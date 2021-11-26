@@ -24,10 +24,8 @@ systemctl start vncserver-x11-serviced.service # start service
 vnclicensewiz # GUI to sign in and assign pwd for this host
 systemctl enable vncserver-x11-serviced.service # startup enabled
 ```
-123465acb
-Kindly remember your password!
 
-7890?
+Kindly remember your password!
 
 Note that you may switch an accout for further use. Install realvnc viewer in your pc logging in with the same account to easily connect them.
 
