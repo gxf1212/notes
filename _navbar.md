@@ -1,4 +1,4 @@
-- [Home](/README.md)
+- [Home](/_coverpage.md)
 - Linux学习类
   - [Linux基础](/Linux/Linux-fundamental.md)
   - [软件安装](/Linux/Prepare-for-the-computer.md)

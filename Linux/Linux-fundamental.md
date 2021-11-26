@@ -211,7 +211,7 @@ This is a record of my operations during 折腾ing the system, in order not to f
 2. rm命令
    ```shell
    rm -d 目录名              #删除一个空目录
-   rm       dir 目录名              #删除一个空目录
+   rm --dir目录名              #删除一个空目录
    rm -r 目录名              #删除一个非空目录
    rm 文件名                  #删除文件
    ```
@@ -382,7 +382,7 @@ This is a record of my operations during 折腾ing the system, in order not to f
    ```shell
    sudo apt-get install ethtool
    ifconfig -a # find your interfaces, as well as the MAC address!
-   # ether 04:d4:c4:21:d6:02
+   # ether xx:xx:....
    sudo ethtool enp4s0 # must add sudo! or error
    # should see:
    # Supports Wake-on: pumbg
@@ -685,13 +685,101 @@ fsck -y /dev/sda
 > shutdown # poweroff, halt
 > ```
 
-# Specific applications for fun
+# Applications for fun
 
-## build a note site with docsify
+## Build a note site with docsify
+
+### references
+
+read through official! https://docsify.js.org/#/quickstart
 
 https://www.cxyzjd.com/article/jackson0714/105331564
 
+https://www.cnblogs.com/fozero/p/10256858.html gitalk
 
+
+
+### What can docsify do
+
+- visualize .md as html
+- customize sidebar, navbar, cover page
+  - write links by yourself
+- 留言、访问计数
+
+easier than hexo, ...
+
+#### Basics
+
+```shell
+docsify serve ./ # http://localhost:3000
+```
+
+
+
+#### Beautify
+
+```markdown
+in coverpage.md
+![color](#f0f0f0)
+![](_media/bg.png)
+```
+
+
+
+#### Customize functions
+
+1. add things after:
+
+   ```html
+   <!-- Docsify v4 -->
+   ```
+
+   like
+
+   ```html
+   <script src="//unpkg.com/docsify-copy-code"></script> <!-- copy to clipboard -->
+   <script src="//unpkg.com/prismjs/components/prism-bash.js"></script> <!-- code highlight -->
+   <script src="//unpkg.com/docsify/lib/plugins/search.js"></script> <!--  search engine -->
+   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script> <!--  emoji -->
+   <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script> <!--  equations -->
+   ```
+
+   to add plug-in
+
+   > https://github.com/upupming/docsify-katex LaTeX equation support
+
+2. customize title with quoted text
+
+   ```markdown
+   [NAMD/VMD和FEP计算基本操作](/MD/FYP-notes.md "2333")
+   ```
+
+3. 
+
+4. 
+
+
+
+
+
+### Appendix
+
+git in cmd:
+
+```shell
+# in your repository path
+# usual usage
+git commit -m "update message"
+git push -u origin master
+git pull
+# other
+git config --global user.name gxf1212 # user.email xxx
+git clone url.git
+git add file # add to git管理范围
+
+```
+
+in Gitee, we should manually update Pages!
 
 
 

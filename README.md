@@ -1,6 +1,6 @@
 # Notes Site
 
-This site shows some of my notes on Linux fundamentals, software installing and molecular dynamics simulation tutorials \& experiences. If I'm going to write notes on courses, I'll build a new, cleaner site for each one.
+This site shows some of my notes on Linux fundamentals, software installing and molecular dynamics simulation tutorials \& experiences. If I'm going to write notes on courses, I'll build a new, cleaner site for each one. :smile:
 
 > You may notice that TOCs in sidebar and navigating bar are actually the same.
 
