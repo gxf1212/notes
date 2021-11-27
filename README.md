@@ -2,9 +2,9 @@
 
 This site shows some of my notes on Linux fundamentals, software installing and molecular dynamics simulation tutorials \& experiences.
 
-> You may notice that TOCs in sidebar and navigating bar are actually the same.
+> You may notice that TOCs in sidebar and navigating bar are generally the same.
 
-I'm just too lazy to make things clear, so these are just what I wrote when I learn. Maybe it's mainly for synchronizing protocols 2333....Later I'll also integrate what I wrote in Windows.
+I'm just too lazy to make things clear, so these are just what I wrote when I learned. Maybe it's mainly for synchronizing protocols 2333....Later I'll also integrate what I wrote in Windows.
 
 In my project, there's information specific for the project. While in the Linux study, the content is continuously being updated. As I don't have 中文 input method in Singapore, most of the content is in English.
 
@@ -15,6 +15,11 @@ In my project, there's information specific for the project. While in the Linux 
 - [ ] systematic notes (course, LaTeX?)
 - [ ] applications I played 
 - [ ] what I did in senior year
+
+other TODOs:
+
+- [ ] beautify the theme (sidebar?)
+- [ ] fontawesome
 
 ## tutorial share
 
