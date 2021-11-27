@@ -3,4 +3,12 @@
   - [软件安装](/Linux/Prepare-for-the-computer.md)
 - MD学习类
   - [虚拟筛选和Gromacs基础操作](/MD/UROPS-run-and-result.md)
-  - [NAMD/VMD和FEP计算基本操作](/MD/FYP-notes.md "2333")
+  - [NAMD/VMD和FEP计算基本操作（待完成）](/MD/FYP-notes.md)
+- [课程学习类](/course/README.md)
+  - [结构生物学笔记（部分完成）](/course/structural-biology/sb-outline.md)
+  - [分子免疫学笔记（待完成）](/course/molecular-immunology)
+- Links
+  - [西安交通大学钱学森学院](http://bjb.xjtu.edu.cn/)
+  - [My GitHub](https://github.com/gxf1212)
+  - [My Bilibili Channel](https://space.bilibili.com/441196634)
+  - [我的保研待录取通知](/utils/推免服务系统.html)

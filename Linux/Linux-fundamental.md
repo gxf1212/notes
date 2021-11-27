@@ -353,7 +353,7 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
 1. get ip address
 
-   ```
+   ```shell
    ip addr show
    ```
 
@@ -464,7 +464,9 @@ This is a record of my operations during 折腾ing the system, in order not to f
 > ```
 >
 > E: 仓库 “http://mirrors.aliyun.com/deepin bionic Release” 没有 Release 文件。
+> 
 > N: 无法安全地用该源进行更新，所以默认禁用该源。
+> 
 > N: 参见 apt-secure(8) 手册以了解仓库创建和用户配置方面的细节。
 >
 > https://packages.ubuntu.com
@@ -689,13 +691,65 @@ fsck -y /dev/sda
 
 ## Build a note site with docsify
 
-### references
+### References
 
 read through official! https://docsify.js.org/#/quickstart
 
-https://www.cxyzjd.com/article/jackson0714/105331564
+also learn settings and styles from https://github.com/jhildenbiddle/docsify-themeable/tree/master/docs
 
-https://www.cnblogs.com/fozero/p/10256858.html gitalk
+some translated doc
+
+- https://www.cxyzjd.com/article/jackson0714/105331564
+- https://segmentfault.com/a/1190000017576714  
+
+### Basic usage
+
+```shell
+docsify serve ./ # http://localhost:3000
+```
+
+#### git in cmd
+
+```shell
+# in your repository path
+# usual usage
+git add ./ # add all changes
+git commit -m "update message"
+git push -u origin master
+git pull
+# other
+git config --global user.name gxf1212 # user.email xxx
+git clone url.git
+git add file # add to git管理范围
+```
+
+in Gitee, we should manually update Pages?
+
+```
+# git status example
+git status
+位于分支 master
+您的分支和 'origin/master' 出现了偏离，
+并且分别有 1 和 1 处不同的提交。
+  （使用 "git pull" 来合并远程分支）
+
+所有冲突已解决但您仍处于合并中。
+  （使用 "git commit" 结束合并）
+
+要提交的变更：
+	新文件：   .gitignore
+	修改：     Linux/Prepare-for-the-computer.md
+```
+
+#### something html
+
+```html
+<p>text</p>
+<strong>bold text</strong>
+<u>underlined text</u>
+<li>list item</li>
+<!-- comment here -->
+```
 
 
 
@@ -704,19 +758,62 @@ https://www.cnblogs.com/fozero/p/10256858.html gitalk
 - visualize .md as html
 - customize sidebar, navbar, cover page
   - write links by yourself
-- 留言、访问计数
+  - can show any .md as TOC
+- plug-in, 留言、访问计数 etc 
 
 easier than hexo, ...
 
-#### Basics
+#### Elements
 
-```shell
-docsify serve ./ # http://localhost:3000
+##### Pages
+
+```html
+window.$docsify = {
+	homepage: true, // default name: README.md
+	coverpage: true, //default: _coverpage.md
+	homepage: 'README.md', // specify file name
+	coverpage: '/_coverpage.md',
+	// sidebar, navbar are similar
+}
 ```
+
+https://docsify.js.org/#/cover  cover page customize, multiple cover
+
+Actually we can assign a cover or home page for every subdirectory using the default file name (README, _coverpage). But it seems that it’s only necessary for **course notes**.
+
+##### Sidebar
+
+https://docsify.js.org/#/more-pages?id=nested-sidebars
+
+- `_sidebar.md`的加载逻辑是从每层目录下获取文件，如果当前目录不存在该文件则回退到上一级目录。
+- 配置`alias`字段后，所有页面都会显示项目根目录`_sidebar.md`文件的配置作为侧边栏，子目录的`_sidebar.md`文件会失效。
+
+it seems that bars and cover must be put in root because the subdirectories have their own...
+
+but after introducing the “sidebar collapse”, I don’t think the sidebar is messy any more. you can come back to other notes through it easily. The navbar is not used. 
+
+Also, the sidebar should be further beautified (**colored**) to clarify the file structure. And the text size?
 
 
 
 #### Beautify
+
+##### Cover
+
+```html
+// multiple covers and custom file name
+coverpage: {
+    '/': 'cover.md',
+    '/zh-cn/': 'cover.md',
+  },
+
+// logo
+window.$docsify = {
+  logo: '/_media/icon.svg',
+};
+```
+
+background not solved
 
 ```markdown
 in coverpage.md
@@ -725,6 +822,24 @@ in coverpage.md
 ```
 
 
+##### Theme
+
+4 official themes: https://docsify.js.org/#/themes?id=themes and dolphin
+
+```html
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+<!-- should not miss // and @4! -->
+```
+
+some others https://docsify.js.org/#/awesome?id=themes
+
+If you want to modify a theme, download from cdn website rather than GitHub!
+
+> notes
+>
+> docsify-themeable is less compatible with 推免服务系统.html
+>
+> vue’ s sidebar needs improving
 
 #### Customize functions
 
@@ -747,6 +862,16 @@ in coverpage.md
    to add plug-in
 
    > https://github.com/upupming/docsify-katex LaTeX equation support
+   >
+   > https://github.com/iPeng6/docsify-sidebar-collapse sidebar collapse
+
+2. blacklist:
+
+   ```html
+   <script src="//cdn.jsdelivr.net/npm/docsify@latest/lib/docsify.min.js"></script>
+   ```
+
+   navbar vanishes!..mouse can't scroll. code highlight is gone.
 
 2. customize title with quoted text
 
@@ -754,32 +879,23 @@ in coverpage.md
    [NAMD/VMD和FEP计算基本操作](/MD/FYP-notes.md "2333")
    ```
 
-3. 
+4. Gittalk
+
+   https://segmentfault.com/a/1190000018072952
+
+   https://www.cnblogs.com/fozero/p/10256858.html 
+
+5. Fontawesome 
+
+   https://www.npmjs.com/package/docsify-fontawesome
+
+   > not solved! refer to https://jhildenbiddle.github.io/docsify-themeable/#/?
+
+5. 
+
+6. 
 
 4. 
-
-
-
-
-
-### Appendix
-
-git in cmd:
-
-```shell
-# in your repository path
-# usual usage
-git commit -m "update message"
-git push -u origin master
-git pull
-# other
-git config --global user.name gxf1212 # user.email xxx
-git clone url.git
-git add file # add to git管理范围
-
-```
-
-in Gitee, we should manually update Pages!
 
 
 

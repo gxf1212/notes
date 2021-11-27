@@ -1,6 +1,6 @@
 # Notes Site
 
-This site shows some of my notes on Linux fundamentals, software installing and molecular dynamics simulation tutorials \& experiences. If I'm going to write notes on courses, I'll build a new, cleaner site for each one. :smile:
+This site shows some of my notes on Linux fundamentals, software installing and molecular dynamics simulation tutorials \& experiences.
 
 > You may notice that TOCs in sidebar and navigating bar are actually the same.
 
@@ -15,3 +15,10 @@ In my project, there's information specific for the project. While in the Linux 
 - [ ] systematic notes (course, LaTeX?)
 - [ ] applications I played 
 - [ ] what I did in senior year
+
+## tutorial share
+
+- [鸟哥的Linux私房菜-基础学习篇](/tutorials/鸟哥的Linux私房菜-基础学习篇(第四版)高清完整书签PDF版.pdf)
+- [Linux就该这么学](/tutorials/Linux就该这么学-高清晰PDF.pdf)
+
+

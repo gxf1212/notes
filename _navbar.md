@@ -4,4 +4,7 @@
   - [软件安装](/Linux/Prepare-for-the-computer.md)
 - MD学习类
   - [虚拟筛选和Gromacs基础操作](/MD/UROPS-run-and-result.md)
-  - [NAMD/VMD和FEP计算基本操作](/MD/FYP-notes.md)
+  - [NAMD/VMD和FEP计算基本操作（待完成）](/MD/FYP-notes.md)
+- [课程学习类](/course/README.md)
+  - [结构生物学笔记（部分完成）](/course/structural-biology/sb-outline.md)
+  - [分子免疫学笔记（待完成）](/course/molecular-immunology)
