@@ -719,27 +719,32 @@ git push -u origin master
 git pull
 # other
 git config --global user.name gxf1212 # user.email xxx
-git clone url.git
-git add file # add to git管理范围
+git clone url.git # clone a repo
 ```
 
 in Gitee, we should manually update Pages?
 
+```shell
+# https://www.cnblogs.com/zlting/p/9620259.html
+git remote set-url origin https://gitee.com/gxf1212/notes.git # 设置远程仓库地址
+git remote -v
 ```
-# git status example
+
+```shell
 git status
-位于分支 master
-您的分支和 'origin/master' 出现了偏离，
-并且分别有 1 和 1 处不同的提交。
-  （使用 "git pull" 来合并远程分支）
-
-所有冲突已解决但您仍处于合并中。
-  （使用 "git commit" 结束合并）
-
-要提交的变更：
-	新文件：   .gitignore
-	修改：     Linux/Prepare-for-the-computer.md
 ```
+
+> 位于分支 master
+> 您的分支和 'origin/master' 出现了偏离，
+> 并且分别有 1 和 1 处不同的提交。
+>   （使用 "git pull" 来合并远程分支）
+>
+> 所有冲突已解决但您仍处于合并中。
+>   （使用 "git commit" 结束合并）
+>
+> 要提交的变更：
+> 	新文件：   .gitignore
+> 	修改：     Linux/Prepare-for-the-computer.md
 
 #### something html
 
