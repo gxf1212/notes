@@ -144,26 +144,129 @@ Given structure and parameters (force field), `LEaP` will generate a topology fi
 
 
 
+## VMD
+
+http://www.ks.uiuc.edu/Training/Tutorials/vmd-index.html
+
+tcl scripting: https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/node4.html
+
+### Using VMD
+
+#### Working with a Single Molecule
+
+##### Load molecule
+
+File → New Molecule...
+
+> Just type the four letter code of the protein **in the File Name text entry** of the Molecule File Browser window and press the Load button. VMD will download it automatically.
+
+......
+
+##### Displaying the Molecule
+
+##### Graphical Representations
+
+Graphics--Representations
+
+- Draw Style
+  - Drawing Method 
+- Selected Atoms--Selection
+  - frequently used
+    - all, protein, nucleic, lipid, water (`not`?)
+    - backbone, sidechain, ...
+    - helix, sheet, ..
+    - carbon, hydrogen, nitrogen, ...
+
+
+
+
+
+#### Trajectory and movie making
+
+#### Scripting in VMD
+
+- Tcl is a rich language
+- Tk is an extension to Tcl that permits GUI
+
+##### The Basics
+
+```tcl
+# set, puts
+puts "Hello, world!"
+set x 10
+puts $x  # $ refer to value
+set str "protein"
+puts "this is a $str"
+# math
+expr 1 + 1
+expr 3 * $x
+set y [expr 3 * $x]
+# write file
+set file [open "out.dat" w]
+for {set x 0} {$x < 10} {incr x} {  # should add space. x refer to variable
+puts $file [expr $x+1]  # puts writes into $file
+}
+close $file  # otherwise not saved
+```
+
+<font color=red>A bracketed expression will automatically be substituted by the return value of the expression inside the brackets</font>
+
+##### VMD scripting
+
+1. load molecule
+
+   ```tcl
+   mol new 1ubq.pdb
+   ```
+
+   terminal tells basic info: atoms, residues, waters, components, ...
+
+2. selection
+
+   ```tcl
+   atomselect moleculeID selection
+   ```
+
+   - mol-ID
+   - selection: see 1.3
+
+   ```tcl
+   set crystal [atomselect top "all"]
+   ```
+
+   The result of atomselect is a function, defining an object to operate on
+
+3. properties
+
+   ```tcl
+   $crystal num  # number of atoms
+   $crystal moveby {10 0 0}  # unit: angstrom
+   ```
+
+   
+
+4. 
+
+
+
 
 
 
 
 ## NAMD
 
-### fundamental tutorial
+### Fundamental tutorial
 
 user guide: http://www.ks.uiuc.edu/Research/namd/2.14/ug/
 
 namd tutorial: http://www.ks.uiuc.edu/Training/Tutorials/namd-index.html
 
 - Case studies: [water ](http://www.ks.uiuc.edu/Training/CaseStudies/index.html#h2ocs)• [DNA ](http://www.ks.uiuc.edu/Training/CaseStudies/index.html#dnacs)• [lipid   bilayers ](http://www.ks.uiuc.edu/Training/CaseStudies/index.html#lipcs)• [BPTI](http://www.ks.uiuc.edu/Training/CaseStudies/index.html#bptics) • [ubiquitin ](http://www.ks.uiuc.edu/Training/CaseStudies/index.html#ubqcs)• [myoglobin](http://www.ks.uiuc.edu/Training/CaseStudies/index.html#myocs) • [aquaporin ](http://www.ks.uiuc.edu/Training/CaseStudies/index.html#aqpcs)• [ion   channels ](http://www.ks.uiuc.edu/Training/CaseStudies/index.html#channelscs)• [titin ](http://www.ks.uiuc.edu/Training/CaseStudies/index.html#titincs)• [lh2](http://www.ks.uiuc.edu/Training/CaseStudies/index.html#lh2cs)
-- A video reviewing the conceptual foundations   of NAMD, "Statistical  Mechanics of Proteins" as recorded by Dr. Klaus Schulten in November  2010 is available [here](http://www.ks.uiuc.edu/Training/video2/namd/).
+- A video reviewing the conceptual foundations of NAMD, "Statistical Mechanics of Proteins" as recorded by Dr. Klaus Schulten in November 2010 is available [here](http://www.ks.uiuc.edu/Training/video2/namd/).
 
 all tutorial: http://www.ks.uiuc.edu/Training/Tutorials/ including 
 
 - [VMD Tutorials](http://www.ks.uiuc.edu/Training/Tutorials/#vmd) • [NAMD Tutorials](http://www.ks.uiuc.edu/Training/Tutorials/#namd) • [Free Energy Methods](http://www.ks.uiuc.edu/Training/Tutorials/#freeenergymethods) • [Bioinformatics](http://www.ks.uiuc.edu/Training/Tutorials/#bioinformatics) • [Bionanotechnology](http://www.ks.uiuc.edu/Training/Tutorials/#bionanotechnology) • [Specialized Topics](http://www.ks.uiuc.edu/Training/Tutorials/#specializedtopics)
-
-tcl scripting: https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/node4.html
 
 #### 1 basics
 
@@ -218,7 +321,52 @@ about restart files:
 - Furthermore, NAMD will store the file from the previous cycle each time it writes a new file. The filename is appended with a .old
   extension; it is created in case NAMD fails in writing the new restart file.
 
+#### Appendix: file types
 
+> 11.28 read everything before the examples
+
+1. The PDB file
+
+   NAMD and VMD ignore everything in a PDB file except for the ATOM and HETATM records. (**coordinates**)
+
+2. The PSF file 
+
+   contains six main sections of interest: atoms, bonds, angles, dihedrals, impropers (dihedral force terms used to maintain planarity), and cross-terms. (**structure**)
+
+3. The topology file `.rtf`
+
+   The topology file defines the atom types used in the **force field**;
+
+   The CHARMM force field is divided into a topology file, which is needed to **generate the PSF file and a parameter file**, 
+
+   - the <u>atom names, types, bonds, and partial charges</u> of each residue type; 
+
+     and any <u>patches</u> necessary to link or otherwise <u>mutate</u> these basic residues.
+
+   - allow the automatic <u>assignment of coordinates to hydrogens and other atoms missing</u>
+
+   - it is preferable to use these pre-combined files. 
+
+   http://mackerell.umaryland.edu/charmm_ff.shtml
+
+4. The parameter file `.prm`
+
+   provides a <u>mapping</u> between bonded and nonbonded interactions involving the various combinations of atom types found in the <u>topology</u> file and specific spring constants and <u>similar parameters</u> for all of the bond, angle, dihedral, improper, and van der Waals terms in the CHARMM potential function.
+
+   contains all of the **numerical constants** needed to evaluate forces and energies
+
+5. The configuration file `.conf` or `.namd`
+
+   - specifies virtually everything about the simulation to be done
+   - (except parallel execution details) portable
+   - case-insensitive 
+   - order-dependent (“action” commands)
+
+6. Other
+
+   - `.str`: extra info
+   - `.crd`: coordinate
+   - `.inp` input (into some program, like charmm-gui)
 
 
 
@@ -457,7 +605,7 @@ seems no need to use the restart file, just restart from the interrupted window.
 - Central to both the alchemical and the geometrical routes is the choice of atoms, or groups thereof, utilized to define the position and the orientation of the ligand with respect to the protein. It should be clearly understood that ∆G~0~ is an <u>invariant of this choice</u>. 
 - A good reference three-dimensional structure? A natural choice is the **energy-minimized** crystallographic structure of the protein:ligand complex solvated in the aqueous environment. Another relevant option consists in running an adequately long molecular-dynamics simulations past the thermalization stage and compute an average structure, which ought to be energy-minimized to remove spurious averaging artifacts, notably from freely rotating methyl groups
 
-### VMD usage
+### VMD usage (summarized)
 
 BTW, record some of the features in VMD
 

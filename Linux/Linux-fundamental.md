@@ -710,41 +710,57 @@ docsify serve ./ # http://localhost:3000
 
 #### git in cmd
 
-```shell
-# in your repository path
-# usual usage
-git add ./ # add all changes
-git commit -m "update message"
-git push -u origin master
-git pull
-# other
-git config --global user.name gxf1212 # user.email xxx
-git clone url.git # clone a repo
-```
+1. basic
 
-in Gitee, we should manually update Pages?
+   ```shell
+   # in your repository path
+   # usual usage
+   git add ./ # add all changes
+   git commit -m "update message"
+   git push -u origin master
+   git pull
+   ```
 
-```shell
-# https://www.cnblogs.com/zlting/p/9620259.html
-git remote set-url origin https://gitee.com/gxf1212/notes.git # 设置远程仓库地址
-git remote -v
-```
+   ```shell
+   # other
+   git config --global user.name gxf1212 # user.email xxx
+   git clone url.git # clone a repo
+   ```
 
-```shell
-git status
-```
+2. in Gitee, we should manually update Pages?
 
-> 位于分支 master
-> 您的分支和 'origin/master' 出现了偏离，
-> 并且分别有 1 和 1 处不同的提交。
->   （使用 "git pull" 来合并远程分支）
->
-> 所有冲突已解决但您仍处于合并中。
->   （使用 "git commit" 结束合并）
->
-> 要提交的变更：
-> 	新文件：   .gitignore
-> 	修改：     Linux/Prepare-for-the-computer.md
+   https://www.cnblogs.com/zlting/p/9620259.html
+
+   ```shell
+   git remote set-url origin https://gitee.com/gxf1212/notes.git # 设置远程仓库地址
+   git remote -v
+   ```
+
+3. no more username+pwd
+
+   https://blog.csdn.net/LosingCarryJie/article/details/73801554
+   
+   ```shell
+git config --global credential.helper store
+   ```
+
+4. git status
+
+   ```shell
+   git status
+   ```
+
+   > 位于分支 master
+   > 您的分支和 'origin/master' 出现了偏离，
+   > 并且分别有 1 和 1 处不同的提交。
+   > （使用 "git pull" 来合并远程分支）
+   >
+   > 所有冲突已解决但您仍处于合并中。
+   > （使用 "git commit" 结束合并）
+   >
+   > 要提交的变更：
+   > 	新文件：   .gitignore
+   > 	修改：     Linux/Prepare-for-the-computer.md
 
 #### something html
 

@@ -42,9 +42,7 @@ The binding energy data reveal that compound-17 (−59.6 kcal/mol) binds  more s
 
 
 
-### initial structure
-
-### our paper
+### our paper and guidance
 
 The relative binding free energy between remdesivir(RemTP) and ATP was calculated to be -2.80 ± 0.84 kcal/mol, where remdesivir bound much stronger to SARS-CoV-2 RdRp than the natural substrate ATP.  
 
@@ -56,6 +54,8 @@ https://scholar.google.com/citations?user=Kwwx85EAAAAJ&hl=en
 
 
 
+> 11.16
+>
 > Of course. We should be able to share the files for purposes such as reproducibility. Plus, all data that are published are made available to the public, including these files. Force fields are also already shared in the published version of the paper. But for your purpose, I think by only reproducing the MD simulations and free energy calculations of ATP should suffice. 
 >
 > Please find the attached zip file containing structures for ATP-RdRp-Mg complex (MD simulation), ATP-water ("free state" FEP), ATP-RdRp-Mg complex ("bound state" FEP). **ATP force field is in the default CHARMM force field files. All force fields are in CHARMM36, downloaded from MacKerrell's group page.** Please let me know if anything is unclear. Also, please use NAMD to conduct all simulations to get similar results. I don't think version matters.
@@ -99,13 +99,6 @@ use “switch”, Smoothly switches the potential to zero between rvdw-switch (p
 (page 212). i.e. a switching distance of 10 Å and a smooth cutoff distance of 12Å in the paper
 
 With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.gromacs.org/documentation/2018/onlinehelp/gmx-mdrun.html#gmx-mdrun) will automatically tune the CPU/GPU load balance by scaling [`rcoulomb`](https://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html#mdp-rcoulomb) and the grid spacing.
-
-
-
-### AutoDockTools and vina
-
-- when writing file, always browse and name the file!
-- when recording vina parameters, centers are on the left! not right!
 
 
 
@@ -181,19 +174,6 @@ notice the binding mode?
 
 ### Prepare another ligand
 
-#### info&convert
-
-RemdesivirTP https://pubchem.ncbi.nlm.nih.gov/compound/56832906
-
-```shell
-# pubchem 2d, for docking
-f=remtp
-obabel ${f}.sdf -osdf -O ${f}-t.sdf --gen3D 
-obminimize -ff MMFF94 -n 1000 ${f}-t.sdf > ${f}.pdb
-obabel ${f}.pdb -opdbqt -O ${f}.pdbqt -as --partialcharge gasteiger 
-rm ${f}.sdf ${f}-t.sdf ${f}.pdb
-```
-
 #### docking
 
 to dock two molecules together, we may:
@@ -211,7 +191,67 @@ to dock two molecules together, we may:
 |          |                                   |         |         |                      |
 |          |                                   |         |         |                      |
 
+#### Autodock vina
 
+> Prepare receptor, as well as flexible: see UROPS notes
+>
+> - when writing file, always browse and name the file!
+> - when recording vina parameters, centers are on the left! not right!
+> - when choosing residues, click on the S circle!
+>
+
+##### info&convert
+
+RemdesivirTP https://pubchem.ncbi.nlm.nih.gov/compound/56832906
+
+```shell
+# pubchem 2d, for docking
+f=remtp
+obabel ${f}.sdf -osdf -O ${f}-t.sdf --gen3D 
+obminimize -ff MMFF94 -n 1000 ${f}-t.sdf > ${f}.pdb
+obabel ${f}.pdb -opdbqt -O ${f}.pdbqt -as --partialcharge gasteiger 
+rm ${f}.sdf ${f}-t.sdf ${f}.pdb
+```
+
+always collect obminimize results in .pdb file. Then convert to .pdbqt. 
+
+> Alternative: ADTools
+>
+> - Edit--Hydrogen--Merge non-polar
+> - Edit--Atom--Assign AD4 Type
+> - Edit--Charge--Compute Gasteiger
+> - Save as PDBQT
+>   - always Browse for a name!!
+>   - maybe select what to save
+>
+> failed?? compare the text!
+
+requirements for vina:
+
+- protein and ligand don’t need non-polar hydrogen.
+- protein and ligand have add empirical charge on each atom and we don’t use `-p 7.0`, just `-h`
+- don’t care visualization of oxygen, etc. (see below)
+- but monitor mis-added hydrogens!
+
+> note: 11.29, dachuang-other-SDH-docking
+>
+> if you view .pdbqt in Pymol
+>
+> - those saved from ADT is normal. Ar is shown. But vina reports error?
+> - those converted from obabel shows C-O single bond as double?
+>
+> But their rotatable bond shown in ADT is normal and the same, suggesting it’s just visualization problem. (not the same software!)
+>
+> Maybe due to the merging of non-polar Hs. After adding H back to docked .pdbqt, Pymol visualizes normally
+>
+> ```
+> set valence, 1
+> set valence_mode, 1
+> ```
+>
+> to show bonds explicitly  https://pymolwiki.org/index.php/Valence
+
+##### docking commands
 
 ```shell
 f=remtp
@@ -221,8 +261,9 @@ vina_split --input ${f}_out.pdbqt
 rm ${f}_out.pdbqt
 mkdir ${f}
 mv ${f}_* ./${f}
-
 ```
+
+> conf.txt: start with # or other, as comment.
 
 
 
@@ -230,13 +271,20 @@ mv ${f}_* ./${f}
 
 ### Prepare the system with VMD etc.
 
+#### reference
+
 some tutorials:
 
-- https://www.youtube.com/watch?v=IET_FvCk9XE
+- preparation
 
-- https://www.youtube.com/watch?v=Pj40ZnybXds
+  - https://www.youtube.com/watch?v=IET_FvCk9XE
 
-  > separate ligands and protein, generate .pdb and .psf files in GUI for all ligands (with H), combine them, solvate. 
+  - https://www.youtube.com/watch?v=Pj40ZnybXds
+
+    > separate ligands and protein, generate .pdb and .psf files in GUI for all ligands (with H), combine them, solvate. 
+
+  - https://www.youtube.com/watch?v=5PYTQiKf0D4 CHARMM GUI official tutorial, series
+
 
 > other
 >
@@ -262,48 +310,71 @@ other tools:
 
 I have to summarize the steps:
 
-1. normally build your complex.pdb (by docking etc). Remember the Mg^2+^.
+#### build complex structure
 
-   > whatever name is ok. we don’t use this .pdb
+normally build your complex.pdb (by docking etc). Get positions right
 
-2. generate files for ligand
+Remember the Mg^2+^.
 
-   1. Use CHARMM-GUI---input generator---ligand reader and modeller
+> whatever name is ok. we don’t use this .pdb
 
-      > **CHARMM GUI notes**
-      >
-      > after GUI, the ligand name is changed into LIG
-      >
-      > - Only molecules in the **HETATM** record in a PDB file are recognized.
-      > - **adopt available RCSB SDF structure** preferentially
-      > - make sure that the Marvin JS structure is correct
-      > - <font color=red>All hydrogen and missing atoms should be explicitly placed for accurate result.</font>
-      > - Users can modify the protonation state if necessary. the coordinates will be preserved.
-      >   - or select a similar structure
-      > - if you are to upload file, .mol2 is prefered? 
-      > - To make position of .psf file right, you should upload your own .pdb file!
+#### generate files for ligand
 
-   2. 
+1. Use CHARMM-GUI---input generator---ligand reader and modeller
 
-3. load complex.pdb into VMD, 
+   refer to preparation videos mentioned above
 
-   1. Extensions---Modeling---Automatic psf Builder would be a GUI
+   > **CHARMM GUI tips**
+   >
+   > - after GUI, the ligand name is changed into LIG
+   > - Only molecules in the **HETATM** record in a PDB file are recognized.
+   > - **adopt available RCSB SDF structure** preferentially
+   > - make sure that the Marvin JS structure is correct
+   > - <font color=red>All hydrogen and missing atoms should be explicitly placed for accurate result.</font> or report error
+   > - Users can modify the protonation state if necessary. 
+   >   - or select other protonation state in the next step
+   > - **The coordinates will be preserved if you upload .pdb file.**
+   >   - if you are to upload file, .mol2 is prefered? 
+   > - you should upload your own .pdb file to make the position right, but can align?
 
-      > **AutoPSF notes**
-      >
-      > - .pdb file provides molecular infomation (namely coordinates)
-      > - topology files (.itp, .rtp) contain all the parameters, i.e. force field info
-      > - top files convert .pdb files into .psf files, which contains full information
-      >
-      > should click in every step
-      >
-      > if no patch, directly generate files at step 3
+   > my experience
+   >
+   > at first, when I upload the built .pdb file, or replace ATOM with HETATM, or add hydrogen, the server did not recognize the ligand, always.
+   >
+   > 1. 11.27, align 2ILY (original structure) with the built .pdb, use its ATP
+   >
+   >    find 2 kinds of topologies in step 2
+   >
+   >    - toppar_all36_na_nad_ppi.str            NAD, NADH, ADP, ATP and others.
+   >    - top_all36_cgenff.rtf., par_all36_cgenff.prm. but with hydrogen. can I later remove?
+   >      - if you modify the protonation state, you can still not generate a correct cGenFF structure. The “Exact” field only provides ATP in toppar_all36_na_nad_ppi.str
+   >      - maybe I’ll use toppar_all36_na_nad_ppi.str first
+   >
+   > 2. 11.28, CHARMM-GUI failed building Mg2+
 
-   2. use console to combine: Extensions---Tk console
+2. other ways to build?
 
-   2. use console, include topology?
+####  make the combined pdb and psf files
 
-4. 
+load into VMD
+
+1. Extensions---Modeling---Automatic psf Builder would be a GUI
+
+   > **AutoPSF notes**
+   >
+   > - .pdb file provides molecular infomation (namely coordinates)
+   > - topology files (.itp, .rtp) contain all the parameters, i.e. force field info
+   > - top files convert .pdb files into .psf files, which contains full information
+   >
+   > should click in every step
+   >
+   > if no patch, directly generate files at step 3
+
+2. use console to combine: Extensions---Tk console
+
+2. use console, include topology?
+
+1. 
 
 
 

@@ -238,14 +238,16 @@ adt # or from "start"
 
   - edit--charge--check total...
 
-  - Flexible Residues--
+  - Flexible Residues: some residues are flexible. the ligand is always flexible (rotatable bonds)!
 
     https://zhuanlan.zhihu.com/p/92658440
 
+    - decide flexible residues
     - Flexible Residues>Input>Choose Micromolecule
+    - select residues in sidebar
     - Flexible Residues>Choose Torsions in Currently Selected Residues
     - FlexibleResidues>Output>Save Flexible PDBQT (grid--open also ok?)
-    - Must also save rigid part!!!
+    - Must also save rigid part! (same as rigid docking)
 
 > energy minimization under pH=7? not all did this
 >
@@ -253,7 +255,9 @@ adt # or from "start"
 
 #### ligand
 
-see *Virtual Screening based predhttps://translate.google.com/iction of potential drugs for COVID-19*
+##### convert
+
+see *Virtual Screening based prediction of potential drugs for COVID-19*
 
 ```shell
 # 1. split ligand .sdf into the current directory and to pdbqt in batch. some split; minimize and then to pdbqt?
@@ -298,6 +302,8 @@ or raccoon http://autodock.scripps.edu/resources/raccoon. to boot:
 pythonsh /home/user/Desktop/work/xufan/bin/raccoon.py # in mgltools/bin
 ```
 
+##### process
+
 **should use GAFF force field!!**
 
 ```shell
@@ -317,8 +323,6 @@ for i in `ls | grep sdf`; do
 fi done
 ```
 
-
-
 note:
 
 - **ligands only have polar hydrogens**!! openbabel won't add polar hydrogen.....
@@ -336,7 +340,13 @@ note:
   - increasing num of modes does not seem to change the distribution.... and time. the range may both 
 - world-not-fda do not corresponding to zinc id???
 
+##### check ligand torsion
 
+- Ligand--Input--Choose your ligand, Yes, load its torsion
+- Ligand--Torsion Tree--Choose Torsions
+  - unrotatable shown as red, rotatable shown as green, semi-rotatable: magenta
+
+##### reference
 
 ligand and receptor, overall refer to:
 
