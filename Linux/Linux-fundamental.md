@@ -704,9 +704,11 @@ some translated doc
 
 ### Basic usage
 
-```shell
-docsify serve ./ # http://localhost:3000
-```
+1. serve locally
+   ```shell
+   docsify serve ./ # http://localhost:3000
+   ```  
+2. the first subtitle is not included into the sidebar
 
 #### git in cmd
 
@@ -741,7 +743,7 @@ docsify serve ./ # http://localhost:3000
    https://blog.csdn.net/LosingCarryJie/article/details/73801554
    
    ```shell
-git config --global credential.helper store
+   git config --global credential.helper store
    ```
 
 4. git status

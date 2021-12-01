@@ -6,7 +6,7 @@
   - [NAMD/VMD和FEP计算基本操作（待完成）](/MD/FYP-notes.md)
 - [课程学习类](/course/README.md)
   - [结构生物学笔记（部分完成）](/course/structural-biology/sb-outline.md)
-  - [分子免疫学笔记（待完成）](/course/molecular-immunology)
+  - [分子免疫学笔记（待完成）](/course/molecular-immunology/molecular-immunology.md)
 - Links
   - [西安交通大学钱学森学院](http://bjb.xjtu.edu.cn/)
   - [My GitHub](https://github.com/gxf1212)
