@@ -2,6 +2,8 @@
 
 Due to the absence of appropriate English online courses that match our course's syllabus, I have to write a note on my own. All the content is based on the newest slides and Chinese textbook. I wound not try to write everything in English, because the nouns must be 太难顶了... (I'm reading Chinese materials!)
 
+The quoted areas are less-important comments, or end-of-chapter questions.
+
 # Chapter 1 Introduction
 
 an outline
@@ -100,13 +102,40 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 ### Periphery (secondary) immune organs
 
 - 外周免疫器官：脾脏、淋巴结
-- 外周免疫组织：
+- 外周免疫组织：黏膜淋巴组织、阑尾、扁桃体
+- 其他组织中的免疫细胞
 
 #### spleen
 
+- 最大的免疫器官
 
+- 淋巴细胞定居、发挥功能的场所
+
+  > 红髓：巨噬细胞；白髓：T细胞
+
+  > 其他功能：调节血量、过滤血液
 
 #### lymphatic system
+
+##### structure and function
+
+- 淋巴结由淋巴管相连，构成遍布全身的网络
+- 沿血管分布，有深有浅，是免疫系统的“哨所”
+  - 淋巴液和血浆成分相似，可能交换
+- 淋巴细胞定居、发挥免疫应答的场所
+
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" /><img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
+
+具体结构
+
+- 两套循环：淋巴循环和血液循环
+- 两个区域
+  - 浅层：B细胞
+    - 初级滤泡
+    - 次级滤泡
+  - 深层：T细胞
+
+##### lymphocyte homing and recirculation
 
 
 
