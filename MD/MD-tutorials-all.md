@@ -148,9 +148,13 @@ Given structure and parameters (force field), `LEaP` will generate a topology fi
 
 http://www.ks.uiuc.edu/Training/Tutorials/vmd-index.html
 
-tcl scripting: https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/node4.html
+tcl scripting: https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/node4.html same as PDF tutorial
 
-### Using VMD
+https://www.ks.uiuc.edu/Research/vmd/script_library/ VMD Script Library
+
+http://www.ks.uiuc.edu/Research/vmd/plugins/ plugins, each has its own documentation (maybe its own tutorial)...
+
+### Using VMD (PDF tutorial)
 
 #### Working with a Single Molecule
 
@@ -165,21 +169,6 @@ File → New Molecule...
 ##### Displaying the Molecule
 
 ##### Graphical Representations
-
-Graphics--Representations
-
-- Draw Style
-  - Drawing Method 
-- Selected Atoms--Selection
-  - frequently used
-    - all, protein, nucleic, lipid, water (`not`?)
-    - backbone, sidechain, ...
-    - helix, sheet, ..
-    - carbon, hydrogen, nitrogen, ...
-
-
-
-
 
 #### Trajectory and movie making
 
@@ -247,9 +236,57 @@ close $file  # otherwise not saved
 
 4. 
 
+### psfgen : building system
+
+#### user guide
+
+##### steps
+
+Generating PSF and PDB files for use with NAMD will typically consist of the following steps:
+1. Preparing separate PDB files containing individual segments of protein, solvent, etc. before running
+psfgen.
+2. Reading in the appropriate topology definition files and aliasing residue and atom names found in the
+PDB file to those found in the topology files. This will generally include selecting a default protonation
+state for histidine residues.
+3. Generating the default structure using segment and pdb commands.
+4. Applying additional patches to the structure.
+5. Reading coordinates from the PDB files.
+6. Deleting unwanted atoms, such as overlapping water molecules.
+7. Guessing missing coordinates of hydrogens and other atoms.
+8. Writing PSF and PDB files for use in NAMD.
+
+##### commands
+
+For the commands, please check NAMD user guide!
+
+- `segment`: Build a segment of the molecule. A segment is typically a single chain of protein or DNA, with default patches applied to the termini. 
+
+##### Scripts
+
+###### Preparing separate PDB files
+
+In psfgen, each of these groups must be assigned to their own segment. This applies most strictly in the case of protein chains, each of which must be assigned to its own segment so that N-terminal and C-terminal patches can be applied. 
+
+```tcl
+# Split a file containing protein and water into separate segments.
+# Creates files named myfile_water.pdb, myfile_frag0.pdb, myfile_frag1.pdb,...
+# Requires VMD.
+mol load pdb myfile.pdb
+set water [atomselect top water]
+$water writepdb myfile_water.pdb
+set protein [atomselect top protein]
+set chains [lsort -unique [$protein get pfrag]]
+foreach chain $chains {
+set sel [atomselect top "pfrag $chain"]
+$sel writepdb myfile_frag${chain}.pdb
+}
+```
 
 
 
+#### tutorial
+
+an example http://www.ks.uiuc.edu/Research/namd/tutorial/NCSA2002/hands-on/
 
 
 
@@ -367,8 +404,99 @@ about restart files:
    - `.str`: extra info
    - `.crd`: coordinate
    - `.inp` input (into some program, like charmm-gui)
+     - but tutorials use it as topology??
+     - `.tcl` = `.pgn`
 
+#### my exploration: building the system
 
+- http://zarbi.chem.yale.edu/ligpargen/namd_tutorial.html  for a single protein. resembles namd tutorial, which gives
+
+  ```tcl
+  package require psfgen
+  topology top_all27_prot_lipid.inp
+  pdbalias residue HIS HSE
+  pdbalias atom ILE CD1 CD
+  segment U {pdb ubqp.pdb}
+  coordpdb ubqp.pdb U
+  guesscoord
+  writepdb ubq.pdb
+  writepsf ubq.psf
+  
+  # in .namd
+  parameters          ../common/par_all27_prot_lipid.inp 
+  ```
+
+- https://www.youtube.com/watch?v=IET_FvCk9XE
+
+- https://www.youtube.com/watch?v=Pj40ZnybXds
+
+  separate ligands and protein, generate .pdb and .psf files in GUI for all ligands (with H), combine them (load all .pdb .psf, save together), solvate, add parameters at simulation. 
+
+  ```tcl
+  package require psfgen
+  resetpsf
+  readpsf protein.psf
+  readpsf ligand.psf
+  readpsf ligand1.psf
+  coordpdb protein.pdb
+  coordpdb ligand.pdb
+  coordpdb ligand1.pdb
+  writepsf all.psf
+  writepdb al1.pdb，
+  puts "HE TERMINADO!!”
+  quit
+  ```
+
+  ![prms](/home/gxf/desktop/work/Git-repo/notes/MD/MD-tutorials-all.assets/prms.png)
+
+  he has to add a lot of prm files because of not adding topology when building! not recommended.
+
+- FEP tutorial, build 18C6 and potassium
+
+  ```tcl
+  package require psfgen
+  topology 18crown6.top
+  segment 18C6 { pdb 18crown6.pdb }
+  coordpdb 18crown6.pdb
+  writepsf 18crown6.psf
+  
+  resetpsf
+  topology top_all22_prot.inp
+  segment POT { residue 0 POT }
+  writepdb potassium.pdb
+  writepsf potassium.psf
+  
+  resetpsf
+  readpsf 18crown6.psf
+  coordpdb 18crown6.pdb
+  readpsf potassium.psf
+  coordpdb potassium.pdb
+  writepsf complex.psf
+  writepdb complex.pdb
+  
+  # move K+ to the center of mass of 18C6
+  set sel [atomselect top "segname 18C6"]
+  set vec [measure center $sel]
+  set sel2 [atomselect top "segname POT"]
+  $sel2 moveby $vec
+  set all [atomselect top "all"]
+  $all writepdb compex_new.pdb
+  
+  # in .namd
+  parameters              ../par_all35_ethers.prm
+  ```
+
+  > in protein-ligand binding, .namd files
+  >
+  > ```tcl
+  > parameters           ../ForceField/par_all27_prot_lipid.prm
+  > ```
+
+- I know! It does not matter how many molecules you want to include (just merge). You only need to build one molecule.
+
+- 
+
+- 
 
 ### Free Energy Tutorial
 
@@ -678,6 +806,8 @@ https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/ the same as .pdf
    - remember to include **packages**
    - use `resetpsf` in Tk Console, no need to use in cmd
    - top selection is not useful in cmd
+
+   
 
 9. atomselect
 

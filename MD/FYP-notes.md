@@ -110,7 +110,7 @@ delete命令！
 
 ### VMD techniques
 
-杂记, some extra functions
+杂记, some extra functions, that I encountered. for details, check vmd-ug.pdf
 
 #### General
 
@@ -124,15 +124,21 @@ delete命令！
 
 #### VMD Graphics
 
-1. Graphics--representation: for visualization.
+1. Graphics--Representations: for visualization.
 
-   select atoms syntax?
-
+   - Draw Style
+     - Drawing Method 
+       - Beta: temperature factor
+   - Selected Atoms--Selection
+     - frequently used
+       - all, protein, nucleic, lipid, water (`not`?)
+       - backbone, sidechain, ...
+       - helix, sheet, ..
+       - carbon, hydrogen, nitrogen, ...
 2. Graphics--colors
 
    - background
    - other many settings, like element, residue, 2d structure. may set default color
-
 3. Labeling a few atoms
 
    - Mouse--Label--Atoms (etc.). Mouse--Pick
@@ -141,9 +147,7 @@ delete命令！
    - Mouse--Label--Atoms (etc.). Mouse--Pick
    - Click on any atom and a piece of text will show up
    - Graphics--Labels--Properties (of the text)
-
-4. 
-
+4. Graphics--Representations--Drawing Method, Beta: we may not use that field. So we can replace it with some properties we computed and let VMD color atoms according to it
 5. 
 
 
@@ -160,11 +164,13 @@ probably need to add top/itp file
 
 
 
-## Protocol
+## Stage 1 Protocol
 
 ### Notes
 
 #### protein-ATP system
+
+the RdRp, residue name has been aliased. only one chain
 
 why only one Mg? 虽然确实要两个，但第二个的位置至今under debate。。
 
@@ -275,20 +281,10 @@ mv ${f}_* ./${f}
 
 some tutorials:
 
-- preparation
+- videos
 
-  - https://www.youtube.com/watch?v=IET_FvCk9XE
-
-  - https://www.youtube.com/watch?v=Pj40ZnybXds
-
-    > separate ligands and protein, generate .pdb and .psf files in GUI for all ligands (with H), combine them, solvate. 
-
-  - https://www.youtube.com/watch?v=5PYTQiKf0D4 CHARMM GUI official tutorial, series
-
-
-> other
->
-> - http://zarbi.chem.yale.edu/ligpargen/namd_tutorial.html
+  - for explorations, codes, see MD-tutorials-all.md “my exploration” section.
+- https://www.youtube.com/watch?v=5PYTQiKf0D4 CHARMM GUI official tutorial, series
 
 other tools:
 
@@ -372,9 +368,13 @@ load into VMD
 
 2. use console to combine: Extensions---Tk console
 
-2. use console, include topology?
+   
 
-1. 
+3. use console, include topology?
+
+   ```tcl
+   package require psfgen
+   ```
 
 
 

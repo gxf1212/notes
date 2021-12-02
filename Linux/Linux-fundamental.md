@@ -165,6 +165,10 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
 14. “软件”里有typora
 
+    https://typora.io/windows/dev_release.html dev版本不要钱的
+
+    主题路径：`/home/gxf/.config/Typora/themes`
+
 15. install lightdm: https://blog.csdn.net/hgtjcxy/article/details/90645838
 
     display managers: https://ubuntuqa.com/article/6577.html
@@ -707,7 +711,7 @@ some translated doc
 1. serve locally
    ```shell
    docsify serve ./ # http://localhost:3000
-   ```  
+   ```
 2. the first subtitle is not included into the sidebar
 
 #### git in cmd

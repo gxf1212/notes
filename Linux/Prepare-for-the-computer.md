@@ -910,7 +910,7 @@ might because handling too many files in a folder...?
     yum install rpm-build -y
     ```
 
-   - theme directory: 
+   - theme directory (in Fedora): 
 
      ```
      /var/lib/flatpak/app/io.typora.Typora/x86_64/stable/67e4ba33309d2516bf011b564be7292dc9a5a1fa46c3bfb0a4a09b8f647cec52/files/typora/resources/app/style/themes
