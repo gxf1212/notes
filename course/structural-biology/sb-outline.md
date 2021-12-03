@@ -1,5 +1,17 @@
 # Structural Biology outline
 
+> 植入广告：
+>
+> *   我搬运的[结构生物学课程](https://www.bilibili.com/video/BV1A34y1m7ie)，完整且有英文字幕
+>
+> *   我搬运的[分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e/)，讲得非常好，老师是分子动力学领域的大牛
+>
+> *   [加州理工学院 冷冻电镜入门](https://www.bilibili.com/video/BV143411k7KJ/)，也讲得非常棒
+>
+> *   [加州理工学院 冷冻电镜样品制备](https://www.bilibili.com/video/BV1r44y1i71P/)，都有英文字幕
+>
+> *   [蛋白结晶研讨会](https://www.bilibili.com/video/BV15L4y1z7be/)
+
 讲这么快，肯定看个大概就行了。。总结的时候不要在意技术细节
 
 了解这几种方法的区别，知道原理就行。现在具体的算法都有软件可以用，不需要掌握公式
@@ -70,16 +82,19 @@ RNA的结构？
 
 ### (0) 概述
 
-伦琴发现X射线，Laue发现衍射现象，Bragg建立理论
+> 伦琴发现X射线，Laue发现衍射现象，Bragg建立理论
 
 特点
 
-- 分辨率高
-- 没有分子大小限制，但**要求单晶**
-- **相位问题**
-- 方法和手段成熟，向全自动化方向发展
+- 优点
+  - 分辨率高
+  - 方法和手段成熟，向全自动化方向发展
+  - 没有分子大小限制
+- 缺点
+  - 但**要求单晶**
+  - **相位问题**
 
-X-ray波长小，能达到原子级分辨率
+> X-ray波长小，能达到原子级分辨率
 
 流程
 
@@ -261,7 +276,7 @@ X-ray波长小，能达到原子级分辨率
 
 32种点群表
 
-<img src="E:\undergraduate_study\study\courses\structural biology\new\4-2.jpg" alt="4-2" style="zoom:15%;" />
+<img src="sb-outline.assets\4-2.jpg" alt="4-2" style="zoom:15%;" />
 
 ##### 空间群
 
@@ -436,7 +451,7 @@ Laue星芒：晶体内部结构畸变时，会产生衍射斑点的伸长
 
 ##### 分辨率
 
-<img src="4-4-2.png" alt="4-4-2" style="zoom:25%;" />
+<img src="sb-outline.assets\4-4-2.png" alt="4-4-2" style="zoom:25%;" />
 $$
 \tan\alpha=R/D\\
 \theta_{max}=\alpha/2\\
@@ -564,7 +579,7 @@ recall:
 
 7. Wilson统计
 
-<img src="4-3-wilson.jpg" alt="wil" style="zoom:55%;" /><img src="4-3-wilson-eq.png" alt="wil" style="zoom:25%;" />
+<img src="sb-outline.assets\4-3-wilson-16385348554011.jpg" alt="wil" style="zoom:55%;" /><img src="E:\undergraduate_study\study\courses\structural biology\new\4-3-wilson-eq.png" alt="wil" style="zoom:25%;" />
 
 ##### 发表数据（初步分析）应注意的问题
 
@@ -679,7 +694,7 @@ where $F_o(\boldsymbol{H})$ 是待测晶体，$F_c(\boldsymbol{H})$ 是已知晶
 
 密堆积分析：寡聚体？
 
-<img src="E:\undergraduate_study\study\courses\structural biology\new\4-4-close1.jpg" alt="4-4-close1" style="zoom:15%;" /><img src="E:\undergraduate_study\study\courses\structural biology\new\4-4-close2.jpg" alt="4-4-close2" style="zoom:15%;" />
+<img src="sb-outline.assets\4-4-close1.jpg" alt="4-4-close1" style="zoom:15%;" /><img src="sb-outline.assets\4-4-close2.jpg" alt="4-4-close2" style="zoom:15%;" />
 
 共有24种分子置换的方式，缩小了搜索范围
 
@@ -711,7 +726,7 @@ $$
 \boldsymbol{H}=(h,k,l)\\
 \boldsymbol{R}=(x,y,z)
 $$
-<img src="E:\undergraduate_study\study\courses\structural biology\new\4-4-patterson.jpg" alt="4-4-patterson" style="zoom:15%;" />
+<img src="sb-outline.assets\4-4-patterson.jpg" alt="4-4-patterson" style="zoom:15%;" />
 
 可以推导出其和电子密度的数学关系
 $$
@@ -879,7 +894,7 @@ pdb等文件
 
 ![image-20211104170835340](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20211104170835340.png)
 
-<img src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20211104170905611.png" alt="image-20211104170905611" style="zoom: 40%;" />
+<img src="sb-outline.assets\image-20211104170905611.png" alt="image-20211104170905611" style="zoom: 40%;" />
 
 模型偏好 (model bias)：优化结果偏向于初猜的模型，可能导致对结构的错误解释。对异质性的样品进行分类分析，可以通过分区的比对和整体比对进行分类
 
@@ -936,7 +951,7 @@ pdb等文件
 
 如何包埋？金属网格吸一层液体，滤纸吸一下，只剩薄液膜，塞进液态乙烷
 
-<img src="5-1.png" alt="5-1" style="zoom:25%;" /><img src="5-2.jpg" alt="5-2" style="zoom:15%;" />
+<img src="sb-outline.assets\5-1.png" alt="5-1" style="zoom:25%;" /><img src="sb-outline.assets\5-2.jpg" alt="5-2" style="zoom:15%;" />
 
 #### 电镜观测和记录
 
