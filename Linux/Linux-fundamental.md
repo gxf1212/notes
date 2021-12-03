@@ -706,6 +706,8 @@ some translated doc
 - https://www.cxyzjd.com/article/jackson0714/105331564
 - https://segmentfault.com/a/1190000017576714  
 
+a lot of fancy features: https://zxiaosi.cn/archives/cd1d42d1.html
+
 ### Basic usage
 
 1. serve locally
@@ -918,7 +920,9 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
    > not solved! refer to https://jhildenbiddle.github.io/docsify-themeable/#/?
 
-5. 
+6. scroll to the top
+
+   https://github.com/zhengxiangqi/docsify-scroll-to-top
 
 6. 
 

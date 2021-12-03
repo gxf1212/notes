@@ -39,6 +39,14 @@
         depth: 3
       },
       notFoundPage: '/utils/_my404.md',
+      // 回到顶部
+      scrollToTop: {
+        auto: true,
+        text: '🔼',
+        right: 12,
+        bottom: 52,
+        offset: 25
+      },
     }
   </script>
   <!-- Docsify v4 -->
@@ -60,5 +68,6 @@
   <script src="//unpkg.com/mermaid/dist/mermaid.js"></script>
   <script src="//unpkg.com/docsify-mermaid@latest/dist/docsify-mermaid.js"> 
   <script>mermaid.initialize({ startOnLoad: true });</script>
+  <script src="//unpkg.com/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
 </body>
 </html>

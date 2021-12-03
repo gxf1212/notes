@@ -539,12 +539,6 @@ the final table may include:
 
 
 
-
-
-
-
-
-
 ### attention
 
 - You should probably avoid search spaces bigger than  `30 x 30 x 30` Angstrom, unless you also increase "`--exhaustiveness`".

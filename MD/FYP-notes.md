@@ -104,9 +104,17 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 
 ### Pymol
 
-delete命令！
+1. delete命令！
 
+2. select atom name
 
+   ```
+   sele name HA
+   ```
+
+   see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
+
+3. 
 
 ### VMD techniques
 
@@ -131,10 +139,11 @@ delete命令！
        - Beta: temperature factor
    - Selected Atoms--Selection
      - frequently used
-       - all, protein, nucleic, lipid, water (`not`?)
+       - all, protein, nucleic, lipid, water (including monomers)
        - backbone, sidechain, ...
        - helix, sheet, ..
        - carbon, hydrogen, nitrogen, ...
+     - `not` as logic? see more syntax in Selection--Marco definition
 2. Graphics--colors
 
    - background
@@ -149,6 +158,20 @@ delete命令！
    - Graphics--Labels--Properties (of the text)
 4. Graphics--Representations--Drawing Method, Beta: we may not use that field. So we can replace it with some properties we computed and let VMD color atoms according to it
 5. 
+
+### shell
+
+1. shell 统计出现行数
+
+   ```shell
+   cat complex_ATPP.pdb | grep "SOD" | wc -l
+   ```
+
+   - cat显示内容
+   - grep查找字符
+   - wc计算字数
+
+2. 
 
 
 
@@ -170,7 +193,7 @@ probably need to add top/itp file
 
 #### protein-ATP system
 
-the RdRp, residue name has been aliased. only one chain
+the RdRp, residue name has already been aliased. only one chain
 
 why only one Mg? 虽然确实要两个，但第二个的位置至今under debate。。
 
@@ -220,6 +243,15 @@ rm ${f}.sdf ${f}-t.sdf ${f}.pdb
 ```
 
 always collect obminimize results in .pdb file. Then convert to .pdbqt. 
+
+If from a normal .pdb
+
+```shell
+f=atp
+obabel ${f}.pdb -opdbqt -O ${f}.pdbqt -as --partialcharge gasteiger 
+```
+
+> The ligand may move away after obabel, but it doesn’t matter
 
 > Alternative: ADTools
 >
@@ -271,6 +303,15 @@ mv ${f}_* ./${f}
 
 > conf.txt: start with # or other, as comment.
 
+After that, convert back to .pdb, add H
+
+```shell
+f=out_ligand_1
+obabel ${f}.pdbqt -opdb -O ${f}_d.pdb  # you have to got .pdb first, or c
+obabel ${f}_d.pdb -opdb -O ${f}.pdb -p 7.0 -as
+rm ${f}_d.pdb
+```
+
 
 
 
@@ -308,19 +349,140 @@ I have to summarize the steps:
 
 #### build complex structure
 
-normally build your complex.pdb (by docking etc). Get positions right
+normally build your complex.pdb (by docking etc). Get positions right. Remember the Mg^2+^.
 
-Remember the Mg^2+^.
+Then split all components.
 
-> whatever name is ok. we don’t use this .pdb
+> aligning ligand if there’s a position shift
+>
+> ```shell
+> conda activate work
+> path=/home/gxf/desktop/work/research-porjects/NUS-UROPS/md/prepare
+> python $path/align_ligand.py \
+> '/home/gxf/desktop/work/research-porjects/FYP/setup and MD/ATP-namd/separate_building' \
+> atp.pdb ATP_autopsf.pdb
+> # path ref mob
+> python $path/co_center.py \
+> '/home/gxf/desktop/work/research-porjects/FYP/setup and MD/ATP-namd/separate_building' \
+> atp.pdb ATP_autopsf.pdb
+> ```
+>
+> 
 
-#### generate files for ligand
+#### build complex-method 1
+
+##### make the all .pdb and .psf with AutoPSF
+
+Extensions---Modeling--Automatic PSF Builder, would be a GUI
+
+> **AutoPSF notes**
+>
+> - .pdb file only provides molecular infomation (namely coordinates)
+> - topology files (.itp, .rtp) contain all the parameters, i.e. force field info
+> - top files convert .pdb files into .psf files, which contains full information
+> - for all ligands, the chain name is changed into ‘X’
+
+should **click in every step**, during which **all patches are made** (generated .pdb is different)
+
+i.e have done `segment`, `pdbalias`, `guesscoord`, etc.
+
+> no that this tools uses all36 force field! You can see in
+>
+> ```tcl
+> /home/gxf/vmd/lib/plugins/noarch/tcl/readcharmmtop1.2/
+> ```
+>
+> ```shell
+> ls
+> pkgIndex.tcl                 top_all36_hybrid.inp
+> readcharmmtop.tcl            top_all36_lipid.rtf
+> top_all22_prot.rtf           top_all36_na.rtf
+> top_all27_hybrid.inp         top_all36_prot.rtf
+> top_all27_prot_lipid_na.inp  top_amber2charmm.inp
+> top_all36_carb.rtf           toppar_all36_carb_glycopeptide.str
+> top_all36_cgenff.rtf         toppar_water_ions_namd.str
+> ```
+
+which is successfully applied to rdrp, atp and Mg
+
+> debug:
+>
+> 1. error in ATP
+>
+>    ```
+>    ERROR: failed on end of segment
+>    MOLECULE DESTROYED BY FATAL ERROR!  Use resetpsf to start over.
+>    ```
+>
+>    only 42/43 atoms, recognized as water? replace that ATPP residue name with ATP-space. the chain name X
+>
+>    is assigned wrongly...
+
+> note on results: `xxx_autopsf_formatted.pdb` only removes `REMARK  xxx` and `END` line from `xxx_autopsf.pdb`. basically identical
+
+##### use console to combine all molecules
+
+Extensions---Tk console, or execute in console
+
+```tcl
+package require psfgen
+resetpsf
+
+readpsf rdrp_autopsf.psf
+coordpdb rdrp_autopsf.pdb
+readpsf atp_autopsf.psf
+coordpdb atp_autopsf.pdb
+readpsf mg_autopsf.psf
+coordpdb mg_autopsf.pdb
+
+writepsf combined.psf
+writepdb combined.pdb
+
+puts "Finished"
+quit
+```
+
+```shell
+vmd -dispdev text -e merge.tcl
+```
+
+> #### build complex-method 2
+>
+> use console, include topology
+>
+> Modeling--Tk Console
+>
+> ```tcl
+> package require psfgen
+> resetpsf
+> topology top_all36_prot.rtf
+> topology /home/gxf/vmd/lib/plugins/noarch/tcl/readcharmmtop1.2/top_all27_prot_lipid_na.inp
+> coordpdb rdrp.pdb
+> topology top_all36_na.rtf
+> topology top_all36_cgenff.rtf
+> coordpdb atp.pdb
+> topology toppar_water_ions_namd.str
+> coordpdb mg.pdb
+> 
+> puts "Finished"
+> quit
+> ```
+>
+> completely failure. don’t know what .inp file the tutorials used.
+>
+> #### build complex-method 3
+>
+> build with Gromacs and AmberTools?
+
+##### Appendix: CHARMM-GUI generate files for ligand
+
+but not used in method 1
 
 1. Use CHARMM-GUI---input generator---ligand reader and modeller
 
    refer to preparation videos mentioned above
 
-   > **CHARMM GUI tips**
+   > **CHARMM GUI basic tips**
    >
    > - after GUI, the ligand name is changed into LIG
    > - Only molecules in the **HETATM** record in a PDB file are recognized.
@@ -330,8 +492,15 @@ Remember the Mg^2+^.
    > - Users can modify the protonation state if necessary. 
    >   - or select other protonation state in the next step
    > - **The coordinates will be preserved if you upload .pdb file.**
+   >   - uploading your own .pdb file is suggested
+   >   - you can align .pdb files later, only it considers coordinates
    >   - if you are to upload file, .mol2 is prefered? 
-   > - you should upload your own .pdb file to make the position right, but can align?
+   > - you may want to “Find similar residues in the CHARMM FF”
+   > - the outputed residue name is ‘LIG’
+
+   then just click, click...and download all files
+
+   focus on `ligandrm.pdb/psf`, which can be put into a merging .tcl, as **an alternative way of AutoPSF** in generating files for ligand (other tools for protein, etc?). Carefully choose the force field!
 
    > my experience
    >
@@ -348,33 +517,92 @@ Remember the Mg^2+^.
    >
    > 2. 11.28, CHARMM-GUI failed building Mg2+
 
-2. other ways to build?
+#### solvation and ionization
 
-####  make the combined pdb and psf files
+- solvate https://www.ks.uiuc.edu/Research/vmd/plugins/solvate/
+- autoionize https://www.ks.uiuc.edu/Research/vmd/plugins/autoionize/
 
-load into VMD
+##### method 1 (scripting, easier?)
 
-1. Extensions---Modeling---Automatic psf Builder would be a GUI
+In the last step, you have obtained combine.pdb and .psf
 
-   > **AutoPSF notes**
-   >
-   > - .pdb file provides molecular infomation (namely coordinates)
-   > - topology files (.itp, .rtp) contain all the parameters, i.e. force field info
-   > - top files convert .pdb files into .psf files, which contains full information
-   >
-   > should click in every step
-   >
-   > if no patch, directly generate files at step 3
+```shell
+vmd merged.psf -pdb merged.pdb
+```
 
-2. use console to combine: Extensions---Tk console
+where the solvation script writes:
 
-   
+```tcl
+package require solvate
+solvate merged.psf merged.pdb -t 15 -o solvated
+```
 
-3. use console, include topology?
+In a new vmd session, load the solvated structure
 
-   ```tcl
-   package require psfgen
-   ```
+```tcl
+package require psfgen
+resetpsf
+
+readpsf solvated.psf
+coordpdb solvated.pdb
+
+set everyone [atomselect top all]
+measure minmax $everyone
+measure center $everyone
+```
+
+This is meant to 
+
+
+
+#####  method 2-GUI
+
+> note: a trick: Extension--Modeling--Automatic PSF Builder--Options, check 'add solvation box' and 'ionization' options, follow the PSF building protocol, and you will get completely solvated and ionized system!!!
+>
+> though the parameters cannot be set...
+
+###### Solvation
+
+Extension--Modeling--Add Solvation Box
+
+- You can rotate to minimize volume
+
+- WT: residue name for waters. can change
+
+- if you check 'use molecular dimension', the min and max in 3D will be calculated automatically, and you only need to add 'padding' (and measure) as we usually did. 
+
+  otherwise we can specify all the parameters manually
+  
+- Click 'solvate', molecular info (# of water) is shown in Terminal again.
+
+> this GUI doesn’t have ionization, neither choose water model?? 
+
+###### Ionization
+
+Extensions--Modeling--Add ions (autoionize)
+
+very straightforward
+
+- Choose salt, additional ions
+- Neutralize and set NaCl concentration to 0.15 mol/L
+
+> it’s not replacing water mols, it adds ions
+
+##### measurement
+
+> note: system info
+>
+> RdRp-ATP-Mg
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -436,8 +664,6 @@ gmx cluster
 
 
 ### FEP (same) with NAMD
-
-
 
 
 

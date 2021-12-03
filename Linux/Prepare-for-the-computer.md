@@ -370,7 +370,11 @@ conda install -c conda-forge pymbar
 
 https://anaconda.org/conda-forge/pymbar git address and doc
 
+### Avogadro
 
+https://ubunlog.com/zh-CN/avogadro%E7%BC%96%E8%BE%91%E4%BD%BF%E5%88%86%E5%AD%90%E5%8F%AF%E8%A7%86%E5%8C%96/#Instalar_Avogadro_en_Ubuntu
+
+official: https://avogadro.cc/devel/compiling/
 
 ## pycharm and miniconda
 

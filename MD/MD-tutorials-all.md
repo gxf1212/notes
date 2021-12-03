@@ -107,7 +107,7 @@ gmx genion -s ions.tpr -o solv_ions.gro -p topol.top -pname NA -nname CL -nn 6
 
 
 
-#### 备注
+#### remark
 
 其他
 
@@ -237,6 +237,8 @@ close $file  # otherwise not saved
 4. 
 
 ### psfgen : building system
+
+also seen in NAMD-ug chp3.4 Creating PSF Structure Files
 
 #### user guide
 
@@ -407,9 +409,13 @@ about restart files:
      - but tutorials use it as topology??
      - `.tcl` = `.pgn`
 
-#### my exploration: building the system
+#### my exploration
 
-- http://zarbi.chem.yale.edu/ligpargen/namd_tutorial.html  for a single protein. resembles namd tutorial, which gives
+##### building the system
+
+- http://zarbi.chem.yale.edu/ligpargen/namd_tutorial.html  
+
+  build a single protein. resembles namd tutorial, which is
 
   ```tcl
   package require psfgen
@@ -425,8 +431,6 @@ about restart files:
   # in .namd
   parameters          ../common/par_all27_prot_lipid.inp 
   ```
-
-- https://www.youtube.com/watch?v=IET_FvCk9XE
 
 - https://www.youtube.com/watch?v=Pj40ZnybXds
 
@@ -451,6 +455,12 @@ about restart files:
 
   he has to add a lot of prm files because of not adding topology when building! not recommended.
 
+- https://www.youtube.com/watch?v=IET_FvCk9XE very details VMD usage
+
+  This guy used AutoPSF to model the protein itself! and CHARMM-GUI for ligand. 
+  
+  finally merge the files as the above guy does, no `topology xxx`
+  
 - FEP tutorial, build 18C6 and potassium
 
   ```tcl
@@ -492,11 +502,54 @@ about restart files:
   > parameters           ../ForceField/par_all27_prot_lipid.prm
   > ```
 
-- I know! It does not matter how many molecules you want to include (just merge). You only need to build one molecule.
+I know! It does not matter how many molecules you want to include (just merge). You only need to build one molecule.
+
+- https://www.youtube.com/watch?v=adxccOTFD_Q
+
+  ```tcl
+  mol new a48.psfmol addfile a48.pdb
+  set al [atomselect top "all"]set sizeV [measure minmax $al]
+  package require solvate
+  solvate a48.psf a48.pdb -o a48.sol -b 1.5 -minmax f21 5855]} {200 184 176]
+  mol delete top
+  package require psfgenresetpsf
+  ##工onize
+  #conc = ion concentrationset conc 1.5
+  package require autoionize
+   autoionize -psf a48.sol.psf -pdba48.sol.pdb -o a48.out -sc $conc -cation POT
+  ```
+
+  
+
+##### solvation and ionization
+
+- still the many-parameter guy, tutorial 1, https://www.youtube.com/watch?v=IArpsQsZ95U 
+
+  GUI-based
+
+  a lazy command:
+
+  ```tcl
+  puts " Cell centre: "
+  puts " X= [ expr ($xmax + $xmin)/2 ] "
+  puts " Y= [ expr ($ymax + $ymin)/2 ] "
+  puts " Z= [ expr ($zmax + $zmin)/2 ] "
+  puts "-------------------------------------------------------"
+  puts " Copy/paste for NAMD: "
+  puts "cellBasisVector1 [ expr $xmax - $xmin ] 0 0 "
+  puts "cellBasisVector2 0 [ expr $ymax - $ymin ] 0 "
+  puts "cellBasisVector3 0 0 [ expr $zmax - $zmin ] "
+  puts "cellOrigin [ expr ($xmax + $xmin)/2 ] [ expr ($ymax + $ymin)/2 ] [ expr ($zmax + $zmin)/2 ] "
+  puts "-------------------------------------------------------"
+  ```
+
+  copy that into Tk c
 
 - 
 
-- 
+
+
+
 
 ### Free Energy Tutorial
 
