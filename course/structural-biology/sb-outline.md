@@ -3,14 +3,11 @@
 > 植入广告：
 >
 > *   我搬运的[结构生物学课程](https://www.bilibili.com/video/BV1A34y1m7ie)，完整且有英文字幕
->
-> *   我搬运的[分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e/)，讲得非常好，老师是分子动力学领域的大牛
->
+>*   我搬运的[分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e/)，讲得非常好，老师是分子动力学领域的大牛
 > *   [加州理工学院 冷冻电镜入门](https://www.bilibili.com/video/BV143411k7KJ/)，也讲得非常棒
->
-> *   [加州理工学院 冷冻电镜样品制备](https://www.bilibili.com/video/BV1r44y1i71P/)，都有英文字幕
->
-> *   [蛋白结晶研讨会](https://www.bilibili.com/video/BV15L4y1z7be/)
+>*   [加州理工学院 冷冻电镜样品制备](https://www.bilibili.com/video/BV1r44y1i71P/)，都有英文字幕
+> 
+>还有很多，可以直接到[我的B站空间](https://space.bilibili.com/441196634)去看
 
 讲这么快，肯定看个大概就行了。。总结的时候不要在意技术细节
 
