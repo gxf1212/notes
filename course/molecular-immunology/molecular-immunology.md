@@ -523,8 +523,33 @@ Ab can also be an antigen. Three types of epitope:
 
 ### Class switching (类别转换)
 
-
+same V region, C region genes conversion along with stages of infection
 
 [reference](https://www.youtube.com/watch?v=Gvq48XrzMTY)
 
 ## Preparation
+
+### Polyclonal Ab
+
+
+
+
+
+### Monoclonal Ab
+
+
+
+
+
+### Genetic engineered Ab
+
+
+
+
+
+> 小结
+> 1. 抗体的功能是什么？
+> 2. 各型抗体的特点是什么？
+> 3. 什么是单克隆抗体？什么是多克隆抗体？
+> 4. 杂交瘤技术的基本原理是什么？
+> 5. 抗体是如何被改造的？  

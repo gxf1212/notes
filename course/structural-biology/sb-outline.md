@@ -567,6 +567,8 @@ $\Delta R$代入上公式，$\theta$ 和 $H$ 取min。
 
 #### 衍射数据的收集与处理
 
+> 评估之前的提纲没说
+
 ##### 指标化（indexing）
 
 $$
@@ -631,11 +633,13 @@ recall:
 
 6. 同种晶体不同个体，衍射数据的分别收集，能合并的程度
 
-7. Wilson统计
+7. Wilson统计。线性拟合
 
-<img src="sb-outline.assets\4-3-wilson.jpg" alt="wil" style="zoom:55%;" /><img src="sb-outline.assets\4-3-wilson-eq.png" alt="wil" style="zoom:25%;" />
+   <img src="sb-outline.assets\4-3-wilson.jpg" alt="wil" style="zoom:55%;" /><img src="sb-outline.assets\4-3-wilson-eq.png" alt="wil" style="zoom:25%;" />
 
 ##### 发表数据（初步分析）应注意的问题
+
+> 提纲也没说
 
 - 实验
   - 样品来源、制备方法
@@ -649,19 +653,21 @@ recall:
 
 #### 数据解析
 
-一般要求
+数据的质量和以下有关：晶体的质量、光源的强度、收集的方法
+
+##### 一般要求
 
 - 分辨率：λ/2sinθ，θ越大分辨率越高
 - 理论衍射点数和1/d的三次方成正比
   - 完整度一般要求80%
 
-数据的处理
+##### 数据的处理
 
 - 数据校正
   - KBPLAD
 - 多套数据的合并
 
-解析的步骤（详见后）
+##### 解析的步骤（详见后）
 
 - 确定相位
 - 计算电子密度图
@@ -698,65 +704,6 @@ $$
 - 通过电子密度的表现，检测模型的正确与否
 
 
-
-
-
-##### 分子置换法
-
-同源：序列不一定相同（identical），但尺寸、疏水性等性质可能相同
-
-序列同源，很可能三维结构折叠类型也同源
-
-同源但不同晶的，用分子置换法（同晶的用同晶差值傅里叶法）
-
-需要先旋转、后平移，让二者的结构单元superimpose
-
-###### 同源蛋白的选取
-
-- 比对时，应删除易变性较强、测量误差大的residue
-- 删除非蛋白分子
-- （同源蛋白的）各向同性温度因子指定为相同的值
-- 选取合适的结构域、（寡聚体中的）单体
-- 多试几个同源蛋白
-
-等
-
-###### 旋转问题
-
-旋转A或B都可
-
-旋转B后Patterson函数为$P_{B,R}(\boldsymbol{U}_R)$，计算二者的相似性（？），最大重叠时旋转函数最大
-
-旋转函数定义为
-$$
-R(\alpha,\beta,\gamma)=\int_
-VP_A(\boldsymbol{U})P_{B,R}(\boldsymbol{U}_R)\mathrm{d}\boldsymbol{U}
-$$
-
-积分域为半径为某个 $r$ 的球面
-
-> 为啥转了以后Patterson函数会变？
-
-###### 平移问题
-
-平移后的结构因子振幅和统一蛋白的结构因子振幅，的R因子最小或（模平方的）相关系数最大
-
-$$
-R=\dfrac{\sum_\boldsymbol{H}|F_o(\boldsymbol{H})-F_c(\boldsymbol{H})|}{\sum_\boldsymbol{H}F_o(\boldsymbol{H})}
-$$
-where $F_o(\boldsymbol{H})$ 是待测晶体，$F_c(\boldsymbol{H})$ 是已知晶体
-
-密堆积分析：寡聚体？
-
-<img src="sb-outline.assets\4-4-close1.jpg" alt="4-4-close1" style="zoom:15%;" /><img src="sb-outline.assets\4-4-close2.jpg" alt="4-4-close2" style="zoom:15%;" />
-
-共有24种分子置换的方式，缩小了搜索范围
-
-
-
-平移函数：类似
-
-> 前面不是已经有目标函数了吗
 
 ##### Patterson函数与原子间矢量法
 
@@ -823,6 +770,65 @@ Harker截面或Harker线，就是同一套等效点的原子组成的帕特森�
 自身Patterson矢量：分子内原子间矢量相对短，在意Patterson晶胞原点为球心、某个长度$r$为半径的球面之内。
 
 交叉Patterson矢量：分子间原子间矢量相对长
+
+##### 分子置换法
+
+同源：序列不一定相同（identical），但尺寸、疏水性等性质可能相同
+
+序列同源，很可能三维结构折叠类型也同源
+
+同源但不同晶的，用分子置换法（同晶的用同晶差值傅里叶法）
+
+需要先旋转、后平移，让二者的结构单元superimpose
+
+###### 同源蛋白的选取
+
+- 比对时，应删除易变性较强、测量误差大的residue
+- 删除非蛋白分子
+- （同源蛋白的）各向同性温度因子指定为相同的值
+- 选取合适的结构域、（寡聚体中的）单体
+- 多试几个同源蛋白
+
+等
+
+###### 旋转问题
+
+旋转A或B都可
+
+旋转B后Patterson函数为$P_{B,R}(\boldsymbol{U}_R)$，计算二者的相似性（？），最大重叠时旋转函数最大
+
+旋转函数定义为
+$$
+R(\alpha,\beta,\gamma)=\int_
+VP_A(\boldsymbol{U})P_{B,R}(\boldsymbol{U}_R)\mathrm{d}\boldsymbol{U}
+$$
+
+积分域为半径为某个 $r$ 的球面
+
+> 为啥转了以后Patterson函数会变？
+
+###### 平移问题
+
+平移后的结构因子振幅和统一蛋白的结构因子振幅，的R因子最小或（模平方的）相关系数最大
+
+$$
+R=\dfrac{\sum_\boldsymbol{H}|F_o(\boldsymbol{H})-F_c(\boldsymbol{H})|}{\sum_\boldsymbol{H}F_o(\boldsymbol{H})}
+$$
+where $F_o(\boldsymbol{H})$ 是待测晶体，$F_c(\boldsymbol{H})$ 是已知晶体
+
+密堆积分析：寡聚体？
+
+<img src="sb-outline.assets\4-4-close1.jpg" alt="4-4-close1" style="zoom:15%;" /><img src="sb-outline.assets\4-4-close2.jpg" alt="4-4-close2" style="zoom:15%;" />
+
+共有24种分子置换的方式，缩小了搜索范围
+
+
+
+平移函数：类似
+
+> 前面不是已经有目标函数了吗
+
+
 
 ##### 多波长反常色散法
 
