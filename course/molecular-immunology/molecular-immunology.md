@@ -480,7 +480,7 @@ Ab can also be an antigen. Three types of epitope:
 
 ### Neutralizing toxins and infection
 
-> [中和与非中和抗体](https://www.bilibili.com/video/BV1Gg411P7jS/)
+> 参考：在B站搜索：中和抗体和非中和抗体有什么区别呢？
 >
 > - 中和抗体只占人体产生抗体中的一小部分
 > - 它们都能特异性结合病原体，但中和抗体可能结合入侵相关蛋白（如冠状病毒的S蛋白），或结合衣壳蛋白导致病毒核酸无法释放，直接阻止对人体的感染；非中和抗体可能结合其他位点，但无法阻止感染！
