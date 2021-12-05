@@ -454,3 +454,51 @@ hinge: flexible, between CH1 and CH2. not in IgM/E
   - according to hinge AA and S-S bond, the five isotypes are classified into different subclasses (亚类)
 - Variable region
   - λ type is classified into 4 subtypes (亚型)
+
+They are encoded by independent genes and just freely combine...which makes diversity.
+
+### Immunogenecity
+
+Ab can also be an antigen. Three types of epitope:
+
+<img src="molecular-immunology.assets\4-5.png" alt="4-5" style="zoom:25%;" />
+
+- isotype: all C region.
+  - Individuals in the same species have similar C region. If you inject monkey's Ab into a human, the C region could be an antigen.
+- allotype: some residue variation in C region
+  - There are gene variations between individuals inside a species too, which generates epitope in C region. A marker of individuals.
+- idiotype: in V region (HVR)
+  - Antibodies from the same individual have diverse V regions which may give rise to an epitope.
+  - Anti-idiotype antibody as an alternative of the antigen to induce immune system.
+
+## Interaction with Ag
+
+- VH and VL all have 3 CDRs. In charge of binding. affinity
+- VL gene is from recombinant V, D, J genes, while VH gene depends on subclasses
+
+## Effects after Ag binding
+
+### Neutralizing toxins and infection
+
+> [中和与非中和抗体](https://www.youtube.com/watch?v=n5JnroNjbw8)
+>
+> - 中和抗体只占人体产生抗体中的一小部分
+> - 它们都能特异性结合病原体，但中和抗体可能结合入侵相关蛋白（如冠状病毒的S蛋白），或结合衣壳蛋白导致病毒核酸无法释放，直接阻止对人体的感染；非中和抗体可能结合其他位点，但无法阻止感染！
+> - 非中和抗体有增强免疫的作用，与病毒结合后可以介导免疫细胞（如巨噬细胞）吞噬、清除病毒，杀敌于“国门之内”，在早期阶段发挥抗病毒作用。
+> - 在中后期可能会导致免疫损伤，因为该抗体不能阻止病毒的侵染，所以病毒可能在吞噬它的细胞内部增殖、裂解之。这种途径使病毒能不依赖细胞表面受体而侵入原本无法入侵的细胞，称为抗体依赖增强作用（Antibody-dependent enhancement，ADE）
+
+### Effect of C region
+
+- activate complement system (see chapter 6 for details)
+- bind Fc receptor on the cell surface
+  - <img src="molecular-immunology.assets\4-ops.png" alt="4-ops" style="zoom:40%;" />
+
+- 穿过胎盘（IgG）与黏膜（分泌型IgA）  
+
+## Characteristics of several types of Ab
+
+
+
+
+
+## Preparation
