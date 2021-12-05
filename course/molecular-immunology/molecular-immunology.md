@@ -106,12 +106,12 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 #### spleen
 
 - 最大的免疫器官
-
 - 淋巴细胞定居、发挥功能的场所
 
-  > 红髓：巨噬细胞；白髓：T细胞
 
-  > 其他功能：调节血量、过滤血液
+> 红髓：巨噬细胞；白髓：T细胞
+>
+> 其他功能：调节血量、过滤血液
 
 #### lymphatic system
 
@@ -482,7 +482,7 @@ Ab can also be an antigen. Three types of epitope:
 
 > 参考：https://www.bilibili.com/video/BV1Gg411P7jS
 >
-> - 蛋白），或结合衣壳蛋白导致病毒核酸无法释放，直接阻止对人体的感染；非中和抗体可能结合其他位点，但无法阻止感染！
+> - 中和抗体只占人体产生抗体中的一小部分
 > - 它们都能特异性结合病原体，但中和抗体可能结合入侵相关蛋白（如冠状病毒的S蛋白），或结合衣壳蛋白导致病毒核酸无法释放，直接阻止对人体的感染；非中和抗体可能结合其他位点，但无法阻止感染！
 > - 非中和抗体有增强免疫的作用，与病毒结合后可以介导免疫细胞（如巨噬细胞）吞噬、清除病毒，杀敌于“国门之内”，在早期阶段发挥抗病毒作用。
 > - 在中后期可能会导致免疫损伤，因为该抗体不能阻止病毒的侵染，所以病毒可能在吞噬它的细胞内部增殖、裂解之。这种途径使病毒能不依赖细胞表面受体而侵入原本无法入侵的细胞，称为抗体依赖增强作用（Antibody-dependent enhancement，ADE）
@@ -490,15 +490,41 @@ Ab can also be an antigen. Three types of epitope:
 ### Effect of C region
 
 - activate complement system (see chapter 6 for details)
+
 - bind Fc receptor on the cell surface
-  - <img src="molecular-immunology.assets\4-ops.png" alt="4-ops" style="zoom:40%;" />
+  - opsonization (调理作用): phagocytosis (吞噬作用) by macrophages and neutrophils through Fc binding to Fc receptor
 
-- 穿过胎盘（IgG）与黏膜（分泌型IgA）  
+    <img src="molecular-immunology.assets\4-ops.png" alt="4-ops" style="zoom:40%;" />
+  
+    
+  
+  - enhance ADCC (antibody-dependent cell-mediated cytotoxicity) effect of NK cell, also through Fc
+  
+  - mediate type I hypersensitivity (超敏反应): mastocytes, basophils, IgE (see chapter 10?)
+  
+- 穿过胎盘（IgG）与黏膜（分泌型 IgA）  
 
-## Characteristics of several types of Ab
+## Characteristics of several classes of Ab
+
+### Five classes
+
+| classes | state    | localization                                   | basic function                                               |
+| ------- | -------- | ---------------------------------------------- | ------------------------------------------------------------ |
+| IgM     | pentamer | mainly in serum<br />monomer on B cell surface | primary immune response<br />strongest complement activation |
+| IgG     | monomer  | in serum and body fluid                        | secondary immune response<br />can also in milk, pass 胎盘   |
+| IgA     | dimer    | mainly mucosa (黏膜)<br />monomer in serum     | secreted into milk (乳汁)                                    |
+| IgE     | monomer  | in serum, very little                          | may cause type I hypersensitivity                            |
+| IgD     | monomer  | on B cell surface                              | marker of B cell maturation<br />not so clear                |
+
+| more info | subclasses | formation               | more on structure | infection | features                           |
+| --------- | ---------- | ----------------------- | ----------------- | --------- | ---------------------------------- |
+| IgM       | μ          | advanced embryo         | no hinge, CH4     | early     | blood type<br />marker of 宫内感染 |
+| IgG       | IgG1/2/3/4 | half a year after birth |                   | late      | long half life                     |
+
+### Class switching (类别转换)
 
 
 
-
+[reference](https://www.youtube.com/watch?v=Gvq48XrzMTY)
 
 ## Preparation

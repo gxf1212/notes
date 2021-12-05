@@ -633,7 +633,7 @@ recall:
 
 7. Wilson统计
 
-<img src="sb-outline.assets\4-3-wilson-16385348554011.jpg" alt="wil" style="zoom:55%;" /><img src="E:\undergraduate_study\study\courses\structural biology\new\4-3-wilson-eq.png" alt="wil" style="zoom:25%;" />
+<img src="sb-outline.assets\4-3-wilson.jpg" alt="wil" style="zoom:55%;" /><img src="sb-outline.assets\4-3-wilson-eq.png" alt="wil" style="zoom:25%;" />
 
 ##### 发表数据（初步分析）应注意的问题
 
