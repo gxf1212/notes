@@ -191,6 +191,46 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
     改完重启即可
 
+18. wall paper壁纸
+
+    搜索：电脑桌面壁纸 化学; microscopy photos
+
+    some good websites
+
+    - https://wall.alphacoders.com/
+    - https://wallpapercave.com/
+    - https://www.wallpaperflare.com/search?wallpaper=chemistry
+    - https://www.flickr.com/photos/zeissmicro/
+
+    > https://cdn.shopify.com/s/files/1/1064/0118/files/periodic-table-of-tech-standalone_alt.png?v=1579813258
+
+    Lively WallpaperLively *Wallpaper* for Windows
+
+19. process figure
+
+    如果只需要单纯的裁剪功能, 推荐gThumb工具, 界面美观好用, 媲美某Q的聊天截图crtl+A
+    打开命令行,输入
+
+    ```shell
+    sudo apt install gthumb
+    ```
+
+    下载安装完, 就能用啦, 输入
+
+    ```shell
+    gthumb
+    ```
+
+    为了以后使用方便, 可以右键屏幕左侧状态栏的gthumb图标,选择”锁定到启动器”. 以后就不用打开命令行了, 直接点状态栏的gthumb图标就行了. gthumb的具体用法不用说, 软件就那几个键, 而且都是图标, 看看就明白了.
+
+    裁剪、调整大小、调整色彩等
+
+    - As for add border, use `cv2.copyMakeBorder()`
+
+    https://blog.csdn.net/qq_36560894/article/details/105416273 
+
+    https://www.geeksforgeeks.org/python-opencv-cv2-copymakeborder-method/
+
 17. 
 
 
@@ -575,7 +615,11 @@ python -V
   conda clean -i
   ```
 
-- 
+- Please update conda by running
+
+  ```shell
+  conda update -n base conda
+  ```
 
 
 
@@ -924,13 +968,21 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
    https://github.com/zhengxiangqi/docsify-scroll-to-top
 
-6. 
+6. https://angry-swanson-b4e47b.netlify.app/zh-cn/helpers?id=%e5%9b%be%e7%89%87%e5%a4%84%e7%90%86 about figures
 
-4. 
+8. 百度提供了一个提交链接的入口，地址如下：
 
+   > https://ziyuan.baidu.com/linksubmit/url
 
+   填写码云 Pages 的链接：https://itwanger.gitee.io/，并「提交」，见下图：
 
+   这样做的好处是，网站可以主动向百度搜索推送数据，缩短爬虫发现网站链接的时间。当然了，百度收录需要一段时间
 
+9. 
+
+#### other features, and Gitee
+
+- It is ridiculous that if I include a YouTube or Bilibili link in .md, I cannot deploy... 
 
 # Installation and softwares
 
