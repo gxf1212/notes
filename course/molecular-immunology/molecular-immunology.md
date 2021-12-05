@@ -1,6 +1,6 @@
 # Molecular Immunology notes
 
-Due to the absence of appropriate English online courses that match our course's syllabus, I have to write a note on my own. All the content is based on the newest slides and Chinese textbook. I wound not try to write everything in English, because the nouns must be 太难顶了... (I'm reading Chinese materials!)
+Due to the absence of appropriate English online courses that match our course's syllabus, I have to write a note on my own. All the content is based on the newest slides and Chinese textbook. I wound not try to write everything in English, because the nouns must be 太难顶了... (I'm reading Chinese materials!) For important terms in English, I have to remark them in Chinese.
 
 The quoted areas are less-important comments, or end-of-chapter questions.
 
@@ -122,7 +122,7 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
   - 淋巴液和血浆成分相似，可能交换
 - 淋巴细胞定居、发挥免疫应答的场所
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" /><img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
+<img src="molecular-immunology.assets\1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" /><img src="molecular-immunology.assets\1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
 
 具体结构
 
@@ -172,8 +172,10 @@ Antigen is substances that can
 
 ### Concepts
 
-- immunogenicity (免疫原性): the ability to induce immnue response
+Corresponding to the above two points,
+
 - antigenicity (抗原性): the ability to specifically combine with the final products of a immune response (i.e. antibodies or receptors on sensitized immune cells)
+- immunogenicity (免疫原性): the ability to induce immnue response
 
 Thus, antigens are categorized into
 
@@ -186,7 +188,7 @@ Another thing is so-called "carrier effect": when a hapten is attached to a larg
 
 #### antigen
 
-##### foreigness
+##### foreigness (异物性)
 
 i.e. the difference between antigen and "self"
 
@@ -196,15 +198,15 @@ What is "self"? If a substance is came into contact <u>during embyronic period o
 
 categories:
 
-- heterogenetic antigen: come from other species
+- heterogenetic (异种) antigen: come from other species
 
   > food, microbes and their products, heterogenetic serum
 
-- allogeneic antigen: other individuals
+- allogeneic (同种异体) antigen: other individuals
 
   > blood group antigen, transplant antigen, etc.
 
-- autogeneic antigen: from yourself
+- autogeneic (自体) antigen: from yourself
 
   >tissue-specific antigen, denatured protein, etc.
 
@@ -239,7 +241,7 @@ age, gender, genetic factor, healthy state
 
 #### route of entry
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\3-skin.png" alt="3-skin" style="zoom:25%;" />
+<img src="molecular-immunology.assets\3-skin.png" alt="3-skin" style="zoom:25%;" />
 
 皮内 > 皮下 > 肌肉 > 静脉 > 口腔
 
@@ -276,50 +278,108 @@ Also, they are the basic unit to specifically recognize TCR/BCR/antibody.
 
 构象表位：由氨基酸序列不连续，但在空间上相互接近、形成特定构象的几个氨基酸构成的表位。
 
-| epitope              | T cell epitope | B cell epitope           |
-| -------------------- | -------------- | ------------------------ |
-| receptor             | TCR            | BCR                      |
-| MHC involved?        |                |                          |
-| antigen presentation | needed         | no need                  |
-| composed of          |                |                          |
-| size                 |                |                          |
-| type                 | linear         | linear or conformational |
+| epitope              | T cell epitope                                      | B cell epitope                                               |
+| -------------------- | --------------------------------------------------- | ------------------------------------------------------------ |
+| receptor             | TCR                                                 | BCR                                                          |
+| MHC involved?        | yes                                                 | no                                                           |
+| antigen presentation | needed                                              | no need                                                      |
+| composed of          | linear short peptide                                | natural polypeptide<br />(lipo)polysaccharide<br />organic compounds |
+| size                 | CD8^+^ T cell: 5~12 AA<br />CD4^+^ T cell: 12~17 AA | 5~15 AA or 5~7 <br />oligosaccharide or nt                   |
+| type                 | linear                                              | linear or conformational                                     |
+| position             | any                                                 | surface                                                      |
 
+> natural: part of a macromolecule?
+
+<img src="molecular-immunology.assets\3-tb.png" alt="3-tb" style="zoom:45%;" />
 
 ## Categories
 
-### Dependence on T cell
+### Dependence on Th cell
 
 Thymus-independent/dependent antigen
 
-- TI-Ag
-- TD-Ag
-
-| antigen          | TI-Ag | TD-Ag |
-| ---------------- | ----- | ----- |
-| comprised of     |       |       |
-| T cell dependent |       |       |
-| type of response |       |       |
-| antibody type    |       |       |
-| memory?          |       |       |
+- TI-Ag 胸腺非依赖性抗原
+- TD-Ag 胸腺依赖性抗原, most antigen. 
+  - Th cell activates B cell
 
 
+| antigen          | TD-Ag                         | TI-Ag                  |
+| ---------------- | ----------------------------- | ---------------------- |
+| T cell dependent | yes                           | no                     |
+| chemical nature  | most protein Ag               | most polysaccharide Ag |
+| type of epitope  | B/TCR epitope                 | BCR epitope            |
+| type of response | humoral/cell-mediated         | humoral immune         |
+| type of antibody | various, mainly IgG, less IgM | IgM                    |
+| memory?          | yes                           | no                     |
+
+relationship
+
+```mermaid
+graph LR
+le[linear epitope] --can be--> te[T cell epitope]
+le[linear epitope] --can be--> be[B cell epitope]
+ce[conformational epitope] --can be--> be[B cell epitope]
+te --from--> TD-Ag
+be --from--> TI-Ag
+be --from--> TD-Ag
+```
 
 ### Relationship (亲缘关系)
 
-
+- heterophilic (异嗜性) antigen
+  - common antigen between human and other species
+  - when pathogen enters, the immune response causes autoimmunity
+- xenogenic (异种) antigen
+  - from other species, not common
+- allogenic (同种异体) antigen
+- autoantigen (自身抗原)
 
 ### Presenting
 
+Whether it is synthesized inside APC
 
+- yes: endogeneous (内源性) antigen.
 
-### Other non-antigenic stimulator
+  > viral/tumor Ag
 
+- no: exogeneous (外源性) antigen.
 
+  > bacteria, animal serum
 
+### Other non-antigenic immune stimulator
 
+> general understanding
 
+#### super antigen 
+
+超抗原, low conc of which can stimulate T cells
+
+> - endogenous: viral protein
+> - exogenous: bacterial exotoxin (secreted protein)
+
+#### adjuvant
+
+佐剂, non-specific substances which are added together with antigen in vaccines, to enhace or change the type of immune response.
+
+> 卡介苗, $\ce{Al(OH)3}$, artificial, Freundadjuvant
+
+#### mitogen
+
+丝裂原, which binds to their receptor and stimulates cell growth
+
+> ### epitope mapping
+>
+> 表位的确定。To determine the action targets, to make vaccines
+>
+> Build a overlapping library and screen with the antibody
+
+> key points
+>
+> - T cell need degradation (presenting), TCR indirectly recognize
+> - BCR directly recognize, both linear (no degradation) or conf (degradation) are ok
+>
 > 思考与小结
+>
 > 1. 抗原的免疫原性和反应原性（抗原性）及其关系
 > 2. 决定免疫原性的因素
 > 3. 载体效应，交叉反应
@@ -331,35 +391,109 @@ Thymus-independent/dependent antigen
 
 # Chapter 4 Immunoglobin 免疫球蛋白
 
+Molecules with antibody-like activity.
+
+Immunoglobulin super family (IgSF, 免疫球蛋白超家族): proteins including Ig-like domains
+
+-  MHC, BCR, TCR, CD4, CD8, ....
+
 ## Structure
 
+### Chains
 
+- A Y-shape molecule. N terminal at the top.
 
+- Two identical heavy chains (connected by S-S bond) and light chains, between which is a S-S bond
 
+- heavy chain: 50kD, five isotypes (同种型): IgA/G/E/M/D ~ α/γ/ε/μ/δ chain
+
+  light chain: 25kD, two types, κ/λ
+
+### Domains
+
+#### structure
+
+<img src="molecular-immunology.assets\4-domain.png" alt="4-domain" style="zoom:30%;" />
+
+|                 | Heavy chain       | Light chain   |
+| --------------- | ----------------- | ------------- |
+| Constant region | sky blue, CH1/2/3 | orange, CL    |
+| Variable region | blue, VH          | tangerine, VL |
+
+hinge: flexible, between CH1 and CH2. not in IgM/E
+
+#### function
+
+- VH/VL: antigen binding
+  - contains hypervariable region (高变区) or complement-determining region (互补决定区), other region is called framework region
+- CH1 and CL: allogenic marker (同种异型标志)
+- CH2: complement binding site for IgG
+- CH3: membrane receptor binding; cross 胎盘 for IgG; complement binding site for IgM
+- CH4 is exclusive in IgM/E, following CH3
+
+### Enzymolysis
+
+<img src="molecular-immunology.assets\4-ab-cleavage.png" alt="4-ab-cleavage" style="zoom:25%;" />
+
+> papain: 木瓜蛋白酶; pepsin: 胃蛋白酶
+
+### Other components
+
+- joining chain (J片): peptide at C-ter, joining secretary IgA dimer or IgM pentamer
+- secretary IgA also need a glycopeptide, secretary piece (分泌片)
+
+> <img src="molecular-immunology.assets\4-other.png" alt="4-other" style="zoom:40%;" />
+>
+> <img src="molecular-immunology.assets\4-iga.png" alt="4-iga" style="zoom:33%;" />
 
 ## Diversity and Immunogenecity
 
+### Diversity
 
+- Constant region
+  - according to hinge AA and S-S bond, the five isotypes are classified into different subclasses (亚类)
+- Variable region
+  - λ type is classified into 4 subtypes (亚型)
 
+They are encoded by independent genes and just freely combine...which makes diversity.
 
+### Immunogenecity
 
+Ab can also be an antigen. Three types of epitope:
 
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\4-5.png" alt="4-5" style="zoom:25%;" />
 
-
+- isotype: all C region.
+  - Individuals in the same species have similar C region. If you inject monkey's Ab into a human, the C region could be an antigen.
+- allotype: some residue variation in C region
+  - There are gene variations between individuals inside a species too, which generates epitope in C region. A marker of individuals.
+- idiotype: in V region (HVR)
+  - Antibodies from the same individual have diverse V regions which may give rise to an epitope.
+  - Anti-idiotype antibody as an alternative of the antigen to induce immune system.
 
 ## Interaction with Ag
 
-
-
-
+- VH and VL all have 3 CDRs. In charge of binding. affinity
+- VL gene is from recombinant V, D, J genes, while VH gene depends on subclasses
 
 ## Effects after Ag binding
 
+### Neutralizing toxins and infection
 
+> [中和与非中和抗体](https://www.youtube.com/watch?v=n5JnroNjbw8)
+>
+> - 中和抗体只占人体产生抗体中的一小部分
+> - 它们都能特异性结合病原体，但中和抗体可能结合入侵相关蛋白（如冠状病毒的S蛋白），或结合衣壳蛋白导致病毒核酸无法释放，直接阻止对人体的感染；非中和抗体可能结合其他位点，但无法阻止感染！
+> - 非中和抗体有增强免疫的作用，与病毒结合后可以介导免疫细胞（如巨噬细胞）吞噬、清除病毒，杀敌于“国门之内”，在早期阶段发挥抗病毒作用。
+> - 在中后期可能会导致免疫损伤，因为该抗体不能阻止病毒的侵染，所以病毒可能在吞噬它的细胞内部增殖、裂解之。这种途径使病毒能不依赖细胞表面受体而侵入原本无法入侵的细胞，称为抗体依赖增强作用（Antibody-dependent enhancement，ADE）
 
+### Effect of C region
 
+- activate complement system (see chapter 6 for details)
+- bind Fc receptor on the cell surface
+  - <img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\4-ops.png" alt="4-ops" style="zoom:40%;" />
 
-
+- 穿过胎盘（IgG）与黏膜（分泌型IgA）  
 
 ## Characteristics of several types of Ab
 
