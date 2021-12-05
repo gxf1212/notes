@@ -411,3 +411,46 @@ Immunoglobulin super family (IgSF, 免疫球蛋白超家族): proteins including
 
 ### Domains
 
+#### structure
+
+<img src="molecular-immunology.assets\4-domain.png" alt="4-domain" style="zoom:30%;" />
+
+|                 | Heavy chain       | Light chain   |
+| --------------- | ----------------- | ------------- |
+| Constant region | sky blue, CH1/2/3 | orange, CL    |
+| Variable region | blue, VH          | tangerine, VL |
+
+hinge: flexible, between CH1 and CH2. not in IgM/E
+
+#### function
+
+- VH/VL: antigen binding
+  - contains hypervariable region (高变区) or complement-determining region (互补决定区), other region is called framework region
+- CH1 and CL: allogenic marker (同种异型标志)
+- CH2: complement binding site for IgG
+- CH3: membrane receptor binding; cross 胎盘 for IgG; complement binding site for IgM
+- CH4 is exclusive in IgM/E, following CH3
+
+### Enzymolysis
+
+<img src="molecular-immunology.assets\4-ab-cleavage.png" alt="4-ab-cleavage" style="zoom:25%;" />
+
+> papain: 木瓜蛋白酶; pepsin: 胃蛋白酶
+
+### Other components
+
+- joining chain (J片): peptide at C-ter, joining secretary IgA dimer or IgM pentamer
+- secretary IgA also need a glycopeptide, secretary piece (分泌片)
+
+> <img src="molecular-immunology.assets\4-other.png" alt="4-other" style="zoom:40%;" />
+>
+> <img src="molecular-immunology.assets\4-iga.png" alt="4-iga" style="zoom:33%;" />
+
+## Diversity and Immunogenecity
+
+### Diversity
+
+- Constant region
+  - according to hinge AA and S-S bond, the five isotypes are classified into different subclasses (亚类)
+- Variable region
+  - λ type is classified into 4 subtypes (亚型)
