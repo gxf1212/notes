@@ -82,9 +82,22 @@ RNA的结构？
 
 参考资料：
 
+- [孙宏伟，结构化学，点群和空间群那块](https://www.bilibili.com/video/BV1P7411w7tm?p=80)，然后再看课件
+
+- > https://www.antpedia.com/viewspace-32448 Laue、周转晶体法
+
+- https://www.bilibili.com/video/BV1bq4y1k7TS/ 第三集，倒易空间，Ewald sphere
+
+- https://www.youtube.com/watch?v=jvovCGHu9c8
+
+  Ewald sphere 3D representation。旋转晶体相当于旋转球，最终能扫到的球（limiting sphere）的半径为$2\cdot\frac{1}{d}$，所以波长越小能收到更多衍射点
+
 - Ewald球就是反射球
+
 - https://wenku.baidu.com/view/f339b14933687e21af45a981.html 衍射定律课件
+
 - https://max.book118.com/html/2018/0614/172432910.shtm 同步辐射晶体学衍射课件，收集和相位问题
+
 - https://www.163.com/dy/article/FK0ATF1Q0516DOTJ.html 一个实验报告
 
 ### (0) 概述
