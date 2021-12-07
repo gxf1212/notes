@@ -508,22 +508,24 @@ Ab can also be an antigen. Three types of epitope:
 
 ### Five classes
 
-| classes | state    | localization                                   | basic function                                               |
+| classes | state    | localization                                   | major function                                               |
 | ------- | -------- | ---------------------------------------------- | ------------------------------------------------------------ |
 | IgM     | pentamer | mainly in serum<br />monomer on B cell surface | primary immune response<br />strongest complement activation |
 | IgG     | monomer  | in serum and body fluid                        | secondary immune response<br />can also in milk, pass 胎盘   |
-| IgA     | dimer    | mainly mucosa (黏膜)<br />monomer in serum     | secreted into milk (乳汁)                                    |
+| IgA     | dimer    | mainly mucosa (黏膜)<br />monomer in serum     | defend in mucosa<br />secreted into milk (乳汁)              |
 | IgE     | monomer  | in serum, very little                          | may cause type I hypersensitivity                            |
 | IgD     | monomer  | on B cell surface                              | marker of B cell maturation<br />not so clear                |
 
 | more info | subclasses | formation               | more on structure | infection | features                           |
 | --------- | ---------- | ----------------------- | ----------------- | --------- | ---------------------------------- |
-| IgM       | μ          | advanced embryo         | no hinge, CH4     | early     | blood type<br />marker of 宫内感染 |
+| IgM       | only one   | advanced embryo         | no hinge, CH4     | early     | blood type<br />marker of 宫内感染 |
 | IgG       | IgG1/2/3/4 | half a year after birth |                   | late      | long half life                     |
 
 ### Class switching (类别转换)
 
 same V region, C region genes conversion along with stages of infection
+
+at DNA level, irreversible, from IgM to G to ...
 
 [reference](https://www.youtube.com/watch?v=Gvq48XrzMTY)
 
@@ -531,21 +533,85 @@ same V region, C region genes conversion along with stages of infection
 
 ### Polyclonal Ab
 
+- a mixture of antibodies targeting a variety of epitopes
+  
+  > clone: a cell cluster derived from lymphcytes targeting a single Ag
+  
+- production: immunize animals with antigen
 
+- usage: urgent treatment
 
-
+- drawback: low specificity, low production, may cause allergy
 
 ### Monoclonal Ab
 
+- from a single clone, targeting one epitope
+
+- flow of production
+
+  - immunize mouse with Ag, isolate spleen cells
+  - fuse them with myeloma cells (骨髓瘤细胞)
+  - screen in HAT medium (for hybridoma cell 杂交瘤细胞)
+  - identify the monoclonal Ab (for that desired Ab)
+  - amplification
+
+  > HAT medium:
+  >
+  > - 氨甲蝶呤：从头合成途径中二氢叶酸还原酶抑制剂
+  > - 次黄嘌呤、胸腺嘧啶脱氧核苷：补救合成途径的原料
+  >
+  > 骨髓瘤细胞的HGPRT（补救合成的一个酶）缺陷，只有和淋巴细胞融合后才能生存
+  >
+  > B细胞只能在体外生存不超过一周
+
+- features
+
+  - high specificity, titer (效价), purity, mass production (大规模生产)
+  - murine, hinders clinical applications
+
+  > 效价是指某一物质引起生物反应、达到一定效果所需的剂量
+
+- applications
+
+  - protein detection/purification, cell isolation
+  - hormone/tumor Ag/pathogen detection, therapy
 
 
+### Genetically engineered Ab
 
+- also known as recombinant Ab: antibodies whose genes are cut, spliced, modified, and transfected into and expressed in appropriate recipient cells.
 
-### Genetic engineered Ab
+  通过基因工程技术对抗体各链基因的剪切、拼接、修饰，并转入适当的受体细胞中从而生产出的抗体
 
+  - modification: reserve Ag binding domain; simplify non-binding domain
+  - goal: humanize, miniaturization (小型化), multi-functionalized. keep specificity and affinity!
 
+- types
+  - humanized Ab
 
+    - chimeric Ab (嵌合抗体): murine V region+human C region
+    - reshaped Ab (改型抗体): murine CDR+human rest part
+    - transgenic mouse: replace with human Ig genes, completely humanized
 
+  - small Ab fragment
+
+    - Fab: L chain+VH+CH, a linker is added
+
+    - Fv: only VH and VL. If linker, called scFv Ab. 
+
+      If only VH, called single domain Ab (单域抗体)
+
+  - multi-functional Ab
+
+    - bispecific Ab: two Fab domains recognize different targets (e.g. tumor and T cell)
+
+      maybe Fc also recruits macrophage
+
+    - bifunctional Ab: conjugated with enzyme, drug, etc. targeted therapy
+
+- antibody phage display: build a library of V region genes by cloning from polyclonal B cells from immunized human, import them into phages. Tandem expression with minor coat protein enables to display Fv antibodies on the surface of phages. Then we can screen Ab with desired affinity with our antigen.
+
+  ![4-display](molecular-immunology.assets\4-display.png)
 
 > 小结
 > 1. 抗体的功能是什么？
@@ -553,3 +619,107 @@ same V region, C region genes conversion along with stages of infection
 > 3. 什么是单克隆抗体？什么是多克隆抗体？
 > 4. 杂交瘤技术的基本原理是什么？
 > 5. 抗体是如何被改造的？  
+
+
+
+# Chapter 5 Complement System
+
+## Intro
+
+### Discovery
+
+> 1. 新鲜的霍乱弧菌抗血清与细菌混合后可以溶解细菌。
+> 2. 对抗血清加热后丧失溶菌能力
+> 3. 加热后的抗血清补充新鲜血清后可以恢复溶菌能力
+> 4. 不含抗体的新鲜血清不具有溶菌的能力。  
+
+### Components
+
+> 1. 固有成分：C1（C1q，C1r，C1s）~C9，MBL，丝氨酸蛋白酶，B因子，D因子，P因子。
+> 2. 补体受体：CR1~CR4，C3aR，C4aR， C5aR
+> 3. 调节蛋白 
+>    1. 可溶性分子
+>    2. 膜结合分子  
+
+## Activation
+
+```mermaid
+graph LR
+c[classic pathway] --> c3[C3 activation]
+a[alternative pathway] --> c3
+m[MBL pathway] --> c3
+c3 --> c5[C5 activation]
+c5 --> mac[MAC formation]
+```
+
+### Classic pathway (经典途径)
+
+
+
+
+
+### Alternative pathway (旁路途径)
+
+
+
+### MBL pathway
+
+甘露糖结合凝集素  
+
+
+
+
+
+![5-pathways](E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\5-pathways.png)
+
+## Membrane attack
+
+
+
+
+
+## Biological function
+
+- dsfsfazdfafsf
+- 
+- 
+- dsaf
+- 
+
+### Bacteriolysis and cytolysis effect
+
+
+
+### Opsonization
+
+
+
+### Clearance of immune complex
+
+
+
+### Inflammatory response
+
+
+
+### Other
+
+
+
+## Regulation
+
+> general understanding
+
+
+
+### Related diseases
+
+
+
+> 思考题
+>
+> 1. 补体激活有那三条途径？各自的生物学意义如何？
+> 2. 补体有哪些生物学功能？
+
+# Chapter 6 MHC
+
