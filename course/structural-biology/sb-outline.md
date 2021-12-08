@@ -682,7 +682,7 @@ recall:
 - 单位晶胞电子密度函数（结构因子）
 - 空间点阵函数（倒易点阵）
 
-电子密度方程
+电子密度方程，由结构因子**做逆傅里叶变换**得到
 $$
 \rho(x,y,z)=\dfrac{1}{V}\sum_h\sum_k\sum_l\left|F_{hkl}\right|e^{i\Phi_{hkl}}e^{-i\cdot2\pi(hx+ky+lz)}
 $$
