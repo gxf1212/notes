@@ -978,11 +978,30 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
    这样做的好处是，网站可以主动向百度搜索推送数据，缩短爬虫发现网站链接的时间。当然了，百度收录需要一段时间
 
+9. shown figures
+
+   - common md syntax is ok, Windows backslash and Linux slash are all ok. and zooming:
+
+     ```html
+     <!-- 指定像素值 -->
+     ![logo](https://docsify.js.org/_media/icon.svg ':size=50x100')
+     ![logo](https://docsify.js.org/_media/icon.svg ':size=100')
+     <!-- 支持按百分比缩放 -->
+     ![logo](https://docsify.js.org/_media/icon.svg ':size=10%')
+     ```
+
+     > Typora zooming script is not supported in docsify (but is ok in a normal html, but can center)
+     >
+     > already asked in CSDN. https://github.com/HanquanHq/MD-Notes
+
+   - no, it supports. But the root directory is not the current directory but the repository’s.....
+
 9. 
 
 #### other features, and Gitee
 
-- It is ridiculous that if I include a YouTube or Bilibili link in .md, I cannot deploy... 
+- It is ridiculous that if I include a YouTube or Bilibili link in .md, I cannot deploy...No, solved
+- markdown based wiki system http://dynalon.github.io/mdwiki/#!index.md
 
 # Installation and softwares
 

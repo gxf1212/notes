@@ -128,7 +128,25 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
    vmd -dispdev text -e combine.tcl
    ```
 
-2. 
+2. question mark prompt and return to the normal vmd> prompt? that mean the tcl interpreter is waiting for you to **close a brace**, so try } or ] or ) followed by enter. you may need to enter it a couple of times.
+
+3. How to run TCL script on VMD?
+
+   This is very easy to do. Just use any text editor to write your script file, and in a VMD session, use the command 
+
+   ```shell
+   source filename
+   ```
+
+   to execute the file. (either VMD command line or Tk Console)
+   
+4. Clears the structure, topology definitions, and aliases, creating clean environment just like a new context.
+
+   ```tcl
+   psfcontext reset
+   ```
+
+5. 
 
 #### VMD Graphics
 
@@ -193,7 +211,9 @@ probably need to add top/itp file
 
 #### protein-ATP system
 
-the RdRp, residue name has already been aliased. only one chain
+the RdRp, residue name has already been aliased. only one chain. no disulfide bonds. patched protein terminal
+
+The ATP molecule from FEP, strange atom type, cannot be used for MD system build-up..(maybe we can aliase pdb)
 
 why only one Mg? 虽然确实要两个，但第二个的位置至今under debate。。
 
@@ -201,7 +221,11 @@ notice the binding mode?
 
 
 
-### Prepare another ligand
+### Prepare a ligand
+
+#### basic
+
+original .pdb文件 去除原子类型??
 
 #### docking
 
@@ -369,7 +393,9 @@ Then split all components.
 >
 > 
 
-#### build complex-method 1
+#### build complex-method 1 (deprecated)
+
+> it is said that when you use AutoPSF you cannot track the topology file used. It’s suggested to adopt method 2
 
 ##### make the all .pdb and .psf with AutoPSF
 
@@ -446,18 +472,98 @@ quit
 vmd -dispdev text -e merge.tcl
 ```
 
-> #### build complex-method 2
->
+#### build complex-method 2
+
 > use console, include topology
 >
-> Modeling--Tk Console
+> https://sassie-web.chem.utk.edu/docs/structures_and_force_fields/notes.html
+
+Modeling--Tk Console
+
+- create segment for our molecule first...if you start with .pdb file
+- for normal ligand, just build normally with the above files, na_nad just deplicates and abandoned
+
+```shell
+vmd -dispdev text -e merge.tcl
+```
+
+```tcl
+package require psfgen
+resetpsf
+topology top_all36_prot.rtf
+topology top_all36_na.rtf
+topology top_all36_cgenff.rtf
+topology toppar_water_ions.str
+# maybe not using alias here
+alias residue HIS HSE           
+alias atom ILE CD1 CD        
+alias atom SER HG HG1         
+alias atom CYS HG HG1          
+
+segment PROT {pdb rdrp.pdb}
+coordpdb rdrp.pdb PROT
+segment ATP {pdb atp.pdb}
+coordpdb atp.pdb ATP
+segment MG {pdb mg.pdb}
+coordpdb mg.pdb MG
+
+guesscoord
+writepdb merged.pdb
+writepsf merged.psf
+```
+
+> exploration: for atp, still built with AutoPSF, topology files only include top_all36_na.rtf, top_all36_cgenff.rtf. 
+>
+> and only 'formatted' provides the right coordinates! _autopsf adjusts coordinates a little bit (why?)
+>
+> but Tk console reports error!
+>
+> >ERROR) Error reading optional structure information from coordinate file atp_autopsf_formatted.pdb
+> >ERROR) Will ignore structure information in this file.
+>
+> but 'formatted’ can be recognized by CHARMM-GUI!
+
+```tcl
+package require psfgen
+resetpsf
+topology top_all36_prot.rtf
+topology toppar_water_ions.str
+
+# maybe not using alias here
+alias residue HIS HSE           
+alias atom ILE CD1 CD        
+alias atom SER HG HG1         
+alias atom CYS HG HG1          
+
+segment PROT {pdb rdrp.pdb}
+coordpdb rdrp.pdb PROT
+# use files from CHARMM-GUI?
+# readpsf ligandrm-nad.psf
+# coordpdb ligandrm-nad_aligned.pdb
+
+readpsf atp_autopsf.psf
+coordpdb atp_autopsf_formatted.pdb
+segment MG {pdb mg.pdb}
+coordpdb mg.pdb MG
+
+guesscoord
+writepdb merged.pdb
+writepsf merged.psf
+```
+
+> notes
+>
+> - `toppar_water_ions.str`: contains **TIP3** water model and ion topology and parameter information.  This is now the only file that contains these entities.
+
+> failed commands
 >
 > ```tcl
-> package require psfgen
-> resetpsf
-> topology top_all36_prot.rtf
+> c
 > topology /home/gxf/vmd/lib/plugins/noarch/tcl/readcharmmtop1.2/top_all27_prot_lipid_na.inp
+> topology top_all22_prot.rtf
+> topology top_all27_prot_lipid.inp
 > coordpdb rdrp.pdb
+> 
 > topology top_all36_na.rtf
 > topology top_all36_cgenff.rtf
 > coordpdb atp.pdb
@@ -470,6 +576,38 @@ vmd -dispdev text -e merge.tcl
 >
 > completely failure. don’t know what .inp file the tutorials used.
 >
+> ```shell
+> grep "PROT" -rl ./rdrp.pdb | xargs sed -i "s/PROT/    /g" 
+> ```
+>
+> this does not matter
+>
+> ```tcl
+> package require psfgen
+> resetpsf
+> topology top_all36_na.rtf
+> topology top_all36_cgenff.rtf
+> topology toppar_all36_na_nad_ppi.str
+> segment ATP {pdb atp.pdb}
+> coordpdb atp.pdb ATP
+> ```
+>
+> still not work for ATP. even though ATPP $\to$ ATP, still “unknown atom type ON3”
+>
+> ```
+> topology toppar_all36_na_nad_ppi.str
+> # autopsf, this probably failed..
+> # segment LIG {pdb atp_autopsf_formatted.pdb}
+> readpsf atp_autopsf.psf
+> coordpdb atp_autopsf_formatted.pdb
+> ```
+>
+> still not work for ATP. cannot recognize atoms. without “formatted” have correct names, but position of PO4 changed.
+>
+> **So we still MUST use CHARMM-GUI if we don’t directly aliase pdb**
+>
+> 
+>
 > #### build complex-method 3
 >
 > build with Gromacs and AmberTools?
@@ -478,44 +616,76 @@ vmd -dispdev text -e merge.tcl
 
 but not used in method 1
 
-1. Use CHARMM-GUI---input generator---ligand reader and modeller
+Use CHARMM-GUI---input generator---ligand reader and modeller
 
-   refer to preparation videos mentioned above
+refer to preparation videos mentioned above
 
-   > **CHARMM GUI basic tips**
-   >
-   > - after GUI, the ligand name is changed into LIG
-   > - Only molecules in the **HETATM** record in a PDB file are recognized.
-   > - **adopt available RCSB SDF structure** preferentially
-   > - make sure that the Marvin JS structure is correct
-   > - <font color=red>All hydrogen and missing atoms should be explicitly placed for accurate result.</font> or report error
-   > - Users can modify the protonation state if necessary. 
-   >   - or select other protonation state in the next step
-   > - **The coordinates will be preserved if you upload .pdb file.**
-   >   - uploading your own .pdb file is suggested
-   >   - you can align .pdb files later, only it considers coordinates
-   >   - if you are to upload file, .mol2 is prefered? 
-   > - you may want to “Find similar residues in the CHARMM FF”
-   > - the outputed residue name is ‘LIG’
+> **CHARMM GUI basic tips**
+>
+> - after GUI, the ligand name is changed into LIG
+> - Only molecules in the **HETATM** record in a PDB file are recognized.
+> - **adopt available RCSB SDF structure** preferentially
+> - make sure that the Marvin JS structure is correct
+> - <font color=red>All hydrogen and missing atoms should be explicitly placed for accurate result.</font> or report error
+> - Users can modify the protonation state if necessary. 
+>   - or select other protonation state in the next step
+> - **The coordinates will be preserved if you upload .pdb file.**
+>   - uploading your own .pdb file is suggested
+>   - you can align .pdb files later, only it considers coordinates
+>   - if you are to upload file, .mol2 is prefered? 
+> - you may want to “Find similar residues in the CHARMM FF”
+> - the outputed residue name is ‘LIG’
 
-   then just click, click...and download all files
+then just click, click...and download all files
 
-   focus on `ligandrm.pdb/psf`, which can be put into a merging .tcl, as **an alternative way of AutoPSF** in generating files for ligand (other tools for protein, etc?). Carefully choose the force field!
+focus on `ligandrm.pdb/psf`, which can be put into a merging .tcl, as **an alternative way of AutoPSF** in generating files for ligand (other tools for protein, etc?). Carefully choose the force field!
 
-   > my experience
+> my experience
+>
+> at first, when I upload the built .pdb file, or replace ATOM with HETATM, or add hydrogen, the server did not recognize the ligand, always.
+>
+> 1. 11.27, align 2ILY (original structure) with the built .pdb, use its ATP
+>
+>    find 2 kinds of topologies in step 2
+>
+>    - **toppar_all36_na_nad_ppi.str**            NAD, NADH, ADP, ATP and others.
+>    - top_all36_cgenff.rtf., par_all36_cgenff.prm. but with hydrogen. can I later remove?
+>      - if you modify the protonation state, you can still not generate a correct cGenFF structure. The “Exact” field only provides ATP in toppar_all36_na_nad_ppi.str
+>      - maybe I’ll use toppar_all36_na_nad_ppi.str first
+>
+> 2. 11.28, CHARMM-GUI failed building Mg2+
+>
+> for ‘formatted’:
+>
+> still **toppar_all36_na_nad_ppi.str** , a little change: Ar ring not planar!! position basically the same
+
+##### Appendix 2: about the topology
+
+When you encouter errors when reading .str file:
+
+> “psfgen) ERROR!  FAILED TO RECOGNIZE SET.  Line 319: set para” etc.
+
+[a great instruction](https://www.researchgate.net/post/How-can-I-use-charm36-forcefiled-for-a-protein-bound-to-ATP-and-MG-Can-you-help-me)
+
+1. First, you need to edit the stream file so that it is compatible with the NAMD/VMD psfgen tool.  To do that, you must comment out (or remove) all the lines containing CHARMM scripting code, since psfgen doesn't recognize them. 
+
+2. Furthermore, the **na_nad_ppi.str** and file you mention requires parsing the "**top_all36_na.rtf**" file containing original nucleic acid parameters, so you need that too. 
+
+   > also, just put toppar_water_ions.str after na.rtf and prot.rtf
+
+   Because: In NAMD, the easiest way to make sure that all the necessary NBFIXes are always in effect is to read *all* the CHARMM36 parameter files into NAMD prior to reading toppar_water_ions_namd.str
+
+   > https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2014-2015/0236.html
    >
-   > at first, when I upload the built .pdb file, or replace ATOM with HETATM, or add hydrogen, the server did not recognize the ligand, always.
-   >
-   > 1. 11.27, align 2ILY (original structure) with the built .pdb, use its ATP
-   >
-   >    find 2 kinds of topologies in step 2
-   >
-   >    - toppar_all36_na_nad_ppi.str            NAD, NADH, ADP, ATP and others.
-   >    - top_all36_cgenff.rtf., par_all36_cgenff.prm. but with hydrogen. can I later remove?
-   >      - if you modify the protonation state, you can still not generate a correct cGenFF structure. The “Exact” field only provides ATP in toppar_all36_na_nad_ppi.str
-   >      - maybe I’ll use toppar_all36_na_nad_ppi.str first
-   >
-   > 2. 11.28, CHARMM-GUI failed building Mg2+
+   > But I still failed to build the ATP in psfgen...
+
+3. You should use both the parameters from the stream files and the original **nucleic acid prm file**.  The stream files do not contain full parameters, some of them (for example some **non-bonded terms**) are expected to be found in the prm files. However, they are needed for accurate representation of these "extra" molecules they describe.
+
+
+
+
+
+
 
 #### solvation and ionization
 
@@ -524,36 +694,27 @@ but not used in method 1
 
 ##### method 1 (scripting, easier?)
 
-In the last step, you have obtained combine.pdb and .psf
+In the last step, you have obtained combine.pdb and .psf. open them with vmd
 
 ```shell
 vmd merged.psf -pdb merged.pdb
 ```
 
-where the solvation script writes:
+you can directly do the following after merged in vmd:
 
 ```tcl
-package require solvate
-solvate merged.psf merged.pdb -t 15 -o solvated
-```
-
-In a new vmd session, load the solvated structure
-
-```tcl
+# if you'd like to make a .tcl file
 package require psfgen
-resetpsf
-
-readpsf solvated.psf
-coordpdb solvated.pdb
-
-set everyone [atomselect top all]
-measure minmax $everyone
-measure center $everyone
+psfcontext reset
+mol load psf merged.psf pdb merged.pdb
+# the solvation script writes:
+package require solvate
+solvate merged.psf merged.pdb -t 11.5 -o solvated # files are written
+mol delete all
+# the ionization script writes:
+autoionize -psf solvated.psf -pdb solvated.pdb -sc 0.1 -o system
+# params, to be consistent
 ```
-
-This is meant to 
-
-
 
 #####  method 2-GUI
 
@@ -575,7 +736,7 @@ Extension--Modeling--Add Solvation Box
   
 - Click 'solvate', molecular info (# of water) is shown in Terminal again.
 
-> this GUI doesn’t have ionization, neither choose water model?? 
+> this GUI doesn’t have ionization, neither choose water model?? TIP3P water is the default...
 
 ###### Ionization
 
@@ -588,11 +749,58 @@ very straightforward
 
 > it’s not replacing water mols, it adds ions
 
-##### measurement
+##### measurement of the system 
 
-> note: system info
+In a new vmd session, load the solvated and ionized structure
+
+```tcl
+# you can ignore this if you come from method1. just load files
+package require psfgen
+psfcontext reset
+# readpsf system.psf
+# coordpdb system.pdb
+mol load psf system.psf pdb system.pdb
+# measure and assign values
+set everyone [atomselect top all]
+set minmax [measure minmax $everyone]
+# set center [measure center $everyone]
+foreach {min max} $minmax { break }
+foreach {xmin ymin zmin} $min { break }
+foreach {xmax ymax zmax} $max { break }
+
+# generate output for .namd file. if you do not use non-standard/rotated box
+puts "# Periodic Boundary Conditions"
+puts "cellBasisVector1 [ expr $xmax - $xmin ] 0 0 "
+puts "cellBasisVector2 0 [ expr $ymax - $ymin ] 0 "
+puts "cellBasisVector3 0 0 [ expr $zmax - $zmin ] "
+puts "cellOrigin [ expr ($xmax + $xmin)/2 ] [ expr ($ymax + $ymin)/2 ] [ expr ($zmax + $zmin)/2 ] "
+```
+
+we need length of 3 edges and coordinate of the center
+
+```shell
+vmd -dispdev text -e measure.tcl
+```
+
+> info: see the folder...probably similar for all ligands
 >
-> RdRp-ATP-Mg
+> ```
+> cellBasisVector1 102.76400184631348 0 0 
+> cellBasisVector2 0 93.35700035095215 0 
+> cellBasisVector3 0 0 108.42400050163269 
+> cellOrigin 57.934000968933105 58.11250019073486 57.53700029850006 
+> ```
+
+### Setting up a MD simulation 
+
+for basics about .namd parameters, please read 
+
+- ug 2.2 NAMD configuration file
+  - 2.2.5 Required NAMD configuration parameters. basic params links
+- ug 7 Standard Minimization and Dynamics Parameters
+- namd-tutorial-unix chp 1 and appendix
+
+#### equilibration
 
 
 
@@ -601,18 +809,6 @@ very straightforward
 
 
 
-
-
-
-
-
-### NAMD for MDS
-
-
-
-
-
-TIP3P water
 
 
 

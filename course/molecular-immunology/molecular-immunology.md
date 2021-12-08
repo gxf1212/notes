@@ -635,11 +635,11 @@ at DNA level, irreversible, from IgM to G to ...
 
 ### Components
 
-> 1. 固有成分：C1（C1q，C1r，C1s）~C9，MBL，丝氨酸蛋白酶，B因子，D因子，P因子。
-> 2. 补体受体：CR1~CR4，C3aR，C4aR， C5aR
-> 3. 调节蛋白 
->    1. 可溶性分子
->    2. 膜结合分子  
+1. 固有成分：C1（C1q，C1r，C1s）~C9，MBL，丝氨酸蛋白酶，B因子，D因子，P因子。
+2. 补体受体：CR1~CR4，C3aR，C4aR， C5aR
+3. 调节蛋白 
+   1. 可溶性分子
+   2. 膜结合分子
 
 ## Activation
 
@@ -654,11 +654,22 @@ c5 --> mac[MAC formation]
 
 ### Classic pathway (经典途径)
 
+#### activator
 
+Ag-Ab complex
+
+#### process
 
 
 
 ### Alternative pathway (旁路途径)
+
+#### activator
+
+
+
+#### process
+
 
 
 
@@ -674,7 +685,13 @@ c5 --> mac[MAC formation]
 
 ## Membrane attack
 
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\5-c5mac.png" alt="5-c5mac" style="zoom:50%;" />
 
+
+
+
+
+<img src="molecular-immunology.assets\5-mac.png" alt="5-mac" style="zoom:40%;" />
 
 
 
@@ -722,4 +739,3 @@ c5 --> mac[MAC formation]
 > 2. 补体有哪些生物学功能？
 
 # Chapter 6 MHC
-

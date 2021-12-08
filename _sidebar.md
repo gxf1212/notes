@@ -10,6 +10,4 @@
   - [分子免疫学笔记（待完成）](/course/molecular-immunology/molecular-immunology.md)
 - Links
   - [西安交通大学钱学森学院](http://bjb.xjtu.edu.cn/)
-  - [My GitHub site](https://github.com/gxf1212)
-  - [My Bilibili Channel](https://space.bilibili.com/441196634)
-  - [我的保研待录取通知](/utils/推免服务系统.html)
+  - [关于我](utils/about.md)

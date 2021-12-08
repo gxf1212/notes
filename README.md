@@ -23,7 +23,6 @@ other TODOs:
 
 ## tutorial share
 
-- [鸟哥的Linux私房菜-基础学习篇](/tutorials/鸟哥的Linux私房菜-基础学习篇(第四版)高清完整书签PDF版.pdf)
-- [Linux就该这么学](/tutorials/Linux就该这么学-高清晰PDF.pdf)
-
+- [鸟哥的Linux私房菜-基础学习篇](utils/tutorials/鸟哥的Linux私房菜-基础学习篇(第四版)高清完整书签PDF版.pdf)
+- [Linux就该这么学](utils/tutorials/Linux就该这么学-高清晰PDF.pdf)
 

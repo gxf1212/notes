@@ -242,7 +242,7 @@ also seen in NAMD-ug chp3.4 Creating PSF Structure Files
 
 #### user guide
 
-##### steps
+##### <font color=red>steps</font>
 
 Generating PSF and PDB files for use with NAMD will typically consist of the following steps:
 1. Preparing separate PDB files containing individual segments of protein, solvent, etc. before running
@@ -267,7 +267,7 @@ For the commands, please check NAMD user guide!
 
 ###### Preparing separate PDB files
 
-In psfgen, each of these groups must be assigned to their own segment. This applies most strictly in the case of protein chains, each of which must be assigned to its own segment so that N-terminal and C-terminal patches can be applied. 
+In psfgen, each of these groups must **be assigned to their own segment**. This applies most strictly in the case of protein chains, each of which must be assigned to its own segment so that **N-terminal and C-terminal patches** can be applied. 
 
 ```tcl
 # Split a file containing protein and water into separate segments.
@@ -283,6 +283,12 @@ set sel [atomselect top "pfrag $chain"]
 $sel writepdb myfile_frag${chain}.pdb
 }
 ```
+
+###### BPTI example
+
+see that folder. see the scripts
+
+include cry
 
 
 
@@ -543,11 +549,17 @@ I know! It does not matter how many molecules you want to include (just merge). 
   puts "-------------------------------------------------------"
   ```
 
-  copy that into Tk c
+  copy that into Tk Console. but see FYP-notes for complete
 
 - 
 
 
+
+#### user guide
+
+- 
+
+- 
 
 
 
