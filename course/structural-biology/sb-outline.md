@@ -124,7 +124,7 @@ RNA的结构？
 
 其他方法：纤维衍射（双螺旋结构）、SAXS（低分辨）、中子衍射（需要大晶体、时间长）
 
-<img src="sb-outline.assets\4-flow.png" alt="4-flow" style="zoom:50%;" />
+<img src="../../course/structural-biology/sb-outline.assets/4-flow.png" alt="4-flow" style="zoom:50%;" />
 
 ### (1) 晶体培养
 
@@ -140,7 +140,7 @@ RNA的结构？
 
 原理：
 
-<img src="sb-outline.assets\4-solubility.png" alt="4-solubility" style="zoom:30%;" />
+<img src="../../course/structural-biology/sb-outline.assets/4-solubility.png" alt="4-solubility" style="zoom:30%;" />
 
 结晶是个熵减过程
 
@@ -297,7 +297,7 @@ RNA的结构？
 
 - 旋转反演
 
-- 螺旋旋转：n~m~轴：C~n~轴+沿轴上升m/n个周期（转一圈上升m个周期）
+- 螺旋旋转：n<sub>m</sub>轴：C<sub>n</sub>轴+沿轴上升m/n个周期（转一圈上升m个周期）
 
 ##### 晶系
 
@@ -311,11 +311,11 @@ RNA的结构？
 
 点群和空间群符号
 
-<img src="sb-outline.assets\4-2-point-group-sign.png" alt="4-2-point-group-sign" style="zoom:50%;" />
+<img src="../../course/structural-biology/sb-outline.assets/4-2-point-group-sign.png" alt="4-2-point-group-sign" style="zoom:50%;" />
 
 32种点群表
 
-<img src="sb-outline.assets\4-2.jpg" alt="4-2" style="zoom:15%;" />
+<img src="../../course/structural-biology/sb-outline.assets/4-2.jpg" alt="4-2" style="zoom:15%;" />
 
 ##### 空间群
 
@@ -325,7 +325,7 @@ RNA的结构？
 
 > 具体对照手写笔记
 >
-> ![4-2-pg](sb-outline.assets\4-2-pg.jpg)
+> ![4-2-pg](../../course/structural-biology/sb-outline.assets/4-2-pg.jpg)
 
 最小体积重复单元：不对称单位
 
@@ -357,7 +357,7 @@ Matthews常数$V_M=V_{cell}/(N_z\cdot M_r)$，$N_z$是单位晶胞的蛋白分�
 
 可用于推测结构、估计晶体含溶剂的体积分数
 
-> 假设某个蛋白质的空间群为C2，单位晶胞总体积为 319,000 Å3 ，该蛋白质的分子量为32,100Da，对于NZ = 2, 4, 或 8 来说，相应的VM = 5, 2.5, 或 1.25 Å3/Da。根据 Matthews常数的经验分布规律，该蛋白质晶体的单位晶 胞中包含4个分子的可能性是非常高的。因为C2空间群 的晶体晶胞具有4个不对称单位，所以每个不对称单位 包含一个蛋白质分子。
+> 假设某个蛋白质的空间群为C2，单位晶胞总体积为 319,000 Å3 ，该蛋白质的分子量为32,100Da，对于NZ = 2, 4, 或 8 来说，相应的VM = 5, 2.5, 或 1.25 Å<sup>3</sup>/Da。根据 Matthews常数的经验分布规律，该蛋白质晶体的单位晶 胞中包含4个分子的可能性是非常高的。因为C2空间群 的晶体晶胞具有4个不对称单位，所以每个不对称单位 包含一个蛋白质分子。
 
 ### (3) 衍射数据收集
 
@@ -492,7 +492,7 @@ Laue星芒：晶体内部结构畸变时，会产生衍射斑点的伸长
 
 ##### 分辨率
 
-<img src="sb-outline.assets\4-4-2.png" alt="4-4-2" style="zoom:25%;" />
+<img src="../../course/structural-biology/sb-outline.assets/4-4-2.png" alt="4-4-2" style="zoom:25%;" />
 $$
 \tan\alpha=R/D\\
 \theta_{max}=\alpha/2\\
@@ -546,7 +546,7 @@ $\Delta R$代入上公式，$\theta$ 和 $H$ 取min。
 
 - 衍射强度$\propto \lambda^3$
 - 长波可增大衍射强度，但吸收效应强
-- 常规封闭管，用Cu的K~α~，传热好，对分辨率要求也不高
+- 常规封闭管，用Cu的K<sub>α</sub>，传热好，对分辨率要求也不高
 - 同步辐射，波长短，像板探测更灵敏，且使斑点锐利，防止重叠
 - 晶体尺寸较小，强度太弱，使用同步辐射，获得高分辨率数据
   - 蛋白质晶胞体积大，本身强度就弱
@@ -635,7 +635,7 @@ recall:
 
 7. Wilson统计。线性拟合
 
-   <img src="sb-outline.assets\4-3-wilson.jpg" alt="wil" style="zoom:55%;" /><img src="sb-outline.assets\4-3-wilson-eq.png" alt="wil" style="zoom:25%;" />
+   <img src="../../course/structural-biology/sb-outline.assets/4-3-wilson.jpg" alt="wil" style="zoom:55%;" /><img src="../../course/structural-biology/sb-outline.assets/4-3-wilson-eq.png" alt="wil" style="zoom:25%;" />
 
 ##### 发表数据（初步分析）应注意的问题
 
@@ -727,7 +727,7 @@ $$
 \boldsymbol{H}=(h,k,l)\\
 \boldsymbol{R}=(x,y,z)
 $$
-<img src="sb-outline.assets\4-4-patterson.jpg" alt="4-4-patterson" style="zoom:15%;" />
+<img src="../../course/structural-biology/sb-outline.assets/4-4-patterson.jpg" alt="4-4-patterson" style="zoom:15%;" />
 
 可以推导出其和电子密度的数学关系
 $$
@@ -818,7 +818,7 @@ where $F_o(\boldsymbol{H})$ 是待测晶体，$F_c(\boldsymbol{H})$ 是已知晶
 
 密堆积分析：寡聚体？
 
-<img src="sb-outline.assets\4-4-close1.jpg" alt="4-4-close1" style="zoom:15%;" /><img src="sb-outline.assets\4-4-close2.jpg" alt="4-4-close2" style="zoom:15%;" />
+<img src="../../course/structural-biology/sb-outline.assets/4-4-close1.jpg" alt="4-4-close1" style="zoom:15%;" /><img src="../../course/structural-biology/sb-outline.assets/4-4-close2.jpg" alt="4-4-close2" style="zoom:15%;" />
 
 共有24种分子置换的方式，缩小了搜索范围
 
@@ -952,9 +952,9 @@ pdb等文件
 | 单颗粒技术 | 病毒、大complex  | 全同粒子 | >0.33nm        |
 | 断层成像   | 细胞器、组织切片 | 单一结构 | 4nm            |
 
-![image-20211104170835340](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20211104170835340.png)
+![image-20211104170835340](../../course/structural-biology/sb-outline.assets/5-temp)
 
-<img src="sb-outline.assets\image-20211104170905611.png" alt="image-20211104170905611" style="zoom: 40%;" />
+<img src="../../course/structural-biology/sb-outline.assets/image-20211104170905611.png" alt="image-20211104170905611" style="zoom: 40%;" />
 
 模型偏好 (model bias)：优化结果偏向于初猜的模型，可能导致对结构的错误解释。对异质性的样品进行分类分析，可以通过分区的比对和整体比对进行分类
 
@@ -1011,7 +1011,7 @@ pdb等文件
 
 如何包埋？金属网格吸一层液体，滤纸吸一下，只剩薄液膜，塞进液态乙烷
 
-<img src="sb-outline.assets\5-1.png" alt="5-1" style="zoom:25%;" /><img src="sb-outline.assets\5-2.jpg" alt="5-2" style="zoom:15%;" />
+<img src="../../course/structural-biology/sb-outline.assets/5-1.png" alt="5-1" style="zoom:25%;" /><img src="../../course/structural-biology/sb-outline.assets/5-2.jpg" alt="5-2" style="zoom:15%;" />
 
 #### 电镜观测和记录
 
@@ -1054,9 +1054,9 @@ pdb等文件
 - mM/L级别
 - 均一溶液
 - 没有聚合
-- 10%D~2~O
+- 10%D<sub>2</sub>O
 - pH<7.5的Tris磷酸、醋酸盐缓冲体系
-- 加NaN~3~、蛋白酶抑制剂，室温能放一周
+- 加NaN<sub>3</sub>、蛋白酶抑制剂，室温能放一周
 
 #### 试验
 

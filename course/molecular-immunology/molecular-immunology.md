@@ -122,7 +122,7 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
   - 淋巴液和血浆成分相似，可能交换
 - 淋巴细胞定居、发挥免疫应答的场所
 
-<img src="molecular-immunology.assets\1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" /><img src="molecular-immunology.assets\1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
+<img src="../../course/molecular-immunology/molecular-immunology.assets/1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" /><img src="../../course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
 
 具体结构
 
@@ -241,7 +241,7 @@ age, gender, genetic factor, healthy state
 
 #### route of entry
 
-<img src="molecular-immunology.assets\3-skin.png" alt="3-skin" style="zoom:25%;" />
+<img src="../../course/molecular-immunology/molecular-immunology.assets/3-skin.png" alt="3-skin" style="zoom:25%;" />
 
 皮内 > 皮下 > 肌肉 > 静脉 > 口腔
 
@@ -278,19 +278,19 @@ Also, they are the basic unit to specifically recognize TCR/BCR/antibody.
 
 构象表位：由氨基酸序列不连续，但在空间上相互接近、形成特定构象的几个氨基酸构成的表位。
 
-| epitope              | T cell epitope                                      | B cell epitope                                               |
-| -------------------- | --------------------------------------------------- | ------------------------------------------------------------ |
-| receptor             | TCR                                                 | BCR                                                          |
-| MHC involved?        | yes                                                 | no                                                           |
-| antigen presentation | needed                                              | no need                                                      |
-| composed of          | linear short peptide                                | natural polypeptide<br />(lipo)polysaccharide<br />organic compounds |
-| size                 | CD8^+^ T cell: 5~12 AA<br />CD4^+^ T cell: 12~17 AA | 5~15 AA or 5~7 <br />oligosaccharide or nt                   |
-| type                 | linear                                              | linear or conformational                                     |
-| position             | any                                                 | surface                                                      |
+| epitope              | T cell epitope                                               | B cell epitope                                               |
+| -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| receptor             | TCR                                                          | BCR                                                          |
+| MHC involved?        | yes                                                          | no                                                           |
+| antigen presentation | needed                                                       | no need                                                      |
+| composed of          | linear short peptide                                         | natural polypeptide<br />(lipo)polysaccharide<br />organic compounds |
+| size                 | CD8<sup>+</sup> T cell: 5\~12 AA<br />CD4<sup>+</sup> T cell: 12\~17 AA | 5\~15 AA or 5\~7 <br />oligosaccharide or nt                   |
+| type                 | linear                                                       | linear or conformational                                     |
+| position             | any                                                          | surface                                                      |
 
 > natural: part of a macromolecule?
 
-<img src="molecular-immunology.assets\3-tb.png" alt="3-tb" style="zoom:45%;" />
+<img src="../../course/molecular-immunology/molecular-immunology.assets/3-tb.png" alt="3-tb" style="zoom:45%;" />
 
 ## Categories
 
@@ -361,7 +361,7 @@ Whether it is synthesized inside APC
 
 佐剂, non-specific substances which are added together with antigen in vaccines, to enhace or change the type of immune response.
 
-> 卡介苗, $\ce{Al(OH)3}$, artificial, Freundadjuvant
+> 卡介苗, $\text{Al(OH)}_3$, artificial, Freundadjuvant
 
 #### mitogen
 
@@ -413,7 +413,7 @@ Immunoglobulin super family (IgSF, 免疫球蛋白超家族): proteins including
 
 #### structure
 
-<img src="molecular-immunology.assets\4-domain.png" alt="4-domain" style="zoom:30%;" />
+<img src="./molecular-immunology.assets/4-domain.png" alt="4-domain" style="zoom:30%;" />
 
 |                 | Heavy chain       | Light chain   |
 | --------------- | ----------------- | ------------- |
@@ -433,7 +433,7 @@ hinge: flexible, between CH1 and CH2. not in IgM/E
 
 ### Enzymolysis
 
-<img src="molecular-immunology.assets\4-ab-cleavage.png" alt="4-ab-cleavage" style="zoom:25%;" />
+<img src="../../course/molecular-immunology/molecular-immunology.assets/4-ab-cleavage.png" alt="4-ab-cleavage" style="zoom:25%;" />
 
 > papain: 木瓜蛋白酶; pepsin: 胃蛋白酶
 
@@ -442,9 +442,9 @@ hinge: flexible, between CH1 and CH2. not in IgM/E
 - joining chain (J片): peptide at C-ter, joining secretary IgA dimer or IgM pentamer
 - secretary IgA also need a glycopeptide, secretary piece (分泌片)
 
-> <img src="molecular-immunology.assets\4-other.png" alt="4-other" style="zoom:40%;" />
+> <img src="../../course/molecular-immunology/molecular-immunology.assets/4-other.png" alt="4-other" style="zoom:40%;" />
 >
-> <img src="molecular-immunology.assets\4-iga.png" alt="4-iga" style="zoom:33%;" />
+> <img src="../../course/molecular-immunology/molecular-immunology.assets/4-iga.png" alt="4-iga" style="zoom:33%;" />
 
 ## Diversity and Immunogenecity
 
@@ -461,7 +461,7 @@ They are encoded by independent genes and just freely combine...which makes dive
 
 Ab can also be an antigen. Three types of epitope:
 
-<img src="molecular-immunology.assets\4-5.png" alt="4-5" style="zoom:25%;" />
+<img src="../../course/molecular-immunology/molecular-immunology.assets/4-5.png" alt="4-5" style="zoom:25%;" />
 
 - isotype: all C region.
   - Individuals in the same species have similar C region. If you inject monkey's Ab into a human, the C region could be an antigen.
@@ -494,7 +494,7 @@ Ab can also be an antigen. Three types of epitope:
 - bind Fc receptor on the cell surface
   - opsonization (调理作用): phagocytosis (吞噬作用) by macrophages and neutrophils through Fc binding to Fc receptor
 
-    <img src="molecular-immunology.assets\4-ops.png" alt="4-ops" style="zoom:40%;" />
+    <img src="../../course/molecular-immunology/molecular-immunology.assets/4-ops.png" alt="4-ops" style="zoom:40%;" />
   
     
   
@@ -611,7 +611,7 @@ at DNA level, irreversible, from IgM to G to ...
 
 - antibody phage display: build a library of V region genes by cloning from polyclonal B cells from immunized human, import them into phages. Tandem expression with minor coat protein enables to display Fv antibodies on the surface of phages. Then we can screen Ab with desired affinity with our antigen.
 
-  ![4-display](molecular-immunology.assets\4-display.png)
+  ![4-display](../../course/molecular-immunology/molecular-immunology.assets/4-display.png)
 
 > 小结
 > 1. 抗体的功能是什么？
@@ -681,17 +681,16 @@ Ag-Ab complex
 
 
 
-![5-pathways](E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\5-pathways.png)
+![5-pathways](../../course/molecular-immunology/molecular-immunology.assets/5-pathways.png)
 
 ## Membrane attack
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\5-c5mac.png" alt="5-c5mac" style="zoom:50%;" />
+<img src="../../course/molecular-immunology/molecular-immunology.assets/5-c5mac.png" alt="5-c5mac" style="zoom:50%;" />
 
 
 
+<img src="../../course/molecular-immunology/molecular-immunology.assets/5-mac.png" alt="aaaa" style="zoom:40%;" />
 
-
-<img src="molecular-immunology.assets\5-mac.png" alt="5-mac" style="zoom:40%;" />
 
 
 

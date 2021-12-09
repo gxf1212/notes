@@ -996,7 +996,49 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
    - no, it supports. But the root directory is not the current directory but the repository’s.....
 
-9. 
+     - in normal md grammar, relative path is ok
+     
+     - in html, zooming without relative path is ok
+
+     - the problem is, in html, <u>it cannot recognize relative path as markdown does (no matter whether zooming)</u>. But it works if you use path relative to the root of repository...which makes figures invisible in local Typora
+     
+     - 本来还猜测只是重新定义了根目录的原因，加个../就认为是相对路径了。事实上是，不管加不加这些东西，都是从the root of repository开始算的。。所以你以为加了../就是父目录了，其实还是root
+     
+       那就能解决了
+     
+     - future tasks:
+     
+       - centralize figures
+       - adjust size, so different from those in Typora!
+     
+     
+     > relative path
+     >
+     > https://angry-swanson-b4e47b.netlify.app/zh-cn/configuration?id=relativepath no use
+     >
+     > <font color=red>世界上怎么会有这么傻逼的设计？！！专门跟Typora过不去吗？？不得不改变创作方式！</font>那这话也不合适
+
+10. other problems like:
+
+    - support on textsubscript: must use `<sub></sub>` tag; 
+
+      must add \ to \~ if there are more than two \~. same for ^
+
+    - support on \ce{NaCl}: may use $\text{Al(OH)}_3$...
+
+11. 附：Github 上怎么删除一个文件的版本控制信息，只保留最新文件？
+
+    项目本身并不大，主要是由于有些大图片多次修改，所以GIT保留的这些图片的历史记录文件非常大，但是我这些图片又不需要历史记录信息，怎么删除？
+
+    干脆利落...
+
+    ```
+    rm -rf .git
+    git init
+    git add -A
+    git commit
+    git push -f
+    ```
 
 #### other features, and Gitee
 
@@ -1094,7 +1136,15 @@ dpkg --info xx.deb # 查看信息，包括软件包名，卸载时用！
   sudo gedit /etc/apt/sources.list
   ```
 
-- 
+- https://blog.csdn.net/jenyzhang/article/details/72510631  [Ubuntu apt-get upgrade 时候忽略某些安装包](https://blog.csdn.net/u010544187/article/details/76512290?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
+
+  ```shell
+  sudo apt-mark hold package
+  sudo apt-mark unhold package
+  sudo dpkg --get-selections | grep hold
+  ```
+
+  
 
 ### other
 

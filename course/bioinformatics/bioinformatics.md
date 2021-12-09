@@ -60,7 +60,7 @@ d(\boldsymbol{x}, \boldsymbol{y})=
 $$
 例子
 
-<img src="E:\GitHub_repo\notes\course\bioinformatics\bioinformatics.assets\linear.png" alt="linear" style="zoom:75%;" />
+<img src="../../course/bioinformatics/bioinformatics.assets/linear.png" alt="linear" style="zoom:75%;" />
 
 
 

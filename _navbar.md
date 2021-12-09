@@ -7,5 +7,6 @@
   - [NAMD/VMD和FEP计算基本操作（待完成）](/MD/FYP-notes.md)
   - [MD各软件教程和网络资料学习](/MD/MD-tutorials-all.md)
 - [课程学习类](/course/README.md)
-  - [结构生物学笔记（部分完成）](/course/structural-biology/sb-outline.md)
+  - [结构生物学笔记（待完成）](/course/structural-biology/sb-outline.md)
   - [分子免疫学笔记（待完成）](/course/molecular-immunology/molecular-immunology.md)
+  - [生物信息学笔记（部分）](/course/bioinformatics/bioinformatics.md)
