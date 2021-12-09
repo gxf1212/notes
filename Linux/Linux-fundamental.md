@@ -916,7 +916,12 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
 #### Customize functions
 
-if a there’s a new version of a plug-in, how to update? 
+TODO list:
+
+- [ ] figure centralize and adjust size
+- [ ] gitee automatically deploy?
+
+> if a there’s a new version of a plug-in, how to update? 
 
 1. add things after:
 
