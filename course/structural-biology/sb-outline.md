@@ -572,12 +572,13 @@ $\Delta R$代入上公式，$\theta$ 和 $H$ 取min。
 ##### 指标化（indexing）
 
 $$
-\begin{align*}
+\begin{aligned}
 \boldsymbol{H}&=x\boldsymbol{i}+y\boldsymbol{j}+z\boldsymbol{k}\\
 &=(\boldsymbol{i},\boldsymbol{j},\boldsymbol{k})(x,y,z)^T\\
 &=(\boldsymbol{a^*},\boldsymbol{b^*},\boldsymbol{c^*})(h,k,l)^T
-\end{align*}
+\end{aligned}
 $$
+
 
 目标：从(h,k,l)反推回(x,y,z)坐标
 
@@ -717,10 +718,10 @@ $$
 
 定义
 $$
-\begin{align}
+\begin{aligned}
 P(\boldsymbol{U})&=\dfrac{1}{V}\sum_\boldsymbol{H}|F_{hkl}|^2\cos\left(2\pi\boldsymbol{H}\cdot\boldsymbol{U}\right)\\
 \rho(\boldsymbol{R})&=\dfrac{1}{V}\sum_\boldsymbol{H}|F_{hkl}|\exp\left[-i\cdot 2\pi\left(\boldsymbol{H}\cdot\boldsymbol{R}+\alpha_{hkl}\right)\right]
-\end{align}
+\end{aligned}
 $$
 where
 $$
@@ -952,7 +953,7 @@ pdb等文件
 | 单颗粒技术 | 病毒、大complex  | 全同粒子 | >0.33nm        |
 | 断层成像   | 细胞器、组织切片 | 单一结构 | 4nm            |
 
-![image-20211104170835340](../../course/structural-biology/sb-outline.assets/5-temp)
+![image-20211104170835340](../../course/structural-biology/sb-outline.assets/5-temp.png)
 
 <img src="../../course/structural-biology/sb-outline.assets/image-20211104170905611.png" alt="image-20211104170905611" style="zoom: 40%;" />
 

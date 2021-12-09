@@ -6,10 +6,20 @@ This is the homepage for course notes. Click the sidebar to view.
 - molecular immunology
 - bioinformatics (part)
 
-Note: if you want to include figures, you should set the path as:
+## Notes
 
-```shell
-../../course/course-name/course-name.assets/figure.png
-```
+1. if you want to include figures, you should set the path as (an example):
+   
+    ```shell
+    ../../course/molecular-immunology/molecular-immunology.assets/figure.png
+    ```
 
-i.e. all the way back into root and then come back.
+    i.e. all the way back into root and then come back.
+2. note that katex only supports these environments that you often use (of course something other):
+   - aligned
+   - gathered
+   - cases
+   - various matrices, array
+
+    check https://upupming.site/docsify-katex/docs/#/supported for more
+

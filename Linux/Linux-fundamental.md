@@ -916,6 +916,8 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
 #### Customize functions
 
+if a there’s a new version of a plug-in, how to update? 
+
 1. add things after:
 
    ```html
@@ -935,6 +937,8 @@ If you want to modify a theme, download from cdn website rather than GitHub!
    to add plug-in
 
    > https://github.com/upupming/docsify-katex LaTeX equation support
+   >
+   > - [**supported functions**!](https://upupming.site/docsify-katex/docs/#/supported)
    >
    > https://github.com/iPeng6/docsify-sidebar-collapse sidebar collapse
 
@@ -1018,13 +1022,15 @@ If you want to modify a theme, download from cdn website rather than GitHub!
      >
      > <font color=red>世界上怎么会有这么傻逼的设计？！！专门跟Typora过不去吗？？不得不改变创作方式！</font>那这话也不合适
 
-10. other problems like:
+10. other supporting problems like:
 
-    - support on textsubscript: must use `<sub></sub>` tag; 
+    - [x] support of textsubscript: must use `<sub></sub>` tag; 
 
       must add \ to \~ if there are more than two \~. same for ^
 
-    - support on \ce{NaCl}: may use $\text{Al(OH)}_3$...
+    - [x] support of \ce{NaCl}: may use $\text{Al(OH)}_3$...
+
+    - [x] support of `\begin{align*}` ?? as well as gather, equation ...
 
 11. 附：Github 上怎么删除一个文件的版本控制信息，只保留最新文件？
 
@@ -1044,6 +1050,7 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
 - It is ridiculous that if I include a YouTube or Bilibili link in .md, I cannot deploy...No, solved
 - markdown based wiki system http://dynalon.github.io/mdwiki/#!index.md
+- 几（十）款制作帮助文档的工具汇总 https://blog.mimvp.com/article/38752.html
 
 # Installation and softwares
 
