@@ -700,14 +700,26 @@ $$
 
 #### 相位确定的方法
 
+按方法学分类，相角问题的解决涉及到下列若干种方法：
+
+1. 同晶差值傅里叶法(Difference Fouier Analysis) 
+2. Patterson函数与重原子法(Heavy Atomic Structural Analysis) 
+3. 多对同晶置换法(Multiple Isomorphous Replacement，MIR)及其与反常散射(Anomalous Scattering)的联合使用(MIRAS) 
+4. 单对同晶置换法(Single Isomorphous Replacement，SIR)及其与反常散射(Anomalous Scattering)的联合使用(SIRAS)
+5. 多波长反常色散法(Multiple wavelength Anomalous Dispersion, MAD)
+6. 单波长反常色散法(Single wavelength Anomalous Dispersion, SAD)
+7. 分子置换法(Molecular Replacement，MR)
+8. 直接法(Direct Method)
+
 ##### 同晶差值傅里叶法
+
+Isomorphous difference Fourier method
 
 用途：
 
 - 已知晶体结构的大部分，测定未知的小部分（如突变体、加个配体），它们是同晶（空间群相同晶胞参数相差小），可以通过修正得出待测晶体的模型
 - 通过电子密度的表现，检测模型的正确与否
-
-
+- 同晶：晶胞参数<1%
 
 ##### Patterson函数与原子间矢量法
 
@@ -763,7 +775,7 @@ $$
 
 Harker截面或Harker线，就是同一套等效点的原子组成的帕特森峰。
 
-
+<img src="../..\course\structural-biology\sb-outline.assets\4-4-harker1.jpg" alt="4-4-harker1" style="zoom:15%;" /><img src="../..\course\structural-biology\sb-outline.assets\4-4-harker2.jpg" style="zoom:15%;" />
 
 蛋白质分子都是CNO，差别不大，容易重叠。
 
@@ -777,20 +789,20 @@ Harker截面或Harker线，就是同一套等效点的原子组成的帕特森�
 
 ##### 分子置换法
 
-同源：序列不一定相同（identical），但尺寸、疏水性等性质可能相同
+> 同源：序列不一定相同（identical），但尺寸、疏水性等性质可能相同
+>
+> 序列同源，很可能三维结构折叠类型也同源
 
-序列同源，很可能三维结构折叠类型也同源
+同源**但不同晶**的，用分子置换法（同晶的用同晶差值傅里叶法）。亚单位可能同源
 
-同源但不同晶的，用分子置换法（同晶的用同晶差值傅里叶法）
-
-需要先旋转、后平移，让二者的结构单元superimpose
+需要先旋转、后平移，让二者的结构单元superimpose。然后算Patterson函数的相似性
 
 ###### 同源蛋白的选取
 
-- 比对时，应删除易变性较强、测量误差大的residue
-- 删除非蛋白分子
-- （同源蛋白的）各向同性温度因子指定为相同的值
-- 选取合适的结构域、（寡聚体中的）单体
+- 比对时，应<u>删除易变性较强、测量误差大</u>的residue
+- 删除<u>非蛋白分子</u>
+- （同源蛋白的）各向同性<u>温度因子</u>指定为相同的值
+- <u>选取</u>合适的结构域、（寡聚体中的）单体
 - 多试几个同源蛋白
 
 等
@@ -838,32 +850,47 @@ where $F_o(\boldsymbol{H})$ 是待测晶体，$F_c(\boldsymbol{H})$ 是已知晶
 
 （multi-wavelength anomalous dispersion）
 
+浸泡法或用含重原子的培养基养菌，能得到重原子取代物。
 
+1个Se/150 residues对MAD就够了
 
+![4-4-mad](../../course\structural-biology\sb-outline.assets\4-4-mad.jpg)
 
+要的是F<sub>BA</sub>和G的夹角$\Delta\phi$
 
+$F_h=F_{BA}+G$，把$G$代进来换成$F_A$。$F_A$的系数随着波长变化
 
+![4-4-mad2](../..\course\structural-biology\sb-outline.assets\4-4-mad2.jpg)
+
+可能有双解问题，解出电子密度再判断
 
 #### 相位的确定总结
 
 ##### 同晶置换法（MIR）
 
+通过比较正常蛋白和多个包含重原子的晶体的衍射模式，推断重原子的位置，进而推断相位
 
+- 适用于全新蛋白的结构测定
+- 操作复杂，计算复杂
 
 ##### 多波长反常散射法（MAD）
 
+反常散射效应随波长而变化。采集多个波长的数据，可确定相位
 
+- 适用于全新蛋白的结构测定
+- 只要一个重原子衍生物，就有多个方程
+- 要求波长可调的同步辐射源，对数据精度要求高
 
 ##### 分子置换法（MR）
 
-用已知类似物的三维结构作为初始模型，经旋转和平移得到待测蛋白初始模型
+用已知类似物的三维结构作为初始模型，经**旋转和平移**得到待测蛋白初始模型
 
 - 需要同源蛋白，越相似越准确
 - 只要一套数据，计算简单
 
 ##### 同晶差值傅里叶法
 
-差异很小的、同晶的蛋白，计算更简单
+差异很小的、同晶的蛋白，用人家的结构来计算相位，计算更简单
 
 
 
@@ -956,21 +983,39 @@ graph LR
   - R<sub>free</sub>因子
   - Luzatti作图等
 - 实空间
-  - 亲水和疏水基团的空间分布，不能过近接触
+  - 亲水和疏水基团的空间分布、原子间过近接触
   - Ramachandran作图
   - 模型和电子密度的拟合，观察
-  - 实空间相关系数、残基温度因子的分布、水分子结构和分布等
+  - 实空间（电子密度的）相关系数、残基温度因子的分布、水分子结构和分布等
   - 立体化学参数和理想值的偏离
 
-##### 晶体学R因子
+##### R因子
 
+晶体学R因子
 $$
-R=\dfrac{\sum_\limits{hkl}}{}
+R=\dfrac{\sum_\limits{hkl\subset W}\Big| |F(hkl)|_{obs}-k|F(hkl)|_{calc} \Big|}{\sum_\limits{hkl\subset W}\Big| |F(hkl)|_{obs} \Big|}
 $$
+自由R因子
+$$
+R=\dfrac{\sum_\limits{hkl\subset T}\Big| |F(hkl)|_{obs}-k|F(hkl)|_{calc} \Big|}{\sum_\limits{hkl\subset T}\Big| |F(hkl)|_{obs} \Big|}
+$$
+$k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”的hkl，后者范围小，仅占5~10%。
 
+粗糙的模型的R因子可达50%，修正后需要到20%或更低。R<sub>free</sub>稍高
 
+修正：通过最小二乘法调整F表达式中的参数（占有率、温度因子等），直到收敛
+
+##### 立体化学参数和理想值的偏离
+
+<img src="../../course\structural-biology\sb-outline.assets\4-5.png" alt="4-5" style="zoom:30%;" />
 
 ##### 别的想看的也看一下
+
+算啦
+
+### 补充：软件使用
+
+
 
 
 
@@ -1100,13 +1145,13 @@ $$
 
 ### 概述
 
-获得原子间的距离信息，结合约束获得模型。已知一级结构
+> 获得原子间的距离信息，结合约束获得模型。已知一级结构
 
 #### 限制
 
 分子量受限：易重叠；弛豫时间减少，峰变矮宽。
 
-一维<80AA，HCN标记可达200AA。（特殊氘标记可达700AA）
+一维<80AA，**常规HCN标记可达200AA**。（特殊氘标记可达700AA）
 
 #### 样品
 
@@ -1114,16 +1159,76 @@ $$
 - 均一溶液
 - 没有聚合
 - 10%D<sub>2</sub>O
-- pH<7.5的Tris磷酸、醋酸盐缓冲体系
+- pH<7.5的Tris或磷酸、醋酸盐缓冲体系
 - 加NaN<sub>3</sub>、蛋白酶抑制剂，室温能放一周
 
 #### 试验
 
 先做一维谱，看有没有结构
 
-二维：HN-HSQC
+> 二维：HN-HSQC
+>
+> 多维：自己选哪些核
 
-多维：自己选哪些核
+<img src="../../course\structural-biology\sb-outline.assets\6-1d.jpg" alt="6-1d" style="zoom:15%;" />
+
+### 实验
+
+#### 样品制备
+
+- 基因克隆
+- 表达纯化
+  - BL21，色谱，SDS-PAGE检测
+- 同位素标记
+  - M9培养基：葡萄糖，无机盐，<sup>15</sup>NH<sub>4</sub>Cl
+- 准备样品：如前所述
+
+采集数据
+
+#### 数据处理和解析结构
+
+流程看小标题！
+
+##### 数据处理
+
+- 线性预测等：补全缺失值？
+
+- **傅里叶变换**（多维：每一维都考虑）
+
+  - FID曲线经过FT变成一个峰
+
+    <img src="../..\course\structural-biology\sb-outline.assets\6-fid.jpg" alt="6-fid" style="zoom:10%;" />
+
+- 相位、基线校正
+
+##### 化学位移校准
+
+- 重要
+- DSS，(CH3)3SiCH2CH2CH2SO3Na，校准质子
+- 以DSS的0 ppm处的频率乘以换算因子得到异核的0 ppm的频率  
+
+##### 初步鉴定
+
+<sup>1</sup>H-<sup>15</sup>N HSQC  
+
+- 除了Pro，每个resiude至少有一个峰
+- 峰分散程度越高，折叠程度越高
+
+##### 三维实验、化学位移指认
+
+- 主链指认
+  - 序列的链接、氨基酸类型
+- 侧链指认
+- NOE实验
+
+##### 结构计算
+
+实验得到的是约束信息：距离、二面角等
+
+- 不完备、不精确
+- 根据距离几何或约束的分子动力学模拟计算约束下的构象
+
+
 
 
 
@@ -1237,5 +1342,14 @@ FEL（free electron laser）
      - X射线
      - 数据处理
    - 结构解析
+   - 相位的确定
+     - 适用于新蛋白
+       - 同晶置换
+       - 多波长反常散射
+       - Patterson函数与重原子法
+       - 直接法
+     - 适用于有同源结构的蛋白
+       - 同晶差值傅里叶
+       - 分子置换法
 5. 电镜三维重构
 6. NMR技术

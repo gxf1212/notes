@@ -413,7 +413,7 @@ Immunoglobulin super family (IgSF, 免疫球蛋白超家族): proteins including
 
 #### structure
 
-<img src="./molecular-immunology.assets/4-domain.png" alt="4-domain" style="zoom:30%;" />
+<img src="../../course/molecular-immunology/molecular-immunology.assets/4-domain.png" alt="4-domain" style="zoom:30%;" />
 
 |                 | Heavy chain       | Light chain   |
 | --------------- | ----------------- | ------------- |
@@ -628,7 +628,7 @@ at DNA level, irreversible, from IgM to G to ...
 
 ### Discovery
 
-> 1. 新鲜的霍乱弧菌抗血清与细菌混合后可以溶解细菌。
+> 1. 新鲜的霍乱弧菌抗血清与细菌混合后可以溶解细菌
 > 2. 对抗血清加热后丧失溶菌能力
 > 3. 加热后的抗血清补充新鲜血清后可以恢复溶菌能力
 > 4. 不含抗体的新鲜血清不具有溶菌的能力。  
@@ -737,5 +737,28 @@ Ag-Ab complex
 > 1. 补体激活有那三条途径？各自的生物学意义如何？
 > 2. 补体有哪些生物学功能？
 
-# Chapter 6 MHC
+# Chapter 6 MHC 主要组织相容性复合体
+
+> 背景：器官移植
+>
+> - 遗传学家发现，同基因型个体不排斥，排斥程度符合孟德尔遗传定律
+> - 免疫学家发现，再次移植同一个供体的器官，排斥得更快；能检测到抗供体的受体
+
+major histocompatibility complex:
+
+- a cluster of genes that are determining the compatibility of a transplanted organ
+  - translated into histocompatibility antigens
+- closely related to immune respone; genetic linkage (连锁)
+- specific in mammals; in human called Human Leukocyte Antigen
+
+## HLA complex
+
+
+
+
+
+```mermaid
+graph LR
+hla(HLA genes)
+```
 
