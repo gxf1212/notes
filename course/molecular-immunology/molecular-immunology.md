@@ -624,7 +624,12 @@ at DNA level, irreversible, from IgM to G to ...
 
 # Chapter 5 Complement System
 
-## Intro
+reference videos
+
+- [20 min to master the complement system, a great video](https://www.youtube.com/watch?v=Uc4nq4Lazo4&list=PLybg94GvOJ9Ha_e6t4NvnCjCyNmJyAvhO&index=10)
+- [an animation on the overall processes](https://www.bilibili.com/video/BV1Dt411w7Ro)
+
+## Introduction
 
 ### Discovery
 
@@ -641,49 +646,101 @@ at DNA level, irreversible, from IgM to G to ...
    1. 可溶性分子
    2. 膜结合分子
 
+### Nomenclature
+
+- C stands for "complement", x represents the order of discovery
+- Cx is cleaved into Cxa (smaller fragment) and Cxb (binding portion)
+  - except C2, which is reversed
+- should add a line over an activated enzyme: $\mathrm{C}\overline{\text{1s}}$, $\mathrm{C}\overline{\text{4b2a3b}}$. But I'm too lazy to do that then...
+- combine them to form a complex. e.g. C5 convertase = $\mathrm{C}\overline{\text{4b2a3b}}$
+
 ## Activation
+
+Note: these reactions occurs on the surface of the pathogen or an infected host cell. Will be refered to as "the surface" in the following context.
+
+### Classic pathway (经典途径)
+
+1. Upon binding to Ag, IgG/M changes its conformation and exposes the C1q binding site on CH2.
+
+   > C1q may also recognize the pathogen surface or some specific proteins on it
+
+2. C1q's binding to Ab results in the autocatalytic activation of C1r which is bound to C1q
+
+   <img src="../..\course\molecular-immunology\molecular-immunology.assets\5-c1q.png" alt="5-c1q" style="zoom:50%;" />
+
+3. C1r cleaves and activates C1s, which then cleaves circulating C4 and C2. C4b is then bound to the membrane or the Ab, forming a **C4b2a complex**.
+
+   <img src="../..\course\molecular-immunology\molecular-immunology.assets\5-c4b2a.png" alt="5-c1q" style="zoom: 30%;" />
+
+4. The complex is called classical pathway **C3 convertase C4b2a**, which cleaves C3 into C3a and C3b. 
+
+### Alternative pathway (旁路途径)
+
+1. activators: LPS, glucan, 酵母多糖. 
+
+   > But they only provide a protective environment for the reaction or an adhesive surface, and are not involved in the actual recognition. Without infection, regulator proteins like Factor H and I, inhibit C3bBb and C3b respectively, while pathogen components inhibit regulators.
+
+2. C3 is slightly and spontaneously hydrolyzed into C3(H<sub>2</sub>O), which is usually in the liquid phase, and have C3b-like properties, enabling attachment to the surface.
+
+   > in C3(H<sub>2</sub>O), C3a is incompletely released, which also exposes the thiol ester that is then attacked by −OH or -NH2 residues and helps C3b to be located on the surface.
+
+3. C3(H<sub>2</sub>O)/C3b also recruits Factor B, which is cleaved by Factor D into Bb. A factor P is added to stablize the structure, which makes the primary C3 convertase C3(H<sub>2</sub>O)Bb.
+
+4. C3bBb produces more C3b. **Positive feedback**! C3b goes the same process and induces large amount og the alternative pathway **C3 convertase C3bBbP**.
+
+   > Another kind of C3 convertase, different from the above one!
+
+![5-alter](../../course\molecular-immunology\molecular-immunology.assets\5-alter.png)
+
+
+### MBL pathway
+
+> MBL means 甘露糖结合凝集素  mannose binding lectin
+>
+> lectin: a class of small proteins that bind pathogen-specific carbohydrates
+
+1. MBL binds to mannose residue on the cell wall, activating MASP (MBL-associated serine proteases)
+
+   > MBL is also a hexamer like C1q
+
+2. MASP2 cleaves other MASP2 molecules, and then cleaves C4 and C2.
+
+   the same as C1s, goes into the classical pathway
+   
+3. MASP1 cleaves C3, but goes into the alternative pathway
+
+<img src="../..\course\molecular-immunology\molecular-immunology.assets\5-mbl.png" alt="5-mbl" style="zoom:45%;" />
+
+### summary
+
+overall pathways: all converge into C3 activation
+
 
 ```mermaid
 graph LR
 c[classic pathway] --> c3[C3 activation]
 a[alternative pathway] --> c3
-m[MBL pathway] --> c3
+m[MBL pathway] --> c
+m[MBL pathway] --> a
 c3 --> c5[C5 activation]
 c5 --> mac[MAC formation]
 ```
 
-### Classic pathway (经典途径)
-
-#### activator
-
-Ag-Ab complex
-
-#### process
-
-
-
-### Alternative pathway (旁路途径)
-
-#### activator
-
-
-
-#### process
-
-
-
-
-### MBL pathway
-
-甘露糖结合凝集素  
-
-
-
-
+Let's zoom in a little bit
 
 ![5-pathways](../../course/molecular-immunology/molecular-immunology.assets/5-pathways.png)
 
-## Membrane attack
+| pathway     | activator             | pathway       | characteristics                       |
+| ----------- | --------------------- | ------------- | ------------------------------------- |
+| classical   | Ag-Ab complex         | C1q,r,s,C4,C2 | relies on antibody, late infection    |
+| alternative | LPS, glucan, etc      | C3b, Bb       | evolutionarily older, early infection |
+| MBL         | pathogen carbohydrate | MBL, MASP     | also early infection                  |
+
+## Membrane attack complex
+
+1. Whichever C3 convertase + C3b = **C5 convertase**, cleaves C5 into C5a and C5b.
+
+   > which includes: C4b2a3b and C3bBb3b (C3bnBb)
 
 <img src="../../course/molecular-immunology/molecular-immunology.assets/5-c5mac.png" alt="5-c5mac" style="zoom:50%;" />
 

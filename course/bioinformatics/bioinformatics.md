@@ -33,7 +33,9 @@
 
 聚类分析是无监督学习，分类分析是监督学习。用的方法当然不同。
 
-mind map
+本节讨论的都是二维数据：一堆样本，每个样本是个向量，向量的每个位置是不同的变量。
+
+a mind map
 
 ```mermaid
 graph LR
@@ -146,7 +148,7 @@ hierarchical clustering
 
 <img src="../..\course\bioinformatics\bioinformatics.assets\5-hierarchical.png" alt="5-hierarchical" style="zoom:50%;" /><img src="../..\course\bioinformatics\bioinformatics.assets\5-hierarchical-gene.png" alt="5-hierarchical" style="zoom:50%;" />
 
-可以同时对变量（汽车品牌，基因名）和样本（各种参数，不同时间表达量）进行分类，将二维的数据组织成如上的热图，可以分析变量和样本的关系。
+可以同时对样本（汽车品牌）和变量（各种参数）进行分类，将二维的数据组织成如上的热图，可以分析汽车品牌和各种参数的关系。同样的例子：基因名（变量）和不同时间表达量（样本）
 
 #### k-means聚类
 
@@ -197,9 +199,61 @@ hierarchical clustering
 
 ### 决策树
 
-<img src="5-treeeg.png" alt="5-treeeg" style="zoom:40%;" />
+<img src="../..\course\bioinformatics\bioinformatics.assets\5-treeeg.png" alt="5-treeeg" style="zoom:40%;" />
+
+一堆样本，对应一个决策；有多个指标（变量），我们需要用已有数据训练出模型。训练目标就是找出，每一步使用什么变量来分类各样本，能达到最准确的分类效果。
 
 #### 分割准则
+
+对于上面这个问题，变量有：有无女票、是否想陪女票、有无学习任务、是否想吃鸡。
+
+假设我们已经有了一堆样本，那么每个节点处都会有一堆样本，需要选一个变量，最好地分开它们。
+
+对于每个变量，都可以做一个表格：
+
+| 是否有女票 | 去上自习 | 不上自习 |
+| ---------- | -------- | -------- |
+| 是         | 2        | 5        |
+| 否         | 6        | 3        |
+| 总         | 8        | 8        |
+
+| 有学习任务 | 去上自习 | 不上自习 |
+| ---------- | -------- | -------- |
+| 是         | 2        | 6        |
+| 否         | 4        | 4        |
+| 总         | 8        | 8        |
+
+“是”、“否”是两个子节点，“总”是根节点
+
+> 当然这里结果（是否上自习）只有两种，其他问题可能有多种
+
+那么选择“是否有女票”还是“有学习任务”呢？以下介绍两个衡量**节点纯度**的**变化量**的指标
+
+- Gini index
+  $$
+  Gini=1-\sum_{i=1}^{k}p_i^2
+  $$
+
+- information entropy
+  $$
+  H(n)=-\sum_{i=1}^{k}p_i\log_2 p_i
+  $$
+
+where $p_i$ is the probability that a sample falls into category $i$, and $k$ is the number of categories.
+
+二者都是越小/越接近0（某个$p_i$越接近1）说明该节点越纯。
+
+对应的变化量分别称为Gini指数变化 ($\Delta Gini$)，和信息增益 (informational gain)：
+$$
+\Delta Gini \text{ or } Gain = G(N) - \sum_j\dfrac{n_j}{n}G(N_j)
+$$
+where $G$ means Gini index or information entropy; $N$ represents the parent node and $N_j$ stands for children nodes (**usually two**).
+
+another example:
+
+<img src="../../course\bioinformatics\bioinformatics.assets\5-treeeg2.png" alt="tree" style="zoom:40%;" />
+
+
 
 
 
