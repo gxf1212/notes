@@ -15,7 +15,7 @@
 
 > 考试要求
 >
-> 1. 考试题型包括单选15个，名词解释7个，简答2个，分析题1个
+> 1. **考试题型包括单选15个，名词解释7个，简答2个，分析题1个**
 > 2. 考试不涉及计算。关键公式需要掌握每项代表的物理意义，如密度公式中的相位、振幅、结构因子等
 > 3. 数据库和软件不用记很多，知道PDB数据库的意思就行
 > 4. 关注一些关键知识点其定义，和一些实用的信息。如根据氨基酸类型判断二级结构，晶体筛选与优化过程，晶体衍射数据收集注意事项，帕特森函数性质等。
@@ -30,10 +30,18 @@
 
 结构生物学是以生命物质的精确空间结构及其运动为基础，来阐明生命活动规律和生命现象本质的学科，其核心内容是蛋白质及其复合物、组装体和由此形成的细胞各类组分的**三维结构、运动和相互作用**，以及它们**与正常的生物学功能和异常病理现象的关系**。
 
-> 诞生：劳厄、布拉格、沃森克里克、Kendrew和Perutz（肌红蛋白、血红蛋白）
+> 诞生：劳厄、布拉格、**沃森克里克**，1959，Kendrew和Perutz（肌红蛋白、血红蛋白）
 >
-> 历史：……；结构基因组学复杂过程，SBDD
+> 1971，PDB建立；1972，提出结构生物学
 >
+> 1975，电镜，细菌视紫红质；1983，二维NMR
+>
+> ……
+>
+> 现在：结构基因组学，复杂过程，SBDD
+
+我国科学家：人工合成结晶牛胰岛素
+
 > 研究现状
 >
 > - 前沿和主流，渗入各个领域
@@ -80,30 +88,56 @@
 
 DNA一级结构
 
-DNA双螺旋结构模型要点
+DNA双螺旋结构模型要点，三种结构
 
+超螺旋
 
+染色质结构，核小体等
 
-
+多链DNA，C<sup>+</sup>GC氢键
 
 
 RNA的结构？
 
 ### 蛋白
 
+> 还是挺重要吧？
+
 #### 概论
+
+蛋白质分三类
 
 #### 结构层次
 
+##### 一级结构
+
+哪些亲疏水
+
+特殊的：GPC，对二级结构影响
+
+- G：柔性；P：顺式肽键，turn
+
+肽平面，二面角，拉氏图
+
 ##### 二级结构
 
+骨架，氢键
+
 - α螺旋：性质
+
+  > 有利：AELM，不利：PGNYC
+
 - β折叠：结构
+
+  > 强烈：VIY，不利：E（PG？）
+
 - β转角、β环：有功能
+
+  > Turn: X-P-(G)-X
 
 拉氏图；有利的AA！
 
-二级结构可变性
+二级结构可变性：pH、温度、溶剂等
 
 超二级结构：αβα，HTH，EF hand，α loop等
 
@@ -115,11 +149,32 @@ RNA的结构？
 > - Rossman：平行β
 > - Greek key等
 
-折叠子：结构核心的折叠特征，包含多个超家族
+折叠子（fold）：结构核心的折叠特征
 
 结构域：……
 
+#### 小心名词解释
+
+> - 二级结构是**多肽链骨架（主链）**的**局部空间结构**，不涉及侧链的构象及整个肽链的空间排列。
+>
+> - 超二级结构：两个或**多个二级结构单元**被连接多肽连接起来，进一步组合成有特殊的几何排列的局部空间结构，称为超二级结构（supersecondary structure），又称为模体（motif）。
+>
+> - 折叠子：蛋白质分子中**主要二级结构单元**的空间排布和拓扑连接方式，称为折叠子。折叠子反映了蛋白质**核心结构**的拓扑结构模式。一个fold包含多个超家族
+>
+> - <font color=red>结构域</font>：折叠成**紧密的相对独立的结构实体**的肽链，有一定的三级结构，而且往往还具有**特定的、但还不完全**的生物活性。
+>
+>   - 一般：100~200个连续的残基。作为一个模式结构来参与蛋白质分子的装配
+>   - 结构域之间的连接比较松散，具有一定的灵活性
+>
+> - 模块（module）是残基数较少的、结构独立性不明显的结构域
+>
+> - > 三级结构：指一条多肽链在二级结构或者超二级结构甚至结构域的基础上，进一步盘绕，折叠，依靠次级键的维系固定所形成的特定空间结构成为蛋白质的三级结构。
+>
+> - 四级结构：相同或不同的蛋白质亚单位（亚基）通过非共价键结合在一起时的组合方式
+
 ## 3. 蛋白结构与功能
+
+蛋白质分子结构是有层次的
 
 ### 蛋白构象病
 
@@ -159,11 +214,12 @@ RNA的结构？
 
 - 优点
   - 分辨率高
-  - 方法和手段成熟，向全自动化方向发展
+  - 成本较低，方法和手段成熟，向全自动化方向发展
   - 没有分子大小限制
 - 缺点
   - 但**要求单晶**
   - **相位问题**
+  - 非native state
 
 > X-ray波长小，能达到原子级分辨率
 
@@ -380,24 +436,30 @@ RNA的结构？
 > 具体对照手写笔记
 >
 > ![4-2-pg](../../course/structural-biology/sb-outline.assets/4-2-pg.jpg)
+>
+> <img src="../../course\structural-biology\sb-outline.assets\4-dengxiao.png" alt="4-dengxiao" style="zoom:25%;" />
 
-最小体积重复单元：不对称单位
-
-原点的选取，优先次序：高对称点的对称中心---低对称点的对称中心---……
-
-坐标轴的轮换与对换
-
-坐标变换矩阵
+> 最小体积重复单元：不对称单位
+>
+> 原点的选取，优先次序：高对称点的对称中心---低对称点的对称中心---……
+>
+> 坐标轴的轮换与对换
+>
+> 坐标变换矩阵
 
 #### 蛋白质晶体
 
 蛋白本身有手性，不存在能引起手性的对称变换，所以蛋白晶体可能的空间群仅**65个**。
 
+<img src="../../course\structural-biology\sb-outline.assets\4-pro-space.png" style="zoom:50%;" />
+
 由于密堆积和互作的需要，螺旋轴出现概率高于普通旋转轴。
 
-若两个晶体空间群相同，晶胞参数差别小，则称二者是同晶的
+<img src="../../course/structural-biology\sb-outline.assets\4-rot.png" style="zoom:35%;" />
 
-不同条件可能不同晶体
+> 若两个晶体空间群相同，晶胞参数差别小 (1%)，则称二者是同晶的
+>
+> 不同条件可能不同晶体
 
 #### 赝对称
 
@@ -475,21 +537,25 @@ X射线曝光激发像板材料，磷光能保存较久时间，其中蓝光和�
 - 可重复使用
 - 但还是胶片，阅读需要一些时间
 
-###### CCD
+###### CCD（略
 
 #### 数据处理
+
+##### 倒易空间
+
+一个点阵，选个原点，其余点到它的距离等于该点对应晶面族的面间距的倒数。
+
+过原点画一个圆心在X射线入射方向上的、半径为$1/\lambda$的圆（球），在其上的倒易点阵点满足Bragg' law，叫Ewald sphere
+
+Diffraction pattern 就是 a 2D projection of a 3D reciprocal lattice
+
+<img src="../../course\structural-biology\sb-outline.assets\4-collect" alt="image-20211213214729959" style="zoom:45%;" />
 
 ##### Laue法（Laue's Method）
 
 用白色X射线打静止不动的晶体
 
 Laue星芒：晶体内部结构畸变时，会产生衍射斑点的伸长
-
-###### 倒易空间
-
-一个点阵，选个原点，其余点到它的距离等于该点对应晶面族的面间距的倒数。
-
-过原点画一个圆心在X射线入射方向上的、半径为$1/\lambda$的圆（球），在其上的倒易点阵点满足Bragg' law，叫Ewald sphere
 
 ##### 小角度回摆*
 
@@ -551,7 +617,7 @@ $$
 \theta_{max}=\alpha/2\\
 2(1/|H_{max}|)\sin\theta_{max}=\lambda
 $$
-$1/|H_{max}|$为晶面间距，$|H_{max}|$为估计的分辨率的数值。角度越高，分辨率越高
+$1/|H_{max}|$为晶面间距，$|H_{max}|$为估计的分辨率的数值。**角度越高**，分辨率越高
 
 可以根据随着分辨率增加，衍射斑点的平均强度的下降来了解晶体内部的有序度
 
@@ -565,7 +631,9 @@ $1/|H_{max}|$为晶面间距，$|H_{max}|$为估计的分辨率的数值。角�
 
 $\Delta R$代入上公式，$\theta$ 和 $H$ 取min。
 
-距离越短，分辨率越高，但可能导致斑点重叠
+**距离越短**，分辨率越高，但可能导致斑点重叠
+
+> $\alpha$ 不变，$D$ 缩小，$\Delta R$ 缩小
 
 ##### 回摆角度、画面张数、曝光时间的设置*
 
@@ -575,12 +643,13 @@ $\Delta R$代入上公式，$\theta$ 和 $H$ 取min。
 
     > 并会导致部分记录反射，一个衍射点可能分布在几张连续的画面上，需要在后续阶段将它们的强度合并。但是不准，有时不计。还是要增加回摆角度
 
-  - 回摆角度过大，有可能导致画面上的衍射斑点重叠。通常取1~2°
+  - 回摆角度过大，有可能导致画面上的衍射斑点重叠（不就是过多嘛）。
 
+    - 通常取1~2°
     - 晶胞大时需要适当减小角度
 
 
-  > ????
+  > 是不是，回摆那个范围的所有衍射点被记录在一张image上了
 
 - 总旋转角=回摆角度×画面张数。对称性越低的晶体要求总旋转角越大
 
@@ -612,11 +681,15 @@ $\Delta R$代入上公式，$\theta$ 和 $H$ 取min。
 
 ##### 反常散射的数据收集
 
-获得尽可能多的Friedel反射对: $I(+h,+k,+l)$ 和 $I(-h, -k, -l)$
+> 反常散射：违反Friedel定律
+
+获得尽可能多的**Friedel反射对**: $I(+h,+k,+l)$ 和 $I(-h, -k, -l)$
 
 假设晶体属于单斜晶系，若入射X射线与2次旋转对称轴垂直， 则根据上述衍射几何可以保证反常散射对F(+)和F(-)同时出现。
 
 多波长反常散射：每张画面依次收集三个波长的衍射数据，即λ1 → λ2 → λ3 → 转动晶体 → λ1 → λ2 → λ3 →……  
+
+解决相位问题的一种方法
 
 #### 衍射数据的收集与处理
 
@@ -626,8 +699,8 @@ $\Delta R$代入上公式，$\theta$ 和 $H$ 取min。
 
 $$
 \begin{aligned}
-\boldsymbol{H}&=x\boldsymbol{i}+y\boldsymbol{j}+z\boldsymbol{k}\\
-&=(\boldsymbol{i},\boldsymbol{j},\boldsymbol{k})(x,y,z)^T\\
+\boldsymbol{H}&=x\boldsymbol{a}+y\boldsymbol{b}+z\boldsymbol{c}\\
+&=(\boldsymbol{a},\boldsymbol{b},\boldsymbol{c})(x,y,z)^T\\
 &=(\boldsymbol{a^*},\boldsymbol{b^*},\boldsymbol{c^*})(h,k,l)^T
 \end{aligned}
 $$
@@ -637,7 +710,7 @@ $$
 
 recall:
 
-- H是正常坐标系的三维坐标(x,y,z)，(h,k,l)是倒易空间的坐标
+- H是正常坐标系的三维坐标(x,y,z)？？(h,k,l)是倒易空间的坐标
 
 - $$
   \boldsymbol{B}(h,k,l)^T=(x,y,z)^T
@@ -645,15 +718,21 @@ recall:
 
 - $(a^*,b^*,c^*)$是倒易空间的基矢，模长为1埃
 
+> strange! 
+>
+> $(x\boldsymbol{a}+y\boldsymbol{b}+z\boldsymbol{c})\cdot(h\boldsymbol{a^*}+k\boldsymbol{b^*}+l\boldsymbol{c^*})=hx+ky+lz$
+
 基本步骤：
 
 - 挑选若干个强衍射斑点并测定其正常坐标
 - 计算出若干个可能的单位晶胞
 - 调整修正参数
 
-##### 强度积分、合并、振幅的还原*
+##### 强度积分 (integration)、合并 (merging)、振幅的还原
 
+指标化后，就把强度积分一下。。
 
+<img src="../../course\structural-biology\sb-outline.assets\integration.png" alt="image-20211213220445679" style="zoom:50%;" />
 
 ##### 晶体学参数测定若干问题
 
@@ -681,21 +760,104 @@ recall:
    >
    > 理论衍射点数与分辨率倒数的三次方成正比
 
-3. 强度的信噪比（强度/偏差）I/sigma
+3. 强度的信噪比（强度/偏差）：I/sigma
 
-   > 越大越好，应>2
+   > 越大越好，应>2。每个衍射点都有
+   >
+   > sigma: 强度的偏差error，指个别测定值与测定的平均值之差。sigma就是强度merge产生的误差
+   >
+   > 见《单晶结构》p64
 
 4. 数据合并的偏离因子R<sub>merge</sub>（越大越不好）
 
-   > 重复测量的衍射点，重复数据是否相差大
+   > 重复测量的衍射点，重复数据是否相差大。
+   > $$
+   > R_{merge}=\dfrac{\sum\limits_\boldsymbol{H}\sum\limits_jABS\left(<I_j(\boldsymbol{H})-I(\boldsymbol{H})>\right)}{\sum\limits_\boldsymbol{H}<I(\boldsymbol{H})>}
+   > $$
+   > 是对一部分（某壳层）衍射点求和的
 
-5. 对称性相关衍射点重复测量的平均次数
+5. 对称性相关衍射点重复测量的平均次数redundancy冗余度
+
+   > 为观测衍射点数目与独立衍射点数目的比值， 应大于4
 
 6. 同种晶体不同个体，衍射数据的分别收集，能合并的程度
 
 7. Wilson统计。线性拟合
 
    <img src="../../course/structural-biology/sb-outline.assets/4-3-wilson.jpg" alt="wil" style="zoom:55%;" /><img src="../../course/structural-biology/sb-outline.assets/4-3-wilson-eq.png" alt="wil" style="zoom:25%;" />
+
+###### 补充：软件使用&数据处理
+
+https://people.mbi.ucla.edu/sawaya/m230d/Reduce/reduce.html 关于indexing等具体讲解
+
+https://www.youtube.com/watch?v=aPgS8_wluS4 软件操作+讲解
+
+https://hkl-xray.com/sites/default/files/HKL2000manual-2020/12-OutputStatisticsGraphs.htm
+
+软件：HKL2000
+
+> - $\chi^2$
+>
+>   > if χ2 > 1 and you see a clear resolution dependence of the χ2 for scaling with merged Friedel pairs (i.e., the χ2 increases as the resolution decreases), there is a strong indication of the presence of an anomalous signal. The resolution dependence allows you to determine where to cut off your resolution to calculate an anomalous difference Patterson map with an optimal signal to noise.
+>
+> - Linear R-fac
+>
+>   - 就是R<sub>merge</sub>
+>   - 应该<50%
+>
+> 都是描述是否有反常散射的
+>
+> ```
+> R linear = SUM ( ABS(I - <I>)) / SUM (I)
+> R square = SUM ( (I - <I>) ** 2) / SUM (I ** 2)
+> Chi**2 = SUM ( (I - <I>) ** 2) / [(Error ** 2) * N / (N-1) ]
+> ```
+>
+> 
+
+- 导入数据，display衍射图
+
+- peak sear（找到衍射峰）
+
+- 指标化（点index，已经确定了空间群？）
+
+- refine几次（注意$\chi^2$值）后确定晶胞类型
+
+- peak情况（红色：rejected，黄色：多张图片上有intensity）；zoom放大查看
+
+- integrate所有图片，然后
+
+  > Integrated intensities are written to .x files, One .x file for each film
+
+- scale---scale sets：normalize，combine，merge
+  - 先用low symmetry space group 来 scale，再check space group
+  - 选好选项，再scale sets，如果check后有更高对称性，调整好（reindex）后再scale sets，就可以在space group处选更高的，再scale sets
+  - 要一直scale sets直到稳定，迭代
+
+###### log file analysis
+
+指标见上
+
+- 统计性质
+
+  - 要分（分辨率的）壳层（lower/upper limit)
+  - 每个衍射点都有一个
+
+  <img src="../../course\structural-biology\sb-outline.assets\4-data1.jpg" alt="4-data1" style="zoom:60%;" />
+
+- 下面那个是上面的加权平均
+
+<img src="../../course\structural-biology\sb-outline.assets\4-data2.jpg" alt="4-data2" style="zoom:60%;" />
+
+I/sigma的分布
+
+<img src="../../course\structural-biology\sb-outline.assets\4-data3.jpg" alt="4-data3" style="zoom:60%;" />
+
+各种指标
+
+<img src="../../course\structural-biology\sb-outline.assets\4-data4.jpg" alt="4-data4" style="zoom:60%;" />
+
+<img src="../../course\structural-biology\sb-outline.assets\4-data5.jpg" alt="4-data5" style="zoom:60%;" />
 
 ##### 发表数据（初步分析）应注意的问题
 
@@ -1073,23 +1235,6 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 
 算啦
 
-### 补充：软件使用&数据处理
-
-https://www.youtube.com/watch?v=aPgS8_wluS4
-
-HKL2000
-
-- 导入数据，display衍射图
-- peak sear（找到衍射峰）
-- 指标化（点index，已经确定了空间群？）
-- refine几次（注意$\chi^2$值）后确定晶胞类型
-- peak情况（红色：rejected，黄色：多张图片上有intensity）；zoom放大查看
-- integrate所有图片，然后
-- scale---scale sets：normalize，combine，merge
-  - 先用low symmetry space group 来 scale，再check space group
-  - 选好选项，再scale sets，如果check后有更高对称性，调整好（reindex）后再scale sets，就可以在space group处选更高的，再scale sets
-  - 要一直scale sets直到稳定
-
 
 
 
@@ -1116,7 +1261,7 @@ HKL2000
 
 成像模式和衍射模式。前者看到的是像，后者是衍射点
 
-<img src="E:\GitHub_repo\notes\course\structural-biology\sb-outline.assets\5-image.png" alt="5-image" style="zoom:50%;" /><img src="E:\GitHub_repo\notes\course\structural-biology\sb-outline.assets\5-diffraction.png" alt="5-diffraction" style="zoom:50%;" />
+<img src="../../course\structural-biology\sb-outline.assets\5-image.png" alt="5-image" style="zoom:50%;" /><img src="../../course\structural-biology\sb-outline.assets\5-diffraction.png" alt="5-diffraction" style="zoom:50%;" />
 
 #### SEM和TEM区别
 
@@ -1129,7 +1274,7 @@ HKL2000
 
 中央截面定理：物体的二维投影像的傅里叶变换等于物体的通过原点且与投影方向垂直的一个截面（中央截面）的三维傅里叶变换。累积二维的FT得到三维的FT，逆变换成三维结构。
 
-<img src="E:\GitHub_repo\notes\course\structural-biology\sb-outline.assets\5-3d.png" alt="5-3d" style="zoom:33%;" />
+<img src="../../course\structural-biology\sb-outline.assets\5-3d.png" alt="5-3d" style="zoom:33%;" />
 
 > 许多截面，所以能看到里面！
 
