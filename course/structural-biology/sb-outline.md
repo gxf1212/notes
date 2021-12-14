@@ -199,7 +199,7 @@ RNA的结构？
 
 ## 4. X射线晶体学
 
-参考资料：
+参考资料（点击跳转）：
 
 - [孙宏伟，结构化学，点群和空间群那块](https://www.bilibili.com/video/BV1P7411w7tm?p=80)，然后再看课件
 
@@ -207,7 +207,7 @@ RNA的结构？
 
 - https://www.bilibili.com/video/BV1bq4y1k7TS/ 第三集，倒易空间，Ewald sphere
 
-- https://www.youtube.com/watch?v=jvovCGHu9c8
+- https://www.bilibili.com/video/BV1ir4y1k7Mg/
 
   Ewald sphere 3D representation。旋转晶体相当于旋转球，最终能扫到的球（limiting sphere）的半径为$2\cdot\frac{1}{d}$，所以波长越小能收到更多衍射点
 
@@ -377,6 +377,8 @@ RNA的结构？
 
 <u>适合X射线</u>的晶体，需考虑：外形，尺寸，抗X射线照射能力，是否为单晶，晶体缺陷，……
 
+> 对照：晶体的安装
+
 不同蛋白不同条件可能产生相同晶型，同一蛋白不同条件可能不同晶型，蛋白种类对结晶影响大……
 
 ##### 储存
@@ -438,11 +440,13 @@ RNA的结构？
 
 点群和空间群符号
 
-<img src="../../course/structural-biology/sb-outline.assets/4-2-point-group-sign.png" alt="4-2-point-group-sign" style="zoom:50%;" />
+<img src="../../course/structural-biology/sb-outline.assets/4-2-point-group-sign.jpg" alt="4-2-point-group-sign" style="zoom: 20%;" />
 
 32种点群表
 
 <img src="../../course/structural-biology/sb-outline.assets/4-2.jpg" alt="4-2" style="zoom:15%;" />
+
+> 不用记，但后面那个从数据判断是什么玩意？
 
 ##### 空间群
 
@@ -456,9 +460,13 @@ RNA的结构？
 >
 > <img src="../../course\structural-biology\sb-outline.assets\4-dengxiao.png" alt="4-dengxiao" style="zoom:25%;" />
 
-P2<sub>1</sub>2<sub>1</sub>2这种：大概都是abc三个方向？
+P2<sub>1</sub>2<sub>1</sub>2这种：大概都是abc三个方向？按理说不应该是位方向？
 
-> 最小体积重复单元：不对称单位
+> 最小体积重复单元：不对称单位或独立区
+>
+> 如图左上角1/4就是不对称单位
+>
+> <img src="../../course\structural-biology\sb-outline.assets\4-asymm.png" alt="4-asymm" style="zoom:60%;" />
 >
 > 原点的选取，优先次序：高对称点的对称中心---低对称点的对称中心---……
 >
@@ -496,7 +504,9 @@ Matthews常数$V_M=V_{cell}/(N_z\cdot M_r)$，$N_z$是单位晶胞的蛋白分�
 
 可用于推测结构、估计晶体含溶剂的体积分数
 
-> 假设某个蛋白质的空间群为C2，单位晶胞总体积为 319,000 Å3 ，该蛋白质的分子量为32,100Da，对于NZ = 2, 4, 或 8 来说，相应的VM = 5, 2.5, 或 1.25 Å<sup>3</sup>/Da。根据 Matthews常数的经验分布规律，该蛋白质晶体的单位晶 胞中包含4个分子的可能性是非常高的。因为C2空间群 的晶体晶胞具有4个不对称单位，所以每个不对称单位 包含一个蛋白质分子。
+> 假设某个蛋白质的空间群为C2，单位晶胞总体积为 319,000 Å<sup>3</sup>，该蛋白质的分子量为32,100Da，对于$N_Z$ = 2, 4, 或 8 来说，相应的$V_M$ = 5, 2.5, 或 1.25 Å<sup>3</sup>/Da。根据 Matthews 常数的经验分布规律，该蛋白质晶体的单位晶胞中包含4个分子的可能性是非常高的。因为C2空间群的晶体晶胞具有4个不对称单位，所以每个不对称单位包含一个蛋白质分子。
+>
+> <img src="../../course\structural-biology\sb-outline.assets\4-2-Usol.png" alt="4-2-Usol" style="zoom:25%;" />
 
 ### (3) 衍射数据收集
 
@@ -511,7 +521,9 @@ Matthews常数$V_M=V_{cell}/(N_z\cdot M_r)$，$N_z$是单位晶胞的蛋白分�
 
 ##### X射线源
 
-强度越大，误差越小，要求的晶体大小越小。同步加速器是上百上千倍
+同步加速器的强度是上百上千倍。强度越大，误差越小，
+
+要求的晶体大小越小。
 
 - 旋转阳极：0.1~0.5mm
 - 同步辐射：20~40μm

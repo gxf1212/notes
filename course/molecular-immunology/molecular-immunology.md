@@ -826,28 +826,29 @@ C3/4/5b is rapidly degraded in the liquid phase.
 
 ### Regulators
 
-- activation: classical, alternative
-- MAC function
+#### activation
 
+- classical
 
+  > liquid phase: C1抑制物 (C1INH)，C4结合蛋白（C4bp)，I 因子
+  >
+  > <img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-c1.png" alt="5-re-c1" style="zoom:25%;" />
+  >
+  > on cell surface: 膜辅助蛋白（MCP），衰变加速因子（DAF)，补体受体（CR1)
+  >
+  > <img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-c4b2a.png" alt="5-re-c4b2a" style="zoom:25%;" />
 
+- alternative
 
+  > I 因子，H 因子，膜辅助蛋白（MCP），补体受体（CR1)
+  >
+  > <img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-c5.png" alt="5-re-c5" style="zoom:25%;" />
 
-<img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-c1.png" alt="5-re-c1" style="zoom:25%;" />
+#### MAC
 
-<img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-c4b2a.png" alt="5-re-c4b2a" style="zoom:25%;" />
+<img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-cd59.png" alt="5-re-cd59" style="zoom:25%;" />  
 
-<img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-c5.png" alt="5-re-c5" style="zoom:25%;" />
-
-<img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-cd59.png" alt="5-re-cd59" style="zoom:25%;" />
-
-C8结合蛋白  
-
-
-
-#### Summary
-
-![5-pathways](../../course/molecular-immunology/molecular-immunology.assets/5-pathways.png)
+<img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-mac.jpg" alt="5-re-mac" style="zoom:40%;" />
 
 ### Related diseases
 
@@ -858,6 +859,10 @@ Types:
 
 - too activated/weak regulation: autoimmune diseases, transplant rejection
 - insufficiently activated/strong regulation: tumor evasion, infection
+
+## Summary
+
+![5-pathways](../../course/molecular-immunology/molecular-immunology.assets/5-pathways.png)
 
 > 思考题
 >
@@ -880,12 +885,78 @@ major histocompatibility complex:
 
 ## HLA complex
 
+located in Chromosome 6 short arm. 6p21.31
 
+> β2m: chromosome 15
 
-
+order: 2, 3, 1
 
 ```mermaid
-graph LR
-hla(HLA genes)
+graph TD
+hla --> 1[class I]
+hla(HLA genes) --> 2[class II]
+hla --> 3[class III]
+1 --> 1c[classic HLA class I <br/> immune response]
+1c --> 1cb[HLA-B]
+1c --> 1ca[HLA-A]
+1c --> 1cc[HLA-C]
+1 --> 1n[non-classic HLA class I <br/> immune tolerance]
+1n --> 1ng[HLA-G]
+1n --> 1nE[HLA-E]
+2 --> 2c[classic HLA class II <br/> immune response]
+2c --> 2cp[HLA-DP]
+2c --> 2cq[HLA-DQ]
+2c --> 2cr[HLA-DR]
+2 --> 2n[transporter associated with <br/> antigen processing, TAP]
+2n --> dm[HLA-DM/O]
+2n --> tap[TAP and <br/> associated genes]
+2n --> psm[proteasome subunit <br/> PSMB8/9]
+3 --> 31[complement component]
+31 --> C4
+31 --> C2
+3 --> 32[inflammatory related]
+32 --> TNF
+32 --> HSP70
+32 --> regulator
+3 --> 33[other]
 ```
+
+> - HLA-G: Maternal-fetal tolerance
+> - HLA-E: NK cell tolerance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
