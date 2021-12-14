@@ -1,12 +1,12 @@
 - [Home](/_coverpage.md)
-- Linux学习类
-  - [Linux基础](/Linux/Linux-fundamental.md)
-  - [软件安装](/Linux/Prepare-for-the-computer.md)
-- MD学习类
-  - [虚拟筛选和Gromacs基础操作](/MD/UROPS-run-and-result.md)
-  - [NAMD/VMD和FEP计算基本操作（待完成）](/MD/FYP-notes.md)
-  - [MD各软件教程和网络资料学习](/MD/MD-tutorials-all.md)
-- [课程学习类](/course/README.md)
-  - [结构生物学笔记](/course/structural-biology/sb-outline.md)
-  - [分子免疫学笔记（待完成）](/course/molecular-immunology/molecular-immunology.md)
-  - [生物信息学笔记（部分）](/course/bioinformatics/bioinformatics.md)
+- Linux study
+  - [Linux basics](/Linux/Linux-fundamental.md)
+  - [Installation](/Linux/Prepare-for-the-computer.md)
+- MD study
+  - [Virtual screening and Gromacs](/MD/UROPS-run-and-result.md)
+  - [NAMD/VMD/FEP basics (to be continued)](/MD/FYP-notes.md)
+  - [MD official and online tutorials](/MD/MD-tutorials-all.md)
+- [course notes](/course/README.md)
+  - [structural biology](/course/structural-biology/sb-outline.md)
+  - [molecular immunology (to be continued)](/course/molecular-immunology/molecular-immunology.md)
+  - [bioinformatics (part)](/course/bioinformatics/bioinformatics.md)

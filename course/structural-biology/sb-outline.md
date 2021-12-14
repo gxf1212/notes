@@ -1,13 +1,28 @@
 # Structural Biology outline
 
+> 我收集的几个结构生物学的课本放在百度网盘了
+>
+> 链接：https://pan.baidu.com/s/15gEAJwKFv_uwT2G8mEK8qw 
+> 提取码：qypq 
+>
+> 包括：
+>
+> - Principles Of Protein X-Ray Crystallography
+> - 单晶结构分析原理与实践 
+>
+> - X射线晶体学基础 第二版 梁栋材 
+> - 结构生物学：从原子到生命（瑞典）利尔加斯
+>
+> 都挺好的。后面有NMR和Cryo-EM的会更新放进去
+>
 > 植入广告：
 >
 > *   我搬运的[结构生物学课程](https://www.bilibili.com/video/BV1A34y1m7ie)，完整且有英文字幕
->*   我搬运的[分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e/)，讲得非常好，老师是分子动力学领域的大牛
+> *   我搬运的[分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e/)，讲得非常好，老师是分子动力学领域的大牛
 > *   [加州理工学院 冷冻电镜入门](https://www.bilibili.com/video/BV143411k7KJ/)，也讲得非常棒
->*   [加州理工学院 冷冻电镜样品制备](https://www.bilibili.com/video/BV1r44y1i71P/)，都有英文字幕
-> 
->还有很多，可以直接到[我的B站空间](https://space.bilibili.com/441196634)去看
+> *   [加州理工学院 冷冻电镜样品制备](https://www.bilibili.com/video/BV1r44y1i71P/)，都有英文字幕
+>
+> 还有很多，可以直接到[我的B站空间](https://space.bilibili.com/441196634)去看
 
 讲这么快，肯定看个大概就行了。。总结的时候不要在意技术细节
 
@@ -138,7 +153,7 @@ RNA的结构？
 
 - α螺旋：性质
 
-  > 有利：AELM，不利：PGNYC
+  > 有利：ALEM，不利：PGNYC
 
 - β折叠：结构
 
@@ -223,7 +238,7 @@ RNA的结构？
 
 > 伦琴发现X射线，Laue发现衍射现象，Bragg建立理论
 
-特点
+#### 特点
 
 - 优点
   - 分辨率高
@@ -236,7 +251,7 @@ RNA的结构？
 
 > X-ray波长小，能达到原子级分辨率
 
-流程
+#### 流程
 
 - 蛋白表达纯化
 - 单晶培养
@@ -360,7 +375,7 @@ RNA的结构？
 
 要考虑产物量的量级：微克、毫克……
 
-重原子取代物的制备
+重原子取代物的制备：见“同晶置换法”
 
 #### 晶体的鉴别和储存
 
@@ -574,7 +589,7 @@ X射线曝光激发像板材料，磷光能保存较久时间，其中蓝光和�
 
 ###### CCD（略
 
-#### 数据处理
+#### 数据的收集方式
 
 ##### 倒易空间
 
@@ -592,13 +607,11 @@ Diffraction pattern 就是 a 2D projection of a 3D reciprocal lattice
 
 Laue星芒：晶体内部结构畸变时，会产生衍射斑点的伸长
 
-##### 小角度回摆*
+##### 小角度回摆
 
 （周转晶体法，oscillation/Rotating-crystal method）
 
 单色X射线，晶体围绕某个轴旋转，底片与轴垂直
-
-
 
 #### 影响衍射强度的若干因素**
 
@@ -611,20 +624,28 @@ Laue星芒：晶体内部结构畸变时，会产生衍射斑点的伸长
 > $$
 > $f_i$ 为散射因子。$\boldsymbol{H}$是倒易矢量
 
-晶体安装方式：
+##### 晶体安装方式
 
 - 室温：玻璃毛细管，残留母液
-- 液氮低温冷冻
+- 液氮低温冷冻，好
 
-##### 镶嵌块
+##### 吸收与消光
 
 晶体会对X射线产生吸收（类似Lambert-Beer定律），和波长、晶体有关
+
+影响挺大的！
+
+<img src="../../course\structural-biology\sb-outline.assets\4-3-abso.png" alt="4-3-abso" style="zoom:45%;" />
+
+##### 镶嵌块
 
 真实晶体由许多晶块（“完美”晶体）镶嵌而成
 
 镶嵌块是足够小的，初级消光可以忽略
 
 强度等于各块之和，但不同块可能相互影响
+
+<img src="../../course\structural-biology\sb-outline.assets\4-3-mosaic.png" alt="4-3-mosaic" style="zoom:35%;" />
 
 ##### 热运动
 
@@ -635,6 +656,8 @@ Laue星芒：晶体内部结构畸变时，会产生衍射斑点的伸长
 - 各向同性温度因子，热运动效应
 - 各向异性。。（高分辨）
 - 假定所有原子B值相同
+
+##### 局部构象占有率
 
 给$F$再乘一个$Q_j$（原子或分子局部构象的占有率），描述部分没有占据严格相同取向的一些分子的影响，和B相关
 
@@ -668,33 +691,33 @@ $\Delta R$代入上公式，$\theta$ 和 $H$ 取min。
 
 **距离越短**，分辨率越高，但可能导致斑点重叠
 
-> $\alpha$ 不变，$D$ 缩小，$\Delta R$ 缩小
+> $\alpha$ 不变，$D$ 缩小，$\Delta R$ 变小；最大 $R$ 是检测器边界，故 $\theta_{max}$ 还变大了
 
-##### 回摆角度、画面张数、曝光时间的设置*
+##### 回摆角度设置*
 
-- （单次）回摆角度
+（单次）回摆角度
 
-  - 回摆角度过小，导致每张画面上的衍射斑点过少；但噪声减少
+- 回摆角度过小，导致每张画面上的衍射斑点过少；但噪声减少
 
-    > 并会导致部分记录反射，一个衍射点可能分布在几张连续的画面上，需要在后续阶段将它们的强度合并。但是不准，有时不计。还是要增加回摆角度
+  > 并会导致部分记录反射，一个衍射点可能分布在几张连续的画面上，需要在后续阶段将它们的强度合并。但是不准，有时不计。还是要增加回摆角度
 
-  - 回摆角度过大，有可能导致画面上的衍射斑点重叠（不就是过多嘛）。
+- 回摆角度过大，有可能导致画面上的衍射斑点重叠（不就是过多嘛）。
 
-    - 通常取1~2°
-    - 晶胞大时需要适当减小角度
+  - 通常取1~2°
+  - 晶胞大时需要适当减小角度
 
 
-  > 是不是，回摆那个范围的所有衍射点被记录在一张image上了
+  > 我明白了！回摆那个范围的所有衍射点被记录在一张image上了
 
-- 总旋转角=回摆角度×画面张数。对称性越低的晶体要求总旋转角越大
+##### 画面张数vs衍射盲区
 
-- 曝光时间越长，衍射强度高？但更易损坏晶体
-
-##### 衍射盲区
+总旋转角=回摆角度×画面张数。对称性越低的晶体要求总旋转角越大
 
 实际工作中，在晶体耐辐射能力、保证完整收集数据的允许下，应尽可能增加总旋转角，即尽可能获得多个独立衍射区的强度数据，能（平均以）减小误差
 
-##### 晶体的安装方式
+##### 曝光时间vs晶体的安装方式
+
+曝光时间越长，衍射强度高。但更易损坏晶体
 
 - 室温：方便，误差大
 - 液氮：成本高，耐辐射能力强，可延长曝光时间
@@ -702,7 +725,7 @@ $\Delta R$代入上公式，$\theta$ 和 $H$ 取min。
 ##### X射线波长的选择
 
 - 衍射强度$\propto \lambda^3$
-- 长波可增大衍射强度，但吸收效应强
+- <u>长波可增大衍射强度，但吸收效应强</u>
 - 常规封闭管，用Cu的K<sub>α</sub>，传热好，对分辨率要求也不高
 - 同步辐射，波长短，像板探测更灵敏，且使斑点锐利，防止重叠
 - 晶体尺寸较小，强度太弱，使用同步辐射，获得高分辨率数据
@@ -716,7 +739,7 @@ $\Delta R$代入上公式，$\theta$ 和 $H$ 取min。
 
 ##### 反常散射的数据收集
 
-> 反常散射：违反Friedel定律<img src="../../course\structural-biology\sb-outline.assets\4-friedel.png" alt="4-friedel" style="zoom:55%;" />
+> 反常散射：违反Friedel定律<img src="../../course\structural-biology\sb-outline.assets\4-friedel.png" alt="4-friedel" style="zoom:55%;" />很多是重原子导致的
 
 获得尽可能多的**Friedel反射对**: $I(+h,+k,+l)$ 和 $I(-h, -k, -l)$
 
@@ -724,7 +747,7 @@ $\Delta R$代入上公式，$\theta$ 和 $H$ 取min。
 
 多波长反常散射：每张画面依次收集三个波长的衍射数据，即λ1 → λ2 → λ3 → 转动晶体 → λ1 → λ2 → λ3 →……  
 
-解决相位问题的一种方法
+是解决相位问题的一种方法
 
 #### 衍射数据的收集与处理
 
@@ -769,6 +792,8 @@ recall:
 
 <img src="../../course\structural-biology\sb-outline.assets\integration.png" alt="image-20211213220445679" style="zoom:50%;" />
 
+> 是绝对的强度，不是相对的
+
 ##### 晶体学参数测定若干问题
 
 用软件能辅助
@@ -785,33 +810,33 @@ recall:
 
 ##### 衍射强度数据的质量评估
 
-1. 衍射分辨率
+1. 衍射**分辨率**
 
-   > 晶面间距越小，要求分辨率越高，要求θ越高，越难收集
+   > 晶面间距越小，要求分辨率越高，θ越高，越难收集
 
-2. 数据（衍射点）完整度
+2. 数据（衍射点）**完整度**
 
    > 一般要求：> 80 %
    >
    > 理论衍射点数与分辨率倒数的三次方成正比
 
-3. 强度的信噪比（强度/偏差）：I/sigma
+3. 强度的**信噪比**（强度/偏差）：I/sigma
 
-   > 越大越好，应>2。每个衍射点都有
+   > 越大越好，应>2。每个衍射点都有，故每个hkl有多个I
    >
-   > sigma: 强度的偏差error，指个别测定值与测定的平均值之差。sigma就是强度merge产生的误差
+   > sigma: 强度的偏差error，指个别测定值与测定的平均值之差。即下式中的$\Big| I_j(\boldsymbol{H})-<I(\boldsymbol{H})>\Big|$
    >
-   > 见《单晶结构》p64
+   > sigma就是强度merge时产生的误差。见《单晶结构》p64
 
-4. 数据合并的偏离因子R<sub>merge</sub>（越大越不好）
+4. 数据合并的**偏离因子**R<sub>merge</sub>（越大越不好）
 
    > 重复测量的衍射点，重复数据是否相差大。
    > $$
-   > R_{merge}=\dfrac{\sum\limits_\boldsymbol{H}\sum\limits_jABS\left(<I_j(\boldsymbol{H})-I(\boldsymbol{H})>\right)}{\sum\limits_\boldsymbol{H}<I(\boldsymbol{H})>}
+   > R_{merge}=\dfrac{\sum\limits_\boldsymbol{H}\sum\limits_j\Big| I_j(\boldsymbol{H})-<I(\boldsymbol{H})>\Big|}{\sum\limits_\boldsymbol{H}<I(\boldsymbol{H})>}
    > $$
    > 是对一部分（某壳层）衍射点求和的
 
-5. 对称性相关衍射点重复测量的平均次数redundancy冗余度
+5. 对称性相关衍射点重复测量的平均次数 redundancy**冗余度**
 
    > 为观测衍射点数目与独立衍射点数目的比值， 应大于4
 
@@ -821,7 +846,7 @@ recall:
 
    <img src="../../course/structural-biology/sb-outline.assets/4-3-wilson.jpg" alt="wil" style="zoom:55%;" /><img src="../../course/structural-biology/sb-outline.assets/4-3-wilson-eq.png" alt="wil" style="zoom:25%;" />
 
-###### 补充：软件使用&数据处理
+##### 补充：软件使用&数据处理
 
 https://people.mbi.ucla.edu/sawaya/m230d/Reduce/reduce.html 关于indexing等具体讲解
 
@@ -835,12 +860,14 @@ https://hkl-xray.com/sites/default/files/HKL2000manual-2020/12-OutputStatisticsG
 >
 >   > if χ2 > 1 and you see a clear resolution dependence of the χ2 for scaling with merged Friedel pairs (i.e., the χ2 increases as the resolution decreases), there is a strong indication of the presence of an anomalous signal. The resolution dependence allows you to determine where to cut off your resolution to calculate an anomalous difference Patterson map with an optimal signal to noise.
 >
+>   描述是否有反常散射的
+>
 > - Linear R-fac
 >
 >   - 就是R<sub>merge</sub>
 >   - 应该<50%
 >
-> 都是描述是否有反常散射的
+> > 都是描述是否有反常散射的
 >
 > ```
 > R linear = SUM ( ABS(I - <I>)) / SUM (I)
@@ -848,7 +875,6 @@ https://hkl-xray.com/sites/default/files/HKL2000manual-2020/12-OutputStatisticsG
 > Chi**2 = SUM ( (I - <I>) ** 2) / [(Error ** 2) * N / (N-1) ]
 > ```
 >
-> 
 
 - 导入数据，display衍射图
 
@@ -870,6 +896,10 @@ https://hkl-xray.com/sites/default/files/HKL2000manual-2020/12-OutputStatisticsG
   - 要一直scale sets直到稳定，迭代
 
 ###### log file analysis
+
+> 我们需要根据这些数据，判断出晶体的空间群、螺旋轴、冗杂度、完整度、I/sigma、Rmerge、xyz轴消光
+>
+> 不过不一定会考。就是在log文件里面找数字，填上去就行
 
 指标见上
 
@@ -952,6 +982,7 @@ $$
 \begin{aligned}
 \rho(x,y,z)&=\dfrac{1}{V}\sum_h\sum_k\sum_lF_{hkl}\ e^{-i\cdot2\pi(hx+ky+lz)}\\
 &=\dfrac{1}{V}\sum_h\sum_k\sum_l\left|F_{hkl}\right|e^{i\Phi_{hkl}}e^{-i\cdot2\pi(hx+ky+lz)}\\
+&=\dfrac{1}{V}\sum_\boldsymbol{H}|F_{hkl}|\exp\left[-i\cdot 2\pi\left(\boldsymbol{H}\cdot\boldsymbol{R}+\alpha_{hkl}\right)\right]\\
 F_{hkl}&=V\cdot\iiint\limits_V\rho(x,y,z)e^{i\cdot2\pi(hx+ky+lz)}\mathrm{d}V
 \end{aligned}
 $$
@@ -986,6 +1017,10 @@ Isomorphous difference Fourier method
 - 通过电子密度的表现，检测模型的正确与否
 - 同晶：晶胞参数<1%
 
+见《单晶》书p73~75。不学了，看不懂！
+
+> 大概是用 $|F_o|-|F_c|$ 代替 $F_{hkl}$
+
 ##### Patterson函数与原子间矢量法
 
 只使用衍射强度来推测结构
@@ -996,11 +1031,11 @@ Isomorphous difference Fourier method
 
 改用坐标$\boldsymbol{U}=(u,v,w)$
 
-定义
+定义（对比）
 $$
 \begin{aligned}
 P(\boldsymbol{U})&=\dfrac{1}{V}\sum_\boldsymbol{H}|F_{hkl}|^2\cos\left(2\pi\boldsymbol{H}\cdot\boldsymbol{U}\right)\\
-\rho(\boldsymbol{R})&=\dfrac{1}{V}\sum_\boldsymbol{H}|F_{hkl}|\exp\left[-i\cdot 2\pi\left(\boldsymbol{H}\cdot\boldsymbol{R}+\alpha_{hkl}\right)\right]
+\rho(\boldsymbol{R})&=\dfrac{1}{V}\sum_\boldsymbol{H}F_{hkl}\ e^{-i\cdot2\pi\boldsymbol{H}\cdot\boldsymbol{R}}
 \end{aligned}
 $$
 where
@@ -1016,35 +1051,37 @@ P(\boldsymbol{U})=\int_\boldsymbol{R}\rho(\boldsymbol{R})\rho(\boldsymbol{U}+\bo
 $$
 
 
-只有当两个位置相差$\boldsymbol{U}$的点处，$\rho$ 都不为零，$P(\boldsymbol{U})$才不为零
+只有当两个位置相差$\boldsymbol{U}$，$\rho$ 都不为零时，$P(\boldsymbol{U})$才不为零
 
 ###### 性质
 
-- 峰的位置（三维），为原子间矢量
+> 峰的数量、对称性、周期性
 
-- N(N-1)个非原点峰
+- 峰的位置（三维），为**原子间矢量**
+- $N(N-1)$个非原点峰
 
-  - 总是中心对称
-
-- N个原点峰，自己和自己
-
+  - 总是**中心对称**
+- $N$个原点峰，自己和自己
 - 强度和两原子的电荷数之积成正比
+- 是**周期性**的，与晶胞的周期性完全一致
 
-- 是周期性的，与晶胞的周期性完全一致
+Patterson晶胞仅存在<u>不包含平移</u>的对称元素，总共**29个**
 
-- Patterson晶胞仅存在不包含平移的对称元素
+Patterson对称群，是蛋白晶体可能有的空间群中，去掉含滑移面、螺旋轴，以及不含对称中心的，剩下的
 
-  Patterson对称群，是蛋白晶体可能有的空间群中，去掉含滑移面、螺旋轴、不含对称中心，剩下的
+<img src="../../course\structural-biology\sb-outline.assets\4-4-patterson-group.png" alt="4-4-patterson-group" style="zoom:30%;" />
 
 ###### Harker峰
 
-Harker截面或Harker线，就是同一套等效点的原子组成的帕特森峰。
-
-<img src="../..\course\structural-biology\sb-outline.assets\4-4-harker1.jpg" alt="4-4-harker1" style="zoom:15%;" /><img src="../..\course\structural-biology\sb-outline.assets\4-4-harker2.jpg" style="zoom:15%;" />
+> Harker截面或Harker线，就是同一套等效点的原子组成的帕特森峰。
+>
+> <img src="../..\course\structural-biology\sb-outline.assets\4-4-harker1.jpg" alt="4-4-harker1" style="zoom:13%;" /><img src="../..\course\structural-biology\sb-outline.assets\4-4-harker2.jpg" style="zoom:13%;" />
 
 蛋白质分子都是CNO，差别不大，容易重叠。
 
-其重原子衍生物中，重原子相关峰很强，数量少，可以用程序鉴别出来，得到重原子位置，再得到其他原子的位置
+<font color=\#8A2BE2>其重原子衍生物中，重原子相关峰很强，数量少，可以用程序鉴别出来，得到重原子位置，再得到其他原子的位置</font>
+
+前提是能够获得$|F_H|^2$  
 
 ###### 蛋白晶体的Patterson函数
 
@@ -1060,7 +1097,7 @@ Harker截面或Harker线，就是同一套等效点的原子组成的帕特森�
 
 同源**但不同晶**的，用分子置换法（同晶的用同晶差值傅里叶法）。亚单位可能同源
 
-需要先旋转、后平移，让二者的结构单元superimpose。然后算Patterson函数的相似性
+需要**先旋转、后平移**，让二者的结构单元superimpose。然后算Patterson函数的相似性
 
 ###### 同源蛋白的选取
 
@@ -1084,32 +1121,30 @@ R(\alpha,\beta,\gamma)=\int_
 VP_A(\boldsymbol{U})P_{B,R}(\boldsymbol{U}_R)\mathrm{d}\boldsymbol{U}
 $$
 
-积分域为半径为某个 $r$ 的球面
+积分域为半径为某个 $r$ 的球体，$\alpha, \beta, \gamma$ 是三个旋转角，对应旋转矩阵
 
-> 为啥转了以后Patterson函数会变？
+> 为啥转了以后Patterson函数会变？因为改变了原子间矢量的取向
 
 ###### 平移问题
 
-平移后的结构因子振幅和统一蛋白的结构因子振幅，的R因子最小或（模平方的）相关系数最大
+平移后的结构因子振幅和同源蛋白的结构因子振幅，的R因子最小或（模平方的）相关系数最大
 
 $$
 R=\dfrac{\sum_\boldsymbol{H}|F_o(\boldsymbol{H})-F_c(\boldsymbol{H})|}{\sum_\boldsymbol{H}F_o(\boldsymbol{H})}
 $$
 where $F_o(\boldsymbol{H})$ 是待测晶体，$F_c(\boldsymbol{H})$ 是已知晶体
 
-密堆积分析：寡聚体？
+> 密堆积分析：寡聚体？
+>
+> <img src="../../course/structural-biology/sb-outline.assets/4-4-close1.jpg" alt="4-4-close1" style="zoom:14%;" /><img src="../../course/structural-biology/sb-outline.assets/4-4-close2.jpg" alt="4-4-close2" style="zoom:14%;" />
+>
+> 共有24种分子置换的方式。根据晶体对称性，缩小了搜索范围
 
-<img src="../../course/structural-biology/sb-outline.assets/4-4-close1.jpg" alt="4-4-close1" style="zoom:15%;" /><img src="../../course/structural-biology/sb-outline.assets/4-4-close2.jpg" alt="4-4-close2" style="zoom:15%;" />
-
-共有24种分子置换的方式，缩小了搜索范围
-
-
-
-平移函数：类似
+平移函数：类似与旋转函数
 
 > 前面不是已经有目标函数了吗
-
-
+>
+> 改进：同时平移旋转、取向修正
 
 ##### 多波长反常色散法
 
@@ -1119,13 +1154,15 @@ where $F_o(\boldsymbol{H})$ 是待测晶体，$F_c(\boldsymbol{H})$ 是已知晶
 
 1个Se/150 residues对MAD就够了
 
-![4-4-mad](../../course\structural-biology\sb-outline.assets\4-4-mad.jpg)
+<img src="../../course\structural-biology\sb-outline.assets\4-4-mad.jpg" alt="4-4-mad" style="zoom:25%;" />
 
 要的是F<sub>BA</sub>和G的夹角$\Delta\phi$
 
-$F_h=F_{BA}+G$，把$G$代进来换成$F_A$。$F_A$的系数随着波长变化
+$F_h=F_{BA}+G$，把$G$代进来换成$F_A$。$F_A$的系数随着波长变化。
 
-![4-4-mad2](../..\course\structural-biology\sb-outline.assets\4-4-mad2.jpg)
+多收几组（保证成对），解出系数和相角
+
+<img src="../..\course\structural-biology\sb-outline.assets\4-4-mad2.jpg" alt="4-4-mad2" style="zoom:25%;" />
 
 可能有双解问题，解出电子密度再判断
 
@@ -1137,6 +1174,11 @@ $F_h=F_{BA}+G$，把$G$代进来换成$F_A$。$F_A$的系数随着波长变化
 
 - 适用于全新蛋白的结构测定
 - 操作复杂，计算复杂
+
+重原子衍生物制备
+
+- 制备方法：浸泡法，化学修饰法，共晶法，硒代蛋氨酸法
+- 同晶性：引入重原子后晶胞参数的变化小于1%，衍射强度的平均变化不随分辨率的增加而升高。
 
 ##### 多波长反常散射法（MAD）
 

@@ -826,7 +826,7 @@ C3/4/5b is rapidly degraded in the liquid phase.
 
 ### Regulators
 
-#### activation
+#### Activation
 
 - classical
 
@@ -885,14 +885,16 @@ major histocompatibility complex:
 
 ## HLA complex
 
+### Genes
+
 located in Chromosome 6 short arm. 6p21.31
 
-> β2m: chromosome 15
+> β2m: chromosome 15. not in HLA II!
 
 order: 2, 3, 1
 
 ```mermaid
-graph TD
+graph LR
 hla --> 1[class I]
 hla(HLA genes) --> 2[class II]
 hla --> 3[class III]
@@ -914,19 +916,170 @@ hla --> 3[class III]
 3 --> 31[complement component]
 31 --> C4
 31 --> C2
+31 --> b[B factor]
 3 --> 32[inflammatory related]
 32 --> TNF
 32 --> HSP70
 32 --> regulator
+32 --> MIC
 3 --> 33[other]
 ```
 
-> - HLA-G: Maternal-fetal tolerance
-> - HLA-E: NK cell tolerance
+> - HLA-G: Maternal-fetal tolerance, receptor:NKG2
+> - HLA-E: NK cell tolerance, receptor: KIR
+>
+> MIC: MHC class I related gene
+
+DP/DQ etc. has multiple gene locus (基因座).
+
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\6-gene.png" alt="6-gene" style="zoom:33%;" />
+
+Each locus has exons encoding all needed chains.
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\6-gene2.png" alt="6-gene2" style="zoom:50%;" />
+
+### Genetic characteristics
+
+#### Diversity
 
 
 
 
+
+
+
+
+
+
+
+##### non-balance distribution and linkage disequilibrium
+
+非随机分布与连锁不平衡  
+
+
+
+## HLA molecule
+
+### MHC class I
+
+
+
+
+
+### MHC class II
+
+
+
+
+
+### MHC function: Antigen presentation
+
+
+
+
+
+
+
+
+
+
+
+
+
+## MHC in medicine
+
+
+
+
+
+
+
+>No reflection questions
+
+
+
+# Chapter 7 Cytokines 细胞因子
+
+
+
+## Common features
+
+
+
+
+
+## Categories and biological properties
+
+### Interleukin
+
+
+
+
+
+### Interferon
+
+
+
+
+
+### Colony stimulating factor (CSF)
+
+
+
+
+
+### Chemokine
+
+
+
+
+
+### Tumor necrosis factor (TNF)
+
+
+
+
+
+### Growth factor
+
+
+
+
+
+## Cytokine receptor
+
+
+
+Ig 超家族  
+
+
+
+Ⅰ 型细胞因子超家族  
+
+
+
+可溶性细胞因子受体  
+
+
+
+
+
+## Biological effects
+
+- 
+- 
+- 
+- 
+- 
+- 
+
+
+
+> No reflection questions
+
+
+
+# Chapter 8 Innate Immune System
 
 
 
