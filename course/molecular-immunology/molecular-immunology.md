@@ -500,7 +500,9 @@ Ab can also be an antigen. Three types of epitope:
   
   - enhance ADCC (antibody-dependent cell-mediated cytotoxicity) effect of NK cell, also through Fc
   
-  - mediate type I hypersensitivity (超敏反应): mastocytes, basophils, IgE (see chapter 10?)
+  - mediate type I hypersensitivity (超敏反应): mastocytes, basophils (嗜碱性粒细胞), IgE 
+  
+    > see chapter 10
   
 - 穿过胎盘（IgG）与黏膜（分泌型 IgA）  
 
@@ -698,6 +700,8 @@ Note: these reactions occurs on the surface of the pathogen or an infected host 
 > MBL means 甘露糖结合凝集素  mannose binding lectin
 >
 > lectin: a class of small proteins that bind pathogen-specific carbohydrates
+>
+> ficolins: another class of sugar-binding proteins
 
 1. MBL binds to mannose residue on the cell wall, activating MASP (MBL-associated serine proteases)
 
@@ -724,13 +728,10 @@ m[MBL pathway] --> c
 m[MBL pathway] --> a
 c3 --> c5[C5 activation]
 c5 --> mac[MAC formation]
+c3 --> o[other responses]
 ```
 
-Let's zoom in a little bit
-
-![5-pathways](../../course/molecular-immunology/molecular-immunology.assets/5-pathways.png)
-
-| pathway     | activator             | pathway       | characteristics                       |
+| pathway     | activator             | main players  | characteristics                       |
 | ----------- | --------------------- | ------------- | ------------------------------------- |
 | classical   | Ag-Ab complex         | C1q,r,s,C4,C2 | relies on antibody, late infection    |
 | alternative | LPS, glucan, etc      | C3b, Bb       | evolutionarily older, early infection |
@@ -741,53 +742,122 @@ Let's zoom in a little bit
 1. Whichever C3 convertase + C3b = **C5 convertase**, cleaves C5 into C5a and C5b.
 
    > which includes: C4b2a3b and C3bBb3b (C3bnBb)
+   
+2. The binding cascade is shown below:
+   
+   <img src="../../course/molecular-immunology/molecular-immunology.assets/5-mac.png" alt="aaaa" style="zoom:40%;" />
+   
+   binding induces a conformational change (C7/8/9) that exposes hydrophobic residues and allows inserting into the membrane
+   
+3. 10-16 (19?) C9 molecules polymerize and form a pore
 
-<img src="../../course/molecular-immunology/molecular-immunology.assets/5-c5mac.png" alt="5-c5mac" style="zoom:50%;" />
+   > see full structure: [6H04](https://www.rcsb.org/3d-view/6H04)
 
+4. lysing the cell
 
-
-<img src="../../course/molecular-immunology/molecular-immunology.assets/5-mac.png" alt="aaaa" style="zoom:40%;" />
-
-
-
+   - loss of plasma membrane integrity
+   - causes influx of water (a few ions) and burst (胀破) of the cell
 
 ## Biological function
 
-- dsfsfazdfafsf
-- 
-- 
-- dsaf
-- 
-
 ### Bacteriolysis and cytolysis effect
 
+溶菌和溶细胞效应
 
+- based on MAC, defending pathogens like G<sup>-</sup> bacteria and enveloped viruses, or tumor cell
 
-### Opsonization
+- it may causes human cell lysis. autoimmune disease or transplant rejection. 
 
+  > the MAC complex might be released and insert into the membrane of a normal cell
 
+### Complement-mediated Opsonization
+
+补体介导的调理作用
+
+Molecules like C3b (also smaller fragments), C4b, etc. are recognized by receptors on phagocytes, like CR1/3/4. This induces **receptor-mediated phagocytosis** <font color=grey>and the secretion of proinflammatory molecules</font>.
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\5-opson.png" alt="5-opson" style="zoom:40%;" />
 
 ### Clearance of immune complex
 
+清除免疫复合物。Also called immune adherence.
 
+Activated by Ag-Ab complex, C3b is produced and recognized by erythrocytes (红细胞) and platelets (血小板) who transport the immune complex (IC) to the liver and spleen, where ICs are cleared by phagocytosis.
+
+<img src="../..\course\molecular-immunology\molecular-immunology.assets\5-adhesion.png" alt="5-adhesion" style="zoom:50%;" />
 
 ### Inflammatory response
 
+介导炎症反应。mediated by the small fragments that are released into the blood stream.
 
+- anaphylatoxin (过敏毒素): C3a, C5a
+
+  recognized by mastocytes, basophils, induces degranulation (脱颗粒), and then histamine (组胺) release (see kinin function); 
+
+  activates monocytes to produce cytokines like IL-1
+
+- chemokine (趋化作用): C3a, C4a, C5a
+
+  attract innflammatory cells, like neutrophils to infiltrate the infected tissue. 
+
+  > chemotaxis (趋化)/metastasis, adhension molecule production, for cells to move and extravasate
+  >
+  > also facilitate producing ROS, prostaglandin (前列腺素), etc
+
+- kinin-like function (激肽样作用): C2b
+
+  causes vasodilation (血管舒张) of capillaries (毛细血管), increases permeability
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\5-c5a.png" alt="5-c5a" style="zoom:40%;" />
 
 ### Other
 
-
+> - may induce adaptive immune responses
+> - maintain homeostasis
+> - interact with other systems like coagulation (凝血)
 
 ## Regulation
 
 > general understanding
 
+### Self-degradation
 
+C3/4/5b is rapidly degraded in the liquid phase.
+
+### Regulators
+
+- activation: classical, alternative
+- MAC function
+
+
+
+
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-c1.png" alt="5-re-c1" style="zoom:25%;" />
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-c4b2a.png" alt="5-re-c4b2a" style="zoom:25%;" />
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-c5.png" alt="5-re-c5" style="zoom:25%;" />
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-cd59.png" alt="5-re-cd59" style="zoom:25%;" />
+
+C8结合蛋白  
+
+
+
+#### Summary
+
+![5-pathways](../../course/molecular-immunology/molecular-immunology.assets/5-pathways.png)
 
 ### Related diseases
 
+- 遗传性补体缺陷
+- 补体功能失调
 
+Types:
+
+- too activated/weak regulation: autoimmune diseases, transplant rejection
+- insufficiently activated/strong regulation: tumor evasion, infection
 
 > 思考题
 >
