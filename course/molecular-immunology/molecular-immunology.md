@@ -881,13 +881,13 @@ major histocompatibility complex:
 - a cluster of genes that are determining the compatibility of a transplanted organ
   - translated into histocompatibility antigens
 - closely related to immune respone; genetic linkage (连锁)
-- specific in mammals; in human called Human Leukocyte Antigen
+- specific in mammals; in human called Human Leukocyte Antigen (here MHC=HLA)
 
 ## HLA complex
 
 ### Genes
 
-located in Chromosome 6 short arm. 6p21.31
+located in Chromosome 6 short arm. 6p21.3
 
 > β2m: chromosome 15. not in HLA II!
 
@@ -905,6 +905,7 @@ hla --> 3[class III]
 1 --> 1n[non-classic HLA class I <br/> immune tolerance]
 1n --> 1ng[HLA-G]
 1n --> 1nE[HLA-E]
+1n --> 1nF[HLA-f]
 2 --> 2c[classic HLA class II <br/> immune response]
 2c --> 2cp[HLA-DP]
 2c --> 2cq[HLA-DQ]
@@ -930,19 +931,33 @@ hla --> 3[class III]
 >
 > MIC: MHC class I related gene
 
-DP/DQ etc. has multiple gene locus (基因座).
+DP/DQ etc. has multiple genes in one locus (基因座).
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\6-gene.png" alt="6-gene" style="zoom:33%;" />
+> A locus is **the specific physical location of a gene or other DNA sequence on a chromosome**, like a genetic street address. A, B, C, G, F are all **loci**.
 
-Each locus has exons encoding all needed chains.
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\6-gene.png" alt="6-gene" style="zoom:39%;" />
+
+Each gene has exons encoding all needed chains.
+
+> Different! In HLA II, A and B expresses α and β chain, respectively; while there's only an α chain in HLA
 
 <img src="../../course\molecular-immunology\molecular-immunology.assets\6-gene2.png" alt="6-gene2" style="zoom:50%;" />
 
 ### Genetic characteristics
 
-#### Diversity
+- various genes
 
+- co-dominance (共显性): in an individual, both maternal and paternal alleles are expressed simultaneously (even though they might be heterozygous)
 
+  > blood type Ag is also co-dominantly expressed
+
+- polymorphism (多态性): in a population, there are a huge number of alleles in one gene locus.
+
+  > HLA is the most polymorphic gene, not "one of". multiple alleles (复等位基因)
+
+> provide public access to the data through the websites http://www.ebi.ac.uk/ipd/imgt/hla/ and here at [http://hla.alleles.org](http://hla.alleles.org/nomenclature/index.html). submit the sequences directly to the [IPD-IMGT/HLA Database](http://www.ebi.ac.uk/ipd/imgt/hla/)
+>
+> [naming rules](http://hla.alleles.org/nomenclature/naming.html)
 
 
 
@@ -1000,13 +1015,34 @@ Each locus has exons encoding all needed chains.
 
 # Chapter 7 Cytokines 细胞因子
 
-
+Cytokines are small multi-bioactive polypeptide or glycoprotein secreted by various cells (especially immune cells).
 
 ## Common features
 
+> just glimpse
 
+### Basic characteristics
 
+- soluable small protein (8~30kD)
+- low concentration, highly effective
+- induced, short half life
+- the below two
 
+### Mode of action
+
+> 自分泌、旁分泌、内分泌
+
+- autocrine: itself
+- paracrine: adjacent
+- endocrine: far away
+
+### Functional Features
+
+- 多效性：一种细胞因子，多个靶细胞
+- 重叠性：多种细胞因子，类似生物功能
+- 协同性：一种加强另一种
+- 拮抗性：一种抑制另一种
+- 网络性：复杂的相互作用
 
 ## Categories and biological properties
 
@@ -1081,35 +1117,83 @@ Ig 超家族
 
 # Chapter 8 Innate Immune System
 
+## Components
+
+### Barrier
+
+#### skin and mucosa
+
+正常菌群  
+
+
+
+#### organs
+
+##### blood-brain barrier
+
+
+
+##### placenta
+
+
+
+### Innate immune cells
+
+#### Phagocytes
+
+##### macrophage
+
+
+
+##### neutrophil
+
+
+
+#### Dendritic cells
+
+##### classical
+
+
+
+##### plasmacytoid DC
+
+IFN  
 
 
 
 
 
+#### Natural killer cells
 
 
 
+#### 固有样淋巴细胞  
 
 
 
+### Innate immune molecules
+
+- complement
+- cytokines
+- other
 
 
 
+## Innate immune response
+
+### Process
 
 
 
+### Characteristics
 
 
 
+### Relationship with adaptive ir
 
 
 
-
-
-
-
-
-
+## Summary
 
 
 

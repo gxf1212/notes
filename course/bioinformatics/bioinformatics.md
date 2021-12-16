@@ -253,15 +253,119 @@ another example:
 
 <img src="../../course\bioinformatics\bioinformatics.assets\5-treeeg2.png" alt="tree" style="zoom:40%;" />
 
+> 另一个例子：西瓜的好坏
+>
+> <img src="../../course\bioinformatics\bioinformatics.assets\5-watermelon.png" alt="5-watermelon" style="zoom:30%;" />
 
-
-
+停止标志：变量用完了（还没分出来就是方法或数据不行）、每个节点都足够纯了。
 
 ## 分类模型的分类效能评价  
+
+如何评价一个模型的好坏？可以从数据中抽取一部分作为训练集，另一部分作为测试集
+
+### 重抽样方法
+
+- n-fold cross-validation：将数据分为n等份，随机选取一份为测试集，剩下的为训练集。重复该过程n次
+
+- 无放回随机抽样：（不用分等份，而是）每次随机抽取1/n的样本为测试集，其他相同
+
+- 留一法（leave-one）交叉验证：每次随机抽一个
+
+- Bagging：样本大小为m，每次有放回地抽取一个样本，重复m次。
+
+  一个样本从来没被抽到过的概率为$(1-\dfrac{1}{m})^m$，极限是$\dfrac{1}{e}\approx37\%$
+
+  用这些样本作为测试集
+
+### 真假阳性-based
+
+<img src="../../course\bioinformatics\bioinformatics.assets\5-tpn.png" alt="5-tpn" style="zoom:40%;" />
+
+| index                | implication （反义)    | equation                                  |
+| -------------------- | ---------------------- | ----------------------------------------- |
+| sensitivity/recall   | 漏掉病人的概率         | $\dfrac{TP}{TP+FN}$                       |
+| specificity          | 误认病人的概率         | $\dfrac{TN}{TN+FP}$                       |
+| precision            | 预测出是病人，的可信度 | $\dfrac{TP}{TP+FP}$                       |
+| negative prediction  | 预测出是正常，的可信度 | $\dfrac{TN}{TN+FN}$                       |
+
+- sensitivity：“宁可错杀一千（FP），也不放过一个（FN低）”
+  - 如：风险用户识别（可以人工再鉴别）
+- precision：“宁可放过一千（FN），也不错杀一个（FP）”
+  - 如：识别垃圾邮件（防止正常的入垃圾）
+
+> 二者是矛盾的！但这个曲线不是ROC（人家是TP和FP的曲线）
+
+<img src="../../course\bioinformatics\bioinformatics.assets\5-curve.png" alt="5-curve" style="zoom:33%;" />
+
+#### 综合准确率指标
+
+balanced accuracy：综合了两方面的预测。避免了数据不平衡导致的全部预测为一个值的糟糕分类器得到高分。
+
+| index                | implication （反义) | equation                                                     |
+| -------------------- | ------------------- | ------------------------------------------------------------ |
+| balanced accuracy    | 均衡准确率          | $\dfrac{1}{2}(\text{recall+specificity})$                    |
+| accuracy/correctness | 总体准确率          | $\dfrac{TP+TN}{Total}$                                       |
+| F-score              | β是权重             | $(1+\beta)\cdot\dfrac{\text{recall}\cdot\text{precision}}{\beta^2(\text{recall+precision})}$ |
+
+<img src="../../course\bioinformatics\bioinformatics.assets\5-wangmazi.png" alt="5-wangmazi" style="zoom:50%;" />
 
 
 
 # 生物分子网络和通路
+
+网络是复杂系统存在的普遍形式
+
+## 相关概念
+
+### 网络的定义
+
+- 定义： 网络是由节点和边构成， 表示诸多对象及其相互联系。  
+
+  可以用图 $G=(V, E)$ 表示网络。  
+
+- 网络可以分为有向网络与无向网络（方向性）
+
+- 加权网络和等权网络  
+
+### 连通度（度）
+
+- 节点 $v$ 的连通度是指网络中直接与 $v$ 相连的边的数目
+
+- 整个网络的连通性可以使用其平均值来表示。
+
+  由$V$个节点和$E$条边组成的无向网络，平均连通度为$K=2E/V$  
+
+- 对于有向网络往往还要区分边的方向.
+
+  由节点$v$发出的边的数目称为节点$v$的出度，指向节点$v$的边数则称为节点$v$的入度。
+
+  我们用符号$k$来表示连通度，$k_{out}$表示出度，$k_{in}$表示入度。
+
+### 路径与距离
+
+- 路径是指从一个节点（起点） 到另外一个节点（终点） 的所有可能的途径。
+- 在有向网络中， 起点与终点是不可逆的。
+- 连接两个节点间最短路径的长度称为从起点到终点的距离。  
+
+### 度量网络特征的常用指标  
+
+平均距离是指网络中任意两个节点距离的平均值。  
+
+
+
+## 小世界和无标度网络
+
+
+
+
+
+
+
+
+
+## 衡量节点重要程度的常用指标
+
+
 
 
 
