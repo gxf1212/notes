@@ -813,6 +813,10 @@ a lot of fancy features: https://zxiaosi.cn/archives/cd1d42d1.html
    > 要提交的变更：
    > 	新文件：   .gitignore
    > 	修改：     Linux/Prepare-for-the-computer.md
+   
+5. GitHub克隆Gitee的仓库
+
+   ![clone](../Linux/images/clone.jpg)
 
 #### something html
 
@@ -944,6 +948,7 @@ TODO list:
    > https://github.com/upupming/docsify-katex LaTeX equation support
    >
    > - [**supported functions**!](https://upupming.site/docsify-katex/docs/#/supported)
+   > - https://github.com/upupming/docsify-katex/issues/11 italic fon
    >
    > https://github.com/iPeng6/docsify-sidebar-collapse sidebar collapse
 
@@ -1148,15 +1153,27 @@ dpkg --info xx.deb # 查看信息，包括软件包名，卸载时用！
   sudo gedit /etc/apt/sources.list
   ```
 
-- https://blog.csdn.net/jenyzhang/article/details/72510631  [Ubuntu apt-get upgrade 时候忽略某些安装包](https://blog.csdn.net/u010544187/article/details/76512290?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
+- https://blog.csdn.net/jenyzhang/article/details/72510631  
 
+  [Ubuntu apt-get upgrade 时候忽略某些安装包](https://blog.csdn.net/u010544187/article/details/76512290?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
+  
   ```shell
   sudo apt-mark hold package
   sudo apt-mark unhold package
   sudo dpkg --get-selections | grep hold
   ```
-
   
+  > do not use `spt update` any more because typora cannot be connected
+  >
+  > ```shell
+  > sudo apt-get upgrade
+  > ```
+  
+- s
+
+- 
+
+
 
 ### other
 

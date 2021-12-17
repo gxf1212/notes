@@ -236,6 +236,19 @@ close $file  # otherwise not saved
 
 4. 
 
+##### from online
+
+1. tcl中注释符为“#”，#之后的内容会被忽略。要注意的是注释语句与代码语句之间也要用换行或分号分隔。
+
+   ```tcl
+   if { 0 } {
+   write your comment here
+   '#' is not necessary because tcl does not parse 
+   }
+   ```
+
+2. 
+
 ### psfgen : building system
 
 also seen in NAMD-ug chp3.4 Creating PSF Structure Files
@@ -286,19 +299,47 @@ $sel writepdb myfile_frag${chain}.pdb
 
 ###### BPTI example
 
+http://www.ks.uiuc.edu/Research/namd/tutorial/NCSA2002/hands-on
+
 see that folder. see the scripts
 
 include cry
 
+#### other two: solvate and ionized
+
+```
+Usage: solvate <psffile> <pdbfile> <option1?> <option2?>...
+Usage: solvate <option1?> <option2?>...  to just create a water box
+Options:
+    -o <output prefix> (data will be written to output.psf/output.pdb)
+    -s <segid prefix> (should be either one or two letters; default WT)
+    -b <boundary> (minimum distance between water and solute, default 2.4)
+    -minmax {{xmin ymin zmin} {xmax ymax zmax}}
+    -rotate (rotate molecule to minimize water volume)
+    -rotsel <selection> (selection of atoms to check for rotation)
+    -rotinc <increment> (degree increment for rotation)
+    -t <pad in all directions> (override with any of the following)
+    -x <pad negative x>
+    -y <pad negative y>
+    -z <pad negative z>
+    +x <pad positive x>
+    +y <pad positive y>
+    +z <pad positive z>
+    The following options allow the use of solvent other than water:
+      -spsf <solventpsf> (PSF file for nonstandard solvent)
+      -spdb <solventpdb> (PDB file for nonstandard solvent)
+      -stop <solventtop> (Topology file for nonstandard solvent)
+      -ws <size> (Box length for nonstandard solvent)
+      -ks <keyatom> (Atom occuring once per residue for nonstandard solvent)
+```
 
 
-#### tutorial
-
-an example http://www.ks.uiuc.edu/Research/namd/tutorial/NCSA2002/hands-on/
 
 
 
 ## NAMD
+
+Some collected guidance (from web, paper, etc.) is just for reference, like a dictionary to look up.
 
 ### Fundamental tutorial
 
@@ -536,11 +577,6 @@ I know! It does not matter how many molecules you want to include (just merge). 
   a lazy command:
 
   ```tcl
-  puts " Cell centre: "
-  puts " X= [ expr ($xmax + $xmin)/2 ] "
-  puts " Y= [ expr ($ymax + $ymin)/2 ] "
-  puts " Z= [ expr ($zmax + $zmin)/2 ] "
-  puts "-------------------------------------------------------"
   puts " Copy/paste for NAMD: "
   puts "cellBasisVector1 [ expr $xmax - $xmin ] 0 0 "
   puts "cellBasisVector2 0 [ expr $ymax - $ymin ] 0 "
@@ -548,10 +584,40 @@ I know! It does not matter how many molecules you want to include (just merge). 
   puts "cellOrigin [ expr ($xmax + $xmin)/2 ] [ expr ($ymax + $ymin)/2 ] [ expr ($zmax + $zmin)/2 ] "
   puts "-------------------------------------------------------"
   ```
-
+  
   copy that into Tk Console. but see FYP-notes for complete
 
+##### simulation parameters
+
+| paper              | minimize1, type | mini whole | after mini            | npt/ps   | vdW, elec | prod |
+| ------------------ | --------------- | ---------- | --------------------- | -------- | --------- | ---- |
+| 1                  | backbone, cg    | 5000 steps | equ*2(npt)--prod(npt) | 4+10     |           | 100  |
+| 2                  | water, cg       | 10000      | equ(npt)--prod(nvt)   | 1000     |           | 51   |
+| 3                  | all, cg         | 20,000     | equ(npt)--prod(npt)   | 1400(6?) | 12        | 20   |
+| K<sup>+</sup>-18C6 | all, cg         | 1000       | same as 3             | 10000    |           |      |
+|                    |                 |            |                       |          |           |      |
+
+common
+
+- NAMD, TIP3P water, CHARMM ff, 310K, 1atm, PME
 - 
+
+OUR: Simulations were performed with GROMACS 5.1.2. Van der Waals interactions were treated with a switching distance of 10 Å and a smooth cutoff distance of 12 Å. Electrostatic interactions were treated with Particle Mesh Ewald with a grid size of 1 Å
+
+1. *Structural insight to hydroxychloroquine-3Clike proteinase complexation from SARS-CoV-2: inhibitor modelling study through molecular docking and MD-simulation study*
+
+   > Subsequent energy minimization was performed by the conjugate gradient method. The process was conducted in two successive stages; initial energy minimization was performed for 2000 steps by fixing the backbone atoms, followed by a final minimization for 5000 steps that were carried out for all atoms of the system to ensure the removal of any residual steric clashes. Then the energy minimized structures were simulated at constant temperature (310 K) and pressure (1 atm) by Langevin dynamics (Gullingsrud et al., [2001](https://www.tandfonline.com/doi/full/10.1080/07391102.2020.1804458#)) using periodic boundary condition. The Particle Mesh Ewald method was applied for full-electrostatics and the Nose–Hoover Langevin piston method was used to control the pressure and dynamical properties of the barostat(Feller et al., [1995](https://www.tandfonline.com/doi/full/10.1080/07391102.2020.1804458#)). All-atom molecular dynamics simulation for 100 ns was carried out for HCQ, Mod I, and Mod II docked 3CL-protease structure. The atomic coordinates of simulated <u>structures were recorded at every 2 ps</u> for further analysis.
+
+2. *SARS-CoV-2 RNA dependent RNA polymerase (RdRp) targeting: an in silico perspective*
+
+   > Water is minimized (conjugate gradient), followed by the minimization of the protein system for 10000 steps each. The temperature is adjusted slowly to reach 310 K, and then an equilibration run is performed with the NPT ensemble (constant number of molecules, pressure, and temperature) for 1 ns. This is followed by the **production run at the NVT ensemble** (constant number of molecules, volume, and temperature) for 51 ns (nvt???)
+
+3. *In silico identification of widely used and welltolerated drugs as potential SARS-CoV-2 3Clike protease and viral RNA-dependent RNA polymerase inhibitors for direct use in clinical trials*
+
+   > Energy minimization was performed for 20,000 steps by conjugate gradient method. Systems was gradually heated and equilibrated in NPT ensemble for 1.4 ns. Throughout equilibration, constrains on the proteins were gradually removed starting from 2 kcal/mol/Å2. At each stage constrains were reduced by 0.5 kcal/mol/Å2 and system were equilibrated for 0.4 ns. After equilibration, a production run of 20 ns for each complex was performed. Time step was set to 2fs. van der Waals (12 Å cut-off) and long-range
+   > electrostatic interactions (via particle-mesh Ewald) were included to calculate the force acting on the system. Production runs were performed at 310 K and under 1 atm
+
+4. 
 
 
 
@@ -560,6 +626,65 @@ I know! It does not matter how many molecules you want to include (just merge). 
 - 
 
 - 
+
+
+
+### Specialized topics
+
+#### Building Gramicidin A: Equilibration
+
+see: http://www.ks.uiuc.edu/Research/namd/tutorial/NCSA2002/hands-on/
+
+see details in the scripts
+
+```
+# execute in vmd console
+eval [::http::data [::http::geturl http://www.ks.uiuc.edu/Research/namd/tutorial/NCSA2002/hands-on/control.vmd]]
+```
+
+and find necessary files in /tmp/
+
+execute them in order: (the first in step 0)
+
+##### prepare the system
+
+```shell
+source view_protein.vmd
+source build_protein.vmd
+source replicate_lipids.vmd
+source arrange_lipids.vmd
+source save_positions.vmd
+source add_water.vmd
+source remove_water.vmd
+source fix_backbone.vmd
+source restrain_ca.vmd
+# vmd -dispdev text -e
+```
+
+> in step 6, should delete all water in the lipid region
+
+##### run simulation
+
+1. Minimization with fixed backbone atoms.
+2. Minimization with restrained carbon alpha atoms.
+3. Langevin dynamics with restraints.
+4. Constant pressure with restraints.
+5. Constant pressure without restraints.
+6. Constant pressure with reduced damping coefficients.
+
+```shell
+mpirun -np 8 namd2 +p8 equil.namd > equil.log
+```
+
+> 20000 steps in total
+
+```
+source view_sample.vmd
+```
+
+
+
+
 
 
 
@@ -997,6 +1122,7 @@ https://www.ks.uiuc.edu/Research/namd/alpha/3.0alpha/#downloads Alpha版本介�
 版本特点
 
 - 2.1.3 版本的 Linux-x86_64-multicore-CUDA 是在 CUDA 8.0 下编译的二进制可执行文件，如果运行平台也是 CUDA 8.0，可以直接运行，如果是更高的版本，需要从源码编译安装. 我的: 
+  
   - NAMD_Git-2021-08-23_Linux-x86_64-multicore-CUDA, Version Nightly Build (2021-08-23) Platforms
   
     > Alchemical free-energy perturbation is not supported in CUDA version

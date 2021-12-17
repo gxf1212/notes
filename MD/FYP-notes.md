@@ -9,6 +9,7 @@ Notes on the final year project (毕设), Nov 2021~May 2022.
 - It was originally developed by Gilead Sciences, Inc. to treat Ebola virus disease.
 - RdRp=NSP12. cofactor: nsp7/nsp8, etc.
   - of course needs helicase (NSP13), etc.
+- 老药新用：drug repurposing
 
 ### Mechanism
 
@@ -34,11 +35,17 @@ The binding energy data reveal that compound-17 (−59.6 kcal/mol) binds  more s
 
 筛选的更是一大堆了，搜    remdesivir analog screening sars-cov-2 RdRp
 
-### other
+### other similar simulation
 
 - *High-throughput rational design of the remdesivir binding site in the RdRp of SARS-CoV-2: implications for potential resistance*
 
-哪些突变能resistance
+  哪些突变能resistance
+
+- *SARS-CoV-2 RNA dependent RNA polymerase (RdRp) targeting: an in silico perspective*
+
+  2021 April, only RdRp dynamic. docked several our drugs with vina
+
+- 
 
 
 
@@ -99,6 +106,39 @@ use “switch”, Smoothly switches the potential to zero between rvdw-switch (p
 (page 212). i.e. a switching distance of 10 Å and a smooth cutoff distance of 12Å in the paper
 
 With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.gromacs.org/documentation/2018/onlinehelp/gmx-mdrun.html#gmx-mdrun) will automatically tune the CPU/GPU load balance by scaling [`rcoulomb`](https://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html#mdp-rcoulomb) and the grid spacing.
+
+
+
+
+
+> ### MD simulation (ATP-Mg^2+^) with Gromacs
+>
+> The ATP system, energy minimization and indexing have been done. 
+>
+> the most important setting is 
+>
+> - vdW and electrostatic
+> - energy groups?
+> - length
+>
+> do not need to repeat MD
+>
+> 1. nvt
+>
+>    ```shell
+>    gmx grompp -f nvt.mdp -c minim.gro -r minim.gro -n solion.ndx -p solion.top -o nvt.tpr
+>    gmx mdrun -deffnm nvt
+>    echo "15\n0" | gmx energy -f nvt.edr -o nvt.xvg # temperature
+>    xmgrace nvt.xvg
+>    ```
+>
+> 2. npt
+>
+> 3. 
+
+
+
+
 
 
 
@@ -209,7 +249,7 @@ probably need to add top/itp file
 
 ### Notes
 
-#### protein-ATP system
+**protein-ATP system**
 
 the RdRp, residue name has already been aliased. only one chain. no disulfide bonds. patched protein terminal
 
@@ -487,43 +527,22 @@ Modeling--Tk Console
 vmd -dispdev text -e merge.tcl
 ```
 
-```tcl
-package require psfgen
-resetpsf
-topology top_all36_prot.rtf
-topology top_all36_na.rtf
-topology top_all36_cgenff.rtf
-topology toppar_water_ions.str
-# maybe not using alias here
-alias residue HIS HSE           
-alias atom ILE CD1 CD        
-alias atom SER HG HG1         
-alias atom CYS HG HG1          
+for atp, still built with AutoPSF, topology files only include top_all36_na.rtf, top_all36_cgenff.rtf. 
 
-segment PROT {pdb rdrp.pdb}
-coordpdb rdrp.pdb PROT
-segment ATP {pdb atp.pdb}
-coordpdb atp.pdb ATP
-segment MG {pdb mg.pdb}
-coordpdb mg.pdb MG
+and only 'formatted' provides the right coordinates! _autopsf adjusts coordinates a little bit (why?)
 
-guesscoord
-writepdb merged.pdb
-writepsf merged.psf
-```
+but Tk console reports error!
 
-> exploration: for atp, still built with AutoPSF, topology files only include top_all36_na.rtf, top_all36_cgenff.rtf. 
->
-> and only 'formatted' provides the right coordinates! _autopsf adjusts coordinates a little bit (why?)
->
-> but Tk console reports error!
->
-> >ERROR) Error reading optional structure information from coordinate file atp_autopsf_formatted.pdb
-> >ERROR) Will ignore structure information in this file.
->
-> but 'formatted’ can be recognized by CHARMM-GUI!
+>ERROR) Error reading optional structure information from coordinate file atp_autopsf_formatted.pdb
+>ERROR) Will ignore structure information in this file.
+
+but **'formatted’ can be recognized by CHARMM-GUI**!
+
+the succeeded version:
 
 ```tcl
+# for atp, still built with AutoPSF, topology files except top_all36_na.rtf,
+# top_all36_cgenff.rtf are deleted..and only 'formatted' provides the right coordinates!
 package require psfgen
 resetpsf
 topology top_all36_prot.rtf
@@ -537,12 +556,17 @@ alias atom CYS HG HG1
 
 segment PROT {pdb rdrp.pdb}
 coordpdb rdrp.pdb PROT
-# use files from CHARMM-GUI?
-# readpsf ligandrm-nad.psf
-# coordpdb ligandrm-nad_aligned.pdb
 
-readpsf atp_autopsf.psf
-coordpdb atp_autopsf_formatted.pdb
+# use files from CHARMM-GUI
+readpsf ligandrm2.psf
+coordpdb ligandrm2.pdb
+# aligned standard atp
+# readpsf ligandrm.psf
+# coordpdb ligandrm_aligned.pdb
+# autopsf
+# readpsf atp_autopsf.psf
+# coordpdb atp_autopsf_formatted.pdb
+
 segment MG {pdb mg.pdb}
 coordpdb mg.pdb MG
 
@@ -638,7 +662,7 @@ refer to preparation videos mentioned above
 
 then just click, click...and download all files
 
-focus on `ligandrm.pdb/psf`, which can be put into a merging .tcl, as **an alternative way of AutoPSF** in generating files for ligand (other tools for protein, etc?). Carefully choose the force field!
+focus on `ligandrm.pdb/psf`, which can be put into a merge.tcl, as **an alternative way of AutoPSF** in generating files for ligand (other tools for protein, etc?). Carefully choose the force field!
 
 > my experience
 >
@@ -799,49 +823,166 @@ for basics about .namd parameters, please read
   - 2.2.5 Required NAMD configuration parameters. basic params links
 - ug 7 Standard Minimization and Dynamics Parameters
 - namd-tutorial-unix chp 1 and appendix
+- [online tutorial](https://www.ks.uiuc.edu/Training/Tutorials/namd/namd-tutorial-unix-html/node26.html)
+- note in .conf
 
-#### equilibration
+#### attributes to pay attention to
+
+Below are parameters you should notice in every simulation.
+
+##### constants
+
+- outputname
+
+##### parameters
+
+par_CMAP.inp? is actually **prm_all36m_prot.prm**
+
+```
+*>>>> CHARMM36 All-Hydrogen Parameter File for Proteins <<<<<<<<<<
+*>>>>> Includes phi, psi cross term map (CMAP) correction <<<<<<<<
+```
 
 
 
 
 
+##### periodic boundary conditions
+
+see the above “measurement” subsection
 
 
 
+##### steps and freq
 
 
 
+##### minimization and equilibration
 
 
-> ### MD simulation (ATP-Mg^2+^) with Gromacs
+
+##### NVT and NPT
+
+NPT: Langevin dynamics+Nos´e-Hoover Langevin piston
+
+NVT: delete piston...
+
+> compare the tutorial files, ws and wb
 >
-> The ATP system, energy minimization and indexing have been done. 
+> no params difference between npt and production??
+
+##### other
+
+- With wrapping, some molecules will jump between sides of the cell in the trajectory file to yield the periodic image nearest to the origin. Without wrapping, molecules will have smooth trajectories, but water in the trajectory may appear to explode as individual molecules diffuse. Wrapping only affects output, not the correctness of the simulation.
+
+  ```
+  wrapAll             on 
+  ```
+
+- PME is only applicable to periodic simulations. PME grid dimensions should have small integer factors only and be greater than or equal to length of the basis vector.
+
+  ```
+  #PME (for full-system periodic electrostatics)
+  PME                 yes
+  ```
+
+  may always use the default value
+
+- minimization < Perform <u>conjugate gradient</u> energy minimization? >
+
+- ` numsteps` = `run` ?
+
+- The “reinitvels” command reinitializes velocities to a random distribution based on the given
+  temperature.
+
+- When initially assembling a system it is sometimes useful to fix the protein while equilibrating water or lipids around it. These options read a PDB file containing flags for the atoms to fix. The number and order of atoms in the PDB file must exactly match that of the PSF and other input files.
+
+  ```
+  fixedAtoms          on
+  fixedAtomsFile      myfixedatoms.pdb  ;# flags are in this file
+  fixedAtomsCol       B                 ;# set beta non-zero to fix an atom
+  ```
+
+  > The fixedAtoms, constraintScaling, and nonbondedScaling parameters may be changed to preserve macromolecular conformation during minimization and equilibration (fixedAtoms may only be disabled, and requires that fixedAtomsForces is enabled to do this).
+
+- 
+
+
+
+#### work flow and restrains
+
+see tutorial [Building Gramicidin A](http://www.ks.uiuc.edu/Research/namd/tutorial/NCSA2002/hands-on/) for detailed guidance about setting restrains
+
+1. Minimization with fixed backbone atoms.
+2. Minimization with restrained carbon alpha atoms.
+3. Langevin dynamics with restraints.
+4. Constant pressure with restraints.
+5. Constant pressure without restraints.
+6. Constant pressure with reduced damping coefficients.
+
+settings:
+
+1. minimize nonbackbone atoms
+
+   ```
+   minimize 1000
+   output min_fix
+   ```
+
+2. min all atoms
+
+   ```
+   fixedAtoms off
+   minimize 1000
+   output min_all
+   ```
+
+3. heat with CAs restrained
+
+   ```
+   # langevin on
+   run 3000
+   output heat
+   ```
+
+4. equilibrate volume with CAs restrained
+
+   ```
+   langevinPiston on
+   run 5000
+   output equil_ca
+   ```
+
+5. equilibrate volume without restraints
+
+   ```
+   constraintScaling	0
+   run 10000
+   ```
+
+> should adjust the # of step
+
+> guidance from https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2008-2009/1333.html
 >
-> the most important setting is 
+> add an unconstrained NPT equilibration phase to your simulation prior to taking data that you consider part of a production run, to allow initial relaxation of your protein and any final adjustments to the periodic cell size without including this data in your analysis.
 >
-> - vdW and electrostatic
-> - energy groups?
-> - length
+> If you equilibrate with very strong protein (>10 or so kcal/mol A^2) restraints it is probably good to remove them gradually, but yours are probably ok to remove in one step. 
 >
-> do not need to repeat MD
->
-> 1. nvt
->
->    ```shell
->    gmx grompp -f nvt.mdp -c minim.gro -r minim.gro -n solion.ndx -p solion.top -o nvt.tpr
->    gmx mdrun -deffnm nvt
->    echo "15\n0" | gmx energy -f nvt.edr -o nvt.xvg # temperature
->    xmgrace nvt.xvg
->    ```
->
-> 2. npt
->
-> 3. 
+> the key is to make sure that at each step **you truly do equilibrate the system** (subject to the current constraints placed on it), and as much as possible you **avoid perturbations** of your solute **during early stages** of solvent equilibration.
 
 
 
 
+
+
+
+### Run your simulation
+
+
+
+#### how to monitor your simulation?
+
+search for “TIMING” in .log file for the progress of your simulation, which updates every $outputTiming steps. 
 
 
 
