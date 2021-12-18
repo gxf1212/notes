@@ -808,12 +808,16 @@ vmd -dispdev text -e measure.tcl
 
 > info: see the folder...probably similar for all ligands
 >
+> RdRp-ATP
+>
 > ```
 > cellBasisVector1 102.76400184631348 0 0 
 > cellBasisVector2 0 93.35700035095215 0 
 > cellBasisVector3 0 0 108.42400050163269 
 > cellOrigin 57.934000968933105 58.11250019073486 57.53700029850006 
 > ```
+>
+> 96013 atoms, 27704 water
 
 ### Setting up a MD simulation 
 
@@ -832,34 +836,30 @@ Below are parameters you should notice in every simulation.
 
 ##### constants
 
-- outputname
+- outputbase: your system
 
 ##### parameters
 
-par_CMAP.inp? is actually **prm_all36m_prot.prm**
+1. par_CMAP.inp? 
 
-```
-*>>>> CHARMM36 All-Hydrogen Parameter File for Proteins <<<<<<<<<<
-*>>>>> Includes phi, psi cross term map (CMAP) correction <<<<<<<<
-```
+   is actually **param.prm** downloaded from [Maryland](http://mackerell.umaryland.edu/). 
 
+   contains protein, ions (and so on? a big file)
 
+   ```
+   *>>>> CHARMM36 All-Hydrogen Parameter File for Proteins <<<<<<<<<<
+   *>>>>> Includes phi, psi cross term map (CMAP) correction <<<<<<<<
+   ```
 
-
+2. **par_all36_na.prm** for some atoms in ATP
 
 ##### periodic boundary conditions
 
 see the above “measurement” subsection
 
-
-
-##### steps and freq
-
-
-
 ##### minimization and equilibration
 
-
+all use conjugated gradient....not much to discuss
 
 ##### NVT and NPT
 
@@ -905,7 +905,7 @@ NVT: delete piston...
 
   > The fixedAtoms, constraintScaling, and nonbondedScaling parameters may be changed to preserve macromolecular conformation during minimization and equilibration (fixedAtoms may only be disabled, and requires that fixedAtomsForces is enabled to do this).
 
-- 
+- constraintScaling 0 is the _immediate_ removal of all constraints
 
 
 
@@ -920,57 +920,100 @@ see tutorial [Building Gramicidin A](http://www.ks.uiuc.edu/Research/namd/tutori
 5. Constant pressure without restraints.
 6. Constant pressure with reduced damping coefficients.
 
-settings:
+##### Guidance
 
-1. minimize nonbackbone atoms
-
-   ```
-   minimize 1000
-   output min_fix
-   ```
-
-2. min all atoms
-
-   ```
-   fixedAtoms off
-   minimize 1000
-   output min_all
-   ```
-
-3. heat with CAs restrained
-
-   ```
-   # langevin on
-   run 3000
-   output heat
-   ```
-
-4. equilibrate volume with CAs restrained
-
-   ```
-   langevinPiston on
-   run 5000
-   output equil_ca
-   ```
-
-5. equilibrate volume without restraints
-
-   ```
-   constraintScaling	0
-   run 10000
-   ```
-
-> should adjust the # of step
+see the script for the final values
 
 > guidance from https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2008-2009/1333.html
 >
-> add an unconstrained NPT equilibration phase to your simulation prior to taking data that you consider part of a production run, to allow initial relaxation of your protein and any final adjustments to the periodic cell size without including this data in your analysis.
+> **add an unconstrained NPT equilibration phase** to your simulation prior to taking data that you consider part of a production run, to allow initial relaxation of your protein and any final adjustments to the periodic cell size without including this data in your analysis.
 >
-> If you equilibrate with very strong protein (>10 or so kcal/mol A^2) restraints it is probably good to remove them gradually, but yours are probably ok to remove in one step. 
+> If you equilibrate with very strong protein (>10 or so kcal/mol A^2) restraints it is probably good to remove them gradually, but yours are <u>probably ok to remove in one step</u>. 
 >
 > the key is to make sure that at each step **you truly do equilibrate the system** (subject to the current constraints placed on it), and as much as possible you **avoid perturbations** of your solute **during early stages** of solvent equilibration.
 
+> guidance from http://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2003-2012/4358.html
+>
+> From my experience, the number of time steps needed for each stage depends on a number of things, including the size of your system, how relaxed/frustrated your initial structures are etc. The "rules of thumb"
+> I used are:
+>
+> 1. Minimimize until the **gradient tolerance drops below 1.0**. The number of steps required to achieve this is **system-dependent**. I usually just minimize initially for, say, **10000 steps** and periodically check the
+> gradient tolerance.
+> 2. Equilibrate the fixed protein until the **temperature** (and other quantities such as pressure if necessary) **stabilizes** at the desired value. Again, the number of steps is worked out by trial and error.
+> 3. Equilibrate with decreasing harmonic constraints until the **unconstrained protein is stable** in terms of temperature, structure and other desired quantities.
 
+time length: refer to tutorials--my exploration--simulation
+
+##### commands
+
+> building system is in a folder; if not messy, could put “solvation” together
+>
+> after building the system, copy all needed files to a directory `./common`
+>
+> the script is without an extension name for VScode to highlight. put in where the results are
+>
+> do not use `mpirun` for such a small system...
+
+```shell
+cd common
+vmd -dispdev text -e fix_backbone_restrain_ca.tcl
+cd ../equil
+namd2 +p8 +idlepoll pro-lig-equil > pro-lig-equil.log
+vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
+
+```
+
+> test, problems:
+>
+> - Randomization of virtual memory (ASLR) is turned on in the kernel, thread migration may not work! Run 'echo 0 > /proc/sys/kernel/randomize_va_space' as root to disable it, or try running with '+isomalloc_sync'.
+>
+> - Warning: ALWAYS USE NON-ZERO MARGIN WITH CONSTANT PRESSURE!
+>
+>   Warning: CHANGING MARGIN FROM 0 to 0.495
+>
+> - **ERROR** TOLERANCE : 1e-06
+>
+> - https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2020-2021/0371.html
+>
+>   ```
+>   Warning: DUPLICATE BOND ENTRY FOR CT3-NC2
+>   PREVIOUS VALUES  k=261  x0=1.49
+>      USING VALUES  k=390  x0=1.49
+>   ```
+>
+> - 
+>
+> backup
+>
+> ```shell
+>  mv ./*.* test2
+> ```
+
+Analysis: As said, to obtain appropriate params for your system, should check properties.
+
+```shell
+# extract properties from .log file
+vmd
+source ../../common/namdstats.tcl
+data_time TEMP pro-lig-equil.log
+data_time TOTAL pro-lig-equil.log
+exit
+xmgrace TEMP.dat
+xmgrace TOTAL.dat
+```
+
+about the script:
+
+```
+Usage: data_avg <logfile> [<first timestep> <last timestep>]
+   <first timestep> and <last timestep> may be entered as numbers or
+   <first timestep> = 'first' will start at the beginning of the simulation
+   <last timestep> = 'last' will go to the end of the simulation
+Usage: data_time <data stream> <logfile> [<first timestep> <last timestep>]
+   <data stream> = BOND, ANGLE, DIHED, IMPRP, ELECT, VDW, BOUNDARY, MISC, KINETIC, TOTAL, TEMP, TOTAL2, TOTAL3, TEMPAVG
+```
+
+adjust the window to see different stages
 
 
 

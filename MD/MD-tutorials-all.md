@@ -154,6 +154,58 @@ https://www.ks.uiuc.edu/Research/vmd/script_library/ VMD Script Library
 
 http://www.ks.uiuc.edu/Research/vmd/plugins/ plugins, each has its own documentation (maybe its own tutorial)...
 
+### VMD Command-Line Options
+
+When started, the following command-line options may be given to VMD. Note that if a command-line option does not start with a dash (-), and is not part of another option, it is assumed to be a PDB filename. Thus, the Unix command
+
+```
+vmd molecule.pdb
+```
+
+will start VMD and load a molecule from the file `molecule.pdb`. On the Windows platform, one must preface the VMD invocation with the Windows `start` command
+
+```
+start vmd molecule.pdb
+```
+
+- `-h | -?` : Print a summary a command-line options to the console.
+
+- `-e filename` : After initialization, execute the text commands in filename, and then resume normal operation.
+
+- `-psf filename` : Load the specified molecule (in PSF format) at startup. The PSF file only contains the molecular structure; a PDB or DCD file must also be specified when this option is used.
+
+- `-pdb filename` : Load the specified molecule (in PDB format) at startup.
+
+- `-dcd filename` : Load the specified trajectory file (in binary DCD format) at startup. The DCD file only contains atomic coordinates; a PDB or PSF file must also be specified when this option is used.
+
+- -dispdev < win | text | cave | caveforms | none >:
+
+  Specify the type of graphical display to use. The possible display devices include:
+
+  - `win`: a standard graphics display window.
+  - `text`: do not provide any graphics display window.
+  - `cave`: use the CAVE virtual environment for display, forms are disabled.
+  - `caveforms`: use the CAVE virtual environment for display and with forms enabled. This is useful with `-display machine:0` for remote display of the forms when the CAVE uses the local screen.
+  - `none`: same as text.
+
+  It is possible to use VMD as a filter to convert coordinate files into rendered images, by using the
+
+  `-dispdev text` and `-e` options.
+
+- `-dist z` : Specify the distance to the VMD image plane.
+
+- `-height y` : Specify the height of the VMD image plane.
+
+- `-pos x y` : Specify the position for the graphics display window. The position (x,y) is the number of pixels from the lower-left corner of the display to the lower-left corner of the graphics window.
+
+- `-size x y` : Specify the size for the graphics display window, in pixels.
+
+- `-nt` : Do not display the VMD title at startup.
+
+- `-startup filename` : Use filename as the VMD startup command script, instead of the default **.vmdrc** or **vmd.rc** file.
+
+- `-debug [level` : Turn on output of debugging messages, and optionally set the current debug level (1=few messages ... 5=many verbose messages). Note this is only useful if VMD has been compiled with debugging option included.
+
 ### Using VMD (PDF tutorial)
 
 #### Working with a Single Molecule
@@ -404,8 +456,24 @@ firsttimestep 92000
 about restart files:
 
 - NAMD can also create restart files, one of which is a pdb file which stores atomic coordinates, and the other of which stores atomic velocities. `restartname` < restart files prefix >   Default Value: `outputname.restart`
-- Furthermore, NAMD will store the file from the previous cycle each time it writes a new file. The filename is appended with a .old
-  extension; it is created in case NAMD fails in writing the new restart file.
+- Furthermore, NAMD will store the file from the previous cycle each time it writes a new file. The filename is appended with a .old extension; it is created in case NAMD fails in writing the new restart file.
+
+#### 2 Analysis
+
+
+
+```shell
+vmd
+source ../2-3-energies/namdstats.tcl
+data_time TEMP ubq-nve.log
+exit # vmd
+xmgrace TEMP.dat
+
+```
+
+
+
+
 
 #### Appendix: file types
 
@@ -437,9 +505,11 @@ about restart files:
 
 4. The parameter file `.prm`
 
-   provides a <u>mapping</u> between bonded and nonbonded interactions involving the various combinations of atom types found in the <u>topology</u> file and specific spring constants and <u>similar parameters</u> for all of the bond, angle, dihedral, improper, and van der Waals terms in the CHARMM potential function.
+   provides a <u>mapping</u> between **bonded and nonbonded interactions** involving the various combinations of **atom types** found in the <u>topology</u> file and specific spring **constants** and <u>similar parameters</u> for all of the bond, angle, dihedral, improper, and van der Waals terms in the CHARMM potential function.
 
-   contains all of the **numerical constants** needed to evaluate forces and energies
+   contains all of the <font color=red>**numerical constants**</font> needed to evaluate forces and energies
+
+   https://charmm-gui.org/?doc=lecture&module=molecules_and_topology&lesson=3
 
 5. The configuration file `.conf` or `.namd`
 
@@ -456,9 +526,9 @@ about restart files:
      - but tutorials use it as topology??
      - `.tcl` = `.pgn`
 
-#### my exploration
+### My exploration
 
-##### building the system
+#### building the system
 
 - http://zarbi.chem.yale.edu/ligpargen/namd_tutorial.html  
 
@@ -568,7 +638,7 @@ I know! It does not matter how many molecules you want to include (just merge). 
 
   
 
-##### solvation and ionization
+#### solvation and ionization
 
 - still the many-parameter guy, tutorial 1, https://www.youtube.com/watch?v=IArpsQsZ95U 
 
@@ -587,15 +657,64 @@ I know! It does not matter how many molecules you want to include (just merge). 
   
   copy that into Tk Console. but see FYP-notes for complete
 
-##### simulation parameters
+#### simulation parameters
 
-| paper              | minimize1, type | mini whole | after mini            | npt/ps   | vdW, elec | prod |
-| ------------------ | --------------- | ---------- | --------------------- | -------- | --------- | ---- |
-| 1                  | backbone, cg    | 5000 steps | equ*2(npt)--prod(npt) | 4+10     |           | 100  |
-| 2                  | water, cg       | 10000      | equ(npt)--prod(nvt)   | 1000     |           | 51   |
-| 3                  | all, cg         | 20,000     | equ(npt)--prod(npt)   | 1400(6?) | 12        | 20   |
-| K<sup>+</sup>-18C6 | all, cg         | 1000       | same as 3             | 10000    |           |      |
-|                    |                 |            |                       |          |           |      |
+##### steps
+
+settings in tutorial:
+
+1. minimize nonbackbone atoms
+
+   ```
+   minimize 1000
+   output min_fix
+   ```
+
+2. min all atoms
+
+   ```
+   fixedAtoms off
+   minimize 1000
+   output min_all
+   ```
+
+3. heat with CAs restrained
+
+   ```
+   # langevin on
+   run 3000
+   output heat
+   ```
+
+4. equilibrate volume with CAs restrained
+
+   ```
+   langevinPiston on
+   run 5000
+   output equil_ca
+   ```
+
+5. equilibrate volume without restraints
+
+   ```
+   constraintScaling	0
+   run 10000
+   ```
+
+> should adjust the # of step
+
+##### values
+
+| paper              | minimize1, type | mini whole   | after mini            | npt/ns     | prod | remark |
+| ------------------ | --------------- | ------------ | --------------------- | ---------- | ---- | ------ |
+| 1                  | backbone, cg    | 2+5000 steps | equ*2(npt)--prod(npt) | 0.004+0.01 | 100  |        |
+| 2                  | water, cg       | 10,000       | equ(npt)--prod(nvt)   | 1          | 51   |        |
+| 3                  | all, cg         | 20,000       | equ(npt)--prod(npt)   | 1.4(6?)    | 20   | vdW,12 |
+| 4                  | all, sg         | 50,000       | equ(nvt)--prod(npt)   | 2+8        | 150  | gmx    |
+|                    |                 |              |                       |            |      |        |
+|                    |                 |              |                       |            |      |        |
+| K<sup>+</sup>-18C6 | all, cg         | 1000         | same as 3             | 10000      |      |        |
+| my gmx             | all, cg         | 5000         | same as 4             | 0.1+0.1    |      |        |
 
 common
 
@@ -617,7 +736,13 @@ OUR: Simulations were performed with GROMACS 5.1.2. Van der Waals interactions w
    > Energy minimization was performed for 20,000 steps by conjugate gradient method. Systems was gradually heated and equilibrated in NPT ensemble for 1.4 ns. Throughout equilibration, constrains on the proteins were gradually removed starting from 2 kcal/mol/Å2. At each stage constrains were reduced by 0.5 kcal/mol/Å2 and system were equilibrated for 0.4 ns. After equilibration, a production run of 20 ns for each complex was performed. Time step was set to 2fs. van der Waals (12 Å cut-off) and long-range
    > electrostatic interactions (via particle-mesh Ewald) were included to calculate the force acting on the system. Production runs were performed at 310 K and under 1 atm
 
-4. 
+4. *In silico identification of novel SARS-COV-2 2′-O-methyltransferase (nsp16) inhibitors: structure-based virtual screening, molecular dynamics simulation and MM-PBSA approaches*
+
+   > employing the steepest descent minimisation algorithm with a maximum of 50,000 steps and <10.0 kJ/mol force. Then, the solvated energy minimised structures were equilibrated with two consecutive steps. Firstly, <u>NVT ensemble with constant number of particles, volume and temperature (310 K) was done for 2 ns followed by NPT ensemble with constant number of particles, pressure and temperature for 8 ns</u>. In the two systems, only the solvent molecules were allowed for free movement to ensure its equilibration in the system while other atoms were restrained. The long range electrostatic interactions were obtained by the particle mesh Eshwald method with a 12 Å cut-off and 12 Å Fourier spacing[26](https://www.tandfonline.com/doi/full/10.1080/14756366.2021.1885396#). Finally, the three well-equilibrated systems (one empty protein and two protein-ligand complexes) were then entered the production stage without any restrains for 150 ns with a time step of 2 fs, and after every 10 ps the structural coordinates were saved to retrieve 15000 frames for each processed complex.
+
+5. 
+
+
 
 
 
@@ -673,13 +798,13 @@ source restrain_ca.vmd
 6. Constant pressure with reduced damping coefficients.
 
 ```shell
-mpirun -np 8 namd2 +p8 equil.namd > equil.log
+namd2 +p8 equil.namd > equil.log
 ```
 
-> 20000 steps in total
+> 20000 steps in total. see .namd for details
 
-```
-source view_sample.vmd
+```shell
+namd2 +p8 +idlepoll nptsim.namd > nptsim.log
 ```
 
 
