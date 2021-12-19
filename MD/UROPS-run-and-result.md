@@ -1643,7 +1643,7 @@ always check:
 
 > backup: no index
 >
-> ```
+> ```shell
 > gmx grompp -f nvt.mdp -c em.gro -r em.gro -p com.top -o nvt.tpr
 > gmx mdrun -deffnm nvt
 > echo "15\n0" | gmx energy -f nvt.edr -o nvt.xvg # temperature

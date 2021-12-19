@@ -229,7 +229,9 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
    - grep查找字符
    - wc计算字数
 
-2. 
+2. if 判断文件或目录是否存在
+
+   https://blog.csdn.net/m0_38039437/article/details/100160042
 
 
 
@@ -958,36 +960,11 @@ time length: refer to tutorials--my exploration--simulation
 cd common
 vmd -dispdev text -e fix_backbone_restrain_ca.tcl
 cd ../equil
-namd2 +p8 +idlepoll pro-lig-equil > pro-lig-equil.log
+namd3 +auto-provision +idlepoll pro-lig-equil > pro-lig-equil.log
 vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
-
+cd ../prod
+namd3 +auto-provision +idlepoll pro-lig-prod > pro-lig-prod.log
 ```
-
-> test, problems:
->
-> - Randomization of virtual memory (ASLR) is turned on in the kernel, thread migration may not work! Run 'echo 0 > /proc/sys/kernel/randomize_va_space' as root to disable it, or try running with '+isomalloc_sync'.
->
-> - Warning: ALWAYS USE NON-ZERO MARGIN WITH CONSTANT PRESSURE!
->
->   Warning: CHANGING MARGIN FROM 0 to 0.495
->
-> - **ERROR** TOLERANCE : 1e-06
->
-> - https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2020-2021/0371.html
->
->   ```
->   Warning: DUPLICATE BOND ENTRY FOR CT3-NC2
->   PREVIOUS VALUES  k=261  x0=1.49
->      USING VALUES  k=390  x0=1.49
->   ```
->
-> - 
->
-> backup
->
-> ```shell
->  mv ./*.* test2
-> ```
 
 Analysis: As said, to obtain appropriate params for your system, should check properties.
 
@@ -1017,15 +994,141 @@ adjust the window to see different stages
 
 
 
+##### testing the run
+
+> problems:
+>
+> - Randomization of virtual memory (ASLR) is turned on in the kernel, thread migration may not work! Run 'echo 0 > /proc/sys/kernel/randomize_va_space' as root to disable it, or try running with '+isomalloc_sync'.
+>
+> - Warning: ALWAYS USE NON-ZERO MARGIN WITH CONSTANT PRESSURE!
+>
+>   Warning: CHANGING MARGIN FROM 0 to 0.495
+>
+> - **ERROR** TOLERANCE : 1e-06
+>
+> - https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2020-2021/0371.html
+>
+>   ```
+>   Warning: DUPLICATE BOND ENTRY FOR CT3-NC2
+>   PREVIOUS VALUES  k=261  x0=1.49
+>      USING VALUES  k=390  x0=1.49
+>   ```
+>
+> - 
+>
+> backup
+>
+> ```shell
+>  mv ./*.* test2
+> ```
+>
+> testing performance (first “wall time”, irrelevant with time I guess)
+>
+> - test 3: above command, 0.0267396/step
+> - test 4: no +p8, no idlepoll (only one gpu core), similar
+> - test 5: namd3, with +p8, with idlepoll,  0.016929/step (only one GPU core used?)
+> - test 6: same, +p2. 0.0186955/step
+> - test 7: same, +auto-provision. just equals to using +p8. 0.0170378/step
+>
+> > if no +p8 is specified
+> >
+> > ```
+> > Charm++> No provisioning arguments specified. Running with a single PE.
+> >          Use +auto-provision to fully subscribe resources or +p1 to silence this message.
+> > ```
+>
+> how come the rate increases two folds in test 3?
+
+
+
 
 
 ### Run your simulation
 
+#### tips
 
+> 1. https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2003-2004/0295.html
+>
+>    You will need to have a non binary coord file with as well as the binary
+>    forms. Don't know why, thats just the way it is...
+>
+> 2. how to monitor your simulation?
+>
+>    search for “TIMING” or “Wall” in .log file for the progress of your simulation, which updates every $outputTiming steps. “Benchmark time:”is also ok
+>
+> 3. 
 
-#### how to monitor your simulation?
+#### Run in Gromacs
 
-search for “TIMING” in .log file for the progress of your simulation, which updates every $outputTiming steps. 
+> prepare, equillibrate in NAMD, run in gmx
+>
+> just a try. not suitable for fep
+
+https://www.ks.uiuc.edu/Research/vmd/plugins/topotools/
+
+TopoTools, not only converting to gmx and lammps, more importantly editing your topology
+
+1. make the latest coordinates as pdb, and them .gro
+
+   ```tcl
+   mol load psf ../common/system.psf
+   mol addfile ../equil/rdrp-atp-equil.coor
+   set sel [atomselect top all]
+   $sel writepdb structure.pdb
+   ```
+
+   also the velocity in the last frame! (find how to load into gmx, .cpt?)
+
+   ```tcl
+   ## from tutorial
+   # read in vmd
+   mol new ../common/ubq_wb.psf 
+   mol addfile ubq_wb_eq_1fs.restart.vel type namdbin waitfor all
+   
+   set all [atomselect top all]
+   set fil [open energy.dat w]
+   foreach m [$all get mass] v [$all get {x y z}] {
+   puts $fil [expr 0.5* $m * [vecdot $v $v]]
+   }
+   
+   close $fil
+   
+   ```
+   
+   > converting binary file: you’d better load into vmd and save
+   
+2. get .top file
+
+   ```tcl
+   package require topotools
+   # Load the structure into VMD.
+   mol new ../common/system.psf
+   mol addfile structure.pdb
+   # Pass along a list of parameters to generate structure.top, suitable for preparing gromacs simulations.
+   topo writegmxtop structure.top [list ../common/param.prm ../common/par_all36_na.prm] 
+   ```
+
+   > CHRAMM ff website also provides many .itp file for gmx
+
+3. to run in gmx, specify T coupling groups:
+
+   ```shell
+   tc_grps    non-Water Water # Membrane-containing MD simulation
+   tc_grps    Protein non-Protein # normal system
+   ```
+
+   make the .tpr file
+
+   ```shell
+   # This would be prepared for simulation using grompp to create a tpr file
+   gmx grompp -f prodmd.mdp -c structure.pdb -r structure.pdb \
+   -p structure.top -o simulation.tpr -maxwarn 200 
+   # supress repeated param definition
+   -t velocity.cpt 
+   gmx mdrun -deffnm simulation -nb gpu
+   ```
+   
+   > cannot resolve the problem of duplicated dihedral angles...
 
 
 

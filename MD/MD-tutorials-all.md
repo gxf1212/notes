@@ -460,7 +460,11 @@ about restart files:
 
 #### 2 Analysis
 
+##### M-B distribution
 
+
+
+##### Temperature
 
 ```shell
 vmd
@@ -986,7 +990,7 @@ timestep: 2fs. use namd3
 
 Alchemy-bound, 11366 atoms
 
-1 CPU+1 GPU, ~0.00530185/step, need ~29.45 hours; 2 CPU+2 GPU0.00318633/step
+1 CPU+1 GPU, ~0.00530185/step, need ~29.45 hours; 2 CPU+2 GPU 0.00318633/step
 
 forward breaks at 0.48~0.5 (then 0.62~0.64), backward at 0.52~0.5
 
@@ -1227,41 +1231,85 @@ https://www.ks.uiuc.edu/Research/namd/alpha/3.0alpha/#downloads Alpha版本介�
 > - is intended for small to medium systems (**10 thousand to 1 million atoms**). For larger simulations,  you should stick to the regular integration scheme
 > - suitable for the  computational capabilities of a **single GPU**-accelerated compute node
 > - it **might slow your simulation** down if you are not running on a Volta, Turing, or Ampere GPU!  If your GPU is older, we recommend that you stick to NAMD 2.x.
-> - The single-node version of NAMD 3.0 has <font color=red>almost everything offloaded to the GPU</font>, so large CPU core counts are NOT necessary to get good performance. We recommend running NAMD **with a low +p count, maybe 2-4** depending on system size, especially if the user plans on running **multiple replica** simulations within a node.
+> - The single-node version of NAMD 3.0 has <font color=red>**almost everything offloaded to the GPU**</font>, so large CPU core counts are NOT necessary to get good performance. We recommend running NAMD **with a low +p count, maybe 2-4** depending on system size, especially if the user plans on running **multiple replica** simulations within a node.
 
+- NAMD3上的试验
+  
+  - 一般，4个CPU就配4个GPU核心，8个对应8个（1个——0个？）
+  - 小体系，**4个不一定比1个快多少**。。（可能差不多）
+    - 所以说，可以省出CPU来多跑几个体系？
+  
 - 测试
+  
   - 在1-LargeSim，和namd2基本一样...
+  
+  - 在9w原子的RdRp，+p8稍微快于namd2，比+p2没提升太多
+  
   - 在ApoA1，namd3还变慢了。。
-- 特点
-  - 4个CPU就配4个GPU核心，8个对应8个（1个——0个？）
-  - 小体系，4个不一定比1个快。。（可能差不多）
+  
+  - 前面的FEP
+  
+    > Alchemy-bound, 11366 atoms
+    >
+    > 1 CPU+1 GPU, ~0.00530185/step, need ~29.45 hours; 2 CPU+2 GPU 0.00318633/step
+    >
+    > forward breaks at 0.48~0.5 (then 0.62~0.64), backward at 0.52~0.5
+    >
+    > Alchemy-unbound, 11612 atoms
+    >
+    > 2 CPU+2 GPU, 0.00438178/step
+  
+  - 
 
-还是不对啊，大小体系都没有加速！难道真是GPU不合适？
+> 还是不对啊，大小体系都没有加速！难道真是GPU不合适？
+>
+> 要跟无GPU的对比，再试试
 
 ##### Summary & Tips
 
-- 后面应该测试
-  - 最优CPU和GPU核数
-  - namd3在小体系的表现
-
-版本特点
-
-- 2.1.3 版本的 Linux-x86_64-multicore-CUDA 是在 CUDA 8.0 下编译的二进制可执行文件，如果运行平台也是 CUDA 8.0，可以直接运行，如果是更高的版本，需要从源码编译安装. 我的: 
-  
-  - NAMD_Git-2021-08-23_Linux-x86_64-multicore-CUDA, Version Nightly Build (2021-08-23) Platforms
-  
-    > Alchemical free-energy perturbation is not supported in CUDA version
-  
-  - [NAMD_3.0alpha9_Linux-x86_64-multicore-CUDA-SingleNode.tar.gz](https://www.ks.uiuc.edu/Research/namd/alpha/3.0alpha/download/NAMD_3.0alpha9_Linux-x86_64-multicore-CUDA-SingleNode.tar.gz) (Standard simulation.) **(February 28, 2021)**
+> 版本特点
+>
+> - 2.1.3 版本的 Linux-x86_64-multicore-CUDA 是在 CUDA 8.0 下编译的二进制可执行文件，如果运行平台也是 CUDA 8.0，可以直接运行，如果是更高的版本，需要从源码编译安装. 我的: 
+>
+>   - NAMD_Git-2021-08-23_Linux-x86_64-multicore-CUDA, Version Nightly Build (2021-08-23) Platforms
+>
+>     > Alchemical free-energy perturbation is not supported in CUDA version
+>
+>   - [NAMD_3.0alpha9_Linux-x86_64-multicore-CUDA-SingleNode.tar.gz](https://www.ks.uiuc.edu/Research/namd/alpha/3.0alpha/download/NAMD_3.0alpha9_Linux-x86_64-multicore-CUDA-SingleNode.tar.gz) (Standard simulation.) **(February 28, 2021)**
+>
 
 GPU的配置
 
+- 相比于纯CPU版，GPU确实能提速4～5倍（GPU tutorial）
+
 - namd2,namd3都是CUDA版本，似乎在CPU多的时候(如8个)自动启用GPU，少了即使加`+idlepoll`都不启用....
-- NAMD 计算时，计算量、CPU进程数和GPU数量匹配很重要。
-  - 体系太小，GPU利用率很低，加速不明显。
-  - 甚至GPU个数越少越好,太并行不好!!! GPU过多,增加CPU也没用.
-  - CPU进程数增加也能帮助小体系，CPU数多才启用GPU。。
-- 相比于纯CPU版，GPU确实能提速4～5倍
 
+  - 但是，**namd2真的很依赖CPU**！！
 
+    > RdRp，去掉+p8 +idlepoll，performance有时不太变？？
 
+  - 我的机子，大一点的（100k），还是用namd3
+
+  - 到底用哪个，每个体系还是测试一下
+
+- NAMD 计算时，计算量、CPU进程数和 GPU 数量匹配很重要。
+  - **体系太小，GPU利用率很低，加速不明显。**
+    - 甚至GPU个数越少越好,太并行不好!!! GPU过多,增加CPU也没用.
+  - CPU进程数增加也能帮助小体系，CPU数多才启用GPU。。（namd2/3的自动机制）
+  - p.s. more GPU means more communication time
+  - 
+
+- 
+
+##### 后面应该测试的
+
+- 为什么比Gromacs慢好多？？
+- 最优CPU和GPU核数，namd2怎么分配的
+- namd3在小体系的表现
+- 试一下namd3少CPU多跑几个体系？
+
+> wall clock指实际流逝的时间
+>
+> CPU总时间（user + sys）是CPU执行用户进程操作和内核（代表用户进程执行）系统调用所耗时间的总和，即该进程（包括线程和子进程）所使用的实际CPU时间。
+>
+> https://blog.csdn.net/xingchenxuanfeng/article/details/73549506
