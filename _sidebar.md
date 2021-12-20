@@ -9,6 +9,7 @@
   - [结构生物学笔记](/course/structural-biology/sb-outline.md)
   - [分子免疫学笔记（待完成）](/course/molecular-immunology/molecular-immunology.md)
   - [生物信息学笔记（部分）](/course/bioinformatics/bioinformatics.md)
+  - [分子生物物理学（NUS）](/course/molecular-biophysics-(NUS)/LSM-3243.md)
 - Links
   - [西安交通大学钱学森学院](http://bjb.xjtu.edu.cn/)
   - [关于我](utils/about.md)

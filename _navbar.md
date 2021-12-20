@@ -8,5 +8,6 @@
   - [MD official and online tutorials](/MD/MD-tutorials-all.md)
 - [course notes](/course/README.md)
   - [structural biology](/course/structural-biology/sb-outline.md)
-  - [molecular immunology (to be continued)](/course/molecular-immunology/molecular-immunology.md)
+  - [molecular immunology (tbc)](/course/molecular-immunology/molecular-immunology.md)
   - [bioinformatics (part)](/course/bioinformatics/bioinformatics.md)
+  - [molecular biophysics](/course/molecular-biophysics-(NUS)/LSM-3243.md)

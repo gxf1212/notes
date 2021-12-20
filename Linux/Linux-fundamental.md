@@ -1062,6 +1062,15 @@ TODO list:
 - markdown based wiki system http://dynalon.github.io/mdwiki/#!index.md
 - 几（十）款制作帮助文档的工具汇总 https://blog.mimvp.com/article/38752.html
 
+#### TODO
+
+- [ ] \ce的重新render
+- [ ] 图片的重新render
+
+> https://docsify.js.org/#/zh-cn/markdown?id=markdown-%e9%85%8d%e7%bd%ae
+>
+> https://github.com/docsifyjs/docsify/issues/850
+
 # Installation and softwares
 
 note: some used stupid old strange paths. replace with yours (eg: your `/home`)
