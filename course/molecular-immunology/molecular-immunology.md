@@ -498,7 +498,7 @@ Ab can also be an antigen. Three types of epitope:
 - bind Fc receptor on the cell surface
   - opsonization (调理作用): phagocytosis (吞噬作用) by macrophages and neutrophils through Fc binding to Fc receptor
 
-    <img src="../../course/molecular-immunology/molecular-immunology.assets/4-ops.png" alt="4-ops" style="zoom:40%;" />
+    <img src="../../course/molecular-immunology/molecular-immunology.assets/4-ops.png" alt="4-ops" style="zoom:40%;" /></img>
   
     
   
@@ -935,7 +935,7 @@ hla --> 3[class III]
 >
 > MIC: MHC class I related gene
 
-DP/DQ etc. has multiple genes in one locus (基因座).
+DP/DQ etc. has multiple genes in one locus (基因座). Each of α and β have 2 types of chains.
 
 > A locus is **the specific physical location of a gene or other DNA sequence on a chromosome**, like a genetic street address. A, B, C, G, F are all **loci**.
 
@@ -949,69 +949,117 @@ Each gene has exons encoding all needed chains.
 
 ### Genetic characteristics
 
-- various genes
+- various genes (**多种基因**)
 
-- co-dominance (共显性): in an individual, both maternal and paternal alleles are expressed simultaneously (even though they might be heterozygous)
+- co-dominance (**共显性**): in an individual, both maternal and paternal alleles are expressed simultaneously (even though they might be heterozygous)
 
   > blood type Ag is also co-dominantly expressed
 
-- polymorphism (多态性): in a population, there are a huge number of alleles in one gene locus.
+- polymorphism (**多态性**): in a population, there are a huge number of alleles in one gene locus.
 
   > HLA is the most polymorphic gene, not "one of". multiple alleles (复等位基因)
+  
+- haplotype heredity (**单倍型遗传**): all HLA genes are so closely linked that they are considered as a complete genetic unit (作为一个整体遗传).
+
+- non-balance distribution and linkage disequilibrium
+
+  - **非随机分布**: different alleles express at certain frequencies, which vary with geographical regions.
+  - **连锁不平衡**: as above. (the frequency of two alleles presenting in the same chromosome is higher than predicted.)
 
 > provide public access to the data through the websites http://www.ebi.ac.uk/ipd/imgt/hla/ and here at [http://hla.alleles.org](http://hla.alleles.org/nomenclature/index.html). submit the sequences directly to the [IPD-IMGT/HLA Database](http://www.ebi.ac.uk/ipd/imgt/hla/)
 >
-> [naming rules](http://hla.alleles.org/nomenclature/naming.html)
+> check the most updated data there!
+>
 
+> HLA-genotyping (基因分型): determine the genotype of <u>12 HLA molecules</u> in an individual
+>
+> essential for matching (配型) in organ transplant, paternity test (亲子鉴定), etc.
+>
+> HLA I seems more diverse.
 
+[Naming Rules](http://hla.alleles.org/nomenclature/naming.html)
 
-
-
-
-
-
-
-##### non-balance distribution and linkage disequilibrium
-
-非随机分布与连锁不平衡  
-
-
+![6-naming](../../course\molecular-immunology\molecular-immunology.assets\6-naming.png)
 
 ## HLA molecule
 
 ### MHC class I
 
+- extracellular domain
 
+  β2m and α3 linked by a disulfide bond
 
+- transmembrane domain
 
+- intracellular domain: singnaling
+
+MHC class I is presented on the surface of any karyocytes (有核细胞) (except 滋养层细胞).
+
+​			<img src="../../course\molecular-immunology\molecular-immunology.assets\6-mhc1.jpg"  style="zoom:25%;" />								<img src="../../course\molecular-immunology\molecular-immunology.assets\6-mhc2.png"  style="zoom:75%;" />
 
 ### MHC class II
 
+- still the 3 domains
+- α1 and β1 contacts the TCR
+- a symbol of the ability of antigen presenting
 
+Expressed on professional APCs, B cells, activated T cells, thymus epithelial cells, etc.
 
+### MHC function
 
+#### That is: antigen presentation
 
-### MHC function: Antigen presentation
+| pathway | presenting cell     | antigen    | T cell type            | effect              |
+| ------- | ------------------- | ---------- | ---------------------- | ------------------- |
+| MHC I   | tumor/infected cell | endogenous | CD8<sup>+</sup> T cell | cytotoxic effect    |
+| MHC II  | APC (see above)     | exogenous  | CD4<sup>+</sup> T cell | promotes CTL and Ab |
 
+![6-anchor-point](../../course\molecular-immunology\molecular-immunology.assets\6-anchor-point.png)
 
+Some AAs is recognized by MHC and some TCR.
 
+#### Related functions
 
-
-
-
-
-
-
-
-
+- AP related
+  - MHC restriction: TCRs have to recognize MHC (when recognizing the antigen peptide)
+  - T cell development, selection (see later chapters)
+  - determines disease sensitivity (Ag presenting; linkage with sensitive genes 易感基因)
+  - involved in the heterogeneity of the genetic structure of population (种群基因结构的异质性)
+  - involved in transplant rejection
+- Immune regulation
+  - encode complement molecules
+  - encode inflammatory factors
+  - induce self-tolerance: MHC binds to KIR and NKG receptor
 
 ## MHC in medicine
 
+1. HLA与器官移植的关系
 
+   常用匹配位点： HLA-A， B， C， DRB1
 
+   血清学分型：依据不同HLA蛋白分子的抗原性不同
 
+   基因分型： 直接比较基因的序列
 
+   > major histocompatibility complex: antigens that induce strong and rapid rejection
+   >
+   > minor: weak and slow
 
+2. HLA与输血反应的关系
+   
+   白细胞溶血由白细胞携带的HLA不同导致（宿主抗移植物效应）
+   
+3. **HLA与疾病的相关性**：见上易感基因。百余种疾病！
+
+4. HLA与法医
+   
+   利用HLA的多态性（但不会变）进行亲子鉴定和身份确认
+   
+5. HLA与新型疫苗的开发  
+
+## Summary
+
+![6-summary](../../course\molecular-immunology\molecular-immunology.assets\6-summary.png)
 
 >No reflection questions
 
@@ -1049,6 +1097,20 @@ Cytokines are small multi-bioactive polypeptide or glycoprotein secreted by vari
 - 网络性：复杂的相互作用
 
 ## Categories and biological properties
+
+| categories  | meaning                     | representative                          | source cell                                                  | function                                                     |
+| ----------- | --------------------------- | --------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| interleukin | between leukocytes          | IL-2                                    | activated T cell                                             | proliferation of T/B/NK cell/LAK/monocyte                    |
+| interferon  | interfere viral replication | type I: IFN-α/β/ε/ω<br />type II: IFN-γ | type I: infected cells, lymphocytes<br />type II: activated/NK cells | type I: anti-tumor/virus<br />type II: boost immune response |
+|             |                             |                                         |                                                              |                                                              |
+|             |                             |                                         |                                                              |                                                              |
+|             |                             |                                         |                                                              |                                                              |
+|             |                             |                                         |                                                              |                                                              |
+|             |                             |                                         |                                                              |                                                              |
+
+LAK：淋巴因子激活的杀伤细胞
+
+
 
 ### Interleukin
 
@@ -1106,12 +1168,12 @@ Ig 超家族
 
 ## Biological effects
 
-- 
-- 
-- 
-- 
-- 
-- 
+- regulate immunity
+- participate in inflammatory response
+- stimulate proliferation and differentiation of hematopoietic cells
+- induce apoptosis
+- promote healing (愈伤)
+- 神经-内分泌-免疫网络调节
 
 
 
@@ -1120,6 +1182,10 @@ Ig 超家族
 
 
 # Chapter 8 Innate Immune System
+
+Before everything begins
+
+![lineage](../../course\molecular-immunology\molecular-immunology.assets\lineage.jpg)
 
 ## Components
 
