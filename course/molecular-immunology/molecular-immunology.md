@@ -1,8 +1,10 @@
 # Molecular Immunology notes
 
-Due to the absence of appropriate English online courses that match our course's syllabus, I have to write a note on my own. All the content is based on the newest slides and Chinese textbook. I wound not try to write everything in English, because the nouns must be 太难顶了... (I'm reading Chinese materials!) For important terms in English, I have to remark them in Chinese.
+Due to the absence of appropriate English online courses that match our course's syllabus, I have to write a note on my own. All the content is based on the newest slides and the Chinese textbook. I wound not try to write everything in English because the nouns must be 太难顶了... (I'm reading Chinese materials!) For important terms in English, I have to remark them in Chinese. So it's a bit challenging for general readers, while interesting for those who would love to dive into immunology research in the future. Due to the limited knowledge, there must be errors and omissions. Some of the terms are poorly translated or guessed due to the time limit. The Author kindly asks the respected readers for granted criticisms and instructions.
 
-The quoted areas are less-important comments, or end-of-chapter questions.
+The main reference materials include the slides (not available, but you can watch) our [Medicinal Immunology MOOC](https://www.icourse163.org/learn/XJTU-1206143814?tid=1464315463#/learn/content) in XJTU. I'm sure that the videos are great resources for students in medicine and life sciences. The first part (chapters 1 to 8) is about the components in the immune system, while the second part (the rest) tries to understand it as a whole and describes the processes. That's also what my notes follow. Hope you will like it. I recommend [a MOOC from Drew University](https://www.bilibili.com/video/BV1ui4y1Z75d/) with subtitles, which also covers a lot of details in immunology. You should go to that page because there are **several textbooks** shared in pdf version (see the top comment). BTW, welcome to subscribe [my Bilibili channel](https://space.bilibili.com/441196634) for educational videos from YouTube with Chinese subtitles!
+
+The quoted areas are less-important comments or end-of-chapter questions.
 
 # Chapter 1 Introduction 绪论
 
@@ -23,7 +25,7 @@ The quoted areas are less-important comments, or end-of-chapter questions.
 
 1. immune defense (**免疫防御**): get rid of foreign pathogens and tissues
 2. immune surveillance (**免疫监视**): eliminate abnormal/non-self cells, like tumor cells
-3. immune homostasis (**免疫自稳**): eliminate aging/dead cells, 维持内环境稳定
+3. immune homeostasis (**免疫自稳**): eliminate aging/dead cells, 维持内环境稳定
 
 ## Operation
 
@@ -61,22 +63,22 @@ The quoted areas are less-important comments, or end-of-chapter questions.
 
 ## Basic problem: how we respond to danger
 
-### Reserach
+### Research
 
-- Development, differentiation of immune cells and regulation
+- Development, differentiation of immune cells, and regulation
 - recognition mechanism, processes of immune response
 - interplay with other systems, relationship with various diseases
 
 ### Applications
 
-- diagonsis, treatment, prevention of diseases
+- diagnosis, treatment, prevention of diseases
 - biotechnology, etc
 
 ## Clone selection theory
 
 - Every immune cell expresses a receptor for a single antigen. Our body creates a library of immune cells, i.e. receptors recognizing all antigens.
 - When an antigen binds to its specific receptor, that cell is activated to proliferate itself. All daughter cells expressing the same receptor are called a clone.
-- If the receptor binds to its antigen during development of cells, the clone is aborted, which makes immune tolerance.
+- If the receptor binds to its antigen during the development of cells, the clone is aborted, which makes immune tolerance.
 
 ## Components
 
@@ -169,75 +171,69 @@ test figure
 
 ## Characteristics
 
-Antigen is substances that can 
+Antigens are substances that can 
 
 - induce the generation of antibody, sensitized lymphocytes (致敏淋巴细胞).
-- be recognized by the immune system and eliciting immune response.
+- be recognized by the immune system and elicit an immune response.
 
 ### Concepts
 
 Corresponding to the above two points,
 
-- antigenicity (抗原性): the ability to specifically combine with the final products of a immune response (i.e. antibodies or receptors on sensitized immune cells)
-- immunogenicity (免疫原性): the ability to induce immnue response
+- antigenicity (抗原性): the ability to specifically combine with the final products of an immune response (i.e. antibodies or receptors on sensitized immune cells)
+- immunogenicity (免疫原性): the ability to induce immune responses
 
 Thus, antigens are categorized into
 
 - hapten: only antigenicity, no immunogenicity
 - complete antigen: both
 
-Another thing is so-called "carrier effect": when a hapten is attached to a larger molecule (e.g. a protein), it can induce secondary, stronger immune response, if the animal has been primed with the same hapten conjugated to another carrier protein.
+Another thing is the so-called "carrier effect": when a hapten is attached to a larger molecule (e.g. a protein), it can induce a secondary, stronger immune response, if the animal has been primed with the same hapten conjugated to another carrier protein.
 
 ### Immunogenicity: influencing factors
 
 #### antigen
 
-##### foreigness (异物性)
+##### foreignness (异物性)
 
 i.e. the difference between antigen and "self"
 
-What is "self"? If a substance is came into contact <u>during embyronic period or the development of lymphocytes</u>, it is recogized as "self".
+What is "self"? If a substance comes into contact during the embryonic period or the development of lymphocytes, it is recognized as "self".
 
-> e.g. antigens carried from mother, HIV etc.
+e.g. antigens carried from mother, HIV, etc.
 
 categories:
 
 - heterogenetic (异种) antigen: come from other species
-
-  > food, microbes and their products, heterogenetic serum
-
+- food, microbes and their products, heterogenetic serum
 - allogeneic (同种异体) antigen: other individuals
-
-  > blood group antigen, transplant antigen, etc.
-
+- blood group antigen, transplant antigen, etc.
 - autogeneic (自体) antigen: from yourself
-
-  >tissue-specific antigen, denatured protein, etc.
+- tissue-specific antigen, denatured protein, etc.
 
 ##### chemical properties
 
 - molecular weight
 
-  - \> 10kD is better
+- - \> 10kD is better
 
 - chemical structure
 
-  - the more complex, the stronger immunogenecity is
+- - the more complex, the stronger immunogenicity is
 
-  1. protein \> polysaccharides \> nucleic acid \> lipids
-  2. more aromatic residues
-  3. more complex 2nd/3rd structure
+1. 1. protein > polysaccharides > nucleic acid > lipids
+   2. more aromatic residues
+   3. more complex 2nd/3rd structure
 
 - physical properties
 
-  - graunle > soluable
+- granule > soluble
 
-    > stays longer, harder to decompose
+- - stays longer, harder to decompose
 
 - epitope accessibility
 
-  - on the surface → stronger
-
+- - on the surface → stronger
 
 #### host
 
@@ -249,27 +245,29 @@ age, gender, genetic factor, healthy state
 
 皮内 > 皮下 > 肌肉 > 静脉 > 口腔
 
-> 口服抗原易导致免疫耐受
+口服抗原易导致免疫耐受
 
 ## Specificity
 
-The nature of antigen specificity is, the specificity of immune response.
+The nature of antigen specificity is, the specificity of an immune response.
 
-> e.g. 抗间氨基苯磺酸的抗体和邻位、对位、其他酸的反应弱或没有
+e.g. 抗间氨基苯磺酸的抗体和邻位、对位、其他酸的反应弱或没有
 
-- an antigen only activates lymphoytes specific to recognize it
-  - MHC, BCR or TCR resricted
-- products of a immune response only reacts with that specific antigen
+- an antigen only activates lymphocytes specific to recognize it
 
-cross reaction (交叉反应): an antibody to a specific antigen can react with other antigens
+- - MHC, BCR or TCR restricted
 
-> e.g. 种牛痘
->
-> nature: similar epitope
+- products of an immune response only react with that specific antigen
+
+cross-reaction (交叉反应): an antibody to a specific antigen can react with other antigens
+
+e.g. 种牛痘
+
+nature: similar epitope
 
 ### Epitope
 
-表位或抗原决定簇 (antigen determinant): groups/structures that determines that specificity of antigens. 
+表位或抗原决定簇 (antigen determinant): groups/structures that determine the specificity of antigens. 
 
 Also, they are the basic unit to specifically recognize TCR/BCR/antibody.
 
@@ -331,11 +329,16 @@ be --from--> TD-Ag
 ### Relationship (亲缘关系)
 
 - heterophilic (异嗜性) antigen
-  - common antigen between human and other species
-  - when pathogen enters, the immune response causes autoimmunity
+
+- - common antigen between humans and other species
+  - when a pathogen enters, the immune response causes autoimmunity
+
 - xenogenic (异种) antigen
-  - from other species, not common
+
+- - from other species, not common
+
 - allogenic (同种异体) antigen
+
 - autoantigen (自身抗原)
 
 ### Presenting
@@ -343,29 +346,26 @@ be --from--> TD-Ag
 Whether it is synthesized inside APC
 
 - yes: endogeneous (内源性) antigen.
-
-  > viral/tumor Ag
-
+- viral/tumor Ag
 - no: exogeneous (外源性) antigen.
+- bacteria, animal serum
 
-  > bacteria, animal serum
+### Other non-antigenic immune stimulators
 
-### Other non-antigenic immune stimulator
-
-> general understanding
+general understanding
 
 #### super antigen 
 
 超抗原, low conc of which can stimulate T cells
 
-> - endogenous: viral protein
-> - exogenous: bacterial exotoxin (secreted protein)
+- endogenous: viral protein
+- exogenous: bacterial exotoxin (secreted protein)
 
 #### adjuvant
 
-佐剂, non-specific substances which are added together with antigen in vaccines, to enhace or change the type of immune response.
+佐剂, non-specific substances which are added together with antigen in vaccines, to enhance or change the type of immune response.
 
-> 卡介苗, $\text{Al(OH)}_3$, artificial, Freundadjuvant
+卡介苗, \text{Al(OH)}_3, artificial, Freundadjuvant
 
 #### mitogen
 
@@ -375,20 +375,20 @@ Whether it is synthesized inside APC
 >
 > 表位的确定。To determine the action targets, to make vaccines
 >
-> Build a overlapping library and screen with the antibody
-
+> Build an overlapping library and screen with the antibody
+>
 > key points
 >
 > - T cell need degradation (presenting), TCR indirectly recognize
-> - BCR directly recognize, both linear (no degradation) or conf (degradation) are ok
->
+> - BCR directly recognize both linear (no degradation) or conf (degradation) are ok
+
 > 思考与小结
 >
 > 1. 抗原的免疫原性和反应原性（抗原性）及其关系
 > 2. 决定免疫原性的因素
-> 3. 载体效应，交叉反应
+>3. 载体效应，交叉反应
 > 4. 表位及表位的分类，表位与抗原的关系
-> 5. 常见的抗原的分类方法
+>5. 常见的抗原的分类方法
 > 6. 什么是超抗原  
 
 
@@ -429,10 +429,15 @@ hinge: flexible, between CH1 and CH2. not in IgM/E
 #### function
 
 - VH/VL: antigen binding
-  - contains hypervariable region (高变区) or complement-determining region (互补决定区), other region is called framework region
+
+- - contains a hypervariable region (高变区) or complement-determining region (互补决定区), other region is called framework region
+
 - CH1 and CL: allogenic marker (同种异型标志)
+
 - CH2: complement binding site for IgG
+
 - CH3: membrane receptor binding; cross 胎盘 for IgG; complement binding site for IgM
+
 - CH4 is exclusive in IgM/E, following CH3
 
 ### Enzymolysis
@@ -525,7 +530,7 @@ Ab can also be an antigen. Three types of epitope:
 | more info | subclasses | formation               | more on structure | infection | features                           |
 | --------- | ---------- | ----------------------- | ----------------- | --------- | ---------------------------------- |
 | IgM       | only one   | advanced embryo         | no hinge, CH4     | early     | blood type<br />marker of 宫内感染 |
-| IgG       | IgG1/2/3/4 | half a year after birth |                   | late      | long half life                     |
+| IgG       | IgG1/2/3/4 | half a year after birth |                   | late      | long half-life                     |
 
 ### Class switching (类别转换)
 
@@ -541,7 +546,7 @@ at DNA level, irreversible, from IgM to G to ...
 
 - a mixture of antibodies targeting a variety of epitopes
   
-  > clone: a cell cluster derived from lymphcytes targeting a single Ag
+  > clone: a cell cluster derived from lymphocytes targeting a single Ag
   
 - production: immunize animals with antigen
 
@@ -553,7 +558,7 @@ at DNA level, irreversible, from IgM to G to ...
 
 - from a single clone, targeting one epitope
 
-- flow of production
+- the flow of production
 
   - immunize mouse with Ag, isolate spleen cells
   - fuse them with myeloma cells (骨髓瘤细胞)
@@ -597,7 +602,7 @@ at DNA level, irreversible, from IgM to G to ...
 
     - chimeric Ab (嵌合抗体): murine V region+human C region
     - reshaped Ab (改型抗体): murine CDR+human rest part
-    - transgenic mouse: replace with human Ig genes, completely humanized
+    - transgenic mouse: replaced with human Ig genes, completely humanized
 
   - small Ab fragment
 
@@ -615,7 +620,7 @@ at DNA level, irreversible, from IgM to G to ...
 
     - bifunctional Ab: conjugated with enzyme, drug, etc. targeted therapy
 
-- antibody phage display: build a library of V region genes by cloning from polyclonal B cells from immunized human, import them into phages. Tandem expression with minor coat protein enables to display Fv antibodies on the surface of phages. Then we can screen Ab with desired affinity with our antigen.
+- antibody phage display: build a library of V region genes by cloning from polyclonal B cells from immunized humans, importing them into phages. Tandem expression with minor coat protein enables to display Fv antibodies on the surface of phages. Then we can screen Ab with the desired affinity with our antigen.
 
   ![4-display](../../course/molecular-immunology/molecular-immunology.assets/4-display.png)
 
@@ -662,7 +667,7 @@ reference videos
 
 ## Activation
 
-Note: these reactions occurs on the surface of the pathogen or an infected host cell. Will be refered to as "the surface" in the following context.
+Note: these reactions occur on the surface of the pathogen or an infected host cell. Will be referred to as "the surface" in the following context.
 
 ### Classic pathway (经典途径)
 
@@ -686,13 +691,13 @@ Note: these reactions occurs on the surface of the pathogen or an infected host 
 
    > But they only provide a protective environment for the reaction or an adhesive surface, and are not involved in the actual recognition. Without infection, regulator proteins like Factor H and I, inhibit C3bBb and C3b respectively, while pathogen components inhibit regulators.
 
-2. C3 is slightly and spontaneously hydrolyzed into C3(H<sub>2</sub>O), which is usually in the liquid phase, and have C3b-like properties, enabling attachment to the surface.
+2. C3 is slightly and spontaneously hydrolyzed into C3(H<sub>2</sub>O), which is usually in the liquid phase, and has C3b-like properties, enabling attachment to the surface.
 
    > in C3(H<sub>2</sub>O), C3a is incompletely released, which also exposes the thiol ester that is then attacked by −OH or -NH2 residues and helps C3b to be located on the surface.
 
-3. C3(H<sub>2</sub>O)/C3b also recruits Factor B, which is cleaved by Factor D into Bb. A factor P is added to stablize the structure, which makes the primary C3 convertase C3(H<sub>2</sub>O)Bb.
+3. C3(H<sub>2</sub>O)/C3b also recruits Factor B, which is cleaved by Factor D into Bb. A factor P is added to stabilize the structure, which makes the primary C3 convertase C3(H<sub>2</sub>O)Bb.
 
-4. C3bBb produces more C3b. **Positive feedback**! C3b goes the same process and induces large amount og the alternative pathway **C3 convertase C3bBbP**.
+4. C3bBb produces more C3b. **Positive feedback**! C3b goes the same process and induces a large amount of the alternative pathway **C3 convertase C3bBbP**.
 
    > Another kind of C3 convertase, different from the above one!
 
@@ -701,7 +706,7 @@ Note: these reactions occurs on the surface of the pathogen or an infected host 
 
 ### MBL pathway
 
-> MBL means 甘露糖结合凝集素  mannose binding lectin
+> MBL means 甘露糖结合凝集素  mannose-binding lectin
 >
 > lectin: a class of small proteins that bind pathogen-specific carbohydrates
 >
@@ -760,7 +765,7 @@ c3 --> o[other responses]
 4. lysing the cell
 
    - loss of plasma membrane integrity
-   - causes influx of water (a few ions) and burst (胀破) of the cell
+   - causes an influx of water (a few ions) and burst (胀破) of the cell
 
 ## Biological function
 
@@ -770,9 +775,9 @@ c3 --> o[other responses]
 
 - based on MAC, defending pathogens like G<sup>-</sup> bacteria and enveloped viruses, or tumor cell
 
-- it may causes human cell lysis. autoimmune disease or transplant rejection. 
+- it may cause human cell lysis. autoimmune disease or transplant rejection. 
 
-  > the MAC complex might be released and insert into the membrane of a normal cell
+  > the MAC complex might be released and inserted into the membrane of a normal cell
 
 ### Complement-mediated Opsonization
 
@@ -792,7 +797,7 @@ Activated by Ag-Ab complex, C3b is produced and recognized by erythrocytes (红�
 
 ### Inflammatory response
 
-介导炎症反应。mediated by the small fragments that are released into the blood stream.
+介导炎症反应。mediated by the small fragments that are released into the bloodstream.
 
 - anaphylatoxin (过敏毒素): C3a, C5a
 
@@ -802,15 +807,15 @@ Activated by Ag-Ab complex, C3b is produced and recognized by erythrocytes (红�
 
 - chemokine (趋化作用): C3a, C4a, C5a
 
-  attract innflammatory cells, like neutrophils to infiltrate the infected tissue. 
+  attract inflammatory cells, like neutrophils to infiltrate the infected tissue. 
 
-  > chemotaxis (趋化)/metastasis, adhension molecule production, for cells to move and extravasate
+  > chemotaxis (趋化)/metastasis, adhesion molecule production, for cells to move and extravasate
   >
   > also facilitate producing ROS, prostaglandin (前列腺素), etc
 
 - kinin-like function (激肽样作用): C2b
 
-  causes vasodilation (血管舒张) of capillaries (毛细血管), increases permeability
+  causes vasodilation (血管舒张) of capillaries (毛细血管), increases the permeability
 
 <img src="../../course\molecular-immunology\molecular-immunology.assets\5-c5a.png" alt="5-c5a" style="zoom:40%;" />
 
@@ -838,7 +843,7 @@ C3/4/5b is rapidly degraded in the liquid phase.
   >
   > <img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-c1.png" alt="5-re-c1" style="zoom:25%;" />
   >
-  > on cell surface: 膜辅助蛋白（MCP），衰变加速因子（DAF)，补体受体（CR1)
+  > on the cell surface: 膜辅助蛋白（MCP），衰变加速因子（DAF)，补体受体（CR1)
   >
   > <img src="../../course\molecular-immunology\molecular-immunology.assets\5-re-c4b2a.png" alt="5-re-c4b2a" style="zoom:25%;" />
 
@@ -882,10 +887,10 @@ Types:
 
 major histocompatibility complex:
 
-- a cluster of genes that are determining the compatibility of a transplanted organ
+- a cluster of genes determining the compatibility of a transplanted organ
   - translated into histocompatibility antigens
-- closely related to immune respone; genetic linkage (连锁)
-- specific in mammals; in human called Human Leukocyte Antigen (here MHC=HLA)
+- closely related to immune response; genetic linkage (连锁)
+- specific in mammals; in humans called Human Leukocyte Antigen (here MHC=HLA)
 
 ## HLA complex
 
@@ -935,7 +940,7 @@ hla --> 3[class III]
 >
 > MIC: MHC class I related gene
 
-DP/DQ etc. has multiple genes in one locus (基因座). Each of α and β have 2 types of chains.
+DP/DQ etc. has multiple genes in one locus (基因座). Each α and β have 2 types of chains.
 
 > A locus is **the specific physical location of a gene or other DNA sequence on a chromosome**, like a genetic street address. A, B, C, G, F are all **loci**.
 
@@ -959,7 +964,7 @@ Each gene has exons encoding all needed chains.
 
   > HLA is the most polymorphic gene, not "one of". multiple alleles (复等位基因)
   
-- haplotype heredity (**单倍型遗传**): all HLA genes are so closely linked that they are considered as a complete genetic unit (作为一个整体遗传).
+- haplotype heredity (**单倍型遗传**): all HLA genes are so closely linked that considered as a complete genetic unit (作为一个整体遗传).
 
 - non-balance distribution and linkage disequilibrium
 
@@ -991,7 +996,7 @@ Each gene has exons encoding all needed chains.
 
 - transmembrane domain
 
-- intracellular domain: singnaling
+- intracellular domain: signaling
 
 MHC class I is presented on the surface of any karyocytes (有核细胞) (except 滋养层细胞).
 
@@ -1000,8 +1005,8 @@ MHC class I is presented on the surface of any karyocytes (有核细胞) (except
 ### MHC class II
 
 - still the 3 domains
-- α1 and β1 contacts the TCR
-- a symbol of the ability of antigen presenting
+- α1 and β1 contact the TCR
+- a symbol of the ability of antigen-presenting
 
 Expressed on professional APCs, B cells, activated T cells, thymus epithelial cells, etc.
 
@@ -1016,7 +1021,7 @@ Expressed on professional APCs, B cells, activated T cells, thymus epithelial ce
 
 ![6-anchor-point](../../course\molecular-immunology\molecular-immunology.assets\6-anchor-point.png)
 
-Some AAs is recognized by MHC and some TCR.
+Some AAs are recognized by MHC and some TCR.
 
 #### Related functions
 
@@ -1024,7 +1029,7 @@ Some AAs is recognized by MHC and some TCR.
   - MHC restriction: TCRs have to recognize MHC (when recognizing the antigen peptide)
   - T cell development, selection (see later chapters)
   - determines disease sensitivity (Ag presenting; linkage with sensitive genes 易感基因)
-  - involved in the heterogeneity of the genetic structure of population (种群基因结构的异质性)
+  - involved in the heterogeneity of the genetic structure of the population (种群基因结构的异质性)
   - involved in transplant rejection
 - Immune regulation
   - encode complement molecules
@@ -1067,7 +1072,7 @@ Some AAs is recognized by MHC and some TCR.
 
 # Chapter 7 Cytokines 细胞因子
 
-Cytokines are small multi-bioactive polypeptide or glycoprotein secreted by various cells (especially immune cells).
+Cytokines are small multi-bioactive polypeptides or glycoproteins secreted by various cells (especially immune cells).
 
 ## Common features
 
@@ -1075,9 +1080,9 @@ Cytokines are small multi-bioactive polypeptide or glycoprotein secreted by vari
 
 ### Basic characteristics
 
-- soluable small protein (8~30kD)
+- soluble small protein (8~30kD)
 - low concentration, highly effective
-- induced, short half life
+- induced, short half-life
 - the below two
 
 ### Mode of action
@@ -1098,73 +1103,74 @@ Cytokines are small multi-bioactive polypeptide or glycoprotein secreted by vari
 
 ## Categories and biological properties
 
-| categories  | meaning                     | representative                          | source cell                                                  | function                                                     |
-| ----------- | --------------------------- | --------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| interleukin | between leukocytes          | IL-2                                    | activated T cell                                             | proliferation of T/B/NK cell/LAK/monocyte                    |
-| interferon  | interfere viral replication | type I: IFN-α/β/ε/ω<br />type II: IFN-γ | type I: infected cells, lymphocytes<br />type II: activated/NK cells | type I: anti-tumor/virus<br />type II: boost immune response |
-|             |                             |                                         |                                                              |                                                              |
-|             |                             |                                         |                                                              |                                                              |
-|             |                             |                                         |                                                              |                                                              |
-|             |                             |                                         |                                                              |                                                              |
-|             |                             |                                         |                                                              |                                                              |
+### Summary
+
+| categories                      | meaning                               | representative                          | source cell                                                  | function                                                     |
+| ------------------------------- | ------------------------------------- | --------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Interleukin                     | conversation among leukocytes         | IL-2                                    | activated T cells                                            | proliferation of T/B/NK cell/LAK/monocyte                    |
+| Interferon                      | interfere viral replication           | type I: IFN-α/β/ε/ω<br />type II: IFN-γ | type I: infected cells, lymphocytes<br />type II: activated/NK cells | type I: anti-tumor/virus<br />type II: boost immune response |
+| Colony-stimulating factor (CSF) | hematopoietic cells (see below)       | IL-3, GM-CSF, EPO, etc.                 | T cells, Mo/Mϕ, mesenchymal cells and some from other tissues | proliferation, differentiation, and activation                |
+| Chemokine                       | directional migration of immune cells | CXC, CC, C, CX3C family                 | T naive/act, Th cell, B cell, Mo/Mϕ/NK/DC                    | attract and activate immune cells, regulate angiogenesis     |
+| Tumor necrosis factor (TNF)     | tumor necrosis (like interferon)      | types: TNF-α/β<br />FasL, TRAIL         | activated monocytes or macrophages (α), T cells (β)          | kill target cell, regulate immune response                   |
+| Growth factor                   | promote growth and differentiation    | TGF-β, VGEF, EGF, FGF, NGF, PDGF        | tumor cells, fibroblasts, macrophages                        | promote growth and differentiation                           |
 
 LAK：淋巴因子激活的杀伤细胞
 
+### Comments
 
+#### Colony stimulating factor
 
-### Interleukin
+meaning: proliferation and differentiation of pluripotential hematopoietic stem cell and hematopoietic progenitor cell
 
+mainly: Mo/Mϕ, endothelial cells, fibroblasts
 
+> | CSF    | Chinese            | source                                  | function                                                     |
+> | ------ | ------------------ | --------------------------------------- | ------------------------------------------------------------ |
+> | IL-3   | 白介素-3           | T cell                                  | pulripotential hematopoietic stem cell (into myeloid progenitor) |
+> | GM-CSF | 粒细胞/巨噬细胞CSF | T cell, "mainly"                        | myeloid and red stem cell, Mϕ activity<br />neutrophil, eosinophil, erythrocyte, DC |
+> | M-CSF  | 巨噬细胞CSF        | "mainly"                                | monocytes, Mϕ activity                                       |
+> | G-CSF  | 粒细胞CSF          | "mainly"                                | granuloid stem cell (e.g. neutrophil)                        |
+> | SCF    | 干细胞因子         | hepatic cells (肝细胞)<br />fibroblasts | pulripotential stem cell, melanophore (黑色素细胞), mastocyte |
+> | EPO    | 红细胞生成素       | renal cells (肾细胞)                    | 红系 stem cell                                               |
+> | TPO    | 血小板生成素       | hepatic and renal cells                 |                                                              |
 
+#### Chemokine
 
+nomenclature: 
 
-### Interferon
-
-
-
-
-
-### Colony stimulating factor (CSF)
-
-
-
-
-
-### Chemokine
-
-
-
-
-
-### Tumor necrosis factor (TNF)
-
-
-
-
-
-### Growth factor
-
-
-
-
+- chemokine: family + L + num, e.g. CXCL8
+- receptor: family + R + num, e.g. CCR5
 
 ## Cytokine receptor
 
+Three regions, for signaling.
 
+### Membrane CR: categories
 
-Ig 超家族  
+| xx superfamily receptors | also known as/abbreviated         | their ligands                                            | domain structure                                             | remark                                                       |
+| ------------------------ | --------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Immunoglobin             | IgSFR                             | IL-1/18, M-CSF, SCF                                      | α/β, each has one or more IgSF domain(s)                     | GM-CSF subfamily: IL-3/5, common β                           |
+| Hematopoietic factor     | Type I cytokine RSF               | IL-2$\sim$7, 9, 11$\sim$13, 15,...<br />GM-CSF, G-CSF... | α/β clamps ligand<br />intracellular γ<br />conserved Cys and WSXWS | IL-2 subfamily, common γ<br />IL-6 subfamily, common gp130   |
+| Interferon               | Type II cytokine RSF              | IFN-α/β/γ, IL-10, etc.                                   | similar, except WSXWS                                        | [Jak/STAT pathway](https://www.bilibili.com/video/BV1ub4y1b7B5/) |
+| TNF                      | Type III cytokine RSF<br />TNFRSF | TNF-α/β<br />CD27/30/40L<br />NGF, Fas                   | mostly homotrimer<br />each chain has many Cys-rich domains  |                                                              |
+| Chemokine                |                                   | IL-8                                                     | all are GPCR                                                 | also Jak/STAT pathway                                        |
 
+### Subunits
 
+- Some subunits are for recognition; some for signaling. 
 
-Ⅰ 型细胞因子超家族  
+- Some are shared, which have similar functions. e.g. IL-2/4/7/9/15/21
 
+- affinity
 
+  <img src="../../course\molecular-immunology\molecular-immunology.assets\7-receptor.png" alt="7-receptor" style="zoom:33%;" />
 
-可溶性细胞因子受体  
+### Soluble cytokine receptor
 
+Some are circulating and only have binding domains. Their work might be:
 
-
-
+- inhibiting: competing with membrane receptors
+- enhancing: transport and gather cytokines 
 
 ## Biological effects
 
@@ -1172,10 +1178,8 @@ Ig 超家族
 - participate in inflammatory response
 - stimulate proliferation and differentiation of hematopoietic cells
 - induce apoptosis
-- promote healing (愈伤)
+- promote wound healing (愈伤)
 - 神经-内分泌-免疫网络调节
-
-
 
 > No reflection questions
 
@@ -1183,9 +1187,17 @@ Ig 超家族
 
 # Chapter 8 Innate Immune System
 
-Before everything begins
+Before everything begins, we should memorize:
 
 ![lineage](../../course\molecular-immunology\molecular-immunology.assets\lineage.jpg)
+
+*Mo*=Monocytes, and *Mϕ*=macrophages, PMN=polymorphonuclear多形核白细胞 (neutrophil, basophil (*Ba*), ensinophil (*Eo*))，也称粒细胞
+
+髓系细胞包括：红细胞、血小板、粒细胞、单核细胞，还有经典DC、肥大细胞等（DC有髓样的也有浆细胞样的）
+
+淋巴细胞包括：T细胞、B细胞、NK细胞，还有NKT细胞、γδT细胞、B1细胞等
+
+这些（除了红细胞、血小板）全都是白细胞
 
 ## Components
 
@@ -1264,6 +1276,131 @@ IFN
 
 
 ## Summary
+
+• 一 固有免疫的构成
+1 屏障作用
+皮肤黏膜屏障：物理屏障，化学屏障，菌群的作用
+器官屏障：解剖基础，屏障的作用（阻挡病原体，大分子，
+活化的淋巴细胞）
+2 免疫细胞：巨噬细胞， NK细胞
+
+巨噬细胞，中性粒细胞， NK细胞， 树突状细胞：嗜酸
+性粒细胞，嗜碱性细胞，肥大细胞， NKT细胞， γδT细
+胞， B1细胞
+
+1）如何识别
+2）作用机制
+
+固有免疫分子
+
+• 二 固有免疫的特点
+• 三 固有免疫应答的过程及其与适应性免疫应答的关系  
+
+
+
+# Chapter 9 Antigen Presenting
+
+T cells cannot directly recognize antigens (even peptide); need the help of APCs.
+
+## Antigen presenting cells
+
+### Basics
+
+APCs are cells which can process antigens and present them to T cells in the form of pMHC complex.
+
+Two conditions must be satisfied to make it an APC:
+
+- degrading proteins
+- express MHC molecules
+  - MHC I: tumor/infected cells
+  - MHC II
+    - professional: DC, Mϕ, B cell
+    - inflammatory: endothelial/epithelial cells, fibroblasts
+
+### Dendritic cells
+
+look like dendrite (树突)
+
+#### Classical DC (cDC)
+
+- from myeloid progenitor cells, everywhere in the body.
+- high expression of MHC II, can activate naive T cells (初始T细胞)
+
+classical DC also includes 
+
+- follicular dendritic cells (FDC)
+  - in follicles
+  - low expression of MHC II, weak presenting
+  - but keeps Ag-Ab for long to stimulate B cells and forms immune memory
+- langerhans cell
+
+##### Maturation
+
+Immature DCs in peripheral tissues
+
+and migrate into peripheral immune organs and become mature DCs.
+
+| terms                                 | immature DC | mature DC |
+| ------------------------------------- | ----------- | --------- |
+| Fc/mannose receptor expression        |             |           |
+| MHC II expression on the cell surface |             |           |
+| MHC II half-life                      | ~10 h       | >100 h    |
+| co-stimulatory molecules expression   |             |           |
+| main function                         |             |           |
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\9-mature.png" alt="9-mature" style="zoom:45%;" />
+
+#### Other
+
+- plasmacytoid DC (pDC): produces **type I IFN** 
+- inflammatory DC: from monocytes, in inflammatory region
+- a few DCs negatively regulate ..
+
+#### Function
+
+- uptake and present cells, activate naive T cell
+- immune regulation
+- induce and maintain immune tolerance
+  - clonal deletion of T cells in thymus (see later chapters)
+  - T cell tolerance when immature DCs in tissues interacts with them
+
+Application: cancer vaccines. 
+
+> Isolate monocytes from the patient and induce them to differentiate into DCs. Treat with tumor tissue lysate to maturate DCs. Inject them back.
+
+### Monocytes/Macrophages
+
+
+
+### B cell
+
+
+
+
+
+## Antigen presenting
+
+### MHC II pathway
+
+
+
+### MHC I pathway
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
