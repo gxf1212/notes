@@ -1,6 +1,8 @@
+
+
 # Molecular Immunology notes
 
-Due to the absence of appropriate English online courses that match our course's syllabus, I have to write a note on my own. All the content is based on the newest slides and the Chinese textbook. I wound not try to write everything in English because the nouns must be 太难顶了... (I'm reading Chinese materials!) For important terms in English, I have to remark them in Chinese. So it's a bit challenging for general readers, while interesting for those who would love to dive into immunology research in the future. Due to the limited knowledge, there must be errors and omissions. Some of the terms are poorly translated or guessed due to the time limit. The Author kindly asks the respected readers for granted criticisms and instructions.
+Due to the absence of appropriate English online courses that match our course's syllabus, I have to write a note on my own. All the content is based on the newest slides in 2021 and the Chinese textbook. I wound not try to write everything in English because the nouns must be 太难顶了... (I'm reading Chinese materials!)  but from chapter 3 most content is in English. For important terms in English, I have to remark them in Chinese. So it's a bit challenging for general readers, while interesting for those who would love to dive into immunology research in the future. Due to the limited knowledge, there must be errors and omissions. Some of the terms are poorly translated or guessed due to the time limit. The author kindly asks the respected readers for granted criticisms and instructions.
 
 The main reference materials include the slides (not available, but you can watch) our [Medicinal Immunology MOOC](https://www.icourse163.org/learn/XJTU-1206143814?tid=1464315463#/learn/content) in XJTU. I'm sure that the videos are great resources for students in medicine and life sciences. The first part (chapters 1 to 8) is about the components in the immune system, while the second part (the rest) tries to understand it as a whole and describes the processes. That's also what my notes follow. Hope you will like it. I recommend [a MOOC from Drew University](https://www.bilibili.com/video/BV1ui4y1Z75d/) with subtitles, which also covers a lot of details in immunology. You should go to that page because there are **several textbooks** shared in pdf version (see the top comment). BTW, welcome to subscribe [my Bilibili channel](https://space.bilibili.com/441196634) for educational videos from YouTube with Chinese subtitles!
 
@@ -27,16 +29,16 @@ The quoted areas are less-important comments or end-of-chapter questions.
 2. immune surveillance (**免疫监视**): eliminate abnormal/non-self cells, like tumor cells
 3. immune homeostasis (**免疫自稳**): eliminate aging/dead cells, 维持内环境稳定
 
-## Operation
+## Operation (运转)
 
 分为两部分
 
 - 固有免疫（innate immune）：与生俱来的，第一道防线，高等和低等生物都有
 
-  - 组成：免疫屏障，固有免疫细胞，免疫分子
+  - 组成：免疫屏障，固有免疫细胞，免疫分子 (see chapter 9)
   - 特点：无特异性，无记忆性
 
-- 特异性免疫（adaptive immune）：高等生物通过接触病原体建立起来的，针对病原体的免疫防御能力
+- 特异性免疫（adaptive immune）：高等生物通过接触病原体建立起来的，针对特定病原体的免疫防御能力
 
   - 组成
 
@@ -51,6 +53,9 @@ The quoted areas are less-important comments or end-of-chapter questions.
 
 - good 
   - defend pathogens, eliminate cancer cells, clear aging/dead cells
+  
+    > coresponding to the functions
+  
 - bad
   - too weak: cannot do above, continuous infection
   - too strong
@@ -76,7 +81,7 @@ The quoted areas are less-important comments or end-of-chapter questions.
 
 ## Clone selection theory
 
-- Every immune cell expresses a receptor for a single antigen. Our body creates a library of immune cells, i.e. receptors recognizing all antigens.
+- Every immune cell expresses a receptor for **a single antigen**. Our body creates a library of immune cells, i.e. receptors recognizing all antigens.
 - When an antigen binds to its specific receptor, that cell is activated to proliferate itself. All daughter cells expressing the same receptor are called a clone.
 - If the receptor binds to its antigen during the development of cells, the clone is aborted, which makes immune tolerance.
 
@@ -96,7 +101,7 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 
 - 骨髓：含造血干细胞，是所有血细胞的来源
   - 为发育提供了环境：生长因子、基质细胞等
-  - 分为粒系/髓系（myeliod）和淋巴系（lymphatic）
+  - 分为粒系/髓系（myeloid）和淋巴系（lymphatic）
 - 胸腺：T细胞分化发育的场所。成年后退化
 
 ### Periphery (secondary) immune organs
@@ -107,7 +112,7 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 
 #### spleen
 
-- 最大的免疫器官
+- 最大的免疫器官（黏膜：你礼貌吗？）
 - 淋巴细胞定居、发挥功能的场所
 
 
@@ -128,7 +133,7 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 
 test figure
 
-<img src="/course/molecular-immunology/molecular-immunology.assets/1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" /><img src="../../course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
+<img src="./course/molecular-immunology/molecular-immunology.assets/1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" /><img src="../../course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
 
 具体结构
 
@@ -204,36 +209,41 @@ e.g. antigens carried from mother, HIV, etc.
 
 categories:
 
-- heterogenetic (异种) antigen: come from other species
-- food, microbes and their products, heterogenetic serum
-- allogeneic (同种异体) antigen: other individuals
-- blood group antigen, transplant antigen, etc.
+- heterogenetic (**异种**) antigen: come from other species
+
+  > food, microbes and their products, heterogenetic serum
+
+- allogeneic (**同种异体**) antigen: other individuals
+
+  > blood group antigen, transplant antigen, etc.
+
 - autogeneic (自体) antigen: from yourself
-- tissue-specific antigen, denatured protein, etc.
+
+  > tissue-specific antigen, denatured protein, etc.
 
 ##### chemical properties
 
 - molecular weight
 
-- - \> 10kD is better
+  - **bigger** (\> 10kD) is better
 
 - chemical structure
 
-- - the more complex, the stronger immunogenicity is
+  the more **complex**, the stronger immunogenicity is
 
-1. 1. protein > polysaccharides > nucleic acid > lipids
+   1. protein > polysaccharides > nucleic acid > lipids
    2. more aromatic residues
-   3. more complex 2nd/3rd structure
+   3. complex 2nd/3rd structure
 
 - physical properties
 
-- granule > soluble
+  - granule > soluble
 
-- - stays longer, harder to decompose
+    **stay**s longer, harder to decompose
 
 - epitope accessibility
 
-- - on the surface → stronger
+  - on the **surface** → stronger
 
 #### host
 
@@ -1191,7 +1201,9 @@ Before everything begins, we should memorize:
 
 ![lineage](../../course\molecular-immunology\molecular-immunology.assets\lineage.jpg)
 
-*Mo*=Monocytes, and *Mϕ*=macrophages, PMN=polymorphonuclear多形核白细胞 (neutrophil, basophil (*Ba*), ensinophil (*Eo*))，也称粒细胞
+*Mo*=Monocytes, and *Mϕ*=macrophages, monocytes differentiate into Mϕ or DC.
+
+PMN=polymorphonuclear多形核白细胞 (neutrophil, basophil (*Ba*), ensinophil (*Eo*))，也称粒细胞
 
 髓系细胞包括：红细胞、血小板、粒细胞、单核细胞，还有经典DC、肥大细胞等（DC有髓样的也有浆细胞样的）
 
@@ -1203,55 +1215,165 @@ Before everything begins, we should memorize:
 
 ### Barrier
 
+balances tolerance and response
+
 #### skin and mucosa
 
-正常菌群  
+> The mucosa is larger than the skin!
+
+- 机械阻挡作用：致密结构，tight junction
+- 分泌物：眼泪、唾液，anti-bacterial substances
+- 免疫细胞
+  - 皮肤：皮试，试是否过敏
+  - 黏膜：丰富的IgA、淋巴细胞、滤泡
+
+- 正常菌群
+  - 寄生在黏膜表面的，大量微生物
+  - 提供营养、免疫防御（如分泌毒素），帮助塑造了免疫系统
 
 
+<img src="../../course\molecular-immunology\molecular-immunology.assets\8-skin.jpg" alt="8-skin"  /><img src="../../course\molecular-immunology\molecular-immunology.assets\8-mucosa.png" alt="8-skin" style="zoom:70%;" />
+
+<center>left: langhans cell in the skin; right: mucosa distribution</center>
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\8-Intestinal Immune System.gif" alt="8-Intestinal Immune System" style="zoom:70%;" />
+
+<center>intestinal immune system</center>
 
 #### organs
 
 ##### blood-brain barrier
 
+- prevents pathogen, lymphocytes and huge molecules (like toxins)
 
+  > it's newly discovered that there exist lymph-vessels (淋巴管) in the brain, published in Nature
 
-##### placenta
+- endothelial cells in the capilliaries are tighly joined, with astroyte (少突胶质细胞) forms 鞘壁 that covers the capilliaries
 
+<img src="../../course\molecular-immunology\molecular-immunology.assets\8-bbb.png" alt="8-bbb" style="zoom:50%;" />
 
+##### placenta barrier
+
+滋养层细胞阻挡来自母体的细菌等
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\8-placenta.png" alt="8-placenta" style="zoom:40%;" />
 
 ### Innate immune cells
 
 #### Phagocytes
 
+##### pattern recognition receptor
+
+recognize common structures in pathogens directly
+
+> on the surface of macrophages, DC, organ, and serum, etc.
+
+- PRR inculdes
+
+  - membrane: mannose receptor (MR), scavenger receptor (SR, 清道夫受体), Toll-like receptor (TLR)
+  - secretory: MBL, C reaction protein, LPS binding protein
+
+- its ligand (模式分子)
+
+  - pathogen-associated molecular pattern (**PAMP**)
+
+    conserved, components on pathogen surface, like LPS, DNA, RNA, phospholipids
+
+  - damage-associated molecular pattern (**DAMP**)
+
+    HSP, uric acid, ROS, degraded substance (like apoptosis)
+
+> for reference
+>
+> ![8-prr](../../course\molecular-immunology\molecular-immunology.assets\8-prr.png)
+
 ##### macrophage
 
+###### basics
 
+- types: Kuffer cell (枯否细胞, liver), microglial (小胶质细胞), osteoclast (破骨细胞, brain), free marophages (tissues). widely distributed.
+- morphological characteristics: rich in cytosol and granules, 
+
+###### ways of cytosis (吞噬)
+
+- phagocytosis
+
+- pinocytosis
+
+- receptor-mediated endocytosis (like FcR, complement)
+
+  <img src="../../course\molecular-immunology\molecular-immunology.assets\8-receptor-mediated.png" alt="8-receptor-mediated" style="zoom:40%;" />
+
+###### mode of distruction
+
+- oxygen-dependent: coenzymes reduce O<sub>2</sub> into various ROS; iNOS produces NO
+- oxygen-independent: lactate accumulation; lysozyme etc., antibacterial peptide distruct the cell wall
+
+###### functions
+
+- clear pathogens
+- kill infected/tumor cells, 胞内寄生菌
+- mediate inflammatory response (produce cytokines)
+- process and present Ag, secondary response
+- immune regulation
 
 ##### neutrophil
 
-
+- distributed in blood, 60 to 70 percent of white blood cells. rapid generation and short half-life
+- morphological features: 分叶核, rich in granules
+- similar function of cytosis
+- mode of distruction: MPO (髓过氧化物酶), etc; oxygen dependent and independent
+- functions: clear pathogens (mainly bacteria), induce inflammatory response
 
 #### Dendritic cells
 
-##### classical
+morphological features: look like dendrite (树突)
 
+##### classical (cDC)
 
+- found in tissues and peripheral immune organs
+- function
+  - immature: Ag uptake (by PRR, opsonic receptor)
+  - mature: Ag presentation (by expressing MHC and co-stimulator)
 
-##### plasmacytoid DC
+see chapter 9 for more details! 
 
-IFN  
+##### plasmacytoid DC (pDC)
 
-
-
-
+produces IFN-α/β 
 
 #### Natural killer cells
 
+Large granular lymphocytes. No sensitization required.
+
+##### receptors
+
+| receptors  | ligand   | receptor motif | receptor example                                             |
+| ---------- | -------- | -------------- | ------------------------------------------------------------ |
+| inhibitory | MHC I    | ITIM           | 杀伤细胞免疫球蛋白样受体: KIR<br />杀伤细胞凝集素样受体: KLR |
+| activating | not sure | ITAM           | KIR2DS， KIR3DS, NKG2D                                       |
 
 
-#### 固有样淋巴细胞  
 
 
+
+
+
+#### Innate-like lymphocytes
+
+固有样淋巴细胞 (ILL), is between adaptive and innate immune cells. 
+
+Restricted diversity, directly recognize pathogens and become activated.
+
+| cell type | feature                                | found in                   | antigen                                | response                                                     |
+| --------- | -------------------------------------- | -------------------------- | -------------------------------------- | ------------------------------------------------------------ |
+| NKT cell  | both TCR-CD3 and CD56 (a symbol of NK) | bone marrow, liver, thymus | phospholipids, glycolipids             | cytotoxic effect and cytokines                               |
+| γδT cell  | TCR: γ,δ chain                         | mucosa (early)             | MICA/B, viral protein, HSP, P/G lipids | the same                                                     |
+| B1 cell   | self-renewing B cells                  | 胸膜腔，腹膜腔，小肠固有层 | TI-Ag, denatured self Ag               | rapid IgM, early resposne; no <br />class switching, no memory |
+
+> cytotoxic effect: granzyme, perforin and Fas/FasL
+
+A lot of other cells are involved into innate immune response, like mastocytes.
 
 ### Innate immune molecules
 
@@ -1319,8 +1441,6 @@ Two conditions must be satisfied to make it an APC:
 
 ### Dendritic cells
 
-look like dendrite (树突)
-
 #### Classical DC (cDC)
 
 - from myeloid progenitor cells, everywhere in the body.
@@ -1336,17 +1456,20 @@ classical DC also includes
 
 ##### Maturation
 
-Immature DCs in peripheral tissues
+Immature DCs in peripheral tissues [phagocytosis (吞噬病原体、死细胞等), macropinocytosis (巨胞饮)],
 
 and migrate into peripheral immune organs and become mature DCs.
 
-| terms                                 | immature DC | mature DC |
-| ------------------------------------- | ----------- | --------- |
-| Fc/mannose receptor expression        |             |           |
-| MHC II expression on the cell surface |             |           |
-| MHC II half-life                      | ~10 h       | >100 h    |
-| co-stimulatory molecules expression   |             |           |
-| main function                         |             |           |
+| terms                                   | immature DC              | mature DC          |
+| --------------------------------------- | ------------------------ | ------------------ |
+| Fc/mannose receptor expression          | ++                       | +-                 |
+| MHC II expression                       | +                        | ++                 |
+| MHC II and lysozyme on the cell surface |                          | largely $\uparrow$ |
+| MHC II half-life                        | ~10 h                    | >100 h             |
+| co-stimulatory molecules expression     | +-                       | ++                 |
+| **main function**                       | Ag uptake and processing | Ag presentation    |
+
+> what does +- mean?
 
 <img src="../../course\molecular-immunology\molecular-immunology.assets\9-mature.png" alt="9-mature" style="zoom:45%;" />
 
@@ -1358,29 +1481,55 @@ and migrate into peripheral immune organs and become mature DCs.
 
 #### Function
 
-- uptake and present cells, activate naive T cell
-- immune regulation
+- uptake and present Ag, high co-stimulator expression
+  - activate CD4<sup>+</sup> and CD8<sup>+</sup> T cell
+  - the only one to activate **naive T cell** !
+- immune regulation: produce cytokines
 - induce and maintain immune tolerance
   - clonal deletion of T cells in thymus (see later chapters)
   - T cell tolerance when immature DCs in tissues interacts with them
 
 Application: cancer vaccines. 
 
-> Isolate monocytes from the patient and induce them to differentiate into DCs. Treat with tumor tissue lysate to maturate DCs. Inject them back.
+> Isolate monocytes from the patient and induce them to differentiate into immature DCs (or isolate these). Treat with tumor tissue lysate to maturate DCs. Inject them back.
+>
+> <img src="../../course\molecular-immunology\molecular-immunology.assets\9-dc.jpg" alt="9-dc" style="zoom:60%;" />
 
 ### Monocytes/Macrophages
 
+- Mo is derived from bone marrow and differentiate into Mϕ
+- good at Ag uptake and processing
+  - expressing various receptors
+  - three ways (see chapter 8)
+- upon IFN-γ/TNF-α (from T cell, etc.)
+  - high MHC I/II and co-stimulator expression, present Ag to CD4/8<sup>+</sup> T cell
+  - enhanced all kinds of "cytosis"
+- cannot activate naive T cells; so only in secondary response (再次应答)
 
+### B cells
 
-### B cell
+- mIg(膜免疫球蛋白, maily BCR?)-mediated endocytosis, Ag enrichment and processing
+- present MHC II-Ag to Th cells (with co-stimulator in inflammatory conditions)
+- reversely be activated by (CD4<sup>+</sup> and?) Th cells (TD-Ag) to produce Ab
 
-
-
-
+<img src="../../course\molecular-immunology\molecular-immunology.assets\9-professional.png" alt="9-professional" style="zoom:60%;" />
 
 ## Antigen presenting
 
 ### MHC II pathway
+
+#### Ag uptake and processing
+
+- mIg-mediated
+- complement-receptor-mediated
+- Fc-receptor-mediated
+- phagocytosis and pinocytosis
+
+sent into endosomes (胞内体) and then lyzosomes for degradation
+
+#### MHC synthesis, their transportation and assembly
+
+- synthesized in ER
 
 
 
@@ -1391,6 +1540,47 @@ Application: cancer vaccines.
 
 
 
+
+
+
+| pathways |      |      |      |      |
+| -------- | ---- | ---- | ---- | ---- |
+|          |      |      |      |      |
+|          |      |      |      |      |
+|          |      |      |      |      |
+|          |      |      |      |      |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Chapter 10 T cell-mediated Immune Response T细胞介导的免疫应答
+
+## Recognition of Ag and activation of T cell
+
+
+
+
+
+
+
+
+
+
+
+
+
+## T cell effective stage
 
 
 
