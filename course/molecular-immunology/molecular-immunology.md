@@ -1,5 +1,3 @@
-
-
 # Molecular Immunology notes
 
 Due to the absence of appropriate English online courses that match our course's syllabus, I have to write a note on my own. All the content is based on the newest slides in 2021 and the Chinese textbook. I wound not try to write everything in English because the nouns must be 太难顶了... (I'm reading Chinese materials!)  but from chapter 3 most content is in English. For important terms in English, I have to remark them in Chinese. So it's a bit challenging for general readers, while interesting for those who would love to dive into immunology research in the future. Due to the limited knowledge, there must be errors and omissions. Some of the terms are poorly translated or guessed due to the time limit. The author kindly asks the respected readers for granted criticisms and instructions.
@@ -178,7 +176,7 @@ test figure
 
 Antigens are substances that can 
 
-- induce the generation of antibody, sensitized lymphocytes (致敏淋巴细胞).
+- induce the generation of antibody, primed lymphocytes (致敏淋巴细胞).
 - be recognized by the immune system and elicit an immune response.
 
 ### Concepts
@@ -193,7 +191,7 @@ Thus, antigens are categorized into
 - hapten: only antigenicity, no immunogenicity
 - complete antigen: both
 
-Another thing is the so-called "carrier effect": when a hapten is attached to a larger molecule (e.g. a protein), it can induce a secondary, stronger immune response, if the animal has been primed with the same hapten conjugated to another carrier protein.
+Another thing is the so-called "carrier effect": when a hapten is attached to a larger molecule (e.g. a protein), it can induce a secondary, stronger immune response, if the animal has been primed (致敏) with the same hapten conjugated to another carrier protein.
 
 ### Immunogenicity: influencing factors
 
@@ -271,7 +269,7 @@ e.g. 抗间氨基苯磺酸的抗体和邻位、对位、其他酸的反应弱或
 
 cross-reaction (交叉反应): an antibody to a specific antigen can react with other antigens
 
-e.g. 种牛痘
+e.g. 给人种牛痘
 
 nature: similar epitope
 
@@ -281,12 +279,12 @@ nature: similar epitope
 
 Also, they are the basic unit to specifically recognize TCR/BCR/antibody.
 
-| epitope                      | linear epitope 线性表位 | conformational epitope 构象表位 |
-| ---------------------------- | ----------------------- | ------------------------------- |
-| sequence                     | sequential              | separated                       |
-| 3D structure                 | close                   | close                           |
-| after denaturation/digestion | remains                 | distroyed                       |
-| recognized by                | TCR, BCR                | mainly BCR                      |
+| epitope type                 | linear epitope <br />线性表位 | conformational epitope <br />构象表位 |
+| ---------------------------- | :---------------------------- | ------------------------------------- |
+| sequence                     | sequential                    | separated                             |
+| 3D structure                 | close                         | close                                 |
+| after denaturation/digestion | remains                       | distroyed                             |
+| recognized by                | TCR, BCR                      | mainly BCR                            |
 
 构象表位：由氨基酸序列不连续，但在空间上相互接近、形成特定构象的几个氨基酸构成的表位。
 
@@ -450,7 +448,7 @@ hinge: flexible, between CH1 and CH2. not in IgM/E
 
 - CH4 is exclusive in IgM/E, following CH3
 
-### Enzymolysis
+### Enzymolysis (酶解)
 
 <img src="../../course/molecular-immunology/molecular-immunology.assets/4-ab-cleavage.png" alt="4-ab-cleavage" style="zoom:25%;" />
 
@@ -1207,13 +1205,17 @@ PMN=polymorphonuclear多形核白细胞 (neutrophil, basophil (*Ba*), ensinophil
 
 髓系细胞包括：红细胞、血小板、粒细胞、单核细胞，还有经典DC、肥大细胞等（DC有髓样的也有浆细胞样的）
 
-淋巴细胞包括：T细胞、B细胞、NK细胞，还有NKT细胞、γδT细胞、B1细胞等
+淋巴细胞包括：T细胞、B细胞、NK细胞，固有样淋巴细胞还有：NKT细胞、γδT细胞、B1细胞等
 
-这些（除了红细胞、血小板）全都是白细胞
+这些（除了红细胞、血小板）全都是白细胞。
+
+狭义的免疫细胞等同于白细胞，广义的免疫细胞还包括其他组织的相关细胞，如呈递抗原的内皮细胞。
+
+> should draw a Venn plot
 
 ## Components
 
-### Barrier
+### Barrier (屏障作用)
 
 balances tolerance and response
 
@@ -1244,7 +1246,7 @@ balances tolerance and response
 
 ##### blood-brain barrier
 
-- prevents pathogen, lymphocytes and huge molecules (like toxins)
+- prevents pathogen, lymphocytes and big molecules (like toxins)
 
   > it's newly discovered that there exist lymph-vessels (淋巴管) in the brain, published in Nature
 
@@ -1264,14 +1266,14 @@ balances tolerance and response
 
 ##### pattern recognition receptor
 
-recognize common structures in pathogens directly
+recognize **common structures** in pathogens directly
 
 > on the surface of macrophages, DC, organ, and serum, etc.
 
 - PRR inculdes
 
   - membrane: mannose receptor (MR), scavenger receptor (SR, 清道夫受体), Toll-like receptor (TLR)
-  - secretory: MBL, C reaction protein, LPS binding protein
+  - secretory: MBL, C reaction protein (C反应蛋白), LPS binding protein (LBP)
 
 - its ligand (模式分子)
 
@@ -1281,7 +1283,7 @@ recognize common structures in pathogens directly
 
   - damage-associated molecular pattern (**DAMP**)
 
-    HSP, uric acid, ROS, degraded substance (like apoptosis)
+    HSP, uric acid crystal, ROS, degraded substance (like apoptosis)
 
 > for reference
 >
@@ -1292,7 +1294,7 @@ recognize common structures in pathogens directly
 ###### basics
 
 - types: Kuffer cell (枯否细胞, liver), microglial (小胶质细胞), osteoclast (破骨细胞, brain), free marophages (tissues). widely distributed.
-- morphological characteristics: rich in cytosol and granules, 
+- morphological characteristics: rich in cytosol and granules, shape-changing
 
 ###### ways of cytosis (吞噬)
 
@@ -1300,11 +1302,11 @@ recognize common structures in pathogens directly
 
 - pinocytosis
 
-- receptor-mediated endocytosis (like FcR, complement)
+- receptor-mediated endocytosis (like FcR, MR, complement ↓)
 
   <img src="../../course\molecular-immunology\molecular-immunology.assets\8-receptor-mediated.png" alt="8-receptor-mediated" style="zoom:40%;" />
 
-###### mode of distruction
+###### mode of destruction
 
 - oxygen-dependent: coenzymes reduce O<sub>2</sub> into various ROS; iNOS produces NO
 - oxygen-independent: lactate accumulation; lysozyme etc., antibacterial peptide distruct the cell wall
@@ -1348,16 +1350,36 @@ Large granular lymphocytes. No sensitization required.
 
 ##### receptors
 
-| receptors  | ligand   | receptor motif | receptor example                                             |
-| ---------- | -------- | -------------- | ------------------------------------------------------------ |
-| inhibitory | MHC I    | ITIM           | 杀伤细胞免疫球蛋白样受体: KIR<br />杀伤细胞凝集素样受体: KLR |
-| activating | not sure | ITAM           | KIR2DS， KIR3DS, NKG2D                                       |
+| receptors  | ligand                | receptor motif | receptor example                               |
+| ---------- | --------------------- | -------------- | ---------------------------------------------- |
+| inhibitory | MHC I                 | ITIM           | KIR2/3DL, NKG2A                                |
+| activating | MHC I <br />and other | ITAM           | KIR2/3DS, NKG2C-DAP12<br />non-MHC: NKG2D, NCR |
 
+> 免疫酪氨酸抑制性模体: ITIM
+>
+> 杀伤细胞免疫球蛋白样受体: KIR, 2$\sim$3 Ig domains
+>
+> 杀伤细胞凝集素样受体: KLR, CD94 and NKG2 family heterodimer
+>
+> short aa chain--activation, long aa chain--inhibition
+>
+> 自然细胞毒性受体: NCR
+>
+> <img src="../../course\molecular-immunology\molecular-immunology.assets\8-nkr.png" alt="8-nkr" style="zoom:60%;" />
+>
+> <img src="../../course\molecular-immunology\molecular-immunology.assets\8-nkr2.png" style="zoom:60%;" />
 
+##### mode of action
 
+- direct attack: perforin-granzyme
+- induce apoptosis: FasL, TRAIL
+- ADCC effect
 
+against infected/tumor cell
 
+> cytotoxic pathways: perforin-granzyme and Fas/FasL
 
+<img src="../../course\molecular-immunology\molecular-immunology.assets\8-nk.jpg" alt="8-nk" style="zoom:70%;" />
 
 #### Innate-like lymphocytes
 
@@ -1371,52 +1393,66 @@ Restricted diversity, directly recognize pathogens and become activated.
 | γδT cell  | TCR: γ,δ chain                         | mucosa (early)             | MICA/B, viral protein, HSP, P/G lipids | the same                                                     |
 | B1 cell   | self-renewing B cells                  | 胸膜腔，腹膜腔，小肠固有层 | TI-Ag, denatured self Ag               | rapid IgM, early resposne; no <br />class switching, no memory |
 
-> cytotoxic effect: granzyme, perforin and Fas/FasL
-
-A lot of other cells are involved into innate immune response, like mastocytes.
+A lot of other cells are involved in innate immune response, like mastocytes.
 
 ### Innate immune molecules
 
-- complement
-- cytokines
+- complement (see chapter 5)
+
+- cytokines (see chapter 7)
+
 - other
 
+  - antibacterial peptide. e.g. α-defensin (防御素) 
+
+    > positive-charged, bind to LPS, 磷壁酸, etc.; hydrophobic part insert into the cell wall
+
+  - lysozyme: lyse peptidoglycan on the cell wall of Gram-positive bacteria; 
+
+    > requires complement and antibody to destruct Gram-negative bacteria
+
+  - β-lysin (乙型溶素): heat-stable, only G<sup>+</sup>
 
 
 ## Innate immune response
 
 ### Process
 
-
+1. <u>immediate</u> innate immune: $<4$ hours, local innate immune cells function, neutrophils enter.
+2. early innate immune
+   - chemokines recruit macrophages, which release more cytokines
+   - NK and NKT cells enter
+   - B1 cell produces Ab
+3. initiates <u>adaptive</u> immune response
 
 ### Characteristics
 
-
+- non-specific
+- no clonal amplification (克隆扩增)
+- rapid and short, no memory
+- regulates adaptive immune
 
 ### Relationship with adaptive ir
 
+I: innate; A: adaptive
 
+- I initiates A: Ag presenting, like DC
+- I regulates strength and type of A: type of cytokines
+- I assists effector T cells to enter the location of disease: chemokines
+- I cooperates with effector T cell and antibody to function: complement, ADCC
 
 ## Summary
 
-• 一 固有免疫的构成
-1 屏障作用
-皮肤黏膜屏障：物理屏障，化学屏障，菌群的作用
-器官屏障：解剖基础，屏障的作用（阻挡病原体，大分子，
-活化的淋巴细胞）
-2 免疫细胞：巨噬细胞， NK细胞
-
-巨噬细胞，中性粒细胞， NK细胞， 树突状细胞：嗜酸
-性粒细胞，嗜碱性细胞，肥大细胞， NKT细胞， γδT细
-胞， B1细胞
-
-1）如何识别
-2）作用机制
-
-固有免疫分子
-
-• 二 固有免疫的特点
-• 三 固有免疫应答的过程及其与适应性免疫应答的关系  
+- 固有免疫的构成
+  1. 屏障作用
+     - 皮肤黏膜屏障：物理屏障，化学屏障，菌群的作用
+     - 器官屏障：解剖基础，屏障的作用（阻挡病原体，大分子，活化的淋巴细胞）
+  2. 免疫细胞：巨噬细胞，中性粒细胞， NK细胞， 树突状细胞，嗜酸性粒细胞，嗜碱性细胞，肥大细胞， NKT细胞， γδT细胞， B1细胞
+     - 如何识别
+     - 作用机制
+  3. 固有免疫分子
+- 固有免疫的特点
+- 固有免疫应答的过程及其与适应性免疫应答的关系  
 
 
 
@@ -1458,18 +1494,20 @@ classical DC also includes
 
 Immature DCs in peripheral tissues [phagocytosis (吞噬病原体、死细胞等), macropinocytosis (巨胞饮)],
 
-and migrate into peripheral immune organs and become mature DCs.
+and become mature DCs as they migrate into peripheral immune organs.
 
-| terms                                   | immature DC              | mature DC          |
-| --------------------------------------- | ------------------------ | ------------------ |
-| Fc/mannose receptor expression          | ++                       | +-                 |
-| MHC II expression                       | +                        | ++                 |
-| MHC II and lysozyme on the cell surface |                          | largely $\uparrow$ |
-| MHC II half-life                        | ~10 h                    | >100 h             |
-| co-stimulatory molecules expression     | +-                       | ++                 |
-| **main function**                       | Ag uptake and processing | Ag presentation    |
+| terms                                        | immature DC              | mature DC          |
+| -------------------------------------------- | ------------------------ | ------------------ |
+| PRR (Fc/mannose receptor, ...) expression    | ++                       | +-                 |
+| MHC II expression                            | +                        | ++                 |
+| MHC II and lysozyme on the cell surface      |                          | largely $\uparrow$ |
+| MHC II half-life                             | ~10 h                    | >100 h             |
+| co-stimulatory/adhesion molecules expression | +-                       | ++                 |
+| **main function**                            | Ag uptake and processing | Ag presentation    |
 
-> what does +- mean?
+> what does +- mean? 有但较少
+>
+> there are a few mature DCs in mucosa and thymus.
 
 <img src="../../course\molecular-immunology\molecular-immunology.assets\9-mature.png" alt="9-mature" style="zoom:45%;" />
 
@@ -1501,10 +1539,10 @@ Application: cancer vaccines.
 - good at Ag uptake and processing
   - expressing various receptors
   - three ways (see chapter 8)
-- upon IFN-γ/TNF-α (from T cell, etc.)
+- under the action of IFN-γ/TNF-α (from T cell, etc.) 
   - high MHC I/II and co-stimulator expression, present Ag to CD4/8<sup>+</sup> T cell
   - enhanced all kinds of "cytosis"
-- cannot activate naive T cells; so only in secondary response (再次应答)
+- cannot activate naive T cells; so only in secondary response (**再次应答**)
 
 ### B cells
 
@@ -1512,9 +1550,17 @@ Application: cancer vaccines.
 - present MHC II-Ag to Th cells (with co-stimulator in inflammatory conditions)
 - reversely be activated by (CD4<sup>+</sup> and?) Th cells (TD-Ag) to produce Ab
 
+**summary**
+
 <img src="../../course\molecular-immunology\molecular-immunology.assets\9-professional.png" alt="9-professional" style="zoom:60%;" />
 
 ## Antigen presenting
+
+basic processes
+
+- Ag generation (endo/exogenous)
+- MHC synthesis and assembly with peptide
+- pMHC presented to T cell
 
 ### MHC II pathway
 
@@ -1529,50 +1575,180 @@ sent into endosomes (胞内体) and then lyzosomes for degradation
 
 #### MHC synthesis, their transportation and assembly
 
-- synthesized in ER
+##### overall flow
 
+```mermaid
+graph LR
+bacteria --> phagosome --lysosome--> phagolysosome --> #
+protein --cytosis--> endosome --> *
+m2[MHC II in ER] --> m2c[M II C] --> * --> membrane
+m2c --> # --> membrane
+```
 
+> phagosome: 吞噬体, phagolysosome: 吞噬溶酶体
+>
+> 内体：利用酸性来降解
+>
+> MHC二类小室: MHC class II compartment, resembling lysosome
+>
+> phagolysosome and M II C: acidic, rich in proteases, both involved in degradation! 10$\sim$30 aa
+
+##### route of MHC II
+
+![9-mhc2](../../course\molecular-immunology\molecular-immunology.assets\9-mhc2.png)
+
+Ia-associated invariant chain, Ii chain, MHC分子相关恒定链
+
+- helps with MHC folding and dimerization (2 heavy chains)
+- <u>prevent MHC from binding self-peptide!</u>
+- help MHC leave ER, then in the vesicles, it's degraded and only CLIP is left
+
+> Ia is actually a trimer. 
+>
+> CLIP: MHC II类分子相关的恒定链多肽 CLass II-associated Invariant chain Polypeptide.
+>
+> <img src="../../course\molecular-immunology\molecular-immunology.assets\9-li.png" alt="9-li" style="zoom:50%;" />
+
+- the vesicle enters M II C, where CLIP is removed with the help of HLA-DM
+
+- then Ag peptide is loaded and the complex is transported onto the cell surface
+
+  > HLA-DO takes away HLA-DM
+
+Still, a number of adhesion molecules bind to each other, surrounding the complex.
 
 ### MHC I pathway
 
+```mermaid
+graph TD
+v[viral protein] --ubiquitinated--> U-protein
+e[endogenous protein] --ubiquitinated--> U-protein
+U-protein --20S proteosome--> ap[Ag peptide]
+U-protein --26S immunoproteasome--> ap --TAP--> er[Ag in the ER] --ERAP--> m[mature peptide] --> pMHC
+a[α chain synthesis in ER] --cal*in--> protected --β2m,tapasin--> f[full MHC I] --modified--> pMHC
+pMHC --> w{with</br>peptide?}
+w --yes--> y[through Golgi to membrane]
+w --no--> l[lysosomal degradation]
+```
+
+#### About peptide
+
+- active β subunit of immunoproteasome is called LMP (巨大多功能蛋白酶体/低分子量多肽)
+- TAP: TAP1/TAP2 heterodimer, forming an ATP-dependent pore that opens upon Ag peptide binding
+  - TAP: ABC family. Requirement: 8$\sim$16-aa; basic//hydrophobic C terminal. 
+- ERAP: ER resident aminopeptidase (ER驻留的氨基肽酶), cut the peptide into 8$\sim$12-aa length.
+
+#### MHC structure
+
+- MHC I is floppy, stabilized by β2m (and finally by peptide?).
+- before β2m: also need 钙联蛋白; to bind TAP to get peptide: need 钙网蛋白, TAP相关蛋白
+
+<img src="../../course/molecular-immunology/molecular-immunology.assets/9-Comparison-of-TCR-pMHC-CD4-and-TCR-pMHC-CD8-ternary-complexes-A-Crystal-structure-of-a.png" style="zoom:60%;" />
+
+<center>complex structure on CD4/8<sup>+</sup> T cell</center>
+
+#### Comparison
+
+![9-presenting](../../course\molecular-immunology\molecular-immunology.assets\9-presenting.png)
+
+### Lipid antigen
+
+- no processing is needed
+
+- goes the same way as MHC II (cytosis, endosome)
+
+  > Sometimes they two bind to antigen on the cell surface before being recycled.
+
+- its carrier is MHC I-like molecule CD1
+
+  > CD1a$\sim$c : specific T cell; CD1d: NKT cell
+
+<img src="../../course/molecular-immunology/molecular-immunology.assets/10-apc2.png" alt="10-apc2" style="zoom:70%;" />
+
+### Cross-presentation
+
+交叉呈递, MHC I and II exchange their Ag type. Just a minor pathway.
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\9-cross.png" alt="9-cross" style="zoom:45%;" />
+
+situations that can happen:
+
+- MHC I-endo
+  - endogenous Ag leaks out of its membrane
+  - MHC I is recyled into an endosome
+- MHC II-exo
+  - exogenous Ag is phagocytosed
+  - exogenous Ag binds to an empty MHC II
+
+> Application: MHC I tetramer, detecting Ag-specific CTL
+>
+> <img src="../../course/molecular-immunology/molecular-immunology.assets/9-mhc4.png" alt="9-mhc4" style="zoom:60%;" />
 
 
 
+# Chapter 10 T cell-mediated Immune Response 
 
-
-
-
-
-| pathways |      |      |      |      |
-| -------- | ---- | ---- | ---- | ---- |
-|          |      |      |      |      |
-|          |      |      |      |      |
-|          |      |      |      |      |
-|          |      |      |      |      |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Chapter 10 T cell-mediated Immune Response T细胞介导的免疫应答
+T细胞介导的免疫应答
 
 ## Recognition of Ag and activation of T cell
 
+### Ag processing and presenting
+
+<img src="../../course/molecular-immunology/molecular-immunology.assets/10-ap.png" alt="10-ap" style="zoom:50%;" />
+
+APCs like DCs, take up Ag in tissues, and enter lymph nodes to present Ag to T lymphocytes.
+
+see chapter 9!!
+
+### Interaction between APC and T cell
+
+A lot of molecules form pairs, making the so-called immunological synapse.
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\10-synapse.png" alt="10-synapse" style="zoom:50%;" />
+
+- coreceptor: CD4/8
+- co-stimulatory molecules: CD28
+- adhesion molecules
+
+steps
+
+- Adhesion molecules form transient and reversible pairs; if TCR doesn't recognize pMHC, they separate.
+
+- If TCR binds pMHC, it induces a conformational change in LFA-1 which strengthen the binding and prevent cells from separating.
+
+  <img src="../../course\molecular-immunology\molecular-immunology.assets\10-lfa.png" alt="10-lfa" style="zoom:40%;" />
+
+- Many TCR-pMHC complexes locate themselves in the center of cell interface
+
+  - which is surrounded by adhesion molecule pairs, which makes a stable cell junction
+  - These changes associate molecules to better transduce signals, i.e. activate pathways, remodel cytoskeleton, etc.
+
+> <img src="../../course\molecular-immunology\molecular-immunology.assets\10-Differences-are-apparent-between-immunological-synapses-formed-by-B-cells-and-dendritic-cells.jpg" alt="10-immunological-synapses" style="zoom:80%;" />
+>
+> Two models. left: B lymphoma cells; right: dendritic cells.
+>
+> The immune synapse is also known as the supramolecular activation cluster or *SMAC*
+>
+> LFA-1: Lymphocyte function-associated antigen 1, in lectin superfamily
+>
+> Left model (as in text book):
+>
+> - c: central, except CD28, CD2, etc.; also CD3, Lck, ZAP70, PKC-θ, etc.
+> - p: peripheral. LFA-1-rich; d: distal. microclusters that resemble cSMAC
+>
+> Right model: DC typically form “multifocal” synapses where TCR-containing clusters are segregated from CD28/PKC-θ containing clusters and no clear “ring” of LFA-1 is formed. (contradiction?)
+>
+> *Roufaiel, Marian & Wells, James & Steptoe, Raymond. (2015). Impaired T-Cell Function in B-Cell Lymphoma: A Direct Consequence of Events at the Immunological Synapse?. Frontiers in Immunology. 6. 258. 10.3389/fimmu.2015.00258.*
+
+### CD4<sup>+</sup> T cell activation
 
 
 
 
 
+
+
+### CD8<sup>+</sup> T cell activation
 
 
 
@@ -1583,6 +1759,32 @@ sent into endosomes (胞内体) and then lyzosomes for degradation
 ## T cell effective stage
 
 
+
+
+
+# Chapter 11 B cell-mediated Immune Response 
+
+B细胞介导的免疫应答
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Ab: biological functions
+
+1. 
 
 
 
