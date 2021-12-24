@@ -6,7 +6,9 @@ The main reference materials include the slides (not available, but you can watc
 
 The quoted areas are less-important comments or end-of-chapter questions.
 
-# Chapter 1 Introduction 绪论
+# Chapter 1 Introduction 
+
+绪论
 
 ## History
 
@@ -33,7 +35,7 @@ The quoted areas are less-important comments or end-of-chapter questions.
 
 - 固有免疫（innate immune）：与生俱来的，第一道防线，高等和低等生物都有
 
-  - 组成：免疫屏障，固有免疫细胞，免疫分子 (see chapter 9)
+  - 组成：免疫屏障，固有免疫细胞，免疫分子 (see [chapter 9](#Chapter-9-Antigen-Presenting))
   - 特点：无特异性，无记忆性
 
 - 特异性免疫（adaptive immune）：高等生物通过接触病原体建立起来的，针对特定病原体的免疫防御能力
@@ -62,7 +64,9 @@ The quoted areas are less-important comments or end-of-chapter questions.
     - related tissue damage (组织损伤)
     - transplant rejection (移植排斥)
 
-# Chapter 2 Basics and Trends 免疫学基础和发展趋势
+# Chapter 2 Basics and Trends 
+
+免疫学基础和发展趋势
 
 ## Basic problem: how we respond to danger
 
@@ -170,7 +174,9 @@ test figure
 
 
 
-# Chapter 3 Antigen 抗原
+# Chapter 3 Antigen 
+
+抗原
 
 ## Characteristics
 
@@ -401,9 +407,9 @@ general understanding
 
 
 
-# Chapter 4 Immunoglobin 免疫球蛋白
+# Chapter 4 Immunoglobin 
 
-Molecules with antibody-like activity.
+免疫球蛋白 Molecules with antibody-like activity.
 
 Immunoglobulin super family (IgSF, 免疫球蛋白超家族): proteins including Ig-like domains
 
@@ -643,7 +649,7 @@ at DNA level, irreversible, from IgM to G to ...
 
 # Chapter 5 Complement System
 
-reference videos
+补体系统. reference videos
 
 - [20 min to master the complement system, a great video](https://www.youtube.com/watch?v=Uc4nq4Lazo4&list=PLybg94GvOJ9Ha_e6t4NvnCjCyNmJyAvhO&index=10)
 - [an animation on the overall processes](https://www.bilibili.com/video/BV1Dt411w7Ro)
@@ -886,14 +892,14 @@ Types:
 > 1. 补体激活有那三条途径？各自的生物学意义如何？
 > 2. 补体有哪些生物学功能？
 
-# Chapter 6 MHC 主要组织相容性复合体
+# Chapter 6 MHC 
 
 > 背景：器官移植
 >
 > - 遗传学家发现，同基因型个体不排斥，排斥程度符合孟德尔遗传定律
 > - 免疫学家发现，再次移植同一个供体的器官，排斥得更快；能检测到抗供体的受体
 
-major histocompatibility complex:
+主要组织相容性复合体 major histocompatibility complex:
 
 - a cluster of genes determining the compatibility of a transplanted organ
   - translated into histocompatibility antigens
@@ -1078,7 +1084,9 @@ Some AAs are recognized by MHC and some TCR.
 
 
 
-# Chapter 7 Cytokines 细胞因子
+# Chapter 7 Cytokines 
+
+细胞因子
 
 Cytokines are small multi-bioactive polypeptides or glycoproteins secreted by various cells (especially immune cells).
 
@@ -1338,7 +1346,7 @@ morphological features: look like dendrite (树突)
   - immature: Ag uptake (by PRR, opsonic receptor)
   - mature: Ag presentation (by expressing MHC and co-stimulator)
 
-see chapter 9 for more details! 
+see [chapter 9](#Chapter-9-Antigen-Presenting) for more details! 
 
 ##### plasmacytoid DC (pDC)
 
@@ -1397,9 +1405,9 @@ A lot of other cells are involved in innate immune response, like mastocytes.
 
 ### Innate immune molecules
 
-- complement (see chapter 5)
+- complement (see [chapter 5](#Chapter-5-Complement-System))
 
-- cytokines (see chapter 7)
+- cytokines (see [chapter 7](#Chapter-7-cytokines))
 
 - other
 
@@ -1538,7 +1546,7 @@ Application: cancer vaccines.
 - Mo is derived from bone marrow and differentiate into Mϕ
 - good at Ag uptake and processing
   - expressing various receptors
-  - three ways (see chapter 8)
+  - three ways (see [chapter 8](#ways-of-cytosis-(吞噬)))
 - under the action of IFN-γ/TNF-α (from T cell, etc.) 
   - high MHC I/II and co-stimulator expression, present Ag to CD4/8<sup>+</sup> T cell
   - enhanced all kinds of "cytosis"
@@ -1589,9 +1597,11 @@ m2c --> # --> membrane
 >
 > 内体：利用酸性来降解
 >
-> MHC二类小室: MHC class II compartment, resembling lysosome
+> MHC二类小室 (M II C): MHC class II compartment, resembling lysosome
 >
-> phagolysosome and M II C: acidic, rich in proteases, both involved in degradation! 10$\sim$30 aa
+> phagolysosome and M II C: acidic, rich in proteases, both involved in degradation! 
+>
+> into 10$\sim$30 aa fragments
 
 ##### route of MHC II
 
@@ -1611,9 +1621,10 @@ Ia-associated invariant chain, Ii chain, MHC分子相关恒定链
 
 - the vesicle enters M II C, where CLIP is removed with the help of HLA-DM
 
+  > HLA-DO takes away HLA-DM
+
 - then Ag peptide is loaded and the complex is transported onto the cell surface
 
-  > HLA-DO takes away HLA-DM
 
 Still, a number of adhesion molecules bind to each other, surrounding the complex.
 
@@ -1621,11 +1632,17 @@ Still, a number of adhesion molecules bind to each other, surrounding the comple
 
 ```mermaid
 graph TD
+subgraph peptide
 v[viral protein] --ubiquitinated--> U-protein
 e[endogenous protein] --ubiquitinated--> U-protein
-U-protein --20S proteosome--> ap[Ag peptide]
-U-protein --26S immunoproteasome--> ap --TAP--> er[Ag in the ER] --ERAP--> m[mature peptide] --> pMHC
-a[α chain synthesis in ER] --cal*in--> protected --β2m,tapasin--> f[full MHC I] --modified--> pMHC
+U-protein --20S proteosome--> ap[Ag peptide in cytosol]
+U-protein --26S immunoproteasome--> ap --TAP--> er[Ag in the ER] --ERAP--> m[mature peptide] 
+end
+m --> pMHC
+subgraph TCR
+a[α chain synthesis in ER] --cal*in--> protected --β2m,tapasin--> f[full empty MHC I]
+end
+f --modified--> pMHC
 pMHC --> w{with</br>peptide?}
 w --yes--> y[through Golgi to membrane]
 w --no--> l[lysosomal degradation]
@@ -1673,12 +1690,13 @@ w --no--> l[lysosomal degradation]
 
 situations that can happen:
 
-- MHC I-endo
-  - endogenous Ag leaks out of its membrane
-  - MHC I is recyled into an endosome
-- MHC II-exo
-  - exogenous Ag is phagocytosed
-  - exogenous Ag binds to an empty MHC II
+- MHC I-exo
+  - exogenous Ag leaks out of its membrane and enters cytosol
+  - exogenous Ag is released out of the cell and binds to an empty MHC I
+  - MHC I is recyled into an endosome where it meets exogenous peptide
+- MHC II-endo
+  - cells/apoptotic bodies (凋亡小体) containing endogenous Ag are phagocytosed
+  - endogenous Ag is released out of the cell and binds to an empty MHC II
 
 > Application: MHC I tetramer, detecting Ag-specific CTL
 >
@@ -1698,7 +1716,7 @@ T细胞介导的免疫应答
 
 APCs like DCs, take up Ag in tissues, and enter lymph nodes to present Ag to T lymphocytes.
 
-see chapter 9!!
+see [chapter 9](#chapter-9-antigen-presenting)!!
 
 ### Interaction between APC and T cell
 
@@ -1742,23 +1760,140 @@ steps
 
 ### CD4<sup>+</sup> T cell activation
 
+> CD4<sup>+</sup> T cell $=$ Th cell 辅助性T细胞; naive CD4<sup>+</sup> T cell $=$ Th0 cell
 
+Double signal model
 
+#### 1. Ag recognition
 
+TCR-pMHC, CD4-MHC, CD3, as above. Fundamental
 
+CD3 mediates <u>initial activation</u> through Lck, NFAT, NFκB, etc. to promote growth and proliferation.
 
+![10-pathway](../../course\molecular-immunology\molecular-immunology.assets\10-pathway.png)
+
+#### 2. Co-stimulation
+
+Adhesion molecule like CD28
+
+They mediates <u>complete activation</u> by additional proliferation signal, expression of cytokine and its receptor.
+
+Without them, T cell anergy (avoid excessive activation)! 
+
+Negative signal also inactivtes T cell
+
+> - engineered CTLA-4 (Abatacept), inhibition, autoimmune disease.
+> - CTLA-4 mAb, activation, cancer
+>
+> CD28 -- IL-2 production, competes with CTLA-4 for CD80/86
+
+#### 3. Cytokines
+
+Induces further differentiation and proliferation.
+
+IL-2: essential for T cell expansion. Th cell: <u>autocrine</u>
+
+Antigen(cytokine)-specific differentiation, determines the types of response  
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\10-diff.png" alt="10-diff" style="zoom:40%;" />
 
 ### CD8<sup>+</sup> T cell activation
 
+Roughly the same. All karyocytes express MHC I, but target cell may not express co-stimulatory molecules.
 
+#### Th dependent
 
+> endogenous Ag
 
+Ag signal$+$cytokines from Th cell
 
+> DCs express both MHC I and II. Th produces IL-2
+>
+> ![10-th-dep](../../course\molecular-immunology\molecular-immunology.assets\10-th-dep.jpg)
 
+#### Th indepedent
+
+> exogenous Ag. Without IL-2, must highly express co-stimulators!!
+
+- cross-priming: APCs also process exogenous Ag. see [chapter 9](#Cross-presentation), the figure for more.
+
+- virus-infected APCs assemble MHC I and viral peptide in them.
+
+  <img src="../../course\molecular-immunology\molecular-immunology.assets\10-Virus-infected-APCs-present-viral-peptides-in-the-context-of-MHC-class-I-or-II-to-naive.jpg" alt="10-Virus-infected" style="zoom:70%;" />
 
 ## T cell effective stage
 
+#### CD4<sup>+</sup> T cell effect
 
+
+
+
+
+| response | cell type | immunity | pathogen      | hypersensitivity | other effect       |
+| -------- | --------- | -------- | ------------- | ---------------- | ------------------ |
+| type 1   | Th1       | cellular | intracellular | delayed          | APC, Tc            |
+| type 2   | Th2       | humoral  | extracellular | allergy          | Ab class switching |
+
+
+
+| T cell subgroup | cytokines inducing their generation | major types of cytokines produced | type of response      | biological function of these cytokines                       |
+| --------------- | ----------------------------------- | --------------------------------- | --------------------- | ------------------------------------------------------------ |
+| Th1             | IL-12, IFN-γ                        | IFN-γ, TNF-α, IL-2                | cell immunity         | Tc, Th differentiation<br />Mϕ, NK activation<br />proliferation,chemotaxis, inflammation and killing |
+| Th2             | IL-4                                | IL-4, IL-10                       | humoral immunity      | B cell activation<br />class switching<br />hypersensitivity |
+| Th17            | IL-6, TGF-β                         | IL-17                             | innate (inflammation) | inflammation!! auto<br />chemotaxis/activation               |
+| CTL             | IL-2                                | IFN-γ, TNF-α                      | cell immunity         | direct killing                                               |
+
+#### CD8<sup>+</sup> T cell effect
+
+feature: Ag-specificity, MHC-restriction
+
+1. 效-靶细胞结合
+
+   CTL migrates following chemokines, contact with the target cell, forms immunological synapse
+
+2. CTL polarization
+
+   Upon recognizing pMHC, TCR and related molecules move towards the interface. Some organelles also re-organize for the granules (containing perforin/granzyme) to release.
+
+   > polarization: cellular components aggregate on one specific side of the cell
+
+3. 致死性攻击
+
+   - perforin: forms a pore on the membrane like C9 does, letting in water that burst the cell
+   - granzyme: get inside through the pore, cleaves Bid (and some others) to initiate apoptosis
+   - FasL: 
+
+   > perforin: pore forming protein, facilitates granzyme endocytosis
+   >
+   > 
+   >
+   > ![10-cte](../../course\molecular-immunology\molecular-immunology.assets\10-cte.png)
+   >
+   > DTH: delayed-type hypersensitivity
+
+## Effector T cell fate
+
+1. apoptosis, to terminate immune response
+   - activation-induced cell death (AICD): e.g. Fas expression
+   - T<sub>reg</sub> induced death (see chapter 13)
+   
+2. to T<sub>m</sub> (memory T cell)
+   - CD45RA<sup>-</sup>/RO<sup>+</sup> (exactly reverse the naive T cell)
+   - rapid activation, more sensitive to Ag/cytokine
+   - less requirement on co-stimulators, more cytokine production
+
+3. CD8
+
+  CD8*记忆T细胞﹐研究结果提示:①CD8Tm的产生无需T细胞分泌的细胞因子参与;2 CD8*Tm的维持无需抗原持续刺激和B细胞参与,亦无需Th辅助,但有赖于与MHCI类分子
+  记
+  的接触,可能需要T细胞CD28与CD80和 CD86结合所产生的共刺激信号持续存在;3IFN-a
+  及IL-15等细胞因子在维持CD8+ Tm中可能发挥重要作用。
+
+## T cell biological effects
+
+- intracellular infection: 结核杆菌, fungi, virus, parasites
+- anti-cancer: CTL, Mϕ, NK, cytokines
+- immune damage: rejection, autoimmunity, etc.
 
 
 
@@ -1768,23 +1903,222 @@ B细胞介导的免疫应答
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Ab: biological functions
 
 1. 
+
+
+
+
+
+
+
+# Chapter 12 Immune Tolerance
+
+免疫耐受
+
+> 发现：异卵双生小牛，共用胎盘，血型不同，但不发生排斥
+
+## Basics
+
+### Immune Tolerance
+
+the immune system does not respond to some **specific** antigen.
+
+- no immune molecules or activated lymphocytes
+- tolerogen 耐受原
+
+Different from immunodeficiency! 
+
+> That's abnormal development, proliferation, differentiation and metabolism of lymphocytes.
+
+### Categories
+
+- a state of unresponsiveness of the immune system to substances or tissue
+
+
+
+# Chapter 13 Hypersensitivity
+
+
+
+
+
+
+
+# Chapter 14 Transplant Immunity
+
+## Immunology of transplant rejection
+
+### History
+
+
+
+types of transplantation
+
+- autologous
+- syngeneic (同系移植，相同遗传背景的，如同卵双胞胎)
+- allogeneic
+- xenogeneic
+
+### Allogeneic antigens
+
+- MHC
+- mH (minor ...)
+  - HY, on Y chromosome
+  - mH, on autosome
+
+### Innate immunity
+
+- initiation
+  - damage: 
+- 
+
+### Adaptive immunity
+
+
+
+
+
+
+
+#### T cell recognition of transplant antigen
+
+- direct recognition
+
+| recognition          | APC        | host T cell  |      |               |
+| -------------------- | ---------- | ------------ | ---- | ------------- |
+| direct recognition   | from graft | allogenic    |      | acute         |
+| indirect recognition | from host  | alloreactive |      | acute/chronic |
+
+
+
+## Types of transplant rejection
+
+> why is transplant rejection much stronger than normal response?
+
+
+
+### Host versus graft reaction (HVGR)
+
+|                      | occurence time                            | mechanism                                                 | pathological<br />features                                   | risk factors                                                 |
+| -------------------- | ----------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| hyperacute rejection | within 24 hours<br />even several minites | prestored anti-graft antibody$\longrightarrow$ complement | bleeding (attacks endothelial cells), formation of microthrombus (微小血栓) | multiple transplant (多次移植), transfusion (输血), 妊娠     |
+| acute rejection      | a few days, within a month                | T cell mediated response                                  | macrophage and lymphocyte infiltration                       |                                                              |
+| chronic              |                                           |                                                           |                                                              | non-immune: <br />immune: low-level response continuously exists |
+
+>occurence time: after connecting vessels
+
+
+
+一边损伤一边生长
+
+管腔变小
+
+最终宿命
+
+肝肾肺心
+
+
+
+
+
+### Graft versus host reaction
+
+移植物抗宿主反应
+
+requirements:
+
+- mature immune cells in the graft
+- immune suppression in the host
+
+
+
+GVL: graft versus lymphoma. 
+
+攻击白血病细胞. balance!
+
+
+
+## Prevention and dilemma
+
+### Matching (配型)
+
+- blood type: ABO, Rh
+
+- HLA
+
+- cross matching
+
+  - 
+
+- pool reactive Ab
+
+  anti-HLA Ab
+
+
+
+> 混合淋巴细胞反应：host and graft
+>
+> 如果增殖，说明能发生反应
+>
+> 丝裂霉素处理，阻断一方的增殖，便于观察另一个
+
+
+
+### Immunosuppressant
+
+- non-specific
+  - block proliferation: 6-MP, 硫唑嘌呤
+  - anti-inflammatory drug: glycotoid (may cause 内分泌紊乱)
+- lymphocyte-specific Ab
+  - OKT3 (anti-CD3)
+- blocking activating signal
+  - like anti-IL-2R Ab, FK-506 (block PLCθ pathway)
+
+
+
+### Problems on organ transplantation
+
+- organ shortage
+- 离体器官 storage
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
