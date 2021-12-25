@@ -146,7 +146,7 @@ hierarchical clustering
 
 ##### 应用
 
-<img src="../..\course/bioinformatics/bioinformatics.assets/5-hierarchical.png" alt="5-hierarchical" style="zoom:50%;" /><img src="../..\course/bioinformatics/bioinformatics.assets/5-hierarchical-gene.png" alt="5-hierarchical" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-hierarchical.png" alt="5-hierarchical" style="zoom:50%;" /><img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-hierarchical-gene.png" alt="5-hierarchical" style="zoom:50%;" />
 
 可以同时对样本（汽车品牌）和变量（各种参数）进行分类，将二维的数据组织成如上的热图，可以分析汽车品牌和各种参数的关系。同样的例子：基因名（变量）和不同时间表达量（样本）
 
@@ -161,7 +161,7 @@ hierarchical clustering
 
 ##### 特点
 
-1. 本质是个优化问题，目标是最小化类内部点间的距离和
+1. 本质是个优化问题，目标是最小化类内部点间的距离和最大化类间的距离
 
 2. 分类结果依赖于初始点，可以多次试验、随机选取，比较结果，得出比较可信的结论
 
@@ -364,11 +364,6 @@ balanced accuracy：综合了两方面的预测。避免了数据不平衡导致
 
 
 ## 衡量节点重要程度的常用指标
-
-
-
-
-
 
 
 
