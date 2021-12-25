@@ -6,22 +6,6 @@ The main reference materials include the slides (not available, but you can watc
 
 The quoted areas are less-important comments or end-of-chapter questions.
 
-## Test figure usage
-
-根目录probably not work
-
-<img src="/course/molecular-immunology/molecular-immunology.assets/1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" />
-
-正常目录probably not work
-
-<img src="./molecular-immunology.assets/1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
-
-this should ok, but does not work locally using provided syntax
-
-![logo](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=50%')![logo](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=100%')
-
-
-
 # Chapter 1 Introduction 
 
 绪论
@@ -529,7 +513,7 @@ Ab can also be an antigen. Three types of epitope:
 - bind Fc receptor on the cell surface
   - opsonization (调理作用): phagocytosis (吞噬作用) by macrophages and neutrophils through Fc binding to Fc receptor
 
-    <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/4-ops.png" alt="4-ops" style="zoom:40%;" /></img>
+    <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/4-ops.png" alt="4-ops" style="zoom:40%;" align=center />
   
     
   
@@ -648,7 +632,7 @@ at DNA level, irreversible, from IgM to G to ...
 
 - antibody phage display: build a library of V region genes by cloning from polyclonal B cells from immunized humans, importing them into phages. Tandem expression with minor coat protein enables to display Fv antibodies on the surface of phages. Then we can screen Ab with the desired affinity with our antigen.
 
-  ![4-display](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/4-display.png)
+  <img src="../../course/molecular-immunology/molecular-immunology.assets/4-display.png" alt="4-display" style="zoom:50%;" />
 
 > 小结
 > 1. 抗体的功能是什么？
@@ -703,11 +687,11 @@ Note: these reactions occur on the surface of the pathogen or an infected host c
 
 2. C1q's binding to Ab results in the autocatalytic activation of C1r which is bound to C1q
 
-   <img src="../..\course\molecular-immunology\molecular-immunology.assets\5-c1q.png" alt="5-c1q" style="zoom:50%;" />
+   <img src="../../course/molecular-immunology/molecular-immunology.assets/5-c1q.png" alt="5-c1q" style="zoom:50%;" />
 
 3. C1r cleaves and activates C1s, which then cleaves circulating C4 and C2. C4b is then bound to the membrane or the Ab, forming a **C4b2a complex**.
 
-   <img src="../..\course\molecular-immunology\molecular-immunology.assets\5-c4b2a.png" alt="5-c1q" style="zoom: 30%;" />
+   <img src="../../course/molecular-immunology/molecular-immunology.assets/5-c4b2a.png" alt="5-c1q" style="zoom: 30%;" />
 
 4. The complex is called classical pathway **C3 convertase C4b2a**, which cleaves C3 into C3a and C3b. 
 
@@ -727,7 +711,7 @@ Note: these reactions occur on the surface of the pathogen or an infected host c
 
    > Another kind of C3 convertase, different from the above one!
 
-![5-alter](https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\5-alter.png)
+![5-alter](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-alter.png)
 
 
 ### MBL pathway
@@ -748,7 +732,7 @@ Note: these reactions occur on the surface of the pathogen or an infected host c
    
 3. MASP1 cleaves C3, but goes into the alternative pathway
 
-<img src="../..\course\molecular-immunology\molecular-immunology.assets\5-mbl.png" alt="5-mbl" style="zoom:45%;" />
+<img src="../../course/molecular-immunology/molecular-immunology.assets/5-mbl.png" alt="5-mbl" style="zoom:45%;" />
 
 ### summary
 
@@ -811,7 +795,7 @@ c3 --> o[other responses]
 
 Molecules like C3b (also smaller fragments), C4b, etc. are recognized by receptors on phagocytes, like CR1/3/4. This induces **receptor-mediated phagocytosis** <font color=grey>and the secretion of proinflammatory molecules</font>.
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\5-opson.png" alt="5-opson" style="zoom:40%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-opson.png" alt="5-opson" style="zoom:40%;" />
 
 ### Clearance of immune complex
 
@@ -819,7 +803,7 @@ Molecules like C3b (also smaller fragments), C4b, etc. are recognized by recepto
 
 Activated by Ag-Ab complex, C3b is produced and recognized by erythrocytes (红细胞) and platelets (血小板) who transport the immune complex (IC) to the liver and spleen, where ICs are cleared by phagocytosis.
 
-<img src="../..\course\molecular-immunology\molecular-immunology.assets\5-adhesion.png" alt="5-adhesion" style="zoom:50%;" />
+<img src="../../course/molecular-immunology/molecular-immunology.assets/5-adhesion.png" alt="5-adhesion" style="zoom:50%;" />
 
 ### Inflammatory response
 
@@ -843,7 +827,7 @@ Activated by Ag-Ab complex, C3b is produced and recognized by erythrocytes (红�
 
   causes vasodilation (血管舒张) of capillaries (毛细血管), increases the permeability
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\5-c5a.png" alt="5-c5a" style="zoom:40%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-c5a.png" alt="5-c5a" style="zoom:40%;" />
 
 ### Other
 
@@ -867,23 +851,23 @@ C3/4/5b is rapidly degraded in the liquid phase.
 
   > liquid phase: C1抑制物 (C1INH)，C4结合蛋白（C4bp)，I 因子
   >
-  > <img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\5-re-c1.png" alt="5-re-c1" style="zoom:25%;" />
+  > <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-re-c1.png" alt="5-re-c1" style="zoom:25%;" />
   >
   > on the cell surface: 膜辅助蛋白（MCP），衰变加速因子（DAF)，补体受体（CR1)
   >
-  > <img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\5-re-c4b2a.png" alt="5-re-c4b2a" style="zoom:25%;" />
+  > <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-re-c4b2a.png" alt="5-re-c4b2a" style="zoom:25%;" />
 
 - alternative
 
   > I 因子，H 因子，膜辅助蛋白（MCP），补体受体（CR1)
   >
-  > <img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\5-re-c5.png" alt="5-re-c5" style="zoom:25%;" />
+  > <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-re-c5.png" alt="5-re-c5" style="zoom:25%;" />
 
 #### MAC
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\5-re-cd59.png" alt="5-re-cd59" style="zoom:25%;" />  
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-re-cd59.png" alt="5-re-cd59" style="zoom:25%;" />  
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\5-re-mac.jpg" alt="5-re-mac" style="zoom:40%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-re-mac.jpg" alt="5-re-mac" style="zoom:40%;" />
 
 ### Related diseases
 
@@ -970,13 +954,13 @@ DP/DQ etc. has multiple genes in one locus (基因座). Each α and β have 2 ty
 
 > A locus is **the specific physical location of a gene or other DNA sequence on a chromosome**, like a genetic street address. A, B, C, G, F are all **loci**.
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\6-gene.png" alt="6-gene" style="zoom:39%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-gene.png" alt="6-gene" style="zoom:39%;" />
 
 Each gene has exons encoding all needed chains.
 
 > Different! In HLA II, A and B expresses α and β chain, respectively; while there's only an α chain in HLA
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\6-gene2.png" alt="6-gene2" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-gene2.png" alt="6-gene2" style="zoom:50%;" />
 
 ### Genetic characteristics
 
@@ -1010,7 +994,7 @@ Each gene has exons encoding all needed chains.
 
 [Naming Rules](http://hla.alleles.org/nomenclature/naming.html)
 
-![6-naming](https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\6-naming.png)
+![6-naming](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-naming.png)
 
 ## HLA molecule
 
@@ -1026,7 +1010,7 @@ Each gene has exons encoding all needed chains.
 
 MHC class I is presented on the surface of any karyocytes (有核细胞) (except 滋养层细胞).
 
-​			<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\6-mhc1.jpg"  style="zoom:25%;" />								<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\6-mhc2.png"  style="zoom:75%;" />
+​			<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-mhc1.jpg"  style="zoom:25%;" />								<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-mhc2.png"  style="zoom:75%;" />
 
 ### MHC class II
 
@@ -1045,7 +1029,7 @@ Expressed on professional APCs, B cells, activated T cells, thymus epithelial ce
 | MHC I   | tumor/infected cell | endogenous | CD8<sup>+</sup> T cell | cytotoxic effect    |
 | MHC II  | APC (see above)     | exogenous  | CD4<sup>+</sup> T cell | promotes CTL and Ab |
 
-![6-anchor-point](https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\6-anchor-point.png)
+![6-anchor-point](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-anchor-point.png)
 
 Some AAs are recognized by MHC and some TCR.
 
@@ -1090,7 +1074,7 @@ Some AAs are recognized by MHC and some TCR.
 
 ## Summary
 
-![6-summary](https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\6-summary.png)
+![6-summary](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-summary.png)
 
 >No reflection questions
 
@@ -1191,7 +1175,7 @@ Three regions, for signaling.
 
 - affinity
 
-  <img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\7-receptor.png" alt="7-receptor" style="zoom:33%;" />
+  <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/7-receptor.png" alt="7-receptor" style="zoom:33%;" />
 
 ### Soluble cytokine receptor
 
@@ -1217,7 +1201,7 @@ Some are circulating and only have binding domains. Their work might be:
 
 Before everything begins, we should memorize:
 
-![lineage](https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\lineage.jpg)
+![lineage](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/lineage.jpg)
 
 *Mo*=Monocytes, and *Mϕ*=macrophages, monocytes differentiate into Mϕ or DC.
 
@@ -1254,11 +1238,11 @@ balances tolerance and response
   - 提供营养、免疫防御（如分泌毒素），帮助塑造了免疫系统
 
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\8-skin.jpg" alt="8-skin"  /><img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\8-mucosa.png" alt="8-skin" style="zoom:70%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-skin.jpg" alt="8-skin"  /><img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-mucosa.png" alt="8-skin" style="zoom:70%;" />
 
 <center>left: langhans cell in the skin; right: mucosa distribution</center>
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\8-Intestinal Immune System.gif" alt="8-Intestinal Immune System" style="zoom:70%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-Intestinal Immune System.gif" alt="8-Intestinal Immune System" style="zoom:70%;" />
 
 <center>intestinal immune system</center>
 
@@ -1272,13 +1256,13 @@ balances tolerance and response
 
 - endothelial cells in the capilliaries are tighly joined, with astroyte (少突胶质细胞) forms 鞘壁 that covers the capilliaries
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\8-bbb.png" alt="8-bbb" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-bbb.png" alt="8-bbb" style="zoom:50%;" />
 
 ##### placenta barrier
 
 滋养层细胞阻挡来自母体的细菌等
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\8-placenta.png" alt="8-placenta" style="zoom:40%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-placenta.png" alt="8-placenta" style="zoom:40%;" />
 
 ### Innate immune cells
 
@@ -1307,7 +1291,7 @@ recognize **common structures** in pathogens directly
 
 > for reference
 >
-> ![8-prr](https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\8-prr.png)
+> ![8-prr](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-prr.png)
 
 ##### macrophage
 
@@ -1324,7 +1308,7 @@ recognize **common structures** in pathogens directly
 
 - receptor-mediated endocytosis (like FcR, MR, complement ↓)
 
-  <img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\8-receptor-mediated.png" alt="8-receptor-mediated" style="zoom:40%;" />
+  <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-receptor-mediated.png" alt="8-receptor-mediated" style="zoom:40%;" />
 
 ###### mode of destruction
 
@@ -1385,9 +1369,9 @@ Large granular lymphocytes. No sensitization required.
 >
 > 自然细胞毒性受体: NCR
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\8-nkr.png" alt="8-nkr" style="zoom:60%;" />
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-nkr.png" alt="8-nkr" style="zoom:60%;" />
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\8-nkr2.png" style="zoom:60%;" />
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-nkr2.png" style="zoom:60%;" />
 
 ##### mode of action
 
@@ -1399,7 +1383,7 @@ against infected/tumor cell
 
 > cytotoxic pathways: perforin-granzyme and Fas/FasL
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\8-nk.jpg" alt="8-nk" style="zoom:70%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-nk.jpg" alt="8-nk" style="zoom:70%;" />
 
 #### Innate-like lymphocytes
 
@@ -1529,7 +1513,7 @@ and become mature DCs as they migrate into peripheral immune organs.
 >
 > there are a few mature DCs in mucosa and thymus.
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\9-mature.png" alt="9-mature" style="zoom:45%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/9-mature.png" alt="9-mature" style="zoom:45%;" />
 
 #### Other
 
@@ -1551,7 +1535,7 @@ Application: cancer vaccines.
 
 > Isolate monocytes from the patient and induce them to differentiate into immature DCs (or isolate these). Treat with tumor tissue lysate to maturate DCs. Inject them back.
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\9-dc.jpg" alt="9-dc" style="zoom:60%;" />
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/9-dc.jpg" alt="9-dc" style="zoom:60%;" />
 
 ### Monocytes/Macrophages
 
@@ -1572,7 +1556,7 @@ Application: cancer vaccines.
 
 **summary**
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\9-professional.png" alt="9-professional" style="zoom:60%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/9-professional.png" alt="9-professional" style="zoom:60%;" />
 
 ## Antigen presenting
 
@@ -1617,7 +1601,7 @@ m2c --> # --> membrane
 
 ##### route of MHC II
 
-![9-mhc2](https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\9-mhc2.png)
+![9-mhc2](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/9-mhc2.png)
 
 Ia-associated invariant chain, Ii chain, MHC分子相关恒定链
 
@@ -1629,7 +1613,7 @@ Ia-associated invariant chain, Ii chain, MHC分子相关恒定链
 >
 > CLIP: MHC II类分子相关的恒定链多肽 CLass II-associated Invariant chain Polypeptide.
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\9-li.png" alt="9-li" style="zoom:50%;" />
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/9-li.png" alt="9-li" style="zoom:50%;" />
 
 - the vesicle enters M II C, where CLIP is removed with the help of HLA-DM
 
@@ -1678,7 +1662,7 @@ w --no--> l[lysosomal degradation]
 
 #### Comparison
 
-![9-presenting](https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\9-presenting.png)
+![9-presenting](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/9-presenting.png)
 
 ### Lipid antigen
 
@@ -1698,7 +1682,7 @@ w --no--> l[lysosomal degradation]
 
 交叉呈递, MHC I and II exchange their Ag type. Just a minor pathway.
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\9-cross.png" alt="9-cross" style="zoom:45%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/9-cross.png" style="zoom:45%;" />
 
 situations that can happen:
 
@@ -1734,7 +1718,7 @@ see [chapter 9](#chapter-9-antigen-presenting)!!
 
 A lot of molecules form pairs, making the so-called immunological synapse.
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\10-synapse.png" alt="10-synapse" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-synapse.png" alt="10-synapse" style="zoom:50%;" />
 
 - coreceptor: CD4/8
 - co-stimulatory molecules: CD28
@@ -1746,14 +1730,14 @@ steps
 
 - If TCR binds pMHC, it induces a conformational change in LFA-1 which strengthen the binding and prevent cells from separating.
 
-  <img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\10-lfa.png" alt="10-lfa" style="zoom:40%;" />
+  <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-lfa.png" alt="10-lfa" style="zoom:40%;" />
 
 - Many TCR-pMHC complexes locate themselves in the center of cell interface
 
   - which is surrounded by adhesion molecule pairs, which makes a stable cell junction
   - These changes associate molecules to better transduce signals, i.e. activate pathways, remodel cytoskeleton, etc.
 
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\10-Differences-are-apparent-between-immunological-synapses-formed-by-B-cells-and-dendritic-cells.jpg" alt="10-immunological-synapses" style="zoom:80%;" />
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-Differences-are-apparent-between-immunological-synapses-formed-by-B-cells-and-dendritic-cells.jpg" alt="10-immunological-synapses" style="zoom:80%;" />
 >
 > Two models. left: B lymphoma cells; right: dendritic cells.
 >
@@ -1782,7 +1766,7 @@ TCR-pMHC, CD4-MHC, CD3, as above. Fundamental
 
 CD3 mediates <u>initial activation</u> through Lck, NFAT, NFκB, etc. to promote growth and proliferation.
 
-![10-pathway](https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\10-pathway.png)
+![10-pathway](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-pathway.png)
 
 #### 2. Co-stimulation
 
@@ -1807,7 +1791,7 @@ IL-2: essential for T cell expansion. Th cell: <u>autocrine</u>
 
 Antigen(cytokine)-specific differentiation, determines the types of response  
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\10-diff.png" alt="10-diff" style="zoom:40%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-diff.png" alt="10-diff" style="zoom:40%;" />
 
 ### CD8<sup>+</sup> T cell activation
 
@@ -1821,7 +1805,7 @@ Ag signal$+$cytokines from Th cell
 
 > DCs express both MHC I and II. Th produces IL-2
 >
-> ![10-th-dep](https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\10-th-dep.jpg)
+> ![10-th-dep](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-th-dep.jpg)
 
 #### Th indepedent
 
@@ -1831,7 +1815,7 @@ Ag signal$+$cytokines from Th cell
 
 - virus-infected APCs assemble MHC I and viral peptide in them.
 
-  <img src="https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\10-Virus-infected-APCs-present-viral-peptides-in-the-context-of-MHC-class-I-or-II-to-naive.jpg" alt="10-Virus-infected" style="zoom:70%;" />
+  <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-Virus-infected-APCs-present-viral-peptides-in-the-context-of-MHC-class-I-or-II-to-naive.jpg" alt="10-Virus-infected" style="zoom:70%;" />
 
 ## T cell effective stage
 
@@ -1879,7 +1863,7 @@ feature: Ag-specificity, MHC-restriction
    >
    > 
    >
-   > ![10-cte](https://gitee.com/gxf1212/notes/raw/master/course\molecular-immunology\molecular-immunology.assets\10-cte.png)
+   > <img src="../../course/molecular-immunology/molecular-immunology.assets/10-cte.png" alt="10-cte" style="zoom:80%;" />
    >
    > DTH: delayed-type hypersensitivity
 
