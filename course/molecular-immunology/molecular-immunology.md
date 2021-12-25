@@ -6,6 +6,20 @@ The main reference materials include the slides (not available, but you can watc
 
 The quoted areas are less-important comments or end-of-chapter questions.
 
+## test figure
+
+根目录probably not ok
+
+<img src="/course/molecular-immunology/molecular-immunology.assets/1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" />
+
+正常目录probably not ok
+
+<img src="./molecular-immunology.assets/1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
+
+this should ok, but does not work locally
+
+![logo](../../course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=50%')![logo](../../course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=100%')
+
 # Chapter 1 Introduction 
 
 绪论
@@ -132,10 +146,6 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 - 淋巴细胞定居、发挥免疫应答的场所
 
 <img src="../../course/molecular-immunology/molecular-immunology.assets/1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" /><img src="../../course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
-
-test figure
-
-<img src="./course/molecular-immunology/molecular-immunology.assets/1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" /><img src="../../course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
 
 具体结构
 
@@ -1921,9 +1931,7 @@ B细胞介导的免疫应答
 
 ## Basics
 
-### Immune Tolerance
-
-the immune system does not respond to some **specific** antigen.
+Immune Tolerance: a state of unresponsiveness of the immune system to **specific** substances or tissue.
 
 - no immune molecules or activated lymphocytes
 - tolerogen 耐受原
@@ -1932,13 +1940,42 @@ Different from immunodeficiency!
 
 > That's abnormal development, proliferation, differentiation and metabolism of lymphocytes.
 
-### Categories
+Categories
 
-- a state of unresponsiveness of the immune system to substances or tissue
+- natural tolerance 天然耐受
+  - came into contact during embryonic period
+  - or after birth, 如口服耐受、妊娠耐受
+- acquired tolerance 人工耐受
+
+Influencing factors: the opposite of [immunogenicity](#Immunogenicity:-influencing-factors)
+
+> antigen (MW, chemistry, structure complexity, physical property, epitope, etc.), host, route of entry
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 # Chapter 13 Hypersensitivity
+
+
+
+
+
+
+
+
+
+
 
 
 

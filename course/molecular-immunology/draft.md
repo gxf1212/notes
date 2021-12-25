@@ -64,7 +64,7 @@ class Th1,Th2,Th17,CTL subcell
 >
 > GM-CSF、 MCF  
 
-a simple version with only cells
+a simple version with only cells。。
 
 ```mermaid
 graph TB
