@@ -20,6 +20,10 @@ this should ok, but does not work locally
 
 ![logo](../../course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=50%')![logo](../../course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=100%')
 
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" />
+
+
+
 # Chapter 1 Introduction 
 
 绪论
