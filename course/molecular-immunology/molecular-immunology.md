@@ -1863,7 +1863,7 @@ feature: Ag-specificity, MHC-restriction
    >
    > 
    >
-   > <img src="../../course/molecular-immunology/molecular-immunology.assets/10-cte.png" alt="10-cte" style="zoom:80%;" />
+   > <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-cte.png" alt="10-cte" style="zoom:80%;" />
    >
    > DTH: delayed-type hypersensitivity
 

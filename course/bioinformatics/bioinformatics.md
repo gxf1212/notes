@@ -86,9 +86,9 @@ $$
 
 例子：几个基因在不同癌症中的表达
 
-<img src="../../course/bioinformatics/bioinformatics.assets/5-linear.png" alt="linear" style="zoom:75%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-linear.png" alt="linear" style="zoom:75%;" />
 
-<img src="../../course/bioinformatics/bioinformatics.assets/5-pearson.png" style="zoom: 40%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-pearson.png" style="zoom: 40%;" />
 
 #### 非线性相关系数
 
@@ -107,7 +107,7 @@ $d$ 到底是啥？先将基因表达量转换成其在所有表达量中的排�
 
 两个基因同一位置rank的差值就是 $d$
 
-<img src="../../course/bioinformatics/bioinformatics.assets/5-rank.png" style="zoom: 50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-rank.png" style="zoom: 50%;" />
 
 #### 互信息
 
@@ -127,11 +127,11 @@ hierarchical clustering
 
 1. 计算所有样本两两间的距离（可表示为矩阵）
 
-   <img src="../..\course\bioinformatics\bioinformatics.assets\5-hie-mat.png" alt="5-hie-mat" style="zoom:50%;" />
+   <img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-hie-mat.png" alt="5-hie-mat" style="zoom:50%;" />
 
 2. 合并距离最近的两个样本为一个节点
 
-   <img src="../../\course\bioinformatics\bioinformatics.assets\5-hie-mat2.png" alt="5-hie-mat2" style="zoom:50%;" />
+   <img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-hie-mat2.png" alt="5-hie-mat2" style="zoom:50%;" />
 
 3. 更新距离矩阵
 
@@ -146,7 +146,7 @@ hierarchical clustering
 
 ##### 应用
 
-<img src="../..\course\bioinformatics\bioinformatics.assets\5-hierarchical.png" alt="5-hierarchical" style="zoom:50%;" /><img src="../..\course\bioinformatics\bioinformatics.assets\5-hierarchical-gene.png" alt="5-hierarchical" style="zoom:50%;" />
+<img src="../..\course/bioinformatics/bioinformatics.assets/5-hierarchical.png" alt="5-hierarchical" style="zoom:50%;" /><img src="../..\course/bioinformatics/bioinformatics.assets/5-hierarchical-gene.png" alt="5-hierarchical" style="zoom:50%;" />
 
 可以同时对样本（汽车品牌）和变量（各种参数）进行分类，将二维的数据组织成如上的热图，可以分析汽车品牌和各种参数的关系。同样的例子：基因名（变量）和不同时间表达量（样本）
 
@@ -199,7 +199,7 @@ hierarchical clustering
 
 ### 决策树
 
-<img src="../..\course\bioinformatics\bioinformatics.assets\5-treeeg.png" alt="5-treeeg" style="zoom:40%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-treeeg.png" alt="5-treeeg" style="zoom:40%;" />
 
 一堆样本，对应一个决策；有多个指标（变量），我们需要用已有数据训练出模型。训练目标就是找出，每一步使用什么变量来分类各样本，能达到最准确的分类效果。
 
@@ -251,11 +251,11 @@ where $G$ means Gini index or information entropy; $N$ represents the parent nod
 
 another example:
 
-<img src="../../course\bioinformatics\bioinformatics.assets\5-treeeg2.png" alt="tree" style="zoom:40%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-treeeg2.png" alt="tree" style="zoom:40%;" />
 
 > 另一个例子：西瓜的好坏
 >
-> <img src="../../course\bioinformatics\bioinformatics.assets\5-watermelon.png" alt="5-watermelon" style="zoom:30%;" />
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-watermelon.png" alt="5-watermelon" style="zoom:30%;" />
 
 停止标志：变量用完了（还没分出来就是方法或数据不行）、每个节点都足够纯了。
 
@@ -279,7 +279,7 @@ another example:
 
 ### 真假阳性-based
 
-<img src="../../course\bioinformatics\bioinformatics.assets\5-tpn.png" alt="5-tpn" style="zoom:40%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-tpn.png" alt="5-tpn" style="zoom:40%;" />
 
 | index                | implication （反义)    | equation                                  |
 | -------------------- | ---------------------- | ----------------------------------------- |
@@ -295,7 +295,7 @@ another example:
 
 > 二者是矛盾的！但这个曲线不是ROC（人家是TP和FP的曲线）
 
-<img src="../../course\bioinformatics\bioinformatics.assets\5-curve.png" alt="5-curve" style="zoom:33%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-curve.png" alt="5-curve" style="zoom:33%;" />
 
 #### 综合准确率指标
 
@@ -307,7 +307,7 @@ balanced accuracy：综合了两方面的预测。避免了数据不平衡导致
 | accuracy/correctness | 总体准确率          | $\dfrac{TP+TN}{Total}$                                       |
 | F-score              | β是权重             | $(1+\beta)\cdot\dfrac{\text{recall}\cdot\text{precision}}{\beta^2(\text{recall+precision})}$ |
 
-<img src="../../course\bioinformatics\bioinformatics.assets\5-wangmazi.png" alt="5-wangmazi" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-wangmazi.png" alt="5-wangmazi" style="zoom:50%;" />
 
 
 
