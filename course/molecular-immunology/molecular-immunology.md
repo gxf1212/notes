@@ -120,7 +120,7 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 
 > 红髓：巨噬细胞；白髓：T细胞
 >
-> 其他功能：调节血量、过滤血液
+> 其他功能：调节血量、过滤血液（拦下一些抗原，便于激活免疫）
 
 #### lymphatic system
 
@@ -130,6 +130,8 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 - 沿血管分布，有深有浅，是免疫系统的“哨所”
   - 淋巴液和血浆成分相似，可能交换
 - 淋巴细胞定居、发挥免疫应答的场所
+  - 脾脏漏掉的抗原被收集，便于激活免疫
+
 
 <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" /><img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
 
@@ -924,7 +926,7 @@ hla --> 3[class III]
 1 --> 1n[non-classic HLA class I <br/> immune tolerance]
 1n --> 1ng[HLA-G]
 1n --> 1nE[HLA-E]
-1n --> 1nF[HLA-f]
+1n --> 1nF[HLA-F]
 2 --> 2c[classic HLA class II <br/> immune response]
 2c --> 2cp[HLA-DP]
 2c --> 2cq[HLA-DQ]
@@ -941,7 +943,7 @@ hla --> 3[class III]
 32 --> TNF
 32 --> HSP70
 32 --> regulator
-32 --> MIC
+32 --> mic["MIC(A/B)"]
 3 --> 33[other]
 ```
 
@@ -1012,6 +1014,8 @@ MHC class I is presented on the surface of any karyocytes (有核细胞) (except
 
 ​			<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-mhc1.jpg"  style="zoom:25%;" />								<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-mhc2.png"  style="zoom:75%;" />
 
+<center>left: MHC I; right: MHC II</center>
+
 ### MHC class II
 
 - still the 3 domains
@@ -1019,6 +1023,8 @@ MHC class I is presented on the surface of any karyocytes (有核细胞) (except
 - a symbol of the ability of antigen-presenting
 
 Expressed on professional APCs, B cells, activated T cells, thymus epithelial cells, etc.
+
+> why activated T cells??
 
 ### MHC function
 
@@ -1209,7 +1215,7 @@ PMN=polymorphonuclear多形核白细胞 (neutrophil, basophil (*Ba*), ensinophil
 
 髓系细胞包括：红细胞、血小板、粒细胞、单核细胞，还有经典DC、肥大细胞等（DC有髓样的也有浆细胞样的）
 
-淋巴细胞包括：T细胞、B细胞、NK细胞，固有样淋巴细胞还有：NKT细胞、γδT细胞、B1细胞等
+淋巴细胞包括：(αβ)T细胞、B细胞、NK细胞，固有样淋巴细胞还有：NKT细胞、γδT细胞、B1细胞等
 
 这些（除了红细胞、血小板）全都是白细胞。
 
@@ -1700,6 +1706,62 @@ situations that can happen:
 
 
 
+# Additional Chapter: T/B cell development
+
+## B cell
+
+### BCR gene and VDJ recombination
+
+#### Structure
+
+
+
+#### Recombination
+
+
+
+#### Ab diversity
+
+
+
+### B cell development
+
+#### Positive selection
+
+See [Chapter 11](#somatic-hypermutation)
+
+#### Negative selection
+
+
+
+#### Categories
+
+B1/2 cells
+
+
+
+## T cell
+
+### TCR gene recombination
+
+
+
+### T cell development
+
+#### Positive selection
+
+See [Chapter 11](#somatic-hypermutation)
+
+#### Negative selection
+
+
+
+### T cell Categories
+
+
+
+
+
 # Chapter 10 T cell-mediated Immune Response 
 
 T细胞介导的免疫应答
@@ -1821,9 +1883,114 @@ Ag signal$+$cytokines from Th cell
 
 #### CD4<sup>+</sup> T cell effect
 
+flow charts
 
+##### Relationship between cells
 
+```mermaid
+graph TD
+%%linkStyle 1 stroke:#ff3,stroke-width:4px,color:red
+DC --Ag presenting--> CD4+[(CD4+)]
+DC --Ag presenting--> CD8+[(CD8+)]
+%% Th1, DC
+DC --IL-12<br/>CD4+ diff--> Th1[Th1]
+Th1 --IFN-γ--> DC
+%% CD diff
+CD4+ ==> Th1 --IL-2<br/>CD4+ diff--> Th1
+CD4+ ==> Th2 --IL-4<br/>CD4+ diff--> Th2
+CD8+ ==> CTL[CTL] --IL-2--> CTL
+%% Th Tc
+Th1 --IL-2--> CTL
+Th1 -.IL-2.-> Th2
+Th1 -.IFN-γ.-> Th2[Th2]
+Th2 -.IL-4.-> Th1
+Th2 -.IL-10.-> Th1
 
+classDef cell fill:#f9f,stroke:#333,stroke-width:2px
+class CD4+,CD8+ cell
+classDef subcell fill:#bbf,stroke:#f66,stroke-width:2px
+class Th1,Th2,Th17,CTL subcell
+```
+
+- DC is the initial activator, IL-12 to induce Th1
+
+- Th1 positive feedback, strengthen DC and itself
+
+- Th1 and Th2, both from Th0, inhibiting each other?
+
+  > no clear result on IL-2's effect on Th2....
+
+- CTL is activated by IL-2 (self, Th1)
+
+##### Th1 downstream: cellular immunity
+
+```mermaid
+graph TD
+CD4+[(CD4+)] ==> Th1 --> l([CD40L,etc.]) --activation--> Mϕ --IL-12 if infected--> Th1
+CD4+ --> co([IL-3,GM-CSF]) --monocyte<br/>differentiation--> Mϕ
+Th1 --> co --recruit--> Mϕ --enhanced<br/>presentation--> CD4+
+
+Th1 --> IL-2([IL-2])
+IL-2 --> CTL --> IL-2
+IL-2 --> Mϕ --> cyto[endocytosis]
+IL-2 --> NK --> ct[cytotoxicity]
+
+CD4+ --> IFN([IFN-γ])
+Th1 --> IFN --> Th1
+IFN --> Mϕ
+TNFa --> NK
+IFN --> NK
+IFN --> CTL --> ct
+IFN --> B[B cell] --Ab--> op[opsonization]
+CD8+[(CD8+)] ==> CTL
+Th1 --> TNFa([TNF-α]) --> neutrophil --> op
+neutrophil --> cyto
+neutrophil --> ct
+
+classDef cell fill:#f9f,stroke:#333,stroke-width:2px
+class CD4+,CD8+ cell
+classDef subcell fill:#bbf,stroke:#f66,stroke-width:2px
+class Th1,NK,Mϕ,CTL,neutrophil,B subcell
+```
+
+- Th1 and macrophage activate each other; monocyte diff and chemotaxis
+
+- various cytokines activate NK, CTL, neotrophil, B cell, ....
+
+  A lot is not shown...
+
+  > TNF-α is also produced by NK, Mϕ, CTL, ...
+
+##### Other Th cell and effects
+
+```mermaid
+graph TB
+CD4+[(CD4+)] ==IL-4==> Th2 --> IL-4([IL-4])
+IL-4 -.-> Th1
+Th2 --> IL-10([IL-10]) -.-> Th1
+IL-4 --> v[B cell,mastocytes,ensinophils] --> p[plasma cell]
+Th2 --> IL-10([IL-10]) --> v
+Th2 --> IL-5([IL-5]) --> v --> hypersensitivity
+Th2 --> IL-13([IL-13]) --> v
+Th2 --IL-3/GM-CSF--> Mϕ
+
+CD4+ ==IL-6==> Th17[Th17] --IL-17--> ic[inflammatory<br/>cytokines]
+Th17 --same as Th1--> Mϕ
+Th17 --> autoimmunity
+
+CD4+ ==TGF-β==> Treg[Treg] --TGF-β--> is[immune<br/>supression]
+Treg --direct<br/>contact--> is
+
+classDef cell fill:#f9f,stroke:#333,stroke-width:2px
+class CD4+,CD8+ cell
+classDef subcell fill:#bbf,stroke:#f66,stroke-width:2px
+class Th1,Th2,Th17,Treg,CTL subcell
+```
+
+- Th2: humoral immunity
+- Th17, Treg: see figure
+
+Summary: a lot of functions are contradictory...
 
 | response | cell type | immunity | pathogen      | hypersensitivity | other effect       |
 | -------- | --------- | -------- | ------------- | ---------------- | ------------------ |
@@ -1838,6 +2005,8 @@ Ag signal$+$cytokines from Th cell
 | Th2             | IL-4                                | IL-4, IL-10                       | humoral immunity      | B cell activation<br />class switching<br />hypersensitivity |
 | Th17            | IL-6, TGF-β                         | IL-17                             | innate (inflammation) | inflammation!! auto<br />chemotaxis/activation               |
 | CTL             | IL-2                                | IFN-γ, TNF-α                      | cell immunity         | direct killing                                               |
+
+> Tfh cell: T follicular helper cell
 
 #### CD8<sup>+</sup> T cell effect
 
@@ -1896,6 +2065,150 @@ feature: Ag-specificity, MHC-restriction
 # Chapter 11 B cell-mediated Immune Response 
 
 B细胞介导的免疫应答
+
+## Response to TD Ag
+
+### B cell activation: primary signal
+
+BCR-CD79a/b-CD19/CD21/CD81 binds Ag
+
+- BCR binds Ag. 
+
+  1) causing the internalization of Ag-Ab complex for Ag presentation
+  2) the activation pathway looks like TCR
+
+  > - CD79a/b (also known as Igα/β): like CD3, transduction into intracellular region, with ITAM motif
+  > - Fyn, Lyn: like Lck; Syk: like ZAP70?
+  > - finally NFAT, NFκB, etc.
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\11-bcr.png" alt="11-bcr" style="zoom:70%;" />
+
+- Co-receptor: CD19/CD21/CD81
+
+  > - CD21: recognizes C3d (C3b is cleaved) that is binding on the Ag
+  > - CD81 stabilizes the coreceptor complex
+  > - CD19 conformational change, Tyr residues are phosphorylated, recruit SH2 adaptors (Fyn, etc.)
+
+  the signal might be amplified 1000 times
+
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\11-bcr-coreceptor.png" alt="11-bcr-coreceptor" style="zoom:60%;" />
+
+BCR is different from TCR in:
+
+- recognize not only protein Ag, but also NA, lipid, polysaccharide, etc.
+- recognize the natural/partially-degraded Ag, not always peptide, i.e. also conformational epitope
+- no APC requirement, no MHC restriction
+
+### Naive B cell activation
+
+Other than the primary signal, it also needs
+
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\11-secondary.png" alt="11-secondary" style="zoom:25%;" />
+
+- secondary signal like CD40L from Th2/Tfh2 cell
+
+  > without that, B cell anergy
+
+- cytokines from Th cells, macrophages, etc.
+
+  so that B cells differentiate and produce Ab.
+
+  > Remember, B cells can act as APC that helps with differentiation, and express B7 for CD28 to activate Th cells. The activation is **mutual**.
+  >
+  > With multiple adhesion molecule pairs, they form an immunological synapse.
+
+```mermaid
+graph LR
+b[BCR recognize Ag] --> 1[primary signal] --> bc[B cell differentiation<br/>and Ab production]
+b --> a[CD4+ T cell -> Th cell] --B7--> th[Th activation] --CD40L--> 2[secondary signal] --> bc
+th --> 3[cytokines] --> bc
+```
+
+### B cell proliferation and events in germinal center
+
+生发中心
+
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\11-abconc.png" alt="11-abconc" style="zoom:33%;" />
+
+#### Proliferation
+
+| response           | region      | antibody          |
+| ------------------ | ----------- | ----------------- |
+| primary response   | bone marrow | produce IgM       |
+| secondary response | follicles   | high affinity IgG |
+
+Germinal center is formed (about 7 days after infection). 
+
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\11-gc.png" alt="11-gc" style="zoom:60%;" />
+
+> centroblast (生发中心母细胞): the core
+>
+> centrocyte (中心细胞): differentiated from centroblast
+
+| zone  | cell type            | activity                                          | gathering |
+| ----- | -------------------- | ------------------------------------------------- | --------- |
+| dark  | centroblast          | divide rapidly, no mIg expression                 | closely   |
+| light | centrocyte, fDC, Tfh | the opposite; further differentiation (see below) | loosely   |
+
+> fDC: concentrate Ag on the surface using FcR and CR, for B cell to recognize. Maintain memory
+
+#### Events
+
+##### Somatic hypermutation
+
+体细胞高频突变  
+
+
+
+##### Ig affinity maturation
+
+亲和力成熟：再次应答时，由于B细胞发生体细胞高频突变，
+产生的多种具有不同亲和力的BCR和抗体。只有最高亲和力
+的细胞能够继续增殖，并产生高亲和力的抗体  
+
+
+
+
+
+##### Ab class switching
+
+
+
+
+
+Most don't accomplish these will be cleared.
+
+
+
+### B cell differentiation/fate
+
+- plasma cell
+  - migrate to bone marrow
+  - produce antibody, but no longer express BCR or MHC II
+- memory T cell
+  - long live, relying on follicular DC
+
+## Response to TI Ag
+
+
+
+
+
+
+
+
+
+
+
+comparison
+
+|      |      |      |
+| ---- | ---- | ---- |
+|      |      |      |
+|      |      |      |
+|      |      |      |
+
+
 
 
 

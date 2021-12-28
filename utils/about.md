@@ -1,6 +1,6 @@
 # About me
 
-<img src="../_media/photo.jpg" style="zoom:50%;" />
+<center><img src="https://gitee.com/gxf1212/notes/raw/master/_media/photo.jpg" style="zoom:50%;" /></center>
 
 - [My GitHub site](https://github.com/gxf1212)
 - [My Bilibili Channel](https://space.bilibili.com/441196634)
