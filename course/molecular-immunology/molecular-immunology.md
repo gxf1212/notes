@@ -634,7 +634,7 @@ at DNA level, irreversible, from IgM to G to ...
 
 - antibody phage display: build a library of V region genes by cloning from polyclonal B cells from immunized humans, importing them into phages. Tandem expression with minor coat protein enables to display Fv antibodies on the surface of phages. Then we can screen Ab with the desired affinity with our antigen.
 
-  <img src="../../course/molecular-immunology/molecular-immunology.assets/4-display.png" alt="4-display" style="zoom:50%;" />
+  <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/4-display.png" alt="4-display" style="zoom:50%;" />
 
 > 小结
 > 1. 抗体的功能是什么？
@@ -689,11 +689,11 @@ Note: these reactions occur on the surface of the pathogen or an infected host c
 
 2. C1q's binding to Ab results in the autocatalytic activation of C1r which is bound to C1q
 
-   <img src="../../course/molecular-immunology/molecular-immunology.assets/5-c1q.png" alt="5-c1q" style="zoom:50%;" />
+   <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-c1q.png" alt="5-c1q" style="zoom:50%;" />
 
 3. C1r cleaves and activates C1s, which then cleaves circulating C4 and C2. C4b is then bound to the membrane or the Ab, forming a **C4b2a complex**.
 
-   <img src="../../course/molecular-immunology/molecular-immunology.assets/5-c4b2a.png" alt="5-c1q" style="zoom: 30%;" />
+   <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-c4b2a.png" alt="5-c1q" style="zoom: 30%;" />
 
 4. The complex is called classical pathway **C3 convertase C4b2a**, which cleaves C3 into C3a and C3b. 
 
@@ -734,7 +734,7 @@ Note: these reactions occur on the surface of the pathogen or an infected host c
    
 3. MASP1 cleaves C3, but goes into the alternative pathway
 
-<img src="../../course/molecular-immunology/molecular-immunology.assets/5-mbl.png" alt="5-mbl" style="zoom:45%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-mbl.png" alt="5-mbl" style="zoom:45%;" />
 
 ### summary
 
@@ -805,7 +805,7 @@ Molecules like C3b (also smaller fragments), C4b, etc. are recognized by recepto
 
 Activated by Ag-Ab complex, C3b is produced and recognized by erythrocytes (红细胞) and platelets (血小板) who transport the immune complex (IC) to the liver and spleen, where ICs are cleared by phagocytosis.
 
-<img src="../../course/molecular-immunology/molecular-immunology.assets/5-adhesion.png" alt="5-adhesion" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-adhesion.png" alt="5-adhesion" style="zoom:50%;" />
 
 ### Inflammatory response
 
@@ -1706,19 +1706,40 @@ situations that can happen:
 
 
 
-# Additional Chapter: T/B cell development
+# Chapter 10 T/B cell development
+
+Not included in slides, but in the textbook. Helps to understand Chapter 10 and 11.
 
 ## B cell
 
 ### BCR gene and VDJ recombination
 
-#### Structure
+#### Basics
 
+Gene recombination: gene segments rearrange.
 
+- heavy chain: Chrom 14. V (variable), D (diversity), J (joining), C (constant) regions
+- light chain: Chrom 2/22, no D region
 
 #### Recombination
 
+- C genes are joined only after VDJ (VJ) genes have combined
 
+- recombinases cut the conservative sequences on both ends of gene segments and connect them
+
+  > TdT also add dozens of nt to the break end (断端)
+
+- The overall steps are shown below
+
+  - heavy chain variable region first, light later
+  - only one D/J is left
+
+  ![9--vdj](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/9--vdj.png)
+
+- a B cell clone only express one type of BCR
+
+  - allelic exclusion: if one chromosome successfully undergo recombination, recombination on the other chromosome is inhibited
+  - isotype exclusion: if κ chain ...., .... of the λ chain is inhibited.
 
 #### Ab diversity
 
@@ -1762,7 +1783,7 @@ See [Chapter 11](#somatic-hypermutation)
 
 
 
-# Chapter 10 T cell-mediated Immune Response 
+# Chapter 11 T cell-mediated Immune Response 
 
 T细胞介导的免疫应答
 
@@ -1959,7 +1980,7 @@ class Th1,NK,Mϕ,CTL,neutrophil,B subcell
 
   A lot is not shown...
 
-  > TNF-α is also produced by NK, Mϕ, CTL, ...
+  > IFN-γ activates almost all these related cells... TNF-α is also produced by NK, Mϕ, CTL, ...
 
 ##### Other Th cell and effects
 
@@ -1997,7 +2018,7 @@ Summary: a lot of functions are contradictory...
 | type 1   | Th1       | cellular | intracellular | delayed          | APC, Tc            |
 | type 2   | Th2       | humoral  | extracellular | allergy          | Ab class switching |
 
-
+A brief recitation
 
 | T cell subgroup | cytokines inducing their generation | major types of cytokines produced | type of response      | biological function of these cytokines                       |
 | --------------- | ----------------------------------- | --------------------------------- | --------------------- | ------------------------------------------------------------ |
@@ -2014,11 +2035,11 @@ feature: Ag-specificity, MHC-restriction
 
 1. 效-靶细胞结合
 
-   CTL migrates following chemokines, contact with the target cell, forms immunological synapse
+   CTLs migrate following chemokines, contact with the target cell, form immunological synapse
 
 2. CTL polarization
 
-   Upon recognizing pMHC, TCR and related molecules move towards the interface. Some organelles also re-organize for the granules (containing perforin/granzyme) to release.
+   Upon recognizing pMHC, TCR and related molecules move towards the interface. Some organelles also re-organize so that the granules (containing perforin/granzyme) can be released.
 
    > polarization: cellular components aggregate on one specific side of the cell
 
@@ -2026,33 +2047,29 @@ feature: Ag-specificity, MHC-restriction
 
    - perforin: forms a pore on the membrane like C9 does, letting in water that burst the cell
    - granzyme: get inside through the pore, cleaves Bid (and some others) to initiate apoptosis
-   - FasL: 
+   - FasL, TNF-α, etc: bind on the receptor and send an apoptosis signal. Fas: caspase-8 pathway
 
-   > perforin: pore forming protein, facilitates granzyme endocytosis
-   >
-   > 
+   > perforin: pore forming protein, also facilitates granzyme getting inside the cell. need Ca<sup>2+</sup>
    >
    > <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-cte.png" alt="10-cte" style="zoom:80%;" />
    >
-   > DTH: delayed-type hypersensitivity
+   > > DTH: delayed-type hypersensitivity
 
 ## Effector T cell fate
 
 1. apoptosis, to terminate immune response
    - activation-induced cell death (AICD): e.g. Fas expression
    - T<sub>reg</sub> induced death (see chapter 13)
-   
 2. to T<sub>m</sub> (memory T cell)
    - CD45RA<sup>-</sup>/RO<sup>+</sup> (exactly reverse the naive T cell)
    - rapid activation, more sensitive to Ag/cytokine
    - less requirement on co-stimulators, more cytokine production
 
-3. CD8
-
-  CD8*记忆T细胞﹐研究结果提示:①CD8Tm的产生无需T细胞分泌的细胞因子参与;2 CD8*Tm的维持无需抗原持续刺激和B细胞参与,亦无需Th辅助,但有赖于与MHCI类分子
-  记
-  的接触,可能需要T细胞CD28与CD80和 CD86结合所产生的共刺激信号持续存在;3IFN-a
-  及IL-15等细胞因子在维持CD8+ Tm中可能发挥重要作用。
+> CD8记忆T细胞。研究结果提示
+>
+> 1. CD8 T<sub>m</sub>的产生无需T细胞分泌的细胞因子参与;
+> 2. CD8 T<sub>m</sub>的维持无需抗原持续刺激和B细胞参与，亦无需Th辅助，但有赖于与MHC I类分子的接触，可能需要T细胞CD28与CD80和CD86结合所产生的共刺激信号持续存在;
+> 3. IFN-α及IL-15等细胞因子在维持CD8 T<sub>m</sub>中可能发挥重要作用。
 
 ## T cell biological effects
 
@@ -2062,7 +2079,7 @@ feature: Ag-specificity, MHC-restriction
 
 
 
-# Chapter 11 B cell-mediated Immune Response 
+# Chapter 12 B cell-mediated Immune Response 
 
 B细胞介导的免疫应答
 
@@ -2081,7 +2098,7 @@ BCR-CD79a/b-CD19/CD21/CD81 binds Ag
   > - Fyn, Lyn: like Lck; Syk: like ZAP70?
   > - finally NFAT, NFκB, etc.
 
-<img src="../../course\molecular-immunology\molecular-immunology.assets\11-bcr.png" alt="11-bcr" style="zoom:70%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-bcr.png" alt="12-bcr" style="zoom:70%;" />
 
 - Co-receptor: CD19/CD21/CD81
 
@@ -2091,7 +2108,7 @@ BCR-CD79a/b-CD19/CD21/CD81 binds Ag
 
   the signal might be amplified 1000 times
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\11-bcr-coreceptor.png" alt="11-bcr-coreceptor" style="zoom:60%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-bcr-coreceptor.png" alt="12-bcr-coreceptor" style="zoom:60%;" />
 
 BCR is different from TCR in:
 
@@ -2103,7 +2120,7 @@ BCR is different from TCR in:
 
 Other than the primary signal, it also needs
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\11-secondary.png" alt="11-secondary" style="zoom:25%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-secondary.png" alt="12-secondary" style="zoom:25%;" />
 
 - secondary signal like CD40L from Th2/Tfh2 cell
 
@@ -2128,7 +2145,7 @@ th --> 3[cytokines] --> bc
 
 生发中心
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\11-abconc.png" alt="11-abconc" style="zoom:33%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-abconc.png" alt="12-abconc" style="zoom:33%;" />
 
 #### Proliferation
 
@@ -2139,7 +2156,7 @@ th --> 3[cytokines] --> bc
 
 Germinal center is formed (about 7 days after infection). 
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\11-gc.png" alt="11-gc" style="zoom:60%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-gc.png" alt="12-gc" style="zoom:60%;" />
 
 > centroblast (生发中心母细胞): the core
 >
@@ -2222,7 +2239,7 @@ comparison
 
 
 
-# Chapter 12 Immune Tolerance
+# Chapter 13 Immune Tolerance
 
 免疫耐受
 
@@ -2264,7 +2281,7 @@ Influencing factors: the opposite of [immunogenicity](#Immunogenicity:-influenci
 
 
 
-# Chapter 13 Hypersensitivity
+# Chapter 14 Hypersensitivity
 
 
 
@@ -2282,7 +2299,7 @@ Influencing factors: the opposite of [immunogenicity](#Immunogenicity:-influenci
 
 
 
-# Chapter 14 Transplant Immunity
+# Chapter 15 Transplant Immunity
 
 ## Immunology of transplant rejection
 
@@ -2424,25 +2441,152 @@ GVL: graft versus lymphoma.
 
 
 
+# Chapter 16 Tumor Immunology
 
 
 
 
 
+tumor cell usually gives endogenous Ag
 
 
 
+### mutation
 
 
 
+### virus
 
 
 
+### abnormal expression
 
 
 
+- temprol
+- spatial
 
 
+
+## Mechanism of evasion
+
+### During recognition
+
+
+
+- absent and of antigen
+- low MHC class I expression
+- absent of co-stimulatory molecules
+
+### During effective stage
+
+- immune supression
+  - cytokines, like IL-10, TGF-β
+  - induce T<sub>reg</sub>
+  - inhibit DC
+  - induce apoptosis (PD-L1, etc)
+- anti-apoptosis
+- fdsf: too fast growth (e.g. in children), too late to fight 
+
+
+
+## Application
+
+### Diagnosis
+
+early!
+
+- Soluble Ag and Ab
+
+  take serum
+
+  - AFP, etc
+  - Ab
+
+- cell surface Ag
+
+  - isotope/fluorophore-labeled Ab, combined with iconography
+
+    > need more/better label
+
+
+
+### Treatment
+
+> 放疗导致免疫抑制，损伤免疫细胞？
+
+#### active
+
+enhance anti-tumor activity
+
+- non-specific
+
+  - adjuvant like 卡介苗，短小棒状杆菌，多糖，OK432等
+  - oncolytic virus
+
+- specific: cancer vaccine
+
+  > mostly therapeutic, not preventive, not those which blocks cancer-related virus
+
+  - inactivated/attenuated vaccine
+  - DC vaccine
+  - polypeptide (with adjuvant) vaccine
+
+#### passive
+
+inject effectors
+
+- antibody
+
+  - block key pathways (VEGF, CD20)
+  - a tool for targeting (multi-functional/bi-specific Ab)
+
+  > drawbacks: cannot get through barriers; rejected by the host
+
+- cytokine
+
+  > great side effect
+
+- lymphocytes
+
+  - CIK: cytokine-induced killer (from the patient), inject back
+
+  - TIL: tumor-infiltrating lymphocyte, activation--inject back
+
+    > these two cannot overcome immunosuppression
+
+  - CAR-T: chimeric antigen receptor.
+
+
+
+##### CAR-T
+
+- structure
+  - extra: single domain Ab or ScFv
+  - spacer: transmembrane
+  - costimulatory domain, like CD28, 4-1BB
+  - CD3ζ: signaling
+- problems
+  - CRS or cytokine storm: too many lymphocyte activated, even hurt the brain
+  - not so good in solid tumor: still, immunosupression microenvironment
+
+
+
+### Tumor Ag identification
+
+
+
+- cDNA library of tumor cells, screen with tumor-specific T cells (tumor cell killed)
+
+  > variant: wash out all peptide on the surface of tumor cells. sequence the protein and make a llibrary, still screening...
+
+- NGS
+
+  > find mutations, analyze epitopes *in silico*, verification
+
+
+
+# Chapter 17 Aut
 
 
 
