@@ -12,4 +12,4 @@ This site shows some of my notes on Linux fundamentals, software installing, mol
 
 
 <!-- 背景图片 -->
-<!-- ![](./_media/virus.jpg)
+![](./_media/virus.jpg)
