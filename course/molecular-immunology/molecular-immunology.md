@@ -1734,7 +1734,7 @@ Gene recombination: gene segments rearrange.
   - heavy chain variable region first, light later
   - only one D/J is left
 
-  ![9--vdj](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/9--vdj.png)
+  ![](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10--vdj.png)
 
 - a B cell clone only express one type of BCR
 
