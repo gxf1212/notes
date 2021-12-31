@@ -1421,15 +1421,15 @@ A lot of other cells are involved in innate immune response, like mastocytes.
 
     > requires complement and antibody to destruct Gram-negative bacteria
 
-  - β-lysin (乙型溶素): heat-stable, only G<sup>+</sup>
+  - β-lysin (乙型溶素): heat-stable; only target G<sup>+</sup>
 
 
 ## Innate immune response
 
 ### Process
 
-1. <u>immediate</u> innate immune: $<4$ hours, local innate immune cells function, neutrophils enter.
-2. early innate immune
+1. <u>immediate</u> innate immunity: $<4$ hours, local innate immune cells function, neutrophils enter.
+2. early innate immunity
    - chemokines recruit macrophages, which release more cytokines
    - NK and NKT cells enter
    - B1 cell produces Ab
@@ -1556,7 +1556,7 @@ Application: cancer vaccines.
 
 ### B cells
 
-- mIg(膜免疫球蛋白, maily BCR?)-mediated endocytosis, Ag enrichment and processing
+- mIg-mediated endocytosis, Ag enrichment and processing
 - present MHC II-Ag to Th cells (with co-stimulator in inflammatory conditions)
 - reversely be activated by (CD4<sup>+</sup> and?) Th cells (TD-Ag) to produce Ab
 
@@ -1721,12 +1721,16 @@ Gene recombination: gene segments rearrange.
 - heavy chain: Chrom 14. V (variable), D (diversity), J (joining), C (constant) regions
 - light chain: Chrom 2/22, no D region
 
+<img src="https://gitee.com/gxf1212/notes/raw/master/molecular-immunology/molecular-immunology.assets/10-a-vdj.jpg" style="zoom:80%;" />
+
 #### Recombination
 
 - C genes are joined only after VDJ (VJ) genes have combined
 
 - recombinases cut the conservative sequences on both ends of gene segments and connect them
 
+  > RAG: recombinase activating gene
+  >
   > TdT also add dozens of nt to the break end (断端)
 
 - The overall steps are shown below
@@ -1734,7 +1738,7 @@ Gene recombination: gene segments rearrange.
   - heavy chain variable region first, light later
   - only one D/J is left
 
-  ![](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10--vdj.png)
+  ![](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-a-vdj.png)
 
 - a B cell clone only express one type of BCR
 
@@ -1743,7 +1747,19 @@ Gene recombination: gene segments rearrange.
 
 #### Ab diversity
 
+- combinational diversity: the choice of V, (D,) J genes are independent
 
+  > an estimate. multiply these numbers!
+  >
+  > | gene  | heavy VH | heavy VD | heavy VJ | Vκ   | Vλ   |
+  > | ----- | -------- | -------- | -------- | ---- | ---- |
+  > | types | 40       | 25       | 6        | 200  | 120  |
+
+- junctional diversity: at the joining end, bases might be randomly added (by TdT) or deleted (not necessarily multiples of three)
+
+- receptor editing: some mIg expressing B cells encounter self-Ag, but clonal deletion does not occur. RAG is re-activated and VJ
+
+- somatic hypermutation (see [chapter 13](#Somatic-hypermutation))
 
 ### B cell development
 
@@ -2168,8 +2184,12 @@ Germinal center is formed (about 7 days after infection).
 | light | centrocyte, fDC, Tfh | the opposite; further differentiation (see below) | loosely   |
 
 > fDC: concentrate Ag on the surface using FcR and CR, for B cell to recognize. Maintain memory
+>
+> mIg: 膜免疫球蛋白, BCR (the same gene as Ab.), heavy chain: IgM or IgD
 
 #### Events
+
+A mature B cell still does not have specificity to an antigen. So what happens to it in the periphery?
 
 ##### Somatic hypermutation
 
@@ -2179,9 +2199,7 @@ Germinal center is formed (about 7 days after infection).
 
 ##### Ig affinity maturation
 
-亲和力成熟：再次应答时，由于B细胞发生体细胞高频突变，
-产生的多种具有不同亲和力的BCR和抗体。只有最高亲和力
-的细胞能够继续增殖，并产生高亲和力的抗体  
+亲和力成熟：再次应答时，由于B细胞发生体细胞高频突变，产生的多种具有不同亲和力的BCR和抗体。只有最高亲和力的细胞能够继续增殖，并产生高亲和力的抗体  
 
 
 
@@ -2586,7 +2604,144 @@ inject effectors
 
 
 
-# Chapter 17 Aut
+# Chapter 17 Autoimmunity
+
+
+
+
+
+
+
+# Chapter 18 Application
+
+
+
+
+
+
+
+
+
+
+
+Only in appropriate concentration when
+
+
+
+Protein assay
+
+- traditional serology method: observation
+  - agglutination reaction (凝集反应): on the surface of granules (virus, bacteria, etc.)
+  - precipitation
+  - 
+- s
+  - soluble:
+  - surface Ag: immunohistochemical
+
+
+
+- immunodiffusion
+- immunonephelometry
+
+
+
+
+
+Complement-dependent cytotoxic experiment
+
+When surface Ag of a cell binds to its Ab, with complement added, cell membrane is broken and thus the pigment is in. 
+
+
+
+Cell immunofluorescence
+
+Different fluorophore-labeled Ab, observe the distribution of multiple target proteins simultaneously.
+
+co-localization:
+
+
+
+Different fluorophore-labeled Ab incubate with cells, send into flow cytometry. 
+
+Incident a laser, analyze the intensity (type) of 出射光
+
+Also, sort the cells.
+
+
+
+Immunohistochemical techniques: where and how much are the proteins expressed?
+
+
+
+
+
+Indirect methods
+
+
+
+ELISA: soluble protein assay. indirect ELISA: enzyme on the secondary Ab (二抗)
+
+- immobilize the Ag on a plate (solid medium)
+- add serum from the patient, wash off other protein until only specific Ab is left
+- add enzyme-linked 2nd Ab. The amount of enzyme left is correlated to the conc of patient Ab
+- 
+
+Advantages:
+
+- Ab from human sample need modification (enzyme), impossible
+- amplification
+
+Disadvantages:
+
+- all
+
+
+
+Sandwich ELISA: more used for soluble protein
+
+- immobilize its Ab on the plate. Add sample and wash
+- 
+
+
+
+Colloidal gold
+
+
+
+
+
+IP: immunoprecipitation
+
+- link Ab to a beads
+- add sample and centrifuge
+- elute off to get your Ab
+
+
+
+CoIP
+
+
+
+
+
+ChIP
+
+
+
+
+
+RIP
+
+
+
+
+
+
+
+magnetic beads:
+
+- 磁铁吸，细胞被抗体拉走
+- very fast, yet only one type of cell a time
 
 
 
@@ -2610,3 +2765,30 @@ inject effectors
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+完结撒花！感谢您的陪伴！
