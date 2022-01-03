@@ -97,11 +97,23 @@ https://rvpn.zju.edu.cn/com/installClient.html#auto-common
 
 > 重要启示：点击安装包，显示安装成功，但启动程序时点击图标无响应，可通过命令行终端（Terminal）执行命令来启动。观察怎么个报错法！有道、DS等
 
+```shell
+/usr/share/sangfor/EasyConnect/EasyConnect 
+```
+
 https://www.cnblogs.com/cocode/p/12890684.html
 
 下载pangolib  我的云盘  链接: https://pan.baidu.com/s/1i8O5ZvMLqnw8K8EzKIrw6Q 提取码: c896
 
-## Autodock
+```shell
+sudo cp ./'pango lib'/lib/lib* /usr/share/sangfor/EasyConnect/
+```
+
+
+
+## Docking
+
+### Autodock
 
 https://ccsb.scripps.edu/projects/docking/
 
@@ -139,7 +151,7 @@ export PATH=$PATH:/home/user/Desktop/work/xufan/bin # vina
 # now it can run under root
 ```
 
-## zdock
+### zdock
 
 https://zdock.umassmed.edu/ with server
 
@@ -149,9 +161,9 @@ seems not this...uninstall it...
 
 snugdock is an Ab docking tool
 
-## MD tools
+## MD
 
-### Gromacs
+### Gromacs (dirty)
 
 I will try cpu version and learn to setup... do not spend time on accelerating here...
 
@@ -185,6 +197,209 @@ also python: (not using)
 ```shell
 conda install -c bioconda gromacs
 ```
+
+### GROMACS installation on a workstation
+
+  Follow this order:
+
+  1. check your graphic card driver
+
+     https://blog.csdn.net/qq_43265072/article/details/107160297
+
+  2. (check gcc version) install cuda and cmake
+
+     - cmake
+       - install: https://jingyan.baidu.com/article/d621e8da56314d2865913f93.html
+       - uninstall: `make uninstall` and `sudo rm -rf` files https://blog.csdn.net/xh_hit/article/details/79639930
+       - I installed it on default path
+     - cuda
+
+  3. use cmake to install gromacs
+
+     - https://blog.csdn.net/SuiYueHuYiWan/article/details/110972083
+
+     - install fftw3 by ourselves under root!
+
+       or `sudo apt-get`
+
+       - http://www.fftw.org/fftw2_doc/fftw_6.html
+
+       - rather than official manual, I used
+
+       **From here, you should see “on new system”**
+
+         ```shell
+       ./configure --prefix=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
+       # SINGLE AND DOUBLE PRECISION: see official manual
+       # --enable-float : single. default: double, which is not so useful in gromacs but QM/MM needs it..
+       
+       make
+       make -j install
+         ```
+
+     - enter "root" by `su`
+
+       ```shell
+       # under the unzipped gromacs directory
+       mkdir build
+       cd build
+       cmake .. \
+       -DCMAKE_INSTALL_PREFIX=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs-2021 \
+       -DGNX_BUILD_OWN_FFTW=ON \
+       -DGMX_FFT_LIBRARY=fftw3 \
+       -DFFTWF_LIBRARY=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/fftw-single/lib/libfftw3f.so \
+       -DFFTWF_LIBRARY=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/lib/libfftw3f.so \
+       -DFFTWF_INCLUDE_DIR=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/include \
+       -DGNX_MPI=ON \
+       -DGMX_GPU=CUDA \
+       -DGMX_CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda
+       # in older versions, -DGMX_GPU=ON 
+       make
+       make check
+       make install
+       gedit /.bashrc
+       export PATH=$PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs-2021/bin/
+       source /media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs/bin/GMXRC
+       ```
+
+       > - library desired path : /media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs (double). single have a separate folder
+
+> - no problem with cuda
+> - .. = ../ !!!
+> - -DCMAKE_PREFIX_PATH is for cmake to search for library
+
+   problems:
+     
+
+   - > Could not find fftw3f library named libfftw3f, please specify its location in CMAKE_PREFIX_PATH or FFTWF_LIBRARY by hand (e.g. -DFFTWF_LIBRARY='/path/to/libfftw3f.so')
+     > CMake Error at cmake/gmxManageFFTLibraries.cmake:92 (MESSAGE):
+     > Cannot find FFTW 3 (with correct precision - libfftw3f for mixed-precision
+     > GROMACS or libfftw3 for double-precision GROMACS).  Either choose the right
+     > precision, choose another FFT(W) library (-DGMX_FFT_LIBRARY), enable
+     >
+     > the
+
+  >   advanced option to let GROMACS build FFTW 3 for you
+  >   (-DGMX_BUILD_OWN_FFTW=ON), or use the really slow GROMACS built-in fftpack
+  >   library (-DGMX_FFT_LIBRARY=fftpack).
+
+  solved
+     
+
+   - 上次装到：运行install.sh，报的信息放在build父目录的output。realvnc也不行
+
+     ```
+     
+     ```
+
+    CMake Warning:
+       Manually-specified variables were not used by the project:
+    
+         GMX_CUDA_TOOLKIT_ROOT_DIR
+      	GNX_BUILD_OWN_FFTW
+         GNX_MPI
+     
+     ```
+
+so the successful version is 
+
+```
+cmake .. -DCMAKE_INSTALL_PREFIX=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs-2021-gpu \
+-DGMX_MPI=ON -DCMAKE_C_COMPILER=mpicc -DCMAKE_CXX_COMPILER=mpicxx \
+-DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/fftw-single/ \
+-DREGRESSIONTEST_DOWNLOAD=ON \
+-DGMX_GPU=CUDA -DCUDA_TOOKIT_ROOT_DIR=/usr/local/cuda/
+
+make -j 6
+make check
+make install
+```
+
+ - guide on cmake: https://blog.csdn.net/wgw335363240/article/details/37758337
+
+   - > CMake Error: The current CMakeCache.txt directory /media/kemov`:q!` 强制退出，不保存
+
+   - openssl: https://www.cnblogs.com/new-journey/p/13323301.html
+
+#### on new system
+
+```shell
+# fftw
+./configure --prefix=/home/gxf/fftw-3.3.9 --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
+make -j 6
+make install
+
+# mpicc, mpicxx
+sudo apt install openmpi-bin
+
+# cmake
+sudo apt install cmake
+
+# gmx
+cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf/gromacs-2021-gpu \
+-DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf/fftw-3.3.9 \
+-DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON \
+-DGMX_GPU=CUDA
+make -j 8
+make check
+make install
+
+# gmx, mpi
+cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf/gromacs-2021-gpu \
+-DGMX_MPI=ON -DCMAKE_C_COMPILER=mpicc -DCMAKE_CXX_COMPILER=mpicxx \
+-DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf/fftw-3.3.9 \
+-DREGRESSIONTEST_DOWNLOAD=ON \
+-DGMX_GPU=CUDA -DCUDA_TOOKIT_ROOT_DIR=/usr/local/cuda/
+make -j 8
+make check
+make install
+```
+
+### NAMD
+
+http://bbs.keinsci.com/thread-22004-1-1.html
+
+just unzip...
+
+  ### openmpi
+
+  Open MPI: Open Source High Performance Computing https://www.open-mpi.org
+  The Open MPI Project is an open source Message Passing Interface implementation...
+
+  But it seems not to accelerate...
+
+  https://blog.csdn.net/zziahgf/article/details/72781799
+
+  download and extract. then
+
+  ```shell
+./configure --prefix=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs --with-cuda=/usr/local/cuda
+make
+make install
+# in ~./bashrc
+export PATH=$PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/bin/ 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/bin/lib/ 
+source ~/.bashrc  
+sudo ldconfig 
+# test in the installing directory
+cd examples
+make
+mpirun -np 8 hello_c
+  ```
+
+  usage:
+
+  ```
+Running as root is *strongly* discouraged as any mistake (e.g., in
+defining TMPDIR) or bug can result in catastrophic damage to the OS
+file system, leaving your system in an unusable state.
+
+We strongly suggest that you run mpirun as a non-root user.
+  ```
+
+/
+
+## Analysis tools: Python/cmd tookit
 
 ### dssp
 
@@ -291,6 +506,27 @@ if in conda, no need to add `amber.pythons`
 > export GMXPBSAHOME=/home/gxf/GMXPBSAtool
 > ```
 
+### GromacsWrapper
+
+https://gromacswrapper.readthedocs.io/en/latest/index.html
+
+```shell
+pip install GromacsWrapper
+from gromacs.fileformats.xvg import XVG # read .xvg files
+```
+
+### alchemistry
+
+https://github.com/MobleyLab/alchemical-analysis
+
+```shell
+conda install -c conda-forge pymbar
+```
+
+https://anaconda.org/conda-forge/pymbar git address and doc
+
+## Modelling tools
+
 ### AMBER
 
 installation: https://ambermd.org/InstFedora.php under user
@@ -349,14 +585,9 @@ conda install -c acpype acpype -y # this contains ambertools-17
 >
 > https://mdtraj.org/1.9.4/mdconvert.html
 
-### GromacsWrapper
+### gaussian
 
-https://gromacswrapper.readthedocs.io/en/latest/index.html
-
-```shell
-pip install GromacsWrapper
-from gromacs.fileformats.xvg import XVG # read .xvg files
-```
+after extraction, http://sobereva.com/439
 
 ### FESetup
 
@@ -366,23 +597,97 @@ https://fesetup.readthedocs.io
 
 though not using...
 
-### alchemistry
+  ### rosetta
 
-https://github.com/MobleyLab/alchemical-analysis
+  ```shell
+gzip -d rosetta_bin_linux_3.12_bundle.tgz -c ../programfiles
+# rosetta
+export ROSETTA=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/rosetta_bin_linux_2020.08.61146_bundle/
+export ROSETTA3_DB=$ROSETTA/main/database
+export ROSETTA_BIN=$ROSETTA/main/source/bin
+export PATH=$PATH:$ROSETTA_BIN
+  ```
 
+## Visualization
 
+### ligplot
+
+https://www.ebi.ac.uk/thornton-srv/software/LigPlus/install.html
 
 ```shell
-conda install -c conda-forge pymbar
+export ligplus='java -cp /home/sjxlab/LigPlus/ -jar /home/sjxlab/LigPlus/LigPlus.jar'
+$ligplus
 ```
 
-https://anaconda.org/conda-forge/pymbar git address and doc
+now it is also ok if
+
+```shell
+java -jar LigPlus.jar
+export PATH=$PATH:/home/sjxlab/LigPlus/
+```
+
+
+### VMD
+
+https://blog.csdn.net/qyb19970829/article/details/106947424
+
+customize
+
+$install_bin_dir `/usr/local/bin` This is the location of the startup script ’vmd’.
+
+$install_library_dir `/usr/local/share` This is the location of all other VMD files.
+
+```shell
+sudo  ./configure LINUXAMD64
+sudo  ./configure
+cd src
+sudo make install
+```
+
+You may refer to the pdf attached for more options
+
+uninstall: delete the files  https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/25245.html
+
+### DiscoveryStudio  Visualizer
+
+https://blog.csdn.net/huanzaizai/article/details/116273464
+
+https://forums.linuxmint.com/viewtopic.php?t=293074
+
+  ### pymol
+
+  - the free version: https://zhuanlan.zhihu.com/p/58803491
+
+    just buy a license from pymol.org
+
+    ```shell
+    conda install -c schrodinger pymol-bundle
+    ```
+
+    and launch it from anaconda prompt
+
+  - install with downloaded package
+
+    ```shell
+    conda install -y --use-local pymol-2.5.0a0-py38h4cb1252_9.tar.bz2 
+    #  y: always yes
+    ```
+
+    都是段错误
+
+#### for python api use
+
+```shell
+conda create -n pymol
+conda activate pymol
+conda install -c schrodinger pymol-bundle
+```
 
 ### Avogadro
 
 https://ubunlog.com/zh-CN/avogadro%E7%BC%96%E8%BE%91%E4%BD%BF%E5%88%86%E5%AD%90%E5%8F%AF%E8%A7%86%E5%8C%96/#Instalar_Avogadro_en_Ubuntu
 
-official: https://avogadro.cc/devel/compiling/
+official: https://avogadro.cc/devel/compiling
 
 ## pycharm and miniconda
 
@@ -409,7 +714,21 @@ https://blog.csdn.net/u013088062/article/details/50001189 关闭代码风格检�
 
 https://www.pythonheidong.com/blog/article/498305/f571ce16edc768ad1839/ matplotlib fonts. just copy .ttf files to ~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf
 
-## medeley
+## Paper
+
+  ### foxit reader
+
+Silly installation
+
+it's good. rename it, and run the .run file under root
+
+```
+./foxit.run
+```
+
+or it will die
+
+### medeley
 
 ```shell
 # never run under root!!
@@ -430,52 +749,6 @@ skills:
 - open .ris or .bib ..... with Medeley!!
 - files--add file
 - contents: to quickly compare the papers, to summarize
-
-## helpful modeling softwares
-
-### discovery studio
-
-https://forums.linuxmint.com/viewtopic.php?t=293074
-
-### ligplot
-
-https://www.ebi.ac.uk/thornton-srv/software/LigPlus/install.html
-
-```shell
-export ligplus='java -cp /home/sjxlab/LigPlus/ -jar /home/sjxlab/LigPlus/LigPlus.jar'
-$ligplus
-```
-
-now it is also ok if
-
-```shell
-java -jar LigPlus.jar
-export PATH=$PATH:/home/sjxlab/LigPlus/
-```
-
-### pymol
-
-for python api use
-
-```shell
-conda create -n pymol
-conda activate pymol
-conda install -c schrodinger pymol-bundle
-```
-
-### VMD
-
-https://blog.csdn.net/qyb19970829/article/details/106947424
-
-$install_bin_dir `/usr/local/bin` This is the location of the startup script ’vmd’.
-
-$install_library_dir `/usr/local/share` This is the location of all other VMD files.
-
-uninstall: delete the files  https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/25245.html
-
-## gaussian
-
-after extraction, http://sobereva.com/439
 
 ## download small molecule pdb files for virtual screening
 

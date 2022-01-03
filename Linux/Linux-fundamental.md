@@ -78,7 +78,7 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
    - 迅飞输入法
 
-     - install https://www.yoki.moe/Intstu/24.html  https://www.52pojie.cn/thread-1243805-1-1.html
+     - install https://www.yoki.moe/Intstu/24.html and https://www.52pojie.cn/thread-1243805-1-1.html
      - 先到官网下几个lib然后update就把依赖装好了
      
    - Ctrl+space 激活/反激活输入法
@@ -182,6 +182,23 @@ This is a record of my operations during 折腾ing the system, in order not to f
     ```
 
     Windows：`C:\Windows\fonts`
+
+    查看当前支持的字体
+
+    ```shell
+    fc-list
+    ```
+
+    in `/usr/share/fonts/`. copy your font into and 
+
+    ```shell
+    sudo cp *.otf /usr/share/fonts/opentype
+    sudo cp *.ttf /usr/share/fonts/truetype
+    sudo apt install xfonts-utils
+    mkfontscale
+    mkfontdir
+    sudo fc-cache -fv
+    ```
 
 17. Linux更改桌面（等）路径
 
@@ -715,30 +732,7 @@ fsck -y /dev/sda
 
 # Applications for fun
 
-## Build a note site with docsify
-
-### References
-
-read through official! https://docsify.js.org/#/quickstart
-
-also learn settings and styles from https://github.com/jhildenbiddle/docsify-themeable/tree/master/docs
-
-some translated doc
-
-- https://www.cxyzjd.com/article/jackson0714/105331564
-- https://segmentfault.com/a/1190000017576714  
-
-a lot of fancy features: https://zxiaosi.cn/archives/cd1d42d1.html
-
-### Basic usage
-
-1. serve locally
-   ```shell
-   docsify serve ./ # http://localhost:3000
-   ```
-2. the first subtitle is not included into the sidebar
-
-#### git in cmd
+## git in cmd
 
 1. basic
 
@@ -792,9 +786,55 @@ a lot of fancy features: https://zxiaosi.cn/archives/cd1d42d1.html
    > 	新文件：   .gitignore
    > 	修改：     Linux/Prepare-for-the-computer.md
    
+5. 对于本地的项目中修改不做保存操作（或代码改崩），可以用到Git pull的强制覆盖
+
+   ```
+   git reset --hard origin/master
+   ```
+
 5. GitHub克隆Gitee的仓库
 
    ![clone](../Linux/images/clone.jpg)
+   
+7. Github 上怎么删除一个文件的版本控制信息，只保留最新文件？
+
+   项目本身并不大，主要是由于有些大图片多次修改，所以GIT保留的这些图片的历史记录文件非常大，但是我这些图片又不需要历史记录信息，怎么删除？
+
+   干脆利落...
+
+   ```shell
+   rm -rf .git
+   git init
+   git add -A
+   git commit
+   git push -f
+   ```
+
+8. 
+
+## Build a note site with docsify
+
+### References
+
+read through official! https://docsify.js.org/#/quickstart  生成那种模块API的，或者学习笔记的一个框架
+
+also learn settings and styles from https://github.com/jhildenbiddle/docsify-themeable/tree/master/docs
+
+some translated doc
+
+- https://www.cxyzjd.com/article/jackson0714/105331564
+- https://segmentfault.com/a/1190000017576714  
+
+a lot of fancy features: https://zxiaosi.cn/archives/cd1d42d1.html
+
+### Basic usage
+
+1. serve locally
+   ```shell
+   docsify serve ./ # http://localhost:3000
+   ```
+2. the first subtitle is not included into the sidebar
+
 
 #### something html
 
@@ -896,14 +936,116 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 >
 > vue’ s sidebar needs improving
 
+#### Show figures
+
+- common md syntax is ok, Windows backslash and Linux slash are all ok. and zooming:
+
+  ```html
+  <!-- 指定像素值 -->
+  ![logo](https://docsify.js.org/_media/icon.svg ':size=50x100')
+  ![logo](https://docsify.js.org/_media/icon.svg ':size=100')
+  <!-- 支持按百分比缩放 -->
+  ![logo](https://docsify.js.org/_media/icon.svg ':size=10%')
+  ```
+
+  > Typora zooming script is not supported in docsify (but is ok in a normal html, but can center)
+  >
+  > already asked in CSDN. https://github.com/HanquanHq/MD-Notes
+
+- no, it supports. But the root directory is not the current directory but the repository’s.....
+
+  - in normal md grammar, relative path is ok
+
+  - in html, zooming without relative path is ok
+
+  - the problem is, in html, <u>it cannot recognize relative path as markdown does (no matter whether zooming)</u>. But it works if you use path relative to the root of repository...which makes figures invisible in local Typora
+
+  - 本来还猜测只是重新定义了根目录的原因，加个../就认为是相对路径了。事实上是，不管加不加这些东西，都是从the root of repository开始算的。。所以你以为加了../就是父目录了，其实还是root
+
+    but still no luck
+
+  - 解决图片问题的思路：
+
+    - 上传的时候render为正确的格式
+    - 把图上传到另一个地方，链接一个网址（缩放？
+
+     hexo就是可以渲染出图片，他docsify就是不行
+
+    引用网址图片也不行
+
+    **解决之道**：要用这个打头（算是git的api？）
+
+    https://gitee.com/gxf1212/notes/raw/master/
+
+    其实git他俩用来做图床就是如此
+
+  - future tasks:
+
+    - centralize figures
+    - adjust size, so different from those in Typora!
+
+
+  > relative path
+  >
+  > https://angry-swanson-b4e47b.netlify.app/zh-cn/configuration?id=relativepath no use
+  >
+  > <font color=red>世界上怎么会有这么傻逼的设计？！！专门跟Typora过不去吗？？不得不改变创作方式！</font>那这话也不合适
+  >
+  > **Test figure usage**
+  >
+  > use the website, a centered figure should look like this:
+  >
+  > <center><img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-c1q.png" alt="5-c1q" style="zoom:50%;" align="center" /></center>
+  >
+  > `align="center" ` does not work.....`<center></center>` or `<p style="text-align:center;"><p/>` works. 
+  >
+  > I'm not particular about centering. The site looks all right though.
+  >
+  > 根目录probably not work
+  >
+  > <img src="/course/molecular-immunology/molecular-immunology.assets/1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" />
+  >
+  > 正常本地目录probably not work
+  >
+  > <img src="../course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
+  >
+  > this should ok, but `':size=50%'` does not work locally using provided syntax
+  >
+  > ![logo](../course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=50%')
+  >
+  > ![logo](../course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=100%')
+  >
+  > To use the website, should not contain a single backslash in Typora...
+  >
+  > <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets\5-c1q.png" alt="5-c1q" style="zoom:50%;" />
+  >
+  > ```
+  > https://gitee.com/gxf1212/notes/raw/master/
+  > ```
+  >
+  > 没想到个别的（本地都）显示不了，即使那个图片确实存在
+
 #### Customize functions
 
 TODO list:
 
-- [ ] figure centralize and adjust size
+- [ ] figure centralize
+
 - [ ] gitee automatically deploy?
 
-> if a there’s a new version of a plug-in, how to update? 
+- [ ] 打赏
+
+- [ ] 访问量统计：busuanzi
+
+- [ ] \ce的重新render
+
+- [ ] 图片的重新render
+
+  > https://docsify.js.org/#/zh-cn/markdown?id=markdown-%e9%85%8d%e7%bd%ae
+  >
+  > https://github.com/docsifyjs/docsify/issues/850
+
+> if a there’s a new version of a plug-in, how to update?  @latest
 
 1. add things after:
 
@@ -960,94 +1102,316 @@ TODO list:
 
    https://github.com/zhengxiangqi/docsify-scroll-to-top
 
-6. https://angry-swanson-b4e47b.netlify.app/zh-cn/helpers?id=%e5%9b%be%e7%89%87%e5%a4%84%e7%90%86 about figures
+7. syntax supporting problems like:
 
-8. 百度提供了一个提交链接的入口，地址如下：
+   - [x] support of textsubscript: must use `<sub></sub>` tag; 
 
-   > https://ziyuan.baidu.com/linksubmit/url
+     must add \ to \~ if there are more than two \~. same for ^
 
-   填写码云 Pages 的链接：https://itwanger.gitee.io/，并「提交」，见下图：
+   - [x] support of \ce{NaCl}: may use $\text{Al(OH)}_3$...
 
-   这样做的好处是，网站可以主动向百度搜索推送数据，缩短爬虫发现网站链接的时间。当然了，百度收录需要一段时间
+   - [x] support of `\begin{align*}` ?? as well as gather, equation ...
 
-9. shown figures
+8. https://coroo.github.io/docsify-share/#/?id=getting-started
 
-   - common md syntax is ok, Windows backslash and Linux slash are all ok. and zooming:
+   插件，share自己的社交媒体
 
-     ```html
-     <!-- 指定像素值 -->
-     ![logo](https://docsify.js.org/_media/icon.svg ':size=50x100')
-     ![logo](https://docsify.js.org/_media/icon.svg ':size=100')
-     <!-- 支持按百分比缩放 -->
-     ![logo](https://docsify.js.org/_media/icon.svg ':size=10%')
-     ```
+9. 如何搞背景？
 
-     > Typora zooming script is not supported in docsify (but is ok in a normal html, but can center)
-     >
-     > already asked in CSDN. https://github.com/HanquanHq/MD-Notes
+   https://segmentfault.com/a/1190000017576714  失败了
 
-   - no, it supports. But the root directory is not the current directory but the repository’s.....
+   为啥呢？原来用vue主题就可以了。theme-simple不支持。。。。
 
-     - in normal md grammar, relative path is ok
-     
-     - in html, zooming without relative path is ok
+   侧边栏还可以搞个图片
 
-     - the problem is, in html, <u>it cannot recognize relative path as markdown does (no matter whether zooming)</u>. But it works if you use path relative to the root of repository...which makes figures invisible in local Typora
-     
-     - 本来还猜测只是重新定义了根目录的原因，加个../就认为是相对路径了。事实上是，不管加不加这些东西，都是从the root of repository开始算的。。所以你以为加了../就是父目录了，其实还是root
-     
-       那就能解决了
-     
-     - future tasks:
-     
-       - centralize figures
-       - adjust size, so different from those in Typora!
-     
-     
-     > relative path
-     >
-     > https://angry-swanson-b4e47b.netlify.app/zh-cn/configuration?id=relativepath no use
-     >
-     > <font color=red>世界上怎么会有这么傻逼的设计？！！专门跟Typora过不去吗？？不得不改变创作方式！</font>那这话也不合适
+10. https://zxiaosi.cn/archives/cd1d42d1.html
 
-10. other supporting problems like:
+    美化。
 
-    - [x] support of textsubscript: must use `<sub></sub>` tag; 
+    - 点击效果，桃心（我想知道其他选择，如富强民主文明和谐
 
-      must add \ to \~ if there are more than two \~. same for ^
+11. https://github.com/827652549/docsify-count
 
-    - [x] support of \ce{NaCl}: may use $\text{Al(OH)}_3$...
+    插件，文字统计
 
-    - [x] support of `\begin{align*}` ?? as well as gather, equation ...
+    阅读进度条[docsify-progress ](https://github.com/HerbertHe/docsify-progress) 这个插件与字数插件不兼容
 
-11. 附：Github 上怎么删除一个文件的版本控制信息，只保留最新文件？
+12. https://blog.csdn.net/weixin_44897405/article/details/103214635
 
-    项目本身并不大，主要是由于有些大图片多次修改，所以GIT保留的这些图片的历史记录文件非常大，但是我这些图片又不需要历史记录信息，怎么删除？
+    这个东西叫做：live2d看板娘。https://github.com/stevenjoezhang/live2d-widget
 
-    干脆利落...
+    https://gitcode.net/mirrors/stevenjoezhang/live2d-widget/-/tree/master  GitHub镜像。
 
-    ```
-    rm -rf .git
-    git init
-    git add -A
-    git commit
-    git push -f
-    ```
+    - 人物有哪些选择？参考7. 提供的
 
-#### other features, and Gitee
+      ```
+      jsonPath: "https://unpkg.com/live2d-widget-model-shizuku@latest/assets/shizuku.model.json",
+      ```
+
+      代码两处都要改
+
+      > https://github.com/evrstr/live2d-widget-models 给的似乎没用？
+      >
+      > http://blog.itchenliang.club/posts/22350780-f32d-11ea-bb4a-d3e1cbe3d592/#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6 hexo的，方案一
+      >
+      > https://summerscar.me/live2dDemo/ 调试模型、参数的效果，好慢
+
+    - 版本一：官网的js
+
+      - L2Dwidget.init 设置大小、调位置咋样都没用。。要clone下来自己改
+      - 看板娘L2Dwidget盯着鼠标移动（好像已经有了
+
+    - L2Dwidget.min.js
+
+      - 就可以设置大小、位置
+      - 但不能说话。。也不能盯着鼠标，甚至还有点模糊
+
+13. https://www.codenong.com/cs107071378/          https://notebook.js.org/#/
+
+    - 显示pdf？
+
+    - Docsify-alerts https://www.npmjs.com/package/docsify-plugin-flexible-alerts
+
+      ```
+      > [!NOTE]
+      > 
+      > [!TIP]
+      > 
+      > [!WARNING]
+      > 
+      > [!ATTENTION]
+      > 
+      ```
+
+      可自定义
+
+    - 看板娘
+
+14. badge。 是用什么东西生成的吗。。
+
+    ![](https://forthebadge.com/images/badges/makes-people-smile.svg)
+    <img src="https://img.shields.io/badge/version-v2.0.0-green.svg" data-origin="https://img.shields.io/badge/version-v2.0.0-green.svg" alt=""> 
+
+15. 
+
+#### Important notes on publishing
+
+- gitee pages 自动部署
+
+  https://gitee.com/yanglbme/gitee-pages-action
+
+  不想在GitHub上弄一个同样的仓库。。先不弄了
+
+  https://bibichuan.gitee.io/posts/5cbf8e2a.html
+
+- 部署到 gitee pages 的静态页面更新后部分样式未刷新问题
+  原因是在重新提交文件并执行更新 gitee pages 操作后，协商缓存ETag和Last-Modified虽然会改变，但是强缓存Cache-Control仍然存在，且优先级更高，导致内容未发生改变。
+  解决方案： ctrl+F5 强制刷新
+  原文链接：https://blog.csdn.net/PorkCanteen/article/details/122068290
+
+- 百度提供了一个提交链接的入口，地址如下：
+
+  > https://ziyuan.baidu.com/linksubmit/url
+
+  填写码云 Pages 的链接：https://itwanger.gitee.io/，并「提交」，见下图：
+
+  这样做的好处是，网站可以主动向百度搜索推送数据，缩短爬虫发现网站链接的时间。当然了，百度收录需要一段时间
+
+- 
+
+#### other features, examples and Gitee
+
+1. https://wiki.xhhdd.cc/#/
+
+   她的站可学习一下。如warning框、等待信息，没找到源码。翻页见下
+
+   Typecho是一个基于PHP的开源博客程序。
+
+2. https://github.com/lufei/notes
+
+   他的配置也是值得参考的。美化上，向他学习一波。
+
+   - 比如vue如何换背景色
+   - 如何插入文艺词句（但说实话没太多机会看到了）
 
 - It is ridiculous that if I include a YouTube or Bilibili link in .md, I cannot deploy...No, solved
+
 - markdown based wiki system http://dynalon.github.io/mdwiki/#!index.md
+
 - 几（十）款制作帮助文档的工具汇总 https://blog.mimvp.com/article/38752.html
 
-#### TODO
+- sfd
 
-- [ ] \ce的重新render
-- [ ] 图片的重新render
+  ```html
+  // 分页导航插件
+  pagination: {
+  	previousText: '上一卷',
+  	nextText: '下一卷',
+  	crossChapter: true,
+  	crossChapterText: true
+  },
+  <!-- 分页导航 -->
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  ```
 
-> https://docsify.js.org/#/zh-cn/markdown?id=markdown-%e9%85%8d%e7%bd%ae
->
-> https://github.com/docsifyjs/docsify/issues/850
+  其他：https://mubu.com/home 做大纲、思维导图的，挺漂亮
+
+- SEO：search engine optimization
+
+  hexo+github pages个人博客做百度、谷歌、bing等搜索引擎收录
+
+  https://reiner.host/posts/2262a2b8.html
+
+  hexo生成sitemap？
+
+  https://cloud.tencent.com/developer/article/1736970
+
+  提交你的域名
+
+  https://search.google.com/search-console/welcome
+
+  > 请求编入索引：已将网址添加到优先抓取队列中。 多次提交同一网页并不能改变该网页的队列顺序或优先级
+
+  https://ziyuan.baidu.com/site/index#/
+
+  百度资源
+
+  https://github.com/docsifyjs/docsify/issues/656
+
+  有些代码是否可用？
+
+  https://github.com/lufei/notes
+
+  
+
+  https://code.google.com/archive/p/sitemap-generators/wikis/SitemapGenerators.wiki
+
+  Google提供的生成器
+
+  生成工具很多，感觉docsify本身不适合。。还是参考已有的
+
+  >https://neilpatel.com/blog/xml-sitemap/
+
+  
+
+  ##### 其他
+
+  内容分发网络 (Content delivery network) 是指一种透过互联网互相连接的电脑网络系统，利用最靠近每位用户的服务器，更快、更可靠地将音乐、图片、视频、应用程序及其他文件发送给用户，来提供高性能、可扩展性及低成本的网络内容传递给用户。
+
+  unpkg is **a free content delivery network (CDN)** that automatically distributes public packages published to npm. unpkg partners with cloudfare and heroku to make this automatic distributing possible
+
+  
+
+  不适用于xmind的思维导图展示，写代码修改？
+
+  https://juejin.cn/post/7000874049333100551
+
+  https://zhuanlan.zhihu.com/p/352795634
+
+  
+
+  mermaid语法
+
+  特殊符号，要加引号才显示
+
+  https://github.com/mermaid-js/mermaid/issues/213
+
+
+### Build Hexo Pages
+
+https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html#%E4%BD%BF%E7%94%A8hexo%E5%86%99%E5%8D%9A%E5%AE%A2
+
+Git 全局设置:
+
+```bash
+git config --global user.name "XJTUChemBioer"
+git config --global user.email "741844489@qq.com"
+
+git config --global user.name "高旭帆"
+git config --global user.email "gxf1212@stu.xjtu.edu.cn"
+```
+
+generate key
+
+```bash
+ssh-keygen -t rsa -C "741844489@qq.com" 
+ssh-keygen -t rsa -C "gxf1212@stu.xjtu.edu.cn"
+cat /c/Users/Lenovo/.ssh/id_rsa.pub
+```
+
+[link](https://yushuaigee.gitee.io/2021/01/02/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%85%8D%E8%B4%B9%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2(%E4%B8%89)%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%20Gitee%20pages%20%E5%BB%BA%E7%AB%99/#%E4%B8%89%E3%80%81Gitee-Pages-%E5%8F%91%E5%B8%83)
+
+test successful
+
+```
+ssh -T git@gitee.com
+```
+
+为了装Hexo，先装Git和Node.js（win上可运行npm）并Add to PATH
+
+```
+npm install -g hexo
+hexo init xjtu-chembioer
+cd xjtu-chembioer
+npm install hexo-deployer-git --save
+```
+
+```
+C:\Users\Lenovo\AppData\Roaming\npm
+```
+
+常用 [link](https://yushuaigee.gitee.io/2021/01/02/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%85%8D%E8%B4%B9%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2(%E4%B8%89)%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%20Gitee%20pages%20%E5%BB%BA%E7%AB%99/#3-%E6%B5%8B%E8%AF%95-Gitee-Pages-%E9%A1%B5%E9%9D%A2)
+
+```bash
+hexo new "postName" #新建文章
+hexo new page "pageName" #新建页面
+hexo generate #生成静态页面至public目录
+hexo server #开启预览访问端口（默认端口4000，'ctrl + c'关闭server）
+hexo deploy #部署到GitHub
+hexo help  # 查看帮助
+hexo version  #查看Hexo的版本
+
+hexo n
+hexo s  # Ctrl+C退出
+hexo clean   # 清除缓存
+# 更新、提交并部署：（不用在Gitee上手动。。）
+hexo g
+hexo d
+```
+
+更改deploy设置：https://www.jianshu.com/p/b748100ddef1
+
+换主题：clone到文件夹，更改`_config.yml`
+
+```bash
+git clone https://github.com/shenliyang/hexo-theme-snippet/ themes/asnippet
+git clone https://github.com/https://littleee.github.io/ themes/asnippet
+```
+
+
+
+```bash
+# 在hexo根目录下
+npm install --save hexo-pdf
+
+
+```
+
+
+
+https://lkevin98.gitee.io/blog/file/%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E9%A1%B5%E4%B8%AD%E5%AE%9E%E7%8E%B0pdf%E5%9C%A8%E7%BA%BF%E9%A2%84%E8%A7%88.pdf
+
+
+
+https://bibichuan.github.io/posts/5affe24.html
+
+
+
+##### 感受
+
+使用hexo等工具，在git上只提交下面的一个`.deploy_git`文件夹。。clone根本没用
+
+
 
 # Installation and softwares
 
@@ -1159,6 +1523,7 @@ dpkg -i --instdir=/dest/dir/path some.deb # under root
   ```shell
   sudo apt install -f
   sudo apt fix --broken # ?
+  sudo apt --fix-broken install
   ```
 
 - 更新软件源
@@ -1366,6 +1731,12 @@ cuda-->cudnn
        # CUDA Driver = CUDART, CUDA Driver Version = 11.2, CUDA Runtime Version = 11.1, NumDevs = 1
        ```
 
+       or
+
+       ```
+       nvcc -V 
+       ```
+
      - problems
 
        - I ran ...run.1 rather than .run ???
@@ -1396,291 +1767,57 @@ cuda-->cudnn
 
      download:
 
-     - [cuDNN Library for Linux (x86_64)](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.2.0.53/11.3_04222021/cudnn-11.3-linux-x64-v8.2.0.53.tgz)
-     - [cuDNN Code Samples and User Guide for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.2.0.53/11.3_04222021/Ubuntu20_04-x64/libcudnn8-samples_8.2.0.53-1+cuda11.3_amd64.deb)
-
+     - [cuDNN Runtime Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8_8.2.1.32-1+cuda11.3_amd64.deb)
+     - [cuDNN Developer Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-dev_8.2.1.32-1+cuda11.3_amd64.deb)
+     - [cuDNN Code Samples and User Guide for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-samples_8.2.1.32-1+cuda11.3_amd64.deb)
+     
      remove
-
+     
      ```
      sudo rm -rf /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
      ```
-
+     
      test.c:1:10: fatal error: FreeImage.h: 没有那个文件或目录 https://blog.csdn.net/xhw205/article/details/116297555
-
-     check success (tar.gz): https://blog.csdn.net/weixin_28691441/article/details/112144795 ???
-
-  
-
-## GROMACS
-
-  Follow this order:
-
-  1. check your graphic card driver
-
-     https://blog.csdn.net/qq_43265072/article/details/107160297
-
-  2. (check gcc version) install cuda and cmake
-
-     - cmake
-       - install: https://jingyan.baidu.com/article/d621e8da56314d2865913f93.html
-       - uninstall: `make uninstall` and `sudo rm -rf` files https://blog.csdn.net/xh_hit/article/details/79639930
-       - I installed it on default path
-     - cuda
-
-  3. use cmake to install gromacs
-
-     - https://blog.csdn.net/SuiYueHuYiWan/article/details/110972083
-
-     - install fftw3 by ourselves under root!
-
-       or `sudo apt-get`
-
-       - http://www.fftw.org/fftw2_doc/fftw_6.html
-
-       - rather than official manual, I used
-
-		**From here, you should see “on new system”**
      
-         ```shell
-         ./configure --prefix=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
-         # SINGLE AND DOUBLE PRECISION: see official manual
-         # --enable-float : single. default: double, which is not so useful in gromacs but QM/MM needs it..
-         
-         make
-         make -j install
-         ```
-
-     - enter "root" by `su`
+     ```shell
+     sudo apt-get install libfreeimage3 libfreeimage-dev
+     ```
      
-       ```shell
-       # under the unzipped gromacs directory
-       mkdir build
-       cd build
-       cmake .. \
-       -DCMAKE_INSTALL_PREFIX=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs-2021 \
-       -DGNX_BUILD_OWN_FFTW=ON \
-       -DGMX_FFT_LIBRARY=fftw3 \
-       -DFFTWF_LIBRARY=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/fftw-single/lib/libfftw3f.so \
-       -DFFTWF_LIBRARY=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/lib/libfftw3f.so \
-       -DFFTWF_INCLUDE_DIR=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/include \
-       -DGNX_MPI=ON \
-       -DGMX_GPU=CUDA \
-       -DGMX_CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda
-       # in older versions, -DGMX_GPU=ON 
-       make
-       make check
-       make install
-       gedit /.bashrc
-       export PATH=$PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs-2021/bin/
-       source /media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs/bin/GMXRC
-       ```
+     You may also need this
      
-       > - library desired path : /media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs (double). single have a separate folder
-
-> - no problem with cuda
-> - .. = ../ !!!
-> - -DCMAKE_PREFIX_PATH is for cmake to search for library
-
-   problems:
+     ```shell
+     sudo dpkg -i libcudnn*
+     ```
      
-
-   - > Could not find fftw3f library named libfftw3f, please specify its location in CMAKE_PREFIX_PATH or FFTWF_LIBRARY by hand (e.g. -DFFTWF_LIBRARY='/path/to/libfftw3f.so')
-     > CMake Error at cmake/gmxManageFFTLibraries.cmake:92 (MESSAGE):
-     > Cannot find FFTW 3 (with correct precision - libfftw3f for mixed-precision
-     > GROMACS or libfftw3 for double-precision GROMACS).  Either choose the right
-     > precision, choose another FFT(W) library (-DGMX_FFT_LIBRARY), enable
+     check success (tar.gz): [??? but a complete guide!!](https://blog.csdn.net/weixin_28691441/article/details/112144795) 
+     
+     ```
+     cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 
+     ```
+     
+     might be old! let’s follow the official
+     
+     > ```shell
+     > # Copy the cuDNN samples to a writable path.
+     > HOME=./
+     > cp -r /usr/src/cudnn_samples_v8/ $HOME
+     > # Go to the writable path.
+     > cd $HOME/cudnn_samples_v8/mnistCUDNN
+     > # Compile the mnistCUDNN sample.
+     > make clean && make
+     > # Run the mnistCUDNN sample.
+     > ./mnistCUDNN
+     > ```
      >
-     > the
-
-  >   advanced option to let GROMACS build FFTW 3 for you
-  >   (-DGMX_BUILD_OWN_FFTW=ON), or use the really slow GROMACS built-in fftpack
-  >   library (-DGMX_FFT_LIBRARY=fftpack).
-
-  solved
-     
-
-   - 上次装到：运行install.sh，报的信息放在build父目录的output。realvnc也不行
-
-     ```
-     
-     ```
-
-    CMake Warning:
-       Manually-specified variables were not used by the project:
-    
-         GMX_CUDA_TOOLKIT_ROOT_DIR
-      	GNX_BUILD_OWN_FFTW
-         GNX_MPI
-     
-     ```
-
-so the successful version is 
-
-```
-cmake .. -DCMAKE_INSTALL_PREFIX=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs-2021-gpu \
--DGMX_MPI=ON -DCMAKE_C_COMPILER=mpicc -DCMAKE_CXX_COMPILER=mpicxx \
--DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/fftw-single/ \
--DREGRESSIONTEST_DOWNLOAD=ON \
--DGMX_GPU=CUDA -DCUDA_TOOKIT_ROOT_DIR=/usr/local/cuda/
-
-make -j 6
-make check
-make install
-```
-
- - guide on cmake: https://blog.csdn.net/wgw335363240/article/details/37758337
-
-   - > CMake Error: The current CMakeCache.txt directory /media/kemov`:q!` 强制退出，不保存
-
-   - openssl: https://www.cnblogs.com/new-journey/p/13323301.html
-
-### on new system
-
-```shell
-# fftw
-./configure --prefix=/home/gxf/fftw-3.3.9 --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
-make -j 6
-make install
-
-# mpicc, mpicxx
-sudo apt install openmpi-bin
-
-# cmake
-sudo apt install cmake
-
-# gmx
-cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf/gromacs-2021-gpu \
--DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf/fftw-3.3.9 \
--DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON \
--DGMX_GPU=CUDA -DCUDA_TOOKIT_ROOT_DIR=/usr/local/cuda/
-make -j 8
-make check
-make install
-
-# gmx, mpi
-cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf/gromacs-2021-gpu \
--DGMX_MPI=ON -DCMAKE_C_COMPILER=mpicc -DCMAKE_CXX_COMPILER=mpicxx \
--DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf/fftw-3.3.9 \
--DREGRESSIONTEST_DOWNLOAD=ON \
--DGMX_GPU=CUDA -DCUDA_TOOKIT_ROOT_DIR=/usr/local/cuda/
-make -j 8
-make check
-make install
-```
-
-## NAMD
-
-http://bbs.keinsci.com/thread-22004-1-1.html
-
-
-
-## compu-chembio helper
-
-### DiscoveryStudio  Visualizer
-
-https://blog.csdn.net/huanzaizai/article/details/116273464
-
-https://forums.linuxmint.com/viewtopic.php?t=293074
-
-  ### pymol
-
-  - the free version: https://zhuanlan.zhihu.com/p/58803491
-
-    just buy a license from pymol.org
-
-    ```shell
-    conda install -c schrodinger pymol-bundle
-    ```
-
-    and launch it from anaconda prompt
-
-  - install with downloaded package
-
-    ```shell
-    conda install -y --use-local pymol-2.5.0a0-py38h4cb1252_9.tar.bz2 
-    #  y: always yes
-    ```
-
-    都是段错误
-
-  - 
-
-  ### rosetta
-
-  ```shell
-gzip -d rosetta_bin_linux_3.12_bundle.tgz -c ../programfiles
-# rosetta
-export ROSETTA=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/rosetta_bin_linux_2020.08.61146_bundle/
-export ROSETTA3_DB=$ROSETTA/main/database
-export ROSETTA_BIN=$ROSETTA/main/source/bin
-export PATH=$PATH:$ROSETTA_BIN
-  ```
-
-  
-
-  ### openmpi
-
-  Open MPI: Open Source High Performance Computing https://www.open-mpi.org
-  The Open MPI Project is an open source Message Passing Interface implementation...
-
-  But it seems not to accelerate...
-
-  https://blog.csdn.net/zziahgf/article/details/72781799
-
-  download and extract. then
-
-  ```shell
-./configure --prefix=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs --with-cuda=/usr/local/cuda
-make
-make install
-# in ~./bashrc
-export PATH=$PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/bin/ 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/bin/lib/ 
-source ~/.bashrc  
-sudo ldconfig 
-# test in the installing directory
-cd examples
-make
-mpirun -np 8 hello_c
-  ```
-
-  usage:
-
-  ```
-Running as root is *strongly* discouraged as any mistake (e.g., in
-defining TMPDIR) or bug can result in catastrophic damage to the OS
-file system, leaving your system in an unusable state.
-
-We strongly suggest that you run mpirun as a non-root user.
-  ```
-
-  ### other small softwares
-
-  1. foxit reader
-
-     it's good. rename it, and run the .run file under root
-
-     ```
-     ./foxit.run
-     ```
-
-     or it will die
-
-  2. 
-
- 
-
-  
-
-  既然可以制定路径，那为啥不新建一个文件夹呢？以后还是直接在programfiles吧
-
-
-
-
-
-
+     > If cuDNN is properly installed and running on your Linux system, you will see a message similar to the following:
+     >
+     > ```
+     > Test passed!
+     > ```
 
 # rubbish
+
+> 既然可以制定路径，那为啥不新建一个文件夹呢？以后还是直接在programfiles吧
 
 ## thinking
 
