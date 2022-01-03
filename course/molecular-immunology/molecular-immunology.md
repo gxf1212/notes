@@ -421,7 +421,7 @@ Immunoglobulin super family (IgSF, 免疫球蛋白超家族): proteins including
 
 - Two identical heavy chains (connected by S-S bond) and light chains, between which is a S-S bond
 
-- heavy chain: 50kD, five isotypes (同种型): IgA/G/E/M/D ~ α/γ/ε/μ/δ chain
+- heavy chain: 50kD, five isotypes (同种型): IgA/G/E/M/D ~ α/γ/ε/μ/δ chain (first letter in α is A, and so on)
 
   light chain: 25kD, two types, κ/λ
 
@@ -1727,9 +1727,9 @@ Gene recombination: gene segments rearrange.
 
 - C genes are joined only after VDJ (VJ) genes have combined
 
-- recombinases cut the conservative sequences on both ends of gene segments and connect them
+- RAG1/2 cut the conservative sequences on both ends of gene segments and connect them
 
-  > RAG: recombinase activating gene
+  > RAG: recombination activating gene
   >
   > TdT also add dozens of nt to the break end (断端)
 
@@ -1738,28 +1738,28 @@ Gene recombination: gene segments rearrange.
   - heavy chain variable region first, light later
   - only one D/J is left
 
-  ![](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-2-vdj.png)
+  <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-2-vdj.png" style="zoom: 70%;" />
 
 - a B cell clone only express one type of BCR
 
-  - allelic exclusion: if one chromosome successfully undergo recombination, recombination on the other chromosome is inhibited
-  - isotype exclusion: if κ chain ...., .... of the λ chain is inhibited.
+  - allelic exclusion (等位排斥): if one chromosome successfully undergo recombination, recombination on the other chromosome is inhibited
+  - isotype exclusion (同型排斥): if κ chain ...., .... of the other κ chain as well as the λ chains is inhibited.
 
 #### Ab diversity
 
 - combinational diversity: the choice of V, (D,) J genes are independent
 
-  > an estimate. multiply these numbers!
+  > an estimate. (add κ and λ) multiply these numbers!
   >
-  > | gene  | V<sub>H</sub> | D    | J<sub>H</sub> | Vκ   | Vλ   |
-  > | ----- | ------------- | ---- | ------------- | ---- | ---- |
-  > | types | 40            | 25   | 6             | 200  | 120  |
+  > <img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-diversity.png" alt="10-2-diversity" style="zoom:80%;" />
 
 - junctional diversity: at the joining end, bases might be randomly added (by TdT) or deleted (not necessarily multiples of three)
 
-- receptor editing: some mIg expressing B cells encounter self-Ag, but clonal deletion does not occur. RAG is re-activated and light chain VJ is recombined to renew the specificity. (If not successful, the B cell is apoptotic)
+- receptor editing: some mIg expressing B cells encounter self-Ag, but clonal deletion does not occur. RAG is re-activated and light chain VJ is recombined to renew the specificity. (If not successful, the B cell undergoes apoptosis)
 
-- somatic hypermutation (see [chapter 13](#Somatic-hypermutation))
+- somatic hypermutation (see [chapter 13](#Somatic-hypermutation)). 
+
+  The above three happen in the bone marrow, while this in periphery.
 
 ### B cell development
 
@@ -1767,29 +1767,50 @@ Gene recombination: gene segments rearrange.
 
 <img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-bdev.png" alt="10-2-bdev" style="zoom:60%;" />
 
-- 
-
 #### Positive selection
 
-See [Chapter 11](#somatic-hypermutation)
+See [Chapter 11](#somatic-hypermutation). Periphery tolerance
 
 #### Negative selection
 
+Central tolerance (中枢耐受): in the bone marrow
 
+If immature B cell (IgM) encounters self-Ag, it undergoes
+
+- clonal deletion: apoptosis
+
+- clonal anergy: not cleared but no response. 
+
+  > in some cases re-activated, causing autoimmunity
+
+- receptor editing: see above
 
 #### Categories
 
-B1/2 cells
-
-
+| type                        | B1 cells                                      | B2 cells                     |
+| --------------------------- | --------------------------------------------- | ---------------------------- |
+| general                     | CLL/autoimmunity related                      | usually refered to as B cell |
+| immunity                    | innate                                        | humoral                      |
+| features                    | earily, spontaneous Ab                        | later                        |
+| Ag                          | carbohydrate, LPS, etc.                       | various protein              |
+| Ab                          | mainly IgM<br />low affinity and polyreactive | plasma cell, IgM/G, specific |
+| hypermutation<br />& memory | no                                            | yes                          |
 
 ## T cell
 
-### TCR gene recombination
-
-
-
 ### T cell development
+
+#### Basic route and TCR gene recombination
+
+![10-2-tdev](E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-tdev.png)
+
+- pre-T cell: first to express CD3
+- pro-T cell: divided into αβ and δγ T cell
+  - δγ T cell: only 1$\sim$5%
+
+
+
+
 
 #### Positive selection
 
@@ -1801,7 +1822,7 @@ See [Chapter 11](#somatic-hypermutation)
 
 ### T cell Categories
 
-
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-ag.png" alt="10-2-ag" style="zoom:70%;" />
 
 
 
@@ -2191,7 +2212,7 @@ Germinal center is formed (about 7 days after infection).
 
 > fDC: concentrate Ag on the surface using FcR and CR, for B cell to recognize. Maintain memory
 >
-> mIg: 膜免疫球蛋白, BCR (the same gene as Ab.), heavy chain: IgM or IgD
+> mIg: 膜免疫球蛋白, BCR (the same gene as Ab.), heavy chain: IgM or IgD (symbol of maturation)
 
 #### Events
 
