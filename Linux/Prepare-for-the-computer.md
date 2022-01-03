@@ -91,7 +91,15 @@ https://rongsp.com/article/96.html
 
 https://github.com/hannuo/ssr-linux-client-electron
 
+#### easy connect
 
+https://rvpn.zju.edu.cn/com/installClient.html#auto-common
+
+> 重要启示：点击安装包，显示安装成功，但启动程序时点击图标无响应，可通过命令行终端（Terminal）执行命令来启动。观察怎么个报错法！有道、DS等
+
+https://www.cnblogs.com/cocode/p/12890684.html
+
+下载pangolib  我的云盘  链接: https://pan.baidu.com/s/1i8O5ZvMLqnw8K8EzKIrw6Q 提取码: c896
 
 ## Autodock
 

@@ -645,28 +645,6 @@ change source: https://www.cnblogs.com/feng-hao/p/11774543.html
 
 `make`命令是运行的所在目录下的`Makefile`文件, 如果*Make*file 里有*check*的话, 会执行测试,也就是检查下编译出来的东西能不能用
 
-### dpkg
-
-- 查看安装包状态：-l
-
-  ```
-  期望状态=未知(u)/安装(i)/删除(r)/清除(p)/保持(h)
-  | 状态=未安装(n)/已安装(i)/仅存配置(c)/仅解压缩(U)/配置失败(F)/不完全安装(H)/触发器等待(W)/触发器未决(T)
-  |/ 错误?=(无)/须重装(R) (状态，错误：大写=故障)
-  ```
-
-  https://zhuanlan.zhihu.com/p/57472336
-
-  https://www.jianshu.com/p/3bbd0cf2debe 也许能删
-
-  ```shell
-  dpkg -l | grep R
-  ```
-
-  found: real-vnc-server
-
-- 
-
 
 
 ## Debugging experiences
@@ -1120,9 +1098,36 @@ dpkg -i --instdir=/dest/dir/path some.deb # under root
 
  关于dpkg：https://blog.csdn.net/weixin_30394633/article/details/98926820
 
-```shell
-dpkg --info xx.deb # 查看信息，包括软件包名，卸载时用！
-```
+- 常用
+
+  ```shell
+  dpkg -i xx.deb
+  dpkg --info xx.deb # 查看信息，包括软件包名，卸载时用！
+  dpkg -P xx.deb # 卸载
+  dpkg --unpack *.deb # 解压？
+  ```
+
+- 查看安装包状态：-l
+
+  ```
+  期望状态=未知(u)/安装(i)/删除(r)/清除(p)/保持(h)
+  | 状态=未安装(n)/已安装(i)/仅存配置(c)/仅解压缩(U)/配置失败(F)/不完全安装(H)/触发器等待(W)/触发器未决(T)
+  |/ 错误?=(无)/须重装(R) (状态，错误：大写=故障)
+  ```
+
+  https://zhuanlan.zhihu.com/p/57472336
+
+  https://www.jianshu.com/p/3bbd0cf2debe 也许能删
+
+  ```shell
+  dpkg -l | grep R
+  ```
+
+  found: real-vnc-server
+
+- 
+
+- 
 
 ### apt-get
 
