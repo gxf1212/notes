@@ -1721,7 +1721,7 @@ Gene recombination: gene segments rearrange.
 - heavy chain: Chrom 14. V (variable), D (diversity), J (joining), C (constant) regions
 - light chain: Chrom 2/22, no D region
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/molecular-immunology/molecular-immunology.assets/10-a-vdj.jpg" style="zoom:80%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/molecular-immunology/molecular-immunology.assets/10-2-vdj2.jpg" style="zoom:80%;" />
 
 #### Recombination
 
@@ -1738,7 +1738,7 @@ Gene recombination: gene segments rearrange.
   - heavy chain variable region first, light later
   - only one D/J is left
 
-  ![](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-a-vdj.png)
+  ![](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-2-vdj.png)
 
 - a B cell clone only express one type of BCR
 
@@ -1751,17 +1751,23 @@ Gene recombination: gene segments rearrange.
 
   > an estimate. multiply these numbers!
   >
-  > | gene  | heavy VH | heavy VD | heavy VJ | Vκ   | Vλ   |
-  > | ----- | -------- | -------- | -------- | ---- | ---- |
-  > | types | 40       | 25       | 6        | 200  | 120  |
+  > | gene  | V<sub>H</sub> | D    | J<sub>H</sub> | Vκ   | Vλ   |
+  > | ----- | ------------- | ---- | ------------- | ---- | ---- |
+  > | types | 40            | 25   | 6             | 200  | 120  |
 
 - junctional diversity: at the joining end, bases might be randomly added (by TdT) or deleted (not necessarily multiples of three)
 
-- receptor editing: some mIg expressing B cells encounter self-Ag, but clonal deletion does not occur. RAG is re-activated and VJ
+- receptor editing: some mIg expressing B cells encounter self-Ag, but clonal deletion does not occur. RAG is re-activated and light chain VJ is recombined to renew the specificity. (If not successful, the B cell is apoptotic)
 
 - somatic hypermutation (see [chapter 13](#Somatic-hypermutation))
 
 ### B cell development
+
+#### In bone marrow: Ag-independent
+
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-bdev.png" alt="10-2-bdev" style="zoom:60%;" />
+
+- 
 
 #### Positive selection
 
