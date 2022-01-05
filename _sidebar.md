@@ -1,4 +1,4 @@
-- Linux技术学习类
+- [Linux技术学习类](/techniques/summary.md)
   - [Linux基础](/techniques/Linux-fundamental.md)
   - [软件操作](/techniques/Specific-Software-Usage.md)
   - [软件安装](/techniques/Prepare-for-the-computer.md)
@@ -11,6 +11,7 @@
   - [分子免疫学笔记（待完成）](/course/molecular-immunology/molecular-immunology.md)
   - [生物信息学笔记（部分）](/course/bioinformatics/bioinformatics.md)
   - [分子生物物理学（NUS）](/course/molecular-biophysics-NUS/LSM-3243.md)
+  - [其他](/course/other.md)
 - Links
   - [西安交通大学钱学森学院](http://bjb.xjtu.edu.cn/)
   - [浙江大学定量生物学中心](https://person.zju.edu.cn/ruhong)
