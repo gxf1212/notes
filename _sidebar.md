@@ -1,6 +1,7 @@
-- Linux学习类
-  - [Linux基础](/Linux/Linux-fundamental.md)
-  - [软件安装](/Linux/Prepare-for-the-computer.md)
+- Linux技术学习类
+  - [Linux基础](/techniques/Linux-fundamental.md)
+  - [软件操作](/techniques/Specific-Software-Usage.md)
+  - [软件安装](/techniques/Prepare-for-the-computer.md)
 - MD学习类
   - [虚拟筛选和Gromacs基础操作](/MD/UROPS-run-and-result.md)
   - [NAMD/VMD和FEP计算基本操作（待完成）](/MD/FYP-notes.md)

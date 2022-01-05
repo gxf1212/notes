@@ -1,6 +1,6 @@
 # UROPS: Running programs
 
-Specific protocol and experiences for the project I did in NUS, Jan~May 2021. 
+Specific protocol and experiences for the project I did in NUS, Jan~May 2021. Some a little more about Autodock and Gromacs basics will be temporarily added.
 
 UROPS: undergraduate research opportunity project in science. 
 
@@ -353,6 +353,14 @@ ligand and receptor, overall refer to:
 - https://www.youtube.com/watch?v=7YTzG2PtzlE very good..
 - https://blog.computsystmed.com/archives/autodock-series-introduction-to-molecular-docking, esp ligand torsion
 - ligand torsion, official: https://www.scripps.edu/sanner/software/adt/Tutorial/AutotorsTutorial.html
+
+> if more processing needed (I forgot..)
+>
+> http://muchong.com/t-1695403-1
+>
+> - 加氢删水
+> - assign type，保存为pdbqt文件
+> - 重新打开，
 
 #### grid
 

@@ -1,10 +1,11 @@
 - [Home](/_coverpage.md)
-- Linux study
-  - [Linux basics](/Linux/Linux-fundamental.md)
-  - [Installation](/Linux/Prepare-for-the-computer.md)
+- Techniques study
+  - [Linux basics](/techniques/Linux-fundamental.md)
+  - [Specific Tools Usage](/techniques/Specific-Software-Usage.md)
+  - [Installation for working](/techniques/Prepare-for-the-computer.md)
 - MD study
   - [Virtual screening and Gromacs](/MD/UROPS-run-and-result.md)
-  - [NAMD/VMD/FEP basics (to be continued)](/MD/FYP-notes.md)
+  - [NAMD/VMD/FEP basics (tbc)](/MD/FYP-notes.md)
   - [MD official and online tutorials](/MD/MD-tutorials-all.md)
 - [course notes](/course/README.md)
   - [structural biology](/course/structural-biology/sb-outline.md)
