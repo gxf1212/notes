@@ -2631,11 +2631,23 @@ inject effectors
 
 
 
-# Chapter 17 Autoimmunity
+# Chapter 17 Immunodeficiency
 
+> self-study
 
+Definition: sydromes caused by loss of immune system components and dysfunction
 
+Features
 
+- repeated, chronic, uncontrollable
+
+  > 机会性病原体引发的感染。这些病原体寄生于免疫功能正常的健康宿主时不致病，但会在宿主出现免疫缺陷时入侵宿主。
+
+- 
+
+## Primary immunodeficiency
+
+原发性免疫缺陷
 
 
 
