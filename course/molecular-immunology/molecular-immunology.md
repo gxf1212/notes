@@ -1721,9 +1721,13 @@ Gene recombination: gene segments rearrange.
 - heavy chain: Chrom 14. V (variable), D (diversity), J (joining), C (constant) regions
 - light chain: Chrom 2/22, no D region
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/molecular-immunology/molecular-immunology.assets/10-2-vdj2.jpg" style="zoom:80%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/molecular-immunology/molecular-immunology.assets/10-2-vdj-2.jpg" style="zoom:80%;" />
 
 #### Recombination
+
+> The real structure
+>
+> <img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-b-gene.png" alt="10-2-b-gene" style="zoom:70%;" />
 
 - C genes are joined only after VDJ (VJ) genes have combined
 
@@ -2207,7 +2211,7 @@ Germinal center is formed (about 7 days after infection).
 
 | zone  | cell type            | activity                                          | gathering |
 | ----- | -------------------- | ------------------------------------------------- | --------- |
-| dark  | centroblast          | divide rapidly, no mIg expression                 | closely   |
+| dark  | centroblast          | divide rapidly, no mIg expression, big volume     | closely   |
 | light | centrocyte, fDC, Tfh | the opposite; further differentiation (see below) | loosely   |
 
 > fDC: concentrate Ag on the surface using FcR and CR, for B cell to recognize. Maintain memory
@@ -2218,27 +2222,39 @@ Germinal center is formed (about 7 days after infection).
 
 A mature B cell still does not have specificity to an antigen. So what happens to it in the periphery?
 
+All these are Ag and Th cell dependent!
+
 ##### Somatic hypermutation
 
 体细胞高频突变  
 
+BCR genes gain mutations highly frequently: $10^{-3}$ in Fv!
 
+> The second stage for B cell to get diversity. 
 
 ##### Ig affinity maturation
 
 亲和力成熟：再次应答时，由于B细胞发生体细胞高频突变，产生的多种具有不同亲和力的BCR和抗体。只有最高亲和力的细胞能够继续增殖，并产生高亲和力的抗体  
 
+Cell death depends on Fas (CD95) from Tfh. Need a strong BCR signal (Ag) AND strong Tfh help in order to overcome this death signal.
 
-
-
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\12-affinity.png" alt="12-affinity" style="zoom:50%;" />
 
 ##### Ab class switching
 
+抗体类型转换：B细胞产生多种类型的抗体。其本质是在Th细胞的辅助下，V区与不同C区基因拼接，然后转录，翻译形成的。
+
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\12-class-switching.png" alt="12-class-switching" style="zoom:50%;" />
+
+Alternative splicing
+
+No variable region changed
 
 
 
 
-Most don't accomplish these will be cleared.
+
+Most that don't accomplish these will be cleared.
 
 
 
@@ -2639,11 +2655,15 @@ Definition: sydromes caused by loss of immune system components and dysfunction
 
 Features
 
-- repeated, chronic, uncontrollable
+- repeated, chronic, uncontrollable, occasional infection
 
   > 机会性病原体引发的感染。这些病原体寄生于免疫功能正常的健康宿主时不致病，但会在宿主出现免疫缺陷时入侵宿主。
 
 - 
+
+- 
+
+- primary: genetic predisposition
 
 ## Primary immunodeficiency
 
