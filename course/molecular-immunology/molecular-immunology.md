@@ -6,6 +6,10 @@ The main reference materials include the slides (not available, but you can watc
 
 The quoted areas are less-important comments or end-of-chapter questions.
 
+TODOs:
+
+- [ ] later, make mindmaps for each chapter if they can be inserted into this site
+
 # Chapter 1 Introduction 
 
 绪论
@@ -1765,6 +1769,14 @@ Gene recombination: gene segments rearrange.
 
   The above three happen in the bone marrow, while this in periphery.
 
+#### Appendix
+
+> mIg and secr
+>
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-2-mig.png" style="zoom:40%;" />
+>
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-2-mig-gene.png" style="zoom:60%;" />
+
 ### B cell development
 
 #### In bone marrow: Ag-independent
@@ -1826,7 +1838,7 @@ See [Chapter 11](#somatic-hypermutation)
 
 ### T cell Categories
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-ag.png" alt="10-2-ag" style="zoom:70%;" />
+
 
 
 
@@ -2190,9 +2202,7 @@ th --> 3[cytokines] --> bc
 
 ### B cell proliferation and events in germinal center
 
-生发中心
-
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-abconc.png" alt="12-abconc" style="zoom:33%;" />
+germinal center: 生发中心
 
 #### Proliferation
 
@@ -2234,7 +2244,9 @@ BCR genes gain mutations highly frequently: $10^{-3}$ in Fv!
 
 ##### Ig affinity maturation
 
-亲和力成熟：再次应答时，由于B细胞发生体细胞高频突变，产生的多种具有不同亲和力的BCR和抗体。只有最高亲和力的细胞能够继续增殖，并产生高亲和力的抗体  
+亲和力成熟：再次应答时，由于B细胞发生体细胞高频突变，产生的多种具有不同亲和力的BCR和抗体。只有最高亲和力的细胞能够继续增殖，并产生高亲和力的抗体。
+
+Most that don't accomplish these processes will be cleared.
 
 Cell death depends on Fas (CD95) from Tfh. Need a strong BCR signal (Ag) AND strong Tfh help in order to overcome this death signal.
 
@@ -2246,47 +2258,43 @@ Cell death depends on Fas (CD95) from Tfh. Need a strong BCR signal (Ag) AND str
 
 <img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\12-class-switching.png" alt="12-class-switching" style="zoom:50%;" />
 
-Alternative splicing
+- No variable region changed, only C
+- S region: switch region. S<sub>μ</sub> will be followed by the S region, then C region of the chain you need.
+- S regions respond to cytokine signaling and a certain type is selected. (If no cytokine, just IgM)
+- Alternative splicing: obtain the mRNA where VDJC are connected
 
-No variable region changed
+Result:
 
-
-
-
-
-Most that don't accomplish these will be cleared.
-
-
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-abconc.png" alt="12-abconc" style="zoom:33%;" />
 
 ### B cell differentiation/fate
 
-- plasma cell
-  - migrate to bone marrow
-  - produce antibody, but no longer express BCR or MHC II
-- memory T cell
+- plasma cell (Ab forming cell, AFC)
+  - migrate to bone marrow and produce antibodies steadily
+  - but no longer express BCR or MHC II, no response to Ag/Th
+- memory B cell (B<sub>m</sub>)
   - long live, relying on follicular DC
+  - rapidly activated to produce Ig when encountering the Ag again.
 
 ## Response to TI Ag
 
+The answer to these are No:
 
+- Ag presentation, T cell required, secondary response
+- class switching, memory (except a few of TI-2)
 
+A comparison
 
-
-
-
-
-
-
-
-comparison
-
-|      |      |      |
-| ---- | ---- | ---- |
-|      |      |      |
-|      |      |      |
-|      |      |      |
-
-
+| Ag             | TD-Ag        | TI-1 Ag                      | TI-2 Ag                              |
+| -------------- | ------------ | ---------------------------- | ------------------------------------ |
+| Ag type        | protein, etc | 细菌多糖，LPS                | 肺炎球菌荚膜多糖<br />沙门菌多聚鞭毛 |
+| receptor       | BCR          | BCR, mitogen receptor        | BCR                                  |
+| target B cell  | B2           | all                          | B1                                   |
+| mature B cell? | yes          | mature or immature           | yes                                  |
+| Ab type        | all types    | early, IgM                   |                                      |
+|                |              |                              |                                      |
+| unique feature |              | polyclonal B cell activation | repeated epitope                     |
+|                |              |                              |                                      |
 
 
 
