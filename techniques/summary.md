@@ -1,1 +1,3 @@
-This is technique study page.
+This is technique study page. Click on the sidebar to start reading!
+
+> Maybe I'll write something here...

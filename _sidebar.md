@@ -1,7 +1,7 @@
 - [Linux技术学习类](/techniques/summary.md)
   - [Linux基础](/techniques/Linux-fundamental.md)
-  - [软件操作](/techniques/Specific-Software-Usage.md)
   - [软件安装](/techniques/Prepare-for-the-computer.md)
+  - [软件操作](/techniques/Specific-Software-Usage.md)
 - [MD学习类](/MD/summary.md)
   - [虚拟筛选和Gromacs基础操作](/MD/UROPS-run-and-result.md)
   - [NAMD/VMD和FEP计算基本操作（待完成）](/MD/FYP-notes.md)
@@ -12,6 +12,7 @@
   - [生物信息学笔记（部分）](/course/bioinformatics/bioinformatics.md)
   - [分子生物物理学（NUS）](/course/molecular-biophysics-NUS/LSM-3243.md)
   - [其他](/course/other.md)
+    - [进化生物学](/course/other/evolutional-bio.md)
 - Links
   - [西安交通大学钱学森学院](http://bjb.xjtu.edu.cn/)
   - [浙江大学定量生物学中心](http://iqb.zju.edu.cn/)

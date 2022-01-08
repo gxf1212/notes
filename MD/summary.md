@@ -1,1 +1,1 @@
-This is technique study page.
+This is MD simulation study page. Click on the sidebar to start reading!
