@@ -14,6 +14,6 @@
   - [其他](/course/other.md)
 - Links
   - [西安交通大学钱学森学院](http://bjb.xjtu.edu.cn/)
-  - [浙江大学定量生物学中心](https://person.zju.edu.cn/ruhong)
+  - [浙江大学定量生物学中心](http://iqb.zju.edu.cn/)
   - [中国生物物理学会](https://space.bilibili.com/424091950)
   - [关于我](utils/about.md)
