@@ -14,6 +14,7 @@
   - [其他](/course/other.md)
     - [进化生物学](/course/other/evolutional-bio.md)
 - Links
+  - [西北工业大学附属中学](http://www.xgdfz.com/)
   - [西安交通大学钱学森学院](http://bjb.xjtu.edu.cn/)
   - [浙江大学定量生物学中心](http://iqb.zju.edu.cn/)
   - [中国生物物理学会](https://space.bilibili.com/424091950)

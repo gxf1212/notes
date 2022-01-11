@@ -2263,10 +2263,6 @@ Cell death depends on Fas (CD95) from Tfh. Need a strong BCR signal (Ag) AND str
 - S regions respond to cytokine signaling and a certain type is selected. (If no cytokine, just IgM)
 - Alternative splicing: obtain the mRNA where VDJC are connected
 
-Result:
-
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-abconc.png" alt="12-abconc" style="zoom:33%;" />
-
 ### B cell differentiation/fate
 
 - plasma cell (Ab forming cell, AFC)
@@ -2278,25 +2274,26 @@ Result:
 
 ## Response to TI Ag
 
-The answer to these are No:
-
-- Ag presentation, T cell required, secondary response
-- class switching, memory (except a few of TI-2)
+- **No** Ag presentation, T cell required, secondary response, affinity maturation
+- **No** class switching, memory (except a few of TI-2)
+- shared polyvalent epitope
 
 A comparison
 
-| Ag             | TD-Ag        | TI-1 Ag                      | TI-2 Ag                              |
-| -------------- | ------------ | ---------------------------- | ------------------------------------ |
-| Ag type        | protein, etc | 细菌多糖，LPS                | 肺炎球菌荚膜多糖<br />沙门菌多聚鞭毛 |
-| receptor       | BCR          | BCR, mitogen receptor        | BCR                                  |
-| target B cell  | B2           | all                          | B1                                   |
-| mature B cell? | yes          | mature or immature           | yes                                  |
-| Ab type        | all types    | early, IgM                   |                                      |
-|                |              |                              |                                      |
-| unique feature |              | polyclonal B cell activation | repeated epitope                     |
-|                |              |                              |                                      |
+| Ag             | TD-Ag                    | TI-1 Ag                                                      | TI-2 Ag                                  |
+| -------------- | ------------------------ | ------------------------------------------------------------ | ---------------------------------------- |
+| Ag type        | Soluble<br/>protein, etc | Bacterial cell-wall<br/>components (e.g., LPS)               | 肺炎球菌荚膜多糖<br />沙门菌多聚鞭毛     |
+| receptor       | BCR                      | BCR, mitogen receptor                                        | BCR                                      |
+| target B cell  | B2                       | all B cell                                                   | mainly B1                                |
+| mature B cell? | mature                   | mature or immature                                           | mature                                   |
+| Ab type        | all types                | early, IgM                                                   | IgM/G                                    |
+| feature        | all processes above      | both the BCR and innate receptors                            | repeated epitope<br />cytokine-dependent |
+| low dose       |                          | oligoclonal activation<br />cross-links the receptors<br />specific antibody | extensive BCR/CR2 crosslink              |
+| high dose      |                          | polyclonal B cell activation                                 | causes B cell anergy                     |
 
+## General laws in humoral immunity
 
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-abconc.png" alt="12-abconc" style="zoom:33%;" />
 
 ## Ab: biological functions
 
@@ -2678,6 +2675,78 @@ Features
 原发性免疫缺陷
 
 
+
+
+
+Acquired
+
+
+
+## Homework
+
+一、 不定项选择题
+
+1. 关于自身免疫，正确的说法是：
+
+   A．  自身免疫都是有害的
+
+   B．  自身免疫是生理状态存在的现象，对于维持内环境的稳定具有重要意义
+
+   C．  自身免疫如果对组织造成持续严重的损伤，则成为自身免疫性疾病
+
+   D．  自身免疫有利于清除衰老、坏死的组织。
+
+   E．  自身免疫不产生明显的炎症
+
+2. 自身抗体的致病机制包括：
+
+   A． 针对细胞表面抗原的自身抗体引发补体活化，破坏细胞
+
+   B． 针对细胞表面受体的自身抗体阻断受体与配体的结合
+
+   C． 针对细胞表面受体的自身抗体模拟其配体的功能，对细胞产生持续的激活作用
+
+   D． 自身抗原与抗体结合后通过免疫调理作用和ADCC效应引起组织损伤
+
+   E． 循环免疫复合物沉积引起沉积部位的炎症反应
+
+3. 正常组织蛋白成为被免疫攻击的自身抗原的原因包括：
+
+   A． 隐蔽抗原的释放
+
+   B． 自身蛋白因为理化、感染等因素发生改变
+
+   C． 病原微生物与宿主的组织细胞有相似的蛋白结构
+
+   D． 随着病程的进展，组织破坏的加剧，更多的表位暴露于免疫系统
+
+   E． 生活习惯的影响
+
+4. 病原体感染诱发自身免疫性疾病可能与以下哪些因素有关：
+
+   A． 改变细胞表面抗原
+
+   B． 某些成分作为超抗原多克隆激活细胞
+
+   C． 基因突变导致的中枢耐受失败
+
+   D． 携带易感基因
+
+   E． 分子模拟
+
+5. 交感性眼炎的发生与以下哪种因素有关？
+
+   A．      隐蔽抗原的释放
+
+   B．      自身蛋白因为理化、感染等因素发生改变
+
+   C．      分子模拟
+
+   D．      表位扩展
+
+   E．      调节性T细胞功能异常
+
+答案：
 
 # Chapter 18 Application
 

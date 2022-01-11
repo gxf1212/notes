@@ -12,5 +12,4 @@
   - [molecular immunology (tbc)](/course/molecular-immunology/molecular-immunology.md)
   - [bioinformatics (part)](/course/bioinformatics/bioinformatics.md)
   - [molecular biophysics](/course/molecular-biophysics-NUS/LSM-3243.md)
-  - [其他](/course/other.md)
-    - [evolutional biology](/course/other/evolutional-bio.md)
+  - [other](/course/other.md)
