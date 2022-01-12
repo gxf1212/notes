@@ -84,11 +84,22 @@ This is a record of my operations during 折腾ing the system, in order not to f
      
      > dependence of com.iflytek.iflyime_1.0.6-7_amd64.deb can not be installed
      
+   - 搜狗
+
+     
+     
+     > 感觉搜狗拼音输入法比谷歌拼音输入法更好，因为有最新流行词汇，可以打出表情符号等等。
+     >
+     > https://blog.csdn.net/Teri_Tor/article/details/111461984
+     
    - 2022.1.4 use google pinyin. 至少能用。。先用吧阿巴阿巴
 
      ```shell
      sudo apt-get install fcitx-googlepinyin
+     whereis googlepinyin
      ```
+
+     > ` /usr/lib/x86_64-linux-gnu/googlepinyin/data`  词库目录
 
    - setting commands
 

@@ -186,6 +186,44 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
    psfcontext reset
    ```
 
+5. resize font in TkConsole https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/29151.html
+
+   type in TkConsole: tkcon font <type> <size>
+
+   ```
+   tkcon font Courier 20
+   ```
+
+   > font type not affected?
+
+6. As for the global font: the higher resolution your screen is, the smaller your font is
+
+   Maybe because the source code specifies pixels??
+
+6. TkConsole auto-loads history file?
+
+   https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/8543.html
+	
+   Yeah, just about last 10 commands you typed, with the starting number 48. 强迫症犯了。。
+	
+	>    history command
+	>
+	>    https://www.tcl.tk/man/tcl8.4/TclCmd/history.html
+	>
+	>    ```tcl
+	>    history clear
+	>    ```
+	>
+	>    or Ctrl+r, but no use
+	>
+	>    ```tcl
+	>    clear
+	>    ```
+	>
+	>    just clears the screen
+	
+7. 
+
 5. 
 
 #### VMD Graphics

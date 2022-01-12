@@ -79,7 +79,9 @@ elif [ "$os_name"== 'Fedora' ]; then
 
 https://sgi.anycast.gay/user 买ssr流量的网站
 
-ssr can not provide access to YouTube. jisu browser can view Google but chrome without the plugin can not... it helps with google scholar but the plugin cannot
+https://www.hayaissr.xyz/ 也是个买vpn的？
+
+> ssr can not provide access to YouTube. 极速 browser can view Google but chrome without the plugin can not... it helps with google scholar but the plugin cannot
 
 laowang, can view youtube on the phone
 
@@ -91,7 +93,42 @@ https://rongsp.com/article/96.html
 
 https://github.com/hannuo/ssr-linux-client-electron
 
-#### easy connect
+depends on Python! If connection fails,
+
+https://www.cnblogs.com/geekHao/p/12635970.html
+
+从源头更改python的链接文件，**推荐这种方法**
+
+1. 查看已安装的python版本和链接情况：
+
+   ```shell
+   ll /usr/bin/python*
+   ```
+
+2. 删除原有的Python连接文件 (I don’t have one after reinstalling the system)
+
+   `sudo rm /usr/bin/python`
+
+3. 建立指向Python3.X的连接
+
+   ```shell
+   ln -s /usr/bin/python3 /user/bin/python
+   ```
+
+   then it’s done
+
+### qt-5
+
+https://github.com/shadowsocks/shadowsocks-qt5/releases/tag/v3.0.1
+
+```shell
+chmod a+x Sha*
+./Sha*
+```
+
+连接--添加--URI
+
+### easy connect
 
 https://rvpn.zju.edu.cn/com/installClient.html#auto-common
 
