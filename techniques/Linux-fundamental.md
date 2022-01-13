@@ -200,9 +200,18 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
     主题路径：`/home/gxf/.config/Typora/themes`
 
-15. install lightdm: https://blog.csdn.net/hgtjcxy/article/details/90645838
+14. install lightdm: https://blog.csdn.net/hgtjcxy/article/details/90645838
 
     display managers: https://ubuntuqa.com/article/6577.html
+
+    ```shell
+    sudo apt update
+    sudo apt install lightdm
+    # or
+    sudo dpkg-reconfigure lightdm
+    # click ok
+    reboot
+    ```
 
 16. 字体缺失（WPS等）
 
@@ -912,23 +921,29 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
 - 安装完第一件事：确定合适驱动版本，直接在系统里下
 
+  - 禁用noveu那个
+
 - 安装QQ，方便传送经验
 
 - 更新软件源，便于下载lightdm等依赖
 
-  - 先注释掉原来的源
+  - 先注释掉原来的源，update
 
 - 安装向日葵，以便远控
 
 - 尝试是否能重启
 
-- 挂载home盘，实现自动挂载
+- 挂载home盘，实现自动挂载。找uuid：那个设备的路径
 
   ```
   vi /etc/fstab
   添加如下内容：
-  /dev/vdb /mnt ext4 defaults 0 0
+  uuid=xxxxxxx /h ext4 defaults 0 0
   ```
+
+- 更改root密码
+
+- 安装vi，git等基本工具
 
 - 安装vpn，翻墙、校园网
 

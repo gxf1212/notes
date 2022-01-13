@@ -257,7 +257,7 @@ age, gender, genetic factor, healthy state
 
 #### route of entry
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/3-skin.png" alt="3-skin" style="zoom:25%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/3-skin.png" alt="3-skin" style="zoom:35%;" />
 
 皮内 > 皮下 > 肌肉 > 静脉 > 口腔
 
@@ -346,12 +346,12 @@ be --from--> TD-Ag
 
 - heterophilic (异嗜性) antigen
 
-- - common antigen between humans and other species
+  - common antigen between humans and other species
   - when a pathogen enters, the immune response causes autoimmunity
 
 - xenogenic (异种) antigen
 
-- - from other species, not common
+  - from other species, not common
 
 - allogenic (同种异体) antigen
 
@@ -381,7 +381,7 @@ general understanding
 
 佐剂, non-specific substances which are added together with antigen in vaccines, to enhance or change the type of immune response.
 
-卡介苗, \text{Al(OH)}_3, artificial, Freundadjuvant
+卡介苗, $\text{Al(OH)}_3$, artificial, Freundadjuvant
 
 #### mitogen
 
@@ -458,7 +458,7 @@ hinge: flexible, between CH1 and CH2. not in IgM/E
 
 ### Enzymolysis (酶解)
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/4-ab-cleavage.png" alt="4-ab-cleavage" style="zoom:25%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/4-ab-cleave.png" style="zoom:25%;" />
 
 > papain: 木瓜蛋白酶; pepsin: 胃蛋白酶
 
@@ -486,7 +486,7 @@ They are encoded by independent genes and just freely combine...which makes dive
 
 Ab can also be an antigen. Three types of epitope:
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/4-5.png" alt="4-5" style="zoom:25%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/4-Ab-Ag.png" style="zoom:25%;" />
 
 - isotype: all C region.
   - Individuals in the same species have similar C region. If you inject monkey's Ab into a human, the C region could be an antigen.
@@ -505,7 +505,7 @@ Ab can also be an antigen. Three types of epitope:
 
 ### Neutralizing toxins and infection
 
-> 参考：https://www.bilibili.com/video/BV1Gg411P7jS
+> [a video for reference](https://www.bilibili.com/video/BV1Gg411P7jS)
 >
 > - 中和抗体只占人体产生抗体中的一小部分
 > - 它们都能特异性结合病原体，但中和抗体可能结合入侵相关蛋白（如冠状病毒的S蛋白），或结合衣壳蛋白导致病毒核酸无法释放，直接阻止对人体的感染；非中和抗体可能结合其他位点，但无法阻止感染！
@@ -1474,6 +1474,8 @@ I: innate; A: adaptive
 
 T cells cannot directly recognize antigens (even peptide); need the help of APCs.
 
+[a video for reference](https://www.bilibili.com/video/BV1SZ4y1Q7Jq/)
+
 ## Antigen presenting cells
 
 ### Basics
@@ -1714,6 +1716,10 @@ situations that can happen:
 
 Not included in slides, but in the textbook. Helps to understand Chapter 10 and 11.
 
+You may remember in that figure in [chapter 8](#Chapter-8-Innate-Immune-System), T and B cell have a common ancester, the differentiation of which depends on Notch1 presence.
+
+<img src="../../course\molecular-immunology\molecular-immunology.assets\10-2-source.png" alt="10-2-source" style="zoom:40%;" />
+
 ## B cell
 
 ### BCR gene and VDJ recombination
@@ -1725,7 +1731,7 @@ Gene recombination: gene segments rearrange.
 - heavy chain: Chrom 14. V (variable), D (diversity), J (joining), C (constant) regions
 - light chain: Chrom 2/22, no D region
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/molecular-immunology/molecular-immunology.assets/10-2-vdj-2.jpg" style="zoom:80%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-2-vdj-2.jpg" style="zoom:80%;" />
 
 #### Recombination
 
@@ -1785,7 +1791,7 @@ Gene recombination: gene segments rearrange.
 
 #### Positive selection
 
-See [Chapter 11](#somatic-hypermutation). Periphery tolerance
+See [Chapter 12](#somatic-hypermutation). Periphery tolerance. Somatic hypermutation, affinity maturation, etc.
 
 #### Negative selection
 
@@ -1820,25 +1826,53 @@ If immature B cell (IgM) encounters self-Ag, it undergoes
 
 ![10-2-tdev](E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-tdev.png)
 
-- pre-T cell: first to express CD3
-- pro-T cell: divided into αβ and δγ T cell
-  - δγ T cell: only 1$\sim$5%
+- (祖) pre-T cell: first to express CD3
+- (前) pro-T cell: become double positive
+  - divided into αβ and δγ T cell (only 1$\sim$5%)
+  - TCR recombination
+- mature T cell: single positve
 
+#### TCR recombination
 
+- α: V-J like Ab light chain; β: V with D-J, like Ag heavy chain
+- combinational/junctional diversity, higher probability of insertion than Ig
 
-
+<img src="../../course\molecular-immunology\molecular-immunology.assets\10-2-tcr-recom.png" alt="10-2-tcr-recom" style="zoom:55%;" />
 
 #### Positive selection
 
-See [Chapter 11](#somatic-hypermutation)
+in thymic cortex (胸腺皮质), T cells need to acquire:
+
+- appropriate affinity with self MHC-peptide on the cortical thymic epithelial cell
+
+  > 3–4 days after the thymocyte first expresses a functional receptor, cTECs give it a survival signal
+  >
+  > 95% cells whose affinity with pMHC is too low undergo apoptosis and are cleared by macrophages. 
+  >
+  > too high? not mentioned in the English books...
+
+- the class of MHC determines which one of CD4 and CD8 will be kept. 
+
+  get MHC restriction; becomes immature CD4<sup>+</sup> and CD8<sup>+</sup> T cell
+  
+  > the other one never gets expressed then
+  >
+  > MHC restriction: T-cell responses depend on specific peptide+MHC
 
 #### Negative selection
 
+In the interface of thymic cortex and medulla (髓质),
 
+those which bind too strongly to self pMHC complex on the DC (macrophage) is cleared in a similar way.
+
+> T cells that moderatly binds then become mature T cell and enter the periphery.
+
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-t-sele.png" alt="10-2-t-sele" style="zoom:50%;" />
 
 ### T cell Categories
 
-
+- According to developmental stage
+- According to function (cytokine)
 
 
 
@@ -2254,7 +2288,7 @@ Cell death depends on Fas (CD95) from Tfh. Need a strong BCR signal (Ag) AND str
 
 ##### Ab class switching
 
-抗体类型转换：B细胞产生多种类型的抗体。其本质是在Th细胞的辅助下，V区与不同C区基因拼接，然后转录，翻译形成的。
+抗体类型转换：B细胞产生多种类型的抗体。其本质是在Th细胞的辅助下，V区与不同C区基因拼接，然后转录，翻译形成的。[参考视频](https://www.bilibili.com/video/BV1iL4y1b7gC/)
 
 <img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\12-class-switching.png" alt="12-class-switching" style="zoom:50%;" />
 
@@ -2295,13 +2329,41 @@ A comparison
 
 <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-abconc.png" alt="12-abconc" style="zoom:33%;" />
 
+> - lag phase: from Ag entrance to detectable Ab
+> - log phase: exponential growth
+> - pleatu phase: a stable high level
+> - decline phase
+
+a comparison
+
+| response                      | primary response<br />初次应答 | secondary response<br />再次应答    |
+| ----------------------------- | ------------------------------ | ----------------------------------- |
+| lag phase                     | longer                         | shorter                             |
+| log phase                     | 7-10 d                         | 3-5 d                               |
+| Ab level at<br />pleatu phase | Ag-dependent                   | 2-3 orders of<br />magnitude higher |
+| pleatu phase                  | shorter                        | longer                              |
+| Ag type                       | TD&TI                          | TD                                  |
+| Ag conc needed                | higher                         | lower                               |
+| B cell type                   | naive B cell                   | memory B cell                       |
+| Ab type                       | low affinity IgM               | high affinity IgG                   |
+
+Secondary response can be effective months or years after the primary response.
+
 ## Ab: biological functions
 
-1. 
+1. neutralization
 
+   > target toxins; prevent the pathogens from adhesion
 
+2. complement activation
 
+3. opsonization of phagocytes
 
+4. ADCC effect of killer cells
+
+5. hypersensitivity
+
+6. cross the mucosa and placenta
 
 
 
@@ -2313,31 +2375,66 @@ A comparison
 
 ## Basics
 
+### Concepts
+
 Immune Tolerance: a state of unresponsiveness of the immune system to **specific** substances or tissue.
 
 - no immune molecules or activated lymphocytes
-- tolerogen 耐受原
+- these antigens are called tolerogen (耐受原)
 
 Different from immunodeficiency! 
 
 > That's abnormal development, proliferation, differentiation and metabolism of lymphocytes.
 
-Categories
+### Categories
 
 - natural tolerance 天然耐受
-  - came into contact during embryonic period
+  - came into contact **during embryonic period**
   - or after birth, 如口服耐受、妊娠耐受
 - acquired tolerance 人工耐受
 
-Influencing factors: the opposite of [immunogenicity](#Immunogenicity:-influencing-factors)
+### Influencing factors
+
+the opposite of [immunogenicity](#Immunogenicity:-influencing-factors)
 
 > antigen (MW, chemistry, structure complexity, physical property, epitope, etc.), host, route of entry
 
+- Ag dose: high-zone or low-zone tolerance
+- small protein or saccharide causes less uptake by APC
+- Ag continues to exist, without APC stimulation, causes T cell tolerance
+- tolerogenic epitope (耐受原表位): activate T<sub>reg</sub> cell
+- it is thousands of times harder to form B cell tolerance than T cell; only high conc TI/TD Ag
+  - T cell: just TD Ag. occurs rapidly and lasts months or years
+
+other
+
+- 口服 > 静脉＞腹腔＞肌肉＞皮内＞皮下
+
+  > depends on other factors, so a substance can be both antigen and tolerogen
+
+- a state of immune cell generation (embryo, infants; immune clearance) is beneficial for tolerance
+
+## Cytological mechanism
+
+细胞学机制
+
+### Central tolerance
+
+is just the negative selection of T/B cells. You may refer to [chapter 10](#Chapter-10-T/B-cell-development) for details.
+
+```mermaid
+graph TB
+t[T cell tolerance] --> 
+b[B cell tolerance] --> 
+```
 
 
 
 
 
+
+
+### Peripheral tolerance
 
 
 
