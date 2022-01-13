@@ -103,7 +103,9 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 2 --> ln[lymph nodes]
 ```
 
-### Central (primary) immune organs
+### Central (primary) immune (lymphoid) organs
+
+中枢免疫器官
 
 - 骨髓：含造血干细胞，是所有血细胞的来源
   - 为发育提供了环境：生长因子、基质细胞等
@@ -1789,11 +1791,11 @@ Gene recombination: gene segments rearrange.
 
 <img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-bdev.png" alt="10-2-bdev" style="zoom:60%;" />
 
-#### Positive selection
+#### B Positive selection
 
 See [Chapter 12](#somatic-hypermutation). Periphery tolerance. Somatic hypermutation, affinity maturation, etc.
 
-#### Negative selection
+#### B Negative selection
 
 Central tolerance (中枢耐受): in the bone marrow
 
@@ -1839,11 +1841,11 @@ If immature B cell (IgM) encounters self-Ag, it undergoes
 
 <img src="../../course\molecular-immunology\molecular-immunology.assets\10-2-tcr-recom.png" alt="10-2-tcr-recom" style="zoom:55%;" />
 
-#### Positive selection
+#### T Positive selection
 
 in thymic cortex (胸腺皮质), T cells need to acquire:
 
-- appropriate affinity with self MHC-peptide on the cortical thymic epithelial cell
+- appropriate affinity with self MHC-peptide on the cortical thymic epithelial cell (TEC)
 
   > 3–4 days after the thymocyte first expresses a functional receptor, cTECs give it a survival signal
   >
@@ -1859,13 +1861,22 @@ in thymic cortex (胸腺皮质), T cells need to acquire:
   >
   > MHC restriction: T-cell responses depend on specific peptide+MHC
 
-#### Negative selection
+#### T Negative selection
 
 In the interface of thymic cortex and medulla (髓质),
 
 those which bind too strongly to self pMHC complex on the DC (macrophage) is cleared in a similar way.
 
-> T cells that moderatly binds then become mature T cell and enter the periphery.
+> to prevent autoreactive T cells from generating.
+>
+> peptide include (just scan):
+>
+> - from <u>ubiquitous protein</u>
+> - a subset of cells in the thymic medulla express small amounts of <u>tissue-specific antigens</u>
+>   - regulated by transcription factor "autoimmune regulator" (AIRE)
+>   - in TEC, presented by TEC or DC (phagocytosing apoptotic TEC)
+
+T cells that moderatly binds then become mature T cell and enter the periphery.
 
 <img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-t-sele.png" alt="10-2-t-sele" style="zoom:50%;" />
 
@@ -1997,7 +2008,7 @@ Ag signal$+$cytokines from Th cell
 
 #### CD4<sup>+</sup> T cell effect
 
-flow charts
+flow charts. solid/dashed lines denote promotion/inhibition. thick solid line means "differentiate into".
 
 ##### Relationship between cells
 
@@ -2399,9 +2410,9 @@ the opposite of [immunogenicity](#Immunogenicity:-influencing-factors)
 
 > antigen (MW, chemistry, structure complexity, physical property, epitope, etc.), host, route of entry
 
-- Ag dose: high-zone or low-zone tolerance
-- small protein or saccharide causes less uptake by APC
-- Ag continues to exist, without APC stimulation, causes T cell tolerance
+- Ag dose: high-zone (too activated) or low-zone (insufficient activation) tolerance
+- small protein or saccharide causes less uptake by APC, thus tolerated (oligomer is fine)
+- long term existence of Ag, without APC stimulation, causes T cell tolerance
 - tolerogenic epitope (耐受原表位): activate T<sub>reg</sub> cell
 - it is thousands of times harder to form B cell tolerance than T cell; only high conc TI/TD Ag
   - T cell: just TD Ag. occurs rapidly and lasts months or years
@@ -2411,6 +2422,8 @@ other
 - 口服 > 静脉＞腹腔＞肌肉＞皮内＞皮下
 
   > depends on other factors, so a substance can be both antigen and tolerogen
+  >
+  > oral: Ag cleared by mucosa immunity?
 
 - a state of immune cell generation (embryo, infants; immune clearance) is beneficial for tolerance
 
@@ -2420,31 +2433,91 @@ other
 
 ### Central tolerance
 
-is just the negative selection of T/B cells. You may refer to [chapter 10](#Chapter-10-T/B-cell-development) for details.
+is just the negative selection of T/B cells. You may refer to [T cell Negative selection](#T-Negative-selection) and [B cell Negative selection](#B-Negative-selection) for details.
 
 ```mermaid
 graph TB
-t[T cell tolerance] --> 
-b[B cell tolerance] --> 
+t[T cell tolerance] --strong--> tn[clonal deletion]
+t --weak--> tr[into nTreg cell]
+b[B cell tolerance] --strong--> bc[clonal deletion]
+b --weak--> ba[clonal anergy]
+b --strong--> re[receptor editing]
 ```
 
-
-
-
-
-
+> strong/weak: TCR signal, or strength of Ag presentation
 
 ### Peripheral tolerance
 
+Still, some autoreactive cells evade, as some of the tissue proteins are not present in thymus/bone marrow. 
 
+Mechanisms are:
 
+- **clonal ignorance** (克隆忽视): low expression/affinity Ag (<u>primary</u>) cannot stimulate lymphocytes
 
+- **clonal deletion**: with Ag, without <u>2ndary</u> signal/cytokines. autoreactive lymphocytes undergo apoptosis
 
+  > e.g. B cells exposed to soluble Ag monomers
 
+- **clonal anergy**: the same, but some are always in existence. 
+
+  >clonal ignorance/anergy might be reversed and cause autoimmunity
+
+- **regulatory cells**: Treg, regulatory B cell/DC, etc.
+
+  > - iTreg: like Th17, from naive T cell
+  > - nTreg: natural, from autoreactive T cell in negative selection
+
+- **immunological privileged site** (免疫豁免部位): lymphocytes cannot enter 中枢神经组织、胎盘，眼前房等
+
+  > barrier; FasL, TGF-β; Th2 response, etc.
+
+## Establishment and break
+
+### Establishment/Induction
+
+建立免疫耐受, for self Ag, [hypersensitivity](#Chapter-14-Hypersensitivity) or transplant. 
+
+> only those mentioned in the slides are listed. check [influencing factors](#Influencing-factors) for more
+
+- central: bone marrow/thymus transplant; inject Ag into the thymus
+
+- peripheral
+
+  - stronger tolerogen (1st signal): intravenous or oral introduction; soluble antigen, etc.
+  - blocking co-stimulatory signals (2nd signal)
+  - inducing immune deviation: Th2 response (e.g. by cytokines)
+  - adoptive T<sub>reg</sub> cell (or other tolerated cells) transfer
+  - peptide antagonists: analogs of self peptide; binds autoreactive TCR but will not send the activation signal
+
+  > Ag presented by immature APC; lack of B/T cell cooperation
+
+### Break
+
+打破免疫耐受, for infection or tumor therapy
+
+- first signal
+
+  > strengthen DC function by: adding adjuvant; expressing co-stimulatory molecules for CD8<sup>+</sup> T cell
+
+- secondary signal
+
+  > agnostic Ab of co-stimulatory molecules; antagonistic Ab of inhibitory molecules like PD-1, CTLA-4
+
+- cytokines
+
+  > proper usage of stimulatory cytokines and Ab of regulatory cytokines
+
+- T<sub>reg</sub> cells
+
+  > eliminate T<sub>reg</sub> cells by targeting specific receptors like CD25, TLR9
 
 
 
 # Chapter 14 Hypersensitivity
+
+
+
+
 
 
 
