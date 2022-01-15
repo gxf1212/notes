@@ -288,7 +288,11 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
     https://www.geeksforgeeks.org/python-opencv-cv2-copymakeborder-method/
 
-17. 
+19. on disk check
+
+    > see below debugging 22.1.14
+
+21. 
 
 
 
@@ -462,12 +466,16 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
    configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md
 
-3. 向日葵连接后即断开解决办法 https://blog.csdn.net/u012254599/article/details/107807751
+3. 向日葵
+
+   软件包名：`sunloginclient`；命令：`/usr/local/sunlogin/bin/sunloginclient`
+   
+   连接后即断开解决办法 https://blog.csdn.net/u012254599/article/details/107807751
 
    ```shell
    sudo dpkg-reconfigure lightdm # 切换lightdm图形页面
    ```
-
+   
    切换完成后重启电脑，就可以使用向日葵远程了…
    
    which leads that the login displays in a strange de-centered looking...
@@ -933,6 +941,8 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
 - 尝试是否能重启
 
+- 更改root密码
+
 - 挂载home盘，实现自动挂载。找uuid：那个设备的路径
 
   ```
@@ -941,13 +951,11 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
   uuid=xxxxxxx /h ext4 defaults 0 0
   ```
 
-- 更改root密码
+- 更改desktop的路径为英文，极端cmd下语言改成英文
 
-- 安装vi，git等基本工具
+- 安装vi，git, alacarte, gpart, gparted, ethtool, 等基本工具
 
 - 安装vpn，翻墙、校园网
-
-- 极端cmd下语言改成英文
 
 - 把win的字体拷过来一份
 
@@ -1313,10 +1321,6 @@ If a file system check fails, then you probably should reinstall, reformatting t
 
 
 
-
-
-
-
 ```shell
 # 其他
 # 重装两个包
@@ -1347,6 +1351,105 @@ A START JOB IS RUNNING FOR HOLD UNTIL BOOT FINISHES UP
 https://www.rffuste.com/2020/04/19/solution-a-start-job-is-running-for-hold-until-boot-finishes-up-ubuntu/
 
 https://blog.csdn.net/weixin_43994864/article/details/114409694
+
+## 2022.1.14 cannot auto-mount HDD
+
+after re-installing the system. should not do formatting!
+
+```shell
+fdisk /dev/sda
+# 设备不包含可识别的分区表
+mount -a
+# mount: /home: wrong fs type, bad option, bad superblock on /dev/sda, missing codepage or helper program, or other error.
+fsck -y /dev/sda
+# /dev/sda：没有问题
+```
+
+同时无法通过右上角来关机，只能cmd！sudo输完密码后面还要输！
+
+```shell
+# check all 
+fdisk -l
+df -h
+lsblk
+# check uuid
+blkid /dev/sda
+```
+
+https://www.cgsecurity.org/wiki/TestDisk
+
+```shell
+sudo apt-get install testdisk
+testdisk
+```
+
+> analyse，没找到分区表；然后quick search，看到
+>
+> ![make-gpt](E:\GitHub_repo\notes\techniques\images\22.1.14-make-gpt.jpg)
+>
+> Enter，发现ok，直接write，重启
+>
+> > https://blog.csdn.net/weixin_34418883/article/details/92753433  删了root也能修复？？
+
+出了新问题
+
+> ```shell
+> root@gxf-workstation:/home/gxf# fsck -y /dev/sda
+> fsck，来自 util-linux 2.34
+> e2fsck 1.45.5 (07-Jan-2020)
+> ext2fs_open2: 超级块中的幻数有错
+> fsck.ext2：超级块无效， 尝试备份块
+> /dev/sda 未被彻底卸载，强制进行检查。
+> 第 1 步：检查inode、块和大小
+> ```
+>
+> 修复完了又恢复最开始的情况。。不要用testdisk了！
+>
+> ```shell
+> fdisk /dev/sda
+> # 主 GPT 表损坏，但备份似乎正常，将使用它
+> p
+> # 分区 1 未起始于物理扇区边界。
+> ```
+
+> gdisk: GPT fdisk
+>
+> 报错信息大致为：
+>
+> ![22.1.14-gdisk1](E:\GitHub_repo\notes\techniques\images\22.1.14-gdisk1.jpg)
+>
+> ```
+> Problem: The CRC for the main partition table is invalid. This table may be
+> corrupt. Consider loading the backup partition table ('c' on the recovery &
+> transformation menu). This report may be a false alarm if you've already
+> corrected other problems.
+> 
+> Caution: Partition 1 doesn't begin on a 8-sector boundary. This may
+> result in degraded performance on some modern (2009 and later) hard disks.
+> ```
+>
+> 操作：用备份的partiation table覆盖main pt
+>
+> ```shell
+> gdisk
+> > p
+> > w
+> > q
+> ```
+>
+> https://blog.csdn.net/liqiua/article/details/88723679
+
+> 结果：fdisk、gdisk都好了；分区 1 未起始于物理扇区边界；blkid：UUID没了，只剩sda1的？mount -a也找不到uuid；手动挂载也不行了。fdisk sda1:设备不包含可识别的分区表。df -h啥都没有
+>
+> 又testdisk一次，没变。好像sudo好了
+
+fsck之后，又变回去了。。。。。。。
+
+> reading: 超级块是什么  https://www.cnblogs.com/betterquan/p/11369364.html
+>
+> 
+
+
 
 # Other---the first time I install this
 
