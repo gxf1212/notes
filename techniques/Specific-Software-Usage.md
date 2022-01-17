@@ -201,6 +201,7 @@ a lot of fancy features: https://zxiaosi.cn/archives/cd1d42d1.html
 
 ```html
 <p>text</p>
+<p align=right>bulabula</p>
 <strong>bold text</strong>
 <u>underlined text</u>
 <li>list item</li>
@@ -406,7 +407,15 @@ TODO list:
   >
   > https://github.com/docsifyjs/docsify/issues/850
 
-> if a there’s a new version of a plug-in, how to update?  @latest
+basic problems
+
+- if a there’s a new version of a plug-in, how to update?  @latest
+
+- principle: add scripts directly, or from the `src` (they all return js script!)
+
+  so we can certainly save the long scripts in another file and call it...
+
+functions
 
 1. add things after:
 
@@ -576,7 +585,37 @@ TODO list:
     ![](https://forthebadge.com/images/badges/makes-people-smile.svg)
     <img src="https://img.shields.io/badge/version-v2.0.0-green.svg" data-origin="https://img.shields.io/badge/version-v2.0.0-green.svg" alt=""> 
 
-15. 
+15. Pagination，暂时没弄
+
+    > 在文档的最下方会展示上一个文档和下一个文档。
+
+    ```html
+    pagination: {
+      previousText: '上一章节',
+      nextText: '下一章节',
+    }
+    ```
+
+    需要引入两个 js 文件：
+
+    ```html
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+    ```
+
+16. 更新时间 https://github.com/pfeak/docsify-updated
+
+    write markdown and append to the end
+
+17. 一言开源社区 https://developer.hitokoto.cn/  https://developer.hitokoto.cn/
+
+    调节请求参数，可以选定句子范围
+
+18. 
+
+19. 
+
+其他插件：https://docsify.js.org/#/awesome?id=plugins，https://docsify.js.org/#/plugins?id=pagination
 
 #### Important notes on publishing
 
@@ -605,6 +644,8 @@ TODO list:
 
 #### other features, examples and Gitee
 
+[showcases](https://docsify.js.org/#/awesome?id=showcase)
+
 1. https://wiki.xhhdd.cc/#/
 
    她的站可学习一下。如warning框、等待信息，没找到源码。翻页见下
@@ -617,6 +658,10 @@ TODO list:
 
    - 比如vue如何换背景色
    - 如何插入文艺词句（但说实话没太多机会看到了）
+   - https://jingyan.baidu.com/article/08b6a591afce9d14a9092241.html 百度统计访问？
+   - 他自己搞的主题？https://github.com/sy-records/docsify-nightly
+   
+3. https://www.cnblogs.com/juemuren4449/p/12904699.html 
 
 - It is ridiculous that if I include a YouTube or Bilibili link in .md, I cannot deploy...No, solved
 

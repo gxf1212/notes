@@ -1,6 +1,6 @@
-This is technique study page. Click on the sidebar to start reading!
+This is MD simulation study page. Click on the sidebar to select a theme and start reading!
 
-> Maybe I'll write something here...
+The content is continuously being updated.
 
 #### tutorial share
 

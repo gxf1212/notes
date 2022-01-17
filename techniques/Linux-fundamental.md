@@ -1356,6 +1356,8 @@ https://blog.csdn.net/weixin_43994864/article/details/114409694
 
 after re-installing the system. should not do formatting!
 
+所以不要选那个重装系统，而要选“其他选项”。。？
+
 ```shell
 fdisk /dev/sda
 # 设备不包含可识别的分区表
@@ -1368,6 +1370,7 @@ fsck -y /dev/sda
 同时无法通过右上角来关机，只能cmd！sudo输完密码后面还要输！
 
 ```shell
+# 常用
 # check all 
 fdisk -l
 df -h
@@ -1446,12 +1449,42 @@ testdisk
 fsck之后，又变回去了。。。。。。。
 
 > reading: 超级块是什么  https://www.cnblogs.com/betterquan/p/11369364.html
+
+```shell
+fdisk -l # 只有sda1且分区 1 未起始于物理扇区边界（不管）；主 GPT 表损坏，但备份似乎正常，将使用它。
+df -h # 没有HDD的信息
+lsblk # 正常
+blkid /dev/sda # 正常
+parted -l # 当然正常
+fdisk /dev/sda
+gdisk /dev/sda # same as before
+# 用系统工具查看，发现是未分配空间？？
+```
+> 用备份的partiation table覆盖main pt。recovery--load backup
 >
-> 
+> ```shell
+> gdisk
+> > r
+> > c
+> > Y
+> ```
+>
+> the same as yesterday...
+
+尝试：每次开机自动运行脚本手动挂载/home。不可，因为可能自己就坏了，需要修复。。（放一会自己就会坏）
+
+而且无法自动在输入流输入sudo或su的密码。。
+
+似乎加载备份后更好？
+
+> 用fdisk更改uuid失败，却得知了sda的uuid，此时已经变成奇怪的东西，仍然找不到
+
 
 
 
 # Other---the first time I install this
+
+not helpful now
 
 > 既然可以制定路径，那为啥不新建一个文件夹呢？以后还是直接在programfiles吧
 

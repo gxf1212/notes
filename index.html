@@ -30,16 +30,18 @@
       coverpage: ['/'],
       loadNavbar: true,
       loadSidebar: true, // 加载自定义侧边栏
+      auto2top: true, // 切换页面后是否自动跳转到页面顶部
       maxLevel: 2, // 默认情况下会抓取文档中所有标题渲染成目录，可配置最大支持渲染的标题层级。
       subMaxLevel: 6, // 生成目录的最大层级
       mergeNavbar: true, // 小屏设备下合并导航栏到侧边栏
+      routerMode: 'history', // 设置为 history 之后，浏览器链接里不会出现 #
       alias: { // 定义路由别名，可以更自由的定义路由规则。 支持正则
         '/.*/_sidebar.md': '/_sidebar.md',//防止意外回退
         '/.*/_navbar.md': '/_navbar.md'
       },
       search: {
         placeholder: '搜索',
-        noData: '找不到结果!',
+        noData: '什么鬼？根本没有啊！',
         depth: 3
       },
       notFoundPage: '/utils/_my404.md',
@@ -71,14 +73,11 @@
         },
       // disqus: 'shortname', //comment
       relativePath: true,
-      //renderer: {
-       // image: function(href, title, text) {
-      //  // 按照原来的渲染 img
-       // var image_html = this.origin.image.apply(this, arguments)
-       // // 用 figure 包一下图片，实现居中
-      // return '<figure>' + image_html + '<figcaption>' + text +
-       //'</figcaption></figure>'}
-     // },
+      // update time
+      timeUpdater: {
+        text: "---\n<p align=right>last update time: {docsify-updated}</p>",
+        formatUpdated: "{YYYY}/{MM}/{DD}",
+      },
     }
   </script>
   <!-- Docsify v4 -->
@@ -88,6 +87,8 @@
   <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
   <!-- 字数统计 -->
   <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
+  <!-- 更新时间 -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-updated@1/src/time-updater.min.js"></script>
   
   <!-- equation -->
   <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
@@ -99,6 +100,7 @@
   <script src="//unpkg.com/prismjs/components/prism-bash.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-python.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-markdown.js"></script>
+
   <!-- usual markdown plug-in-->
   <!-- <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script> -->
   <script src="//unpkg.com/docsify-fontawesome/dist/docsify-fontawesome.min.js"></script>
@@ -112,6 +114,7 @@
   <script src="//cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@latest/js/click_heart.js"></script> 
   <!-- 页脚 -->
   <script src="//unpkg.com/docsify-footer-enh/dist/docsify-footer-enh.min.js"></script>
+
   <!-- comment -->
   <!-- <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/disqus.min.js"></script> -->
   <!-- lower right cartoon girl -->
@@ -157,42 +160,6 @@
     });
   </script>
   <!-- 添加网站运行时间统计 -->
-  <script language=javascript>
-  function siteTime() {
-     window.setTimeout("siteTime()", 1000);
-     var seconds = 1000;
-     var minutes = seconds * 60;
-     var hours = minutes * 60;
-     var days = hours * 24;
-     var years = days * 365;
-     var today = new Date();
-     var todayYear = today.getFullYear();
-     var todayMonth = today.getMonth() + 1;
-     var todayDate = today.getDate();
-     var todayHour = today.getHours();
-     var todayMinute = today.getMinutes();
-     var todaySecond = today.getSeconds();
-     /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
-     year - 作为date对象的年份，为4位年份值
-     month - 0-11之间的整数，做为date对象的月份
-     day - 1-31之间的整数，做为date对象的天数
-     hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
-     minutes - 0-59之间的整数，做为date对象的分钟数
-     seconds - 0-59之间的整数，做为date对象的秒数
-     microseconds - 0-999之间的整数，做为date对象的毫秒数 */
-
-       /* 建站时间 */
-     var t1 = Date.UTC(2021, 11, 27, 00, 32, 00); 
-     var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-     var diff = t2 - t1;
-     var diffYears = Math.floor(diff / years);
-     var diffDays = Math.floor((diff / days) - diffYears * 365);
-     var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-     var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
-     var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
-     document.getElementById("sitetime").innerHTML = " 小破站已经摸鱼了 " + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分 " + diffSeconds + " 秒 ";
-    }
-  siteTime();
-  </script>
+<script src="./utils/sitetime.js"></script>
 </body>
 </html>

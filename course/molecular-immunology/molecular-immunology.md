@@ -2473,6 +2473,8 @@ Mechanisms are:
 
 ## Establishment and break
 
+建立和打破
+
 ### Establishment/Induction
 
 建立免疫耐受, for self Ag, [hypersensitivity](#Chapter-14-Hypersensitivity) or transplant. 
@@ -2515,23 +2517,105 @@ Mechanisms are:
 
 # Chapter 14 Hypersensitivity
 
+Hypersensitivity is abnormal adaptive immune responses that cause physiological dysfunction and tissue/cell damage when we're encountering some of the antigens.
+
+## Type I hypersensitivity
+
+immediate hypersensitivity (速发型超敏反应) or allergy (过敏反应)
+
+### Components
+
+- allergen (变应原): antigens that induce IgE production and type I hypersensitivity.
+
+  > through all pathways can me meet allergens
+  >
+  > - 呼吸道：花粉，粉尘
+  > - 消化道：蛋，奶，海鲜
+  > - 皮肤：化妆品，染发剂
+  > - 其他：药物，金属  
+
+- IgE: the lowest Ab in serum
+
+- receptor: FcεR
+
+  > - FcεR I: high affinity, high expression in mastocytes and basophils
+  > - FcεR II: low affinity, universally expressed
+  > - eosinophils?
+
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\14-cells.png" alt="14-cells" style="zoom:40%;" />
+
+<center>left: basophil; right: mastocyte</center>
+
+### Sensitization phase
+
+致敏阶段
+
+When the allergen enters our body the first time,
+
+- IgE expression: Ag activates B cell to produce specific IgE
+- sensitization: IgE binds the receptors on the two cells, and stays there
+
+```mermaid
+graph TB
+a[allergen] --> b[B cell] --class switching--> IgE
+a --> Th2 --differentiation--> mastocytes --FcεR I--o IgE
+Th2 --differentiation--> eosinophils --FcεR I--o IgE
+```
+
+recall [chapter 11](#Other-Th-cell-and-effects)
+
+### Action phase
+
+发敏阶段，但没找到翻译
+
+When the allergen enters our body again,
+
+- IgE cross-linking: upon IgE binding the allergen, multiple FcεR molecules form a complex and send the activation signal through its cytosolic ITAMs.
+
+  > a single FcεR cannot transduce the signal
+  >
+  > abnormal activation: anti-IgE Ab; anti FcεR Ab
+
+- degranulation: the effect is, granules of inflammatory factors is released
+
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\14-t1-famin.png" alt="14-t1-famin" style="zoom:50%;" />
+
+### Release of bioactive factors
 
 
 
 
 
+summary
+
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\14-t1.png" alt="14-t1" style="zoom:50%;" />
+
+## Type II
 
 
 
 
 
+## Type III
 
 
 
 
 
+## Type IV
 
 
+
+
+
+Summary of four types
+
+|      | sensitization phase |      |      |      |
+| ---- | ------------------- | ---- | ---- | ---- |
+|      |                     |      |      |      |
+|      |                     |      |      |      |
+|      |                     |      |      |      |
+|      |                     |      |      |      |
 
 
 
