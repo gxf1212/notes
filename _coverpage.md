@@ -1,4 +1,4 @@
-# Notes Site
+# Notes
 
 <!-- ![logo](./_media/face.jpg ":size=20%") -->
 

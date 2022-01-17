@@ -196,19 +196,30 @@ a lot of fancy features: https://zxiaosi.cn/archives/cd1d42d1.html
 
 2. the first subtitle is not included into the sidebar
 
-
 #### something html
 
+杂记
+
 ```html
-<p>text</p>
-<p align=right>bulabula</p>
-<strong>bold text</strong>
-<u>underlined text</u>
-<li>list item</li>
+<p> text </p>
+<p align=right> bulabula </p>
+<strong> bold text </strong>
+<u> underlined text </u>
+<li> list item </li>
 <!-- comment here -->
+<span> 标签被用来组合文档中的行内元素 </span>
+<hr> 标签定义 HTML 页面中的主题变化(比如话题的转移),并显示为一条水平线。
 ```
 
+1. `<a>` 标签的 target 属性规定在何处打开链接文档 https://www.w3school.com.cn/tags/att_a_target.asp
 
+#### something JavaScript
+
+1. https://blog.csdn.net/sally18/article/details/84326528
+
+   点击事件
+
+2. 
 
 ### What can docsify do
 
@@ -349,7 +360,7 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
   > relative path
   >
-  > https://angry-swanson-b4e47b.netlify.app/zh-cn/configuration?id=relativepath no use
+  > https://docsify.js.org/#/zh-cn/configuration?id=relativepath no use
   >
   > <font color=red>世界上怎么会有这么傻逼的设计？！！专门跟Typora过不去吗？？不得不改变创作方式！</font>那这话也不合适
   >
@@ -407,7 +418,9 @@ TODO list:
   >
   > https://github.com/docsifyjs/docsify/issues/850
 
-basic problems
+##### basic problems
+
+refer to [html](#something-html)
 
 - if a there’s a new version of a plug-in, how to update?  @latest
 
@@ -415,7 +428,30 @@ basic problems
 
   so we can certainly save the long scripts in another file and call it...
 
-functions
+  eg:
+
+  ```html
+  <script src="./utils/sitetime.js"></script>
+  ```
+
+- there are some ways to define sth with your code
+
+  ```html
+  document.getElementById("sitetime").innerHTML = "bulabula"  # defined in .js file
+  ```
+  
+  once get an element, we can put it in any tag, just by refering to `id`:
+
+  ```html
+  <span id="sitetime"></span> # in footer['copy']
+  <p id="sitetime"></p> # add a linebreak..
+  ```
+  
+  
+  
+- you should not 
+
+##### functions
 
 1. add things after:
 
@@ -506,6 +542,21 @@ functions
 
     阅读进度条[docsify-progress ](https://github.com/HerbertHe/docsify-progress) 这个插件与字数插件不兼容
 
+12. sitetime.js：运行时间统计
+
+13. 辅以页脚系统 https://github.com/erickjx/docsify-footer-enh
+
+    - do not support `\n`, only html `<br/>`
+
+    - params
+      | params | content                                               |
+      | ------ | ----------------------------------------------------- |
+      | copy   | Copyright text to display (just write your main text) |
+      | auth   | Author text                                           |
+      | style  | Footer CSS inline style                               |
+      | class  | Footer Classes to include                             |
+      | pre    | Html pre footer text                                  |
+    
 12. https://blog.csdn.net/weixin_44897405/article/details/103214635
 
     这个东西叫做：live2d看板娘。https://github.com/stevenjoezhang/live2d-widget
@@ -585,7 +636,7 @@ functions
     ![](https://forthebadge.com/images/badges/makes-people-smile.svg)
     <img src="https://img.shields.io/badge/version-v2.0.0-green.svg" data-origin="https://img.shields.io/badge/version-v2.0.0-green.svg" alt=""> 
 
-15. Pagination，暂时没弄
+17. Pagination，暂时没弄
 
     > 在文档的最下方会展示上一个文档和下一个文档。
 
@@ -603,17 +654,32 @@ functions
     <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
     ```
 
-16. 更新时间 https://github.com/pfeak/docsify-updated
+18. 更新时间 https://github.com/pfeak/docsify-updated
 
     write markdown and append to the end
 
-17. 一言开源社区 https://developer.hitokoto.cn/  https://developer.hitokoto.cn/
+19. 一言开源社区 https://developer.hitokoto.cn/ 
 
-    调节请求参数，可以选定句子范围
+    一般方法：https://www.jianshu.com/p/3a58d9a796c3，不需要另外那两个脚本
 
-18. 
+    很好，coverpage不会有。
 
-19. 
+    放在哪呢？docsify的这些主题，往下划，header栏就看不到了
+
+    自定义：
+
+    - 自己写点话？如何查，比如所有关于三体的
+    - 格式：改js？只能控制show出哪些文字，没法搞局部下划线啥的
+    - 调节请求参数，可以选定句子范围
+    - token？
+
+    其他
+
+    https://www.jinrishici.com/doc/ 今日诗词API
+
+20. 
+
+21. 
 
 其他插件：https://docsify.js.org/#/awesome?id=plugins，https://docsify.js.org/#/plugins?id=pagination
 
@@ -644,7 +710,7 @@ functions
 
 #### other features, examples and Gitee
 
-[showcases](https://docsify.js.org/#/awesome?id=showcase)
+[showcases](https://docsify.js.org/#/awesome?id=showcase)  [hitokoto links](https://hitokoto.cn/friendship)
 
 1. https://wiki.xhhdd.cc/#/
 

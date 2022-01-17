@@ -21,5 +21,6 @@ other TODOs:
 - [ ] beautify the theme (sidebar?), try interesting plugins
 - [ ] correct figure paths and LaTeX formula
 - [ ] try to include mindmaps
+- [ ] English or Chinese?
 - [ ] build another site to share large amount of textbooks below with GitHub or Gitee (any suggestions?)
 
