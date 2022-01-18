@@ -1720,7 +1720,7 @@ Not included in slides, but in the textbook. Helps to understand Chapter 10 and 
 
 You may remember in that figure in [chapter 8](#Chapter-8-Innate-Immune-System), T and B cell have a common ancester, the differentiation of which depends on Notch1 presence.
 
-<img src="../../course\molecular-immunology\molecular-immunology.assets\10-2-source.png" alt="10-2-source" style="zoom:40%;" />
+<img src="../../course\molecular-immunology/molecular-immunology.assets/10-2-source.png" alt="10-2-source" style="zoom:40%;" />
 
 ## B cell
 
@@ -1739,7 +1739,7 @@ Gene recombination: gene segments rearrange.
 
 > The real structure
 >
-> <img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-b-gene.png" alt="10-2-b-gene" style="zoom:70%;" />
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-2-b-gene.png" alt="10-2-b-gene" style="zoom:70%;" />
 
 - C genes are joined only after VDJ (VJ) genes have combined
 
@@ -1767,7 +1767,7 @@ Gene recombination: gene segments rearrange.
 
   > an estimate. (add κ and λ) multiply these numbers!
   >
-  > <img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-diversity.png" alt="10-2-diversity" style="zoom:80%;" />
+  > <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-2-diversity.png" alt="10-2-diversity" style="zoom:80%;" />
 
 - junctional diversity: at the joining end, bases might be randomly added (by TdT) or deleted (not necessarily multiples of three)
 
@@ -1789,7 +1789,7 @@ Gene recombination: gene segments rearrange.
 
 #### In bone marrow: Ag-independent
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-bdev.png" alt="10-2-bdev" style="zoom:60%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-2-bdev.png" alt="10-2-bdev" style="zoom:60%;" />
 
 #### B Positive selection
 
@@ -1826,7 +1826,7 @@ If immature B cell (IgM) encounters self-Ag, it undergoes
 
 #### Basic route and TCR gene recombination
 
-![10-2-tdev](E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-tdev.png)
+![10-2-tdev](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-2-tdev.png)
 
 - (祖) pre-T cell: first to express CD3
 - (前) pro-T cell: become double positive
@@ -1839,7 +1839,7 @@ If immature B cell (IgM) encounters self-Ag, it undergoes
 - α: V-J like Ab light chain; β: V with D-J, like Ag heavy chain
 - combinational/junctional diversity, higher probability of insertion than Ig
 
-<img src="../../course\molecular-immunology\molecular-immunology.assets\10-2-tcr-recom.png" alt="10-2-tcr-recom" style="zoom:55%;" />
+<img src="../../course\molecular-immunology/molecular-immunology.assets/10-2-tcr-recom.png" alt="10-2-tcr-recom" style="zoom:55%;" />
 
 #### T Positive selection
 
@@ -1878,7 +1878,7 @@ those which bind too strongly to self pMHC complex on the DC (macrophage) is cle
 
 T cells that moderatly binds then become mature T cell and enter the periphery.
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\10-2-t-sele.png" alt="10-2-t-sele" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-2-t-sele.png" alt="10-2-t-sele" style="zoom:50%;" />
 
 ### T cell Categories
 
@@ -2295,13 +2295,13 @@ Most that don't accomplish these processes will be cleared.
 
 Cell death depends on Fas (CD95) from Tfh. Need a strong BCR signal (Ag) AND strong Tfh help in order to overcome this death signal.
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\12-affinity.png" alt="12-affinity" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-affinity.png" alt="12-affinity" style="zoom:50%;" />
 
 ##### Ab class switching
 
 抗体类型转换：B细胞产生多种类型的抗体。其本质是在Th细胞的辅助下，V区与不同C区基因拼接，然后转录，翻译形成的。[参考视频](https://www.bilibili.com/video/BV1iL4y1b7gC/)
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\12-class-switching.png" alt="12-class-switching" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-class-switching.png" alt="12-class-switching" style="zoom:50%;" />
 
 - No variable region changed, only C
 - S region: switch region. S<sub>μ</sub> will be followed by the S region, then C region of the chain you need.
@@ -2460,7 +2460,7 @@ Mechanisms are:
 
 - **clonal anergy**: the same, but some are always in existence. 
 
-  >clonal ignorance/anergy might be reversed and cause autoimmunity
+  > clonal ignorance/anergy might be reversed and cause autoimmunity
 
 - **regulatory cells**: Treg, regulatory B cell/DC, etc.
 
@@ -2534,17 +2534,28 @@ immediate hypersensitivity (速发型超敏反应) or allergy (过敏反应)
   > - 皮肤：化妆品，染发剂
   > - 其他：药物，金属
 
-- IgE: the lowest Ab in serum
+- IgE: the lowest Ab in serum, concentrated in the tissues.
+
+  <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/14-ige.png" alt="14-ige" style="zoom:30%;" />
+
+  'shrimp-like' structure
+
+  | Ab   | IgE  | IgG  |
+  | ---- | ---- | ---- |
+  |      |      |      |
+  |      |      |      |
+  |      |      |      |
 
 - receptor: FcεR
 
   > - FcεR I: high affinity, high expression in mastocytes and basophils; 
   >   - slightly less expression in eosinophils
+  >   - IgE won't disassociate from it
   > - FcεR II: low affinity, universally expressed. CD23
   >   - on B cell, IgE-Ag complex reduces IgE production
   >   - but liquid phase CD23 binds B cell CD21 to enhance IgE production...
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\14-cells.png" alt="14-cells" style="zoom:40%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/14-cells.png" alt="14-cells" style="zoom:40%;" />
 
 <center>left: basophil; right: mastocyte</center>
 
@@ -2582,7 +2593,7 @@ When the allergen enters our body **again**,
 - degranulation: the effect is, granules of inflammatory factors is released
 
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\14-t1-famin.png" alt="14-t1-famin" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/14-t1-famin.png" alt="14-t1-famin" style="zoom:50%;" />
 
 ### Release of bioactive mediators
 
@@ -2612,7 +2623,7 @@ When the allergen enters our body **again**,
 
 a simple version of summary
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\14-t1.png" alt="14-t1" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/14-t1.png" alt="14-t1" style="zoom:50%;" />
 
 > 以下，了解？
 
@@ -3017,21 +3028,83 @@ Features
 
   > 机会性病原体引发的感染。这些病原体寄生于免疫功能正常的健康宿主时不致病，但会在宿主出现免疫缺陷时入侵宿主。
 
-- 
+- dysfunction, prone to cancer
 
-- 
-
-- primary: genetic predisposition
+- primary immunodeficiency: genetic predisposition
 
 ## Primary immunodeficiency
 
 原发性免疫缺陷
 
+loss of function, usually in infants, causes early death
+
+
+
+## Acquired immunodeficiency
 
 
 
 
-Acquired
+
+# Additional chapter: autoimmunity
+
+自身免疫
+
+tolerance to self
+
+## Factors and mechanisms
+
+### Factors
+
+#### Antigens
+
+- Antigens in immunologically privileged site. 
+
+  secluded/sequestered antigen (隐蔽/隔离抗原), proteins in those sites like crystallin, never get tolerated, causing a response (to eyes)
+
+- Alternation of self antigen (自身抗原改变)
+
+  e.g. mutation caused by physical/chemical factors, or chemical binding. 类风湿
+
+- Molecular mimicry (分子模拟)
+
+  pathogens having similar epitopes as ours
+
+- Epitope spreading (表位扩展)
+
+  cells that target cryptic epitopes escape from negative selection. e.g. 系统性红斑狼疮
+
+  > primary(原发)/dominant(显性) epitope: the first to induce a response
+  >
+  > secondary(继发)/cryptic(隐形) epitope: buried or low content
+
+#### Genetics
+
+- MHC II (like HLA-DR3/4) fails the negative selection, thus autoreactive T cells survive.
+
+- or they helps with molecular mimicry
+
+- deficiency in genes of complement components, like C1q, C4
+
+  > harder to sweep away Ag-Ab complex, continuous stimulation
+
+#### Other
+
+- sex hormone
+- age
+- environment
+
+### Mechanisms of abnormal tolerance
+
+- abnormal negative selection or AICD. e.g. deficiency in Fas, FasL, AIRE gene
+
+- breaking [immunological ignorance](#Peripheral-tolerance) (low conc Ag)
+
+  > e.g. infected DC, polyclonal Ag, TLR activation (clearance of apoptotic debris)
+  
+  
+
+
 
 
 
