@@ -1,8 +1,8 @@
-- [Linux技术学习类](/techniques/summary.md)
+- [Linux技术学习类](/techniques/README.md)
   - [Linux基础](/techniques/Linux-fundamental.md)
   - [软件安装](/techniques/Prepare-for-the-computer.md)
   - [软件操作](/techniques/Specific-Software-Usage.md)
-- [MD学习类](/MD/summary.md)
+- [MD学习类](/MD/README.md)
   - [虚拟筛选和Gromacs基础操作](/MD/UROPS-run-and-result.md)
   - [NAMD/VMD和FEP计算基本操作（待完成）](/MD/FYP-notes.md)
   - [MD各软件教程和网络资料学习](/MD/MD-tutorials-all.md)
@@ -14,7 +14,7 @@
   - [其他](/course/other.md)
     - [进化生物学](/course/other/evolutional-bio.md)
     - [遗传学](/course/other/genetics.md)
-- Links
+- 友情链接
   - [西北工业大学附属中学](http://www.xgdfz.com/)
   - [西安交通大学钱学森学院](http://bjb.xjtu.edu.cn/)
   - [浙江大学定量生物学中心](http://iqb.zju.edu.cn/)
