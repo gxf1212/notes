@@ -644,6 +644,8 @@ refer to [html](#something-html)
     pagination: {
       previousText: '上一章节',
       nextText: '下一章节',
+      crossChapter: true,
+      crossChapterText: true,
     }
     ```
 
@@ -666,10 +668,15 @@ refer to [html](#something-html)
 
     放在哪呢？docsify的这些主题，往下划，header栏就看不到了
 
+    https://hitokoto.cn/dashboard#/ 控制台，看、提交句子的
+
     自定义：
 
-    - 自己写点话？如何查，比如所有关于三体的
+    - 自己写点话？审核要一年？？
+    - 如何查，比如所有关于三体的
     - 格式：改js？只能控制show出哪些文字，没法搞局部下划线啥的
+      - 解决破折号前空格
+
     - 调节请求参数，可以选定句子范围
     - token？
 
@@ -708,6 +715,44 @@ refer to [html](#something-html)
 
 - 
 
+SEO：search engine optimization
+
+hexo+github pages个人博客做百度、谷歌、bing等搜索引擎收录
+
+https://reiner.host/posts/2262a2b8.html
+
+hexo生成sitemap？
+
+https://cloud.tencent.com/developer/article/1736970
+
+提交你的域名
+
+https://search.google.com/search-console/welcome
+
+> 请求编入索引：已将网址添加到优先抓取队列中。 多次提交同一网页并不能改变该网页的队列顺序或优先级
+
+https://ziyuan.baidu.com/site/index#/
+
+百度资源
+
+https://github.com/docsifyjs/docsify/issues/656
+
+有些代码是否可用？
+
+https://github.com/lufei/notes
+
+
+
+https://code.google.com/archive/p/sitemap-generators/wikis/SitemapGenerators.wiki
+
+Google提供的生成器
+
+生成工具很多，感觉docsify本身不适合。。还是参考已有的
+
+>https://neilpatel.com/blog/xml-sitemap/
+
+
+
 #### other features, examples and Gitee
 
 [showcases](https://docsify.js.org/#/awesome?id=showcase)  [hitokoto links](https://hitokoto.cn/friendship)
@@ -730,86 +775,38 @@ refer to [html](#something-html)
 3. https://www.cnblogs.com/juemuren4449/p/12904699.html 
 
 - It is ridiculous that if I include a YouTube or Bilibili link in .md, I cannot deploy...No, solved
-
 - markdown based wiki system http://dynalon.github.io/mdwiki/#!index.md
-
 - 几（十）款制作帮助文档的工具汇总 https://blog.mimvp.com/article/38752.html
+- 快写鸭：多平台同时发布
+- 其他：https://mubu.com/home 做大纲、思维导图的，挺漂亮
+- 
+- 
 
-- sfd
+##### 其他
 
-  ```html
-  // 分页导航插件
-  pagination: {
-  	previousText: '上一卷',
-  	nextText: '下一卷',
-  	crossChapter: true,
-  	crossChapterText: true
-  },
-  <!-- 分页导航 -->
-  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
-  ```
+内容分发网络 (Content delivery network) 是指一种透过互联网互相连接的电脑网络系统，利用最靠近每位用户的服务器，更快、更可靠地将音乐、图片、视频、应用程序及其他文件发送给用户，来提供高性能、可扩展性及低成本的网络内容传递给用户。
 
-  其他：https://mubu.com/home 做大纲、思维导图的，挺漂亮
+unpkg is **a free content delivery network (CDN)** that automatically distributes public packages published to npm. unpkg partners with cloudfare and heroku to make this automatic distributing possible
 
-- SEO：search engine optimization
 
-  hexo+github pages个人博客做百度、谷歌、bing等搜索引擎收录
 
-  https://reiner.host/posts/2262a2b8.html
+不适用于xmind的思维导图展示，写代码修改？
 
-  hexo生成sitemap？
+https://juejin.cn/post/7000874049333100551
 
-  https://cloud.tencent.com/developer/article/1736970
+https://zhuanlan.zhihu.com/p/352795634
 
-  提交你的域名
 
-  https://search.google.com/search-console/welcome
 
-  > 请求编入索引：已将网址添加到优先抓取队列中。 多次提交同一网页并不能改变该网页的队列顺序或优先级
+mermaid语法
 
-  https://ziyuan.baidu.com/site/index#/
+特殊符号，要加引号才显示
 
-  百度资源
+https://github.com/mermaid-js/mermaid/issues/213
 
-  https://github.com/docsifyjs/docsify/issues/656
 
-  有些代码是否可用？
 
-  https://github.com/lufei/notes
 
-  
-
-  https://code.google.com/archive/p/sitemap-generators/wikis/SitemapGenerators.wiki
-
-  Google提供的生成器
-
-  生成工具很多，感觉docsify本身不适合。。还是参考已有的
-
-  >https://neilpatel.com/blog/xml-sitemap/
-
-  
-
-  ##### 其他
-
-  内容分发网络 (Content delivery network) 是指一种透过互联网互相连接的电脑网络系统，利用最靠近每位用户的服务器，更快、更可靠地将音乐、图片、视频、应用程序及其他文件发送给用户，来提供高性能、可扩展性及低成本的网络内容传递给用户。
-
-  unpkg is **a free content delivery network (CDN)** that automatically distributes public packages published to npm. unpkg partners with cloudfare and heroku to make this automatic distributing possible
-
-  
-
-  不适用于xmind的思维导图展示，写代码修改？
-
-  https://juejin.cn/post/7000874049333100551
-
-  https://zhuanlan.zhihu.com/p/352795634
-
-  
-
-  mermaid语法
-
-  特殊符号，要加引号才显示
-
-  https://github.com/mermaid-js/mermaid/issues/213
 
 
 ## Build Hexo Pages (not organized yet)

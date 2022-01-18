@@ -165,8 +165,8 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 
 > questions
 >
-> - 你知道白血病和淋巴瘤的区别吗？  
-> - 胸腺退化是否会引起免疫功能低下？  
+> - 你知道白血病和淋巴瘤的区别吗？
+> - 胸腺退化是否会引起免疫功能低下？
 > - position of these organs?
 >
 > 思考与小结
@@ -174,7 +174,7 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 > - 免疫系统的基本功能是什么？
 > - 免疫系统是怎样工作的？
 > - 免疫系统是怎样构成的？
-> - 什么是淋巴细胞归巢与再循环？  
+> - 什么是淋巴细胞归巢与再循环？
 
 
 
@@ -407,7 +407,7 @@ general understanding
 >3. 载体效应，交叉反应
 > 4. 表位及表位的分类，表位与抗原的关系
 >5. 常见的抗原的分类方法
-> 6. 什么是超抗原  
+> 6. 什么是超抗原
 
 
 
@@ -531,7 +531,7 @@ Ab can also be an antigen. Three types of epitope:
   
     > see chapter 10
   
-- 穿过胎盘（IgG）与黏膜（分泌型 IgA）  
+- 穿过胎盘（IgG）与黏膜（分泌型 IgA）
 
 ## Characteristics of several classes of Ab
 
@@ -647,7 +647,7 @@ at DNA level, irreversible, from IgM to G to ...
 > 2. 各型抗体的特点是什么？
 > 3. 什么是单克隆抗体？什么是多克隆抗体？
 > 4. 杂交瘤技术的基本原理是什么？
-> 5. 抗体是如何被改造的？  
+> 5. 抗体是如何被改造的？
 
 
 
@@ -665,7 +665,7 @@ at DNA level, irreversible, from IgM to G to ...
 > 1. 新鲜的霍乱弧菌抗血清与细菌混合后可以溶解细菌
 > 2. 对抗血清加热后丧失溶菌能力
 > 3. 加热后的抗血清补充新鲜血清后可以恢复溶菌能力
-> 4. 不含抗体的新鲜血清不具有溶菌的能力。  
+> 4. 不含抗体的新鲜血清不具有溶菌的能力。
 
 ### Components
 
@@ -1082,7 +1082,7 @@ Some AAs are recognized by MHC and some TCR.
    
    利用HLA的多态性（但不会变）进行亲子鉴定和身份确认
    
-5. HLA与新型疫苗的开发  
+5. HLA与新型疫苗的开发
 
 ## Summary
 
@@ -1250,7 +1250,7 @@ balances tolerance and response
   - 提供营养、免疫防御（如分泌毒素），帮助塑造了免疫系统
 
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-skin.jpg" alt="8-skin"  /><img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-mucosa.png" alt="8-skin" style="zoom:70%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-skin.jpg" alt="8-skin"/><img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-mucosa.png" alt="8-skin" style="zoom:70%;" />
 
 <center>left: langhans cell in the skin; right: mucosa distribution</center>
 
@@ -1468,7 +1468,7 @@ I: innate; A: adaptive
      - 作用机制
   3. 固有免疫分子
 - 固有免疫的特点
-- 固有免疫应答的过程及其与适应性免疫应答的关系  
+- 固有免疫应答的过程及其与适应性免疫应答的关系
 
 
 
@@ -2281,7 +2281,7 @@ All these are Ag and Th cell dependent!
 
 ##### Somatic hypermutation
 
-体细胞高频突变  
+体细胞高频突变
 
 BCR genes gain mutations highly frequently: $10^{-3}$ in Fv!
 
@@ -2532,15 +2532,17 @@ immediate hypersensitivity (速发型超敏反应) or allergy (过敏反应)
   > - 呼吸道：花粉，粉尘
   > - 消化道：蛋，奶，海鲜
   > - 皮肤：化妆品，染发剂
-  > - 其他：药物，金属  
+  > - 其他：药物，金属
 
 - IgE: the lowest Ab in serum
 
 - receptor: FcεR
 
-  > - FcεR I: high affinity, high expression in mastocytes and basophils
-  > - FcεR II: low affinity, universally expressed
-  > - eosinophils?
+  > - FcεR I: high affinity, high expression in mastocytes and basophils; 
+  >   - slightly less expression in eosinophils
+  > - FcεR II: low affinity, universally expressed. CD23
+  >   - on B cell, IgE-Ag complex reduces IgE production
+  >   - but liquid phase CD23 binds B cell CD21 to enhance IgE production...
 
 <img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\14-cells.png" alt="14-cells" style="zoom:40%;" />
 
@@ -2550,25 +2552,26 @@ immediate hypersensitivity (速发型超敏反应) or allergy (过敏反应)
 
 致敏阶段
 
-When the allergen enters our body the first time,
+When the allergen enters our body **the first time**,
 
 - IgE expression: Ag activates B cell to produce specific IgE
-- sensitization: IgE binds the receptors on the two cells, and stays there
+- sensitization: IgE binds the receptors on the three types of cells, and stays there
 
 ```mermaid
 graph TB
-a[allergen] --> b[B cell] --class switching--> IgE
+a[allergen] --> b[B cell] --class switching--> IgE[(IgE)]
 a --> Th2 --differentiation--> mastocytes --FcεR I--o IgE
+Th2 --differentiation--> basophils --FcεR I--o IgE
 Th2 --differentiation--> eosinophils --FcεR I--o IgE
 ```
 
-recall [chapter 11](#Other-Th-cell-and-effects)
+recall [chapter 11](#Other-Th-cell-and-effects) for Th2 response
 
 ### Action phase
 
 发敏阶段，但没找到翻译
 
-When the allergen enters our body again,
+When the allergen enters our body **again**,
 
 - IgE cross-linking: upon IgE binding the allergen, multiple FcεR molecules form a complex and send the activation signal through its cytosolic ITAMs.
 
@@ -2578,21 +2581,117 @@ When the allergen enters our body again,
 
 - degranulation: the effect is, granules of inflammatory factors is released
 
+
 <img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\14-t1-famin.png" alt="14-t1-famin" style="zoom:50%;" />
 
-### Release of bioactive factors
+### Release of bioactive mediators
+
+生物活性介质，没找到翻译。。
 
 
+| reaction        | early phase reaction  | late phase reaction |
+| --------------- | --------------------- | ------------------- |
+| happens after   | seconds               | 2$\sim$4 hours      |
+| lasts           | hours                 | days                |
+| type of factors | pre-synthesized       |                     |
+| main factors    | histamine,            |                     |
+| main cells      | mast cells, basophils | ensinophils         |
+|                 |                       |                     |
 
 
+- pre-synthesized factors: granular contents, released at once
 
-summary
+  > - histamine: 4 types
+  > - kininogenase (激肽原酶)
+
+- 
+
+> - granular contents (including  and proteases) 
+> - inflammatory cytokines
+> - lipid inflammatory molecules (leukotrienes and prostaglandins).
+
+a simple version of summary
 
 <img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\14-t1.png" alt="14-t1" style="zoom:50%;" />
 
+> 以下，了解？
+
+Why allergy?
+
+- genetic factors: easier to produce IgE, FcεR, to trigger Th2 response
+- environment: hygiene hypothesis, early contact with pathogens helps to produce IgG and make Th1 response
+
+### Clinical diseases
+
+#### 全身过敏性休克
+
+变应原：药物，抗血清，昆虫蛋白
+
+症状：接触抗原几分钟之内出现面色苍白，四肢发凉，紫绀，血压剧降等症状。
+
+Systemic allergic reactions can occur very rapidly and be life-threatening. They require immediate medical attention.
+
+#### 局部过敏反应
+
+##### 呼吸道过敏反应
+
+支气管哮喘、变应性鼻炎
+
+症状：血管收缩，产生粘液栓，堵塞气管
+
+变应原：花粉等。
+
+##### 消化道过敏反应
+
+如对虾，鸡蛋等食物的过敏反应
+
+症状：恶心，呕吐，腹痛等症状
+
+##### 皮肤过敏反应
+
+荨麻疹、特应性皮炎（湿疹）
+
+### Prevention and treatment
+
+#### 诊断
+
+1. 症状诊断
+2. 过敏原检测：
+   - 体内法：皮内试验，针刺试验，贴斑实验
+   - 体外法：allergen-specific IgE test
+
+#### 治疗原则
+
+1. 查清过敏原，避免接触
+
+2. 脱敏（desensitization）治疗
+
+   - 异种血清脱敏：短间隔，小剂量，多次注射。
+
+     > all granules are released, can no longer be sensitized; might be temporary
+
+   - 特异性变应原脱敏：长间隔，小剂量，反复皮下注射  
+
+     >produce IgG, inhibit switch to IgE; block the allergen; induce T<sub>reg</sub> cell
+
+#### 药物治疗
+
+1）抑制生物活性介质的合成和释放：阿司匹林（PDG<sub>2</sub>），色苷酸二钠，地塞米松
+
+2）生物活性介质作用的拮抗剂（受体）：苯海拉明，扑尔敏，异丙嗪
+
+3）对症治疗，改善效应器官的反应性（别的途径？）：肾上腺素，葡萄糖酸钙，维生素C
+
+#### 新兴疫苗治疗
+
+开发能够诱导免疫耐受的疫苗；或改变应答类型 (cytokines, Th1 response)
+
 ## Type II
 
-
+又称为细胞毒型或细胞溶解型超敏反应。当
+IgG或IgM与组织细胞表面的相应抗原或半抗
+原结合，通过激活补体，募集NK细胞，激活
+吞噬细胞，引起组织细胞损伤。  
 
 
 
@@ -2942,15 +3041,15 @@ Acquired
 
 1. 关于自身免疫，正确的说法是：
 
-   A．  自身免疫都是有害的
+   A．自身免疫都是有害的
 
-   B．  自身免疫是生理状态存在的现象，对于维持内环境的稳定具有重要意义
+   B．自身免疫是生理状态存在的现象，对于维持内环境的稳定具有重要意义
 
-   C．  自身免疫如果对组织造成持续严重的损伤，则成为自身免疫性疾病
+   C．自身免疫如果对组织造成持续严重的损伤，则成为自身免疫性疾病
 
-   D．  自身免疫有利于清除衰老、坏死的组织。
+   D．自身免疫有利于清除衰老、坏死的组织。
 
-   E．  自身免疫不产生明显的炎症
+   E．自身免疫不产生明显的炎症
 
 2. 自身抗体的致病机制包括：
 
@@ -2990,15 +3089,15 @@ Acquired
 
 5. 交感性眼炎的发生与以下哪种因素有关？
 
-   A．      隐蔽抗原的释放
+   A．隐蔽抗原的释放
 
-   B．      自身蛋白因为理化、感染等因素发生改变
+   B．自身蛋白因为理化、感染等因素发生改变
 
-   C．      分子模拟
+   C．分子模拟
 
-   D．      表位扩展
+   D．表位扩展
 
-   E．      调节性T细胞功能异常
+   E．调节性T细胞功能异常
 
 答案：
 

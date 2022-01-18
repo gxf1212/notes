@@ -13,6 +13,7 @@
   - [分子生物物理学（NUS）](/course/molecular-biophysics-NUS/LSM-3243.md)
   - [其他](/course/other.md)
     - [进化生物学](/course/other/evolutional-bio.md)
+    - [遗传学](/course/other/genetics.md)
 - Links
   - [西北工业大学附属中学](http://www.xgdfz.com/)
   - [西安交通大学钱学森学院](http://bjb.xjtu.edu.cn/)
