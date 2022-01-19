@@ -6,7 +6,7 @@ This site shows some of my notes on Linux fundamentals, software installing, mol
 
 I'm just too lazy to make things clear, so these are just what I wrote when I learned. Maybe it's mainly for synchronizing notes 2333...
 
-我的Bilibili账号：[东山月光下](https://space.bilibili.com/441196634)，定期分享结构生物学、分子动力学/统计热力学、肿瘤和免疫三大板块的完整课程、专题小知识、动画演示和前沿讲座。
+My Bilibili channel: [东山月光下](https://space.bilibili.com/441196634). from time to time, I will share complete courses, specialized mini-lecture, animated demonstrations and cutting-edge lectures in macromolecular structure study, molecular dynamics simulation/statistical thermodynamics, oncology and immunology.
 
 
 ## TOC and plans
@@ -19,6 +19,7 @@ I'm just too lazy to make things clear, so these are just what I wrote when I le
 other TODOs:
 
 - [ ] beautify the theme (sidebar?), try interesting plugins
+- [ ] make badges?
 - [ ] correct figure paths and LaTeX formula
 - [ ] try to include mindmaps
 - [ ] English or Chinese?

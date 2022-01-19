@@ -1,5 +1,5 @@
 - [Home](/_coverpage.md)
-- [Techniques study](/techniques/README.md)
+- [Techniques](/techniques/README.md)
   - [Linux basics](/techniques/Linux-fundamental.md)
   - [Installation for working](/techniques/Prepare-for-the-computer.md)
   - [Specific Tools Usage](/techniques/Specific-Software-Usage.md)

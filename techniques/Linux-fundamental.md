@@ -292,7 +292,7 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
     > see below debugging 22.1.14
 
-21. 
+21. Linux `dmesg`（英文全称：display message）命令用于显示开机信息。
 
 
 
@@ -1181,7 +1181,7 @@ cuda-->cudnn
 
 # Debugging experiences on the system
 
-## 21.2.17
+## 21.2.17 rm -rf /*
 
 what if you
 
@@ -1478,6 +1478,18 @@ gdisk /dev/sda # same as before
 似乎加载备份后更好？
 
 > 用fdisk更改uuid失败，却得知了sda的uuid，此时已经变成奇怪的东西，仍然找不到
+
+>[!NOTE]
+> 
+> `/etc/fstab` option, not 'default', but 'default**s**'!!
+
+https://qastack.cn/unix/315063/mount-wrong-fs-type-bad-option-bad-superblock
+
+
+
+
+
+
 
 
 
