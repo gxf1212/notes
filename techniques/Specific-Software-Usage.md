@@ -398,7 +398,7 @@ If you want to modify a theme, download from cdn website rather than GitHub!
   >
   > 没想到个别的（本地都）显示不了，即使那个图片确实存在
 
-#### Customize functions
+### Customize functions
 
 TODO list:
 
@@ -418,7 +418,7 @@ TODO list:
   >
   > https://github.com/docsifyjs/docsify/issues/850
 
-##### basic problems
+#### basic problems
 
 refer to [html](#something-html)
 
@@ -451,7 +451,7 @@ refer to [html](#something-html)
   
 - you should not 
 
-##### functions
+#### functions
 
 1. add things after:
 
@@ -690,7 +690,7 @@ refer to [html](#something-html)
 
 其他插件：https://docsify.js.org/#/awesome?id=plugins，https://docsify.js.org/#/plugins?id=pagination
 
-#### Important notes on publishing
+### Important notes on publishing
 
 - gitee pages 自动部署
 
@@ -753,7 +753,7 @@ Google提供的生成器
 
 
 
-#### other features, examples and Gitee
+### other features, examples and Gitee
 
 [showcases](https://docsify.js.org/#/awesome?id=showcase)  [hitokoto links](https://hitokoto.cn/friendship)
 
@@ -782,7 +782,17 @@ Google提供的生成器
 - 
 - 
 
-##### 其他
+#### Debugging
+
+##### 22.1.19
+
+local serving is fine; sidebar and navbar is missing; even we can open a note, click on any subtitle, redirected to the global README (get started).
+
+
+
+
+
+#### 其他
 
 内容分发网络 (Content delivery network) 是指一种透过互联网互相连接的电脑网络系统，利用最靠近每位用户的服务器，更快、更可靠地将音乐、图片、视频、应用程序及其他文件发送给用户，来提供高性能、可扩展性及低成本的网络内容传递给用户。
 
