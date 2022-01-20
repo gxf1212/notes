@@ -255,12 +255,13 @@ https://docsify.js.org/#/more-pages?id=nested-sidebars
 
 - `_sidebar.md`的加载逻辑是从每层目录下获取文件，如果当前目录不存在该文件则回退到上一级目录。
 - 配置`alias`字段后，所有页面都会显示项目根目录`_sidebar.md`文件的配置作为侧边栏，子目录的`_sidebar.md`文件会失效。
+- 需要在 `./docs` 目录创建 `.nojekyll` 命名的空文件，阻止 GitHub Pages 忽略命名是下划线开头的文件。
 
 it seems that bars and cover must be put in root because the subdirectories have their own...
 
 but after introducing the “sidebar collapse”, I don’t think the sidebar is messy any more. you can come back to other notes through it easily. The navbar is not used. 
 
-Also, the sidebar should be further beautified (**colored**) to clarify the file structure. And the text size?
+Also, the sidebar should be further beautified (**colored**) to clarify the file structure. And the text size in vue?
 
 
 
@@ -786,7 +787,11 @@ Google提供的生成器
 
 ##### 22.1.19
 
-local serving is fine; sidebar and navbar is missing; even we can open a note, click on any subtitle, redirected to the global README (get started).
+local serving is fine; 
+
+- sidebar and navbar is missing;
+- cannot see the cover page;
+- even we can open a note, click on any subtitle, redirected to the global README (get started).
 
 
 
