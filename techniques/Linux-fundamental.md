@@ -10,7 +10,7 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
 3. rpm包主要应用在RedHat系列包括 Fedora等发行版的Linux系统上，deb包主要应用于Debian系列包括现在比较流行的Ubuntu等发行版上。
    
-   transform .rpm to .deb: `sudo alien \*.rpm`
+   transform .rpm to .deb: `sudo alien ./*.rpm`
 
 4. It's hard to change default install directory. And I have to make a boot CD (U disk) to change the storage distribution (like when I'm installing Ubuntu, how much for root, home, swap...).
 
@@ -290,8 +290,6 @@ This is a record of my operations during 折腾ing the system, in order not to f
 22. [解决类似umount target is busy挂载盘卸载不掉问题 - Adrian·Ding - 博客园](https://www.cnblogs.com/ding2016/p/9605526.html)
 
 23. 
-
-
 
 > ### package name
 > 
@@ -1470,10 +1468,10 @@ fsck -vy /dev/sda
 You should always add `y` !!!
 
 > a lot of:
->
+> 
 > 组 #1872的可用inode计数错误（8192，实际为2021）。  
 > 处理? yes  
->
+> 
 > 组 #1872的目录计数错误（0，实际为621）  
 > 处理? yes
 
@@ -1493,14 +1491,12 @@ makes `mount -a` work fine, but after rebooting, fsck is needed again! `gdisk` s
 > 第 4 步：检查引用计数
 > 第 5 步：检查组概要信息
 > ```
->
+> 
 > [e2fsck(8): check ext2/ext3/ext4 file system](https://linux.die.net/man/8/e2fsck)
 
 no difference...
 
 > type `ls` at 主目录, I can't get what in my /sda, though the GUI works well. only after rebooting terminal.
-
-
 
 Oh! finally solved on 22.1.20!
 
