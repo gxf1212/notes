@@ -602,7 +602,7 @@ refer to [html](#something-html)
         </script>
       ```
 
-13. https://www.codenong.com/cs107071378/          https://notebook.js.org/#/
+15. https://www.codenong.com/cs107071378/          https://notebook.js.org/#/
     
     - 显示pdf？
     
@@ -623,12 +623,12 @@ refer to [html](#something-html)
     
     - 看板娘
 
-14. badge。 是用什么东西生成的吗。。
+16. badge。 是用什么东西生成的吗。。
     
     ![](https://forthebadge.com/images/badges/makes-people-smile.svg)
     <img src="https://img.shields.io/badge/version-v2.0.0-green.svg" data-origin="https://img.shields.io/badge/version-v2.0.0-green.svg" alt=""> 
 
-15. Pagination，暂时没弄
+17. Pagination，暂时没弄
     
     > 在文档的最下方会展示上一个文档和下一个文档。
     
@@ -648,11 +648,11 @@ refer to [html](#something-html)
     <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
     ```
 
-16. 更新时间 https://github.com/pfeak/docsify-updated
+18. 更新时间 https://github.com/pfeak/docsify-updated
     
     write markdown and append to the end
 
-17. 一言开源社区 https://developer.hitokoto.cn/ 
+19. 一言开源社区 https://developer.hitokoto.cn/ 
     
     一般方法：https://www.jianshu.com/p/3a58d9a796c3，不需要另外那两个脚本
     
@@ -680,9 +680,9 @@ refer to [html](#something-html)
     
     https://www.jinrishici.com/doc/ 今日诗词API
 
-18. 
+20. 
 
-19. 
+21. 
 
 其他插件：https://docsify.js.org/#/awesome?id=plugins，https://docsify.js.org/#/plugins?id=pagination
 
@@ -784,6 +784,12 @@ Google提供的生成器
 > - even we can open a note, click on any subtitle, redirected to the global README (get started).
 > 
 > solution: should make an empty file .nojekyll, or _files are ignored!
+> 
+> still not ok. should not use router mode (if you have refered to the site with # in your link, like https://gxf1212.gitee.io/notes/#/utils/about
+> 
+> why don't I use .md? because it adds an arrow in the side bar...
+> 
+> how to avoid popping out a window? write html...
 
 #### 其他
 

@@ -20,3 +20,4 @@
   - [浙江大学定量生物学中心](http://iqb.zju.edu.cn/)
   - [中国生物物理学会](https://space.bilibili.com/424091950)
   - [关于我](https://gxf1212.gitee.io/notes/#/utils/about)
+  - <a href="https://gxf1212.gitee.io/notes/#/utils/about" target="_self">关于我</a>
