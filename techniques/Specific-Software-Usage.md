@@ -785,15 +785,15 @@ Google提供的生成器
 
 #### Debugging
 
-##### 22.1.19
-
-local serving is fine; 
-
-- sidebar and navbar is missing;
-- cannot see the cover page;
-- even we can open a note, click on any subtitle, redirected to the global README (get started).
-
-
+> ##### 22.1.19
+>
+> local serving is fine; 
+>
+> - sidebar and navbar is missing;
+> - cannot see the cover page;
+> - even we can open a note, click on any subtitle, redirected to the global README (get started).
+>
+> solution: should make an empty file .nojekyll, or _files are ignored!
 
 
 
