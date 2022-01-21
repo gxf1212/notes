@@ -2705,7 +2705,8 @@ Ab: IgG/IgM
 just [effects of Ag-Ab complex](#Ab:-biological-functions)
 
 - complement activation
-- 
+- opsonizaion
+- ADCC effect, cross-linking Fc receptor
 
 
 
