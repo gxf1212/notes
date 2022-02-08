@@ -892,3 +892,90 @@ https://bibichuan.github.io/posts/5affe24.html
 使用hexo等工具，在git上只提交下面的一个`.deploy_git`文件夹。。clone根本没用
 
 ## Experiences on video/subtitles collection
+
+
+
+
+
+
+
+## Write games in python
+
+### Basics
+
+还有另外几种GUI：https://www.runoob.com/python/python-gui-tkinter.html
+
+#### pygame
+
+https://pygame.readthedocs.io/
+
+很好的基础 https://blog.csdn.net/zha6476003/article/details/82940350/
+
+Clock https://learnku.com/python/t/38674
+
+```
+pip install pygame
+```
+
+pygame画button的逻辑不同，生成是从字符串创建surface，点击是要判断位置……
+
+#### tkinter
+
+跟C#那个接近
+
+https://docs.python.org/3/library/tkinter.html
+
+[a tutorial](https://realpython.com/python-gui-tkinter/#building-your-first-python-gui-application-with-tkinter)
+
+- The **`side`** keyword
+
+挺好的tutorial https://mofanpy.com/tutorials/python-basic/tkinter/
+
+但是那个doc基本用不了
+
+- Python: tkinter窗口屏幕居中,设置窗口最大,最小尺寸
+
+  https://blog.csdn.net/yao_yu_126/article/details/23717355
+
+- Button详解与位置调整
+
+  https://www.tianqiweiqi.com/python-tkinter-button.html
+
+  - command： 指定按钮消息的回调函数；
+  - 指定按钮上文本的位置anchor: must be n, ne, e, se, s, sw, w, nw, or center
+
+  > frame类似panel？
+
+- `.place()` is not used often. It has two main drawbacks:
+
+  1. **Layout can be difficult to manage with `.place()`.** This is especially true if your application has lots of widgets.
+  2. **Layouts created with `.place()` are not responsive.** They don’t change as the window is resized. 除非用相对的。relx/y是针对window的
+
+- 您可以拨打self.update（）你已经把它的屏幕（上之后`pack`，`grid`等），以使其绘制。绘制后，`winfo_width`, `winfo_x` and `winfo_height`命令将起作用。
+
+- https://jingyan.baidu.com/article/3f16e00312aaa62591c10315.html
+
+  win.winfo_x()
+
+#### wx
+
+https://docs.wxpython.org/
+
+https://codingdict.com/article/7713
+
+
+
+### linkGame
+
+pygame连连看 https://juejin.cn/post/6969082546801868807
+
+
+
+
+
+
+
+other
+
+> https://blog.csdn.net/weixin_40957741/article/details/102761183  Python variable underline
+

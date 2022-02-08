@@ -2,6 +2,8 @@
 
 This is a record of my operations during 折腾ing the system, in order not to forget.
 
+有些使用方法写在debugging那里了，也许要整理吧，但尽量描述详细，方便搜到
+
 ## basics
 
 1. kde and gnome are two types of desktop interface. KDE looks like Windows desktop and gnome is the classic Linux desktop interface.
@@ -342,22 +344,34 @@ This is a record of my operations during 折腾ing the system, in order not to f
    sudo mv filename target-dir
    ```
 
-2. create a soft link (short cut). Files stored in `gxf1` are actually occupying space in `gxf`. 
+2. create a **soft link** (short cut). Files stored in `gxf1` are actually occupying space in `gxf`. 
    
    ```shell
    sudo ln -s /gxf/ ./gxf1
    ```
    
-   (However, I still have to specify the install directory.)
+   > (However, I still have to specify the install directory.)
 
-3. create a hard link:
+   create a **hard link**:
    
    ```shell
    sudo ln ./source ./target
    ```
    
-   my comprehension: 硬链接就是一个指针，软链接就是告诉你某处有个文件（指针）。区别就是删了源文件，硬链接还能访问，软的就不行。但是两种链接都可以改名字？
-
+   https://zhuanlan.zhihu.com/p/88891362
+   
+   my comprehension: 都是一个指针
+   
+   硬链接和源文件是一样的，指向相同的内容（文件、inode）；
+   
+   软链接指向一个东西（链接文件），这个东西（也算是指针）告诉你某处有个文件（源文件内容）。
+   
+   区别就是删了源文件，硬链接还能访问，软的就不行。但是两种链接都可以改名字？
+   
+   ![img](https://pic4.zhimg.com/80/v2-679da10fd5e4193d0098e6d6a35d5e1b_1440w.jpg)
+   
+   ![img](https://pic3.zhimg.com/80/v2-9abd33350e3bcb401f379752874f9b52_1440w.jpg)
+   
 4. `su root`: enter root. pw: a
 
 5. find:
@@ -1187,6 +1201,8 @@ https://stackoverflow.com/questions/13361729/found-a-swap-file-by-the-name/51326
 
 ```shell
 sudo vim /etc/default/locale
+LANG="en_US.UTF-8"
+LANGUAGE="en_US:en"
 ```
 
 https://www.cnblogs.com/machangwei-8/p/10353614.html fsck命令
@@ -1363,7 +1379,7 @@ testdisk
 
 > analyse，没找到分区表；然后quick search，看到
 > 
-> ![make-gpt](E:\GitHub_repo\notes\techniques\images\22.1.14-make-gpt.jpg)
+> ![make-gpt](https://gitee.com/gxf1212/notes/raw/master/techniques/images/22.1.14-make-gpt.jpg)
 > 
 > Enter，发现ok，直接write，重启
 > 
@@ -1498,7 +1514,203 @@ no difference...
 
 > type `ls` at 主目录, I can't get what in my /sda, though the GUI works well. only after rebooting terminal.
 
-Oh! finally solved on 22.1.20!
+Oh! finally unsolved! re-install the system!
+
+## 22.1.29 Data Recovery from re-install
+
+formatted my HDD when re-installing the system, lost all data
+
+- stu邮箱能找回NUS的东西吧
+- 同样还有部分rdrp的东西
+- 百度网盘里有高斯，git上有ML代码，SDH的在群里和聊天记录？
+- 其他不太重要的
+  - 封面图片
+  - 文档里的：package、license等
+  - pycharm practice
+
+### 问题的产生
+
+>[!WARNING] 
+>https://blog.csdn.net/qq_40907977/article/details/105900429 用移动硬盘拷数据，先umount再弹出。。
+
+出于对电脑软硬件，特别是对温逗死的了解，知道一般格式化后的数据还是可以找回来的，只要没有被数据二次覆盖。
+
+快速格式化：在格式化过程中重写[引导记录](https://baike.baidu.com/item/引导记录/8669373)，不检测磁盘坏簇，FAT表中除坏簇以外所有表项清零，根目录表清空，数据区不变。
+
+> 出故障后，应尽快umount文件系统。
+
+尝试一些方案吧
+
+1. https://forum.ubuntu.org.cn/viewtopic.php?t=343604  
+
+   https://www.diskgenius.cn/bbs/forum.php?mod=viewthread&tid=1623 
+
+   Diskgenius重建分区表+重装？
+
+   > 可以用磁盘管理器**看出460G分区中230G已用**，我想，数据就在那里，为何看不到呢！经过disgenius找回文件功能全部扫描后，仍然跟以前一样，看到了我的主用户文件夹，但里面没有任何文件
+
+   DG的破解
+
+   > https://www.downkuai.com/soft/147756.html
+
+2. https://blog.csdn.net/u012589476/article/details/50433432 直接deep search？
+
+   找不到啥。。
+
+关于各种软件：
+
+- Diskgenius只支持Windows的文件系统，但好像Linux的盘也能用？
+- easyrecovery不保留原来文件名？
+- 其他：嗨格式数据恢复大师？R-Studio数据恢复 免费？将硬盘寄给厂家？B计划数据恢复软件？。。。
+
+### 修复过程
+
+华硕主板u盘启动：按F8（DEL，F2）
+
+无法U盘启动的情况：
+
+1、电脑所属机型不支持U盘启动，条件允许的，可以换个机型试试；
+
+2、U盘本身由于平时操作不当，如直接插拔，导致接口接触不良，此时可以换个USB接口试试；
+
+我那个可能不是USB3.0
+
+DG的坏道检测，看看硬盘是不是不行了
+
+格式化后还是直接“恢复文件”
+
+DiskGenius扫不出来。。也许可以放弃了。。
+
+testdisk和DG扫不出来，基本可以去找专业公司了
+
+遗留一些疑问
+
+- 如果拔下硬盘插在别的电脑上，会不会能看见？winPE这次没找到
+- diskgenius如果能恢复，之后虽然看不见文件但是能发现空间被占用了？
+- 现在的DG是成功破解了，但老是闪退不知为啥。。
+- 其他的不知道哪些靠谱，包括英文教程。
+- 比如photorec感觉是testdisk的子程序。。好像不能扫描这种。。
+
+### 教训
+
+（1）**做好定期数据备份**：我还是觉得每天备份对我来讲似乎不太现实。一个月备份一次，而且一定要备份在移动硬盘上。今天开始我要把数据备份列入工作计划了！免不了笔记本会出现各种意外情况的（包括丢失、物理破坏等）！
+（2）**固定化分区模式**：以便即使出现我的状况，还能有挽救的机会。
+（3）数据恢复：首先格式化后千万**别写入**数据；其次分析数据**丢失原因**；再次如果是格式化等原因，尽量找回分区表（我觉得第一时间用**testdisk和diskgenius**最好）；确认数据还在（恢复分区后应该在UBUNTU系统中可以看到硬盘已用空间，如果和你记得的近似，那说明数据就在那里，等你去找她）；最后软件无法恢复的话，就试试我的办法吧：用一样的分区办法，相同的系统重新安装（切忌在分区的时候，目标数据分区不能格式化啊）。
+
+来自方案一
+
+（4）网上已有的经验越来越不够用了，有志气真的还是自己去论坛提问
+
+### 其他，待整理
+
+系统应用，磁盘：看你怎么分区的。现在都是efi+boot
+
+按shift进入grub，f2进入bios
+
+ubuntu进入grub菜单 https://jingyan.baidu.com/article/6dad50755e35d1a123e36ecc.html
+
+```shell
+sudo gedit /etc/default/grub
+
+#grub_timeout_style=hidden
+grub_timeout=5 # 秒数
+grub_cmdline_linux_default=text
+
+sudo update-grub
+```
+
+extundelete：恢复rm误删的文件
+
+### 同步备份网盘
+
+> 总结：
+>
+> https://zhuanlan.zhihu.com/p/65644792
+>
+> https://mp.weixin.qq.com/s?__biz=MzA5NjEwNjE0OQ==&mid=2247486950&idx=1&sn=696f1a10603f5a4843e407034d36cdd4&source=41#wechat_redirect 好！
+
+#### 总述
+
+同步的特点：本地云端都要存；不需要分享文件
+
+考虑的因素：容量；传输速度；价格。
+
+跨平台能弄就弄，和文件系统结合倒不必
+
+Windows上平时文档以100GB为单位；如果时常要存项目数据，需要TB级别的
+
+#### 对比
+
+> 数据收集于2022年2月
+
+| platform       | space (free)                | space (more paid)              | other                 |
+| -------------- | --------------------------- | ------------------------------ | --------------------- |
+| Google         | 15G                         | 2TB: 140SGD/year               | 功能全面              |
+| 坚果           | 流量1G上行、<br />3G下行/月 | 高级，96G，400/年              | 普通：42G，200/年     |
+| DropBox        |                             | 2T，120USD/年                  | 功能优秀              |
+| Onedrive       |                             | 1TB，398/年 office365          | Linux难，家庭版好？   |
+| pcloud         |                             | 2TB，350欧元终身<br />100欧/年 | 家庭版。。            |
+| Seafile        | 无限大                      | 开源的                         |                       |
+| Onedrive Edu   | 5T，全功能                  |                                |                       |
+|                |                             |                                |                       |
+|                |                             |                                |                       |
+| 超星云盘       | 100G                        |                                | 同步不错，Linux难     |
+| 天翼云对象存储 | 免费1T家庭版                | 1TB,￥102/月                   | Linux难，可以备份照片 |
+
+Google https://one.google.com/storage
+
+坚果 https://content.jianguoyun.com/15815.html
+
+Dropbox https://www.dropbox.com/plans?trigger=sem
+
+onedrive https://www.microsoft.com/zh-cn/microsoft-365/onedrive/compare-onedrive-plans
+
+pcloud https://www.pcloud.com/zh/cloud-storage-pricing-plans.html?period=lifetime
+
+seafile https://www.seafile.com/product/private_server/
+
+天翼云 https://cloud.189.cn/
+
+win的东西超星云盘够了吧？能不能同步？
+
+- https://passport2.chaoxing.com/enroll?refer=http://i.mooc.chaoxing.com
+- http://passport2.chaoxing.com/register3?refer=http%3A%2F%2Fpan.ananas.chaoxing.com
+
+#### Seafile
+
+速度很快，免费，理论上其空间无限大
+
+挂载盘 (不占用本地空间，直接访问云端文件)：要商业版
+
+对于 Linux，有两个官方客户端 Seadrive 和 Seafile，前者是挂载文件系统，后者用于同步。对于一个自建网盘，它功能相当纯粹
+
+怎么用？自己整服务器？？
+
+#### OneDrive Client for Linux
+
+>[!NOTE]
+>
+>免费申请OneDrive 5T 网盘空间（教育邮箱） https://signup.microsoft.com/signup?sku=student
+>
+>https://www.onedrives.net/4864.html 可能是白嫖邮箱？
+
+https://www.office.com/ 工作台？还是business的，这样功能就挺多了。。
+
+https://stuxjtueducn-my.sharepoint.com/ 原来就是nus那个呀。。
+
+Linux怎么整呢？好多不同的API，看知乎
+
+
+
+### win下扩容？
+
+https://www.cnblogs.com/yunweis/p/8023098.html
+
+动态磁盘可以跨磁盘扩容
+
+diskgenius可以无损扩容？
+
+
 
 # Other---the first time I install this
 
@@ -1543,3 +1755,10 @@ just be a helper calculator, and a platform to learn Linux. (zheteng is allowed)
 ### pycharm tips
 
 - intepreter: create from existing sources. "study" can run both R and Python.
+
+
+
+
+
+
+

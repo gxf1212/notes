@@ -517,13 +517,13 @@ Ab can also be an antigen. Three types of epitope:
 
 - bind Fc receptor on the cell surface
   
-  - opsonization (调理作用): phagocytosis (吞噬作用) by macrophages and neutrophils through Fc binding to Fc receptor
+  - opsonization (调理作用): phagocytosis (吞噬作用) by macrophages and neutrophils through Fc binding to Fc receptor, then into [presenting pathway](#MHC synthesis,-their-transportation-and-assembly)
     
     <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/4-ops.png" alt="4-ops" style="zoom:40%;" align=center />
 
 - enhance ADCC (antibody-dependent cell-mediated cytotoxicity) effect of NK cell, also through Fc
 
-- mediate type I hypersensitivity (超敏反应): mastocytes, basophils (嗜碱性粒细胞), IgE 
+- mediate [type I hypersensitivity](#type-I-hypersensitivity) (超敏反应): mastocytes, basophils (嗜碱性粒细胞), IgE 
   
   > see chapter 10
 
@@ -2610,10 +2610,10 @@ a simple version of summary
 
 > 以下，了解？
 
-Why allergy?
+##### Factors leading to allergy
 
 - genetic factors: easier to produce IgE, FcεR, to trigger Th2 response
-- environment: hygiene hypothesis, early contact with pathogens helps to produce IgG and make Th1 response
+- environment: hygiene hypothesis, early contact with pathogens helps to produce IgG and elicit Th1 responses preferentially
 
 ### Diseases
 
@@ -2705,26 +2705,59 @@ Ab: IgG/IgM
 just [effects of Ag-Ab complex](#Ab:-biological-functions)
 
 - complement activation
-- opsonizaion
+- opsonization/phagocytosis (normal or [complement-mediated](#Complement-mediated-Opsonization))
 - ADCC effect, cross-linking Fc receptor
 
-
-
-
+irreversible cell damage, without individual difference (just Ag-Ab, not IgE preference, etc.)
 
 ### Diseases
 
+#### Hemolysis
+
+溶血
+
+If you have blood type A Ag, you will also have IgM antibody for blood type B Ag. vice versa
+
+If you are Rh<sup>-/-</sup>, you will have anti-Rh Ab.
+
+- transfusion
+
+  > with wrong ABO type
+
+- hemolytic disease of the newborn (HDN, 新生儿溶血)
+
+  -  ABO hemolysis
+  - Rh hemolysis
 
 
 
+
+
+#### Autoimmune disease
+
+
+
+#### Ab of essential recptors
 
 
 
 ## Type III hypersensitivity
 
+also called immune complex-mediated hypersensitivity  
+
+hypersensitivity vasculitis
+
 ### Mechanisms
 
-### Type III Damage
+#### 
+
+
+
+#### Type III Damage
+
+
+
+### Diseases
 
 
 
