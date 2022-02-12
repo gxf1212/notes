@@ -79,6 +79,17 @@ https://blog.csdn.net/u012428169/article/details/80558331 没有进行特殊命�
 
 https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography not compatible with author-year
 
+## ThunderBird
+
+xjtu email: just login, default configuration
+
+> https://zhuanlan.zhihu.com/p/152548000
+
+1. specify contacts 联系人, signature
+2. plugin: [FileLink Provider for Dropbox](https://addons.thunderbird.net/zh-CN/thunderbird/addon/filelink-provider-for-dropbox/?src=search)
+
+
+
 # Applications for fun
 
 ## git in cmd
@@ -97,9 +108,10 @@ https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography
    ```shell
    # other
    git config --global user.name gxf1212 # user.email xxx
+   git config --global user.pas
    git clone url.git # clone a repo
    ```
-
+   
 2. in Gitee, we should manually update Pages?
    
    https://www.cnblogs.com/zlting/p/9620259.html
@@ -144,7 +156,7 @@ https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography
 
 6. GitHub克隆Gitee的仓库
    
-   ![clone](/home/gxf/desktop/work/Git-repo/notes/Linux/images/clone.jpg)
+   ![clone](https://gitee.com/gxf1212/notes/raw/master/techniques/images/clone.jpg)
 
 7. Github 上怎么删除一个文件的版本控制信息，只保留最新文件？
    

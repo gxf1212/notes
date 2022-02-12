@@ -32,6 +32,8 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
 ### Fundamental settings and softwares
 
+#### system info
+
 1. check the system
    
    ```shell
@@ -62,34 +64,135 @@ This is a record of my operations during 折腾ing the system, in order not to f
    
    https://www.asus.com/hk/Motherboards-Components/Motherboards/PRIME/PRIME-Z390-P/ 华硕PRIME Z390-P
 
-5. input method
+#### disk management
+
+1. 删除分区用gparted
+
+   也许 https://blog.csdn.net/xiexievv/article/details/50525783
+
+   https://blog.csdn.net/renfeigui0/article/details/100765958 格式化
+
+2. Linux中/var空间不足的解决办法 https://blog.csdn.net/hqzhon/article/details/49027351
+
+   not use this partition anymore
    
-   - fcitx
-     
-     - use software market or commmand line:
-       
-       ```shell
-       sudo apt install fcitx
-       sudo apt install fcitx-config-gtk # configure GUI
-       ```
-     
-     - also set fcitx in "language support". reboot 
-     
-     - uninstall: https://jingyan.baidu.com/article/d5c4b52b95eb52da570dc511.html
-   
-   - 迅飞输入法
-     
-     - install https://www.yoki.moe/Intstu/24.html and https://www.52pojie.cn/thread-1243805-1-1.html
-     - 先到官网下几个lib然后update就把依赖装好了
-     - setting: Ctrl+space 激活/反激活输入法
-     
-     > dependence of com.iflytek.iflyime_1.0.6-7_amd64.deb can not be installed
-   
-   - 搜狗
-     
-     > 感觉搜狗拼音输入法比谷歌拼音输入法更好，因为有最新流行词汇，可以打出表情符号等等。
-     > 
-     > https://blog.csdn.net/Teri_Tor/article/details/111461984
+3. on disk check
+
+   > see below debugging 22.1.14
+
+4. Linux `dmesg`（英文全称：display message）命令用于显示开机信息。
+
+5. [解决类似umount target is busy挂载盘卸载不掉问题 - Adrian·Ding - 博客园](https://www.cnblogs.com/ding2016/p/9605526.html)
+
+#### system settings
+
+1. 字体缺失（WPS等）
+
+   add into system font directory https://zhuanlan.zhihu.com/p/31848590
+
+   ```
+   sudo cp * /usr/share/fonts/wps-office
+   ```
+
+   Windows：`C:\Windows\fonts`
+
+   查看当前支持的字体
+
+   ```shell
+   fc-list
+   ```
+
+   in `/usr/share/fonts/`. copy your font into and 
+
+   ```shell
+   sudo cp *.otf /usr/share/fonts/opentype
+   sudo cp *.ttf /usr/share/fonts/truetype
+   sudo apt install xfonts-utils
+   mkfontscale
+   mkfontdir
+   sudo fc-cache -fv
+   ```
+
+2. Linux更改桌面（等）路径
+
+   ```
+   sudo gedit ~/.config/user-dirs.dirs
+   ```
+
+   改完重启即可
+
+3. upgrade from 18.04 to 20.04. upgraded cuda and graphics driver at the same time!
+
+#### input method installation
+
+- fcitx
+  
+  - steps
+  
+    ```shell
+    # use software market or commmand line:
+    sudo apt install fcitx fcitx-config-gtk # configure GUI
+    # 设置fcitx开机自启动
+    sudo cp /usr/share/applications/fcitx.desktop /etc/xdg/autostart/
+    # say goodbye to ibus
+    sudo apt purge ibus
+    ```
+    
+  - also set fcitx in "language support". reboot.
+  
+  - uninstall: https://jingyan.baidu.com/article/d5c4b52b95eb52da570dc511.html
+  
+    ```shell
+    sudo apt-get remove fcitx fcitx-module* fcitx-frontend*
+    sudo apt-get purge fcitx* # config
+    ```
+  
+- 迅飞输入法
+
+  - install https://www.yoki.moe/Intstu/24.html and https://www.52pojie.cn/thread-1243805-1-1.html
+  - 先到官网下几个lib然后update就把依赖装好了
+  - setting: Ctrl+space 激活/反激活输入法
+
+  > dependence of com.iflytek.iflyime_1.0.6-7_amd64.deb can not be installed
+
+- 搜狗 
+
+  - install
+
+    https://pinyin.sogou.com/linux/help.php
+
+    ```shell
+    # install and dependencies
+    sudo dpkg -i sogou*.deb
+    sudo apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
+    sudo apt install libgsettings-qt1
+    ```
+
+    add sogou. then it works!
+
+  - 开启了细胞词库功能  https://blog.csdn.net/Teri_Tor/article/details/111461984
+
+    > 感觉搜狗拼音输入法比谷歌拼音输入法更好，因为有最新流行词汇，可以打出表情符号等等。
+    >
+
+    dictionaries: https://pinyin.sogou.com/dict/
+
+    follow the blog, but paths have changed! try `tree ~/.config/sogoupinyin/`
+
+    ```shell
+    sudo cp *.scel ~/.config/sogoupinyin/dict/scd
+    ```
+
+    not work. other old tutorials is outdated...
+
+    skins: https://pinyin.sogou.com/skins
+
+    > Windows: just click to install.
+    >
+    > Linux also openwith sogou, but no such program...
+
+  - still can't see conf gui, but `gedit /home/gxf/.config/sogoupinyin/dict/shell.conf`
+
 - 2022.1.4 use google pinyin. 至少能用。。先用吧阿巴阿巴
   
   ```shell
@@ -102,202 +205,154 @@ This is a record of my operations during 折腾ing the system, in order not to f
 - setting commands
   
   ```shell
-  fcitx-config-gtk3
+  fcitx-config-gtk3 # global configuration
   im-config
   ```
 
+- why? after "restart", config is not shown...
+
+  solution: type `fcitx` in Terminal
+
 - skin?
 
-- other
+- other, see fcitx project
   
   ```shell
   sudo apt-get install fcitx-libpinyin
   ```
-7. upgrade from 18.04 to 20.04. upgraded cuda and graphics driver at the same time!
 
-8. google download?
-   
+
+
+#### figures&media
+
+1. cannot play video?
+
+   https://blog.csdn.net/weixin_45361800/article/details/116844378  solved!
+
+   ```shell
+   sudo apt install ffmpeg
+   ```
+
+   no longer support Adobe flash player
+
+   > 可能导致有命令`flash-player-properties`的:https://jingyan.baidu.com/article/3c48dd34a2952ee10be35820.html
+   >
+   > install flash player for firefox (not successful，没删)
+   >
+   > download https://www.flash.cn/download  
+   >
+   > install https://blog.csdn.net/weixin_33759269/article/details/92001224 or https://www.jb51.net/article/193782.htm
+   >
+   > ```shell
+   > sudo cp libflashplayer.so /home/gxf/.mozilla/firefox/
+   > sudo cp -r usr/* /usr
+   > ```
+   >
+   > 如何显示Firefox插件(Plugins)的完整路径 https://blog.csdn.net/xuewuzhijin2012/article/details/53140899
+
+2. no sound?
+
+   ```shell
+   sudo gedit /etc/default/grub
+   # GRUB_CMDLINE_LINUX_DEFAULT="quiet splash snd_hda_intel.dmic_detect=0"
+   sudo grub-mkconfig -o /boot/grub/grub.cfg
+   sudo update-grub
+   reboot
+   ```
+
+   https://blog.csdn.net/swordsm/article/details/108417931
+
+   but, only when the headphone is charged can we play music........
+
+   other:
+
+   ```shell
+   sudo apt install pavucontrol
+   pavucontrol
+   ```
+
+3. wall paper壁纸
+
+   搜索：电脑桌面壁纸 化学; microscopy photos
+
+   some good websites
+
+   - https://wall.alphacoders.com/
+   - https://wallpapercave.com/
+   - https://www.wallpaperflare.com/search?wallpaper=chemistry
+   - https://www.flickr.com/photos/zeissmicro/
+
+   > https://cdn.shopify.com/s/files/1/1064/0118/files/periodic-table-of-tech-standalone_alt.png?v=1579813258
+
+   Lively WallpaperLively *Wallpaper* for Windows
+
+4. process figure
+
+   如果只需要单纯的裁剪功能, 推荐gThumb工具, 界面美观好用, 媲美某Q的聊天截图crtl+A
+   打开命令行,输入
+
+   ```shell
+   sudo apt install gthumb
+   ```
+
+   下载安装完, 就能用啦, 输入
+
+   ```shell
+   gthumb
+   ```
+
+   为了以后使用方便, 可以右键屏幕左侧状态栏的gthumb图标,选择”锁定到启动器”. 以后就不用打开命令行了, 直接点状态栏的gthumb图标就行了. gthumb的具体用法不用说, 软件就那几个键, 而且都是图标, 看看就明白了.
+
+   裁剪、调整大小、调整色彩等
+
+   - As for add border, use `cv2.copyMakeBorder()`
+
+   https://blog.csdn.net/qq_36560894/article/details/105416273 
+
+   https://www.geeksforgeeks.org/python-opencv-cv2-copymakeborder-method/
+
+5. install lightdm: https://blog.csdn.net/hgtjcxy/article/details/90645838
+
+   display managers: https://ubuntuqa.com/article/6577.html
+
+   ```shell
+   sudo apt update
+   sudo apt install lightdm
+   # or
+   sudo dpkg-reconfigure lightdm
+   # click ok
+   reboot
+   ```
+
+6. 
+
+#### other
+
+1. google download?
+
    为什么用 Chrome 下载东西速度非常慢？ - 老郭的回答 - 知乎 https://www.zhihu.com/question/20082667/answer/1177212992
-   
+
    may use firefox...but now I abandoned firefox
 
-9. 删除分区用gparted
-   
-   也许 https://blog.csdn.net/xiexievv/article/details/50525783
-   
-   https://blog.csdn.net/renfeigui0/article/details/100765958 格式化
+2. 有道dictionary 
 
-10. Linux中/var空间不足的解决办法 https://blog.csdn.net/hqzhon/article/details/49027351
-    
-    not use this partition anymore
+   > wrong: http://cidian.youdao.com/index-linux.html. 
+   >
+   > dependences: https://my.oschina.net/u/4400327/blog/3544515 
+   >
+   > https://www.ubuntuupdates.org/package/core/trusty/universe/updates/gstreamer0.10-plugins-ugly
+   >
+   > finally, for the xxx-plugin-ugly: https://my.oschina.net/u/3384982/blog/867063
 
-11. no sound?
-    
-    ```shell
-    sudo gedit /etc/default/grub
-    # GRUB_CMDLINE_LINUX_DEFAULT="quiet splash snd_hda_intel.dmic_detect=0"
-    sudo grub-mkconfig -o /boot/grub/grub.cfg
-    sudo update-grub
-    reboot
-    ```
-    
-    https://blog.csdn.net/swordsm/article/details/108417931
-    
-    but, only when the headphone is charged can we play music........
-    
-    other:
-    
-    ```shell
-    sudo apt install pavucontrol
-    pavucontrol
-    ```
+   see https://blog.csdn.net/weixin_42912072/article/details/108572983, should be the newest version https://cidian.youdao.com/multi.html#linuxAll! just download all the dependencies, no need to fix xxx-plugin-ugly!
 
-12. 有道dictionary 
-    
-    > wrong: http://cidian.youdao.com/index-linux.html. 
-    > 
-    > dependences: https://my.oschina.net/u/4400327/blog/3544515 
-    > 
-    > https://www.ubuntuupdates.org/package/core/trusty/universe/updates/gstreamer0.10-plugins-ugly
-    > 
-    > finally, for the xxx-plugin-ugly: https://my.oschina.net/u/3384982/blog/867063
-    
-    see https://blog.csdn.net/weixin_42912072/article/details/108572983, should be the newest version https://cidian.youdao.com/multi.html#linuxAll! just download all the dependencies, no need to fix xxx-plugin-ugly!
+3. “软件”里有typora
 
-13. cannot play video?
-    
-    https://blog.csdn.net/weixin_45361800/article/details/116844378  solved!
-    
-    ```shell
-    sudo apt install ffmpeg
-    ```
-    
-    no longer support Adobe flash player
-    
-    > 可能导致有命令`flash-player-properties`的:https://jingyan.baidu.com/article/3c48dd34a2952ee10be35820.html
-    > 
-    > install flash player for firefox (not successful，没删)
-    > 
-    > download https://www.flash.cn/download  
-    > 
-    > install https://blog.csdn.net/weixin_33759269/article/details/92001224 or https://www.jb51.net/article/193782.htm
-    > 
-    > ```shell
-    > sudo cp libflashplayer.so /home/gxf/.mozilla/firefox/
-    > sudo cp -r usr/* /usr
-    > ```
-    > 
-    > 如何显示Firefox插件(Plugins)的完整路径 https://blog.csdn.net/xuewuzhijin2012/article/details/53140899
+   https://typora.io/windows/dev_release.html dev版本不要钱的
 
-14. “软件”里有typora
-    
-    https://typora.io/windows/dev_release.html dev版本不要钱的
-    
-    主题路径：`/home/gxf/.config/Typora/themes`
+   主题路径：`/home/gxf/.config/Typora/themes`
 
-15. install lightdm: https://blog.csdn.net/hgtjcxy/article/details/90645838
-    
-    display managers: https://ubuntuqa.com/article/6577.html
-    
-    ```shell
-    sudo apt update
-    sudo apt install lightdm
-    # or
-    sudo dpkg-reconfigure lightdm
-    # click ok
-    reboot
-    ```
-
-16. 字体缺失（WPS等）
-    
-    add into system font directory https://zhuanlan.zhihu.com/p/31848590
-    
-    ```
-    sudo cp * /usr/share/fonts/wps-office
-    ```
-    
-    Windows：`C:\Windows\fonts`
-    
-    查看当前支持的字体
-    
-    ```shell
-    fc-list
-    ```
-    
-    in `/usr/share/fonts/`. copy your font into and 
-    
-    ```shell
-    sudo cp *.otf /usr/share/fonts/opentype
-    sudo cp *.ttf /usr/share/fonts/truetype
-    sudo apt install xfonts-utils
-    mkfontscale
-    mkfontdir
-    sudo fc-cache -fv
-    ```
-
-17. Linux更改桌面（等）路径
-    
-    ```
-    sudo gedit ~/.config/user-dirs.dirs
-    ```
-    
-    改完重启即可
-
-18. wall paper壁纸
-    
-    搜索：电脑桌面壁纸 化学; microscopy photos
-    
-    some good websites
-    
-    - https://wall.alphacoders.com/
-    - https://wallpapercave.com/
-    - https://www.wallpaperflare.com/search?wallpaper=chemistry
-    - https://www.flickr.com/photos/zeissmicro/
-    
-    > https://cdn.shopify.com/s/files/1/1064/0118/files/periodic-table-of-tech-standalone_alt.png?v=1579813258
-    
-    Lively WallpaperLively *Wallpaper* for Windows
-
-19. process figure
-    
-    如果只需要单纯的裁剪功能, 推荐gThumb工具, 界面美观好用, 媲美某Q的聊天截图crtl+A
-    打开命令行,输入
-    
-    ```shell
-    sudo apt install gthumb
-    ```
-    
-    下载安装完, 就能用啦, 输入
-    
-    ```shell
-    gthumb
-    ```
-    
-    为了以后使用方便, 可以右键屏幕左侧状态栏的gthumb图标,选择”锁定到启动器”. 以后就不用打开命令行了, 直接点状态栏的gthumb图标就行了. gthumb的具体用法不用说, 软件就那几个键, 而且都是图标, 看看就明白了.
-    
-    裁剪、调整大小、调整色彩等
-    
-    - As for add border, use `cv2.copyMakeBorder()`
-    
-    https://blog.csdn.net/qq_36560894/article/details/105416273 
-    
-    https://www.geeksforgeeks.org/python-opencv-cv2-copymakeborder-method/
-
-20. on disk check
-    
-    > see below debugging 22.1.14
-
-21. Linux `dmesg`（英文全称：display message）命令用于显示开机信息。
-
-22. [解决类似umount target is busy挂载盘卸载不掉问题 - Adrian·Ding - 博客园](https://www.cnblogs.com/ding2016/p/9605526.html)
-
-23. 
-
-> ### package name
-> 
-> yes we should remember some; and can check with `dpkg --info`
-> 
-> google-chrome-stable
+4. 
 
 ### Operation on files and directory
 
@@ -380,6 +435,20 @@ This is a record of my operations during 折腾ing the system, in order not to f
    sudo find / -name "*your-query*" # all that contains your query
    ```
 
+6. another tool to search
+   
+   ```shell
+   locate -h
+   Usage: locate [OPTION]... [PATTERN]...
+   Search for entries in a mlocate database.
+   
+     -A, --all              only print entries that match all patterns
+     -b, --basename         match only the base name of path names
+     -h, --help             print this help
+     -w, --wholename        match whole path name (default)
+   
+   ```
+   
 6. create file
    
    ```shell
@@ -394,7 +463,41 @@ This is a record of my operations during 折腾ing the system, in order not to f
    sudo mv ./fca58054-9480-4790-a8ab-bc37f33823a4/ ./mechanical
    ```
 
-8. 
+8. `rename` to change
+
+9. tree: list subdirectories
+
+   ```shell
+   sudo apt-get install tree
+   ```
+
+10. 
+
+#### zip and unzip
+
+the problem rises when installing Gaussian
+
+```shell
+sudo apt-get install rar unrar
+```
+
+unzip multiple files: maybe just select all part files and right click...
+
+https://www.cnblogs.com/xd502djj/archive/2011/03/25/1995331.html
+
+```shell
+unrar x -o- -y 'the first part file' 'target path'
+
+unrar x -o- -y 'Gaussian 16 Rev. A.03 ES64L Linux x64.part1.rar' .
+```
+
+zip into some certain-size part files to store in baidunetdisk or qq
+
+```shell
+tar -zcvf folder.tar.gz folder | split -b 4000M -d -a 1 - folder.tar.gz
+```
+
+
 
 #### disk
 
@@ -412,7 +515,9 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
 2. 
 
-### K desktop specific settings (not using)
+### desktop manager
+
+#### K desktop specific settings (not using)
 
 1. fonts
 2. settings manager 
@@ -423,7 +528,7 @@ This is a record of my operations during 折腾ing the system, in order not to f
 3. add "show desktop": http://www.linuxdiyf.com/view_134588.html
 4. sf
 
-### GNOME
+#### GNOME
 
 1. 在Ubuntu的系统中如何将应用程序添加到开始菜单中 https://blog.csdn.net/qk1992919/article/details/51034361/ https://ubuntuqa.com/article/1235.html
    
@@ -465,10 +570,6 @@ This is a record of my operations during 折腾ing the system, in order not to f
    ip addr show
    ```
 
-2. VPN for Linux: https://github.com/hannuo/ssr-linux-client-electron
-   
-   configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md
-
 3. 向日葵
    
    软件包名：`sunloginclient`；命令：`/usr/local/sunlogin/bin/sunloginclient`
@@ -501,14 +602,13 @@ This is a record of my operations during 折腾ing the system, in order not to f
    # Wake-on: g # if is d, just do 
    # sudo ethtool -s enp4s0 wol g
    ```
-
-```
-远程开机？
-
-```shell
-wakeonlan -i 192.168.5.255 04:d4:c4:21:d6:02
-```
-
+   
+   远程开机？
+   
+   ```shell
+   wakeonlan -i 192.168.5.255 04:d4:c4:21:d6:02
+   ```
+   
 5. to enable the wol function, should all the Linux subsystem on Windows
    
    [install wsl](https://docs.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions)                          https://blog.csdn.net/daxues_/article/details/119639093
@@ -609,10 +709,16 @@ wakeonlan -i 192.168.5.255 04:d4:c4:21:d6:02
 
 - insert: edit
   
-  ### conda & python cmd
+### conda & python cmd
 
 https://blog.csdn.net/zhayushui/article/details/80433768
 
+- upon installation
+  
+  ```shell
+  conda init shell
+  ```
+  
 - on environments
   
   - see
@@ -681,6 +787,8 @@ https://blog.csdn.net/zhayushui/article/details/80433768
 
 - path to anaconda icon  [link](https://dannyda.com/2020/03/21/how-to-create-shortcut-icon-for-anaconda-anaconda3-navigator-launch-anaconda-navigator-in-linux-debian-ubuntu-kali-linux/?__cf_chl_managed_tk__=8b0602f628e3697df877a10ef8acbd1aaed57efe-1624180568-0-AQN5TbG3O_yGaDEn0fVCjKdPwJeitKXjQ5dGrRfek69NylD0fJ5-atmRV2JoCodX4-mn_CX-vH8Ay_KzM9Ew77recYhgLQF_b3AqC85p9Pt8IVjBso98tTdFN9TknxGj5tTJFM_8KyF_S4qbMmoTpsiUnMKl2kc3rlzmRlQZvO0AJaILgZakK-WjM6xFauMno73HWqkCE4IaHB35y0M0C0dnw8t2b5qReINgAcLiCZuHX897fWj-OLS6yNbAVjmkgOPbkazSG3X8a-o_AgziC8zfKXi584jpGmet4WwRwFnSaWJvOAp7BA7vSIkcSJ7UAOFWzpvkDilEtFoa-XMd6jpZQgKbtBVQn4vLT5LUl1_XLFU3M7B9G_vN7vcyUcFjLV2gl6xdDcx9WA-JypLtICF3nbFVjS3gvK_WCEqs30dnW38X3Ceuk9Bhq7FFyegkaQmnFy5a4V5KeJob3h_gXQRaWwaeAFAHoeuYY0RXfAtfD82sJgJP0UOOYC8IBBV43rGAmhSOsLhiC2u3hk2hwLIEy7mG10sSUlGq_3I_dPjha1qlIAP0APiBXaWOOdujGD2gFeot6PQGwrg71cglm4rQc1Zei_kF8QfHdYerOFjLLtbfWC0HTeoFZ_L7Qu9R9c8npxn9Z5Np2O_IqqsKo3yaDAxR_aV8JVS3rS-a4mxAunZXcWj734HTBAJaTTSdepNfW2PdqnUEbsnD5bAyjeDPVQQupDNG_1qz8fsEzThDBSPP04GMtGJGqpEBawQvu2Nk857rXxA-_V2AwE9s7Og)
 
+  `/home/abc/anaconda3/lib/python3.7/site-packages/anaconda_navigator/static/images/anaconda-icon-256x256.png`
+
 - An unexpected error has occurred. Conda has prepared the above report.
   
   https://blog.csdn.net/Felaim/article/details/108368598
@@ -721,6 +829,8 @@ change source: https://www.cnblogs.com/feng-hao/p/11774543.html
 
 ### dpkg
 
+### package name
+
 install with .deb
 
 just **double click it** 不能指定目录
@@ -743,7 +853,7 @@ dpkg -i --instdir=/dest/dir/path some.deb # under root
   
   ```shell
   dpkg -i xx.deb
-  dpkg --info xx.deb # 查看信息，包括软件包名，卸载时用！
+  dpkg --info xx.deb # 查看信息，包括软件包名，卸载时用！we should remember some of them
   dpkg -P xx.deb # 卸载
   dpkg --unpack *.deb # 解压？
   ```
@@ -829,7 +939,43 @@ dpkg -i --instdir=/dest/dir/path some.deb # under root
   > sudo apt-get upgrade
   > ```
 
-- s
+- 
+
+### tar
+
+- manual
+
+  ```shell
+    tar -cf archive.tar foo bar  # Create archive.tar from files foo and bar.
+    tar -tvf archive.tar         # List all files in archive.tar verbosely.
+    tar -xf archive.tar          # Extract all files from archive.tar.
+  
+   主操作模式:
+  
+    -A, --catenate, --concatenate   追加 tar 文件至归档
+    -c, --create               创建一个新归档
+    -d, --diff, --compare      找出归档和文件系统的差异
+        --delete               从归档(非磁带！)中删除
+    -r, --append               追加文件至归档结尾
+    -t, --list                 列出归档内容
+        --test-label           测试归档卷标并退出
+    -u, --update               仅追加比归档中副本更新的文件
+    -x, --extract, --get       从归档中解出文件
+  
+    -j, --bzip2                通过 bzip2 过滤归档
+    -z, --gzip, --gunzip, --ungzip   通过 gzip 过滤归档
+        --zstd                 通过 zstd 过滤归档
+    -Z, --compress, --uncompress   通过 compress 过滤归档
+    -v, --verbose              详细地列出处理的文件
+  ```
+
+  
+
+- tbz
+
+  ```shell
+  tar -xjvf G16-A03-AVX2.tbz
+  ```
 
 - 
 
@@ -887,31 +1033,33 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 ## memo
 
 > 安排存储分配。关键的软件尽量装到root
-> 
+>
 > - [x] 翻墙
 > - [x] 向日葵，vnc viewer
-> - [x] 显卡驱动
-> - [x] python环境(pycharm, miniconda)
-> - [x] 分子模拟环境（gmx,openbabel,pymol,gaussian,ambertools,acpype)
-> - [ ] 其他分子模拟（maybe VMD,DSV）
-> - [x] flash，浏览器
-> - [x] 配套工具（百度网盘、阅读器、qq等）
-> - [ ] 写作？（texlive,VScode,mendeley,GitHub Desktop)
-> - [ ] 修理：software
-> - [ ] 自定义桌面等，如天气
-> 
+> - [x] 显卡驱动, cuda, cudnn
+> - [x] 编程环境 (pycharm, anaconda)
+> - [x] 基本工具（git, gparted这种）、常用写作（typora和主题, VScode）
+> - [x] 分子模拟环境（gmx,openbabel,pymol,gaussian,ambertools,acpype, VMD,DSV）
+> - [x] 配套工具（百度网盘、阅读器、qq、有道词典、WPS）
+> - [x] email client
+> - [x] 程序图标
+> - [ ] 备份系统
+> - [x] 输入法、字体等
+> - [ ] 其他？（texlive,,mendeley,GitHub Desktop, flash, 浏览器)
+> - [ ] 修理：software?
+> - [ ] 自定义桌面等，如天气，壁纸图片
+>
 > 小问题
-> 
+>
 > - [x] 输入法点不开  界面（算了）
-> - [ ] discovery studio
-> - [x] 有道词典
+> - [ ] 
 > - [ ] 
 
 ## 重装系统
 
 ### Partition
 
-#### 2022.1.3重装
+2022.1.3重装
 
 | 挂载点   | 大小  | 文件系统 | 分区类型 |
 | ----- | --- | ---- | ---- |
@@ -919,6 +1067,8 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 | \efi  | 1G  | EFI  | 主分区  |
 | \swap | 16G | swap | 逻辑   |
 | \     | 剩下的 | ext4 | 主分区  |
+
+其实boot和efi半个g就够了
 
 ### Common flow
 
@@ -942,53 +1092,84 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
 - 更改root密码
 
+  ```shell
+  sudo passwd root
+  ```
+
 - 挂载home盘，实现自动挂载。找uuid：那个设备的路径
-  
+
   ```
   vi /etc/fstab
   添加如下内容：
   uuid=xxxxxxx /h ext4 defaults 0 0
   ```
 
-- 更改desktop的路径为英文，极端cmd下语言改成英文
+- 更改desktop的路径为英文，极端cmd下语言改成英文 [命令行更改系统语言](https://blog.csdn.net/MaryChow/article/details/68494243?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
+
+  ```shell
+  sudo vim /etc/default/locale
+  LANG="en_US.UTF-8"
+  LANGUAGE="en_US:en"
+  ```
 
 - 安装vi，git, alacarte, gpart, gparted, ethtool, 等基本工具
 
-- 安装vpn，翻墙、校园网
+  configure git
+
+  ```shell
+  sudo apt-get install vi git alacarte gpart gparted ethtool
+  ```
+
+- chrome浏览器，安装vpn，翻墙、校园网
+
+  > https://www.google.cn/intl/zh-CN/chrome/
+  >
+  > go to https://support.google.com/a/answer/135937?hl=en to sync your account
+
+- typora, VScode等办公
+
+  > ```shell
+  > sudo apt-get install snap
+  > sudo snap install --classic code
+  > ```
+  >
+  > https://www.typora.io/releases/all
 
 - 把win的字体拷过来一份
 
 - 安好cuda、cudnn
 
 - 安装下游的gmx、vmd、namd
-  
+
+- 
+
   ## fundamental softwares
-  
+
   1. VScode
      
      > ```shell
      > dpkg -i --instdir=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs code_1.52.1-1608136922_amd64.deb
      > ```
-  
+
   2. realvnc
      
      ```shell
      systemctl start vncserver-x11-serviced.service
      systemctl enable vncserver-x11-serviced.service
      ```
-  
+
   3. GitHub Desktop on Linuxhttps://codechina.csdn.net/mirrors/shiftkey/desktop?utm_source=csdn_github_accelerator
-  
+
   4. xshell http://www.netsarang.com/download/free_license.html
-  
+
   5. https://linux.wps.cn/
-  
+
   6. weather  https://www.ywnz.com/linuxjc/4429.html
-  
+
   7. insync, sync for google, onedrive, dropbox
      
      https://cn.go-travels.com/98643-how-to-use-google-drive-linux-4176144-1291281
-  
+
   8. 
 
 > browsers
@@ -1036,128 +1217,168 @@ cuda-->driver
 cuda-->cudnn
 ```
 
-1. pycharm student:
-   
-   https://blog.csdn.net/qq_39521554/article/details/80855357
-   
-   my email: stu, 741844489acb
-   
-   1. problem! can only run .sh file now!
-   2. cooooonfiiigure a command for them
+### pycharm 
 
-2. Anaconda
-   
-   1. no need to copy a .sh file. You can assign a directory.
-   
-   2. under `su root`
-   
-   3. `conda: no command`: add path. https://blog.csdn.net/freezeplantt/article/details/80176215
-   
-   4. cannot activate at the first time: run `source activate`
-      
-      then run `conda activate` or `conda deactivate`
-      
-      see https://blog.csdn.net/qq_36338754/article/details/97009338
+student (professional)
 
-3. cuda
-   
-   - https://blog.csdn.net/weixin_38369492/article/details/107957296
-   
-   - > Driver:   Not Selected
-     > Toolkit:  Installed in /usr/local/cuda-11.1/
-     > Samples:  Installed in /home/kemove/, but missing recommended libraries
-     > 
-     > Please make sure that
-     > 
-     > - PATH includes /usr/local/cuda-11.1/bin
-     > - LD_LIBRARY_PATH includes /usr/local/cuda-11.1/lib64, or, add /usr/local/cuda-11.1/lib64 to /etc/ld.so.conf and run ldconfig as root
-     > 
-     > To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-11.1/bin
-     > ***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least .00 is required for CUDA 11.1 functionality to work.
-     > To install the driver using this installer, run the following command, replacing <CudaInstaller> with the name of this run file:
-     > 
-     >     sudo <CudaInstaller>.run --silent --driver
-     > 
-     > Logfile is /var/log/cuda-installer.log
-   
-   - to verify success: https://blog.csdn.net/weixin_38208741/article/details/70848364
-     
-     ```
-     cd /usr/local/cuda/samples/1_Utilities/deviceQuery #由自己电脑目录决定
-     make
-     sudo ./deviceQuery
-     ```
-     
-     ```shell
-     /usr/local/cuda/samples/1_Utilities/deviceQuery/deviceQuery
-     # CUDA Driver = CUDART, CUDA Driver Version = 11.2, CUDA Runtime Version = 11.1, NumDevs = 1
-     ```
-     
-     or
-     
-     ```
-     nvcc -V 
-     ```
-   
-   - problems
-     
-     - I ran ...run.1 rather than .run ???
-     - don't know if this matters: https://blog.davidou.org/archives/1361
-   
-   - other
-     
-     - if "Failed to initialize NVML: Driver/library version mismatch"
-       
-       https://comzyh.com/blog/archives/967/
-       
-       if it's due to software update, just reboot. driver and cuda toolkit is simultaneously updated...
-   
-   - other ways to check gpu
-     
-     ```shell
-     pip install gpustat
-     gpustat
-     ```
-   
-   - multiple version of cuda: https://bluesmilery.github.io/blogs/a687003b/
+https://blog.csdn.net/qq_51468843/article/details/110561151
 
-4. cudnn
+my email: stu, `741*******cb`
+
+1. problem! can only run .sh file now!
+2. cooooonfiiigure a command for them
+
+### Anaconda
+
+1. no need to copy a .sh file. You can assign a directory.
+
+2. under `su root`
+
+3. `conda: no command`: add path. https://blog.csdn.net/freezeplantt/article/details/80176215
+
+4. cannot activate at the first time: run `source activate`
    
-   follow offical guide
+   then run `conda activate` or `conda deactivate`
    
-   https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html
-   
-   download:
-   
-   - [cuDNN Runtime Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8_8.2.1.32-1+cuda11.3_amd64.deb)
-   - [cuDNN Developer Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-dev_8.2.1.32-1+cuda11.3_amd64.deb)
-   - [cuDNN Code Samples and User Guide for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-samples_8.2.1.32-1+cuda11.3_amd64.deb)
-   
-   remove
-   
-   ```
+   see https://blog.csdn.net/qq_36338754/article/details/97009338
+
+### cuda
+
+- .deb just follow official guide
+
+  .run https://blog.csdn.net/weixin_38369492/article/details/107957296
+
+  both: don't forget blacklist nouveau
+
+- > Driver:   Not Selected
+  > Toolkit:  Installed in /usr/local/cuda-11.1/
+  > Samples:  Installed in /home/kemove/, but missing recommended libraries
+  >
+  > Please make sure that
+  >
+  > - PATH includes /usr/local/cuda-11.1/bin
+  > - LD_LIBRARY_PATH includes /usr/local/cuda-11.1/lib64, or, add /usr/local/cuda-11.1/lib64 to /etc/ld.so.conf and run ldconfig as root
+  >
+  > ```shell
+  > export PATH=$PATH:/usr/local/cuda/bin
+  > export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+  > ```
+  >
+  > **To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-11.1/bin**
+  >
+  > > ***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least .00 is required for CUDA 11.1 functionality to work.
+  > > To install the driver using this installer, run the following command, replacing <CudaInstaller> with the name of this run file:
+  >
+  >     sudo <CudaInstaller>.run --silent --driver
+  >
+  > Logfile is /var/log/cuda-installer.log
+  
+- to verify success: https://blog.csdn.net/weixin_38208741/article/details/70848364
+  
+  ```shell
+  cd /usr/local/cuda/samples/1_Utilities/deviceQuery #由自己电脑目录决定
+  sudo make
+  sudo ./deviceQuery
+  ```
+  
+  ```shell
+  /usr/local/cuda/samples/1_Utilities/deviceQuery/deviceQuery
+  # deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 11.4, CUDA Runtime Version = 11.4, NumDevs = 1
+  Result = PASS
+  ```
+  
+  or
+  
+  ```shell
+  nvcc -V 
+  ```
+  
+- problems
+  
+  - I ran ...run.1 rather than .run ???
+  - don't know if this matters: https://blog.davidou.org/archives/1361
+
+- other
+  
+  - if "Failed to initialize NVML: Driver/library version mismatch"
+    
+    https://comzyh.com/blog/archives/967/
+    
+    if it's due to software update, just reboot. driver and cuda toolkit is simultaneously updated...
+
+- other ways to check gpu
+  
+  ```shell
+  pip install gpustat
+  gpustat
+  ```
+
+- multiple version of cuda: https://bluesmilery.github.io/blogs/a687003b/
+
+### cudnn
+
+follow offical guide
+
+https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html
+
+#### method 1
+
+download [cuDNN Library for Linux (x86_64)](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.2.4/11.4_20210831/cudnn-11.4-linux-x64-v8.2.4.15.tgz)
+
+```shell
+# 22 1st time
+sudo cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include 
+sudo cp -P cudnn-*-archive/lib/libcudnn* /usr/local/cuda/lib64 
+sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+# 22 2nd time
+sudo cp cudnn/cuda/include/cudnn*.h /usr/local/cuda/include 
+sudo cp -P cudnn/cuda/lib64/libcudnn* /usr/local/cuda/lib64 
+sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+```
+
+also need the code samples
+
+#### method 2??
+
+download:
+
+- [cuDNN Runtime Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8_8.2.1.32-1+cuda11.3_amd64.deb)
+- [cuDNN Developer Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-dev_8.2.1.32-1+cuda11.3_amd64.deb)
+- [cuDNN Code Samples and User Guide for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-samples_8.2.1.32-1+cuda11.3_amd64.deb)
+
+```shell
+sudo dpkg -i lib*
+```
+
+not sure how to do...
+
+#### other issues
+
+1. to remove cudnn
+
+   ```shell
    sudo rm -rf /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
    ```
-   
-   test.c:1:10: fatal error: FreeImage.h: 没有那个文件或目录 https://blog.csdn.net/xhw205/article/details/116297555
-   
+
+2.  test.c:1:10: fatal error: FreeImage.h: 没有那个文件或目录 https://blog.csdn.net/xhw205/article/details/116297555
+
    ```shell
    sudo apt-get install libfreeimage3 libfreeimage-dev
    ```
    
-   You may also need this
-   
+3. You may also need this
+
    ```shell
    sudo dpkg -i libcudnn*
    ```
    
-   check success (tar.gz): [??? but a complete guide!!](https://blog.csdn.net/weixin_28691441/article/details/112144795) 
-   
-   ```
+4. check success (tar.gz): [strange??? but a complete guide!!](https://blog.csdn.net/weixin_28691441/article/details/112144795) 
+
+   ```shell
    cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 
    ```
    
-   might be old! let’s follow the official
+   might be old! let’s follow the official guide below
    
    > ```shell
    > # Copy the cuDNN samples to a writable path.
@@ -1170,12 +1391,14 @@ cuda-->cudnn
    > # Run the mnistCUDNN sample.
    > ./mnistCUDNN
    > ```
-   > 
+   >
    > If cuDNN is properly installed and running on your Linux system, you will see a message similar to the following:
-   > 
+   >
    > ```
    > Test passed!
    > ```
+
+
 
 # Debugging experiences on the system
 
@@ -1196,14 +1419,6 @@ https://www.jianshu.com/p/9c9ad9a97452 vim
 https://www.runoob.com/linux/linux-comm-mount.html mount
 
 https://stackoverflow.com/questions/13361729/found-a-swap-file-by-the-name/51326724 vim的冲突，显示的信息
-
-[命令行更改系统语言](https://blog.csdn.net/MaryChow/article/details/68494243?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link) now LANG and LANGUAGE is English
-
-```shell
-sudo vim /etc/default/locale
-LANG="en_US.UTF-8"
-LANGUAGE="en_US:en"
-```
 
 https://www.cnblogs.com/machangwei-8/p/10353614.html fsck命令
 

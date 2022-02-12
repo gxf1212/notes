@@ -1,6 +1,6 @@
 # Prepare for the computer
 
-This page is all about software installing, both for system and project environment. Also something about Fedora. A little bit messy.
+This page is all about software installing, both for system and project environment. Also something about Fedora. A little bit messy. Try to be clear about the commands for Dedian/RedHat systems!
 
 Mainly recorded while in NUS. The installation of DL environment, Gromacs, and plans are all in `Linux fundamental (Installation and softwares)`.
 
@@ -85,37 +85,70 @@ https://www.hayaissr.xyz/ 也是个买vpn的？
 
 laowang, can view youtube on the phone
 
+### electron-ssr
+
+configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md
+
+- old VPN for Linux: https://github.com/hannuo/ssr-linux-client-electron
+- 22.2.9 [0.2.7](https://github.com/shadowsocksrr/electron-ssr/releases/tag/v0.2.7) and [0.2.6](https://github.com/qingshuisiyuan/electron-ssr-backup/releases/tag/v0.2.6)
+
+1. dependencies (as said in Debian系列安装与配置[Ubuntu.md](https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md))
+
+   ```shell
+   sudo apt install libcanberra-gtk-module libcanberra-gtk3-module gconf2 gconf-service libappindicator1 libssl-dev libsodium-dev
+   sudo apt install python
+   ```
+
+2. depends on Python! It will look like
+
+   ![electron-ssr-py](/home/gxf/desktop/work/git-repo/notes/techniques/images/electron-ssr-py.png)
+
+   If connection fails,
+
+   https://www.cnblogs.com/geekHao/p/12635970.html
+
+   从源头更改python的链接文件，**推荐这种方法**
+
+   1. 查看已安装的python版本和链接情况：
+
+      ```shell
+      ll /usr/bin/python*
+      ```
+
+   2. 删除原有的Python连接文件 (I don’t have one after reinstalling the system)
+
+      ```shell
+      sudo rm /usr/bin/python
+      ```
+
+   3. 建立指向Python3.X的连接
+
+      ```shell
+      sudo ln -s /usr/bin/python3 /usr/bin/python
+      ```
+
+      then it’s done
+
+3. an usual bug
+
+   similar situation https://github.com/qingshuisiyuan/electron-ssr-backup/issues/26
+
+   ![electron-ssr-dep](/home/gxf/desktop/work/git-repo/notes/techniques/images/electron-ssr-dep.png)
+
+   > libcrypto is along with `libssl-dev`. 这俩包不重要，主要是代理方式！
+
+   do as https://sobaigu.com/software-shadowsocksr-in-linux.html
+
+   just set the **manual proxy**...
+
+   > - but without electron-ssr, cannot see baidu.com?
+   > - after rebooting, become "auto-proxy"?? not so ok...switch back to auto, still ok??
+
+
+
 ### v2ray
 
 https://rongsp.com/article/96.html
-
-### electron-ssr
-
-https://github.com/hannuo/ssr-linux-client-electron
-
-depends on Python! If connection fails,
-
-https://www.cnblogs.com/geekHao/p/12635970.html
-
-从源头更改python的链接文件，**推荐这种方法**
-
-1. 查看已安装的python版本和链接情况：
-
-   ```shell
-   ll /usr/bin/python*
-   ```
-
-2. 删除原有的Python连接文件 (I don’t have one after reinstalling the system)
-
-   `sudo rm /usr/bin/python`
-
-3. 建立指向Python3.X的连接
-
-   ```shell
-   ln -s /usr/bin/python3 /user/bin/python
-   ```
-
-   then it’s done
 
 ### qt-5
 
@@ -128,7 +161,7 @@ chmod a+x Sha*
 
 连接--添加--URI
 
-### easy connect
+### easy connect (for school)
 
 https://rvpn.zju.edu.cn/com/installClient.html#auto-common
 
@@ -136,6 +169,8 @@ https://rvpn.zju.edu.cn/com/installClient.html#auto-common
 
 ```shell
 /usr/share/sangfor/EasyConnect/EasyConnect 
+(EasyConnect:51965): Pango-ERROR **: 15:18:20.035: Harfbuzz version too old (1.3.1)
+追踪与中断点陷阱 (核心已转储)
 ```
 
 https://www.cnblogs.com/cocode/p/12890684.html
@@ -177,16 +212,26 @@ Install according to official manual. Remember to configure environmental path.
 
 It also include PMV...see https://ccsb.scripps.edu/mgltools/ for all.
 
-note: for .tar.gz, you should put the folder right under the directory you want to install
-
-### backup
+note: for .tar.gz, you should **put the folder right under the directory you want to install**
 
 ```shell
-# paths
-export PATH=$PATH:/home/user/MGLTools-1.5.7/bin # mgltools
-export PATH=$PATH:/home/user/Desktop/work/xufan/bin # vina
-# now it can run under root
+export PATH=$PATH:/home/gxf/MGLTools-1.5.7/bin
 ```
+
+icon path: just search `adt` or `icon`
+
+> adt: $HOME/mgltools_x86_64Linux2_1.5.7/MGLToolsPckgs/Pmv/Icons/128x128/adt.png
+
+> ### backup
+>
+> ```shell
+> # paths
+> export PATH=$PATH:/home/user/MGLTools-1.5.7/bin # mgltools
+> export PATH=$PATH:/home/user/Desktop/work/xufan/bin # vina
+> # now it can run under root
+> ```
+>
+> ### 
 
 ### zdock
 
@@ -237,9 +282,11 @@ conda install -c bioconda gromacs
 
 ### GROMACS installation on a workstation
 
+#### prepare
+
   Follow this order:
 
-  1. check your graphic card driver
+  1. check your graphic card driver (and installation)
 
      https://blog.csdn.net/qq_43265072/article/details/107160297
 
@@ -260,19 +307,20 @@ conda install -c bioconda gromacs
        or `sudo apt-get`
 
        - http://www.fftw.org/fftw2_doc/fftw_6.html
+  - rather than official manual, I used
 
-       - rather than official manual, I used
+#### old try
 
-       **From here, you should see “on new system”**
+  1. **From here, you should see “on new system”**
 
-         ```shell
-       ./configure --prefix=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
-       # SINGLE AND DOUBLE PRECISION: see official manual
-       # --enable-float : single. default: double, which is not so useful in gromacs but QM/MM needs it..
-       
-       make
-       make -j install
-         ```
+     ```shell
+     ./configure --prefix=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
+     # SINGLE AND DOUBLE PRECISION: see official manual
+     # --enable-float : single. default: double, which is not so useful in gromacs but QM/MM needs it..
+     
+     make
+     make -j install
+     ```
 
      - enter "root" by `su`
 
@@ -361,8 +409,8 @@ make install
 #### on new system
 
 ```shell
-# fftw
-./configure --prefix=/home/gxf/fftw-3.3.9 --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
+# fftw: http://www.fftw.org/download.html
+./configure --prefix=/home/gxf/fftw-3.3.10 --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
 make -j 6
 make install
 
@@ -373,8 +421,8 @@ sudo apt install openmpi-bin
 sudo apt install cmake
 
 # gmx
-cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf/gromacs-2021-gpu \
--DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf/fftw-3.3.9 \
+cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf/gromacs-2021.5-gpu \
+-DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf/fftw-3.3.10 \
 -DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON \
 -DGMX_GPU=CUDA
 make -j 8
@@ -595,22 +643,44 @@ https://docs.conda.io/en/latest/miniconda.html
 
 a readme: https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml
 
-### acpype
+#### AmberTools
 
-this tool should be in ambertools...
+http://ambermd.org/GetAmber.php#ambertools
 
-https://github.com/alanwilter/acpype
+from conda
 
 ```shell
 # AmberTools. for gmx_MMPBSA, not so high python version
 conda create -n AmberTools20
 # conda remove --name AmberTools20 --all 
 conda activate AmberTools20
-conda install -c conda-forge ambertools=20 -y
+# conda install -c conda-forge ambertools=20 -y # old
+conda install -c conda-forge ambertools=21 compilers -y 
+# update
+conda update -c conda-forge ambertools
+```
+
+can also directly get the package
+
+
+### acpype
+
+this tool should be separate from ambertools...
+
+https://github.com/alanwilter/acpype#how-to-use-acpype
+
+```shell
 # acpype
-conda create -n Acpype python=3.6 # now 3.7. install appropriate version at step 3
+conda create -n Acpype python=3.6  # now 3.7. install appropriate version at step 3
 conda activate Acpype
 conda install -c acpype acpype -y # this contains ambertools-17
+```
+
+2022.2.11 update
+
+```shell
+conda create -n Acpype 
+conda install -c conda-forge acpype
 ```
 
 > ### mdtraj
@@ -625,6 +695,38 @@ conda install -c acpype acpype -y # this contains ambertools-17
 ### gaussian
 
 after extraction, http://sobereva.com/439
+
+```shell
+export g16root=$HOME/g16
+export GAUSS_SCRDIR=$HOME/g16/scratch
+export GAUSS_EXEDIR=$HOME/g16
+
+source /home/gxf/g16/bsd/g16.profile
+```
+
+> debugging experience 2022.2.10
+>
+> 1. below
+>
+>    ```
+>    PGFIO/stdio: No such file or directory
+>    PGFIO-F-/OPEN/unit=11/error code returned by host stdio - 2.
+>     File name = /home/gxf/g16/scratch/Gau-8001.inp
+>     In source file ml0.f, at line number 197
+>    ```
+>
+>    means you need to `mkdir scratch`
+>
+> 2. below
+>
+>    ```shell
+>    ntrex1: Bad file descriptor
+>    Segmentation fault (core dumped)
+>    ```
+>
+>    means you assigned an improper chk file in your .gjf file like 
+>
+>    `%chk=D:\Doctor\my work\undergraduate\TA\2019\0912\ethylene.chk`
 
 ### FESetup
 
@@ -666,13 +768,17 @@ export PATH=$PATH:/home/sjxlab/LigPlus/
 
 ### VMD
 
+#### pre-compiled version
+
 https://blog.csdn.net/qyb19970829/article/details/106947424
 
-customize
+> 2022.2.11, `vmd-1.9.4a55.bin.LINUXAMD64-CUDA102-OptiX650-OSPRay185-RTXRTRT.opengl.tar.gz`
 
 $install_bin_dir `/usr/local/bin` This is the location of the startup script ’vmd’.
 
-$install_library_dir `/usr/local/share` This is the location of all other VMD files.
+$install_library_dir `/usr/local/lib/$install_name` This is the location of all other VMD files.
+
+> customize: `$Home/$install_name/bin`	   `$Home/$install_name/lib`
 
 ```shell
 sudo  ./configure LINUXAMD64
@@ -681,44 +787,132 @@ cd src
 sudo make install
 ```
 
+if you don't want to customize, keep the installation folder to run the following when you want to remove vmd
+
+```shell
+sudo make uninstall
+```
+
 You may refer to the pdf attached for more options
 
 uninstall: delete the files  https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/25245.html
 
-### DiscoveryStudio  Visualizer
+#### source code
+
+http://www.ks.uiuc.edu/Research/vmd/doxygen/
+
+1. compile the plugins
+2. compile vmd
+
+### DiscoveryStudio Visualizer
 
 https://blog.csdn.net/huanzaizai/article/details/116273464
 
-https://forums.linuxmint.com/viewtopic.php?t=293074
+> https://forums.linuxmint.com/viewtopic.php?t=293074
+
+a newer: https://forums.linuxmint.com/viewtopic.php?t=352478
+
+```shell
+## prepare
+sudo apt-get install csh tcsh
+## step 1, get the program in your target path
+# at downloads
+bash BIOVIA_2021.DS2021Client.bin --noexec --target /home/gxf/BIOVIA2021
+cd /home/gxf/BIOVIA2021
+vi install_DSClient.sh
+# Change "#!/bin/sh" to "#!/bin/bash"
+# Insert "shopt -s expand_aliases" (without quotes) above "alias echoe="echo -e"" and save file.
+bash install_DSClient.sh
+# choose 2, create a folder in the current path as target, then choose 1 (or Enter) twice
+/home/gxf/BIOVIA2021/DiscoveryStudio2021
+# now you've created an installer
+
+## step 2, configure license pack
+cd /home/gxf/BIOVIA2021/DiscoveryStudio2021/lp_installer
+bash ./lp_setup_linux.sh --noexec --target /home/gxf/BIOVIA2021
+cd /home/gxf/BIOVIA2021/LicensePack/etc
+./lp_config
+vi lp_echovars
+# change "#! /bin/csh -f" to "#! /bin/tcsh"
+./lp_echovars
+cd ~/BIOVIA2021/DiscoveryStudio2021/bin
+./config_lp_location ~/BIOVIA2021/LicensePack/
+gedit ./DiscoveryStudio2021
+# change "ACCELRYS_DEBUG=0" to "ACCELRYS_DEBUG=1". 
+# Then when DSV is started via the terminal, you will get a verbose readout that can be inspected for errors.
+./DiscoveryStudio2021
+```
+
+> ~/BIOVIA2021/DiscoveryStudio2021/bin/../lib/DiscoveryStudio2021-bin: error while loading shared libraries: libpng15.so.15: cannot open shared object file: No such file or directory
+
+just refer to the first tutorial, download from http://sourceforge.net/projects/libpng/files/libpng15/
+
+unzip, install according to file `install`
+
+```shell
+sudo apt install zlib1g # zlib
+./configure --prefix=/home/gxf/libpng15
+make check
+make install
+cp /home/gxf/libpng15/lib/libpng15.so.15 ~/BIOVIA2021/DiscoveryStudio2021/lib/
+```
+
+and it''s working! [Applause]
+
+icon path: `/home/gxf/BIOVIA2021/DiscoveryStudio2021/share/doc/DS/Skins/Favicons` (or DSV)
 
   ### pymol
 
-  - the free version: https://zhuanlan.zhihu.com/p/58803491
+#### in python
 
-    just buy a license from pymol.org
+the free version: https://zhuanlan.zhihu.com/p/58803491
 
-    ```shell
-    conda install -c schrodinger pymol-bundle
-    ```
+just buy a license from pymol.org
 
-    and launch it from anaconda prompt
+```shell
+conda install -c schrodinger pymol-bundle
+```
 
-  - install with downloaded package
+and launch it from anaconda prompt. works in Windows...
 
-    ```shell
-    conda install -y --use-local pymol-2.5.0a0-py38h4cb1252_9.tar.bz2 
-    #  y: always yes
-    ```
+>   - install with downloaded package
+>
+>     ```shell
+>     conda install -y --use-local pymol-2.5.0a0-py38h4cb1252_9.tar.bz2 
+>     #  y: always yes
+>     ```
+>
+>     都是段错误
 
-    都是段错误
-
-#### for python api use
+for python api use
 
 ```shell
 conda create -n pymol
 conda activate pymol
 conda install -c schrodinger pymol-bundle
 ```
+
+#### independent
+
+Of course downloading the whole package is convenient!!
+
+https://pymol.org/ep
+
+the password is often `betabarrel`
+
+should use **PyMOL 2.0** (installer) rather than [EduPyMOL-v1.7.4.5-Linux-x86_64.tar.bz2](https://pymol.org/ep/EduPyMOL-v1.7.4.5-Linux-x86_64.tar.bz2)
+
+![pymol](https://gitee.com/gxf1212/notes/raw/master/techniques/images/pymol.jpg)
+
+> Icon=/home/gxf/pymol/share/pymol/data/pymol/icons/icon2_128x128.png
+
+btw, have you ever tried
+
+```shell
+sudo apt install pymol
+```
+
+
 
 ### Avogadro
 
@@ -815,6 +1009,7 @@ maybe I'll use smiles to determine similarity between atp and ligands...
 ```shell
 dnf install openbabel-gui # do not support converting to pdb???
 dnf install openbabel # without gui
+sudo apt-get install openbabel # debian
 ```
 
 This program has a interface with Python...
