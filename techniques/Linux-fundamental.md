@@ -1402,6 +1402,19 @@ not sure how to do...
 
 # Debugging experiences on the system
 
+## TOC
+
+This chapter also includes (kind of) systematic notes. Just make a memo.
+
+- debugging the system (file, driver)
+  - you are in emergency mode
+  - Nvidia driver-Linux kernel mismatch
+  - Press ctrl+c to cancel all filesystem check
+  - wrong fs type, bad option, bad superblock on
+- data recovery and backup
+  - rm -rf /* (testdisk recovery)
+  - Data Recovery from re-install (diskgenius, formatted disk, no mis-deleted, expand)
+
 ## 21.2.17 rm -rf /*
 
 what if you
@@ -1731,7 +1744,7 @@ no difference...
 
 Oh! finally unsolved! re-install the system!
 
-## 22.1.29 Data Recovery from re-install
+## 22.1.29 Data Recovery from re-install**
 
 formatted my HDD when re-installing the system, lost all data
 
@@ -1836,60 +1849,91 @@ sudo update-grub
 
 extundelete：恢复rm误删的文件
 
-### 同步备份网盘
+### win下扩容？
 
-> 总结：
->
-> https://zhuanlan.zhihu.com/p/65644792
->
-> https://mp.weixin.qq.com/s?__biz=MzA5NjEwNjE0OQ==&mid=2247486950&idx=1&sn=696f1a10603f5a4843e407034d36cdd4&source=41#wechat_redirect 好！
+https://www.cnblogs.com/yunweis/p/8023098.html
 
-#### 总述
+动态磁盘可以跨磁盘扩容
+
+diskgenius可以无损扩容？
+
+
+
+## 工作文件的同步备份网盘
+
+> alias：私有同步云盘
+>
+> 总结：https://zhuanlan.zhihu.com/p/65644792 国内外40个
+>
+> https://mp.weixin.qq.com/s?__biz=MzA5NjEwNjE0OQ==&mid=2247486950&idx=1&sn=696f1a10603f5a4843e407034d36cdd4&source=41#wechat_redirect 详细！
+>
+> https://funletu.com/1368/.html 国内的汇总。联通沃家云、电信天翼云、移动和彩云
+>
+> https://zhuanlan.zhihu.com/p/360780042 百度阿里迅雷腾讯详细对比
+>
+> https://zhuanlan.zhihu.com/p/44103820 如何搭建自己的私有云盘
+
+### 总述
 
 同步的特点：本地云端都要存；不需要分享文件
 
-考虑的因素：容量；传输速度；价格。
+考虑的因素：容量；传输速度；价格。尽量别限制流量
 
-跨平台能弄就弄，和文件系统结合倒不必
+其他要求：跨平台能弄就弄；和文件系统结合倒随便；文件大小其实都能解决
 
-Windows上平时文档以100GB为单位；如果时常要存项目数据，需要TB级别的
+> 速度慢也拉倒，但能白嫖大空间的，或交了钱的应该不会限制吧
 
-#### 对比
+Windows上平时文档以100GB为单位，但其实不常更新；加上手机，容量要求500G以下
+
+Linux和iPad上，如果时常要存项目数据，需要TB级别的
+
+- win上：软件包（<100G），本科文件（~56G），视频素材？
+- 手机：照片、表情包？
+- Pad：也就goodnotes了（课本、课件、笔记），主要是要云空间
+
+### 对比
 
 > 数据收集于2022年2月
+>
+> 类别：基本全平台、功能好但收费；免费很多最白嫖（自己搭）；
 
-| platform       | space (free)                | space (more paid)              | other                 |
-| -------------- | --------------------------- | ------------------------------ | --------------------- |
-| Google         | 15G                         | 2TB: 140SGD/year               | 功能全面              |
-| 坚果           | 流量1G上行、<br />3G下行/月 | 高级，96G，400/年              | 普通：42G，200/年     |
-| DropBox        |                             | 2T，120USD/年                  | 功能优秀              |
-| Onedrive       |                             | 1TB，398/年 office365          | Linux难，家庭版好？   |
-| pcloud         |                             | 2TB，350欧元终身<br />100欧/年 | 家庭版。。            |
-| Seafile        | 无限大                      | 开源的                         |                       |
-| Onedrive Edu   | 5T，全功能                  |                                |                       |
-|                |                             |                                |                       |
-|                |                             |                                |                       |
-| 超星云盘       | 100G                        |                                | 同步不错，Linux难     |
-| 天翼云对象存储 | 免费1T家庭版                | 1TB,￥102/月                   | Linux难，可以备份照片 |
+| platform     | space (free)                | space (more paid)                        | remark              |
+| ------------ | --------------------------- | ---------------------------------------- | ------------------- |
+| Google       | 15G                         | 2TB: 140SGD/year                         | 功能全面            |
+| 坚果         | 流量1G上行、<br />3G下行/月 | 高级，96G，400/年<br />普通：42G，200/年 | 同步等功能好        |
+| DropBox      |                             | 2T，120USD/年                            | 功能优秀            |
+| Onedrive     | 最多15G                     | 1TB，398/年<br />（在office365中         | Linux难，家庭版好？ |
+| pcloud       | 10G                         | 2TB，350欧元终身<br />100欧/年           | 家庭版。。          |
+| resilio      |                             | 没说，60$永久                            | 好像挺好            |
+|              |                             |                                          |                     |
+| Onedrive Edu | **5T，全功能**              |                                          |                     |
+| Seafile      | **无限大，开源**            |                                          |                     |
+| Nextcloud    | **无限大，开源**            |                                          | 也好？              |
+| Cloudreve    |                             |                                          |                     |
+|              |                             |                                          |                     |
 
-Google https://one.google.com/storage
 
-坚果 https://content.jianguoyun.com/15815.html
+稍微详细点的
 
-Dropbox https://www.dropbox.com/plans?trigger=sem
+1. Google https://one.google.com/storage
+2. 坚果 https://content.jianguoyun.com/15815.html
+3. Dropbox https://www.dropbox.com/plans?trigger=sem
+4. onedrive https://www.microsoft.com/zh-cn/microsoft-365/onedrive/compare-onedrive-plans
+5. pcloud https://www.pcloud.com/zh/cloud-storage-pricing-plans.html?period=lifetime
+6. seafile https://www.seafile.com/product/private_server/
+7. resilio https://www.resilio.com/individuals/     [install](https://cloud.tencent.com/developer/article/1719052?from=15425)
+8. Nextcloud https://nextcloud.com/install/#    https://blog.51cto.com/libinblog/3157762
+9. Cloudreve
+10. 
+11. iCloud当然只能苹果系列了，还要钱
 
-onedrive https://www.microsoft.com/zh-cn/microsoft-365/onedrive/compare-onedrive-plans
+最后选了
 
-pcloud https://www.pcloud.com/zh/cloud-storage-pricing-plans.html?period=lifetime
+- 
 
-seafile https://www.seafile.com/product/private_server/
+### 搭建类
 
-天翼云 https://cloud.189.cn/
-
-win的东西超星云盘够了吧？能不能同步？
-
-- https://passport2.chaoxing.com/enroll?refer=http://i.mooc.chaoxing.com
-- http://passport2.chaoxing.com/register3?refer=http%3A%2F%2Fpan.ananas.chaoxing.com
+https://wzfou.com/seafile-yunpan/
 
 #### Seafile
 
@@ -1901,7 +1945,7 @@ win的东西超星云盘够了吧？能不能同步？
 
 怎么用？自己整服务器？？
 
-#### OneDrive Client for Linux
+### OneDrive Client for Linux
 
 >[!NOTE]
 >
@@ -1913,19 +1957,61 @@ https://www.office.com/ 工作台？还是business的，这样功能就挺多了
 
 https://stuxjtueducn-my.sharepoint.com/ 原来就是nus那个呀。。
 
+office365教育版也可白嫖。。outlook那些，全功能！
+
+但是害怕毕业，换账号又要迁移？
+
 Linux怎么整呢？好多不同的API，看知乎
 
+### 其他
 
+anaconda环境信息同步？
 
-### win下扩容？
+白嫖GPU：https://www.zhihu.com/question/271520755
 
-https://www.cnblogs.com/yunweis/p/8023098.html
+### 网盘（存储）
 
-动态磁盘可以跨磁盘扩容
+> 如果我要分享，也是g16、rosetta那种大文件
+>
+> 替代百度的话，可以不那么大，对速度要求高，但小文件直接通过QQ之类的？
+>
+> 另外一个是存影视的，要大。参考那个群吧，就是百度、阿里、迅雷
 
-diskgenius可以无损扩容？
+这些基本不能同步pc，可以备份手机、Pad。。可存储、分享
 
+| platform     | space (free)                                        | space (more paid)                        | remark                                  |
+| ------------ | --------------------------------------------------- | ---------------------------------------- | --------------------------------------- |
+| 迅雷云盘     | 500G                                                |                                          | 同步只有文件夹                          |
+| 阿里云盘     | 100G+领空间                                         |                                          | 除Linux外全平台<br />不同步             |
+|              |                                                     |                                          |                                         |
+| 超星云盘     | 100G，学生                                          |                                          | 同步？不限速<br />仅win/mac             |
+| 天翼云盘     | 1T家庭（没了                                        | 4TB,￥120/年                             | 除Linux外全平台                         |
+| 115          | 15G                                                 | 5TB,￥500/年                             | win/Android                             |
+| 和彩云       | 个人家庭各20G<br />新手领取1T/1年<br />做任务领福利 |                                          | 除Linux外全平台<br />不限速，手机同步？ |
 
+1. 百度：不能同步？下载贼慢？还是老实做分享盘。。
+
+2. 阿里 
+
+3. win的东西--超星云盘
+
+   - https://passport2.chaoxing.com/enroll?refer=http://i.mooc.chaoxing.com
+   - http://pan-yz.chaoxing.com/app/download
+
+   单文件限制1.5G。同步？？
+
+4. 天翼云 https://cloud.189.cn/ 傻瓜式操作即可
+
+   活动结束了，个人30G，家庭60G
+
+5. 115，会员+签到可弄好多？最大115GB？？
+
+6. 其他
+
+   - 腾讯微云 https://www.weiyun.com/ 才10G，要买
+   - 亿方云：偏企业，同步
+   - 蓝奏云：有点小，不限速
+   - MEGA：50G，很受限 https://funletu.com/1113/.html
 
 # Other---the first time I install this
 
