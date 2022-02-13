@@ -31,6 +31,14 @@ Fret not over bygones, and the forward journey take.
 
 3. 
 
+## pycharm
+
+1. http://errornoerror.com/question/13223264808178804318/
+
+   In[1]: ipython
+
+2. 
+
 ## Jupyter Notebook
 
 Jupyter Notebook 更换主题（背景、字体）:  https://www.cnblogs.com/shanger/p/12006161.html
@@ -108,7 +116,7 @@ xjtu email: just login, default configuration
    ```shell
    # other
    git config --global user.name gxf1212 # user.email xxx
-   git config --global user.pas
+   git config --global user.email
    git clone url.git # clone a repo
    ```
    
@@ -172,7 +180,18 @@ xjtu email: just login, default configuration
    git push -f
    ```
 
-8. 
+8. proxy
+
+   https://blog.csdn.net/zphuangtang/article/details/112151857
+
+   重置git代理：
+
+   ```shell
+   git config --global https.proxy ""
+   git config --global http.proxy "" 
+   ```
+
+   
 
 ## Build a note site with docsify
 

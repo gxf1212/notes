@@ -191,7 +191,9 @@ This is a record of my operations during 折腾ing the system, in order not to f
     >
     > Linux also openwith sogou, but no such program...
 
-  - still can't see conf gui, but `gedit /home/gxf/.config/sogoupinyin/dict/shell.conf`
+    设置界面自己好了。。scel file添加后在客户端勾选即可。皮肤还不行
+
+    > still can't see conf gui, but `gedit /home/gxf/.config/sogoupinyin/dict/shell.conf`
 
 - 2022.1.4 use google pinyin. 至少能用。。先用吧阿巴阿巴
   
@@ -802,6 +804,16 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   ```shell
   conda update -n base conda
   ```
+  
+- EnvironmentNotWritableError: The current user does not have write permissions to the targe...
+
+  https://www.jianshu.com/p/95e52d6b46ac   problem: permission 权限
+
+  ```shell
+  sudo chmod -R 777 anaconda3/
+  ```
+
+- 
 
 ### svn
 
@@ -1849,14 +1861,6 @@ sudo update-grub
 
 extundelete：恢复rm误删的文件
 
-### win下扩容？
-
-https://www.cnblogs.com/yunweis/p/8023098.html
-
-动态磁盘可以跨磁盘扩容
-
-diskgenius可以无损扩容？
-
 
 
 ## 工作文件的同步备份网盘
@@ -1943,9 +1947,34 @@ https://stuxjtueducn-my.sharepoint.com/ 原来就是nus那个呀。。
 
 office365教育版也可白嫖。。outlook那些，全功能！
 
-但是害怕毕业，换账号又要迁移？
+但是害怕毕业，换账号又要迁移？自动上传倒没事
 
 Linux怎么整呢？好多不同的API，看知乎
+
+[Windows也可自选？](https://support.microsoft.com/en-us/office/choose-which-onedrive-folders-to-sync-to-your-computer-98b8b011-8b94-419b-aa95-a14ff2415e85)，怎么配置？
+
+### 自动上传类
+
+要求：能控制文件夹？（主要就是work，picture，packages），最好别制定文件夹的。看哪个star的多。。
+
+> https://zhuanlan.zhihu.com/p/372355859
+> https://github.com/skilion/onedrive
+> https://github.com/MoeClub/OneList/tree/master/OneDriveUploader
+> https://www.moerats.com/archives/491/
+
+#### onedrive
+
+https://github.com/abraunegg/onedrive
+
+The 'skilion' version contains a significant number of defects in how the local sync state is managed.
+
+- [install](https://github.com/abraunegg/onedrive/blob/master/docs/INSTALL.md#dependencies-ubuntu-18x-ubuntu-19x-ubuntu-20x--debian-9-debian-10---x86_64)
+
+
+
+#### baidunetdisk-python
+
+http://tiramisutes.github.io/2015/07/28/Linux-backup.html
 
 ### 搭建类
 
@@ -1960,12 +1989,6 @@ https://wzfou.com/seafile-yunpan/
 对于 Linux，有两个官方客户端 Seadrive 和 Seafile，前者是挂载文件系统，后者用于同步。对于一个自建网盘，它功能相当纯粹
 
 怎么用？自己整服务器？？
-
-### 自动上传类
-
-#### OneDrive Client for Linux
-
-
 
 ### 其他
 
@@ -2017,7 +2040,25 @@ anaconda环境信息同步？
    - 蓝奏云：有点小，不限速
    - MEGA：50G，很受限 https://funletu.com/1113/.html
 
-# Other---the first time I install this
+# Windows notes
+
+1. windows如何查看用户名 https://zhuanlan.zhihu.com/p/129858590
+
+   控制面板--用户账户
+
+2. win下扩容？
+
+   https://www.cnblogs.com/yunweis/p/8023098.html
+
+   动态磁盘可以跨磁盘扩容
+
+   diskgenius可以无损扩容？
+
+3. 
+
+
+
+# Other---the first time I install Ubuntu
 
 not helpful now
 

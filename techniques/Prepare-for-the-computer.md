@@ -101,7 +101,7 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
 2. depends on Python! It will look like
 
-   ![electron-ssr-py](/home/gxf/desktop/work/git-repo/notes/techniques/images/electron-ssr-py.png)
+   ![electron-ssr-py](https://gitee.com/gxf1212/notes/raw/master/techniques/images/electron-ssr-py.png)
 
    If connection fails,
 
@@ -133,7 +133,7 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
    similar situation https://github.com/qingshuisiyuan/electron-ssr-backup/issues/26
 
-   ![electron-ssr-dep](/home/gxf/desktop/work/git-repo/notes/techniques/images/electron-ssr-dep.png)
+   ![electron-ssr-dep](https://gitee.com/gxf1212/notes/raw/master/techniques/images/electron-ssr-dep.png)
 
    > libcrypto is along with `libssl-dev`. 这俩包不重要，主要是代理方式！
 
@@ -143,6 +143,14 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
    > - but without electron-ssr, cannot see baidu.com?
    > - after rebooting, become "auto-proxy"?? not so ok...switch back to auto, still ok??
+   
+   in terminal??
+   
+   ```
+   export http_proxy="http://127.0.0.1:12333"
+   ```
+   
+   
 
 
 
