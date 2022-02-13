@@ -1638,7 +1638,7 @@ testdisk
 > 
 > 报错信息大致为：
 > 
-> ![22.1.14-gdisk1](E:\GitHub_repo\notes\techniques\images\22.1.14-gdisk1.jpg)
+> ![22.1.14-gdisk1](https://gitee.com/gxf1212/notes/raw/master/techniques/images/22.1.14-gdisk1.jpg)
 > 
 > ```
 > Problem: The CRC for the main partition table is invalid. This table may be
@@ -1875,13 +1875,15 @@ diskgenius可以无损扩容？
 
 ### 总述
 
-同步的特点：本地云端都要存；不需要分享文件
+同步的特点：本地云端都要存，倒不用不同平台都同步；不需要分享文件
 
 考虑的因素：容量；传输速度；价格。尽量别限制流量
 
 其他要求：跨平台能弄就弄；和文件系统结合倒随便；文件大小其实都能解决
 
 > 速度慢也拉倒，但能白嫖大空间的，或交了钱的应该不会限制吧
+>
+> 那么问题来了，为啥不用git呢。。
 
 Windows上平时文档以100GB为单位，但其实不常更新；加上手机，容量要求500G以下
 
@@ -1891,7 +1893,7 @@ Linux和iPad上，如果时常要存项目数据，需要TB级别的
 - 手机：照片、表情包？
 - Pad：也就goodnotes了（课本、课件、笔记），主要是要云空间
 
-### 对比
+### 直接网盘
 
 > 数据收集于2022年2月
 >
@@ -1927,25 +1929,7 @@ Linux和iPad上，如果时常要存项目数据，需要TB级别的
 10. 
 11. iCloud当然只能苹果系列了，还要钱
 
-最后选了
-
-- 
-
-### 搭建类
-
-https://wzfou.com/seafile-yunpan/
-
-#### Seafile
-
-速度很快，免费，理论上其空间无限大
-
-挂载盘 (不占用本地空间，直接访问云端文件)：要商业版
-
-对于 Linux，有两个官方客户端 Seadrive 和 Seafile，前者是挂载文件系统，后者用于同步。对于一个自建网盘，它功能相当纯粹
-
-怎么用？自己整服务器？？
-
-### OneDrive Client for Linux
+#### onedrive
 
 >[!NOTE]
 >
@@ -1962,6 +1946,26 @@ office365教育版也可白嫖。。outlook那些，全功能！
 但是害怕毕业，换账号又要迁移？
 
 Linux怎么整呢？好多不同的API，看知乎
+
+### 搭建类
+
+https://wzfou.com/seafile-yunpan/
+
+#### Seafile
+
+速度很快，免费，理论上其空间无限大
+
+挂载盘 (不占用本地空间，直接访问云端文件)：要商业版
+
+对于 Linux，有两个官方客户端 Seadrive 和 Seafile，前者是挂载文件系统，后者用于同步。对于一个自建网盘，它功能相当纯粹
+
+怎么用？自己整服务器？？
+
+### 自动上传类
+
+#### OneDrive Client for Linux
+
+
 
 ### 其他
 
