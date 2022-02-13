@@ -1951,18 +1951,36 @@ office365教育版也可白嫖。。outlook那些，全功能！
 
 Linux怎么整呢？好多不同的API，看知乎
 
-[Windows也可自选？](https://support.microsoft.com/en-us/office/choose-which-onedrive-folders-to-sync-to-your-computer-98b8b011-8b94-419b-aa95-a14ff2415e85)，怎么配置？
 
-### 自动上传类
 
-要求：能控制文件夹？（主要就是work，picture，packages），最好别制定文件夹的。看哪个star的多。。
+自动上传。要求：能控制文件夹？（主要就是work，picture，packages），最好别制定文件夹的。看哪个star的多。。
 
 > https://zhuanlan.zhihu.com/p/372355859
 > https://github.com/skilion/onedrive
 > https://github.com/MoeClub/OneList/tree/master/OneDriveUploader
 > https://www.moerats.com/archives/491/
 
-#### onedrive
+##### Windows
+
+[Windows也可自选文件夹？](https://jingyan.baidu.com/article/4665065836e951f549e5f822.html)  [创建符号链接](https://liam.page/2018/12/10/mklink-in-Windows/)
+
+以管理员身份运行cmd
+
+```
+mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\soft packages" E:\soft
+mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\undergraduate" E:\undergraduate_study
+mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\fun\music" E:\KuGou
+mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\fun\T&J" "F:\makevideo\Tom and Jerry"
+mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\smart phone" "F:\smart phone backup"
+```
+
+> /D：为目录创建符号链接
+>
+> 路径必须双引号；先创建文件夹再链接；不能有中文、符号
+
+网页端同步manage
+
+##### Linux
 
 https://github.com/abraunegg/onedrive
 
