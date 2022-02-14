@@ -425,9 +425,11 @@ This is a record of my operations during 折腾ing the system, in order not to f
    
    区别就是删了源文件，硬链接还能访问，软的就不行。但是两种链接都可以改名字？
    
+   如果要类比，硬链接就像win备份用的那个符号链接，软链接则像快捷方式
+   
    ![img](https://pic4.zhimg.com/80/v2-679da10fd5e4193d0098e6d6a35d5e1b_1440w.jpg)
    
-   ![img](https://pic3.zhimg.com/80/v2-9abd33350e3bcb401f379752874f9b52_1440w.jpg)
+   <img src="https://pic3.zhimg.com/80/v2-9abd33350e3bcb401f379752874f9b52_1440w.jpg" alt="img" style="zoom:80%;" />
    
 4. `su root`: enter root. pw: a
 
@@ -1338,11 +1340,11 @@ https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html
 download [cuDNN Library for Linux (x86_64)](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.2.4/11.4_20210831/cudnn-11.4-linux-x64-v8.2.4.15.tgz)
 
 ```shell
-# 22 1st time
+# 22 Jan. 1st time
 sudo cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include 
 sudo cp -P cudnn-*-archive/lib/libcudnn* /usr/local/cuda/lib64 
 sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-# 22 2nd time
+# 22 Feb. 2nd time
 sudo cp cudnn/cuda/include/cudnn*.h /usr/local/cuda/include 
 sudo cp -P cudnn/cuda/lib64/libcudnn* /usr/local/cuda/lib64 
 sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
@@ -1862,209 +1864,6 @@ sudo update-grub
 extundelete：恢复rm误删的文件
 
 
-
-## 工作文件的同步备份网盘
-
-> alias：私有同步云盘
->
-> 总结：https://zhuanlan.zhihu.com/p/65644792 国内外40个
->
-> https://mp.weixin.qq.com/s?__biz=MzA5NjEwNjE0OQ==&mid=2247486950&idx=1&sn=696f1a10603f5a4843e407034d36cdd4&source=41#wechat_redirect 详细！
->
-> https://funletu.com/1368/.html 国内的汇总。联通沃家云、电信天翼云、移动和彩云
->
-> https://zhuanlan.zhihu.com/p/360780042 百度阿里迅雷腾讯详细对比
->
-> https://zhuanlan.zhihu.com/p/44103820 如何搭建自己的私有云盘
-
-### 总述
-
-同步的特点：本地云端都要存，倒不用不同平台都同步；不需要分享文件
-
-考虑的因素：容量；传输速度；价格。尽量别限制流量
-
-其他要求：跨平台能弄就弄；和文件系统结合倒随便；文件大小其实都能解决
-
-> 速度慢也拉倒，但能白嫖大空间的，或交了钱的应该不会限制吧
->
-> 那么问题来了，为啥不用git呢。。
-
-Windows上平时文档以100GB为单位，但其实不常更新；加上手机，容量要求500G以下
-
-Linux和iPad上，如果时常要存项目数据，需要TB级别的
-
-但我希望手机、（尤其是）Pad能不仅是同步，而是云端硬盘。。
-
-- win上：软件包（<100G），本科文件（~56G），视频素材？
-- 手机：照片、表情包？
-- Pad：也就goodnotes（课本、课件、笔记）和xmind了，主要是要云空间
-
-### 直接网盘
-
-> 数据收集于2022年2月
->
-> 类别：基本全平台、功能好但收费；免费很多最白嫖（自己搭）；
-
-| platform     | space (free)                | space (more paid)                        | remark              |
-| ------------ | --------------------------- | ---------------------------------------- | ------------------- |
-| Google       | 15G                         | 2TB: 140SGD/year                         | 功能全面            |
-| 坚果         | 流量1G上行、<br />3G下行/月 | 高级，96G，400/年<br />普通：42G，200/年 | 同步等功能好        |
-| DropBox      |                             | 2T，120USD/年                            | 功能优秀            |
-| Onedrive     | 最多15G                     | 1TB，398/年<br />（在office365中         | Linux难，家庭版好？ |
-| pcloud       | 10G                         | 2TB，350欧元终身<br />100欧/年           | 家庭版。。          |
-| resilio      |                             | 没说，60$永久                            | 好像挺好            |
-|              |                             |                                          |                     |
-| Onedrive Edu | **5T，全功能**              |                                          |                     |
-| Seafile      | **无限大，开源**            |                                          |                     |
-| Nextcloud    | **无限大，开源**            |                                          | 也好？              |
-| Cloudreve    |                             |                                          |                     |
-|              |                             |                                          |                     |
-
-
-稍微详细点的
-
-1. Google https://one.google.com/storage
-2. 坚果 https://content.jianguoyun.com/15815.html
-3. Dropbox https://www.dropbox.com/plans?trigger=sem
-4. onedrive https://www.microsoft.com/zh-cn/microsoft-365/onedrive/compare-onedrive-plans
-5. pcloud https://www.pcloud.com/zh/cloud-storage-pricing-plans.html?period=lifetime
-6. seafile https://www.seafile.com/product/private_server/
-7. resilio https://www.resilio.com/individuals/     [install](https://cloud.tencent.com/developer/article/1719052?from=15425)
-8. Nextcloud https://nextcloud.com/install/#    https://blog.51cto.com/libinblog/3157762
-9. Cloudreve
-10. 
-11. iCloud当然只能苹果系列了，还要钱
-
-#### onedrive
-
->[!NOTE]
->
->免费申请OneDrive 5T 网盘空间（教育邮箱） https://signup.microsoft.com/signup?sku=student
->
->https://www.onedrives.net/4864.html 可能是白嫖邮箱？
-
-https://www.office.com/ 工作台？还是business的，这样功能就挺多了。。
-
-https://stuxjtueducn-my.sharepoint.com/ 原来就是nus那个呀。。
-
-office365教育版也可白嫖。。outlook那些，全功能！
-
-- 但是害怕毕业，换账号又要迁移？自动上传倒没事
-- 自动上传。要求：能控制文件夹？（主要就是work，picture，packages），最好别制定文件夹的。用链接解决了
-
-##### 速度太慢
-
-换美国节点？host？
-
-##### Windows
-
-[Windows也可自选文件夹？](https://jingyan.baidu.com/article/4665065836e951f549e5f822.html)  [创建符号链接](https://liam.page/2018/12/10/mklink-in-Windows/)
-
-以管理员身份运行cmd
-
-```
-mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\soft packages" E:\soft
-mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\undergraduate" E:\undergraduate_study
-mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\fun\music" E:\KuGou
-mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\fun\T&J" "F:\makevideo\Tom and Jerry"
-mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\smart phone" "F:\smart phone backup"
-```
-
-> /D：为目录创建符号链接
->
-> 路径必须双引号；先创建文件夹再链接；不能有中文、符号
-
-网页端同步manage
-
-##### iPad
-
-Goodnotes：https://zhuanlan.zhihu.com/p/104734199  需科学上网
-
-##### Linux
-
-好多不同的API，看知乎。。看哪个star的多。。
-
-> https://zhuanlan.zhihu.com/p/372355859
-> https://github.com/MoeClub/OneList/tree/master/OneDriveUploader
-> https://www.moerats.com/archives/491/
-
-###### abraunegg/onedrive
-
-https://github.com/abraunegg/onedrive
-
-[The 'skilion' version](https://github.com/skilion/onedrive) contains a significant number of defects in how the local sync state is managed.
-
-- [install](https://github.com/abraunegg/onedrive/blob/master/docs/INSTALL.md#dependencies-ubuntu-18x-ubuntu-19x-ubuntu-20x--debian-9-debian-10---x86_64)
-
-
-
-#### baidunetdisk-python
-
-http://tiramisutes.github.io/2015/07/28/Linux-backup.html
-
-### 搭建类
-
-https://wzfou.com/seafile-yunpan/
-
-#### Seafile
-
-速度很快，免费，理论上其空间无限大
-
-挂载盘 (不占用本地空间，直接访问云端文件)：要商业版
-
-对于 Linux，有两个官方客户端 Seadrive 和 Seafile，前者是挂载文件系统，后者用于同步。对于一个自建网盘，它功能相当纯粹
-
-怎么用？自己整服务器？？
-
-### 其他
-
-anaconda环境信息同步？
-
-白嫖GPU：https://www.zhihu.com/question/271520755
-
-### 网盘（存储）
-
-> 如果我要分享，也是g16、rosetta那种大文件
->
-> 替代百度的话，可以不那么大，对速度要求高，但小文件直接通过QQ之类的？
->
-> 另外一个是存影视的，要大。参考那个群吧，就是百度、阿里、迅雷
-
-这些基本不能同步pc，可以备份手机、Pad。。可存储、分享
-
-| platform     | space (free)                                        | space (more paid)                        | remark                                  |
-| ------------ | --------------------------------------------------- | ---------------------------------------- | --------------------------------------- |
-| 迅雷云盘     | 500G                                                |                                          | 同步只有文件夹                          |
-| 阿里云盘     | 100G+领空间                                         |                                          | 除Linux外全平台<br />不同步             |
-|              |                                                     |                                          |                                         |
-| 超星云盘     | 100G，学生                                          |                                          | 同步？不限速<br />仅win/mac             |
-| 天翼云盘     | 1T家庭（没了                                        | 4TB,￥120/年                             | 除Linux外全平台                         |
-| 115          | 15G                                                 | 5TB,￥500/年                             | win/Android                             |
-| 和彩云       | 个人家庭各20G<br />新手领取1T/1年<br />做任务领福利 |                                          | 除Linux外全平台<br />不限速，手机同步？ |
-
-1. 百度：不能同步？下载贼慢？还是老实做分享盘。。
-
-2. 阿里 
-
-3. win的东西--超星云盘
-
-   - https://passport2.chaoxing.com/enroll?refer=http://i.mooc.chaoxing.com
-   - http://pan-yz.chaoxing.com/app/download
-
-   单文件限制1.5G。同步？？
-
-4. 天翼云 https://cloud.189.cn/ 傻瓜式操作即可
-
-   活动结束了，个人30G，家庭60G
-
-5. 115，会员+签到可弄好多？最大115GB？？
-
-6. 其他
-
-   - 腾讯微云 https://www.weiyun.com/ 才10G，要买
-   - 亿方云：偏企业，同步
-   - 蓝奏云：有点小，不限速
-   - MEGA：50G，很受限 https://funletu.com/1113/.html
 
 # Windows notes
 
