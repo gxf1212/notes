@@ -1893,9 +1893,11 @@ Windows上平时文档以100GB为单位，但其实不常更新；加上手机�
 
 Linux和iPad上，如果时常要存项目数据，需要TB级别的
 
+但我希望手机、（尤其是）Pad能不仅是同步，而是云端硬盘。。
+
 - win上：软件包（<100G），本科文件（~56G），视频素材？
 - 手机：照片、表情包？
-- Pad：也就goodnotes了（课本、课件、笔记），主要是要云空间
+- Pad：也就goodnotes（课本、课件、笔记）和xmind了，主要是要云空间
 
 ### 直接网盘
 
@@ -1947,18 +1949,12 @@ https://stuxjtueducn-my.sharepoint.com/ 原来就是nus那个呀。。
 
 office365教育版也可白嫖。。outlook那些，全功能！
 
-但是害怕毕业，换账号又要迁移？自动上传倒没事
+- 但是害怕毕业，换账号又要迁移？自动上传倒没事
+- 自动上传。要求：能控制文件夹？（主要就是work，picture，packages），最好别制定文件夹的。用链接解决了
 
-Linux怎么整呢？好多不同的API，看知乎
+##### 速度太慢
 
-
-
-自动上传。要求：能控制文件夹？（主要就是work，picture，packages），最好别制定文件夹的。看哪个star的多。。
-
-> https://zhuanlan.zhihu.com/p/372355859
-> https://github.com/skilion/onedrive
-> https://github.com/MoeClub/OneList/tree/master/OneDriveUploader
-> https://www.moerats.com/archives/491/
+换美国节点？host？
 
 ##### Windows
 
@@ -1980,11 +1976,23 @@ mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\smart phone" "F:\smart phone bac
 
 网页端同步manage
 
+##### iPad
+
+Goodnotes：https://zhuanlan.zhihu.com/p/104734199  需科学上网
+
 ##### Linux
+
+好多不同的API，看知乎。。看哪个star的多。。
+
+> https://zhuanlan.zhihu.com/p/372355859
+> https://github.com/MoeClub/OneList/tree/master/OneDriveUploader
+> https://www.moerats.com/archives/491/
+
+###### abraunegg/onedrive
 
 https://github.com/abraunegg/onedrive
 
-The 'skilion' version contains a significant number of defects in how the local sync state is managed.
+[The 'skilion' version](https://github.com/skilion/onedrive) contains a significant number of defects in how the local sync state is managed.
 
 - [install](https://github.com/abraunegg/onedrive/blob/master/docs/INSTALL.md#dependencies-ubuntu-18x-ubuntu-19x-ubuntu-20x--debian-9-debian-10---x86_64)
 
