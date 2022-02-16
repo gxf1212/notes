@@ -114,7 +114,7 @@ https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography
 
 2. 
 
-## cloud backup and sync for files in all platforms
+# cloud backup and sync for files in all platforms
 
 > 工作文件的同步备份网盘，alias：私有同步云盘
 >
@@ -128,7 +128,7 @@ https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography
 >
 > https://zhuanlan.zhihu.com/p/44103820 如何搭建自己的私有云盘
 
-### Requirement
+## Requirement
 
 同步的特点：本地云端都要存，倒不用不同平台都同步；不需要分享文件
 
@@ -150,7 +150,7 @@ Linux和iPad上，如果时常要存项目数据，需要TB级别的
 - 手机：照片、表情包？
 - Pad：也就goodnotes（课本、课件、笔记）和xmind了，主要是要云空间
 
-### net disks for syncing
+## net disks for syncing
 
 > 数据收集于2022年2月
 >
@@ -186,7 +186,7 @@ Linux和iPad上，如果时常要存项目数据，需要TB级别的
 10. 
 11. iCloud当然只能苹果系列了，还要钱
 
-#### onedrive
+### onedrive
 
 >[!NOTE]
 >
@@ -203,11 +203,11 @@ office365教育版也可白嫖。。outlook那些，全功能！
 - 但是害怕毕业，换账号又要迁移？自动上传倒没事
 - 自动上传。要求：能控制文件夹？（主要就是work，picture，packages），最好别制定文件夹的。用链接解决了
 
-##### too slow?
+#### too slow?
 
 换美国节点？host？
 
-##### Windows
+#### Windows
 
 [Windows也可自选文件夹？](https://jingyan.baidu.com/article/4665065836e951f549e5f822.html)  [创建符号链接](https://liam.page/2018/12/10/mklink-in-Windows/)
 
@@ -227,11 +227,11 @@ mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\smart phone" "F:\smart phone bac
 
 网页端同步manage
 
-##### iPad
+#### iPad
 
 Goodnotes：https://zhuanlan.zhihu.com/p/104734199  需科学上网
 
-##### Linux
+#### Linux
 
 好多不同的API，看知乎。。看哪个star的多。。
 
@@ -239,7 +239,7 @@ Goodnotes：https://zhuanlan.zhihu.com/p/104734199  需科学上网
 > https://github.com/MoeClub/OneList/tree/master/OneDriveUploader
 > https://www.moerats.com/archives/491/
 
-###### abraunegg/onedrive
+##### abraunegg/onedrive
 
 https://github.com/abraunegg/onedrive. I've cloned it to save the docs.
 
@@ -259,25 +259,25 @@ https://github.com/abraunegg/onedrive. I've cloned it to save the docs.
 
 - 
 
-###### problems
+##### problems
 
 1. Using application %27OneDrive Free Client%27 is currently not supported for your organization stu.xjtu.edu.cn because it is in an unmanaged state. An administrator needs to claim ownership of the company by DNS validation of stu.xjtu.edu.cn before the application OneDrive Free Client can be provisioned.
 
    > %27: '
 
-   
+   https://github.com/skilion/onedrive/issues/244
 
 2. 
 
-#### baidunetdisk-python
+### baidunetdisk-python
 
 http://tiramisutes.github.io/2015/07/28/Linux-backup.html
 
-### set up a netdisk?
+## set up a netdisk?
 
 https://wzfou.com/seafile-yunpan/
 
-#### Seafile
+### Seafile
 
 速度很快，免费，理论上其空间无限大
 
@@ -287,13 +287,13 @@ https://wzfou.com/seafile-yunpan/
 
 怎么用？自己整服务器？？
 
-### other
+## other thoughts
 
 anaconda环境信息同步？
 
 白嫖GPU：https://www.zhihu.com/question/271520755
 
-### just for storage
+## just for storage
 
 > 如果我要分享，也是g16、rosetta那种大文件
 >
@@ -337,7 +337,6 @@ anaconda环境信息同步？
    - 蓝奏云：有点小，不限速
    - MEGA：50G，很受限 https://funletu.com/1113/.html
 
-# 
 
 # Applications for fun
 
@@ -358,6 +357,7 @@ anaconda环境信息同步？
    # other
    git config --global user.name gxf1212 # user.email xxx
    git config --global user.email
+   # also works for my github r
    git clone url.git # clone a repo
    ```
    
