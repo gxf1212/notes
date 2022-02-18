@@ -43,13 +43,17 @@ Fret not over bygones, and the forward journey take.
 
 3. 
 
-## pycharm
+## Pycharm
 
-1. http://errornoerror.com/question/13223264808178804318/
+1. https://blog.csdn.net/qq_41330454/article/details/105906347 控制台命令提示符是In[2]. ipython!
 
-   In[1]: ipython
+   http://errornoerror.com/question/13223264808178804318/
 
-2. 
+2. [关闭代码风格检查](https://blog.csdn.net/u013088062/article/details/50001189)
+
+3. matplotlib fonts. just copy .ttf files to ~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf
+
+   https://www.pythonheidong.com/blog/article/498305/f571ce16edc768ad1839/ 
 
 ## Jupyter Notebook
 

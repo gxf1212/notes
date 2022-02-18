@@ -604,7 +604,8 @@ if in conda, no need to add `amber.pythons`
 https://gromacswrapper.readthedocs.io/en/latest/index.html
 
 ```shell
-pip install GromacsWrapper
+pip install GromacsWrapper  #
+conda install -c conda-forge -c bioconda gromacswrapper
 from gromacs.fileformats.xvg import XVG # read .xvg files
 ```
 
@@ -622,6 +623,8 @@ https://anaconda.org/conda-forge/pymbar git address and doc
 
 ### AMBER
 
+Amber软件包主要包括2个部分：Amber Tools和Amber，其中Amber Tools可以免费在[Amber官网](http://ambermd.org/AmberTools17-get.html)下载，Tools中包含了Amber几乎所有的模块，Sander、tleap、MMPBSA等最核心的内容都可以免费使用。而另外的Amber则是唯一收费的部分，该部分主要包括了PMEMD以及GPU加速 的功能
+
 installation: https://ambermd.org/InstFedora.php under user
 
 >error:
@@ -637,17 +640,17 @@ installation: https://ambermd.org/InstFedora.php under user
 >
 >remember this is always the way to install a different version of gcc, which seems to overwrite the configuration in /usr/bin....
 >
->failed here: https://stackoom.com/question/3nN9A/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3-archlinux%E4%B8%AD%E7%9A%84gcc%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-sys-ustat-h-%E6%B2%A1%E6%9C%89%E8%BF%99%E6%A0%B7%E7%9A%84%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95
+>failed here: [link](https://stackoom.com/question/3nN9A/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3-archlinux%E4%B8%AD%E7%9A%84gcc%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-sys-ustat-h-%E6%B2%A1%E6%9C%89%E8%BF%99%E6%A0%B7%E7%9A%84%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95)
 
 from miniconda (which only includes python in conda)
 
 https://docs.conda.io/en/latest/miniconda.html
 
-> I'm not using neither openmpi cuda here. maybe refer to
+> I'm not using neither openmpi cuda here. maybe refer to [this](https://jerkwin.github.io/2017/12/26/Amber_2017_%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86_%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%AE%89%E8%A3%85/) a intro to Amber program
 >
-> https://jerkwin.github.io/2017/12/26/Amber_2017_%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86_%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%AE%89%E8%A3%85/
+> CentOS: https://www.cnblogs.com/wq242424/p/8857296.html
 >
-> https://www.cnblogs.com/wq242424/p/8857296.html
+> Ubuntu: https://blog.csdn.net/qq_33953882/article/details/113995531
 
 a readme: https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml
 
@@ -700,16 +703,16 @@ conda install -c conda-forge acpype
 >
 > https://mdtraj.org/1.9.4/mdconvert.html
 
-### gaussian
+### Gaussian16 and view
 
-after extraction, http://sobereva.com/439
+after extraction, add these to `~/.bashrc` http://sobereva.com/439
 
 ```shell
-export g16root=$HOME/g16
-export GAUSS_SCRDIR=$HOME/g16/scratch
-export GAUSS_EXEDIR=$HOME/g16
-
-source /home/gxf/g16/bsd/g16.profile
+export g16root=$HOME
+export GAUSS_SCRDIR=$g16root/g16/scratch
+# export GAUSS_EXEDIR=$g16root
+source $g16root/g16/bsd/g16.profile
+export PATH=$PATH:$HOME/g16
 ```
 
 > debugging experience 2022.2.10
@@ -735,6 +738,16 @@ source /home/gxf/g16/bsd/g16.profile
 >    means you assigned an improper chk file in your .gjf file like 
 >
 >    `%chk=D:\Doctor\my work\undergraduate\TA\2019\0912\ethylene.chk`
+
+[g16 view csdn](https://download.csdn.net/download/lk2069/10777135), buy at 1 yuan [here](https://www.kerwin.cn/dl/detail/lk2069/275737); [win?](https://getintopc.com/softwares/design/gaussview-6-0-16-free-download/)
+
+[installation guide](http://www.molcalx.com.cn/gaussian-16-installation/)
+
+put the folder `gv` under your g16 folder!! 
+
+You can type `gv` in the terminal to start GView and link to Gaussian as we did in Windows, only if it can be found by g16 path settings!
+
+> icon: downloaded from web
 
 ### FESetup
 
@@ -936,22 +949,19 @@ $pycharm # boot
 
 ### packages
 
+for AmberTools!!!
+
 ```shell
+# https://www.mdanalysis.org/
 conda config --add channels conda-forge
-conda install mdanalysis # https://www.mdanalysis.org/
+conda install mdanalysis
+conda install -c openbabel openbabel
+conda install -c rdkit rdkit
 ```
 
 ### notes on conda
 
 https://blog.csdn.net/vola9527/article/details/80744540 create from yaml
-
-### notes on pycharm
-
-https://blog.csdn.net/qq_41330454/article/details/105906347 控制台命令提示符是In[2]
-
-https://blog.csdn.net/u013088062/article/details/50001189 关闭代码风格检查
-
-https://www.pythonheidong.com/blog/article/498305/f571ce16edc768ad1839/ matplotlib fonts. just copy .ttf files to ~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf
 
 ## Paper
 
@@ -1041,10 +1051,6 @@ It **can do things in batch**, but **no outputing pdb**....but don't forget its 
 > finally I found simpler commands...
 
 also, in python
-
-```shell
-conda install -c openbabel openbabel
-```
 
 #### avogadro
 

@@ -215,7 +215,7 @@ adt # or from "start"
 
 #### receptor
 
-- get structure
+- fget structure
 
   - download .pdb file
   - use Swiss Model: upload sequence, then it shows which template (pdb link), identity...and you can download modeled .pdb file
@@ -643,7 +643,7 @@ the final table may include:
 
 - https://jerkwin.github.io/GMX/GMXtut-0 an example of Amber99sb-ildn ff and a great Chinese tutorial of http://www.mdtutorials.com
 
-- https://jerkwin.github.io/GMX/GMXtut-5 protein-ligand
+- https://jerkwin.github.io/GMX/GMXtut-5 protein-ligand, no analysis
 
   > https://jerkwin.github.io/2018/11/24/Barnett_GROMACS%E6%95%99%E7%A8%8B/
 
@@ -1123,7 +1123,7 @@ see method 1 for detailed parameters
 
 #### result of method 2
 
-https://jerkwin.github.io/2017/10/20/GROMACS%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E6%8B%9F%E6%95%99%E7%A8%8B-%E5%A4%9A%E8%82%BD-%E8%9B%8B%E7%99%BD%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%80
+[Analysis reference](https://jerkwin.github.io/2017/10/20/GROMACS%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E6%8B%9F%E6%95%99%E7%A8%8B-%E5%A4%9A%E8%82%BD-%E8%9B%8B%E7%99%BD%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%80)
 
 > save fig in xmgrace: file--print setup--check "print to file" and edit filename--file--print, or
 >
@@ -1251,9 +1251,7 @@ for restraint:
 >     - std: 0.076359395
 >   - exclude 
 
-### generate topology of ligand
-
-http://bbs.keinsci.com/thread-428-1-1.html 几种生成有机分子GROMACS拓扑文件的工具
+### generate the topology of ligands
 
 > choose a good conformation:
 >
@@ -1261,12 +1259,15 @@ http://bbs.keinsci.com/thread-428-1-1.html 几种生成有机分子GROMACS拓扑
 
 > see: 
 >
-> - https://jerkwin.github.io/2019/07/14/%E8%AE%B8%E6%A5%A0-%E4%BD%BF%E7%94%A8GAFF%E5%8A%9B%E5%9C%BA%E5%8F%82%E6%95%B0%E5%8C%96%E5%B0%8F%E5%88%86%E5%AD%90%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ but not understood the script
-> - https://zhuanlan.zhihu.com/p/188735956 use gaussian and resp charge
-> - https://gohom.win/2015/11/12/AMBER-Ligand/
-> - http://kangsgo.com/94.html
-> - http://bbs.keinsci.com/thread-428-1-1.html generate charge
-> - http://sobereva.com/531 intro to resp charge
+> - [使用GAFF力场参数化小分子的自动化工具](https://jerkwin.github.io/2019/07/14/%E8%AE%B8%E6%A5%A0-%E4%BD%BF%E7%94%A8GAFF%E5%8A%9B%E5%9C%BA%E5%8F%82%E6%95%B0%E5%8C%96%E5%B0%8F%E5%88%86%E5%AD%90%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/) but did not understood the script
+> - [使用AmberTools+ACPYPE+Gaussian创建小分子GAFF力场的拓扑文件](https://jerkwin.github.io/2015/12/08/%E4%BD%BF%E7%94%A8AmberTools+ACPYPE+Gaussian%E5%88%9B%E5%BB%BA%E5%B0%8F%E5%88%86%E5%AD%90GAFF%E5%8A%9B%E5%9C%BA%E7%9A%84%E6%8B%93%E6%89%91%E6%96%87%E4%BB%B6/) with gui and script examples
+> - user protocols
+>   - https://zhuanlan.zhihu.com/p/188735956 use gaussian and resp charge
+>   - https://gohom.win/2015/11/12/AMBER-Ligand/
+>   - http://kangsgo.com/94.html
+> - summary
+>   - [几种生成有机分子GROMACS拓扑文件的工具](http://bbs.keinsci.com/thread-428-1-1.html) generate charge
+>   - [RESP2原子电荷的思想](http://sobereva.com/531) intro to resp charge
 
 steps:
 
@@ -1287,7 +1288,7 @@ steps:
 
    but I believe non-polar hydrogen should be added
 
-   > if added extra hydrogen: pymol delete atom
+   > if added extra hydrogen: pymol can delete atom, but I think GaussView can edit all bonds! Maybe 
    >
 
 2. get gaussian input file
@@ -1305,7 +1306,7 @@ steps:
 
    https://zhuanlan.zhihu.com/p/59070901 use its gaussian setting
 
-   http://ambermd.org/antechamber/ac.html#antechamber parameter
+   http://ambermd.org/antechamber/ac.html#antechamber antechamber parameters
 
 3. run gaussian
 
@@ -1358,6 +1359,10 @@ steps:
 
    run python to get ${f}_aligned.mol2
    
+   ```shell
+   ~/Desktop/work/projects/undergraduate/NUS-UROPS/md/prepare/align.py PEP
+   ```
+   
    
    
 
@@ -1373,17 +1378,23 @@ steps:
 > ```
 
 
-### combine ligand and protein
+### combine the ligand and protein
 
 > - thanks for https://zhuanlan.zhihu.com/p/197979734 to release me for copying texts!
 > - http://sobereva.com/266 要处理xxx.mol2就执行./acpype.py -i xxx.mol2，算完后会新产生一个xxx目录，里头有_GMX后缀的.gro、.itp、.top，直接在GROMACS里用即可。
 > - http://bbs.keinsci.com/thread-13564-1-1.html AmberTools+ACPYPE产生的就是完整形式的top文件（包括成键项与非键项参数）。参数都已经齐全了还要include干啥。 but acpype don't produce position restraint
-> - https://www.phys.ksu.edu/personal/schmit/SLTCAP/SLTCAP.html
+> - [SLTCAP tool to calculate the number of ions](https://www.phys.ksu.edu/personal/schmit/SLTCAP/SLTCAP.html)
 
 1. get old fflig2
 
    ```shell
    cp /home/gxf/miniconda3/envs/AmberTools20/dat/leap/cmd/oldff/leaprc.ff99SBildn /home/gxf/miniconda3/envs/AmberTools20/dat/leap/cmd/leaprc.ff99SBildn
+   ```
+
+   now (22.2.17)
+
+   ```shell
+   cd /home/gxf/.conda/envs/AmberTools21/dat/leap/cmd/
    ```
 
 2. get amber input file
@@ -1495,7 +1506,7 @@ steps:
 
    ```shell
    conda activate Acpype
-   acpype -p com.prmtop -x com.inpcrd -d
+   acpype -p com.prmtop -x com.inpcrd -d -c user
    # rename
    mv com_GMX.gro com.gro
    mv com_GMX.top com.top
@@ -1514,6 +1525,8 @@ steps:
    grep " IM " -rl ./com.top | xargs sed -i "s/ IM / Cl- /g" 
    ```
    
+
+note that the output has changed in 2022! output into a folder; add a run.sh and .itp file
 
 ### MD with one ligand
 
@@ -1580,9 +1593,8 @@ https://jerkwin.github.io/GMX/GMXtut-5/#%E6%A6%82%E8%BF%B0
    gmx mdrun -deffnm nvt
    echo "15\n0" | gmx energy -f nvt.edr -o nvt.xvg # temperature
    xmgrace nvt.xvg
-   
    ```
-
+   
    > only ATP reported this error (before removing H), index better than noindex
    >
    > Step 641, time 1.282 (ps)  LINCS WARNING 
@@ -1594,7 +1606,7 @@ https://jerkwin.github.io/GMX/GMXtut-5/#%E6%A6%82%E8%BF%B0
    >   1408  1409  90.0   0.1293  0.1227    0.0973
    >
    > <u>the variables set in the GMXRC file</u>
-
+   
 7. npt
 
    ```shell
@@ -1618,6 +1630,7 @@ https://jerkwin.github.io/GMX/GMXtut-5/#%E6%A6%82%E8%BF%B0
    ```
 
    ```shell
+   # movie
    gmx trjconv -f npt.trr -o npt.xtc
    pwd
    # in pymol
@@ -1640,7 +1653,6 @@ https://jerkwin.github.io/GMX/GMXtut-5/#%E6%A6%82%E8%BF%B0
        ```shell
     gmx grompp -f md.mdp -c npt.gro -r npt.gro -n index.ndx -t npt.cpt -p com.top -o final_com.tpr
     gmx mdrun -deffnm final_com
-    
     gmx mdrun -deffnm final_com -nb gpu
        ```
 
@@ -1767,7 +1779,32 @@ show sticks,resi 105+106+107+109+110+113+114+137+145+147+149+151+132+176+177+179
 color magenta,resi 105+106+107+109+110+113+114+137+145+147+149+151+132+176+177+179+181+183
 ```
 
+#### Potential problems
+
+1. system explosion, too large force: 
+
+   [from Jerkwin](https://jerkwin.github.io/2016/12/28/GROMACS%E6%9C%AF%E8%AF%AD-%E7%88%86%E7%A0%B4(Blowing_Up)/)
+
+2. 谈谈分子动力学模拟蛋白-配体复合物过程中配体发生脱离的原因 http://sobereva.com/632
+
 ### result
+
+- `topol.tpr`: 运行输入文件, 包含模拟开始时体系的完整描述
+- `confout.gro`: 结构文件, 包含最后一步的坐标和速度
+- `traj.trr`: 全精度轨迹, 包括随时间变化的位置, 速度和力
+- `traj.xtc`: 压缩轨迹, 轻量, 只包含低精度(0.001 nm)的坐标信息
+- `ener.edr`: 随时间变化的有关能量数据
+- `md.log`: 模拟过程的日志, 包含模拟过程中的信息
+
+#### trajectory files
+
+- final.xtc (obtained from the simulation): also ok for visualization, but will cross the faces of your box
+- `noPBC`保持结构完好，不会通过一个面跳跃到相对的一个面
+- `nojump`把体系放在最中间，使所有原子处于盒子中；但溶剂会飞向无穷远
+
+> 教程中性质计算都用这个。实际上各种轨迹算出来的有一点小差别，最好还是全部nojump
+
+获得xtc文件后, 如果在后续分析中不需要速度和力的话, 你可以删除trr文件.
 
 #### free result commands
 
@@ -1857,8 +1894,8 @@ color magenta,resi 105+106+107+109+110+113+114+137+145+147+149+151+132+176+177+1
 
 good resources
 
-- https://jerkwin.github.io/2017/10/20/GROMACS%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E6%8B%9F%E6%95%99%E7%A8%8B-%E5%A4%9A%E8%82%BD-%E8%9B%8B%E7%99%BD%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%80
-- https://jerkwin.github.io/GMX/GMXtut-0
+- [分子动力学模拟数据的分析一（详细！）](https://jerkwin.github.io/2017/10/20/GROMACS%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E6%8B%9F%E6%95%99%E7%A8%8B-%E5%A4%9A%E8%82%BD-%E8%9B%8B%E7%99%BD%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%80)
+- https://jerkwin.github.io/GMX/GMXtut-0 also detailed
 - https://zhuanlan.zhihu.com/p/149863158
 - https://www.mdanalysis.org/MDAnalysisTutorial
 
@@ -2259,53 +2296,57 @@ in amber
 
 18. d
 
-#### portable result commands
+#### summary result commands (updating)
 
 want full time for property-time, but want "later" for per residue...
 
 1. visualization
 
    ```shell
-   gmx trjconv -f final_com.trr -o final_com.xtc -dt 50
-   echo 0 | gmx trjconv -s final_com.tpr -f final_com.xtc -n index.ndx -o final_com_noPBC.xtc -pbc mol -ur compact -dt 50 # choose 0 system
+   gmx trjconv -f final.trr -o final.xtc -dt 50
+   echo 0 | gmx trjconv -s final.tpr -f final.xtc -n index.ndx -o final_noPBC.xtc -pbc mol -ur compact -dt 50 # choose 0 system
    ```
 
    ```shell
-   load npt.gro, final_com
-   load final_com_noPBC.xtc, final_com
+   load npt.gro, final
+   load final_noPBC.xtc, final
    show sticks,resi 4+5+6+8+9+12+13+36+44+46+48+50+31+75+76+78+80+82
    color magenta,resi 4+5+6+8+9+12+13+36+44+46+48+50+31+75+76+78+80+82
+   ```
+
+   ```shell
+   vmd npt.gro final.xtc
    ```
 
 2. distance
 
    ```shell
-   echo 4 | gmx mindist -f final_com.xtc -s final_com.tpr -od minimal-periodic-distance.xvg -pi # choose 4 backbone, similar to C alpha. but for whole protein, it's much smaller???
+   echo 4 | gmx mindist -f final.xtc -s final.tpr -od minimal-periodic-distance.xvg -pi # choose 4 backbone, similar to C alpha. but for whole protein, it's much smaller???
    xmgrace minimal-periodic-distance.xvg
    ```
 
 3. prepare
 
    ```shell
-   gmx trjconv -f final_com.trr -o final_com_later.xtc -b 2000 -e 10000 -dt 50 # exclude initial state
-   echo 0 | gmx trjconv -f final_com.trr -o final_com_nojump.xtc -pbc nojump -dt 50 # full no jump
-   echo 0 | gmx trjconv -f final_com.trr -o final_com_later_nojump.xtc -pbc nojump -b 2000 -e 10000 -dt 50 # later no jump
+   gmx trjconv -f final.trr -o final_later.xtc -b 2000 -e 10000 -dt 50 # exclude initial state
+   echo 0 | gmx trjconv -f final.trr -o final_nojump.xtc -pbc nojump -dt 50 # full no jump
+   echo 0 | gmx trjconv -f final.trr -o final_later_nojump.xtc -pbc nojump -b 2000 -e 10000 -dt 50 # later no jump
    ```
 
 4. rmsd, rmsf
 
    ```shell
-   echo "3\n 3" | gmx rms -s final_com.tpr -f final_com_nojump.xtc -o rmsd_bb.xvg -tu ns # C alpha
-   xmgrace rmsd_bb.xvg
-   echo 3 | gmx rmsf -f final_com_later.xtc -s final_com.tpr -o rmsf-per-residue.xvg -ox average.pdb -oq bfactors-residue.pdb -res
+   echo "3\n 3" | gmx rms -s final.tpr -f final_nojump.xtc -o rmsd_ca.xvg -tu ns # C alpha
+   xmgrace rmsd_ca.xvg
+   echo 3 | gmx rmsf -f final_nojump.xtc -s final.tpr -o rmsf-per-residue.xvg -ox average.pdb -oq bfactors-residue.pdb -res
    xmgrace rmsf-per-residue.xvg
-   echo "17\n 17" | gmx rms -s final_com.tpr -f final_com_nojump.xtc -o rmsd_lig.xvg -tu ns
+   echo "17\n 17" | gmx rms -s final.tpr -f final_nojump.xtc -o rmsd_lig.xvg -tu ns
    ```
 
 5. get pdb
 
    ```shell
-   echo 24 | gmx trjconv -f final_com_nojump.xtc -s final_com.tpr -n index.ndx -o traj.pdb -tu ns
+   echo 24 | gmx trjconv -f final_nojump.xtc -s final.tpr -n index.ndx -o traj.pdb -tu ns
    # in pymol
    split_state traj
    run /home/gxf/Desktop/xufan/MD/real-simulation/further/align_traj.py 
@@ -2328,23 +2369,23 @@ want full time for property-time, but want "later" for per residue...
    - Rg
 
      ```shell
-     echo 1 | gmx gyrate -s final_com.tpr -f final_com.xtc -o gyrate.xvg
+     echo 1 | gmx gyrate -s final.tpr -f final_nojump.xtc -o gyrate.xvg
      xmgrace gyrate.xvg
      ```
 
    - sasa
 
      ```shell
-     echo 1 | gmx sasa -f final_com_nojump.xtc -s final_com.tpr -n index.ndx -o sasa.xvg
+     echo 1 | gmx sasa -f final_nojump.xtc -s final.tpr -n index.ndx -o sasa.xvg
      xmgrace sasa.xvg
-     echo 1 | gmx sasa -f final_com_later_nojump.xtc -s final_com.tpr -n index.ndx -or sasa-residue.xvg
+     echo 1 | gmx sasa -f final_later_nojump.xtc -s final.tpr -n index.ndx -or sasa-residue.xvg
      xmgrace sasa-residue.xvg
      ```
 
    - hbond
 
      ```shell
-     echo "1\n 13" | gmx hbond -f final_com_nojump.xtc -s final_com.tpr -num pro_lig_hnum.xvg -ang pro_lig_hang.xvg # protein and ligand
+     echo "1\n 13" | gmx hbond -f final_nojump.xtc -s final.tpr -num pro_lig_hnum.xvg -ang pro_lig_hang.xvg # protein and ligand
      xmgrace pro_lig_hnum.xvg
      xmgrace pro_lig_hang.xvg
      ```
@@ -2354,7 +2395,7 @@ want full time for property-time, but want "later" for per residue...
    ```shell
    conda activate AmberTools20
    mol2=`ls | grep _aligned.mol2`
-   gmx_MMPBSA -O -i mmgbsa.in -cs final_com.tpr -ci index.ndx -cg 1 13 -ct final_com_later_noPBC.xtc -lm ${mol2} -nogui
+   gmx_MMPBSA -O -i mmgbsa.in -cs final.tpr -ci index.ndx -cg 1 13 -ct final_later_noPBC.xtc -lm ${mol2} -nogui
    mkdir ./gmx_MMGBSA
    mv _GMXMMPBSA_* COM* LIG.prmtop REC.prmtop reference.frc gmx_MMPBSA.log FINAL_RESULTS_MMPBSA.dat ./gmx_MMGBSA
    

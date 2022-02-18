@@ -4,6 +4,8 @@ The official (or well-known) tutorial for Gromacs, AmberTools, NAMD, etc.
 
 自己在学习。后面要整理，把草稿放到quote里！
 
+# Common tools
+
 ## Gromacs
 
 some blogs:
@@ -1313,3 +1315,144 @@ GPU的配置
 > CPU总时间（user + sys）是CPU执行用户进程操作和内核（代表用户进程执行）系统调用所耗时间的总和，即该进程（包括线程和子进程）所使用的实际CPU时间。
 >
 > https://blog.csdn.net/xingchenxuanfeng/article/details/73549506
+
+
+
+# Misc experiences
+
+There might be something valuable, thus they can be integrated...but most are drafts, add to gitignore later
+
+## 22.2.17 Amber building PEP
+
+> failed
+>
+> ```shell
+> # ligand
+> f=PEP
+> obabel $f.pdb -opdb -O ${f}_h.pdb -p 7.0 --partialcharge gasteiger
+> obminimize -ff MMFF94 -n 1000 ${f}_h.pdb > ${f}_m.pdb # -3 charge!
+> 
+> antechamber -i ${f}.pdb -fi pdb -o ${f}_h.pdb -fo pdb -pf y -c wc
+> ```
+
+
+openbabel induces connectivity error in the molecule sometimes, and this time both the oxygen atom in the carboxyl group is assigned a negative charge.
+
+antechamber: `-c bcc -nc 3` (or mulliken, etc.), if not equal to formal charge, will perform QM calculation (Gasteiger will not)
+
+> unchanged
+>
+> ```shell
+> antechamber -i ${f}.pdb -fi pdb -o ${f}.gjf -fo gcrt -pf y \
+> -gm "%mem=4096MB" -gn "%nproc=4" -ch ${f} -nc -1 \
+> -gk "#B3LYP/6-31G* em=GD3BJ scrf=solvent=water iop(6/33=2) pop=CHELPG" -ge ${f}_resp.gesp -gv 1 
+> antechamber -i ${f}_resp.gesp -fi gesp -o ${f}.mol2 -fo mol2 -pf y -c resp
+> parmchk2 -i ${f}.mol2 -f mol2 -o ${f}.frcmod
+> ```
+>
+> goes fine
+
+If possible, you could open this document with markdown editors.
+
+You may try programs to add the real charge on PEP because I think the hydrogens in the carboxyl group and phosphate group should be removed.
+
+Here is the command I used:
+
+Try to edit the molecule in GView to make sure the bonds are right (actually some tutorials did so? see UROPS notes)
+
+```shell
+# lig
+f=PEP_gv
+f=PEP2_gv
+antechamber -i ${f}.pdb -fi pdb -o ${f}.gjf -fo gcrt -pf y \
+-gm "%mem=4096MB" -gn "%nproc=4" -ch ${f} -nc -3 \
+-gk "#B3LYP/6-31G* em=GD3BJ scrf=solvent=water SCF=tight \
+iop(6/33=2,6/42=6,6/50=1) pop=CHELPG" -ge ${f}_resp.gesp -gv 1 
+g16 ${f}.gjf
+antechamber -i ${f}_resp.gesp -fi gesp -o ${f}.mol2 -fo mol2 -pf y -c resp
+parmchk2 -i ${f}.mol2 -f mol2 -o ${f}.frcmod
+# python ~/Desktop/work/projects/undergraduate/NUS-UROPS/md/prepare/align.py ~/Desktop/work/practice/with others/AroG-PEP $f
+
+# pro
+cat ./original/input_E2ES.pdb | grep ATOM > ori.pdb
+sele resi  1-350
+save chain1.pdb, sele
+sele resi  351-700
+save chain2.pdb, sele
+pdb4amber -i chain1.pdb -o pro1.pdb
+pdb4amber -i chain2.pdb -o pro2.pdb
+rm ori.pdb chain1.pdb chain2.pdb
+cat ./original/input_E2ES.pdb | grep MN > mn.pdb
+
+# combine
+tleap
+source leaprc.protein.ff14SB
+pro1 = loadpdb pro1.pdb 
+pro2 = loadpdb pro2.pdb
+check pro1 
+check pro2
+source leaprc.gaff2
+loadamberparams PEP_gv.frcmod
+lig1 = loadmol2 PEP_gv_aligned.mol2
+check lig1
+loadamberparams PEP2_gv.frcmod
+lig2 = loadmol2 PEP2_gv_aligned.mol2
+check lig2
+source leaprc.water.tip3p
+ion = loadpdb mn.pdb
+com = combine {pro1 pro2 lig1 lig2 ion}
+# -5*2-3*2+2*2=-12
+solvatebox com TIP3PBOX 10.0
+charge com
+addIons2 com Cl- 36 Na+ 48
+check com
+saveamberparm com com.prmtop com.inpcrd
+quit
+
+conda activate Acpype
+acpype -p com.prmtop -x com.inpcrd -d -c user
+cd com.amb2gmx
+mv com_GMX.gro com.gro
+mv com_GMX.top com.top
+grep "WAT" -rl ./com.gro | xargs sed -i "s/WAT/SOL/g" 
+grep "WAT" -rl ./com.top | xargs sed -i "s/WAT/SOL/g" 
+```
+
+then generally the same if you use gromacs...
+
+Note: in mdp:
+
+```
+tc-grps                  = Protein_MOL_MN Water_and_ions
+energygrps               = Protein MOL MN
+```
+
+- energy: list all main species
+- tc: Water_and_ion and the other
+
+updated gmx .mdp files? problem with rvdw settings
+
+```shell
+gmx grompp -f md.mdp -c npt.gro -r npt.gro -n index.ndx -t npt.cpt -p com.top -o final.tpr -maxwarn 1
+gmx mdrun -deffnm final
+```
+
+```shell
+# visualize
+gmx trjconv -f final.trr -o final_later.xtc -b 2000 -e 10000 -dt 20
+echo 0 | gmx trjconv -s final.tpr -f final_later.xtc -n index.ndx -o final_noPBC.xtc -pbc mol -ur compact -dt 20
+load npt.gro, final
+load final_noPBC.xtc, final
+
+# analysis
+echo 0 | gmx trjconv -f final.trr -o final_nojump.xtc -pbc nojump -e 10000 -dt 20 # -b 2000
+echo "3\n 3" | gmx rms -s final.tpr -f final_nojump.xtc -o rmsd_ca.xvg -tu ns # C alpha
+xmgrace rmsd_ca.xvg
+echo 3 | gmx rmsf -f final_nojump.xtc -s final.tpr -o rmsf-per-residue.xvg -ox average.pdb -oq bfactors-residue.pdb -res
+xmgrace rmsf-per-residue.xvg
+
+
+```
+
+
+

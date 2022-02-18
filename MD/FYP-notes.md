@@ -307,6 +307,11 @@ notice the binding mode?
 
 original .pdb文件 去除原子类型??
 
+two types of processings
+
+- directly from pdb structure (pdb to pdb)
+- make (whatever type) into pdbqt and dock first, then convert (pdbqt or original) to pdb
+
 #### docking
 
 to dock two molecules together, we may:
@@ -411,7 +416,7 @@ After that, convert back to .pdb, add H
 
 ```shell
 f=out_ligand_1
-obabel ${f}.pdbqt -opdb -O ${f}_d.pdb  # you have to got .pdb first, or c
+obabel ${f}.pdbqt -opdb -O ${f}_d.pdb  # you have to got .pdb first, or fails
 obabel ${f}_d.pdb -opdb -O ${f}.pdb -p 7.0 -as
 rm ${f}_d.pdb
 ```

@@ -63,6 +63,10 @@ This is a record of my operations during 折腾ing the system, in order not to f
 4. my base board
    
    https://www.asus.com/hk/Motherboards-Components/Motherboards/PRIME/PRIME-Z390-P/ 华硕PRIME Z390-P
+   
+5. [check shell version](https://blog.csdn.net/electrocrazy/article/details/78313962)
+
+6. 
 
 #### disk management
 
@@ -564,7 +568,13 @@ tar -zcvf folder.tar.gz folder | split -b 4000M -d -a 1 - folder.tar.gz
 
 4. https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu windows环境，装qq微信等
 
-5. 分屏 https://blog.csdn.net/SiriusExplorer/article/details/103016747
+5. Ubuntu分屏 https://blog.csdn.net/SiriusExplorer/article/details/103016747
+
+   go to https://extensions.gnome.org/extension/39/put-windows/
+
+   setting 
+
+   <img src="https://img-blog.csdnimg.cn/20191111203143905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Npcml1c0V4cGxvcmVy,size_16,color_FFFFFF,t_70" style="zoom:50%;" />
 
 ### Connection, vpn, remote control
 
