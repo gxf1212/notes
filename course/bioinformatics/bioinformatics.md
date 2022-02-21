@@ -23,6 +23,18 @@
 
 如果从我校课程角度来看，这些讲得都不算深，杨老师的目的就是让每个人都懂基本的算法，非常多实例来辅助，过程讲解很具体。所以考试其实就是要知道所有这些算法的基本过程就行了，不必搞太高深的东西。其实学这个就是体会一下思想嘛。
 
+不过确实需要总结一下可能考计算的：
+
+- 全局比对、局部比对
+- 系统发生树：UPGMA、FM（MP？）
+- RNA-seq标准化、t检验方差分析？
+- BWT（压缩和）查找
+- 算距离，层次聚类，Pearson和Spearman相关系数
+- 决策树：节点纯度的指标？
+- 灵敏度、特异性（小题吧）
+- 网络的基本性质、四种中心性
+- Bayes公式，最大似然？
+
 资源分享：
 
 - [哈佛生信课程，啥都有](https://www.youtube.com/playlist?list=PLeB-Dlq-v6taAXK6ZCGfqImrNWJzFt3p3)
@@ -107,6 +119,8 @@ $d$ 到底是啥？先将基因表达量转换成其在所有表达量中的排�
 
 两个基因同一位置rank的差值就是 $d$
 
+> 要把这个向量的元素排序
+
 <img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-rank.png" style="zoom: 50%;" />
 
 #### 互信息
@@ -185,7 +199,7 @@ hierarchical clustering
 
 即Fisher线性判别
 
-核心思想：将样本降维到二维，使得类与类可以被一条直线分开
+核心思想：将样本 $x$ 降维到二维，使得类与类可以被一条直线分开
 
 目标：降维后的向量 $y=w^*x+b$ ，优化 $w^*$ 使得：1）类与类的均值差异最大；2）各类内的方差最小。
 
@@ -281,16 +295,16 @@ another example:
 
 <img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-tpn.png" alt="5-tpn" style="zoom:40%;" />
 
-| index                | implication （反义)    | equation                                  |
-| -------------------- | ---------------------- | ----------------------------------------- |
-| sensitivity/recall   | 漏掉病人的概率         | $\dfrac{TP}{TP+FN}$                       |
-| specificity          | 误认病人的概率         | $\dfrac{TN}{TN+FP}$                       |
-| precision            | 预测出是病人，的可信度 | $\dfrac{TP}{TP+FP}$                       |
-| negative prediction  | 预测出是正常，的可信度 | $\dfrac{TN}{TN+FN}$                       |
+| metrics             | Chinese        | implication （反义)    | equation            |
+| ------------------- | -------------- | ---------------------- | ------------------- |
+| sensitivity/recall  | 灵敏度/召回值  | 漏掉病人的概率         | $\dfrac{TP}{TP+FN}$ |
+| specificity         | 特异性         | 误认为病人的概率       | $\dfrac{TN}{TN+FP}$ |
+| precision           | （阳性）准确率 | 预测出是病人，的可信度 | $\dfrac{TP}{TP+FP}$ |
+| negative prediction | 阴性准确率     | 预测出是正常，的可信度 | $\dfrac{TN}{TN+FN}$ |
 
-- sensitivity：“宁可错杀一千（FP），也不放过一个（FN低）”
+- sensitivity：“宁可错杀一千（FP），也不放过一个（FN低）”。能不能检测出真实的病人
   - 如：风险用户识别（可以人工再鉴别）
-- precision：“宁可放过一千（FN），也不错杀一个（FP）”
+- precision：“宁可放过一千（FN），也不错杀一个（FP）”。
   - 如：识别垃圾邮件（防止正常的入垃圾）
 
 > 二者是矛盾的！但这个曲线不是ROC（人家是TP和FP的曲线）
@@ -301,11 +315,13 @@ another example:
 
 balanced accuracy：综合了两方面的预测。避免了数据不平衡导致的全部预测为一个值的糟糕分类器得到高分。
 
-| index                | implication （反义) | equation                                                     |
-| -------------------- | ------------------- | ------------------------------------------------------------ |
-| balanced accuracy    | 均衡准确率          | $\dfrac{1}{2}(\text{recall+specificity})$                    |
-| accuracy/correctness | 总体准确率          | $\dfrac{TP+TN}{Total}$                                       |
-| F-score              | β是权重             | $(1+\beta)\cdot\dfrac{\text{recall}\cdot\text{precision}}{\beta^2(\text{recall+precision})}$ |
+| index                | implication（反义) | equation                                                     |
+| -------------------- | ------------------ | ------------------------------------------------------------ |
+| balanced accuracy    | 均衡准确率         | $\dfrac{1}{2}(\text{recall+specificity})$                    |
+| accuracy/correctness | 总体准确率         | $\dfrac{TP+TN}{Total}$                                       |
+| F-score              | β是权重            | $(1+\beta)\cdot\dfrac{\text{recall}\cdot\text{precision}}{\beta^2(\text{recall+precision})}$ |
+
+> 均衡正确率：都取相反（如TP和FN），都是测出来是这一种中实际上就是这一种的
 
 <img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/5-wangmazi.png" alt="5-wangmazi" style="zoom:50%;" />
 
@@ -435,7 +451,7 @@ Scale-free network
 
 中心性（Centrality）！
 
-> 以下2，3，4均针对无向图
+> 以下2，3均针对无向图
 
 ### 总结
 
@@ -446,17 +462,17 @@ Scale-free network
    衡量节点的直接连接数目
 
 2. 紧密度中心性（Closeness centrality）：节点与图中所有其他节点之间的最短路径平均值的倒数，
-  $$
+$$
   C_v=\dfrac{n-1}{\sum_jd_{ij}}
-  $$
-  衡量节点接近网络“中心”的程度。
+$$
+衡量节点接近网络“中心”的程度。
 
 3. 介数/中介中心性（Betweenness centrality）：其他节点之间的最短路径中经过该节点的路径的数目占总的最短路径总数的比例。
-  $$
+$$
   B_v=\dfrac{\sum\limits_v\dfrac{s点到t点的最短路径经过v的数目}{s点到t点的最短路径数目}}{去除v之后总的
   pair数:(N-1)(N-2)/2}
-  $$
-  衡量节点在网络信息传递相关过程中的重要性。
+$$
+衡量节点在网络信息传递相关过程中的重要性。
 
 4. 特征向量中心性（eigenvector centrality）：一个节点的重要性取决于其邻居节点重要性。与你连接的人越重要，你也就越重要
 
@@ -498,24 +514,130 @@ $$
 - c: 某个模块
 - $m$: 图中的总边数
 - $l_c$: 模块c中内部边的总数
-- $O_c$: 模块c与其他模块连接的边数  
+- $O_c$: 模块c与其他模块连接的边数
 - $D_c$: 模块c中所有顶点的度数之和。$D_c = 2l_c +O_c$
 
-$Q$越大则表明社区划分效果越好。 数值在0.3~0.7之间时， 说明聚类的效果很好。  
+$Q$越大则表明社区划分效果越好。 数值在0.3~0.7之间时， 说明聚类的效果很好。
 
 ### 实例
 
 WGCNA算法
 
-将表达量相似的基因划分为一个模块。 这样就能将众多的基因归类为少量的模块， 模块内部包含的基因往往具有功能上的紧密联系。  
+将表达量相似的基因划分为一个模块。 这样就能将众多的基因归类为少量的模块， 模块内部包含的基因往往具有功能上的紧密联系。
 
 
+
+
+
+# 基因表达数据分析
+
+##  RNA-Seq数据分析
+
+RPKM: Reads Per Kilobase Per Millon
+FPKM: Fragments Per Kilobase Per Million
+TPM: Transcripts Per Million
+
+kilo：长度；million：深度（reads数）
+
+RPKM、FPKM和TPM都是描述相对定量的单位
+
+<img src="E:\GitHub_repo\notes\course\bioinformatics\bioinformatics.assets\ex-flow.png" alt="ex-flow" style="zoom:50%;" />
+
+### 组内标准化方法
+
+<img src="E:\GitHub_repo\notes\course\bioinformatics\bioinformatics.assets\ex-raw.png" alt="ex-raw" style="zoom:50%;" />
+
+- RPKM：先除以长度，再除以原始中每个样本总reads数的和
+- FPKM：[双端测序](https://www.jianshu.com/p/5c238ea7c52f)，每个fragment两条reads
+- TPM：只不过除以标准化后总reads数的和
+
+<img src="E:\GitHub_repo\notes\course\bioinformatics\bioinformatics.assets\ex-comparison.png" alt="ex-comparison" style="zoom:67%;" />
+
+### 组间标准化方法
+
+<img src="E:\GitHub_repo\notes\course\bioinformatics\bioinformatics.assets\ex-data-tpm.png" alt="ex-data-tpm" style="zoom: 50%;" />
+
+差异基因应该只占少数。原因实质上是因为基因G5的表达量异常升高，导致其它基因的相对表达量降低。
+
+#### 内参法
+
+给两个样品乘以不同的系数，使内参基因的表达（或大多数基因的表达）达到基本一致。假设基因G1是看家基因，给对照和处理分别除以8和24，得到下面的结果。这里的8和24称为标准化因子
+
+<img src="E:\GitHub_repo\notes\course\bioinformatics\bioinformatics.assets\ex-data-internal.png" alt="ex-data-internal" style="zoom:50%;" />
+
+不足
+
+1、依赖于基因的功能注释
+2、能用于作为内参的基因数目比较少，导致准确性不高
+
+假设大多数基因在样品间的表达是没有差异的，然后运用统计学的方法找到组间的标准化因子。如TMM  
+
+### 差异基因筛选方法
+
+#### 倍数法
+
+用于基因的大规模初筛
+$$
+f=\dfrac{基因在实验条件下表达量}{基因在对照条件下表达量}
+$$
+f = 1，表示该基因在两种不同条件下的表达没有差异
+f < 1/2 或 f > 2 ，认为该基因在两种条件下的表达有差异
+
+#### t 检验法
+
+仅适用于两组数据之间的比较
+
+H0：μ1=μ2，即假设某基因在两种不同条件下的平均表达水平相等；H1：μ1≠μ2  
+
+不知道方差是否相等的那种统计量，不是？？？
+$$
+t=\dfrac{\overline{x_1}-\overline{x_2}}{\sqrt{s_1^2/n_1+s_2^2/n_2}}
+$$
+这是啥？？把样本方差直接当总体方差了？
+
+记住样本方差算了
+
+<img src="E:\GitHub_repo\notes\course\bioinformatics\bioinformatics.assets\ex-ttest.png" alt="ex-ttest" style="zoom:60%;" />
+
+#### 方差分析
+
+适用于两组或超过两组表达量之间的比较
+
+H0：μ1=μ2=μ3…，即假设某基因在所有不同条件下的平均表达水平相等；H1：μ1、μ2、μ3…，不全相等
+
+计算组内组外和总方差
+$$
+SS_{sum}=\sum_i\sum_j(x_{ij}-\overline{x})^2\\
+SS_{intra}=\sum_in_i(\overline{x_i}-\overline{x})\\
+SS_{inter}=\sum_i\sum_j(x_{ij}-\overline{x_i})^2
+$$
+
+- 第 $i$ 种条件，共 $k$ 种；第 $j$ 个样本，总共 $n_i$ 个
+- $\overline{x}$：所有样本中的平均值
+
+$$
+MS_{intra}=\dfrac{SS_{intra}}{dof_{intra}}=\dfrac{SS_{intra}}{N-k}\\
+MS_{inter}=\dfrac{SS_{inter}}{dof_{inter}}=\dfrac{SS_{inter}}{k-1}
+$$
+
+统计量
+$$
+F=\dfrac{SS_{inter}}{SS_{intra}}\sim F(N-k, k-1)
+$$
+若p < α，则拒绝零假设，认为某基因在不同条件下的表达差异具有统计学意义
+若p > α，则接受零假设，认为某基因在不同条件下的无表达差异  
+
+eg：通过p53表达分析这三种人患肺癌风险是否一致？  
+
+<img src="E:\GitHub_repo\notes\course\bioinformatics\bioinformatics.assets\ex-eg.png" alt="ex-eg" style="zoom:50%;" />
 
 
 
 # 其他
 
 [单端测序与双末端测序问题](https://www.jianshu.com/p/5c238ea7c52f)
+
+
 
 
 

@@ -92,7 +92,7 @@ TODOs:
 
 - Every immune cell expresses a receptor for **a single antigen**. Our body creates a library of immune cells, i.e. receptors recognizing all antigens.
 - When an antigen binds to its specific receptor, that cell is activated to proliferate itself. All daughter cells expressing the same receptor are called a clone.
-- If the receptor binds to its antigen during the development of cells, the clone is aborted, which makes immune tolerance.
+- If the receptor binds to its antigen during the development of cells, the clone is aborted, which is called immune tolerance.
 
 ## Components
 
