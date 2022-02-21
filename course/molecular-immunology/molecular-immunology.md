@@ -3064,7 +3064,7 @@ loss of function, usually in infants, causes early death
 
 #### HIV structure
 
-![17-hiv](E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\17-hiv.png)
+![17-hiv](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/17-hiv.png)
 
 #### Phases and immunological features
 
@@ -3114,7 +3114,7 @@ loss of function, usually in infants, causes early death
    - 巨噬细胞、树突细胞： HIV的庇护所，传染源
    - NK细胞：功能受损  
 
-![17-entrance](E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\17-entrance.png)
+![17-entrance](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/17-entrance.png)
 
 免疫学诊断
 
@@ -3414,5 +3414,41 @@ magnetic beads:
 
 - 磁铁吸，细胞被抗体拉走
 - very fast, yet only one type of cell a time
+
+
+
+# A homework
+
+> 某AIDS患者罹患白血病，在接受了CCR5Δ32/Δ32基因型的同种异体造血干细胞移植后，HIV也被彻底清除。
+
+1. 请根据所学免疫学知识，解释HIV消失的原因。
+
+   接受移植后发生了移植物抗宿主反应（GVHR），患者原有的淋巴细胞被清除，而移植来的造血干细胞分化产生的淋巴细胞都是CCR5Δ32/Δ32基因型，不表达正常的CCR5蛋白，该病人体内也不含通过其他受体入侵的HIV变体，所以不能被HIV侵入。于是HIV将逐渐消失。
+
+2. 非CCR5Δ32/Δ32的同种异体造血干细胞移植是否可以起到相同的作用？
+
+   可能只能治好白血病，但不能使HIV消失。因为新的淋巴细胞仍表达正常的CCR5蛋白，能被HIV侵入。
+
+<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\hw2.jpg" alt="hw2" style="zoom:40%;" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 完结撒花！感谢您的陪伴！
