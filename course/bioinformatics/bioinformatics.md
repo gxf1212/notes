@@ -392,7 +392,7 @@ CC_v=\dfrac{n_{connected}}{\mathrm{C}_k^2}
 $$
 例子：
 
-<img src="E:\GitHub_repo\notes\course\bioinformatics\bioinformatics.assets\9-cluster.png" alt="9-cluster" style="zoom:33%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/9-cluster.png" alt="9-cluster" style="zoom:33%;" />
 
 网络的聚集系数：所有节点聚集系数的平均值。
 
@@ -434,7 +434,7 @@ Scale-free network
 
 > 幂律分布描述类似这样多数个体量级很小，少数个体量级很大的情况。
 
-<img src="E:\GitHub_repo\notes\course\bioinformatics\bioinformatics.assets\9-fractal.png" alt="9-fractal" style="zoom:40%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/9-fractal.png" alt="9-fractal" style="zoom:40%;" />
 
 无标度网络具有自相似性。Fractal：分形，“一个粗糙或零碎的几何形状，可以分成数个部分，且每一部分都（至少近似地）是整体缩小后的形状”.
 
@@ -480,11 +480,11 @@ $$
 
 eg：访问网页
 
-<img src="E:\GitHub_repo\notes\course\bioinformatics\bioinformatics.assets\9-1.png" alt="9-1" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/9-1.png" alt="9-1" style="zoom:50%;" />
 
 
 
-<img src="E:\GitHub_repo\notes\course\bioinformatics\bioinformatics.assets\9-2.png" alt="9-2" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/bioinformatics/bioinformatics.assets/9-2.png" alt="9-2" style="zoom:50%;" />
 
 R0为初始状态，A称为转移矩阵(Transition Matrix)，一直乘。。。各节点的特征向量中心性等于
 $$

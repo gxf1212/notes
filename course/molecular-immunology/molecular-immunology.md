@@ -193,8 +193,8 @@ Antigens are substances that can
 
 Corresponding to the above two points,
 
-- antigenicity (抗原性): the ability to specifically combine with the final products of an immune response (i.e. antibodies or receptors on sensitized immune cells)
-- immunogenicity (免疫原性): the ability to induce immune responses
+- antigenicity (抗原性): the ability to specifically combine with the final **products** of an immune response (i.e. antibodies or receptors on sensitized immune cells)
+- immunogenicity (免疫原性): the ability to induce immune **responses**
 
 Thus, antigens are categorized into
 
@@ -255,7 +255,7 @@ categories:
 
 #### host
 
-age, gender, genetic factor, healthy state
+age, gender, genetic factor, healthy state...
 
 #### route of entry
 
@@ -273,7 +273,7 @@ e.g. 抗间氨基苯磺酸的抗体和邻位、对位、其他酸的反应弱或
 
 - an antigen only activates lymphocytes specific to recognize it
 
-- - MHC, BCR or TCR restricted
+  - MHC, BCR or TCR restricted
 
 - products of an immune response only react with that specific antigen
 
@@ -285,28 +285,28 @@ nature: similar epitope
 
 ### Epitope
 
-表位或抗原决定簇 (antigen determinant): groups/structures that determine the specificity of antigens. 
+表位或抗原决定簇 (antigen determinant): groups/structures that **determine the specificity of antigens**. 
 
 Also, they are the basic unit to specifically recognize TCR/BCR/antibody.
 
 | epitope type                 | linear epitope <br />线性表位 | conformational epitope <br />构象表位 |
-| ---------------------------- |:------------------------- | --------------------------------- |
-| sequence                     | sequential                | separated                         |
-| 3D structure                 | close                     | close                             |
-| after denaturation/digestion | remains                   | distroyed                         |
-| recognized by                | TCR, BCR                  | mainly BCR                        |
+| ---------------------------- | :---------------------------: | :-----------------------------------: |
+| sequence                     | sequential                    | separated                             |
+| 3D structure                 | close                         | close                                 |
+| after denaturation/digestion | remains                       | distroyed                             |
+| recognized by T/B?           | TCR, BCR                      | mainly BCR                            |
 
 构象表位：由氨基酸序列不连续，但在空间上相互接近、形成特定构象的几个氨基酸构成的表位。
 
-| epitope              | T cell epitope                                                          | B cell epitope                                                       |
-| -------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| receptor             | TCR                                                                     | BCR                                                                  |
-| MHC involved?        | yes                                                                     | no                                                                   |
-| antigen presentation | needed                                                                  | no need                                                              |
-| composed of          | linear short peptide                                                    | natural polypeptide<br />(lipo)polysaccharide<br />organic compounds |
-| size                 | CD8<sup>+</sup> T cell: 5\~12 AA<br />CD4<sup>+</sup> T cell: 12\~17 AA | 5\~15 AA or 5\~7 <br />oligosaccharide or nt                         |
-| type                 | linear                                                                  | linear or conformational                                             |
-| position             | any                                                                     | surface                                                              |
+| epitope              | T cell epitope                                               | B cell epitope                                               |
+| -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| receptor             | TCR                                                          | BCR                                                          |
+| MHC involved?        | yes                                                          | no                                                           |
+| antigen presentation | needed                                                       | no need                                                      |
+| composition          | linear short peptide                                         | natural polypeptide<br />(lipo)polysaccharide<br />organic compounds |
+| size                 | CD8<sup>+</sup> T cell: 5\~12 AA<br />CD4<sup>+</sup> T cell: 12\~17 AA | 5\~15 AA or 5\~7 <br />oligosaccharide or nt                 |
+| type                 | linear epitope                                               | linear or conformational                                     |
+| position             | any                                                          | surface                                                      |
 
 > natural: part of a macromolecule?
 
@@ -331,7 +331,7 @@ Thymus-independent/dependent antigen
 | type of antibody | various, mainly IgG, less IgM | IgM                    |
 | memory?          | yes                           | no                     |
 
-relationship
+**relationship**
 
 ```mermaid
 graph LR
@@ -358,14 +358,16 @@ be --from--> TD-Ag
 
 - autoantigen (自身抗原)
 
-### Presenting
+### Source
 
-Whether it is synthesized inside APC
+Whether it is **synthesized** inside APC
 
 - yes: endogeneous (内源性) antigen.
-- viral/tumor Ag
+  - viral/tumor Ag
+
 - no: exogeneous (外源性) antigen.
-- bacteria, animal serum
+  - bacteria, animal serum
+
 
 ### Other non-antigenic immune stimulators
 
@@ -373,7 +375,7 @@ general understanding
 
 #### super antigen
 
-超抗原, low conc of which can stimulate T cells
+超抗原, **low conc** of which can stimulate T cells
 
 - endogenous: viral protein
 - exogenous: bacterial exotoxin (secreted protein)
@@ -420,7 +422,7 @@ Immunoglobulin super family (IgSF, 免疫球蛋白超家族): proteins including
 
 ### Chains
 
-- A Y-shape molecule. N terminal at the top.
+- A Y-shape molecule. **N** terminal at the top.
 
 - Two identical heavy chains (connected by S-S bond) and light chains, between which is a S-S bond
 
@@ -445,15 +447,16 @@ hinge: flexible, between CH1 and CH2. not in IgM/E
 
 - VH/VL: antigen binding
 
-- - contains a hypervariable region (高变区) or complement-determining region (互补决定区), other region is called framework region
+  - contains a hypervariable region (**HVR**, 高变区) or complement-determining region (**CDR**, 互补决定区)
+  - other region is called framework region
 
 - CH1 and CL: allogenic marker (同种异型标志)
 
-- CH2: complement binding site for IgG
+- CH2: **complement** binding site for IgG
 
-- CH3: membrane receptor binding; cross 胎盘 for IgG; complement binding site for IgM
+- CH3: membrane **receptor** binding; cross 胎盘 for IgG; complement binding site for IgM
 
-- CH4 is exclusive in IgM/E, following CH3
+- CH4 is exclusive in Ig**M/E**, following CH3
 
 ### Enzymolysis (酶解)
 
@@ -464,7 +467,7 @@ hinge: flexible, between CH1 and CH2. not in IgM/E
 ### Other components
 
 - joining chain (J片): peptide at C-ter, joining secretary IgA dimer or IgM pentamer
-- secretary IgA also need a glycopeptide, secretary piece (分泌片)
+- secretary IgA also need a glycopeptide called secretary piece (分泌片)
 
 > <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/4-other.png" alt="4-other" style="zoom:40%;" />
 > 
@@ -487,13 +490,13 @@ Ab can also be an antigen. Three types of epitope:
 
 <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/4-Ab-Ag.png" style="zoom:25%;" />
 
-- isotype: all C region.
+- isotype: all C region. 同种型：不同种间的
   - Individuals in the same species have similar C region. If you inject monkey's Ab into a human, the C region could be an antigen.
-- allotype: some residue variation in C region
+- allotype: some residue variation in C region. 同种异型：不同个体的
   - There are gene variations between individuals inside a species too, which generates epitope in C region. A marker of individuals.
-- idiotype: in V region (HVR)
+- idiotype: in V region (HVR). 独特型
   - Antibodies from the same individual have diverse V regions which may give rise to an epitope.
-  - Anti-idiotype antibody as an alternative of the antigen to induce immune system.
+  - Anti-idiotype antibody as an alternative of the antigen to induce immune responses.
 
 ## Interaction with Ag
 
@@ -513,21 +516,19 @@ Ab can also be an antigen. Three types of epitope:
 
 ### Effect of C region
 
-- activate complement system (see chapter 6 for details)
+- CH2: activate **complement** system (see [chapter 5](Chapter-5-Complement-System) for details)
 
-- bind Fc receptor on the cell surface
+- CH3: bind Fc receptor on the cell surface
   
-  - opsonization (调理作用): phagocytosis (吞噬作用) by macrophages and neutrophils through Fc binding to Fc receptor, then into [presenting pathway](#MHC synthesis,-their-transportation-and-assembly)
-    
+  - **opsonization** (调理作用): phagocytosis (吞噬作用) by macrophages and neutrophils through Fc binding to Fc receptor, then into [presenting pathway](#MHC synthesis,-their-transportation-and-assembly)
+  
     <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/4-ops.png" alt="4-ops" style="zoom:40%;" align=center />
 
-- enhance ADCC (antibody-dependent cell-mediated cytotoxicity) effect of NK cell, also through Fc
-
-- mediate [type I hypersensitivity](#type-I-hypersensitivity) (超敏反应): mastocytes, basophils (嗜碱性粒细胞), IgE 
+  - enhance **ADCC** (antibody-dependent cell-mediated cytotoxicity) effect of NK cell, also through Fc
   
-  > see chapter 10
-
-- 穿过胎盘（IgG）与黏膜（分泌型 IgA）
+  - mediate [type I **hypersensitivity**](#type-I-hypersensitivity) (超敏反应): mastocytes, basophils (嗜碱性粒细胞), IgE 
+  
+- 穿过胎盘（IgG）与黏膜（分泌型 IgA, CH4）
 
 ## Characteristics of several classes of Ab
 
@@ -535,11 +536,11 @@ Ab can also be an antigen. Three types of epitope:
 
 | classes | state    | localization                                   | major function                                               |
 | ------- | -------- | ---------------------------------------------- | ------------------------------------------------------------ |
-| IgM     | pentamer | mainly in serum<br />monomer on B cell surface | primary immune response<br />strongest complement activation |
-| IgG     | monomer  | in serum and body fluid                        | secondary immune response<br />can also in milk, pass 胎盘     |
-| IgA     | dimer    | mainly mucosa (黏膜)<br />monomer in serum       | defend in mucosa<br />secreted into milk (乳汁)                |
-| IgE     | monomer  | in serum, very little                          | may cause type I hypersensitivity                            |
-| IgD     | monomer  | on B cell surface                              | marker of B cell maturation<br />not so clear                |
+| IgM     | pentamer | mainly in serum<br />monomer on B cell surface | primary immune response<br />strongest **complement** activation |
+| IgG     | monomer  | in serum and body fluid                        | secondary immune **response<br />**can also in milk, pass 胎盘 |
+| IgA     | dimer    | mainly mucosa (黏膜)<br />monomer in serum     | defend in **mucosa**<br />secreted into milk (乳汁)          |
+| IgE     | monomer  | in serum, very little                          | may cause type I **hypersensitivity**                        |
+| IgD     | monomer  | on B cell surface                              | **marker** of B cell maturation<br />not so clear            |
 
 | more info | subclasses | formation               | more on structure | infection | features                       |
 | --------- | ---------- | ----------------------- | ----------------- | --------- | ------------------------------ |
@@ -550,9 +551,9 @@ Ab can also be an antigen. Three types of epitope:
 
 same V region, C region genes conversion along with stages of infection
 
-at DNA level, irreversible, from IgM to G to ...
+at **DNA** level, irreversible, from IgM to G to ...
 
-[reference](https://www.youtube.com/watch?v=Gvq48XrzMTY)
+[video reference](https://www.bilibili.com/video/BV1iL4y1b7gC)
 
 ## Preparation
 
@@ -560,7 +561,7 @@ at DNA level, irreversible, from IgM to G to ...
 
 - a mixture of antibodies targeting a variety of epitopes
   
-  > clone: a cell cluster derived from lymphocytes targeting a single Ag
+  > clone: a cell cluster derived from lymphocytes targeting a single epitope
 
 - production: immunize animals with antigen
 
@@ -591,7 +592,7 @@ at DNA level, irreversible, from IgM to G to ...
 
 - features
   
-  - high specificity, titer (效价), purity, mass production (大规模生产)
+  - high specificity, titer (效价), purity; mass production (大规模生产)
   - murine, hinders clinical applications
   
   > 效价是指某一物质引起生物反应、达到一定效果所需的剂量
@@ -684,11 +685,17 @@ Note: these reactions occur on the surface of the pathogen or an infected host c
 
 ### Classic pathway (经典途径)
 
+```mermaid
+graph LR
+ic[immune complex] --> C1q --> C1r --> C1s --> C4 --> C3c[C3 convertase]
+C1s --> C2 --> C3c
+```
+
 1. Upon binding to Ag, IgG/M changes its conformation and exposes the C1q binding site on CH2.
    
    > C1q may also recognize the pathogen surface or some specific proteins on it
 
-2. C1q's binding to Ab results in the autocatalytic activation of C1r which is bound to C1q
+2. C1q's binding to (more than one) Ab results in the autocatalytic activation of C1r which is bound to C1q
    
    <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-c1q.png" alt="5-c1q" style="zoom:50%;" />
 
@@ -699,6 +706,12 @@ Note: these reactions occur on the surface of the pathogen or an infected host c
 4. The complex is called classical pathway **C3 convertase C4b2a**, which cleaves C3 into C3a and C3b. 
 
 ### Alternative pathway (旁路途径)
+
+```mermaid
+graph LR
+C3 --> c3h["C3(H2O)"] --B,D--> c3hb["C3(H2O)Bb"] --C3--> C3b --B,D--> C3bBb
+C3bBb --C3--> C3b
+```
 
 1. activators: LPS, glucan, 酵母多糖. 
    
@@ -742,8 +755,8 @@ overall pathways: all converge into C3 activation
 
 ```mermaid
 graph LR
-c[classic pathway] --> c3[C3 activation]
-a[alternative pathway] --> c3
+c[classic pathway] --C4b2a--> c3[C3 activation]
+a[alternative pathway] --C3bBb--> c3
 m[MBL pathway] --> c
 m[MBL pathway] --> a
 c3 --> c5[C5 activation]
@@ -790,7 +803,7 @@ c3 --> o[other responses]
   
   > the MAC complex might be released and inserted into the membrane of a normal cell
 
-### Complement-mediated Opsonization
+### Complement-mediated opsonization
 
 补体介导的调理作用
 
@@ -866,9 +879,9 @@ C3/4/5b is rapidly degraded in the liquid phase.
 
 #### MAC
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-re-cd59.png" alt="5-re-cd59" style="zoom:25%;" />  
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-re-cd59.png" alt="5-re-cd59" style="zoom:25%;" /> 
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-re-mac.jpg" alt="5-re-mac" style="zoom:40%;" />
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-re-mac.jpg" alt="5-re-mac" style="zoom:40%;" />
 
 ### Related diseases
 
@@ -3088,7 +3101,7 @@ loss of function, usually in infants, causes early death
 
 ② **恶性肿瘤**： AIDS患者易伴发Kaposio肉瘤和恶性淋巴瘤，也是AIDS病人常见的死亡原因；
 
-③ **神经系统损害**： 约60%的AIDS病人出现AIDS痴呆症。  
+③ **神经系统损害**： 约60%的AIDS病人出现AIDS痴呆症。
 
 #### Mechanism, diagnosis and treatment
 
@@ -3100,7 +3113,7 @@ loss of function, usually in infants, causes early death
    a. 病毒释放，造成细胞膜损伤
    b. 病毒感染骨髓造血干细胞，免疫细胞生成障碍
    c. 对细胞自身蛋白和DNA合成的干扰
-   d. 与未感染细胞融合造成健康细胞的感染  
+   d. 与未感染细胞融合造成健康细胞的感染
 
 2. 病毒的间接损伤作用
 
@@ -3112,7 +3125,7 @@ loss of function, usually in infants, causes early death
 
    - B细胞：多克隆活化
    - 巨噬细胞、树突细胞： HIV的庇护所，传染源
-   - NK细胞：功能受损  
+   - NK细胞：功能受损
 
 ![17-entrance](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/17-entrance.png)
 
@@ -3128,7 +3141,7 @@ loss of function, usually in infants, causes early death
 - 预防：提高认识，切断感染源
 - 主要传播途径：体液传播，性传播，母－胎垂直传播
 - 治疗：抑制病毒的増殖，抗逆转录，抗蛋白酶
-- 鸡尾酒疗法 ：一种蛋白酶抑制剂＋两种逆转录酶抑制剂  
+- 鸡尾酒疗法 ：一种蛋白酶抑制剂＋两种逆转录酶抑制剂
 
 迄今为止不能产生有效的疫苗的主要原因：HIV在体内复制过程中的高突变率，免疫系统干不掉它
 
