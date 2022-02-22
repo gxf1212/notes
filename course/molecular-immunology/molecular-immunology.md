@@ -11,6 +11,10 @@ TODOs:
 - [ ] later, make mindmaps for each chapter if they can be inserted into this site
 - [ ] also, a mindmap for relationships of chapters
 
+Resources
+
+- [a test paper with answers](https://wenku.baidu.com/view/c22d35dbbceb19e8b9f6ba5d.html)
+
 # Chapter 1 Introduction
 
 绪论
@@ -516,7 +520,7 @@ Ab can also be an antigen. Three types of epitope:
 
 ### Effect of C region
 
-- CH2: activate **complement** system (see [chapter 5](Chapter-5-Complement-System) for details)
+- CH2: activate **complement** system (see [chapter 5](#Chapter-5-Complement-System) for details)
 
 - CH3: bind Fc receptor on the cell surface
   
@@ -982,11 +986,11 @@ Each gene has exons encoding all needed chains.
 
 - co-dominance (**共显性**): in an individual, both maternal and paternal alleles are expressed simultaneously (even though they might be heterozygous)
   
-  > blood type Ag is also co-dominantly expressed
+  > blood type Ag is also co-dominantly expressed. but Ab: allelic exclusion
 
 - polymorphism (**多态性**): in a population, there are a huge number of alleles in one gene locus.
   
-  > HLA is the most polymorphic gene, not "one of". multiple alleles (复等位基因)
+  > HLA is the most polymorphic gene, not one of them. multiple alleles (复等位基因)
 
 - haplotype heredity (**单倍型遗传**): all HLA genes are so closely linked that considered as a complete genetic unit (作为一个整体遗传).
 
@@ -1015,7 +1019,7 @@ Each gene has exons encoding all needed chains.
 
 - extracellular domain
   
-  β2m and α3 linked by a disulfide bond
+  > β2m and α3 linked by a disulfide bond
 
 - transmembrane domain
 
@@ -1035,7 +1039,7 @@ MHC class I is presented on the surface of any karyocytes (有核细胞) (except
 
 Expressed on professional APCs, B cells, activated T cells, thymus epithelial cells, etc.
 
-> why activated T cells??
+> activated T cells...
 
 ### MHC function
 
@@ -1048,13 +1052,13 @@ Expressed on professional APCs, B cells, activated T cells, thymus epithelial ce
 
 ![6-anchor-point](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-anchor-point.png)
 
-Some AAs are recognized by MHC and some TCR.
+Some AAs are recognized by MHC and some by TCR.
 
 #### Related functions
 
 - AP related
   - MHC restriction: TCRs have to recognize MHC (when recognizing the antigen peptide)
-  - T cell development, selection (see later chapters)
+  - T cell development, selection (see [chapter 10](#Chapter-10-T/B-cell-development))
   - determines disease sensitivity (Ag presenting; linkage with sensitive genes 易感基因)
   - involved in the heterogeneity of the genetic structure of the population (种群基因结构的异质性)
   - involved in transplant rejection
@@ -1067,11 +1071,11 @@ Some AAs are recognized by MHC and some TCR.
 
 1. HLA与器官移植的关系
    
-   常用匹配位点： HLA-A， B， C， DRB1
+   常用匹配位点： HLA-A，B，C，DRB1
    
-   血清学分型：依据不同HLA蛋白分子的抗原性不同
+   血清学分型：依据不同HLA蛋白分子的抗原性不同。淋巴细胞混合反应
    
-   基因分型： 直接比较基因的序列
+   基因分型：直接比较基因的序列
    
    > major histocompatibility complex: antigens that induce strong and rapid rejection
    > 
@@ -1092,6 +1096,8 @@ Some AAs are recognized by MHC and some TCR.
 ## Summary
 
 ![6-summary](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-summary.png)
+
+> HLA I: genetics; HLA II: Ag presenting
 
 > No reflection questions
 
@@ -1132,14 +1138,14 @@ Cytokines are small multi-bioactive polypeptides or glycoproteins secreted by va
 
 ### Summary
 
-| categories                      | meaning                               | representative                          | source cell                                                          | function                                                     |
-| ------------------------------- | ------------------------------------- | --------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Interleukin                     | conversation among leukocytes         | IL-2                                    | activated T cells                                                    | proliferation of T/B/NK cell/LAK/monocyte                    |
+| categories                      | ==meaning==                           | representative                          | source cell                                                  | function                                                     |
+| ------------------------------- | ------------------------------------- | --------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Interleukin                     | conversation among leukocytes         | IL-2                                    | activated T cells                                            | proliferation of T/B/NK/LAK/monocyte                         |
 | Interferon                      | interfere viral replication           | type I: IFN-α/β/ε/ω<br />type II: IFN-γ | type I: infected cells, lymphocytes<br />type II: activated/NK cells | type I: anti-tumor/virus<br />type II: boost immune response |
-| Colony-stimulating factor (CSF) | hematopoietic cells (see below)       | IL-3, GM-CSF, EPO, etc.                 | T cells, Mo/Mϕ, mesenchymal cells and some from other tissues        | proliferation, differentiation, and activation               |
-| Chemokine                       | directional migration of immune cells | CXC, CC, C, CX3C family                 | T naive/act, Th cell, B cell, Mo/Mϕ/NK/DC                            | attract and activate immune cells, regulate angiogenesis     |
-| Tumor necrosis factor (TNF)     | tumor necrosis (like interferon)      | types: TNF-α/β<br />FasL, TRAIL         | activated monocytes or macrophages (α), T cells (β)                  | kill target cell, regulate immune response                   |
-| Growth factor                   | promote growth and differentiation    | TGF-β, VGEF, EGF, FGF, NGF, PDGF        | tumor cells, fibroblasts, macrophages                                | promote growth and differentiation                           |
+| Colony-stimulating factor (CSF) | hematopoietic cells (see below)       | IL-3, GM-CSF, EPO, etc.                 | T cells, Mo/Mϕ, mesenchymal cells and some from other tissues | proliferation, differentiation, and activation               |
+| Chemokine                       | directional migration of immune cells | CXC, CC, C, CX3C family                 | T naive/act, Th cell, B cell, Mo/Mϕ/NK/DC                    | attract and activate immune cells, regulate angiogenesis     |
+| Tumor necrosis factor (TNF)     | tumor necrosis (like interferon)      | types: TNF-α/β<br />FasL, TRAIL         | activated monocytes or macrophages (α), T cells (β)          | kill target cell, regulate immune response                   |
+| Growth factor                   | promote growth and differentiation    | TGF-β, VGEF, EGF, FGF, NGF, PDGF        | tumor cells, fibroblasts, macrophages                        | promote growth and differentiation                           |
 
 LAK：淋巴因子激活的杀伤细胞
 
@@ -1147,7 +1153,7 @@ LAK：淋巴因子激活的杀伤细胞
 
 #### Colony stimulating factor
 
-meaning: proliferation and differentiation of pluripotential hematopoietic stem cell and hematopoietic progenitor cell
+meaning: proliferation and differentiation of pluripotential hematopoietic stem cells (HSCs) and hematopoietic progenitor cells
 
 mainly: Mo/Mϕ, endothelial cells, fibroblasts
 
@@ -1292,8 +1298,8 @@ recognize **common structures** in pathogens directly
 
 - PRR inculdes
   
-  - membrane: mannose receptor (MR), scavenger receptor (SR, 清道夫受体), Toll-like receptor (TLR)
-  - secretory: MBL, C reaction protein (C反应蛋白), LPS binding protein (LBP)
+  - membrane: mannose receptor (**MR**), scavenger receptor (**SR**, 清道夫受体), Toll-like receptor (**TLR**)
+  - secretory: **MBL**, C reaction protein (**CRP**, C反应蛋白), LPS binding protein (**LBP**)
 
 - its ligand (模式分子)
   
@@ -1407,11 +1413,11 @@ against infected/tumor cell
 
 Restricted diversity, directly recognize pathogens and become activated.
 
-| cell type | feature                                | found in                   | antigen                                | response                                                       |
-| --------- | -------------------------------------- | -------------------------- | -------------------------------------- | -------------------------------------------------------------- |
-| NKT cell  | both TCR-CD3 and CD56 (a symbol of NK) | bone marrow, liver, thymus | phospholipids, glycolipids             | cytotoxic effect and cytokines                                 |
-| γδT cell  | TCR: γ,δ chain                         | mucosa (early)             | MICA/B, viral protein, HSP, P/G lipids | the same                                                       |
-| B1 cell   | self-renewing B cells                  | 胸膜腔，腹膜腔，小肠固有层              | TI-Ag, denatured self Ag               | rapid IgM, early resposne; no <br />class switching, no memory |
+| cell type | feature                                | found in                   | antigen                                | response                                                     |
+| --------- | -------------------------------------- | -------------------------- | -------------------------------------- | ------------------------------------------------------------ |
+| NKT cell  | both TCR-CD3 and CD16 (a symbol of NK) | bone marrow, liver, thymus | phospholipids, glycolipids             | cytotoxic effect and cytokines                               |
+| γδT cell  | TCR: γ,δ chain                         | mucosa (early)             | MICA/B, viral protein, HSP, P/G lipids | the same                                                     |
+| B1 cell   | self-renewing B cells                  | 胸膜腔，腹膜腔，小肠固有层 | TI-Ag, denatured self Ag               | rapid IgM, early resposne; no <br />class switching, no memory |
 
 A lot of other cells are involved in innate immune response, like mastocytes.
 
@@ -1451,14 +1457,14 @@ A lot of other cells are involved in innate immune response, like mastocytes.
 - rapid and short, no memory
 - regulates adaptive immune
 
-### Relationship with adaptive ir
+### Relationship with adaptive IR
 
 I: innate; A: adaptive
 
-- I initiates A: Ag presenting, like DC
-- I regulates strength and type of A: type of cytokines
-- I assists effector T cells to enter the location of disease: chemokines
-- I cooperates with effector T cell and antibody to function: complement, ADCC
+- I initiates A: Ag **presenting**, like DC
+- I regulates strength and type of A: type of **cytokines**
+- I assists effector T cells to enter the location of disease: **chemokines**
+- I **cooperates** with effector T cell and antibody to function: complement, ADCC
 
 ## Summary
 
@@ -1466,7 +1472,7 @@ I: innate; A: adaptive
   1. 屏障作用
      - 皮肤黏膜屏障：物理屏障，化学屏障，菌群的作用
      - 器官屏障：解剖基础，屏障的作用（阻挡病原体，大分子，活化的淋巴细胞）
-  2. 免疫细胞：巨噬细胞，中性粒细胞， NK细胞， 树突状细胞，嗜酸性粒细胞，嗜碱性细胞，肥大细胞， NKT细胞， γδT细胞， B1细胞
+  2. 免疫细胞：巨噬细胞，中性粒细胞，NK细胞，树突状细胞，嗜酸性粒细胞，嗜碱性细胞，肥大细胞，NKT细胞，γδT细胞，B1细胞
      - 如何识别
      - 作用机制
   3. 固有免疫分子
@@ -1714,7 +1720,7 @@ situations that can happen:
 
 # Chapter 10 T/B cell development
 
-Not included in slides, but in the textbook. Helps to understand Chapter 10 and 11.
+Not included in slides, but in the textbook. Helps to understand Chapter 11 and 12.
 
 You may remember in that figure in [chapter 8](#Chapter-8-Innate-Immune-System), T and B cell have a common ancester, the differentiation of which depends on Notch1 presence.
 
