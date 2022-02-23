@@ -14,6 +14,7 @@ TODOs:
 Resources
 
 - [a test paper with answers](https://wenku.baidu.com/view/c22d35dbbceb19e8b9f6ba5d.html)
+- [paper 2](https://wenku.baidu.com/view/a47abb9e74eeaeaad1f34693daef5ef7ba0d1285.html)
 
 # Chapter 1 Introduction
 
@@ -1214,6 +1215,8 @@ Some are circulating and only have binding domains. Their work might be:
 - promote wound healing (愈伤)
 - 神经-内分泌-免疫网络调节
 
+炎症、增殖、分化、调控
+
 > No reflection questions
 
 # Chapter 8 Innate Immune System
@@ -1413,11 +1416,11 @@ against infected/tumor cell
 
 Restricted diversity, directly recognize pathogens and become activated.
 
-| cell type | feature                                | found in                   | antigen                                | response                                                     |
-| --------- | -------------------------------------- | -------------------------- | -------------------------------------- | ------------------------------------------------------------ |
-| NKT cell  | both TCR-CD3 and CD16 (a symbol of NK) | bone marrow, liver, thymus | phospholipids, glycolipids             | cytotoxic effect and cytokines                               |
-| γδT cell  | TCR: γ,δ chain                         | mucosa (early)             | MICA/B, viral protein, HSP, P/G lipids | the same                                                     |
-| B1 cell   | self-renewing B cells                  | 胸膜腔，腹膜腔，小肠固有层 | TI-Ag, denatured self Ag               | rapid IgM, early resposne; no <br />class switching, no memory |
+| cell type | feature                                | found in                   | antigen                                    | response                                                     |
+| --------- | -------------------------------------- | -------------------------- | ------------------------------------------ | ------------------------------------------------------------ |
+| NKT cell  | both TCR-CD3 and CD16 (a symbol of NK) | bone marrow, liver, thymus | phospholipids, glycolipids                 | cytotoxic effect and cytokines                               |
+| γδT cell  | TCR: γ,δ chain                         | mucosa (early)             | MICA/B, viral protein, HSP, **P/G lipids** | the same                                                     |
+| B1 cell   | self-renewing B cells                  | 胸膜腔，腹膜腔，小肠固有层 | TI-Ag, denatured self Ag                   | rapid IgM, early resposne; no <br />class switching, no memory |
 
 A lot of other cells are involved in innate immune response, like mastocytes.
 
@@ -2132,7 +2135,7 @@ class Th1,Th2,Th17,Treg,CTL subcell
 
 - Th2: humoral immunity pathway; type I hypersensitivity
 - Th17: autoimmunity/inflammation
-- Treg: suppression.
+- T<sub>reg</sub>: suppression.
 
 Summary: a lot of functions are contradictory...
 
@@ -2228,14 +2231,16 @@ BCR-CD79a/b-CD19/CD21/CD81 binds Ag
   > - CD19 conformational change, Tyr residues are phosphorylated, recruit SH2 adaptors (Fyn, etc.)
   
   the signal might be amplified 1000 times
+  
+- CD79a/79b heterodimer, help transmit the signal, just like CD3
 
 <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-bcr-coreceptor.png" alt="12-bcr-coreceptor" style="zoom:60%;" />
 
 BCR is different from TCR in:
 
+- no APC requirement, no MHC restriction
 - recognize not only protein Ag, but also NA, lipid, polysaccharide, etc.
 - recognize the natural/partially-degraded Ag, not always peptide, i.e. also conformational epitope
-- no APC requirement, no MHC restriction
 
 ### Naive B cell activation
 
@@ -2287,8 +2292,10 @@ Germinal center is formed (about 7 days after infection).
 | light | centrocyte, fDC, Tfh | the opposite; further differentiation (see below) | loosely   |
 
 > fDC: concentrate Ag on the surface using FcR and CR, for B cell to recognize. Maintain memory
-> 
-> mIg: 膜免疫球蛋白, BCR (the same gene as Ab.), heavy chain: IgM or IgD (symbol of maturation)
+>
+> Tfh cells provide co-stimulatory CD40L
+>
+> mIg: 膜免疫球蛋白, BCR (the same gene as Ab), heavy chain: IgM or IgD (symbol of B cell maturation)
 
 #### Events here
 
@@ -2342,16 +2349,17 @@ Cell death depends on Fas (CD95) from Tfh. Need a strong BCR signal (Ag) AND str
 
 A comparison
 
-| Ag             | TD-Ag                    | TI-1 Ag                                                                      | TI-2 Ag                                  |
-| -------------- | ------------------------ | ---------------------------------------------------------------------------- | ---------------------------------------- |
-| Ag type        | Soluble<br/>protein, etc | Bacterial cell-wall<br/>components (e.g., LPS)                               | 肺炎球菌荚膜多糖<br />沙门菌多聚鞭毛                    |
-| receptor       | BCR                      | BCR, mitogen receptor                                                        | BCR                                      |
-| target B cell  | B2                       | all B cell                                                                   | mainly B1                                |
-| mature B cell? | mature                   | mature or immature                                                           | mature                                   |
-| Ab type        | all types                | early, IgM                                                                   | IgM/G                                    |
-| feature        | all processes above      | both the BCR and innate receptors                                            | repeated epitope<br />cytokine-dependent |
+| Ag             | TD-Ag                    | TI-1 Ag                                                      | TI-2 Ag                                  |
+| -------------- | ------------------------ | ------------------------------------------------------------ | ---------------------------------------- |
+| Ag type        | Soluble<br/>protein, etc | Bacterial cell-wall<br/>components (e.g., LPS)               | 肺炎球菌荚膜多糖<br />沙门菌多聚鞭毛     |
+| receptor       | BCR                      | BCR, mitogen receptor                                        | BCR                                      |
+| target B cell  | B2                       | all B cell                                                   | mainly B1                                |
+| mature B cell? | mature                   | mature or immature                                           | mature                                   |
+| Ab type        | all types                | early, IgM                                                   | IgM/G                                    |
+| feature        | all processes above      | both the BCR and innate receptors                            | repeated epitope<br />cytokine-dependent |
 | low dose       |                          | oligoclonal activation<br />cross-links the receptors<br />specific antibody | extensive BCR/CR2 crosslink              |
-| high dose      |                          | polyclonal B cell activation                                                 | causes B cell anergy                     |
+| high dose      |                          | polyclonal B cell activation                                 | causes B cell anergy                     |
+| memory         | yes                      | no                                                           | no                                       |
 
 ## General laws in humoral immunity
 
@@ -2469,7 +2477,7 @@ Mechanisms are:
 
 - **clonal ignorance** (克隆忽视): low expression/affinity Ag (<u>primary</u>) cannot stimulate lymphocytes
 
-- **clonal deletion**: with Ag, without <u>2ndary</u> signal/cytokines. autoreactive lymphocytes undergo apoptosis
+- **clonal deletion**: with Ag, without <u>secondary</u> signal/cytokines. autoreactive lymphocytes undergo apoptosis
   
   > e.g. B cells exposed to soluble Ag monomers
 
@@ -2477,10 +2485,10 @@ Mechanisms are:
   
   > clonal ignorance/anergy might be reversed and cause autoimmunity
 
-- **regulatory cells**: Treg, regulatory B cell/DC, etc.
+- **regulatory cells**: T<sub>reg</sub>, regulatory B cell/DC, etc.
   
-  > - iTreg: like Th17, from naive T cell
-  > - nTreg: natural, from autoreactive T cell in negative selection
+  > - iT<sub>reg</sub>: like Th17, from naive T cell
+  > - nT<sub>reg</sub>: natural, from autoreactive T cell in negative selection
 
 - **immunological privileged site** (免疫豁免部位): lymphocytes cannot enter 中枢神经组织、胎盘，眼前房等
   
