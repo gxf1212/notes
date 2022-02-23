@@ -761,8 +761,8 @@ overall pathways: all converge into C3 activation
 graph LR
 c[classic pathway] --C4b2a--> c3[C3 activation]
 a[alternative pathway] --C3bBb--> c3
-m[MBL pathway] --> c
-m[MBL pathway] --> a
+m[MBL pathway] --MASP2--> c
+m[MBL pathway] --MASP1--> a
 c3 --> c5[C5 activation]
 c5 --> mac[MAC formation]
 c3 --> o[other responses]
@@ -1180,13 +1180,13 @@ Three regions, for signaling.
 
 ### Membrane CR: categories
 
-| xx superfamily receptors | also known as/abbreviated         | their ligands                                            | domain structure                                                    | remark                                                           |
-| ------------------------ | --------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| Immunoglobin             | IgSFR                             | IL-1/18, M-CSF, SCF                                      | α/β, each has one or more IgSF domain(s)                            | GM-CSF subfamily: IL-3/5, common β                               |
-| Hematopoietic factor     | Type I cytokine RSF               | IL-2$\sim$7, 9, 11$\sim$13, 15,...<br />GM-CSF, G-CSF... | α/β clamps ligand<br />intracellular γ<br />conserved Cys and WSXWS | IL-2 subfamily, common γ<br />IL-6 subfamily, common gp130       |
-| Interferon               | Type II cytokine RSF              | IFN-α/β/γ, IL-10, etc.                                   | similar, except WSXWS                                               | [Jak/STAT pathway](https://www.bilibili.com/video/BV1ub4y1b7B5/) |
-| TNF                      | Type III cytokine RSF<br />TNFRSF | TNF-α/β<br />CD27/30/40L<br />NGF, Fas                   | mostly homotrimer<br />each chain has many Cys-rich domains         |                                                                  |
-| Chemokine                |                                   | IL-8                                                     | all are GPCR                                                        | also Jak/STAT pathway                                            |
+| xx superfamily receptors      | also known as/abbreviated         | their ligands                                            | domain structure                                             | remark                                                       |
+| ----------------------------- | --------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Immunoglobin                  | IgSFR                             | IL-1/18, M-CSF, SCF                                      | α/β, each has one or more IgSF domain(s)                     | GM-CSF subfamily: IL-3/5, common β                           |
+| Hematopoietic factor 造血因子 | Type I cytokine RSF               | IL-2$\sim$7, 9, 11$\sim$13, 15,...<br />GM-CSF, G-CSF... | α/β clamps ligand<br />intracellular γ<br />conserved Cys and WSXWS | IL-2 subfamily, common γ<br />IL-6 subfamily, common gp130   |
+| Interferon                    | Type II cytokine RSF              | IFN-α/β/γ, IL-10, etc.                                   | similar, except WSXWS                                        | [Jak/STAT pathway](https://www.bilibili.com/video/BV1ub4y1b7B5/) |
+| TNF                           | Type III cytokine RSF<br />TNFRSF | TNF-α/β<br />CD27/30/40L<br />NGF, Fas                   | mostly homotrimer<br />each chain has many Cys-rich domains  |                                                              |
+| Chemokine                     |                                   | IL-8                                                     | all are GPCR                                                 | also Jak/STAT pathway                                        |
 
 ### Subunits
 
@@ -1315,7 +1315,7 @@ recognize **common structures** in pathogens directly
 > 
 > ![8-prr](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/8-prr.png)
 
-##### macrophage
+##### ==macrophage==
 
 ###### basics
 
@@ -1397,9 +1397,9 @@ Large granular lymphocytes. No sensitization required.
 
 ##### mode of action
 
-- direct attack: perforin-granzyme
-- induce apoptosis: FasL, TRAIL
-- ADCC effect
+- direct **attack**: perforin-granzyme
+- induce **apoptosis**: FasL, TRAIL
+- **ADCC** effect
 
 against infected/tumor cell
 
@@ -1464,7 +1464,7 @@ I: innate; A: adaptive
 - I initiates A: Ag **presenting**, like DC
 - I regulates strength and type of A: type of **cytokines**
 - I assists effector T cells to enter the location of disease: **chemokines**
-- I **cooperates** with effector T cell and antibody to function: complement, ADCC
+- I cooperates with effector T cell and antibody to function: **complement, ADCC**
 
 ## Summary
 
@@ -1472,7 +1472,7 @@ I: innate; A: adaptive
   1. 屏障作用
      - 皮肤黏膜屏障：物理屏障，化学屏障，菌群的作用
      - 器官屏障：解剖基础，屏障的作用（阻挡病原体，大分子，活化的淋巴细胞）
-  2. 免疫细胞：巨噬细胞，中性粒细胞，NK细胞，树突状细胞，嗜酸性粒细胞，嗜碱性细胞，肥大细胞，NKT细胞，γδT细胞，B1细胞
+  2. 免疫细胞：==巨噬细胞，中性粒细胞，NK细胞，树突状细胞，嗜酸性粒细胞，嗜碱性细胞，肥大细胞，NKT细胞，γδT细胞，B1细胞==
      - 如何识别
      - 作用机制
   3. 固有免疫分子
@@ -1540,7 +1540,7 @@ and become mature DCs as they migrate into peripheral immune organs.
 
 - plasmacytoid DC (pDC): produces **type I IFN** 
 - inflammatory DC: from monocytes, in inflammatory region
-- a few DCs negatively regulate ..
+- a few DCs negatively regulate .. like Myeloid-derived-suppressor DC (MSDC)
 
 #### Function
 
@@ -1549,7 +1549,7 @@ and become mature DCs as they migrate into peripheral immune organs.
   - the only one to activate **naive T cell** !
 - immune regulation: produce cytokines
 - induce and maintain immune tolerance
-  - clonal deletion of T cells in thymus (see later chapters)
+  - clonal deletion of T cells in thymus (see [Negative selection](#T-Negative-selection))
   - T cell tolerance when immature DCs in tissues interacts with them
 
 Application: cancer vaccines. 
@@ -1561,11 +1561,11 @@ Application: cancer vaccines.
 ### Monocytes/Macrophages
 
 - Mo is derived from bone marrow and differentiate into Mϕ
-- good at Ag uptake and processing
+- good at Ag uptake and processing (**both**)
   - expressing various receptors
   - three ways (see [chapter 8](#ways-of-cytosis-(吞噬)))
 - under the action of IFN-γ/TNF-α (from T cell, etc.) 
-  - high MHC I/II and co-stimulator expression, present Ag to CD4/8<sup>+</sup> T cell
+  - high MHC I/II and co-stimulator expression, present Ag to **CD4/8<sup>+</sup>** T cell (not naive)
   - enhanced all kinds of "cytosis"
 - cannot activate naive T cells; so only in secondary response (**再次应答**)
 
@@ -1573,7 +1573,7 @@ Application: cancer vaccines.
 
 - mIg-mediated endocytosis, Ag enrichment and processing
 - present MHC II-Ag to Th cells (with co-stimulator in inflammatory conditions)
-- reversely be activated by (CD4<sup>+</sup> and?) Th cells (TD-Ag) to produce Ab
+- reversely be activated by (CD4<sup>+</sup> and?) **Th cells** (TD-Ag) to produce Ab ([see chapter 12](#Naive-B-cell-activation))
 
 **summary**
 
@@ -1651,7 +1651,7 @@ graph TD
 subgraph peptide
 v[viral protein] --ubiquitinated--> U-protein
 e[endogenous protein] --ubiquitinated--> U-protein
-U-protein --20S proteosome--> ap[Ag peptide in cytosol]
+U-protein --20S proteaosome--> ap[Ag peptide in cytosol]
 U-protein --26S immunoproteasome--> ap --TAP--> er[Ag in the ER] --ERAP--> m[mature peptide] 
 end
 m --> pMHC
@@ -1724,7 +1724,7 @@ Not included in slides, but in the textbook. Helps to understand Chapter 11 and 
 
 You may remember in that figure in [chapter 8](#Chapter-8-Innate-Immune-System), T and B cell have a common ancester, the differentiation of which depends on Notch1 presence.
 
-<img src="../../course\molecular-immunology/molecular-immunology.assets/10-2-source.png" alt="10-2-source" style="zoom:40%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-2-source.png" alt="10-2-source" style="zoom:40%;" />
 
 ## B cell
 
@@ -1777,7 +1777,7 @@ Gene recombination: gene segments rearrange.
 
 - receptor editing: some mIg expressing B cells encounter self-Ag, but clonal deletion does not occur. RAG is re-activated and light chain VJ is recombined to renew the specificity. (If not successful, the B cell undergoes apoptosis)
 
-- somatic hypermutation (see [chapter 13](#Somatic-hypermutation)). 
+- somatic hypermutation during affinity maturation (see [chapter 12](#Somatic-hypermutation)). 
   
   The above three happen in the bone marrow, while this in periphery.
 
@@ -1797,7 +1797,9 @@ Gene recombination: gene segments rearrange.
 
 #### B Positive selection
 
-See [Chapter 12](#somatic-hypermutation). Periphery tolerance. Somatic hypermutation, affinity maturation, etc.
+See [Chapter 12](#Events-here) in germinal center. 
+
+Periphery tolerance, include somatic hypermutation, affinity maturation, etc.
 
 #### B Negative selection
 
@@ -1819,7 +1821,7 @@ If immature B cell (IgM) encounters self-Ag, it undergoes
 | --------------------------- | --------------------------------------------- | ---------------------------- |
 | general                     | CLL/autoimmunity related                      | usually refered to as B cell |
 | immunity                    | innate                                        | humoral                      |
-| features                    | earily, spontaneous Ab                        | later                        |
+| features                    | early, spontaneous Ab                         | later                        |
 | Ag                          | carbohydrate, LPS, etc.                       | various protein              |
 | Ab                          | mainly IgM<br />low affinity and polyreactive | plasma cell, IgM/G, specific |
 | hypermutation<br />& memory | no                                            | yes                          |
@@ -1888,6 +1890,19 @@ T cells that moderatly binds then become mature T cell and enter the periphery.
 
 - According to developmental stage
 - According to function (cytokine)
+
+## Summary
+
+### on genes
+
+| genes          | location on chromosome |
+| -------------- | ---------------------- |
+| HLA            | 6, short arm           |
+| β2m            | 15                     |
+| Ab heavy chain | 14                     |
+| Ab light chain | 2/22                   |
+
+TCR α/Ab light chain: only VJ, no D
 
 # Chapter 11 T cell-mediated Immune Response
 
@@ -2273,7 +2288,7 @@ Germinal center is formed (about 7 days after infection).
 > 
 > mIg: 膜免疫球蛋白, BCR (the same gene as Ab.), heavy chain: IgM or IgD (symbol of maturation)
 
-#### Events
+#### Events here
 
 A mature B cell still does not have specificity to an antigen. So what happens to it in the periphery?
 
@@ -2766,30 +2781,76 @@ also called immune complex-mediated hypersensitivity
 
 hypersensitivity vasculitis
 
+抗体与可溶性抗原结合后，形成的免疫复合物在毛细血管基底膜沉积，引发的以充血水肿，局部坏死和中性粒细胞浸润为主要特征的炎症反应和组织损伤。
+
 ### Mechanisms
 
-#### 
+- 免疫复合物清除障碍  
+- 组织学和血管动力学因素  
 
 
+
+IgG,IgM  
 
 #### Type III Damage
 
 
 
+1. 激活补体
+   直接的损伤作用，趋化作用，过敏毒素
+2. 炎性细胞浸润：
+   中性粒细胞，巨噬细胞，嗜碱性粒细胞
+3. 活化血小板
+   形成微血栓；加剧炎性反应.
+
 ### Diseases
 
+Arthurs 反应：用马血清反复免疫家兔数周后，当再次注射马血清
+时，可在注射局部出现红肿，出血和坏死
 
+1. 血清病
+2. 类风湿性关节炎
+3. 链球菌感染后肾小球肾炎  
 
 ## Type IV hypersensitivity
 
+由致敏的特异性T细胞介导的超敏反应。其实质为细胞免疫引起的组织损伤
+
+
+
+
+
+胞内菌，病毒，真菌，移植物，寄生虫  
+
+
+
+
+
+
+
+
+
+1. 起病慢，消退慢
+2. 补体，抗体不参与
+3. 炎性细胞和因子是主要的致病因素
+4. 单核细胞，淋巴细胞浸润
+5. 多数无明显的个体差异  
+
+
+
 Summary of four types
 
-|     | sensitization phase |     |     |     |
-| --- | ------------------- | --- | --- | --- |
-|     |                     |     |     |     |
-|     |                     |     |     |     |
-|     |                     |     |     |     |
-|     |                     |     |     |     |
+| type                               | I                         | II                      | III                                      | IV                                     |
+| ---------------------------------- | ------------------------- | ----------------------- | ---------------------------------------- | -------------------------------------- |
+| happen&fade                        | fast                      | a bit fast              | a bit slow                               | slow                                   |
+| antibody                           | IgE                       | IgM/G                   | IgM/G                                    | no                                     |
+| complement                         | no                        | yes                     | yes                                      | yes                                    |
+| inflammatory<br />mediators        | yes                       |                         |                                          | yes                                    |
+| cells                              | mast cell<br />ensinophil | NK cell<br />macrophage | neutrophil<br />macrophage<br />platelet | monocyte<br />CD4/8<sup>+</sup> T cell |
+| damage                             | not much                  | cytolysis               | inflammation                             | lymphocyte<br />infiltration           |
+| individual difference<br />genetic | obvious                   | not                     | not                                      | mostly not                             |
+
+
 
 # Chapter 15 Transplant Immunity
 
@@ -3022,7 +3083,7 @@ inject effectors
 
 > self-study, just scan...
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\17-diseases.png" alt="19-diseases" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/17-diseases.png" alt="19-diseases" style="zoom:50%;" />
 
 Definition: sydromes caused by loss of immune system components and dysfunction
 
@@ -3436,6 +3497,14 @@ magnetic beads:
 
 
 
+# Additional summary
+
+
+
+
+
+
+
 # A homework
 
 > 某AIDS患者罹患白血病，在接受了CCR5Δ32/Δ32基因型的同种异体造血干细胞移植后，HIV也被彻底清除。
@@ -3448,7 +3517,7 @@ magnetic beads:
 
    可能只能治好白血病，但不能使HIV消失。因为新的淋巴细胞仍表达正常的CCR5蛋白，能被HIV侵入。
 
-<img src="E:\GitHub_repo\notes\course\molecular-immunology\molecular-immunology.assets\hw2.jpg" alt="hw2" style="zoom:40%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/hw2.jpg" alt="hw2" style="zoom:40%;" />
 
 
 
