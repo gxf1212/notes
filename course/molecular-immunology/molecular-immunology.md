@@ -1027,7 +1027,7 @@ Each gene has exons encoding all needed chains.
 
 MHC class I is presented on the surface of any karyocytes (有核细胞) (except 滋养层细胞).
 
-​            <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-mhc1.jpg"  style="zoom:25%;" />                                <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-mhc2.png"  style="zoom:75%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-mhc1.jpg"  style="zoom:25%;" /><img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/6-mhc2.png"  style="zoom:75%;" />
 
 <center>left: MHC I; right: MHC II</center>
 
@@ -1845,7 +1845,7 @@ If immature B cell (IgM) encounters self-Ag, it undergoes
 - α: V-J like Ab light chain; β: V with D-J, like Ag heavy chain
 - combinational/junctional diversity, higher probability of insertion than Ig
 
-<img src="../../course\molecular-immunology/molecular-immunology.assets/10-2-tcr-recom.png" alt="10-2-tcr-recom" style="zoom:55%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-2-tcr-recom.png" alt="10-2-tcr-recom" style="zoom:55%;" />
 
 #### T Positive selection
 
@@ -1914,7 +1914,7 @@ T细胞介导的免疫应答
 
 <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-ap.png" alt="10-ap" style="zoom:50%;" />
 
-APCs like DCs, take up Ag in tissues, and enter lymph nodes to present Ag to T lymphocytes.
+APCs like DCs, take up Ag in **tissues**, and enter lymph nodes to present Ag to T lymphocytes.
 
 see [chapter 9](#chapter-9-antigen-presenting)!!
 
@@ -1972,13 +1972,15 @@ CD3 mediates <u>initial activation</u> through Lck, NFAT, NFκB, etc. to promote
 
 ![10-pathway](https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/10-pathway.png)
 
+<center>TCR signaling</center>
+
 #### 2. Co-stimulation
 
 Adhesion molecule like CD28
 
 They mediates <u>complete activation</u> by additional proliferation signal, expression of cytokine and its receptor.
 
-Without them, T cell anergy (avoid excessive activation)! 
+Without them, T cell anergy (to avoid excessive activation)! 
 
 Negative signal also inactivtes T cell
 
@@ -2013,7 +2015,7 @@ Ag signal$+$cytokines from Th cell
 
 #### Th indepedent
 
-> exogenous Ag. Without IL-2, must highly express co-stimulators!!
+> Without IL-2, must highly express co-stimulators!!
 
 - cross-priming: APCs also process exogenous Ag. see [chapter 9](#Cross-presentation), the figure for more.
 
@@ -2054,13 +2056,13 @@ classDef subcell fill:#bbf,stroke:#f66,stroke-width:2px
 class Th1,Th2,Th17,CTL subcell
 ```
 
-- DC is the initial activator, IL-12 to induce Th1
+- DC is the initial activator, **IL-12** to induce Th1
 
 - Th1 positive feedback, strengthen DC and itself
 
 - Th1 and Th2, both from Th0, inhibiting each other?
   
-  > no clear result on IL-2's effect on Th2....
+  > no clear result on IL-2's effect on Th2....??
 
 - CTL is activated by IL-2 (self, Th1)
 
@@ -2084,7 +2086,6 @@ TNFa --> NK
 IFN --> NK
 IFN --> CTL --> ct
 IFN --> B[B cell] --Ab--> op[opsonization]
-CD8+[(CD8+)] ==> CTL
 Th1 --> TNFa([TNF-α]) --> neutrophil --> op
 neutrophil --> cyto
 neutrophil --> ct
@@ -2095,7 +2096,7 @@ classDef subcell fill:#bbf,stroke:#f66,stroke-width:2px
 class Th1,NK,Mϕ,CTL,neutrophil,B subcell
 ```
 
-- Th1 and macrophage activate each other; monocyte diff and chemotaxis
+- Th1 and **macrophage** activate each other; monocyte diff and chemotaxis
 
 - various cytokines activate NK, CTL, neotrophil, B cell, ....
   
@@ -2129,8 +2130,9 @@ classDef subcell fill:#bbf,stroke:#f66,stroke-width:2px
 class Th1,Th2,Th17,Treg,CTL subcell
 ```
 
-- Th2: humoral immunity
-- Th17, Treg: see figure
+- Th2: humoral immunity pathway; type I hypersensitivity
+- Th17: autoimmunity/inflammation
+- Treg: suppression.
 
 Summary: a lot of functions are contradictory...
 
@@ -2141,12 +2143,12 @@ Summary: a lot of functions are contradictory...
 
 A brief recitation
 
-| T cell subgroup | cytokines inducing their generation | major types of cytokines produced | type of response      | biological function of these cytokines                                                                |
-| --------------- | ----------------------------------- | --------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------- |
+| T cell subgroup | cytokines inducing their generation | major types of cytokines produced | type of response      | biological function of these cytokines                       |
+| --------------- | ----------------------------------- | --------------------------------- | --------------------- | ------------------------------------------------------------ |
 | Th1             | IL-12, IFN-γ                        | IFN-γ, TNF-α, IL-2                | cell immunity         | Tc, Th differentiation<br />Mϕ, NK activation<br />proliferation,chemotaxis, inflammation and killing |
-| Th2             | IL-4                                | IL-4, IL-10                       | humoral immunity      | B cell activation<br />class switching<br />hypersensitivity                                          |
-| Th17            | IL-6, TGF-β                         | IL-17                             | innate (inflammation) | inflammation!! auto<br />chemotaxis/activation                                                        |
-| CTL             | IL-2                                | IFN-γ, TNF-α                      | cell immunity         | direct killing                                                                                        |
+| Th2             | IL-4, IL-10                         | IL-4, IL-10, IL-5, IL-13          | humoral immunity      | B cell activation<br />class switching<br />hypersensitivity |
+| Th17            | IL-6, TGF-β                         | IL-17, GM-CSF                     | innate (inflammation) | inflammation!! auto<br />chemotaxis/activation               |
+| CTL             | IL-2                                | IL-2, IFN-γ, TNF-α                | cell immunity         | direct killing                                               |
 
 > Tfh cell: T follicular helper cell
 
@@ -2180,16 +2182,16 @@ feature: Ag-specificity, MHC-restriction
 
 1. apoptosis, to terminate immune response
    - activation-induced cell death (AICD): e.g. Fas expression
-   - T<sub>reg</sub> induced death (see chapter 13)
+   - T<sub>reg</sub> induced death (see chapter 13 tolerance?)
 2. to T<sub>m</sub> (memory T cell)
-   - CD45RA<sup>-</sup>/RO<sup>+</sup> (exactly reverse the naive T cell)
+   - CD45RA<sup>-</sup>/RO<sup>+</sup> (exactly opposite the naive T cell)
    - rapid activation, more sensitive to Ag/cytokine
    - less requirement on co-stimulators, more cytokine production
 
 > CD8记忆T细胞。研究结果提示
 > 
-> 1. CD8 T<sub>m</sub>的产生无需T细胞分泌的细胞因子参与;
-> 2. CD8 T<sub>m</sub>的维持无需抗原持续刺激和B细胞参与，亦无需Th辅助，但有赖于与MHC I类分子的接触，可能需要T细胞CD28与CD80和CD86结合所产生的共刺激信号持续存在;
+> 1. CD8 T<sub>m</sub>的产生无需T细胞分泌的细胞因子参与；
+> 2. CD8 T<sub>m</sub>的维持无需抗原持续刺激和B细胞参与，亦无需Th辅助，但有赖于与MHC I类分子的接触，可能需要T细胞CD28与CD80和CD86结合所产生的共刺激信号持续存在；
 > 3. IFN-α及IL-15等细胞因子在维持CD8 T<sub>m</sub>中可能发挥重要作用。
 
 ## T cell biological effects
@@ -2777,7 +2779,7 @@ If you are Rh<sup>-/-</sup>, you will have anti-Rh Ab.
 
 ## Type III hypersensitivity
 
-also called immune complex-mediated hypersensitivity  
+also called immune complex-mediated hypersensitivity, 免疫复合物型超敏反应
 
 hypersensitivity vasculitis
 
@@ -2785,8 +2787,10 @@ hypersensitivity vasculitis
 
 ### Mechanisms
 
-- 免疫复合物清除障碍  
-- 组织学和血管动力学因素  
+- 免疫复合物清除障碍
+  - IC大量生成：自身抗原，大量异种蛋白的输入，持续接触外源性抗原，感染
+  - 补体缺陷
+- 组织学和血管动力学因素：血流缓慢，涡流，高静水压，毛细血管通透性增加
 
 
 
@@ -2805,22 +2809,23 @@ IgG,IgM
 
 ### Diseases
 
-Arthurs 反应：用马血清反复免疫家兔数周后，当再次注射马血清
-时，可在注射局部出现红肿，出血和坏死
+Arthurs 反应：用马血清反复免疫家兔数周后，当再次注射马血清时，可在注射局部出现红肿，出血和坏死
 
 1. 血清病
 2. 类风湿性关节炎
-3. 链球菌感染后肾小球肾炎  
+3. 链球菌感染后肾小球肾炎
 
 ## Type IV hypersensitivity
 
+delayed type hypersensitivity, 迟发型超敏反应
+
 由致敏的特异性T细胞介导的超敏反应。其实质为细胞免疫引起的组织损伤
 
+T<sub>DTH</sub>
 
 
 
-
-胞内菌，病毒，真菌，移植物，寄生虫  
+胞内菌，病毒，真菌，移植物，寄生虫
 
 
 
@@ -2834,21 +2839,24 @@ Arthurs 反应：用马血清反复免疫家兔数周后，当再次注射马血
 2. 补体，抗体不参与
 3. 炎性细胞和因子是主要的致病因素
 4. 单核细胞，淋巴细胞浸润
-5. 多数无明显的个体差异  
+5. 多数无明显的个体差异
 
 
 
-Summary of four types
+## Summary
 
-| type                               | I                         | II                      | III                                      | IV                                     |
-| ---------------------------------- | ------------------------- | ----------------------- | ---------------------------------------- | -------------------------------------- |
-| happen&fade                        | fast                      | a bit fast              | a bit slow                               | slow                                   |
-| antibody                           | IgE                       | IgM/G                   | IgM/G                                    | no                                     |
-| complement                         | no                        | yes                     | yes                                      | yes                                    |
-| inflammatory<br />mediators        | yes                       |                         |                                          | yes                                    |
-| cells                              | mast cell<br />ensinophil | NK cell<br />macrophage | neutrophil<br />macrophage<br />platelet | monocyte<br />CD4/8<sup>+</sup> T cell |
-| damage                             | not much                  | cytolysis               | inflammation                             | lymphocyte<br />infiltration           |
-| individual difference<br />genetic | obvious                   | not                     | not                                      | mostly not                             |
+| type                                 | I                                    | II                                                           | III                                          | IV                                               |
+| ------------------------------------ | ------------------------------------ | ------------------------------------------------------------ | -------------------------------------------- | ------------------------------------------------ |
+| alias                                | 速发型超敏反应                       | 细胞毒/溶细胞型超敏反应                                      | 免疫复合物型超敏反应                         | 迟发型超敏反应                                   |
+| antigen                              |                                      | on the surface                                               | soluable                                     |                                                  |
+| happen&fade                          | fast                                 | kind of fast                                                 | a bit slower                                 | slow                                             |
+| antibody                             | IgE                                  | IgM/G                                                        | IgM/G                                        | no                                               |
+| complement                           | no                                   | yes                                                          | yes                                          | yes                                              |
+| inflammatory<br />mediators          | yes                                  | yes                                                          | yes                                          | yes                                              |
+| cells                                | mast cell<br />ensinophil            | NK cell, macrophage                                          | neutrophil<br />macrophage<br />platelet     | monocyte<br />CD4/8<sup>+</sup> T cell           |
+| damage                               | not much                             | cytolysis                                                    | inflammation                                 | lymphocyte<br />infiltration                     |
+| individual difference<br />(genetic) | obvious                              | not                                                          | not                                          | mostly not                                       |
+| diseases                             | 全身过敏性休克<br />呼吸道等过敏反应 | 溶血性疾病：输血、新生儿、免疫性血细胞减少<br />自身免疫：肺－肾综合征<br />受体的抗体：甲亢、重症肌无力、糖尿病 | 局部免疫复合物病<br />类风湿性关节炎、血清病 | 传染性变态反应：肺结核，乙肝， HIV<br />移植排斥 |
 
 
 
