@@ -727,7 +727,7 @@ speciation
 
 人工选择：是指针对特定[性状](https://zh.wikipedia.org/wiki/性狀)进行育种，使这些性状的表现逐渐强化，而人们不需要的性状则可能逐渐消匿的过程。
 
-<img src="https://nitrocdn.com/BzukxzxIDWSkBjOuXIuFVkjjEriFmqlw/assets/static/optimized/rev-540763a/wp-content/uploads/2019/10/Drosophila_speciation_experiment-1024x401.png" alt="5-artificial" style="zoom:60%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/other/evolutional-bio.assets/5-speciation.jpg" alt="5-speciation" style="zoom:0%;" />
 
 基因工程：是打破物种间生殖隔离的强大力量
 
