@@ -2,7 +2,19 @@
 
 只展示思维导图。有些细节可能不全，但也够多的了。表格之类的复杂功能可能还整不了
 
-refer to [link](https://gxf1212.gitee.io/notes/#/techniques/Specific-Software-Usage?id=functions), find "mindmap" for more details
+一个关于这个页面怎么搭建的介绍：https://blog.csdn.net/gxf1212/article/details/123142111
+
+代码示例
+
+```mindmap
+root
+  topic1
+    subtopic
+  topic2
+    subtopic
+```
+
+> refer to [link](https://gxf1212.gitee.io/notes/#/techniques/Specific-Software-Usage?id=functions) for docsify functions
 
 # Chapter 1 绪论
 
