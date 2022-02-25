@@ -6,6 +6,8 @@
 
 > refer to [link](https://gxf1212.gitee.io/notes/#/techniques/Specific-Software-Usage?id=functions) for docsify functions
 
+导图是可以缩放、拖动、查找的哦~
+
 # Chapter 1 绪论
 
 1. 了解基因工程的概念
