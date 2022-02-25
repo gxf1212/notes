@@ -194,7 +194,7 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
    tkcon font Courier 20
    ```
 
-   > font type not affected?
+   size of the window is automatically changed. But font type not affected?
 
 6. As for the global font: the higher resolution your screen is, the smaller your font is
 
@@ -224,7 +224,7 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 	
 7. 
 
-5. 
+5. To know about your system, like checking the number of atoms, just load it into vmd (also when executing scripts) and see the cmd.
 
 #### VMD Graphics
 
@@ -501,6 +501,7 @@ i.e have done `segment`, `pdbalias`, `guesscoord`, etc.
 >
 > ```tcl
 > /home/gxf/vmd/lib/plugins/noarch/tcl/readcharmmtop1.2/
+> /usr/local/lib/vmd/plugins/noarch/tcl/readcharmmtop1.2/
 > ```
 >
 > ```shell
@@ -559,9 +560,8 @@ vmd -dispdev text -e merge.tcl
 
 #### build complex-method 2
 
-> use console, include topology
+> use console, include topology. [How to create a PSF file](https://sassie-web.chem.utk.edu/docs/structures_and_force_fields/notes.html)
 >
-> https://sassie-web.chem.utk.edu/docs/structures_and_force_fields/notes.html
 
 Modeling--Tk Console
 
@@ -868,28 +868,36 @@ vmd -dispdev text -e measure.tcl
 
 for basics about .namd parameters, please read 
 
-- ug 2.2 NAMD configuration file
-  - 2.2.5 Required NAMD configuration parameters. basic params links
-- ug 7 Standard Minimization and Dynamics Parameters
-- namd-tutorial-unix chp 1 and appendix
+- fundamental
+  - ug 2.2 NAMD configuration file
+    - 2.2.5 Required NAMD configuration parameters. basic params links
+  - ug 7 Standard Minimization and Dynamics Parameters
+  - namd-tutorial-unix chp 1 and appendix
+
 - [online tutorial](https://www.ks.uiuc.edu/Training/Tutorials/namd/namd-tutorial-unix-html/node26.html)
 - note in .conf
+- [Kevin's scripts](https://github.com/skblnw/mkrun/tree/master/NAMD). don't ever forget!
 
-#### attributes to pay attention to
+#### on the scripts
 
 Below are parameters you should notice in every simulation.
 
-##### constants
+##### constants and options
 
 - outputbase: your system
+- 
+- restarting a simulation: set `INPUTNAME`
+- gradually increase the temperature: set `ITMEP`$\neq$`FTEMP`
+- when temp gets stable, `langevin on`
+- `PSWITCH` and `langevinPiston on`: constant pressure
 
-##### parameters
+##### system and parameters
 
 1. par_CMAP.inp? 
 
    is actually **param.prm** downloaded from [Maryland](http://mackerell.umaryland.edu/). 
 
-   contains protein, ions (and so on? a big file)
+   contains protein, ions (and so on? a huge file). begin with:
 
    ```
    *>>>> CHARMM36 All-Hydrogen Parameter File for Proteins <<<<<<<<<<
@@ -898,47 +906,16 @@ Below are parameters you should notice in every simulation.
 
 2. **par_all36_na.prm** for some atoms in ATP
 
-##### periodic boundary conditions
+##### restarting
 
-see the above “measurement” subsection
+- The “reinitvels” command reinitializes velocities to a random distribution based on the given temperature.
+- 
 
-##### minimization and equilibration
+##### boxes, restrains
 
-all use conjugated gradient....not much to discuss
+see tutorial [Building Gramicidin A](http://www.ks.uiuc.edu/Research/namd/tutorial/NCSA2002/hands-on/) for detailed guidance and scripts about setting restrains
 
-##### NVT and NPT
-
-NPT: Langevin dynamics+Nos´e-Hoover Langevin piston
-
-NVT: delete piston...
-
-> compare the tutorial files, ws and wb
->
-> no params difference between npt and production??
-
-##### other
-
-- With wrapping, some molecules will jump between sides of the cell in the trajectory file to yield the periodic image nearest to the origin. Without wrapping, molecules will have smooth trajectories, but water in the trajectory may appear to explode as individual molecules diffuse. Wrapping only affects output, not the correctness of the simulation.
-
-  ```
-  wrapAll             on 
-  ```
-
-- PME is only applicable to periodic simulations. PME grid dimensions should have small integer factors only and be greater than or equal to length of the basis vector.
-
-  ```
-  #PME (for full-system periodic electrostatics)
-  PME                 yes
-  ```
-
-  may always use the default value
-
-- minimization < Perform <u>conjugate gradient</u> energy minimization? >
-
-- ` numsteps` = `run` ?
-
-- The “reinitvels” command reinitializes velocities to a random distribution based on the given
-  temperature.
+- periodic boundary conditions: see the above “measurement” subsection
 
 - When initially assembling a system it is sometimes useful to fix the protein while equilibrating water or lipids around it. These options read a PDB file containing flags for the atoms to fix. The number and order of atoms in the PDB file must exactly match that of the PSF and other input files.
 
@@ -952,18 +929,84 @@ NVT: delete piston...
 
 - constraintScaling 0 is the _immediate_ removal of all constraints
 
+- PME is only applicable to periodic simulations. PME grid dimensions should have small integer factors only and be greater than or equal to length of the basis vector.
 
+  ```
+  #PME (for full-system periodic electrostatics)
+  PME                 yes
+  ```
 
-#### work flow and restrains
+  may always use the default value
 
-see tutorial [Building Gramicidin A](http://www.ks.uiuc.edu/Research/namd/tutorial/NCSA2002/hands-on/) for detailed guidance about setting restrains
+- 
+
+##### minimization, equilibration, NVT and NPT
+
+all use conjugated gradient....not much to discuss
+
+> default: minimization < Perform <u>conjugate gradient</u> energy minimization? >
+
+NPT: Langevin dynamics+Nos´e-Hoover Langevin piston
+
+NVT: delete piston...
+
+> compare the tutorial files, ws and wb
+>
+> no params difference between npt and production??
+
+By now the Kevin script is compatible with the tutorial. Just ignore the other option, set `constraintScaling` to 1.
+
+` numsteps` = `run` ?
+
+###### steps
+
+Initially, both temp and pressure is on and settings are done. Fix and restraint are both on. 
+
+As simulation goes on, we only turn the options on or off.
 
 1. Minimization with fixed backbone atoms.
+
+   ```
+   langevinPiston	off
+   ```
+
 2. Minimization with restrained carbon alpha atoms.
+
+   ```
+   fixedAtoms	off
+   ```
+
 3. Langevin dynamics with restraints.
+
+   > langevin already on
+
 4. Constant pressure with restraints.
+
+   ```
+   langevinPiston	on
+   ```
+
 5. Constant pressure without restraints.
+
+   ```
+   constraintScaling	0
+   ```
+
 6. Constant pressure with reduced damping coefficients.
+
+##### other settings
+
+- With wrapping, some molecules will jump between sides of the cell in the trajectory file to yield the periodic image nearest to the origin. Without wrapping, molecules will have smooth trajectories, but water in the trajectory may appear to explode as individual molecules diffuse. Wrapping only affects output, not the correctness of the simulation.
+
+  ```
+  wrapAll             on 
+  ```
+
+- `on` = `yes`?
+
+- 
+
+- 
 
 ##### Guidance
 
@@ -983,11 +1026,13 @@ see the script for the final values
 > I used are:
 >
 > 1. Minimimize until the **gradient tolerance drops below 1.0**. The number of steps required to achieve this is **system-dependent**. I usually just minimize initially for, say, **10000 steps** and periodically check the
-> gradient tolerance.
+>    gradient tolerance.
 > 2. Equilibrate the fixed protein until the **temperature** (and other quantities such as pressure if necessary) **stabilizes** at the desired value. Again, the number of steps is worked out by trial and error.
 > 3. Equilibrate with decreasing harmonic constraints until the **unconstrained protein is stable** in terms of temperature, structure and other desired quantities.
 
 time length: refer to tutorials--my exploration--simulation
+
+#### work flow
 
 ##### commands
 
@@ -996,6 +1041,26 @@ time length: refer to tutorials--my exploration--simulation
 > after building the system, copy all needed files to a directory `./common`
 >
 > the script is without an extension name for VScode to highlight. put in where the results are
+>
+> ```shell
+> $
+> ├── common
+> │   ├── fix_backbone.pdb
+> │   ├── fix_backbone_restrain_ca.tcl
+> │   ├── par_all36m_prot.prm
+> │   ├── par_all36_na.prm
+> │   ├── param.prm
+> │   ├── restrain_ca.pdb
+> │   ├── system.pdb
+> │   ├── system.psf
+> │   └── template-us-namd
+> ├── equil
+> │   ├── pro-lig-equil
+> │   └── pro-lig-equil.log
+> └── prod
+>     ├── pro-lig-prod
+>     └── pro-lig-prod.log
+> ```
 >
 > do not use `mpirun` for such a small system...
 
@@ -1022,7 +1087,7 @@ xmgrace TEMP.dat
 xmgrace TOTAL.dat
 ```
 
-about the script:
+the script is from namd unix tutorial files. note:
 
 ```
 Usage: data_avg <logfile> [<first timestep> <last timestep>]

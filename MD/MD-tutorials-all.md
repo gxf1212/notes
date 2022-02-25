@@ -725,26 +725,53 @@ settings in tutorial:
 common
 
 - NAMD, TIP3P water, CHARMM ff, 310K, 1atm, PME
-- 
+- 缓慢升温的script？
 
 OUR: Simulations were performed with GROMACS 5.1.2. Van der Waals interactions were treated with a switching distance of 10 Å and a smooth cutoff distance of 12 Å. Electrostatic interactions were treated with Particle Mesh Ewald with a grid size of 1 Å
 
 1. *Structural insight to hydroxychloroquine-3Clike proteinase complexation from SARS-CoV-2: inhibitor modelling study through molecular docking and MD-simulation study*
 
-   > Subsequent energy minimization was performed by the conjugate gradient method. The process was conducted in two successive stages; initial energy minimization was performed for 2000 steps by fixing the backbone atoms, followed by a final minimization for 5000 steps that were carried out for all atoms of the system to ensure the removal of any residual steric clashes. Then the energy minimized structures were simulated at constant temperature (310 K) and pressure (1 atm) by Langevin dynamics (Gullingsrud et al., [2001](https://www.tandfonline.com/doi/full/10.1080/07391102.2020.1804458#)) using periodic boundary condition. The Particle Mesh Ewald method was applied for full-electrostatics and the Nose–Hoover Langevin piston method was used to control the pressure and dynamical properties of the barostat(Feller et al., [1995](https://www.tandfonline.com/doi/full/10.1080/07391102.2020.1804458#)). All-atom molecular dynamics simulation for 100 ns was carried out for HCQ, Mod I, and Mod II docked 3CL-protease structure. The atomic coordinates of simulated <u>structures were recorded at every 2 ps</u> for further analysis.
+   > Subsequent energy minimization was performed by the conjugate gradient method. The process was conducted in two successive stages; initial energy minimization was performed for **2000** steps by fixing the backbone atoms, followed by a final minimization for **5000** steps that were carried out for all atoms of the system to ensure the removal of any residual steric clashes. Then the energy minimized structures were simulated at constant temperature (310 K) and pressure (1 atm) by Langevin dynamics (Gullingsrud et al., [2001](https://www.tandfonline.com/doi/full/10.1080/07391102.2020.1804458#)) using periodic boundary condition. The Particle Mesh Ewald method was applied for full-electrostatics and the Nose–Hoover Langevin piston method was used to control the pressure and dynamical properties of the barostat(Feller et al., [1995](https://www.tandfonline.com/doi/full/10.1080/07391102.2020.1804458#)). All-atom molecular dynamics simulation for 100 ns was carried out for HCQ, Mod I, and Mod II docked 3CL-protease structure. The atomic coordinates of simulated <u>structures were recorded at every 2 ps</u> for further analysis.
 
 2. *SARS-CoV-2 RNA dependent RNA polymerase (RdRp) targeting: an in silico perspective*
 
-   > Water is minimized (conjugate gradient), followed by the minimization of the protein system for 10000 steps each. The temperature is adjusted slowly to reach 310 K, and then an equilibration run is performed with the NPT ensemble (constant number of molecules, pressure, and temperature) for 1 ns. This is followed by the **production run at the NVT ensemble** (constant number of molecules, volume, and temperature) for 51 ns (nvt???)
+   > **Water** is minimized (conjugate gradient), followed by the minimization of the protein system for **10000** steps each. The temperature is adjusted slowly to reach 310 K, and then an equilibration run is performed with the NPT ensemble (constant number of molecules, pressure, and temperature) for **1 ns**. This is followed by the **production run at the NVT ensemble** (constant number of molecules, volume, and temperature) for 51 ns (nvt???)
 
 3. *In silico identification of widely used and welltolerated drugs as potential SARS-CoV-2 3Clike protease and viral RNA-dependent RNA polymerase inhibitors for direct use in clinical trials*
 
-   > Energy minimization was performed for 20,000 steps by conjugate gradient method. Systems was gradually heated and equilibrated in NPT ensemble for 1.4 ns. Throughout equilibration, constrains on the proteins were gradually removed starting from 2 kcal/mol/Å2. At each stage constrains were reduced by 0.5 kcal/mol/Å2 and system were equilibrated for 0.4 ns. After equilibration, a production run of 20 ns for each complex was performed. Time step was set to 2fs. van der Waals (12 Å cut-off) and long-range
+   > Energy minimization was performed for **20,000** steps by conjugate gradient method. Systems was gradually heated and equilibrated in NPT ensemble for 1.4 ns. Throughout equilibration, constrains on the proteins were gradually removed starting from 2 kcal/mol/Å2. At each stage constrains were reduced by 0.5 kcal/mol/Å2 and system were equilibrated for **0.4 ns**. After equilibration, a production run of 20 ns for each complex was performed. Time step was set to 2fs. van der Waals (12 Å cut-off) and long-range
    > electrostatic interactions (via particle-mesh Ewald) were included to calculate the force acting on the system. Production runs were performed at 310 K and under 1 atm
 
 4. *In silico identification of novel SARS-COV-2 2′-O-methyltransferase (nsp16) inhibitors: structure-based virtual screening, molecular dynamics simulation and MM-PBSA approaches*
 
-   > employing the steepest descent minimisation algorithm with a maximum of 50,000 steps and <10.0 kJ/mol force. Then, the solvated energy minimised structures were equilibrated with two consecutive steps. Firstly, <u>NVT ensemble with constant number of particles, volume and temperature (310 K) was done for 2 ns followed by NPT ensemble with constant number of particles, pressure and temperature for 8 ns</u>. In the two systems, only the solvent molecules were allowed for free movement to ensure its equilibration in the system while other atoms were restrained. The long range electrostatic interactions were obtained by the particle mesh Eshwald method with a 12 Å cut-off and 12 Å Fourier spacing[26](https://www.tandfonline.com/doi/full/10.1080/14756366.2021.1885396#). Finally, the three well-equilibrated systems (one empty protein and two protein-ligand complexes) were then entered the production stage without any restrains for 150 ns with a time step of 2 fs, and after every 10 ps the structural coordinates were saved to retrieve 15000 frames for each processed complex.
+   > employing the steepest descent minimisation algorithm with a maximum of **50,000** steps and <10.0 kJ/mol force. Then, the solvated energy minimised structures were equilibrated with two consecutive steps. Firstly, <u>NVT ensemble with constant number of particles, volume and temperature (310 K) was done for **2 ns** followed by NPT ensemble with constant number of particles, pressure and temperature for **8 ns**</u>. In the two systems, only the solvent molecules were allowed for free movement to ensure its equilibration in the system while other atoms were restrained. The long range electrostatic interactions were obtained by the particle mesh Eshwald method with a 12 Å cut-off and 12 Å Fourier spacing[26](https://www.tandfonline.com/doi/full/10.1080/14756366.2021.1885396#). Finally, the three well-equilibrated systems (one empty protein and two protein-ligand complexes) were then entered the production stage without any restrains for 150 ns with a time step of 2 fs, and after every 10 ps the structural coordinates were saved to retrieve 15000 frames for each processed complex.
+
+5. *Microbial Natural Products as Potential Inhibitors ofSARS-CoV-2 Main Protease (Mpro)*
+
+   > Molecular dynamic simulations (MDS) for the free Mpro enzyme and ligand–enzyme complexes
+   > were performed using the Nanoscale Molecular Dynamics (NAMD) 2.6 software [25], employing
+   > the CHARMM27 force field [26]. Hydrogen atoms were added to initial coordinates for Mpro using
+   > the psfgen plugin included in the Visual Molecular Dynamic (VMD) 1.9 software [27]. Subsequently,
+   > the protein system was solvated using TIP3P water particles and 0.15 M NaCl. The equilibration
+   > procedure comprised **1500** minimization steps followed by **30 ps** of MDS at 10 k with fixed protein atoms.
+   > Then, the entire system was minimized over **1500** steps at 0 K, followed by gradual heating from
+   > 10 to 310 K using temperature reassignment during the initial 60 ps of the **100 ps** equilibration
+   > MDS. The final step involved NTP simulation (**30 ps**) using the Nose–Hoover Langevin piston
+   > pressure control at 310 K and 1.01325 bars for density (volume) fitting [28]. Thereafter, the MDS
+   > was continued for 25 ns for the entire system (20 ns for the enzyme–ligand complexes).
+
+6. *The impact of curcumin derived polyphenols on the structure and flexibility COVID-19 main protease binding pocket: a molecular dynamics simulation study*
+
+   >The generated NAMD compatible files for the
+   >proteins and the ligands were then merged, and then complex subjected to solvated,
+   >minimized, and equilibrated. The systems were solvated in a cubic water-box with the
+   >explicit solvation model TIP3P.20 we used a distance of 1.0 Å between the cell wall and the
+   >solvated atoms of the system. Counter-ions were also added to neutralize the system.
+   >The energy minimization (n steps = **5,000**) was conducted using the steepest descent
+   >approach (1,000 ps) for each protein-ligand complex. Particle Mesh Ewald (PME) method
+   >was employed for energy calculation and electrostatic and Van der Waals interactions; cut-off distance for the short-range Van der Waals was set to 10 Å, where Coulomb cut-off
+   >and neighbor list were fixed at 8 Å. Finally, a 50 ns molecular dynamics simulation
+   >was carried out for all the complexes with n steps 1,000,000.
 
 5. 
 
@@ -775,7 +802,7 @@ eval [::http::data [::http::geturl http://www.ks.uiuc.edu/Research/namd/tutorial
 
 and find necessary files in /tmp/
 
-execute them in order: (the first in step 0)
+execute them in vmd console in order: (the first in step 0)
 
 ##### prepare the system
 
@@ -792,16 +819,35 @@ source restrain_ca.vmd
 # vmd -dispdev text -e
 ```
 
-> in step 6, should delete all water in the lipid region
+> files
+>
+> - pope1: initial
+> - pope: many POPEs overlapping, to be moved
+> - pope/protein_move: centered and arranged
+> - pope_gram: combined
+> - pope_gram_wat: with box
+> - grama.pdb: water deleted, used in simulations
+
+> questions on lipids arrangement
+>
+> - the template POPE should be roughly  parallel with, let's say, the z axis?
+> - -35 is a subtle number. make sure the head of POPE is outwards...
+> - POPE molecules not completerly separated? 35 and the length...
+>
+> in step 3
+>
+> - press 8. pressing shift to rotate, without shift to translate (originally, move the whole)
+> - make the helix inside and parallel to the lipids
+>
+> in step 6
+>
+> - should delete all water around the lipid region ($|z|<z_0$)
+> - and outside the periodic box (according to the shape). measure well!!
+> - select and tag the atoms to be deleted by setting the beta value
+>
+> set beta = 1 for "protein and backbone", and 0.5 for "protein and name CA" to be restrained. write a pdb for both of them
 
 ##### run simulation
-
-1. Minimization with fixed backbone atoms.
-2. Minimization with restrained carbon alpha atoms.
-3. Langevin dynamics with restraints.
-4. Constant pressure with restraints.
-5. Constant pressure without restraints.
-6. Constant pressure with reduced damping coefficients.
 
 ```shell
 namd2 +p8 equil.namd > equil.log
@@ -1146,6 +1192,8 @@ https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/ the same as .pdf
 
 ### GPU tutorial
 
+files at http://www.ks.uiuc.edu/Training/Tutorials/namd-index.html
+
 http://www.ks.uiuc.edu/Research/namd/2.14/ug/node110.html
 
 中科大--NAMD 软件安装指南
@@ -1450,7 +1498,6 @@ echo "3\n 3" | gmx rms -s final.tpr -f final_nojump.xtc -o rmsd_ca.xvg -tu ns # 
 xmgrace rmsd_ca.xvg
 echo 3 | gmx rmsf -f final_nojump.xtc -s final.tpr -o rmsf-per-residue.xvg -ox average.pdb -oq bfactors-residue.pdb -res
 xmgrace rmsf-per-residue.xvg
-
 
 ```
 

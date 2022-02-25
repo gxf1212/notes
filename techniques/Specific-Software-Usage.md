@@ -209,7 +209,7 @@ office365教育版也可白嫖。。outlook那些，全功能！
 
 #### too slow?
 
-换美国节点？host？
+换美国节点？host？还好，先不管了
 
 #### Windows
 
@@ -239,39 +239,55 @@ Goodnotes：https://zhuanlan.zhihu.com/p/104734199  需科学上网
 
 好多不同的API，看知乎。。看哪个star的多。。
 
-> https://zhuanlan.zhihu.com/p/372355859
+> 
 > https://github.com/MoeClub/OneList/tree/master/OneDriveUploader
-> https://www.moerats.com/archives/491/
 
-##### abraunegg/onedrive
+>##### abraunegg/onedrive
+>
+>https://github.com/abraunegg/onedrive. I've cloned it to save the docs.
+>
+>also refer to https://zhuanlan.zhihu.com/p/372355859
+>
+>> It says [The 'skilion' version](https://github.com/skilion/onedrive) contains a significant number of defects in how the local sync state is managed.
+>
+>- [install](https://github.com/abraunegg/onedrive/blob/master/docs/INSTALL.md#dependencies-ubuntu-18x-ubuntu-19x-ubuntu-20x--debian-9-debian-10---x86_64) and don't forget
+>
+>  ```shell
+>  sudo apt install onedrive
+>  ```
+>
+>- [authorization](https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#authorize-the-application-with-your-onedrive-account)
+>
+>  ```
+>  
+>  ```
+>
+>- 
+>
+>##### problems
+>
+>1. Using application %27OneDrive Free Client%27 is currently not supported for your organization stu.xjtu.edu.cn because it is in an unmanaged state. An administrator needs to claim ownership of the company by DNS validation of stu.xjtu.edu.cn before the application OneDrive Free Client can be provisioned.
+>
+>   > %27: '
+>
+>   https://github.com/skilion/onedrive/issues/244
+>
+>given up!
+>
+>#### rclone
+>
+>https://itsfoss.com/use-onedrive-linux-rclone/
+>
+>https://www.moerats.com/archives/491/
+>
+>```
+>Error: Auth Error
+>Description: No code returned by remote server
+>```
+>
+>感觉是学校的问题。。
 
-https://github.com/abraunegg/onedrive. I've cloned it to save the docs.
 
-> It says [The 'skilion' version](https://github.com/skilion/onedrive) contains a significant number of defects in how the local sync state is managed.
-
-- [install](https://github.com/abraunegg/onedrive/blob/master/docs/INSTALL.md#dependencies-ubuntu-18x-ubuntu-19x-ubuntu-20x--debian-9-debian-10---x86_64) and don't forget
-
-  ```shell
-  sudo apt install onedrive
-  ```
-
-- [authorization](https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#authorize-the-application-with-your-onedrive-account)
-
-  ```
-  
-  ```
-
-- 
-
-##### problems
-
-1. Using application %27OneDrive Free Client%27 is currently not supported for your organization stu.xjtu.edu.cn because it is in an unmanaged state. An administrator needs to claim ownership of the company by DNS validation of stu.xjtu.edu.cn before the application OneDrive Free Client can be provisioned.
-
-   > %27: '
-
-   https://github.com/skilion/onedrive/issues/244
-
-2. 
 
 ### baidunetdisk-python
 
