@@ -81,13 +81,13 @@
         text: "<br/><p align=right>last update time: {docsify-updated}</p>",
         formatUpdated: "{YYYY}/{MM}/{DD}",
       },
-      // mindmap: {
-      //     // https://github.com/dundalek/markmap
-      //     markmap: {
-      //       preset: 'colorful', // or default
-      //       linkShape: 'diagonal' // or bracket
-      //     }
-      //   },
+      mindmap: {
+          // https://github.com/dundalek/markmap
+          markmap: {
+            preset: 'colorful', // or default
+            linkShape: 'diagonal' // or bracket
+          }
+        },
     }
   </script>
   <!-- Docsify v4 -->
@@ -118,11 +118,11 @@
   <script src="https://unpkg.com/docsify-plugin-flexible-alerts"></script>
 
   <!-- markmap is based on d3, so must load those files first. -->
-  <!-- <script src="//unpkg.com/d3@3/d3.min.js"></script>
+  <script src="//unpkg.com/d3@3/d3.min.js"></script>
   <script src="//unpkg.com/markmap@0.6.1/lib/d3-flextree.js"></script>
   <script src="//unpkg.com/markmap@0.6.1/lib/view.mindmap.js"></script>
   <link rel="stylesheet" href="//unpkg.com/markmap@0.6.1/style/view.mindmap.css">
-  <script src="//unpkg.com/docsify-mindmap/dist/docsify-mindmap.min.js"></script> -->
+  <script src="//unpkg.com/docsify-mindmap/dist/docsify-mindmap.min.js"></script>
   
   <!-- 红心点击特效 -->
   <script src="//cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@latest/js/click_heart.js"></script> 

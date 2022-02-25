@@ -1,15 +1,52 @@
-# Genetic Engineering
 
-只展示思维导图。有些细节可能不全，但也够多的了。表格之类的复杂功能可能还整不了
 
-# Chapter 1
+## test
 
-1. 了解基因工程的概念
-2. 了解基因工程主要技术操作流程
-3. 了解基因工程的历史和发展，特别是重要的代表性亊件
-3. 了解基因工程的在各个领域的应用
+### json放弃了，太复杂
 
 ```mindmap json
+{
+	"name": "Genetic\\nEngineering", 
+	"children": [
+	{"name": "Course syllabus", "children": [{"name": "lalalalala"}]}, {"name": "Techniques", "children": [{"name": "Gene editing"}, {"name": "Detection & Diagnosis"}]}]}
+```
+
+already good structure!
+
+```mindmap json
+{
+	'name': 'Genetic\\nEngineering', 
+	'children': [
+	{'name': 'Course syllabus', 
+	'children': [
+	{'name': 'lalalalala'}]}, {'name': 'Techniques', 'children': [
+	{'name': 'Gene editing'}, {'name': 'Detection & Diagnosis'}]}]}
+```
+
+### eg
+
+
+```mindmap json
+{
+  "name": "root2",
+  "children": [
+    {
+      "name": "children1",
+      "children": [{ "name": "subchildren" }]
+    },
+    {
+      "name": "children2",
+      "children": [{ "name": "subchildren" }]
+    }
+  ]
+}
+```
+
+must use json for dictionary
+
+normal:
+
+```mindmap
 root
   children1
     subchildren
@@ -19,106 +56,26 @@ root
 
 ### markdown
 
-# Chapter 2
+```mindmap
+# Genetic Engineering
+  Chp 1 Preface
+    Opening
+    COVID-19
+```
 
-- 掌握限制性核酸内切酶（Type II和Type III）的作用原理及其应用
-- 掌握DNA连接酶的作用原理及其应用
-- 掌握常见DNA修饰酶的作用原理及其应用
+即可
 
-# Chapter 3
+处理markdown文本，#换成缩进，*是七级标题（solved
 
-1. 掌握gDNA 文库构建方法和原理(计算)
-2. 掌握cDNA文库构建方法，特别是cDNA两条链的合成过程
-2. 了解基因的化学合成法
-4. 了解基因组和碱裂解法质粒DNA提取的步骤原理
+再缩进再加（读的时候不要strip空格，还要检测空格。。），还有强制换行的（倒序读取写入？）
 
-# Chapter 4
+开头空格无所谓
 
-1. 掌握PCR的原理、条件、影响因素
-2. 掌握几种常见类型的PCR的原理及应用
-2. 了解PCR技术在各个领域的应用
+设计者应该是把空两个作为一个tab的
 
-# Chapter 5
-
-RE based methods
-- Traditional RE cut & Ligase ligation
-- Complicated &sequence dependent
-- One fragment ligation once
+中文被自动忽略（其实GBK能看到）
 
 
-BioBricks
-
-- Standard set of restriction enzymes
-- Step by step
-
-Golden Gate
-
-- Type IIIs REs that cleave themselves out
-- Assembly of several fragments in designed order one time
-- Limited overlapping adaptor
-
-Extra sequence based method
-
-- More treatments more complicated
-- Rarely used currently
-
-PCR-based method
-
-- Assembly via PCR
-- Unspecific products especially long and multiple fragments
-
-Recombination based methods
-
-- Specific & high efficient
-- Multi-fragments assembly in one step
-
-Gibson
-
-- Chewback to create long overlaps
-- Multi-fragments assembly in one step 
-- Secondary structure of overlap
-
-# Chapter 6
-
-- 掌握基因转化、转染及转导
-- 掌握重组体的鉴别方法
-  - 遗传检测法(抗生素筛选/营养缺陷型筛选/插入失活)
-  - 物理检测法 (酶切/PCR鉴定)
-  - 核酸杂交筛选法
-  - 免疫化学检测法(标记抗体探针/免疫沉淀)
-
-# Chapter 7
-
-1. 原核基因表达的元件/基本转录单元包含的元件（启动子，SD序列，编码区，终止子）
-2. 提高原核表达效率的方法
-3. 常见表达类型（融合表达/分泌表达/IPTG诱导表达） 
-3. 原核细胞基因工程的应用（重组胰岛素/人生长激素）
-
-
-
-# Chapter 8
-
-- 酵母基因工程的载体类型、特点及用途
-- 酵母常用的选择性标记及筛选原理
-- 互补法克隆/筛选酵母基因
-- 酵母基因定向
-- 酵母的应用（了解）
-
-# Chapter 9
-
-- 哺乳细胞基因工程的筛选标记
-- 基因转移方法
-- 表达类型(提高哺乳细胞基因表达水平实例)
-- 应用(tPA生产)
-- 转基因动物(转基因鼠制备方法，转基因三文 鱼，克隆动物与转基因动物区别)
-
-# Chapter 10
-
-1. 植物再生方式(原生质体法，叶盘法)
-2. Ti 质粒介导的基因转移方式 Ti质粒的特性及其如何引发冠瘿瘤的形成? Ti质粒如何改造成基因工程载体?(共整合/二元载体系统)
-3. 转基因植物(转基因烟草、抗虫棉、抗除草剂植物、转 基因番茄、黄金大米)
-
-# Chapter 11 基因编辑
 
 ```mindmap
 Chp 11 Genome Editing
@@ -304,11 +261,4 @@ Chp 11 Genome Editing
       Engineered enzyme that enables editing in physiological temperature
       Maybe it can knock-down genes?
 ```
-
-# Chapter 12
-
-1. 了解几种常见基因疾病的基因诊断方法
-2. 了解不同层面(DNA/RNA/protein)上的基因治疗方案 和原理
-
-
 

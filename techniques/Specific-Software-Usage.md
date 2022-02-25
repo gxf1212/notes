@@ -687,6 +687,8 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
 ### Customize functions
 
+还是有待发展啊！期待更多好玩的功能
+
 TODO list:
 
 - [ ] figure centralize
@@ -777,7 +779,7 @@ refer to [html](#something-html)
    [NAMD/VMD和FEP计算基本操作](/MD/FYP-notes.md "2333")
    ```
 
-4. Gittalk
+4. Gittalk (not applied)
    
    https://segmentfault.com/a/1190000018072952
    
@@ -972,7 +974,27 @@ refer to [html](#something-html)
     
     https://www.jinrishici.com/doc/ 今日诗词API
 
-20. 
+20. mindmap
+
+    https://github.com/up9cloud/docsify-mindmap 照着做
+
+    - mindmap和json有别
+    - json放弃了，转换太复杂，必须把字典字符串合理得换行。。
+    - 处理markdown文本：#换成缩进，*是七级标题，再缩进再加，还有强制换行的
+    - 开头空格无所谓
+    - 设计者应该是把空两个作为一个tab的
+    - 中文还是支持的
+
+    https://github.com/fex-team/kityminder-core 更高端的？
+
+    > markmap
+    >
+    > ```
+    > npm install yarn
+    > yarn add markm
+    > ```
+    >
+    > failed
 
 21. 
 
@@ -1182,6 +1204,8 @@ https://lkevin98.gitee.io/blog/file/%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E5%8D%9A%E5%
 https://bibichuan.github.io/posts/5affe24.html
 
 使用hexo等工具，在git上只提交下面的一个`.deploy_git`文件夹。。clone根本没用
+
+
 
 ## Experiences on video/subtitles collection
 
