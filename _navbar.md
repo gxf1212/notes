@@ -12,4 +12,4 @@
   - [molecular immunology (tbc)](/course/molecular-immunology/molecular-immunology.md)
   - [bioinformatics (part)](/course/bioinformatics/bioinformatics.md)
   - [molecular biophysics](/course/molecular-biophysics-NUS/LSM-3243.md)
-  - [other](/course/other.md)
+  - [Fundamental Biology](/course/fundamental-biology.md)

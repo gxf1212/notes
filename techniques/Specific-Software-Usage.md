@@ -54,6 +54,8 @@ Fret not over bygones, and the forward journey take.
 3. matplotlib fonts. just copy .ttf files to ~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf
 
    https://www.pythonheidong.com/blog/article/498305/f571ce16edc768ad1839/ 
+   
+4. 实际上没有那么快自动保存，还是需要ctrl+s。。
 
 ## Jupyter Notebook
 
@@ -978,12 +980,25 @@ refer to [html](#something-html)
 
     https://github.com/up9cloud/docsify-mindmap 照着做
 
+    steps
+
+    - iPad端导出xmind为markdown
+    - 用写的程序处理
+    - 粘到markdown里
+
+    note
+
     - mindmap和json有别
     - json放弃了，转换太复杂，必须把字典字符串合理得换行。。
     - 处理markdown文本：#换成缩进，*是七级标题，再缩进再加，还有强制换行的
     - 开头空格无所谓
     - 设计者应该是把空两个作为一个tab的
     - 中文还是支持的
+
+    问题
+
+    - 美化？
+    - Typora看不了都没啥，本地部署预览不了？
 
     https://github.com/fex-team/kityminder-core 更高端的？
 

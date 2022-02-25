@@ -895,7 +895,9 @@ speciation
 > - 干群（stem group）指在冠群之外，但又与该冠群有更密切的系统发育关系、现已绝灭的生物类群。
 > - 总群（total group)是指冠群和干群的总合。
 >
-> <img src="http://3.bp.blogspot.com/-tf5Vy1nO9ks/UwdwvAPz3iI/AAAAAAAABho/gYkfOesrtx8/s1600/Stem+and+crown+groups+-+Wikimedia.png" style="zoom:30%;" />
+> > http://3.bp.blogspot.com/-tf5Vy1nO9ks/UwdwvAPz3iI/AAAAAAAABho/gYkfOesrtx8/s1600/Stem+and+crown+groups+-+Wikimedia.png
+>
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course/other/evolutional-bio.assets5-Stem and crown groups.png" alt="5-Stem and crown groups" style="zoom:30%;" />
 >
 > 主要是指宏观生物的灭绝
 >

@@ -1,4 +1,6 @@
-This is MD simulation study page. Click on the sidebar to select a theme and start reading!
+# Techniques
+
+This is techniques simulation study page. Click on the sidebar to select a theme and start reading!
 
 The content is continuously being updated.
 
