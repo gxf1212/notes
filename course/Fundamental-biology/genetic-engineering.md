@@ -13,7 +13,7 @@
 3. 了解基因工程的历史和发展，特别是重要的代表性亊件
 3. 了解基因工程的在各个领域的应用
 
-```mindmap json
+```mindmap
 Chp 1 Preface
   Opening
     COVID-19
@@ -53,6 +53,30 @@ Chp 1 Preface
       Company and Product
         GeneTech, 1977
       Drugs, transgenic animal/plants, 1980s
+  Definition
+    Techniques to transform organisms in the level of genes, to make new characteristics
+    A highly crossing discipline
+  Applications
+    Agriculture
+      BT anti-pest cotton
+      Golden rice (carotene)
+      Pig, salmon, artificial meat,...
+    Medicine
+      Neutralizing antibodies production
+        mRNA
+        Virus vector
+        Inactivated
+        Recombinant protein
+      Human growth hormone
+      HBV
+      PD(L)1 antibody
+      CAR-T cell
+      Drug bio-synthesis
+    Environment
+      Degradable material,...
+    Interdiscipline
+      DNA storage
+      AlphaFold
   Ethic issues
     Transgenic food
     Ecological safety
