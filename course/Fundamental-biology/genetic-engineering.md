@@ -476,7 +476,7 @@ Gibson
 ```
 
 
-完整都
+完整的
 
 ```mindmap
 Chp 5 Vectors and Recombination
@@ -695,7 +695,7 @@ Chp 6 Transfer and Identification
       Immuno precipitation
         Maybe lyse bacteria in situ to see the ring
         Maybe extract and CoIP or WB
-   genetic engineering
+ 
 ```
 
 
