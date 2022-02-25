@@ -2,7 +2,7 @@
 
 只展示思维导图。有些细节可能不全，但也够多的了。表格之类的复杂功能可能还整不了
 
-refer to [link](https://gxf1212.gitee.io/notes/#/techniques/Specific-Software-Usage?id=functions), find "mindmap"
+refer to [link](https://gxf1212.gitee.io/notes/#/techniques/Specific-Software-Usage?id=functions), find "mindmap" for more details
 
 # Chapter 1 绪论
 
