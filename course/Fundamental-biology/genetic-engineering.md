@@ -2,17 +2,7 @@
 
 只展示思维导图。有些细节可能不全，但也够多的了。表格之类的复杂功能可能还整不了
 
-一个关于这个页面怎么搭建的介绍：https://blog.csdn.net/gxf1212/article/details/123142111
-
-代码示例
-
-```mindmap
-root
-  topic1
-    subtopic
-  topic2
-    subtopic
-```
+一个关于这个页面怎么搭建的介绍：https://blog.csdn.net/gxf1212/article/details/123142268
 
 > refer to [link](https://gxf1212.gitee.io/notes/#/techniques/Specific-Software-Usage?id=functions) for docsify functions
 
@@ -63,30 +53,6 @@ Chp 1 Preface
       Company and Product
         GeneTech, 1977
       Drugs, transgenic animal/plants, 1980s
-  Definition
-    Techniques to transform organisms in the level of genes, to make new characteristics
-    A highly crossing discipline
-  Applications
-    Agriculture
-      BT anti-pest cotton
-      Golden rice (carotene)
-      Pig, salmon, artificial meat,…
-    Medicine
-      Neutralizing antibodies production
-        mRNA
-        Virus vector
-        Inactivated
-        Recombinant protein
-      Human growth hormone
-      HBV
-      PD(L)1 antibody
-      CAR-T cell
-      Drug bio-synthesis
-    Environment
-      Degradable material, …
-    Interdiscipline
-      DNA storage
-      AlphaFold
   Ethic issues
     Transgenic food
     Ecological safety

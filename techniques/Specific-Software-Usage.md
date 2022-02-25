@@ -1010,6 +1010,14 @@ refer to [html](#something-html)
     > ```
     >
     > failed
+    >
+    > 不适用于xmind的思维导图展示，写代码修改？
+    >
+    > https://juejin.cn/post/7000874049333100551
+    >
+    > https://zhuanlan.zhihu.com/p/352795634
+    >
+    > failed
 
 21. 
 
@@ -1128,13 +1136,11 @@ Google提供的生成器
 
 unpkg is **a free content delivery network (CDN)** that automatically distributes public packages published to npm. unpkg partners with cloudfare and heroku to make this automatic distributing possible
 
-##### mind map
 
-不适用于xmind的思维导图展示，写代码修改？
 
-https://juejin.cn/post/7000874049333100551
 
-https://zhuanlan.zhihu.com/p/352795634
+
+CSDN：投稿，再次上传markdown文件，链接变了。。。
 
 
 
