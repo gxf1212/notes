@@ -10,7 +10,7 @@
 >
 > 六个要点的题，三分，写三个就ok了。。
 
-这份提纲的网页版也上线了：https://gxf1212.gitee.io/notes/#/course/other/evolutional-bio
+这份提纲的网页版也上线了：https://gxf1212.gitee.io/notes/#/course/Fundamental-biology/evolutional-bio
 
 > - 其实老师给的提纲也基本就是大纲
 > - 多的都略写或在引用框中
@@ -544,7 +544,10 @@ speciation
       生物学
       形态学等
     物种的标准
-    物种的结构（环种）
+      形态学
+      遗传学
+      生态学
+    物种的结构（如环种）
   物种形成
     重要条件
       可遗传的变异
@@ -681,9 +684,9 @@ speciation
 
 #### 隔离的特点
 
-- 一般是多种隔离方式同时存在
-- 形态差异与生殖隔离具有相对的独立性（不太相关）
-- 生殖隔离与遗传距离同样也具有相对的独立性
+- 一般是<u>多种</u>隔离方式同时存在
+- <u>形态差异</u>与生殖隔离具有相对的独立性（不太相关）
+- 生殖隔离与<u>遗传距离</u>同样也具有相对的独立性
 
 如何验证生殖隔离？试验较难。猜测。但A和B不隔离，B跟C不隔离，无法推出A和C不隔离（环种）。
 
@@ -763,7 +766,7 @@ speciation
 
 ### 复杂的种间关系
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/other/evolutional-bio.assets/5-complex.png" alt="5-complex" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/Fundamental-biology/evolutional-bio.assets/5-complex.png" alt="5-complex" style="zoom:50%;" />
 
 ## 其他
 
@@ -771,7 +774,7 @@ speciation
 
 人工选择：是指针对特定[性状](https://zh.wikipedia.org/wiki/性狀)进行育种，使这些性状的表现逐渐强化，而人们不需要的性状则可能逐渐消匿的过程。
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/other/evolutional-bio.assets/5-speciation.jpg" alt="5-speciation" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/Fundamental-biology/evolutional-bio.assets/5-speciation.jpg" alt="5-speciation" style="zoom:50%;" />
 
 基因工程：是打破物种间生殖隔离的强大力量
 
@@ -941,11 +944,11 @@ speciation
 >
 > > http://3.bp.blogspot.com/-tf5Vy1nO9ks/UwdwvAPz3iI/AAAAAAAABho/gYkfOesrtx8/s1600/Stem+and+crown+groups+-+Wikimedia.png
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course/other/evolutional-bio.assets5-Stem and crown groups.png" alt="5-Stem and crown groups" style="zoom:30%;" />
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course//evolutional-bio.assets5-Stem and crown groups.png" alt="5-Stem and crown groups" style="zoom:30%;" />
 >
 > 主要是指宏观生物的灭绝
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course/other/evolutional-bio.assets/6-mass-extinction.png" style="zoom:50%;" />
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course/Fundamental-biology/evolutional-bio.assets/6-mass-extinction.png" style="zoom:50%;" />
 
 ### 人类世与第六次物种大灭绝
 
@@ -1206,7 +1209,7 @@ Law of Hardy-Weinberg Equilibrium
 
 ### 种群成员的迁入和迁出
 
-immgration, emigration
+immigration, emigration
 
 直接改变了种群的基因组成
 
@@ -1216,7 +1219,7 @@ immgration, emigration
 
 遗传漂变：在一个**有限群体**中，因为存在对配子库中配子的**随机抽样**，导致下一世代中的**基因频率**与上一世代存在随机的误差。
 
->e.g. 5个红球5个白球，有放回地随机抽取10个，也不一定概率就是50%
+>e.g. 5个红球5个白球，有放回地随机抽取10个，也不一定红球的概率就是50%
 >
 >可能导致某种等位基因完全消失
 
@@ -1688,7 +1691,7 @@ Irreducible Complexity
 
 为什么各文明都认为有灵魂？把身体和精神分开的“身心二元论”。
 
-<img src="E:\GitHub_repo\notes\course\other\evolutional-bio.assets\9-1.png" alt="9-1" style="zoom:50%;" />
+<img src="E:\GitHub_repo\notes\course\Fundamental-biology\evolutional-bio.assets\9-1.png" alt="9-1" style="zoom:50%;" />
 
 
 

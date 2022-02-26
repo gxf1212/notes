@@ -4,7 +4,7 @@
 
 From gene (2-7) to genome (8-13)
 
-![syllabus](E:\GitHub_repo\notes\course\other\genetics.assets\syllabus.png)
+![syllabus](https://gitee.com/gxf1212/notes/raw/master/course/Fundamental-biology/genetics.assets/syllabus.png)
 
 # Chapter 1 Intro
 
@@ -54,7 +54,7 @@ Omics: ....
 
 The recent 20 years
 
-![1-20y](E:\GitHub_repo\notes\course\other\genetics.assets\1-20y.png)
+![1-20y](https://gitee.com/gxf1212/notes/raw/master/course/Fundamental-biology/genetics.assets/1-20y.png)
 
 > - 2001: draft verison of human genome
 > - 2003: ENCODE, non-coding sequence?
@@ -113,13 +113,13 @@ The Law of Independent Assortment: Duringgamete formation, different pairs of al
 
 ### Predict the outcome of crosses
 
-> a. The Punnett Square Method (庞氏表格): a diagram for predicting theresults of a genetic cross between individuals of known genetic makeup
+> a. The Punnett Square Method (庞氏表格): a diagram for predicting theresults of a genetic cross betw/een individuals of known genetic makeup
 >
 > b. Branched-line diagrams
 >
 > 
 
-<img src="E:\GitHub_repo\notes\course\other\genetics.assets\2-hybrid.png" alt="2-hybrid" style="zoom:50%;" />
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/Fundamental-biology/genetics.assets/2-hybrid.png" alt="2-hybrid" style="zoom:50%;" />
 
 c. Probabilities
 
