@@ -576,28 +576,15 @@ tar -zcvf folder.tar.gz folder | split -b 4000M -d -a 1 - folder.tar.gz
 
    <img src="https://img-blog.csdnimg.cn/20191111203143905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Npcml1c0V4cGxvcmVy,size_16,color_FFFFFF,t_70" style="zoom:50%;" />
 
-### Connection, vpn, remote control
+### Connection, vpn, remote control usage
 
 1. get ip address
    
    ```shell
    ip addr show
-   ```
-
-3. 向日葵
-   
-   软件包名：`sunloginclient`；命令：`/usr/local/sunlogin/bin/sunloginclient`
-   
-   连接后即断开解决办法 https://blog.csdn.net/u012254599/article/details/107807751
-   
-   ```shell
-   sudo dpkg-reconfigure lightdm # 切换lightdm图形页面
+   ifconfig
    ```
    
-   切换完成后重启电脑，就可以使用向日葵远程了…
-   
-   which leads that the login displays in a strange de-centered looking...
-
 4. Use “Wake on LAN” to boot remotely
    
    - https://necromuralist.github.io/posts/enabling-wake-on-lan/
@@ -629,7 +616,19 @@ tar -zcvf folder.tar.gz folder | split -b 4000M -d -a 1 - folder.tar.gz
    
    change the .appx file into .zip file, unzip it in the desired directory
 
-6. 
+4. connect with ssh
+
+   guide: https://www.cnblogs.com/conefirst/articles/15225952.html
+
+   没有公网ip，整不了。。。你上面那个wsl不也一样吗。。
+
+   > 内外网：https://www.zhihu.com/question/63098230/answer/1989327965
+
+5. 一般服务器是要买公网IP的，如果你要搞化生网站就是如此吧？
+   搭建云盘也是这样，但是存储空间还得靠自己。。常说NAS。存储设备几百块钱跟网上说的差不多
+   内网穿透是为这台机器提供访问的配置，本身没有存储吧。。但可以用本机的，所以可以做网站了？
+
+   
 
 ### customs
 
@@ -906,11 +905,23 @@ dpkg -i --instdir=/dest/dir/path some.deb # under root
   dpkg -L sunloginclient
   ```
 
-- 
+- dfa
+
+debug
+
+- 死机 when installing .deb, reboot. https://mlog.club/article/3533423
+
+  just fsck your root
+
+  
 
 ### apt-get
 
-- install with apt-get or apt:
+https://blog.csdn.net/liudsl/article/details/79200134
+
+apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用命令选项的集合。
+
+- install with apt-get or apt
   
   ```shell
   sudo apt-get install xxx
@@ -1958,3 +1969,4 @@ just be a helper calculator, and a platform to learn Linux. (zheteng is allowed)
 
 
 
+zi

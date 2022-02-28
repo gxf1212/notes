@@ -65,6 +65,8 @@ gmail
 
 ### sunflower
 
+#### Fedora
+
 https://tieba.baidu.com/p/7157359656
 
 ```shell
@@ -72,6 +74,48 @@ elif [ "$os_name"== 'Fedora' ]; then
         os_version=`cat /etc/fedora-release | cut -d' ' -f3`
 || [ $os_name== "fedora" ]
 ```
+
+
+
+#### 花生壳
+
+> https://sunlight.oray.com/ 阳光换东西。。
+
+https://hsk.oray.com/cooperation/ 使用花生壳快速建立端口映射，在宿舍也能随时远程控制、访问、管理实验室设备、服务器等
+
+for students，白嫖内网穿透，还要做任务？
+
+##### usage
+
+> phlinux is the old version. forget about it!
+
+without client, just use web client...
+
+客户端离线：安装后用sn号在网页端登录，手机APP扫码激活才能用
+
+> 未来之星 https://www.yibeianyuming.com/n/821.html
+>
+> 花生壳5.0 for Linux使用教程 tcp https://service.oray.com/question/11630.html
+
+填写指南？ https://hsk.oray.com/news/7553.html 填写内网ip：127.0.0.1，最后还是成功了。但博客都不这样？
+
+内网端口只能是22，才能诊断成功，即[这个人的设置](https://blog.csdn.net/skylake_/article/details/107411893)
+
+可以选http
+
+诊断得到IP（等价的）
+
+> +apache https://zhuanlan.zhihu.com/p/137498696
+
+自动启动 https://blog.csdn.net/TianXieZuoMaiKong/article/details/90574629
+
+我们还需要编辑OpenSSH服务配置文件：`/etc/ssh/sshd_config`，将`#PermitRootLogin without-password` 更改为`PermitRootLogin yes`，从而运行root远程登录。
+
+##### issues
+
+花生壳青春版能用多久？一年，还是因为我快毕业了？
+
+
 
 ## vpn
 
@@ -758,6 +802,8 @@ https://fesetup.readthedocs.io
 though not using...
 
   ### rosetta
+
+https://www.rosettacommons.org/downloads/academic/3.13/
 
   ```shell
 gzip -d rosetta_bin_linux_3.12_bundle.tgz -c ../programfiles

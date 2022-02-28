@@ -29,8 +29,12 @@ Fret not over bygones, and the forward journey take.
 ## Sunlogin remote control
 
 > auto-boot: https://www.cnblogs.com/citrus/p/13879021.html
-> 
+>
 > use realvnc? actually no need...
+
+向日葵
+
+软件包名：`sunloginclient`；命令：`/usr/local/sunlogin/bin/sunloginclient`
 
 1. check “start upon boot”
 
@@ -41,7 +45,17 @@ Fret not over bygones, and the forward journey take.
    > `telnet client.oray.net 443`
    > https://blog.csdn.net/MuscleBaBa_Chang/article/details/110562652
 
-3. 
+3. 连接后即断开解决办法 https://blog.csdn.net/u012254599/article/details/107807751
+
+   ```shell
+   sudo dpkg-reconfigure lightdm # 切换lightdm图形页面
+   ```
+
+   切换完成后重启电脑，就可以使用向日葵远程了…
+
+   which leads that the login displays in a strange de-centered looking...
+
+4. 
 
 ## Pycharm
 
@@ -172,10 +186,10 @@ Linux和iPad上，如果时常要存项目数据，需要TB级别的
 | resilio      |                             | 没说，60$永久                            | 好像挺好            |
 |              |                             |                                          |                     |
 | Onedrive Edu | **5T，全功能**              |                                          |                     |
-| Seafile      | **无限大，开源**            |                                          |                     |
-| Nextcloud    | **无限大，开源**            |                                          | 也好？              |
-| Cloudreve    |                             |                                          |                     |
 |              |                             |                                          |                     |
+| Seafile      | **搭建**                    |                                          |                     |
+| Nextcloud    | **搭建**                    |                                          | 也好？              |
+| Cloudreve    | **搭建**                    |                                          |                     |
 
 
 稍微详细点的
@@ -237,67 +251,150 @@ mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\smart phone" "F:\smart phone bac
 
 Goodnotes：https://zhuanlan.zhihu.com/p/104734199  需科学上网
 
+还是登不上学校的？？
+
+个人版的放不下goodnotes啊
+
 #### Linux
 
 好多不同的API，看知乎。。看哪个star的多。。
 
+https://linuxpip.org/linux-onedrive-client/
+
 > 
 > https://github.com/MoeClub/OneList/tree/master/OneDriveUploader
 
->##### abraunegg/onedrive
->
->https://github.com/abraunegg/onedrive. I've cloned it to save the docs.
->
->also refer to https://zhuanlan.zhihu.com/p/372355859
->
->> It says [The 'skilion' version](https://github.com/skilion/onedrive) contains a significant number of defects in how the local sync state is managed.
->
->- [install](https://github.com/abraunegg/onedrive/blob/master/docs/INSTALL.md#dependencies-ubuntu-18x-ubuntu-19x-ubuntu-20x--debian-9-debian-10---x86_64) and don't forget
->
->  ```shell
->  sudo apt install onedrive
->  ```
->
->- [authorization](https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#authorize-the-application-with-your-onedrive-account)
->
->  ```
->  
->  ```
->
->- 
->
->##### problems
->
->1. Using application %27OneDrive Free Client%27 is currently not supported for your organization stu.xjtu.edu.cn because it is in an unmanaged state. An administrator needs to claim ownership of the company by DNS validation of stu.xjtu.edu.cn before the application OneDrive Free Client can be provisioned.
->
->   > %27: '
->
->   https://github.com/skilion/onedrive/issues/244
->
->given up!
->
+##### abraunegg/onedrive
+
+https://github.com/abraunegg/onedrive. I've cloned it to save the docs.
+
+also refer to https://zhuanlan.zhihu.com/p/372355859
+
+最主流的吧
+
+> It says [The 'skilion' version](https://github.com/skilion/onedrive) contains a significant number of defects in how the local sync state is managed.
+
+- [install](https://github.com/abraunegg/onedrive/blob/master/docs/INSTALL.md#dependencies-ubuntu-18x-ubuntu-19x-ubuntu-20x--debian-9-debian-10---x86_64) and don't forget
+
+   ```shell
+  sudo apt install onedrive
+  ```
+
+- [authorization](https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#authorize-the-application-with-your-onedrive-account)
+
+   Run the command `onedrive --logout`. This will clean up the previous authorisation
+
+- 
+
+###### problems
+
+1. Using application %27OneDrive Free Client%27 is currently not supported for your organization stu.xjtu.edu.cn because it is in an unmanaged state. An administrator needs to claim ownership of the company by DNS validation of stu.xjtu.edu.cn before the application OneDrive Free Client can be provisioned.
+
+     > %27: '
+
+     https://github.com/skilion/onedrive/issues/244
+
+   个人登录能用？还是报错
+
+given up!
+
+##### Insync
+
+Insync client: also cannot login
+
+https://www.onedrives.net/2626.html
+
+maybe the problem sits in our unversity?
+
+
+
 >#### rclone
 >
 >https://itsfoss.com/use-onedrive-linux-rclone/
 >
 >https://www.moerats.com/archives/491/
 >
->```
+>```shell
+>$ rclone config
 >Error: Auth Error
 >Description: No code returned by remote server
 >```
 >
 >感觉是学校的问题。。
-
-
+>
+>#### onedrived-dev
+>
+>https://github.com/xybu/onedrived-dev
+>
+>```shell
+>pip3 uninstall onedrived
+>pip3 install --user git+https://github.com/xybu/onedrived-dev.git
+>```
+>
+>似乎几百人star，但是Python问题。。
 
 ### baidunetdisk-python
 
-http://tiramisutes.github.io/2015/07/28/Linux-backup.html
+还是就用百度吧
+
+> https://www.jiangjiyue.com/maintenance/linux/527.html  
+
+阿里等其他也许也有，但脚本不太通用？
+
+其他国外的盘，要么有客户端，要么包含在rclone里面，比较方便
+
+> 关于速度：其实是动态调配，原则有：会员优先；你占的资源多了就暂时限制
+
+#### tutorial
+
+official: https://github.com/houtianze/bypy
+
+自动同步脚本 https://www.aiyo99.com/archives/60.html
+
+> http://tiramisutes.github.io/2015/07/28/Linux-backup.html 就是定时上传一下
+>
+> mysql的还看不懂
+>
+> https://www.aiyo99.com/archives/60.html
+
+```shell
+bypy syncup /local/path/name /cloud/path/name
+# bypy upload
+```
+
+只是上传，并没有自动同步。需要自己编写脚本
+
+运行时添加-v参数，会显示进度详情。
+
+它的机制是这样吗，就是记录下sync过的每个文件？
+
+
+
+```shell
+bypy syncup packages ./backup-workstation/packages
+```
+
+
+
+### aliyun-client
+
+https://www.jiangjiyue.com/maintenance/linux/527.html
+
+https://github.com/tickstep/aliyunpan
+
+### Google
+
+探索了这么多，最后还是以买了个淘宝账号结束，还买的50块的，20就能买到了。
+
+真是太搞笑了。
+
+
 
 ## set up a netdisk?
 
 https://wzfou.com/seafile-yunpan/
+
+这类搭建盘的确实需要自己整服务器（需要ip），存储空间应该也是自己的吧。。。
 
 ### Seafile
 
@@ -306,14 +403,6 @@ https://wzfou.com/seafile-yunpan/
 挂载盘 (不占用本地空间，直接访问云端文件)：要商业版
 
 对于 Linux，有两个官方客户端 Seadrive 和 Seafile，前者是挂载文件系统，后者用于同步。对于一个自建网盘，它功能相当纯粹
-
-怎么用？自己整服务器？？
-
-## other thoughts
-
-anaconda环境信息同步？
-
-白嫖GPU：https://www.zhihu.com/question/271520755
 
 ## just for storage
 
@@ -325,19 +414,24 @@ anaconda环境信息同步？
 
 这些基本不能同步pc，可以备份手机、Pad。。可存储、分享
 
-| platform | space (free)                                        | space (more paid) | remark                                  |
-| -------- | --------------------------------------------------- | ----------------- | --------------------------------------- |
-| 迅雷云盘 | 500G                                                |                   | 同步只有文件夹                          |
-| 阿里云盘 | 100G+领空间                                         |                   | 除Linux外全平台<br />不同步             |
-|          |                                                     |                   |                                         |
-| 超星云盘 | 100G，学生                                          |                   | 同步？不限速<br />仅win/mac             |
-| 天翼云盘 | 1T家庭（没了                                        | 4TB,￥120/年      | 除Linux外全平台                         |
-| 115      | 15G                                                 | 5TB,￥500/年      | win/Android                             |
-| 和彩云   | 个人家庭各20G<br />新手领取1T/1年<br />做任务领福利 |                   | 除Linux外全平台<br />不限速，手机同步？ |
+| platform | space (free)                                        | space (more paid)                                | remark                                                       |
+| -------- | --------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------ |
+| 迅雷云盘 | 500G                                                |                                                  | 也无Linux吧<br />同步只有文件夹                              |
+| 阿里云盘 | 100G+领空间                                         |                                                  | 除Linux外全平台<br />不同步<br />活动多但不一定永久          |
+| 百度网盘 | 1T                                                  | 超级会员：188￥/5T/年<br />备份方案：108￥/3T/年 | 超级会员特权完整<br />Linux上大量功能用不了<br />同步也不一定能用 |
+| 腾讯微云 |                                                     | 30￥/6T/月                                       | 直接没有Linux客户端                                          |
+| 超星云盘 | 100G，学生                                          |                                                  | 同步？不限速<br />仅win/mac                                  |
+| 天翼云盘 | 1T家庭（没了                                        | 4TB,￥120/年                                     | 除Linux外全平台                                              |
+| 115      | 15G                                                 | 5TB,￥500/年                                     | win/Android                                                  |
+| 和彩云   | 个人家庭各20G<br />新手领取1T/1年<br />做任务领福利 |                                                  | 除Linux外全平台<br />不限速，手机同步？                      |
 
 1. 百度：不能同步？下载贼慢？还是老实做分享盘。。
 
-2. 阿里 
+   会员也许一般是3M/s，网好能到10，凑活忍。。
+
+2. 阿里：应该是不限速
+
+   1）API不太广泛应用；2）老是要做活动
 
 3. win的东西--超星云盘
 
@@ -358,6 +452,20 @@ anaconda环境信息同步？
    - 亿方云：偏企业，同步
    - 蓝奏云：有点小，不限速
    - MEGA：50G，很受限 https://funletu.com/1113/.html
+
+## summary
+
+https://post.smzdm.com/p/apz0wrd2/
+
+自己搭和网盘各有优缺点吧，像研究团队肯定是自己搭，小团队可以用团队网盘，个人就都行了。将来跑的东西真的多了5t也是不够的，唉，别想了。
+
+
+
+### other thoughts
+
+anaconda环境信息同步？
+
+白嫖GPU：https://www.zhihu.com/question/271520755
 
 
 # Applications for fun
