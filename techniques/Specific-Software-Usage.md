@@ -26,7 +26,89 @@ Fret not over bygones, and the forward journey take.
 
 1. liquid: cannot see the mouse cursor in titles and hyperlinks?
 
-## Sunlogin remote control
+## Network
+
+Connection, vpn, remote control usage
+
+configure VPN: see prepare-for-the-computer
+
+### Common
+
+1. get ip address
+
+   ```shell
+   ip addr show
+   ifconfig
+   ```
+
+2. Use “Wake on LAN” to boot remotely
+
+   - https://necromuralist.github.io/posts/enabling-wake-on-lan/
+
+   - https://service.oray.com/question/1331.html 判断主机是否支持远程开机？
+
+     华硕主板要：高级 > 高级电源管理（APM）> 开启 **Resume By PCI or PCI-E Ddevice**（由pci/pcie设备唤醒）选项
+
+   ```shell
+   sudo apt-get install ethtool
+   ifconfig -a # find your interfaces, as well as the MAC address!
+   # ether xx:xx:....
+   sudo ethtool enp4s0 # must add sudo! or error
+   # should see:
+   # Supports Wake-on: pumbg
+   # Wake-on: g # if is d, just do 
+   sudo ethtool -s enp4s0 wol g
+   ```
+
+   just check this two?
+
+   远程开机？
+
+   ```shell
+   wakeonlan MAC # -i ip-address ?
+   ```
+
+3. to enable the wol function, should all the Linux subsystem on Windows
+
+   [install wsl](https://docs.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions)                          https://blog.csdn.net/daxues_/article/details/119639093
+
+   change the .appx file into .zip file, unzip it in the desired directory
+
+   ```shell
+   sudo apt install wakeonlan
+   ```
+
+4. connect with ssh
+
+   guide: https://www.cnblogs.com/conefirst/articles/15225952.html
+
+   没有公网ip，整不了。。。你上面那个wsl不也一样吗。。
+
+   > 内外网：https://www.zhihu.com/question/63098230/answer/1989327965
+
+   ssh可以解决卡机，wakeonlan可以解决误关机（挂起？），但系统要是坏了……能否登录救援模式
+
+5. scp: secure copy
+
+   https://www.cnblogs.com/l199616j/p/12092113.html
+
+   
+
+5. 一般服务器是要买公网IP的，如果你要搞化生网站就是如此吧？
+   搭建云盘也是这样，但是存储空间还得靠自己。。常说NAS。存储设备几百块钱跟网上说的差不多
+   内网穿透是为这台机器提供访问的配置，本身没有存储吧。。但可以用本机的，所以可以做网站了？
+
+5. 若实例有公网 IP，则请参考 使用 SSH 登录 Linux 实例。
+   若实例无公网 IP，则请参考 使用 VNC 登录 Linux 实例。
+   所以向日葵和vnc真的冲突吗？
+
+5. http服务
+   
+8. 
+
+### Sunlogin remote control
+
+工单：可以咨询技术人员。https://console.oray.com/center/workorder
 
 > auto-boot: https://www.cnblogs.com/citrus/p/13879021.html
 >
@@ -56,6 +138,70 @@ Fret not over bygones, and the forward journey take.
    which leads that the login displays in a strange de-centered looking...
 
 4. 
+
+### phddns
+
+花生壳
+
+> https://sunlight.oray.com/ 阳光换东西。。
+
+https://hsk.oray.com/cooperation/ 使用花生壳快速建立端口映射，在宿舍也能随时远程控制、访问、管理实验室设备、服务器等
+
+for students，白嫖内网穿透，还要做任务？
+
+#### usage
+
+> phlinux is the old version. forget about it!
+
+without client, just use web client...
+
+客户端离线：安装后用sn号在网页端登录，手机APP扫码激活才能用
+
+后来用sn号登不上了。。
+
+> 未来之星 https://www.yibeianyuming.com/n/821.html
+>
+> 花生壳5.0 for Linux使用教程 tcp https://service.oray.com/question/11630.html
+
+> 填写指南？ https://hsk.oray.com/news/7553.html 填写内网ip：127.0.0.1，最后还是成功了。但博客都不这样？
+>
+> 内网端口只能是22，才能诊断成功，即[这个人的设置](https://blog.csdn.net/skylake_/article/details/107411893)
+>
+> 可以选http
+>
+> 诊断得到IP（等价的）
+
+> +apache https://zhuanlan.zhihu.com/p/137498696
+
+问了客服，这样配置：
+
+![phddns-config](https://gitee.com/gxf1212/notes/raw/master/techniques/images/phddns-config.jpg)
+
+- 映射类型：TCP
+- TCP类型：普通即可
+- 映射模板：SSH服务
+- 端口：动态无所谓
+
+然后xshell就能连了
+
+```
+ssh gxf@xxxxx.xxx.xx:port
+```
+
+- 挂起和关机应该用不了
+- 卡机了、tty下可，要用root去reboot
+
+自动启动 https://blog.csdn.net/TianXieZuoMaiKong/article/details/90574629
+
+我们还需要编辑OpenSSH服务配置文件：`/etc/ssh/sshd_config`，将`#PermitRootLogin without-password` 更改为`PermitRootLogin yes`，从而运行root远程登录。
+
+手机上APP可以看客户端状态
+
+> issues
+>
+> 花生壳青春版能用多久？一年，还是因为我快毕业了？
+
+
 
 ## Pycharm
 
@@ -336,7 +482,7 @@ and https://www.moerats.com/archives/740/
 
 - 
 
-
+上传还是挺快的
 
 A simple GUI with multi-account support. https://github.com/bpozdena/OneDriveGUI
 

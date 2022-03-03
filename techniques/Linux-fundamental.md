@@ -60,6 +60,13 @@ This is a record of my operations during 折腾ing the system, in order not to f
    
    mine: i7 9700k, 8 cores
 
+4. gpu info
+   
+   ```shell
+   cat /proc/driver/nvidia/version
+   n
+   ```
+   
 4. my base board
    
    https://www.asus.com/hk/Motherboards-Components/Motherboards/PRIME/PRIME-Z390-P/ 华硕PRIME Z390-P
@@ -576,60 +583,6 @@ tar -zcvf folder.tar.gz folder | split -b 4000M -d -a 1 - folder.tar.gz
 
    <img src="https://img-blog.csdnimg.cn/20191111203143905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Npcml1c0V4cGxvcmVy,size_16,color_FFFFFF,t_70" style="zoom:50%;" />
 
-### Connection, vpn, remote control usage
-
-1. get ip address
-   
-   ```shell
-   ip addr show
-   ifconfig
-   ```
-   
-4. Use “Wake on LAN” to boot remotely
-   
-   - https://necromuralist.github.io/posts/enabling-wake-on-lan/
-   
-   - https://service.oray.com/question/1331.html 判断主机是否支持远程开机？
-     
-     华硕主板要：高级 > 高级电源管理（APM）> 开启 **Resume By PCI or PCI-E Ddevice**（由pci/pcie设备唤醒）选项
-   
-   ```shell
-   sudo apt-get install ethtool
-   ifconfig -a # find your interfaces, as well as the MAC address!
-   # ether xx:xx:....
-   sudo ethtool enp4s0 # must add sudo! or error
-   # should see:
-   # Supports Wake-on: pumbg
-   # Wake-on: g # if is d, just do 
-   # sudo ethtool -s enp4s0 wol g
-   ```
-   
-   远程开机？
-   
-   ```shell
-   wakeonlan -i 192.168.5.255 04:d4:c4:21:d6:02
-   ```
-   
-5. to enable the wol function, should all the Linux subsystem on Windows
-   
-   [install wsl](https://docs.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions)                          https://blog.csdn.net/daxues_/article/details/119639093
-   
-   change the .appx file into .zip file, unzip it in the desired directory
-
-4. connect with ssh
-
-   guide: https://www.cnblogs.com/conefirst/articles/15225952.html
-
-   没有公网ip，整不了。。。你上面那个wsl不也一样吗。。
-
-   > 内外网：https://www.zhihu.com/question/63098230/answer/1989327965
-
-5. 一般服务器是要买公网IP的，如果你要搞化生网站就是如此吧？
-   搭建云盘也是这样，但是存储空间还得靠自己。。常说NAS。存储设备几百块钱跟网上说的差不多
-   内网穿透是为这台机器提供访问的配置，本身没有存储吧。。但可以用本机的，所以可以做网站了？
-
-   
-
 ### customs
 
 1. to denote path, separate the sentence by / like:
@@ -861,7 +814,7 @@ just **double click it** 不能指定目录
 命令行法：直接解压到当前目录，然后配置环境变量，即可启动运行程序；
 
 ```shell
-dpkg -x same.deb
+dpkg -x same.deb 
 ```
 
  当然，还有另外一个命令，安装到指定目录：
@@ -1903,6 +1856,19 @@ extundelete：恢复rm误删的文件
 恢复：远程通过ssh登录tty然后重启？
 
 已经关闭自动锁屏和息屏延时，不知道是否有效。。
+
+后来觉得应该是：显卡没用默认的，且常用远程控制使用了过多的图形界面程序
+
+把vnc停了吧
+
+## 22.3.2 系统出错并无法恢复,请尝试注销并重新登录。
+
+https://blog.csdn.net/shen_bb/article/details/16983739
+
+```
+sudo mv /home/user/.Xauthority /home/user/.Xauthority.backup  (user为你的登录用户名) 
+sudo service lightdm restart
+```
 
 
 

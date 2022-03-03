@@ -904,7 +904,7 @@ Below are parameters you should notice in every simulation.
    *>>>>> Includes phi, psi cross term map (CMAP) correction <<<<<<<<
    ```
 
-2. **par_all36_na.prm** for some atoms in ATP
+2. **par_all36_na.prm** for some atoms in ATP. may cause conflicts. does that matter?
 
 ##### restarting
 
@@ -1069,40 +1069,24 @@ cd common
 vmd -dispdev text -e fix_backbone_restrain_ca.tcl
 cd ../equil
 namd3 +auto-provision +idlepoll pro-lig-equil > pro-lig-equil.log
+# may go to analysis and check?
 vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
 cd ../prod
 namd3 +auto-provision +idlepoll pro-lig-prod > pro-lig-prod.log
 ```
 
-Analysis: As said, to obtain appropriate params for your system, should check properties.
-
-```shell
-# extract properties from .log file
-vmd
-source ../../common/namdstats.tcl
-data_time TEMP pro-lig-equil.log
-data_time TOTAL pro-lig-equil.log
-exit
-xmgrace TEMP.dat
-xmgrace TOTAL.dat
-```
-
-the script is from namd unix tutorial files. note:
-
-```
-Usage: data_avg <logfile> [<first timestep> <last timestep>]
-   <first timestep> and <last timestep> may be entered as numbers or
-   <first timestep> = 'first' will start at the beginning of the simulation
-   <last timestep> = 'last' will go to the end of the simulation
-Usage: data_time <data stream> <logfile> [<first timestep> <last timestep>]
-   <data stream> = BOND, ANGLE, DIHED, IMPRP, ELECT, VDW, BOUNDARY, MISC, KINETIC, TOTAL, TEMP, TOTAL2, TOTAL3, TEMPAVG
-```
-
-adjust the window to see different stages
-
-
-
 ##### testing the run
+
+> 1. https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2003-2004/0295.html
+>
+>    You will need to have a non binary coord file with as well as the binary
+>    forms. Don't know why, thats just the way it is...
+>
+> 2. how to monitor your simulation?
+>
+>    search for “TIMING” or “Wall” in .log file for the progress of your simulation, which updates every $outputTiming steps. “Benchmark time:”is also ok
+>
+> 3. 
 
 > problems:
 >
@@ -1121,6 +1105,8 @@ adjust the window to see different stages
 >   PREVIOUS VALUES  k=261  x0=1.49
 >      USING VALUES  k=390  x0=1.49
 >   ```
+>
+>   maybe caused by duplicated prm files. but cannot remove any of them. just be it
 >
 > - 
 >
@@ -1147,24 +1133,49 @@ adjust the window to see different stages
 >
 > how come the rate increases two folds in test 3?
 
+#### Analysis basics and check
+
+As said, to obtain appropriate params for your system, should check properties.
+
+```shell
+# extract properties from .log file
+vmd
+source ../common/namdstats.tcl
+data_time TEMP pro-lig-equil.log
+data_time TOTAL pro-lig-equil.log
+exit
+xmgrace TEMP.dat
+xmgrace TOTAL.dat
+```
+
+the script is from namd unix tutorial files. note:
+
+```
+Usage: data_avg <logfile> [<first timestep> <last timestep>]
+   <first timestep> and <last timestep> may be entered as numbers or
+   <first timestep> = 'first' will start at the beginning of the simulation
+   <last timestep> = 'last' will go to the end of the simulation
+Usage: data_time <data stream> <logfile> [<first timestep> <last timestep>]
+   <data stream> = BOND, ANGLE, DIHED, IMPRP, ELECT, VDW, BOUNDARY, MISC, KINETIC, TOTAL, TEMP, TOTAL2, TOTAL3, TEMPAVG
+```
+
+adjust the window to see different stages
+
+also you may view the animation
+
+```
+menu animate on
+mol load psf ../common/system.psf pdb ../common/system.pdb
+animate read dcd rdrp-atp-equil.dcd
+
+animate read dcd rdrp-atp-p.dcd
+```
 
 
 
 
-### Run your simulation
 
-#### tips
 
-> 1. https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2003-2004/0295.html
->
->    You will need to have a non binary coord file with as well as the binary
->    forms. Don't know why, thats just the way it is...
->
-> 2. how to monitor your simulation?
->
->    search for “TIMING” or “Wall” in .log file for the progress of your simulation, which updates every $outputTiming steps. “Benchmark time:”is also ok
->
-> 3. 
 
 #### Run in Gromacs
 
