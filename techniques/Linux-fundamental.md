@@ -24,7 +24,7 @@ This is a record of my operations during 折腾ing the system, in order not to f
    
    export的含义 https://askubuntu.com/questions/720678/what-does-export-path-somethingpath-mean
 
-7. 
+7. Linux操作系统执行可执行文件提示*No such file or directory*的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
 
 ## Operations
 
@@ -1050,6 +1050,13 @@ apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用
    sudo ./filename.run # like .exe in win
    ```
 
+4. install flatpakref package
+   
+   ```shell
+   sudo apt install flatpak
+   sudo apt install gnome-software-plugin-flatpak # GUI
+   ```
+   
 4. make -jn (install...)
    n代表同时编译的进程，可以加快编译速度，n由用户计算机的配置与性能决定，当前的典型值为10。所以`make -j10`
 

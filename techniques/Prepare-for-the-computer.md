@@ -117,9 +117,17 @@ without client, just use web client...
 
 
 
-## vpn
+## break the wall
 
-### anycast
+[vpn和v2ray、ssr、加速器有什么区别？](https://shutupandshowpages.com/index.php/2021/07/06/vpn%E5%92%8Cv2ray%E3%80%81ssr%E3%80%81%E5%8A%A0%E9%80%9F%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/)
+
+翻墙的方式：vpn、代理、自己搭服务器（淘宝上还有帮忙搭建内网穿透的；自己也可搭ssr啥的？）
+
+总之VPN更安全；v2ray比ssr可靠、难搞
+
+https://sites.google.com/view/honven all kinds of recomm
+
+### airport: sgi.anycast.gay
 
 https://sgi.anycast.gay/user 买ssr流量的网站
 
@@ -200,7 +208,15 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
 ### v2ray
 
-https://rongsp.com/article/96.html
+> https://rongsp.com/article/96.html
+
+https://github.com/Qv2ray/Qv2ray/releases/tag/v2.7.0 with GUI
+
+intro https://iyuantiao.com/fenxiangfuli/jiaocheng/v2ray.html
+
+
+
+
 
 ### qt-5
 
