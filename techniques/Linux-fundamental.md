@@ -71,9 +71,14 @@ This is a record of my operations during 折腾ing the system, in order not to f
    
    https://www.asus.com/hk/Motherboards-Components/Motherboards/PRIME/PRIME-Z390-P/ 华硕PRIME Z390-P
    
-5. [check shell version](https://blog.csdn.net/electrocrazy/article/details/78313962)
+6. [check shell version](https://blog.csdn.net/electrocrazy/article/details/78313962)
 
-6. 
+#### monitor resource usage
+
+[ref](https://blog.csdn.net/liaomin416100569/article/details/76920328)
+
+1. `top`
+2. 
 
 #### disk management
 
@@ -486,6 +491,15 @@ This is a record of my operations during 折腾ing the system, in order not to f
    sudo apt-get install tree
    ```
 
+10. check file size
+
+    ```shell
+    man ls
+    ls -l # kb
+    ls -lh # proper magnitud
+    ls -l --blocksize=g  # gb
+    ```
+
 10. 
 
 #### zip and unzip
@@ -516,7 +530,7 @@ tar -zcvf folder.tar.gz folder | split -b 4000M -d -a 1 - folder.tar.gz
 
 #### disk
 
-1. smart: https://www.cnblogs.com/xqzt/p/5512075.html
+1. 自我检测分析与报告技术smart: https://www.cnblogs.com/xqzt/p/5512075.html
 
 #### debian series features
 
@@ -1844,24 +1858,7 @@ sudo update-grub
 
 extundelete：恢复rm误删的文件
 
-## 22.2.23 长时间待机死机
-
-这次安装完之后，没开始做模拟时就没出过问题。。
-
-推测：
-
-- namd等内存的问题？？按blog做，没这问题
-- 也没有使用开源驱动啊
-
-恢复：远程通过ssh登录tty然后重启？
-
-已经关闭自动锁屏和息屏延时，不知道是否有效。。
-
-后来觉得应该是：显卡没用默认的，且常用远程控制使用了过多的图形界面程序
-
-把vnc停了吧
-
-## 22.3.2 系统出错并无法恢复,请尝试注销并重新登录。
+## 2022.3.2 系统出错并无法恢复,请尝试注销并重新登录。
 
 https://blog.csdn.net/shen_bb/article/details/16983739
 
@@ -1869,6 +1866,60 @@ https://blog.csdn.net/shen_bb/article/details/16983739
 sudo mv /home/user/.Xauthority /home/user/.Xauthority.backup  (user为你的登录用户名) 
 sudo service lightdm restart
 ```
+
+## 2022.3.4 向日葵静置就卡机
+
+> 这次安装完之后，没开始做模拟时就没出过问题。。
+>
+> 推测：
+>
+> - namd等内存的问题？？按blog做，没这问题
+> - 也没有使用开源驱动啊
+>
+> 恢复：远程通过ssh登录tty然后重启？
+>
+> 已经关闭自动锁屏和息屏延时，不知道是否有效。。
+>
+> 把vnc停了，但也没用
+
+问题描述
+
+- 有时远控正用着就卡机，一段时间不操作很快会卡机
+- 断开后一段时间（如过夜）后卡死
+
+并发症状
+
+- ssh有时能连？花生壳没下线。
+
+- 向日葵甚至有时能看到，tty也不太能进入
+
+- 主机似乎发出较大声音
+
+- 重启时
+
+  ```
+  nvidia-gpu 0000:01:00.3: 12c timeout error e000000
+  ucsi_ccg 0-0008 i2c_transfer failed -110
+  ucsi_ccg 0-0008 ucsi_ccg_inlt failed - -110
+  ```
+
+  几秒后才开机
+
+> 不用向日葵（线下）基本ok，说明是远控的问题
+>
+> 后来觉得应该是：显卡没用默认的，且常用远程控制使用了过多的图形界面程序
+
+解决思路：
+
+- 自动释放资源，因为向日葵可能有残留进程啥的？
+- 显卡驱动设置？
+- 换个软件
+
+自己使用习惯：
+
+- 休息时断开连接
+- 吃饭睡觉前重启一波？
+- 占资源行为：VScode开着巨大的log文件（还好？最好别）
 
 
 

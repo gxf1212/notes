@@ -828,6 +828,8 @@ $install_bin_dir `/usr/local/bin` This is the location of the startup script ’
 
 $install_library_dir `/usr/local/lib/$install_name` This is the location of all other VMD files.
 
+All files are here.
+
 > customize: `$Home/$install_name/bin`	   `$Home/$install_name/lib`
 
 ```shell

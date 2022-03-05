@@ -191,7 +191,7 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
    type in TkConsole: tkcon font <type> <size>
 
    ```
-   tkcon font Courier 20
+   tkcon font Courier 16
    ```
 
    size of the window is automatically changed. But font type not affected?
@@ -558,7 +558,7 @@ quit
 vmd -dispdev text -e merge.tcl
 ```
 
-#### build complex-method 2
+#### build complex-method 2 (using)
 
 > use console, include topology. [How to create a PSF file](https://sassie-web.chem.utk.edu/docs/structures_and_force_fields/notes.html)
 >
@@ -583,7 +583,7 @@ but Tk console reports error!
 
 but **'formatted’ can be recognized by CHARMM-GUI**!
 
-the succeeded version:
+the successful version:
 
 ```tcl
 # for atp, still built with AutoPSF, topology files except top_all36_na.rtf,
@@ -599,8 +599,8 @@ alias atom ILE CD1 CD
 alias atom SER HG HG1         
 alias atom CYS HG HG1          
 
-segment PROT {pdb rdrp.pdb}
-coordpdb rdrp.pdb PROT
+segment PRO {pdb rdrp.pdb}
+coordpdb rdrp.pdb PRO
 
 # use files from CHARMM-GUI
 readpsf ligandrm2.psf
@@ -622,7 +622,7 @@ writepsf merged.psf
 
 > notes
 >
-> - `toppar_water_ions.str`: contains **TIP3** water model and ion topology and parameter information.  This is now the only file that contains these entities.
+> - `toppar_water_ions.str`: contains **TIP3** water model and ion topology and parameter information. This is now the only file that contains these entities.
 
 > failed commands
 >
@@ -1108,7 +1108,13 @@ namd3 +auto-provision +idlepoll pro-lig-prod > pro-lig-prod.log
 >
 >   maybe caused by duplicated prm files. but cannot remove any of them. just be it
 >
-> - 
+> - rigid bond
+>
+>   ```
+>   Warning: The Langevin gamma parameters differ over the particles, Warning: requiring extra work per step to constrain rigid bonds.
+>   ```
+>
+>   The covalent bonds with hydrogen atoms were constrained at their equilibrium values by the LINCS algorithm?
 >
 > backup
 >
@@ -1163,7 +1169,7 @@ adjust the window to see different stages
 
 also you may view the animation
 
-```
+```tcl
 menu animate on
 mol load psf ../common/system.psf pdb ../common/system.pdb
 animate read dcd rdrp-atp-equil.dcd
@@ -1179,7 +1185,7 @@ animate read dcd rdrp-atp-p.dcd
 
 #### Run in Gromacs
 
-> prepare, equillibrate in NAMD, run in gmx
+> prepare, equillibrate in NAMD, run in gmx. i.e. convert equilibrated system to gmx (.gro/top, ndx, velocity)
 >
 > just a try. not suitable for fep
 
@@ -1187,7 +1193,7 @@ https://www.ks.uiuc.edu/Research/vmd/plugins/topotools/
 
 TopoTools, not only converting to gmx and lammps, more importantly editing your topology
 
-1. make the latest coordinates as pdb, and them .gro
+1. make the latest coordinates as pdb, and then .gro
 
    ```tcl
    mol load psf ../common/system.psf
@@ -1255,13 +1261,63 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 
 ### Clustering
 
-```
-gmx cluster
-```
+refer to
+
+- https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2011-2012/0654.htmlanalyze .dcd in gmx
+- http://www.ks.uiuc.edu/Development/MDTools/catdcd/ catdcd: dcd I/O basics
+
+> preparations and problems
+>
+> other
+>
+> 1. 
+>
+>    ```shell
+>    gmx rmsf -s ..pdb -f rdrp-atp-prod.dcd
+>    ```
+>
+>    > Can not find mass in database for atom MG in residue 921 MG
+>    >
+>    > Masses and atomic (Van der Waals) radii will be guessed based on residue and atom names
+>
+>    just change 'MG' to 'Mg', solved.
+>
+> 2. trjcat? no!
+>
+>    ```shell
+>    f=rdrp-atp-prod
+>    gmx trjcat -f ${f}.dcd -o ${f}.xtc
+>    gmx trjcat -f *.dcd *.dcd *.dcd -o trajectory.xtc # concatenate multiple files
+>    ```
+>
+>    
+
+steps
+
+1. make initial structure, as did in [Run in Gromacs](#Run-in-Gromacs). It contains parameters (charge?) and functions like .tpr file
+
+2. convert trajectory file
+
+   ```tcl
+   set f rdrp-atp-prod
+   catdcd -o ${f}.trr ${f}.dcd
+   ```
+
+   
+
+3. clustering
+
+   ```
+   gmx cluster
+   ```
+
+   
 
 
 
 
+
+#### clustering in VMD
 
 
 

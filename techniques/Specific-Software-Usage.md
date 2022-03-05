@@ -92,7 +92,7 @@ configure VPN: see prepare-for-the-computer
 
    https://www.cnblogs.com/l199616j/p/12092113.html
 
-   
+   see `cluster_usage.md` detailed
 
 5. 一般服务器是要买公网IP的，如果你要搞化生网站就是如此吧？
    搭建云盘也是这样，但是存储空间还得靠自己。。常说NAS。存储设备几百块钱跟网上说的差不多
@@ -200,6 +200,28 @@ ssh gxf@xxxxx.xxx.xx:port
 > issues
 >
 > 花生壳青春版能用多久？一年，还是因为我快毕业了？
+
+### ToDesk
+
+https://www.todesk.com/linux.html
+
+doc: https://docs.todesk.com/zh-CN
+
+advantages/functions
+
+- free, no rate limit, all platforms
+- check rate: upper left letter
+
+flaws
+
+- have to open a client or it cannot be connected
+- WOL under lan failed
+- 占用这么大内存, twice of sunlogin
+- screen is not as clear, even free version?
+- 登录不稳定？也有评价好的
+- 鼠标光标太大，而且位置难以把控。。
+
+charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 
 
 
@@ -349,8 +371,11 @@ Linux和iPad上，如果时常要存项目数据，需要TB级别的
 7. resilio https://www.resilio.com/individuals/     [install](https://cloud.tencent.com/developer/article/1719052?from=15425)
 8. Nextcloud https://nextcloud.com/install/#    https://blog.51cto.com/libinblog/3157762
 9. Cloudreve
-10. 
 11. iCloud当然只能苹果系列了，还要钱
+
+不再考察了，淘宝yyds
+
+支持国内平台吗？可是可白嫖程度还是不够大，自动上传的客户端也不算完善，再等等吧。。
 
 ### Onedrive
 
@@ -422,6 +447,8 @@ and https://www.moerats.com/archives/740/
 
 > It says [The 'skilion' version](https://github.com/skilion/onedrive) contains a significant number of defects in how the local sync state is managed.
 
+###### Usage
+
 - [install](https://github.com/abraunegg/onedrive/blob/master/docs/INSTALL.md#dependencies-ubuntu-18x-ubuntu-19x-ubuntu-20x--debian-9-debian-10---x86_64) dependencies and don't forget
 
   ```shell
@@ -482,7 +509,7 @@ and https://www.moerats.com/archives/740/
 
 - 
 
-上传还是挺快的
+上传还是挺快的；自动上传的频率应该ok
 
 A simple GUI with multi-account support. https://github.com/bpozdena/OneDriveGUI
 
@@ -494,11 +521,19 @@ A simple GUI with multi-account support. https://github.com/bpozdena/OneDriveGUI
 
      https://github.com/skilion/onedrive/issues/244
 
-   个人登录能用？
+   个人登录能用
+   
+2. A database statement execution error occurred: disk I/O error
 
-given up!
+     The existing execution still has a lock on the files. You 'most likely' had a service file running the daemon which you did not stop.
 
-##### Insync
+     事实上虽然手动同步还报错，但确实在很快地同步
+
+3. 将来真的文件多了，应该1）升级25T；2）改用rclone的挂载模式（万一号没了又咋办？？）
+
+##### other
+
+###### Insync
 
 Insync client: also cannot login
 
@@ -510,11 +545,15 @@ maybe the problem sits in our unversity?
 >
 > Personal: Connecting to Insync...
 
-##### rclone
+###### rclone
 
 https://itsfoss.com/use-onedrive-linux-rclone/
 
 https://www.moerats.com/archives/491/
+
+https://www.misterma.com/archives/900/
+
+all are usage & mounting reference
 
 ```shell
 $ rclone config
@@ -593,6 +632,10 @@ https://github.com/tickstep/aliyunpan
 探索了这么多，最后还是以买了个淘宝账号结束，还买的50块的，20就能买到了。
 
 真是太搞笑了。
+
+https://oauth2.googleapis.com  142.251.43.10:443
+
+连不上API，电脑端作罢。
 
 #### about the network
 
@@ -713,11 +756,6 @@ grive等一通客户端都不行
 
 
 
-https://oauth2.googleapis.com
-142.251.43.10:443
-
-
-
 ## set up a netdisk?
 
 https://wzfou.com/seafile-yunpan/
@@ -732,7 +770,7 @@ https://wzfou.com/seafile-yunpan/
 
 对于 Linux，有两个官方客户端 Seadrive 和 Seafile，前者是挂载文件系统，后者用于同步。对于一个自建网盘，它功能相当纯粹
 
-## just for storage
+## domestic cloud drives: just for storage
 
 > 如果我要分享，也是g16、rosetta那种大文件
 >
@@ -1655,7 +1693,7 @@ git clone https://github.com/https://littleee.github.io/ themes/asnippet
 npm install --save hexo-pdf
 ```
 
-https://lkevin98.gitee.io/blog/file/%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E9%A1%B5%E4%B8%AD%E5%AE%9E%E7%8E%B0pdf%E5%9C%A8%E7%BA%BF%E9%A2%84%E8%A7%88.pdf
+如何在hexo博客网页中实现pdf在线预览
 
 https://bibichuan.github.io/posts/5affe24.html
 

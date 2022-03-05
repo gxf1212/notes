@@ -2300,6 +2300,8 @@ in amber
 
 want full time for property-time, but want "later" for per residue...
 
+input: .tpr, .xtc, .ndx
+
 1. visualization
 
    ```shell
@@ -2338,7 +2340,7 @@ want full time for property-time, but want "later" for per residue...
    ```shell
    echo "3\n 3" | gmx rms -s final.tpr -f final_nojump.xtc -o rmsd_ca.xvg -tu ns # C alpha
    xmgrace rmsd_ca.xvg
-   echo 3 | gmx rmsf -f final_nojump.xtc -s final.tpr -o rmsf-per-residue.xvg -ox average.pdb -oq bfactors-residue.pdb -res
+   echo 3 | gmx rmsf -s final.tpr -f final_nojump.xtc -o rmsf-per-residue.xvg -ox average.pdb -oq bfactors-residue.pdb -res
    xmgrace rmsf-per-residue.xvg
    echo "17\n 17" | gmx rms -s final.tpr -f final_nojump.xtc -o rmsd_lig.xvg -tu ns
    ```
@@ -2346,7 +2348,7 @@ want full time for property-time, but want "later" for per residue...
 5. get pdb
 
    ```shell
-   echo 24 | gmx trjconv -f final_nojump.xtc -s final.tpr -n index.ndx -o traj.pdb -tu ns
+   echo 24 | gmx trjconv -s final.tpr -f final_nojump.xtc -n index.ndx -o traj.pdb -tu ns
    # in pymol
    split_state traj
    run /home/gxf/Desktop/xufan/MD/real-simulation/further/align_traj.py 

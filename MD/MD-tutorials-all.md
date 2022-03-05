@@ -665,7 +665,7 @@ I know! It does not matter how many molecules you want to include (just merge). 
 
 #### simulation parameters
 
-##### steps
+##### equilibration steps
 
 settings in tutorial:
 
@@ -711,13 +711,14 @@ settings in tutorial:
 
 ##### values
 
+This part is kind of 鸡肋. just for obtaining intuiations
+
 | paper              | minimize1, type | mini whole   | after mini            | npt/ns     | prod | remark |
 | ------------------ | --------------- | ------------ | --------------------- | ---------- | ---- | ------ |
 | 1                  | backbone, cg    | 2+5000 steps | equ*2(npt)--prod(npt) | 0.004+0.01 | 100  |        |
 | 2                  | water, cg       | 10,000       | equ(npt)--prod(nvt)   | 1          | 51   |        |
 | 3                  | all, cg         | 20,000       | equ(npt)--prod(npt)   | 1.4(6?)    | 20   | vdW,12 |
 | 4                  | all, sg         | 50,000       | equ(nvt)--prod(npt)   | 2+8        | 150  | gmx    |
-|                    |                 |              |                       |            |      |        |
 |                    |                 |              |                       |            |      |        |
 | K<sup>+</sup>-18C6 | all, cg         | 1000         | same as 3             | 10000      |      |        |
 | my gmx             | all, cg         | 5000         | same as 4             | 0.1+0.1    |      |        |
@@ -775,13 +776,26 @@ OUR: Simulations were performed with GROMACS 5.1.2. Van der Waals interactions w
 
 5. 
 
+##### FEP: other users
+
+| paper     | MD/ns | FEP each/ns | # windows | array                                                        | repeat |
+| --------- | ----- | ----------- | --------- | ------------------------------------------------------------ | ------ |
+| our redem | 100   |             | 21        | (0.00, 0.00001, 0.0001, 0.001, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99, 0.999, 0.9999, 0.99999, 1.00) | 10     |
+| 1         | 20    | 2           | 9         | 0.00, 0.10, 0.25, 0.35, 0.50, 0.65, 0.75, 0.90, and 1.00     | 2      |
+|           |       |             |           |                                                              |        |
+|           |       |             |           |                                                              |        |
+|           |       |             |           |                                                              |        |
+|           |       |             |           |                                                              |        |
+
+1. Assessing potential inhibitors of SARS-CoV-2 main protease from available drugs using free energy perturbation simulations
 
 
 
 
-#### user guide
 
-- 
+
+
+- fast pulling of ligand (FPL)
 
 - 
 
