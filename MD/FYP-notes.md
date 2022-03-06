@@ -628,7 +628,8 @@ writepsf merged.psf
 
 > notes
 >
-> - `toppar_water_ions.str`: contains **TIP3** water model and ion topology and parameter information. This is now the only file that contains these entities.
+> - `toppar_water_ions.str`: contains **TIP3** water model and **ion** topology and parameter information. This is now **the only file** that contains these entities.
+> - you'd better use capital letter ('MG') for use in CHARMM
 
 > failed commands
 >
@@ -652,13 +653,13 @@ writepsf merged.psf
 > completely failure. don’t know what .inp file the tutorials used.
 >
 > ```shell
-> grep "PROT" -rl ./rdrp.pdb | xargs sed -i "s/PROT/    /g" 
+>grep "PROT" -rl ./rdrp.pdb | xargs sed -i "s/PROT/    /g" 
 > ```
->
+> 
 > this does not matter
 >
 > ```tcl
-> package require psfgen
+>package require psfgen
 > resetpsf
 > topology top_all36_na.rtf
 > topology top_all36_cgenff.rtf
@@ -666,17 +667,17 @@ writepsf merged.psf
 > segment ATP {pdb atp.pdb}
 > coordpdb atp.pdb ATP
 > ```
->
+> 
 > still not work for ATP. even though ATPP $\to$ ATP, still “unknown atom type ON3”
 >
 > ```
-> topology toppar_all36_na_nad_ppi.str
+>topology toppar_all36_na_nad_ppi.str
 > # autopsf, this probably failed..
 > # segment LIG {pdb atp_autopsf_formatted.pdb}
 > readpsf atp_autopsf.psf
 > coordpdb atp_autopsf_formatted.pdb
 > ```
->
+> 
 > still not work for ATP. cannot recognize atoms. without “formatted” have correct names, but position of PO4 changed.
 >
 > **So we still MUST use CHARMM-GUI if we don’t directly aliase pdb**
@@ -899,7 +900,7 @@ Below are parameters you should notice in every simulation.
 
 ##### system and parameters
 
-1. par_CMAP.inp? 
+1. par_CMAP.inp in Kevin's script? 
 
    is actually **param.prm** downloaded from [Maryland](http://mackerell.umaryland.edu/). 
 
@@ -909,6 +910,26 @@ Below are parameters you should notice in every simulation.
    *>>>> CHARMM36 All-Hydrogen Parameter File for Proteins <<<<<<<<<<
    *>>>>> Includes phi, psi cross term map (CMAP) correction <<<<<<<<
    ```
+
+   > **DUPLICATE terms**
+   >
+   > https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2020-2021/0371.html
+   >
+   > ```
+   > Warning: DUPLICATE BOND ENTRY FOR CT3-NC2
+   > PREVIOUS VALUES  k=261  x0=1.49
+   > USING VALUES  k=390  x0=1.49
+   > ```
+   >
+   > maybe caused by duplicated prm files. but cannot remove any of them. just be it?
+   >
+   > some of the pair values **both** occur in param.prm
+   >
+   > I use `param.prm` and `par_all36_na.prm` in .namd. Built with `top_all36_prot.rtf`, `toppar_water_ions.str`
+   >
+   > The tutorial uses `par_all27_prot_lipid.inp` and `par-extraterms.inp`, built with `top_all27_prot_lipid.inp`, `par_all27_prot_lipid.inp`
+
+   solution: use `par_all36m_prot.prm` (same protein parameter as we are using in `param.prm`) and
 
 2. **par_all36_na.prm** for some atoms in ATP. may cause conflicts. does that matter?
 
@@ -1049,7 +1070,7 @@ time length: refer to tutorials--my exploration--simulation
 > the script is without an extension name for VScode to highlight. put in where the results are
 >
 > ```shell
-> $
+> $ tree
 > ├── common
 > │   ├── fix_backbone.pdb
 > │   ├── fix_backbone_restrain_ca.tcl
@@ -1085,16 +1106,15 @@ namd3 +auto-provision +idlepoll pro-lig-prod > pro-lig-prod.log
 
 > 1. https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2003-2004/0295.html
 >
->    You will need to have a non binary coord file with as well as the binary
->    forms. Don't know why, thats just the way it is...
->
-> 2. how to monitor your simulation?
->
->    search for “TIMING” or “Wall” in .log file for the progress of your simulation, which updates every $outputTiming steps. “Benchmark time:”is also ok
->
-> 3. 
+>    You will need to have a non binary coord file with as well as a binary one. Don't know why, thats just the way it is...
+>    
+>2. how to monitor your simulation?
+> 
+>   search for “TIMING” or “Wall” in .log file for the progress of your simulation, which updates every $outputTiming steps. “Benchmark time:”is also ok
+> 
+>3.  
 
-> problems:
+> other problems:
 >
 > - Randomization of virtual memory (ASLR) is turned on in the kernel, thread migration may not work! Run 'echo 0 > /proc/sys/kernel/randomize_va_space' as root to disable it, or try running with '+isomalloc_sync'.
 >
@@ -1102,17 +1122,7 @@ namd3 +auto-provision +idlepoll pro-lig-prod > pro-lig-prod.log
 >
 >   Warning: CHANGING MARGIN FROM 0 to 0.495
 >
-> - **ERROR** TOLERANCE : 1e-06
->
-> - https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2020-2021/0371.html
->
->   ```
->   Warning: DUPLICATE BOND ENTRY FOR CT3-NC2
->   PREVIOUS VALUES  k=261  x0=1.49
->      USING VALUES  k=390  x0=1.49
->   ```
->
->   maybe caused by duplicated prm files. but cannot remove any of them. just be it
+> - ERROR TOLERANCE : 1e-06
 >
 > - rigid bond
 >
@@ -1213,8 +1223,8 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    ```tcl
    ## from tutorial
    # read in vmd
-   mol new ../common/ubq_wb.psf 
-   mol addfile ubq_wb_eq_1fs.restart.vel type namdbin waitfor all
+   mol new ../common/system.psf 
+   mol addfile rdrp-atp-equil.restart.vel type namdbin waitfor all
    
    set all [atomselect top all]
    set fil [open energy.dat w]
@@ -1234,7 +1244,7 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    package require topotools
    # Load the structure into VMD.
    mol new ../common/system.psf
-   mol addfile structure.pdb
+   mol addfile equilibrated.pdb
    # Pass along a list of parameters to generate structure.top, suitable for preparing gromacs simulations.
    topo writegmxtop structure.top [list ../common/param.prm ../common/par_all36_na.prm] 
    ```
@@ -1244,15 +1254,27 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 3. to run in gmx, specify T coupling groups:
 
    ```shell
-   tc_grps    non-Water Water # Membrane-containing MD simulation
-   tc_grps    Protein non-Protein # normal system
+   gmx make_ndx -f equilibrated.pdb -o index.ndx
+   > 1|13|14
+   > 21|22|23
+   > q
    ```
-
-   make the .tpr file
-
+   
+   > Protein_ATP_Mg    TIP3_SOD_CLA
+   >
+   > refer to
+   >
+   > ```shell
+   > tc_grps    	= non-Water Water # Membrane-containing MD simulation
+   > tc_grps    	= Protein_ligand_ion Other # normal system
+   > compressed-x-grp or energygrps  = Protein MOL MN # list all main species
+   > ```
+   
+4. make the .tpr file
+   
    ```shell
    # This would be prepared for simulation using grompp to create a tpr file
-   gmx grompp -f prodmd.mdp -c structure.pdb -r structure.pdb \
+   gmx grompp -f md.mdp -c equilibrated.pdb -r equilibrated.pdb \
    -p structure.top -o simulation.tpr -maxwarn 200 
    # supress repeated param definition
    -t velocity.cpt 
@@ -1316,7 +1338,7 @@ steps
    > >
    > > Masses and atomic (Van der Waals) radii will be guessed based on residue and atom names
    >
-   > just change 'MG' to 'Mg' in .pdb, solved.
+   > just change 'MG' to 'Mg' in .pdb, solved. Do this only when gmx is needed...
 
 4. rmsd/rmsf of NTP
 

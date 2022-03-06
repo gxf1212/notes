@@ -574,7 +574,7 @@ xmgrace TEMP.dat
   quit
   ```
 
-  ![prms](/home/gxf/desktop/work/Git-repo/notes/MD/MD-tutorials-all.assets/prms.png)
+  ![prms](https://gitee.com/gxf1212/notes/raw/master/MD/MD-tutorials-all.assets/prms.png)
 
   he has to add a lot of prm files because of not adding topology when building! not recommended.
 
@@ -1490,7 +1490,7 @@ energygrps               = Protein MOL MN
 ```
 
 - energy: list all main species
-- tc: Water_and_ion and the other
+- tc: Water_and_ion (exclude MN!) and the other
 
 updated gmx .mdp files? problem with rvdw settings
 

@@ -277,7 +277,7 @@ The nature of antigen specificity is, the specificity of an immune response.
 e.g. 抗间氨基苯磺酸的抗体和邻位、对位、其他酸的反应弱或没有
 
 - an antigen only activates lymphocytes specific to recognize it
-
+  
   - MHC, BCR or TCR restricted
 
 - products of an immune response only react with that specific antigen
@@ -295,23 +295,23 @@ nature: similar epitope
 Also, they are the basic unit to specifically recognize TCR/BCR/antibody.
 
 | epitope type                 | linear epitope <br />线性表位 | conformational epitope <br />构象表位 |
-| ---------------------------- | :---------------------------: | :-----------------------------------: |
-| sequence                     | sequential                    | separated                             |
-| 3D structure                 | close                         | close                                 |
-| after denaturation/digestion | remains                       | distroyed                             |
-| recognized by T/B?           | TCR, BCR                      | mainly BCR                            |
+| ---------------------------- |:-------------------------:|:---------------------------------:|
+| sequence                     | sequential                | separated                         |
+| 3D structure                 | close                     | close                             |
+| after denaturation/digestion | remains                   | distroyed                         |
+| recognized by T/B?           | TCR, BCR                  | mainly BCR                        |
 
 构象表位：由氨基酸序列不连续，但在空间上相互接近、形成特定构象的几个氨基酸构成的表位。
 
-| epitope              | T cell epitope                                               | B cell epitope                                               |
-| -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| receptor             | TCR                                                          | BCR                                                          |
-| MHC involved?        | yes                                                          | no                                                           |
-| antigen presentation | needed                                                       | no need                                                      |
-| composition          | linear short peptide                                         | natural polypeptide<br />(lipo)polysaccharide<br />organic compounds |
-| size                 | CD8<sup>+</sup> T cell: 5\~12 AA<br />CD4<sup>+</sup> T cell: 12\~17 AA | 5\~15 AA or 5\~7 <br />oligosaccharide or nt                 |
-| type                 | linear epitope                                               | linear or conformational                                     |
-| position             | any                                                          | surface                                                      |
+| epitope              | T cell epitope                                                          | B cell epitope                                                       |
+| -------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| receptor             | TCR                                                                     | BCR                                                                  |
+| MHC involved?        | yes                                                                     | no                                                                   |
+| antigen presentation | needed                                                                  | no need                                                              |
+| composition          | linear short peptide                                                    | natural polypeptide<br />(lipo)polysaccharide<br />organic compounds |
+| size                 | CD8<sup>+</sup> T cell: 5\~12 AA<br />CD4<sup>+</sup> T cell: 12\~17 AA | 5\~15 AA or 5\~7 <br />oligosaccharide or nt                         |
+| type                 | linear epitope                                                          | linear or conformational                                             |
+| position             | any                                                                     | surface                                                              |
 
 > natural: part of a macromolecule?
 
@@ -368,11 +368,12 @@ be --from--> TD-Ag
 Whether it is **synthesized** inside APC
 
 - yes: endogeneous (内源性) antigen.
+  
   - viral/tumor Ag
 
 - no: exogeneous (外源性) antigen.
+  
   - bacteria, animal serum
-
 
 ### Other non-antigenic immune stimulators
 
@@ -451,7 +452,7 @@ hinge: flexible, between CH1 and CH2. not in IgM/E
 #### function
 
 - VH/VL: antigen binding
-
+  
   - contains a hypervariable region (**HVR**, 高变区) or complement-determining region (**CDR**, 互补决定区)
   - other region is called framework region
 
@@ -526,26 +527,26 @@ Ab can also be an antigen. Three types of epitope:
 - CH3: bind Fc receptor on the cell surface
   
   - **opsonization** (调理作用): phagocytosis (吞噬作用) by macrophages and neutrophils through Fc binding to Fc receptor, then into [presenting pathway](#MHC synthesis,-their-transportation-and-assembly)
-  
+    
     <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/4-ops.png" alt="4-ops" style="zoom:40%;" align=center />
-
+  
   - enhance **ADCC** (antibody-dependent cell-mediated cytotoxicity) effect of NK cell, also through Fc
   
   - mediate [type I **hypersensitivity**](#type-I-hypersensitivity) (超敏反应): mastocytes, basophils (嗜碱性粒细胞), IgE 
-  
+
 - 穿过胎盘（IgG）与黏膜（分泌型 IgA, CH4）
 
 ## Characteristics of several classes of Ab
 
 ### Five classes
 
-| classes | state    | localization                                   | major function                                               |
-| ------- | -------- | ---------------------------------------------- | ------------------------------------------------------------ |
+| classes | state    | localization                                   | major function                                                   |
+| ------- | -------- | ---------------------------------------------- | ---------------------------------------------------------------- |
 | IgM     | pentamer | mainly in serum<br />monomer on B cell surface | primary immune response<br />strongest **complement** activation |
-| IgG     | monomer  | in serum and body fluid                        | secondary immune **response<br />**can also in milk, pass 胎盘 |
-| IgA     | dimer    | mainly mucosa (黏膜)<br />monomer in serum     | defend in **mucosa**<br />secreted into milk (乳汁)          |
-| IgE     | monomer  | in serum, very little                          | may cause type I **hypersensitivity**                        |
-| IgD     | monomer  | on B cell surface                              | **marker** of B cell maturation<br />not so clear            |
+| IgG     | monomer  | in serum and body fluid                        | secondary immune **response<br />**can also in milk, pass 胎盘     |
+| IgA     | dimer    | mainly mucosa (黏膜)<br />monomer in serum       | defend in **mucosa**<br />secreted into milk (乳汁)                |
+| IgE     | monomer  | in serum, very little                          | may cause type I **hypersensitivity**                            |
+| IgD     | monomer  | on B cell surface                              | **marker** of B cell maturation<br />not so clear                |
 
 | more info | subclasses | formation               | more on structure | infection | features                       |
 | --------- | ---------- | ----------------------- | ----------------- | --------- | ------------------------------ |
@@ -1139,14 +1140,14 @@ Cytokines are small multi-bioactive polypeptides or glycoproteins secreted by va
 
 ### Summary
 
-| categories                      | ==meaning==                           | representative                          | source cell                                                  | function                                                     |
-| ------------------------------- | ------------------------------------- | --------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Interleukin                     | conversation among leukocytes         | IL-2                                    | activated T cells                                            | proliferation of T/B/NK/LAK/monocyte                         |
+| categories                      | ==meaning==                           | representative                          | source cell                                                          | function                                                     |
+| ------------------------------- | ------------------------------------- | --------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Interleukin                     | conversation among leukocytes         | IL-2                                    | activated T cells                                                    | proliferation of T/B/NK/LAK/monocyte                         |
 | Interferon                      | interfere viral replication           | type I: IFN-α/β/ε/ω<br />type II: IFN-γ | type I: infected cells, lymphocytes<br />type II: activated/NK cells | type I: anti-tumor/virus<br />type II: boost immune response |
-| Colony-stimulating factor (CSF) | hematopoietic cells (see below)       | IL-3, GM-CSF, EPO, etc.                 | T cells, Mo/Mϕ, mesenchymal cells and some from other tissues | proliferation, differentiation, and activation               |
-| Chemokine                       | directional migration of immune cells | CXC, CC, C, CX3C family                 | T naive/act, Th cell, B cell, Mo/Mϕ/NK/DC                    | attract and activate immune cells, regulate angiogenesis     |
-| Tumor necrosis factor (TNF)     | tumor necrosis (like interferon)      | types: TNF-α/β<br />FasL, TRAIL         | activated monocytes or macrophages (α), T cells (β)          | kill target cell, regulate immune response                   |
-| Growth factor                   | promote growth and differentiation    | TGF-β, VGEF, EGF, FGF, NGF, PDGF        | tumor cells, fibroblasts, macrophages                        | promote growth and differentiation                           |
+| Colony-stimulating factor (CSF) | hematopoietic cells (see below)       | IL-3, GM-CSF, EPO, etc.                 | T cells, Mo/Mϕ, mesenchymal cells and some from other tissues        | proliferation, differentiation, and activation               |
+| Chemokine                       | directional migration of immune cells | CXC, CC, C, CX3C family                 | T naive/act, Th cell, B cell, Mo/Mϕ/NK/DC                            | attract and activate immune cells, regulate angiogenesis     |
+| Tumor necrosis factor (TNF)     | tumor necrosis (like interferon)      | types: TNF-α/β<br />FasL, TRAIL         | activated monocytes or macrophages (α), T cells (β)                  | kill target cell, regulate immune response                   |
+| Growth factor                   | promote growth and differentiation    | TGF-β, VGEF, EGF, FGF, NGF, PDGF        | tumor cells, fibroblasts, macrophages                                | promote growth and differentiation                           |
 
 LAK：淋巴因子激活的杀伤细胞
 
@@ -1181,13 +1182,13 @@ Three regions, for signaling.
 
 ### Membrane CR: categories
 
-| xx superfamily receptors      | also known as/abbreviated         | their ligands                                            | domain structure                                             | remark                                                       |
-| ----------------------------- | --------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Immunoglobin                  | IgSFR                             | IL-1/18, M-CSF, SCF                                      | α/β, each has one or more IgSF domain(s)                     | GM-CSF subfamily: IL-3/5, common β                           |
-| Hematopoietic factor 造血因子 | Type I cytokine RSF               | IL-2$\sim$7, 9, 11$\sim$13, 15,...<br />GM-CSF, G-CSF... | α/β clamps ligand<br />intracellular γ<br />conserved Cys and WSXWS | IL-2 subfamily, common γ<br />IL-6 subfamily, common gp130   |
-| Interferon                    | Type II cytokine RSF              | IFN-α/β/γ, IL-10, etc.                                   | similar, except WSXWS                                        | [Jak/STAT pathway](https://www.bilibili.com/video/BV1ub4y1b7B5/) |
-| TNF                           | Type III cytokine RSF<br />TNFRSF | TNF-α/β<br />CD27/30/40L<br />NGF, Fas                   | mostly homotrimer<br />each chain has many Cys-rich domains  |                                                              |
-| Chemokine                     |                                   | IL-8                                                     | all are GPCR                                                 | also Jak/STAT pathway                                        |
+| xx superfamily receptors  | also known as/abbreviated         | their ligands                                            | domain structure                                                    | remark                                                           |
+| ------------------------- | --------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Immunoglobin              | IgSFR                             | IL-1/18, M-CSF, SCF                                      | α/β, each has one or more IgSF domain(s)                            | GM-CSF subfamily: IL-3/5, common β                               |
+| Hematopoietic factor 造血因子 | Type I cytokine RSF               | IL-2$\sim$7, 9, 11$\sim$13, 15,...<br />GM-CSF, G-CSF... | α/β clamps ligand<br />intracellular γ<br />conserved Cys and WSXWS | IL-2 subfamily, common γ<br />IL-6 subfamily, common gp130       |
+| Interferon                | Type II cytokine RSF              | IFN-α/β/γ, IL-10, etc.                                   | similar, except WSXWS                                               | [Jak/STAT pathway](https://www.bilibili.com/video/BV1ub4y1b7B5/) |
+| TNF                       | Type III cytokine RSF<br />TNFRSF | TNF-α/β<br />CD27/30/40L<br />NGF, Fas                   | mostly homotrimer<br />each chain has many Cys-rich domains         |                                                                  |
+| Chemokine                 |                                   | IL-8                                                     | all are GPCR                                                        | also Jak/STAT pathway                                            |
 
 ### Subunits
 
@@ -1416,11 +1417,11 @@ against infected/tumor cell
 
 Restricted diversity, directly recognize pathogens and become activated.
 
-| cell type | feature                                | found in                   | antigen                                    | response                                                     |
-| --------- | -------------------------------------- | -------------------------- | ------------------------------------------ | ------------------------------------------------------------ |
-| NKT cell  | both TCR-CD3 and CD16 (a symbol of NK) | bone marrow, liver, thymus | phospholipids, glycolipids                 | cytotoxic effect and cytokines                               |
-| γδT cell  | TCR: γ,δ chain                         | mucosa (early)             | MICA/B, viral protein, HSP, **P/G lipids** | the same                                                     |
-| B1 cell   | self-renewing B cells                  | 胸膜腔，腹膜腔，小肠固有层 | TI-Ag, denatured self Ag                   | rapid IgM, early resposne; no <br />class switching, no memory |
+| cell type | feature                                | found in                   | antigen                                    | response                                                       |
+| --------- | -------------------------------------- | -------------------------- | ------------------------------------------ | -------------------------------------------------------------- |
+| NKT cell  | both TCR-CD3 and CD16 (a symbol of NK) | bone marrow, liver, thymus | phospholipids, glycolipids                 | cytotoxic effect and cytokines                                 |
+| γδT cell  | TCR: γ,δ chain                         | mucosa (early)             | MICA/B, viral protein, HSP, **P/G lipids** | the same                                                       |
+| B1 cell   | self-renewing B cells                  | 胸膜腔，腹膜腔，小肠固有层              | TI-Ag, denatured self Ag                   | rapid IgM, early resposne; no <br />class switching, no memory |
 
 A lot of other cells are involved in innate immune response, like mastocytes.
 
@@ -2146,12 +2147,12 @@ Summary: a lot of functions are contradictory...
 
 A brief recitation
 
-| T cell subgroup | cytokines inducing their generation | major types of cytokines produced | type of response      | biological function of these cytokines                       |
-| --------------- | ----------------------------------- | --------------------------------- | --------------------- | ------------------------------------------------------------ |
+| T cell subgroup | cytokines inducing their generation | major types of cytokines produced | type of response      | biological function of these cytokines                                                                |
+| --------------- | ----------------------------------- | --------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------- |
 | Th1             | IL-12, IFN-γ                        | IFN-γ, TNF-α, IL-2                | cell immunity         | Tc, Th differentiation<br />Mϕ, NK activation<br />proliferation,chemotaxis, inflammation and killing |
-| Th2             | IL-4, IL-10                         | IL-4, IL-10, IL-5, IL-13          | humoral immunity      | B cell activation<br />class switching<br />hypersensitivity |
-| Th17            | IL-6, TGF-β                         | IL-17, GM-CSF                     | innate (inflammation) | inflammation!! auto<br />chemotaxis/activation               |
-| CTL             | IL-2                                | IL-2, IFN-γ, TNF-α                | cell immunity         | direct killing                                               |
+| Th2             | IL-4, IL-10                         | IL-4, IL-10, IL-5, IL-13          | humoral immunity      | B cell activation<br />class switching<br />hypersensitivity                                          |
+| Th17            | IL-6, TGF-β                         | IL-17, GM-CSF                     | innate (inflammation) | inflammation!! auto<br />chemotaxis/activation                                                        |
+| CTL             | IL-2                                | IL-2, IFN-γ, TNF-α                | cell immunity         | direct killing                                                                                        |
 
 > Tfh cell: T follicular helper cell
 
@@ -2231,7 +2232,7 @@ BCR-CD79a/b-CD19/CD21/CD81 binds Ag
   > - CD19 conformational change, Tyr residues are phosphorylated, recruit SH2 adaptors (Fyn, etc.)
   
   the signal might be amplified 1000 times
-  
+
 - CD79a/79b heterodimer, help transmit the signal, just like CD3
 
 <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/12-bcr-coreceptor.png" alt="12-bcr-coreceptor" style="zoom:60%;" />
@@ -2292,9 +2293,9 @@ Germinal center is formed (about 7 days after infection).
 | light | centrocyte, fDC, Tfh | the opposite; further differentiation (see below) | loosely   |
 
 > fDC: concentrate Ag on the surface using FcR and CR, for B cell to recognize. Maintain memory
->
+> 
 > Tfh cells provide co-stimulatory CD40L
->
+> 
 > mIg: 膜免疫球蛋白, BCR (the same gene as Ab), heavy chain: IgM or IgD (symbol of B cell maturation)
 
 #### Events here
@@ -2349,17 +2350,17 @@ Cell death depends on Fas (CD95) from Tfh. Need a strong BCR signal (Ag) AND str
 
 A comparison
 
-| Ag             | TD-Ag                    | TI-1 Ag                                                      | TI-2 Ag                                  |
-| -------------- | ------------------------ | ------------------------------------------------------------ | ---------------------------------------- |
-| Ag type        | Soluble<br/>protein, etc | Bacterial cell-wall<br/>components (e.g., LPS)               | 肺炎球菌荚膜多糖<br />沙门菌多聚鞭毛     |
-| receptor       | BCR                      | BCR, mitogen receptor                                        | BCR                                      |
-| target B cell  | B2                       | all B cell                                                   | mainly B1                                |
-| mature B cell? | mature                   | mature or immature                                           | mature                                   |
-| Ab type        | all types                | early, IgM                                                   | IgM/G                                    |
-| feature        | all processes above      | both the BCR and innate receptors                            | repeated epitope<br />cytokine-dependent |
+| Ag             | TD-Ag                    | TI-1 Ag                                                                      | TI-2 Ag                                  |
+| -------------- | ------------------------ | ---------------------------------------------------------------------------- | ---------------------------------------- |
+| Ag type        | Soluble<br/>protein, etc | Bacterial cell-wall<br/>components (e.g., LPS)                               | 肺炎球菌荚膜多糖<br />沙门菌多聚鞭毛                    |
+| receptor       | BCR                      | BCR, mitogen receptor                                                        | BCR                                      |
+| target B cell  | B2                       | all B cell                                                                   | mainly B1                                |
+| mature B cell? | mature                   | mature or immature                                                           | mature                                   |
+| Ab type        | all types                | early, IgM                                                                   | IgM/G                                    |
+| feature        | all processes above      | both the BCR and innate receptors                                            | repeated epitope<br />cytokine-dependent |
 | low dose       |                          | oligoclonal activation<br />cross-links the receptors<br />specific antibody | extensive BCR/CR2 crosslink              |
-| high dose      |                          | polyclonal B cell activation                                 | causes B cell anergy                     |
-| memory         | yes                      | no                                                           | no                                       |
+| high dose      |                          | polyclonal B cell activation                                                 | causes B cell anergy                     |
+| memory         | yes                      | no                                                                           | no                                       |
 
 ## General laws in humoral immunity
 
@@ -2565,7 +2566,7 @@ immediate hypersensitivity (速发型超敏反应) or allergy (过敏反应)
   
   - Cε2 of IgE is correspond to the hinge in IgG, Cε3 is like CH2
   - Fab of IgE is less flexible
-  
+
 - receptor: FcεR
   
   > - FcεR I: high affinity, high expression in mastocytes and basophils; 
@@ -2578,16 +2579,15 @@ immediate hypersensitivity (速发型超敏反应) or allergy (过敏反应)
   <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/14-cells.png" alt="14-cells" style="zoom:40%;" />
   
   <center>left: basophil; right: mastocyte</center>
-  
-- cells
 
+- cells
+  
   - mast cell
     - a mast cell expresses half a million copies of FcεR I, which can bind a vast diversity of IgE
     - long memory: may last a life time
     - mast cells are present in all vascularized tissues except the retina and the central nervous system  
   - basophils
   - eosinophils
-
 
 #### Sensitization phase
 
@@ -2765,25 +2765,17 @@ If you have blood type A Ag, you will also have IgM antibody for blood type B Ag
 If you are Rh<sup>-/-</sup>, you will have anti-Rh Ab.
 
 - transfusion
-
+  
   > with wrong ABO type
 
 - hemolytic disease of the newborn (HDN, 新生儿溶血)
-
-  -  ABO hemolysis
+  
+  - ABO hemolysis
   - Rh hemolysis
-
-
-
-
 
 #### Autoimmune disease
 
-
-
 #### Ab of essential recptors
-
-
 
 ## Type III hypersensitivity
 
@@ -2800,13 +2792,9 @@ hypersensitivity vasculitis
   - 补体缺陷
 - 组织学和血管动力学因素：血流缓慢，涡流，高静水压，毛细血管通透性增加
 
-
-
 IgG,IgM  
 
 #### Type III Damage
-
-
 
 1. 激活补体
    直接的损伤作用，趋化作用，过敏毒素
@@ -2831,17 +2819,7 @@ delayed type hypersensitivity, 迟发型超敏反应
 
 T<sub>DTH</sub>
 
-
-
 胞内菌，病毒，真菌，移植物，寄生虫
-
-
-
-
-
-
-
-
 
 1. 起病慢，消退慢
 2. 补体，抗体不参与
@@ -2849,24 +2827,20 @@ T<sub>DTH</sub>
 4. 单核细胞，淋巴细胞浸润
 5. 多数无明显的个体差异
 
-
-
 ## Summary
 
-| type                                 | I                                    | II                                                           | III                                          | IV                                               |
-| ------------------------------------ | ------------------------------------ | ------------------------------------------------------------ | -------------------------------------------- | ------------------------------------------------ |
-| alias                                | 速发型超敏反应                       | 细胞毒/溶细胞型超敏反应                                      | 免疫复合物型超敏反应                         | 迟发型超敏反应                                   |
-| antigen                              |                                      | on the surface                                               | soluable                                     |                                                  |
-| happen&fade                          | fast                                 | kind of fast                                                 | a bit slower                                 | slow                                             |
-| antibody                             | IgE                                  | IgM/G                                                        | IgM/G                                        | no                                               |
-| complement                           | no                                   | yes                                                          | yes                                          | yes                                              |
-| inflammatory<br />mediators          | yes                                  | yes                                                          | yes                                          | yes                                              |
-| cells                                | mast cell<br />ensinophil            | NK cell, macrophage                                          | neutrophil<br />macrophage<br />platelet     | monocyte<br />CD4/8<sup>+</sup> T cell           |
-| damage                               | not much                             | cytolysis                                                    | inflammation                                 | lymphocyte<br />infiltration                     |
-| individual difference<br />(genetic) | obvious                              | not                                                          | not                                          | mostly not                                       |
-| diseases                             | 全身过敏性休克<br />呼吸道等过敏反应 | 溶血性疾病：输血、新生儿、免疫性血细胞减少<br />自身免疫：肺－肾综合征<br />受体的抗体：甲亢、重症肌无力、糖尿病 | 局部免疫复合物病<br />类风湿性关节炎、血清病 | 传染性变态反应：肺结核，乙肝， HIV<br />移植排斥 |
-
-
+| type                                 | I                         | II                                                             | III                                      | IV                                     |
+| ------------------------------------ | ------------------------- | -------------------------------------------------------------- | ---------------------------------------- | -------------------------------------- |
+| alias                                | 速发型超敏反应                   | 细胞毒/溶细胞型超敏反应                                                   | 免疫复合物型超敏反应                               | 迟发型超敏反应                                |
+| antigen                              |                           | on the surface                                                 | soluable                                 |                                        |
+| happen&fade                          | fast                      | kind of fast                                                   | a bit slower                             | slow                                   |
+| antibody                             | IgE                       | IgM/G                                                          | IgM/G                                    | no                                     |
+| complement                           | no                        | yes                                                            | yes                                      | yes                                    |
+| inflammatory<br />mediators          | yes                       | yes                                                            | yes                                      | yes                                    |
+| cells                                | mast cell<br />ensinophil | NK cell, macrophage                                            | neutrophil<br />macrophage<br />platelet | monocyte<br />CD4/8<sup>+</sup> T cell |
+| damage                               | not much                  | cytolysis                                                      | inflammation                             | lymphocyte<br />infiltration           |
+| individual difference<br />(genetic) | obvious                   | not                                                            | not                                      | mostly not                             |
+| diseases                             | 全身过敏性休克<br />呼吸道等过敏反应     | 溶血性疾病：输血、新生儿、免疫性血细胞减少<br />自身免疫：肺－肾综合征<br />受体的抗体：甲亢、重症肌无力、糖尿病 | 局部免疫复合物病<br />类风湿性关节炎、血清病                | 传染性变态反应：肺结核，乙肝， HIV<br />移植排斥          |
 
 # Chapter 15 Transplant Immunity
 
@@ -3199,13 +3173,13 @@ loss of function, usually in infants, causes early death
    d. 与未感染细胞融合造成健康细胞的感染
 
 2. 病毒的间接损伤作用
-
+   
    1）免疫病理损伤
-
+   
    2）诱导细胞死亡
 
 3. 对其他免疫细胞的影响
-
+   
    - B细胞：多克隆活化
    - 巨噬细胞、树突细胞： HIV的庇护所，传染源
    - NK细胞：功能受损
@@ -3227,8 +3201,6 @@ loss of function, usually in infants, causes early death
 - 鸡尾酒疗法 ：一种蛋白酶抑制剂＋两种逆转录酶抑制剂
 
 迄今为止不能产生有效的疫苗的主要原因：HIV在体内复制过程中的高突变率，免疫系统干不掉它
-
-
 
 # Additional chapter: autoimmunity
 
@@ -3441,14 +3413,18 @@ Only in appropriate concentration when
 Protein assay
 
 - traditional serology method: observation
+  
   - agglutination reaction (凝集反应): on the surface of granules (virus, bacteria, etc.)
   - precipitation
   - 
+
 - s
+  
   - soluble:
   - surface Ag: immunohistochemical
 
 - immunodiffusion
+
 - immunonephelometry
 
 Complement-dependent cytotoxic experiment
@@ -3511,48 +3487,20 @@ magnetic beads:
 - 磁铁吸，细胞被抗体拉走
 - very fast, yet only one type of cell a time
 
-
-
 # Additional summary
-
-
-
-
-
-
 
 # A homework
 
 > 某AIDS患者罹患白血病，在接受了CCR5Δ32/Δ32基因型的同种异体造血干细胞移植后，HIV也被彻底清除。
 
 1. 请根据所学免疫学知识，解释HIV消失的原因。
-
+   
    接受移植后发生了移植物抗宿主反应（GVHR），患者原有的淋巴细胞被清除，而移植来的造血干细胞分化产生的淋巴细胞都是CCR5Δ32/Δ32基因型，不表达正常的CCR5蛋白，该病人体内也不含通过其他受体入侵的HIV变体，所以不能被HIV侵入。于是HIV将逐渐消失。
 
 2. 非CCR5Δ32/Δ32的同种异体造血干细胞移植是否可以起到相同的作用？
-
+   
    可能只能治好白血病，但不能使HIV消失。因为新的淋巴细胞仍表达正常的CCR5蛋白，能被HIV侵入。
 
 <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/hw2.jpg" alt="hw2" style="zoom:40%;" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 完结撒花！感谢您的陪伴！
