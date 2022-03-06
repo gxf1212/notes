@@ -211,6 +211,7 @@ advantages/functions
 
 - free, no rate limit, all platforms
 - check rate: upper left letter
+- no more stucking?
 
 flaws
 
@@ -220,6 +221,7 @@ flaws
 - screen is not as clear, even free version?
 - 登录不稳定？也有评价好的
 - 鼠标光标太大，而且位置难以把控。。
+- 播放pymol的movie会卡（vmd还好），向日葵也有点卡（变得不清晰）
 
 charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 

@@ -1173,7 +1173,7 @@ see method 1 for detailed parameters
 
 3. get rmsd
 
-   RMSD通常用于表征结构到平衡态的收敛情况. 如前面所讲, RMSD是结构变化对原子总数的平均, 基本上是一个距离表征, 低的值最有意义. (使用初始结构作为参考结构)
+   RMSD通常用于表征结构到平衡态的收敛情况. 如前面所讲, RMSD是结构变化对原子总数的平均, 基本上是一个距离表征, 低的值最有意义. (**使用初始结构作为参考结构**)
 
    ```shell
    # all choose 1 protein
@@ -1184,11 +1184,15 @@ see method 1 for detailed parameters
    xmgrace rmsd_bb.xvg
    ```
 
+   > -tu: Unit for time values. default: ps
+
 4. get rmsf
 
-   除了能量等性质, 也能够通过结构的变化和弛豫来考察模拟趋向平衡的收敛性. 通常,  这种弛豫仅仅使用结构到参考结构(如晶体结构)的欧几里德距离来衡量. 这一距离被称为均方根偏差(RMSD). 然而,  我们也建议再考察一下到平均结构的弛豫, 即相对于平均结构的RMSD, 个中原因将在下节说明. 但是要计算相对于平均结构的RMSD,  需要首先获得平均结构. 平均结构可以在计算[均方根波动(RMSF)](http://en.wikipedia.org/wiki/Root_mean_square_fluctuation)时顺便获得.
+   除了能量等性质, 也能够通过结构的变化和弛豫来考察模拟趋向平衡的收敛性. 通常,  这种弛豫仅仅使用结构到参考结构(如晶体结构)的欧几里德距离来衡量. 这一距离被称为均方根偏差(RMSD). 然而,  我们也建议再考察一下到平均结构的弛豫, 即相对于平均结构的RMSD, 个中原因将在下节说明. 但是要计算相对于平均结构的RMSD,  需要首先获得平均结构. **平均结构**可以在计算[均方根波动(RMSF)](http://en.wikipedia.org/wiki/Root_mean_square_fluctuation)时**顺便获得**.
 
-   RMSF计算每个原子相对于其平均位置的涨落, 表征了结构的变化对时间的平均, 给出了蛋白各个区域柔性的表征,  对应于晶体学中的b因子(温度因子). 通常, 我们预期RMSF和温度因子类似, 这可以用于考察模拟结果是否与晶体结构符合.  RMSF(和平均结构)使用`rmsf`命令计算. `-oq`选项可以计算b因子, 并将其添加到参考结构中. 我们最关心的是每个残基的涨落, 这可使用选项`-res`设定.
+   RMSF计算每个原子相对于其平均位置的涨落, 表征了结构的变化对时间的平均, 给出了蛋白各个区域柔性的表征,  对应于晶体学中的b因子(温度因子). 通常, 我们预期RMSF和温度因子类似, 这可以用于考察模拟结果是否与晶体结构符合.  
+
+   RMSF(和平均结构)使用`rmsf`命令计算. `-oq`选项**可以计算b因子**, 并将其添加到参考结构中. 我们最关心的是每个残基的涨落, 这可使用选项`-res`设定.
 
    ```shell
    echo 4 | gmx rmsf -f final_2cqg.xtc -s final_2cqg.tpr -o rmsf-per-residue.xvg -ox average.pdb -oq bfactors-residue.pdb -res
@@ -2465,7 +2469,7 @@ input: .tpr, .xtc, .ndx
 - dynamic cross-correlation matrix
   
   - https://www.mpibpc.mpg.de/grubmueller/g_correlation more accurate way to find correlation
-  - (different) 对二者的协方差矩阵进行对角线化，得到 ＰＩＩ所有本征向量所对应的本征值之和（总平方波动）为 ４．１３３ ２ ｎｍ２，高于 ＰＲ１ 的总平方波动值 ２．３５８ ６ｎｍ２．这一结果与前述动态几何属性比较结果一致，均说明 ＰＩＩ 具备比 ＰＲ１ 强的整体构象柔性
+  - (different) 对二者的协方差矩阵进行对角线化，得到 P II 所有本征向量所对应的本征值之和（总平方波动）为 4.1332 ｎｍ２，高于 PR 1 的总平方波动值2.3586 nm２．这一结果与前述动态几何属性比较结果一致，均说明 P II 具备比 PR I 强的整体构象柔性
   
 - ss, and statistical analysis of structure analysis, 
 

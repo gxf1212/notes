@@ -481,6 +481,10 @@ http://bbs.keinsci.com/thread-22004-1-1.html
 
 just unzip...
 
+### VEGA_ZZ
+
+https://www.ddl.unimi.it/cms/index.php?Software_projects:VEGA_ZZ:Main_features
+
   ### openmpi
 
   Open MPI: Open Source High Performance Computing https://www.open-mpi.org
@@ -646,6 +650,29 @@ conda install -c conda-forge pymbar
 
 https://anaconda.org/conda-forge/pymbar git address and doc
 
+### mdtraj
+
+convert trajectories
+
+```shell
+conda install -c conda-forge mdtraj
+conda uninstall mdtraj
+```
+
+https://mdtraj.org/1.9.4/mdconvert.html
+
+#### msmbuilder
+
+http://msmbuilder.org/3.8.0/
+
+```shell
+conda create env -n xxx python==3.6 # 22.3.5
+conda activate
+conda install -c omnia msmbuilder
+```
+
+
+
 ## Modelling tools
 
 ### AMBER
@@ -720,15 +747,6 @@ conda install -c acpype acpype -y # this contains ambertools-17
 conda create -n Acpype 
 conda install -c conda-forge acpype
 ```
-
-> ### mdtraj
->
-> ```shell
-> conda install -c conda-forge mdtraj
-> conda uninstall mdtraj
-> ```
->
-> https://mdtraj.org/1.9.4/mdconvert.html
 
 ### Gaussian16 and view
 

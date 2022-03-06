@@ -287,6 +287,8 @@ probably need to add top/itp file
 
 ## Stage 1 Protocol
 
+stage 1: from structure to FEP
+
 ### Notes
 
 **protein-ATP system**
@@ -301,7 +303,7 @@ notice the binding mode?
 
 
 
-### Prepare a ligand
+### Prepare the docked structure (ligand)
 
 #### basic
 
@@ -421,7 +423,11 @@ obabel ${f}_d.pdb -opdb -O ${f}.pdb -p 7.0 -as
 rm ${f}_d.pdb
 ```
 
+#### Problem unsolved
 
+> The initial structures do matter. But short simulations (<0.1ms) usually won't help you finding another binding site. What we do is called equilibration, which ensures that it finds a local  minimum. So be very careful with the initial states. Kevin will guide you through this process. 
+>
+> Also, if the binding structure of the ligand strays too far away from the orthosteric binding site, it won't be a fair comparison between this ligand and ATP. So we will need to think about a way to explain that. We may need to calculate two FEPs for this case: docked binding pose and orthosteric binding pose. But for now, you don't need to worry about it.
 
 
 
@@ -1259,51 +1265,60 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 
 
 
-### Clustering
+### Clustering Anaylsis
 
-refer to
+#### Clustering
+
+##### in gmx
 
 - https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2011-2012/0654.htmlanalyze .dcd in gmx
 - http://www.ks.uiuc.edu/Development/MDTools/catdcd/ catdcd: dcd I/O basics
 
-> preparations and problems
->
-> other
->
-> 1. 
->
->    ```shell
->    gmx rmsf -s ..pdb -f rdrp-atp-prod.dcd
->    ```
->
->    > Can not find mass in database for atom MG in residue 921 MG
->    >
->    > Masses and atomic (Van der Waals) radii will be guessed based on residue and atom names
->
->    just change 'MG' to 'Mg', solved.
->
-> 2. trjcat? no!
->
->    ```shell
->    f=rdrp-atp-prod
->    gmx trjcat -f ${f}.dcd -o ${f}.xtc
->    gmx trjcat -f *.dcd *.dcd *.dcd -o trajectory.xtc # concatenate multiple files
->    ```
->
->    
-
 steps
 
-1. make initial structure, as did in [Run in Gromacs](#Run-in-Gromacs). It contains parameters (charge?) and functions like .tpr file
+1. make the initial structure, as did in [Run in Gromacs](#Run-in-Gromacs). 
+
+   It contains structural parameters (charge?) like the .tpr file
 
 2. convert trajectory file
 
-   ```tcl
-   set f rdrp-atp-prod
-   catdcd -o ${f}.trr ${f}.dcd
+   ```shell
+   conda activate AmberTools # MDtraj
+   f=rdrp-atp-prod
+   mdconvert -o ${f}.xtc -t ../common/equilibrated.pdb ${f}.dcd # normal xtc
+   gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump # movie, water not go to infinity?
    ```
 
-   
+   > watch movie (don't for the 300-ns one! it eats all memory...)
+   >
+   > ```shell
+   > # pymol
+   > load ../common/equilibrated.pdb, final
+   > load rdrp-atp-prod.xtc, final
+   > # vmd
+   > menu animate on
+   > mol load psf ../common/system.psf pdb ../common/equilibrated.pdb
+   > animate read dcd rdrp-atp-prod.dcd
+   > ```
+
+3. checking
+
+   ```shell
+   # choose 4 backbone
+   echo "4\n 4" | gmx rms -s ../common/equilibrated.pdb -f ${f}_nj.xtc -tu ns -o rmsd_bb.xvg
+   xmgrace rmsd_bb.xvg
+   gmx rmsf -s ../common/equilibrated.pdb -f ${f}_nj.xtc
+   ```
+
+   > problem:
+   >
+   > > Can not find mass in database for atom MG in residue 921 MG
+   > >
+   > > Masses and atomic (Van der Waals) radii will be guessed based on residue and atom names
+   >
+   > just change 'MG' to 'Mg' in .pdb, solved.
+
+4. rmsd/rmsf of NTP
 
 3. clustering
 
@@ -1313,11 +1328,48 @@ steps
 
    
 
+other
+
+1. trjcat? no!
+
+   ```shell
+   f=rdrp-atp-prod
+   gmx trjcat -f ${f}.dcd -o ${f}.xtc
+   gmx trjcat -f *.dcd *.dcd *.dcd -o trajectory.xtc # concatenate multiple files
+   ```
+
+2. failed [catdcd](http://www.ks.uiuc.edu/Development/MDTools/catdcd/)
+
+   ```tcl
+   set f rdrp-atp-prod
+   catdcd -o ${f}.trr -i ../common/equilibrated.pdb ${f}.dcd
+   ```
+
+3. mdconvert can make .trr too, but it's the same size as .xtc (also the .dcd)...
+
+   ```shell
+   
+   ```
+
+   
+
+
+
+##### in VMD
 
 
 
 
-#### clustering in VMD
+
+
+
+#### Analysis of binding mode?
+
+
+
+
+
+
 
 
 
