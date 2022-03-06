@@ -77,9 +77,11 @@ Allele: alternative forms of a gene
 
 Dominant allele: determines the organism's appearance
 
-Recessive allele: has no noticeable effect on appearanceHomozygous: An organism with two identical alleles fora character
+Recessive allele: has no noticeable effect on appearance
 
-Heterozygous: An organism that has two differentalleles oor a gene
+Homozygous: An organism with two identical alleles fora character
+
+Heterozygous: An organism that has two differentalleles or a gene
 
 Gametes (配子): eggs or sperm cells
 
@@ -87,7 +89,7 @@ Zygote (合子): fertilized egg, with two copies of genes
 
 
 
-The Law of Segregation (分离定律): The two alleles for each traitseparate (segregate) during gamete formation, thenunite at random, one from each parent, at fertilization.
+The Law of Segregation (分离定律): The two alleles for each trait separate (segregate) during gamete formation, thenunite at random, one from each parent, at fertilization.
 
 
 
@@ -95,7 +97,7 @@ Test cross: breeding the mystery individual of dominant phenotype with a homozyg
 
 - lf any offspring display the recessive phenotype, themystery parent must be heterozygous
 
-Dihybrid cross: Crossing two true-breeding parents differing in two traitsproduces dihybrids in the F1generation, heterozygous forboth traits.
+Dihybrid cross: Crossing two true-breeding parents differing in two traits produces dihybrids in the F1 generation, heterozygous for both traits.
 
 > Reciprocal cross is a kind of crossing strategy, which means to make crosses between a pair of parents (A and B) by using them in turn as female parent and male parent to obtain two reciprocal crosses of A×B and B×A (usually a cross is expressed in the way that the first parent is female and the second parent is male).
 
@@ -107,13 +109,15 @@ Recombinant type
 
 
 
-The Law of Independent Assortment: Duringgamete formation, different pairs of allelessegregate independently of each other.
+The Law of Independent Assortment: During gamete formation, different pairs of alleles segregate independently of each other.
+
+
 
 ## Applications
 
 ### Predict the outcome of crosses
 
-> a. The Punnett Square Method (庞氏表格): a diagram for predicting theresults of a genetic cross betw/een individuals of known genetic makeup
+> a. The Punnett Square Method (庞氏表格): a diagram for predicting the results of a genetic cross betw/een individuals of known genetic makeup
 >
 > b. Branched-line diagrams
 >

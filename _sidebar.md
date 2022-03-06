@@ -12,9 +12,6 @@
   - [生物信息学笔记（部分）](/course/bioinformatics/bioinformatics.md)
   - [分子生物物理学（NUS）](/course/molecular-biophysics-NUS/LSM-3243.md)
   - [生物基础课程](/course/fundamental-biology.md)
-    - [进化生物学](/course/Fundamental-biology/evolutional-bio.md)
-    - [遗传学](/course/Fundamental-biology/genetics.md)
-    - [基因工程](/course/Fundamental-biology/genetic-engineering.md)
 - 友情链接
   - [西北工业大学附属中学](http://www.xgdfz.com/)
   - [西安交通大学钱学森学院](http://bjb.xjtu.edu.cn/)
