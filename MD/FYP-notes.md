@@ -740,8 +740,11 @@ focus on `ligandrm.pdb/psf`, which can be put into a merge.tcl, as **an alternat
 When you encouter errors when reading .str file:
 
 > “psfgen) ERROR!  FAILED TO RECOGNIZE SET.  Line 319: set para” etc.
+>
+> FATAL ERROR: UNKNOWN PARAMETER IN CHARMM PARAMETER FILE ../common/toppar_water_ions.str
+> LINE=*set app*
 
-[a great instruction](https://www.researchgate.net/post/How-can-I-use-charm36-forcefiled-for-a-protein-bound-to-ATP-and-MG-Can-you-help-me)
+[How-can-I-use-charm36-forcefiled-for-a-protein-bound-to-ATP-and-MG](https://www.researchgate.net/post/How-can-I-use-charm36-forcefiled-for-a-protein-bound-to-ATP-and-MG-Can-you-help-me)
 
 1. First, you need to edit the stream file so that it is compatible with the NAMD/VMD psfgen tool.  To do that, you must comment out (or remove) all the lines containing CHARMM scripting code, since psfgen doesn't recognize them. 
 
@@ -749,17 +752,9 @@ When you encouter errors when reading .str file:
 
    > also, just put toppar_water_ions.str after na.rtf and prot.rtf
 
-   Because: In NAMD, the easiest way to make sure that all the necessary NBFIXes are always in effect is to read *all* the CHARMM36 parameter files into NAMD prior to reading toppar_water_ions_namd.str
+3. You **should use both** the parameters from the stream files and the original **nucleic acid prm file**.  The stream files do not contain full parameters, some of them (for example some **non-bonded terms**) are expected to be found in the prm files. However, they are needed for accurate representation of these "extra" molecules they describe
 
-   > https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2014-2015/0236.html
-   >
-   > But I still failed to build the ATP in psfgen...
-
-3. You should use both the parameters from the stream files and the original **nucleic acid prm file**.  The stream files do not contain full parameters, some of them (for example some **non-bonded terms**) are expected to be found in the prm files. However, they are needed for accurate representation of these "extra" molecules they describe.
-
-
-
-
+3. 
 
 
 
@@ -898,40 +893,72 @@ Below are parameters you should notice in every simulation.
 - when temp gets stable, `langevin on`
 - `PSWITCH` and `langevinPiston on`: constant pressure
 
-##### system and parameters
+##### system and parameters 
 
-1. par_CMAP.inp in Kevin's script? 
+###### (debugging)
 
-   is actually **param.prm** downloaded from [Maryland](http://mackerell.umaryland.edu/). 
+par_CMAP.inp in Kevin's script? 
 
-   contains protein, ions (and so on? a huge file). begin with:
+is actually **param.prm** downloaded from [Maryland](http://mackerell.umaryland.edu/). 
 
-   ```
-   *>>>> CHARMM36 All-Hydrogen Parameter File for Proteins <<<<<<<<<<
-   *>>>>> Includes phi, psi cross term map (CMAP) correction <<<<<<<<
-   ```
+contains protein, ions (and so on? a huge file). begin with:
 
-   > **DUPLICATE terms**
-   >
-   > https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2020-2021/0371.html
-   >
-   > ```
-   > Warning: DUPLICATE BOND ENTRY FOR CT3-NC2
-   > PREVIOUS VALUES  k=261  x0=1.49
-   > USING VALUES  k=390  x0=1.49
-   > ```
-   >
-   > maybe caused by duplicated prm files. but cannot remove any of them. just be it?
-   >
-   > some of the pair values **both** occur in param.prm
-   >
-   > I use `param.prm` and `par_all36_na.prm` in .namd. Built with `top_all36_prot.rtf`, `toppar_water_ions.str`
-   >
-   > The tutorial uses `par_all27_prot_lipid.inp` and `par-extraterms.inp`, built with `top_all27_prot_lipid.inp`, `par_all27_prot_lipid.inp`
+```
+*>>>> CHARMM36 All-Hydrogen Parameter File for Proteins <<<<<<<<<<
+*>>>>> Includes phi, psi cross term map (CMAP) correction <<<<<<<<
+```
 
-   solution: use `par_all36m_prot.prm` (same protein parameter as we are using in `param.prm`) and
+> **DUPLICATE terms**
+>
+> https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2020-2021/0371.html
+>
+> ```
+> Warning: DUPLICATE BOND ENTRY FOR CT3-NC2
+> PREVIOUS VALUES  k=261  x0=1.49
+> USING VALUES  k=390  x0=1.49
+> ```
+>
+> maybe caused by duplicated prm files. but cannot remove any of them. just be it?
+>
+> some of the pair values **both** occur in `param.prm`. **Don't use that anymore!**
+>
+> I use `param.prm` and `par_all36_na.prm` in .namd. Built with `top_all36_prot.rtf`, `toppar_water_ions.str`
+>
+> The tutorial uses `par_all27_prot_lipid.inp` and `par-extraterms.inp`, built with `top_all27_prot_lipid.inp`, `par_all27_prot_lipid.inp`
+>
+> **par_all36_na.prm** for some atoms in ATP. may cause conflicts. does that matter?
 
-2. **par_all36_na.prm** for some atoms in ATP. may cause conflicts. does that matter?
+###### solution
+
+use `par_all36m_prot.prm` (same protein parameter as we are using in `param.prm`) and all other `.prm` files, then `water_and_ions_namd.str`
+
+In NAMD, the easiest way to make sure that all the necessary NBFIXes are always in effect is to **read all the CHARMM36 parameter files into NAMD prior to reading `toppar_water_ions_namd.str`**
+
+> https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2014-2015/0236.html
+>
+> http://mackerell.umaryland.edu/~kenno/cgenff/program.php#namd
+>
+> But I still failed to build the ATP in psfgen...
+
+just like the tutorial video said! do this in `.namd` file... but did not work! 
+
+You should download the `toppar_water_ions_namd.str` which removed the `set` commands from the second link above (cgenff)
+
+And the parameters should look like
+
+```tcl
+paraTypeCharmm	    on
+parameters          ../common/par_all36m_prot.prm
+parameters          ../common/par_all36_na.prm
+mergeCrossterms yes
+parameters          ../common/par_all35_ethers.prm
+parameters          ../common/par_all36_carb.prm
+parameters          ../common/par_all36_cgenff.prm
+parameters          ../common/par_all36_lipid_ljpme.prm
+parameters          ../common/toppar_water_ions_namd.str
+```
+
+the `molecule.str` is not necessary here
 
 ##### restarting
 
@@ -1212,14 +1239,15 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 1. make the latest coordinates as pdb, and then .gro
 
    ```tcl
-   mol load psf ../common/system.psf
+   # under ./common
+   mol load psf system.psf
    mol addfile ../equil/rdrp-atp-equil.coor
    set sel [atomselect top all]
-   $sel writepdb structure.pdb
+   $sel writepdb equilibrated.pdb
    ```
-
+   
    also the velocity in the last frame! (find how to load into gmx, .cpt?)
-
+   
    ```tcl
    ## from tutorial
    # read in vmd
@@ -1237,24 +1265,46 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    ```
    
    > converting binary file: you’d better load into vmd and save
+   >
+   > can't do it now, just set `gen_vel` to yes and `continuation` to no
    
 2. get .top file
 
    ```tcl
    package require topotools
    # Load the structure into VMD.
-   mol new ../common/system.psf
+   mol new system.psf
    mol addfile equilibrated.pdb
    # Pass along a list of parameters to generate structure.top, suitable for preparing gromacs simulations.
-   topo writegmxtop structure.top [list ../common/param.prm ../common/par_all36_na.prm] 
+   topo writegmxtop structure.top [list par_all35_ethers.prm par_all36_carb.prm par_all36_cgenff.prm par_all36_lipid_ljpme.prm par_all36m_prot.prm par_all36_na.prm] 
    ```
 
    > CHRAMM ff website also provides many .itp file for gmx
 
+   > don't include `param.prm ` because gmx never tolerate duplication a little bit
+   >
+   > ```
+   > ERROR 50 [file structure.top, line 7884]:
+   >   Encountered a second block of parameters for dihedral type 9 for the same
+   >   atoms, with either different parameters and/or the first block has
+   >   multiple lines. This is not supported.
+   > ```
+
+3. make a box. find the length of cell basis vector from your measure or `equil.namd`
+
+   ```shell
+   # under gmx
+   gmx editconf -f equilibrated.pdb -o equilibrated.gro \
+   -box 102.76400184631348 93.35700035095215 108.42400050163269 \
+   -center 57.934000968933105 58.11250019073486 57.53700029850006 # x y z
+   ```
+
+   check in pymol to see if they are the same
+
 3. to run in gmx, specify T coupling groups:
 
    ```shell
-   gmx make_ndx -f equilibrated.pdb -o index.ndx
+   gmx make_ndx -f equilibrated.gro -o index.ndx
    > 1|13|14
    > 21|22|23
    > q
@@ -1274,8 +1324,8 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    
    ```shell
    # This would be prepared for simulation using grompp to create a tpr file
-   gmx grompp -f md.mdp -c equilibrated.pdb -r equilibrated.pdb \
-   -p structure.top -o simulation.tpr -maxwarn 200 
+   gmx grompp -f md.mdp -c equilibrated.gro -r equilibrated.gro \
+   -p structure.top -o simulation.tpr -maxwarn 400
    # supress repeated param definition
    -t velocity.cpt 
    gmx mdrun -deffnm simulation -nb gpu
@@ -1294,25 +1344,39 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 ##### in gmx
 
 - https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2011-2012/0654.htmlanalyze .dcd in gmx
-- http://www.ks.uiuc.edu/Development/MDTools/catdcd/ catdcd: dcd I/O basics
+- http://www.ks.uiuc.edu/Development/MDTools/catdcd/ catdcd: dcd I/O basics. failed
+- [Using GROMACS force distribution analysis (FDA) tool with NAMD trajectories](9https://hits-mbm.github.io/guides/namd-fda.html) a good reference! do as him!
 
 steps
 
-1. make the initial structure, as did in [Run in Gromacs](#Run-in-Gromacs). 
+1. make the initial structure, topology file, as did in [Run in Gromacs](#Run-in-Gromacs). The .pdb contains structural parameters (charge?) like the .tpr file
 
-   It contains structural parameters (charge?) like the .tpr file
-
-2. convert trajectory file
+2. convert the trajectory file
 
    ```shell
-   conda activate AmberTools # MDtraj
+   # convert trajectory file
+   conda activate AmberTools21 # MDtraj
    f=rdrp-atp-prod
    mdconvert -o ${f}.xtc -t ../common/equilibrated.pdb ${f}.dcd # normal xtc
    gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump # movie, water not go to infinity?
    ```
 
-   > watch movie (don't for the 300-ns one! it eats all memory...)
-   >
+   we may also use vmd
+
+   ```shell
+   f=rdrp-atp-prod
+   vmd ../common/system.psf ${f}.dcd
+   # cmd?
+   ```
+
+   > equal to: After VMD was opened select the molecule. Then click on `File` and select `Save Coordinates`. Now choose the trr format and save it.
+
+   not enough! if simply do this, gmx reports errors related to PBC box setting.
+
+3. go back to [Run in Gromacs](#Run-in-Gromacs) to see how to make a .tpr
+
+4. optional: watch movie (don't for the 300-ns one! it eats all memory...)
+
    > ```shell
    > # pymol
    > load ../common/equilibrated.pdb, final

@@ -4,6 +4,12 @@ Here shows some specific experiences on daily working.
 
 Fret not over bygones, and the forward journey take.
 
+> wakeonlan
+>
+> future: onedrive cloud mount, not occupying  my HD...
+>
+> 能装/home还是尽量
+
 # Commonly used for working
 
 ## Typora

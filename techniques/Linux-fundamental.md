@@ -139,6 +139,8 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
 3. upgrade from 18.04 to 20.04. upgraded cuda and graphics driver at the same time!
 
+3. [Ubuntu设置文件默认打开方式](https://jingyan.baidu.com/article/915fc414b686a251394b2080.html)：右键、属性
+
 #### input method installation
 
 - fcitx

@@ -425,12 +425,13 @@ all tutorial: http://www.ks.uiuc.edu/Training/Tutorials/ including
 
   The viable states are one in which the δ nitrogen of histidine is protonated (listed with residue name “HSD" in the topology file), one in which the $\varepsilon$ nitrogen of histidine is protonated (“HSE"), and one in which both nitrogens are protonated (“HSP").
 
-  ![组氨酸- 生物百科- 生物行](/home/gxf/desktop/work/practice/MD/tutorials.assets/images.png)
+  ![组氨酸- 生物百科- 生物行](https://gitee.com/gxf1212/notes/raw/master/MD/MD-tutorials-all.assets/his.png)
 
 - load .psf and then .pdb file
 
-
 ##### restart a simulation
+
+just need to reset these:
 
 ```tcl
 set inputname input
@@ -441,19 +442,25 @@ binvelocities				$inputname.vel
 ExtendedSystem		  $inputname.xsc
 
 firsttimestep 92000
-
-# if you have also specified a .vel restart file, comment out
-# temperature         $temperature
- 
-# Do not set the periodic cell basis if you have also specified an .xsc restart file!
-# cellBasisVector1    20.0  0    0
-# cellBasisVector2     0   20.0  0
-# cellBasisVector3     0    0   50.0
-# cellOrigin                 0    0    0
-
-# comment out processes that no longer need!
-# minimize 1000
 ```
+
+> note
+>
+> ```tcl
+> # if you have also specified a .vel restart file, comment out
+> # temperature         $temperature
+>  
+> # Do not set the periodic cell basis if you have also specified an .xsc restart file!
+> # cellBasisVector1    20.0  0    0
+> # cellBasisVector2     0   20.0  0
+> # cellBasisVector3     0    0   50.0
+> # cellOrigin                 0    0    0
+> 
+> # comment out processes that no longer need!
+> # minimize 1000
+> ```
+>
+> `.dcd.` file only contains frames. It doesn't matter even if some steps are lost before the next frame is recorded. We only need to consider `.coor`, `.vel` and `.xsc`. Set output frequency properly so that they match.
 
 about restart files:
 
@@ -569,7 +576,7 @@ xmgrace TEMP.dat
   coordpdb ligand.pdb
   coordpdb ligand1.pdb
   writepsf all.psf
-  writepdb al1.pdb，
+  writepdb al1.pdb
   puts "HE TERMINADO!!”
   quit
   ```
