@@ -485,6 +485,8 @@ just unzip...
 
 https://www.ddl.unimi.it/cms/index.php?Software_projects:VEGA_ZZ:Main_features
 
+one year trial...
+
   ### openmpi
 
   Open MPI: Open Source High Performance Computing https://www.open-mpi.org
@@ -986,9 +988,24 @@ sudo apt install pymol
 
 ### Avogadro
 
-https://ubunlog.com/zh-CN/avogadro%E7%BC%96%E8%BE%91%E4%BD%BF%E5%88%86%E5%AD%90%E5%8F%AF%E8%A7%86%E5%8C%96/#Instalar_Avogadro_en_Ubuntu
+[refer to](https://ubunlog.com/zh-CN/avogadro%E7%BC%96%E8%BE%91%E4%BD%BF%E5%88%86%E5%AD%90%E5%8F%AF%E8%A7%86%E5%8C%96/#Instalar_Avogadro_en_Ubuntu)
 
 official: https://avogadro.cc/devel/compiling
+
+> [install-qt4-ubuntu-20-04](https://ubuntuhandbook.org/index.php/2020/07/install-qt4-ubuntu-20-04/)
+
+### UCSF-Chimera
+
+```
+Installation dir:
+	/home/gxf/.local/UCSF-Chimera64-1.16/
+Symbolic link of executable:
+	/home/gxf/bi
+To (re)install desktop menu and icon later, run:
+    /home/gxf/.local/UCSF-Chimera64-1.16/bin/xdg-setup install
+```
+
+
 
 ## pycharm and miniconda
 

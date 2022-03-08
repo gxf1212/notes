@@ -217,7 +217,7 @@ advantages/functions
 
 - free, no rate limit, all platforms
 - check rate: upper left letter
-- no more stucking?
+- no more stucking? yes!
 
 flaws
 
@@ -225,12 +225,33 @@ flaws
 - WOL under lan failed
 - 占用这么大内存, twice of sunlogin
 - screen is not as clear, even free version?
-- 登录不稳定？也有评价好的
 - 鼠标光标太大，而且位置难以把控。。
-- 播放pymol的movie会卡（vmd还好），向日葵也有点卡（变得不清晰）
+- 不能用PageUp/Down键
+- 这两天在此重启时会卡
+
+两者都：播放pymol的movie会卡（vmd还好），向日葵也有点卡（变得不清晰）
 
 charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 
+### Summary on remote control
+
+回家三天，总结一下解决远程控制Linux服务器卡机的修复过程。
+
+问题起因：安装了nvidia用于GPU计算的驱动，导致不能很好地使用图形界面应用，如远程控制。
+
+问题表现：有时用着用着就卡机了；远控打开长时间不动就卡机；有时关掉向日葵后第二天早上发现卡机。
+
+问题解决：大佬们释放资源的操作我不会
+1. 以ToDesk软件为主，免费又不限速，可以避免向日葵远控产生的一部分上述问题。
+但是它的光标太大、鼠标定位不准，网好时没有向日葵清晰，所以可以短时间使用一下向日葵。
+还有，在ToDesk下重启会导致`a stop job is running...`，所以重启前要关完程序
+2. 更改系统设置，如关闭自动休眠等。
+3. 改善网络环境。。。图书馆出来挨打
+4. 更改使用习惯，包括：1）以ToDesk软件为主，间歇使用；2）不使用时关闭远控界面；3）少用费资源的图形软件，如pymol和vmd的movie；4）吃饭睡觉前重启以清理内存，但跑程序时不太会卡；5）重启时记得登录进去，否则20分钟内将自动休眠，无法连接。。。
+
+失败的解决方法：wakeonlan（连不上）、ssh（卡机时也不一定能连上）、卸掉vnc（不是因为冲突）
+
+希望以后的工作能顺利进行。😭😭
 
 
 ## Pycharm

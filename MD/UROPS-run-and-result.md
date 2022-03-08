@@ -50,7 +50,7 @@ structure-based virtual screening (SBVS)
     - a good tutorial: [How to Search PubChem for Chemical Information](https://chem.libretexts.org/Courses/University_of_Arkansas_Little_Rock/ChemInformatics_(2017)%3A_Chem_4399_5399/6%3A_How_to_Search_PubChem_for_Chemical_Information_(Part_2))
     - tool with cut-off value: https://chemminetools.ucr.edu/eisearch/query/
 
-  - Fingerprint Tanimoto-based 2-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             dimenpubchemsional similarity
+  - Fingerprint Tanimoto-based 2-dimensional similarity
 
     - convert structure to fingerprint, which is a 2-value vector, indicating if this character exists
       $$
@@ -691,6 +691,12 @@ the final table may include:
      - https://lammps.sandia.gov/doc/Howto_tip3p.html
    - `-ignh`参数会让程序自动忽略输入pdb文件中的氢原子并根据相应的力场**自动添加符合力场要求的氢原子**
 
+   > note
+   >
+   > - 检查组氨酸质子化状态所做的选择, 注意蛋白质的总电荷数
+   > - path to forcefield files: `~/gromacs-2021.5-gpu/share/gromacs/top`. refer to `forcefield.itp` under each folder to use that forcefield
+   > - 
+
    > output
    >
    > - The topology for the molecule.   
@@ -1056,6 +1062,10 @@ see method 1 for detailed parameters
    echo 10 0 | gmx energy -f em.edr -o em.xvg # if no restraint
    xmgrace em.xvg
    ```
+
+   > `grompp`程序将会提示此体系的净电荷不为零, 还会输出一些与体系和控制参数有关的其他信息. 该程序也会产生一个额外的输出文件(`mdout.mdp`), 里面包含所有控制参数的设置。
+   >
+   > 我咋不信在em这步的？可以作为参考，比如group的设置。甚至FEP的东西都出来了。。
 
 6. nvt
 
@@ -1526,7 +1536,7 @@ steps:
    grep "WAT" -rl ./com.top | xargs sed -i "s/WAT/SOL/g"
    # change in topol.top (under "atom") IM to Cl-, IP to Na+
    grep " IP " -rl ./com.top | xargs sed -i "s/ IP / Na+ /g" 
-   grep " IM " -rl ./com.top | xargs sed -i "s/ IM / Cl- /g" 
+   grep " IM " -rl ./com.top | xechoargs sed -i "s/ IM / Cl- /g" 
    ```
    
 
@@ -1858,6 +1868,7 @@ color magenta,resi 105+106+107+109+110+113+114+137+145+147+149+151+132+176+177+1
 
    ```shell
    echo 1 | gmx trjconv -f final_2cqg_nojump_2.xtc -s final_2cqg.tpr -o traj.pdb -tu ns
+   
    split_state traj
    run /home/gxf/Desktop/xufan/MD/real-simulation/further/align_traj.py # 961
    run /home/gxf/Desktop/xufan/MD/real-simulation/first-run/align_traj.py # 201
@@ -2142,10 +2153,8 @@ good resources
       mv _GMXMMPBSA_* COM* LIG.prmtop REC.prmtop reference.frc gmx_MMPBSA.log FINAL_RESULTS_MMPBSA.dat ./gmx_MMPBSA-pbsa
       ```
       
-
-in amber
-      
-```shell
+      in amber
+      ```shell
       echo 0 | gmx trjconv -s final_com.tpr -f final_com.xtc -n index.ndx -o final_com_later_noPBC.xtc -pbc mol -ur compact -dt 50 -b 20000 -e 50000 
       # conda activate AmberTools20
       MMPBSA.py -O -i mmgbsa-decomp.in -cp com.prmtop -y final_com_later_noPBC.xtc
@@ -2153,18 +2162,18 @@ in amber
       mv _MMPBSA_* gmx_MMPBSA.log FINAL_RESULTS_MMPBSA.dat FINAL_DECOMP_MMPBSA.dat ./gmx_MMGBSA-decomp
       
       gmx_MMPBSA_ana -p ./gmx_MMGBSA-decomp/_MMPBSA_info
-```
-
+      ```
+      
       > other
       >
-      > ```
+      > ```shell
       > # P765
       > # conda activate AmberTools
       > mdconvert -o final_com_later.crd final_com_later.xtc 
       > ```
       >
       > 
-
+   
 10. solvent accessible surface area
 
     https://qinqianshan.com/bioinformatics/protein_design/solvent-accessibility/
@@ -2408,8 +2417,9 @@ input: .tpr, .xtc, .ndx
    gmx_MMPBSA_ana -p ./gmx_MMPBSA/_GMXMMPBSA_info 
    ```
    
-   
-   
+7. gmx do_dssp?
+
+9. 
 
 
 

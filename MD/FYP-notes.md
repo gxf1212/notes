@@ -340,7 +340,7 @@ to dock two molecules together, we may:
 > - when choosing residues, click on the S circle!
 >
 
-##### info&convert
+##### info&convert existing structure
 
 RemdesivirTP https://pubchem.ncbi.nlm.nih.gov/compound/56832906
 
@@ -355,14 +355,16 @@ rm ${f}.sdf ${f}-t.sdf ${f}.pdb
 
 always collect obminimize results in .pdb file. Then convert to .pdbqt. 
 
-If from a normal .pdb
+If from a **normal .pdb**
 
 ```shell
 f=atp
-obabel ${f}.pdb -opdbqt -O ${f}.pdbqt -as --partialcharge gasteiger 
+obabel ${f}.pdb -opdbqt -O ${f}.pdbqt -as -h --partialcharge gasteiger 
 ```
 
-> The ligand may move away after obabel, but it doesn’t matter
+> The ligand may move away after obabel, but it doesn’t matter for docking
+>
+> However, sometimes it gives wrong aromatic rings. Check hydrogens! You may use [other methods](#Other-about-modeling). also: openeye package?
 
 > Alternative: ADTools
 >
@@ -422,6 +424,45 @@ obabel ${f}.pdbqt -opdb -O ${f}_d.pdb  # you have to got .pdb first, or fails
 obabel ${f}_d.pdb -opdb -O ${f}.pdb -p 7.0 -as
 rm ${f}_d.pdb
 ```
+
+#### Other about modeling
+
+tools that can **both draw** a molecule **and convert** through SMILES.  Your own molecule!
+
+##### ZINC+obabel
+
+- ZINC: search and draw, copy that smiles
+
+- convert to anything by obabel
+
+  ```shell
+  f='Nc1ncnc2c1ncn2[C@@H]1O[C@H](CO[P@](=O)(O)O[P@](=O)(O)OP(=O)(O)O)[C@@H](O)[C@H]1O'
+  obabel -:$f --gen3d -opdbqt -O atp.pdbqt -as -h --partialcharge gasteiger # for vina
+  ```
+
+##### avogadro
+
+> an alternative for ChemBioOffice in Linux
+
+[building-with-smiles](https://avogadro.cc/docs/building-molecules/building-with-smiles/): Build--Insert
+
+output: File--Export--Molecule--xxx.pdb
+
+https://avogadro.cc/docs/tools/draw-tool/
+
+
+
+
+
+
+
+
+
+UCSF-Chimera
+
+https://zhuanlan.zhihu.com/p/148384183
+
+> GaussView?
 
 #### Problem unsolved
 
@@ -1129,6 +1170,16 @@ cd ../prod
 namd3 +auto-provision +idlepoll pro-lig-prod > pro-lig-prod.log
 ```
 
+> on lab computer:
+>
+> ```shell
+> namd3 +p1 +devices 0 pro-lig-prod > pro-lig-prod.log
+> ```
+>
+> In your NAMD configuration file, set `CUDASOAintegrate` to `on`. only use one cpu to achieve 2-fold acceleration of namd3.
+>
+> [namd3-gpu](https://developer.nvidia.com/blog/delivering-up-to-9x-throughput-with-namd-v3-and-a100-gpu/)
+
 ##### testing the run
 
 > 1. https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2003-2004/0295.html
@@ -1246,8 +1297,57 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    $sel writepdb equilibrated.pdb
    ```
    
-   also the velocity in the last frame! (find how to load into gmx, .cpt?)
+   make a box. find the length of cell basis vector from your measure or `equil.namd`
    
+   ```shell
+   # under gmx
+   gmx editconf -f equilibrated.pdb -o equilibrated.gro \
+   -box 102.76400184631348 93.35700035095215 108.42400050163269 \
+   -center 57.934000968933105 58.11250019073486 57.53700029850006 # x y z
+   ```
+   
+   check in pymol to see if they are the same
+   
+2. get .top file
+
+   ```tcl
+   package require topotools
+   # Load the structure into VMD.
+   mol new system.psf
+   mol addfile equilibrated.pdb
+   # Pass along a list of parameters to generate structure.top, suitable for preparing gromacs simulations.
+   topo writegmxtop structure.top [list par_all35_ethers.prm par_all36_carb.prm par_all36_cgenff.prm par_all36_lipid_ljpme.prm par_all36m_prot.prm par_all36_na.prm] 
+   ```
+
+   > don't include `param.prm ` because gmx never tolerate duplication a little bit
+   >
+   > ```
+   > ERROR 50 [file structure.top, line 7884]:
+   > Encountered a second block of parameters for dihedral type 9 for the same
+   > atoms, with either different parameters and/or the first block has
+   > multiple lines. This is not supported.
+   > ```
+
+   CHRAMM ff website also provides many .itp file for gmx
+
+   > copy your folder to `~/gromacs-2021.5-gpu/share/gromacs/top` and you can add at the beginning of `.top` file:
+   >
+   > ```c
+   > #include "charmm36-jul2021.ff/forcefield.itp"
+   > ```
+
+   but we don't need that much, which causes hundreds of duplications again (for atomtype, just warnings).
+
+   ```c
+   #include "charmm36-jul2021.ff/ffnonbonded.itp"
+   ```
+
+   which really includes parameters for these ions. `ions.itp` only defines atoms.
+
+   Put it before `[ atomtypes ]` in your `.top` file
+
+3. also the velocity in the last frame! (find how to load into gmx, .cpt?)
+
    ```tcl
    ## from tutorial
    # read in vmd
@@ -1263,43 +1363,10 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    close $fil
    
    ```
-   
-   > converting binary file: you’d better load into vmd and save
+
+   > converting binary file: you'd better load into vmd and save
    >
    > can't do it now, just set `gen_vel` to yes and `continuation` to no
-   
-2. get .top file
-
-   ```tcl
-   package require topotools
-   # Load the structure into VMD.
-   mol new system.psf
-   mol addfile equilibrated.pdb
-   # Pass along a list of parameters to generate structure.top, suitable for preparing gromacs simulations.
-   topo writegmxtop structure.top [list par_all35_ethers.prm par_all36_carb.prm par_all36_cgenff.prm par_all36_lipid_ljpme.prm par_all36m_prot.prm par_all36_na.prm] 
-   ```
-
-   > CHRAMM ff website also provides many .itp file for gmx
-
-   > don't include `param.prm ` because gmx never tolerate duplication a little bit
-   >
-   > ```
-   > ERROR 50 [file structure.top, line 7884]:
-   >   Encountered a second block of parameters for dihedral type 9 for the same
-   >   atoms, with either different parameters and/or the first block has
-   >   multiple lines. This is not supported.
-   > ```
-
-3. make a box. find the length of cell basis vector from your measure or `equil.namd`
-
-   ```shell
-   # under gmx
-   gmx editconf -f equilibrated.pdb -o equilibrated.gro \
-   -box 102.76400184631348 93.35700035095215 108.42400050163269 \
-   -center 57.934000968933105 58.11250019073486 57.53700029850006 # x y z
-   ```
-
-   check in pymol to see if they are the same
 
 3. to run in gmx, specify T coupling groups:
 
@@ -1325,7 +1392,8 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    ```shell
    # This would be prepared for simulation using grompp to create a tpr file
    gmx grompp -f md.mdp -c equilibrated.gro -r equilibrated.gro \
-   -p structure.top -o simulation.tpr -maxwarn 400
+   -p structure.top -n index.ndx -o simulation.tpr -maxwarn 400
+   # not that much warnings
    # supress repeated param definition
    -t velocity.cpt 
    gmx mdrun -deffnm simulation -nb gpu
@@ -1339,6 +1407,14 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 
 ### Clustering Anaylsis
 
+preparation
+
+```shell
+catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
+```
+
+
+
 #### Clustering
 
 ##### in gmx
@@ -1347,9 +1423,11 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 - http://www.ks.uiuc.edu/Development/MDTools/catdcd/ catdcd: dcd I/O basics. failed
 - [Using GROMACS force distribution analysis (FDA) tool with NAMD trajectories](9https://hits-mbm.github.io/guides/namd-fda.html) a good reference! do as him!
 
-steps
+###### prepare
 
-1. make the initial structure, topology file, as did in [Run in Gromacs](#Run-in-Gromacs). The .pdb contains structural parameters (charge?) like the .tpr file
+1. make the initial structure, topology file, as did in [Run in Gromacs](#Run-in-Gromacs). We need `.tpr` or `.gro` for option `-s`
+
+   > The .pdb contains structural parameters (charge?) like the .tpr file? not enough in `mdconvert` but ok for `gmx rms`?
 
 2. convert the trajectory file
 
@@ -1357,29 +1435,31 @@ steps
    # convert trajectory file
    conda activate AmberTools21 # MDtraj
    f=rdrp-atp-prod
-   mdconvert -o ${f}.xtc -t ../common/equilibrated.pdb ${f}.dcd # normal xtc
+   mdconvert -o ${f}.xtc -t equilibrated.gro ${f}.dcd # normal xtc
    gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump # movie, water not go to infinity?
    ```
 
-   we may also use vmd
+   > if simply use `.pdb`, gmx reports errors related to PBC box setting.
+   >
+   > mdconvert can make .trr too, but it's the same size as .xtc (also the .dcd)...
+   >
+   > if you really need velocities (`.trr`), you should use vmd
+
+3. we may also use vmd to do that. the result is just the same
 
    ```shell
    f=rdrp-atp-prod
    vmd ../common/system.psf ${f}.dcd
    # cmd?
+   # After VMD was opened select the molecule. Then click on `File` and select `Save Coordinates`. Now choose the trr format and save it.
+   gmx trjconv -f ${f}-vmd.trr -o ${f}_nj.xtc -pbc nojump
    ```
-
-   > equal to: After VMD was opened select the molecule. Then click on `File` and select `Save Coordinates`. Now choose the trr format and save it.
-
-   not enough! if simply do this, gmx reports errors related to PBC box setting.
-
-3. go back to [Run in Gromacs](#Run-in-Gromacs) to see how to make a .tpr
 
 4. optional: watch movie (don't for the 300-ns one! it eats all memory...)
 
    > ```shell
    > # pymol
-   > load ../common/equilibrated.pdb, final
+   > load equilibrated.gro, final
    > load rdrp-atp-prod.xtc, final
    > # vmd
    > menu animate on
@@ -1387,13 +1467,14 @@ steps
    > animate read dcd rdrp-atp-prod.dcd
    > ```
 
-3. checking
+5. general checking
 
    ```shell
    # choose 4 backbone
-   echo "4\n 4" | gmx rms -s ../common/equilibrated.pdb -f ${f}_nj.xtc -tu ns -o rmsd_bb.xvg
+   echo "4\n 4" | gmx rms -s equilibrated.gro -f ${f}_nj.xtc -tu ns -o rmsd_bb.xvg
    xmgrace rmsd_bb.xvg
-   gmx rmsf -s ../common/equilibrated.pdb -f ${f}_nj.xtc
+   echo 4 | gmx rmsf -s equilibrated.gro -f ${f}_nj.xtc -o rmsf_bb.xvg -res
+   xmgrace rmsf_bb.xvg
    ```
 
    > problem:
@@ -1404,17 +1485,120 @@ steps
    >
    > just change 'MG' to 'Mg' in .pdb, solved. Do this only when gmx is needed...
 
-4. rmsd/rmsf of NTP
+###### clustering
 
-3. clustering
+We performed clustering analysis based on the RMSD of NTPs during the simulations, with SARS-COV-2 NSP12 aligned. 
 
+> reference
+>
+> - [gmx cluster????](https://www.jianshu.com/p/a0c15620702e)
+>
+> - [MD tutorial: choose groups](http://www.mdtutorials.com/gmx/complex/09_analysis.html); [sob comments](http://bbs.keinsci.com/thread-23116-1-1.html)
+>
+>   Execute the rms module, choosing "Backbone" for least-squares fitting and "JZ4_Heavy" for the RMSD calculation. By doing so, the overall rotation and translation of the protein is removed via fitting and the RMSD reported is how much the JZ4 position has varied relative to the protein, which is a good indicator of how well the binding pose was preserved during the simulation.
+
+1. aligned trajectory
+
+   https://cbiores.com/tips-and-tricks/
+
+   ```shell
+   echo 4 24 | gmx trjconv -s equilibrated.gro -n index.ndx -f ${f}_nj.xtc -fit rot+trans -o ${f}_fit.xtc
    ```
-   gmx cluster
+
+   > is that necessary?
+   >
+   > `Select group for least squares fit`: I think it's **what to align**. backbone
+   >
+   > `Select group for output`: **what to keep** in the _fit.xtc. only our protein_atp_mg!
+   >
+   > view with `pro-lig.pdb`, no 1st frame problem
+   
+2. make rmsd matrix first
+
+   ```shell
+   f=rdrp-atp-prod
+   echo 4 19 | gmx rms -s equilibrated.gro -n index.ndx -f ${f}_fit.xtc -m rmsd-lig.xpm -tu ns #-f2 ${f}_fit.xtc
+   gmx xpm2ps -f rmsd-lig.xpm -o rmsd-lig.eps -rainbow blue
+   # a matrix, not readable data encoding...
+   # ps2pdf rmsd-matrix.eps
    ```
+
+   > `Select group for RMSD calculation`: ATP! the output
+   >
+   > ```shell
+   > xmgrace rmsd.xvg
+   > ```
+
+2. clustering
+
+   ```shell
+   rm \#*\#
+   # run
+   echo 4 24 | gmx cluster -s ../equilibrated.gro -n ../index.ndx -f ../${f}_fit.xtc -dm ../rmsd-lig.xpm \
+   -dist rmsd-distribution.xvg -o clusters.xpm -sz cluster-sizes.xvg -tr cluster-transitions.xpm \
+   -ntr cluster-transitions.xvg -clid cluster-id-over-time.xvg -cl clusters.pdb \
+   -cutoff 0.15 -method gromos
+   # tutorial: 0.2, gromos
+   ```
+   
+   > `lsq`: still backbone
+   >
+   > `output`: our protein_atp_mg complex
+   
+
+questions
+
+> - why `echo 4 19 | ` all the time?
+>
+> - 1st frame away from others if you view _fit! also in nojump! not a problem for npt.gro! but ok in vmd without loading .gro...
+>
+>   answer: just ignore that! you are just viewing! if you convert the .xtc to .pdb files, only 300 frames! 
+>
+>   maybe caused by: namd running is different from gmx?
+
+###### analysis
+
+1. basics
+
+   > Two output files are always written:
+   >
+   > - -o writes the RMSD values in the upper left half of the matrix and a graphical depiction of the clusters **in the lower right half** When -minstruct = 1 the graphical depiction is black when two structures are in the same cluster. When -minstruct > 1 different colors will be used for each cluster.
+   > - -g writes information on the options used and a detailed list of all clusters and their members. (`.log`?)
+   >
+   > Additionally, a number of optional output files can be written:
+   >
+   > - -dist writes the RMSD distribution.
+   > - -ev writes the eigenvectors of the RMSD matrix diagonalization.
+   > - -sz writes the cluster sizes.
+   > - -tr writes a matrix of the number transitions between cluster pairs.
+   > - -ntr writes the total number of transitions to or from each cluster.
+   > - -clid writes the cluster number as a function of time.
+   > - -clndx writes the frame numbers corresponding to the clusters to the specified index file to be read into trjconv.
+   > - -cl writes average (with option -av) or central structure of each cluster or writes numbered files with cluster members for a selected set of clusters (with option -wcl, depends on -nst and -rmsmin). The center of a cluster is the structure with the smallest average RMSD from all other structures of the cluster.
+
+   ```shell
+   cluster-id-over-time.xvg
+   cluster-sizes.xvg
+   cluster-transitions.xvg
+   rmsd-distribution.xvg
+   # eg
+   xmgrace cluster-id-over-time.xvg
+   gmx xpm2ps -f clusters.xpm -o clusters.eps -rainbow blue # blue: not the same cluster
+   # gmx xpm2ps -f cluster-transitions.xpm -o cluster-transitions.eps
+   ```
+
+2. structural
 
    
 
-other
+      ```shell
+   # pymol
+   split_states cluster
+   ```
+
+      ???cluster???????frame?????rmsd?
+
+###### other
 
 1. trjcat? no!
 
@@ -1431,13 +1615,12 @@ other
    catdcd -o ${f}.trr -i ../common/equilibrated.pdb ${f}.dcd
    ```
 
-3. mdconvert can make .trr too, but it's the same size as .xtc (also the .dcd)...
+3. rmsd/rmsf of NTP
 
-   ```shell
-   
-   ```
+4. 
 
    
+
 
 
 
