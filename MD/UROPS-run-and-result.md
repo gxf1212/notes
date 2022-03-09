@@ -238,7 +238,7 @@ adt # or from "start"
 
   - edit--charge--check total...
 
-  - Flexible Residues: some residues are flexible. the ligand is always flexible (rotatable bonds)!
+  - Flexible Residues (optional): some residues are flexible. the ligand is always flexible (rotatable bonds)!
 
     https://zhuanlan.zhihu.com/p/92658440
 

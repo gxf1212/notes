@@ -49,41 +49,6 @@ The binding energy data reveal that compound-17 (−59.6 kcal/mol) binds  more s
 
 
 
-### our paper and guidance
-
-The relative binding free energy between remdesivir(RemTP) and ATP was calculated to be -2.80 ± 0.84 kcal/mol, where remdesivir bound much stronger to SARS-CoV-2 RdRp than the natural substrate ATP.  
-
-Key residues D618, S549 and R555 are found to be the contributors to the binding affinity of remdesivir.
-
-https://www.linkedin.com/in/leili-zhang-046769bb
-
-https://scholar.google.com/citations?user=Kwwx85EAAAAJ&hl=en
-
-
-
-> 11.16
->
-> Of course. We should be able to share the files for purposes such as reproducibility. Plus, all data that are published are made available to the public, including these files. Force fields are also already shared in the published version of the paper. But for your purpose, I think by only reproducing the MD simulations and free energy calculations of ATP should suffice. 
->
-> Please find the attached zip file containing structures for ATP-RdRp-Mg complex (MD simulation), ATP-water ("free state" FEP), ATP-RdRp-Mg complex ("bound state" FEP). **ATP force field is in the default CHARMM force field files. All force fields are in CHARMM36, downloaded from MacKerrell's group page.** Please let me know if anything is unclear. Also, please use NAMD to conduct all simulations to get similar results. I don't think version matters.
-> https://drive.google.com/file/d/1bMH1-PUtWAadcOmz8MTEbhy4jcZgtPUk/view?usp=sharing
-
-
-
-## work calendar
-
-21.11.16
-
-other todo:
-
-- download CHARMM ff files
-- read the paper carefully!
-- dock RemTP on the structure
-
-
-
-
-
 ## Software usage
 
 record sth general
@@ -366,7 +331,7 @@ obabel ${f}.pdb -opdbqt -O ${f}.pdbqt -as -h --partialcharge gasteiger
 >
 > However, sometimes it gives wrong aromatic rings. Check hydrogens! You may use [other methods](#Other-about-modeling). also: openeye package?
 
-> Alternative: ADTools
+> Alternative: ADTools for ligand
 >
 > - Edit--Hydrogen--Merge non-polar
 > - Edit--Atom--Assign AD4 Type
@@ -376,6 +341,8 @@ obabel ${f}.pdb -opdbqt -O ${f}.pdbqt -as -h --partialcharge gasteiger
 >   - maybe select what to save
 >
 > failed?? compare the text!
+>
+> > As for the receptor, maybe directly Grid--Open to process the .pdb and save a .pdbqt?
 
 requirements for vina:
 
@@ -440,7 +407,7 @@ tools that can **both draw** a molecule **and convert** through SMILES.  Your ow
   obabel -:$f --gen3d -opdbqt -O atp.pdbqt -as -h --partialcharge gasteiger # for vina
   ```
 
-##### avogadro
+##### Avogadro
 
 > an alternative for ChemBioOffice in Linux
 
@@ -450,27 +417,33 @@ output: File--Export--Molecule--xxx.pdb
 
 https://avogadro.cc/docs/tools/draw-tool/
 
+##### GaussView: using
 
+load pdb into it. Almost no changes in the position. But we are so familiar with modelling!
 
+One thing you MUST do is: unify the residue name (change for edited atoms). or AutoPSF says sth like 'failed on end of segment'
 
+##### DSV
 
+may also edit small molecule and prepare for docking (usable?)
 
+`Small Molecules` in the second line of menu. Also `Chemistry` in the 1st line. Delete in the 3rd line. 
 
+May vary a bit if you `Clean Geometry` to optimize structure. 
 
+Not as familiar as Gauss.
 
-UCSF-Chimera
-
-https://zhuanlan.zhihu.com/p/148384183
-
-> GaussView?
-
-#### Problem unsolved
-
-> The initial structures do matter. But short simulations (<0.1ms) usually won't help you finding another binding site. What we do is called equilibration, which ensures that it finds a local  minimum. So be very careful with the initial states. Kevin will guide you through this process. 
+> UCSF-Chimera doesn' t seem to add groups. So does Avogradro
 >
-> Also, if the binding structure of the ligand strays too far away from the orthosteric binding site, it won't be a fair comparison between this ligand and ATP. So we will need to think about a way to explain that. We may need to calculate two FEPs for this case: docked binding pose and orthosteric binding pose. But for now, you don't need to worry about it.
+> but can prepare for UCSF DOCK (adt, and other?) https://zhuanlan.zhihu.com/p/148384183
 
+#### Finally
 
+you should change the name of the ligand? not really needed
+
+```shell
+grep "ATP" -rl ./remtp.pdb | xargs sed -i "s/ATP/LIG/g"
+```
 
 ### Prepare the system with VMD etc.
 
@@ -564,6 +537,15 @@ i.e have done `segment`, `pdbalias`, `guesscoord`, etc.
 
 which is successfully applied to rdrp, atp and Mg
 
+Summary on steps (see MD-tutorial for details)
+
+- load pdb into vmd
+- open AutoPSF builder
+- modify top files
+- finish step 1~4
+
+> should be the same as loading topology in tkConsole and save?
+
 > debug:
 >
 > 1. error in ATP
@@ -619,7 +601,7 @@ Modeling--Tk Console
 vmd -dispdev text -e merge.tcl
 ```
 
-for atp, still built with AutoPSF, topology files only include top_all36_na.rtf, top_all36_cgenff.rtf. 
+for atp, still built with AutoPSF, topology files **only include top_all36_na.rtf, top_all36_cgenff.rtf**. 
 
 and only 'formatted' provides the right coordinates! _autopsf adjusts coordinates a little bit (why?)
 
@@ -629,6 +611,10 @@ but Tk console reports error!
 >ERROR) Will ignore structure information in this file.
 
 but **'formatted’ can be recognized by CHARMM-GUI**!
+
+> important note: for newly added atoms, parameterization is needed.
+>
+> ![parameterization](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/parameterization.jpg)
 
 the successful version:
 
@@ -675,7 +661,8 @@ writepsf merged.psf
 > failed commands
 >
 > ```tcl
-> c
+> package require psfgen
+> resetpsf
 > topology /home/gxf/vmd/lib/plugins/noarch/tcl/readcharmmtop1.2/top_all27_prot_lipid_na.inp
 > topology top_all22_prot.rtf
 > topology top_all27_prot_lipid.inp
@@ -694,13 +681,13 @@ writepsf merged.psf
 > completely failure. don’t know what .inp file the tutorials used.
 >
 > ```shell
->grep "PROT" -rl ./rdrp.pdb | xargs sed -i "s/PROT/    /g" 
+> grep "PROT" -rl ./rdrp.pdb | xargs sed -i "s/PROT/    /g" 
 > ```
-> 
-> this does not matter
+>
+> this does not matter. later ligands: just use PRO for segment name!
 >
 > ```tcl
->package require psfgen
+> package require psfgen
 > resetpsf
 > topology top_all36_na.rtf
 > topology top_all36_cgenff.rtf
@@ -708,26 +695,38 @@ writepsf merged.psf
 > segment ATP {pdb atp.pdb}
 > coordpdb atp.pdb ATP
 > ```
-> 
+>
 > still not work for ATP. even though ATPP $\to$ ATP, still “unknown atom type ON3”
 >
 > ```
->topology toppar_all36_na_nad_ppi.str
+> topology toppar_all36_na_nad_ppi.str
 > # autopsf, this probably failed..
 > # segment LIG {pdb atp_autopsf_formatted.pdb}
 > readpsf atp_autopsf.psf
 > coordpdb atp_autopsf_formatted.pdb
 > ```
-> 
+>
 > still not work for ATP. cannot recognize atoms. without “formatted” have correct names, but position of PO4 changed.
 >
 > **So we still MUST use CHARMM-GUI if we don’t directly aliase pdb**
 >
 > 
 >
-> #### build complex-method 3
+> the second try for remTP
 >
-> build with Gromacs and AmberTools?
+> Use method 2: 
+>
+> > ERROR: failed on end of segment
+> >
+> > unknown residue type LIG
+>
+> 
+
+#### build complex-method 3
+
+build with Gromacs and AmberTools?
+
+
 
 ##### Appendix: CHARMM-GUI generate files for ligand
 
