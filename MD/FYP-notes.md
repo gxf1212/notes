@@ -1,4 +1,4 @@
-# Notes on FYP
+##### Notes on FYP
 
 Notes on the final year project (毕设), Nov 2021~May 2022.
 
@@ -392,7 +392,7 @@ obabel ${f}_d.pdb -opdb -O ${f}.pdb -p 7.0 -as
 rm ${f}_d.pdb
 ```
 
-#### Other about modeling
+#### Draw and convert
 
 tools that can **both draw** a molecule **and convert** through SMILES.  Your own molecule!
 
@@ -417,11 +417,21 @@ output: File--Export--Molecule--xxx.pdb
 
 https://avogadro.cc/docs/tools/draw-tool/
 
-##### GaussView: using
+#### Draw and edit molecule
 
-load pdb into it. Almost no changes in the position. But we are so familiar with modelling!
+minimization won't change its position too much, but so helpful for later use. Or just modify on minimized ATP...
 
-One thing you MUST do is: unify the residue name (change for edited atoms). or AutoPSF says sth like 'failed on end of segment'
+```shell
+obminimize -ff MMFF94 -n 1000 atp.pdb > atp_m.pdb
+```
+
+##### GaussView
+
+load pdb into it. Almost no changes in the position. But we are so familiar with modeling!
+
+Try to make every bond and hydrogen right! Maybe Ar ring should be made into single-double-bond-interspaced.
+
+One thing you MUST do after that is: unify the residue name (change for edited atoms). or AutoPSF says sth like 'failed on end of segment'
 
 ##### DSV
 
@@ -437,9 +447,9 @@ Not as familiar as Gauss.
 >
 > but can prepare for UCSF DOCK (adt, and other?) https://zhuanlan.zhihu.com/p/148384183
 
-#### Finally
+##### After drawing
 
-you should change the name of the ligand? not really needed
+maybe minimize. you should change the name of the ligand? not really needed
 
 ```shell
 grep "ATP" -rl ./remtp.pdb | xargs sed -i "s/ATP/LIG/g"
@@ -601,7 +611,7 @@ Modeling--Tk Console
 vmd -dispdev text -e merge.tcl
 ```
 
-for atp, still built with AutoPSF, topology files **only include top_all36_na.rtf, top_all36_cgenff.rtf**. 
+for atp, still built with AutoPSF, topology files **only include top_all36_na.rtf, top_all36_cgenff.rtf**. May also
 
 and only 'formatted' provides the right coordinates! _autopsf adjusts coordinates a little bit (why?)
 
@@ -612,9 +622,28 @@ but Tk console reports error!
 
 but **'formatted’ can be recognized by CHARMM-GUI**!
 
-> important note: for newly added atoms, parameterization is needed.
+> note: for newly added atoms, parameterization is needed?
 >
-> ![parameterization](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/parameterization.jpg)
+> <img src="https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/parameterization.jpg" alt="parameterization" style="zoom:80%;" />
+>
+> but may also use 'formatted’. but for remtp I used  remtp_autopsf_temp.pdb
+>
+> Another way to generate uploadable .pdb is:
+>
+> ```shell
+> gmx pdb2gmx -f remtp.pdb -o remtp.gro # though failed, we use that .gro file
+> obabel -igro remtp.gro -opdb -O remtp-gro.pdb
+> ```
+>
+
+Choose 'Exact', 'Make CGenFF topology'
+
+Then we obtain all .pdb, .psf, etc. that is needed.
+
+> other files:
+>
+> - drawing: the recognized structure on the 1st page
+> - copy `charmm-gui-xxxxx/toppar/lig.prm` (lig: residue name of your ligand) for use in your simulation! shown in [this video](https://www.youtube.com/watch?v=Pj40ZnybXds)
 
 the successful version:
 
@@ -720,6 +749,10 @@ writepsf merged.psf
 > >
 > > unknown residue type LIG
 >
+> tried AutoPSF and gmx
+>
+> note that in both cases the molecule structure in the first page of CHARMM-GUI might be strange, and the final structure is broken
+>
 > 
 
 #### build complex-method 3
@@ -732,9 +765,13 @@ build with Gromacs and AmberTools?
 
 but not used in method 1
 
+> https://cgenff.umaryland.edu/  itself, the program to assign parameters for your ligand
+>
+> the "penalty score" is returned to the user as a measure for the accuracy of the approximation. in `.rtf`
+
 Use CHARMM-GUI---input generator---ligand reader and modeller
 
-refer to preparation videos mentioned above
+refer to preparation videos mentioned above, and [the official one](https://www.bilibili.com/video/BV1bM4y1P7tB)
 
 > **CHARMM GUI basic tips**
 >
@@ -743,16 +780,21 @@ refer to preparation videos mentioned above
 > - **adopt available RCSB SDF structure** preferentially
 > - make sure that the Marvin JS structure is correct
 > - <font color=red>All hydrogen and missing atoms should be explicitly placed for accurate result.</font> or report error
+>   - **edit the protonation states yourself!**
 > - Users can modify the protonation state if necessary. 
 >   - or select other protonation state in the next step
 > - **The coordinates will be preserved if you upload .pdb file.**
 >   - uploading your own .pdb file is suggested
 >   - you can align .pdb files later, only it considers coordinates
 >   - if you are to upload file, .mol2 is prefered? 
-> - you may want to “Find similar residues in the CHARMM FF”
+> - you may want to “Find similar residues in the CHARMM FF”, only when your ligand is special to be included in the ff...
 > - the outputed residue name is ‘LIG’
 
 then just click, click...and download all files
+
+> charmm-gui, what do the files do? what is needed? these?
+>
+> ![parameterization](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/parameterization.jpg)
 
 focus on `ligandrm.pdb/psf`, which can be put into a merge.tcl, as **an alternative way of AutoPSF** in generating files for ligand (other tools for protein, etc?). Carefully choose the force field!
 
@@ -820,7 +862,8 @@ psfcontext reset
 mol load psf merged.psf pdb merged.pdb
 # the solvation script writes:
 package require solvate
-solvate merged.psf merged.pdb -t 11.5 -o solvated # files are written
+solvate merged.psf merged.pdb -t 11.5 -o solvated
+# files are written
 mol delete all
 # the ionization script writes:
 autoionize -psf solvated.psf -pdb solvated.pdb -sc 0.1 -o system
@@ -1128,6 +1171,11 @@ time length: refer to tutorials--my exploration--simulation
 
 #### work flow
 
+for a new ligand, only need to change:
+
+- outputbase
+- CellBasisVector/origin
+
 ##### commands
 
 > building system is in a folder; if not messy, could put “solvation” together
@@ -1143,7 +1191,7 @@ time length: refer to tutorials--my exploration--simulation
 > │   ├── fix_backbone_restrain_ca.tcl
 > │   ├── par_all36m_prot.prm
 > │   ├── par_all36_na.prm
-> │   ├── param.prm
+> │   ├── par_.....prm
 > │   ├── restrain_ca.pdb
 > │   ├── system.pdb
 > │   ├── system.psf
@@ -1166,18 +1214,17 @@ namd3 +auto-provision +idlepoll pro-lig-equil > pro-lig-equil.log
 # may go to analysis and check?
 vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
 cd ../prod
-namd3 +auto-provision +idlepoll pro-lig-prod > pro-lig-prod.log
+namd3 +p1 +devices 0 pro-lig-prod > pro-lig-prod.log
+# on lab computer
 ```
 
-> on lab computer:
->
-> ```shell
-> namd3 +p1 +devices 0 pro-lig-prod > pro-lig-prod.log
-> ```
->
-> In your NAMD configuration file, set `CUDASOAintegrate` to `on`. only use one cpu to achieve 2-fold acceleration of namd3.
+> In your NAMD configuration file, set `CUDASOAintegrate` to `on`. only use one cpu, to achieve 2-fold acceleration of namd3. ~2 times faster (but not in my workstation, only in lab?)
 >
 > [namd3-gpu](https://developer.nvidia.com/blog/delivering-up-to-9x-throughput-with-namd-v3-and-a100-gpu/)
+> 
+> Interpretation: put most of the work on GPU. so don't run 2 simulations at once.
+>
+> But don't use that for minimization (CPU-dependent). But also there's 45w steps of npt...
 
 ##### testing the run
 
@@ -1267,7 +1314,7 @@ menu animate on
 mol load psf ../common/system.psf pdb ../common/system.pdb
 animate read dcd rdrp-atp-equil.dcd
 
-animate read dcd rdrp-atp-p.dcd
+animate read dcd rdrp-atp-prod.dcd
 ```
 
 
@@ -1614,12 +1661,7 @@ questions
    catdcd -o ${f}.trr -i ../common/equilibrated.pdb ${f}.dcd
    ```
 
-3. rmsd/rmsf of NTP
-
 4. 
-
-   
-
 
 
 
@@ -1627,17 +1669,9 @@ questions
 
 
 
-
-
-
-
 #### Analysis of binding mode?
 
-
-
-
-
-
+Here not that much is required...
 
 
 
@@ -1647,6 +1681,7 @@ questions
 
 
 
+#### FESetup
 
 
 
@@ -1658,14 +1693,352 @@ questions
 
 
 
+## Stage 2 Protocol
 
 
 
 
 
+### VS draft
+
+#### search
+
+remTP: N#C[C@@]3(n2cnc1c(N)ncnc12)O[C@H](COP(=O)(O)OP(=O)(O)OP(=O)(O)O)[C@@H](O)[C@H]3O
+
+(zinc)
+
+a clear 5-member ring with tri phosphate and purine ring: O=P(O)(O)OP(=O)(O)OP(=O)(O)OC[C@@H]3CCC(n2cnc1cncnc12)O3
+
+find 'substructure' in pubchem
+
+[now](https://pubchem.ncbi.nlm.nih.gov/#query=O%3DP(O)(O)OP(%3DO)(O)OP(%3DO)(O)OC%5BC%40%40H%5D3CCC(n2cnc1cncnc12)O3&tab=substructure&fullsearch=true&mw_lte=800.17&rotbonds_lte=20&mw_gte=460.17&rotbonds_gte=4&heavycnt_lte=50&hbonddonor_lte=14&hbondacc_lte=25&complexity_lte=1406&xlogp_gte=-10.3&polararea_lte=439&sort=polararea&page=1)
+
+但还是有很多嘧啶系列的
+
+pubmed离谱的一点就是，甲基都算烃基链的substructure，芳环就不能模糊搜索一下
+
+> so don't use filtered from ATP: https://pubchem.ncbi.nlm.nih.gov/#query=N%23C%5BC%40%40%5D3(n2cnc1c(N)ncnc12)O%5BC%40H%5D(COP(%3DO)(O)OP(%3DO)(O)OP(%3DO)(O)O)%5BC%40%40H%5D(O)%5BC%40H%5D3O&tab=similarity&fullsearch=true&mw_lte=625.27&rotbonds_lte=15&mw_gte=265.27&rotbonds_gte=0&hbonddonor_lte=10&hbonddonor_gte=1&heavycnt_lte=39&polararea_lte=339&hbondacc_lte=20&complexity_lte=934&xlogp_lte=0.7&xlogp_gte=-7.3
+>
+> [no purine](https://pubchem.ncbi.nlm.nih.gov/#query=O%3DP(O)(O)OP(%3DO)(O)OP(%3DO)(O)OC%5BC%40%40H%5D1CCCO1&tab=substructure&fullsearch=true&rotbonds_lte=20&mw_lte=723&hbondacc_lte=20&hbondacc_gte=11&rotbonds_gte=4&xlogp_gte=-10.7&heavycnt_gte=25&hbonddonor_lte=10&polararea_gte=176&mw_gte=445.17&complexity_lte=1312&hbonddonor_gte=2&heavycnt_lte=45&polararea_lte=366&xlogp_lte=1.3)
+
+#### summary
+
+| stage                 | # of molecules |
+| --------------------- | -------------- |
+| database              | 2863           |
+| converted             | 2466           |
+| processed nan etc     | 2418           |
+| recovered MMFF94s etc | 2738           |
+| recovered ion         | 2791           |
+| final                 | 2771           |
+
+总结，对付pubchem的顺序！
+
+- 有多个分子的，去除离子的（绝对正确）
+- 用MMFF94和94s各生成一遍，合并（有的会错）
+- 再找出没文件的，用先gen3D的方式（仍有nan，要不算了，你厉害你用rdkit再试试）
+- 最终整体检查，修正加氢情况等，再改改
+
+#### converting
+
+##### 2nd
+
+> pubchem里整出来坐标nan？gen3D的锅。converted有370个有nan
+>
+> 去搜它的PUBCHEM_IUPAC_INCHIKEY？
+
+```shell
+# all files, no path
+for j in `find ./ -type f -name '*.pdbqt' | xargs grep -l 'nan'`; do
+g=${j%*.pdbqt}
+f=${g#*/}
+cp ../lib/${j} ../lib-temp 
+obminimize -ff MMFF94 -n 1000 ../lib-temp/${j} > ../lib-temp/${f}.pdb
+rm ../lib-temp/${j}
+obabel ../lib-temp/${f}.pdb -opdbqt -O ../lib-temp/${f}.pdbqt -as -h # wrong! replace this batch
+done
+rm ../lib-temp/*.pdb
+```
+
+重新搞个lib，光最小化，只替换这些有问题的
+
+- 有的也不好，还需最小化PO4；
+
+- 有的（上一行的）因为最小化爆炸了，PO4掉了，拉倒；（735等）
+
+  > 正方形的PO4没有gen3D就容易爆炸
+  >
+  > 还可能因为有离子，如1297
+
+- 个别的没加氢
+
+文件变为0的，就算了吧
+
+带水的，断开的，文件特征？
+
+还有的5号C和磷酸的键是直线，这也没救。。（1045）
+
+还有芳环歪了的，TP掉了的
+
+> 简单edit就pymol吧，反正要转换下pdb，还要-as --partialcharge gasteiger不要-h！
+
+如果看直接最小化的，问题都在磷酸上！
+
+没采纳
+
+##### 3rd
+
+```shell
+for j in `ls ../lib-temp`; do
+g=${j%*.pdbqt}
+f=${g#*/}
+cp ../lib/${f}.sdf ./
+obabel ${f}.sdf -osdf -O ${f}-t.sdf --gen3D
+obminimize -ff MMFF94s -n 1000 ${f}-t.sdf > ${f}.pdb
+mv *.sdf ./trash
+obabel ${f}.pdb -opdbqt -O ${f}.pdbqt -as --partialcharge gasteiger
+mv *.pdb ./trash
+done
+mkdir trash
+#mv *.pdb ./trash
+#mv *.sdf ./trash
+```
+
+> 还是先gen3D，但用GAFF，有些先最小化没成功的成了？
+>
+> 问题：嘌呤全完了？？主要是变形太严重，成键是pymol的问题
+>
+> 直线键啥的解决了？
+
+MMFF94s：能输出的好像好多都好着。5C直线键解决了
+
+> 有的没加氢。倒有些“先最小化”ok的被破坏了？有些OPO仍然直线（735）。
+
+还是有些炸了
+
+没输出的52个,44个nan
+
+最后是采纳了一些？
+
+以后用MMFF94s？用吧，至少5C直线键要解决
+
+##### 4th
+
+以后直接初始就94s！
+
+去掉空的2464，有几十个nan？所以看来正常MMFF94**也要跑**，算是补充，加起来都快齐了
+
+按2dsdf2pdbqt.sh，完了以后，在library下
+
+```shell
+ls | grep pdbqt | sort > 94s
+ls ../../library | grep pdbqt | sort > lib
+diff -r 94s lib | grep '<' | cut -c 2- > lack.txt
+rm 94s lib
+
+for j in `cat lack.txt`; do
+cp ./${j} ../temp #../../library
+done
+# remove emtpy and nan
+```
+
+多了好多，快300个。。NB！
+
+> lib_94s
+
+##### 5th
+
+处理有离子的。在splited里：
+
+```shell
+for j in `find ./ -type f -name '*.sdf' | xargs grep -l 'Na '`; do
+mv ${j} ./ion/
+done
+```
+
+出现的奇怪元素：Na, Mg, Cu, Mn, K, Li, Cr, Ba, Co
+
+但是有些其实处理成功了，所以过滤下（10）；个别有文件但磷酸掉了（3）
+
+大部分是好的？对比：
+
+```shell
+ls | grep sdf | cut -d '.' -f 1 | sort > ion
+ls ../../library | grep pdbqt | cut -d '.' -f 1 | sort > lib
+diff -r ion lib | grep '<' | cut -c 2- > lack.txt
+rm ion lib
+```
+
+> 关于命令
+>
+> 就是收集文件名，用后缀过滤，排序。
+>
+> diff：找出差异文件。<代表前者有后者没有的
+>
+> cut：去掉输出的'< '
+>
+> d和f：截取，这里去掉后缀
+>
+> 其他：https://www.cnblogs.com/f-ck-need-u/p/9071033.html
+
+救一下没有的
+
+> https://blog.csdn.net/u012325865/article/details/103782297
+>
+> https://www.rdkit.org/docs/GettingStartedInPython.html
+>
+> https://www.rdkit.org/docs/source/rdkit.Chem.rdmolfiles.html reader and writer
+>
+> http://rdkit.chenzhaoqiang.com/index.html Chinese tutorial
+>
+> rdkit去除离子
+
+```shell
+# under done
+mkdir ion-done
+rm ./*-t.sdf ./*.pdb ./ion-done/*.pdbqt
+for j in *.sdf; do
+f=${j%*.sdf};
+obabel ${f}.sdf -osdf -O ${f}-t.sdf --gen3D -e -as -h
+obminimize -ff MMFF94s -n 1000 ${f}-t.sdf > ${f}.pdb; 
+obabel ${f}.pdb -opdbqt -O ${f}.pdbqt -as --partialcharge gasteiger;
+mv ${f}.pdbqt ./ion-done
+done
+```
+
+除完离子这些加氢有点问题？算了library里也有。。
+
+##### 6th
+
+再救一波。。
+
+剩下这些要么nan要么0
+
+nan的基本上gen3D时就nan了，0的此时就有离谱的坐标（一堆0，和接近nan的大数？）
+
+先最小化？还是老问题，直线、断裂等
+
+```shell
+for j in *.sdf; do
+f=${j%*.sdf};
+obminimize -ff MMFF94s -n 1000 ${f}.sdf > ${f}.pdb; 
+obabel ${f}.pdb -opdbqt -O ${f}.pdbqt -as --partialcharge gasteiger;
+mv ${f}.pdbqt ./mini
+done
+
+for j in *.pdbqt; do
+f=${j%*.pdbqt};
+obminimize -ff MMFF94s -n 1000 ${f}.pdbqt > ${f}.pdb; 
+obabel ${f}.pdb -opdbqt -O ${f}.pdbqt -as --partialcharge gasteiger;
+mv ${f}.pdbqt ./mini/mini
+done
+```
+
+倒也总比没有强。有些是好的，手工挑出来吧。再优化一波，去掉0和nan，还有些炸的最后一步做吧
+
+gamma磷酸真的优化不了
+
+51个nan不管了
+
+##### 7th
+
+最终检查，目标：加氢、多个分子，能修个别γ磷酸最好，能修芳环（kekulize）吗
+
+https://openbabel.org/docs/dev/UseTheLibrary/Python_Pybel.html
+
+```
+/home/gxf/Desktop/work/projects/tools/Python-for-MD/convert-ligand/convert.py
+```
+
+> MDAnalysis、RDkit都不能读取pdbqt。但是读完通过smi可以转换
+
+可是有些正常的，smi生成不了啊！
+
+> ```
+> rdkit.Chem.rdmolops.SanitizeFlags.SANITIZE_NONE
+> ```
+>
+>  indicates that no problems were encountered. 没用上  
+
+处理多个分子：ok。可以用来除离子？
+
+get所有smi
+
+```shell
+for j in `cat smis.txt`; do
+f=${j%/*}
+sm=${j#*/}
+obabel -:$sm --gen3d -osdf -O $f.sdf
+obminimize -ff MMFF94s -n 1000 ${f}.sdf > ${f}.pdb
+obabel ${f}.pdb -opdbqt -O ${f}.pdbqt -as --partialcharge gasteiger
+done
+rm ${f}.sdf ${f}.pdb
+rm *d*
+```
+
+除掉nan和broken(15)
+
+```shell
+find ./ -type f -name '*.pdbqt' | xargs grep -l 'nan' | xargs -n 1 rm -f
+for j in `cat broken.txt`; do
+rm $j.pdbqt
+done
+```
+
+还是有没加氢、C5直线的，算了。。
+
+已经炸了的，不能通过片段来救了
 
 
 
+> 转了也没有用，还是好多读不了
+
+```shell
+for j in *.pdbqt; do
+f=${j%*.pdbqt};
+obabel ${f}.pdbqt -osdf -O ../sdf/${f}.sdf;
+done
+find . -name "*" -type f -size 0c | xargs -n 1 rm -f
+```
 
 
 
+#### other
+
+那转不了的到底是哪些呢？没离子也有好多失败的
+
+双分子？
+
+原来的MMFF94可能还不好？但看了下也都没直键的问题
+
+能查找区别了以后，就可以无限次补救了。。。
+
+
+
+[RDKit|分子子结构的删除、替换与切割](https://blog.csdn.net/dreadlesss/article/details/105826379)   可以自己生成了？
+
+[a series of questions, including removing solvent](https://rdkit-discuss.narkive.com/CAZ6XfCC/washing-molecules-in-rdkit)
+
+> https://github.com/forlilab/Meeko read pdbqt and Mol to PDBT. not a rdkit.Chem.Mol...
+
+
+
+#### docking
+
+> docking test: some bonds rotated, some not. it affects!
+>
+> convert: most bonds are ok, but some of the ligands huddled up (its TP). 
+>
+> straight O-P-O bond: from convert. not changed in docking...
+>
+> gen3D和minimize也没啥变化，拉倒吧
+>
+> those that failed might be: with Na+, Cu2+ ion, water, etc. That's ok
+>
+> 感觉leili给的初始结构怪怪的，作用力不强，都dock不上去
+>
+> 还不如equil的ATP，好几个Arg，align了一下，相对位置差不多
+>
+> 现在docking的site调整好了
+
+对接要多给点空间啊！

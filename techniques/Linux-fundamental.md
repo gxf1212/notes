@@ -721,7 +721,7 @@ https://blog.csdn.net/zhayushui/article/details/80433768
       conda create -n env_name
       ```
     
-    - from yaml
+    - from yaml https://blog.csdn.net/vola9527/article/details/80744540
       
       ```shell
       conda env create -f study.yaml

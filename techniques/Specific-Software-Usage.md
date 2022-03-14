@@ -12,26 +12,6 @@ Fret not over bygones, and the forward journey take.
 
 # Commonly used for working
 
-## Typora
-
-1. 自定义快捷键
-   
-   https://blog.csdn.net/December_shi/article/details/108690116
-
-   Ctrl+5 in Linux does not work?
-   
-2. 
-
-#### plugins
-
-1. mermaid语法
-   - 特殊符号，要加引号才显示 https://github.com/mermaid-js/mermaid/issues/213
-2. 
-
-### themes
-
-1. liquid: cannot see the mouse cursor in titles and hyperlinks?
-
 ## Network
 
 Connection, vpn, remote control usage
@@ -85,6 +65,12 @@ configure VPN: see prepare-for-the-computer
    ```
 
 4. connect with ssh
+
+   install
+
+   ```shell
+   sudo apt install openssh-server openssh
+   ```
 
    guide: https://www.cnblogs.com/conefirst/articles/15225952.html
 
@@ -253,6 +239,33 @@ charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 
 希望以后的工作能顺利进行。😭😭
 
+## Typora
+
+1. 自定义快捷键
+
+   https://blog.csdn.net/December_shi/article/details/108690116
+
+   Ctrl+5 in Linux does not work?
+
+2. 
+
+#### plugins
+
+1. mermaid语法
+   - 特殊符号，要加引号才显示 https://github.com/mermaid-js/mermaid/issues/213
+2. 
+
+### themes
+
+1. liquid: cannot see the mouse cursor in titles and hyperlinks?
+
+## VScode
+
+I also met [this question](https://stackoverflow.com/questions/70221994/unable-to-change-theme-in-vs-code) or [this](https://www.reddit.com/r/vscode/comments/lx7536/any_idea_why_my_theme_is_suddenly_changing_every/)
+
+[Workbench Appearance color theme keeps being overridden](https://github.com/microsoft/vscode/issues/105102)
+
+引申出主题的管理方式：和系统有关。。
 
 ## Pycharm
 
@@ -1648,7 +1661,7 @@ https://www.bilibili.com/read/cv403592/
 
 ## Build Hexo Pages (not organized yet)
 
-https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html#%E4%BD%BF%E7%94%A8hexo%E5%86%99%E5%8D%9A%E5%AE%A2
+[build-blog-website-by-hexo](https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html#%E4%BD%BF%E7%94%A8hexo%E5%86%99%E5%8D%9A%E5%AE%A2)
 
 Git 全局设置:
 

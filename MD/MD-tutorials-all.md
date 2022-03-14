@@ -580,13 +580,17 @@ xmgrace TEMP.dat
 
   ![prms](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/prms.png)
 
-  he has to add a lot of prm files because of not adding topology when building! not recommended.
+  > he has to add a lot of prm files because of not adding topology when building! not recommended.
+
+  Now I understand! but should we use lig.rtf when building?
 
 - https://www.youtube.com/watch?v=IET_FvCk9XE very details VMD usage
 
-  This guy used AutoPSF to model the protein itself! and CHARMM-GUI for ligand. 
+  This Indian guy used AutoPSF to model the protein itself! and CHARMM-GUI for ligand. 
   
   finally merge the files as the above guy does, no `topology xxx`
+  
+  no simulation script
   
 - FEP tutorial, build 18C6 and potassium
 
@@ -1519,5 +1523,99 @@ xmgrace rmsf-per-residue.xvg
 
 ```
 
+## 22.3.14
+
+### traj convert
+
+https://ambermd.org/tutorials/basic/tutorial2/section6.htm
+
+load into vmd in turn:
+
+- .prmtop
+
+- .nc
+
+- > .mdcrd
+
+[vmd save trajectory](https://www.researchgate.net/post/How_to_write_pdb_file_of_protein_ligand_system_of_a_particular_frame_using_VMD)   select the molecule, File--save coordinates
+
+then
+
+```shell
+acpype -p EAS.prmtop -x EAS.inpcrd
+# should use nojump
+echo 0 | gmx trjconv -f EAS.trr -o EAS_nj.xtc -pbc nojump 
+# remove _GMX
+gmx make_ndx -f EAS.gro -o index.ndx # only if necesssary
+gmx grompp -f md.mdp -c EAS.gro -r EAS.gro -p EAS.top -o EAS.tpr -maxwarn 1
+```
+
+### FEL
+
+> [Jerkwin FEL](https://jerkwin.github.io/2017/10/20/GROMACS%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E6%8B%9F%E6%95%99%E7%A8%8B-%E5%A4%9A%E8%82%BD-%E8%9B%8B%E7%99%BD%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/#8-%E8%87%AA%E7%94%B1%E8%83%BD%E5%BD%A2%E8%B2%8C%E5%9B%BE)
+>
+>  FEL通常使用两个变量来表示, 它们反映了体系的特定性质, 并表征了构象变化. 例如你可以使用绕一根特定键的扭转角, 或分子的回旋半径, 或相对于天然状态的RMSD来作为这两个变量. 第三个变量是自由能, 可以从体系相对前面所选变量的分布(概率分布)来估计. 当使用三维表示时, 形貌图中的谷表示低自由能区域, 代表体系的亚稳定构象, 丘表示连接这些亚稳定状态的能量势垒.
+>
+> 帧数要尽量多！
+>
+> 不太一样，这里是指定了两个变量，就是算了xyz的一堆数据点。这里是Rg和RMSD
+>
+> 基于covar的是你的PCA变量，其实也一样，就是要算PCA变量而已
+
+http://sobereva.com/73   steps
+
+- 使用g_covar获取协方差矩阵的一切
+- 使用g_anaeig将轨迹投影到PC1与PC2上
+- 使用ddtpd做自由能面图
+
+#### covar
+
+对PCA分析, 我们主要关心蛋白质骨架上的原子. 但是backbone效果很不明显，所以用C alpha。#是backbone的
+
+```shell
+echo "3\n 3" | gmx covar -s EAS.tpr -f EAS_nj.xtc -o eigenvalues.xvg -v eigenvectors.trr -xpma covar.xpm -ascii covariances.dat -xpm covara.xpm
+gmx xpm2ps -f covara.xpm -o covara.eps -do covara.m2p
+xmgrace eigenvalues.xvg
+```
+
+> g_covar -f 输入的轨迹文件 -s 输入的结构文件 -n [输入的index文件] -o 输出的本征值文件 -v 输出的本征向量文件 -av 输出的平均结构文件 -l 输出的日志文件 -ascii [输出的协方差矩阵数据文件] -xpm [图形描述的N阶协方差矩阵] -xpma [图形描述的3N阶协方差矩阵]
+>
+> Note: the fit and analysis group are identical,
+>       while the fit is mass weighted and the analysis is not.
+>       Making the fit non mass weighted.
+
+> dimension of the matrix: 3 mes number of atoms of your group
+
+#### anaeig
+
+```shell
+echo "3\n 3" | gmx anaeig -s EAS.tpr -f EAS_nj.xtc -v eigenvectors.trr -eig eigenvalues.xvg -first 1 -last 2 -2d 2d.xvg
+xmgrace 2d.xvg
+```
+
+> 首先allnowat.xtc各帧会被align到eigenvectors.trr里记录的参考结构上，然后投影到-first和-last所选的本征向量，命令中1、2就是指前两个本征向量，即PC1和PC2。-2d 2d.xvg代表将每帧结构在PC1和PC2上的投影值输出到2d.xvg。
+
+> you may want to inspect the first two eigenvalues
+>
+> ```shell
+> gmx anaeig -s ../topol.tpr -f ../traj.xtc -v eigenvectors.trr -eig eigenvalues.xvg -proj proj-ev1.xvg -extr ev1.pdb -rmsf rmsf-ev1.xvg -first 1 -last 1
+> gmx anaeig -s ../topol.tpr -f ../traj.xtc -v eigenvectors.trr -eig eigenvalues.xvg -proj proj-ev2.xvg -extr ev2.pdb -rmsf rmsf-ev2.xvg -first 2 -last 2
+> ```
+>
+>  选项`-extr`沿着选定的特征值从轨迹中提取极端结构. 把这些结构导入PyMOL查看
+>
+> `-proj`：分别输出各个
 
 
+
+
+
+
+
+尝试理解
+
+- 聚类画的图横坐标是时间，PCA画的图横坐标是空间。
+- 纵坐标都是每一帧的构象，重复采样的结果
+- 但其实都是对空间（坐标、结构）聚类
+  - 前者是直接算距离，后者是提出新指标
+  - 纵坐标是构象，一般搞成概率密度。算能量（？）

@@ -8,9 +8,9 @@ Mainly recorded while in NUS. The installation of DL environment, Gromacs, and p
 
 ### tight vnc
 
-https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/infrastructure-services/TigerVNC/
+[doc](https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/infrastructure-services/TigerVNC/)
 
-https://www.dev2qa.com/how-to-fix-error-job-for-vncserver1-service-failed-because-the-control-process-exited-with-error-code-see-systemctl-status-vncserver1-service-and-journalctl-xe-for-details-when-start-vnc/
+[error](https://www.dev2qa.com/how-to-fix-error-job-for-vncserver1-service-failed-because-the-control-process-exited-with-error-code-see-systemctl-status-vncserver1-service-and-journalctl-xe-for-details-when-start-vnc/)
 
 I've removed that but maybe it's ok (you may try to find the viewer).
 
@@ -802,7 +802,20 @@ https://www.ccpbiosim.ac.uk/software
 
 https://fesetup.readthedocs.io
 
-though not using...
+```shell
+cd /where/I/want/it # replace the path to whatever you like
+./FESetupN_Linux.sh # extract all files into FESetupN/
+```
+
+Amber/Obabel: use default
+
+python: `python_exe=/usr/bin/python2.7`
+
+> ImportError: libpython2.7.so.1.0: cannot open shared object file: No such file or directory
+>
+> ```shell
+> sudo apt-get install libpython2.7
+> ```
 
   ### rosetta
 
@@ -1022,12 +1035,19 @@ for AmberTools!!!
 conda config --add channels conda-forge
 conda install mdanalysis
 conda install -c openbabel openbabel
+# conda install -c bioconda pybel # not this
 conda install -c rdkit rdkit
 ```
 
-### notes on conda
+usage
 
-https://blog.csdn.net/vola9527/article/details/80744540 create from yaml
+```shell
+import openbabel
+import pybel
+mymol = pybel.readstring("smi", "CCCC")
+```
+
+
 
 ## Paper
 
