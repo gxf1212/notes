@@ -1,4 +1,4 @@
-##### Notes on FYP
+# Notes on FYP
 
 Notes on the final year project (毕设), Nov 2021~May 2022.
 
@@ -626,7 +626,7 @@ but **'formatted’ can be recognized by CHARMM-GUI**!
 >
 > <img src="https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/parameterization.jpg" alt="parameterization" style="zoom:80%;" />
 >
-> but may also use 'formatted’. but for remtp I used  remtp_autopsf_temp.pdb
+> but may also use 'formatted’. but for remtp I used remtp_autopsf_temp.pdb
 >
 > Another way to generate uploadable .pdb is:
 >
@@ -635,6 +635,12 @@ but **'formatted’ can be recognized by CHARMM-GUI**!
 > obabel -igro remtp.gro -opdb -O remtp-gro.pdb
 > ```
 >
+
+Check the printed structure!!!! like
+
+- <font color=red>check every single bond in GaussView before building anything, and CHARMM-GUI may mis-assign the aromatic bonds!</font>
+- the Ar ring completeness
+- remove Hs added to phosphate....
 
 Choose 'Exact', 'Make CGenFF topology'
 
@@ -1677,11 +1683,229 @@ Here not that much is required...
 
 ### FEP (same) with NAMD
 
+#### Fundamentals
+
+NAMD supports such a traditional dual-topology alchemical setup, which may be applied to perform both absolute and relative FEP calculation
+
+VMD does not yet provide a hybrid topology setup tool, and CHARMM-GUI is testing a beta version (that is not yet available online) to automatically generate all input files for NAMD. For the time being, users can utilize an alternative hybrid structure preparation tool, such as FESetup or AmberTools, and then manually convert the generated CHARMM-formatted input files into a format that can be read by NAMD.
+
+readings
+
+- https://www.cresset-group.com/about/news/fep-drug-discovery-toolbox/
+  - FEP要求尽量稳定不动，这是不同于MD的
+  - FEP要求尽量不要改变电荷数
+
+- 
+
+```
+two modes
+- absolute
+- relative
+tools for setup: 
+- CHARMM-GUI
+- FESetup
+- FEPrepare
+```
+
+
+
+ligand: you just need to modify atoms in GaussView, so that no change is needed for Mg, and the position of ligands remains unchanged. (unlike aligning structures...) go to CHARMM-GUI for both ligands!
+
+we start from (equilibrated?) .pdb after MD
+
+
+
+尝试列表：
+- charmm-gui
+- 网络tutorial，Python，gmx
+- FEsetup
+- gmx，absolute
+- AMberTools
+
+
+
+#### CHARMM-GUI
+
+[video demo](https://www.charmm-gui.org/?doc=demo&id=fec&lesson=1), [bilibili version](https://www.bilibili.com/video/BV153411s7kF)
+
+> TIP1: https://charmm-gui.org/?doc=input/retriever  This page can be used to recover a job, if you *did not* save a bookmark link, but you *do* remember the Job ID
+>
+> - jobid=4735806442, absolute, cgenff v1.0, using ligandrm.pdb to build, upload other ligand's drawing3D.mol2
+> - JOB ID: 4739580626, relative, v2.5, .mol2, .mol2
+>
+> TIP2: do download every .tgz from Windows......
+
+##### note on files
+
+> !ATTENTION
+>
+> always use the drawing.mol2 files from CHARMM-GUI, both when building or uploading!
+>
+> but different conformation from original??
+
+folder: `basic` (from simulation), `ligand-charmm` (from GUI)
+
+###### What to use when building? 
+
+normal .pdb failed, .sdf failed(it's not our ligand, it's something strange...), obabel converted also failed to pass the <u>topology making</u>. otherwise if you use the ligand files from RCSB, then [this](https://www.charmm-gui.org/?doc=issues) (atom order?)
+
+> original: cannot input for force field; ligandrm.pdb: a little problem in text format.
+
+> !TIP
+>
+> may use `ligandrm.pdb` or `drawing3D.mol2`, etc. They don't align? just moved somewhat.
+>
+> When choosing a structural file (instead of using RCSB .pdb (but maybe that only provides topology?)), use`drawing3D.mol2` 
+
+###### What to use when uploading ligands?
+
+> in the case of Absolute, mtp
+
+After *solvation*, our system is moved. Also, drawing3D.mol2 moves away. so how to align?
+
+It seems that using drawing_3D.mol2 works fine here, if you align the structure, it is a little changed (ligandrm.pdb changes more slightly from the original file)....so do the alignment and check in pymol to see if i's ok with Mg<sup>2+</sup>...usually it's fine (drawing_3D.mol2 is a little strange because the TP huddle up?). 
+
+But the final structure turns out to be so similar to ligandrm.pdb?? I didn't use that. EM is performed? (maybe we can upload a converted one from ligandrm.pdb?)
+
+But for remtp, initial = ligandrm != drawing3D != final (PO4 the same??)
+
+> In the case of Relative, remtp
+
+cannot upload converted ligandrm?
+
+Conclusion: because of the EM, it's fine...
+
+###### force field check
+
+However, the original ligand failed again. when using ligandrm.pdb, etc., it failed at cgenff (v2.5) force field check. lone pair? v1.0 is fine
+
+> Current FEP doesn't allow lonepair. Please select CGenFF v1.0 to avoid lonepair generation.
+
+Actually the original ligand always fails. so upload again (without checking the option) and v2.5 works fine
+
+##### steps
+
+ use default settings unless otherwise specified
+
+1. build the complex (including Mg is fine)
+2. upload your complex file (containing the starting ligand)
+3. choose chain (all)
+4. build topology, choosing a file for the ligand
+5. solvate. choose box size and ion conc
+6. Generate grid information for PME FFT automatically (default)
+7. select Ligand Molecule for Free Energy Calculation
+8. PBC (default)
+9. upload ligand
+
+   - supports multiple ligands in one .sdf or ,mol2 file
+   - it's better to dock them first
+   - if not, or you are drawing ligands, the GUI automatically positions the ligands (may be not accurate)
+10. select program, force field, **check ligand**; ion for the ligand, 310K, etc.
+10. Relative: clustering, choose molecule pairs
+12. finished, <font color=red>CHECK YOUR STRUCTURE!!</font>
+
+both Relative or Absolute apply. A little difference for multiple ligands:
+
+- the latter designs a FEP path () or just all with the first one
+
+- when uploading ligands
+
+  - Absolute: Use this option only when the ligands are already **docked**.
+  - Relative: Use this option only when the scaffold coordinate of a pair of ligands are **identical.**
+
+  Absolute just cares 'in position', Relative should make sure 'same position'.
+  
+- result
+
+  - Absolute: one folder for one ligand
+  - Relative: one for a pair of FEP molecule
+
+
+
+
+to prepare multiple ligands. support multiple files and one file containing ligands.
+
+
+
+##### result
+
+- go to `namd`, 1,2,... means different ligands
+
 
 
 
 
 #### FESetup
+
+https://fesetup.readthedocs.io/en/latest/introduction.html is unreadable...
+
+##### FESetup for Gromacs
+
+[a tutorial](https://vileoy.uovie.com/blog/2020/01/07/free-energy-calculation-tutorial/) from [this original one](https://siremol.org/tutorials/somd/Binding_free_energy/FESetup.html)
+
+[maybe](http://pmx.mpibpc.mpg.de/sardinia2018_tutorial2/index.html)
+
+
+
+
+
+FESetup for NAMD
+
+no tutorial, no option manual, only code...
+
+
+
+#### FEPrepare
+
+- https://feprepare.vi-seem.eu/indexlpg.php  a server
+  - https://zhuanlan.zhihu.com/p/358318444  https://www.zhihu.com/people/qutesun/zvideos
+  - https://feprepare.vi-seem.eu/Manual.pdf
+- http://zarbi.chem.yale.edu/ligpargen bad charge settings!
+  - [principles, and guide of ligpargen](https://pergamos.lib.uoa.gr/uoa/dl/frontend/file/lib/default/data/2779350/theFile)
+
+cannot control force field?? also, failed...
+
+
+
+
+
+#### Method 1 MTP
+
+change any NTP into methyl triphosphate
+
+> try: equilibrated remTP
+
+##### build dual topology file
+
+1. First, build the normal system. 
+
+
+
+syntax
+
+```shell
+alchemify <input PSF> <output PSF> <FEPfile> [FEP column]
+```
+
+so here
+
+##### build the system and .fep
+
+
+
+##### run the simulation
+
+> once we obtained the .psf and .pdb file of the system, no more hybrid topology file is needed
+
+
+
+
+
+
+
+
+
+
 
 
 

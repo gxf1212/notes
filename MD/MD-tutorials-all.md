@@ -101,11 +101,19 @@ gmx genion -s ions.tpr -o solv_ions.gro -p topol.top -pname NA -nname CL -nn 6
 
 #### 6. methane in water--free energy
 
-
+http://www.mdtutorials.com/gmx/free_energy/index.html
 
 #### notes
 
 离子名称:如果遇到困难, 请参考`ions.itp`中的正确命名.
+
+
+
+### Advanced
+
+Free Energy Calculation with GROMACS Hands-On Tutorial
+
+
 
 
 
@@ -114,10 +122,6 @@ gmx genion -s ions.tpr -o solv_ions.gro -p topol.top -pname NA -nname CL -nn 6
 其他
 
 - 毕设那个可以增加investigational等等
-
-
-
-
 
 ## Amber(Tools)
 
