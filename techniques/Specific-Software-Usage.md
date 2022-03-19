@@ -497,6 +497,21 @@ and https://www.moerats.com/archives/740/
   sudo apt install onedrive
   ```
 
+  But [an issue](https://github.com/skilion/onedrive/issues/511) said this installs an old version? The first time I install it works fine. And [.deb](https://packages.ubuntu.com/focal/onedrive) does not solve the issue.
+
+  > compile
+  >
+  > ```shell
+  > # under source code folder
+  > curl -fsS https://dlang.org/install.sh | bash -s dmd
+  > source ~/dlang/dmd-2.099.0/activate
+  > ./configure
+  > make clean; make;
+  > sudo make install
+  > ```
+  >
+  > and succeeded to authorize...
+
 - [authorization](https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#authorize-the-application-with-your-onedrive-account)
 
    Run the command `onedrive --logout`. This will clean up the previous authorisation
@@ -508,23 +523,38 @@ and https://www.moerats.com/archives/740/
    gedit /home/gxf/.config/onedrive/config
    ```
 
+   copy default from [here](https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#the-default-configuration-file-is-listed-below)
+
 - To sync more folders
 
    - make links, like in Windows
 
      ```shell
-     ln -s ~/work_dir ~/Onedrive/workstation
+     ln -s ~/work_dir ~/onedrive/workstation
      ```
 
      you can organize the directories under `~/Onedrive/workstation` in case data in other machines...
-
-     but once the source folder is modified, soft links are lost
 
    - or [modify the sync_list](https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#selective-sync-via-sync_list-file)
 
      After changing the sync_list, you must perform `onedrive --synchronize --resync`
 
+     can set 'excludes'
+     
      but may have same problems
+
+   > both: once the source folder is modified, links are lost
+
+   list of dirs
+
+   ```shell
+   work
+   packages
+   Pictures (wall papers)
+   Documents
+   ...
+   ~/.config # bashrc, conda? typora! p
+   ```
 
 - sync
 
@@ -595,7 +625,7 @@ https://www.moerats.com/archives/491/
 
 https://www.misterma.com/archives/900/
 
-all are usage & mounting reference
+all are usage & mounting reference (not for just syncing?)
 
 ```shell
 $ rclone config
@@ -607,7 +637,7 @@ Description: No code returned by remote server
 
 个人：Application has been successfully authorised, however no additional command switches were provided.
 
-
+I decide to use rclone when one project is finished and move all files to the cloud (no longer in local)
 
 >##### onedrived-dev
 >

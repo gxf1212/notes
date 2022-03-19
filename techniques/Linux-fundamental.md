@@ -64,7 +64,7 @@ This is a record of my operations during 折腾ing the system, in order not to f
    
    ```shell
    cat /proc/driver/nvidia/version
-   n
+   nvidia-smi
    ```
    
 4. my base board
@@ -372,7 +372,15 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
    主题路径：`/home/gxf/.config/Typora/themes`
 
-4. 
+   现在还是用下好的包了
+
+4. 桌面便签
+
+   ```shell
+   sudo apt-get install xpad
+   ```
+
+   
 
 ### Operation on files and directory
 
@@ -575,8 +583,18 @@ tar -zcvf folder.tar.gz folder | split -b 4000M -d -a 1 - folder.tar.gz
    Icon=/home/gxf/pymol/share/pymol/data/pymol/icons/icon2_128x128.png   #在开始菜>单中的显示图标
    ```
    
-   还是用alacarte
+   还是用**alacarte**
 
+   ```
+   adt
+   pymol
+   DSV
+   GaussView
+   chimera
+   Pycharm
+   anaconda-navigator
+   ```
+   
 2. 软件中心点开没反应？ 
    
    ```shell
@@ -769,7 +787,7 @@ https://blog.csdn.net/zhayushui/article/details/80433768
 
 - path to anaconda icon  [link](https://dannyda.com/2020/03/21/how-to-create-shortcut-icon-for-anaconda-anaconda3-navigator-launch-anaconda-navigator-in-linux-debian-ubuntu-kali-linux/?__cf_chl_managed_tk__=8b0602f628e3697df877a10ef8acbd1aaed57efe-1624180568-0-AQN5TbG3O_yGaDEn0fVCjKdPwJeitKXjQ5dGrRfek69NylD0fJ5-atmRV2JoCodX4-mn_CX-vH8Ay_KzM9Ew77recYhgLQF_b3AqC85p9Pt8IVjBso98tTdFN9TknxGj5tTJFM_8KyF_S4qbMmoTpsiUnMKl2kc3rlzmRlQZvO0AJaILgZakK-WjM6xFauMno73HWqkCE4IaHB35y0M0C0dnw8t2b5qReINgAcLiCZuHX897fWj-OLS6yNbAVjmkgOPbkazSG3X8a-o_AgziC8zfKXi584jpGmet4WwRwFnSaWJvOAp7BA7vSIkcSJ7UAOFWzpvkDilEtFoa-XMd6jpZQgKbtBVQn4vLT5LUl1_XLFU3M7B9G_vN7vcyUcFjLV2gl6xdDcx9WA-JypLtICF3nbFVjS3gvK_WCEqs30dnW38X3Ceuk9Bhq7FFyegkaQmnFy5a4V5KeJob3h_gXQRaWwaeAFAHoeuYY0RXfAtfD82sJgJP0UOOYC8IBBV43rGAmhSOsLhiC2u3hk2hwLIEy7mG10sSUlGq_3I_dPjha1qlIAP0APiBXaWOOdujGD2gFeot6PQGwrg71cglm4rQc1Zei_kF8QfHdYerOFjLLtbfWC0HTeoFZ_L7Qu9R9c8npxn9Z5Np2O_IqqsKo3yaDAxR_aV8JVS3rS-a4mxAunZXcWj734HTBAJaTTSdepNfW2PdqnUEbsnD5bAyjeDPVQQupDNG_1qz8fsEzThDBSPP04GMtGJGqpEBawQvu2Nk857rXxA-_V2AwE9s7Og)
 
-  `/home/abc/anaconda3/lib/python3.7/site-packages/anaconda_navigator/static/images/anaconda-icon-256x256.png`
+  `/home/user/anaconda3/lib/python3.7/site-packages/anaconda_navigator/static/images/anaconda-icon-256x256.png`
 
 - An unexpected error has occurred. Conda has prepared the above report.
   
@@ -1383,33 +1401,35 @@ not sure how to do...
    sudo dpkg -i libcudnn*
    ```
    
-4. check success (tar.gz): [strange??? but a complete guide!!](https://blog.csdn.net/weixin_28691441/article/details/112144795) 
+   to check success. You'd better install in order! (libcudnn, dev, example)
+   
+4. check success (tar.gz)
 
+   > [strange??? but a complete guide!!](https://blog.csdn.net/weixin_28691441/article/details/112144795) 
+   >
+   > ```shell
+   > cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 
+   > ```
+   >
+   > It's  old! let’s follow the official guide below
+   
    ```shell
-   cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 
+   # Copy the cuDNN samples to a writable path.
+   HOME=./
+   cp -r /usr/src/cudnn_samples_v8/ $HOME
+   # Go to the writable path.
+   cd $HOME/cudnn_samples_v8/mnistCUDNN
+   # Compile the mnistCUDNN sample.
+   make clean && make
+   # Run the mnistCUDNN sample.
+   ./mnistCUDNN
    ```
    
-   might be old! let’s follow the official guide below
+   If cuDNN is properly installed and running on your Linux system, you will see a message similar to the following:
    
-   > ```shell
-   > # Copy the cuDNN samples to a writable path.
-   > HOME=./
-   > cp -r /usr/src/cudnn_samples_v8/ $HOME
-   > # Go to the writable path.
-   > cd $HOME/cudnn_samples_v8/mnistCUDNN
-   > # Compile the mnistCUDNN sample.
-   > make clean && make
-   > # Run the mnistCUDNN sample.
-   > ./mnistCUDNN
-   > ```
-   >
-   > If cuDNN is properly installed and running on your Linux system, you will see a message similar to the following:
-   >
-   > ```
-   > Test passed!
-   > ```
-
-
+    ```
+    Test passed!
+    ```
 
 # Debugging experiences on the system
 
@@ -1923,7 +1943,45 @@ sudo service lightdm restart
 - 吃饭睡觉前重启一波？
 - 占资源行为：VScode开着巨大的log文件（还好？最好别）
 
+## 22.3.17 主文件夹没了，用户还在
 
+- 症状
+  - 输入密码后闪一下又回到登录界面（循环登录）
+  - 我的用户文件夹没了
+  - gdisk: all is 'not present' 
+- 可能错误问题
+  - 系统配置
+    - 显卡 (no prob)
+    - ls -ld /tmp; /usr/lib，权限 (not this)
+    - /etc/profile（没用？
+  - 硬盘坏了
+    - 硬盘空间不够？
+    - df -h等手段
+    - 即使gdisk写了分区表也不可，重装后都看不到
+
+https://www.jianshu.com/p/c8403b417641 解决ubuntu显卡驱动和循环登录问题
+
+https://blog.csdn.net/cqandwly/article/details/118407580
+
+> cat ~/.xsession-errors (no!)
+
+https://blog.csdn.net/chenjiyou363753068/article/details/90611483
+
+https://askubuntu.com/questions/401201/could-not-chdir-to-home-directory-home-me-no-such-file-or-directory  新建一个文件夹设为home
+
+http://www.noobyard.com/article/p-vgixdwgy-st.html 创建home后解决了？
+
+不得已的解决：重建用户，下载备份
+
+但是都没用。结果：重装系统、格掉硬盘
+
+> 我的根目录无罪啊！！！
+
+教训：
+
+>!WARNING
+>
+> 永远不能用ToDesk的按钮重启
 
 
 

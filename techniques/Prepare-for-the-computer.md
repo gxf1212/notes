@@ -460,7 +460,7 @@ cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf/gromacs-2021.5-gpu \
 -DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf/fftw-3.3.10 \
 -DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON \
 -DGMX_GPU=CUDA
-make -j 8
+make -j 6
 make check
 make install
 
@@ -470,7 +470,7 @@ cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf/gromacs-2021-gpu \
 -DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf/fftw-3.3.9 \
 -DREGRESSIONTEST_DOWNLOAD=ON \
 -DGMX_GPU=CUDA -DCUDA_TOOKIT_ROOT_DIR=/usr/local/cuda/
-make -j 8
+make -j 6
 make check
 make install
 ```
@@ -637,7 +637,7 @@ if in conda, no need to add `amber.pythons`
 https://gromacswrapper.readthedocs.io/en/latest/index.html
 
 ```shell
-pip install GromacsWrapper  #
+pip install GromacsWrapper  # use ↓
 conda install -c conda-forge -c bioconda gromacswrapper
 from gromacs.fileformats.xvg import XVG # read .xvg files
 ```
@@ -663,7 +663,7 @@ conda uninstall mdtraj
 
 https://mdtraj.org/1.9.4/mdconvert.html
 
-#### msmbuilder
+### msmbuilder
 
 http://msmbuilder.org/3.8.0/
 
@@ -718,9 +718,9 @@ from conda
 
 ```shell
 # AmberTools. for gmx_MMPBSA, not so high python version
-conda create -n AmberTools20
+conda create -n AmberTools21 -y
 # conda remove --name AmberTools20 --all 
-conda activate AmberTools20
+conda activate AmberTools21
 # conda install -c conda-forge ambertools=20 -y # old
 conda install -c conda-forge ambertools=21 compilers -y 
 # update
@@ -746,7 +746,7 @@ conda install -c acpype acpype -y # this contains ambertools-17
 2022.2.11 update
 
 ```shell
-conda create -n Acpype 
+conda create -n Acpype -
 conda install -c conda-forge acpype
 ```
 
@@ -908,8 +908,9 @@ vi install_DSClient.sh
 # Change "#!/bin/sh" to "#!/bin/bash"
 # Insert "shopt -s expand_aliases" (without quotes) above "alias echoe="echo -e"" and save file.
 bash install_DSClient.sh
-# choose 2, create a folder in the current path as target, then choose 1 (or Enter) twice
-/home/gxf/BIOVIA2021/DiscoveryStudio2021
+# choose 2, create a folder in the current path as target, (??) then choose 1 (or Enter) twice
+/home/gxf/BIOVIA2021/DiscoveryStudio2021  # we just want to add 2021, if not, just use default 'BIOVIA'
+# ignore './install_lp.sh: 73: Syntax error: redirection unexpected'
 # now you've created an installer
 
 ## step 2, configure license pack
@@ -923,7 +924,7 @@ vi lp_echovars
 cd ~/BIOVIA2021/DiscoveryStudio2021/bin
 ./config_lp_location ~/BIOVIA2021/LicensePack/
 gedit ./DiscoveryStudio2021
-# change "ACCELRYS_DEBUG=0" to "ACCELRYS_DEBUG=1". 
+# change "ACCELRYS_DEBUG=0" to "ACCELRYS_DEBUG=1". (all 3?)
 # Then when DSV is started via the terminal, you will get a verbose readout that can be inspected for errors.
 ./DiscoveryStudio2021
 ```
@@ -941,6 +942,8 @@ make check
 make install
 cp /home/gxf/libpng15/lib/libpng15.so.15 ~/BIOVIA2021/DiscoveryStudio2021/lib/
 ```
+
+> working directory should not contain sth like '&'
 
 and it''s working! [Applause]
 
@@ -1033,10 +1036,10 @@ for AmberTools!!!
 ```shell
 # https://www.mdanalysis.org/
 conda config --add channels conda-forge
-conda install mdanalysis
-conda install -c openbabel openbabel
+conda install mdanalysis -y
+conda install -c openbabel openbabel -y
 # conda install -c bioconda pybel # not this
-conda install -c rdkit rdkit
+conda install -c rdkit rdkit -y
 ```
 
 usage

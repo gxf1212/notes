@@ -2,7 +2,7 @@
 
 Notes on the final year project (毕设), Nov 2021~May 2022.
 
-## background
+# background
 
 > 9.27
 
@@ -11,7 +11,7 @@ Notes on the final year project (毕设), Nov 2021~May 2022.
   - of course needs helicase (NSP13), etc.
 - 老药新用：drug repurposing
 
-### Mechanism
+## Mechanism
 
 - *Mechanism of SARS-CoV-2 polymerase stalling by remdesivir* (nature communications)
 
@@ -25,7 +25,7 @@ Here, we present a 3.9-Å-resolution cryo-EM reconstruction of a <u>remdesivir-s
 
 Here we report the cryo–electron microscopy structure of the SARS-CoV-2  RdRp, both in the apo form at 2.8-angstrom resolution and <u>in complex with a 50-base template-primer RNA and remdesivir</u> at 2.5-angstrom resolution. The complex structure reveals that the partial double-stranded RNA template is inserted into the central channel of the RdRp, where remdesivir is covalently incorporated into the primer  strand at the first replicated base pair, and terminates chain elongation.
 
-### simulation
+## simulation
 
 - *Revealing the Inhibition Mechanism of RNA-Dependent RNA Polymerase (RdRp) of  SARS-CoV-2 by Remdesivir and Nucleotide Analogues: A Molecular Dynamics  Simulation Study*
 
@@ -35,7 +35,7 @@ The binding energy data reveal that compound-17 (−59.6 kcal/mol) binds  more s
 
 筛选的更是一大堆了，搜    remdesivir analog screening sars-cov-2 RdRp
 
-### other similar simulation
+## other similar simulation
 
 - *High-throughput rational design of the remdesivir binding site in the RdRp of SARS-CoV-2: implications for potential resistance*
 
@@ -49,11 +49,11 @@ The binding energy data reveal that compound-17 (−59.6 kcal/mol) binds  more s
 
 
 
-## Software usage
+# Software usage
 
 record sth general
 
-### gmx
+## gmx
 
 1. check installation info
 
@@ -63,9 +63,9 @@ record sth general
 
 2. 
 
-#### .mdp options
+### .mdp options
 
-##### vdw
+#### vdw
 
 use “switch”, Smoothly switches the potential to zero between rvdw-switch (page 211) and rvdw
 (page 212). i.e. a switching distance of 10 Å and a smooth cutoff distance of 12Å in the paper
@@ -76,7 +76,7 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 
 
 
-> ### MD simulation (ATP-Mg^2+^) with Gromacs
+> ## MD simulation (ATP-Mg^2+^) with Gromacs
 >
 > The ATP system, energy minimization and indexing have been done. 
 >
@@ -107,7 +107,7 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 
 
 
-### Pymol
+## Pymol
 
 1. delete命令！
 
@@ -121,11 +121,11 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 
 3. 
 
-### VMD techniques
+## VMD techniques
 
 杂记, some extra functions, that I encountered. for details, check vmd-ug.pdf
 
-#### General
+### General
 
 1. run in terminal
 
@@ -198,7 +198,7 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 
 5. To know about your system, like checking the number of atoms, just load it into vmd (also when executing scripts) and see the cmd.
 
-#### VMD Graphics
+### VMD Graphics
 
 1. Graphics--Representations: for visualization.
 
@@ -227,7 +227,7 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 4. Graphics--Representations--Drawing Method, Beta: we may not use that field. So we can replace it with some properties we computed and let VMD color atoms according to it
 5. 
 
-### shell
+## shell
 
 1. shell 统计出现行数
 
@@ -245,7 +245,7 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 
 
 
-### Some other notes with VMD and NAMD
+## Some other notes with VMD and NAMD
 
 > ERROR: failed on end of segment MOLECULE DESTROYED BY FATAL ERROR!
 
@@ -257,11 +257,11 @@ probably need to add top/itp file
 
 
 
-## Stage 1 Protocol
+# Stage 1 Protocol
 
 stage 1: from structure to FEP
 
-### Notes
+## Notes
 
 **protein-ATP system**
 
@@ -275,9 +275,9 @@ notice the binding mode?
 
 
 
-### Prepare the docked structure (ligand)
+## Prepare the docked structure (ligand)
 
-#### basic
+### basic
 
 original .pdb文件 去除原子类型??
 
@@ -286,7 +286,7 @@ two types of processings
 - directly from pdb structure (pdb to pdb)
 - make (whatever type) into pdbqt and dock first, then convert (pdbqt or original) to pdb
 
-#### docking
+### docking
 
 to dock two molecules together, we may:
 
@@ -303,7 +303,7 @@ to dock two molecules together, we may:
 |          |                                   |         |         |                      |
 |          |                                   |         |         |                      |
 
-#### Autodock vina
+### Autodock vina
 
 > Prepare receptor, as well as flexible: see UROPS notes
 >
@@ -312,7 +312,7 @@ to dock two molecules together, we may:
 > - when choosing residues, click on the S circle!
 >
 
-##### info&convert existing structure
+#### info&convert existing structure
 
 RemdesivirTP https://pubchem.ncbi.nlm.nih.gov/compound/56832906
 
@@ -376,7 +376,7 @@ requirements for vina:
 >
 > to show bonds explicitly  https://pymolwiki.org/index.php/Valence
 
-##### docking commands
+#### docking commands
 
 ```shell
 f=remtp
@@ -399,11 +399,11 @@ obabel ${f}_d.pdb -opdb -O ${f}.pdb -p 7.0 -as
 rm ${f}_d.pdb
 ```
 
-#### Draw and convert
+### Draw and convert
 
 tools that can **both draw** a molecule **and convert** through SMILES.  Your own molecule!
 
-##### ZINC+obabel
+#### ZINC+obabel
 
 - ZINC: search and draw, copy that smiles
 
@@ -414,7 +414,7 @@ tools that can **both draw** a molecule **and convert** through SMILES.  Your ow
   obabel -:$f --gen3d -opdbqt -O atp.pdbqt -as -h --partialcharge gasteiger # for vina
   ```
 
-##### Avogadro
+### Avogadro
 
 > an alternative for ChemBioOffice in Linux
 
@@ -424,7 +424,7 @@ output: File--Export--Molecule--xxx.pdb
 
 https://avogadro.cc/docs/tools/draw-tool/
 
-#### Draw and edit molecule
+## Draw and edit molecule
 
 minimization won't change its position too much, but so helpful for later use. Or just modify on minimized ATP...
 
@@ -432,7 +432,7 @@ minimization won't change its position too much, but so helpful for later use. O
 obminimize -ff MMFF94 -n 1000 atp.pdb > atp_m.pdb
 ```
 
-##### GaussView
+### GaussView
 
 load pdb into it. Almost no changes in the position. But we are so familiar with modeling!
 
@@ -440,7 +440,7 @@ Try to make every bond and hydrogen right! Maybe Ar ring should be made into sin
 
 One thing you MUST do after that is: unify the residue name (change for edited atoms). or AutoPSF says sth like 'failed on end of segment'
 
-##### DSV
+### DSV
 
 may also edit small molecule and prepare for docking (usable?)
 
@@ -454,7 +454,7 @@ Not as familiar as Gauss.
 >
 > but can prepare for UCSF DOCK (adt, and other?) https://zhuanlan.zhihu.com/p/148384183
 
-##### After drawing
+### After drawing
 
 maybe minimize. you should change the name of the ligand? not really needed
 
@@ -462,9 +462,9 @@ maybe minimize. you should change the name of the ligand? not really needed
 grep "ATP" -rl ./remtp.pdb | xargs sed -i "s/ATP/LIG/g"
 ```
 
-### Prepare the system with VMD etc.
+## Prepare the system with VMD etc.
 
-#### reference
+### reference
 
 some tutorials:
 
@@ -493,7 +493,7 @@ other tools:
 
 I have to summarize the steps:
 
-#### build complex structure
+### build complex structure
 
 normally build your complex.pdb (by docking etc). Get positions right. Remember the Mg^2+^.
 
@@ -515,11 +515,11 @@ Then split all components.
 >
 > 
 
-#### build complex-method 1 (deprecated)
+### build complex-method 1 (deprecated)
 
 > it is said that when you use AutoPSF you cannot track the topology file used. It’s suggested to adopt method 2
 
-##### make the all .pdb and .psf with AutoPSF
+#### make the all .pdb and .psf with AutoPSF
 
 Extensions---Modeling--Automatic PSF Builder, would be a GUI
 
@@ -578,7 +578,7 @@ Summary on steps (see MD-tutorial for details)
 
 > note on results: `xxx_autopsf_formatted.pdb` only removes `REMARK  xxx` and `END` line from `xxx_autopsf.pdb`. basically identical
 
-##### use console to combine all molecules
+#### use console to combine all molecules
 
 Extensions---Tk console, or execute in console
 
@@ -604,7 +604,7 @@ quit
 vmd -dispdev text -e merge.tcl
 ```
 
-#### build complex-method 2 (using)
+### build complex-method 2 (using)
 
 > use console, include topology. [How to create a PSF file](https://sassie-web.chem.utk.edu/docs/structures_and_force_fields/notes.html)
 >
@@ -768,13 +768,13 @@ writepsf merged.psf
 >
 > 
 
-#### build complex-method 3
+### build complex-method 3
 
 build with Gromacs and AmberTools?
 
 
 
-##### Appendix: CHARMM-GUI generate files for ligand
+#### Appendix: CHARMM-GUI generate files for ligand
 
 but not used in method 1
 
@@ -830,7 +830,7 @@ focus on `ligandrm.pdb/psf`, which can be put into a merge.tcl, as **an alternat
 >
 > still **toppar_all36_na_nad_ppi.str** , a little change: Ar ring not planar!! position basically the same
 
-##### Appendix 2: about the topology
+#### Appendix 2: about the topology
 
 When you encouter errors when reading .str file:
 
@@ -853,12 +853,12 @@ When you encouter errors when reading .str file:
 
 
 
-#### solvation and ionization
+### solvation and ionization
 
 - solvate https://www.ks.uiuc.edu/Research/vmd/plugins/solvate/
 - autoionize https://www.ks.uiuc.edu/Research/vmd/plugins/autoionize/
 
-##### method 1 (scripting, easier?)
+#### method 1 (scripting, easier?)
 
 In the last step, you have obtained combine.pdb and .psf. open them with vmd
 
@@ -883,13 +883,13 @@ autoionize -psf solvated.psf -pdb solvated.pdb -sc 0.1 -o system
 # params, to be consistent
 ```
 
-#####  method 2-GUI
+####  method 2-GUI
 
 > note: a trick: Extension--Modeling--Automatic PSF Builder--Options, check 'add solvation box' and 'ionization' options, follow the PSF building protocol, and you will get completely solvated and ionized system!!!
 >
 > though the parameters cannot be set...
 
-###### Solvation
+##### Solvation
 
 Extension--Modeling--Add Solvation Box
 
@@ -905,7 +905,7 @@ Extension--Modeling--Add Solvation Box
 
 > this GUI doesn’t have ionization, neither choose water model?? TIP3P water is the default...
 
-###### Ionization
+##### Ionization
 
 Extensions--Modeling--Add ions (autoionize)
 
@@ -916,7 +916,7 @@ very straightforward
 
 > it’s not replacing water mols, it adds ions
 
-##### measurement of the system 
+#### measurement of the system 
 
 In a new vmd session, load the solvated and ionized structure
 
@@ -962,7 +962,7 @@ vmd -dispdev text -e measure.tcl
 >
 > 96013 atoms, 27704 water
 
-### Setting up a MD simulation 
+## Setting up a MD simulation 
 
 for basics about .namd parameters, please read 
 
@@ -976,11 +976,11 @@ for basics about .namd parameters, please read
 - note in .conf
 - [Kevin's scripts](https://github.com/skblnw/mkrun/tree/master/NAMD). don't ever forget!
 
-#### on the scripts
+### on the scripts
 
 Below are parameters you should notice in every simulation.
 
-##### constants and options
+#### constants and options
 
 - outputbase: your system
 - 
@@ -989,9 +989,9 @@ Below are parameters you should notice in every simulation.
 - when temp gets stable, `langevin on`
 - `PSWITCH` and `langevinPiston on`: constant pressure
 
-##### system and parameters 
+#### system and parameters 
 
-###### (debugging)
+##### (debugging)
 
 par_CMAP.inp in Kevin's script? 
 
@@ -1024,7 +1024,7 @@ contains protein, ions (and so on? a huge file). begin with:
 >
 > **par_all36_na.prm** for some atoms in ATP. may cause conflicts. does that matter?
 
-###### solution
+##### solution
 
 use `par_all36m_prot.prm` (same protein parameter as we are using in `param.prm`) and all other `.prm` files, then `water_and_ions_namd.str`
 
@@ -1056,12 +1056,12 @@ parameters          ../common/toppar_water_ions_namd.str
 
 the `molecule.str` is not necessary here
 
-##### restarting
+#### restarting
 
 - The “reinitvels” command reinitializes velocities to a random distribution based on the given temperature.
 - 
 
-##### boxes, restrains
+#### boxes, restrains
 
 see tutorial [Building Gramicidin A](http://www.ks.uiuc.edu/Research/namd/tutorial/NCSA2002/hands-on/) for detailed guidance and scripts about setting restrains
 
@@ -1090,7 +1090,7 @@ see tutorial [Building Gramicidin A](http://www.ks.uiuc.edu/Research/namd/tutori
 
 - 
 
-##### minimization, equilibration, NVT and NPT
+#### minimization, equilibration, NVT and NPT
 
 all use conjugated gradient....not much to discuss
 
@@ -1108,7 +1108,7 @@ By now the Kevin script is compatible with the tutorial. Just ignore the other o
 
 ` numsteps` = `run` ?
 
-###### steps
+##### steps
 
 Initially, both temp and pressure is on and settings are done. Fix and restraint are both on. 
 
@@ -1144,7 +1144,7 @@ As simulation goes on, we only turn the options on or off.
 
 6. Constant pressure with reduced damping coefficients.
 
-##### other settings
+#### other settings
 
 - With wrapping, some molecules will jump between sides of the cell in the trajectory file to yield the periodic image nearest to the origin. Without wrapping, molecules will have smooth trajectories, but water in the trajectory may appear to explode as individual molecules diffuse. Wrapping only affects output, not the correctness of the simulation.
 
@@ -1158,7 +1158,7 @@ As simulation goes on, we only turn the options on or off.
 
 - 
 
-##### Guidance
+#### Guidance
 
 see the script for the final values
 
@@ -1182,14 +1182,14 @@ see the script for the final values
 
 time length: refer to tutorials--my exploration--simulation
 
-#### work flow
+### work flow
 
 for a new ligand, only need to change:
 
 - outputbase
 - CellBasisVector/origin
 
-##### commands
+#### commands
 
 > building system is in a folder; if not messy, could put “solvation” together
 >
@@ -1239,7 +1239,7 @@ namd3 +p1 +devices 0 pro-lig-prod > pro-lig-prod.log
 >
 > But don't use that for minimization (CPU-dependent). But also there's 45w steps of npt...
 
-##### testing the run
+#### testing the run
 
 > 1. https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2003-2004/0295.html
 >
@@ -1292,7 +1292,7 @@ namd3 +p1 +devices 0 pro-lig-prod > pro-lig-prod.log
 >
 > how come the rate increases two folds in test 3?
 
-#### Analysis basics and check
+### Analysis basics and check
 
 As said, to obtain appropriate params for your system, should check properties.
 
@@ -1336,7 +1336,7 @@ animate read dcd rdrp-atp-prod.dcd
 
 
 
-#### Run in Gromacs
+### Run in Gromacs
 
 > prepare, equillibrate in NAMD, run in gmx. i.e. convert equilibrated system to gmx (.gro/top, ndx, velocity)
 >
@@ -1408,7 +1408,7 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 3. also the velocity in the last frame! (find how to load into gmx, .cpt?)
 
    ```tcl
-   ## from tutorial
+   # from tutorial
    # read in vmd
    mol new ../common/system.psf 
    mol addfile rdrp-atp-equil.restart.vel type namdbin waitfor all
@@ -1464,7 +1464,7 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 
 
 
-### Clustering Anaylsis
+## Clustering Anaylsis
 
 preparation
 
@@ -1474,15 +1474,15 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
 
 
 
-#### Clustering
+### Clustering
 
-##### in gmx
+#### in gmx
 
 - https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2011-2012/0654.htmlanalyze .dcd in gmx
 - http://www.ks.uiuc.edu/Development/MDTools/catdcd/ catdcd: dcd I/O basics. failed
 - [Using GROMACS force distribution analysis (FDA) tool with NAMD trajectories](9https://hits-mbm.github.io/guides/namd-fda.html) a good reference! do as him!
 
-###### prepare
+##### prepare
 
 1. make the initial structure, topology file, as did in [Run in Gromacs](#Run-in-Gromacs). We need `.tpr` or `.gro` for option `-s`
 
@@ -1544,7 +1544,7 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
    >
    > just change 'MG' to 'Mg' in .pdb, solved. Do this only when gmx is needed...
 
-###### clustering
+##### clustering
 
 We performed clustering analysis based on the RMSD of NTPs during the simulations, with SARS-COV-2 NSP12 aligned. 
 
@@ -1615,7 +1615,7 @@ questions
 >
 >   maybe caused by: namd running is different from gmx?
 
-###### analysis
+##### analysis
 
 1. basics
 
@@ -1657,7 +1657,7 @@ questions
 
       ???cluster???????frame?????rmsd?
 
-###### other
+##### other
 
 1. trjcat? no!
 
@@ -1678,19 +1678,19 @@ questions
 
 
 
-##### in VMD
+#### in VMD
 
 
 
-#### Analysis of binding mode?
+### Analysis of binding mode?
 
 Here not that much is required...
 
 
 
-### FEP (same) with NAMD
+## FEP (same) with NAMD
 
-#### Fundamentals
+### Fundamentals
 
 NAMD supports such a traditional dual-topology alchemical setup, which may be applied to perform both absolute and relative FEP calculation
 
@@ -1733,19 +1733,23 @@ we start from (equilibrated?) .pdb after MD
 
 
 
-#### Build with VMD
+### Build with VMD
 
 > try: equilibrated remTP
+>
+> files: protein, MG, two ligands from gui: pdb, psf, rtf, prm
 
-##### Relative
+#### Relative
 
-1. build the system and .fep
+> you may build the .fep first...
+
+1. build the system
 
    process the ligand as before, and change the name of the ligand:
 
    ```shell
-   grep -rl "LIG " remtp-gui.pdb remtp-gui.psf | xargs sed -i s/"LIG"/"END"/g
-   grep -rl "LIG " mtp-gui.pdb mtp-gui.psf | xargs sed -i s/"LIG"/"INI"/g
+   grep -rl "LIG " remtp-rm.pdb remtp-rm.psf | xargs sed -i s/"LIG"/"END"/g
+   grep -rl "LIG " mtp-rm.pdb mtp-rm.psf | xargs sed -i s/"LIG"/"INI"/g
    ```
 
    then build both ligand and complex
@@ -1755,29 +1759,86 @@ we start from (equilibrated?) .pdb after MD
    vmd -dispdev text -e sol-ion-fep.tcl
    ```
 
-2. build dual topology file
+   > a small problem: all is ATOM, no HETATM
+
+2. build the .fep
 
    you can either copy one file as the fep indicator or just modify your .pdb file. I'll choose the former here
 
    change all "END" lines, 63-66 columns to ' 1.00'; "INI": '-1.00' for your two .pdb file
 
    ```shell
-   awk -F " " '{if ($18==END) $62= 1.00}' complex.pdb > complex.fep
+   list=(ligand complex)
+   for f in ${list[*]}; do
+   cp ${f}.pdb ${f}.fep
+   sed -i "s/1.00  0.00      END/1.00  1.00      END/g" ${f}.fep
+   sed -i "s/1.00  0.00      INI/1.00 -1.00      INI/g" ${f}.fep
+   done
+   # find the long pattern
    ```
+
+   watch
+   
+   ```shell
+   vmd complex.psf -pdb complex.fep
+   vmd ligand.psf -pdb ligand.fep
+   ```
+
+   > select ligand by
+> ```
+   > resname END
+   > ```
+   >
+   > and view with coloring method 'Beta'
+
+3. build the dual topology file
+
+   
+
+   
+
+   
+
+3. 
 
 3. run the simulation
 
-   
+3. 
 
-   
 
-##### Absolute
+> failed
+>
+> ```shell
+> awk -F " " '{if ($18==END) $62= 1.00}' complex.pdb > complex.fep
+> grep "END" -rl complex.fep | xargs sed -i "s/ 0.00     / 1.00     /g"
+> ```
+>
+> 
+>
+> syntax
+>
+> ```shell
+> alchemify <input PSF> <output PSF> <FEPfile> [FEP column]
+> ```
+>
+> so here
+>
+> ```shell
+> # vmd
+> alchemify complex.psf complex-mtp2remtp.psf complex.fep B
+> ```
+>
+> rarely used now
+>
+> 
+
+#### Absolute
 
 easier, build as before until making FEP
 
 
 
-#### CHARMM-GUI
+### CHARMM-GUI
 
 [video demo](https://www.charmm-gui.org/?doc=demo&id=fec&lesson=1), [bilibili version](https://www.bilibili.com/video/BV153411s7kF)
 
@@ -1788,7 +1849,7 @@ easier, build as before until making FEP
 >
 > TIP2: do download every .tgz from Windows......
 
-##### steps
+#### steps
 
  use default settings unless otherwise specified
 
@@ -1808,11 +1869,11 @@ easier, build as before until making FEP
 
 > note: the unit of edge distance is nm, not Å .....
 
-##### note on files
+#### note on files
 
 folder: `basic` (from simulation), `ligand-charmm` (from GUI)
 
-###### What to use when building? 
+##### What to use when building? 
 
 normal .pdb failed, .sdf failed(it's not our ligand, it's something strange...), obabel converted also failed to pass the <u>topology making</u>. otherwise if you use the ligand files from RCSB, then [this](https://www.charmm-gui.org/?doc=issues) (atom order?)
 
@@ -1824,7 +1885,7 @@ normal .pdb failed, .sdf failed(it's not our ligand, it's something strange...),
 >
 > When choosing a structural file (instead of using RCSB .pdb (but maybe that only provides topology?)) for the ligand's topology, use`drawing3D.mol2` 
 
-###### What to use when uploading ligands?
+##### What to use when uploading ligands?
 
 > in the case of Absolute, mtp
 
@@ -1847,7 +1908,7 @@ cannot upload converted ligandrm?
 >
 >you may check the structure after equilibration
 
-###### force field check
+##### force field check
 
 However, the original ligand failed again. when using ligandrm.pdb, etc., it failed at cgenff (v2.5) force field check. lone pair? v1.0 is fine
 
@@ -1855,7 +1916,7 @@ However, the original ligand failed again. when using ligandrm.pdb, etc., it fai
 
 Actually the original ligand always fails. so **upload again** (without checking the option) and v2.5 works fine
 
-##### notes on modes
+#### notes on modes
 
 uploading ligands
 
@@ -1884,20 +1945,22 @@ both Relative or Absolute apply. A little difference for multiple ligands:
 
 to prepare multiple ligands. support multiple files and one file containing ligands.
 
-##### result
+#### result
 
 - where: go to `namd`, 1,2,... (2-3, ...) means different ligands
 - FEP: all of ligand INI disappear, all END appear, no common searching...
 
 
 
+### BFEE2
 
 
-#### FESetup
+
+### FESetup
 
 https://fesetup.readthedocs.io/en/latest/introduction.html is unreadable...
 
-##### FESetup for Gromacs
+#### FESetup for Gromacs
 
 [a tutorial](https://vileoy.uovie.com/blog/2020/01/07/free-energy-calculation-tutorial/) from [this original one](https://siremol.org/tutorials/somd/Binding_free_energy/FESetup.html)
 
@@ -1917,7 +1980,7 @@ no tutorial, no option manual, only code...
 
 
 
-#### FEPrepare
+### FEPrepare
 
 - https://feprepare.vi-seem.eu/indexlpg.php  a server
   - https://zhuanlan.zhihu.com/p/358318444  https://www.zhihu.com/people/qutesun/zvideos
@@ -1925,11 +1988,13 @@ no tutorial, no option manual, only code...
 - http://zarbi.chem.yale.edu/ligpargen bad charge settings!
   - [principles, and guide of ligpargen](https://pergamos.lib.uoa.gr/uoa/dl/frontend/file/lib/default/data/2779350/theFile)
 
-cannot control force field?? also, failed...
+cannot control force field? we have defined .psf and .rtf already... 
+
+also, failed...
 
 
 
-### FEP running
+## FEP running
 
 > once we obtained the .psf and .pdb file of the system, no more hybrid topology file is needed
 
@@ -1952,17 +2017,6 @@ namd3 +p1 +devices 0 pro-lig-prod > pro-lig-prod.log
 
 
 
-syntax
-
-```shell
-alchemify <input PSF> <output PSF> <FEPfile> [FEP column]
-```
-
-so here
-
-```shell
-alchemify complex.psf mtp2remtp.psf complex.pdb B
-```
 
 
 
@@ -1977,18 +2031,15 @@ alchemify complex.psf mtp2remtp.psf complex.pdb B
 
 
 
-
-
-
-## Stage 2 Protocol
+# Stage 2 Protocol
 
 
 
 
 
-### VS draft
+## VS draft
 
-#### search
+### search
 
 remTP: N#C[C@@]3(n2cnc1c(N)ncnc12)O[C@H](COP(=O)(O)OP(=O)(O)OP(=O)(O)O)[C@@H](O)[C@H]3O
 
@@ -2008,7 +2059,7 @@ pubmed离谱的一点就是，甲基都算烃基链的substructure，芳环就�
 >
 > [no purine](https://pubchem.ncbi.nlm.nih.gov/#query=O%3DP(O)(O)OP(%3DO)(O)OP(%3DO)(O)OC%5BC%40%40H%5D1CCCO1&tab=substructure&fullsearch=true&rotbonds_lte=20&mw_lte=723&hbondacc_lte=20&hbondacc_gte=11&rotbonds_gte=4&xlogp_gte=-10.7&heavycnt_gte=25&hbonddonor_lte=10&polararea_gte=176&mw_gte=445.17&complexity_lte=1312&hbonddonor_gte=2&heavycnt_lte=45&polararea_lte=366&xlogp_lte=1.3)
 
-#### summary
+### summary
 
 | stage                 | # of molecules |
 | --------------------- | -------------- |
@@ -2026,9 +2077,9 @@ pubmed离谱的一点就是，甲基都算烃基链的substructure，芳环就�
 - 再找出没文件的，用先gen3D的方式（仍有nan，要不算了，你厉害你用rdkit再试试）
 - 最终整体检查，修正加氢情况等，再改改
 
-#### converting
+### converting
 
-##### 2nd
+#### 2nd
 
 > pubchem里整出来坐标nan？gen3D的锅。converted有370个有nan
 >
@@ -2073,7 +2124,7 @@ rm ../lib-temp/*.pdb
 
 没采纳
 
-##### 3rd
+#### 3rd
 
 ```shell
 for j in `ls ../lib-temp`; do
@@ -2109,7 +2160,7 @@ MMFF94s：能输出的好像好多都好着。5C直线键解决了
 
 以后用MMFF94s？用吧，至少5C直线键要解决
 
-##### 4th
+#### 4th
 
 以后直接初始就94s！
 
@@ -2133,7 +2184,7 @@ done
 
 > lib_94s
 
-##### 5th
+#### 5th
 
 处理有离子的。在splited里：
 
@@ -2195,7 +2246,7 @@ done
 
 除完离子这些加氢有点问题？算了library里也有。。
 
-##### 6th
+#### 6th
 
 再救一波。。
 
@@ -2227,7 +2278,7 @@ gamma磷酸真的优化不了
 
 51个nan不管了
 
-##### 7th
+#### 7th
 
 最终检查，目标：加氢、多个分子，能修个别γ磷酸最好，能修芳环（kekulize）吗
 
@@ -2290,7 +2341,7 @@ find . -name "*" -type f -size 0c | xargs -n 1 rm -f
 
 
 
-#### other
+### other
 
 那转不了的到底是哪些呢？没离子也有好多失败的
 
@@ -2310,7 +2361,7 @@ find . -name "*" -type f -size 0c | xargs -n 1 rm -f
 
 
 
-#### docking
+### docking
 
 > docking test: some bonds rotated, some not. it affects!
 >
