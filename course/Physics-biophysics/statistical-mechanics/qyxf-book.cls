@@ -19,7 +19,7 @@
 \DeclareStringOption{primary}
 \DeclareStringOption{secondary}
 \DeclareBoolOption[true]{xits}
-\DeclareVoidOption{noCJKfont}{\PassOptionsToClass{fontset=none}{ctexbook}}
+\DeclareVoidOption{noCJKfont}{\PassOptionsToClass{fontset=none}{book}}
 
 % 已废弃选项提示
 \DeclareVoidOption{color}{\ClassWarning{\styname}{The option `color' is deprecated. Use `colorscheme' instead}}
@@ -30,13 +30,13 @@
 \DeclareVoidOption{opensource}{\ClassWarning{\styname}{The option `opensource' is deprecated}}
 
 % 处理选项
-\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{ctexbook}}
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessKeyvalOptions*
 
 % 载入文类
 \PassOptionsToPackage{no-math}{fontspec}
 \PassOptionsToPackage{CJKmath = true}{xeCJK}
-\LoadClass{ctexbook}
+\LoadClass{book}
 
 % 西文字体处理
 \RequirePackage{amsmath}
@@ -268,7 +268,7 @@
 
 % 章节标题与目录样式
 \RequirePackage{titlesec,titletoc}
-\ctexset{section={name={\S,}}}
+%\ctexset{section={name={\S,}}}
 \titleformat{\chapter}[block]{\color{\TitleColor}\centering\bfseries\fontsize{2.25em}{1.2ex}\selectfont}{\CTEXthechapter}{1em}{}
 \titleformat*{\section}{\color{\TitleColor}\fontsize{1.75em}{1.225ex}\selectfont\bfseries\centering}
 \titleformat*{\subsection}{\color{\TitleColor}\fontsize{1.5em}{1.43ex}\selectfont\bfseries}
@@ -277,10 +277,10 @@
 \titleformat*{\subparagraph}{\color{\TitleColor}}
 \titlespacing{\chapter}{0pt}{*1}{*4}
 \titlecontents{chapter}[24pt]{\hspace{-2pc}\filright}
-              {\normalsize\bfseries\contentspush{\thecontentslabel\ }}
+              {\normalsize\bfseries\contentspush{Chapter\ \thecontentslabel\ }}
               {}{\bfseries\titlerule*[8pt]{.}\contentspage}
 \titlecontents{section}[20pt]{\filright}
-              {\contentspush{\thecontentslabel\ }}
+              {\contentspush{\S\ \thecontentslabel\ }}
               {}{\titlerule*[8pt]{.}\contentspage}
 \titlecontents{subsection}[18pt]{\hspace{2pc}\filright}
               {\contentspush{\thecontentslabel\ }\itshape}
@@ -325,7 +325,7 @@
 % 杂项
 \RequirePackage{lastpage}
 \RequirePackage{appendix}
-\ctexset{appendix={number={\Roman{chapter}}}}
+%\ctexset{appendix={number={\Roman{chapter}}}}
 
 % 若干 metadata
 \newcommand{\@subtitle}{}

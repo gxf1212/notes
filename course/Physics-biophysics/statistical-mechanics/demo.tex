@@ -4,9 +4,9 @@
   twoside,
   openany,
   b5paper, % 以上均为 ctexbook 提供的文类选项
-  colorscheme = rbb, % 请根据需要选择或定制配色方案
-  primary = orange,  % 将主色改为橙色
-  secondary = violet, % 将辅助色改为紫色
+  colorscheme = bootstrap-v4, % 请根据需要选择或定制配色方案
+%  primary = blue,  % 主色
+%  secondary = violet, % 辅助色
   xits = false,
 ]{qyxf-book}
 
@@ -15,7 +15,7 @@
 \subtitle{Notes on Statistical Mechanics for Molecular Simulation}  % 可选
 \author{Xufan Gao}
 \date{\today}
-%\typo{AlphaGo}  % 排版人员信息，选填
+\typo{Xufan Gao}  % 排版人员信息，选填
 
 % 定制元信息
 \org{\Large\textit{西安交通大学}\\\textsc{Xi'an Jiaotong University}}
@@ -30,10 +30,23 @@
 % 取消本条注释，则将定义计数器归并到定理下
 % \resetdefine
 
+% customize
+\usepackage[UTF8]{ctex}  % for rare Chinese comments
+\ctexset{today=old}
+\renewcommand{\chaptername}{Chapter\ }
+\titleformat{\chapter}[block]{\color{\TitleColor}\centering\bfseries\fontsize{2.25em}{1.2ex}\selectfont}{\chaptername\thechapter}{1em}{}
+\titleformat{\section}{\color{\TitleColor}\fontsize{1.75em}{1.225ex}\selectfont\bfseries\centering}{\S\,\thesection}{1em}{}
+\renewcommand{\tablename}{Tab.}
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\refname}{References}
+\renewcommand{\contentsname}{Table of Contents}
+
 \newcommand{\md}{\mathrm{d}}
 \newcommand{\vF}{\boldsymbol{F}}
 \newcommand{\vr}{\boldsymbol{r}}
 \newcommand{\vp}{\boldsymbol{p}}
+
+% 日期、作品信息、环境名称是中文格式
 
 \begin{document}
 
@@ -41,7 +54,7 @@
 
 \tableofcontents
 
-\chapter{Preface}
+\chapter*{Preface}
 
 Oxford Graduate Texts
 
@@ -186,7 +199,7 @@ $$
   \footnote{未来新开发出来的 \LaTeX 引擎可能会被考虑。}。
 \end{alert}
 
-\section{常用功能指南}
+\section{Common functions}
 
 \subsection{命令与环境}
 
