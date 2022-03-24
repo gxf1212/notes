@@ -461,277 +461,147 @@ mklink/D "D:\OneDrive - stu.xjtu.edu.cn\Windows\smart phone" "F:\smart phone bac
 
 网页端同步manage
 
+#### iPad
 
+Goodnotes：https://zhuanlan.zhihu.com/p/104734199  需科学上网
 
+还是登不上学校的？？
 
+个人版的放不下goodnotes啊
 
-###### problems
+#### Linux
 
-1. Using application %27OneDrive Free Client%27 is currently not supported for your organization stu.xjtu.edu.cn because it is in an unmanaged state. An administrator needs to claim ownership of the company by DNS validation of stu.xjtu.edu.cn before the application OneDrive Free Client can be provisioned.
+好多不同的API，看知乎。。看哪个star的多。。
 
-   > %27: '
+https://linuxpip.org/linux-onedrive-client/
 
-   https://github.com/skilion/onedrive/issues/244
+> https://github.com/MoeClub/OneList/tree/master/OneDriveUploader
 
-   个人登录能用
+##### abraunegg/onedrive
 
-2. A database statement execution error occurred: disk I/O error
+https://github.com/abraunegg/onedrive. I've cloned it to save the docs.
 
-   The existing execution still has a lock on the files. You 'most likely' had a service file running the daemon which you did not stop.
+also refer to https://zhuanlan.zhihu.com/p/372355859
 
-   事实上虽然手动同步还报错，但确实在很快地同步
+and https://www.moerats.com/archives/740/
 
-3. 将来真的文件多了，应该1）升级25T；2）改用rclone的挂载模式（万一号没了又咋办？？）
+最主流的吧
 
-4. this time (22.3.20) building with source
+> It says [The 'skilion' version](https://github.com/skilion/onedrive) contains a significant number of defects in how the local sync state is managed.
 
-   problem: https://github.com/abraunegg/onedrive/issues/973
+###### Usage
 
-   also, failed at 
+- [install](https://github.com/abraunegg/onedrive/blob/master/docs/INSTALL.md#dependencies-ubuntu-18x-ubuntu-19x-ubuntu-20x--debian-9-debian-10---x86_64) dependencies and don't forget
 
-   ```
-   service onedrive start
-   ```
+  ```shell
+  sudo apt install onedrive
+  ```
 
-   
+  But [an issue](https://github.com/skilion/onedrive/issues/511) said this installs an old version? The first time I install it works fine. And [.deb](https://packages.ubuntu.com/focal/onedrive) does not solve the issue.
 
-   以后重装第一件事就是装好onedrive，单独下载后同步全部乱套了
+  > compile
+  >
+  > ```shell
+  > # under source code folder
+  > curl -fsS https://dlang.org/install.sh | bash -s dmd
+  > source ~/dlang/dmd-2.099.0/activate
+  > ./configure
+  > make clean; make;
+  > sudo make install
+  > ```
+  >
+  > and succeeded to authorize...
 
-5. 是不是如果有其他来源的备份也必须下载，比如iPad？rclone可吗？
+- [authorization](https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#authorize-the-application-with-your-onedrive-account)
 
-##### other
+  Run the command `onedrive --logout`. This will clean up the previous authorisation
 
-###### Insync
+- config
 
-Insync client: also cannot login
+  ```shell
+  onedrive --display-config # check
+  gedit /home/gxf/.config/onedrive/config
+  ```
 
-https://www.onedrives.net/2626.html
+  copy default from [here](https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#the-default-configuration-file-is-listed-below)
 
-maybe the problem sits in our unversity?
+- To sync more folders
 
->  School account: An error occurred and you couldn't be logged in.Please retry adding the account to Insync.Contact support@insynchq.com if the issue persists.
->
->  Personal: Connecting to Insync...
+  - make links, like in Windows
 
-###### rclone
+    ```shell
+    ln -s ~/work_dir ~/OneDrive/workstation
+    ```
 
-https://itsfoss.com/use-onedrive-linux-rclone/
+    you can organize the directories under `~/Onedrive/workstation` in case data in other machines...
 
-https://www.moerats.com/archives/491/
+  - or [modify the sync_list](https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#selective-sync-via-sync_list-file)
 
-https://www.misterma.com/archives/900/
+    After changing the sync_list, you must perform `onedrive --synchronize --resync`
 
-all are usage & mounting reference (not for just syncing?)
+    can set 'excludes'
 
-```shell
-$ rclone config
-Error: Auth Error
-Description: No code returned by remote server
-```
+    but may have same problems
 
-感觉是学校的问题。。
+  > both: once the source folder is modified, links are lost
 
-个人：Application has been successfully authorised, however no additional command switches were provided.
+  list of dirs
 
-I decide to use rclone when one project is finished and move all files to the cloud (no longer in local)
+  ```shell
+  work
+  packages
+  Pictures (wall papers)
+  Documents
+  ...
+  ~/.config # bashrc, conda? typora! p
+  ```
 
-```shell
-rclone mount backup:/ ~/onedrive --copy-links --no-gzip-encoding --no-check-certificate --allow-non-empty --umask 000
-```
+- sync
 
-can also sync
+  ```shell
+  onedrive --synchronize 
+  onedrive --synchronize --upload-only
+  onedrive --synchronize --download-only
+  ```
 
-```shell
-#!/bin/bash
-rclone sync /home/gxf/OneDrive/workstation/work backup:workstation/work
-rclone sync /home/gxf/OneDrive/workstation/Documents backup:workstation/Documents
-```
+  选择性同步
+  如果你不想同步整个网盘，而是某个文件夹，比如MOERATS，使用命令：
 
+  ```shell
+  #使用前提是OneDrive网盘和/root/OneDrive文件夹都有这个文件夹 # ?
+  onedrive --synchronize --single-directory MOERATS
+  ```
 
+- automatic sync
 
->##### onedrived-dev
->
->https://github.com/xybu/onedrived-dev
->
->```shell
->pip3 uninstall onedrived
->pip3 install --user git+https://github.com/xybu/onedrived-dev.git
->```
->
->似乎几百人star，但是Python问题。。
+  ```shell
+  systemctl --user enable onedrive
+  systemctl --user start onedrive
+  ```
 
-### baidunetdisk-python
+- If a file or folder is present on OneDrive, that does not exist locally, it will be removed. If the data on OneDrive should be kept, the following should be used:
 
-还是就用百度吧
+  ```shell
+  onedrive --synchronize --upload-only --no-remote-delete
+  ```
 
-> https://www.jiangjiyue.com/maintenance/linux/527.html  
+- status
 
-阿里等其他也许也有，但脚本不太通用？
+  ```shell
+  onedrive --display-sync-status --verbose
+  ```
 
-其他国外的盘，要么有客户端，要么包含在rclone里面，比较方便
+- stop
 
-> 关于速度：其实是动态调配，原则有：会员优先；你占的资源多了就暂时限制
+  ```shell
+  pkill -f onedrive
+  ```
 
-#### tutorial
+- 
 
-official: https://github.com/houtianze/bypy
+上传还是挺快的；自动上传的频率应该ok
 
-自动同步脚本 https://www.aiyo99.com/archives/60.html
+A simple GUI with multi-account support. https://github.com/bpozdena/OneDriveGUI
 
-> http://tiramisutes.github.io/2015/07/28/Linux-backup.html 就是定时上传一下
->
-> mysql的还看不懂
->
-> https://www.aiyo99.com/archives/60.html
 
-```shell
-bypy syncup /local/path/name /cloud/path/name
-# bypy upload
-```
 
-只是上传，并没有自动同步。需要自己编写脚本
-
-运行时添加-v参数，会显示进度详情。
-
-它的机制是这样吗，就是记录下sync过的每个文件？
-
-
-
-```shell
-bypy syncup packages ./backup-workstation/packages
-```
-
-
-
-### aliyun-client
-
-https://www.jiangjiyue.com/maintenance/linux/527.html
-
-https://github.com/tickstep/aliyunpan
-
-### Google drive
-
-探索了这么多，最后还是以买了个淘宝账号结束，还买的50块的，20就能买到了。
-
-真是太搞笑了。
-
-https://oauth2.googleapis.com  142.251.43.10:443
-
-连不上API，电脑端作罢。
-
-#### about the network
-
-防火墙或梯子（代理）可能导致登不了
-
-https://help.insynchq.com/en/articles/4209925-insync-3-common-issues-and-bugs   "Connecting to Insync..." and gets stuck
-
-```shell
-sudo ufw disable
-```
-
-no luck
-
-As for rclone:
-
-```
-If your browser doesn't open automatically go to the following link: http://127.0.0.1:53682/auth?state=eHlIJHcxkDZCnKNJduX4ZQ
-Log in and authorize rclone for access
-Waiting for code...
-Got code
-Failed to configure token: failed to get token: Post https://oauth2.googleapis.com/token: dial tcp 142.251.42.234:443: i/o timeout
-```
-
-#### rclone
-
-> to use your own API: https://rclone.org/drive/#making-your-own-client-id
-
-https://blog.csdn.net/maxuearn/article/details/82391957
-
-https://www.jiyiblog.com/archives/031167.html
-
-
-
-grive: also timeout
-
-https://github.com/vitalif/grive2
-
-
-
-gdrive
-
-no version for x86...
-
-https://github.com/prasmussen/gdrive
-
-https://zhujiwiki.com/3505/
-
-
-
-[ODrive](http://cn.tipsandtricks.tech/%E5%A6%82%E4%BD%95%E5%B0%86Ubuntu%E5%90%8C%E6%AD%A5%E5%88%B0%E6%82%A8%E7%9A%84Google-Drive)
-
-install: https://flathub.org/apps/details/io.github.liberodark.OpenDrive
-
-```shell
-flatpak uninstall io.github.liberodark.OpenDrive
-```
-
-
-
-drive
-
-https://github.com/odeke-em/drive#initializing
-
-also timeout
-
-### Summary on tests
-
-- 网页版到哪都能用
-- 和操作系统关系不大
-- onedrive学校号确实用不了
-- onedrive Linux是ok的；goodnotes可以
-- 所以问题在Google API上
-- Insync真的用不了；不能说rclone也有问题
-
-> 疑点：为啥API就用不了
->
-> rclone用不了Google却能用onedrive个人；且goodnotes为啥可以Google
-
-> 用API的两个：rclone和insync；onedrive
->
-> 变量：OS、平台、云盘、账号
-
-Onedrive：要分学校和个人账号
-
-iPad端的client可以用学校账号，但goodnote不能，个人goodnotes可以，但放不下
-
-Windows的client可以用学校账号，在用了
-
-insync是不行
-
-没试rclone
-
-Linux端
-
-onedrive登学校账户不行、个人可以
-
-rclone个人也可以，学校直接failure
-
-insync均用不了，但个人版报的错似乎不同？是Connectinnng toinsync，和Gdrive一样，学校报的，onedrive见上，rsync是什么
-
-不会是因为没交钱吧
-
-
-
-GDrive：要分我的和买的吗？
-
-iPad的goodnote都已经ok了
-
-Windows上官方client两个号都能用
-
-rclone两个号都不行（换greenVPN也一样）
-
-insync两个号都不行（报错有点不同？）
-
-Linux端两种client两个号也都不行
-
-grive等一通客户端都不行
