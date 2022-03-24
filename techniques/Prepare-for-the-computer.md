@@ -830,6 +830,12 @@ export ROSETTA_BIN=$ROSETTA/main/source/bin
 export PATH=$PATH:$ROSETTA_BIN
   ```
 
+### PyAutoFEP
+
+https://github.com/luancarvalhomartins/PyAutoFEP
+
+
+
 ## Visualization
 
 ### ligplot

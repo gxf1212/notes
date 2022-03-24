@@ -530,7 +530,7 @@ and https://www.moerats.com/archives/740/
    - make links, like in Windows
 
      ```shell
-     ln -s ~/work_dir ~/onedrive/workstation
+     ln -s ~/work_dir ~/OneDrive/workstation
      ```
 
      you can organize the directories under `~/Onedrive/workstation` in case data in other machines...
@@ -579,6 +579,24 @@ and https://www.moerats.com/archives/740/
    systemctl --user start onedrive
    ```
 
+- If a file or folder is present on OneDrive, that does not exist locally, it will be removed. If the data on OneDrive should be kept, the following should be used:
+
+   ```shell
+   onedrive --synchronize --upload-only --no-remote-delete
+   ```
+   
+- status
+
+   ```shell
+   onedrive --display-sync-status --verbose
+   ```
+
+- stop
+
+   ```shell
+   pkill -f onedrive
+   ```
+
 - 
 
 上传还是挺快的；自动上传的频率应该ok
@@ -602,6 +620,23 @@ A simple GUI with multi-account support. https://github.com/bpozdena/OneDriveGUI
      事实上虽然手动同步还报错，但确实在很快地同步
 
 3. 将来真的文件多了，应该1）升级25T；2）改用rclone的挂载模式（万一号没了又咋办？？）
+
+4. this time (22.3.20) building with source
+
+     problem: https://github.com/abraunegg/onedrive/issues/973
+
+     also, failed at 
+
+     ```
+     service onedrive start
+     
+     ```
+
+     
+
+     以后重装第一件事就是装好onedrive，神tm版本管理，单独下载后同步全部乱套了
+
+5. 是不是如果有其他来源的备份也必须下载，比如iPad？rclone可吗？
 
 ##### other
 
@@ -638,6 +673,20 @@ Description: No code returned by remote server
 个人：Application has been successfully authorised, however no additional command switches were provided.
 
 I decide to use rclone when one project is finished and move all files to the cloud (no longer in local)
+
+```shell
+rclone mount backup:/ ~/onedrive --copy-links --no-gzip-encoding --no-check-certificate --allow-non-empty --umask 000
+```
+
+can also sync
+
+```shell
+#!/bin/bash
+rclone sync /home/gxf/OneDrive/workstation/work backup:workstation/work
+rclone sync /home/gxf/OneDrive/workstation/Documents backup:workstation/Documents
+```
+
+
 
 >##### onedrived-dev
 >

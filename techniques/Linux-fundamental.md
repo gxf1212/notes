@@ -708,7 +708,10 @@ tar -zcvf folder.tar.gz folder | split -b 4000M -d -a 1 - folder.tar.gz
   - esc: stop editing
 
 - insert: edit
-  
+
+- :set fileencoding
+
+  https://www.cnblogs.com/sharesdk/p/9208349.html
 ### conda & python cmd
 
 https://blog.csdn.net/zhayushui/article/details/80433768

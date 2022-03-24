@@ -2077,15 +2077,17 @@ good resources
    > AMBER tutorial https://jerkwin.github.io/2018/01/28/AMBER%E9%AB%98%E7%BA%A7%E6%95%99%E7%A8%8BA3-MM-PBSA/
    >
    > https://jerkwin.github.io/GMX/GMXtut-9/   some fundamental knowledge
+   >
+   > normal .xtc, not nojump?
 
    1. principle
-
+   
       https://en.wikipedia.org/wiki/Implicit_solvation#Generalized_Born_model equation
       
       http://sobereva.com/42
       
    2. run
-
+   
       ```shell
       gmx trjconv -f final_com.trr -o final_com_later.xtc -b 2000 -e 10000 -dt 50
       # single trajectory method, and collect file into a folder
@@ -2097,7 +2099,7 @@ good resources
       mv _GMXMMPBSA_* ./gmx_MMPBSA
       mv COM* LIG.prmtop REC.prmtop reference.frc gmx_MMPBSA.log FINAL_RESULTS_MMPBSA.dat ./gmx_MMPBSA
       ```
-
+   
       - The script creates <u>three unsolvated mdcrd</u> files (complex, receptor, and ligand) using ptraj that are the coordinates analyzed during the GB and PB calculations. 
       - The <u>*.mdout files</u> contain the <u>energies for all frames</u> specified. 
       - A PDB file of the average structure is created align (via RMS) all snapshots to <u>prepare for a quasi-harmonic entropy calculation</u> with ptraj if one is requested. 
@@ -2105,12 +2107,12 @@ good resources
       - When a topology file is defined, the ligand mol2 file is not needed. The ligand mol2 file only required when `gmx_MMPBSA` build the amber topology from a structure
 
    3. ana
-
+   
       ```shell
       gmx_MMPBSA_ana -p ./gmx_MMPBSA/_GMXMMPBSA_info 
       # pop out a window same as when the program finished, showing all components changing with time
       ```
-
+   
       > VDWAALS = van der Waals contribution from MM.
       > EEL = electrostatic energy.
       > EPB/EGB = the electrostatic contribution to the solvation free energycalculated by PB or GB respectively.
@@ -2122,7 +2124,7 @@ good resources
       plot result: https://www.jianshu.com/p/615328ef542d
 
    4. other
-
+   
       ```shell
       conda activate AmberTools20
       for f in `ls -F | grep ligand`; do 
@@ -2142,7 +2144,7 @@ good resources
       done
       cd ..
       ```
-
+   
       ```shell
       # pbsa
       conda activate AmberTools20

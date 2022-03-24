@@ -1698,7 +1698,7 @@ Here not that much is required...
 
 
 
-## FEP building systems
+## FEP (same) with NAMD
 
 ### Fundamentals
 
@@ -1734,299 +1734,274 @@ we start from (equilibrated?) .pdb after MD
 
 
 
-### By scripting
-
-I have written a program to generate this. A brief flow is
-
-- get stable complex structure, modify the ligand to obtain th other one
-
-- parametrize both ligands in CHARMM-GUI
-
-  - to get: .rtf file. 
-
-  > manually merge the .prm file for later, because it only uses atom types in the force field, not atom names
-
-- same ligands, get properly renumbered .pdb files from CHARMM-GUI PDB reader
-
-  - to get: .pdb file
-
-- run the program to obtain the hybrid .rtf and .pdb file (with atoms renamed and B value assigned)
-
-- build the ligand and complex with VMD. do use top_all36_cgenff.rtf!
-
-priciples
-
-- always make sure they are overlapping (same coordinates)
-- if .mol2 file is needed, use drawing_3D!
 
 
 
+### Build with VMD
 
+> try: equilibrated remTP
+>
+> files: protein, MG, two ligands from gui: pdb, psf, rtf, prm
 
-> deprecated  methods
->
-> ### Build with VMD
->
-> > try: equilibrated remTP
-> >
-> > files: protein, MG, two ligands from gui: pdb, psf, rtf, prm
->
-> #### Relative
->
-> > you may build the .fep first...
->
-> 1. build the system
->
->    process the ligand as before, and change the name of the ligand:
->
->    ```shell
->    grep -rl "LIG " remtp-rm.pdb remtp-rm.psf | xargs sed -i s/"LIG"/"END"/g
->    grep -rl "LIG " mtp-rm.pdb mtp-rm.psf | xargs sed -i s/"LIG"/"INI"/g
->    ```
->
->    then build both ligand and complex
->
->    ```shell
->    vmd -dispdev text -e merge-fep.tcl
->    vmd -dispdev text -e sol-ion-fep.tcl
->    ```
->
->    > a small problem: all is ATOM, no HETATM
->
-> 2. build the .fep
->
->    you can either copy one file as the fep indicator or just modify your .pdb file. I'll choose the former here
->
->    change all "END" lines, 63-66 columns to ' 1.00'; "INI": '-1.00' for your two .pdb file
->
->    ```shell
->    list=(ligand complex)
->    for f in ${list[*]}; do
->    cp ${f}.pdb ${f}.fep
->    sed -i "s/1.00  0.00      END/1.00  1.00      END/g" ${f}.fep
->    sed -i "s/1.00  0.00      INI/1.00 -1.00      INI/g" ${f}.fep
->    done
->    # find the long pattern
->    ```
->
->    watch
->
->    ```shell
->    vmd complex.psf -pdb complex.fep
->    vmd ligand.psf -pdb ligand.fep
->    ```
->
->    > select ligand by
->
-> > ```
-> > resname END
-> > ```
-> >
-> > and view with coloring method 'Beta'
->
-> 3. build the dual topology file
->
->    
->
->    
->
->    
->
-> 3. 
->
-> 3. run the simulation
->
-> 3. 
->
->
-> > failed
-> >
-> > ```shell
-> > awk -F " " '{if ($18==END) $62= 1.00}' complex.pdb > complex.fep
-> > grep "END" -rl complex.fep | xargs sed -i "s/ 0.00     / 1.00     /g"
-> > ```
-> >
-> > 
-> >
-> > syntax
-> >
-> > ```shell
-> > alchemify <input PSF> <output PSF> <FEPfile> [FEP column]
-> > ```
-> >
-> > so here
-> >
-> > ```shell
-> > # vmd
-> > alchemify complex.psf complex-mtp2remtp.psf complex.fep B
-> > ```
-> >
-> > rarely used now
-> >
-> > 
->
-> #### Absolute
->
-> easier, build as before until making FEP
->
-> 
->
-> ### CHARMM-GUI
->
-> [video demo](https://www.charmm-gui.org/?doc=demo&id=fec&lesson=1), [bilibili version](https://www.bilibili.com/video/BV153411s7kF)
->
-> > TIP1: https://charmm-gui.org/?doc=input/retriever  This page can be used to recover a job, if you *did not* save a bookmark link, but you *do* remember the Job ID
-> >
-> > - jobid=4735806442, absolute, cgenff v1.0, using ligandrm.pdb to build, upload other ligand's drawing3D.mol2
-> > - JOB ID: 4739580626, relative, v2.5, .mol2, .mol2
-> >
-> > TIP2: do download every .tgz from Windows......
->
-> #### steps
->
->  use default settings unless otherwise specified
->
-> 1. build the complex (including Mg is fine)
-> 2. upload your complex file (containing the starting ligand)
-> 3. choose chain (all)
-> 4. build topology, choosing a file for the ligand
-> 5. solvate. choose box size and ion conc
-> 6. Generate grid information for PME FFT automatically (default)
-> 7. select Ligand Molecule for Free Energy Calculation
-> 8. PBC (default)
-> 9. upload ligand
->
-> 10. select program, force field, **check ligand**; ion for the ligand, distance from edge, 310K, etc.
-> 11. Relative: clustering, choose molecule pairs
-> 12. finished, <font color=red>CHECK YOUR STRUCTURE!!</font>
->
-> > note: the unit of edge distance is nm, not Å .....
->
-> #### note on files
->
-> folder: `basic` (from simulation), `ligand-charmm` (from GUI)
->
-> ##### What to use when building? 
->
-> normal .pdb failed, .sdf failed(it's not our ligand, it's something strange...), obabel converted also failed to pass the <u>topology making</u>. otherwise if you use the ligand files from RCSB, then [this](https://www.charmm-gui.org/?doc=issues) (atom order?)
->
-> > original: cannot input for force field; ligandrm.pdb: a little problem in text format.
->
-> >!TIP
-> >
-> >may use `ligandrm.pdb` or `drawing3D.mol2`,  etc. when building. They don't align? just moved somewhat.
-> >
-> >When choosing a structural file (instead of using RCSB .pdb (but maybe that only provides topology?)) for the ligand's topology, use`drawing3D.mol2` 
->
-> ##### What to use when uploading ligands?
->
-> > in the case of Absolute, mtp
->
-> After *solvation*, our system is moved. Also, drawing3D.mol2 moves away. so how to align?
->
-> It seems that using drawing_3D.mol2 works fine here, if you align the structure, it is a little changed (ligandrm.pdb changes more slightly from the original file)....so do the alignment and check in pymol to see if i's ok with Mg<sup>2+</sup>...usually it's fine (drawing_3D.mol2 is a little strange because the TP huddle up?). 
->
-> But the final structure turns out to be so similar to ligandrm.pdb?? I didn't use that. EM is performed? (maybe we can upload a converted one from ligandrm.pdb?)
->
-> But for remtp, initial = ligandrm != drawing3D != final (PO4 the same??)
->
-> > In the case of Relative, remtp
->
-> cannot upload converted ligandrm?
->
->
-> >!TIP
-> >
-> >Conclusion: because the processing moves the ligands, it's fine to use either ligandrm or drawing_3D...
-> >
-> >you may check the structure after equilibration
->
-> ##### force field check
->
-> However, the original ligand failed again. when using ligandrm.pdb, etc., it failed at cgenff (v2.5) force field check. lone pair? v1.0 is fine
->
-> > Current FEP doesn't allow lonepair. Please select CGenFF v1.0 to avoid lonepair generation.
->
-> Actually the original ligand always fails. so **upload again** (without checking the option) and v2.5 works fine
->
-> #### notes on modes
->
-> uploading ligands
->
-> - supports multiple ligands in one .sdf or ,mol2 file
-> - it's better to dock them first
-> - if not, or you are drawing ligands, the GUI automatically positions the ligands (may be not accurate)
->
-> both Relative or Absolute apply. A little difference for multiple ligands:
->
-> - the latter designs a `Closed minimal perturbation path based on the clustering` 
->
->   - or just `Radial shape of perturbation path from the first one`
->
-> - when uploading ligands
->
->   - Absolute: Use this option only when the ligands are already **docked**.
->   - Relative: Use this option only when the scaffold coordinate of a pair of ligands are **identical.**
->
->   Absolute just cares 'in position', Relative should make sure 'same position'.
->
-> - result
->
->   - Absolute: one folder for one ligand
->   - Relative: one for a pair of FEP molecule
->
->
-> to prepare multiple ligands. support multiple files and one file containing ligands.
->
-> #### result
->
-> - where: go to `namd`, 1,2,... (2-3, ...) means different ligands
-> - FEP: all of ligand INI disappear, all END appear, no common searching...
->
-> 
->
-> ### BFEE2
->
-> https://github.com/fhh2626/BFEE2
->
-> https://www.ks.uiuc.edu/Research/vmd/plugins/bfeestimator/
->
-> ok for absolute BFE
->
-> 
->
-> ### FEPrepare
->
-> - https://feprepare.vi-seem.eu/indexlpg.php  a server
->   - https://www.zhihu.com/zvideo/1356250979265093632  https://www.zhihu.com/people/qutesun/zvideos
->   - https://feprepare.vi-seem.eu/Manual.pdf
-> - http://zarbi.chem.yale.edu/ligpargen bad charge settings!
->   - [principles, and guide of ligpargen](https://pergamos.lib.uoa.gr/uoa/dl/frontend/file/lib/default/data/2779350/theFile)
->
-> cannot control force field? we have defined .psf and .rtf already? still using OPLS?
->
-> May produce a hybrid ligand, but failed...
->
+#### Relative
+
+> you may build the .fep first...
+
+1. build the system
+
+   process the ligand as before, and change the name of the ligand:
+
+   ```shell
+   grep -rl "LIG " remtp-rm.pdb remtp-rm.psf | xargs sed -i s/"LIG"/"END"/g
+   grep -rl "LIG " mtp-rm.pdb mtp-rm.psf | xargs sed -i s/"LIG"/"INI"/g
+   ```
+
+   then build both ligand and complex
+
+   ```shell
+   vmd -dispdev text -e merge-fep.tcl
+   vmd -dispdev text -e sol-ion-fep.tcl
+   ```
+
+   > a small problem: all is ATOM, no HETATM
+
+2. build the .fep
+
+   you can either copy one file as the fep indicator or just modify your .pdb file. I'll choose the former here
+
+   change all "END" lines, 63-66 columns to ' 1.00'; "INI": '-1.00' for your two .pdb file
+
+   ```shell
+   list=(ligand complex)
+   for f in ${list[*]}; do
+   cp ${f}.pdb ${f}.fep
+   sed -i "s/1.00  0.00      END/1.00  1.00      END/g" ${f}.fep
+   sed -i "s/1.00  0.00      INI/1.00 -1.00      INI/g" ${f}.fep
+   done
+   # find the long pattern
+   ```
+
+   watch
+   
+   ```shell
+   vmd complex.psf -pdb complex.fep
+   vmd ligand.psf -pdb ligand.fep
+   ```
+
+   > select ligand by
 > ```
-> Making biomolecule rdrp...
-> ERROR: rdrp failed: Leap did not create the topology and/or coordinate file(s): vacuum.parm7, vacuum.rst7
-> Making ligand mtp...
-> ERROR: mtp failed: SCF has not converged
-> Making ligand remtp...
-> ERROR: remtp failed: SCF has not converged
-> ERROR: The following proteins have failed:
->  rdrp
-> ERROR: The following ligands have failed:
->  mtp
+   > resname END
+   > ```
+   >
+   > and view with coloring method 'Beta'
+
+3. build the dual topology file
+
+   
+
+   
+
+   
+
+3. 
+
+3. run the simulation
+
+3. 
+
+
+> failed
+>
+> ```shell
+> awk -F " " '{if ($18==END) $62= 1.00}' complex.pdb > complex.fep
+> grep "END" -rl complex.fep | xargs sed -i "s/ 0.00     / 1.00     /g"
 > ```
 >
 > 
+>
+> syntax
+>
+> ```shell
+> alchemify <input PSF> <output PSF> <FEPfile> [FEP column]
+> ```
+>
+> so here
+>
+> ```shell
+> # vmd
+> alchemify complex.psf complex-mtp2remtp.psf complex.fep B
+> ```
+>
+> rarely used now
+>
+> 
+
+#### Absolute
+
+easier, build as before until making FEP
+
+
+
+### CHARMM-GUI
+
+[video demo](https://www.charmm-gui.org/?doc=demo&id=fec&lesson=1), [bilibili version](https://www.bilibili.com/video/BV153411s7kF)
+
+> TIP1: https://charmm-gui.org/?doc=input/retriever  This page can be used to recover a job, if you *did not* save a bookmark link, but you *do* remember the Job ID
+>
+> - jobid=4735806442, absolute, cgenff v1.0, using ligandrm.pdb to build, upload other ligand's drawing3D.mol2
+> - JOB ID: 4739580626, relative, v2.5, .mol2, .mol2
+>
+> TIP2: do download every .tgz from Windows......
+
+#### steps
+
+ use default settings unless otherwise specified
+
+1. build the complex (including Mg is fine)
+2. upload your complex file (containing the starting ligand)
+3. choose chain (all)
+4. build topology, choosing a file for the ligand
+5. solvate. choose box size and ion conc
+6. Generate grid information for PME FFT automatically (default)
+7. select Ligand Molecule for Free Energy Calculation
+8. PBC (default)
+9. upload ligand
+
+10. select program, force field, **check ligand**; ion for the ligand, distance from edge, 310K, etc.
+11. Relative: clustering, choose molecule pairs
+12. finished, <font color=red>CHECK YOUR STRUCTURE!!</font>
+
+> note: the unit of edge distance is nm, not Å .....
+
+#### note on files
+
+folder: `basic` (from simulation), `ligand-charmm` (from GUI)
+
+##### What to use when building? 
+
+normal .pdb failed, .sdf failed(it's not our ligand, it's something strange...), obabel converted also failed to pass the <u>topology making</u>. otherwise if you use the ligand files from RCSB, then [this](https://www.charmm-gui.org/?doc=issues) (atom order?)
+
+> original: cannot input for force field; ligandrm.pdb: a little problem in text format.
+
+>!TIP
+>
+> may use `ligandrm.pdb` or `drawing3D.mol2`,  etc. when building. They don't align? just moved somewhat.
+>
+> When choosing a structural file (instead of using RCSB .pdb (but maybe that only provides topology?)) for the ligand's topology, use`drawing3D.mol2` 
+
+##### What to use when uploading ligands?
+
+> in the case of Absolute, mtp
+
+After *solvation*, our system is moved. Also, drawing3D.mol2 moves away. so how to align?
+
+It seems that using drawing_3D.mol2 works fine here, if you align the structure, it is a little changed (ligandrm.pdb changes more slightly from the original file)....so do the alignment and check in pymol to see if i's ok with Mg<sup>2+</sup>...usually it's fine (drawing_3D.mol2 is a little strange because the TP huddle up?). 
+
+But the final structure turns out to be so similar to ligandrm.pdb?? I didn't use that. EM is performed? (maybe we can upload a converted one from ligandrm.pdb?)
+
+But for remtp, initial = ligandrm != drawing3D != final (PO4 the same??)
+
+> In the case of Relative, remtp
+
+cannot upload converted ligandrm?
+
+
+>!TIP
+>
+>Conclusion: because the processing moves the ligands, it's fine to use either ligandrm or drawing_3D...
+>
+>you may check the structure after equilibration
+
+##### force field check
+
+However, the original ligand failed again. when using ligandrm.pdb, etc., it failed at cgenff (v2.5) force field check. lone pair? v1.0 is fine
+
+> Current FEP doesn't allow lonepair. Please select CGenFF v1.0 to avoid lonepair generation.
+
+Actually the original ligand always fails. so **upload again** (without checking the option) and v2.5 works fine
+
+#### notes on modes
+
+uploading ligands
+
+- supports multiple ligands in one .sdf or ,mol2 file
+- it's better to dock them first
+- if not, or you are drawing ligands, the GUI automatically positions the ligands (may be not accurate)
+
+both Relative or Absolute apply. A little difference for multiple ligands:
+
+- the latter designs a `Closed minimal perturbation path based on the clustering` 
+
+  - or just `Radial shape of perturbation path from the first one`
+
+- when uploading ligands
+
+  - Absolute: Use this option only when the ligands are already **docked**.
+  - Relative: Use this option only when the scaffold coordinate of a pair of ligands are **identical.**
+
+  Absolute just cares 'in position', Relative should make sure 'same position'.
+
+- result
+
+  - Absolute: one folder for one ligand
+  - Relative: one for a pair of FEP molecule
+
+
+to prepare multiple ligands. support multiple files and one file containing ligands.
+
+#### result
+
+- where: go to `namd`, 1,2,... (2-3, ...) means different ligands
+- FEP: all of ligand INI disappear, all END appear, no common searching...
+
+### By hand
 
 
 
 
 
-### for Gromacs
+
+
+### BFEE2
+
+https://github.com/fhh2626/BFEE2
+
+https://www.ks.uiuc.edu/Research/vmd/plugins/bfeestimator/
+
+ok for absolute BFE
+
+
+
+### FEPrepare
+
+- https://feprepare.vi-seem.eu/indexlpg.php  a server
+  - https://www.zhihu.com/zvideo/1356250979265093632  https://www.zhihu.com/people/qutesun/zvideos
+  - https://feprepare.vi-seem.eu/Manual.pdf
+- http://zarbi.chem.yale.edu/ligpargen bad charge settings!
+  - [principles, and guide of ligpargen](https://pergamos.lib.uoa.gr/uoa/dl/frontend/file/lib/default/data/2779350/theFile)
+
+cannot control force field? we have defined .psf and .rtf already? still using OPLS?
+
+May produce a hybrid ligand, but failed...
+
+```
+Making biomolecule rdrp...
+ERROR: rdrp failed: Leap did not create the topology and/or coordinate file(s): vacuum.parm7, vacuum.rst7
+Making ligand mtp...
+ERROR: mtp failed: SCF has not converged
+Making ligand remtp...
+ERROR: remtp failed: SCF has not converged
+ERROR: The following proteins have failed:
+ rdrp
+ERROR: The following ligands have failed:
+ mtp
+```
+
+
+
+
+
+### Gromacs
 
 [MD tutorial](http://www.mdtutorials.com/gmx/free_energy/08_advanced.html)
 
@@ -2088,7 +2063,6 @@ http://pmx.mpibpc.mpg.de/webserver.html  can perform protein and DNA mutation
 
 https://github.com/drazen-petrov/SMArt
 
-#### BFEE2?
 
 
 
@@ -2096,9 +2070,8 @@ https://github.com/drazen-petrov/SMArt
 
 
 
-## FEP running with NAMD
 
-### work flow
+## FEP running
 
 > once we obtained the .psf and .pdb file of the system, no more hybrid topology file is needed
 
@@ -2121,13 +2094,7 @@ namd3 +p1 +devices 0 pro-lig-prod > pro-lig-prod.log
 
 
 
-### on the scripts
 
-reference:
-
-- FEP tutorial: equil, shift
-- protein-ligand: only production
-- Kevin: GPU
 
 
 
