@@ -143,6 +143,147 @@ for students，白嫖内网穿透，还要做任务？
 
 
 
+#### usage
+
+> phlinux is the old version. forget about it!
+
+without client, just use web client...
+
+客户端离线：安装后用sn号在网页端登录，手机APP扫码激活才能用
+
+后来用sn号登不上了。。
+
+> 未来之星 https://www.yibeianyuming.com/n/821.html
+>
+> 花生壳5.0 for Linux使用教程 tcp https://service.oray.com/question/11630.html
+
+> 填写指南？ https://hsk.oray.com/news/7553.html 填写内网ip：127.0.0.1，最后还是成功了。但博客都不这样？
+>
+> 内网端口只能是22，才能诊断成功，即[这个人的设置](https://blog.csdn.net/skylake_/article/details/107411893)
+>
+> 可以选http
+>
+> 诊断得到IP（等价的）
+
+> +apache https://zhuanlan.zhihu.com/p/137498696
+
+问了客服，这样配置：
+
+![phddns-config](https://gitee.com/gxf1212/notes/raw/master/techniques/images/phddns-config.jpg)
+
+- 映射类型：TCP
+- TCP类型：普通即可
+- 映射模板：SSH服务
+- 端口：动态无所谓
+
+然后xshell就能连了
+
+```
+ssh gxf@xxxxx.xxx.xx:port
+```
+
+- 挂起和关机应该用不了
+- 卡机了、tty下可，要用root去reboot
+
+自动启动 https://blog.csdn.net/TianXieZuoMaiKong/article/details/90574629
+
+我们还需要编辑OpenSSH服务配置文件：`/etc/ssh/sshd_config`，将`#PermitRootLogin without-password` 更改为`PermitRootLogin yes`，从而运行root远程登录。
+
+手机上APP可以看客户端状态
+
+> issues
+>
+> 花生壳青春版能用多久？一年，还是因为我快毕业了？
+
+### ToDesk
+
+https://www.todesk.com/linux.html
+
+doc: https://docs.todesk.com/zh-CN
+
+advantages/functions
+
+- free, no rate limit, all platforms
+- check rate: upper left letter
+- no more stucking? yes!
+
+flaws
+
+- have to open a client or it cannot be connected
+- WOL under lan failed
+- 占用这么大内存, twice of sunlogin
+- screen is not as clear, even free version?
+- 鼠标光标太大，而且位置难以把控。。
+- 不能用PageUp/Down键
+- 这两天在此重启时会卡
+
+两者都：播放pymol的movie会卡（vmd还好），向日葵也有点卡（变得不清晰）
+
+charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
+
+### Summary on remote control
+
+回家三天，总结一下解决远程控制Linux服务器卡机的修复过程。
+
+问题起因：安装了nvidia用于GPU计算的驱动，导致不能很好地使用图形界面应用，如远程控制。
+
+问题表现：有时用着用着就卡机了；远控打开长时间不动就卡机；有时关掉向日葵后第二天早上发现卡机。
+
+问题解决：大佬们释放资源的操作我不会
+
+1. 以ToDesk软件为主，免费又不限速，可以避免向日葵远控产生的一部分上述问题。
+   但是它的光标太大、鼠标定位不准，网好时没有向日葵清晰，所以可以短时间使用一下向日葵。
+   还有，在ToDesk下重启会导致`a stop job is running...`，所以重启前要关完程序
+2. 更改系统设置，如关闭自动休眠等。
+3. 改善网络环境。。。图书馆出来挨打
+4. 更改使用习惯，包括：1）以ToDesk软件为主，间歇使用；2）不使用时关闭远控界面；3）少用费资源的图形软件，如pymol和vmd的movie；4）吃饭睡觉前重启以清理内存，但跑程序时不太会卡；5）重启时记得登录进去，否则20分钟内将自动休眠，无法连接。。。
+
+失败的解决方法：wakeonlan（连不上）、ssh（卡机时也不一定能连上）、卸掉vnc（不是因为冲突）
+
+希望以后的工作能顺利进行。😭😭
+
+## Typora
+
+1. 自定义快捷键
+
+   https://blog.csdn.net/December_shi/article/details/108690116
+
+   Ctrl+5 in Linux does not work?
+
+2. 
+
+#### plugins
+
+1. mermaid语法
+   - 特殊符号，要加引号才显示 https://github.com/mermaid-js/mermaid/issues/213
+2. 
+
+### themes
+
+1. liquid: cannot see the mouse cursor in titles and hyperlinks?
+
+## VScode
+
+I also met [this question](https://stackoverflow.com/questions/70221994/unable-to-change-theme-in-vs-code) or [this](https://www.reddit.com/r/vscode/comments/lx7536/any_idea_why_my_theme_is_suddenly_changing_every/)
+
+[Workbench Appearance color theme keeps being overridden](https://github.com/microsoft/vscode/issues/105102)
+
+引申出主题的管理方式：和系统有关。。
+
+## Pycharm
+
+1. https://blog.csdn.net/qq_41330454/article/details/105906347 控制台命令提示符是In[2]. ipython!
+
+   http://errornoerror.com/question/13223264808178804318/
+
+2. [关闭代码风格检查](https://blog.csdn.net/u013088062/article/details/50001189)
+
+3. matplotlib fonts. just copy .ttf files to ~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf
+
+   https://www.pythonheidong.com/blog/article/498305/f571ce16edc768ad1839/ 
+
+4. 实际上没有那么快自动保存，还是需要ctrl+s。。
+
 
 
 ## Jupyter Notebook
