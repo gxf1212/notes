@@ -16,8 +16,14 @@ We use position and momentum in the phase space because
 
 
 $$
-\boldsymbol{F}=\dfrac{\mathrm{d}\boldsymbol{p}}{\mathrm{d}t}
+\boldsymbol{F}=\dfrac{\mathrm{d}\boldsymbol{p}}{\mathrm{d}t} \label{rp}\tag{1}
 $$
+
+
+
+
+
+
 
 
 
@@ -29,6 +35,8 @@ $$
 > \boldsymbol{F}
 >
 > \mathrm{d}
+>
+> refer to eqn. $\ref{rp}$
 
 
 
