@@ -1900,7 +1900,8 @@ priciples
 > 11. Relative: clustering, choose molecule pairs
 > 12. finished, <font color=red>CHECK YOUR STRUCTURE!!</font>
 >
-> > note: the unit of edge distance is nm, not Å .....
+> >[!NOTE]
+> > the unit of edge distance is nm, not Å .....
 >
 > #### note on files
 >
@@ -1912,7 +1913,7 @@ priciples
 >
 > > original: cannot input for force field; ligandrm.pdb: a little problem in text format.
 >
-> >!TIP
+> >[!TIP]
 > >
 > >may use `ligandrm.pdb` or `drawing3D.mol2`,  etc. when building. They don't align? just moved somewhat.
 > >
@@ -1935,7 +1936,7 @@ priciples
 > cannot upload converted ligandrm?
 >
 >
-> >!TIP
+> >[!TIP]
 > >
 > >Conclusion: because the processing moves the ligands, it's fine to use either ligandrm or drawing_3D...
 > >
