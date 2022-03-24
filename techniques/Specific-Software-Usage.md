@@ -579,25 +579,8 @@ and https://www.moerats.com/archives/740/
   systemctl --user start onedrive
   ```
 
-- If a file or folder is present on OneDrive, that does not exist locally, it will be removed. If the data on OneDrive should be kept, the following should be used:
-
-  ```shell
-  onedrive --synchronize --upload-only --no-remote-delete
-  ```
-
-- status
-
-  ```shell
-  onedrive --display-sync-status --verbose
-  ```
-
-- stop
-
-  ```shell
-  pkill -f onedrive
-  ```
-
 - 
+
 
 上传还是挺快的；自动上传的频率应该ok
 
