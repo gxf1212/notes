@@ -1617,9 +1617,13 @@ refer to [html](#something-html)
     >
     > failed
 
-21. 
+21. PDF reader embedded
 
-其他插件：https://docsify.js.org/#/awesome?id=plugins，https://docsify.js.org/#/plugins?id=pagination
+    https://github.com/lazypanda10117/docsify-pdf-embed
+
+22. 
+
+more plugins: https://docsify.js.org/#/awesome?id=plugins，https://docsify.js.org/#/plugins?id=pagination
 
 ### Important notes on publishing
 

@@ -40,8 +40,9 @@ The content is continuously being updated.
 
     check https://upupming.site/docsify-katex/docs/#/supported for more
 
-4. Gitee screened words (“可能包含违禁违规内容，请排查调整后再行重试。”)
+4. Gitee screened words (“可能包含违禁违规内容，请排查调整后再行重试。”). try to avoid them
 
    - 某PN
+   - 某pǐn（drug）相关
 
 

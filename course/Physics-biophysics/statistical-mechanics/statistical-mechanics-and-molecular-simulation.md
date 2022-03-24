@@ -1,17 +1,27 @@
 # Statistical Mechanics and Molecular Simulation
 
-Oxford Graduate Texts
 
-Tuckerman, M. E. (2010). *Statistical mechanics: Theory and molecular simulation*. Oxford: Oxford University Press.
+
+
+
+```pdf
+d
+```
+
+
+
+
 
 
 
 # Chp1 Classical mechanics
 
-## Abstract
-
 ### 1.2 Newton's laws of motion
 
+second law:
+$$
+\boldsymbol{F}=m
+$$
 
 
 
