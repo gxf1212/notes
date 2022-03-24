@@ -1,8 +1,0 @@
-# statistical-thermodynamics
-
-
-
-
-
-
-
