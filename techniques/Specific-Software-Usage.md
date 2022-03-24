@@ -14,9 +14,9 @@ Fret not over bygones, and the forward journey take.
 
 ## Network
 
-Connection, vpn, remote control usage
+Connection, *pn, remote control usage
 
-configure VPN: see prepare-for-the-computer
+configure *PN: see prepare-for-the-computer
 
 ### Common
 
@@ -144,6 +144,50 @@ for students，白嫖内网穿透，还要做任务？
 
 
 
+
+## Jupyter Notebook
+
+Jupyter Notebook 更换主题（背景、字体）:  https://www.cnblogs.com/shanger/p/12006161.html
+
+https://jingyan.baidu.com/article/d713063577bcf353fdf475e7.html cd
+
+https://github.com/dunovank/jupyter-themes
+
+```
+jt -r # default
+jt -t grade3 -f firacode -T -T # other is default
+jt -t grade3 -f consolamono -T -T # not using
+```
+
+代码提示功能：在base下（default配置！）
+
+```
+pip install jupyter_contrib_nbextensions
+jupyter contrib nbextension install --user
+pip install jupyter_nbextensions_configurator
+jupyter nbextensions_configurator enable --user
+```
+
+https://www.freesion.com/article/6188402580/
+
+social network
+
+```
+conda install matplotlib==2.0.0 networkx==1.11 pandas==0.20.3 scikit-learn==0.18.2 scipy==0.18.1 numpy==1.13.1
+```
+
+## ThunderBird
+
+xjtu email: just login, default configuration
+
+> https://zhuanlan.zhihu.com/p/152548000
+
+1. specify contacts 联系人, signature
+2. plugin: [FileLink Provider for Dropbox](https://addons.thunderbird.net/zh-CN/thunderbird/addon/filelink-provider-for-dropbox/?src=search)
+
+## LaTeX
+
+notes from Windows
 
 可以在 C:\texlive\2019\texmf-dist\fonts\opentype（你看你的安装目录）下找一个合适的位置，建一个文件夹，把思源字体拷进去，然后在命令行中输入，fc-cache -fv
 
