@@ -629,13 +629,12 @@ A simple GUI with multi-account support. https://github.com/bpozdena/OneDriveGUI
 
      ```
      service onedrive start
-     
      ```
-
      
-
-     以后重装第一件事就是装好onedrive，神tm版本管理，单独下载后同步全部乱套了
-
+     
+     
+     以后重装第一件事就是装好onedrive，单独下载后同步全部乱套了
+     
 5. 是不是如果有其他来源的备份也必须下载，比如iPad？rclone可吗？
 
 ##### other
