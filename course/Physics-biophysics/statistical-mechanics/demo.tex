@@ -5,6 +5,8 @@
   openany,
   b5paper, % 以上均为 ctexbook 提供的文类选项
   colorscheme = rbb, % 请根据需要选择或定制配色方案
+  primary = orange,  % 将主色改为橙色
+  secondary = violet, % 将辅助色改为紫色
   xits = false,
 ]{qyxf-book}
 
@@ -28,20 +30,84 @@
 % 取消本条注释，则将定义计数器归并到定理下
 % \resetdefine
 
+\newcommand{\md}{\mathrm{d}}
+\newcommand{\vF}{\boldsymbol{F}}
+\newcommand{\vr}{\boldsymbol{r}}
+\newcommand{\vp}{\boldsymbol{p}}
+
 \begin{document}
 
 \maketitle
 
 \tableofcontents
 
-\Chapter{Preface}
+\chapter{Preface}
 
 Oxford Graduate Texts
 
-Tuckerman, M. E. (2010). *Statistical mechanics: Theory and molecular simulation*. Oxford: Oxford University Press.
+Tuckerman, M. E. (2010). Statistical mechanics: Theory and molecular simulation. Oxford: Oxford University Press.
+
+
+
+
 
 
 \chapter{Classical Mechanics}
+
+
+\section{Newton's laws of motion}
+
+second law:
+$$
+\boldsymbol{F}=m
+$$
+
+
+
+
+\section{Phase space: visualization}
+
+We use position and momentum in the phase space because
+$$
+\boldsymbol{F}=\dfrac{\mathrm{d}\boldsymbol{p}}{\mathrm{d}t} \label{rp}
+$$
+
+
+
+
+
+
+
+
+
+
+\section{Lagrangian formulation of classical mechanics}
+
+Conservative forces, means energy conservation. Defined as
+$$
+\boldsymbol{F_i}=\nabla_iU(\boldsymbol{r}_1,\boldsymbol{r}_2,\dots,\boldsymbol{r}_N)
+$$
+
+
+
+\section{Summary}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \chapter{模板功能介绍}

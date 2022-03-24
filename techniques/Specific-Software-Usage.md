@@ -1621,6 +1621,11 @@ refer to [html](#something-html)
 
     https://github.com/lazypanda10117/docsify-pdf-embed
 
+    uses PDFObject
+
+    - put it between `<body></body>` (not `<head>` as the document said)
+    - use relative path to the repository root
+
 22. 
 
 more plugins: https://docsify.js.org/#/awesome?id=plugins，https://docsify.js.org/#/plugins?id=pagination
@@ -1890,7 +1895,7 @@ https://docs.python.org/3/library/tkinter.html
   1. **Layout can be difficult to manage with `.place()`.** This is especially true if your application has lots of widgets.
   2. **Layouts created with `.place()` are not responsive.** They don’t change as the window is resized. 除非用相对的。relx/y是针对window的
 
-- 您可以拨打self.update（）你已经把它的屏幕（上之后`pack`，`grid`等），以使其绘制。绘制后，`winfo_width`, `winfo_x` and `winfo_height`命令将起作用。
+- 您可以call self.update（）你已经把它的屏幕（上之后`pack`，`grid`等），以使其绘制。绘制后，`winfo_width`, `winfo_x` and `winfo_height`命令将起作用。
 
 - https://jingyan.baidu.com/article/3f16e00312aaa62591c10315.html
 

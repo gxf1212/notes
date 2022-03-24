@@ -2,9 +2,9 @@
 
 <center><img src="https://gitee.com/gxf1212/notes/raw/master/_media/photo.jpg" style="zoom:50%;" /></center>
 
-- [My GitHub site](https://github.com/gxf1212)
-- [My Bilibili Channel](https://space.bilibili.com/441196634)
-- [我的保研待录取通知](/utils/推免服务系统.html)(bushi
+- [My GitHub site](https://github.com/gxf1212), with some templates and study notes
+- [My Bilibili Channel](https://space.bilibili.com/441196634) with 
+- [我的保研待录取通知](/utils/推免服务系统.html) (bushi
 - [A poorly developed personal blog](https://gxf1212.github.io/) is on GitHub
 
 I've developed a huge interest in math, physics and especially chemistry as soon as I met them. I love writing equations for a physical problem and appreciating chemical structures. Though those may not be the real science, it's a good start. I was admitted into the best high school in our province (even around China). Though under the pressure of competition like mountains on the top, I met admirable friends, patient and considerable teachers, a free environment (vacations, uniform-free months, basketball, teenage love), supportive parents. I felt so happy I was once a part of them. 
