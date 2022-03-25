@@ -22,7 +22,7 @@
 - 友情链接
   - [西北工业大学附属中学](http://www.xgdfz.com/)
   - [西安交通大学钱学森学院](http://bjb.xjtu.edu.cn/)
-  - [西安交大钱院学辅](https://qyxf.site/)
+  - [西安交大钱院学辅信息站](https://qyxf.site/)
   - [浙江大学定量生物学中心](http://iqb.zju.edu.cn/)
-  - [中国生物物理学会](https://space.bilibili.com/424091950)
+  - [中国生物物理学会B站](https://space.bilibili.com/424091950)
   - <a href="https://gxf1212.gitee.io/notes/#/utils/about" target="_self">关于我</a>

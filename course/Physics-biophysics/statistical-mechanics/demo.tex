@@ -30,7 +30,8 @@
 % 取消本条注释，则将定义计数器归并到定理下
 % \resetdefine
 
-% customize
+% customization
+% English
 \usepackage[UTF8]{ctex}  % for rare Chinese comments
 \ctexset{today=old}
 \renewcommand{\chaptername}{Chapter\ }
@@ -40,13 +41,19 @@
 \renewcommand{\figurename}{Fig.}
 \renewcommand{\refname}{References}
 \renewcommand{\contentsname}{Table of Contents}
+% 作品信息、环境名称是中文格式
 
+% math symbols
 \newcommand{\md}{\mathrm{d}}
 \newcommand{\vF}{\boldsymbol{F}}
 \newcommand{\vr}{\boldsymbol{r}}
 \newcommand{\vp}{\boldsymbol{p}}
+\newcommand{\der}[2]{\dfrac{\md #1}{\md #2}}
+\newcommand{\dd}[2]{\dfrac{\md^2 #1}{\md #2^2}}
+\newcommand{\p}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\pp}[2]{\dfrac{\partial^2 #1}{\partial #2^2}}
+% \dot, \ddot
 
-% 日期、作品信息、环境名称是中文格式
 
 \begin{document}
 
@@ -67,12 +74,15 @@ Tuckerman, M. E. (2010). Statistical mechanics: Theory and molecular simulation.
 
 \chapter{Classical Mechanics}
 
+\section{Math recap}
+
+\href{https://www.cnblogs.com/yanghh/p/13756471.html}{Take the derivative with respect to vectors}
 
 \section{Newton's laws of motion}
 
-second law:
+Newton's second law:
 $$
-\boldsymbol{F}=m
+\vF=m\dd{\vr}{t}
 $$
 
 
@@ -82,11 +92,8 @@ $$
 
 We use position and momentum in the phase space because
 $$
-\boldsymbol{F}=\dfrac{\mathrm{d}\boldsymbol{p}}{\mathrm{d}t} \label{rp}
+\vF=\der{p}{t} \label{rp}
 $$
-
-
-
 
 
 
@@ -98,7 +105,7 @@ $$
 
 Conservative forces, means energy conservation. Defined as
 $$
-\boldsymbol{F_i}=\nabla_iU(\boldsymbol{r}_1,\boldsymbol{r}_2,\dots,\boldsymbol{r}_N)
+\vF_i=\nabla_iU(\vr_1,\vr_2,\dots,\vr_N)
 $$
 
 

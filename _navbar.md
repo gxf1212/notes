@@ -1,4 +1,4 @@
-- [Home](/_coverpage.md)
+- [Home](/README.md)
 - [Techniques](/techniques/README.md)
   - [Linux basics](/techniques/Linux-fundamental.md)
   - [Installation for working](/techniques/Prepare-for-the-computer.md)
