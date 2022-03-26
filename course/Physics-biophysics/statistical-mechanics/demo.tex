@@ -70,12 +70,7 @@
 
 \chapter*{Preface}
 
-Oxford Graduate Texts
-
-Tuckerman, M. E. (2010). Statistical mechanics: Theory and molecular simulation. Oxford: Oxford University Press.
-
-
-
+\input{./chapters/preface.tex}
 
 \newpage
 
@@ -91,7 +86,7 @@ Tuckerman, M. E. (2010). Statistical mechanics: Theory and molecular simulation.
 
 \section{Newton's laws of motion}
 
-Review some basic laws.
+Review basic laws.
 
 Newton's second law:
 \begin{equation}
@@ -136,12 +131,12 @@ Visualizing a many-particle system is hard. Maybe we can consider a particular c
 \subsection{Conservative forces}
 Conservative forces, means \textbf{energy conservation}. Defined as the negative gradient of $U$, the \textit{potential energy function}
 \begin{equation}
-	\vF_i=-\nabla_iU(\vr_1,\dots,\vr_N)
+	\vF=-\nabla U(\vr_1,\dots,\vr_N)
 \end{equation}
-where $\nabla_i=\p{}{\vr_i}$. Or that
+where $\nabla=\p{}{\vr}$. Or for each particle $i$
 \begin{tcolorbox}
 	\begin{equation}
-		\vF_i=\der{U}{\vr_i} \label{eq:conservative}
+		\vF_i=\p{U}{\vr_i} \label{eq:conservative}
 	\end{equation}
 \end{tcolorbox}
 An important property is that, the work done by conservative forces only depends on the difference of $U$ of the start and end state, i.e. independent of the path taken. 
@@ -205,11 +200,11 @@ Thus, through the chain rule, we have
 \end{equation}
 
 The kinetic energy can then be written as\footnote{separate everything containing $q$ ($i$) and the $\dot{q}$ velocities, by summing over $i$ first. Imagina a 3D cube, the z-axis is $m_i$, while on the x-y plane sits pairs of $q$ terms...}
-\begin{align*}
+\begin{align}
 	K(\boldsymbol{q},\dot{\boldsymbol{q}})&=\sumin m_i\suman\p{\vr_i}{q_\alpha}\dot{q_\alpha}\sum_{\beta=1}^{3N}\p{\vr_i}{q_\beta}\dot{q_\beta} \notag\\
 	&=\suman\sum_{\beta=1}^{3N}\sumin m_i\p{\vr_i}{q_\alpha}\p{\vr_i}{q_\beta}\dot{q_\alpha}\dot{q_\beta} \notag\\
 	&=\suman\sum_{\beta=1}^{3N}G_{\alpha\beta}\dot{q_\alpha}\dot{q_\beta}
-\end{align*}
+\end{align}
 where
 \begin{tcolorbox}
 	\begin{equation}
@@ -221,9 +216,10 @@ is called the \textit{mass metric matrix} and is the function of $q$ (so is $U(\
 	\der{}{t}\left(\sum_{\beta=1}^{3N}G_{\gamma\beta}\dot{q}_\beta\right)=\suman\sum_{\beta=1}^{3N}\p{G_{\alpha\beta}}{q_\gamma}\dot{q_\alpha}\dot{q_\beta}-\p{U}{q_\gamma}\\
 \end{equation}
 
+\subsection{Example: two-particle system}
 
 
-
+\section{}
 
 
 
