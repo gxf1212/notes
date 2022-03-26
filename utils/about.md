@@ -4,7 +4,7 @@
 
 - [My GitHub site](https://github.com/gxf1212), with some templates and study notes
 - [My Bilibili Channel](https://space.bilibili.com/441196634) with machine-translated YouTube lecture videos
-- [我的保研待录取通知](/utils/推免服务系统.html) (bushi
+- [我的保研待录取通知](/utils/baoyan-doge.md) (bushi
 - [A poorly developed personal blog](https://gxf1212.github.io/) is on GitHub
 
 My name is Xufan Gao (高旭帆). In Chinese it means sailing to the horizon where the sun rises above the sea.
@@ -15,7 +15,7 @@ My classmates (and I) easily won 2nd prize in provincial-level contests in math,
 
 Unluckily, I almost failed in Chinese in the College Entrance Exam (CEE,高考) and also did terribly in biology. Ironically, I got full scores in physics. I enjoy Chinese traditional poems (and even wrote some) and get immersed in beautiful proses, though I'm really worse at Chinese exams than others. But I deem that it is real, heartfelt emotions that make your lines shine. I don't mind being short of splendid words, being mocked. I always try to write down the touching moments in life.
 
-Entering the university, I realized that science is based on but totally different from what we learned before. Chemistry is, because I saw all professors trying to create a strange new materials (create new substances, no wrong). That's not playing with skeletal formulas on the paper! I also ruined experiments I've already did back in high school. I did not get anything new in the beginning chem courses; instead, biology filled in since the second year. I started to get away from chemistry.
+Entering Xi'an Jiaotong University, I realized that science is based on but totally different from what we learned before. Chemistry is, because I saw all professors trying to create a strange new materials (create new substances, no wrong). That's not playing with skeletal formulas on the paper! I also ruined experiments I've already did back in high school. I did not get anything new in the beginning chem courses; instead, biology filled in since the second year. I started to get away from chemistry.
 
 It's strange that I turned to biology. I hating memorizing, so verbose names for animals and plants ruled out of mind. It's useless if you don't do research on it. But learning population science in Bilibili is ok. I don't have to remember them for tests. Some of the UPs give presentations 100 times nicer than some professors. I'm always wondering how we humans clear pathogens, regulate the hormones and respond to stimulations. I hope to crack the mystery of diseases and beat them into the ground. It's all about knowing ourselves. Health is a key issue in civilized 21st century, and in reviving China. That might be why many of my classmates chose medicine schools (also because the CEE score required to be admitted is a bit lower). 
 
