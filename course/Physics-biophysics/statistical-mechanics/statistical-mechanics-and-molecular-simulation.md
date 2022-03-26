@@ -12,14 +12,6 @@ Just read the following PDF.
 
 
 
-```pdf
-https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
-```
-
-
-
-
-
 To use [QYXF LaTeX template](https://gitee.com/qyxf/qyxf-book) in English:
 
 - change all `ctexbook` into `book`; comment the `\ctexset` command
