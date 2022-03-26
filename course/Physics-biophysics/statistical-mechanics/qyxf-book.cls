@@ -40,11 +40,12 @@
 
 % 西文字体处理
 \RequirePackage{amsmath}
+\RequirePackage[no-math]{fontspec} % Undefined control sequence. \setmainfont
 \ifQYXF@xits
   \setmainfont{XITS}
   \setsansfont{TeX Gyre Heros}[Scale=0.93]
-  \RequirePackage{unicode-math}
-  \setmathfont{XITS Math}
+%  \RequirePackage{unicode-math}
+%  \setmathfont{XITS Math}  % using xits main font and default math font
 \fi
 \RequirePackage{hologo}
 
@@ -230,6 +231,11 @@
   coltext = \AlertColor
 }
 
+% self defined
+\newtheorem{pequation}{Equation}
+\BeforeBeginEnvironment{pequation}{\begin{tcolorbox}[colback=\TheoremBackground,colframe=\TheoremFrame,coltext=\TheoremColor]}
+\AfterEndEnvironment{pequation}{\end{tcolorbox}}
+
 % 定理清除工具
 % source: <https://tex.stackexchange.com/questions/103013/is-there-a-renewtheorem-equivalent-of-renewcommand-using-amsthm-and-not-ntheo>
 \def\cleartheorem#1{%
@@ -269,8 +275,8 @@
 % 章节标题与目录样式
 \RequirePackage{titlesec,titletoc}
 %\ctexset{section={name={\S,}}}
-\titleformat{\chapter}[block]{\color{\TitleColor}\centering\bfseries\fontsize{2.25em}{1.2ex}\selectfont}{\CTEXthechapter}{1em}{}
-\titleformat*{\section}{\color{\TitleColor}\fontsize{1.75em}{1.225ex}\selectfont\bfseries\centering}
+%\titleformat{\chapter}[block]{\color{\TitleColor}\centering\bfseries\fontsize{2.25em}{1.2ex}\selectfont}{\CTEXthechapter}{1em}{}
+%\titleformat*{\section}{\color{\TitleColor}\fontsize{1.75em}{1.225ex}\selectfont\bfseries\centering}
 \titleformat*{\subsection}{\color{\TitleColor}\fontsize{1.5em}{1.43ex}\selectfont\bfseries}
 \titleformat*{\subsubsection}{\color{\TitleColor}\fontsize{1.25em}{1.4ex}\selectfont\bfseries}
 \titleformat*{\paragraph}{\color{\TitleColor}\bfseries}
@@ -280,7 +286,7 @@
               {\normalsize\bfseries\contentspush{Chapter\ \thecontentslabel\ }}
               {}{\bfseries\titlerule*[8pt]{.}\contentspage}
 \titlecontents{section}[20pt]{\filright}
-              {\contentspush{\S\ \thecontentslabel\ }}
+              {\contentspush{\S\,\thecontentslabel\ }}
               {}{\titlerule*[8pt]{.}\contentspage}
 \titlecontents{subsection}[18pt]{\hspace{2pc}\filright}
               {\contentspush{\thecontentslabel\ }\itshape}
