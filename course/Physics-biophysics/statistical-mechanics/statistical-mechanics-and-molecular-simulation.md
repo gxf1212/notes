@@ -10,6 +10,9 @@ Just read the following PDF.
 /course/Physics-biophysics/statistical-mechanics/demo.pdf
 ```
 
+```pdf
+demo.pdf
+```
 
 
 To use [QYXF LaTeX template](https://gitee.com/qyxf/qyxf-book) in English:
