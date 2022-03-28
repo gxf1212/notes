@@ -6,7 +6,7 @@ Since there's too many equations to number and refer to, I'll write this in LaTe
 
 Just read the following PDF.
 
-<embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
+<embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo" height=800px; width=100%>
 
 Other
 
@@ -27,7 +27,7 @@ Other
 > another method might be (no plugin required?...
 >
 > ```html
-> <embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
+> <embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
 > ```
 
 
