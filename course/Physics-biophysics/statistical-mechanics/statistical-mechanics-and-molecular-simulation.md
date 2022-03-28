@@ -1,6 +1,6 @@
 # Statistical Mechanics and Molecular Simulation
 
-Get the textbook: [Tuckerman, M. E. (2010). Statistical mechanics: Theory and molecular simulation. Oxford: Oxford University Press.](https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/(Oxford%20Graduate%20Texts)%20Mark%20E.%20Tuckerman%20-%20Statistical%20Mechanics_%20Theory%20and%20Molecular%20Simulation-Oxford%20University%20Press,%20USA%20(2010).pdf)
+Get the textbook: [Tuckerman, M. E. (2010). Statistical mechanics: Theory and molecular simulation. Oxford: Oxford University Press.](https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/Mark-E-Tuckerman-Statistical-Mechanics-Theory-and-Molecular-Simulation-Oxford-University-Press-USA-(2010).pdf)
 
 Since there's too many equations to number and refer to, I'll write this in LaTeX.
 
@@ -13,15 +13,12 @@ Just read the following PDF.
 ```
 
 ```pdf
-/course/Physics-biophysics/statistical-mechanics/Mark-E.-Tuckerman-Statistical-Mechanics-Theory-and-Molecular-Simulation-Oxford-University Press-USA-(2010).pdf
+/course/Physics-biophysics/statistical-mechanics/Mark-E-Tuckerman-Statistical-Mechanics-Theory-and-Molecular-Simulation-Oxford-University-Press-USA-(2010).pdf
 ```
 
-```pdf
-/utils/tutorials/fontawesome5.pdf
-```
 
 ```pdf
-https://qyxf.site/zhufeng/zhufeng-2021-spring.pdf
+//qyxf.site/zhufeng/zhufeng-2021-spring.pdf
 ```
 
 > another method might be (no plugin required? failed)
