@@ -8,18 +8,16 @@ Just read the following PDF.
 
 
 
+
 ```pdf
-https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
+//gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
 ```
 
 ```pdf
-https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/Mark-E-Tuckerman-Statistical-Mechanics-Theory-and-Molecular-Simulation-Oxford-University-Press-USA-(2010).pdf
+https://qyxf.site/zhufeng/zhufeng-2021-spring.pdf
 ```
 
 
-```pdf
-//qyxf.site/zhufeng/zhufeng-2021-spring.pdf
-```
 
 > another method might be (no plugin required? failed)
 >
