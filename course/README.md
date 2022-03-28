@@ -2,9 +2,9 @@
 
 This is the homepage for course notes. Click the sidebar to view.
 
-- structural biology
-- molecular immunology
-- bioinformatics (part)
+- Fundamental-biology
+- Advanced biology
+- Physics-biophysics
 - other courses
 
 #### tutorial share

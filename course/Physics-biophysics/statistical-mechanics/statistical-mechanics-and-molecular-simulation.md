@@ -7,6 +7,8 @@ Since there's too many equations to number and refer to, I'll write this in LaTe
 
 Just read the following PDF.
 
+<embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=PDFLINK" height=800px; width=100%>
+
 ```pdf
 /course/Physics-biophysics/statistical-mechanics/demo.pdf
 ```
