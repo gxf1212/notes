@@ -4,7 +4,7 @@ Get the textbook: [Tuckerman, M. E. (2010). Statistical mechanics: Theory and mo
 
 Since there's too many equations to number and refer to, I'll write this in LaTeX.
 
-Just read the following PDF.
+Just read the following PDF if you have access to GitHub. [Login Gitee to Download](https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf)
 
 <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
 
