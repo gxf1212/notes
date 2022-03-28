@@ -6,20 +6,21 @@ Since there's too many equations to number and refer to, I'll write this in LaTe
 
 Just read the following PDF.
 
+
 ```pdf
-https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
+https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
 ```
 
 
-<embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
-
-
+> ```pdf
+> https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
+> ```
+>
 > another method might be (no plugin required? failed)
 >
 > ```html
 > <embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
 > ```
-
 
 
 To use [QYXF LaTeX template](https://gitee.com/qyxf/qyxf-book) in English:
