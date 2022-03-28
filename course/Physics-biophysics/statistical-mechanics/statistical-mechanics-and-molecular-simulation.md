@@ -6,7 +6,14 @@ Since there's too many equations to number and refer to, I'll write this in LaTe
 
 Just read the following PDF.
 
-<embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo" height=800px; width=100%>
+<script type="text/javascript">
+  //loads pdf files for resume
+  window.onload = function (){
+    var success = new PDFObject({ 
+      url: "https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" 
+    }).embed("my_pdf_object");
+  };
+</script>
 
 Other
 
