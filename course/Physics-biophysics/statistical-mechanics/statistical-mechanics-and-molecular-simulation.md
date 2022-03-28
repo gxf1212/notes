@@ -8,7 +8,7 @@ Just read the following PDF.
 
 
 ```pdf
-raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
+https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
 ```
 Other
 
