@@ -834,6 +834,12 @@ export PATH=$PATH:$ROSETTA_BIN
 
 https://github.com/luancarvalhomartins/PyAutoFEP
 
+### SilcsBio
+
+https://docs.silcsbio.com/2020.1/install.html
+
+
+
 
 
 ## Visualization

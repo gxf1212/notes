@@ -814,7 +814,28 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   sudo chmod -R 777 anaconda3/
   ```
 
-- 
+- s
+
+#### For R language
+
+when pycharm is open, working directory is set to the current. to install a package (dependent on) tcl
+
+```R
+setwd('/home/gxf/anaconda3/envs/Rlan')
+install.packages("Rcpp")
+install.packages("bio3d")
+install.packages("nc")
+```
+
+you should
+
+```shell
+conda create -n Rlan
+conda activate Rlan
+conda install -c intel tcl
+```
+
+failed, remove this env...
 
 ### svn
 

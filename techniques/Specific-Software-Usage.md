@@ -581,6 +581,12 @@ and https://www.moerats.com/archives/740/
   systemctl --user start onedrive
   ```
 
+  check
+
+  ```shell
+  code /usr/lib/systemd/user/onedrive.service
+  ```
+
 - If a file or folder is present on OneDrive, that does not exist locally, it will be removed. If the data on OneDrive should be kept, the following should be used:
 
   ```shell
@@ -619,11 +625,17 @@ A simple GUI with multi-account support. https://github.com/bpozdena/OneDriveGUI
 
    The existing execution still has a lock on the files. You 'most likely' had a service file running the daemon which you did not stop.
 
+   Additionally, this error: `A database statement execution error occurred: disk I/O error` means you have 2 copies of the program running - most likely 1 is via systemd, the other your manual execution.
+
    事实上虽然手动同步还报错，但确实在很快地同步
+
+   So let it be
+
+3. The use of --resync will remove your local 'onedrive' client state, thus no record will exist regarding your current 'sync status'
 
 3. 将来真的文件多了，应该1）升级25T；2）改用rclone的挂载模式（万一号没了又咋办？？）
 
-4. this time (22.3.20) building with source
+5. this time (22.3.20) building with source
 
    problem: https://github.com/abraunegg/onedrive/issues/973
 
@@ -633,9 +645,11 @@ A simple GUI with multi-account support. https://github.com/bpozdena/OneDriveGUI
    service onedrive start
    ```
 
-   
-
    以后重装第一件事就是装好onedrive，单独下载后同步全部乱套了
+
+6. To solve the above renaming problem (change your local file to xxx-localhost.xxx)
+
+   add `--upload-only` to the servi
 
 5. 是不是如果有其他来源的备份也必须下载，比如iPad？rclone可吗？
 

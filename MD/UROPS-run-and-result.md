@@ -1409,6 +1409,7 @@ steps:
 
    ```shell
    cd /home/gxf/.conda/envs/AmberTools21/dat/leap/cmd/
+   c/home/gxf/anaconda3/envs/AmberTools21/dat/leap/cmd/
    ```
 
 2. get amber input file

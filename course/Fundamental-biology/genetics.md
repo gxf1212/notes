@@ -1,20 +1,10 @@
-# Genetics & Genomics
+# Genetics
 
 > 考核：60%考试。很多计算题。。
-> 
-> From gene (2-7) to genome (8-13)
->
->![syllabus](https://gitee.com/gxf1212/notes/raw/master/course/Fundamental-biology/genetics.assets/syllabus.png)
-> 
-> But I've run to *genomics*! No more tests!
-> 
-> genomics for ChemBioer: 30% course exercises, 30% project, 30% presentation, 10% attendence.
-> 
-> ![syllabus](https://gitee.com/gxf1212/notes/raw/master/course/Fundamental-biology/genetics.assets/syllabus.jpg)
->
-> so write if I like...
 
+From gene (2-7) to genome (8-13)
 
+![syllabus](https://gitee.com/gxf1212/notes/raw/master/course/Fundamental-biology/genetics.assets/syllabus.png)
 
 # Chapter 1 Intro
 
@@ -147,81 +137,9 @@ The sum rule: either of exclusive events occurring (*or*), add the probabilities
 
 
 
-# Chapter 3 Extension of Mendel's Law
-
-
-
-## Single-gene inheritance
-
-imcomplete dominance
-
-
-
-
-
-codominance
 
 
 
 
 
 
-
-> pleiotropy of sickle-cell anemia: dominance type vary with the phenotype and environment
->
-> altitude
->
-> malaria
-
-
-
-
-
-
-
-But Mendel's law still works (genotypes remain)
-
-
-
-
-
-pleiotropy (多效性): a single gene determines a number of distinct and seemingly unrelated characteristics.
-
-Most genes do have....
-
-
-
-example: lethal allele (致死等位基因)
-
-A^y^ mutation: yellow coat mice, dominant to A (grey)
-
-but recessive to A in the production of lethality (A^y^A^y^ causes death)
-
-
-
-
-
-multiple alleles
-
-eg: blood type antigen
-
-
-
-How to establish the dominance relationship?
-
-- crossing between true-breeding
-
-
-
-concepts
-
-
-
-## Two-gene inheritance
-
-Interactions between alleles of different genes:
-
-- Additive effect (累加效应)
-- Complementary effect (互补作用)
-- Epistasis effect (上位效应)
-- Redundancy (冗余)

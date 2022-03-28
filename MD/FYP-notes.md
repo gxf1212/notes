@@ -861,6 +861,13 @@ When you encouter errors when reading .str file:
 
 3. 
 
+#### Appendix 3: other ways to generate ligand topology
+
+- https://cgenff.umaryland.edu is what CHARMM-GUI calls for ligand, the same
+- https://www.swissparam.ch/ MMFF/CHARMM22
+
+these servers generate files for multiple MD engines
+
 
 
 ### solvation and ionization
@@ -1698,7 +1705,7 @@ Here not that much is required...
 
 
 
-## FEP building systems
+## FEP (relative) building systems
 
 ### Fundamentals
 
@@ -1736,15 +1743,15 @@ we start from (equilibrated?) .pdb after MD
 
 ### By scripting
 
-I have written a program to generate this. A brief flow is
+I have written a program to generate this. 
+
+#### A brief flow
 
 - get stable complex structure, modify the ligand to obtain th other one
 
 - parametrize both ligands in CHARMM-GUI
 
   - to get: .rtf file. 
-
-  > manually merge the .prm file for later, because it only uses atom types in the force field, not atom names
 
 - same ligands, get properly renumbered .pdb files from CHARMM-GUI PDB reader
 
@@ -1761,16 +1768,148 @@ priciples
 
 
 
+#### Basic thoughts of the script
+
+- data structure
+  - The molecule is stored in a `Ligand object`. The core is `atomdict`. the key is the original atom name, the value contains all info, like FF atom type, coordinate (read in the .rtf and .pdb file together).
+  - All other properties are stored by tuples of atom keys (atom names+tag) (and other data), so that when we change the atom name to write in hybrid molecules, we just index through the dict (by GetXXX functions)
+- methods
+  - common structure: use RDkit package, get it from two .pdb files, find the corresponding atom indices in each molecule
+  - modification: 
+  - naming: 
+  - output: just write formatted strings into .rtf and .pdb files
 
 
-> deprecated  methods
+
+> Exploration
 >
+> 如果编码成图，这个问题叫做：最大公共子图问题
+>
+> https://drugai.blog.csdn.net/article/details/102626236
+>
+> https://blog.csdn.net/u012325865/article/details/111478970
+>
+> - 搜这个子图问题
+>   - `ismags.largest_common_subgraph()` 暂时失败
+> - RDkit：drugAI的code
+> - 基于group自己想
+>   - 还是线性思维，能扩展到其他TP
+> - 线性思维一步步
+>   - 对于mtp其实够了
+>
+> 
+>
+> CHARMM-GUI的code，收藏了
+>
+> - openMM能读写，可能转不了？读完以后能干啥？
+> - RDkit能找子结构，但处理不了文件？
+>
+> 
+>
+> 图同构（英語：graph isomorphism）描述的是图论中，两个图之间的完全等价关系。在图论的观点下，两个同构的图被当作同一个图来研究。
+> https://networkx.org/documentation/stable/_modules/networkx/algorithms/isomorphism/ismags.html
+>
+> 
+>
+> 用rdkit查找子结构是有效的，并且不需要图的数据结构，只要能返回去查找到atom name。并且rdkit可辅助阅读pdb中的信息（非必需
+>
+> > PH:画出来是P+？
+>
+> 
+>
+> 写文件：
+>
+> 自己写？名字问题？type问题？
+>
+> 文件：改一下原.rtf里面所有atom name，再读进来合并？
+>
+> prm文件也得改？MD测试一下
+>
+> 写的时候，写出group？
+>
+> IC的+-，*都什么意思？
+>
+> 问题
+>
+> - charge可合并？差多大。如P1，O1
+> - type不同？如C，差太大，删掉
+> - 坐标微调了，优化了？原来的pdb原子renumber了。既然要用公共的，就排个序。。能对上？是否影响parameterization？跟kevin check一下
+>   - 带ligand的都移动过了。upload.crd都好但没有氢
+>   - rdkit，读取formatted文件，手动renumber，分配坐标？还没好
+>   - 另外的renumber软件
+>     - **CHARMM-GUI 的PDB reder，同样的流程，drawing3d。**
+>     - 最好找点别的开源？
+>   - 没edit的不用了？
+>   - schrondinger可以做。。
+> - prm文件不用改，因为用的是力场里的atom type！但是要合并一下？复制粘贴就可以，但是mtp啥都没有，就不用了
+>
+> 
+>
+> import rdkit 出现 ImportError: DLL load failed: 找不到指定的模块
+> 解决：版本不对，重装
+>
+> reference
+>
+> - https://www.rdkit.org/docs/GettingStartedInPython.html
+> - https://www.rdkit.org/docs/Cookbook
+> - https://www.rdkit.org/docs/source/rdkit.Chem.html
+> - https://www.rdkit.org/docs/source/rdkit.Chem.rdchem.html#rdkit.Chem.rdchem.Mol
+> - https://www.rdkit.org/docs/source/rdkit.Chem.rdchem.html#rdkit.Chem.rdchem.Atom
+> - https://www.rdkit.org/docs/source/rdkit.Chem.rdFMCS.html?highlight=rdkit%20chem%20rdfmcs%20findmcs#rdkit.Chem.rdFMCS.FindMCS
+> - https://www.rdkit.org/docs/Cookbook.html?highlight=rdkit%20chem%20rdfmcs%20findmcs
+
+#### Rescuing the parameters
+
+We also get .prm file from CHARMM-GUI. manually merge the .prm file for later, because it only uses atom types in the force field, not atom names. But it clearly lacks some parameters (like angle, dihedral), because the rtf file contains new atom types (CG331, HGA3) that other .prm file can't parametrize, too. Errors are about them. However, normal simulations did not report error. 
+
+Because: these are new "hybrid" angles forming between the ligands.
+
+> 无语了，写中文
+>
+> - 讨厌的是，新生成的键还需要提供参数，这就意味着只做两个ligand的charmm-gui是不够的
+> - 我找遍了各种prm文件，gui生成的、charmm ff文件包的、vmd自带的、tutorial的，都没有这些参数。且有相关原子的大多都是`par_all36_cgenff.prm `
+> - 离谱的是，有几个ATP环上的参数，普通MD也找不到，但普通MD就可以跑
+> - 手动添加参数到prm文件，就可以运行。必须添加所有缺的，似乎说明参数完整才能跑
+>
+> 结论：直接用那个psf的话，没有那几个dihedral，不需要参数，VMD+rtf好心地全都加上了
+
+
+
+```
+alchemify ligand-merged.psf ligand-merged-fep.psf ligand-merged.pdb
+```
+
+
+
+
+
+
+
+
+
+```shell
+grep HGA3 ./*.prm | grep CG331 | grep OG303 | grep CG321
+grep CG321 ./*.prm | grep CG331 | grep OG303 | grep HGA3
+grep HGA3 par_all36_cgenff.prm | grep OG303
+
+grep NG1T1 ./*.prm | grep CG1N1
+
+!OG3C51 CG3C50 CG1N1  NG1T1      0.4300  3     0.00
+!NG2R51 CG3C50 CG1N1  NG1T1      0.4300  3     0.00
+```
+
+
+
+
+
+### Deprecated  methods
+
 > ### Build with VMD
 >
 > > try: equilibrated remTP
-> >
+>>
 > > files: protein, MG, two ligands from gui: pdb, psf, rtf, prm
->
+> 
 > #### Relative
 >
 > > you may build the .fep first...
@@ -1780,17 +1919,17 @@ priciples
 >    process the ligand as before, and change the name of the ligand:
 >
 >    ```shell
->    grep -rl "LIG " remtp-rm.pdb remtp-rm.psf | xargs sed -i s/"LIG"/"END"/g
+>     grep -rl "LIG " remtp-rm.pdb remtp-rm.psf | xargs sed -i s/"LIG"/"END"/g
 >    grep -rl "LIG " mtp-rm.pdb mtp-rm.psf | xargs sed -i s/"LIG"/"INI"/g
 >    ```
->
+> 
 >    then build both ligand and complex
 >
 >    ```shell
->    vmd -dispdev text -e merge-fep.tcl
+>     vmd -dispdev text -e merge-fep.tcl
 >    vmd -dispdev text -e sol-ion-fep.tcl
 >    ```
->
+> 
 >    > a small problem: all is ATOM, no HETATM
 >
 > 2. build the .fep
@@ -1800,7 +1939,7 @@ priciples
 >    change all "END" lines, 63-66 columns to ' 1.00'; "INI": '-1.00' for your two .pdb file
 >
 >    ```shell
->    list=(ligand complex)
+>     list=(ligand complex)
 >    for f in ${list[*]}; do
 >    cp ${f}.pdb ${f}.fep
 >    sed -i "s/1.00  0.00      END/1.00  1.00      END/g" ${f}.fep
@@ -1808,29 +1947,29 @@ priciples
 >    done
 >    # find the long pattern
 >    ```
->
+> 
 >    watch
 >
 >    ```shell
->    vmd complex.psf -pdb complex.fep
+>     vmd complex.psf -pdb complex.fep
 >    vmd ligand.psf -pdb ligand.fep
 >    ```
->
+> 
 >    > select ligand by
->
-> > ```
-> > resname END
-> > ```
-> >
-> > and view with coloring method 'Beta'
->
+>   >
+>    > > ```
+>    > > resname END
+>    > > ```
+>    > >
+>    > > and view with coloring method 'Beta'
+> 
 > 3. build the dual topology file
 >
->    
+> 
 >
->    
+> 
 >
->    
+> 
 >
 > 3. 
 >
@@ -1838,9 +1977,9 @@ priciples
 >
 > 3. 
 >
->
-> > failed
-> >
+> 
+>> failed
+>>
 > > ```shell
 > > awk -F " " '{if ($18==END) $62= 1.00}' complex.pdb > complex.fep
 > > grep "END" -rl complex.fep | xargs sed -i "s/ 0.00     / 1.00     /g"
@@ -1864,7 +2003,7 @@ priciples
 > > rarely used now
 > >
 > > 
->
+> 
 > #### Absolute
 >
 > easier, build as before until making FEP
@@ -1876,18 +2015,18 @@ priciples
 > [video demo](https://www.charmm-gui.org/?doc=demo&id=fec&lesson=1), [bilibili version](https://www.bilibili.com/video/BV153411s7kF)
 >
 > > TIP1: https://charmm-gui.org/?doc=input/retriever  This page can be used to recover a job, if you *did not* save a bookmark link, but you *do* remember the Job ID
-> >
+>>
 > > - jobid=4735806442, absolute, cgenff v1.0, using ligandrm.pdb to build, upload other ligand's drawing3D.mol2
 > > - JOB ID: 4739580626, relative, v2.5, .mol2, .mol2
 > >
 > > TIP2: do download every .tgz from Windows......
->
+> 
 > #### steps
 >
 >  use default settings unless otherwise specified
 >
 > 1. build the complex (including Mg is fine)
-> 2. upload your complex file (containing the starting ligand)
+>2. upload your complex file (containing the starting ligand)
 > 3. choose chain (all)
 > 4. build topology, choosing a file for the ligand
 > 5. solvate. choose box size and ion conc
@@ -1895,13 +2034,12 @@ priciples
 > 7. select Ligand Molecule for Free Energy Calculation
 > 8. PBC (default)
 > 9. upload ligand
->
+> 
 > 10. select program, force field, **check ligand**; ion for the ligand, distance from edge, 310K, etc.
-> 11. Relative: clustering, choose molecule pairs
+>11. Relative: clustering, choose molecule pairs
 > 12. finished, <font color=red>CHECK YOUR STRUCTURE!!</font>
->
-> >[!NOTE]
-> > the unit of edge distance is nm, not Å .....
+> 
+> > note: the unit of edge distance is nm, not Å .....
 >
 > #### note on files
 >
@@ -1913,12 +2051,12 @@ priciples
 >
 > > original: cannot input for force field; ligandrm.pdb: a little problem in text format.
 >
-> >[!TIP]
-> >
+> >!TIP
+>>
 > >may use `ligandrm.pdb` or `drawing3D.mol2`,  etc. when building. They don't align? just moved somewhat.
 > >
 > >When choosing a structural file (instead of using RCSB .pdb (but maybe that only provides topology?)) for the ligand's topology, use`drawing3D.mol2` 
->
+> 
 > ##### What to use when uploading ligands?
 >
 > > in the case of Absolute, mtp
@@ -1935,13 +2073,13 @@ priciples
 >
 > cannot upload converted ligandrm?
 >
->
-> >[!TIP]
-> >
+> 
+>>!TIP
+>>
 > >Conclusion: because the processing moves the ligands, it's fine to use either ligandrm or drawing_3D...
 > >
 > >you may check the structure after equilibration
->
+> 
 > ##### force field check
 >
 > However, the original ligand failed again. when using ligandrm.pdb, etc., it failed at cgenff (v2.5) force field check. lone pair? v1.0 is fine
@@ -1955,9 +2093,9 @@ priciples
 > uploading ligands
 >
 > - supports multiple ligands in one .sdf or ,mol2 file
-> - it's better to dock them first
+>- it's better to dock them first
 > - if not, or you are drawing ligands, the GUI automatically positions the ligands (may be not accurate)
->
+> 
 > both Relative or Absolute apply. A little difference for multiple ligands:
 >
 > - the latter designs a `Closed minimal perturbation path based on the clustering` 
@@ -1967,23 +2105,23 @@ priciples
 > - when uploading ligands
 >
 >   - Absolute: Use this option only when the ligands are already **docked**.
->   - Relative: Use this option only when the scaffold coordinate of a pair of ligands are **identical.**
->
+>  - Relative: Use this option only when the scaffold coordinate of a pair of ligands are **identical.**
+> 
 >   Absolute just cares 'in position', Relative should make sure 'same position'.
 >
 > - result
 >
 >   - Absolute: one folder for one ligand
->   - Relative: one for a pair of FEP molecule
->
->
-> to prepare multiple ligands. support multiple files and one file containing ligands.
+>  - Relative: one for a pair of FEP molecule
+> 
+> 
+>to prepare multiple ligands. support multiple files and one file containing ligands.
 >
 > #### result
 >
 > - where: go to `namd`, 1,2,... (2-3, ...) means different ligands
-> - FEP: all of ligand INI disappear, all END appear, no common searching...
->
+>- FEP: all of ligand INI disappear, all END appear, no common searching...
+> 
 > 
 >
 > ### BFEE2
@@ -1999,17 +2137,17 @@ priciples
 > ### FEPrepare
 >
 > - https://feprepare.vi-seem.eu/indexlpg.php  a server
->   - https://www.zhihu.com/zvideo/1356250979265093632  https://www.zhihu.com/people/qutesun/zvideos
+>  - https://www.zhihu.com/zvideo/1356250979265093632  https://www.zhihu.com/people/qutesun/zvideos
 >   - https://feprepare.vi-seem.eu/Manual.pdf
 > - http://zarbi.chem.yale.edu/ligpargen bad charge settings!
 >   - [principles, and guide of ligpargen](https://pergamos.lib.uoa.gr/uoa/dl/frontend/file/lib/default/data/2779350/theFile)
->
+> 
 > cannot control force field? we have defined .psf and .rtf already? still using OPLS?
 >
 > May produce a hybrid ligand, but failed...
 >
 > ```
-> Making biomolecule rdrp...
+>Making biomolecule rdrp...
 > ERROR: rdrp failed: Leap did not create the topology and/or coordinate file(s): vacuum.parm7, vacuum.rst7
 > Making ligand mtp...
 > ERROR: mtp failed: SCF has not converged
@@ -2020,14 +2158,14 @@ priciples
 > ERROR: The following ligands have failed:
 >  mtp
 > ```
->
+> 
 > 
 
 
 
 
 
-### for Gromacs
+### For Gromacs
 
 [MD tutorial](http://www.mdtutorials.com/gmx/free_energy/08_advanced.html)
 
@@ -2106,6 +2244,9 @@ https://github.com/drazen-petrov/SMArt
 the same as before?
 
 ```shell
+vmd -dispdev text -e merge-fep.tcl
+vmd -dispdev text -e sol-ion-fep.tcl
+# common
 file = ligand # complex
 vmd -dispdev text -e measure.tcl -args $file
 # common
