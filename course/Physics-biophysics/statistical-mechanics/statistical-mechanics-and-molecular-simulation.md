@@ -13,7 +13,7 @@ Just read the following PDF.
 ```
 
 ```pdf
-/course/Physics-biophysics/statistical-mechanics/(Oxford%20Graduate%20Texts)%20Mark%20E.%20Tuckerman%20-%20Statistical%20Mechanics_%20Theory%20and%20Molecular%20Simulation-Oxford%20University%20Press,%20USA%20(2010).pdf
+/course/Physics-biophysics/statistical-mechanics/(Oxford Graduate Texts) Mark E. Tuckerman - Statistical Mechanics_ Theory and Molecular Simulation-Oxford University Press, USA (2010).pdf
 ```
 
 
