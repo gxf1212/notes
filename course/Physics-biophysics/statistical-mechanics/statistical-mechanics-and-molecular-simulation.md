@@ -14,7 +14,7 @@ https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics
 
 
 
-<i src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
+<iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
 
 
 
@@ -23,7 +23,7 @@ Other
 
 > failed bacause a download session starts and no preview...
 >
-> ````
+> ````markdown
 > ```pdf
 > https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
 > ```
@@ -31,7 +31,7 @@ Other
 >
 > failed because gitee doesn't show until login...
 >
-> ````
+> ````markdown
 > ```pdf
 > https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
 > ```

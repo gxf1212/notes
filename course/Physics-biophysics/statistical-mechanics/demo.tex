@@ -129,16 +129,14 @@ Visualizing a many-particle system is hard. Maybe we can consider a particular c
 \section{Lagrangian formulation of classical mechanics}
 
 \subsection{Conservative forces}
-Conservative forces, means \textbf{energy conservation}. Defined as the negative gradient of $U$, the \textit{potential energy function}
-\begin{equation}
-	\vF=-\nabla U(\vr_1,\dots,\vr_N)
-\end{equation}
-where $\nabla=\p{}{\vr}$. Or for each particle $i$
+Conservative forces, means \textbf{energy conservation}. Defined as the negative gradient of $U$, the \textit{potential energy function}, Or for each particle $i$
 \begin{tcolorbox}
 	\begin{equation}
-		\vF_i=-\p{U}{\vr_i} \label{eq:conservative}
+		\vF_i=-\nabla_i U(\vr_1,\dots,\vr_N) \label{eq:conservative}
 	\end{equation}
 \end{tcolorbox}
+where $\nabla=\p{}{\vr}$. 
+
 An important property is that, the work done by conservative forces only depends on the difference of $U$ of the start and end state, i.e. independent of the path taken. 
 $$
 %\oint\vF_i\md\vl=0
@@ -166,6 +164,7 @@ which is the difference between the kinetic energy and potential energy. In cont
 	\begin{equation}
 		\der{}{t}\p{\lag}{\dvr_i}=\p{\lag}{\vr_i} \label{eq:euler-lagrangian}
 	\end{equation}
+	For any one of position coordinates, taking the partial derivative with respect to the velocity and then time, is equal to that with respect to the position directly.
 \end{tcolorbox}
 which can be verified with the substitution of eqn. \ref{eq:conservative} and \ref{eq:kinetics} (poco).
 
@@ -205,13 +204,14 @@ The kinetic energy can then be written as\footnote{separate everything containin
 	&=\half\suman\sum_{\beta=1}^{3N}\sumin m_i\p{\vr_i}{q_\alpha}\p{\vr_i}{q_\beta}\dot{q_\alpha}\dot{q_\beta} \notag\\
 	&=\half\suman\sum_{\beta=1}^{3N}G_{\alpha\beta}\dot{q_\alpha}\dot{q_\beta}
 \end{align}
-where
 \begin{tcolorbox}
+	where
 	\begin{equation}
 		G_{\alpha\beta}(\boldsymbol{q})=\sumin m_i\p{\vr_i}{q_\alpha}\cdot\p{\vr_i}{q_\beta}
 	\end{equation}
+	is the function of $q$ (so is $U(\boldsymbol{q})$). $\alpha$ and $\beta$ as indices, these elements forms a matrix $G$, the \textit{mass metric matrix}. 
 \end{tcolorbox}
-is the function of $q$ (so is $U(\boldsymbol{q})$). $\alpha$ and $\beta$ as indices, these elements forms a matrix $G$, the \textit{mass metric matrix}. Then the Lagrangian is expressed as a function of $\boldsymbol{q}$ and $\dot{\boldsymbol{q}}$. Adopting the Euler-Lagrangian equation, considering $q_{\gamma}$ as $q_\alpha$:
+Then the Lagrangian is expressed as a function of $\boldsymbol{q}$ and $\dot{\boldsymbol{q}}$. Adopting the Euler-Lagrangian equation, considering $q_{\gamma}$ as $q_\alpha$:
 \begin{equation}
 	\der{}{t}\left(\sum_{\beta=1}^{3N}G_{\gamma\beta}\dot{q}_\beta\right)=\suman\sum_{\beta=1}^{3N}\p{G_{\alpha\beta}}{q_\gamma}\dot{q_\alpha}\dot{q_\beta}-\p{U}{q_\gamma}\\
 \end{equation}
@@ -263,6 +263,36 @@ We can also transform $\vr$ further into spherical coordinates to obtain the one
 
 \section{Legendre transforms}
 
+Consider a derivable function $f(x)$. Define
+\begin{equation}
+	s=f^\prime(x)=g(x)
+\end{equation}
+and assume $s=g(x)$ is a one-to-one mapping (i.e. $x=g^{-1}(s)$ exists).
+
+For all $x=x_0$, 
+\begin{equation*}
+	f(x_0)=f^\prime(x_0)x_0+b(x_0)
+\end{equation*}
+holds, where $b(x_0)$ is the $y$-intercept. Thus, forall $x$
+\begin{equation}
+	f(x)=f^\prime(x)x+b(x)
+\end{equation}
+
+We now express the relation in the function of $s$, i.e. find the equivalent expression. Let $\tilde{f}=b$, then
+\begin{equation}
+	\tilde{f}=b(g^{-1}(s))=f(x(s))-sx(s)
+\end{equation}
+This is called a \textit{Legendre transform}.
+
+For multiple variables $x_1, \dots, x_n$, there will be corresponding $s_1, \dots, s_n$, and the generalized form is
+\begin{tcolorbox}
+	\begin{equation}
+		\tilde{f}(s_1, \dots, s_n)=f(x_1(s_1, \dots, s_n),\dots,x_n(s_1, \dots, s_n))-\sum_{i=1}^{n}s_ix_i(s_1, \dots, s_n)
+	\end{equation}
+	$f$ is constituted of $n$ pairs of variable $\times$ its derivative, plus a bias term $\tilde{f}$.
+\end{tcolorbox}
+
+
 
 \section{Hamiltonian formulation}
 
@@ -275,7 +305,10 @@ Recall our mass metric matrix $G$
 
 \section{Summary of chapter}
 
-
+\begin{itemize}
+	\item 
+	\item the Hamiltonian is a Legandre transform of the Lagrangian.
+\end{itemize}
 
 
 
