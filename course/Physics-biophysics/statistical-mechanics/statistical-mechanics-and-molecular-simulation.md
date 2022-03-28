@@ -6,20 +6,25 @@ Since there's too many equations to number and refer to, I'll write this in LaTe
 
 Just read the following PDF.
 
+<embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
 
-```pdf
-https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
-```
 Other
 
-> failed
+> failed bacause a download session starts and no preview...
+>
+> ```pdf
+> https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
+> ```
+>
+> failed because gitee doesn't show until login...
+>
 > ````
 > ```pdf
 > https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
 > ```
 > ````
 >
-> another method might be (no plugin required? failed)
+> another method might be (no plugin required?...
 >
 > ```html
 > <embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
