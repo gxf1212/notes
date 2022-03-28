@@ -6,22 +6,28 @@ Since there's too many equations to number and refer to, I'll write this in LaTe
 
 Just read the following PDF.
 
-<script type="text/javascript">
-  //loads pdf files for resume
-  window.onload = function (){
-    var success = new PDFObject({ 
-      url: "https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" 
-    }).embed("my_pdf_object");
-  };
-</script>
+
+
+```pdf
+https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
+```
+
+
+
+<i src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
+
+
+
 
 Other
 
 > failed bacause a download session starts and no preview...
 >
+> ````
 > ```pdf
 > https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
 > ```
+> ````
 >
 > failed because gitee doesn't show until login...
 >
@@ -36,6 +42,21 @@ Other
 > ```html
 > <embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
 > ```
+>
+> failed
+>
+> ```
+> <script type="text/javascript">
+>   //loads pdf files for resume
+>   window.onload = function (){
+>     var success = new PDFObject({ 
+>       url: "https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" 
+>     }).embed("my_pdf_object");
+>   };
+> </script>
+> ```
+>
+> 
 
 
 To use [QYXF LaTeX template](https://gitee.com/qyxf/qyxf-book) in English:
