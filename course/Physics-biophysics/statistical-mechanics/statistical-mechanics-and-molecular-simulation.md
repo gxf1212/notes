@@ -9,11 +9,11 @@ Just read the following PDF.
 
 
 ```pdf
-/course/Physics-biophysics/statistical-mechanics/demo.pdf
+https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
 ```
 
 ```pdf
-/course/Physics-biophysics/statistical-mechanics/Mark-E-Tuckerman-Statistical-Mechanics-Theory-and-Molecular-Simulation-Oxford-University-Press-USA-(2010).pdf
+https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/Mark-E-Tuckerman-Statistical-Mechanics-Theory-and-Molecular-Simulation-Oxford-University-Press-USA-(2010).pdf
 ```
 
 
