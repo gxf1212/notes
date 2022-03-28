@@ -4,12 +4,12 @@
   - [软件操作](/techniques/Specific-Software-Usage.md)
 - [MD学习类](/MD/README.md)
   - [虚拟筛选和Gromacs基础操作](/MD/UROPS-run-and-result.md)
-  - [NAMD/VMD和FEP计算基本操作（待完成）](/MD/FYP-notes.md)
+  - [NAMD/VMD和FEP计算基本操作](/MD/FYP-notes.md)
   - [MD各软件教程和网络资料学习](/MD/MD-tutorials-all.md)
 - [课程学习类](/course/README.md)
   - [高年级生物课](/course/advanced-biology.md)
     - [结构生物学笔记](/course/Advanced-biology/structural-biology/sb-outline.md)
-    - [分子免疫学笔记（待完成）](/course/Advanced-biology/molecular-immunology/molecular-immunology.md)
+    - [分子免疫学笔记（未完）](/course/Advanced-biology/molecular-immunology/molecular-immunology.md)
     - [生物信息学笔记（部分）](/course/Advanced-biology/bioinformatics/bioinformatics.md)
   - [物理下的生物](/course/physics-biophysics.md)
     - [分子生物物理学（NUS）](/course/Physics-biophysics/molecular-biophysics-NUS/LSM-3243.md)
@@ -22,7 +22,7 @@
 - 友情链接
   - [西北工业大学附属中学](http://www.xgdfz.com/)
   - [西安交通大学钱学森学院](http://bjb.xjtu.edu.cn/)
-  - [西安交大钱院学辅](https://qyxf.site/)
+  - [西安交大钱院学辅信息站](https://qyxf.site/)
   - [浙江大学定量生物学中心](http://iqb.zju.edu.cn/)
   - [中国生物物理学会](https://space.bilibili.com/424091950)
   - <a href="https://gxf1212.gitee.io/notes/#/utils/about" target="_self">关于我</a>

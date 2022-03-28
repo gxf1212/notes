@@ -103,7 +103,7 @@ The definition of work:
 	W_{AB}=\int_A^B\vF\cdot\md\vl
 \end{equation}
 
-In statistical mechanics, a particle $i$ will experience a force $\vF_i(\vr_1, \vr_2,\dots, \vr_N, \dot{\vr_i})$, i.e. the positions of all other particles and its velocity. 
+In statistical mechanics, a particle $i$ will experience a force $\vF_i(\vr_1, \vr_2,\dots, \vr_N, \dot{\vr_i})$, which is determined by the positions of all other particles and its velocity. 
 
 \section{Phase space: visualization}
 
@@ -112,7 +112,7 @@ We use position and momentum in the phase space because
 	\vF=\der{\vp}{t} \label{rp}
 \end{equation}
 
-Phase space: $3N$ position variables and $3N$ momentum variables consititue the microscopic state of the system at time $t$, if the dimensionality is 3. These variables forms a so-called \textit{phase space vector}. And by solving the Newton's second law, we obtain a \textit{trajectory}:
+Phase space: $3N$ position variables and $3N$ momentum variables constitute the microscopic state of the system at time $t$, if the dimensionality is 3. These variables forms a so-called \textit{phase space vector} $x$. And by solving the Newton's second law, we obtain a \textit{trajectory}:
 \begin{equation}
 	x_t=\left(\vr_1(t), \dots, \vr_N(t), \vp_1(t), \dots, \vp_N(t)\right)
 \end{equation}
@@ -136,7 +136,7 @@ Conservative forces, means \textbf{energy conservation}. Defined as the negative
 where $\nabla=\p{}{\vr}$. Or for each particle $i$
 \begin{tcolorbox}
 	\begin{equation}
-		\vF_i=\p{U}{\vr_i} \label{eq:conservative}
+		\vF_i=-\p{U}{\vr_i} \label{eq:conservative}
 	\end{equation}
 \end{tcolorbox}
 An important property is that, the work done by conservative forces only depends on the difference of $U$ of the start and end state, i.e. independent of the path taken. 
@@ -164,7 +164,7 @@ which is the difference between the kinetic energy and potential energy. In cont
 
 \begin{tcolorbox}[title={The Euler-Lagrangian equation}]
 	\begin{equation}
-		\der{}{t}\p{\lag}{\dvr_i}=\dd{\lag}{\vr_i}
+		\der{}{t}\p{\lag}{\dvr_i}=\p{\lag}{\vr_i} \label{eq:euler-lagrangian}
 	\end{equation}
 \end{tcolorbox}
 which can be verified with the substitution of eqn. \ref{eq:conservative} and \ref{eq:kinetics} (poco).
@@ -174,7 +174,7 @@ This equation helps generate the equations of motion. Take the example of the on
 	U(x)&=\half kx^2\\
 	K(\dot{x})&=\half m\dot{x}^2\\
 	\der{}{t}\p{\lag}{\dot{x}}=\der{(m\dot{x})}{t}&=m\ddot{x}\\
-	\dd{\lag}{x}&=-kx
+	\p{\lag}{x}&=-kx
 \end{align*}
 
 It also helps to verify conservation of the energy.
@@ -211,15 +211,60 @@ where
 		G_{\alpha\beta}(\boldsymbol{q})=\sumin m_i\p{\vr_i}{q_\alpha}\p{\vr_i}{q_\beta}
 	\end{equation}
 \end{tcolorbox}
-is called the \textit{mass metric matrix} and is the function of $q$ (so is $U(\boldsymbol{q})$). Then the Lagrangian is expressed as a function of $\boldsymbol{q}$ and $\dot{\boldsymbol{q}}$. Adopting the Euler-Lagrangian equation, considering $q_{\gamma}$ as $q_\alpha$:
+is called the \textit{mass metric matrix} (of $\alpha$ and $\beta$) and is the function of $q$ (so is $U(\boldsymbol{q})$). Then the Lagrangian is expressed as a function of $\boldsymbol{q}$ and $\dot{\boldsymbol{q}}$. Adopting the Euler-Lagrangian equation, considering $q_{\gamma}$ as $q_\alpha$:
 \begin{equation}
 	\der{}{t}\left(\sum_{\beta=1}^{3N}G_{\gamma\beta}\dot{q}_\beta\right)=\suman\sum_{\beta=1}^{3N}\p{G_{\alpha\beta}}{q_\gamma}\dot{q_\alpha}\dot{q_\beta}-\p{U}{q_\gamma}\\
 \end{equation}
 
 \subsection{Example: two-particle system}
+A two particle system subject to a potential $U$ which only depends on the distance between them. We can write:
+\begin{equation}
+	\lag=\half m_1\dvr_1^2+\half m_2\dvr_2^2-U(|\vr_1-\vr_2|) \label{eq:ex1.4}\\
+\end{equation}
+And knowing that (not important)
+\begin{gather*}
+	|\vr_1-\vr_2|=\sqrt{(x_1-x_2)^2+(y_1-y_2)^2+(z_1-z_2)^2}\\
+	\p{|\vr_1-\vr_2|}{x_1}=\dfrac{2x_1}{2\sqrt{(x_1-x_2)^2+(y_1-y_2)^2+(z_1-z_2)^2}}=\dfrac{x_1}{|\vr_1-\vr_2|}\\
+	\p{U(|\vr_1-\vr_2|)}{\vr_1}=\der{U(|\vr_1-\vr_2|)}{(|\vr_1-\vr_2|)}\p{|\vr_1-\vr_2|}{\vr_1}=\der{U(|\vr_1-\vr_2|)}{(|\vr_1-\vr_2|)}\dfrac{\vr_1}{|\vr_1-\vr_2|}\\
+	\p{U(|\vr_1-\vr_2|)}{\vr_2}=-\der{U(|\vr_1-\vr_2|)}{(|\vr_1-\vr_2|)}\dfrac{\vr_2}{|\vr_1-\vr_2|}
+\end{gather*}
+,using eqn \ref{eq:euler-lagrangian}, we can get
+\begin{gather*}
+	m_1\ddvr_1=-\der{U(|\vr_1-\vr_2|)}{(|\vr_1-\vr_2|)}\dfrac{\vr_1}{|\vr_1-\vr_2|}\\
+	m_2\ddvr_2=\der{U(|\vr_1-\vr_2|)}{(|\vr_1-\vr_2|)}\dfrac{\vr_1}{|\vr_1-\vr_2|}
+\end{gather*}
+
+We now want to introduce a more natural set of general coordinates: \textit{center of mass} and \textit{relative position}:
+\begin{gather*}
+	\boldsymbol{R}=\dfrac{m_1\vr_1+m_2\vr_2}{m_1+m_2}\\
+	\vr=\vr_1-\vr_2
+\end{gather*}
+Let $M=m_1+m_2$. The inverse of this transformation is
+\begin{gather*}
+	\vr_1=\boldsymbol{R}+\dfrac{m_2}{M}\vr\\
+	\vr_2=\boldsymbol{R}-\dfrac{m_1}{M}\vr
+\end{gather*}
+Substituted into eqn \ref{eq:ex1.4}, the Lagrangian becomes
+\begin{align*}
+	\lag&=
+	\half 
+	m_1\left(\dot{\boldsymbol{R}}+\dfrac{m_2}{M}\dvr\right)^2+
+	\half m_2\left(\dot{\boldsymbol{R}}-\dfrac{m_1}{M}\dvr\right)^2-U(|\vr|)\\
+	&=\half M\dot{\boldsymbol{R}}^2+\half\mu\dvr^2-U(|\vr|)
+\end{align*}
+where \textit{reduced mass} $\mu=\dfrac{m_1m_2}{M}$.
+
+Since the energy does not change as the center of mass moves, $\p{\lag}{\boldsymbol{R}}=0$. Then the equation of motion will be
+\begin{gather*}
+	M\ddot{\boldsymbol{R}}=0\\
+	\mu\ddvr=-\der{U}{|\vr|}\dfrac{\vr}{|\vr|}
+\end{gather*}
+We can also transform $\vr$ further into spherical coordinates to obtain the one-dimensional equation of motion.
+
+\section{Legendre transforms}
 
 
-\section{}
+\section{Hamiltonian formulation}
 
 
 

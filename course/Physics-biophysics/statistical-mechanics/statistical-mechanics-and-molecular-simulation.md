@@ -7,8 +7,6 @@ Since there's too many equations to number and refer to, I'll write this in LaTe
 
 Just read the following PDF.
 
-
-
 ```pdf
 /course/Physics-biophysics/statistical-mechanics/demo.pdf
 ```
