@@ -13,9 +13,16 @@ Just read the following PDF.
 ```
 
 ```pdf
-/course/Physics-biophysics/statistical-mechanics/(Oxford Graduate Texts) Mark E. Tuckerman - Statistical Mechanics_ Theory and Molecular Simulation-Oxford University Press, USA (2010).pdf
+/course/Physics-biophysics/statistical-mechanics/Mark-E.-Tuckerman-Statistical-Mechanics-Theory-and-Molecular-Simulation-Oxford-University Press-USA-(2010).pdf
 ```
 
+```pdf
+/utils/tutorials/fontawesome5.pdf
+```
+
+```pdf
+https://qyxf.site/zhufeng/zhufeng-2021-spring.pdf
+```
 
 > another method might be (no plugin required? failed)
 >
