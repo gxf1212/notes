@@ -6,17 +6,7 @@ Since there's too many equations to number and refer to, I'll write this in LaTe
 
 Just read the following PDF.
 
-
-
-```pdf
-https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
-```
-
-
-
 <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
-
-
 
 
 Other
@@ -43,20 +33,11 @@ Other
 > <embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
 > ```
 >
-> failed
+> also start downloading, but fixed by `<iframe>`
 >
-> ```
-> <script type="text/javascript">
->   //loads pdf files for resume
->   window.onload = function (){
->     var success = new PDFObject({ 
->       url: "https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" 
->     }).embed("my_pdf_object");
->   };
-> </script>
-> ```
->
-> 
+> https://cloudpdf.io/blog/how-to-embed-a-pdf-in-html-without-the-ability-to-download
+
+
 
 
 To use [QYXF LaTeX template](https://gitee.com/qyxf/qyxf-book) in English:
