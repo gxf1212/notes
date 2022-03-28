@@ -8,13 +8,16 @@ Just read the following PDF.
 
 
 ```pdf
-https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
+raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
 ```
+Other
 
-
+> failed
+> ````
 > ```pdf
 > https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
 > ```
+> ````
 >
 > another method might be (no plugin required? failed)
 >
