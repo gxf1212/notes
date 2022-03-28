@@ -1037,6 +1037,12 @@ anaconda环境信息同步？
    git reset --hard origin/master
    ```
 
+   give up specific files
+
+   ```shell
+   git restore _sidebar.md
+   ```
+
 6. GitHub克隆Gitee的仓库
 
    ![clone](https://gitee.com/gxf1212/notes/raw/master/techniques/images/clone.jpg)
@@ -1937,3 +1943,4 @@ other
 
 > https://blog.csdn.net/weixin_40957741/article/details/102761183  Python variable underline
 
+re
