@@ -7,11 +7,23 @@ Since there's too many equations to number and refer to, I'll write this in LaTe
 
 Just read the following PDF.
 
-<embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=PDFLINK" height=800px; width=100%>
+
 
 ```pdf
 /course/Physics-biophysics/statistical-mechanics/demo.pdf
 ```
+
+```pdf
+/course/Physics-biophysics/statistical-mechanics/(Oxford%20Graduate%20Texts)%20Mark%20E.%20Tuckerman%20-%20Statistical%20Mechanics_%20Theory%20and%20Molecular%20Simulation-Oxford%20University%20Press,%20USA%20(2010).pdf
+```
+
+
+> another method might be (no plugin required? failed)
+>
+> ```html
+> <embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
+> ```
+
 
 
 To use [QYXF LaTeX template](https://gitee.com/qyxf/qyxf-book) in English:

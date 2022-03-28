@@ -201,17 +201,17 @@ Thus, through the chain rule, we have
 
 The kinetic energy can then be written as\footnote{separate everything containing $q$ ($i$) and the $\dot{q}$ velocities, by summing over $i$ first. Imagina a 3D cube, the z-axis is $m_i$, while on the x-y plane sits pairs of $q$ terms...}
 \begin{align}
-	K(\boldsymbol{q},\dot{\boldsymbol{q}})&=\sumin m_i\suman\p{\vr_i}{q_\alpha}\dot{q_\alpha}\sum_{\beta=1}^{3N}\p{\vr_i}{q_\beta}\dot{q_\beta} \notag\\
-	&=\suman\sum_{\beta=1}^{3N}\sumin m_i\p{\vr_i}{q_\alpha}\p{\vr_i}{q_\beta}\dot{q_\alpha}\dot{q_\beta} \notag\\
-	&=\suman\sum_{\beta=1}^{3N}G_{\alpha\beta}\dot{q_\alpha}\dot{q_\beta}
+	K(\boldsymbol{q},\dot{\boldsymbol{q}})&=\half\sumin m_i\suman\p{\vr_i}{q_\alpha}\dot{q_\alpha}\sum_{\beta=1}^{3N}\p{\vr_i}{q_\beta}\dot{q_\beta} \notag\\
+	&=\half\suman\sum_{\beta=1}^{3N}\sumin m_i\p{\vr_i}{q_\alpha}\p{\vr_i}{q_\beta}\dot{q_\alpha}\dot{q_\beta} \notag\\
+	&=\half\suman\sum_{\beta=1}^{3N}G_{\alpha\beta}\dot{q_\alpha}\dot{q_\beta}
 \end{align}
 where
 \begin{tcolorbox}
 	\begin{equation}
-		G_{\alpha\beta}(\boldsymbol{q})=\sumin m_i\p{\vr_i}{q_\alpha}\p{\vr_i}{q_\beta}
+		G_{\alpha\beta}(\boldsymbol{q})=\sumin m_i\p{\vr_i}{q_\alpha}\cdot\p{\vr_i}{q_\beta}
 	\end{equation}
 \end{tcolorbox}
-is called the \textit{mass metric matrix} (of $\alpha$ and $\beta$) and is the function of $q$ (so is $U(\boldsymbol{q})$). Then the Lagrangian is expressed as a function of $\boldsymbol{q}$ and $\dot{\boldsymbol{q}}$. Adopting the Euler-Lagrangian equation, considering $q_{\gamma}$ as $q_\alpha$:
+is the function of $q$ (so is $U(\boldsymbol{q})$). $\alpha$ and $\beta$ as indices, these elements forms a matrix $G$, the \textit{mass metric matrix}. Then the Lagrangian is expressed as a function of $\boldsymbol{q}$ and $\dot{\boldsymbol{q}}$. Adopting the Euler-Lagrangian equation, considering $q_{\gamma}$ as $q_\alpha$:
 \begin{equation}
 	\der{}{t}\left(\sum_{\beta=1}^{3N}G_{\gamma\beta}\dot{q}_\beta\right)=\suman\sum_{\beta=1}^{3N}\p{G_{\alpha\beta}}{q_\gamma}\dot{q_\alpha}\dot{q_\beta}-\p{U}{q_\gamma}\\
 \end{equation}
@@ -267,6 +267,11 @@ We can also transform $\vr$ further into spherical coordinates to obtain the one
 \section{Hamiltonian formulation}
 
 
+Recall our mass metric matrix $G$
+
+\begin{equation}
+	G_{\alpha\beta}(\boldsymbol{q})=\sumin m_i\p{\vr_i}{q_\alpha}\p{\vr_i}{q_\beta}
+\end{equation}
 
 \section{Summary of chapter}
 
