@@ -52,13 +52,16 @@
 \newcommand{\vF}{\boldsymbol{F}}
 \newcommand{\vr}{\boldsymbol{r}}
 \newcommand{\vp}{\boldsymbol{p}}
+\newcommand{\vq}{\boldsymbol{q}}
 \newcommand{\vl}{\boldsymbol{l}}
 \newcommand{\dvr}{\dot{\vr}}
 \newcommand{\ddvr}{\ddot{\vr}}
+\newcommand{\dvq}{\dot{\vq}}
 \newcommand{\half}{\dfrac{1}{2}}
 \newcommand{\sumin}{\sum_{i=1}^N}
 \newcommand{\suman}{\sum_{\alpha=1}^{3N}}
 \newcommand{\lag}{\mathcal{L}} % Lagrangian
+\newcommand{\ham}{\mathcal{H}} % Hamiltionian
 
 % other 
 %\usepackage[utf8]{inputec}
@@ -90,7 +93,7 @@ Review basic laws.
 
 Newton's second law:
 \begin{equation}
-	\vF=m\dd{\vr}{t}=m\ddot{\vr}
+	\vF=m\dd{\vr}{t}=m\ddot{\vr} \label{eq:newton2nd}
 \end{equation}
 
 And Newton's third law:
@@ -195,26 +198,27 @@ It is assumed that the transformation has a unique inverse
 \end{equation}
 Thus, through the chain rule, we have
 \begin{equation}
-	\dvr_i=\suman\p{\vr_i}{q_\alpha}\dot{q_\alpha}
+	\dvr_i=\suman\p{\vr_i}{q_\alpha}\dot{q}_\alpha
 \end{equation}
 
 The kinetic energy can then be written as\footnote{separate everything containing $q$ ($i$) and the $\dot{q}$ velocities, by summing over $i$ first. Imagina a 3D cube, the z-axis is $m_i$, while on the x-y plane sits pairs of $q$ terms...}
-\begin{align}
-	K(\boldsymbol{q},\dot{\boldsymbol{q}})&=\half\sumin m_i\suman\p{\vr_i}{q_\alpha}\dot{q_\alpha}\sum_{\beta=1}^{3N}\p{\vr_i}{q_\beta}\dot{q_\beta} \notag\\
-	&=\half\suman\sum_{\beta=1}^{3N}\sumin m_i\p{\vr_i}{q_\alpha}\p{\vr_i}{q_\beta}\dot{q_\alpha}\dot{q_\beta} \notag\\
-	&=\half\suman\sum_{\beta=1}^{3N}G_{\alpha\beta}\dot{q_\alpha}\dot{q_\beta}
+\begin{align}\label{eq:kinetic-energy}
+	K(\vq,\dvq)&=\half\sumin m_i\suman\p{\vr_i}{q_\alpha}\dot{q}_\alpha\sum_{\beta=1}^{3N}\p{\vr_i}{q_\beta}\dot{q}_\beta \notag\\
+	&=\half\suman\sum_{\beta=1}^{3N}\sumin m_i\p{\vr_i}{q_\alpha}\p{\vr_i}{q_\beta}\dot{q}_\alpha\dot{q}_\beta \notag\\
+	&=\half\suman\sum_{\beta=1}^{3N}G_{\alpha\beta}\dot{q}_\alpha\dot{q}_\beta
 \end{align}
 \begin{tcolorbox}
 	where
 	\begin{equation}
-		G_{\alpha\beta}(\boldsymbol{q})=\sumin m_i\p{\vr_i}{q_\alpha}\cdot\p{\vr_i}{q_\beta}
+		G_{\alpha\beta}(\vq)=\sumin m_i\p{\vr_i}{q_\alpha}\cdot\p{\vr_i}{q_\beta}
 	\end{equation}
-	is the function of $q$ (so is $U(\boldsymbol{q})$). $\alpha$ and $\beta$ as indices, these elements forms a matrix $G$, the \textit{mass metric matrix}. 
+	is the function of $q$ (so is $U(\vq)$). $\alpha$ and $\beta$ as indices, these elements forms a matrix $G$, the \textit{mass metric matrix}. 
 \end{tcolorbox}
-Then the Lagrangian is expressed as a function of $\boldsymbol{q}$ and $\dot{\boldsymbol{q}}$. Adopting the Euler-Lagrangian equation, considering $q_{\gamma}$ as $q_\alpha$:
+Then the Lagrangian is expressed as a function of $\vq$ and $\dvq$. Adopting the Euler-Lagrangian equation, considering $q_{\gamma}$ as $q_\alpha$:
 \begin{equation}
-	\der{}{t}\left(\sum_{\beta=1}^{3N}G_{\gamma\beta}\dot{q}_\beta\right)=\suman\sum_{\beta=1}^{3N}\p{G_{\alpha\beta}}{q_\gamma}\dot{q_\alpha}\dot{q_\beta}-\p{U}{q_\gamma}\\
+	\der{}{t}\left(\sum_{\beta=1}^{3N}G_{\gamma\beta}\dot{q}_\beta\right)=\suman\sum_{\beta=1}^{3N}\p{G_{\alpha\beta}}{q_\gamma}\dot{q}_\alpha\dot{q}_\beta-\p{U}{q_\gamma} \label{eq:lag-equations}
 \end{equation}
+where $\gamma=1,\dots,3N$. These are the $3N$ equations of motion of the system.
 
 \subsection{Example: two-particle system}
 A two particle system subject to a potential $U$ which only depends on the distance between them. We can write:
@@ -273,7 +277,7 @@ For all $x=x_0$,
 \begin{equation*}
 	f(x_0)=f^\prime(x_0)x_0+b(x_0)
 \end{equation*}
-holds, where $b(x_0)$ is the $y$-intercept. Thus, forall $x$
+holds, where $b(x_0)$ is the $y$-intercept. Thus, for all $x$
 \begin{equation}
 	f(x)=f^\prime(x)x+b(x)
 \end{equation}
@@ -292,16 +296,96 @@ For multiple variables $x_1, \dots, x_n$, there will be corresponding $s_1, \dot
 	$f$ is constituted of $n$ pairs of variable $\times$ its derivative, plus a bias term $\tilde{f}$.
 \end{tcolorbox}
 
-
-
 \section{Hamiltonian formulation}
+\subsection{Notes}
+Before the derivation, something is worth noting.
 
+An interesting fact is
+\begin{gather}
+	\p{\lag}{\dvr_i}=\p{}{\dvr_i}\left[\sum_{i=1}\half m_i\dvr_i^2-U(\vr_i,\dots,\vr_N)\right]=m_i\dvr_i=\vp_i\\
+	K=\sumin\half m_i\dvr_i^2=\half\sumin\vp_i\dvr_i
+\end{gather}
+$\dvr_i$ is a function of $\vp_i$ ($\dvr_i(\vp_i)=\vp_i/m_i$; $s_i$ is $\vp_i$; $x_i$ is $\dvr_i$). 
 
-Recall our mass metric matrix $G$
+So we can define the \textit{generalized momentum} $p_\alpha$ as
+\begin{gather}
+	p_\alpha=\p{\lag}{\dot{q}_\alpha}\\
+	K=\half\suman p_\alpha\dot{q}_\alpha \label{eq:kinetic-general}
+\end{gather}
+for every set of generalized coordinates. These momenta are referred to as \textit{conjugated} to the coordinates. $\dot{q}_\alpha$ is a function of $p_\alpha$.
 
+\subsection{Formulation}
+The Hamilitonian is just the negative Legandre transformation of the Lagrangian. 
+
+The reason we introduce the Hamiltionian is to replace $\dvr_i$ in $\lag$ into $\vp_i$. Do the Legendre transform with $\vr_i$ fixed:
+\begin{align}
+	\tilde{\lag}&=\lag(\vr_1,\dots,\vr_N,\dvr_1(\vp_1),\dots,\dvr_N(\vp_N))-\sumin \vp_i\dvr_i(\vp_i) \notag\\
+	&=\sumin\half \dfrac{\vp_i^2}{m_i}-U(\vr_1,\dots,\vr_N)-\sumin \dfrac{\vp_i^2}{m_i} \notag\\
+	&=-\left(\sumin\half \dfrac{\vp_i^2}{m_i}+U(\vr_1,\dots,\vr_N)\right)
+\end{align}
+
+Thus, the Hamiltionian is defined as
 \begin{equation}
-	G_{\alpha\beta}(\boldsymbol{q})=\sumin m_i\p{\vr_i}{q_\alpha}\p{\vr_i}{q_\beta}
+	\ham(\vr_1,\dots,\vr_N,\vp_1,\dots,\vp_N)=\sumin\half \dfrac{\vp_i^2}{m_i}+U(\vr_1,\dots,\vr_N)
 \end{equation}
+which is the \textbf{total energy} of the system.
+
+\subsection{Equations of motion}
+
+Recall eqn \ref{eq:kinetic-energy}, our mass metric matrix $G$ where
+\begin{equation}
+	%	G_{\alpha\beta}(\vq)=\sumin m_i\p{\vr_i}{q_\alpha}\p{\vr_i}{q_\beta}\\
+	K(\vq,\dvq)=\half\suman\sum_{\beta=1}^{3N}G_{\alpha\beta}\dot{q}_\alpha\dot{q}_\beta
+	%	=\half \dvq G \dvq^T\\
+\end{equation}
+Comparing with eqn. \ref{eq:kinetic-general}, we can infer that
+\begin{equation}
+	p_\alpha=\sum_{\beta=1}^{3N}G_{\alpha\beta}\dot{q}_\beta
+\end{equation}
+In the form of matrix multiplication, it's $\vp=G\dvq$, or reversely
+\begin{equation}
+	\dvq=G^{-1}\vp
+\end{equation}
+where $\vp=(p_1,\dots,p_{3N})$ and $\dvq=(\dot{q}_1,\dots,\dot{q}_{3N})$.
+
+For any set of generalized coordinates, the Hamiltionian is given similarly:
+\begin{equation}
+	\ham(\vq,\vp)=K(\vp,\dvq(\vp))+U(\vq) \label{eq:hamiltonian}
+\end{equation}
+where $K$ is only the function of $\vp$ ($m_i$ as constants) and $U$ is only the function of $\vq$.
+%To be more specific,
+%\begin{equation*}
+%	K=\half\suman p_\alpha\dot{q}_\alpha=\half\vp^TG^{-1}\vp=\half\suman\sum_{\beta=1}^{3N}p_\alpha G^*_{\alpha\beta}p_\beta
+%\end{equation*}
+%where $G^{-1}(\alpha,\beta)=G^*_{\alpha\beta}$.
+
+From eqn. \ref{eq:hamiltonian}, we can obtain by referring to eqn. \ref{eq:kinetic-general} and \ref{eq:conservative}:
+\begin{gather}
+	\p{\ham}{p_\alpha}=\dot{q}_\alpha \qquad \p{\ham}{q_\alpha}=-\dot{p}_\alpha
+	\label{eq:ham-equations}
+\end{gather}
+for $\alpha=1,\dots,3N$, which is known as \textit{Hamiltonian's equations of motion}. You may verify it in the example of harmonic oscillation:
+\begin{gather*}
+	\ham=\dfrac{p^2}{2m}+\half kx^2\\
+	m\ddot{x}=\dot{p}=-\p{\ham}{x}=-kx
+\end{gather*}
+
+Notes on the Hamiltonian equations of motion:
+\begin{itemize}
+	\item It's equivalent to Newton's second law of motion (eqn. \ref{eq:newton2nd})
+	\item It's equivalent to the Lagrangian equations of motion (eqn. \ref{eq:lag-equations}), which is a set of $3N$ second-order DEs, while eqn. \ref{eq:ham-equations} is a set of $6N$ first-order DEs.
+\end{itemize}
+
+\subsection{Energy conservation}
+
+
+
+
+\section{A simple classic polymer model}
+
+
+
+
 
 \section{Summary of chapter}
 
