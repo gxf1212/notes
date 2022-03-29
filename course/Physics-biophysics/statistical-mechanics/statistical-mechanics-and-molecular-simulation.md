@@ -4,7 +4,7 @@ Get the textbook: [Tuckerman, M. E. (2010). Statistical mechanics: Theory and mo
 
 Since there's too many equations to number and refer to, I'll write this in LaTeX.
 
-Just read the following PDF if you have access to GitHub. [Login Gitee to Download](https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf)
+Just read the following PDF if you have access to GitHub. [If not, read it here](https://stuxjtueducn-my.sharepoint.com/personal/gxf1212_stu_xjtu_edu_cn/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fgxf1212%5Fstu%5Fxjtu%5Fedu%5Fcn%2FDocuments%2FWindows%2FGit%2Drepo%2Fother%2Fstatistical%2Dmechanics%2Fdemo%2Epdf&parent=%2Fpersonal%2Fgxf1212%5Fstu%5Fxjtu%5Fedu%5Fcn%2FDocuments%2FWindows%2FGit%2Drepo%2Fother%2Fstatistical%2Dmechanics&ga=1)
 
 <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
 
@@ -33,9 +33,14 @@ Other
 > <embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
 > ```
 >
-> also start downloading, but fixed by `<iframe>`
+> also start downloading, but fixed by `<iframe>`, `<iframe src="" height=800px; width=100%>`
+> 
+> but later content not shown in site?
 >
 > https://cloudpdf.io/blog/how-to-embed-a-pdf-in-html-without-the-ability-to-download
+> 
+> Onedrive link also 拒绝了我们的请求
+ 
 
 
 
