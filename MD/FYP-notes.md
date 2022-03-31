@@ -1384,7 +1384,26 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    
    check in pymol to see if they are the same
    
-2. get .top file
+2. to run in gmx, specify T coupling groups:
+
+   ```shell
+   gmx make_ndx -f equilibrated.gro -o index.ndx
+   > 1|13|14
+   > 21|22|23
+   > q
+   ```
+
+   > Protein_ATP_Mg    TIP3_SOD_CLA
+   >
+   > refer to
+   >
+   > ```shell
+   > tc_grps    	= non-Water Water # Membrane-containing MD simulation
+   > tc_grps    	= Protein_ligand_ion Other # normal system
+   > compressed-x-grp or energygrps  = Protein MOL MN # list all main species
+   > ```
+
+3. get .top file
 
    ```tcl
    package require topotools
@@ -1392,8 +1411,10 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    mol new system.psf
    mol addfile equilibrated.pdb
    # Pass along a list of parameters to generate structure.top, suitable for preparing gromacs simulations.
-   topo writegmxtop structure.top [list par_all35_ethers.prm par_all36_carb.prm par_all36_cgenff.prm par_all36_lipid_ljpme.prm par_all36m_prot.prm par_all36_na.prm] 
+   topo writegmxtop structure.top [list par_all36m_prot.prm lig.prm par_all36_cgenff.prm toppar_water_ions_namd.str par_all36_na.prm par_all35_ethers.prm par_all36_carb.prm par_all36_lipid_ljpme.prm]
    ```
+
+   be sure to include `lig.prm` and the water_ions one!
 
    > don't include `param.prm ` because gmx never tolerate duplication a little bit
    >
@@ -1406,21 +1427,23 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 
    CHRAMM ff website also provides many .itp file for gmx
 
-   > copy your folder to `~/gromacs-2021.5-gpu/share/gromacs/top` and you can add at the beginning of `.top` file:
+   > copy your folder downloaded from http://mackerell.umaryland.edu/charmm_ff.shtml to `~/gromacs-2021.5-gpu/share/gromacs/top` and you can add at the beginning of `.top` file:
    >
    > ```c
    > #include "charmm36-jul2021.ff/forcefield.itp"
    > ```
 
-   but we don't need that much, which causes hundreds of duplications again (for atomtype, just warnings).
-
-   ```c
-   #include "charmm36-jul2021.ff/ffnonbonded.itp"
-   ```
-
-   which really includes parameters for these ions. `ions.itp` only defines atoms.
-
-   Put it before `[ atomtypes ]` in your `.top` file
+   > but we don't need that much, which causes hundreds of duplications again (for atomtype, just warnings).
+   >
+   > ```c
+   > #include "charmm36-jul2021.ff/ffnonbonded.itp"
+   > ```
+   >
+   > which really includes parameters for these ions. `ions.itp` only defines atoms.
+   >
+   > Put it before the first `[ atomtypes ]` in your `.top` file
+   >
+   > > I'm doing this because I forgot toppar_water_ions_namd.str before...
 
 3. also the velocity in the last frame! (find how to load into gmx, .cpt?)
 
@@ -1444,32 +1467,13 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    >
    > can't do it now, just set `gen_vel` to yes and `continuation` to no
 
-3. to run in gmx, specify T coupling groups:
+3. make the .tpr file
 
-   ```shell
-   gmx make_ndx -f equilibrated.gro -o index.ndx
-   > 1|13|14
-   > 21|22|23
-   > q
-   ```
-   
-   > Protein_ATP_Mg    TIP3_SOD_CLA
-   >
-   > refer to
-   >
-   > ```shell
-   > tc_grps    	= non-Water Water # Membrane-containing MD simulation
-   > tc_grps    	= Protein_ligand_ion Other # normal system
-   > compressed-x-grp or energygrps  = Protein MOL MN # list all main species
-   > ```
-   
-4. make the .tpr file
-   
    ```shell
    # This would be prepared for simulation using grompp to create a tpr file
    gmx grompp -f md.mdp -c equilibrated.gro -r equilibrated.gro \
    -p structure.top -n index.ndx -o simulation.tpr -maxwarn 400
-   # not that much warnings
+   # not that many warnings
    # supress repeated param definition
    -t velocity.cpt 
    gmx mdrun -deffnm simulation -nb gpu
@@ -1534,6 +1538,7 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
 4. optional: watch movie (don't for the 300-ns one! it eats all memory...)
 
    > ```shell
+   > gmx trjconv -f ${f}.xtc -o ${f}_v.xtc -b 295 -e 300 -tu 
    > # pymol
    > load equilibrated.gro, final
    > load rdrp-atp-prod.xtc, final
@@ -1743,25 +1748,22 @@ we start from (equilibrated?) .pdb after MD
 
 ### By scripting
 
-I have written a program to generate this. 
-
 #### A brief flow
 
-- get stable complex structure, modify the ligand to obtain th other one
-
+- get stable complex structure, modify the ligand to obtain the other one
 - parametrize both ligands in CHARMM-GUI
 
   - to get: .rtf file. 
-
 - same ligands, get properly renumbered .pdb files from CHARMM-GUI PDB reader
 
   - to get: .pdb file
-
-- run the program to obtain the hybrid .rtf and .pdb file (with atoms renamed and B value assigned)
-
+- run the make_hybrid code to obtain the hybrid .rtf and .pdb file (with atoms renamed and B value assigned)
 - build the ligand and complex with VMD. do use top_all36_cgenff.rtf!
+- run the 2nd script to edit the beta field in the .pdb file
+- run the 3rd script to remove unparametrized angles/dihedrals, etc.
+- normal measurement, equilibration and run, but not necessary to gradually heat up (but if you like...)
 
-priciples
+principles
 
 - always make sure they are overlapping (same coordinates)
 - if .mol2 file is needed, use drawing_3D!
@@ -1772,11 +1774,15 @@ priciples
 
 - data structure
   - The molecule is stored in a `Ligand object`. The core is `atomdict`. the key is the original atom name, the value contains all info, like FF atom type, coordinate (read in the .rtf and .pdb file together).
-  - All other properties are stored by tuples of atom keys (atom names+tag) (and other data), so that when we change the atom name to write in hybrid molecules, we just index through the dict (by GetXXX functions)
-- methods
+  - All other properties are stored by tuples of atom **keys** (atom names initially, +tag in hybrid) (and other data), so that when we change the atom name to write in hybrid molecules, we just index through the dict (by GetXXX functions)
+- flow
+  - read files
   - common structure: use RDkit package, get it from two .pdb files, find the corresponding atom indices in each molecule
-  - modification: 
-  - naming: 
+  - verification: position and charge nearly the same, or removed from common
+  - modification: add A, B to atom name. C for common atoms
+  - combination: a `Ligand` object 'hybrid'
+    - atomdict, key is name+tag, same value, count common atoms point to the same `Atom` object
+    - thus we can use **set** operations to merge bonds, etc.
   - output: just write formatted strings into .rtf and .pdb files
 
 
@@ -1873,32 +1879,17 @@ Because: these are new "hybrid" angles forming between the ligands.
 >
 > 结论：直接用那个psf的话，没有那几个dihedral，不需要参数，VMD+rtf好心地全都加上了
 
+solution: edit .pdb files. 因为generate psf和mol and save molecule是不同的过程，所以前者模式下无法select分子，也就无法搞……后者只能是load merge后的，beta值又混乱了，所以还不如重改
 
+> so I can play with a tcl list...
 
-```
-alchemify ligand-merged.psf ligand-merged-fep.psf ligand-merged.pdb
-```
+So I wrote a script that read from hybrid and **merged** files, search for corresponding atoms to edit the beta field.
 
+Editing .psf files: read from the log file reporting the lacking parameters
 
-
-
-
-
-
-
-
-```shell
-grep HGA3 ./*.prm | grep CG331 | grep OG303 | grep CG321
-grep CG321 ./*.prm | grep CG331 | grep OG303 | grep HGA3
-grep HGA3 par_all36_cgenff.prm | grep OG303
-
-grep NG1T1 ./*.prm | grep CG1N1
-
-!OG3C51 CG3C50 CG1N1  NG1T1      0.4300  3     0.00
-!NG2R51 CG3C50 CG1N1  NG1T1      0.4300  3     0.00
-```
-
-
+- you must **remove** the atom numbers 
+- incomplete line is fine (no re-organizing)
+- must **change** the total number of angles, ...
 
 
 
@@ -2191,43 +2182,45 @@ and another pdf tutorial [Free Energy Calculation with GROMACS: Solvation free e
 
 
 
-
-
-#### FESetup
-
-https://fesetup.readthedocs.io/en/latest/introduction.html is unreadable...
-
-[a tutorial](https://vileoy.uovie.com/blog/2020/01/07/free-energy-calculation-tutorial/) from [this original one](https://siremol.org/tutorials/somd/Binding_free_energy/FESetup.html)
-
-
-
-FESetup for NAMD
-
-no tutorial, no option manual, only code...
-
-
-
-#### PyAutoFEP
-
-https://github.com/luancarvalhomartins/PyAutoFEP
-
-Automated, Streamlined, and Accurate Absolute Binding Free-Energy Calculations
-
-
-
-#### PMX
-
-[another tool: pmx](http://pmx.mpibpc.mpg.de/sardinia2018_tutorial2/index.html)
-
-http://pmx.mpibpc.mpg.de/webserver.html  can perform protein and DNA mutation
-
-
-
-
-
-https://github.com/drazen-petrov/SMArt
-
-#### BFEE2?
+> #### FESetup
+>
+> https://fesetup.readthedocs.io/en/latest/introduction.html is unreadable...
+>
+> [a tutorial](https://vileoy.uovie.com/blog/2020/01/07/free-energy-calculation-tutorial/) from [this original one](https://siremol.org/tutorials/somd/Binding_free_energy/FESetup.html)
+>
+> 
+>
+> FESetup for NAMD
+>
+> no tutorial, no option manual, only code...
+>
+> 
+>
+> #### PyAutoFEP
+>
+> https://github.com/luancarvalhomartins/PyAutoFEP
+>
+> Automated, Streamlined, and Accurate Absolute Binding Free-Energy Calculations
+>
+> 
+>
+> #### PMX
+>
+> [another tool: pmx](http://pmx.mpibpc.mpg.de/sardinia2018_tutorial2/index.html)
+>
+> http://pmx.mpibpc.mpg.de/webserver.html  can perform protein and DNA mutation
+>
+> 
+>
+> 
+>
+> https://github.com/drazen-petrov/SMArt
+>
+> #### BFEE2?
+>
+> 
+>
+> 
 
 
 
@@ -2249,14 +2242,14 @@ vmd -dispdev text -e sol-ion-fep.tcl
 # common
 file = ligand # complex
 vmd -dispdev text -e measure.tcl -args $file
-# common
-vmd -dispdev text -e fix_backbone_restrain_ca.tcl
-cd ../equil
-namd3 +auto-provision +idlepoll pro-lig-equil > pro-lig-equil.log
+# equil
+namd3 +auto-provision +idlepoll fep-lig-equil > fep-lig-equil.log
+
 # may go to analysis and check?
 vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
-cd ../prod
-namd3 +p1 +devices 0 pro-lig-prod > pro-lig-prod.log
+
+# prod
+namd3 +p1 +devices 0 fep-lig-prod-forward > fep-lig-prod-forward.log
 ```
 
 
@@ -2270,6 +2263,66 @@ reference:
 - FEP tutorial: equil, shift
 - protein-ligand: only production
 - Kevin: GPU
+
+order: make lig-equil, modify into com-equil/lig-prod-forward, then into backward
+
+#### parameters
+
+
+
+```shell
+alchDecouple            off		# our ligand is charged..
+alchVdwLambdaEnd        1.0
+alchElecLambdaStart     0.1		# so early
+
+alchOutFreq             1000 	# should be small
+```
+
+
+
+
+
+#### backward
+
+forward: starting from equilibration
+
+```tcl
+set  temp           310
+set  outputbase     rdrp-mtp-remtp-ligand
+set  outputName     $outputbase-prod-backward
+# if you do not want to open this option, assign 0
+set INPUTNAME       1                      ;# use the former outputName, for restarting a simulation
+
+
+# restart or PBC
+if { $INPUTNAME != 0 } {
+    # restart
+    BinVelocities $INPUTNAME.restart.vel.old
+    BinCoordinates $INPUTNAME.restart.coor.old
+    ExtendedSystem $INPUTNAME.restart.xsc.old
+} else {
+    # from foward. use the former outputName
+    bincoordinates 	    $outputbase-prod-forward.coor
+    binvelocities	    $outputbase-prod-forward.vel
+    extendedSystem      $outputbase-prod-forward.xsc
+}
+
+set all {0.00 0.00001 0.0001 0.001 0.01 0.05 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.95 0.99 0.999 0.9999 0.99999 1.00 }
+# symmetric
+runFEPlist [lreverse $all] $numSteps
+
+```
+
+
+
+### result
+
+
+
+```
+```
+
+
 
 
 
