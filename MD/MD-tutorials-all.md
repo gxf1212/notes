@@ -938,8 +938,10 @@ The distance separating the cation in the primary and the adjacent cells = 30 $\
 Solid lines represent outgoing atoms and dashed lines represent incoming atoms.
 Two variables define how the perturbed system is coupled or decoupled from its environment, viz. λ~elec~ (alchElecLambdaStart) and λ~vdW~ (alchVdwLambdaEnd). 
 
-> In the present scenario, λ~vdW~ = 1.0, meaning that the van der Waals interactions for outgoing and incoming particles will be, respectively, scaled down starting from λ = 1.0 − λ~vdW~ = 0.0 to λ = 1.0, and scaled up starting from λ = 0.0 to λ = λ~vdW~. If λ~elec~ = 0.4,
-> electrostatic interactions for outgoing and incoming particles are, respectively, scaled down from  λ = 0.0 to λ = 1.0 - λ~elec~ = 0.6, and scaled up from  λ = λ~elec~ to 1 λ = 1.0.
+> - `alchElecLambdaStart`: E interactions the appearing atoms starts to be scaled up
+> - `alchVdwLambdaEnd`: V interactions the appearing atoms finishes to be scaled up
+>
+> In the present scenario, λ~vdW~ = 1.0, meaning that the van der Waals interactions for outgoing and incoming particles will be, respectively, scaled down starting from λ = 1.0 − λ~vdW~ = 0.0 to λ = 1.0, and scaled up starting from λ = 0.0 to λ = λ~vdW~. If λ~elec~ = 0.4, electrostatic interactions for outgoing and incoming particles are, respectively, scaled down from  λ = 0.0 to λ = 1.0 - λ~elec~ = 0.6, and scaled up from  λ = λ~elec~ to λ = 1.0.
 >
 > | atoms    | vdW       | elec      |
 > | -------- | --------- | --------- |
@@ -1006,7 +1008,7 @@ The whole last paragraphs are worth reading later......
 >
 > This very close agreement with experimental determinations based on side–chain analogues, as well as other computational estimates, may be in part coincidental or due to fortuitous <u>**cancellation of errors**</u>. Indeed, some deviation could be expected due to environment effects — viz. the mutation of a residue embedded in a small peptide chain versus that of an isolated, prototypical organic molecule[24] — and, to a lesser extent, the limited accuracy of empirical force fields. The first explanation may be related to the concept of “self solvation” of the side chain. Here, the tyrosyl fragment is not only solvated predominantly by the aqueous environment, but also, to a certain degree, by the peptide chain, which, under certain circumstances, can form hydrogen bonds with the hydroxyl group.
 
-> Moreover, it should be noted that even for a small and quickly relaxing system such as the hybrid tripeptide, convergence of the FEP equation requires a significant time. In some cases, <u>very short runs may give better results</u> than moderately longer ones, because the former provide a local sampling around the starting configuration, while the latter start exploring nearby conformations, yet are not long enough to fully sample them.
+> Moreover, it should be noted that even for a small and quickly relaxing system such as the hybrid tripeptide, convergence of the FEP equation requires a significant time. In some cases, <u>**very short runs may give better results**</u> than moderately longer ones, because the former provide a local sampling around the starting configuration, while the latter start exploring nearby conformations, yet are not long enough to fully sample them.
 
 > In general, whether or not intramolecular interactions ought to be perturbed — i.e. `alchDecouple` set to off or on, respectively — requires careful attention. As has been seen here, ignoring perturbed intramolecular interactions is computationally advantageous in the sense that it obviates the need for the gas-phase simulation depicted in Figure 9. This choice is fully justified in the case of rigid, or sufficiently small molecules. If, however, the system of interest can assume multiple conformations, setting alchDecouple to on may no longer be appropriate. This is due to the fact that on account of the environment, specifically its permittivity, the conformational space explored in the low-pressure gaseous phase is likely to be different from that in an aqueous medium.
 >

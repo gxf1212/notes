@@ -587,6 +587,10 @@ and https://www.moerats.com/archives/740/
   code /usr/lib/systemd/user/onedrive.service
   ```
 
+  you may also not use this because the process takes up your memory...
+
+  
+
 - If a file or folder is present on OneDrive, that does not exist locally, it will be removed. If the data on OneDrive should be kept, the following should be used:
 
   ```shell
