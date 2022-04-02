@@ -117,7 +117,7 @@ We use position and momentum in the phase space because
 
 Phase space: $3N$ position variables and $3N$ momentum variables constitute the microscopic state of the system at time $t$, if the dimensionality is 3. These variables forms a so-called \textit{phase space vector} $x$. And by solving the Newton's second law, we obtain a \textit{trajectory}:
 \begin{equation}
-	x_t=\left(\vr_1(t), \dots, \vr_N(t), \vp_1(t), \dots, \vp_N(t)\right)
+	x_t=\left(\vr_1(t), \dots, \vr_N(t), \vp_1(t), \dots, \vp_N(t)\right) \label{eq:phase-space-vector}
 \end{equation}
 
 We can visualize the trajectory for a single one-dimensional particle. Some examples are (not explained here):
@@ -131,6 +131,7 @@ Visualizing a many-particle system is hard. Maybe we can consider a particular c
 
 \section{Lagrangian formulation of classical mechanics}
 
+\vspace{0.5em}
 \subsection{Conservative forces}
 Conservative forces, means \textbf{energy conservation}. Defined as the negative gradient of $U$, the \textit{potential energy function}, Or for each particle $i$
 \begin{tcolorbox}
@@ -171,7 +172,10 @@ which is the difference between the kinetic energy and potential energy. In cont
 \end{tcolorbox}
 which can be verified with the substitution of eqn. \ref{eq:conservative} and \ref{eq:kinetics} (poco).
 
-This equation helps generate the equations of motion. Take the example of the one-dimensional harmonic oscillator, where
+This equation helps generate the equations of motion. 
+
+\example
+Take the example of the one-dimensional harmonic oscillator, where
 \begin{align*}
 	U(x)&=\half kx^2\\
 	K(\dot{x})&=\half m\dot{x}^2\\
@@ -220,7 +224,7 @@ Then the Lagrangian is expressed as a function of $\vq$ and $\dvq$. Adopting the
 \end{equation}
 where $\gamma=1,\dots,3N$. These are the $3N$ equations of motion of the system.
 
-\subsection{Example: two-particle system}
+\subsection{An example: two-particle system}
 A two particle system subject to a potential $U$ which only depends on the distance between them. We can write:
 \begin{equation}
 	\lag=\half m_1\dvr_1^2+\half m_2\dvr_2^2-U(|\vr_1-\vr_2|) \label{eq:ex1.4}\\
@@ -297,47 +301,45 @@ For multiple variables $x_1, \dots, x_n$, there will be corresponding $s_1, \dot
 \end{tcolorbox}
 
 \section{Hamiltonian formulation}
-\subsection{Notes}
-Before the derivation, something is worth noting.
 
-An interesting fact is
+\vspace{1em}
+\subsection{the Hamiltionian under Cartesian coordinates}
+
+Before the derivation, An interesting fact is worth noting:
 \begin{gather}
 	\p{\lag}{\dvr_i}=\p{}{\dvr_i}\left[\sum_{i=1}\half m_i\dvr_i^2-U(\vr_i,\dots,\vr_N)\right]=m_i\dvr_i=\vp_i\\
-	K=\sumin\half m_i\dvr_i^2=\half\sumin\vp_i\dvr_i
+	K=\sumin\half m_i\dvr_i^2=\half\sumin\vp_i\dvr_i\left(=\sumin\dfrac{\vp_i^2}{2m_i}\right)
 \end{gather}
 $\dvr_i$ is a function of $\vp_i$ ($\dvr_i(\vp_i)=\vp_i/m_i$; $s_i$ is $\vp_i$; $x_i$ is $\dvr_i$). 
 
-So we can define the \textit{generalized momentum} $p_\alpha$ as
-\begin{gather}
-	p_\alpha=\p{\lag}{\dot{q}_\alpha}\\
-	K=\half\suman p_\alpha\dot{q}_\alpha \label{eq:kinetic-general}
-\end{gather}
-for every set of generalized coordinates. These momenta are referred to as \textit{conjugated} to the coordinates. $\dot{q}_\alpha$ is a function of $p_\alpha$.
-
-\subsection{Formulation}
-The Hamilitonian is just the negative Legandre transformation of the Lagrangian. 
-
-The reason we introduce the Hamiltionian is to replace $\dvr_i$ in $\lag$ into $\vp_i$. Do the Legendre transform with $\vr_i$ fixed:
+The reason we introduce the Hamiltionian is to replace $\dvr_i$ in $\lag$ into $\vp_i$. Do the Legendre transform with $\vr_i$ fixed, plugging in the two equaitons above:
 \begin{align}
 	\tilde{\lag}&=\lag(\vr_1,\dots,\vr_N,\dvr_1(\vp_1),\dots,\dvr_N(\vp_N))-\sumin \vp_i\dvr_i(\vp_i) \notag\\
 	&=\sumin\half \dfrac{\vp_i^2}{m_i}-U(\vr_1,\dots,\vr_N)-\sumin \dfrac{\vp_i^2}{m_i} \notag\\
-	&=-\left(\sumin\half \dfrac{\vp_i^2}{m_i}+U(\vr_1,\dots,\vr_N)\right)
+	&=-\left(\sumin \dfrac{\vp_i^2}{2m_i}+U(\vr_1,\dots,\vr_N)\right)
 \end{align}
 
-Thus, the Hamiltionian is defined as
-\begin{equation}
-	\ham(\vr_1,\dots,\vr_N,\vp_1,\dots,\vp_N)=\sumin\half \dfrac{\vp_i^2}{m_i}+U(\vr_1,\dots,\vr_N)
-\end{equation}
+Thus, the Hamilitonian is just the negative Legandre transformation of the Lagrangian:
+\begin{tcolorbox}
+	\begin{equation}
+		\ham(\vr_1,\dots,\vr_N,\vp_1,\dots,\vp_N)=K(\vp_1,\dots,\vp_N)+U(\vr_1,\dots,\vr_N)
+	\end{equation}
+\end{tcolorbox}
 which is the \textbf{total energy} of the system.
 
-\subsection{Equations of motion}
+\subsection{Equations of motion under generalized coordinates}
 
-Recall eqn \ref{eq:kinetic-energy}, our mass metric matrix $G$ where
-\begin{equation}
-	%	G_{\alpha\beta}(\vq)=\sumin m_i\p{\vr_i}{q_\alpha}\p{\vr_i}{q_\beta}\\
-	K(\vq,\dvq)=\half\suman\sum_{\beta=1}^{3N}G_{\alpha\beta}\dot{q}_\alpha\dot{q}_\beta
-	%	=\half \dvq G \dvq^T\\
-\end{equation}
+Likewise, we can define the \textit{generalized momentum} $p_\alpha$ as
+\begin{gather}
+	p_\alpha=\p{\lag}{\dot{q}_\alpha} \label{eq:palpha}\\
+	K(\vp,\dvq)=\half\suman p_\alpha\dot{q}_\alpha=\half\vp\cdot\dvq \label{eq:kinetic-general}
+\end{gather}
+for every set of generalized coordinates, where $\vp=(p_1,\dots,p_{3N})$ and $\dvq=(\dot{q}_1,\dots,\dot{q}_{3N})$.. These momenta are referred to as \textit{conjugated} to the coordinates. But why is there a $1/2$? Becuase $\dot{q}_\alpha$ is a function of $p_\alpha$.
+
+Recall eqn \ref{eq:kinetic-energy}:
+\begin{equation*}
+	K=\half\suman\sum_{\beta=1}^{3N}G_{\alpha\beta}\dot{q}_\alpha\dot{q}_\beta
+\end{equation*}
 Comparing with eqn. \ref{eq:kinetic-general}, we can infer that
 \begin{equation}
 	p_\alpha=\sum_{\beta=1}^{3N}G_{\alpha\beta}\dot{q}_\beta
@@ -346,7 +348,7 @@ In the form of matrix multiplication, it's $\vp=G\dvq$, or reversely
 \begin{equation}
 	\dvq=G^{-1}\vp
 \end{equation}
-where $\vp=(p_1,\dots,p_{3N})$ and $\dvq=(\dot{q}_1,\dots,\dot{q}_{3N})$.
+which implies that $\dvq$ is a function of $\vp$. Though our mass metric matrix $G$ is a function of $\vq$, once the generalized coordinates are defined, $G$ remains unchanged. The value of $\vr$ and $\vq$ vary along the trajectory, but the direvatives do not.
 
 For any set of generalized coordinates, the Hamiltionian is given similarly:
 \begin{equation}
@@ -360,23 +362,61 @@ where $K$ is only the function of $\vp$ ($m_i$ as constants) and $U$ is only the
 %where $G^{-1}(\alpha,\beta)=G^*_{\alpha\beta}$.
 
 From eqn. \ref{eq:hamiltonian}, we can obtain by referring to eqn. \ref{eq:kinetic-general} and \ref{eq:conservative}:
-\begin{gather}
-	\p{\ham}{p_\alpha}=\dot{q}_\alpha \qquad \p{\ham}{q_\alpha}=-\dot{p}_\alpha
-	\label{eq:ham-equations}
-\end{gather}
-for $\alpha=1,\dots,3N$, which is known as \textit{Hamiltonian's equations of motion}. You may verify it in the example of harmonic oscillation:
+\begin{tcolorbox}[title={Hamiltonian's equations of motion}]
+	\begin{gather}
+		\p{\ham}{p_\alpha}=\dot{q}_\alpha \qquad \p{\ham}{q_\alpha}=-\dot{p}_\alpha
+		\label{eq:ham-equations}
+	\end{gather}
+	for $\alpha=1,\dots,3N$. 
+\end{tcolorbox}
+
+\example You may verify it in the example of harmonic oscillation:
 \begin{gather*}
 	\ham=\dfrac{p^2}{2m}+\half kx^2\\
 	m\ddot{x}=\dot{p}=-\p{\ham}{x}=-kx
 \end{gather*}
 
-Notes on the Hamiltonian equations of motion:
+\mynote on the Hamiltonian equations of motion:
 \begin{itemize}
-	\item It's equivalent to Newton's second law of motion (eqn. \ref{eq:newton2nd})
-	\item It's equivalent to the Lagrangian equations of motion (eqn. \ref{eq:lag-equations}), which is a set of $3N$ second-order DEs, while eqn. \ref{eq:ham-equations} is a set of $6N$ first-order DEs.
+	\item It's equivalent to Newton's second law of motion (eqn. \ref{eq:newton2nd}, with eqn. \ref{eq:palpha})
+	\item It's equivalent to the Lagrangian equations of motion (eqn. \ref{eq:lag-equations}), which is a set of $3N$ second-order DEs. Eqn. \ref{eq:ham-equations} is a set of $6N$ first-order DEs and thus looks simpler.
 \end{itemize}
 
+\supplement I can't explain the $1/2$ yet...
+
+\subsection{Properties}
+
+\vspace{0.5em}
 \subsection{Energy conservation}
+\begin{align*}
+	\der{\ham}{t}&=\suman \p{\ham}{q_\alpha}\dot{q}_\alpha+\p{\ham}{p_\alpha}\dot{p}_\alpha\\
+	&=\suman\p{\ham}{q_\alpha}\p{\ham}{p_\alpha}+\p{\ham}{p_\alpha}(-\p{\ham}{q_\alpha})=0
+\end{align*}
+
+For a trajectory under constant energy, the phase space vectors (eqn. \ref{eq:phase-space-vector}) remain in a surface known as \textit{constant-energy (hyper)surface}.
+
+\textit{Work-energy theroem} writes:
+\begin{gather}
+	K_A+U_A=K_B+U_B \notag\\
+	U_B-U_A=W_{AB}=K_A-K_B
+\end{gather}
+
+Consider any arbitrary phase space function $a(x)$. To study its time evolution:
+\begin{align*}
+	\der{a}{t}&=\suman\p{a}{p_\alpha}\dot{p}_\alpha+\p{a}{q_\alpha}\dot{q}_\alpha\\
+	&=\suman\p{a}{p_\alpha}\p{\ham}{q}-\p{a}{q_\alpha}\p{\ham}{p_\alpha}\\
+	&=\left\{a,\ham\right\} \label{eq:poisson-bracket}
+\end{align*}
+where the last line is known as the \textit{Poisson bracket}.
+
+\subsubsection{Phase space incompressibility}
+
+Divergence
+
+\subsubsection{Symplectic structure}
+
+
+sa
 
 
 

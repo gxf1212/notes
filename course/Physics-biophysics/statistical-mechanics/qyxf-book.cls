@@ -207,6 +207,9 @@
 \newcommand{\exercise}[1]{\noindent\textbf{\color{\MiscColor}练习 #1}\ }
 \newcommand{\solve}[1][解]{\noindent\textbf{\color{\MiscColor}#1}\ }
 \newcommand{\analysis}[1][分析]{\noindent\emph{\color{\MiscColor}#1}\ }
+\newcommand{\example}[1][Example]{\noindent\emph{\color{\MiscColor}#1}\ }
+\newcommand{\mynote}[1][Notes]{\noindent\emph{\color{\MiscColor}#1}\ }
+\newcommand{\supplement}[1][Supplement]{\noindent\emph{\color{\MiscColor}#1}\ }
 
 % 定理环境及样式设定
 \newtheorem{theorem}{定理}
