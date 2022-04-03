@@ -589,7 +589,23 @@ and https://www.moerats.com/archives/740/
 
   you may also not use this because the process takes up your memory...
 
-  
+  ```shell
+  vim .onedrive.sh
+  # /usr/local/bin/onedrive --monitor --upload-only
+  chmod +x .onedrive.sh
+  crontab -e
+  # 0 * * * * ~/.onedrive.sh 2>&1
+  # template: 35 1 * * *  /root/rclone.sh >> /root/rclone.log 2>&1 # 1:35 everyday
+  ```
+
+  https://blog.csdn.net/LLQ_200/article/details/77044603   http://tool.lu/[crontab](https://so.csdn.net/so/search?q=crontab&spm=1001.2101.3001.7020) 
+
+  > Select an editor.  To change later, run 'select-editor'.
+  >
+  >   1. /bin/nano        <---- easiest
+  >   2. /usr/bin/vim.basic
+  >   3. /usr/bin/vim.tiny
+  >   4. /bin/ed
 
 - If a file or folder is present on OneDrive, that does not exist locally, it will be removed. If the data on OneDrive should be kept, the following should be used:
 

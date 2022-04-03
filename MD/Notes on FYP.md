@@ -1353,7 +1353,7 @@ animate read dcd rdrp-atp-prod.dcd
 
 
 
-### Run in Gromacs
+### Run in Gromacs (prepare)
 
 > prepare, equillibrate in NAMD, run in gmx. i.e. convert equilibrated system to gmx (.gro/top, ndx, velocity)
 >
@@ -1511,50 +1511,73 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
 
 2. convert the trajectory file
 
-   ```shell
-   # convert trajectory file
-   conda activate AmberTools21 # MDtraj
-   f=rdrp-atp-prod
-   mdconvert -o ${f}.xtc -t equilibrated.gro ${f}.dcd # normal xtc
-   gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump # movie, water not go to infinity?
-   ```
+   1. mdconvert
 
-   > if simply use `.pdb`, gmx reports errors related to PBC box setting.
+      ```shell
+      # convert trajectory file
+      conda activate AmberTools21 # MDtraj
+      f=rdrp-atp-prod
+      mdconvert -o ${f}.xtc -t equilibrated.gro ${f}.dcd # normal xtc
+      gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump # movie, water not go to infinity?
+      ```
+
+      > if simply use `.pdb`, gmx reports errors related to PBC box setting.
+      >
+      > mdconvert can make .trr too, but it's the same size as .xtc (also the .dcd)...
+      >
+      > if you really need velocities (`.trr`), you should use vmd
+
+   2. we may also use vmd to do that. the result is just the same
+
+      ```shell
+      f=rdrp-atp-prod
+      vmd ../common/system.psf ${f}.dcd
+      # cmd?
+      # After VMD was opened select the molecule. Then click on `File` and select `Save Coordinates`. Now choose the trr format and save it.
+      # but only works for short trajectories...
+      ```
+
+      cmd
+
+      ```shell
+      f=rdrp-remtp-prod
+      # /usr/local/lib/vmd/plugins/LINUXAMD64/bin/catdcd5.2/
+      catdcd -o ${f}.trr -otype trr -i equilibrated.gro -dcd ${f}.dcd
+      gmx trjconv -f ${f}.trr -o ${f}_nj.xtc -pbc nojump
+      ```
+
+      catdcd is used outside VMD! a bit slow...
+
+   3. maybe also mda
+
+   > problem: Masses were requested, but for some atom(s) masses could not be found in the database. Use a tpr file as input, if possible, or add these atoms to the mass database.
    >
-   > mdconvert can make .trr too, but it's the same size as .xtc (also the .dcd)...
-   >
-   > if you really need velocities (`.trr`), you should use vmd
+   > solution: use .tpr instead of .gro for `-s`
 
-3. we may also use vmd to do that. the result is just the same
-
-   ```shell
-   f=rdrp-atp-prod
-   vmd ../common/system.psf ${f}.dcd
-   # cmd?
-   # After VMD was opened select the molecule. Then click on `File` and select `Save Coordinates`. Now choose the trr format and save it.
-   gmx trjconv -f ${f}-vmd.trr -o ${f}_nj.xtc -pbc nojump
-   ```
-
-4. optional: watch movie (don't for the 300-ns one! it eats all memory...)
+3. optional: watch movie (don't for the 300-ns one! it eats all memory...)
 
    > ```shell
-   > gmx trjconv -f ${f}.xtc -o ${f}_v.xtc -b 295 -e 300 -tu 
+   > echo 0 | gmx trjconv -s simulation.tpr -n index.ndx -f ${f}.trr -pbc mol -o ${f}_view.xtc -b 2.95 -e 3.00 -tu ns
+   > # strange! 295ns~300ns
    > # pymol
    > load equilibrated.gro, final
-   > load rdrp-atp-prod.xtc, final
+   > load rdrp-remtp-prod_view.xtc, final
+   > load equilibrated.gro
    > # vmd
    > menu animate on
    > mol load psf ../common/system.psf pdb ../common/equilibrated.pdb
    > animate read dcd rdrp-atp-prod.dcd
    > ```
+   >
+   > view with `pro-lig.pdb` (converted from equilibrated.gro), no 1st frame problem (not much shift)
 
-5. general checking
+4. general checking
 
    ```shell
    # choose 4 backbone
-   echo "4\n 4" | gmx rms -s equilibrated.gro -f ${f}_nj.xtc -tu ns -o rmsd_bb.xvg
+   echo "4\n 4" | gmx rms -s simulation.tpr -f ${f}_nj.xtc -tu ns -o rmsd_bb.xvg
    xmgrace rmsd_bb.xvg
-   echo 4 | gmx rmsf -s equilibrated.gro -f ${f}_nj.xtc -o rmsf_bb.xvg -res
+   echo 4 | gmx rmsf -s simulation.tpr -f ${f}_nj.xtc -o rmsf_bb.xvg -res
    xmgrace rmsf_bb.xvg
    ```
 
@@ -1583,22 +1606,20 @@ We performed clustering analysis based on the RMSD of NTPs during the simulation
    https://cbiores.com/tips-and-tricks/
 
    ```shell
-   echo 4 24 | gmx trjconv -s equilibrated.gro -n index.ndx -f ${f}_nj.xtc -fit rot+trans -o ${f}_fit.xtc
+   echo 4 0 | gmx trjconv -s simulation.tpr -n index.ndx -f ${f}_nj.xtc -fit rot+trans -o ${f}_fit.xtc
    ```
 
    > is that necessary?
    >
    > `Select group for least squares fit`: I think it's **what to align**. backbone
    >
-   > `Select group for output`: **what to keep** in the _fit.xtc. only our protein_atp_mg!
-   >
-   > view with `pro-lig.pdb`, no 1st frame problem
+   > `Select group for output`: **what to keep** in the _fit.xtc. only our protein_atp_mg? it seems that TP will attract NA+ ions, maybe water? just keep all
    
 2. make rmsd matrix first
 
    ```shell
    f=rdrp-atp-prod
-   echo 4 19 | gmx rms -s equilibrated.gro -n index.ndx -f ${f}_fit.xtc -m rmsd-lig.xpm -tu ns #-f2 ${f}_fit.xtc
+   echo 4 19 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig.xpm -tu ns #-f2 ${f}_fit.xtc
    gmx xpm2ps -f rmsd-lig.xpm -o rmsd-lig.eps -rainbow blue
    # a matrix, not readable data encoding...
    # ps2pdf rmsd-matrix.eps
@@ -1610,12 +1631,14 @@ We performed clustering analysis based on the RMSD of NTPs during the simulation
    > xmgrace rmsd.xvg
    > ```
 
+   gmx的分析只能一个processor，贼慢，太离谱！能否换软件。。？
+
 2. clustering
 
    ```shell
    rm \#*\#
    # run
-   echo 4 24 | gmx cluster -s ../equilibrated.gro -n ../index.ndx -f ../${f}_fit.xtc -dm ../rmsd-lig.xpm \
+   echo 4 24 | gmx cluster -s ../simulation.tpr -n ../index.ndx -f ../${f}_fit.xtc -dm ../rmsd-lig.xpm \
    -dist rmsd-distribution.xvg -o clusters.xpm -sz cluster-sizes.xvg -tr cluster-transitions.xpm \
    -ntr cluster-transitions.xvg -clid cluster-id-over-time.xvg -cl clusters.pdb \
    -cutoff 0.15 -method gromos
@@ -1670,14 +1693,13 @@ questions
 
 2. structural
 
+   ```shell
    
-
-      ```shell
-   # pymol
+      # pymol
    split_states cluster
    ```
-
-      ???cluster???????frame?????rmsd?
+   
+   ???cluster???????frame?????rmsd?
 
 ##### other
 
@@ -1693,7 +1715,7 @@ questions
 
    ```tcl
    set f rdrp-atp-prod
-   catdcd -o ${f}.trr -i ../common/equilibrated.pdb ${f}.dcd
+   catdcd -o ${f}.trr -otype trr -i equilibrated.pdb -dcd ${f}.dcd
    ```
 
 4. 
@@ -1864,7 +1886,23 @@ principles
 > - https://www.rdkit.org/docs/source/rdkit.Chem.rdFMCS.html?highlight=rdkit%20chem%20rdfmcs%20findmcs#rdkit.Chem.rdFMCS.FindMCS
 > - https://www.rdkit.org/docs/Cookbook.html?highlight=rdkit%20chem%20rdfmcs%20findmcs
 
+
+
 #### Rescuing the parameters
+
+##### about fep beta
+
+solution: edit .pdb files. 因为generate psf和mol and save molecule是不同的过程，所以前者模式下无法select分子，也就无法搞……后者只能是load merge后的，beta值又混乱了，所以还不如重改
+
+> so I can play with a tcl list...
+
+So I wrote a script that read from hybrid and **merged** files, search for corresponding atoms to edit the beta field.
+
+> note: it seems to work if we change atom name 'TIP3' into 'TIP', because indexing just by atom number?
+>
+> We'd better keep everything in the future? though ugly
+
+##### parameters
 
 We also get .prm file from CHARMM-GUI. manually merge the .prm file for later, because it only uses atom types in the force field, not atom names. But it clearly lacks some parameters (like angle, dihedral), because the rtf file contains new atom types (CG331, HGA3) that other .prm file can't parametrize, too. Errors are about them. However, normal simulations did not report error. 
 
@@ -1878,18 +1916,123 @@ Because: these are new "hybrid" angles forming between the ligands.
 > - 手动添加参数到prm文件，就可以运行。必须添加所有缺的，似乎说明参数完整才能跑
 >
 > 结论：直接用那个psf的话，没有那几个dihedral，不需要参数，VMD+rtf好心地全都加上了
+>
+> ```
+> Warning: UNABLE TO FIND ANGLE PARAMETERS FOR CG321 OG303 CG331 (ATOMS 6 7 18)
+> Warning: ALCHEMY MODULE WILL REMOVE ANGLE OR RAISE ERROR
+> Warning: UNABLE TO FIND DIHEDRAL PARAMETERS FOR HGA3 CG331 OG303 CG321 (ATOMS 1 6 7 18)
+> Warning: ALCHEMY MODULE WILL REMOVE DIHEDRAL OR RAISE ERROR
+> Warning: UNABLE TO FIND DIHEDRAL PARAMETERS FOR HGA3 CG331 OG303 CG321 (ATOMS 2 6 7 18)
+> Warning: ALCHEMY MODULE WILL REMOVE DIHEDRAL OR RAISE ERROR
+> Warning: UNABLE TO FIND DIHEDRAL PARAMETERS FOR CG331 OG303 CG321 HGA2 (ATOMS 6 7 18 47)
+> Warning: ALCHEMY MODULE WILL REMOVE DIHEDRAL OR RAISE ERROR
+> Warning: UNABLE TO FIND DIHEDRAL PARAMETERS FOR CG331 OG303 CG321 HGA2 (ATOMS 6 7 18 46)
+> Warning: ALCHEMY MODULE WILL REMOVE DIHEDRAL OR RAISE ERROR
+> Warning: UNABLE TO FIND DIHEDRAL PARAMETERS FOR CG331 OG303 CG321 CG3C51 (ATOMS 6 7 18 20)
+> Warning: ALCHEMY MODULE WILL REMOVE DIHEDRAL OR RAISE ERROR
+> Warning: UNABLE TO FIND DIHEDRAL PARAMETERS FOR HGA3 CG331 OG303 CG321 (ATOMS 17 6 7 18)
+> Warning: ALCHEMY MODULE WILL REMOVE DIHEDRAL OR RAISE ERROR
+> Warning: UNABLE TO FIND DIHEDRAL PARAMETERS FOR OG3C51 CG3C50 CG1N1 NG1T1 (ATOMS 22 29 37 32)
+> Warning: ALCHEMY MODULE WILL REMOVE DIHEDRAL OR RAISE ERROR
+> Warning: UNABLE TO FIND DIHEDRAL PARAMETERS FOR CG3C51 CG3C50 CG1N1 NG1T1 (ATOMS 26 29 37 32)
+> Warning: ALCHEMY MODULE WILL REMOVE DIHEDRAL OR RAISE ERROR
+> Warning: UNABLE TO FIND DIHEDRAL PARAMETERS FOR NG2R51 CG3C50 CG1N1 NG1T1 (ATOMS 30 29 37 32)
+> Warning: ALCHEMY MODULE WILL REMOVE DIHEDRAL OR RAISE ERROR
+> ```
+>
+> search command drafts
+>
+> ```shell
+> grep 'CG1N1' ./* | grep 'X'
+> grep  NG2R51 ./* | grep CG3C50
+> ```
+>
+> 
 
-solution: edit .pdb files. 因为generate psf和mol and save molecule是不同的过程，所以前者模式下无法select分子，也就无法搞……后者只能是load merge后的，beta值又混乱了，所以还不如重改
 
-> so I can play with a tcl list...
-
-So I wrote a script that read from hybrid and **merged** files, search for corresponding atoms to edit the beta field.
 
 Editing .psf files: read from the log file reporting the lacking parameters
 
 - you must **remove** the atom numbers 
 - incomplete line is fine (no re-organizing)
 - must **change** the total number of angles, ...
+
+But was suggested not remove the dihedrals...
+
+solution1: include as many as parameter files, ~50 files
+
+note: use those for namd (like from FEP calculator), or containing charmm scripts
+
+but still no luck
+
+我觉得应该就是氰基没这些dihedral吧。Cgenff、VMD的force field toolkit都提示没有这个参数，各种力场也都没这个参数。只有VMD load rtf之时整出来这些dihedral
+
+
+
+#### Taking another set of starting coordinates
+
+no need to run CHARMM-GUI ligand builder again, because we assume that only coordinates are changed...after testing, they really do.
+
+and starting from making the hybrid, go through everything
+
+1. get new pdb files
+
+   ```tcl
+   # vmd
+   mol load psf system.psf
+   mol addfile rdrp-remtp-prod.coor
+   set pro [atomselect top protein]
+   $pro writepdb rdrp.pdb
+   set mg [atomselect top "resname MG"]
+   $mg writepdb mg1.pdb
+   set remtp [atomselect top "resname LIG"]
+   $remtp writepdb remtp1.pdb
+   ```
+
+   and modify into your mtp.pdb...
+
+2. but we'd better CHARMM-GUI
+
+
+
+### From Amber+Gaussian
+
+Depending on CHARMM-GUI, always not so accurate...the fatal error is something like the cyano group, with no proper parameters in CGenFF...
+
+为什么.prm files这么多“from xxx”呢？都是在cgenff里面找的近似的，所以才有penalty。这样就感觉所有小分子应该Gaussian。但是如果从“反正都不准”的角度看……
+
+
+
+Build your molecule with proper protonation state and then go with Gaussian protocol, get Amber files and convert to NAMD files
+
+```shell
+conda activate AmberTools21
+f=remtp
+antechamber -i ${f}.pdb -fi pdb -o ${f}.gjf -fo gcrt -pf y \
+-gm "%mem=4096MB" -gn "%nproc=4" -ch ${f} -nc 0 \
+-gk "#B3LYP/6-31G* em=GD3BJ scrf=solvent=water SCF=tight \
+iop(6/33=2,6/42=6,6/50=1) pop=CHELPG" -ge ${f}_resp.gesp -gv 1 
+g16 ${f}.gjf
+antechamber -i ${f}_resp.gesp -fi gesp -o ${f}.mol2 -fo mol2 -pf y -c resp
+parmchk2 -i ${f}.mol2 -f mol2 -o ${f}.frcmod
+
+tleap
+source leaprc.gaff2  # can't find cgenff!
+loadamberparams mtp.frcmod
+lig1 = loadmol2 mtp.mol2
+check lig
+saveamberparm lig lig.prmtop lig.inpcrd
+quit
+
+```
+
+
+
+
+
+
+
+
 
 
 
@@ -2115,7 +2258,7 @@ Editing .psf files: read from the log file reporting the lacking parameters
 > 
 > 
 >
-> ### BFEE2
+> ### **BFEE2**
 >
 > https://github.com/fhh2626/BFEE2
 >
