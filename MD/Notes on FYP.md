@@ -2,6 +2,10 @@
 
 Notes on the final year project (毕设), Nov 2021~May 2022.
 
+Starting reading from [Stage1 Protocol](#Stage-1-Protocol)
+
+
+
 # background
 
 > 9.27
@@ -67,8 +71,7 @@ record sth general
 
 #### vdw
 
-use “switch”, Smoothly switches the potential to zero between rvdw-switch (page 211) and rvdw
-(page 212). i.e. a switching distance of 10 Å and a smooth cutoff distance of 12Å in the paper
+use “switch”, Smoothly switches the potential to zero between rvdw-switch (page 211) and rvdw (page 212). i.e. a switching distance of 10 Å and a smooth cutoff distance of 12Å in the paper
 
 With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.gromacs.org/documentation/2018/onlinehelp/gmx-mdrun.html#gmx-mdrun) will automatically tune the CPU/GPU load balance by scaling [`rcoulomb`](https://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html#mdp-rcoulomb) and the grid spacing.
 
@@ -101,9 +104,25 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 >
 > 3. 
 
+## Gaussian
 
+1. segmentation violation
 
+   成因：提供这种报错信息毫无意义，任何原因Gaussian报错退出都会有类似的输出。
 
+   解决：**用文本编辑器打开输出文件**，如上图中为“a.out”文件，**拖到最后看最终报错**。Linux下也是如此，可用 nano, tail, cat, vi 等命令阅读文件。看到真正报错后，可按照相应信息（如下文中涉及的这些报错）进行解决。
+
+2. 高斯软件出现PGFIO/stdio: No space left on device错误
+
+   首先这不是高斯软件的问题，而是服务器的问题。当你的计算量太大或者服务器队列很满的话就有可能有这样的问题。这是个occasion的错误，重新提交任务有可能解决，不行就再提交，实在不行就问问你的服务器管理员。
+
+3. specify log file
+
+   ```shell
+   nohup g16 qm.gau qm.log 2>&1 &
+   ```
+
+4. don't use too many CPU cores because g1 uses more than you think. use two if you have 8 CPU cores
 
 
 
@@ -194,7 +213,13 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 	>
 	>    just clears the screen
 	
-8. 
+8. select certain frames
+
+   ```tcl
+   atomselect top "within 5 of resname LYR" frame 23
+   ```
+
+9. 
 
 5. To know about your system, like checking the number of atoms, just load it into vmd (also when executing scripts) and see the cmd.
 
@@ -447,6 +472,8 @@ Also as easy to use as GaussView
 also need to edit the atom names
 
 > when editing for FEP, remember to edit the names before going into CHARMM-GUI, or it will cause trouble for scripting!
+
+I think it's better to check the aromatic bonds here because it looks strange in GV..?
 
 ### DSV
 
@@ -1563,6 +1590,7 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
    > load equilibrated.gro, final
    > load rdrp-remtp-prod_view.xtc, final
    > load equilibrated.gro
+   > load rdrp-remtp-prod_smaller.xtc, final
    > # vmd
    > menu animate on
    > mol load psf ../common/system.psf pdb ../common/equilibrated.pdb
@@ -1618,7 +1646,7 @@ We performed clustering analysis based on the RMSD of NTPs during the simulation
 2. make rmsd matrix first
 
    ```shell
-   f=rdrp-atp-prod
+   f=rdrp-atp-prod # f=rdrp-remtp-prod
    echo 4 19 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig.xpm -tu ns #-f2 ${f}_fit.xtc
    gmx xpm2ps -f rmsd-lig.xpm -o rmsd-lig.eps -rainbow blue
    # a matrix, not readable data encoding...
@@ -1641,7 +1669,7 @@ We performed clustering analysis based on the RMSD of NTPs during the simulation
    echo 4 24 | gmx cluster -s ../simulation.tpr -n ../index.ndx -f ../${f}_fit.xtc -dm ../rmsd-lig.xpm \
    -dist rmsd-distribution.xvg -o clusters.xpm -sz cluster-sizes.xvg -tr cluster-transitions.xpm \
    -ntr cluster-transitions.xvg -clid cluster-id-over-time.xvg -cl clusters.pdb \
-   -cutoff 0.15 -method gromos
+   -cutoff 0.2 -method gromos
    # tutorial: 0.2, gromos
    ```
    
@@ -1756,6 +1784,7 @@ two modes
 - charmm-gui
 - 网络tutorial，Python，pmx
 - FEsetup
+- BFEE2
 - gmx，absolute
 - AMberTools
 ```
@@ -1764,25 +1793,36 @@ two modes
 
 ligand: you just need to modify atoms in GaussView, so that no change is needed for Mg, and the position of ligands remains unchanged. (unlike aligning structures...) go to CHARMM-GUI for both ligands!
 
-we start from (equilibrated?) .pdb after MD
+we start from (equilibrated?) .pdb after MD. But finally should use those from clustering, and compare with the original!
 
-
+> VMD molecule editor: http://www.ks.uiuc.edu/Research/vmd/plugins/molefacture/, conjugation with ffTk, paratool, CGenFF server, etc. AutoPSF?
 
 ### By scripting
 
 #### A brief flow
 
 - get stable complex structure, modify the ligand to obtain the other one
+
 - parametrize both ligands in CHARMM-GUI
 
-  - to get: .rtf file. 
+  - to get: `.rtf` file. 
+  
 - same ligands, get properly renumbered .pdb files from CHARMM-GUI PDB reader
 
-  - to get: .pdb file
-- run the make_hybrid code to obtain the hybrid .rtf and .pdb file (with atoms renamed and B value assigned)
-- build the ligand and complex with VMD. do use top_all36_cgenff.rtf!
+  - to get: `.pdb` file
+  
+  > PDB reader itself can also give .rtf? but need the .mol2 file...
+  
+- run the make_hybrid code to obtain the hybrid `.rtf` and `.pdb` file (with atoms renamed and B value assigned)
+
+- run `merge-fep.tcl` to build the ligand and complex with VMD. do use `top_all36_cgenff.rtf`!
+
+- solvate and ionize them. a new version of `sol-ion-fep.tcl` is created to make sure the systems have the same size (ligand more atoms?)
+
 - run the 2nd script to edit the beta field in the .pdb file
-- run the 3rd script to remove unparametrized angles/dihedrals, etc.
+
+- run the 3rd script (not finished) to remove unparametrized angles/dihedrals, etc.
+
 - normal measurement, equilibration and run, but not necessary to gradually heat up (but if you like...)
 
 principles
@@ -1792,7 +1832,7 @@ principles
 
 
 
-#### Basic thoughts of the script
+#### Basic thoughts of make_hybrid script
 
 - data structure
   - The molecule is stored in a `Ligand object`. The core is `atomdict`. the key is the original atom name, the value contains all info, like FF atom type, coordinate (read in the .rtf and .pdb file together).
@@ -1894,9 +1934,11 @@ principles
 
 solution: edit .pdb files. 因为generate psf和mol and save molecule是不同的过程，所以前者模式下无法select分子，也就无法搞……后者只能是load merge后的，beta值又混乱了，所以还不如重改
 
-> so I can play with a tcl list...
+> unless I can play with a tcl list...
 
-So I wrote a script that read from hybrid and **merged** files, search for corresponding atoms to edit the beta field.
+I originally want to build the ligand and complex with `make_merged.sh` to keep the beta field. also load into pymol etc. to renumber atoms. This makes me keep the beta values after merging. But they get lost after solvation...
+
+So I wrote a script `edit_fep.py` that read from hybrid and **merged** files, search for corresponding atoms to edit the beta field.
 
 > note: it seems to work if we change atom name 'TIP3' into 'TIP', because indexing just by atom number?
 >
@@ -1971,62 +2013,25 @@ but still no luck
 
 #### Taking another set of starting coordinates
 
-no need to run CHARMM-GUI ligand builder again, because we assume that only coordinates are changed...after testing, they really do.
-
-and starting from making the hybrid, go through everything
-
-1. get new pdb files
-
-   ```tcl
-   # vmd
-   mol load psf system.psf
-   mol addfile rdrp-remtp-prod.coor
-   set pro [atomselect top protein]
-   $pro writepdb rdrp.pdb
-   set mg [atomselect top "resname MG"]
-   $mg writepdb mg1.pdb
-   set remtp [atomselect top "resname LIG"]
-   $remtp writepdb remtp1.pdb
-   ```
-
-   and modify into your mtp.pdb...
-
-2. but we'd better CHARMM-GUI
+Why don't we run equilibration for a while again?
 
 
 
-### From Amber+Gaussian
+### **BFEE2**
+
+https://github.com/fhh2626/BFEE2
+
+https://www.ks.uiuc.edu/Research/vmd/plugins/bfeestimator/
+
+ok for absolute BFE
+
+
+
+### QM-optimized parameters
 
 Depending on CHARMM-GUI, always not so accurate...the fatal error is something like the cyano group, with no proper parameters in CGenFF...
 
 为什么.prm files这么多“from xxx”呢？都是在cgenff里面找的近似的，所以才有penalty。这样就感觉所有小分子应该Gaussian。但是如果从“反正都不准”的角度看……
-
-
-
-Build your molecule with proper protonation state and then go with Gaussian protocol, get Amber files and convert to NAMD files
-
-```shell
-conda activate AmberTools21
-f=remtp
-antechamber -i ${f}.pdb -fi pdb -o ${f}.gjf -fo gcrt -pf y \
--gm "%mem=4096MB" -gn "%nproc=4" -ch ${f} -nc 0 \
--gk "#B3LYP/6-31G* em=GD3BJ scrf=solvent=water SCF=tight \
-iop(6/33=2,6/42=6,6/50=1) pop=CHELPG" -ge ${f}_resp.gesp -gv 1 
-g16 ${f}.gjf
-antechamber -i ${f}_resp.gesp -fi gesp -o ${f}.mol2 -fo mol2 -pf y -c resp
-parmchk2 -i ${f}.mol2 -f mol2 -o ${f}.frcmod
-
-tleap
-source leaprc.gaff2  # can't find cgenff!
-loadamberparams mtp.frcmod
-lig1 = loadmol2 mtp.mol2
-check lig
-saveamberparm lig lig.prmtop lig.inpcrd
-quit
-
-```
-
-
 
 
 
@@ -2038,12 +2043,12 @@ quit
 
 ### Deprecated  methods
 
-> ### Build with VMD
->
+#### Build with VMD
+
 > > try: equilibrated remTP
->>
+>
 > > files: protein, MG, two ligands from gui: pdb, psf, rtf, prm
-> 
+>
 > #### Relative
 >
 > > you may build the .fep first...
@@ -2053,14 +2058,14 @@ quit
 >    process the ligand as before, and change the name of the ligand:
 >
 >    ```shell
->     grep -rl "LIG " remtp-rm.pdb remtp-rm.psf | xargs sed -i s/"LIG"/"END"/g
+>    grep -rl "LIG " remtp-rm.pdb remtp-rm.psf | xargs sed -i s/"LIG"/"END"/g
 >    grep -rl "LIG " mtp-rm.pdb mtp-rm.psf | xargs sed -i s/"LIG"/"INI"/g
 >    ```
 > 
 >    then build both ligand and complex
 >
 >    ```shell
->     vmd -dispdev text -e merge-fep.tcl
+>    vmd -dispdev text -e merge-fep.tcl
 >    vmd -dispdev text -e sol-ion-fep.tcl
 >    ```
 > 
@@ -2073,7 +2078,7 @@ quit
 >    change all "END" lines, 63-66 columns to ' 1.00'; "INI": '-1.00' for your two .pdb file
 >
 >    ```shell
->     list=(ligand complex)
+>    list=(ligand complex)
 >    for f in ${list[*]}; do
 >    cp ${f}.pdb ${f}.fep
 >    sed -i "s/1.00  0.00      END/1.00  1.00      END/g" ${f}.fep
@@ -2085,17 +2090,17 @@ quit
 >    watch
 >
 >    ```shell
->     vmd complex.psf -pdb complex.fep
+>    vmd complex.psf -pdb complex.fep
 >    vmd ligand.psf -pdb ligand.fep
 >    ```
 > 
 >    > select ligand by
->   >
->    > > ```
->    > > resname END
->    > > ```
->    > >
->    > > and view with coloring method 'Beta'
+>  >
+>   >> ```
+>   >> resname END
+>   >> ```
+>   >>
+>   >> and view with coloring method 'Beta'
 > 
 > 3. build the dual topology file
 >
@@ -2113,9 +2118,9 @@ quit
 >
 > 
 >> failed
->>
+>
 > > ```shell
-> > awk -F " " '{if ($18==END) $62= 1.00}' complex.pdb > complex.fep
+>> awk -F " " '{if ($18==END) $62= 1.00}' complex.pdb > complex.fep
 > > grep "END" -rl complex.fep | xargs sed -i "s/ 0.00     / 1.00     /g"
 > > ```
 > >
@@ -2142,25 +2147,24 @@ quit
 >
 > easier, build as before until making FEP
 >
-> 
->
-> ### CHARMM-GUI
+
+#### CHARMM-GUI
 >
 > [video demo](https://www.charmm-gui.org/?doc=demo&id=fec&lesson=1), [bilibili version](https://www.bilibili.com/video/BV153411s7kF)
 >
 > > TIP1: https://charmm-gui.org/?doc=input/retriever  This page can be used to recover a job, if you *did not* save a bookmark link, but you *do* remember the Job ID
->>
+>
 > > - jobid=4735806442, absolute, cgenff v1.0, using ligandrm.pdb to build, upload other ligand's drawing3D.mol2
 > > - JOB ID: 4739580626, relative, v2.5, .mol2, .mol2
 > >
 > > TIP2: do download every .tgz from Windows......
-> 
+>
 > #### steps
 >
 >  use default settings unless otherwise specified
 >
 > 1. build the complex (including Mg is fine)
->2. upload your complex file (containing the starting ligand)
+> 2. upload your complex file (containing the starting ligand)
 > 3. choose chain (all)
 > 4. build topology, choosing a file for the ligand
 > 5. solvate. choose box size and ion conc
@@ -2168,11 +2172,11 @@ quit
 > 7. select Ligand Molecule for Free Energy Calculation
 > 8. PBC (default)
 > 9. upload ligand
-> 
+>
 > 10. select program, force field, **check ligand**; ion for the ligand, distance from edge, 310K, etc.
->11. Relative: clustering, choose molecule pairs
+> 11. Relative: clustering, choose molecule pairs
 > 12. finished, <font color=red>CHECK YOUR STRUCTURE!!</font>
-> 
+>
 > > note: the unit of edge distance is nm, not Å .....
 >
 > #### note on files
@@ -2186,11 +2190,11 @@ quit
 > > original: cannot input for force field; ligandrm.pdb: a little problem in text format.
 >
 > >!TIP
->>
+>
 > >may use `ligandrm.pdb` or `drawing3D.mol2`,  etc. when building. They don't align? just moved somewhat.
 > >
 > >When choosing a structural file (instead of using RCSB .pdb (but maybe that only provides topology?)) for the ligand's topology, use`drawing3D.mol2` 
-> 
+>
 > ##### What to use when uploading ligands?
 >
 > > in the case of Absolute, mtp
@@ -2207,13 +2211,13 @@ quit
 >
 > cannot upload converted ligandrm?
 >
-> 
->>!TIP
->>
+>
+> >!TIP
+>
 > >Conclusion: because the processing moves the ligands, it's fine to use either ligandrm or drawing_3D...
 > >
 > >you may check the structure after equilibration
-> 
+>
 > ##### force field check
 >
 > However, the original ligand failed again. when using ligandrm.pdb, etc., it failed at cgenff (v2.5) force field check. lone pair? v1.0 is fine
@@ -2227,9 +2231,9 @@ quit
 > uploading ligands
 >
 > - supports multiple ligands in one .sdf or ,mol2 file
->- it's better to dock them first
+> - it's better to dock them first
 > - if not, or you are drawing ligands, the GUI automatically positions the ligands (may be not accurate)
-> 
+>
 > both Relative or Absolute apply. A little difference for multiple ligands:
 >
 > - the latter designs a `Closed minimal perturbation path based on the clustering` 
@@ -2240,48 +2244,40 @@ quit
 >
 >   - Absolute: Use this option only when the ligands are already **docked**.
 >  - Relative: Use this option only when the scaffold coordinate of a pair of ligands are **identical.**
-> 
+>
 >   Absolute just cares 'in position', Relative should make sure 'same position'.
 >
 > - result
 >
 >   - Absolute: one folder for one ligand
 >  - Relative: one for a pair of FEP molecule
-> 
-> 
->to prepare multiple ligands. support multiple files and one file containing ligands.
+>
+>
+> to prepare multiple ligands. support multiple files and one file containing ligands.
 >
 > #### result
 >
 > - where: go to `namd`, 1,2,... (2-3, ...) means different ligands
->- FEP: all of ligand INI disappear, all END appear, no common searching...
-> 
-> 
->
-> ### **BFEE2**
->
-> https://github.com/fhh2626/BFEE2
->
-> https://www.ks.uiuc.edu/Research/vmd/plugins/bfeestimator/
->
-> ok for absolute BFE
+> - FEP: all of ligand INI disappear, all END appear, no common searching...
 >
 > 
 >
-> ### FEPrepare
+> 
+>
+#### FEPrepare
 >
 > - https://feprepare.vi-seem.eu/indexlpg.php  a server
 >  - https://www.zhihu.com/zvideo/1356250979265093632  https://www.zhihu.com/people/qutesun/zvideos
 >   - https://feprepare.vi-seem.eu/Manual.pdf
 > - http://zarbi.chem.yale.edu/ligpargen bad charge settings!
 >   - [principles, and guide of ligpargen](https://pergamos.lib.uoa.gr/uoa/dl/frontend/file/lib/default/data/2779350/theFile)
-> 
+>
 > cannot control force field? we have defined .psf and .rtf already? still using OPLS?
 >
 > May produce a hybrid ligand, but failed...
 >
 > ```
->Making biomolecule rdrp...
+> Making biomolecule rdrp...
 > ERROR: rdrp failed: Leap did not create the topology and/or coordinate file(s): vacuum.parm7, vacuum.rst7
 > Making ligand mtp...
 > ERROR: mtp failed: SCF has not converged
@@ -2292,8 +2288,73 @@ quit
 > ERROR: The following ligands have failed:
 >  mtp
 > ```
+>
+#### From Amber+Gaussian
+>
+> Build your molecule with proper protonation state and then go with Gaussian protocol, get Amber files and convert to NAMD files? But already used GAFF
+>
+> ```shell
+> conda activate AmberTools21
+> f=remtp
+> antechamber -i ${f}.pdb -fi pdb -o ${f}.gjf -fo gcrt -pf y \
+> -gm "%mem=4096MB" -gn "%nproc=4" -ch ${f} -nc 0 \
+> -gk "#B3LYP/6-31G* em=GD3BJ scrf=solvent=water SCF=tight \
+> iop(6/33=2,6/42=6,6/50=1) pop=CHELPG" -ge ${f}_resp.gesp -gv 1 
+> g16 ${f}.gjf
+> antechamber -i ${f}_resp.gesp -fi gesp -o ${f}.mol2 -fo mol2 -pf y -c resp
+> parmchk2 -i ${f}.mol2 -f mol2 -o ${f}.frcmod
 > 
+> tleap
+> source leaprc.gaff2  # can't find cgenff!
+> loadamberparams mtp.frcmod
+> lig1 = loadmol2 mtp.mol2
+> check lig
+> saveamberparm lig lig.prmtop lig.inpcrd
+> quit
 > 
+> ```
+>
+#### Paratool in VMD
+
+>
+> https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/32793.html said paratool has long been replaced by ffTk, yet the document is worth reading.
+>
+> https://www.ks.uiuc.edu/Research/vmd/plugins/paratool/usersguide.html
+>
+> https://www.ks.uiuc.edu/Research/vmd/plugins/paratool/general_scheme.html
+>
+> To start, type `paratool` in Tkconsole. Or go through the AutoPSF protocol
+>
+> Load the molecule from GUI (.psf + .pdb)
+>
+> Assign parameters
+>
+> 
+>
+#### Taking another set of starting coordinates
+
+>
+> no need to run CHARMM-GUI ligand builder again, because we assume that only coordinates are changed...after testing, they really do.
+>
+> and starting from making the hybrid, go through everything
+>
+> 1. get new pdb files
+>
+>    ```tcl
+>    # vmd
+>    mol load psf system.psf
+>    mol addfile rdrp-remtp-prod.coor
+>    set pro [atomselect top protein]
+>    $pro writepdb rdrp.pdb
+>    set mg [atomselect top "resname MG"]
+>    $mg writepdb mg1.pdb
+>    set remtp [atomselect top "resname LIG"]
+>    $remtp writepdb remtp1.pdb
+>    ```
+>
+>    and modify into your mtp.pdb...
+>
+> 2. but we'd better CHARMM-GUI
 
 
 
@@ -2383,8 +2444,7 @@ the same as before?
 vmd -dispdev text -e merge-fep.tcl
 vmd -dispdev text -e sol-ion-fep.tcl
 # common
-file = ligand # complex
-vmd -dispdev text -e measure.tcl -args $file
+vmd -dispdev text -e measure.tcl -args ligand # complex
 # equil
 namd3 +auto-provision +idlepoll fep-lig-equil > fep-lig-equil.log
 
@@ -2394,6 +2454,12 @@ vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
 # prod
 namd3 +p1 +devices 0 fep-lig-prod-forward > fep-lig-prod-forward.log
 ```
+
+
+
+### making colvars
+
+
 
 
 
@@ -2419,6 +2485,7 @@ alchVdwLambdaEnd        1.0
 alchElecLambdaStart     0.1		# so early
 
 alchOutFreq             1000 	# should be small
+alchDecouple			off
 ```
 
 
@@ -2455,6 +2522,86 @@ set all {0.00 0.00001 0.0001 0.001 0.01 0.05 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
 runFEPlist [lreverse $all] $numSteps
 
 ```
+
+we may run consecutively
+
+```shell
+nohup bash batch-fep.sh fep-com-prod 2&>error.log &
+# batch-fep.sh
+base=$1
+namd3 +p1 +devices 0 $base-forward > $base-forward.log
+namd3 +p1 +devices 0 $base-backward > $base-backward.log
+```
+
+
+
+#### restart
+
+it's amazing that FEP data will be appended to the original .fepout file!
+
+```tcl
+# add to fep.tcl
+# starting: the number of window. grep 'Running FEP window' in .log file
+proc runFEPlist_restart { lambdaList nSteps starting timestep } {
+    # Keep track of window number
+    global win
+    if {![info exists win]} {
+      set win starting
+    }
+
+    set starting2 [expr $starting + 1]
+
+    set l1 [lindex $lambdaList $starting]
+    foreach l2 [lrange $lambdaList $starting2 end] {
+      print [format "Running FEP window %3s: Lambda1 %-6s Lambda2 %-6s \[dLambda %-6s\]"\
+        $win $l1 $l2 [expr $l2 - $l1]]
+      if { $l1 == $starting } {
+        set firsttimestep $timestep
+      } else {
+        set firsttimestep 0
+      }
+      firsttimestep    $firsttimestep
+      alchLambda       $l1
+      alchLambda2      $l2
+      run $nSteps
+
+      set l1 $l2
+      incr win
+    }
+}
+```
+
+then in conf file
+
+```tcl
+set  outputName     $outputbase-prod-forward-2
+set  INPUTNAME      $outputbase-prod-forward 
+runFEPlist_restart  $all $numSteps 0 14000
+```
+
+and you'll of course change your -backward file
+
+```tcl
+} else {
+    # from foward. use the former outputName
+    bincoordinates 	    $outputbase-prod-forward.coor
+    binvelocities	    $outputbase-prod-forward.vel
+    extendedSystem      $outputbase-prod-forward.xsc
+}
+```
+
+#### command
+
+
+
+
+
+### debug
+
+> remtp-try-------try-equil
+>
+> - 3,4: constrain
+> - 5: vdWshiftcoefficient
 
 
 

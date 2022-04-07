@@ -901,7 +901,13 @@ namd2 +p8 +idlepoll nptsim.namd > nptsim.log
 
 
 
+#### ffTk tutorial
 
+http://www.ks.uiuc.edu/Research/vmd/plugins/fftk/
+
+restart Gaussian optimization: copy the .gjf file, add 'restart' to 'opt=', specify a .chk file.
+
+http://bbs.keinsci.com/thread-1821-1-1.html
 
 
 

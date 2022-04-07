@@ -448,6 +448,7 @@ make install
 ./configure --prefix=/home/gxf/fftw-3.3.10 --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
 make -j 6
 make install
+## REMEMBER TO ADD TO LD_LIBRARY_PATH!!!
 
 # mpicc, mpicxx
 sudo apt install openmpi-bin
@@ -464,8 +465,9 @@ make -j 6
 make check
 make install
 
-# ugcc environment
-cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf1212/gromacs-2021.5-gpu -DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf1212/program -DCMAKE_C_COMPILER=/home/gxf1212/program/bin/gcc -DCMAKE_CXX_COMPILER=/home/gxf1212/program/bin/g++ -DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON -DGMX_GPU=CUDA
+# gcc environment
+cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf1212/gromacs-2021.5-gpu -DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf1212/program \# -DFFTWF_LIBRARY=/home/gxf1212/program/lib/libfftw3f.so -DFFTWF_INCLUDE_DIR=/home/gxf1212/programinclude  
+-DCMAKE_C_COMPILER=/home/gxf1212/program/bin/gcc -DCMAKE_CXX_COMPILER=/home/gxf1212/program/bin/g++ -DGMX_CUDA_TARGET_SM=80 -DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON -DGMX_GPU=CUDA # 80: just a workaround
 
 # gmx, mpi
 cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf/gromacs-2021.5-gpu-mpi \
@@ -479,6 +481,10 @@ make install
 ```
 
 gromacs 新版本运行老文件
+
+other issues
+
+- https://gitlab.com/gromacs/gromacs/-/issues/4037
 
 ### NAMD
 
@@ -757,6 +763,11 @@ conda install -c conda-forge acpype
 
 ### Gaussian16 and view
 
+```shell
+tar -xjvf G16-A03-AVX2.tbz
+mkdir g16/scratch
+```
+
 after extraction, add these to `~/.bashrc` http://sobereva.com/439
 
 ```shell
@@ -905,6 +916,10 @@ http://www.ks.uiuc.edu/Research/vmd/doxygen/
 
 1. compile the plugins
 2. compile vmd
+
+#### Python interface
+
+https://vmd.robinbetz.com/
 
 ### DiscoveryStudio Visualizer
 
