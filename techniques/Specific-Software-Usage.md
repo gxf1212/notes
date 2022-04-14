@@ -671,7 +671,12 @@ A simple GUI with multi-account support. https://github.com/bpozdena/OneDriveGUI
 
    add `--upload-only` to the servi
 
-5. 是不是如果有其他来源的备份也必须下载，比如iPad？rclone可吗？
+7. 是不是如果有其他来源的备份也必须下载，比如iPad？rclone可吗？
+
+8. 难以解决：
+
+   - 由于网络差，大文件能上传无法下载，或者有些大文件下下来就坏了就离谱，方便的管理还是实现不了。
+   - 一些`.`开头is needed但不是所有。其实就是保存尽量多的配置就好
 
 ##### other
 

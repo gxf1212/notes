@@ -684,6 +684,36 @@ conda activate
 conda install -c omnia msmbuilder
 ```
 
+### Align ligands
+
+1. LigAlign: a pymol tool
+
+   http://compbio.cs.toronto.edu/ligalign/index.html
+
+   ```shell
+   # upon launching pymol
+   run ~/pymol/ligalign/ligand_alignment.py
+   ```
+
+   but too old!
+
+2. Mcsalign https://pymolwiki.org/index.php/Mcsalign
+
+   ```shell
+   conda install -c schrodinger  pymol pymol-psico
+   conda install -c rdkit rdkit
+   conda install -c speleo3 csb
+   ```
+
+   run
+
+   ```shell
+   conda activate pymol
+   pymol
+   ```
+
+   
+
 
 
 ## Modelling tools
@@ -773,7 +803,7 @@ after extraction, add these to `~/.bashrc` http://sobereva.com/439
 ```shell
 export g16root=$HOME
 export GAUSS_SCRDIR=$g16root/g16/scratch
-# export GAUSS_EXEDIR=$g16root
+export GAUSS_EXEDIR=$g16root #
 source $g16root/g16/bsd/g16.profile
 export PATH=$PATH:$HOME/g16
 ```

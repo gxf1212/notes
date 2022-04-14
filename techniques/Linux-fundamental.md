@@ -479,6 +479,8 @@ This is a record of my operations during 折腾ing the system, in order not to f
    
    ```
    
+   locate命令其实是find -name的另一种写法，但是要比后者快得多，原因在于它不搜索具体目录，而是搜索一个数据库/var/lib/locatedb，这个数据库中含有本地所有文件信息。**Linux系统自动创建这个数据库，并且每天自动更新一次**，所以使用locate命令查不到最新变动过的文件。为了避免这种情况，可以在使用locate之前，先使用updatedb命令，手动更新数据库。
+   
 6. create file
    
    ```shell
@@ -2016,6 +2018,16 @@ http://www.noobyard.com/article/p-vgixdwgy-st.html 创建home后解决了？
 >[!WARNING]
 >
 > 永远不能用ToDesk的按钮重启
+
+2022.4.9，再次这个问题
+
+过程：重启后死机。强制，到了emergency。修复home，闪回登录界面，已经没/home/gxf了。修复home，远程卡机终端重启。修复sda，uuid没了。修复sda1，硬盘挂成功。仍没gxf，testdisk啥都没，GPT corrupt，lost and found有gromacs的碎片
+
+> Files that appear in lost+found are typically files that were already unlinked (i.e. their name had been erased) but still opened by some process (so the data wasn't erased yet) when the system halted suddenly (kernel panic or power failure). If that's all that happened, these files were slated for deletion anyway, you don't need to care about them.
+
+刚才应该直接gdisk /dev/sda1
+
+解决：重写了分区表，相当于格式化吧。重新创建用户。。
 
 
 
