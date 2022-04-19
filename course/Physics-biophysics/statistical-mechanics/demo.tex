@@ -34,6 +34,9 @@
 % English
 \usepackage[UTF8]{ctex}  % for rare Chinese comments
 \ctexset{today=old}
+\numberwithin{equation}{section}
+\usepackage{mhchem}
+
 % 作品信息、环境名称是中文格式
 \renewcommand{\chaptername}{Chapter\ }
 \titleformat{\chapter}[block]{\color{\TitleColor}\centering\bfseries\fontsize{2.25em}{1.2ex}\selectfont}{\chaptername\thechapter}{1em}{}
@@ -44,24 +47,28 @@
 \renewcommand{\contentsname}{Table of Contents}
 
 % math symbols
+\newcommand{\md}{\mathrm{d}}
 \newcommand{\der}[2]{\dfrac{\md #1}{\md #2}}
 \newcommand{\dd}[2]{\dfrac{\md^2 #1}{\md #2^2}}
 \newcommand{\p}[2]{\dfrac{\partial #1}{\partial #2}}
 \newcommand{\pp}[2]{\dfrac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\md}{\mathrm{d}}
+\newcommand{\pd}[3]{\dfrac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\vF}{\boldsymbol{F}}
 \newcommand{\vr}{\boldsymbol{r}}
 \newcommand{\vp}{\boldsymbol{p}}
 \newcommand{\vq}{\boldsymbol{q}}
 \newcommand{\vl}{\boldsymbol{l}}
+\newcommand{\vx}{\boldsymbol{x}}
 \newcommand{\dvr}{\dot{\vr}}
 \newcommand{\ddvr}{\ddot{\vr}}
 \newcommand{\dvq}{\dot{\vq}}
+\newcommand{\dt}{\mathrm{d}t}
 \newcommand{\half}{\dfrac{1}{2}}
 \newcommand{\sumin}{\sum_{i=1}^N}
 \newcommand{\suman}{\sum_{\alpha=1}^{3N}}
 \newcommand{\lag}{\mathcal{L}} % Lagrangian
 \newcommand{\ham}{\mathcal{H}} % Hamiltionian
+\newcommand{\intot}{\int_{t_1}^{t_2}}
 
 % other 
 %\usepackage[utf8]{inputec}
@@ -164,9 +171,9 @@ which is the difference between the kinetic energy and potential energy. In cont
 	E=K(\dvr_1, \dots, \dvr_N)+U(\vr_1, \dots, \vr_N)
 \end{equation}
 
-\begin{tcolorbox}[title={The Euler-Lagrangian equation}]
+\begin{tcolorbox}[title={The Euler-Lagrange equation}]
 	\begin{equation}
-		\der{}{t}\p{\lag}{\dvr_i}=\p{\lag}{\vr_i} \label{eq:euler-lagrangian}
+		\der{}{t}\p{\lag}{\dvr_i}=\p{\lag}{\vr_i} \label{eq:euler-lagrange}
 	\end{equation}
 	For any one of position coordinates, taking the partial derivative with respect to the velocity and then time, is equal to that with respect to the position directly.
 \end{tcolorbox}
@@ -218,7 +225,7 @@ The kinetic energy can then be written as\footnote{separate everything containin
 	\end{equation}
 	is the function of $q$ (so is $U(\vq)$). $\alpha$ and $\beta$ as indices, these elements forms a matrix $G$, the \textit{mass metric matrix}. 
 \end{tcolorbox}
-Then the Lagrangian is expressed as a function of $\vq$ and $\dvq$. Adopting the Euler-Lagrangian equation, considering $q_{\gamma}$ as $q_\alpha$:
+Then the Lagrangian is expressed as a function of $\vq$ and $\dvq$. Adopting the Euler-Lagrange equation, considering $q_{\gamma}$ as $q_\alpha$:
 \begin{equation}
 	\der{}{t}\left(\sum_{\beta=1}^{3N}G_{\gamma\beta}\dot{q}_\beta\right)=\suman\sum_{\beta=1}^{3N}\p{G_{\alpha\beta}}{q_\gamma}\dot{q}_\alpha\dot{q}_\beta-\p{U}{q_\gamma} \label{eq:lag-equations}
 \end{equation}
@@ -236,7 +243,7 @@ And knowing that (not important)
 	\p{U(|\vr_1-\vr_2|)}{\vr_1}=\der{U(|\vr_1-\vr_2|)}{(|\vr_1-\vr_2|)}\p{|\vr_1-\vr_2|}{\vr_1}=\der{U(|\vr_1-\vr_2|)}{(|\vr_1-\vr_2|)}\dfrac{\vr_1}{|\vr_1-\vr_2|}\\
 	\p{U(|\vr_1-\vr_2|)}{\vr_2}=-\der{U(|\vr_1-\vr_2|)}{(|\vr_1-\vr_2|)}\dfrac{\vr_2}{|\vr_1-\vr_2|}
 \end{gather*}
-,using eqn \ref{eq:euler-lagrangian}, we can get
+, using eqn \ref{eq:euler-lagrange}, we can get
 \begin{gather*}
 	m_1\ddvr_1=-\der{U(|\vr_1-\vr_2|)}{(|\vr_1-\vr_2|)}\dfrac{\vr_1}{|\vr_1-\vr_2|}\\
 	m_2\ddvr_2=\der{U(|\vr_1-\vr_2|)}{(|\vr_1-\vr_2|)}\dfrac{\vr_1}{|\vr_1-\vr_2|}
@@ -387,7 +394,8 @@ From eqn. \ref{eq:hamiltonian}, we can obtain by referring to eqn. \ref{eq:kinet
 \subsection{Properties}
 
 \vspace{0.5em}
-\subsection{Energy conservation}
+\subsubsection{Energy conservation}
+\vspace{-1.2em}
 \begin{align*}
 	\der{\ham}{t}&=\suman \p{\ham}{q_\alpha}\dot{q}_\alpha+\p{\ham}{p_\alpha}\dot{p}_\alpha\\
 	&=\suman\p{\ham}{q_\alpha}\p{\ham}{p_\alpha}+\p{\ham}{p_\alpha}(-\p{\ham}{q_\alpha})=0
@@ -401,30 +409,196 @@ For a trajectory under constant energy, the phase space vectors (eqn. \ref{eq:ph
 	U_B-U_A=W_{AB}=K_A-K_B
 \end{gather}
 
-Consider any arbitrary phase space function $a(x)$. To study its time evolution:
-\begin{align*}
-	\der{a}{t}&=\suman\p{a}{p_\alpha}\dot{p}_\alpha+\p{a}{q_\alpha}\dot{q}_\alpha\\
+Consider any arbitrary phase space function $a(x)$, a function of positions and momentums. To study its time evolution:
+\begin{align}
+	\der{a}{t}&=\suman\p{a}{p_\alpha}\dot{p}_\alpha+\p{a}{q_\alpha}\dot{q}_\alpha \notag\\
 	&=\suman\p{a}{p_\alpha}\p{\ham}{q}-\p{a}{q_\alpha}\p{\ham}{p_\alpha}\\
 	&=\left\{a,\ham\right\} \label{eq:poisson-bracket}
-\end{align*}
+\end{align}
 where the last line is known as the \textit{Poisson bracket}.
 
-\subsubsection{Phase space incompressibility}
+\example Suppose a system without external forces acting on it, which implies $\sumin \vF_i=0$, then consider the total momentum $\boldsymbol{P}=\sumin\vp_i$
+\begin{align*}
+	\left\{\boldsymbol{P},\ham\right\}&=\suman\left\{p_\alpha,\ham\right\}\\
+	&=\suman\sum_{\beta=1}^{3N}\left[\der{p_\alpha}{r_\beta}\der{\ham}{p_\beta}-\der{p_\alpha}{p_\beta}\der{\ham}{r_\beta}\right] \qquad\text{($p$ and $q$ are independent)}\\
+	&=\sum_{\beta=1}^{3N}\der{\ham}{r_\beta}=\sumin\der{\ham}{\vr_i}=\sumin\der{U}{\vr_i}=\sumin\vF_i=0
+\end{align*}
+which inplies that without external forces, the total momentum is conserved.
 
-Divergence
+The Hamiltonian is invariant with respect to simply a translation transformation $\vr^\prime=\vr+\boldsymbol{a}$.
+
+\subsubsection{Phase space incompressibility}
+The derivative of the phase space vector $\vx$, $\eta$ is a function of $\vx$
+\begin{gather}
+	\dot{\vx}(t)=\left(\dot{q_1},\dots,\dot{q_{3N}},\dot{p_1},\dots,\dot{p_{3N}}\right) \notag\\
+	\eta(\vx)=(\der{\ham}{p_1},\dots,\der{\ham}{p_{3N}},-\der{\ham}{q_1},\dots,\der{\ham}{q_{3N}}) \label{eq:etax}
+\end{gather}
+
+Divergence (散度) is defined as $\nabla_x=\p{}{\boldsymbol{x}}$, then
+\begin{align*}
+	\nabla_x\cdot\dot{\vx}&=\suman\p{\dot{q_\alpha}}{q\alpha}+\p{\dot{p_\alpha}}{p_\alpha}\\
+	&=\suman\pd{\ham}{p_\alpha}{q_\alpha}+\pd{\ham}{(-q_\alpha)}{p_\alpha}=0
+\end{align*}
+which means there is no sources and sinks, called an incompressible flow in hydrodynamics.
 
 \subsubsection{Symplectic structure}
+As eqn. \ref{eq:etax} indicated
+\begin{equation}
+	\dot{\vx}=M\der{\ham}{\vx} \label{eq:xt}
+\end{equation}
+where $M$ is a matrix
+\begin{equation}
+	M=\begin{pmatrix}
+		\boldsymbol{0} & \boldsymbol{I}\\
+		-\boldsymbol{I}& \boldsymbol{0}
+	\end{pmatrix}
+\end{equation}
+where $\boldsymbol{0}$ and $\boldsymbol{I}$ are $3N\times 3N$ zero and identity matrices respectively.
 
+Consider a solution $\vx_t$ to eqn. \ref{eq:xt} starting from an initial condition $\vx_0$, $\vx_t$ is a unique function of $\vx_0$. This dependence can be viewed as a transformation from the beginning $6N$ variables to the end $6N$ variables\footnote{multivariate vector function, 多元向量值函数}, whose Jacobian matrix is
+\begin{equation}
+	J_{kl}=\p{x_t^k}{x_0^l}
+\end{equation}
+which is known as \textit{symplectic property}\footnote{辛性质}, and satisfies
+\begin{equation}
+	M=J^TMJ
+\end{equation}
 
-sa
-
-
-
+\example the one-dimensional harmonic oscillator
+\begin{gather*}
+	x(t)=x_0\cos\omega t+\dfrac{p(0)}{m\omega}\sin\omega t\\
+	p(t)=p_0\cos\omega t-m\omega x_0\sin\omega t
+\end{gather*}
+Thus, 
+\begin{equation*}
+	J=\begin{pmatrix}
+		\cos\omega t & -m\omega\sin\omega t \\
+		\dfrac{1}{m\omega}\sin\omega t & \cos\omega t
+	\end{pmatrix}
+\end{equation*}
+and $M$ is just
+\begin{equation*}
+	\begin{pmatrix}
+		0 & 1 \\
+		-1 & 0
+	\end{pmatrix}
+\end{equation*}
+then
+\begin{align*}
+	J^TMJ&=
+	\begin{pmatrix}
+		-\dfrac{1}{m\omega}\sin\omega t & \cos\omega t \\
+		-\cos\omega t & -m\omega\sin\omega t
+	\end{pmatrix}
+	\begin{pmatrix}
+		\cos\omega t & -m\omega\sin\omega t \\
+		\dfrac{1}{m\omega}\sin\omega t & \cos\omega t
+	\end{pmatrix}\\
+	&=\begin{pmatrix}
+		0 & 1 \\
+		-1 & 0
+	\end{pmatrix} = M
+\end{align*}
 
 \section{A simple classic polymer model}
+变分法是处理泛函的数学领域，和处理函数的普通微积分相对。 譬如，这样的泛函可以通过未知函数的积分和它的导数来构造。 变分法最终寻求的是极值函数：它们使得泛函取得极大或极小值。 有些曲线上的经典问题采用这种形式表达：一个例子是最速降线，在重力作用下一个粒子沿着该路径可以在最短时间从点A到达不直接在它底下的一点B。
+
+\section{The action integral}
+\textit{The action integral} emerges naturally from quantum mechanics. It is defined as
+\begin{equation}
+	A=\intot\lag\left(\vq(t),\dvq(t)\right)\dt
+\end{equation}
+where $\vq=(q_1,\dots,q_{3N})$. $A$ is trajectory-dependent because it counts every value of $\vq$ and $\dvq$ from $t_1$ to $t_2$. Since a trajectory is a function of $t$, then the action integral is a \textit{functional}, usually denoted as $A\left[\vq\right]$.
+
+\begin{quote}
+	Definitions:
+	\begin{itemize}
+		\item A functional\footnote{泛函} is a quantity that depends on all values of a function between two points of its domain.
+		\item A stationary point\footnote{驻点} is where the first order derivative of a function is zero.
+		\item The variational principle\footnote{变分原理}. The variational method is to find an extremal function\footnote{极值函数} for a functional, just like to find an extreme value for a function.
+	\end{itemize}
+	A detailed introduction of the variational method is \href{https://zhuanlan.zhihu.com/p/139018146}{here}. A relevant example is to find the ground state wave function of a \ce{H2+}, where we use a linear combination of basis functions as the trial function, get the derivative of the total energy, let them equal to zero and calculate the coefficients. Then we obtain the wave function that may make the energy the lowest.
+\end{quote}
+
+Here we will do similar things to the action integral. 
+First of all, such a trajectory must satisfy the endpoint conditions:
+\begin{gather}
+	\vq(t_1)=\vq_1,\qquad \dvq(t_1)=\dvq_1,\qquad \vq(t_2)=\vq_2,\qquad \dvq(t_2)=\dvq_2
+\end{gather}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figure/1-8-qt}
+	\caption{Two proposed paths joining the fixed endpoints.}
+	\label{fig:1-8-qt}
+\end{figure}
+
+Second, for a slightly changed trajectory $\vq(t)+\delta \vq(t)$ that also satisfies the endpoint conditions, i.e.
+\begin{gather}
+	\delta\vq(t_1)=\delta\vq(t_2)=0,\qquad \delta\dvq(t_1)=\delta\dvq(t_2)=0
+\end{gather}
+where $\delta\vq$ is called the variation of $\vq$\footnote{$\delta\vq$是$\vq$的变分},
+the variation of $A$ must be zero, which means
+\begin{equation*}
+	\delta A=\intot\lag\left(\vq(t)+\delta\vq(t),\dvq(t)+\delta\dvq(t)\right)\dt
+	-\intot\lag\left(\vq(t),\dvq(t)\right)\dt=0
+\end{equation*}
+Perform a first-order Taylor expansion to the first term, we get
+\begin{equation*}
+	A=\intot\left[\p{\lag}{\vq(t)}\delta\vq(t)+\p{\lag}{\dvq}\delta\dvq(t)\right]\dt
+\end{equation*}
+Knowing that $\delta\dvq(t)=\der{\left[\delta\vq(t)\right]}{t}$, and hoping to merge the two $\delta$ terms, we integrate the second term by parts\footnote{integrate ... by parts: 分部积分法}
+\begin{align*}
+	A&=\intot\p{\lag}{\vq(t)}\delta\vq(t)\dt+\p{\lag}{\dvq}\md\left[\delta\vq(t)\right]\\
+	&=\left.\p{\lag}{\dvq}\delta\vq(t)\right|_{t_1}^{t_2}+\intot\left[\p{\lag}{\vq(t)}-\der{}{t}\left(\p{\lag}{\dvq(t)}\right)\right]\delta\vq(t)\dt=0
+\end{align*}
+Since $\delta\vq(t)=0$ at $t_1$ and $t_2$, the first term is 0; for any $\delta\vq$ the above equation holds, then there must be
+\begin{equation}
+	\p{\lag}{\vq}-\der{}{t}\left(\p{\lag}{\dvq}\right)=0
+\end{equation}
+which is exactly the Euler-Lagrange equation (eqn. \ref{eq:euler-lagrange}).
+
+In statistical mechanics, we care more about endpoint problems than initial-value problems, though the solution to the "endpoint problem"\footnote{comparing with the the initial-value problem, there are two conditions.} is not guaranteed to be a "stationary function". We are interested in the behaviors of large numbers of trajectories all seeded differently. Initial conditions for Hamilton's equations are generally chosen at random (e.g. random velocities). And we are interested in paths that evolve from one region of phase space to another, but not one point to another.
+
+\section{Lagrangian mechanics and systems with constraints}
+It is often necessary to impose constraints to a system.
+\begin{itemize}
+	\item high-frequency (rigid) chemical bonds
+	\item thermal or barostatic control mechanisms
+\end{itemize}
+
+A system with $N_c$ constraints have $3N-N_c$ degrees of freedom, and must satisfy $N_c$ equations of the coordinates and velocities.
+
+\textit{Holonomic constraints}\footnote{完整约束，相对地有非完整约束}: all relationships are functions of only the coordinates and time:
+\begin{equation}
+	\sigma_k(q_1,\dots,q_{3N},t)=0\quad \text{for } k=1,2,\dots,N_c
+\end{equation}
+If not, the constraints are said to be \textit{nonholonomic constraints}. For example, to keep the kinetic energy (temperature) constant, the system must satisfy
+\begin{equation*}
+	\sumin\half m_i\dvr_i^2-C=0
+\end{equation*}
+where $C$ is a constant.
+
+Constraints will reduce the degrees of freedom, which is good, but it is not always convienent to write new equations particularly when there is a large number of coupled constraints. 
+Then we try to incorporate them into the framework of classical mechanics.
+We apply the method of \textit{Lagrangian undetermined multiplier}\footnote{拉格朗日不定乘子}, but the constraint conditions must satisfy
+\begin{equation}
+	\suman a_{k\alpha}\md q_\alpha+a_{kt}\md t=0 \label{eq:lag-multiplier}
+\end{equation}
+where $a_{k\alpha}$ is a set of coefficients for the displacements $\md q_\alpha$. For a holonomic constraint, they can be obtained by
+\begin{gather}
+	a_{k\alpha}=\p{\sigma_k}{q_\alpha}
+	a_{kt}=\p{\sigma_k}{t}
+\end{gather}
+while nonholonomic constraints can not always be expressed in the form of eqn. \ref{eq:lag-multiplier}, but 
+
+\section{Gauss's priniciple of least constraint}
 
 
 
+
+
+\section{}
 
 
 \section{Summary of chapter}
@@ -569,9 +743,9 @@ sa
   \item ……
 \end{itemize}
 
-\begin{thebibliography}{99}
-  \bibitem{texbook} KNUTH~D~E. The \TeX book [M]. Addison-Wesley: Reading, 1986.
-  \bibitem{latex} 刘海洋. \LaTeX 入门 [M]. 人民邮电出版社: 北京, 2013.
-\end{thebibliography}
+%\begin{thebibliography}{99}
+%  \bibitem{texbook} KNUTH~D~E. The \TeX book [M]. Addison-Wesley: Reading, 1986.
+%  \bibitem{latex} 刘海洋. \LaTeX 入门 [M]. 人民邮电出版社: 北京, 2013.
+%\end{thebibliography}
 
 \end{document}
