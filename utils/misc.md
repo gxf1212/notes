@@ -1,0 +1,475 @@
+# Misc, Info and Plan
+
+This doc records misc. Not on blog
+
+# Cluster usage
+
+SSH
+
+## basic
+
+### connect
+
+```shell
+ssh gxf1212@10.77.14.186 -p 606
+```
+
+always specify the port
+
+```shell
+ssh -i /home/gxf1212/.ssh/zju 10.77.14.186 -p 606
+```
+
+failed: no user gxf1212
+
+### send files
+
+#### universal usage
+
+```shell
+workdir=/home/gxf1212/data/rdrp/atp-try/md
+# to
+scp -P 606 ./system.pdb gxf1212@10.77.14.186:$workdir # file
+# dir, with -r
+scp -P 606 -r ./common gxf1212@10.77.14.186:$workdir
+scp -P 606 -r ./equil/*equil.vel ./equil/*equil.coor ./equil/*equil.xsc gxf1212@10.77.14.186:$workdir/equil
+scp -P 606 ./prod/pro-lig-prod gxf1212@10.77.14.186:$workdir/prod
+# from
+scp -r -P 606 gxf1212@10.77.14.186:$workdir/md/prod ./
+
+```
+
+just like `cp`. dir supported, multiple files (*equil) supported, * supported
+
+1~3MB/s, pretty good
+
+**You should not upload to a non-existing directory...**
+
+#### draft&notes
+
+重要的经验
+
+- [传输文件的四种方式](https://blog.csdn.net/qw_xingzhe/article/details/80167888)
+- [免密码登录](https://blog.csdn.net/xyang81/article/details/51477925)
+- Linux远程执行命令：`sh [options] [user@]host [command]`，如`ssh -p 606 gxf1212@10.77.14.186 "ls $workdir/prod"`
+
+> 离谱的测试，都在大四.md...
+> 
+> 文件太大？不影响
+> 
+> [serveraliveinterval](https://unix.stackexchange.com/questions/3026/what-do-options-serveraliveinterval-and-clientaliveinterval-in-sshd-config-d) 也不影响
+> 
+> 正在跑所以不能copy？没有吧
+
+### running in remote
+
+- softwares to use: namd3, gmx, vmd (console)
+- you may start another ssh session to monitor your run. check with command `tail`
+
+```shell
+nohup namd3 +p1 +devices 0 pro-lig-prod 2&>pro-lig-prod.log &  # not 
+tail -n 30 pro-lig-prod.log
+ssh gxf1212@10.77.14.186 -p 606 "tail -n 20 /home/gxf1212/data/rdrp/remtp-try/fep/try1/prod/complex/*forward.log"
+
+nohup bash gmx.sh 2&>gmx.log &  # for gromacs, which considers 2 in 2&> as a input parameter
+nohup bash batch-fep.sh fep-com-prod 2&>error.log &  # multiple tasks. namd output in normal .log files you assigned
+```
+
+[如何在ssh断开后继续让程序在后台运行](https://blog.csdn.net/liuyanfeier/article/details/62422742)
+
+- 一但把当前控制台关掉(退出帐户时)，作业就会停止运行。nohup命令可以在你退出帐户之后继续运行相应的进程。标准输出和标准错误缺省会被重定向到 nohup.out 文件中。
+- 当在前台运行某个作业时，终端被该作业占据；可以在命令后面加上& 实现后台运行。
+- 2与>结合代表错误重定向，而1则代表错误重定向到一个文件1，而不代表标准输出；换成2>&1，&与1结合就代表标准输出了，就变成错误重定向到标准输出
+  - 也可以正常重定向输出
+
+- 可以用进程号来监控该进程，或杀死它
+
+## other
+
+```shell
+ssh gxf1212@10.77.14.186 -p 606
+
+workdir=/home/gxf1212/data/rdrp/atp-try/md
+scp -P 606 -r ./prod/pro* gxf1212@10.77.14.186:$workdir/prod
+scp -P 606 -r ./equil/rdrp-atp-equil.vel ./equil/rdrp-atp-equil.coor ./equil/rdrp-atp-equil.xsc gxf1212@10.77.14.186:$workdir/equil
+scp -P 606 -r gxf1212@10.77.14.186:/home/gxf1212/data/rdrp/atp-try/md/prod ./prod-temp
+
+rsync -av gxf1212@10.77.14.186:/home/gxf1212/data/rdrp/atp-try/md/prod -e "ssh -p606" ./prod-temp
+rsync -avz ~/.ssh/id_rsa.pub --port=606 gxf1212@10.77.14.186::/home/gxf1212/
+ssh gxf1212@10.77.14.186 -p 606 "tar czf - /home/gxf1212/data/rdrp/atp-try/md/prod" | tar xzvf - -C ./
+# these scp and rsync, even ssh all failed later. because of the stupid 44...
+
+scp -P 606 -v gxf1212@10.77.14.186:/home/gxf1212/data/rdrp/atp-try/md/prod/pro-lig-prod ./
+scp -P 606 gxf1212@10.77.14.186:/home/gxf1212/data/rdrp/remtp-try/ana/rms.log ./
+tail rms.log -n 20
+
+ssh gxf1212@10.77.14.186 -p 606 "tail -n 20 /home/gxf1212/data/rdrp/remtp-try/ana/rms.log"
+ssh gxf1212@10.77.14.186 -p 606 "tail -n 20 /home/gxf1212/data/rdrp/remtp-try/try/gau-opt/2.log"
+
+```
+
+
+
+# Info
+
+## our paper and guidance
+
+The relative binding free energy between remdesivir(RemTP) and ATP was calculated to be -2.80 ± 0.84 kcal/mol, where remdesivir bound much stronger to SARS-CoV-2 RdRp than the natural substrate ATP.  
+
+Key residues D618, S549 and R555 are found to be the contributors to the binding affinity of remdesivir.
+
+https://www.linkedin.com/in/leili-zhang-046769bb
+
+https://scholar.google.com/citations?user=Kwwx85EAAAAJ&hl=en
+
+> 11.16
+> 
+> Of course. We should be able to share the files for purposes such as reproducibility. Plus, all data that are published are made available to the public, including these files. Force fields are also already shared in the published version of the paper. But for your purpose, I think by only reproducing the MD simulations and free energy calculations of ATP should suffice. 
+> 
+> Please find the attached zip file containing structures for ATP-RdRp-Mg complex (MD simulation), ATP-water ("free state" FEP), ATP-RdRp-Mg complex ("bound state" FEP). **ATP force field is in the default CHARMM force field files. All force fields are in CHARMM36, downloaded from MacKerrell's group page.** Please let me know if anything is unclear. Also, please use NAMD to conduct all simulations to get similar results. I don't think version matters.
+> https://drive.google.com/file/d/1bMH1-PUtWAadcOmz8MTEbhy4jcZgtPUk/view?usp=sharing
+> 
+> the paper says: The parameters of RemTP were generated by CHARMM CGenFF
+
+work calendar
+
+> 21.11.16
+>
+> other todo:
+>
+> - download CHARMM ff files
+> - read the paper carefully!
+> - dock RemTP on the structure
+
+- 获取结构
+- 建模
+- 模拟设置
+- 1.22安装软件环境
+- 2.8查阅资料
+- 2.28开始进行MD模拟，下一个
+- 3.12构建小分子库
+
+# mail draft and discussion
+
+## 2022.3.7
+
+现在的问题：不太清楚技术路线；不太能把握时间规划。
+
+所以想问点什么？就是写个email，大概是说，我这得10天，趁这个时间准备。这下一步是不是要cluster，我怎么做的。再下一步就是fep吧，有没有可以参考的脚本之类的（不急）
+
+- docking,原来的参数已经丢了，那怎么解释初始结构。先不管了，和所有配体一起
+- 下一步咋分析
+- 具体mode？还有别的issue？
+
+情景描述详细点
+
+Hi Kevin,
+
+Sorry for missing your email during the winter vacation... I've been running the 300-ns MD simulation for the SARS-CoV-2 RdRp-ATP-Mg system on our cluster. It will take another 8 days to finish from now. During this break, I'd like to query you about what to do next.
+
+1. Our goal is to obtain starting conformations of the complex for FEP. I have learned how to convert the trajectory for the clustering in Gromacs these days. The paper [10.1021/acs.jpcb.0c04198](https://pubs.acs.org/doi/10.1021/acs.jpcb.0c04198) has described the binding mode, which provides me a template for the analysis. Except for that, I wonder what additional analysis we should perform, so that I can try the techniques in my 3-ns run.
+
+2. I remember Leili mentioned previously that
+   
+   > The initial structures do matter. But short simulations (<0.1ms) usually won't help you finding another binding site. What we do is called equilibration, which ensures that it finds a local minimum. So be very careful with the initial states. Kevin will guide you through this process. 
+   > 
+   > Also, if the binding structure of the ligand strays too far away from the orthosteric binding site, it won't be a fair comparison between this ligand and ATP. So we will need to think about a way to explain that. We may need to calculate two FEPs for this case: docked binding pose and orthosteric binding pose. But for now, you don't need to worry about it.
+   
+   I didn't quite understand this. We are running for 300 ns. Should I do docking again and try other starting conformations for MDS, or just compare with known rdrp-ntp structures?
+
+Thanks a lot for your time and looking forward to your reply!   
+
+Best regards, 
+
+Xufan 
+
+3.8
+
+Oh, dear! I remember I replied to Leili once you noticed me, but I cannot find in 'sent'? I'll reply to him about what I'm doing recently.
+
+About the short meeting, would you mind setting it at 19:00 tonight, if just you and me? Just about what to do next.
+
+Best regards, 
+
+Xufan 
+
+### meeting
+
+- on force field and software
+  - FF
+    - 药物cgenff不太好，以后用amber体系的？但现在还是stick to cgenff吧，主要是常和charmm搭配
+    - 小分子他觉得Amber比较好
+    - gmx搞charmm可能出问题
+    - 其实都行。后面也可以用Amber的系列搭吧，但是要复现（Kevin觉得Leili的选择。。）
+    - 大体系一定用NAMD，小的GMX没快那么多？也好着。。
+  - FEP
+    - gmx可以用FESetup产生准备文件。但复杂体系可能出错
+    - namd手写dual topology（配体二合一），后面差不多
+      - rtf，A or B，+-1，。。。
+    - 所以MD都行，FEP推荐NAMD
+- plan for FEP
+  - 先熟悉，然后开冲remTP
+  - 先复现，和MTP的。。（数据不好用ATP）
+  - 但是都是找rem的类似物，其他药不用画了。尽量现成的……再说
+- binding mode, clustering
+  - 先dock，然后100多ns就差不多了。。。就是大概看一下
+  - 因为这个ATP应该保守吧，所以直接参考？
+  - cluster除了看size，还是分析作用力，要尽量对上每一个，否则FEP可能有误差
+  - 最多选两个？和初始差距不大就不变了
+- other
+  - https://developer.nvidia.com/blog/delivering-up-to-9x-throughput-with-namd-v3-and-a100-gpu/ 小技巧
+  - benchmarking：100k原子，要100ns
+  - 28号机是主要的cluster，48张30系列，是现在的1.5倍左右
+  - script: https://github.com/skblnw/mkrun/tree/master/NAMD/fep
+
+#### Plan
+
+> The initial structures do matter. But short simulations (<0.1ms) usually won't help you finding another binding site. What we do is called equilibration, which ensures that it finds a local  minimum. So be very careful with the initial states. Kevin will guide you through this process. 
+> 
+> Also, if the binding structure of the ligand strays too far away from the orthosteric binding site, it won't be a fair comparison between this ligand and ATP. So we will need to think about a way to explain that. We may need to calculate two FEPs for this case: docked binding pose and orthosteric binding pose. But for now, you don't need to worry about it.
+
+After trial, we just build the model for other inhibitors. Requirement: similar to the binding pose in Leili's structure for FEP, which is already validated.
+
+> btw, they're almost the same before or after my equilibration. So do check this before FEP!
+
+Docking is not an ideal way. edit or align molecules
+
+## 2022.4.1
+
+Hi Kevin,
+
+Sorry for the delay. I would like to invite you to a meeting to discuss about the RdRp project. Would you be available today? I'm ok all day. 
+
+The main points will be:
+
+- I've created Python scripts to prepare for FEP. Let's check the correctness and other details. 
+- I've tried to run FEP based on tutorial files. Let's check the parameters. And anaylzing the ligand system.
+- Some doubts on the initial structure. Besides, I have built up a library of 2771 ATP analogs (virtual screening?).
+
+Thank you for your time in advance and looking for your reply!
+
+Best regards,
+
+Xufan
+
+If so, I'll send you a Tencent meeting link on WeChat.
+
+
+
+### FEP system details
+
+- share the protocol
+  - ligand: position, ff
+  - merge .rtf, .prm, correctness
+  - build and edit fep
+  - remove unparametrized?
+
+- other?
+
+### FEP setting
+
+template: tons of namd .conf files provided...your fep.eq.long.namd (no gradual heating), fep.soft.gpu.namd
+
+Parameters. Based on Leili's paper, what should we change and what to keep? What params matter? Like:
+
+- setting windows
+
+  > (0.00, 0.00001, 0.0001, 0.001, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99, 0.999, 0.9999, 0.99999, 1.00), then reverse 
+
+- how many nanoseconds we should run for each window, ligand (2887) vs complex (97424), still ask Leili?
+
+  - same size
+
+- number of independent runs (10?)
+
+- still use namd3 +p1?
+
+  - minimize no integrate
+
+- `alchVdWShiftCoeff`       1.0
+
+- `alchDecouple off`
+
+### Structure
+
+- new RdRp structure? is Leili's structure old?
+- is that fine to randomly take reasonable snapshots during the MDS as initial structures for independent runs? if changed?
+
+### Analogs, goal
+
+1. Prof. Zhou originally suggests that we try to find other analogs resembling Remdesivir. I have built up a library of 2771 small molecules from Pubchem by searching the superstructure of ATP (i.e. everything that contains a 5-member ring linking an adenosine derivatives and three phosphates) that can be screened by AutoDock vina. Do we need to do that? Is that enough for our project?
+
+2. Besides, I have gone over related papers the past days. Someone has done virtual screening for RdRp, but they are adopting the form of prodrugs (i.e. RemMP, I think that's unreasonable...). Some others ([link](https://pubs.rsc.org/en/content/articlelanding/2021/cp/d1cp03049c)) have done very detailed FEP study (with RNA) on Remdesivir and five alternatives. 
+
+### other
+
+- is there any way to accelerate analysis in Gromacs, like `gmx rms`? no GPU or multi-CPU option is provided...
+- regular meeting...
+
+### meeting
+
+- parameter check, with X
+- include all parameters provided
+- GUI: solution generator?
+- size, 1fs and 500ps, 3 runs
+- no other changes
+- if varied, please watch together
+- ignore the library; find info about the mechanism
+  - rational design: know about the pocket and ligand
+- check BFEE!
+- textbook share
+
+> I've been creating FEP files these days because I still find it hard to do it manually or with FESetup in the case of lacking of understanding of the process and very few tutorials online. I've tried on CHARMM-GUI 'Free Energy Calculator' and obtained .psf and .pdb files (ligand: MTP and RemTP) that I'll see these days. Before doing the simulation, I want to ask a few questions on details.
+>
+> I feel a little uncertain on what we are gonna do. I wonder how and what experiments we're going to do to better point out the innovativeness of this project to our team and in my bachelor's thesis. I have to take into consider that we're running multiple replicates for each FEP run, and I'm going to accomplish the project to some extent before the middle of June. Are we merely searching for another potential inhibitor based on RemTP? Or are we perform FEP on existing drugs like molnupiravir, or important RdRp mutants? 
+
+ I hope to discuss about we might do with them next in the next meeting.
+
+If necessary, let's schedule a meeting for discussion.
+
+## 2022.4.13
+
+Hi Leili,
+
+I've build up the RdRp-RemTP-Mg complex and ran an MD which fits your initial structure very well. I've also  been dealing with some problems on the paramerization previously. For the ligands, I used CHARMM-GUI which gave me somewhat big penalty score for RemTP. That's ok. We may start trying new molecules after FEP for RemTP is done. But I do got a question for your FEP settings.
+
+I've designed a protocol (you may find it here: https://gxf1212.gitee.io/notes/#/MD/FYP-notes?id=by-scripting) to merge the triphosphate compounds into a hybrid topology, since no tools we tried worked well. But that's a bit different from your example. The files you provided suggests that you were regarding the two hydrogens on the carbon atom connecting with the triphosphate group "common atoms" (just like the triphosphate group, beta=0), and the extra hydrogen is added with a partial charge 0. It worked for me. But I wonder if it's ok to deal with the hydrogen like that which seems a bit unreasonable. Would you please kindly explain this?
+
+p.s. I did not regard the carbon atom in RemTP and MTP because CHARMM-GUI gave them different partial charge. I only merged the triphosphate group. You may find the files named "hybrid". This didn't work, where the "uncommon" atoms in the decoupled ligand (i.e., the adenine ring and ribose in RemTP, when λ=0) started moving randomly and resulted in an overlapped position with the triphosphate group. You may find the files named "equilibrated". I wonder how NAMD deals with motions of the decoupled atoms...Kevin suggested that maybe parameters are wrong. I do find it's a bit different from what you suggested in https://pubs.acs.org/doi/abs/10.1021/acs.jpcb.0c04198. But if worked if I set the emerging and vanishing atoms exactly as you did.
+
+Thanks a lot for your time and looking forward to your reply!   
+
+Best regards, 
+Xufan
+
+
+
+you may try this https://gxf1212.github.io/notes/#/MD/FYP-notes?id=by-scripting
+
+
+
+
+
+
+
+
+
+
+> 
+>
+
+
+
+# biweekly report
+
+## requirements
+
+中心成员每半月需进行工作汇报，简要汇报前一次的工作完成情况以及接下来的工作安排（建议按点罗列），在每月15号和月末最后一天24：00前将纸质版交给张冬老师，[并通过电子邮件发送电子版至周老师邮箱rhzhou@zju.edu.cn](mailto:rhzhou@zju.edu.cn)，并CC到张冬老师邮箱[zhangd_iqb@zju.edu.cn](mailto:zhangd_iqb@zju.edu.cn)；
+
+> 周老师会不定期找组内同学一对一讨论各自课题。轮到的同学请在讨论前做好准备，力求在较短的时间内清晰地表达自己课题的近况和碰到的问题。
+
+第一期的半月报（纸质版与电子版）都收到了，我也一一都看了。有些写的不错，但大部分都写的不好，主要还是没有经验，大家不知道该怎么写。我这里选了两份，Kevin与张贯乔的，大家可以做参考。我们半月报的目的是**了解每个课题的进展与目前碰到的困难**，这样有问题可以快速解决。另外，也是给大家一个机会训练写作（目前我们团队最弱的就是写作）
+
+这里我建议格式方面：
+
+1. 第一段可以列一个类似Kevin这样的你参与的全部课题清单（以后Project list）
+2. 选取2-3个课题重点汇报（有较大进展或有困难的）
+3. 下一阶段的计划
+
+我建议报告开头写上名字和日期
+
+以后请将电子版命名为 “姓名-半月报-20220315”
+
+> 老师只想知道你干的核心，不用放特别具体的东西、无关的东西
+>
+> 图片：直接放docx里
+
+
+
+Dear Professor:
+
+Here is my biweekly report. Please find the attachment.
+
+Best regards,
+Xufan
+
+# 2022.3.15
+
+Name: Xufan Gao
+
+Project: SRAS-CoV-2 RdRp (NSP12) inhibitor: remdesivir analogs
+
+Background: we try to find other analogs resembling Remdesivir to enhance binding affinity (etc.) and investigate the mechanism utilizing FEP. This may be used as by final year project.
+
+Since I'm not in Hangzhou, I will not submit a paper copy.
+
+## Advances
+
+1. Modeled ATP-bound RdRp structures obtained from Leili with VMD, and ran a 300-ns MD simulation (using NAMD, CgenFF for NTPs and CHARMM36 for the rest) for ATP and RemTP in complex with NSP12 and Mg^2+^. 
+
+   > I'm using a computer in our lab with a RTX 2080Ti that gives a ~59ns/day computational power (mine is roughly half of it). It will be finished soon.
+
+2. Learned how to perform clustering analysis of the trajectory in Gromacs for binding mode optimization. 
+
+   > Kevin thought the initial structure provided by Leili has been verified. This clustering analysis is just a check. If the biggest cluster is quite similar to the initial structure, that's perfect. We may address the details later for other ligands.
+
+3. Built up a library of 2771 small molecules from Pubchem by searching the superstructure of ATP (i.e. everything that contains a 5-member ring linking an adenosine derivative and three phosphates) that can be screened by AutoDock vina. 
+
+   > I did that myself since we planned to discover another stronger inhibitor. We'll discuss about it later.
+   >
+   > Actually we can also design any group substitution and build a combinatorial library using RDkit Python packge. But this one is also fine.
+
+4. Went over related papers to investigate RdRp, nucleoside triphosphate inhibitors and docking/MD/FEP study, to prepare for writing the thesis proposal.
+
+## Next actions
+
+1. Analyze trajectories of MD simulation to select initial structures for FEP.
+2. Try to perform FEP simulation on NSP12-RemTP-Mg^2+^. Check details with Kevin.
+3. Discuss with Kevin on the plan (like what ligands to study, virtual screening, etc.). 
+4. Start writing the thesis proposal required by my home university.
+
+# 2022.3.31
+
+Name: Xufan Gao
+
+Project: SRAS-CoV-2 RdRp (NSP12) inhibitor: remdesivir analogs
+
+Background: we try to find other analogs resembling Remdesivir to enhance binding affinity (etc.) and investigate the mechanism utilizing FEP.
+
+### Advances
+
+1. Started to learn to build the FEP system, especially the dual topology paradigm for NAMD. Explored various tools.
+
+   > VMD and CHARMM-GUI seems to just merge ligands; FEPrepare and FEsetup failed.
+
+2. Built a script to merged files of two ligands made in CHARMM-GUI, and another script to edit the files.
+
+   > this protocol may also apply to later systems convienently.
+
+3. Started to try running short FEPs and analyzing under the guidance of Kevin. Adjusted parameters.
+
+### Next actions
+
+1. Fix additional issues on FEP building-up.
+1. Finish initial FEP runs and have discussions.
+2. Prepare for the mid-term examination in my home university.
+
+
+
+
+
+
+# Temp & Drafts
+
+
+
+```tcl
+mol load pdb c01.pdb
+set pro [atomselect top protein]
+$pro writepdb rdrp.pdb
+set mg [atomselect top "resname MG"]
+$mg writepdb mg.pdb
+set remtp [atomselect top "resname LIG"]
+$remtp writepdb remtp.pdb
+```
+
