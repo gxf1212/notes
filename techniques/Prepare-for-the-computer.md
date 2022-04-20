@@ -153,6 +153,10 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
    just set the **manual proxy**...
 
+   ```127.0.0.1
+   http://127.0.0.1
+   ```
+   
    > - but without electron-ssr, cannot see baidu.com?
    > - after rebooting, become "auto-proxy"?? not so ok...switch back to auto, still ok??
    
@@ -700,9 +704,9 @@ conda install -c omnia msmbuilder
 2. Mcsalign https://pymolwiki.org/index.php/Mcsalign
 
    ```shell
-   conda install -c schrodinger  pymol pymol-psico
-   conda install -c rdkit rdkit
-   conda install -c speleo3 csb
+   conda install -c schrodinger -y pymol pymol-psico
+   conda install -c rdkit rdkit -y
+   conda install -c speleo3 csb -y
    ```
 
    run
@@ -710,9 +714,16 @@ conda install -c omnia msmbuilder
    ```shell
    conda activate pymol
    pymol
+   import psico.mcsalign
+   mcsalign mobile, target
    ```
 
-   
+
+### Clustering plugin in VMD
+
+https://github.com/luisico/clustering
+
+
 
 
 
@@ -880,7 +891,7 @@ export PATH=$PATH:$ROSETTA_BIN
 
 https://github.com/luancarvalhomartins/PyAutoFEP
 
-### SilcsBio
+### SilcsBio (not free)
 
 https://docs.silcsbio.com/2020.1/install.html
 

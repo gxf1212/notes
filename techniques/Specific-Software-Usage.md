@@ -10,6 +10,8 @@ Fret not over bygones, and the forward journey take.
 >
 > 能装/home还是尽量
 
+go to [onedrive](#Linux)
+
 # Commonly used for working
 
 ## Network
@@ -504,9 +506,9 @@ and https://www.moerats.com/archives/740/
   > compile
   >
   > ```shell
-  > # under source code folder
+  > # under onedrive source code folder
   > curl -fsS https://dlang.org/install.sh | bash -s dmd
-  > source ~/dlang/dmd-2.099.0/activate
+  > source ~/dlang/dmd-2.099.1/activate 
   > ./configure
   > make clean; make;
   > sudo make install
@@ -514,15 +516,13 @@ and https://www.moerats.com/archives/740/
   >
   > and succeeded to authorize...
 
-- [authorization](https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#authorize-the-application-with-your-onedrive-account)
-
-  Run the command `onedrive --logout`. This will clean up the previous authorisation
+- [authorizationcd `onedrive --logout`. This will clean up the previous authorisation
 
 - config
 
   ```shell
   onedrive --display-config # check
-  gedit /home/gxf/.config/onedrive/config
+  gedit /home/moonlight/.config/onedrive/config
   ```
 
   copy default from [here](https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#the-default-configuration-file-is-listed-below)
@@ -594,7 +594,7 @@ and https://www.moerats.com/archives/740/
   # /usr/local/bin/onedrive --monitor --upload-only
   chmod +x .onedrive.sh
   crontab -e
-  # 0 * * * * ~/.onedrive.sh 2>&1
+  # 0 * * * * ~/.onedrive.sh 2>&1  # every o
   # template: 35 1 * * *  /root/rclone.sh >> /root/rclone.log 2>&1 # 1:35 everyday
   ```
 
@@ -827,6 +827,14 @@ Failed to configure token: failed to get token: Post https://oauth2.googleapis.c
 https://blog.csdn.net/maxuearn/article/details/82391957
 
 https://www.jiyiblog.com/archives/031167.html
+
+**教育版帐号无法使用独立api？**
+
+
+
+> Edit advanced config? no
+>
+> Use auto config? no?
 
 
 

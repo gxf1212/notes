@@ -219,7 +219,15 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
    atomselect top "within 5 of resname LYR" frame 23
    ```
 
-9. 
+9. Menu--Mouse--Center: pick an atom to center
+
+10. path to plugins
+
+    ```shell
+    /usr/local/lib/vmd/plugins/noarch/tcl/
+    ```
+
+11. 
 
 5. To know about your system, like checking the number of atoms, just load it into vmd (also when executing scripts) and see the cmd.
 
@@ -282,7 +290,7 @@ probably need to add top/itp file
 
 
 
-# Stage 1 Protocol
+# Stage 1 Protocol: MD
 
 stage 1: from structure to FEP
 
@@ -1411,6 +1419,26 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    
    check in pymol to see if they are the same
    
+   > for FEP
+   >
+   > ```tcl
+   > # vmd
+   > mol load psf ligand.psf
+   > mol addfile ../equil/ligand-fine/rdrp-mtp-remtp-ligand-equil.coor
+   > set sel [atomselect top all]
+   > $sel writepdb equilibrated.pdb
+   > exit
+   > ```
+   >
+   > ```shell
+   > # shell
+   > gmx editconf -f equilibrated.pdb -o equilibrated.gro \
+   > -box 102.65199661254883 92.91299819946289 112.18100357055664 \
+   > -center 2.9200000762939453 -1.5814990997314453 -3.010499954223633 
+   > ```
+   >
+   > 
+   
 2. to run in gmx, specify T coupling groups:
 
    ```shell
@@ -1438,7 +1466,8 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    mol new system.psf
    mol addfile equilibrated.pdb
    # Pass along a list of parameters to generate structure.top, suitable for preparing gromacs simulations.
-   topo writegmxtop structure.top [list par_all36m_prot.prm lig.prm par_all36_cgenff.prm toppar_water_ions_namd.str par_all36_na.prm par_all35_ethers.prm par_all36_carb.prm par_all36_lipid_ljpme.prm]
+   topo writegmxtop structure.top [list par_all36m_prot.prm lig.prm par_all36_cgenff.prm toppar_water_ions_namd.str] 
+   # par_all36_na.prm par_all35_ethers.prm par_all36_carb.prm par_all36_lipid_ljpme.prm]
    ```
 
    be sure to include `lig.prm` and the water_ions one!
@@ -1760,6 +1789,8 @@ Here not that much is required...
 
 
 
+# Stage 2 Protocol: FEP
+
 ## FEP (relative) building systems
 
 ### Fundamentals
@@ -1801,18 +1832,22 @@ we start from (equilibrated?) .pdb after MD. But finally should use those from c
 
 #### A brief flow
 
-- get stable complex structure, modify the ligand to obtain the other one
+- get stable complex structure, modify the ligand properly to obtain the other one
 
-- parametrize both ligands in CHARMM-GUI
+- get .mol2, .rtf and .prm files from [CGenFF](https://cgenff.umaryland.edu/) or MolFacture in VMD (no AutoPSF required, retaining coordinates and names)
 
-  - to get: `.rtf` file. 
-  
-- same ligands, get properly renumbered .pdb files from CHARMM-GUI PDB reader
+  > old version: use CHARMM-GUI
+  >
+  > - parametrize both ligands in CHARMM-GUI
+  >
+  >   - to get: `.rtf` file. 
+  >
+  > - same ligands, get properly renumbered .pdb files from CHARMM-GUI PDB reader
+  >
+  >   - to get: `.pdb` file
+  >
+  >   > PDB reader itself can also give .rtf? but need the .mol2 file...
 
-  - to get: `.pdb` file
-  
-  > PDB reader itself can also give .rtf? but need the .mol2 file...
-  
 - run the make_hybrid code to obtain the hybrid `.rtf` and `.pdb` file (with atoms renamed and B value assigned)
 
 - run `merge-fep.tcl` to build the ligand and complex with VMD. do use `top_all36_cgenff.rtf`!
@@ -2024,6 +2059,36 @@ https://github.com/fhh2626/BFEE2
 https://www.ks.uiuc.edu/Research/vmd/plugins/bfeestimator/
 
 ok for absolute BFE
+
+
+
+### By-hand
+
+the CH2 also considered as "common atoms"
+
+
+
+```tcl
+package require psfgen
+resetpsf
+topology hybrid.rtf
+topology top_all36_cgenff.rtf
+segment HETA {pdb hybrid.pdb}
+coordpdb hybrid.pdb HETA
+writepdb hybrid-p.pdb
+writepsf hybrid-p.psf
+psfcontext reset
+
+mol load psf hybrid-p.psf 
+```
+
+
+
+
+
+
+
+
 
 
 
@@ -2441,8 +2506,15 @@ and another pdf tutorial [Free Energy Calculation with GROMACS: Solvation free e
 the same as before?
 
 ```shell
+# after wget
+# wget --user gxf1212 --password 123465acB% # no use
+obabel *.mol2 -opdb -O *2.
+# run make_hybrid.py
 vmd -dispdev text -e merge-fep.tcl
 vmd -dispdev text -e sol-ion-fep.tcl
+# edit fep
+conda activate AmberTools21
+python3 /home/moonlight/Desktop/work/projects/tools/Python-for-MD/make_hybrid_top/edit_FEP.py `pwd` 
 # common
 vmd -dispdev text -e measure.tcl -args ligand # complex
 # equil
@@ -2454,16 +2526,6 @@ vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
 # prod
 namd3 +p1 +devices 0 fep-lig-prod-forward > fep-lig-prod-forward.log
 ```
-
-
-
-### making colvars
-
-
-
-
-
-
 
 ### on the scripts
 
@@ -2480,12 +2542,11 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 
 ```shell
-alchDecouple            off		# our ligand is charged..
 alchVdwLambdaEnd        1.0
 alchElecLambdaStart     0.1		# so early
-
+alchVdWShiftCoeff       6.0
 alchOutFreq             1000 	# should be small
-alchDecouple			off
+alchDecouple			off		# our ligand is charged..
 ```
 
 
@@ -2603,13 +2664,46 @@ and you'll of course change your -backward file
 > - 3,4: constrain
 > - 5: vdWshiftcoefficient
 
+check if the ligand is neutral
 
-
-### result
-
-
-
+```tcl
+f=remtp
+f=hybrid
+vmd $f.psf -pdb $f.pdb
+set sel [atomselect top "resname HYB"]
+set c [$sel get charge]
+eval vecadd $c
 ```
+
+
+
+
+
+
+
+
+
+### is this run ok?
+
+extract some frames. 250 frames a window.
+
+
+
+```shell
+catdcd -o view.dcd -otype dcd -i equilibrated-ligand.gro -stride 125 rdrp-mtp-remtp-ligand-prod-forward.dcd
+# failed in re
+```
+
+
+
+```tcl
+mol load psf ../../common/ligand.psf
+mol addfile rdrp-mtp-remtp-ligand-prod-forward.dcd
+for {set x 0} {$x <= } {incr x} {
+	set sel [atomselect top "resname HYB" frame [expr $x * 250]]
+}
+
+# atomselect top "within 5 of resname HYB" frame [expr $x * 250]
 ```
 
 
@@ -2626,7 +2720,7 @@ and you'll of course change your -backward file
 
 
 
-# Stage 2 Protocol
+# Extra protocol
 
 
 
