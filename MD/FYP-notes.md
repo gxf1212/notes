@@ -1833,39 +1833,36 @@ we start from (equilibrated?) .pdb after MD. But finally should use those from c
 #### A brief flow
 
 - get stable complex structure, modify the ligand properly to obtain the other one
-
-- get .mol2, .rtf and .prm files from [CGenFF](https://cgenff.umaryland.edu/) or MolFacture in VMD (no AutoPSF required, retaining coordinates and names)
-
-  > old version: use CHARMM-GUI
-  >
-  > - parametrize both ligands in CHARMM-GUI
-  >
-  >   - to get: `.rtf` file. 
-  >
-  > - same ligands, get properly renumbered .pdb files from CHARMM-GUI PDB reader
-  >
-  >   - to get: `.pdb` file
-  >
-  >   > PDB reader itself can also give .rtf? but need the .mol2 file...
+- get `.mol2`, `.rtf` and `.prm` (in one single `.str`) files from [CGenFF](https://cgenff.umaryland.edu/) or MolFacture in VMD 
+  - no AutoPSF required, retaining coordinates and names (same for mtp and remtp)
 
 - run the make_hybrid code to obtain the hybrid `.rtf` and `.pdb` file (with atoms renamed and B value assigned)
-
+  - did not run very well. Now: just stick to the paper: the CH2 also considered as "common atoms". we only add a neutral hydrogen atom
 - run `merge-fep.tcl` to build the ligand and complex with VMD. do use `top_all36_cgenff.rtf`!
-
 - solvate and ionize them. a new version of `sol-ion-fep.tcl` is created to make sure the systems have the same size (ligand more atoms?)
-
-- run the 2nd script to edit the beta field in the .pdb file
-
-- run the 3rd script (not finished) to remove unparametrized angles/dihedrals, etc.
-
+- run the 2nd script `edit_FEP.py` to edit the beta field in the .pdb file
+- run the 3rd script `edit_psf.py` to remove unparametrized angles/dihedrals, etc.
 - normal measurement, equilibration and run, but not necessary to gradually heat up (but if you like...)
 
 principles
 
-- always make sure they are overlapping (same coordinates)
-- if .mol2 file is needed, use drawing_3D!
+- always make sure the initial and final ligands are overlapping (same coordinates)
 
 
+
+> old version for ligand building: use CHARMM-GUI
+>
+> - parametrize both ligands in CHARMM-GUI
+>
+>   - to get: `.rtf` file. 
+>
+> - same ligands, get properly renumbered .pdb files from CHARMM-GUI PDB reader
+>
+>   - to get: `.pdb` file
+>
+>   > PDB reader itself can also give .rtf? but need the .mol2 file...
+>
+>   if .mol2 file is needed, use drawing_3D!
 
 #### Basic thoughts of make_hybrid script
 
@@ -1949,6 +1946,7 @@ principles
 > 
 >
 > import rdkit 出现 ImportError: DLL load failed: 找不到指定的模块
+>
 > 解决：版本不对，重装
 >
 > reference
@@ -1963,7 +1961,7 @@ principles
 
 
 
-#### Rescuing the parameters
+#### Rescuing the parameters: extensive trials
 
 ##### about fep beta
 
@@ -2046,27 +2044,17 @@ but still no luck
 
 
 
-#### Taking another set of starting coordinates
+### QM-optimized parameters
 
-Why don't we run equilibration for a while again?
+Depending on CHARMM-GUI, always not so accurate...the fatal error is something like the cyano group, with no proper parameters in CGenFF...
 
-
-
-### **BFEE2**
-
-https://github.com/fhh2626/BFEE2
-
-https://www.ks.uiuc.edu/Research/vmd/plugins/bfeestimator/
-
-ok for absolute BFE
+为什么.prm files这么多“from xxx”呢？都是在cgenff里面找的近似的，所以才有penalty。这样就感觉所有小分子应该Gaussian。但是如果从“反正都不准”的角度看……
 
 
 
-### By-hand
+### Deprecated  methods
 
-the CH2 also considered as "common atoms"
-
-
+#### draft cmd
 
 ```tcl
 package require psfgen
@@ -2081,32 +2069,6 @@ psfcontext reset
 
 mol load psf hybrid-p.psf 
 ```
-
-
-
-
-
-
-
-
-
-
-
-### QM-optimized parameters
-
-Depending on CHARMM-GUI, always not so accurate...the fatal error is something like the cyano group, with no proper parameters in CGenFF...
-
-为什么.prm files这么多“from xxx”呢？都是在cgenff里面找的近似的，所以才有penalty。这样就感觉所有小分子应该Gaussian。但是如果从“反正都不准”的角度看……
-
-
-
-
-
-
-
-
-
-### Deprecated  methods
 
 #### Build with VMD
 
@@ -2425,7 +2387,7 @@ Depending on CHARMM-GUI, always not so accurate...the fatal error is something l
 
 
 
-### For Gromacs
+### Building in Gromacs
 
 [MD tutorial](http://www.mdtutorials.com/gmx/free_energy/08_advanced.html)
 
@@ -2487,7 +2449,11 @@ and another pdf tutorial [Free Energy Calculation with GROMACS: Solvation free e
 >
 > #### BFEE2?
 >
-> 
+> https://github.com/fhh2626/BFEE2
+>
+> https://www.ks.uiuc.edu/Research/vmd/plugins/bfeestimator/
+>
+> ok for absolute BFE. only for ABFE
 >
 > 
 
@@ -2499,7 +2465,7 @@ and another pdf tutorial [Free Energy Calculation with GROMACS: Solvation free e
 
 ## FEP running with NAMD
 
-### work flow
+### work flow: cmd reference
 
 > once we obtained the .psf and .pdb file of the system, no more hybrid topology file is needed
 
@@ -2508,7 +2474,7 @@ the same as before?
 ```shell
 # after wget
 # wget --user gxf1212 --password 123465acB% # no use
-obabel *.mol2 -opdb -O *2.
+obabel *.mol2 -opdb -O *2.pdb -m
 # run make_hybrid.py
 vmd -dispdev text -e merge-fep.tcl
 vmd -dispdev text -e sol-ion-fep.tcl
@@ -2527,7 +2493,7 @@ vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
 namd3 +p1 +devices 0 fep-lig-prod-forward > fep-lig-prod-forward.log
 ```
 
-### on the scripts
+### configurations
 
 reference:
 
@@ -2537,9 +2503,58 @@ reference:
 
 order: make lig-equil, modify into com-equil/lig-prod-forward, then into backward
 
-#### parameters
+#### ligand paramters
+
+It's found that the aromatic ring cannot retain its planar structure, though in pymol hybrid.pdb still looks fine (though ligand.pdb Ar dotted bonds is gone).
+
+> 31 17 19 34: CG3C50 CG2R57 NG2RC0 CG2RC
+
+31 17 36 18: CG3C50 CG2R57 CG2R51 CG2R51
+
+34 19 24 32: CG2RC0 NG2RC0 NG2R62 CG2R64
+
+18 34 35 22: CG2R51 CG2RC0 CG2R64 NG2R62
+
+35 22 32 24: CG2R64 NG2R62 CG2R64 NG2R62
+
+![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral.png)
+
+coplanar four atoms. there must be at least two common atoms to make two dihedrals copl
+
+#### simualtion params
+
+```tcl
+timestep                1.0
+dcdfreq                 10000		;# not too large!
+
+# CONSTANT-T
+langevin                on
+langevinTemp            $temp
+langevinDamping         10.0
+
+# CONSTANT-P, not in tutorial
+useGroupPressure        yes;           # is needed for rigid bonds (rigidBonds/SHAKE)
+useFlexibleCell         no;            # yes for anisotropic system like membrane 
+useConstantRatio        no;            # keeps the ratio of the unit cell in the x-y plane constant A=B
+langevinPiston          on
+langevinPistonTarget    1.01325
+langevinPistonPeriod    100;          # not too large!
+langevinPistonDecay     50;        	  # not too large!
+langevinPistonTemp      $temp
+StrainRate              0.0 0.0 0.0
+
+# CUT-OFFS
+switching                on
+switchdist               8.0			# not too large!
+cutoff                   9.0
+pairlistdist            10.0
+```
 
 
+
+#### alch parameters
+
+recommend
 
 ```shell
 alchVdwLambdaEnd        1.0
@@ -2549,11 +2564,7 @@ alchOutFreq             1000 	# should be small
 alchDecouple			off		# our ligand is charged..
 ```
 
-
-
-
-
-#### backward
+#### production: backward
 
 forward: starting from equilibration
 
@@ -2562,7 +2573,7 @@ set  temp           310
 set  outputbase     rdrp-mtp-remtp-ligand
 set  outputName     $outputbase-prod-backward
 # if you do not want to open this option, assign 0
-set INPUTNAME       1                      ;# use the former outputName, for restarting a simulation
+set INPUTNAME       0                      ;# use the former outputName, for restarting a simulation
 
 
 # restart or PBC
@@ -2596,7 +2607,7 @@ namd3 +p1 +devices 0 $base-backward > $base-backward.log
 
 
 
-#### restart
+#### restart production
 
 it's amazing that FEP data will be appended to the original .fepout file!
 
@@ -2651,9 +2662,50 @@ and you'll of course change your -backward file
 }
 ```
 
-#### command
+To check:
+
+````shell
+grep "Running FEP window" ./*.log 
+````
 
 
+
+### check: is this run ok?
+
+#### equilibration
+
+> Taking another set of starting coordinates as the initial for production
+
+Why don't we run equilibration for a while again?
+
+but we've tried so many runs, see `try.xlsx`
+
+
+
+
+
+#### production
+
+extract some frames. 250 frames a window.
+
+
+
+```shell
+catdcd -o view.dcd -otype dcd -i equilibrated-ligand.gro -stride 125 rdrp-mtp-remtp-ligand-prod-forward.dcd
+# failed in re
+```
+
+
+
+```tcl
+mol load psf ../../common/ligand.psf
+mol addfile rdrp-mtp-remtp-ligand-prod-forward.dcd
+for {set x 0} {$x <= } {incr x} {
+	set sel [atomselect top "resname HYB" frame [expr $x * 250]]
+}
+
+# atomselect top "within 5 of resname HYB" frame [expr $x * 250]
+```
 
 
 
@@ -2677,34 +2729,75 @@ eval vecadd $c
 
 
 
-
-
-
-
-
-
-### is this run ok?
-
-extract some frames. 250 frames a window.
-
-
-
-```shell
-catdcd -o view.dcd -otype dcd -i equilibrated-ligand.gro -stride 125 rdrp-mtp-remtp-ligand-prod-forward.dcd
-# failed in re
-```
-
-
-
-```tcl
-mol load psf ../../common/ligand.psf
-mol addfile rdrp-mtp-remtp-ligand-prod-forward.dcd
-for {set x 0} {$x <= } {incr x} {
-	set sel [atomselect top "resname HYB" frame [expr $x * 250]]
-}
-
-# atomselect top "within 5 of resname HYB" frame [expr $x * 250]
-```
+> #### 4.21
+>
+> compare tutorial
+>
+> ```tcl
+> switchdist               8.0
+> cutoff                   9.0
+> pairlistdist            10.0
+> 
+> timestep                1.0
+> fullElectFrequency      2
+> nonbondedFreq           1
+> 
+> rigidbonds              all
+> rigidtolerance          0.000001
+> rigiditerations         400
+> 
+> langevin                on
+> langevinTemp            $temp
+> langevinDamping         10.0
+> ```
+>
+>  and my config
+>
+> ```tcl
+> vdwForceSwitching   	yes;
+> cutoff             	 	12.0;              # may use smaller, maybe 10., with PME
+> switchdist          	10.0;              
+> pairlistdist        	14.0;
+> 
+> timestep            	1.0;               # 2fs/step
+> nonbondedFreq       	1;                 # nonbonded forces every step
+> fullElectFrequency  	2; 
+> stepspercycle       	20;                # 20 redo pairlists every ten steps
+> pairlistsPerCycle    	2;                
+> rigidBonds          	all;               # needed for 2fs steps. Bound constraint all bonds involving H are fixed in length
+> 
+> margin              	1.0
+> 
+> langevin                   on;         # do langevin dynamics
+> langevinDamping             1;         # damping coefficient (gamma) of 1/ps
+> langevinTemp            $temp;
+> langevinHydrogen          off;
+> 
+> wrapWater           	on;                # wrap water to central cell
+> wrapAll             	on;                # wrap other molecules too
+> wrapNearest         	off;               # use for non-rectangular cells (wrap to the nearest image)
+> 
+> PME                 	yes
+> PMEGridSpacing      	1.0
+> PMETolerance        	10e-6
+> PMEInterpOrder      	4
+> useGroupPressure        yes;           # needed for rigid bonds (rigidBonds/SHAKE)
+> useFlexibleCell         no;            # yes for anisotropic system like membrane 
+> useConstantRatio        no;            # keeps the ratio of the unit cell in the x-y plane constant A=B
+> langevinPiston          on
+> langevinPistonTarget    1.01325
+> langevinPistonPeriod    100;         # 100?
+> langevinPistonDecay     50;         # 50?
+> langevinPistonTemp      $temp
+> StrainRate              0.0 0.0 0.0
+> 
+> 
+> # SPACE PARTITIONING
+> splitpatch              hydrogen
+> hgroupcutoff            2.8
+> ```
+>
+> #### 4.23~24
 
 
 

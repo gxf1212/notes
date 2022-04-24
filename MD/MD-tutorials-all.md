@@ -1099,6 +1099,7 @@ Alchemy-unbound, 11612 atoms
 ```shell
 parsefep -forward frwd.fepout -backward back.fepout -gc 0 -bar
 parsefep -forward frwd-01.fepout -backward back-01.fepout -gc 0 -bar
+# parsefep -forward ../forward-shift.fepout -backward ../backward-shift.fepout -gc 0 -bar 
 ```
 
 plot FEP calculation
