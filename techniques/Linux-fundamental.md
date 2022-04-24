@@ -839,33 +839,15 @@ conda install -c intel tcl
 
 failed, remove this env...
 
-### svn
+### ssh and scp
 
-get part of the files in one GitHub repository
 
-- `svn checkout url`, trunk
-  
-  Then the files are downloaded to the current directory of terminal.
-  
-  https://blog.csdn.net/ai_faker/article/details/107823359?utm_medium=distribute.pc_relevant.none-task-blog-title-2&spm=1001.2101.3001.4242
-
-- https://blog.csdn.net/q279838089/article/details/44751039
-
-### npm
-
-install nodejs first.
-
-change source: https://www.cnblogs.com/feng-hao/p/11774543.html
 
 ### make
 
 `make`命令是运行的所在目录下的`Makefile`文件, 如果*Make*file 里有*check*的话, 会执行测试,也就是检查下编译出来的东西能不能用
 
-> ## Especially about installation
-
-### dpkg
-
-### package name
+### dpkg: installation
 
 install with .deb
 
@@ -989,7 +971,7 @@ apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用
 
 - 
 
-### tar
+### tar and unzip
 
 - manual
 
@@ -1019,15 +1001,35 @@ apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用
 
   
 
-- tbz
+- tbz file
 
   ```shell
   tar -xjvf G16-A03-AVX2.tbz
   ```
 
-- 
+- unzip
 
-### other
+### privilige: chown and chmod
+
+### svn
+
+get part of the files in one GitHub repository
+
+- `svn checkout url`, trunk
+
+  Then the files are downloaded to the current directory of terminal.
+
+  https://blog.csdn.net/ai_faker/article/details/107823359?utm_medium=distribute.pc_relevant.none-task-blog-title-2&spm=1001.2101.3001.4242
+
+- https://blog.csdn.net/q279838089/article/details/44751039
+
+### npm
+
+install nodejs first.
+
+change source: https://www.cnblogs.com/feng-hao/p/11774543.html
+
+### other during installation
 
 1. run .sh files:
    

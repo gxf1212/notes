@@ -2465,35 +2465,7 @@ and another pdf tutorial [Free Energy Calculation with GROMACS: Solvation free e
 
 ## FEP running with NAMD
 
-### work flow: cmd reference
-
-> once we obtained the .psf and .pdb file of the system, no more hybrid topology file is needed
-
-the same as before?
-
-```shell
-# after wget
-# wget --user gxf1212 --password 123465acB% # no use
-obabel *.mol2 -opdb -O *2.pdb -m
-# run make_hybrid.py
-vmd -dispdev text -e merge-fep.tcl
-vmd -dispdev text -e sol-ion-fep.tcl
-# edit fep
-conda activate AmberTools21
-python3 /home/moonlight/Desktop/work/projects/tools/Python-for-MD/make_hybrid_top/edit_FEP.py `pwd` 
-# common
-vmd -dispdev text -e measure.tcl -args ligand # complex
-# equil
-namd3 +auto-provision +idlepoll fep-lig-equil > fep-lig-equil.log
-
-# may go to analysis and check?
-vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
-
-# prod
-namd3 +p1 +devices 0 fep-lig-prod-forward > fep-lig-prod-forward.log
-```
-
-### configurations
+### Configurations
 
 reference:
 
@@ -2507,19 +2479,19 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 It's found that the aromatic ring cannot retain its planar structure, though in pymol hybrid.pdb still looks fine (though ligand.pdb Ar dotted bonds is gone).
 
-> 31 17 19 34: CG3C50 CG2R57 NG2RC0 CG2RC
+31 17 19 34: CG3C50 CG2R57 NG2RC0 CG2RC0 (purple)
 
-31 17 36 18: CG3C50 CG2R57 CG2R51 CG2R51
+31 17 36 18: CG3C50 CG2R57 CG2R51 CG2R51 (green)
 
-34 19 24 32: CG2RC0 NG2RC0 NG2R62 CG2R64
+34 19 24 32: CG2RC0 NG2RC0 NG2R62 CG2R64 (orange)
 
-18 34 35 22: CG2R51 CG2RC0 CG2R64 NG2R62
+18 34 35 22: CG2R51 CG2RC0 CG2R64 NG2R62 (pink)
 
-35 22 32 24: CG2R64 NG2R62 CG2R64 NG2R62
+35 22 32 24: CG2R64 NG2R62 CG2R64 NG2R62 (blue)
 
-![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral.png)
+![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral.jpg)
 
-coplanar four atoms. there must be at least two common atoms to make two dihedrals copl
+coplanar four atoms. there must be at least two common atoms to make two dihedrals coplanar
 
 #### simualtion params
 
@@ -2662,7 +2634,7 @@ and you'll of course change your -backward file
 }
 ```
 
-To check:
+To check the progress:
 
 ````shell
 grep "Running FEP window" ./*.log 
@@ -2670,9 +2642,70 @@ grep "Running FEP window" ./*.log
 
 
 
-### check: is this run ok?
+### work flow: cmd reference
 
-#### equilibration
+> once we obtained the .psf and .pdb file of the system, no more hybrid topology file is needed
+
+#### before equilibration
+
+##### cmd reference
+
+```shell
+# after wget
+# wget --user gxf1212 --password 123465acB% # no use
+obabel *.mol2 -opdb -O *2.pdb -m
+# run make_hybrid.py, after protein, hybrid.rtf/pdb, top files are ready
+vmd -dispdev text -e merge-fep.tcl
+vmd -dispdev text -e sol-ion-fep.tcl
+# edit fep
+script_dir=/home/moonlight/Desktop/work/projects/tools/Python-for-MD/make_hybrid_top
+conda activate AmberTools21
+python3 $script_dir/edit_FEP.py `pwd` 
+python3 $script_dir/edit_PSF.py `pwd`
+# common
+vmd -dispdev text -e measure.tcl -args ligand # complex
+# equil
+namd3 +p6 fep-lig-equil > fep-lig-equil.log  # +auto-provision +idlepoll
+# may go to analysis and check?
+vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
+
+```
+
+##### check if the ligand is neutral
+
+```tcl
+f=remtp
+f=hybrid
+vmd $f.psf -pdb $f.pdb
+set sel [atomselect top "resname HYB"]
+set c [$sel get charge]
+eval vecadd $c
+```
+
+
+
+
+
+##### check: is this run ok
+
+structural integrity, when protein is always fine. you may check work report for more (random move, overlap)
+
+- are strange connections formed
+- is the ligand look like the initial state
+- does it remain in its position in complex
+- will it still be stable if time is longer?
+
+```tcl
+# vmd
+mol load psf ../../common/ligand-fep.psf
+mol addfile rdrp-mtp-remtp-ligand-equil.coor
+set sel [atomselect top "segname HETA or resname MG"]
+$sel writepdb equil-ligand.pdb
+exit
+# pymol *.pdb
+```
+
+
 
 > Taking another set of starting coordinates as the initial for production
 
@@ -2680,11 +2713,24 @@ Why don't we run equilibration for a while again?
 
 but we've tried so many runs, see `try.xlsx`
 
+grep "Running FEP window" ./*.log 
 
 
 
+#### after production
 
-#### production
+
+
+```shell
+
+
+# prod
+namd3 +p1 +devices 0 fep-lig-prod-forward > fep-lig-prod-forward.log
+```
+
+
+
+##### processing
 
 extract some frames. 250 frames a window.
 
@@ -2711,23 +2757,17 @@ for {set x 0} {$x <= } {incr x} {
 
 ### debug
 
+the history
+
+- ligand parameterization (C#N dihedral)
+- ligand building (common atom, params)
+- ligand huddling up (simulation parameter)
+- ligand bad conformation
+
 > remtp-try-------try-equil
 >
 > - 3,4: constrain
 > - 5: vdWshiftcoefficient
-
-check if the ligand is neutral
-
-```tcl
-f=remtp
-f=hybrid
-vmd $f.psf -pdb $f.pdb
-set sel [atomselect top "resname HYB"]
-set c [$sel get charge]
-eval vecadd $c
-```
-
-
 
 > #### 4.21
 >
@@ -2797,9 +2837,9 @@ eval vecadd $c
 > hgroupcutoff            2.8
 > ```
 >
-> #### 4.23~24
+> 
 
-
+#### 4.23~24
 
 
 

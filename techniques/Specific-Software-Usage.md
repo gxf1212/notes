@@ -1007,7 +1007,9 @@ anaconda环境信息同步？
 
 # Applications for fun
 
-## git in cmd
+## Git
+
+### in cmd
 
 1. basic
 
@@ -1076,10 +1078,6 @@ anaconda环境信息同步？
    git restore _sidebar.md
    ```
 
-6. GitHub克隆Gitee的仓库
-
-   ![clone](https://gitee.com/gxf1212/notes/raw/master/techniques/images/clone.jpg)
-
 7. Github 上怎么删除一个文件的版本控制信息，只保留最新文件？
 
    项目本身并不大，主要是由于有些大图片多次修改，所以GIT保留的这些图片的历史记录文件非常大，但是我这些图片又不需要历史记录信息，怎么删除？
@@ -1105,7 +1103,25 @@ anaconda环境信息同步？
    git config --global http.proxy "" 
    ```
 
-   
+8. 
+
+### exploration
+
+1. GitHub克隆Gitee的仓库
+
+   ![clone](https://gitee.com/gxf1212/notes/raw/master/techniques/images/clone.jpg)
+
+   cloning is boring, why not sync a repository?
+
+   https://gitee.com/help/articles/4336#article-header10
+
+   **进入需要使用镜像功能的仓库，进入「管理」找到「仓库镜像管理」选项**
+
+   限时开放至 2022 年 08 月 31 日，在限时开放期结束前，我们将更新相关产品策略。
+
+   git actions for gitee? https://gyx8899.gitbook.io/blog/share/syncgithubtogitee
+
+
 
 ## Build a note site with docsify
 
