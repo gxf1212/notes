@@ -2068,6 +2068,14 @@ Though I only need to re-install programs in gxf (like gmx), a sea of permission
 
    https://www.runoob.com/linux/linux-comm-ls.html `ls -l` to see owners
 
+   solution
+
+   ```shell
+   sudo chown moonlight:moonlight xxx
+   ```
+
+   or re-install the program and reboot, to solve some of them
+
 5. git cannot remember login info
 
    fatal: unsafe repository (xxx is owned by someone else)
@@ -2079,13 +2087,7 @@ Though I only need to re-install programs in gxf (like gmx), a sea of permission
    
    ```
    
-   solution
-   
-   ```shell
-   sudo chown moonlight:moonlight xxx
-   ```
-   
-   
+   https://stackoverflow.com/questions/61376694/git-ubuntu-url-has-no-scheme
 
 ## common problems
 
