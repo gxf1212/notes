@@ -2084,10 +2084,16 @@ Though I only need to re-install programs in gxf (like gmx), a sea of permission
    $ git push origin -u master
    warning: url has no scheme: <?xml version="1.0"?>
    fatal: credential url cannot be parsed: <?xml version="1.0"?>
-   
+   Username for 'https://gitee.com':
    ```
    
-   https://stackoverflow.com/questions/61376694/git-ubuntu-url-has-no-scheme
+   even though I've already done the settings
+   
+   solution: `rm ~/.git-credentials` and rerun `git config --global credential.helper store`
+   
+   > https://stackoverflow.com/questions/61376694/git-ubuntu-url-has-no-scheme
+   
+6. 
 
 ## common problems
 

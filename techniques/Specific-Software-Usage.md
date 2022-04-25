@@ -1090,7 +1090,7 @@ anaconda环境信息同步？
    git reset --hard origin/master
    ```
 
-   give up specific files
+   to give up specific files
 
    ```shell
    git restore _sidebar.md

@@ -2820,18 +2820,13 @@ the history
 - ligand huddling up (simulation parameter)
 - ligand bad conformation
 
-### tests
+#### tests
 
-> remtp-try-------try-equil
->
-> - 3,4: constrain
-> - 5: vdWshiftcoefficient
+try-4.21.xlsx
 
 > c: complex
 >
 > (piston)表示100, 50的参数
-
-4.21
 
 现在要验证一个用我参数的
 
@@ -2983,9 +2978,9 @@ Info: LARGEST PATCH (785) HAS 102993 ATOMS
 >
 > http://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2010-2011/2282.html
 
+#### 4.25 failed
 
-
-
+ΔΔA failed for all ligand and complex, > 100 kcal/mol
 
 
 
