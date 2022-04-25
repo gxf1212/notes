@@ -244,6 +244,12 @@ charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 
 希望以后的工作能顺利进行。😭😭
 
+### easyconnect
+
+easyconnect：没事不要老开着，当自动断开时就重启一下！！
+
+https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect，但没launchctl这个命令
+
 ## Typora
 
 1. 自定义快捷键
@@ -266,11 +272,19 @@ charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 
 ## VScode
 
-I also met [this question](https://stackoverflow.com/questions/70221994/unable-to-change-theme-in-vs-code) or [this](https://www.reddit.com/r/vscode/comments/lx7536/any_idea_why_my_theme_is_suddenly_changing_every/)
+1. theme
 
-[Workbench Appearance color theme keeps being overridden](https://github.com/microsoft/vscode/issues/105102)
+   (description) I also met [this question](https://stackoverflow.com/questions/70221994/unable-to-change-theme-in-vs-code) or [this](https://www.reddit.com/r/vscode/comments/lx7536/any_idea_why_my_theme_is_suddenly_changing_every/)
 
-引申出主题的管理方式：和系统有关。。
+   > [Workbench Appearance color theme keeps being overridden](https://github.com/microsoft/vscode/issues/105102)
+   >
+   > 引申出主题的管理方式：和系统有关。。
+
+   No! finally, vscode theme问题：biosyntax和gmxlang要用它们自己的theme
+
+   solution: disable掉他俩, 然后settings（ctrl+,）里面搜索theme
+
+2. 
 
 ## Pycharm
 
@@ -677,6 +691,10 @@ A simple GUI with multi-account support. https://github.com/bpozdena/OneDriveGUI
 
    - 由于网络差，大文件能上传无法下载，或者有些大文件下下来就坏了就离谱，方便的管理还是实现不了。
    - 一些`.`开头is needed但不是所有。其实就是保存尽量多的配置就好
+
+
+
+Power Automate，将新的 OneDrive 文件同步到 Google Drive 文件，贵的一批
 
 ##### other
 
@@ -1904,12 +1922,6 @@ https://bibichuan.github.io/posts/5affe24.html
 
 
 
-## Experiences on video/subtitles collection
-
-
-
-
-
 
 
 ## Write games in python
@@ -1993,3 +2005,12 @@ other
 > https://blog.csdn.net/weixin_40957741/article/details/102761183  Python variable underline
 
 re
+
+
+
+# Experiences on video/subtitles collection
+
+
+
+
+

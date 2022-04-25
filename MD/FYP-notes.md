@@ -821,6 +821,10 @@ build with Gromacs and AmberTools?
 
 #### Appendix: CHARMM-GUI generate files for ligand
 
+> <font size=5>if you want to perfectly retain its coordinates and atom names, use CGenFF server!</font>
+>
+> slightly different charge. I think remtp's params are closer to the paper.
+
 but not used in method 1
 
 > https://cgenff.umaryland.edu/  itself, the program to assign parameters for your ligand
@@ -898,8 +902,8 @@ When you encouter errors when reading .str file:
 
 #### Appendix 3: other ways to generate ligand topology
 
-- https://cgenff.umaryland.edu is what CHARMM-GUI calls for ligand, the same
-- https://www.swissparam.ch/ MMFF/CHARMM22
+- https://cgenff.umaryland.edu is what CHARMM-GUI calls for ligand, the same. but stupidly we cannot `wget` files
+- https://www.swissparam.ch/ MMFF/CHARMM22, too old
 
 these servers generate files for multiple MD engines
 
@@ -1828,7 +1832,7 @@ we start from (equilibrated?) .pdb after MD. But finally should use those from c
 
 > VMD molecule editor: http://www.ks.uiuc.edu/Research/vmd/plugins/molefacture/, conjugation with ffTk, paratool, CGenFF server, etc. AutoPSF?
 
-### By scripting
+### Primary protocol
 
 #### A brief flow
 
@@ -1846,7 +1850,9 @@ we start from (equilibrated?) .pdb after MD. But finally should use those from c
 
 principles
 
-- always make sure the initial and final ligands are overlapping (same coordinates)
+- always make sure the initial and final ligands are overlapping (same coordinates). 
+
+  be careful of ligandrm.pdb from GUI, which is slightly changed...
 
 
 
@@ -1864,6 +1870,12 @@ principles
 >
 >   if .mol2 file is needed, use drawing_3D!
 
+Comment by tutors:
+
+Also, the physics of a common molecule is usually unimportant, because  it usually only provides us a baseline of energy. There have been papers using completely unrealistic molecules such as dummy benzenes  (geometrically looking like benzene but no partial charges and sometimes even 0 epsilon values for VDW). 
+
+With that said, there is also a scenario when the common molecule is  important - which is when you actually have the experimental data for  this common molecule. But I don't think we have it.
+
 #### Basic thoughts of make_hybrid script
 
 - data structure
@@ -1878,8 +1890,6 @@ principles
     - atomdict, key is name+tag, same value, count common atoms point to the same `Atom` object
     - thus we can use **set** operations to merge bonds, etc.
   - output: just write formatted strings into .rtf and .pdb files
-
-
 
 > Exploration
 >
@@ -1897,23 +1907,21 @@ principles
 > - 线性思维一步步
 >   - 对于mtp其实够了
 >
-> 
+> 图同构（英語：graph isomorphism）描述的是图论中，两个图之间的完全等价关系。在图论的观点下，两个同构的图被当作同一个图来研究。
+> https://networkx.org/documentation/stable/_modules/networkx/algorithms/isomorphism/ismags.html
 >
 > CHARMM-GUI的code，收藏了
 >
 > - openMM能读写，可能转不了？读完以后能干啥？
 > - RDkit能找子结构，但处理不了文件？
 >
-> 
->
-> 图同构（英語：graph isomorphism）描述的是图论中，两个图之间的完全等价关系。在图论的观点下，两个同构的图被当作同一个图来研究。
-> https://networkx.org/documentation/stable/_modules/networkx/algorithms/isomorphism/ismags.html
->
-> 
->
 > 用rdkit查找子结构是有效的，并且不需要图的数据结构，只要能返回去查找到atom name。并且rdkit可辅助阅读pdb中的信息（非必需
 >
 > > PH:画出来是P+？
+>
+> 连在同一个磷上的氧能不能对上看来是随机的
+>
+> 我们用remtp的骨架，HGA3+CG321就没参数
 >
 > 
 >
@@ -1943,12 +1951,6 @@ principles
 >   - schrondinger可以做。。
 > - prm文件不用改，因为用的是力场里的atom type！但是要合并一下？复制粘贴就可以，但是mtp啥都没有，就不用了
 >
-> 
->
-> import rdkit 出现 ImportError: DLL load failed: 找不到指定的模块
->
-> 解决：版本不对，重装
->
 > reference
 >
 > - https://www.rdkit.org/docs/GettingStartedInPython.html
@@ -1958,6 +1960,14 @@ principles
 > - https://www.rdkit.org/docs/source/rdkit.Chem.rdchem.html#rdkit.Chem.rdchem.Atom
 > - https://www.rdkit.org/docs/source/rdkit.Chem.rdFMCS.html?highlight=rdkit%20chem%20rdfmcs%20findmcs#rdkit.Chem.rdFMCS.FindMCS
 > - https://www.rdkit.org/docs/Cookbook.html?highlight=rdkit%20chem%20rdfmcs%20findmcs
+>
+> Rdkit issues
+>
+> 1. import rdkit 出现 ImportError: DLL load failed: 找不到指定的模块
+>
+>    解决：版本不对，重装
+>
+> 2. MolFromMol2File(…)不推荐，容易出bug，pdb还行
 
 
 
@@ -2042,7 +2052,56 @@ but still no luck
 
 我觉得应该就是氰基没这些dihedral吧。Cgenff、VMD的force field toolkit都提示没有这个参数，各种力场也都没这个参数。只有VMD load rtf之时整出来这些dihedral
 
+### hand-crafting the hybrid molecule
 
+#### flow
+
+1. build a proper remtp structure and get topology/parameters
+2. open in GaussView, add a free hydrogen atom, press ctrl+shift to drag that atom with your mouse, until it's almost "colinear" with the next carbon. adjust the C-H bond length. save the coordinates.
+3. but don't use that .pdb file because GV may rearrange the atoms. MANUALLY edit the file by copying from saved coordinates and add residue name etc.
+4. edit .rtf file: just add "HA" with the same atom type as the other two hydrogens but its charge is 0. add a bond. 
+4. edit .pdb file: assign beta values, and it's done
+
+if you don't want to manually assign beta values, it's a bit more complicated to start from Python-created hybrid molecule.
+
+> 1.H10B变为H2C（pdb，beta），H10A删去（pdb），改bond，type为HGA2
+> 2.H11A变为HA（pdb），改bond，改电荷！
+> 3.删去C1A，C1B改为C1C（pdb），bond的C1A改成C1C，但删去一个O1C重复的
+
+#### check
+
+is your edit right? `check_hybrid.py`, etc.
+
+it reads in .rtf file, and you can see the consistency of atom section and bond section; draw the network to checks bonds (overall structure)
+
+open with Pymol or VMD, to check the pdb structure, atom names, and BETA values!
+
+you can also compare with/transfer param values in the paper
+
+#### charge
+
+check if the ligand is neutral
+
+```tcl
+f=remtp
+f=hybrid
+vmd $f.psf -pdb $f.pdb
+set sel [atomselect top "resname HYB"]
+set c [$sel get charge]
+eval vecadd $c
+```
+
+it's hard to filter with beta in vmd, so I write some Python scripts to check the charge of the initial (excluding +1 atoms) and final state.
+
+It's better to make all parts both neutral. add H paradigm works ok but two-carbon paradigm is not that fine?
+
+> 双碳paradigm：总的-3.903，+1是4.00，-1是-3.999
+> transfer的hybrid，全部：-4.0
+> 那个normal build,-1是-3.996，+1和总的是-4
+
+> transfer：应该是把transfer写出的东西粘到str里面然后正常合并
+>
+> 有几个还是和文献值差距有点大
 
 ### QM-optimized parameters
 
@@ -2477,7 +2536,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 #### ligand paramters
 
-It's found that the aromatic ring cannot retain its planar structure, though in pymol hybrid.pdb still looks fine (though ligand.pdb Ar dotted bonds is gone).
+It's found that the aromatic ring cannot retain its planar structure, though in pymol hybrid.pdb still looks fine (though ligand.pdb Ar dotted bonds is gone). 因为后面对芳环只有参数的限制，程序不知道关于芳香键的标记
 
 31 17 19 34: CG3C50 CG2R57 NG2RC0 CG2RC0 (purple)
 
@@ -2671,19 +2730,6 @@ vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
 
 ```
 
-##### check if the ligand is neutral
-
-```tcl
-f=remtp
-f=hybrid
-vmd $f.psf -pdb $f.pdb
-set sel [atomselect top "resname HYB"]
-set c [$sel get charge]
-eval vecadd $c
-```
-
-
-
 
 
 ##### check: is this run ok
@@ -2713,13 +2759,17 @@ Why don't we run equilibration for a while again?
 
 but we've tried so many runs, see `try.xlsx`
 
+```shell
 grep "Running FEP window" ./*.log 
+```
+
+to check the progress
 
 
 
 #### after production
 
-
+##### cmd
 
 ```shell
 
@@ -2728,7 +2778,13 @@ grep "Running FEP window" ./*.log
 namd3 +p1 +devices 0 fep-lig-prod-forward > fep-lig-prod-forward.log
 ```
 
+##### Comment
 
+If the integrity of nucleoside is fine, it may be fine because the disappearing atoms are supposed to stop interacting with the rest of the system and as a result, overlapping is expected. 
+
+Just remember to **check ddG** at each step to see if there's a big jump from lambda=0.0001 to lambda=0. This usually indicates a more severe problem. 
+
+Another thing is that if the nucleoside collapses on itself at lambda=0, it means that there're some serious issues with the parameters.
 
 ##### processing
 
@@ -2755,7 +2811,7 @@ for {set x 0} {$x <= } {incr x} {
 
 
 
-### debug
+### debug and problems
 
 the history
 
@@ -2764,13 +2820,69 @@ the history
 - ligand huddling up (simulation parameter)
 - ligand bad conformation
 
+### tests
+
 > remtp-try-------try-equil
 >
 > - 3,4: constrain
 > - 5: vdWshiftcoefficient
 
-> #### 4.21
+> c: complex
 >
+> (piston)表示100, 50的参数
+
+4.21
+
+现在要验证一个用我参数的
+
+先调好最好的配置，然后用在normal系统上吧，two carbon可能难指望
+
+> - 所有的模拟中，连接芳环的键那里不再是平面，是一直存在的问题
+>   - 芳环应该修一下，但hybrid都好着
+>   - pymol edit一下可能稍稍改变atom order
+>   - 参数上少个约束吧，其实整个芳环都有点歪（不管）
+>   - 在使用真正的remtp之前，都没有过这个问题
+>   - tut-nvt不是很严重
+> - alpha磷酸离芳环氢有点近了，都这样
+> - timestep 1.0
+
+> 后来算了：
+>
+> - complex+tutorial+my cutoff+edited hybrid.prm
+>   - 改参数是修好了键的问题
+>   - 改cutoff毁掉了ligand
+> - 现在以my-piston为基础，改cutoff为8，10，10.小一点的diheral k
+>   - 只改cutoff三连可以毁掉tut，但不能拯救my-piston
+>   - pme加到tut没啥影响
+> - tut-piston-pme，调dihedral，也ok
+>   - 两个键恐怕只能8，5组合才能成功限制？没事
+> - 加上其他参数
+>   - 跑得没有tut-piston远。这几个hybrid都不算太远；transfer也没比normal少跑
+>
+> 芳环的事已经有所改善，但后面是否还应该使用限制性的参数？
+>
+> final：ligand那组还是有点变化了，complex炸了
+>
+> - 奇怪的是去掉那几个其他参数，hgroupcutoff、wrap water，就好了？并没好？？
+>
+> 现在的框架应该是tut+piston+pme+other，但其实是**有时候成功有时候不太行**。很可能是piston等压的问题，pme和other影响都不大吧，alpha磷酸离芳环氢有点近了的情况基本都存在，tut-piston也是？
+
+总结：
+
+- **是否NPT**当然是最重要的之一
+- tutorial的参数构象都还行；my param使得三磷酸翘起来
+  - 可能的重要因素：**cutoff三连**（langevin damping，PME?）
+
+- npt使得距离变化？爆炸？**piston那俩参数**还是有影响。。
+
+#### 4.21 
+
+> FATAL ERROR: ABNORMAL EOF FOUND -buffer=*END
+
+This is an end-of-file error. Check the end of your pdb,psf and parameter files (all inputs). Probably one of them has been interrupted while being created. I can help you more if you upload the files.
+
+#### 4.21
+
 > compare tutorial
 >
 > ```tcl
@@ -2791,7 +2903,7 @@ the history
 > langevinDamping         10.0
 > ```
 >
->  and my config
+> and my config
 >
 > ```tcl
 > vdwForceSwitching   	yes;
@@ -2837,11 +2949,35 @@ the history
 > hgroupcutoff            2.8
 > ```
 >
-> 
+> fep似乎是nvt或npt都行？查一下
+>
+> tutorial和程序我记得都是nvt？biggin那个书是吉布斯
 
 #### 4.23~24
 
+问题：在一次中断后restart
 
+> FATAL ERROR: CudaTileListKernel::buildTileLists, maximum shared memory allocation exceeded. Too many atoms in a patch
+
+[CUDA source](https://www.ks.uiuc.edu/Research/namd/doxygen/classCudaTileListKernel.html#ae2ecf8db799a4ffedde6062e772e7ad0)
+
+namd no gpu: namd fatal error: patch has ... atoms, maximum allowed is 65535
+
+核心问题：namd Too many atoms in a patch，不是cuda. 正常run的patch只有几百atoms。观察对比log file中patch grid 等参数
+
+The command "twoAwayX yes" (same for Y and Z) will double the number of
+patches. Trying to run 3.5 million atoms on only 16 processors is asking a
+lot of NAMD though.
+[Improving Parallel Scaling](https://www.ks.uiuc.edu/Research/namd/2.9/ug/node90.html)
+[NamdPerformanceTuning](http://www.ks.uiuc.edu/Research/namd/wiki/?NamdPerformanceTuning)
+
+在zju上
+Info: PATCH GRID IS 12 (PERIODIC) BY 10 (PERIODIC) BY 13 (PERIODIC)
+Info: PATCH GRID IS 2-AWAY BY 2-AWAY BY 2-AWAY
+Info: LARGEST PATCH (785) HAS 102993 ATOMS
+*numprocs* = (2) *numpatches* + 1
+
+放弃！
 
 
 

@@ -417,7 +417,11 @@ This is a record of my operations during 折腾ing the system, in order not to f
    du -sh /directory
    ```
 
-5. 
+5. ls
+
+   https://www.runoob.com/linux/linux-comm-ls.html
+
+6. 
 
 #### other
 
@@ -2030,6 +2034,56 @@ http://www.noobyard.com/article/p-vgixdwgy-st.html 创建home后解决了？
 刚才应该直接gdisk /dev/sda1
 
 解决：重写了分区表，相当于格式化吧。重新创建用户。。
+
+## 4.9 after recreating a user, no permission 'apt' installed tools
+
+Though I only need to re-install programs in gxf (like gmx), a sea of permission errors occur in all tools previously installed by `sudo apt`. Only with sudo can they be installed or removed. (dpkg: error: requested oper ation requires superuser priviLege)
+
+1. Chrome的密码没了，还有每次登录要输密码
+
+   ![chrome-startup](https://gitee.com/gxf1212/notes/raw/master/techniques/images/chrome-startup.png)
+
+   解决：设置中打开passwords and keys，或cmd输入`seahorse`、返回，删掉关于Chrome的所有login的keyrings并无用？或者设一个空的密码。但是每次开Chrome仍会自动创建一个？？
+
+   Chrome 无法自动填充密码：点击右上角头像 - 管理用户 - 移除此用户 - 之后再登录就好楼
+
+2. onedrive client：重装没用，但留下安装folder以便卸载
+
+3. vim
+
+   ```
+   E575: viminfo: Illegal starting char in Line:
+   <context id="">
+   E575: viminfo: Illegal starting char in line:
+   <application id="snap - store_ ubuntu-sof tware- Local-
+   file . desktop" score="0" last-seen="0" />
+   E575: viminfo: Illegal starting char in line:
+   <application id=" google- chr ome . desktop" score= ”152
+   ”last-seen=" 1650193126" />
+   ```
+
+   solution: `rm ~/.viminfo`		 https://blog.csdn.net/sahusoft/article/details/4540931
+
+4. 安装软件要root不是sudo。Linux打开应用需要root，因为是之前那个用户安装的。要更改程序的用户组和用户主
+
+   https://www.runoob.com/linux/linux-comm-ls.html `ls -l` to see owners
+
+5. git cannot remember login info
+
+   ```shell
+   $ git push origin -u master
+   warning: url has no scheme: <?xml version="1.0"?>
+   fatal: credential url cannot be parsed: <?xml version="1.0"?>
+   
+   ```
+
+   
+
+## common problems
+
+https://sudoedit.com/linux-server-wont-reboot/
+
+
 
 
 
