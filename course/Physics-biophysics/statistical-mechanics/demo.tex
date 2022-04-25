@@ -68,7 +68,7 @@
 \newcommand{\suman}{\sum_{\alpha=1}^{3N}}
 \newcommand{\lag}{\mathcal{L}} % Lagrangian
 \newcommand{\ham}{\mathcal{H}} % Hamiltionian
-\newcommand{\intot}{\int_{t_1}^{t_2}}
+\newcommand{\inttot}{\int_{t_1}^{t_2}}
 
 % other 
 %\usepackage[utf8]{inputec}
@@ -96,7 +96,7 @@
 
 \section{Newton's laws of motion}
 
-Review basic laws.
+Review some basic laws.
 
 Newton's second law:
 \begin{equation}
@@ -122,7 +122,7 @@ We use position and momentum in the phase space because
 	\vF=\der{\vp}{t} \label{rp}
 \end{equation}
 
-Phase space: $3N$ position variables and $3N$ momentum variables constitute the microscopic state of the system at time $t$, if the dimensionality is 3. These variables forms a so-called \textit{phase space vector} $x$. And by solving the Newton's second law, we obtain a \textit{trajectory}:
+Phase space: $3N$ position variables and $3N$ momentum variables constitute the microscopic state of the system at time $t$, if the dimensionality is 3. These variables forms a so-called \textit{phase space vector} $x$. And by solving equations in the Newton's second law, we obtain a \textit{trajectory}:
 \begin{equation}
 	x_t=\left(\vr_1(t), \dots, \vr_N(t), \vp_1(t), \dots, \vp_N(t)\right) \label{eq:phase-space-vector}
 \end{equation}
@@ -134,7 +134,7 @@ We can visualize the trajectory for a single one-dimensional particle. Some exam
 	\item a particle crossing a "hill" potential
 \end{itemize}
 
-Visualizing a many-particle system is hard. Maybe we can consider a particular cut or surface representing a set of variables of interest, known as a \textit{Poincar{\'e} section}.
+Visualizing a many-particle system is hard. Maybe we can consider a particular cut or surface representing a set of variables of interest, known as a \textit{Poincar{\'e} section}\footnote{庞加莱截面}.
 
 \section{Lagrangian formulation of classical mechanics}
 
@@ -218,13 +218,12 @@ The kinetic energy can then be written as\footnote{separate everything containin
 	&=\half\suman\sum_{\beta=1}^{3N}\sumin m_i\p{\vr_i}{q_\alpha}\p{\vr_i}{q_\beta}\dot{q}_\alpha\dot{q}_\beta \notag\\
 	&=\half\suman\sum_{\beta=1}^{3N}G_{\alpha\beta}\dot{q}_\alpha\dot{q}_\beta
 \end{align}
-\begin{tcolorbox}
-	where
-	\begin{equation}
-		G_{\alpha\beta}(\vq)=\sumin m_i\p{\vr_i}{q_\alpha}\cdot\p{\vr_i}{q_\beta}
-	\end{equation}
-	is the function of $q$ (so is $U(\vq)$). $\alpha$ and $\beta$ as indices, these elements forms a matrix $G$, the \textit{mass metric matrix}. 
-\end{tcolorbox}
+where
+\begin{equation}
+	G_{\alpha\beta}(\vq)=\sumin m_i\p{\vr_i}{q_\alpha}\cdot\p{\vr_i}{q_\beta}
+\end{equation}
+is the function of $q$ (so is $U(\vq)$). $\alpha$ and $\beta$ as indices, these elements forms a matrix $G$, the \textit{mass metric matrix}. 
+
 Then the Lagrangian is expressed as a function of $\vq$ and $\dvq$. Adopting the Euler-Lagrange equation, considering $q_{\gamma}$ as $q_\alpha$:
 \begin{equation}
 	\der{}{t}\left(\sum_{\beta=1}^{3N}G_{\gamma\beta}\dot{q}_\beta\right)=\suman\sum_{\beta=1}^{3N}\p{G_{\alpha\beta}}{q_\gamma}\dot{q}_\alpha\dot{q}_\beta-\p{U}{q_\gamma} \label{eq:lag-equations}
@@ -297,7 +296,7 @@ We now express the relation in the function of $s$, i.e. find the equivalent exp
 \begin{equation}
 	\tilde{f}=b(g^{-1}(s))=f(x(s))-sx(s)
 \end{equation}
-This is called a \textit{Legendre transform}.
+This is called a \textit{Legendre transform}\footnote{勒让德变换}.
 
 For multiple variables $x_1, \dots, x_n$, there will be corresponding $s_1, \dots, s_n$, and the generalized form is
 \begin{tcolorbox}
@@ -409,13 +408,15 @@ For a trajectory under constant energy, the phase space vectors (eqn. \ref{eq:ph
 	U_B-U_A=W_{AB}=K_A-K_B
 \end{gather}
 
-Consider any arbitrary phase space function $a(x)$, a function of positions and momentums. To study its time evolution:
-\begin{align}
-	\der{a}{t}&=\suman\p{a}{p_\alpha}\dot{p}_\alpha+\p{a}{q_\alpha}\dot{q}_\alpha \notag\\
-	&=\suman\p{a}{p_\alpha}\p{\ham}{q}-\p{a}{q_\alpha}\p{\ham}{p_\alpha}\\
-	&=\left\{a,\ham\right\} \label{eq:poisson-bracket}
-\end{align}
-where the last line is known as the \textit{Poisson bracket}.
+Consider any arbitrary phase space function $a(x)$, a function of positions and momentums. We study its time evolution:
+\begin{tcolorbox}
+	\begin{align}
+		\der{a}{t}&=\suman\p{a}{p_\alpha}\dot{p}_\alpha+\p{a}{q_\alpha}\dot{q}_\alpha \notag\\
+		&=\suman\p{a}{p_\alpha}\p{\ham}{q}-\p{a}{q_\alpha}\p{\ham}{p_\alpha}\\
+		&=\left\{a,\ham\right\} \label{eq:poisson-bracket}
+	\end{align}
+	where the last line is known as the \textit{Poisson bracket}.
+\end{tcolorbox}
 
 \example Suppose a system without external forces acting on it, which implies $\sumin \vF_i=0$, then consider the total momentum $\boldsymbol{P}=\sumin\vp_i$
 \begin{align*}
@@ -460,9 +461,11 @@ Consider a solution $\vx_t$ to eqn. \ref{eq:xt} starting from an initial conditi
 	J_{kl}=\p{x_t^k}{x_0^l}
 \end{equation}
 which is known as \textit{symplectic property}\footnote{辛性质}, and satisfies
-\begin{equation}
-	M=J^TMJ
-\end{equation}
+\begin{tcolorbox}
+	\begin{equation}
+		M=J^TMJ
+	\end{equation}
+\end{tcolorbox}
 
 \example the one-dimensional harmonic oscillator
 \begin{gather*}
@@ -505,12 +508,14 @@ then
 
 \section{The action integral}
 \textit{The action integral} emerges naturally from quantum mechanics. It is defined as
-\begin{equation}
-	A=\intot\lag\left(\vq(t),\dvq(t)\right)\dt
-\end{equation}
+\begin{tcolorbox}
+	\begin{equation}
+		A=\inttot\lag\left(\vq(t),\dvq(t)\right)\dt
+	\end{equation}
+\end{tcolorbox}
 where $\vq=(q_1,\dots,q_{3N})$. $A$ is trajectory-dependent because it counts every value of $\vq$ and $\dvq$ from $t_1$ to $t_2$. Since a trajectory is a function of $t$, then the action integral is a \textit{functional}, usually denoted as $A\left[\vq\right]$.
 
-\begin{quote}
+\begin{tcolorbox}[colback=\TheoremBackground,colframe=\TheoremFrame,coltext=\TheoremColor]
 	Definitions:
 	\begin{itemize}
 		\item A functional\footnote{泛函} is a quantity that depends on all values of a function between two points of its domain.
@@ -518,7 +523,7 @@ where $\vq=(q_1,\dots,q_{3N})$. $A$ is trajectory-dependent because it counts ev
 		\item The variational principle\footnote{变分原理}. The variational method is to find an extremal function\footnote{极值函数} for a functional, just like to find an extreme value for a function.
 	\end{itemize}
 	A detailed introduction of the variational method is \href{https://zhuanlan.zhihu.com/p/139018146}{here}. A relevant example is to find the ground state wave function of a \ce{H2+}, where we use a linear combination of basis functions as the trial function, get the derivative of the total energy, let them equal to zero and calculate the coefficients. Then we obtain the wave function that may make the energy the lowest.
-\end{quote}
+\end{tcolorbox}
 
 Here we will do similar things to the action integral. 
 First of all, such a trajectory must satisfy the endpoint conditions:
@@ -540,29 +545,34 @@ Second, for a slightly changed trajectory $\vq(t)+\delta \vq(t)$ that also satis
 where $\delta\vq$ is called the variation of $\vq$\footnote{$\delta\vq$是$\vq$的变分},
 the variation of $A$ must be zero, which means
 \begin{equation*}
-	\delta A=\intot\lag\left(\vq(t)+\delta\vq(t),\dvq(t)+\delta\dvq(t)\right)\dt
-	-\intot\lag\left(\vq(t),\dvq(t)\right)\dt=0
+	\delta A=\inttot\lag\left(\vq(t)+\delta\vq(t),\dvq(t)+\delta\dvq(t)\right)\dt
+	-\inttot\lag\left(\vq(t),\dvq(t)\right)\dt=0
 \end{equation*}
 Perform a first-order Taylor expansion to the first term, we get
 \begin{equation*}
-	A=\intot\left[\p{\lag}{\vq(t)}\delta\vq(t)+\p{\lag}{\dvq}\delta\dvq(t)\right]\dt
+	\delta A=\inttot\left[\p{\lag}{\vq(t)}\delta\vq(t)+\p{\lag}{\dvq}\delta\dvq(t)\right]\dt
 \end{equation*}
 Knowing that $\delta\dvq(t)=\der{\left[\delta\vq(t)\right]}{t}$, and hoping to merge the two $\delta$ terms, we integrate the second term by parts\footnote{integrate ... by parts: 分部积分法}
-\begin{align*}
-	A&=\intot\p{\lag}{\vq(t)}\delta\vq(t)\dt+\p{\lag}{\dvq}\md\left[\delta\vq(t)\right]\\
-	&=\left.\p{\lag}{\dvq}\delta\vq(t)\right|_{t_1}^{t_2}+\intot\left[\p{\lag}{\vq(t)}-\der{}{t}\left(\p{\lag}{\dvq(t)}\right)\right]\delta\vq(t)\dt=0
-\end{align*}
+\begin{align}
+	\delta A&=\inttot\p{\lag}{\vq(t)}\delta\vq(t)\dt+\p{\lag}{\dvq}\md\left[\delta\vq(t)\right] \notag\\
+	&=\left.\p{\lag}{\dvq}\delta\vq(t)\right|_{t_1}^{t_2}+\inttot\left[\p{\lag}{\vq(t)}-\der{}{t}\left(\p{\lag}{\dvq(t)}\right)\right]\delta\vq(t)\dt=0 \label{eq:deltaA}
+\end{align}
 Since $\delta\vq(t)=0$ at $t_1$ and $t_2$, the first term is 0; for any $\delta\vq$ the above equation holds, then there must be
 \begin{equation}
 	\p{\lag}{\vq}-\der{}{t}\left(\p{\lag}{\dvq}\right)=0
 \end{equation}
+or 
+\begin{equation}
+	\der{}{t}\left(\p{\lag}{\dot{q}_\alpha}\right)-\suman\p{\lag}{q_\alpha}=0
+\end{equation}
 which is exactly the Euler-Lagrange equation (eqn. \ref{eq:euler-lagrange}).
 
-In statistical mechanics, we care more about endpoint problems than initial-value problems, though the solution to the "endpoint problem"\footnote{comparing with the the initial-value problem, there are two conditions.} is not guaranteed to be a "stationary function". We are interested in the behaviors of large numbers of trajectories all seeded differently. Initial conditions for Hamilton's equations are generally chosen at random (e.g. random velocities). And we are interested in paths that evolve from one region of phase space to another, but not one point to another.
+In statistical mechanics, we care more about endpoint problems than initial-value problems, though the solution to the "endpoint problem"\footnote{相比于初值问题，有两个条件要满足} is not guaranteed to be a "stationary function". We are interested in the behaviors of large numbers of trajectories all seeded differently. Initial conditions for Hamilton's equations are generally chosen at random (e.g. random velocities). And we are interested in paths that evolve from one region of phase space to another, but not one point to another.
 
 \section{Lagrangian mechanics and systems with constraints}
 It is often necessary to impose constraints to a system.
-\begin{itemize}
+
+\example \begin{itemize}
 	\item high-frequency (rigid) chemical bonds
 	\item thermal or barostatic control mechanisms
 \end{itemize}
@@ -573,24 +583,77 @@ A system with $N_c$ constraints have $3N-N_c$ degrees of freedom, and must satis
 \begin{equation}
 	\sigma_k(q_1,\dots,q_{3N},t)=0\quad \text{for } k=1,2,\dots,N_c
 \end{equation}
-If not, the constraints are said to be \textit{nonholonomic constraints}. For example, to keep the kinetic energy (temperature) constant, the system must satisfy
-\begin{equation*}
-	\sumin\half m_i\dvr_i^2-C=0
-\end{equation*}
+If not, the constraints are said to be \textit{nonholonomic constraints}. 
+For example, to keep the kinetic energy (temperature) constant, the system must satisfy
+\begin{equation}
+	\sumin\half m_i\dvr_i^2-C=0 \label{eq:kinetic-constrain}
+\end{equation}
 where $C$ is a constant.
 
 Constraints will reduce the degrees of freedom, which is good, but it is not always convienent to write new equations particularly when there is a large number of coupled constraints. 
 Then we try to incorporate them into the framework of classical mechanics.
-We apply the method of \textit{Lagrangian undetermined multiplier}\footnote{拉格朗日不定乘子}, but the constraint conditions must satisfy
-\begin{equation}
-	\suman a_{k\alpha}\md q_\alpha+a_{kt}\md t=0 \label{eq:lag-multiplier}
-\end{equation}
+We apply the method of \textit{Lagrangian undetermined multiplier}\footnote{拉格朗日待定乘子}, but the constraint conditions of a trajectory $\vq(t)$ must satisfy
+\begin{tcolorbox}
+	\begin{equation}
+		\suman a_{k\alpha}\md q_\alpha+a_{kt}\md t=0 \label{eq:lag-multiplier}
+	\end{equation}
+\end{tcolorbox}
 where $a_{k\alpha}$ is a set of coefficients for the displacements $\md q_\alpha$. For a holonomic constraint, they can be obtained by
 \begin{gather}
-	a_{k\alpha}=\p{\sigma_k}{q_\alpha}
+	a_{k\alpha}=\p{\sigma_k}{q_\alpha}\\
 	a_{kt}=\p{\sigma_k}{t}
 \end{gather}
-while nonholonomic constraints can not always be expressed in the form of eqn. \ref{eq:lag-multiplier}, but 
+In other words, $\md\sigma_k$ is an exact differential\footnote{全微分，也称perfect differential} of $q_\alpha$ and $t$. Eqn. \ref{eq:lag-multiplier} can be easily derived from $\md\sigma_k=0$.
+
+Similarly, we can obtain the variation of $\sigma_k$\footnote{Please refer to \href{https://www.bilibili.com/video/BV1xJ411s78q?p=59}{this fantastic MOOC}, which told me the differentiation and variation of a variable are similar in form (perfect differential), while the latter assumes time does not change. We can write both $\md q$ and $\delta q$.}
+\begin{equation}
+	\delta\sigma_k=\suman a_{k\alpha}\delta q_\alpha=0
+\end{equation}
+where $t$ is not included in the variation form.
+
+\mynote The original text: Assuming that the constraints can be expressed in the differential form of eqn. \ref{eq:lag-multiplier}, we must also be able to express them in terms of path displacements δqα in order to incorporate them into the action principle. Unfortunately, doing so requires a further restriction, since it is not possible to guarantee that a perturbed path Q(t) + δQ(t) satisfies the constraints. The latter will hold if the constraints are integrable, in which case they are expressible in terms of path displacements as eqn. \ref{eq:lag-multiplier}.
+
+In contrast, nonholonomic constraints can not always be expressed in the form of eqn. \ref{eq:lag-multiplier}, but a notable exception is eqn. \ref{eq:kinetic-constrain}
+\begin{gather*}
+	\sumin\half m_i\dvr_i^2-C=0\\
+	\sumin\half m_i\dvr\md\vr_i-C\dt=0
+\end{gather*}
+where $a_{ki}=\half m_i\dvr$.
+
+We then add eqn. \ref{eq:lag-multiplier} as Lagrange undetermined multipliers into eqn. \ref{eq:deltaA}:
+\begin{equation}
+	\delta A=\inttot\left[\suman\p{\lag}{q_\alpha(t)}-\suman\der{}{t}\left(\p{\lag}{\dot{q}_\alpha(t)}\right)+\sum_{k=1}^{N_c}\suman \lambda_ka_{k\alpha}\right]\delta\vq(t)\dt
+\end{equation}
+Thus, the new equations of motion can be derived from $\delta A=0$:
+\begin{tcolorbox}
+	\begin{equation}
+		\der{}{t}\left(\p{\lag}{\dot{q}_\alpha(t)}\right)-\p{\lag}{q_\alpha(t)}=\sum_{k=1}^{N_c}\lambda_ka_{k\alpha} \qquad \text{for}\ \alpha=1,\dots,3N
+	\end{equation}
+\end{tcolorbox}
+this equation holds for every $\alpha$ because every $\delta q$ is independent of each other.
+
+Still for holomonic constraints,
+\begin{equation}
+	\ham=U+K+\sum_{k=1}^{N_c}\sigma_k
+\end{equation}
+
+where
+
+
+
+
+
+\supplement 自己的一点理解，不知道对不对
+
+\begin{itemize}
+	\item 完整约束：（积分后）与速度无关。如物体只能在静止的面上运动。
+	\item 稳定约束：约束不随时间变化。如物体只能在固定平面上运动。
+	\item 理想约束：约束力做的虚功为零。如物体只能在光滑水平面上运动。
+\end{itemize}
+
+虚位移是某一时刻对$\vr$加一个微扰，位移的变分是对整个时间段$t_1\sim t_2$加一个微扰，不一样但都是虚拟微扰。
+
+虚功原理，分析力学下的平衡条件：主动力虚功为零。对应、等价于牛顿第一、二定律。
 
 \section{Gauss's priniciple of least constraint}
 
