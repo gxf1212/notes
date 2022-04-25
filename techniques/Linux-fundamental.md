@@ -2070,13 +2070,21 @@ Though I only need to re-install programs in gxf (like gmx), a sea of permission
 
 5. git cannot remember login info
 
+   fatal: unsafe repository (xxx is owned by someone else)
+   
    ```shell
    $ git push origin -u master
    warning: url has no scheme: <?xml version="1.0"?>
    fatal: credential url cannot be parsed: <?xml version="1.0"?>
    
    ```
-
+   
+   solution
+   
+   ```shell
+   sudo chown moonlight:moonlight xxx
+   ```
+   
    
 
 ## common problems
