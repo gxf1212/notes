@@ -2620,7 +2620,7 @@ if { $INPUTNAME != 0 } {
     extendedSystem      $outputbase-prod-forward.xsc
 }
 
-set all {0.00 0.00001 0.0001 0.001 0.01 0.05 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.95 0.99 0.999 0.9999 0.99999 1.00 }
+set all {0.00 0.00001 0.0001 0.001 0.01 0.05 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.95 0.99 0.999 0.9999 0.99999 1.00}
 # symmetric
 runFEPlist [lreverse $all] $numSteps
 
@@ -2692,6 +2692,25 @@ and you'll of course change your -backward file
     extendedSystem      $outputbase-prod-forward.xsc
 }
 ```
+
+#### add window
+
+```shell
+# only change forward config
+} else {
+    # from equil. use the former outputName
+    temperature         $temp
+    extendedSystem      from-prod.xsc
+}
+
+set all {0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6 0.65 0.7 0.75 0.8 0.85 0.9}
+```
+
+
+
+
+
+
 
 To check the progress:
 
@@ -2978,9 +2997,46 @@ Info: LARGEST PATCH (785) HAS 102993 ATOMS
 >
 > http://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2010-2011/2282.html
 
-#### 4.25 failed
+## FEP results
 
-ΔΔA failed for all ligand and complex, > 100 kcal/mol
+> The relative binding free energy (ΔΔG) of ATP was found to be −4.88 ± 0.62 kcal/mol, while that of RemTP was −7.68 ± 0.57 kcal/mol
+
+> 4.25: see mail list
+
+### ParseFEP
+
+data explained https://www.ks.uiuc.edu/Research/namd/2.14/ug/node66.html
+
+
+
+```shell
+# parsefep -forward ../*forward-all*.fepout -backward ../*backward-all*.fepout -gc 0 -bar
+rm file*
+bash grace.summary.exec
+```
+
+
+
+adjusting
+
+https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2018-2019/0204.html
+https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2013-2014/0568.html
+
+### using alchemlyb
+
+steps
+
+- [parsing namd](https://alchemlyb.readthedocs.io/en/latest/parsing/alchemlyb.parsing.namd.html?highlight=namd)
+- combine forward and backward, substitute np.nan
+- check convergence
+- fit with a estimator
+  - `delta_f_.loc[0.00, 1.00]`
+
+alchemlyb这个包处理得十分粗糙，首先没有考虑分开vdW和coul，数据只读取了dE；然后是数据虽然能比较自由得组合，但是其他lambda下的能量根本不知道，留下了许多nan；最后是他给出那个forward和backward合并的方案，难道不是加了两份dE吗？虽然数值不太一样？感觉没道理
+
+
+
+
 
 
 

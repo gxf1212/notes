@@ -667,6 +667,31 @@ conda install -c conda-forge pymbar
 
 https://anaconda.org/conda-forge/pymbar git address and doc
 
+### alchemical-analysis, alchemlyb
+
+> https://anaconda.org/conda-forge/alchemical-analysis
+>
+> ```shell
+> conda activate AmberTools21 # no! choose python version?
+> conda install -c conda-forge alchemical-analysis
+> ```
+
+We are in the process of migrating all functionality from here to instead use [`alchemlyb`](https://github.com/alchemistry/alchemlyb)
+
+doc: https://alchemlyb.readthedocs.io/en/latest/index.html
+
+pdf: https://alchemlyb.readthedocs.io/en/latest/index.html
+
+datasets for testing: https://alchemtest.readthedocs.io/en/latest/index.html
+
+```shell
+conda activate AmberTools21
+pip install --user alchemlyb
+pip install --user alchemtest
+```
+
+
+
 ### mdtraj
 
 convert trajectories

@@ -302,7 +302,7 @@ https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect�
 
 
 
-## Jupyter Notebook
+## Jupyter Notebook, Google Colab, etc.
 
 Jupyter Notebook 更换主题（背景、字体）:  https://www.cnblogs.com/shanger/p/12006161.html
 
@@ -1040,11 +1040,15 @@ anaconda环境信息同步？
    git pull
    ```
 
+   > **`git push <remote> <place>`**
+   >
+   > https://www.cnblogs.com/suihang/p/10556519.html
+
    ```shell
    # other
    git config --global user.name gxf1212 # user.email xxx
    git config --global user.email
-   # also works for my github r
+   # also works for my github
    git clone url.git # clone a repo
    ```
 

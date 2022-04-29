@@ -1015,6 +1015,12 @@ apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用
 
 ### privilige: chown and chmod
 
+change owner, change mode
+
+Linux/Unix 的文件调用权限分为三级 : 文件所有者（Owner）、用户组（Group）、其它用户（Other Users）。
+
+https://www.runoob.com/linux/linux-comm-chmod.html  great!
+
 ### svn
 
 get part of the files in one GitHub repository
@@ -2074,7 +2080,7 @@ Though I only need to re-install programs in gxf (like gmx), a sea of permission
    sudo chown moonlight:moonlight xxx
    ```
 
-   or re-install the program and reboot, to solve some of them
+   or re-install the program and reboot, to solve some of them (e.g. xmgrace)
 
 5. git cannot remember login info
 
@@ -2089,15 +2095,26 @@ Though I only need to re-install programs in gxf (like gmx), a sea of permission
    
    even though I've already done the settings
    
-   solution: `rm ~/.git-credentials` and rerun `git config --global credential.helper store`
+   check `~/.git-credentials` and you will find `<?xml version="1.0"?>` and strange things
+   
+   solution: `rm ~/.git-credentials` and rerun `git config --global credential.helper store`. done.
    
    > https://stackoverflow.com/questions/61376694/git-ubuntu-url-has-no-scheme
    
 6. 
 
-## common problems
+## usual problems
 
-https://sudoedit.com/linux-server-wont-reboot/
+1. A problem occured and the system cannot be recovered
+
+   https://www.cnblogs.com/wu-song/p/12745956.html
+
+   ```shell
+   sudo apt-get update && apt-get upgrade
+   sudo dpkg --configure -a
+   ```
+
+2. https://sudoedit.com/linux-server-wont-reboot/
 
 
 
