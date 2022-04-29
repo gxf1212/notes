@@ -304,34 +304,47 @@ https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect�
 
 ## Jupyter Notebook, Google Colab, etc.
 
-Jupyter Notebook 更换主题（背景、字体）:  https://www.cnblogs.com/shanger/p/12006161.html
+1. Jupyter Notebook 更换主题（背景、字体）:  https://www.cnblogs.com/shanger/p/12006161.html
 
-https://jingyan.baidu.com/article/d713063577bcf353fdf475e7.html cd
+   https://jingyan.baidu.com/article/d713063577bcf353fdf475e7.html cd
 
-https://github.com/dunovank/jupyter-themes
+   https://github.com/dunovank/jupyter-themes
 
-```
-jt -r # default
-jt -t grade3 -f firacode -T -T # other is default
-jt -t grade3 -f consolamono -T -T # not using
-```
+   ```shell
+   jt -r # default
+   jt -t grade3 -f firacode -T -T # other is default
+   jt -t grade3 -f consolamono -T -T # not using
+   ```
 
-代码提示功能：在base下（default配置！）
+2. 代码提示功能：在base下（default配置！）
 
-```
-pip install jupyter_contrib_nbextensions
-jupyter contrib nbextension install --user
-pip install jupyter_nbextensions_configurator
-jupyter nbextensions_configurator enable --user
-```
+   ```
+   pip install jupyter_contrib_nbextensions
+   jupyter contrib nbextension install --user
+   pip install jupyter_nbextensions_configurator
+   jupyter nbextensions_configurator enable --user
+   ```
 
-https://www.freesion.com/article/6188402580/
+   https://www.freesion.com/article/6188402580/
 
-social network
+3. Add the following code on top of your jupyter notebook:
 
-```
-conda install matplotlib==2.0.0 networkx==1.11 pandas==0.20.3 scikit-learn==0.18.2 scipy==0.18.1 numpy==1.13.1
-```
+   ```
+   $$\require{mhchem}$$  
+   ```
+
+   https://stackoverflow.com/questions/59890934/is-there-a-way-to-write-down-chemical-equations-in-jupyter-notebook-by-using-ext
+
+4. 
+
+5. > social network网课
+
+   > ```
+   > conda install matplotlib==2.0.0 networkx==1.11 pandas==0.20.3 scikit-learn==0.18.2 scipy==0.18.1 numpy==1.13.1
+   > ```
+   >
+
+   
 
 ## ThunderBird
 
@@ -1338,7 +1351,7 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
 > relative path
 >
-> https://docsify.js.org/#/zh-cn/configuration?id=relativepath no use
+> https://docsify.js.org/#/zh-cn/configuration?id=relativepath not useful
 >
 > <font color=red>世界上怎么会有这么傻逼的设计？！！专门跟Typora过不去吗？？不得不改变创作方式！</font>那这话也不合适
 >
