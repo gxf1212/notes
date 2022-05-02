@@ -1464,11 +1464,12 @@ f=PEP2_gv
 antechamber -i ${f}.pdb -fi pdb -o ${f}.gjf -fo gcrt -pf y \
 -gm "%mem=4096MB" -gn "%nproc=4" -ch ${f} -nc -3 \
 -gk "#B3LYP/6-31G* em=GD3BJ scrf=solvent=water SCF=tight \
-iop(6/33=2,6/42=6,6/50=1) pop=CHELPG" -ge ${f}_resp.gesp -gv 1 
+iop(6/33=2,6/42=6,6/50=1) pop=CHELPG" -ge ${f}_resp.gesp -gv 1 -at gaff
 g16 ${f}.gjf
 antechamber -i ${f}_resp.gesp -fi gesp -o ${f}.mol2 -fo mol2 -pf y -c resp
 parmchk2 -i ${f}.mol2 -f mol2 -o ${f}.frcmod
 # python ~/Desktop/work/projects/undergraduate/NUS-UROPS/md/prepare/align.py ~/Desktop/work/practice/with others/AroG-PEP $f
+python ~/Desktop/work/projects/undergraduate/NUS-UROPS/md/prepare/align.py ~/Desktop/work/projects/undergraduate/SDH/md/lig1/ lig1
 
 # pro
 cat ./original/input_E2ES.pdb | grep ATOM > ori.pdb
@@ -1534,6 +1535,8 @@ gmx grompp -f md.mdp -c npt.gro -r npt.gro -n index.ndx -t npt.cpt -p com.top -o
 gmx mdrun -deffnm final
 ```
 
+after that
+
 ```shell
 # visualize
 gmx trjconv -f final.trr -o final_later.xtc -b 2000 -e 10000 -dt 20
@@ -1550,7 +1553,7 @@ xmgrace rmsf-per-residue.xvg
 
 ```
 
-## 22.3.14
+## 22.3.14 pca
 
 ### traj convert
 
@@ -1635,10 +1638,6 @@ xmgrace 2d.xvg
 
 
 
-
-
-
-
 尝试理解
 
 - 聚类画的图横坐标是时间，PCA画的图横坐标是空间。
@@ -1646,3 +1645,45 @@ xmgrace 2d.xvg
 - 但其实都是对空间（坐标、结构）聚类
   - 前者是直接算距离，后者是提出新指标
   - 纵坐标是构象，一般搞成概率密度。算能量（？）
+
+
+
+## 22.5.2 SDH
+
+
+
+```
+tleap
+source leaprc.protein.ff14SB
+ca = loadpdb ca.pdb 
+cb = loadpdb cb.pdb
+cc = loadpdb cc.pdb
+cd = loadpdb cd.pdb
+source leaprc.gaff
+loadamberparams lig1.frcmod
+lig1 = loadmol2 lig1_aligned.mol2
+check lig1
+source leaprc.water.tip3p
+com = combine {ca cb cc cd lig1}
+solvatebox com TIP3PBOX 12.0
+charge com
+addIons2 com Cl- 88 Na+ 85
+check com
+saveamberparm com com.prmtop com.inpcrd
+quit
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

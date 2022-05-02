@@ -4,8 +4,6 @@ Notes on the final year project (毕设), Nov 2021~May 2022.
 
 Starting reading from [Stage1 Protocol](#Stage-1-Protocol)
 
-
-
 # background
 
 > 9.27
@@ -42,16 +40,14 @@ The binding energy data reveal that compound-17 (−59.6 kcal/mol) binds  more s
 ## other similar simulation
 
 - *High-throughput rational design of the remdesivir binding site in the RdRp of SARS-CoV-2: implications for potential resistance*
-
+  
   哪些突变能resistance
 
 - *SARS-CoV-2 RNA dependent RNA polymerase (RdRp) targeting: an in silico perspective*
-
+  
   2021 April, only RdRp dynamic. docked several our drugs with vina
 
 - 
-
-
 
 # Software usage
 
@@ -60,7 +56,7 @@ record sth general
 ## gmx
 
 1. check installation info
-
+   
    ```shell
    gmx -version
    ```
@@ -75,67 +71,61 @@ use “switch”, Smoothly switches the potential to zero between rvdw-switch (p
 
 With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.gromacs.org/documentation/2018/onlinehelp/gmx-mdrun.html#gmx-mdrun) will automatically tune the CPU/GPU load balance by scaling [`rcoulomb`](https://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html#mdp-rcoulomb) and the grid spacing.
 
-
-
-
-
 > ## MD simulation (ATP-Mg^2+^) with Gromacs
->
+> 
 > The ATP system, energy minimization and indexing have been done. 
->
+> 
 > the most important setting is 
->
+> 
 > - vdW and electrostatic
 > - energy groups?
 > - length
->
+> 
 > do not need to repeat MD
->
+> 
 > 1. nvt
->
+>    
 >    ```shell
 >    gmx grompp -f nvt.mdp -c minim.gro -r minim.gro -n solion.ndx -p solion.top -o nvt.tpr
 >    gmx mdrun -deffnm nvt
 >    echo "15\n0" | gmx energy -f nvt.edr -o nvt.xvg # temperature
 >    xmgrace nvt.xvg
 >    ```
->
+> 
 > 2. npt
->
+> 
 > 3. 
 
 ## Gaussian
 
 1. segmentation violation
-
+   
    成因：提供这种报错信息毫无意义，任何原因Gaussian报错退出都会有类似的输出。
-
+   
    解决：**用文本编辑器打开输出文件**，如上图中为“a.out”文件，**拖到最后看最终报错**。Linux下也是如此，可用 nano, tail, cat, vi 等命令阅读文件。看到真正报错后，可按照相应信息（如下文中涉及的这些报错）进行解决。
 
 2. 高斯软件出现PGFIO/stdio: No space left on device错误
-
+   
    首先这不是高斯软件的问题，而是服务器的问题。当你的计算量太大或者服务器队列很满的话就有可能有这样的问题。这是个occasion的错误，重新提交任务有可能解决，不行就再提交，实在不行就问问你的服务器管理员。
 
 3. specify log file
-
+   
    ```shell
    nohup g16 qm.gau qm.log 2>&1 &
    ```
 
 4. don't use too many CPU cores because g1 uses more than you think. use two if you have 8 CPU cores
 
-
-
 ## Pymol
 
 1. delete命令！
 
 2. select atom name
-
+   
    ```
    sele name HA
    ```
-
+   
    see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 3. 
@@ -147,13 +137,13 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 ### General
 
 1. run in terminal
-
+   
    ```shell
    vmd -dispdev text -e combine.tcl
    ```
-
+   
    vmd scripting, [pass parameters](http://timchen314.com/vmd%E7%AC%94%E8%AE%B0/)
-
+   
    ```
    set file [lindex $argv 0]
    vmd .... -args arg arg2
@@ -162,59 +152,59 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 2. question mark prompt and return to the normal vmd> prompt? that mean the tcl interpreter is waiting for you to **close a brace**, so try } or ] or ) followed by enter. you may need to enter it a couple of times.
 
 3. How to run TCL script on VMD?
-
+   
    This is very easy to do. Just use any text editor to write your script file, and in a VMD session, use the command 
-
+   
    ```shell
    source filename
    ```
-
-   to execute the file. (either VMD command line or Tk Console)
    
-4. Clears the structure, topology definitions, and aliases, creating clean environment just like a new context.
+   to execute the file. (either VMD command line or Tk Console)
 
+4. Clears the structure, topology definitions, and aliases, creating clean environment just like a new context.
+   
    ```tcl
    psfcontext reset
    ```
 
 5. resize font in TkConsole https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/29151.html
-
+   
    type in TkConsole: tkcon font <type> <size>
-
+   
    ```
    tkcon font Courier 16
    ```
-
+   
    size of the window is automatically changed. But font type not affected?
 
 6. As for the global font: the higher resolution your screen is, the smaller your font is
-
+   
    Maybe because the source code specifies pixels??
 
-6. TkConsole auto-loads history file?
-
+7. TkConsole auto-loads history file?
+   
    https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/8543.html
-	
+   
    Yeah, just about last 10 commands you typed, with the starting number 48. 强迫症犯了。。
-	
-	>    history command
-	>
-	>    https://www.tcl.tk/man/tcl8.4/TclCmd/history.html
-	>
-	>    ```tcl
-	>    history clear
-	>    ```
-	>
-	>    or Ctrl+r, but no use
-	>
-	>    ```tcl
-	>    clear
-	>    ```
-	>
-	>    just clears the screen
-	
-8. select certain frames
+   
+   >    history command
+   > 
+   >    https://www.tcl.tk/man/tcl8.4/TclCmd/history.html
+   > 
+   > ```tcl
+   > history clear
+   > ```
+   > 
+   >    or Ctrl+r, but no use
+   > 
+   > ```tcl
+   > clear
+   > ```
+   > 
+   >    just clears the screen
 
+8. select certain frames
+   
    ```tcl
    atomselect top "within 5 of resname LYR" frame 23
    ```
@@ -222,19 +212,19 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 9. Menu--Mouse--Center: pick an atom to center
 
 10. path to plugins
-
+    
     ```shell
     /usr/local/lib/vmd/plugins/noarch/tcl/
     ```
 
 11. 
 
-5. To know about your system, like checking the number of atoms, just load it into vmd (also when executing scripts) and see the cmd.
+12. To know about your system, like checking the number of atoms, just load it into vmd (also when executing scripts) and see the cmd.
 
 ### VMD Graphics
 
 1. Graphics--Representations: for visualization.
-
+   
    - Draw Style
      - Drawing Method 
        - Beta: temperature factor
@@ -245,50 +235,46 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
        - helix, sheet, ..
        - carbon, hydrogen, nitrogen, ...
      - `not` as logic? see more syntax in Selection--Marco definition
-2. Graphics--colors
 
+2. Graphics--colors
+   
    - background
    - other many settings, like element, residue, 2d structure. may set default color
-3. Labeling a few atoms
 
+3. Labeling a few atoms
+   
    - Mouse--Label--Atoms (etc.). Mouse--Pick
    - Graphics--Labels, click on an atom, info shows up. 
    - Graphics--Color--Label--Atoms (etc)---choose your favorite color
    - Mouse--Label--Atoms (etc.). Mouse--Pick
    - Click on any atom and a piece of text will show up
    - Graphics--Labels--Properties (of the text)
+
 4. Graphics--Representations--Drawing Method, Beta: we may not use that field. So we can replace it with some properties we computed and let VMD color atoms according to it
+
 5. 
 
 ## shell
 
 1. shell 统计出现行数
-
+   
    ```shell
    cat complex_ATPP.pdb | grep "SOD" | wc -l
    ```
-
+   
    - cat显示内容
    - grep查找字符
    - wc计算字数
 
 2. if 判断文件或目录是否存在
-
+   
    https://blog.csdn.net/m0_38039437/article/details/100160042
-
-
 
 ## Some other notes with VMD and NAMD
 
 > ERROR: failed on end of segment MOLECULE DESTROYED BY FATAL ERROR!
 
 probably need to add top/itp file
-
-
-
-
-
-
 
 # Stage 1 Protocol: MD
 
@@ -305,8 +291,6 @@ The ATP molecule from FEP, strange atom type, cannot be used for MD system build
 why only one Mg? 虽然确实要两个，但第二个的位置至今under debate。。
 
 notice the binding mode?
-
-
 
 ## Prepare the docked structure (ligand)
 
@@ -339,11 +323,10 @@ to dock two molecules together, we may:
 ### Autodock vina
 
 > Prepare receptor, as well as flexible: see UROPS notes
->
+> 
 > - when writing file, always browse and name the file!
 > - when recording vina parameters, centers are on the left! not right!
 > - when choosing residues, click on the S circle!
->
 
 #### info&convert existing structure
 
@@ -368,20 +351,20 @@ obabel ${f}.pdb -opdbqt -O ${f}.pdbqt -as -h --partialcharge gasteiger
 ```
 
 > The ligand may move away after obabel, but it doesn’t matter for docking
->
+> 
 > However, sometimes it gives wrong aromatic rings. Check hydrogens! You may use [other methods](#Other-about-modeling). also: openeye package?
 
 > Alternative: ADTools for ligand
->
+> 
 > - Edit--Hydrogen--Merge non-polar
 > - Edit--Atom--Assign AD4 Type
 > - Edit--Charge--Compute Gasteiger
 > - Save as PDBQT
 >   - always Browse for a name!!
 >   - maybe select what to save
->
+> 
 > failed?? compare the text!
->
+> 
 > > As for the receptor, maybe directly Grid--Open to process the .pdb and save a .pdbqt?
 
 requirements for vina:
@@ -392,21 +375,21 @@ requirements for vina:
 - but monitor mis-added hydrogens!
 
 > note: 11.29, dachuang-other-SDH-docking
->
+> 
 > if you view .pdbqt in Pymol
->
+> 
 > - those saved from ADT is normal. Ar is shown. But vina reports error?
 > - those converted from obabel shows C-O single bond as double?
->
+> 
 > But their rotatable bond shown in ADT is normal and the same, suggesting it’s just visualization problem. (not the same software!)
->
+> 
 > Maybe due to the merging of non-polar Hs. After adding H back to docked .pdbqt, Pymol visualizes normally
->
+> 
 > ```
 > set valence, 1
 > set valence_mode, 1
 > ```
->
+> 
 > to show bonds explicitly  https://pymolwiki.org/index.php/Valence
 
 #### docking commands
@@ -441,7 +424,7 @@ tools that can **both draw** a molecule **and convert** through SMILES.  Your ow
 - ZINC: search and draw, copy that smiles
 
 - convert to anything by obabel
-
+  
   ```shell
   f='Nc1ncnc2c1ncn2[C@@H]1O[C@H](CO[P@](=O)(O)O[P@](=O)(O)OP(=O)(O)O)[C@@H](O)[C@H]1O'
   obabel -:$f --gen3d -opdbqt -O atp.pdbqt -as -h --partialcharge gasteiger # for vina
@@ -494,7 +477,7 @@ May vary a bit if you `Clean Geometry` to optimize structure.
 Not as familiar as Gauss.
 
 > UCSF-Chimera doesn' t seem to add groups. So does Avogradro
->
+> 
 > but can prepare for UCSF DOCK (adt, and other?) https://zhuanlan.zhihu.com/p/148384183
 
 ### After drawing
@@ -512,8 +495,9 @@ grep "ATP" -rl ./remtp.pdb | xargs sed -i "s/ATP/LIG/g"
 some tutorials:
 
 - videos
-
+  
   - for explorations, codes, see MD-tutorials-all.md “my exploration” section.
+
 - https://www.youtube.com/watch?v=5PYTQiKf0D4 CHARMM GUI official tutorial, series
 
 other tools:
@@ -521,17 +505,15 @@ other tools:
 - http://mackerell.umaryland.edu/ CHARMM force field files
 - https://www.ks.uiuc.edu/Research/vmd/plugins/autopsf/ autopsf usage
 
-
-
 > - current plan
->
+>   
 >   - use AutoPSF, import the complex, include ligand's params, and export .pdb and .psf files of the complex (as Leili suggests?)
 >   - separately generate .pdb and .psf files for protein and ligand; run another script to combine them, finally include parameters
->
+>   
 >   both is ok, but:
->
+> 
 > - problems
->
+>   
 >   - how to model magensium?
 
 I have to summarize the steps:
@@ -543,7 +525,7 @@ normally build your complex.pdb (by docking etc). Get positions right. Remember 
 Then split all components.
 
 > aligning ligand if there’s a position shift
->
+> 
 > ```shell
 > conda activate work
 > path=/home/gxf/desktop/work/research-porjects/NUS-UROPS/md/prepare
@@ -555,8 +537,6 @@ Then split all components.
 > '/home/gxf/desktop/work/research-porjects/FYP/setup and MD/ATP-namd/separate_building' \
 > atp.pdb ATP_autopsf.pdb
 > ```
->
-> 
 
 ### build complex-method 1 (deprecated)
 
@@ -567,7 +547,7 @@ Then split all components.
 Extensions---Modeling--Automatic PSF Builder, would be a GUI
 
 > **AutoPSF notes**
->
+> 
 > - .pdb file only provides molecular infomation (namely coordinates)
 > - topology files (.itp, .rtp) contain all the parameters, i.e. force field info
 > - top files convert .pdb files into .psf files, which contains full information
@@ -578,12 +558,12 @@ should **click in every step**, during which **all patches are made** (generated
 i.e have done `segment`, `pdbalias`, `guesscoord`, etc.
 
 > no that this tools uses all36 force field! You can see in
->
+> 
 > ```tcl
 > /home/gxf/vmd/lib/plugins/noarch/tcl/readcharmmtop1.2/
 > /usr/local/lib/vmd/plugins/noarch/tcl/readcharmmtop1.2/
 > ```
->
+> 
 > ```shell
 > ls
 > pkgIndex.tcl                 top_all36_hybrid.inp
@@ -607,16 +587,16 @@ Summary on steps (see MD-tutorial for details)
 > should be the same as loading topology in tkConsole and save?
 
 > debug:
->
+> 
 > 1. error in ATP
->
+>    
 >    ```
 >    ERROR: failed on end of segment
 >    MOLECULE DESTROYED BY FATAL ERROR!  Use resetpsf to start over.
 >    ```
->
+>    
 >    only 42/43 atoms, recognized as water? replace that ATPP residue name with ATP-space. the chain name X
->
+>    
 >    is assigned wrongly...
 
 > note on results: `xxx_autopsf_formatted.pdb` only removes `REMARK  xxx` and `END` line from `xxx_autopsf.pdb`. basically identical
@@ -650,7 +630,6 @@ vmd -dispdev text -e merge.tcl
 ### build complex-method 2 (using)
 
 > use console, include topology. [How to create a PSF file](https://sassie-web.chem.utk.edu/docs/structures_and_force_fields/notes.html)
->
 
 Modeling--Tk Console
 
@@ -667,24 +646,23 @@ and only 'formatted' provides the right coordinates! _autopsf adjusts coordinate
 
 but Tk console reports error!
 
->ERROR) Error reading optional structure information from coordinate file atp_autopsf_formatted.pdb
->ERROR) Will ignore structure information in this file.
+> ERROR) Error reading optional structure information from coordinate file atp_autopsf_formatted.pdb
+> ERROR) Will ignore structure information in this file.
 
 but **'formatted’ can be recognized by CHARMM-GUI**!
 
 > note: for newly added atoms, parameterization is needed?
->
+> 
 > <img src="https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/parameterization.jpg" alt="parameterization" style="zoom:80%;" />
->
+> 
 > but may also use 'formatted’. but for remtp I used remtp_autopsf_temp.pdb
->
+> 
 > Another way to generate uploadable .pdb is:
->
+> 
 > ```shell
 > gmx pdb2gmx -f remtp.pdb -o remtp.gro # though failed, we use that .gro file
 > obabel -igro remtp.gro -opdb -O remtp-gro.pdb
 > ```
->
 
 Check the printed structure!!!! like
 
@@ -697,7 +675,7 @@ Choose 'Exact', 'Make CGenFF topology'
 Then we obtain all .pdb, .psf, etc. that is needed.
 
 > other files:
->
+> 
 > - drawing: the recognized structure on the 1st page
 > - copy `charmm-gui-xxxxx/toppar/lig.prm` (lig: residue name of your ligand) for use in your simulation! shown in [this video](https://www.youtube.com/watch?v=Pj40ZnybXds)
 
@@ -741,12 +719,12 @@ writepsf merged.psf
 ```
 
 > notes
->
+> 
 > - `toppar_water_ions.str`: contains **TIP3** water model and **ion** topology and parameter information. This is now **the only file** that contains these entities.
 > - you'd better use capital letter ('MG') for use in CHARMM
 
 > failed commands
->
+> 
 > ```tcl
 > package require psfgen
 > resetpsf
@@ -764,15 +742,15 @@ writepsf merged.psf
 > puts "Finished"
 > quit
 > ```
->
+> 
 > completely failure. don’t know what .inp file the tutorials used.
->
+> 
 > ```shell
 > grep "PROT" -rl ./rdrp.pdb | xargs sed -i "s/PROT/    /g" 
 > ```
->
+> 
 > this does not matter. later ligands: just use PRO for segment name!
->
+> 
 > ```tcl
 > package require psfgen
 > resetpsf
@@ -782,9 +760,9 @@ writepsf merged.psf
 > segment ATP {pdb atp.pdb}
 > coordpdb atp.pdb ATP
 > ```
->
+> 
 > still not work for ATP. even though ATPP $\to$ ATP, still “unknown atom type ON3”
->
+> 
 > ```
 > topology toppar_all36_na_nad_ppi.str
 > # autopsf, this probably failed..
@@ -792,43 +770,37 @@ writepsf merged.psf
 > readpsf atp_autopsf.psf
 > coordpdb atp_autopsf_formatted.pdb
 > ```
->
+> 
 > still not work for ATP. cannot recognize atoms. without “formatted” have correct names, but position of PO4 changed.
->
+> 
 > **So we still MUST use CHARMM-GUI if we don’t directly aliase pdb**
->
 > 
->
 > the second try for remTP
->
-> Use method 2: 
->
-> > ERROR: failed on end of segment
-> >
-> > unknown residue type LIG
->
-> tried AutoPSF and gmx
->
-> note that in both cases the molecule structure in the first page of CHARMM-GUI might be strange, and the final structure is broken
->
 > 
+> Use method 2: 
+> 
+> > ERROR: failed on end of segment
+> > 
+> > unknown residue type LIG
+> 
+> tried AutoPSF and gmx
+> 
+> note that in both cases the molecule structure in the first page of CHARMM-GUI might be strange, and the final structure is broken
 
 ### build complex-method 3
 
 build with Gromacs and AmberTools?
 
-
-
 #### Appendix: CHARMM-GUI generate files for ligand
 
 > <font size=5>if you want to perfectly retain its coordinates and atom names, use CGenFF server!</font>
->
+> 
 > slightly different charge. I think remtp's params are closer to the paper.
 
 but not used in method 1
 
 > https://cgenff.umaryland.edu/  itself, the program to assign parameters for your ligand
->
+> 
 > the "penalty score" is returned to the user as a measure for the accuracy of the approximation. in `.rtf`
 
 Use CHARMM-GUI---input generator---ligand reader and modeller
@@ -836,7 +808,7 @@ Use CHARMM-GUI---input generator---ligand reader and modeller
 refer to preparation videos mentioned above, and [the official one](https://www.bilibili.com/video/BV1bM4y1P7tB)
 
 > **CHARMM GUI basic tips**
->
+> 
 > - after GUI, the ligand name is changed into LIG
 > - Only molecules in the **HETATM** record in a PDB file are recognized.
 > - **adopt available RCSB SDF structure** preferentially
@@ -855,28 +827,28 @@ refer to preparation videos mentioned above, and [the official one](https://www.
 then just click, click...and download all files
 
 > charmm-gui, what do the files do? what is needed? these?
->
->![parameterization](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/parameterization.jpg)
+> 
+> ![parameterization](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/parameterization.jpg)
 
 focus on `ligandrm.pdb/psf`, which can be put into a merge.tcl, as **an alternative way of AutoPSF** in generating files for ligand (other tools for protein, etc?). Carefully choose the force field!
 
 > my experience
->
+> 
 > at first, when I upload the built .pdb file, or replace ATOM with HETATM, or add hydrogen, the server did not recognize the ligand, always.
->
+> 
 > 1. 11.27, align 2ILY (original structure) with the built .pdb, use its ATP
->
+>    
 >    find 2 kinds of topologies in step 2
->
+>    
 >    - **toppar_all36_na_nad_ppi.str**            NAD, NADH, ADP, ATP and others.
 >    - top_all36_cgenff.rtf., par_all36_cgenff.prm. but with hydrogen. can I later remove?
 >      - if you modify the protonation state, you can still not generate a correct cGenFF structure. The “Exact” field only provides ATP in toppar_all36_na_nad_ppi.str
 >      - maybe I’ll use toppar_all36_na_nad_ppi.str first
->
+> 
 > 2. 11.28, CHARMM-GUI failed building Mg2+
->
+> 
 > for ‘formatted’:
->
+> 
 > still **toppar_all36_na_nad_ppi.str** , a little change: Ar ring not planar!! position basically the same
 
 #### Appendix 2: about the topology
@@ -884,7 +856,7 @@ focus on `ligandrm.pdb/psf`, which can be put into a merge.tcl, as **an alternat
 When you encouter errors when reading .str file:
 
 > “psfgen) ERROR!  FAILED TO RECOGNIZE SET.  Line 319: set para” etc.
->
+> 
 > FATAL ERROR: UNKNOWN PARAMETER IN CHARMM PARAMETER FILE ../common/toppar_water_ions.str
 > LINE=*set app*
 
@@ -893,12 +865,12 @@ When you encouter errors when reading .str file:
 1. First, you need to edit the stream file so that it is compatible with the NAMD/VMD psfgen tool.  To do that, you must comment out (or remove) all the lines containing CHARMM scripting code, since psfgen doesn't recognize them. 
 
 2. Furthermore, the **na_nad_ppi.str** and file you mention requires parsing the "**top_all36_na.rtf**" file containing original nucleic acid parameters, so you need that too. 
-
+   
    > also, just put toppar_water_ions.str after na.rtf and prot.rtf
 
 3. You **should use both** the parameters from the stream files and the original **nucleic acid prm file**.  The stream files do not contain full parameters, some of them (for example some **non-bonded terms**) are expected to be found in the prm files. However, they are needed for accurate representation of these "extra" molecules they describe
 
-3. 
+4. 
 
 #### Appendix 3: other ways to generate ligand topology
 
@@ -906,8 +878,6 @@ When you encouter errors when reading .str file:
 - https://www.swissparam.ch/ MMFF/CHARMM22, too old
 
 these servers generate files for multiple MD engines
-
-
 
 ### solvation and ionization
 
@@ -939,10 +909,10 @@ autoionize -psf solvated.psf -pdb solvated.pdb -sc 0.1 -o system
 # params, to be consistent
 ```
 
-####  method 2-GUI
+#### method 2-GUI
 
 > note: a trick: Extension--Modeling--Automatic PSF Builder--Options, check 'add solvation box' and 'ionization' options, follow the PSF building protocol, and you will get completely solvated and ionized system!!!
->
+> 
 > though the parameters cannot be set...
 
 ##### Solvation
@@ -954,9 +924,9 @@ Extension--Modeling--Add Solvation Box
 - WT: residue name for waters. can change
 
 - if you check 'use molecular dimension', the min and max in 3D will be calculated automatically, and you only need to add 'padding' (and measure) as we usually did. 
-
-  otherwise we can specify all the parameters manually
   
+  otherwise we can specify all the parameters manually
+
 - Click 'solvate', molecular info (# of water) is shown in Terminal again.
 
 > this GUI doesn’t have ionization, neither choose water model?? TIP3P water is the default...
@@ -972,7 +942,7 @@ very straightforward
 
 > it’s not replacing water mols, it adds ions
 
-#### measurement of the system 
+#### measurement of the system
 
 In a new vmd session, load the solvated and ionized structure
 
@@ -1006,30 +976,33 @@ vmd -dispdev text -e measure.tcl
 ```
 
 > info: see the folder...probably similar for all ligands
->
+> 
 > RdRp-ATP
->
+> 
 > ```
 > cellBasisVector1 102.76400184631348 0 0 
 > cellBasisVector2 0 93.35700035095215 0 
 > cellBasisVector3 0 0 108.42400050163269 
 > cellOrigin 57.934000968933105 58.11250019073486 57.53700029850006 
 > ```
->
+> 
 > 96013 atoms, 27704 water
 
-## Setting up a MD simulation 
+## Setting up a MD simulation
 
 for basics about .namd parameters, please read 
 
 - fundamental
+  
   - ug 2.2 NAMD configuration file
     - 2.2.5 Required NAMD configuration parameters. basic params links
   - ug 7 Standard Minimization and Dynamics Parameters
   - namd-tutorial-unix chp 1 and appendix
 
 - [online tutorial](https://www.ks.uiuc.edu/Training/Tutorials/namd/namd-tutorial-unix-html/node26.html)
+
 - note in .conf
+
 - [Kevin's scripts](https://github.com/skblnw/mkrun/tree/master/NAMD). don't ever forget!
 
 ### on the scripts
@@ -1045,7 +1018,7 @@ Below are parameters you should notice in every simulation.
 - when temp gets stable, `langevin on`
 - `PSWITCH` and `langevinPiston on`: constant pressure
 
-#### system and parameters 
+#### system and parameters
 
 ##### (debugging)
 
@@ -1061,23 +1034,23 @@ contains protein, ions (and so on? a huge file). begin with:
 ```
 
 > **DUPLICATE terms**
->
+> 
 > https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2020-2021/0371.html
->
+> 
 > ```
 > Warning: DUPLICATE BOND ENTRY FOR CT3-NC2
 > PREVIOUS VALUES  k=261  x0=1.49
 > USING VALUES  k=390  x0=1.49
 > ```
->
+> 
 > maybe caused by duplicated prm files. but cannot remove any of them. just be it?
->
+> 
 > some of the pair values **both** occur in `param.prm`. **Don't use that anymore!**
->
+> 
 > I use `param.prm` and `par_all36_na.prm` in .namd. Built with `top_all36_prot.rtf`, `toppar_water_ions.str`
->
+> 
 > The tutorial uses `par_all27_prot_lipid.inp` and `par-extraterms.inp`, built with `top_all27_prot_lipid.inp`, `par_all27_prot_lipid.inp`
->
+> 
 > **par_all36_na.prm** for some atoms in ATP. may cause conflicts. does that matter?
 
 ##### solution
@@ -1087,9 +1060,9 @@ use `par_all36m_prot.prm` (same protein parameter as we are using in `param.prm`
 In NAMD, the easiest way to make sure that all the necessary NBFIXes are always in effect is to **read all the CHARMM36 parameter files into NAMD prior to reading `toppar_water_ions_namd.str`**
 
 > https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2014-2015/0236.html
->
+> 
 > http://mackerell.umaryland.edu/~kenno/cgenff/program.php#namd
->
+> 
 > But I still failed to build the ATP in psfgen...
 
 just like the tutorial video said! do this in `.namd` file... but did not work! 
@@ -1099,7 +1072,7 @@ You should download the `toppar_water_ions_namd.str` which removed the `set` com
 And the parameters should look like
 
 ```tcl
-paraTypeCharmm	    on
+paraTypeCharmm        on
 parameters          ../common/par_all36m_prot.prm
 parameters          ../common/par_all36_na.prm
 mergeCrossterms yes
@@ -1124,24 +1097,24 @@ see tutorial [Building Gramicidin A](http://www.ks.uiuc.edu/Research/namd/tutori
 - periodic boundary conditions: see the above “measurement” subsection
 
 - When initially assembling a system it is sometimes useful to fix the protein while equilibrating water or lipids around it. These options read a PDB file containing flags for the atoms to fix. The number and order of atoms in the PDB file must exactly match that of the PSF and other input files.
-
+  
   ```
   fixedAtoms          on
   fixedAtomsFile      myfixedatoms.pdb  ;# flags are in this file
   fixedAtomsCol       B                 ;# set beta non-zero to fix an atom
   ```
-
+  
   > The fixedAtoms, constraintScaling, and nonbondedScaling parameters may be changed to preserve macromolecular conformation during minimization and equilibration (fixedAtoms may only be disabled, and requires that fixedAtomsForces is enabled to do this).
 
 - constraintScaling 0 is the _immediate_ removal of all constraints
 
 - PME is only applicable to periodic simulations. PME grid dimensions should have small integer factors only and be greater than or equal to length of the basis vector.
-
+  
   ```
   #PME (for full-system periodic electrostatics)
   PME                 yes
   ```
-
+  
   may always use the default value
 
 - 
@@ -1157,7 +1130,7 @@ NPT: Langevin dynamics+Nos´e-Hoover Langevin piston
 NVT: delete piston...
 
 > compare the tutorial files, ws and wb
->
+> 
 > no params difference between npt and production??
 
 By now the Kevin script is compatible with the tutorial. Just ignore the other option, set `constraintScaling` to 1.
@@ -1171,31 +1144,31 @@ Initially, both temp and pressure is on and settings are done. Fix and restraint
 As simulation goes on, we only turn the options on or off.
 
 1. Minimization with fixed backbone atoms.
-
+   
    ```
-   langevinPiston	off
+   langevinPiston    off
    ```
 
 2. Minimization with restrained carbon alpha atoms.
-
+   
    ```
-   fixedAtoms	off
+   fixedAtoms    off
    ```
 
 3. Langevin dynamics with restraints.
-
+   
    > langevin already on
 
 4. Constant pressure with restraints.
-
+   
    ```
-   langevinPiston	on
+   langevinPiston    on
    ```
 
 5. Constant pressure without restraints.
-
+   
    ```
-   constraintScaling	0
+   constraintScaling    0
    ```
 
 6. Constant pressure with reduced damping coefficients.
@@ -1203,7 +1176,7 @@ As simulation goes on, we only turn the options on or off.
 #### other settings
 
 - With wrapping, some molecules will jump between sides of the cell in the trajectory file to yield the periodic image nearest to the origin. Without wrapping, molecules will have smooth trajectories, but water in the trajectory may appear to explode as individual molecules diffuse. Wrapping only affects output, not the correctness of the simulation.
-
+  
   ```
   wrapAll             on 
   ```
@@ -1219,18 +1192,18 @@ As simulation goes on, we only turn the options on or off.
 see the script for the final values
 
 > guidance from https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2008-2009/1333.html
->
+> 
 > **add an unconstrained NPT equilibration phase** to your simulation prior to taking data that you consider part of a production run, to allow initial relaxation of your protein and any final adjustments to the periodic cell size without including this data in your analysis.
->
+> 
 > If you equilibrate with very strong protein (>10 or so kcal/mol A^2) restraints it is probably good to remove them gradually, but yours are <u>probably ok to remove in one step</u>. 
->
+> 
 > the key is to make sure that at each step **you truly do equilibrate the system** (subject to the current constraints placed on it), and as much as possible you **avoid perturbations** of your solute **during early stages** of solvent equilibration.
 
 > guidance from http://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2003-2012/4358.html
->
+> 
 > From my experience, the number of time steps needed for each stage depends on a number of things, including the size of your system, how relaxed/frustrated your initial structures are etc. The "rules of thumb"
 > I used are:
->
+> 
 > 1. Minimimize until the **gradient tolerance drops below 1.0**. The number of steps required to achieve this is **system-dependent**. I usually just minimize initially for, say, **10000 steps** and periodically check the
 >    gradient tolerance.
 > 2. Equilibrate the fixed protein until the **temperature** (and other quantities such as pressure if necessary) **stabilizes** at the desired value. Again, the number of steps is worked out by trial and error.
@@ -1248,11 +1221,11 @@ for a new ligand, only need to change:
 #### commands
 
 > building system is in a folder; if not messy, could put “solvation” together
->
+> 
 > after building the system, copy all needed files to a directory `./common`
->
+> 
 > the script is without an extension name for VScode to highlight. put in where the results are
->
+> 
 > ```shell
 > $ tree
 > ├── common
@@ -1272,7 +1245,7 @@ for a new ligand, only need to change:
 >     ├── pro-lig-prod
 >     └── pro-lig-prod.log
 > ```
->
+> 
 > do not use `mpirun` for such a small system...
 
 ```shell
@@ -1288,64 +1261,64 @@ namd3 +p1 +devices 0 pro-lig-prod > pro-lig-prod.log
 ```
 
 > In your NAMD configuration file, set `CUDASOAintegrate` to `on`. only use one cpu, to achieve 2-fold acceleration of namd3. ~2 times faster (but not in my workstation, only in lab?)
->
+> 
 > [namd3-gpu](https://developer.nvidia.com/blog/delivering-up-to-9x-throughput-with-namd-v3-and-a100-gpu/)
 > 
 > Interpretation: put most of the work on GPU. so don't run 2 simulations at once.
->
+> 
 > But don't use that for minimization (CPU-dependent). But also there's 45w steps of npt...
 
 #### testing the run
 
 > 1. https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2003-2004/0295.html
->
->    You will need to have a non binary coord file with as well as a binary one. Don't know why, thats just the way it is...
 >    
->2. how to monitor your simulation?
+>    You will need to have a non binary coord file with as well as a binary one. Don't know why, thats just the way it is...
 > 
->   search for “TIMING” or “Wall” in .log file for the progress of your simulation, which updates every $outputTiming steps. “Benchmark time:”is also ok
+> 2. how to monitor your simulation?
+>    
+>    search for “TIMING” or “Wall” in .log file for the progress of your simulation, which updates every $outputTiming steps. “Benchmark time:”is also ok
 > 
->3.  
+> 3. 
 
 > other problems:
->
+> 
 > - Randomization of virtual memory (ASLR) is turned on in the kernel, thread migration may not work! Run 'echo 0 > /proc/sys/kernel/randomize_va_space' as root to disable it, or try running with '+isomalloc_sync'.
->
+> 
 > - Warning: ALWAYS USE NON-ZERO MARGIN WITH CONSTANT PRESSURE!
->
+>   
 >   Warning: CHANGING MARGIN FROM 0 to 0.495
->
+> 
 > - ERROR TOLERANCE : 1e-06
->
+> 
 > - rigid bond
->
+>   
 >   ```
 >   Warning: The Langevin gamma parameters differ over the particles, Warning: requiring extra work per step to constrain rigid bonds.
 >   ```
->
+>   
 >   The covalent bonds with hydrogen atoms were constrained at their equilibrium values by the LINCS algorithm?
->
+> 
 > backup
->
+> 
 > ```shell
 >  mv ./*.* test2
 > ```
->
+> 
 > testing performance (first “wall time”, irrelevant with time I guess)
->
+> 
 > - test 3: above command, 0.0267396/step
 > - test 4: no +p8, no idlepoll (only one gpu core), similar
 > - test 5: namd3, with +p8, with idlepoll,  0.016929/step (only one GPU core used?)
 > - test 6: same, +p2. 0.0186955/step
 > - test 7: same, +auto-provision. just equals to using +p8. 0.0170378/step
->
+> 
 > > if no +p8 is specified
-> >
+> > 
 > > ```
 > > Charm++> No provisioning arguments specified. Running with a single PE.
 > >          Use +auto-provision to fully subscribe resources or +p1 to silence this message.
 > > ```
->
+> 
 > how come the rate increases two folds in test 3?
 
 ### Analysis basics and check
@@ -1386,16 +1359,10 @@ animate read dcd rdrp-atp-equil.dcd
 animate read dcd rdrp-atp-prod.dcd
 ```
 
-
-
-
-
-
-
 ### Run in Gromacs (prepare)
 
 > prepare, equillibrate in NAMD, run in gmx. i.e. convert equilibrated system to gmx (.gro/top, ndx, velocity)
->
+> 
 > just a try. not suitable for fep
 
 https://www.ks.uiuc.edu/Research/vmd/plugins/topotools/
@@ -1403,7 +1370,7 @@ https://www.ks.uiuc.edu/Research/vmd/plugins/topotools/
 TopoTools, not only converting to gmx and lammps, more importantly editing your topology
 
 1. make the latest coordinates as pdb, and then .gro
-
+   
    ```tcl
    # under ./common
    mol load psf system.psf
@@ -1424,7 +1391,7 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    check in pymol to see if they are the same
    
    > for FEP
-   >
+   > 
    > ```tcl
    > # vmd
    > mol load psf ligand.psf
@@ -1433,37 +1400,35 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    > $sel writepdb equilibrated.pdb
    > exit
    > ```
-   >
+   > 
    > ```shell
    > # shell
    > gmx editconf -f equilibrated.pdb -o equilibrated.gro \
    > -box 102.65199661254883 92.91299819946289 112.18100357055664 \
    > -center 2.9200000762939453 -1.5814990997314453 -3.010499954223633 
    > ```
-   >
-   > 
-   
-2. to run in gmx, specify T coupling groups:
 
+2. to run in gmx, specify T coupling groups:
+   
    ```shell
    gmx make_ndx -f equilibrated.gro -o index.ndx
    > 1|13|14
    > 21|22|23
    > q
    ```
-
+   
    > Protein_ATP_Mg    TIP3_SOD_CLA
-   >
+   > 
    > refer to
-   >
+   > 
    > ```shell
-   > tc_grps    	= non-Water Water # Membrane-containing MD simulation
-   > tc_grps    	= Protein_ligand_ion Other # normal system
+   > tc_grps        = non-Water Water # Membrane-containing MD simulation
+   > tc_grps        = Protein_ligand_ion Other # normal system
    > compressed-x-grp or energygrps  = Protein MOL MN # list all main species
    > ```
 
 3. get .top file
-
+   
    ```tcl
    package require topotools
    # Load the structure into VMD.
@@ -1473,40 +1438,40 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    topo writegmxtop structure.top [list par_all36m_prot.prm lig.prm par_all36_cgenff.prm toppar_water_ions_namd.str] 
    # par_all36_na.prm par_all35_ethers.prm par_all36_carb.prm par_all36_lipid_ljpme.prm]
    ```
-
+   
    be sure to include `lig.prm` and the water_ions one!
-
+   
    > don't include `param.prm ` because gmx never tolerate duplication a little bit
-   >
+   > 
    > ```
    > ERROR 50 [file structure.top, line 7884]:
    > Encountered a second block of parameters for dihedral type 9 for the same
    > atoms, with either different parameters and/or the first block has
    > multiple lines. This is not supported.
    > ```
-
+   
    CHRAMM ff website also provides many .itp file for gmx
-
+   
    > copy your folder downloaded from http://mackerell.umaryland.edu/charmm_ff.shtml to `~/gromacs-2021.5-gpu/share/gromacs/top` and you can add at the beginning of `.top` file:
-   >
+   > 
    > ```c
    > #include "charmm36-jul2021.ff/forcefield.itp"
    > ```
-
+   
    > but we don't need that much, which causes hundreds of duplications again (for atomtype, just warnings).
-   >
+   > 
    > ```c
    > #include "charmm36-jul2021.ff/ffnonbonded.itp"
    > ```
-   >
+   > 
    > which really includes parameters for these ions. `ions.itp` only defines atoms.
-   >
+   > 
    > Put it before the first `[ atomtypes ]` in your `.top` file
-   >
+   > 
    > > I'm doing this because I forgot toppar_water_ions_namd.str before...
 
-3. also the velocity in the last frame! (find how to load into gmx, .cpt?)
-
+4. also the velocity in the last frame! (find how to load into gmx, .cpt?)
+   
    ```tcl
    # from tutorial
    # read in vmd
@@ -1520,15 +1485,14 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    }
    
    close $fil
-   
    ```
-
+   
    > converting binary file: you'd better load into vmd and save
-   >
+   > 
    > can't do it now, just set `gen_vel` to yes and `continuation` to no
 
-3. make the .tpr file
-
+5. make the .tpr file
+   
    ```shell
    # This would be prepared for simulation using grompp to create a tpr file
    gmx grompp -f md.mdp -c equilibrated.gro -r equilibrated.gro \
@@ -1541,10 +1505,6 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    
    > cannot resolve the problem of duplicated dihedral angles...
 
-
-
-
-
 ## Clustering Anaylsis
 
 preparation
@@ -1552,8 +1512,6 @@ preparation
 ```shell
 catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
 ```
-
-
 
 ### Clustering
 
@@ -1566,29 +1524,29 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
 ##### prepare
 
 1. make the initial structure, topology file, as did in [Run in Gromacs](#Run-in-Gromacs). We need `.tpr` or `.gro` for option `-s`
-
+   
    > The .pdb contains structural parameters (charge?) like the .tpr file? not enough in `mdconvert` but ok for `gmx rms`?
 
 2. convert the trajectory file
-
+   
    1. mdconvert
-
+      
       ```shell
       # convert trajectory file
       conda activate AmberTools21 # MDtraj
       f=rdrp-atp-prod
-      mdconvert -o ${f}.xtc -t equilibrated.gro ${f}.dcd # normal xtc
+      mdconvert -o ${f}.xtc -t equilibrated.gro ${f}.dcd # normal xtc. .tpr is not recognized
       gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump # movie, water not go to infinity?
       ```
-
+      
       > if simply use `.pdb`, gmx reports errors related to PBC box setting.
-      >
+      > 
       > mdconvert can make .trr too, but it's the same size as .xtc (also the .dcd)...
-      >
+      > 
       > if you really need velocities (`.trr`), you should use vmd
-
+   
    2. we may also use vmd to do that. the result is just the same
-
+      
       ```shell
       f=rdrp-atp-prod
       vmd ../common/system.psf ${f}.dcd
@@ -1596,26 +1554,26 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
       # After VMD was opened select the molecule. Then click on `File` and select `Save Coordinates`. Now choose the trr format and save it.
       # but only works for short trajectories...
       ```
-
+      
       cmd
-
+      
       ```shell
       f=rdrp-remtp-prod
       # /usr/local/lib/vmd/plugins/LINUXAMD64/bin/catdcd5.2/
       catdcd -o ${f}.trr -otype trr -i equilibrated.gro -dcd ${f}.dcd
       gmx trjconv -f ${f}.trr -o ${f}_nj.xtc -pbc nojump
       ```
-
+      
       catdcd is used outside VMD! a bit slow...
-
+   
    3. maybe also mda
-
+   
    > problem: Masses were requested, but for some atom(s) masses could not be found in the database. Use a tpr file as input, if possible, or add these atoms to the mass database.
-   >
+   > 
    > solution: use .tpr instead of .gro for `-s`
 
 3. optional: watch movie (don't for the 300-ns one! it eats all memory...)
-
+   
    > ```shell
    > echo 0 | gmx trjconv -s simulation.tpr -n index.ndx -f ${f}.trr -pbc mol -o ${f}_view.xtc -b 2.95 -e 3.00 -tu ns
    > # strange! 295ns~300ns
@@ -1629,11 +1587,11 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
    > mol load psf ../common/system.psf pdb ../common/equilibrated.pdb
    > animate read dcd rdrp-atp-prod.dcd
    > ```
-   >
+   > 
    > view with `pro-lig.pdb` (converted from equilibrated.gro), no 1st frame problem (not much shift)
 
 4. general checking
-
+   
    ```shell
    # choose 4 backbone
    echo "4\n 4" | gmx rms -s simulation.tpr -f ${f}_nj.xtc -tu ns -o rmsd_bb.xvg
@@ -1641,13 +1599,13 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
    echo 4 | gmx rmsf -s simulation.tpr -f ${f}_nj.xtc -o rmsf_bb.xvg -res
    xmgrace rmsf_bb.xvg
    ```
-
+   
    > problem:
-   >
+   > 
    > > Can not find mass in database for atom MG in residue 921 MG
-   > >
+   > > 
    > > Masses and atomic (Van der Waals) radii will be guessed based on residue and atom names
-   >
+   > 
    > just change 'MG' to 'Mg' in .pdb, solved. Do this only when gmx is needed...
 
 ##### clustering
@@ -1655,29 +1613,29 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
 We performed clustering analysis based on the RMSD of NTPs during the simulations, with SARS-COV-2 NSP12 aligned. 
 
 > reference
->
+> 
 > - [gmx cluster????](https://www.jianshu.com/p/a0c15620702e)
->
+> 
 > - [MD tutorial: choose groups](http://www.mdtutorials.com/gmx/complex/09_analysis.html); [sob comments](http://bbs.keinsci.com/thread-23116-1-1.html)
->
+>   
 >   Execute the rms module, choosing "Backbone" for least-squares fitting and "JZ4_Heavy" for the RMSD calculation. By doing so, the overall rotation and translation of the protein is removed via fitting and the RMSD reported is how much the JZ4 position has varied relative to the protein, which is a good indicator of how well the binding pose was preserved during the simulation.
 
 1. aligned trajectory
-
+   
    https://cbiores.com/tips-and-tricks/
-
+   
    ```shell
    echo 4 0 | gmx trjconv -s simulation.tpr -n index.ndx -f ${f}_nj.xtc -fit rot+trans -o ${f}_fit.xtc
    ```
-
-   > is that necessary?
-   >
-   > `Select group for least squares fit`: I think it's **what to align**. backbone
-   >
-   > `Select group for output`: **what to keep** in the _fit.xtc. only our protein_atp_mg? it seems that TP will attract NA+ ions, maybe water? just keep all
    
-2. make rmsd matrix first
+   > is that necessary?
+   > 
+   > `Select group for least squares fit`: I think it's **what to align**. backbone
+   > 
+   > `Select group for output`: **what to keep** in the _fit.xtc. only our protein_atp_mg? it seems that TP will attract NA+ ions, maybe water? just keep all
 
+2. make rmsd matrix first
+   
    ```shell
    f=rdrp-atp-prod # f=rdrp-remtp-prod
    echo 4 19 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig.xpm -tu ns #-f2 ${f}_fit.xtc
@@ -1685,17 +1643,17 @@ We performed clustering analysis based on the RMSD of NTPs during the simulation
    # a matrix, not readable data encoding...
    # ps2pdf rmsd-matrix.eps
    ```
-
+   
    > `Select group for RMSD calculation`: ATP! the output
-   >
+   > 
    > ```shell
    > xmgrace rmsd.xvg
    > ```
-
+   
    gmx的分析只能一个processor，贼慢，太离谱！能否换软件。。？
 
-2. clustering
-
+3. clustering
+   
    ```shell
    rm \#*\#
    # run
@@ -1707,31 +1665,30 @@ We performed clustering analysis based on the RMSD of NTPs during the simulation
    ```
    
    > `lsq`: still backbone
-   >
+   > 
    > `output`: our protein_atp_mg complex
-   
 
 questions
 
 > - why `echo 4 19 | ` all the time?
->
+> 
 > - 1st frame away from others if you view _fit! also in nojump! not a problem for npt.gro! but ok in vmd without loading .gro...
->
+>   
 >   answer: just ignore that! you are just viewing! if you convert the .xtc to .pdb files, only 300 frames! 
->
+>   
 >   maybe caused by: namd running is different from gmx?
 
 ##### analysis
 
 1. basics
-
+   
    > Two output files are always written:
-   >
+   > 
    > - -o writes the RMSD values in the upper left half of the matrix and a graphical depiction of the clusters **in the lower right half** When -minstruct = 1 the graphical depiction is black when two structures are in the same cluster. When -minstruct > 1 different colors will be used for each cluster.
    > - -g writes information on the options used and a detailed list of all clusters and their members. (`.log`?)
-   >
+   > 
    > Additionally, a number of optional output files can be written:
-   >
+   > 
    > - -dist writes the RMSD distribution.
    > - -ev writes the eigenvectors of the RMSD matrix diagonalization.
    > - -sz writes the cluster sizes.
@@ -1740,7 +1697,7 @@ questions
    > - -clid writes the cluster number as a function of time.
    > - -clndx writes the frame numbers corresponding to the clusters to the specified index file to be read into trjconv.
    > - -cl writes average (with option -av) or central structure of each cluster or writes numbered files with cluster members for a selected set of clusters (with option -wcl, depends on -nst and -rmsmin). The center of a cluster is the structure with the smallest average RMSD from all other structures of the cluster.
-
+   
    ```shell
    cluster-id-over-time.xvg
    cluster-sizes.xvg
@@ -1753,9 +1710,8 @@ questions
    ```
 
 2. structural
-
-   ```shell
    
+   ```shell
       # pymol
    split_states cluster
    ```
@@ -1765,7 +1721,7 @@ questions
 ##### other
 
 1. trjcat? no!
-
+   
    ```shell
    f=rdrp-atp-prod
    gmx trjcat -f ${f}.dcd -o ${f}.xtc
@@ -1773,25 +1729,21 @@ questions
    ```
 
 2. failed [catdcd](http://www.ks.uiuc.edu/Development/MDTools/catdcd/)
-
+   
    ```tcl
    set f rdrp-atp-prod
    catdcd -o ${f}.trr -otype trr -i equilibrated.pdb -dcd ${f}.dcd
    ```
 
-4. 
-
-
+3. 
 
 #### in VMD
 
-
+> [VMD plugin](https://github.com/luisico/clustering), but not for dcd?
 
 ### Analysis of binding mode?
 
 Here not that much is required...
-
-
 
 # Stage 2 Protocol: FEP
 
@@ -1806,6 +1758,7 @@ VMD does not yet provide a hybrid topology setup tool, and CHARMM-GUI is testing
 readings
 
 - https://www.cresset-group.com/about/news/fep-drug-discovery-toolbox/
+  
   - FEP要求尽量稳定不动，这是不同于MD的
   - FEP要求尽量不要改变电荷数
 
@@ -1824,8 +1777,6 @@ two modes
 - AMberTools
 ```
 
-
-
 ligand: you just need to modify atoms in GaussView, so that no change is needed for Mg, and the position of ligands remains unchanged. (unlike aligning structures...) go to CHARMM-GUI for both ligands!
 
 we start from (equilibrated?) .pdb after MD. But finally should use those from clustering, and compare with the original!
@@ -1837,37 +1788,43 @@ we start from (equilibrated?) .pdb after MD. But finally should use those from c
 #### A brief flow
 
 - get stable complex structure, modify the ligand properly to obtain the other one
+
 - get `.mol2`, `.rtf` and `.prm` (in one single `.str`) files from [CGenFF](https://cgenff.umaryland.edu/) or MolFacture in VMD 
+  
   - no AutoPSF required, retaining coordinates and names (same for mtp and remtp)
 
 - run the make_hybrid code to obtain the hybrid `.rtf` and `.pdb` file (with atoms renamed and B value assigned)
+  
   - did not run very well. Now: just stick to the paper: the CH2 also considered as "common atoms". we only add a neutral hydrogen atom
+
 - run `merge-fep.tcl` to build the ligand and complex with VMD. do use `top_all36_cgenff.rtf`!
+
 - solvate and ionize them. a new version of `sol-ion-fep.tcl` is created to make sure the systems have the same size (ligand more atoms?)
+
 - run the 2nd script `edit_FEP.py` to edit the beta field in the .pdb file
+
 - run the 3rd script `edit_psf.py` to remove unparametrized angles/dihedrals, etc.
+
 - normal measurement, equilibration and run, but not necessary to gradually heat up (but if you like...)
 
 principles
 
 - always make sure the initial and final ligands are overlapping (same coordinates). 
-
+  
   be careful of ligandrm.pdb from GUI, which is slightly changed...
 
-
-
 > old version for ligand building: use CHARMM-GUI
->
+> 
 > - parametrize both ligands in CHARMM-GUI
->
+>   
 >   - to get: `.rtf` file. 
->
+> 
 > - same ligands, get properly renumbered .pdb files from CHARMM-GUI PDB reader
->
+>   
 >   - to get: `.pdb` file
->
+>   
 >   > PDB reader itself can also give .rtf? but need the .mol2 file...
->
+>   
 >   if .mol2 file is needed, use drawing_3D!
 
 Comment by tutors:
@@ -1892,13 +1849,13 @@ With that said, there is also a scenario when the common molecule is  important 
   - output: just write formatted strings into .rtf and .pdb files
 
 > Exploration
->
+> 
 > 如果编码成图，这个问题叫做：最大公共子图问题
->
+> 
 > https://drugai.blog.csdn.net/article/details/102626236
->
+> 
 > https://blog.csdn.net/u012325865/article/details/111478970
->
+> 
 > - 搜这个子图问题
 >   - `ismags.largest_common_subgraph()` 暂时失败
 > - RDkit：drugAI的code
@@ -1906,39 +1863,37 @@ With that said, there is also a scenario when the common molecule is  important 
 >   - 还是线性思维，能扩展到其他TP
 > - 线性思维一步步
 >   - 对于mtp其实够了
->
+> 
 > 图同构（英語：graph isomorphism）描述的是图论中，两个图之间的完全等价关系。在图论的观点下，两个同构的图被当作同一个图来研究。
 > https://networkx.org/documentation/stable/_modules/networkx/algorithms/isomorphism/ismags.html
->
+> 
 > CHARMM-GUI的code，收藏了
->
+> 
 > - openMM能读写，可能转不了？读完以后能干啥？
 > - RDkit能找子结构，但处理不了文件？
->
-> 用rdkit查找子结构是有效的，并且不需要图的数据结构，只要能返回去查找到atom name。并且rdkit可辅助阅读pdb中的信息（非必需
->
-> > PH:画出来是P+？
->
-> 连在同一个磷上的氧能不能对上看来是随机的
->
-> 我们用remtp的骨架，HGA3+CG321就没参数
->
 > 
->
+> 用rdkit查找子结构是有效的，并且不需要图的数据结构，只要能返回去查找到atom name。并且rdkit可辅助阅读pdb中的信息（非必需
+> 
+> > PH:画出来是P+？
+> 
+> 连在同一个磷上的氧能不能对上看来是随机的
+> 
+> 我们用remtp的骨架，HGA3+CG321就没参数
+> 
 > 写文件：
->
+> 
 > 自己写？名字问题？type问题？
->
+> 
 > 文件：改一下原.rtf里面所有atom name，再读进来合并？
->
+> 
 > prm文件也得改？MD测试一下
->
+> 
 > 写的时候，写出group？
->
+> 
 > IC的+-，*都什么意思？
->
+> 
 > 问题
->
+> 
 > - charge可合并？差多大。如P1，O1
 > - type不同？如C，差太大，删掉
 > - 坐标微调了，优化了？原来的pdb原子renumber了。既然要用公共的，就排个序。。能对上？是否影响parameterization？跟kevin check一下
@@ -1950,9 +1905,9 @@ With that said, there is also a scenario when the common molecule is  important 
 >   - 没edit的不用了？
 >   - schrondinger可以做。。
 > - prm文件不用改，因为用的是力场里的atom type！但是要合并一下？复制粘贴就可以，但是mtp啥都没有，就不用了
->
+> 
 > reference
->
+> 
 > - https://www.rdkit.org/docs/GettingStartedInPython.html
 > - https://www.rdkit.org/docs/Cookbook
 > - https://www.rdkit.org/docs/source/rdkit.Chem.html
@@ -1960,16 +1915,14 @@ With that said, there is also a scenario when the common molecule is  important 
 > - https://www.rdkit.org/docs/source/rdkit.Chem.rdchem.html#rdkit.Chem.rdchem.Atom
 > - https://www.rdkit.org/docs/source/rdkit.Chem.rdFMCS.html?highlight=rdkit%20chem%20rdfmcs%20findmcs#rdkit.Chem.rdFMCS.FindMCS
 > - https://www.rdkit.org/docs/Cookbook.html?highlight=rdkit%20chem%20rdfmcs%20findmcs
->
+> 
 > Rdkit issues
->
+> 
 > 1. import rdkit 出现 ImportError: DLL load failed: 找不到指定的模块
->
+>    
 >    解决：版本不对，重装
->
+> 
 > 2. MolFromMol2File(…)不推荐，容易出bug，pdb还行
-
-
 
 #### Rescuing the parameters: extensive trials
 
@@ -1984,7 +1937,7 @@ I originally want to build the ligand and complex with `make_merged.sh` to keep 
 So I wrote a script `edit_fep.py` that read from hybrid and **merged** files, search for corresponding atoms to edit the beta field.
 
 > note: it seems to work if we change atom name 'TIP3' into 'TIP', because indexing just by atom number?
->
+> 
 > We'd better keep everything in the future? though ugly
 
 ##### parameters
@@ -1994,14 +1947,14 @@ We also get .prm file from CHARMM-GUI. manually merge the .prm file for later, b
 Because: these are new "hybrid" angles forming between the ligands.
 
 > 无语了，写中文
->
+> 
 > - 讨厌的是，新生成的键还需要提供参数，这就意味着只做两个ligand的charmm-gui是不够的
 > - 我找遍了各种prm文件，gui生成的、charmm ff文件包的、vmd自带的、tutorial的，都没有这些参数。且有相关原子的大多都是`par_all36_cgenff.prm `
 > - 离谱的是，有几个ATP环上的参数，普通MD也找不到，但普通MD就可以跑
 > - 手动添加参数到prm文件，就可以运行。必须添加所有缺的，似乎说明参数完整才能跑
->
+> 
 > 结论：直接用那个psf的话，没有那几个dihedral，不需要参数，VMD+rtf好心地全都加上了
->
+> 
 > ```
 > Warning: UNABLE TO FIND ANGLE PARAMETERS FOR CG321 OG303 CG331 (ATOMS 6 7 18)
 > Warning: ALCHEMY MODULE WILL REMOVE ANGLE OR RAISE ERROR
@@ -2024,17 +1977,13 @@ Because: these are new "hybrid" angles forming between the ligands.
 > Warning: UNABLE TO FIND DIHEDRAL PARAMETERS FOR NG2R51 CG3C50 CG1N1 NG1T1 (ATOMS 30 29 37 32)
 > Warning: ALCHEMY MODULE WILL REMOVE DIHEDRAL OR RAISE ERROR
 > ```
->
+> 
 > search command drafts
->
+> 
 > ```shell
 > grep 'CG1N1' ./* | grep 'X'
 > grep  NG2R51 ./* | grep CG3C50
 > ```
->
-> 
-
-
 
 Editing .psf files: read from the log file reporting the lacking parameters
 
@@ -2060,7 +2009,7 @@ but still no luck
 2. open in GaussView, add a free hydrogen atom, press ctrl+shift to drag that atom with your mouse, until it's almost "colinear" with the next carbon. adjust the C-H bond length. save the coordinates.
 3. but don't use that .pdb file because GV may rearrange the atoms. MANUALLY edit the file by copying from saved coordinates and add residue name etc.
 4. edit .rtf file: just add "HA" with the same atom type as the other two hydrogens but its charge is 0. add a bond. 
-4. edit .pdb file: assign beta values, and it's done
+5. edit .pdb file: assign beta values, and it's done
 
 if you don't want to manually assign beta values, it's a bit more complicated to start from Python-created hybrid molecule.
 
@@ -2100,7 +2049,7 @@ It's better to make all parts both neutral. add H paradigm works ok but two-carb
 > 那个normal build,-1是-3.996，+1和总的是-4
 
 > transfer：应该是把transfer写出的东西粘到str里面然后正常合并
->
+> 
 > 有几个还是和文献值差距有点大
 
 ### QM-optimized parameters
@@ -2108,8 +2057,6 @@ It's better to make all parts both neutral. add H paradigm works ok but two-carb
 Depending on CHARMM-GUI, always not so accurate...the fatal error is something like the cyano group, with no proper parameters in CGenFF...
 
 为什么.prm files这么多“from xxx”呢？都是在cgenff里面找的近似的，所以才有penalty。这样就感觉所有小分子应该Gaussian。但是如果从“反正都不准”的角度看……
-
-
 
 ### Deprecated  methods
 
@@ -2132,37 +2079,37 @@ mol load psf hybrid-p.psf
 #### Build with VMD
 
 > > try: equilibrated remTP
->
+> 
 > > files: protein, MG, two ligands from gui: pdb, psf, rtf, prm
->
+> 
 > #### Relative
->
+> 
 > > you may build the .fep first...
->
+> 
 > 1. build the system
->
+>    
 >    process the ligand as before, and change the name of the ligand:
->
+>    
 >    ```shell
 >    grep -rl "LIG " remtp-rm.pdb remtp-rm.psf | xargs sed -i s/"LIG"/"END"/g
 >    grep -rl "LIG " mtp-rm.pdb mtp-rm.psf | xargs sed -i s/"LIG"/"INI"/g
 >    ```
-> 
+>    
 >    then build both ligand and complex
->
+>    
 >    ```shell
 >    vmd -dispdev text -e merge-fep.tcl
 >    vmd -dispdev text -e sol-ion-fep.tcl
 >    ```
-> 
+>    
 >    > a small problem: all is ATOM, no HETATM
->
+> 
 > 2. build the .fep
->
+>    
 >    you can either copy one file as the fep indicator or just modify your .pdb file. I'll choose the former here
->
+>    
 >    change all "END" lines, 63-66 columns to ' 1.00'; "INI": '-1.00' for your two .pdb file
->
+>    
 >    ```shell
 >    list=(ligand complex)
 >    for f in ${list[*]}; do
@@ -2172,196 +2119,188 @@ mol load psf hybrid-p.psf
 >    done
 >    # find the long pattern
 >    ```
-> 
+>    
 >    watch
->
+>    
 >    ```shell
 >    vmd complex.psf -pdb complex.fep
 >    vmd ligand.psf -pdb ligand.fep
 >    ```
-> 
+>    
 >    > select ligand by
->  >
->   >> ```
->   >> resname END
->   >> ```
->   >>
->   >> and view with coloring method 'Beta'
+>    > 
+>    > > ```
+>    > > resname END
+>    > > ```
+>    > > 
+>    > > and view with coloring method 'Beta'
 > 
 > 3. build the dual topology file
->
 > 
->
-> 
->
-> 
->
 > 3. 
->
-> 3. run the simulation
->
-> 3. 
->
 > 
->> failed
->
+> 4. run the simulation
+> 
+> 5. 
+> 
+> > failed
+> 
 > > ```shell
->> awk -F " " '{if ($18==END) $62= 1.00}' complex.pdb > complex.fep
+> > awk -F " " '{if ($18==END) $62= 1.00}' complex.pdb > complex.fep
 > > grep "END" -rl complex.fep | xargs sed -i "s/ 0.00     / 1.00     /g"
 > > ```
-> >
 > > 
-> >
 > > syntax
-> >
+> > 
 > > ```shell
 > > alchemify <input PSF> <output PSF> <FEPfile> [FEP column]
 > > ```
-> >
+> > 
 > > so here
-> >
+> > 
 > > ```shell
 > > # vmd
 > > alchemify complex.psf complex-mtp2remtp.psf complex.fep B
 > > ```
-> >
-> > rarely used now
-> >
 > > 
+> > rarely used now
 > 
 > #### Absolute
->
+> 
 > easier, build as before until making FEP
->
 
 #### CHARMM-GUI
->
+
 > [video demo](https://www.charmm-gui.org/?doc=demo&id=fec&lesson=1), [bilibili version](https://www.bilibili.com/video/BV153411s7kF)
->
+> 
 > > TIP1: https://charmm-gui.org/?doc=input/retriever  This page can be used to recover a job, if you *did not* save a bookmark link, but you *do* remember the Job ID
->
+> 
 > > - jobid=4735806442, absolute, cgenff v1.0, using ligandrm.pdb to build, upload other ligand's drawing3D.mol2
 > > - JOB ID: 4739580626, relative, v2.5, .mol2, .mol2
-> >
+> > 
 > > TIP2: do download every .tgz from Windows......
->
+> 
 > #### steps
->
+> 
 >  use default settings unless otherwise specified
->
+> 
 > 1. build the complex (including Mg is fine)
+> 
 > 2. upload your complex file (containing the starting ligand)
+> 
 > 3. choose chain (all)
+> 
 > 4. build topology, choosing a file for the ligand
+> 
 > 5. solvate. choose box size and ion conc
+> 
 > 6. Generate grid information for PME FFT automatically (default)
+> 
 > 7. select Ligand Molecule for Free Energy Calculation
+> 
 > 8. PBC (default)
+> 
 > 9. upload ligand
->
+> 
 > 10. select program, force field, **check ligand**; ion for the ligand, distance from edge, 310K, etc.
+> 
 > 11. Relative: clustering, choose molecule pairs
+> 
 > 12. finished, <font color=red>CHECK YOUR STRUCTURE!!</font>
->
+> 
 > > note: the unit of edge distance is nm, not Å .....
->
+> 
 > #### note on files
->
+> 
 > folder: `basic` (from simulation), `ligand-charmm` (from GUI)
->
-> ##### What to use when building? 
->
+> 
+> ##### What to use when building?
+> 
 > normal .pdb failed, .sdf failed(it's not our ligand, it's something strange...), obabel converted also failed to pass the <u>topology making</u>. otherwise if you use the ligand files from RCSB, then [this](https://www.charmm-gui.org/?doc=issues) (atom order?)
->
+> 
 > > original: cannot input for force field; ligandrm.pdb: a little problem in text format.
->
-> >!TIP
->
-> >may use `ligandrm.pdb` or `drawing3D.mol2`,  etc. when building. They don't align? just moved somewhat.
-> >
-> >When choosing a structural file (instead of using RCSB .pdb (but maybe that only provides topology?)) for the ligand's topology, use`drawing3D.mol2` 
->
+> 
+> > !TIP
+> 
+> > may use `ligandrm.pdb` or `drawing3D.mol2`,  etc. when building. They don't align? just moved somewhat.
+> > 
+> > When choosing a structural file (instead of using RCSB .pdb (but maybe that only provides topology?)) for the ligand's topology, use`drawing3D.mol2` 
+> 
 > ##### What to use when uploading ligands?
->
+> 
 > > in the case of Absolute, mtp
->
+> 
 > After *solvation*, our system is moved. Also, drawing3D.mol2 moves away. so how to align?
->
+> 
 > It seems that using drawing_3D.mol2 works fine here, if you align the structure, it is a little changed (ligandrm.pdb changes more slightly from the original file)....so do the alignment and check in pymol to see if i's ok with Mg<sup>2+</sup>...usually it's fine (drawing_3D.mol2 is a little strange because the TP huddle up?). 
->
+> 
 > But the final structure turns out to be so similar to ligandrm.pdb?? I didn't use that. EM is performed? (maybe we can upload a converted one from ligandrm.pdb?)
->
+> 
 > But for remtp, initial = ligandrm != drawing3D != final (PO4 the same??)
->
+> 
 > > In the case of Relative, remtp
->
+> 
 > cannot upload converted ligandrm?
->
->
-> >!TIP
->
-> >Conclusion: because the processing moves the ligands, it's fine to use either ligandrm or drawing_3D...
-> >
-> >you may check the structure after equilibration
->
+> 
+> > !TIP
+> 
+> > Conclusion: because the processing moves the ligands, it's fine to use either ligandrm or drawing_3D...
+> > 
+> > you may check the structure after equilibration
+> 
 > ##### force field check
->
+> 
 > However, the original ligand failed again. when using ligandrm.pdb, etc., it failed at cgenff (v2.5) force field check. lone pair? v1.0 is fine
->
+> 
 > > Current FEP doesn't allow lonepair. Please select CGenFF v1.0 to avoid lonepair generation.
->
+> 
 > Actually the original ligand always fails. so **upload again** (without checking the option) and v2.5 works fine
->
+> 
 > #### notes on modes
->
+> 
 > uploading ligands
->
+> 
 > - supports multiple ligands in one .sdf or ,mol2 file
 > - it's better to dock them first
 > - if not, or you are drawing ligands, the GUI automatically positions the ligands (may be not accurate)
->
+> 
 > both Relative or Absolute apply. A little difference for multiple ligands:
->
+> 
 > - the latter designs a `Closed minimal perturbation path based on the clustering` 
->
+>   
 >   - or just `Radial shape of perturbation path from the first one`
->
+> 
 > - when uploading ligands
->
+>   
 >   - Absolute: Use this option only when the ligands are already **docked**.
->  - Relative: Use this option only when the scaffold coordinate of a pair of ligands are **identical.**
->
+>   - Relative: Use this option only when the scaffold coordinate of a pair of ligands are **identical.**
+>   
 >   Absolute just cares 'in position', Relative should make sure 'same position'.
->
+> 
 > - result
->
+>   
 >   - Absolute: one folder for one ligand
->  - Relative: one for a pair of FEP molecule
->
->
+>   - Relative: one for a pair of FEP molecule
+> 
 > to prepare multiple ligands. support multiple files and one file containing ligands.
->
+> 
 > #### result
->
+> 
 > - where: go to `namd`, 1,2,... (2-3, ...) means different ligands
 > - FEP: all of ligand INI disappear, all END appear, no common searching...
->
-> 
->
-> 
->
+
 #### FEPrepare
->
+
 > - https://feprepare.vi-seem.eu/indexlpg.php  a server
->  - https://www.zhihu.com/zvideo/1356250979265093632  https://www.zhihu.com/people/qutesun/zvideos
+>   - https://www.zhihu.com/zvideo/1356250979265093632  https://www.zhihu.com/people/qutesun/zvideos
 >   - https://feprepare.vi-seem.eu/Manual.pdf
 > - http://zarbi.chem.yale.edu/ligpargen bad charge settings!
 >   - [principles, and guide of ligpargen](https://pergamos.lib.uoa.gr/uoa/dl/frontend/file/lib/default/data/2779350/theFile)
->
+> 
 > cannot control force field? we have defined .psf and .rtf already? still using OPLS?
->
+> 
 > May produce a hybrid ligand, but failed...
->
+> 
 > ```
 > Making biomolecule rdrp...
 > ERROR: rdrp failed: Leap did not create the topology and/or coordinate file(s): vacuum.parm7, vacuum.rst7
@@ -2374,11 +2313,11 @@ mol load psf hybrid-p.psf
 > ERROR: The following ligands have failed:
 >  mtp
 > ```
->
+
 #### From Amber+Gaussian
->
+
 > Build your molecule with proper protonation state and then go with Gaussian protocol, get Amber files and convert to NAMD files? But already used GAFF
->
+> 
 > ```shell
 > conda activate AmberTools21
 > f=remtp
@@ -2397,35 +2336,30 @@ mol load psf hybrid-p.psf
 > check lig
 > saveamberparm lig lig.prmtop lig.inpcrd
 > quit
-> 
 > ```
->
+
 #### Paratool in VMD
 
->
 > https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/32793.html said paratool has long been replaced by ffTk, yet the document is worth reading.
->
-> https://www.ks.uiuc.edu/Research/vmd/plugins/paratool/usersguide.html
->
-> https://www.ks.uiuc.edu/Research/vmd/plugins/paratool/general_scheme.html
->
-> To start, type `paratool` in Tkconsole. Or go through the AutoPSF protocol
->
-> Load the molecule from GUI (.psf + .pdb)
->
-> Assign parameters
->
 > 
->
+> https://www.ks.uiuc.edu/Research/vmd/plugins/paratool/usersguide.html
+> 
+> https://www.ks.uiuc.edu/Research/vmd/plugins/paratool/general_scheme.html
+> 
+> To start, type `paratool` in Tkconsole. Or go through the AutoPSF protocol
+> 
+> Load the molecule from GUI (.psf + .pdb)
+> 
+> Assign parameters
+
 #### Taking another set of starting coordinates
 
->
 > no need to run CHARMM-GUI ligand builder again, because we assume that only coordinates are changed...after testing, they really do.
->
+> 
 > and starting from making the hybrid, go through everything
->
+> 
 > 1. get new pdb files
->
+>    
 >    ```tcl
 >    # vmd
 >    mol load psf system.psf
@@ -2437,14 +2371,10 @@ mol load psf hybrid-p.psf
 >    set remtp [atomselect top "resname LIG"]
 >    $remtp writepdb remtp1.pdb
 >    ```
->
+>    
 >    and modify into your mtp.pdb...
->
+> 
 > 2. but we'd better CHARMM-GUI
-
-
-
-
 
 ### Building in Gromacs
 
@@ -2455,72 +2385,48 @@ https://manual.gromacs.org/current/reference-manual/special/free-energy-implemen
 and another pdf tutorial [Free Energy Calculation with GROMACS: Solvation free energy](http://www.gromacs.org/@api/deki/files/262/=gromacs-free-energy-tutorial.pdf)
 
 > 注意NAMD和Gromacs做fep的逻辑稍微有点不一样
->
+> 
 > NAMD是dual-topology。代表任何改变了电荷的原子都需要列一个新原子，该原子会在state B出现，原本的原子会在state A消失
->
+> 
 > Gromacs是single-topology。改变原子的电荷只需要在同一个原子身上列明state A state B就可以了。但是遇到原本不存在的原子的话，gromacs就需要列一个pseudo atom，该原子在state A不存在，会在state B出现
 
 > a set of series: (see manual also)
->
+> 
 > https://manual.gromacs.org/current/reference-manual/algorithms/free-energy-calculations.html
->
+> 
 > https://manual.gromacs.org/current/reference-manual/functions/free-energy-interactions.html#feia TI equations
 
-
-
-
-
-
-
 > #### FESetup
->
+> 
 > https://fesetup.readthedocs.io/en/latest/introduction.html is unreadable...
->
+> 
 > [a tutorial](https://vileoy.uovie.com/blog/2020/01/07/free-energy-calculation-tutorial/) from [this original one](https://siremol.org/tutorials/somd/Binding_free_energy/FESetup.html)
->
 > 
->
 > FESetup for NAMD
->
+> 
 > no tutorial, no option manual, only code...
->
 > 
->
 > #### PyAutoFEP
->
+> 
 > https://github.com/luancarvalhomartins/PyAutoFEP
->
+> 
 > Automated, Streamlined, and Accurate Absolute Binding Free-Energy Calculations
->
 > 
->
 > #### PMX
->
+> 
 > [another tool: pmx](http://pmx.mpibpc.mpg.de/sardinia2018_tutorial2/index.html)
->
+> 
 > http://pmx.mpibpc.mpg.de/webserver.html  can perform protein and DNA mutation
->
 > 
->
-> 
->
 > https://github.com/drazen-petrov/SMArt
->
-> #### BFEE2?
->
-> https://github.com/fhh2626/BFEE2
->
-> https://www.ks.uiuc.edu/Research/vmd/plugins/bfeestimator/
->
-> ok for absolute BFE. only for ABFE
->
 > 
-
-
-
-
-
-
+> #### BFEE2?
+> 
+> https://github.com/fhh2626/BFEE2
+> 
+> https://www.ks.uiuc.edu/Research/vmd/plugins/bfeestimator/
+> 
+> ok for absolute BFE. only for ABFE
 
 ## FEP running with NAMD
 
@@ -2552,11 +2458,21 @@ It's found that the aromatic ring cannot retain its planar structure, though in 
 
 coplanar four atoms. there must be at least two common atoms to make two dihedrals coplanar
 
+another thing is to control rotations of the groups, i.e. cis-adenine, phosphate group contacting hydrogens....
+
+cis-adenine might be fine (25 31 17 36)
+
+1 4 21 23: PG1 OG303 CG321 CG3C51 
+
+> ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.6000  1   180.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
+> ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.6500  2     0.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
+> ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.0500  3     0.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
+
 #### simualtion params
 
 ```tcl
 timestep                1.0
-dcdfreq                 10000		;# not too large!
+dcdfreq                 10000        ;# not too large!
 
 # CONSTANT-T
 langevin                on
@@ -2570,18 +2486,16 @@ useConstantRatio        no;            # keeps the ratio of the unit cell in the
 langevinPiston          on
 langevinPistonTarget    1.01325
 langevinPistonPeriod    100;          # not too large!
-langevinPistonDecay     50;        	  # not too large!
+langevinPistonDecay     50;              # not too large!
 langevinPistonTemp      $temp
 StrainRate              0.0 0.0 0.0
 
 # CUT-OFFS
 switching                on
-switchdist               8.0			# not too large!
+switchdist               8.0            # not too large!
 cutoff                   9.0
 pairlistdist            10.0
 ```
-
-
 
 #### alch parameters
 
@@ -2589,10 +2503,10 @@ recommend
 
 ```shell
 alchVdwLambdaEnd        1.0
-alchElecLambdaStart     0.1		# so early
+alchElecLambdaStart     0.1        # so early
 alchVdWShiftCoeff       6.0
-alchOutFreq             1000 	# should be small
-alchDecouple			off		# our ligand is charged..
+alchOutFreq             1000     # should be small
+alchDecouple            off        # our ligand is charged..
 ```
 
 #### production: backward
@@ -2615,15 +2529,14 @@ if { $INPUTNAME != 0 } {
     ExtendedSystem $INPUTNAME.restart.xsc.old
 } else {
     # from foward. use the former outputName
-    bincoordinates 	    $outputbase-prod-forward.coor
-    binvelocities	    $outputbase-prod-forward.vel
+    bincoordinates         $outputbase-prod-forward.coor
+    binvelocities        $outputbase-prod-forward.vel
     extendedSystem      $outputbase-prod-forward.xsc
 }
 
 set all {0.00 0.00001 0.0001 0.001 0.01 0.05 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.95 0.99 0.999 0.9999 0.99999 1.00}
 # symmetric
 runFEPlist [lreverse $all] $numSteps
-
 ```
 
 we may run consecutively
@@ -2635,8 +2548,6 @@ base=$1
 namd3 +p1 +devices 0 $base-forward > $base-forward.log
 namd3 +p1 +devices 0 $base-backward > $base-backward.log
 ```
-
-
 
 #### restart production
 
@@ -2687,8 +2598,8 @@ and you'll of course change your -backward file
 ```tcl
 } else {
     # from foward. use the former outputName
-    bincoordinates 	    $outputbase-prod-forward.coor
-    binvelocities	    $outputbase-prod-forward.vel
+    bincoordinates         $outputbase-prod-forward.coor
+    binvelocities        $outputbase-prod-forward.vel
     extendedSystem      $outputbase-prod-forward.xsc
 }
 ```
@@ -2706,19 +2617,11 @@ and you'll of course change your -backward file
 set all {0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6 0.65 0.7 0.75 0.8 0.85 0.9}
 ```
 
-
-
-
-
-
-
 To check the progress:
 
-````shell
+```shell
 grep "Running FEP window" ./*.log 
-````
-
-
+```
 
 ### work flow: cmd reference
 
@@ -2746,10 +2649,7 @@ vmd -dispdev text -e measure.tcl -args ligand # complex
 namd3 +p6 fep-lig-equil > fep-lig-equil.log  # +auto-provision +idlepoll
 # may go to analysis and check?
 vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
-
 ```
-
-
 
 ##### check: is this run ok
 
@@ -2770,8 +2670,6 @@ exit
 # pymol *.pdb
 ```
 
-
-
 > Taking another set of starting coordinates as the initial for production
 
 Why don't we run equilibration for a while again?
@@ -2784,15 +2682,11 @@ grep "Running FEP window" ./*.log
 
 to check the progress
 
-
-
 #### after production
 
 ##### cmd
 
 ```shell
-
-
 # prod
 namd3 +p1 +devices 0 fep-lig-prod-forward > fep-lig-prod-forward.log
 ```
@@ -2809,26 +2703,20 @@ Another thing is that if the nucleoside collapses on itself at lambda=0, it mean
 
 extract some frames. 250 frames a window.
 
-
-
 ```shell
 catdcd -o view.dcd -otype dcd -i equilibrated-ligand.gro -stride 125 rdrp-mtp-remtp-ligand-prod-forward.dcd
 # failed in re
 ```
 
-
-
 ```tcl
 mol load psf ../../common/ligand.psf
 mol addfile rdrp-mtp-remtp-ligand-prod-forward.dcd
 for {set x 0} {$x <= } {incr x} {
-	set sel [atomselect top "resname HYB" frame [expr $x * 250]]
+    set sel [atomselect top "resname HYB" frame [expr $x * 250]]
 }
 
 # atomselect top "within 5 of resname HYB" frame [expr $x * 250]
 ```
-
-
 
 ### debug and problems
 
@@ -2844,7 +2732,7 @@ the history
 try-4.21.xlsx
 
 > c: complex
->
+> 
 > (piston)表示100, 50的参数
 
 现在要验证一个用我参数的
@@ -2861,7 +2749,7 @@ try-4.21.xlsx
 > - timestep 1.0
 
 > 后来算了：
->
+> 
 > - complex+tutorial+my cutoff+edited hybrid.prm
 >   - 改参数是修好了键的问题
 >   - 改cutoff毁掉了ligand
@@ -2872,24 +2760,26 @@ try-4.21.xlsx
 >   - 两个键恐怕只能8，5组合才能成功限制？没事
 > - 加上其他参数
 >   - 跑得没有tut-piston远。这几个hybrid都不算太远；transfer也没比normal少跑
->
+> 
 > 芳环的事已经有所改善，但后面是否还应该使用限制性的参数？
->
+> 
 > final：ligand那组还是有点变化了，complex炸了
->
+> 
 > - 奇怪的是去掉那几个其他参数，hgroupcutoff、wrap water，就好了？并没好？？
->
+> 
 > 现在的框架应该是tut+piston+pme+other，但其实是**有时候成功有时候不太行**。很可能是piston等压的问题，pme和other影响都不大吧，alpha磷酸离芳环氢有点近了的情况基本都存在，tut-piston也是？
 
 总结：
 
 - **是否NPT**当然是最重要的之一
+
 - tutorial的参数构象都还行；my param使得三磷酸翘起来
+  
   - 可能的重要因素：**cutoff三连**（langevin damping，PME?）
 
 - npt使得距离变化？爆炸？**piston那俩参数**还是有影响。。
 
-#### 4.21 
+#### 4.21
 
 > FATAL ERROR: ABNORMAL EOF FOUND -buffer=*END
 
@@ -2898,7 +2788,7 @@ This is an end-of-file error. Check the end of your pdb,psf and parameter files 
 #### 4.21
 
 > compare tutorial
->
+> 
 > ```tcl
 > switchdist               8.0
 > cutoff                   9.0
@@ -2916,37 +2806,37 @@ This is an end-of-file error. Check the end of your pdb,psf and parameter files 
 > langevinTemp            $temp
 > langevinDamping         10.0
 > ```
->
+> 
 > and my config
->
+> 
 > ```tcl
-> vdwForceSwitching   	yes;
-> cutoff             	 	12.0;              # may use smaller, maybe 10., with PME
-> switchdist          	10.0;              
-> pairlistdist        	14.0;
+> vdwForceSwitching       yes;
+> cutoff                      12.0;              # may use smaller, maybe 10., with PME
+> switchdist              10.0;              
+> pairlistdist            14.0;
 > 
-> timestep            	1.0;               # 2fs/step
-> nonbondedFreq       	1;                 # nonbonded forces every step
-> fullElectFrequency  	2; 
-> stepspercycle       	20;                # 20 redo pairlists every ten steps
-> pairlistsPerCycle    	2;                
-> rigidBonds          	all;               # needed for 2fs steps. Bound constraint all bonds involving H are fixed in length
+> timestep                1.0;               # 2fs/step
+> nonbondedFreq           1;                 # nonbonded forces every step
+> fullElectFrequency      2; 
+> stepspercycle           20;                # 20 redo pairlists every ten steps
+> pairlistsPerCycle        2;                
+> rigidBonds              all;               # needed for 2fs steps. Bound constraint all bonds involving H are fixed in length
 > 
-> margin              	1.0
+> margin                  1.0
 > 
 > langevin                   on;         # do langevin dynamics
 > langevinDamping             1;         # damping coefficient (gamma) of 1/ps
 > langevinTemp            $temp;
 > langevinHydrogen          off;
 > 
-> wrapWater           	on;                # wrap water to central cell
-> wrapAll             	on;                # wrap other molecules too
-> wrapNearest         	off;               # use for non-rectangular cells (wrap to the nearest image)
+> wrapWater               on;                # wrap water to central cell
+> wrapAll                 on;                # wrap other molecules too
+> wrapNearest             off;               # use for non-rectangular cells (wrap to the nearest image)
 > 
-> PME                 	yes
-> PMEGridSpacing      	1.0
-> PMETolerance        	10e-6
-> PMEInterpOrder      	4
+> PME                     yes
+> PMEGridSpacing          1.0
+> PMETolerance            10e-6
+> PMEInterpOrder          4
 > useGroupPressure        yes;           # needed for rigid bonds (rigidBonds/SHAKE)
 > useFlexibleCell         no;            # yes for anisotropic system like membrane 
 > useConstantRatio        no;            # keeps the ratio of the unit cell in the x-y plane constant A=B
@@ -2962,9 +2852,9 @@ This is an end-of-file error. Check the end of your pdb,psf and parameter files 
 > splitpatch              hydrogen
 > hgroupcutoff            2.8
 > ```
->
+> 
 > fep似乎是nvt或npt都行？查一下
->
+> 
 > tutorial和程序我记得都是nvt？biggin那个书是吉布斯
 
 #### 4.23~24
@@ -2994,7 +2884,7 @@ Info: LARGEST PATCH (785) HAS 102993 ATOMS
 放弃！
 
 > https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2020-2021/0939.html
->
+> 
 > http://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2010-2011/2282.html
 
 ## FEP results
@@ -3007,20 +2897,67 @@ Info: LARGEST PATCH (785) HAS 102993 ATOMS
 
 data explained https://www.ks.uiuc.edu/Research/namd/2.14/ug/node66.html
 
-
-
 ```shell
 # parsefep -forward ../*forward-all*.fepout -backward ../*backward-all*.fepout -gc 0 -bar
 rm file*
 bash grace.summary.exec
 ```
 
-
-
 adjusting
 
 https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2018-2019/0204.html
 https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2013-2014/0568.html
+
+### collect trajectory files
+
+```shell
+catdcd -num forward.dcd
+```
+
+
+
+
+
+### clustering
+
+```shell
+# cd equil-try folder
+## step1: run make_equil.tcl with saving equilibrated
+## step2: find box info
+p=complex
+gmx editconf -f ${p}/equilibrated.pdb -o ${p}/equilibrated.gro \
+-box 102.65500259399414 92.92599868774414 112.19599914550781 \
+-center 2.9195003509521484 -1.5780010223388672 -3.006999969482422
+## step3: make the top file
+vmd -dispdev text -e make_top.tcl -args complex1
+## step4: to deal with t coupling better, make a index file
+echo "10|11|12" | echo "13|2|3" | gmx make_ndx -f equilibrated.gro -o index.ndx
+## step5: make .tpr
+gmx grompp -f ../md_fake.mdp -n index.ndx -c equilibrated.gro -r equilibrated.gro -p structure.top -o simulation.tpr -maxwarn 4
+# copy: index.ndx equilibrated.gro simulation.tpr
+## step 6: making traj
+f=forward
+conda activate AmberTools21 
+mdconvert -o ${f}.xtc -t equilibrated.gro ${f}.dcd
+gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump
+## step7: fit. protein for least square fit, system for output
+echo 13 0 | gmx trjconv -s simulation.tpr -n index.ndx -f ${f}_nj.xtc -fit rot+trans -o ${f}_fit.xtc
+rm ${f}.xtc
+## step8: get rmsd matrix. protein for least square fit, ligand for rmsd calculation
+echo 13 2 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig.xpm -tu ns
+gmx xpm2ps -f rmsd-lig.xpm -o rmsd-lig.eps -rainbow blue
+## step9: clustering
+cd clus
+rm \#*\#
+echo 13 24 | gmx cluster -s ../simulation.tpr -n ../index.ndx -f ../${f}_fit.xtc -dm ../rmsd-lig.xpm \
+-dist rmsd-distribution.xvg -o clusters.xpm -sz cluster-sizes.xvg -tr cluster-transitions.xpm \
+-ntr cluster-transitions.xvg -clid cluster-id-over-time.xvg -cl clusters.pdb \
+-cutoff 0.2 -method gromos
+```
+
+
+
+
 
 ### using alchemlyb
 
@@ -3034,19 +2971,7 @@ steps
 
 alchemlyb这个包处理得十分粗糙，首先没有考虑分开vdW和coul，数据只读取了dE；然后是数据虽然能比较自由得组合，但是其他lambda下的能量根本不知道，留下了许多nan；最后是他给出那个forward和backward合并的方案，难道不是加了两份dE吗？虽然数值不太一样？感觉没道理
 
-
-
-
-
-
-
-
-
 # Extra protocol
-
-
-
-
 
 ## VS draft
 
@@ -3067,7 +2992,7 @@ find 'substructure' in pubchem
 pubmed离谱的一点就是，甲基都算烃基链的substructure，芳环就不能模糊搜索一下
 
 > so don't use filtered from ATP: https://pubchem.ncbi.nlm.nih.gov/#query=N%23C%5BC%40%40%5D3(n2cnc1c(N)ncnc12)O%5BC%40H%5D(COP(%3DO)(O)OP(%3DO)(O)OP(%3DO)(O)O)%5BC%40%40H%5D(O)%5BC%40H%5D3O&tab=similarity&fullsearch=true&mw_lte=625.27&rotbonds_lte=15&mw_gte=265.27&rotbonds_gte=0&hbonddonor_lte=10&hbonddonor_gte=1&heavycnt_lte=39&polararea_lte=339&hbondacc_lte=20&complexity_lte=934&xlogp_lte=0.7&xlogp_gte=-7.3
->
+> 
 > [no purine](https://pubchem.ncbi.nlm.nih.gov/#query=O%3DP(O)(O)OP(%3DO)(O)OP(%3DO)(O)OC%5BC%40%40H%5D1CCCO1&tab=substructure&fullsearch=true&rotbonds_lte=20&mw_lte=723&hbondacc_lte=20&hbondacc_gte=11&rotbonds_gte=4&xlogp_gte=-10.7&heavycnt_gte=25&hbonddonor_lte=10&polararea_gte=176&mw_gte=445.17&complexity_lte=1312&hbonddonor_gte=2&heavycnt_lte=45&polararea_lte=366&xlogp_lte=1.3)
 
 ### summary
@@ -3093,7 +3018,7 @@ pubmed离谱的一点就是，甲基都算烃基链的substructure，芳环就�
 #### 2nd
 
 > pubchem里整出来坐标nan？gen3D的锅。converted有370个有nan
->
+> 
 > 去搜它的PUBCHEM_IUPAC_INCHIKEY？
 
 ```shell
@@ -3114,9 +3039,9 @@ rm ../lib-temp/*.pdb
 - 有的也不好，还需最小化PO4；
 
 - 有的（上一行的）因为最小化爆炸了，PO4掉了，拉倒；（735等）
-
+  
   > 正方形的PO4没有gen3D就容易爆炸
-  >
+  > 
   > 还可能因为有离子，如1297
 
 - 个别的没加氢
@@ -3154,9 +3079,9 @@ mkdir trash
 ```
 
 > 还是先gen3D，但用GAFF，有些先最小化没成功的成了？
->
+> 
 > 问题：嘌呤全完了？？主要是变形太严重，成键是pymol的问题
->
+> 
 > 直线键啥的解决了？
 
 MMFF94s：能输出的好像好多都好着。5C直线键解决了
@@ -3219,27 +3144,27 @@ rm ion lib
 ```
 
 > 关于命令
->
+> 
 > 就是收集文件名，用后缀过滤，排序。
->
+> 
 > diff：找出差异文件。<代表前者有后者没有的
->
+> 
 > cut：去掉输出的'< '
->
+> 
 > d和f：截取，这里去掉后缀
->
+> 
 > 其他：https://www.cnblogs.com/f-ck-need-u/p/9071033.html
 
 救一下没有的
 
 > https://blog.csdn.net/u012325865/article/details/103782297
->
+> 
 > https://www.rdkit.org/docs/GettingStartedInPython.html
->
+> 
 > https://www.rdkit.org/docs/source/rdkit.Chem.rdmolfiles.html reader and writer
->
+> 
 > http://rdkit.chenzhaoqiang.com/index.html Chinese tutorial
->
+> 
 > rdkit去除离子
 
 ```shell
@@ -3306,7 +3231,7 @@ https://openbabel.org/docs/dev/UseTheLibrary/Python_Pybel.html
 > ```
 > rdkit.Chem.rdmolops.SanitizeFlags.SANITIZE_NONE
 > ```
->
+> 
 >  indicates that no problems were encountered. 没用上  
 
 处理多个分子：ok。可以用来除离子？
@@ -3338,8 +3263,6 @@ done
 
 已经炸了的，不能通过片段来救了
 
-
-
 > 转了也没有用，还是好多读不了
 
 ```shell
@@ -3349,8 +3272,6 @@ obabel ${f}.pdbqt -osdf -O ../sdf/${f}.sdf;
 done
 find . -name "*" -type f -size 0c | xargs -n 1 rm -f
 ```
-
-
 
 ### other
 
@@ -3362,32 +3283,28 @@ find . -name "*" -type f -size 0c | xargs -n 1 rm -f
 
 能查找区别了以后，就可以无限次补救了。。。
 
-
-
 [RDKit|分子子结构的删除、替换与切割](https://blog.csdn.net/dreadlesss/article/details/105826379)   可以自己生成了？
 
 [a series of questions, including removing solvent](https://rdkit-discuss.narkive.com/CAZ6XfCC/washing-molecules-in-rdkit)
 
 > https://github.com/forlilab/Meeko read pdbqt and Mol to PDBT. not a rdkit.Chem.Mol...
 
-
-
 ### docking
 
 > docking test: some bonds rotated, some not. it affects!
->
+> 
 > convert: most bonds are ok, but some of the ligands huddled up (its TP). 
->
+> 
 > straight O-P-O bond: from convert. not changed in docking...
->
+> 
 > gen3D和minimize也没啥变化，拉倒吧
->
+> 
 > those that failed might be: with Na+, Cu2+ ion, water, etc. That's ok
->
+> 
 > 感觉leili给的初始结构怪怪的，作用力不强，都dock不上去
->
+> 
 > 还不如equil的ATP，好几个Arg，align了一下，相对位置差不多
->
+> 
 > 现在docking的site调整好了
 
 对接要多给点空间啊！

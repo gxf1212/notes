@@ -1409,7 +1409,7 @@ steps:
 
    ```shell
    cd /home/gxf/.conda/envs/AmberTools21/dat/leap/cmd/
-   c/home/gxf/anaconda3/envs/AmberTools21/dat/leap/cmd/
+   cd /home/gxf/anaconda3/envs/AmberTools21/dat/leap/cmd/
    ```
 
 2. get amber input file
@@ -1506,7 +1506,7 @@ steps:
    quit
    ```
 
-   > https://ambermd.org/tutorials/basic/tutorial8/index.php https://www.phys.ksu.edu/personal/schmit/SLTCAP/SLTCAP.html
+   > calculate the number of ions: https://ambermd.org/tutorials/basic/tutorial8/index.php https://www.phys.ksu.edu/personal/schmit/SLTCAP/SLTCAP.html
    >
    > - mw of protein: 9.762 kDa
    > - concentration: 150
@@ -1516,6 +1516,15 @@ steps:
    > Warning: The unperturbed charge of the unit (1.999900) is not zero.
    >
    > Warning: Close contact of 1.432869 angstroms between .R<CASP 185>.A<H 2> and .R<MOL 186>.A<H10 41>
+   >
+   > one thing that matters is, when measuring mw of the protein, we must **include hydrogens**:
+   >
+   > ```shell
+   > conda activate AmberTools21
+   > reduce 2fbw_pro.pdb > 2fbw_h.pdb
+   > python3 ~/Desktop/work/projects/tools/Python-for-MD/prepare/mw.py ~/Desktop/work/projects/undergraduate/SDH/md/lig1/ 2fbw_h.pdb
+   > 
+   > ```
 
 3. convert to 
 
@@ -1541,7 +1550,7 @@ steps:
    ```
    
 
-note that the output has changed in 2022! output into a folder; add a run.sh and .itp file
+note that the output has changed in 2022! output into a folder; add a run.sh and .itp file. see [here in 2](https://gxf1212.gitee.io/notes/#/MD/MD-tutorials-all?id=_22217-amber-building-pep)
 
 ### MD with one ligand
 
