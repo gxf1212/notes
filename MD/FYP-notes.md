@@ -1735,6 +1735,8 @@ questions
    catdcd -o ${f}.trr -otype trr -i equilibrated.pdb -dcd ${f}.dcd
    ```
 
+   do not add index file
+   
 3. 
 
 #### in VMD
@@ -2468,6 +2470,14 @@ cis-adenine might be fine (25 31 17 36)
 > ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.6500  2     0.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
 > ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.0500  3     0.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
 
+25 31 17 36: 
+
+29 31 17 36: 
+
+> in ori (c01 not so ideal): 50.47070, -69.64504
+>
+> equil2/fine3: 65.38997 -45.18305
+
 #### simualtion params
 
 ```tcl
@@ -2668,6 +2678,10 @@ set sel [atomselect top "segname HETA or resname MG"]
 $sel writepdb equil-ligand.pdb
 exit
 # pymol *.pdb
+
+conda activate AmberTools21
+align_ligand `pwd`/*.pdb `pwd`/../../../c01-hyb.pdb
+pymol *_aligned.pdb ../../../c01-hyb.pdb
 ```
 
 > Taking another set of starting coordinates as the initial for production
@@ -2895,10 +2909,13 @@ Info: LARGEST PATCH (785) HAS 102993 ATOMS
 
 ### ParseFEP
 
+see tutorial-FEP for basic usage.
+
 data explained https://www.ks.uiuc.edu/Research/namd/2.14/ug/node66.html
 
 ```shell
 # parsefep -forward ../*forward-all*.fepout -backward ../*backward-all*.fepout -gc 0 -bar
+# now we must use GUI since problem occurs in 'display'
 rm file*
 bash grace.summary.exec
 ```
@@ -2908,17 +2925,32 @@ adjusting
 https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2018-2019/0204.html
 https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2013-2014/0568.html
 
-### collect trajectory files
+### clustering
+
+#### collect trajectory files
+
+> draft
 
 ```shell
-catdcd -num forward.dcd
+bash catdcd.sh ${p} ${f} 6 510 0 _0_0.1
+bash catdcd.sh ${p} ${f} 6 510 7140 _0.9_1
+
+f=backward
+f=forward
+
+catdcd -o ${f}.dcd ${f}_*.dcd 
+
+bash catdcd.sh ${p} ${f} 6 51 0 _0_0.1
+bash catdcd.sh ${p} ${f} 6 51 714 _0.9_1
+bash catdcd2.sh ${p} ${f} 16 10 0_0.1_0.9
+
+catdcd -num ${f}.dcd
+catdcd -num ${p}/*.dcd
 ```
 
 
 
-
-
-### clustering
+#### making clusters
 
 ```shell
 # cd equil-try folder
@@ -2928,34 +2960,63 @@ p=complex
 gmx editconf -f ${p}/equilibrated.pdb -o ${p}/equilibrated.gro \
 -box 102.65500259399414 92.92599868774414 112.19599914550781 \
 -center 2.9195003509521484 -1.5780010223388672 -3.006999969482422
+# ligand
+gmx editconf -f ${p}/equilibrated.pdb -o ${p}/equilibrated.gro \
+-box 102.65199661254883 92.91299819946289 112.18100357055664 \
+-center 2.9200000762939453 -1.5814990997314453 -3.010499954223633 
 ## step3: make the top file
 vmd -dispdev text -e make_top.tcl -args complex1
 ## step4: to deal with t coupling better, make a index file
+cd $p
 echo "10|11|12" | echo "13|2|3" | gmx make_ndx -f equilibrated.gro -o index.ndx
+echo "4|5|6" | echo "2|9" | gmx make_ndx -f equilibrated.gro -o index.ndx
 ## step5: make .tpr
 gmx grompp -f ../md_fake.mdp -n index.ndx -c equilibrated.gro -r equilibrated.gro -p structure.top -o simulation.tpr -maxwarn 4
+# ligand: md_fake2
 # copy: index.ndx equilibrated.gro simulation.tpr
 ## step 6: making traj
 f=forward
 conda activate AmberTools21 
 mdconvert -o ${f}.xtc -t equilibrated.gro ${f}.dcd
 gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump
-## step7: fit. protein for least square fit, system for output
+## step7: fit. protein for least square fit, system for output. ligand 13: HYB_MG
 echo 13 0 | gmx trjconv -s simulation.tpr -n index.ndx -f ${f}_nj.xtc -fit rot+trans -o ${f}_fit.xtc
 rm ${f}.xtc
 ## step8: get rmsd matrix. protein for least square fit, ligand for rmsd calculation
-echo 13 2 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig.xpm -tu ns
-gmx xpm2ps -f rmsd-lig.xpm -o rmsd-lig.eps -rainbow blue
+echo 13 2 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig-${f}.xpm -tu ns
+gmx xpm2ps -f rmsd-lig-${f}.xpm -o rmsd-lig-${f}.eps -rainbow blue
+mv rmsd.xvg rmsd_${f}.xvg
+xmgrace rmsd_forward.xvg rmsd_backward.xvg
 ## step9: clustering
-cd clus
+mkdir clus-${f} && cd clus-${f}
 rm \#*\#
-echo 13 24 | gmx cluster -s ../simulation.tpr -n ../index.ndx -f ../${f}_fit.xtc -dm ../rmsd-lig.xpm \
+echo 13 24 | gmx cluster -s ../simulation.tpr -n ../index.ndx -f ../${f}_fit.xtc -dm ../rmsd-lig-${f}.xpm \
 -dist rmsd-distribution.xvg -o clusters.xpm -sz cluster-sizes.xvg -tr cluster-transitions.xpm \
 -ntr cluster-transitions.xvg -clid cluster-id-over-time.xvg -cl clusters.pdb \
--cutoff 0.2 -method gromos
+-cutoff 0.25 -method gromos
+# ligand: 13 13
+xmgrace cluster-id-over-time.xvg
+xmgrace cluster-sizes.xvg
+# pymol
+split_states cluster
+
+cd ..
+```
+
+#### decomposition
+
+```shell
+bash ../mknamd_fep_decomp.sh rdrp-mtp-remtp-complex-prod-backward-all.fepout 10000 510000 500
 ```
 
 
+
+
+
+#### Analysis
+
+1. visualize `clusters.pdb`, compare with the initial structure
+2. calculate RMSD with `c01.pdb`
 
 
 
