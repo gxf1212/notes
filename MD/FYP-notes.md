@@ -2444,6 +2444,8 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 #### ligand paramters
 
+![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral.jpg)
+
 1. It's found that the aromatic ring cannot retain its planar structure, though in pymol hybrid.pdb still looks fine (though ligand.pdb Ar dotted bonds is gone). 因为后面对芳环只有参数的限制，程序不知道关于芳香键的标记
 
    31 17 19 34: CG3C50 CG2R57 NG2RC0 CG2RC0 (purple)
@@ -2456,13 +2458,13 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
    35 22 32 24: CG2R64 NG2R62 CG2R64 NG2R62 (blue)
 
-   ![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral.jpg)
-
    coplanar four atoms. there must be at least two common atoms to make two dihedrals coplanar
 
    another thing is to control rotations of the groups, i.e. cis-adenine, phosphate group contacting hydrogens....
 
    cis-adenine might be fine (25 31 17 36)
+
+   > these modifications are made before the first equilibration, before 22.5.1
 
 2. 1 4 21 23: PG1 OG303 CG321 CG3C51 
 
@@ -2472,7 +2474,9 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
    >
    > ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.0500  3     0.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
 
-   I only keep 0.6500  1     0.00
+   I only keep 0.6500  1     0.00. Then the minimum point is just 180 degree. Suitable slope too.
+
+   > these modifications are first made in prod-dihe
 
 3. 25 31 17 36: OG3C51 CG3C50 CG2R57 CG2R51
 
@@ -2502,11 +2506,72 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
    >
    > try not to look like c01, almost 0 degree (but fits the parameters...)
 
-   I would write
+   not changed now since it works ok in prod-window (not at its minimum, 0 degree)
 
    > OG3C51 CG3C50 CG2R57 CG2R51
 
-4. 4 21 23 25
+4. to prevent the oxygen from folding back
+
+   ![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-fold-back.jpg)
+
+   21 23 25 31: CG321 CG3C51 OG3C51 CG3C50
+
+   > ./hybrid2.prm:CG321  CG3C51 OG3C51 CG3C50     0.3000  3     0.00 ! /tmp/php , from CG321 CG3C51 OG3C51 CG3C51, penalty= 0.8
+   >
+   > optimal: -60, 60, 180
+   >
+   > initial: 137.44635
+   >
+   > fine
+   >
+   > - prod-dihe/ligand1/c03: 157.66055
+   > - ligand2/dihe-fine1: 141.65534
+   > - ligand2/fine1: 151.13087
+   >
+   > failed
+   >
+   > - complex2/dihe-failed1-lig: 86.83992
+   > - complex2/failed1-lig: 99.32578
+   > - prod-dihe/ligand1/c04: 83.83505
+
+   21 23 26 29: CG321 CG3C51 CG3C51 CG3C51
+
+   > ./par_all36_cgenff.prm:CG321  CG3C51 CG3C51 CG3C51     **0.1900**  3     0.00 ! alkane, 4/98, yin and mackerell, thf, viv
+   >
+   > optimal: -180, -60, 60, 180
+   >
+   > initial: -153.51054
+   >
+   > fine
+   >
+   > - prod-dihe/ligand1/c03: -166.96539
+   > - ligand2/dihe-fine1: -140.73695
+   > - ligand2/fine1: -161.30931
+   >
+   > failed
+   >
+   > - complex2/dihe-failed1-lig: -93.94408
+   > - complex2/failed1-lig: -93.40841
+   > - prod-dihe/ligand1/c04: -84.28765
+
+4. 
+
+> stupid error: this is for 4 21 23 25: OG303 CG321 CG3C51 OG3C51
+>
+> > ./par_all36_cgenff.prm:OG303  CG321  CG3C51 OG3C51     3.4000  1   180.00 ! NA, sugar
+> >
+> > optimal: 0 degree
+>
+> fine
+>
+> - prod-dihe/ligand1/c03: -45.03162
+> - ligand2/dihe-fine1: -45.09206
+>
+> failed
+>
+> - complex2/dihe-failed1-lig: -34.30922
+> - complex2/failed1-lig: -53.21200
+> - prod-dihe/ligand1/c04: -44.75677
 
 #### simualtion params
 
@@ -2960,7 +3025,7 @@ https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2013-2014/0568.html
 
 ### clustering
 
-#### collect trajectory files
+#### collect trajectory files (prod-window)
 
 > draft
 
@@ -2981,9 +3046,9 @@ catdcd -num ${f}.dcd
 catdcd -num ${p}/*.dcd
 ```
 
-
-
 #### making clusters
+
+> now for prod-dihe
 
 ```shell
 # cd equil-try folder
@@ -3008,14 +3073,16 @@ echo "4|5|6" | echo "2|3" | gmx make_ndx -f equilibrated.gro -o index.ndx
 gmx grompp -f ../md_fake.mdp -n index.ndx -c equilibrated.gro -r equilibrated.gro -p structure.top -o simulation.tpr -maxwarn 4
 # ligand: md_fake2
 # copy: index.ndx equilibrated.gro simulation.tpr
-## step 6: making traj
+## step 6: making traj. in folder clustering
 f=forward
 conda activate AmberTools21 
-mdconvert -o ${f}.xtc -t equilibrated.gro *${f}.dcd
+mdconvert -o ${f}.xtc -t equilibrated.gro ../*${f}.dcd
 gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump
 ## step7: fit. protein for least square fit, system for output. ligand 13: HYB_MG
 echo 13 0 | gmx trjconv -s simulation.tpr -n index.ndx -f ${f}_nj.xtc -fit rot+trans -o ${f}_fit.xtc
 rm ${f}.xtc
+# optional, full traj
+# echo 24 | gmx trjconv -f ${f}_fit.xtc -s simulation.tpr -n index.ndx -o traj.pdb -tu ps
 ## step8: get rmsd matrix. protein for least square fit, ligand for rmsd calculation
 echo 13 2 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig-${f}.xpm -tu ns
 gmx xpm2ps -f rmsd-lig-${f}.xpm -o rmsd-lig-${f}.eps -rainbow blue

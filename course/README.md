@@ -2,9 +2,9 @@
 
 This is the homepage for course notes. Click the sidebar to view.
 
-- Fundamental-biology
-- Advanced biology
-- Physics-biophysics
+- [Fundamental-biology](/course/fundamental-biology.md)
+- [Advanced biology](/course/advanced-biology.md)
+- [Physics-biophysics](/course/physics-biophysics.md)
 - other courses
 
 #### tutorial share
