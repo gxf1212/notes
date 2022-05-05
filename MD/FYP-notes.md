@@ -2444,39 +2444,69 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 #### ligand paramters
 
-It's found that the aromatic ring cannot retain its planar structure, though in pymol hybrid.pdb still looks fine (though ligand.pdb Ar dotted bonds is gone). 因为后面对芳环只有参数的限制，程序不知道关于芳香键的标记
+1. It's found that the aromatic ring cannot retain its planar structure, though in pymol hybrid.pdb still looks fine (though ligand.pdb Ar dotted bonds is gone). 因为后面对芳环只有参数的限制，程序不知道关于芳香键的标记
 
-31 17 19 34: CG3C50 CG2R57 NG2RC0 CG2RC0 (purple)
+   31 17 19 34: CG3C50 CG2R57 NG2RC0 CG2RC0 (purple)
 
-31 17 36 18: CG3C50 CG2R57 CG2R51 CG2R51 (green)
+   31 17 36 18: CG3C50 CG2R57 CG2R51 CG2R51 (green)
 
-34 19 24 32: CG2RC0 NG2RC0 NG2R62 CG2R64 (orange)
+   34 19 24 32: CG2RC0 NG2RC0 NG2R62 CG2R64 (orange)
 
-18 34 35 22: CG2R51 CG2RC0 CG2R64 NG2R62 (pink)
+   18 34 35 22: CG2R51 CG2RC0 CG2R64 NG2R62 (pink)
 
-35 22 32 24: CG2R64 NG2R62 CG2R64 NG2R62 (blue)
+   35 22 32 24: CG2R64 NG2R62 CG2R64 NG2R62 (blue)
 
-![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral.jpg)
+   ![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral.jpg)
 
-coplanar four atoms. there must be at least two common atoms to make two dihedrals coplanar
+   coplanar four atoms. there must be at least two common atoms to make two dihedrals coplanar
 
-another thing is to control rotations of the groups, i.e. cis-adenine, phosphate group contacting hydrogens....
+   another thing is to control rotations of the groups, i.e. cis-adenine, phosphate group contacting hydrogens....
 
-cis-adenine might be fine (25 31 17 36)
+   cis-adenine might be fine (25 31 17 36)
 
-1 4 21 23: PG1 OG303 CG321 CG3C51 
+2. 1 4 21 23: PG1 OG303 CG321 CG3C51 
 
-> ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.6000  1   180.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
-> ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.6500  2     0.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
-> ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.0500  3     0.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
+   > ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.6000  1   180.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
+   >
+   > ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.6500  2     0.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
+   >
+   > ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.0500  3     0.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
 
-25 31 17 36: 
+   I only keep 0.6500  1     0.00
 
-29 31 17 36: 
+3. 25 31 17 36: OG3C51 CG3C50 CG2R57 CG2R51
 
-> in ori (c01 not so ideal): 50.47070, -69.64504
->
-> equil2/fine3: 65.38997 -45.18305
+   29 31 17 36: CG3C51 CG3C50 CG2R57 CG2R51
+
+   > in hybrid2.prm
+   >
+   > CG2R51 CG2R57 CG3C50 CG3C51     0.3500  3   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C51 CG3C51, penalty= 21
+   >
+   > CG2R51 CG2R57 CG3C50 OG3C51     0.2800  1   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C52 OG3C51, penalty= 25
+   >
+   > CG2R51 CG2R57 CG3C50 OG3C51     0.9800  2   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C52 OG3C51, penalty= 25
+   >
+   > CG2R51 CG2R57 CG3C50 OG3C51     1.7500  3   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C52 OG3C51, penalty= 25
+
+   > in ori (c01 not so ideal): 50.47070, -69.64504
+   >
+   > equil2/ligand/fine3: 65.38997 -45.18305
+   >
+   > equil2/ligand/fine1: 32.69268 -80.13612
+   >
+   > equil2/ligand/fine2: 32.31323 -84.86327
+   >
+   > equil/ligand/fine6:   49.75553 -66.17808
+   >
+   > equil/ligand/fine5:   47.29112 -66.99147
+   >
+   > try not to look like c01, almost 0 degree (but fits the parameters...)
+
+   I would write
+
+   > OG3C51 CG3C50 CG2R57 CG2R51
+
+4. 4 21 23 25
 
 #### simualtion params
 
@@ -2679,9 +2709,12 @@ $sel writepdb equil-ligand.pdb
 exit
 # pymol *.pdb
 
-conda activate AmberTools21
-align_ligand `pwd`/*.pdb `pwd`/../../../c01-hyb.pdb
-pymol *_aligned.pdb ../../../c01-hyb.pdb
+conda activate pymol
+pymol *.pdb ../../../c01-hyb.pdb
+import psico.mcsalign
+mcsalign fine2, c01-hyb
+# align_ligand `pwd`/*.pdb `pwd`/../../../c01-hyb.pdb
+
 ```
 
 > Taking another set of starting coordinates as the initial for production
@@ -2956,11 +2989,11 @@ catdcd -num ${p}/*.dcd
 # cd equil-try folder
 ## step1: run make_equil.tcl with saving equilibrated
 ## step2: find box info
-p=complex
+p=complex1
 gmx editconf -f ${p}/equilibrated.pdb -o ${p}/equilibrated.gro \
 -box 102.65500259399414 92.92599868774414 112.19599914550781 \
 -center 2.9195003509521484 -1.5780010223388672 -3.006999969482422
-# ligand
+p=ligand1
 gmx editconf -f ${p}/equilibrated.pdb -o ${p}/equilibrated.gro \
 -box 102.65199661254883 92.91299819946289 112.18100357055664 \
 -center 2.9200000762939453 -1.5814990997314453 -3.010499954223633 
@@ -2969,7 +3002,8 @@ vmd -dispdev text -e make_top.tcl -args complex1
 ## step4: to deal with t coupling better, make a index file
 cd $p
 echo "10|11|12" | echo "13|2|3" | gmx make_ndx -f equilibrated.gro -o index.ndx
-echo "4|5|6" | echo "2|9" | gmx make_ndx -f equilibrated.gro -o index.ndx
+# ligand
+echo "4|5|6" | echo "2|3" | gmx make_ndx -f equilibrated.gro -o index.ndx
 ## step5: make .tpr
 gmx grompp -f ../md_fake.mdp -n index.ndx -c equilibrated.gro -r equilibrated.gro -p structure.top -o simulation.tpr -maxwarn 4
 # ligand: md_fake2
@@ -2977,7 +3011,7 @@ gmx grompp -f ../md_fake.mdp -n index.ndx -c equilibrated.gro -r equilibrated.gr
 ## step 6: making traj
 f=forward
 conda activate AmberTools21 
-mdconvert -o ${f}.xtc -t equilibrated.gro ${f}.dcd
+mdconvert -o ${f}.xtc -t equilibrated.gro *${f}.dcd
 gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump
 ## step7: fit. protein for least square fit, system for output. ligand 13: HYB_MG
 echo 13 0 | gmx trjconv -s simulation.tpr -n index.ndx -f ${f}_nj.xtc -fit rot+trans -o ${f}_fit.xtc
@@ -2998,6 +3032,7 @@ echo 13 24 | gmx cluster -s ../simulation.tpr -n ../index.ndx -f ../${f}_fit.xtc
 xmgrace cluster-id-over-time.xvg
 xmgrace cluster-sizes.xvg
 # pymol
+pymol clusters.pdb
 split_states cluster
 
 cd ..
