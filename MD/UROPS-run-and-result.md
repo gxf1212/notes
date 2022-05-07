@@ -1282,8 +1282,14 @@ for restraint:
 > - summary
 >   - [几种生成有机分子GROMACS拓扑文件的工具](http://bbs.keinsci.com/thread-428-1-1.html) generate charge
 >   - [RESP2原子电荷的思想](http://sobereva.com/531) intro to resp charge
+>
+> comments:
+>
+> - it's better to work under Linux environment. Windows cmd does not support statement like `f=atp`. you may install WSL (Windows subsystem for Linux) and find your files at `\mnt`
+> - tools needed: conda (AmberTools, acpype), Gaussian+MDanalysis, openbabel, gromacs, bash shell
+> - [download G16 for Linux](https://murbsch-my.sharepoint.com/:f:/g/personal/gxf1212_880n_vip/Em7CrTdwlC5Horhyc1RxCBEBdlhKyrUy5Og55gbckLL4sg?e=XD0A7B)
 
-steps:
+#### Steps
 
 1. add non-polar hydrogens
 
@@ -1377,9 +1383,21 @@ steps:
    ~/Desktop/work/projects/undergraduate/NUS-UROPS/md/prepare/align.py PEP
    ```
    
-   
-   
 
+#### A simplified alternative
+
+bcc charge
+
+```shell
+conda activate AmberTools21
+pdb4amber -i lig.pdb -o lig_new.pdb --reduce --dry
+antechamber -i lig_new.pdb -fi pdb -o lig.mol2 -fo mol2 -at gaff -c bcc -rn MOL
+parmchk2 -i lig.mol2 -f mol2 -o lig.frcmod
+```
+
+
+
+> draft
 > 
 > ```shell
 > tleap
@@ -1521,40 +1539,55 @@ steps:
    >
    > ```shell
    > conda activate AmberTools21
-   > reduce 2fbw_pro.pdb > 2fbw_h.pdb
+   > reduce 2fbw_pro.pdb > 2fbw_h.pdb  # add hydrogen
    > python3 ~/Desktop/work/projects/tools/Python-for-MD/prepare/mw.py ~/Desktop/work/projects/undergraduate/SDH/md/lig1/ 2fbw_h.pdb
    > 
    > ```
 
-3. convert to 
-
+3. convert to gmx
+   
+   >   history command (in 2021)
+   >   
+   >     ```shell
+   >    conda activate Acpype
+   >    acpype -p com.prmtop -x com.inpcrd -d -c user
+   >    # rename
+   >    mv com_GMX.gro com.gro
+   >    mv com_GMX.top com.top
+   >    # also generated em.mdp and md.mdp for test
+   >    mv em.mdp em_test.mdp
+   >    mv md.mdp md_test.mdp
+   >     ```
+   >
+   >    and process some text
+   >
+   >    ```shell
+   >    grep "WAT" -rl ./com.gro | xargs sed -i "s/WAT/SOL/g" 
+   >    grep "WAT" -rl ./com.top | xargs sed -i "s/WAT/SOL/g"
+   >    # change in topol.top (under "atom") IM to Cl-, IP to Na+
+   >    grep " IP " -rl ./com.top | xargs sed -i "s/ IP / Na+ /g" 
+   >    grep " IM " -rl ./com.top | xechoargs sed -i "s/ IM / Cl- /g" 
+   >    ```
+   
+   note that the output has changed in 2022! output into a folder; add a run.sh and .itp file, but we don't use them.
+   
    ```shell
    conda activate Acpype
    acpype -p com.prmtop -x com.inpcrd -d -c user
-   # rename
+   cd com.amb2gmx
    mv com_GMX.gro com.gro
    mv com_GMX.top com.top
-   # also generated em.mdp and md.mdp for test
-   mv em.mdp em_test.mdp
-   mv md.mdp md_test.mdp
-   ```
-
-4. process text
-
-   ```shell
    grep "WAT" -rl ./com.gro | xargs sed -i "s/WAT/SOL/g" 
-   grep "WAT" -rl ./com.top | xargs sed -i "s/WAT/SOL/g"
-   # change in topol.top (under "atom") IM to Cl-, IP to Na+
-   grep " IP " -rl ./com.top | xargs sed -i "s/ IP / Na+ /g" 
-   grep " IM " -rl ./com.top | xechoargs sed -i "s/ IM / Cl- /g" 
+   grep "WAT" -rl ./com.top | xargs sed -i "s/WAT/SOL/g" 
    ```
    
-
-note that the output has changed in 2022! output into a folder; add a run.sh and .itp file. see [here in 2](https://gxf1212.gitee.io/notes/#/MD/MD-tutorials-all?id=_22217-amber-building-pep)
+   > [acpype server](https://www.bio2byte.be/acpype/), but not using
 
 ### MD with one ligand
 
 https://jerkwin.github.io/GMX/GMXtut-5/#%E6%A6%82%E8%BF%B0
+
+you may use my scripts: [download here](), but refer to Jerkwin tutorial for details; or modify from his.
 
 1. 将蛋白质和ligand放到分开的坐标文件中 (I don't need)
 

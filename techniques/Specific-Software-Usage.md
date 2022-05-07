@@ -143,8 +143,6 @@ https://hsk.oray.com/cooperation/ 使用花生壳快速建立端口映射，在�
 
 for students，白嫖内网穿透，还要做任务？
 
-
-
 #### usage
 
 > phlinux is the old version. forget about it!

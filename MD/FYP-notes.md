@@ -2473,8 +2473,16 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
    > ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.6500  2     0.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
    >
    > ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.0500  3     0.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
+   >
+   > optimal: 0
 
-   I only keep 0.6500  1     0.00. Then the minimum point is just 180 degree. Suitable slope too.
+   I only keep
+
+   ```
+   CG3C51 CG321  OG303  PG1        0.6500  1     0.00     ! manually added
+   ```
+
+   Then the minimum point is just 180 degree. Suitable slope too.
 
    > these modifications are first made in prod-dihe
 
@@ -2486,14 +2494,22 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
    >
    > CG2R51 CG2R57 CG3C50 CG3C51     0.3500  3   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C51 CG3C51, penalty= 21
    >
+   > optimal: -60, 60, 180
+   >
    > CG2R51 CG2R57 CG3C50 OG3C51     0.2800  1   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C52 OG3C51, penalty= 25
    >
    > CG2R51 CG2R57 CG3C50 OG3C51     0.9800  2   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C52 OG3C51, penalty= 25
    >
    > CG2R51 CG2R57 CG3C50 OG3C51     1.7500  3   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C52 OG3C51, penalty= 25
-
-   > in ori (c01 not so ideal): 50.47070, -69.64504
    >
+   > optimal: 0; sub-optimal: $\pm$125
+
+   > the two dihedrals
+   >
+   > in ori (c01 not so ideal): 50.47070, -69.64504
+   > 
+   > c01: 81.9996 -109.7405
+   > 
    > equil2/ligand/fine3: 65.38997 -45.18305
    >
    > equil2/ligand/fine1: 32.69268 -80.13612
@@ -2507,6 +2523,8 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
    > try not to look like c01, almost 0 degree (but fits the parameters...)
 
    not changed now since it works ok in prod-window (not at its minimum, 0 degree)
+
+   no, not ok. at its highest??
 
    > OG3C51 CG3C50 CG2R57 CG2R51
 
@@ -2553,6 +2571,13 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
    > - complex2/dihe-failed1-lig: -93.94408
    > - complex2/failed1-lig: -93.40841
    > - prod-dihe/ligand1/c04: -84.28765
+
+   ```
+   CG321  CG3C51 OG3C51 CG3C50     0.9000  1     0.00     ! manually added
+   CG321  CG3C51 CG3C51 CG3C51     0.5700  1     0.00     ! manually added
+   ```
+
+   Though that does not restrain the dihedral in the optimal, it works fine.   
 
 4. 
 
