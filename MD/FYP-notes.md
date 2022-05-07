@@ -1787,7 +1787,7 @@ we start from (equilibrated?) .pdb after MD. But finally should use those from c
 
 ### Primary protocol
 
-#### A brief flow
+#### A brief flow: MTP
 
 - get stable complex structure, modify the ligand properly to obtain the other one
 
@@ -1842,6 +1842,7 @@ With that said, there is also a scenario when the common molecule is  important 
   - All other properties are stored by tuples of atom **keys** (atom names initially, +tag in hybrid) (and other data), so that when we change the atom name to write in hybrid molecules, we just index through the dict (by GetXXX functions)
 - flow
   - read files
+    - you will alway need to make sure that your topology and coordinate info match in every line: 1) in order; 2) remember to adjust which line to start reading.
   - common structure: use RDkit package, get it from two .pdb files, find the corresponding atom indices in each molecule
   - verification: position and charge nearly the same, or removed from common
   - modification: add A, B to atom name. C for common atoms
@@ -2486,51 +2487,9 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
    > these modifications are first made in prod-dihe
 
-3. 25 31 17 36: OG3C51 CG3C50 CG2R57 CG2R51
+4. to prevent the oxygen from folding back. actually 21-23 is nearly perpendicular to the ribose "plane"
 
-   29 31 17 36: CG3C51 CG3C50 CG2R57 CG2R51
-
-   > in hybrid2.prm
-   >
-   > CG2R51 CG2R57 CG3C50 CG3C51     0.3500  3   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C51 CG3C51, penalty= 21
-   >
-   > optimal: -60, 60, 180
-   >
-   > CG2R51 CG2R57 CG3C50 OG3C51     0.2800  1   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C52 OG3C51, penalty= 25
-   >
-   > CG2R51 CG2R57 CG3C50 OG3C51     0.9800  2   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C52 OG3C51, penalty= 25
-   >
-   > CG2R51 CG2R57 CG3C50 OG3C51     1.7500  3   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C52 OG3C51, penalty= 25
-   >
-   > optimal: 0; sub-optimal: $\pm$125
-
-   > the two dihedrals
-   >
-   > in ori (c01 not so ideal): 50.47070, -69.64504
-   > 
-   > c01: 81.9996 -109.7405
-   > 
-   > equil2/ligand/fine3: 65.38997 -45.18305
-   >
-   > equil2/ligand/fine1: 32.69268 -80.13612
-   >
-   > equil2/ligand/fine2: 32.31323 -84.86327
-   >
-   > equil/ligand/fine6:   49.75553 -66.17808
-   >
-   > equil/ligand/fine5:   47.29112 -66.99147
-   >
-   > try not to look like c01, almost 0 degree (but fits the parameters...)
-
-   not changed now since it works ok in prod-window (not at its minimum, 0 degree)
-
-   no, not ok. at its highest??
-
-   > OG3C51 CG3C50 CG2R57 CG2R51
-
-4. to prevent the oxygen from folding back
-
-   ![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-fold-back.jpg)
+   <img src="https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-fold-back.png" alt="remtp-foldback" style="zoom:50%;" />
 
    21 23 25 31: CG321 CG3C51 OG3C51 CG3C50
 
@@ -2579,9 +2538,51 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
    Though that does not restrain the dihedral in the optimal, it works fine.   
 
-4. 
+4. 25 31 17 36: OG3C51 CG3C50 CG2R57 CG2R51
 
-> stupid error: this is for 4 21 23 25: OG303 CG321 CG3C51 OG3C51
+   29 31 17 36: CG3C51 CG3C50 CG2R57 CG2R51
+
+   > in hybrid2.prm
+   >
+   > CG2R51 CG2R57 CG3C50 CG3C51     0.3500  3   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C51 CG3C51, penalty= 21
+   >
+   > optimal: -60, 60, 180
+   >
+   > CG2R51 CG2R57 CG3C50 OG3C51     0.2800  1   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C52 OG3C51, penalty= 25
+   >
+   > CG2R51 CG2R57 CG3C50 OG3C51     0.9800  2   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C52 OG3C51, penalty= 25
+   >
+   > CG2R51 CG2R57 CG3C50 OG3C51     1.7500  3   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C52 OG3C51, penalty= 25
+   >
+   > optimal: 0; sub-optimal: $\pm$125
+
+   > the two dihedrals
+   >
+   > in ori (c01 not so ideal): 50.47070, -69.64504
+   >
+   > c01: 81.9996 -109.7405
+   >
+   > equil2/ligand/fine3: 65.38997 -45.18305
+   >
+   > equil2/ligand/fine1: 32.69268 -80.13612
+   >
+   > equil2/ligand/fine2: 32.31323 -84.86327
+   >
+   > equil/ligand/fine6:   49.75553 -66.17808
+   >
+   > equil/ligand/fine5:   47.29112 -66.99147
+   >
+   > try not to look like c01, almost 0 degree (but fits the parameters...)
+
+   not changed now since it works ok in prod-window (not at its minimum, 0 degree)
+
+   no, not ok. at its highest??
+
+   > OG3C51 CG3C50 CG2R57 CG2R51
+
+other
+
+> stupid mistake: this is for 4 21 23 25: OG303 CG321 CG3C51 OG3C51
 >
 > > ./par_all36_cgenff.prm:OG303  CG321  CG3C51 OG3C51     3.4000  1   180.00 ! NA, sugar
 > >
@@ -3089,6 +3090,7 @@ gmx editconf -f ${p}/equilibrated.pdb -o ${p}/equilibrated.gro \
 -center 2.9200000762939453 -1.5814990997314453 -3.010499954223633 
 ## step3: make the top file
 vmd -dispdev text -e make_top.tcl -args complex1
+vmd -dispdev text -e make_top.tcl -args ligand1
 ## step4: to deal with t coupling better, make a index file
 cd $p
 echo "10|11|12" | echo "13|2|3" | gmx make_ndx -f equilibrated.gro -o index.ndx
@@ -3107,7 +3109,7 @@ gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump
 echo 13 0 | gmx trjconv -s simulation.tpr -n index.ndx -f ${f}_nj.xtc -fit rot+trans -o ${f}_fit.xtc
 rm ${f}.xtc
 # optional, full traj
-# echo 24 | gmx trjconv -f ${f}_fit.xtc -s simulation.tpr -n index.ndx -o traj.pdb -tu ps
+echo 24 | gmx trjconv -f ${f}_fit.xtc -s simulation.tpr -n index.ndx -o traj.pdb -tu ps
 ## step8: get rmsd matrix. protein for least square fit, ligand for rmsd calculation
 echo 13 2 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig-${f}.xpm -tu ns
 gmx xpm2ps -f rmsd-lig-${f}.xpm -o rmsd-lig-${f}.eps -rainbow blue
