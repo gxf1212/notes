@@ -2445,9 +2445,9 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 #### ligand paramters
 
-![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral.jpg)
-
 1. It's found that the aromatic ring cannot retain its planar structure, though in pymol hybrid.pdb still looks fine (though ligand.pdb Ar dotted bonds is gone). 因为后面对芳环只有参数的限制，程序不知道关于芳香键的标记
+
+   ![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral.jpg)
 
    31 17 19 34: CG3C50 CG2R57 NG2RC0 CG2RC0 (purple)
 
@@ -2467,7 +2467,9 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
    > these modifications are made before the first equilibration, before 22.5.1
 
-2. 1 4 21 23: PG1 OG303 CG321 CG3C51 
+2. 1 4 21 23: PG1 OG303 CG321 CG3C51
+
+   ![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral2.jpg) 
 
    > ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.6000  1   180.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
    >
@@ -2480,12 +2482,12 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
    I only keep
 
    ```
-   CG3C51 CG321  OG303  PG1        0.6500  1     0.00     ! manually added
+   CG3C51 CG321  OG303  PG1        0.6500  1     0.00     ! manually added, in prod-dihe
    ```
 
    Then the minimum point is just 180 degree. Suitable slope too.
 
-   > these modifications are first made in prod-dihe
+   but no! when k=9.65 that dihedral still moves slightly away (in prod-restrict)
 
 4. to prevent the oxygen from folding back. actually 21-23 is nearly perpendicular to the ribose "plane"
 
@@ -2542,6 +2544,8 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
    29 31 17 36: CG3C51 CG3C50 CG2R57 CG2R51
 
+   ![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral3.jpg) 
+   
    > in hybrid2.prm
    >
    > CG2R51 CG2R57 CG3C50 CG3C51     0.3500  3   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C51 CG3C51, penalty= 21
@@ -2555,7 +2559,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
    > CG2R51 CG2R57 CG3C50 OG3C51     1.7500  3   180.00 ! /tmp/php , from CG2R51 CG2R51 CG3C52 OG3C51, penalty= 25
    >
    > optimal: 0; sub-optimal: $\pm$125
-
+   
    > the two dihedrals
    >
    > in ori (c01 not so ideal): 50.47070, -69.64504
@@ -2577,7 +2581,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
    not changed now since it works ok in prod-window (not at its minimum, 0 degree)
 
    no, not ok. at its highest??
-
+   
    > OG3C51 CG3C50 CG2R57 CG2R51
 
 other
@@ -3102,6 +3106,7 @@ gmx grompp -f ../md_fake.mdp -n index.ndx -c equilibrated.gro -r equilibrated.gr
 # copy: index.ndx equilibrated.gro simulation.tpr
 ## step 6: making traj. in folder clustering
 f=forward
+num=24
 conda activate AmberTools21 
 mdconvert -o ${f}.xtc -t equilibrated.gro ../*${f}.dcd
 gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump
@@ -3109,24 +3114,26 @@ gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump
 echo 13 0 | gmx trjconv -s simulation.tpr -n index.ndx -f ${f}_nj.xtc -fit rot+trans -o ${f}_fit.xtc
 rm ${f}.xtc
 # optional, full traj
-echo 24 | gmx trjconv -f ${f}_fit.xtc -s simulation.tpr -n index.ndx -o traj.pdb -tu ps
+echo ${num} | gmx trjconv -f ${f}_fit.xtc -s simulation.tpr -n index.ndx -o traj-${f}.pdb -tu ps -dt 5
+# dt=280 (total number of frames)/70 (how many frames we want). dt is a scaling factor
 ## step8: get rmsd matrix. protein for least square fit, ligand for rmsd calculation
 echo 13 2 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig-${f}.xpm -tu ns
 gmx xpm2ps -f rmsd-lig-${f}.xpm -o rmsd-lig-${f}.eps -rainbow blue
 mv rmsd.xvg rmsd_${f}.xvg
 xmgrace rmsd_forward.xvg rmsd_backward.xvg
+# black red
 ## step9: clustering
 mkdir clus-${f} && cd clus-${f}
 rm \#*\#
-echo 13 24 | gmx cluster -s ../simulation.tpr -n ../index.ndx -f ../${f}_fit.xtc -dm ../rmsd-lig-${f}.xpm \
+echo 13 ${num} | gmx cluster -s ../simulation.tpr -n ../index.ndx -f ../${f}_fit.xtc -dm ../rmsd-lig-${f}.xpm \
 -dist rmsd-distribution.xvg -o clusters.xpm -sz cluster-sizes.xvg -tr cluster-transitions.xpm \
--ntr cluster-transitions.xvg -clid cluster-id-over-time.xvg -cl clusters.pdb \
+-ntr cluster-transitions.xvg -clid cluster-id-over-time.xvg -cl clusters-${f}.pdb \
 -cutoff 0.25 -method gromos
 # ligand: 13 13
 xmgrace cluster-id-over-time.xvg
 xmgrace cluster-sizes.xvg
 # pymol
-pymol clusters.pdb
+pymol *.pdb
 split_states cluster
 
 cd ..
