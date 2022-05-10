@@ -820,7 +820,19 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   sudo chmod -R 777 anaconda3/
   ```
 
-- s
+- pip install the package only inside one specific conda environment
+
+  ```shell
+  # make sure
+  which pip
+  # returns the virtual env path. you can try
+  conda install pip
+  # in it before installing with pip
+  ```
+
+  https://blog.csdn.net/weixin_41712499/article/details/105430471  it's just the problem with pat
+
+- 
 
 #### For R language
 
@@ -1020,6 +1032,8 @@ change owner, change mode
 Linux/Unix 的文件调用权限分为三级 : 文件所有者（Owner）、用户组（Group）、其它用户（Other Users）。
 
 https://www.runoob.com/linux/linux-comm-chmod.html  great!
+
+https://www.runoob.com/linux/linux-comm-chown.html
 
 ### svn
 

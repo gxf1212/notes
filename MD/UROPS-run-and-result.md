@@ -1448,6 +1448,9 @@ parmchk2 -i lig.mol2 -f mol2 -o lig.frcmod
    source leaprc.water.tip3p
    solvatebox com TIP3PBOX 10.0 # 对复合物进行溶剂化，盒子边缘距离复合物最小 1 nm
    check com
+   addIons2 com Cl- 14 Na+ 12 # 根据计算好的离子数添加
+   charge com
+   check com # 最后的检查
    saveamberparm com com.prmtop com.inpcrd # 保存amber输入文件
    quit
    # check: see if ok

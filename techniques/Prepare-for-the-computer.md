@@ -878,6 +878,25 @@ You can type `gv` in the terminal to start GView and link to Gaussian as we did 
 
 > icon: downloaded from web
 
+### PMX
+
+```shell
+git clone https://github.com/deGrootLab/pmx pmx
+cd pmx
+# to switch to 'develop' branch type:
+git checkout develop
+
+conda activate  AmberTools21
+# conda install pip
+python -m pip install .
+conda install -c rdkit rdkit -y
+
+```
+
+
+
+
+
 ### FESetup
 
 https://www.ccpbiosim.ac.uk/software

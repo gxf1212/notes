@@ -2461,11 +2461,13 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
    coplanar four atoms. there must be at least two common atoms to make two dihedrals coplanar
 
-   another thing is to control rotations of the groups, i.e. cis-adenine, phosphate group contacting hydrogens....
-
-   cis-adenine might be fine (25 31 17 36)
+   another thing is to control rotations of the groups, i.e. cis-Ar, phosphate group contacting hydrogens....
 
    > these modifications are made before the first equilibration, before 22.5.1
+
+   cis might be fine (25 31 17 36)? no!
+
+   If I don't apply even bigger $k$ values, they are still a bit away from planar...!!
 
 2. 1 4 21 23: PG1 OG303 CG321 CG3C51
 
@@ -2477,7 +2479,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
    >
    > ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.0500  3     0.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
    >
-   > optimal: 0
+   > optimal angle: 0
 
    I only keep
 
@@ -2497,7 +2499,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
    > ./hybrid2.prm:CG321  CG3C51 OG3C51 CG3C50     0.3000  3     0.00 ! /tmp/php , from CG321 CG3C51 OG3C51 CG3C51, penalty= 0.8
    >
-   > optimal: -60, 60, 180
+   > optimal angle: -60, 60, 180
    >
    > initial: 137.44635
    >
@@ -3120,7 +3122,7 @@ echo ${num} | gmx trjconv -f ${f}_fit.xtc -s simulation.tpr -n index.ndx -o traj
 echo 13 2 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig-${f}.xpm -tu ns
 gmx xpm2ps -f rmsd-lig-${f}.xpm -o rmsd-lig-${f}.eps -rainbow blue
 mv rmsd.xvg rmsd_${f}.xvg
-xmgrace rmsd_forward.xvg rmsd_backward.xvg
+xmgrace rmsd_forward.xvg rmsd_backward.xvg  -hdevice PNG -hardcopy -printfile rmsd.png
 # black red
 ## step9: clustering
 mkdir clus-${f} && cd clus-${f}
@@ -3167,6 +3169,38 @@ steps
   - `delta_f_.loc[0.00, 1.00]`
 
 alchemlyb这个包处理得十分粗糙，首先没有考虑分开vdW和coul，数据只读取了dE；然后是数据虽然能比较自由得组合，但是其他lambda下的能量根本不知道，留下了许多nan；最后是他给出那个forward和backward合并的方案，难道不是加了两份dE吗？虽然数值不太一样？感觉没道理
+
+# Stage 3 protocol: GMX FEP
+
+## FEP building systems
+
+### Preparation
+
+files required: .pdb and .itp file that matches. 
+
+source: 1) CHARMM-GUI; 2) CGenFF+ParmEd (psf2itp?)
+
+### Commands
+
+```shell
+l1=atp
+l2=remtp
+
+conda activate AmberTools21
+pmx atomMapping -i1 ${l1}.pdb -i2 ${l2}.pdb -o1 pairs1.dat
+pmx ligandHybrid -i1 ${l1}.pdb -i2 ${l2}.pdb -itp1 ${l1}.itp -itp2 ${l2}.itp -pairs pairs.dat 
+
+
+
+
+p./ref/psf2itp.py /home/moonlight/Desktop/work/projects/undergraduate/FYP/FEP/remtp-atp/build-pmx/cgenff/atp atp.psf
+
+
+```
+
+
+
+
 
 # Extra protocol
 
