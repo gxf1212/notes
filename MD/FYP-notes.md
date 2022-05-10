@@ -3174,31 +3174,129 @@ alchemlyb这个包处理得十分粗糙，首先没有考虑分开vdW和coul，�
 
 ## FEP building systems
 
-### Preparation
+### Tools
 
-files required: .pdb and .itp file that matches. 
+#### pmx package
 
-source: 1) CHARMM-GUI; 2) CGenFF+ParmEd (psf2itp?)
+[installation guide](https://gxf1212.gitee.io/notes/#/techniques/Prepare-for-the-computer?id=pmx)
 
-### Commands
+https://degrootlab.github.io/pmx/index.html 官方文档
+
+https://github.com/deGrootLab/pmx/tree/develop  
+
+注意是dev版，master是Python2写的，已经不更新了
+
+- .py版
+
+  - http://pmx.mpibpc.mpg.de/ server，只能protein/DNA mutation
+
+  - http://pmx.mpibpc.mpg.de/summerSchool2020_tutorial2/index.html tutorial from [here](http://pmx.mpibpc.mpg.de/tutorial.html)
+
+    不知道是哪个版本，但doc里有？
+
+- 文件夹版，官文啥都没说
+
+  - https://www.youtube.com/watch?v=NSeiQUwc8-I 视频教程
+  - https://github.com/deGrootLab/pmx/blob/develop/tutorials/ligand_tutorial.ipynb 是视频所用的tutorial
+  - https://github.com/deGrootLab/pmx/tree/master/protLig_benchmark 视频所用的文件
+
+- 命令行，没别的资料
+
+  - https://degrootlab.github.io/pmx/scripts/index.html
+
+- Python版：还是看官文
 
 ```shell
-l1=atp
-l2=remtp
-
-conda activate AmberTools21
-pmx atomMapping -i1 ${l1}.pdb -i2 ${l2}.pdb -o1 pairs1.dat
-pmx ligandHybrid -i1 ${l1}.pdb -i2 ${l2}.pdb -itp1 ${l1}.itp -itp2 ${l2}.itp -pairs pairs.dat 
-
-
-
-
-p./ref/psf2itp.py /home/moonlight/Desktop/work/projects/undergraduate/FYP/FEP/remtp-atp/build-pmx/cgenff/atp atp.psf
-
-
+pmx -h
+pmx mutate -h
 ```
 
+- protein
+  - mutate       Mutate protein or DNA/RNA
+  - gentop       Fill hybrid topology with B states
+  - analyse      Estimate free energy from Gromacs xvg files
+- ligand
+  - atomMapping   Ligand alchemy: map atoms for morphing
+    - generate pairs for hybrid
+  - ligandHybrid  Ligand alchemy: hybrid structure/topology
+  - abfe         Setup files for an ABFE calculation 
+    - combine protein and ligand, top and crd?
+  - doublebox    Place two input structures into a single box
+- check
+  - genlib       Generate pmx ff library
+  - gmxlib       Show/set GMXLIB path
 
+#### charmm2gmx
+
+[`cgenff_charmm2gmx_py3_nx2.py`](http://mackerell.umaryland.edu/download.php?filename=CHARMM_ff_params_files/cgenff_charmm2gmx_py3_nx2.py) in [charmff site](http://mackerell.umaryland.edu/charmm_ff.shtml#gromacs).
+
+```shell
+conda create -n charmm2gmx python=3.7 -y
+conda activate charmm2gmx
+conda install networkx=2.3 numpy
+```
+
+notes: cgenff_charmm2gmx_py3_nx2.py
+
+- Code tested with Python 3.5.2 and 3.7.3. Code tested with NetworkX 2.3.
+- Please be sure to use the same version of CGenFF in your simulations that was used during parameter generation
+- To avoid duplicated parameters, do NOT select the 'Include parameters that are already in CGenFF' option when uploading a molecule into CGenFF.
+- If your topology has lone pairs, you must use GROMACS version 2020 or newer to use 2fd construction
+
+### Flow
+
+
+1. Preparation
+
+   - generate .mol2 and .str file from [CGenFF](https://cgenff.umaryland.edu/)
+   - modification: change the residue name in `.str` file to 'LIG'
+   
+   > files required: .pdb and .itp file that matches. 
+   >
+   > source: 1) CHARMM-GUI; 2) CGenFF+ParmEd (psf2itp?)
+   
+1. get cgenff files for gmx
+
+   ```shell
+   l1=atp
+   l2=remtp
+   conda activate charmm2gmx
+   charmm_path=~/gromacs-2021.5-gpu/share/gromacs/top/charmm36-jul2021.ff
+   python cgenff_charmm2gmx_py3_nx2.py LIG ${l1}.mol2 ${l1}.str ${charmm_path}
+   
+   
+   pdb2gmx -f ${l1}.pdb -o ${l1}_cg.pdb
+   
+   ```
+   
+   - - 
+   
+2.  use pmx to merge the ligands
+
+   ```shell
+   pmx atomMapping -i1 ${l1}.pdb -i2 ${l2}.pdb -o1 pairs1.dat
+   pmx ligandHybrid -i1 ${l1}.pdb -i2 ${l2}.pdb -itp1 ${l1}.itp -itp2 ${l2}.itp -pairs pairs.dat 
+   
+   
+   
+   
+   
+   
+   ```
+   
+3. 
+
+
+
+
+
+> not using or failed
+> ```shell
+>python ./ref/psf2itp.py /home/moonlight/Desktop/work/projects/undergraduate/FYP/FEP/remtp-atp/build-pmx/cgenff/atp atp.psf
+> gmx pdb2gmx -f ${l1}.pdb -o ${l1}_cg.pdb
+> ```
+> 
+> s
 
 
 

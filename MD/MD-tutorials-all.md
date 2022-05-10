@@ -1655,16 +1655,16 @@ xmgrace 2d.xvg
 ```
 tleap
 source leaprc.protein.ff14SB
-ca = loadpdb ca.pdb 
-cb = loadpdb cb.pdb
-cc = loadpdb cc.pdb
-cd = loadpdb cd.pdb
+ca = loadpdb ca_noh.pdb 
+cb = loadpdb cb_noh.pdb
+cc = loadpdb cc_noh.pdb
+cd = loadpdb cd_noh.pdb
 source leaprc.gaff
-loadamberparams lig1.frcmod
-lig1 = loadmol2 lig1_aligned.mol2
-check lig1
+loadamberparams lig4.frcmod
+lig = loadmol2 lig4_aligned.mol2
+check lig
 source leaprc.water.tip3p
-com = combine {ca cb cc cd lig1}
+com = combine {ca cb cc cd lig}
 solvatebox com TIP3PBOX 12.0
 charge com
 addIons2 com Cl- 88 Na+ 85

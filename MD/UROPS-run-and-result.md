@@ -1,6 +1,6 @@
 # UROPS: Running programs
 
-Specific protocol and experiences for the project I did in NUS, Jan~May 2021. Some a little more about Autodock and Gromacs basics will be temporarily added.
+Specific protocol and experiences for the project I did in NUS, Jan~May 2021. Something a little more about Autodock and Gromacs basics will be temporarily added.
 
 UROPS: undergraduate research opportunity project in science. 
 
@@ -1314,14 +1314,20 @@ for restraint:
 2. get gaussian input file
 
    ```shell
+   # 2021.3
    # conda activate AmberTools20
    antechamber -i ${f}_m.pdb -fi pdb -o ${f}.gjf -fo gcrt -pf y \
    -gm "%mem=4096MB" -gn "%nproc=4" -ch ${f} -nc 2 \
    -gk "#B3LYP/6-31G* em=GD3BJ scrf=solvent=water iop(6/33=2) pop=CHELPG" -ge ${f}_resp.gesp -gv 1 
    # change your charge!
-   # no opt 
+   # no opt !
+   # new version
+   antechamber -i ${f}_m.pdb -fi pdb -o ${f}.gjf -fo gcrt -pf y \
+   -gm "%mem=4096MB" -gn "%nproc=4" -ch ${f} -nc 0 \
+   -gk "#B3LYP/6-31G* em=GD3BJ scrf=solvent=water SCF=tight \
+   iop(6/33=2,6/42=6,6/50=1) pop=CHELPG" -ge ${f}_resp.gesp -gv 1 -at gaff
    ```
-   
+
    http://gohom.win/2015/09/17/AutoCalcRESP/ 自动计算ESP和RESP电荷(AMBER and G09) explains parameters
 
    https://zhuanlan.zhihu.com/p/59070901 use its gaussian setting
@@ -1381,12 +1387,15 @@ for restraint:
    
    ```shell
    ~/Desktop/work/projects/undergraduate/NUS-UROPS/md/prepare/align.py PEP
+   # new version
+   # alias align_gauss='python3 ~/Desktop/work/projects/tools/Python-for-MD/prepare/align_gauss.py'
+   align_gauss `pwd`/ ${f}
    ```
    
 
 #### A simplified alternative
 
-bcc charge
+bcc charge, less time-consuming than Gaussian
 
 ```shell
 conda activate AmberTools21

@@ -886,8 +886,8 @@ cd pmx
 # to switch to 'develop' branch type:
 git checkout develop
 
-conda activate  AmberTools21
-# conda install pip
+conda activate  AmberTools21 # whatever
+# conda install pip  # to make sure pip under 
 python -m pip install .
 conda install -c rdkit rdkit -y
 
