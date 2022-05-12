@@ -3170,6 +3170,61 @@ steps
 
 alchemlyb这个包处理得十分粗糙，首先没有考虑分开vdW和coul，数据只读取了dE；然后是数据虽然能比较自由得组合，但是其他lambda下的能量根本不知道，留下了许多nan；最后是他给出那个forward和backward合并的方案，难道不是加了两份dE吗？虽然数值不太一样？感觉没道理
 
+## Other ligand pairs
+
+We'll use GAFF (2?). CGenFF sucks.
+
+
+
+```shell
+conda activate AmberTools21
+
+
+
+```
+
+
+
+
+
+
+
+> ### building info
+>
+> #### rempty-remtp
+>
+> ```
+> distance error H12A CB
+> distinct charge C12A C12B
+> different type C5A C5B
+> before merging: O2A -0.548 O2B -0.545 ave= -0.5465
+> before merging: C2A 0.132 C2B 0.141 ave= 0.1365
+> before merging: C3A 0.137 C3B 0.14 ave= 0.1385
+> before merging: C4A 0.051 C4B 0.043 ave= 0.047
+> before merging: O4A -0.648 O4B -0.646 ave= -0.647
+> +1: -3.999
+> -1: -3.997
+> 0: -4.65
+> ```
+>
+> the ribose differ a little bit
+>
+> > PG1 OG303 CG321 CG3C51 (ATOMS 5 10 8 11)
+>
+> 
+
+
+
+### result
+
+
+
+
+
+
+
+
+
 # Stage 3 protocol: GMX FEP
 
 ## FEP building systems
@@ -3249,7 +3304,7 @@ notes: cgenff_charmm2gmx_py3_nx2.py
 1. Preparation
 
    - generate .mol2 and .str file from [CGenFF](https://cgenff.umaryland.edu/)
-   - modification: change the residue name in `.str` file to 'LIG'
+   - modification: change the residue name in `.str`  and `.mol2` file to 'LIG'
    
    > files required: .pdb and .itp file that matches. 
    >
@@ -3263,26 +3318,26 @@ notes: cgenff_charmm2gmx_py3_nx2.py
    conda activate charmm2gmx
    charmm_path=~/gromacs-2021.5-gpu/share/gromacs/top/charmm36-jul2021.ff
    python cgenff_charmm2gmx_py3_nx2.py LIG ${l1}.mol2 ${l1}.str ${charmm_path}
-   
-   
-   pdb2gmx -f ${l1}.pdb -o ${l1}_cg.pdb
-   
+   rename "s/lig/${l1}/" lig* -f
+   python cgenff_charmm2gmx_py3_nx2.py LIG ${l2}.mol2 ${l2}.str ${charmm_path}
+   rename "s/lig/${l2}/" lig* -f
    ```
    
-   - - 
+   charmm2gmx generates 4 files for each ligand: .prm, .itp, .top, _ini.pdb
+   
+   > The molecule topology has been written to lig.itp. Additional parameters needed by the molecule are written to lig.prm, which needs to be included in the system .top
    
 2.  use pmx to merge the ligands
 
    ```shell
+   conda activate AmberTools21
    pmx atomMapping -i1 ${l1}.pdb -i2 ${l2}.pdb -o1 pairs1.dat
-   pmx ligandHybrid -i1 ${l1}.pdb -i2 ${l2}.pdb -itp1 ${l1}.itp -itp2 ${l2}.itp -pairs pairs.dat 
-   
-   
-   
-   
+   pmx ligandHybrid -i1 ${l1}.pdb -i2 ${l2}.pdb -itp1 ${l1}.itp -itp2 ${l2}.itp -pairs pairs1.dat 
    
    
    ```
+   
+   - atom mapping: outputs pairs and mapping score
    
 3. 
 
