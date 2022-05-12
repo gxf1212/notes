@@ -1650,6 +1650,13 @@ xmgrace 2d.xvg
 
 ## 22.5.2 SDH
 
+```
+antechamber -i lig1_aligned.mol2  -o lig.mol2 -fo mol2 -at gaff -c bcc -rn MOL
+parmchk2 -i lig.mol2 -f mol2 -o lig.frcmod
+```
+
+
+
 
 
 ```
@@ -1662,6 +1669,9 @@ cd = loadpdb cd_noh.pdb
 source leaprc.gaff
 loadamberparams lig4.frcmod
 lig = loadmol2 lig4_aligned.mol2
+
+loadamberparams lig.frcmod
+lig = loadmol2 lig.mol2
 check lig
 source leaprc.water.tip3p
 com = combine {ca cb cc cd lig}
@@ -1672,6 +1682,8 @@ check com
 saveamberparm com com.prmtop com.inpcrd
 quit
 ```
+
+
 
 
 

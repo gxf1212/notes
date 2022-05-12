@@ -905,8 +905,10 @@ solvate merged.psf merged.pdb -t 11.5 -o solvated
 # files are written
 mol delete all
 # the ionization script writes:
+package require autoionize
 autoionize -psf solvated.psf -pdb solvated.pdb -sc 0.1 -o system
 # params, to be consistent
+
 ```
 
 #### method 2-GUI
