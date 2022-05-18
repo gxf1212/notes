@@ -3199,7 +3199,8 @@ mol addfile rdrp-remtp-equil-all.dcd type dcd waitfor all
 set lig [atomselect top "resname LIG"]
 set cen [measure center $lig weight mass]
 foreach {x y z} $cen { break }
-molinfo top set center_matrix "{{1 0 0 $x} {0 1 0 $y} {0 0 1 $z} {0 0 0 1}}"
+molinfo top set center_matrix "{{1 0 0 -$x} {0 1 0 -$y} {0 0 1 -$z} {0 0 0 1}}"
+# use negative...
 
 # make representation
 mol delrep 0 top
@@ -3208,6 +3209,7 @@ mol color Structure
 mol selection {protein}
 mol material Opaque
 mol addrep top
+# add rep a
 
 mol representation Licorice 0.300000 12.000000 12.000000
 mol color Type
