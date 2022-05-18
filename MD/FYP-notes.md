@@ -217,6 +217,8 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
     /usr/local/lib/vmd/plugins/noarch/tcl/
     ```
 
+11. In the main menu, press the Save State button found in the File menu; this will bring up a browser window where you can enter a file name in which to save your work. 
+
 11. 
 
 12. To know about your system, like checking the number of atoms, just load it into vmd (also when executing scripts) and see the cmd.
@@ -1374,11 +1376,12 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 1. make the latest coordinates as pdb, and then .gro
    
    ```tcl
-   # under ./common
-   mol load psf system.psf
-   mol addfile ../equil/rdrp-atp-equil.coor
+   # under ./equil
+   mol load psf ../common/system.psf
+   mol addfile rdrp-atp-equil.coor
    set sel [atomselect top all]
    $sel writepdb equilibrated.pdb
+   quit
    ```
    
    make a box. find the length of cell basis vector from your measure or `equil.namd`
@@ -1409,7 +1412,7 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    > -box 102.65199661254883 92.91299819946289 112.18100357055664 \
    > -center 2.9200000762939453 -1.5814990997314453 -3.010499954223633 
    > ```
-
+   
 2. to run in gmx, specify T coupling groups:
    
    ```shell
@@ -1432,13 +1435,17 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 3. get .top file
    
    ```tcl
+   # vmd, under equil
    package require topotools
    # Load the structure into VMD.
-   mol new system.psf
+   mol new ../common/system.psf
    mol addfile equilibrated.pdb
    # Pass along a list of parameters to generate structure.top, suitable for preparing gromacs simulations.
-   topo writegmxtop structure.top [list par_all36m_prot.prm lig.prm par_all36_cgenff.prm toppar_water_ions_namd.str] 
-   # par_all36_na.prm par_all35_ethers.prm par_all36_carb.prm par_all36_lipid_ljpme.prm]
+   cd ../common/toppar
+   topo writegmxtop ../../equil/structure.top [list par_all36m_prot.prm par_all36_cgenff.prm toppar_water_ions_namd.str lig.prm ] 
+   # atp: with toppar_all36_na_nad_ppi.str, no lig
+   # par_all36_na.prm
+   exit
    ```
    
    be sure to include `lig.prm` and the water_ions one!
@@ -1471,7 +1478,7 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    > Put it before the first `[ atomtypes ]` in your `.top` file
    > 
    > > I'm doing this because I forgot toppar_water_ions_namd.str before...
-
+   
 4. also the velocity in the last frame! (find how to load into gmx, .cpt?)
    
    ```tcl
@@ -1498,7 +1505,7 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    ```shell
    # This would be prepared for simulation using grompp to create a tpr file
    gmx grompp -f md.mdp -c equilibrated.gro -r equilibrated.gro \
-   -p structure.top -n index.ndx -o simulation.tpr -maxwarn 400
+   -p structure.top -n index.ndx -o simulation.tpr -maxwarn 4
    # not that many warnings
    # supress repeated param definition
    -t velocity.cpt 
@@ -1539,6 +1546,7 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
       f=rdrp-atp-prod
       mdconvert -o ${f}.xtc -t equilibrated.gro ${f}.dcd # normal xtc. .tpr is not recognized
       gmx trjconv -f ${f}.xtc -o ${f}_nj.xtc -pbc nojump # movie, water not go to infinity?
+      # gmx check -f ${f}_nj.xtc
       ```
       
       > if simply use `.pdb`, gmx reports errors related to PBC box setting.
@@ -1546,7 +1554,7 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
       > mdconvert can make .trr too, but it's the same size as .xtc (also the .dcd)...
       > 
       > if you really need velocities (`.trr`), you should use vmd
-   
+      
    2. we may also use vmd to do that. the result is just the same
       
       ```shell
@@ -1573,7 +1581,7 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
    > problem: Masses were requested, but for some atom(s) masses could not be found in the database. Use a tpr file as input, if possible, or add these atoms to the mass database.
    > 
    > solution: use .tpr instead of .gro for `-s`
-
+   
 3. optional: watch movie (don't for the 300-ns one! it eats all memory...)
    
    > ```shell
@@ -1631,11 +1639,17 @@ We performed clustering analysis based on the RMSD of NTPs during the simulation
    ```
    
    > is that necessary?
-   > 
+   >
    > `Select group for least squares fit`: I think it's **what to align**. backbone
-   > 
+   >
    > `Select group for output`: **what to keep** in the _fit.xtc. only our protein_atp_mg? it seems that TP will attract NA+ ions, maybe water? just keep all
 
+   ```shell
+   gmx trjconv -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -o traj.pdb -tu ns -dt 0.3
+   ```
+   
+   to make a traj pdb
+   
 2. make rmsd matrix first
    
    ```shell
@@ -2782,6 +2796,7 @@ script_dir=/home/moonlight/Desktop/work/projects/tools/Python-for-MD/make_hybrid
 conda activate AmberTools21
 python3 $script_dir/edit_FEP.py `pwd` 
 python3 $script_dir/edit_PSF.py `pwd`
+rm *merged* *solvated*
 # common
 vmd -dispdev text -e measure.tcl -args ligand # complex
 # equil
@@ -3041,6 +3056,8 @@ Info: LARGEST PATCH (785) HAS 102993 ATOMS
 
 ### ParseFEP
 
+#### basics
+
 see tutorial-FEP for basic usage.
 
 data explained https://www.ks.uiuc.edu/Research/namd/2.14/ug/node66.html
@@ -3057,9 +3074,19 @@ adjusting
 https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2018-2019/0204.html
 https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2013-2014/0568.html
 
-### clustering
+#### decomposition
 
-#### collect trajectory files (prod-window)
+```shell
+bash ../mknamd_fep_decomp.sh rdrp-mtp-remtp-complex-prod-backward-all.fepout 10000 510000 500
+```
+
+
+
+### trajectory analysis
+
+#### making clusters in gmx
+
+##### collect trajectory files (prod-window)
 
 > draft
 
@@ -3080,7 +3107,7 @@ catdcd -num ${f}.dcd
 catdcd -num ${p}/*.dcd
 ```
 
-#### making clusters
+##### make aligned trajectory
 
 > now for prod-dihe
 
@@ -3120,6 +3147,11 @@ rm ${f}.xtc
 # optional, full traj
 echo ${num} | gmx trjconv -f ${f}_fit.xtc -s simulation.tpr -n index.ndx -o traj-${f}.pdb -tu ps -dt 5
 # dt=280 (total number of frames)/70 (how many frames we want). dt is a scaling factor
+```
+
+##### clustering
+
+```shell
 ## step8: get rmsd matrix. protein for least square fit, ligand for rmsd calculation
 echo 13 2 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig-${f}.xpm -tu ns
 gmx xpm2ps -f rmsd-lig-${f}.xpm -o rmsd-lig-${f}.eps -rainbow blue
@@ -3143,20 +3175,94 @@ split_states cluster
 cd ..
 ```
 
-#### decomposition
+1. visualize `clusters.pdb`, compare with the initial structure
+2. calculate RMSD with `c01.pdb`
 
-```shell
-bash ../mknamd_fep_decomp.sh rdrp-mtp-remtp-complex-prod-backward-all.fepout 10000 510000 500
+#### RMSD tool in VMD
+
+if we don't need to cluster, we just use VMD.
+
+##### preparation
+
+> https://www.ks.uiuc.edu/Research/vmd/current/ug/node198.html
+>
+> https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/3517.html
+>
+> [tcl基本语法：中括号[ ]、大括号{ }、双引号“ ”](https://blog.csdn.net/sinat_41774721/article/details/120884601)
+
+```tcl
+# load psf and dcd file
+mol new system.psf type psf
+mol addfile rdrp-remtp-equil-all.dcd type dcd waitfor all
+
+# move to center
+set lig [atomselect top "resname LIG"]
+set cen [measure center $lig weight mass]
+foreach {x y z} $cen { break }
+molinfo top set center_matrix "{{1 0 0 $x} {0 1 0 $y} {0 0 1 $z} {0 0 0 1}}"
+
+# make representation
+mol delrep 0 top
+mol representation NewCartoon 0.300000 10.000000 4.100000 0
+mol color Structure
+mol selection {protein}
+mol material Opaque
+mol addrep top
+
+mol representation Licorice 0.300000 12.000000 12.000000
+mol color Type
+mol selection {resname LIG}
+mol material Opaque
+mol addrep top
+
+mol representation VDW 1.000000 12.000000
+mol color Type
+mol selection {resname MG}
+mol material Opaque
+mol addrep top
+
+mol representation Lines 1.000000
+mol color Type
+mol selection {protein and residue 436 to 443 or residue 567 or residue 721}
+mol material Opaque
+mol addrep top
+# Val: 557, 442
+
 ```
 
 
 
+draft
 
+```shell
+prefix=rdrp-mtp-remtp-complex-prod
+catdcd -o all.dcd -stride 4 ${prefix}-forward.dcd 
+```
 
-#### Analysis
+##### RMSD tool
 
-1. visualize `clusters.pdb`, compare with the initial structure
-2. calculate RMSD with `c01.pdb`
+In VMD tutorial 4.2 (4: DATA ANALYSIS IN VMD)
+
+- Extensions → Analysis → RMSD Trajectory Tool 
+
+- type your selection
+
+  - backbone: C,CA,N; trace: CA
+
+- Click the Align button (with protein backbone selected?)
+
+- Click the RMSD button. Make sure the Plot checkbox is selected.
+
+- first and last
+
+  ```tcl
+  set sel [atomselect top all frame 0]
+  $sel writepdb first.pdb
+  set sel [atomselect top all frame 199]
+  $sel writepdb last.pdb
+  ```
+
+- 
 
 
 

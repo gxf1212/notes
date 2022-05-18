@@ -499,7 +499,13 @@ This is a record of my operations during 折腾ing the system, in order not to f
    sudo mv ./fca58054-9480-4790-a8ab-bc37f33823a4/ ./mechanical
    ```
 
-8. `rename` to change
+8. `rename` to change 
+
+   https://blog.51cto.com/jiemian/1846951 Perl语言版本格式
+
+   ```shell
+   rename 's/a/b/' *a*
+   ```
 
 9. tree: list subdirectories
 
@@ -990,7 +996,7 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 > - [x] 配套工具（百度网盘、阅读器、qq、有道词典、WPS）
 > - [x] email client
 > - [x] 程序图标
-> - [ ] 备份系统
+> - [x] 备份系统
 > - [x] 输入法、字体等
 > - [ ] 其他？（texlive,,mendeley,GitHub Desktop, flash, 浏览器)
 > - [ ] 修理：software?
@@ -2068,4 +2074,3 @@ just be a helper calculator, and a platform to learn Linux. (zheteng is allowed)
 
 
 
-zi

@@ -14,7 +14,7 @@ go to [onedrive](#Linux)
 
 # Commonly used for working
 
-## Network
+## Connect and remote control
 
 Connection, *pn, remote control usage
 
@@ -247,6 +247,81 @@ charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 easyconnect：没事不要老开着，当自动断开时就重启一下！！
 
 https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect，但没launchctl这个命令
+
+## Supercomputers
+
+### ssh and scp
+
+
+
+under Win, Xshell+Xftp look very good.
+
+### slurt
+
+read the pdf from hpc.xjtu.edu.cn for more
+
+https://blog.csdn.net/qq_33275276/article/details/105060613
+
+```shell
+# install
+module load gcc8.5
+module load cmake320
+cmake .. -DCMAKE_INSTALL_PREFIX=~/program/gromacs-2020.1-cpu -DGMX_BUILD_OWN_FFTW=ON -DGMX_GPU=off -DCMAKE_C_COMPILER=/share/apps/gcc-8.5/bin/gcc -DCMAKE_CXX_COMPILER=/share/apps/gcc-8.5/bin/g++
+make -j 8
+make install
+
+cd ~/gmx/lig2
+source ~/program/gromacs-2020.1-cpu/bin/GMXRC.bash
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/lib64/
+module load gcc8.5
+module load intel20u4
+
+squeue
+scontrol show job jobid
+
+```
+
+write absolute path when submitting jobs...
+
+an example script. submitted under your working directory
+
+```shell
+#!/bin/bash
+#SBATCH -J lig2
+#SBATCH -n 8
+#SBATCH -p node
+#SBATCH -N 1
+##SBATCH --tmp=MB 
+#SBATCH -p gpu
+#SBATCH --gres=gpu:1
+
+job=final_com
+
+#source /share/apps/gromacs/20211/bin/GMXRC.bash
+source /share/apps/gromacs/20211new/bin/GMXRC.bash
+
+module load cuda11.1
+##module load cuda10.2
+module load gcc8.5
+module load intel20u4
+
+##Run  Gromacs
+date > log
+gmx mdrun -deffnm $job -nb gpu
+date > log
+~
+```
+
+
+
+### PBS
+
+- basics https://www.jianshu.com/p/2f6c799ca147
+  - 
+- Environment Variable https://pubs.opengroup.org/onlinepubs/009696699/utilities/qsub.html
+  - like `$PBS_O_WORKDIR`
+- 
+- 
 
 ## Typora
 

@@ -961,6 +961,11 @@ java -jar LigPlus.jar
 export PATH=$PATH:/home/sjxlab/LigPlus/
 ```
 
+Parameters written to file: `/home/moonlight/LigPlus/lib/params/ligplus.par`
+
+### RasMol
+
+http://www.rasmol.org/software/RasMol_2.7.5/INSTALL.html
 
 ### VMD
 
@@ -1019,21 +1024,23 @@ a newer: https://forums.linuxmint.com/viewtopic.php?t=352478
 sudo apt-get install csh tcsh
 ## step 1, get the program in your target path
 # at downloads
-bash BIOVIA_2021.DS2021Client.bin --noexec --target /home/gxf/BIOVIA2021
-cd /home/gxf/BIOVIA2021
+bash BIOVIA_2021.DS2021Client.bin --noexec --target ~/BIOVIA2021
+cd ~/BIOVIA2021
 vi install_DSClient.sh
 # Change "#!/bin/sh" to "#!/bin/bash"
 # Insert "shopt -s expand_aliases" (without quotes) above "alias echoe="echo -e"" and save file.
 bash install_DSClient.sh
 # choose 2, create a folder in the current path as target, (??) then choose 1 (or Enter) twice
-/home/gxf/BIOVIA2021/DiscoveryStudio2021  # we just want to add 2021, if not, just use default 'BIOVIA'
+/home/xxx/BIOVIA2021/DiscoveryStudio2021  
+# we just want to add 2021, if not, just use default 'BIOVIA'
+# do not use ~ here. I don't know why
 # ignore './install_lp.sh: 73: Syntax error: redirection unexpected'
 # now you've created an installer
 
 ## step 2, configure license pack
-cd /home/gxf/BIOVIA2021/DiscoveryStudio2021/lp_installer
-bash ./lp_setup_linux.sh --noexec --target /home/gxf/BIOVIA2021
-cd /home/gxf/BIOVIA2021/LicensePack/etc
+cd lp_installer
+bash ./lp_setup_linux.sh --noexec --target ../ # /home/gxf/BIOVIA2021
+cd ../LicensePack/etc
 ./lp_config
 vi lp_echovars
 # change "#! /bin/csh -f" to "#! /bin/tcsh"
@@ -1054,10 +1061,10 @@ unzip, install according to file `install`
 
 ```shell
 sudo apt install zlib1g # zlib
-./configure --prefix=/home/gxf/libpng15
+./configure --prefix=/home/moonlight/libpng15
 make check
 make install
-cp /home/gxf/libpng15/lib/libpng15.so.15 ~/BIOVIA2021/DiscoveryStudio2021/lib/
+cp ~/libpng15/lib/libpng15.so.15 ~/BIOVIA2021/DiscoveryStudio2021/lib/
 ```
 
 > working directory should not contain sth like '&'
