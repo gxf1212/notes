@@ -1459,6 +1459,7 @@ Try to edit the molecule in GView to make sure the bonds are right (actually som
 
 ```shell
 # lig
+# conda activate A
 f=PEP_gv
 f=PEP2_gv
 antechamber -i ${f}.pdb -fi pdb -o ${f}.gjf -fo gcrt -pf y \

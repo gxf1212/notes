@@ -893,7 +893,9 @@ conda install -c rdkit rdkit -y
 
 ```
 
+### FFparam
 
+http://kenno.org/pro/lsfitpar/
 
 
 

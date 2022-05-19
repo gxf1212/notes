@@ -1757,11 +1757,30 @@ questions
 
 #### in VMD
 
+see below
+
 > [VMD plugin](https://github.com/luisico/clustering), but not for dcd?
 
 ### Analysis of binding mode?
 
 Here not that much is required...
+
+## GAFF
+
+
+
+
+
+```shell
+```
+
+
+
+
+
+
+
+
 
 # Stage 2 Protocol: FEP
 
@@ -3184,6 +3203,15 @@ if we don't need to cluster, we just use VMD.
 
 ##### preparation
 
+cat
+
+```shell
+prefix=rdrp-mtp-remtp-ligand-prod
+catdcd -o all.dcd -stride 4 ${prefix}-forward.dcd ${prefix}-backward.dcd 
+prefix=rdrp-mtp-remtp-complex-prod
+catdcd -o all.dcd -stride 4 ${prefix}-forward.dcd ${prefix}-backward.dcd 
+```
+
 > https://www.ks.uiuc.edu/Research/vmd/current/ug/node198.html
 >
 > https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/3517.html
@@ -3191,16 +3219,11 @@ if we don't need to cluster, we just use VMD.
 > [tcl基本语法：中括号[ ]、大括号{ }、双引号“ ”](https://blog.csdn.net/sinat_41774721/article/details/120884601)
 
 ```tcl
+# MD LIG. copy from here. use a script for FEP
+
 # load psf and dcd file
 mol new system.psf type psf
 mol addfile rdrp-remtp-equil-all.dcd type dcd waitfor all
-
-# move to center
-set lig [atomselect top "resname LIG"]
-set cen [measure center $lig weight mass]
-foreach {x y z} $cen { break }
-molinfo top set center_matrix "{{1 0 0 -$x} {0 1 0 -$y} {0 0 1 -$z} {0 0 0 1}}"
-# use negative...
 
 # make representation
 mol delrep 0 top
@@ -3209,7 +3232,7 @@ mol color Structure
 mol selection {protein}
 mol material Opaque
 mol addrep top
-# add rep a
+# add rep after setting up
 
 mol representation Licorice 0.300000 12.000000 12.000000
 mol color Type
@@ -3230,18 +3253,18 @@ mol material Opaque
 mol addrep top
 # Val: 557, 442
 
-```
+# move to center
+set lig [atomselect top "resname LIG"]
+set cen [measure center $lig weight mass]
+foreach {x y z} $cen { break }
+molinfo top set center_matrix "{{1 0 0 [expr -$x]} {0 1 0 [expr -$y]} {0 0 1 [expr -$z]} {0 0 0 1}}"
+# use negative...
 
-
-
-draft
-
-```shell
-prefix=rdrp-mtp-remtp-complex-prod
-catdcd -o all.dcd -stride 4 ${prefix}-forward.dcd 
 ```
 
 ##### RMSD tool
+
+https://www.ks.uiuc.edu/Research/vmd/plugins/rmsdtt/
 
 In VMD tutorial 4.2 (4: DATA ANALYSIS IN VMD)
 
@@ -3284,8 +3307,6 @@ alchemlyb这个包处理得十分粗糙，首先没有考虑分开vdW和coul，�
 
 We'll use GAFF (2?). CGenFF sucks.
 
-
-
 ```shell
 conda activate AmberTools21
 
@@ -3321,7 +3342,11 @@ conda activate AmberTools21
 >
 > > PG1 OG303 CG321 CG3C51 (ATOMS 5 10 8 11)
 >
-> 
+> #### remtp-2OH-NH2
+>
+> in ori, leili's param
+>
+> NH2: 2*0.34-0.915=-0.235, OH: 0.42-0.65=-0.23. no more modification.
 
 
 
@@ -3335,7 +3360,7 @@ conda activate AmberTools21
 
 
 
-# Stage 3 protocol: GMX FEP
+# Stage n protocol: GMX FEP
 
 ## FEP building systems
 
