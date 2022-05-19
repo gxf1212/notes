@@ -895,7 +895,21 @@ conda install -c rdkit rdkit -y
 
 ### FFparam
 
-http://kenno.org/pro/lsfitpar/
+http://ffparam.umaryland.edu/
+
+need http://kenno.org/pro/lsfitpar/ and cgenff program, utilizes Gaussian
+
+manual: http://ffparam.umaryland.edu/manual/index.html, install as it says
+
+
+
+### Multiwfn
+
+http://sobereva.com/multiwfn/
+
+download package and manual
+
+remember to modify `gaupath=` etc. in `settings.ini`. formchk etc: inside g16
 
 
 

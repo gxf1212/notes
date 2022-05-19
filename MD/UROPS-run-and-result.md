@@ -1578,7 +1578,7 @@ parmchk2 -i lig.mol2 -f mol2 -o lig.frcmod
    >    grep "WAT" -rl ./com.top | xargs sed -i "s/WAT/SOL/g"
    >    # change in topol.top (under "atom") IM to Cl-, IP to Na+
    >    grep " IP " -rl ./com.top | xargs sed -i "s/ IP / Na+ /g" 
-   >    grep " IM " -rl ./com.top | xecargs sed -i "s/ IM / Cl- /g" 
+   >    grep " IM " -rl ./com.top | xeargs sed -i "s/ IM / Cl- /g" 
    >    ```
    
    note that the output has changed in 2022! output into a folder; add a run.sh and .itp file, but we don't use them.

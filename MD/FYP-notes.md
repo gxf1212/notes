@@ -1767,16 +1767,140 @@ Here not that much is required...
 
 ## GAFF
 
+### building steps
 
+#### prepare for protein
 
+> https://docs.bioexcel.eu/2020_06_09_online_ambertools4cp2k/03-prepPDB/index.html
 
+problem: atom types varies between CHARMM and Amber. Maybe protonation state is also a problem
 
 ```shell
+pdb4amber rdrp.pdb -o rdrp_p.pdb -y
+# -y: no hydrogen
+grep 'CD  ILE' -rl rdrp_p.pdb | xargs sed -i 's/CD  ILE/CD1 ILE/g'
+# OT1, OT2 to OXT
+```
+
+> FATAL:  Atom .R<ILE 772>.A<CD 20> does not have a type.
+>
+> FATAL:  Atom .R<CPHE 804>.A<OT1 22> does not have a type.
+
+compute molecular weight
+
+- [pymol](https://kpwu.wordpress.com/2013/04/06/pymol-compute-molecular-weight/): Simple click “A” right next to the (select) object, and go down to “compute”, then choose “molecular weight” to calculate MW of object either “explicit” or “**with missing hydrogens**” mode. The missing hydrogens mode means PyMOL automatically add missed protons of object and calculate the proton-added MW.
+- pdb2gmx will also output mw
+
+> rdrp.pdb: pymol, 91.9756253 kD
+
+> failed
+>
+> ```shell
+> grep 'HSE' -rl rdrp.pdb | xargs sed -i 's/ HSE / HIS /g'
+> echo 12 7 | gmx pdb2gmx -f rdrp.pdb -o rdrp_a.pdb -ignh
+> # 99sb-ildn, no water
+> rm *.itp *.top
+> ```
+
+#### ligand topology
+
+##### re-investigate resp calculation
+
+- http://sobereva.com/441  RESP拟合静电势电荷的原理以及在Multiwfn中的计算
+
+  - 是通过最小二乘法最小化基于原子电荷计算的与基于波函数计算的静电势在这些拟合点上的偏差得到，并同时通过拉格朗日乘子法约束原子电荷加和等于体系净电荷
+  - 拟合静电势最常见、最知名的就是Merz-Kollman (MK)和CHELPG这两种。MK和CHELPG结果通常差异不太大
+  - 柔性分子有很多不同构象，动力学模拟过程中构象经常发生变化，而拟合静电势电荷计算结果又对构象很敏感。
+
+- http://sobereva.com/531 RESP2原子电荷的思想以及在Multiwfn中的计算
+
+  - q_RESP2(0.5) = 0.5*q_gas + 0.5*q_solv
+    其中q_gas是气相下的RESP电荷，q_solv是用PCM模型表现实际溶剂时的RESP电荷
+
+  - 基于结构文件傻瓜式一键调用Gaussian和Multiwfn计算RESP2电荷
+
+    对中性单重态分子计算用于水溶剂MD模拟的RESP2(0.5)电荷：./RESP2.sh H2O.pdb
+
+  - 此脚本用的计算级别只要打开.sh文件一看便知
+
+- 
+
+examples\RESP\RESP2.sh. modify the script:
+
+- g16
+- params, like nproc
+
+```shell
+bash ./RESP2.sh remtp.pdb -4
+bash ./restart.sh remtp.pdb -4
 ```
 
 
 
 
+
+##### old method
+
+```shell
+conda activate AmberTools21
+f=remtp
+antechamber -i ${f}.pdb -fi pdb -o ${f}.gjf -fo gcrt -pf y \
+-gm "%mem=4096MB" -gn "%nproc=4" -ch ${f} -nc -4 \
+-gk "#B3LYP/6-311G** em=GD3BJ scrf=solvent=water SCF=tight \
+iop(6/33=2,6/42=6,6/50=1) pop=CHELPG" -ge ${f}_resp.gesp -gv 1 -at gaff
+g16 ${f}.gjf
+antechamber -i ${f}_resp.gesp -fi gesp -o ${f}.mol2 -fo mol2 -pf y -c resp
+parmchk2 -i ${f}.mol2 -f mol2 -o ${f}.frcmod
+# python ~/Desktop/work/projects/undergraduate/NUS-UROPS/md/prepare/align.py ~/Desktop/work/practice/with others/AroG-PEP $f
+align_gauss `pwd`/ remtp
+```
+
+#### combine
+
+```shell
+conda activate AmberTools21
+tleap
+source leaprc.ff99SBildn
+pro = loadpdb rdrp_p.pdb
+check pro 
+source leaprc.gaff
+loadamberparams remtp.frcmod
+lig = loadmol2 remtp_aligned.mol2
+check lig
+source leaprc.water.tip3p
+mg = loadpdb mg.pdb
+com = combine {pro lig mg}
+solvatebox com TIP3PBOX 11.5
+# 0.1 M ion
+charge com
+addIons2 com Cl- 41 Na+ 53
+check com
+saveamberparm com com.prmtop com.inpcrd
+quit
+
+leaprc.protein.ff14SB
+```
+
+#### similar processes
+
+```shell
+conda activate Acpype
+acpype -p com.prmtop -x com.inpcrd -d -c user
+mv com_GMX.gro com.gro
+mv com_GMX.top com.top
+mv em.mdp em_test.mdp
+mv md.mdp md_test.mdp
+grep "WAT" -rl ./com.gro | xargs sed -i "s/WAT/SOL/g" 
+grep "WAT" -rl ./com.top | xargs sed -i "s/WAT/SOL/g"
+grep " IP " -rl ./com.top | xargs sed -i "s/ IP / Na+ /g" 
+grep " IM " -rl ./com.top | xargs sed -i "s/ IM / Cl- /g" 
+gmx grompp -f em_sol_pme.mdp -c com.gro -r com.gro -p com.top -o em.tpr -maxwarn 1 
+gmx mdrun -v -deffnm em
+
+
+
+
+```
 
 
 
@@ -3103,6 +3227,102 @@ bash ../mknamd_fep_decomp.sh rdrp-mtp-remtp-complex-prod-backward-all.fepout 100
 
 ### trajectory analysis
 
+#### RMSD tool in VMD
+
+if we don't need to cluster, we just use VMD.
+
+##### preparation
+
+cat
+
+```shell
+cd ligand1
+prefix=rdrp-mtp-remtp-ligand-prod
+catdcd -o all.dcd -stride 4 ${prefix}-forward.dcd ${prefix}-backward.dcd 
+cd ..
+cd complex1
+prefix=rdrp-mtp-remtp-complex-prod
+catdcd -o all.dcd -stride 4 ${prefix}-forward.dcd ${prefix}-backward.dcd 
+cd ..
+```
+
+> https://www.ks.uiuc.edu/Research/vmd/current/ug/node198.html
+>
+> https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/3517.html
+>
+> [tcl基本语法：中括号[ ]、大括号{ }、双引号“ ”](https://blog.csdn.net/sinat_41774721/article/details/120884601)
+
+```tcl
+# MD LIG. copy from here. use a script for FEP
+
+# load psf and dcd file
+mol new system.psf type psf
+mol addfile rdrp-remtp-equil-all.dcd type dcd waitfor all
+
+# make representation
+mol delrep 0 top
+mol representation NewCartoon 0.300000 10.000000 4.100000 0
+mol color Structure
+mol selection {protein}
+mol material Opaque
+mol addrep top
+# add rep after setting up
+
+mol representation Licorice 0.300000 12.000000 12.000000
+mol color Type
+mol selection {resname LIG}
+mol material Opaque
+mol addrep top
+
+mol representation VDW 1.000000 12.000000
+mol color Type
+mol selection {resname MG}
+mol material Opaque
+mol addrep top
+
+mol representation Lines 1.000000
+mol color Type
+mol selection {protein and residue 436 to 443 or residue 567 or residue 721}
+mol material Opaque
+mol addrep top
+# Val: 557, 442
+
+# move to center
+set lig [atomselect top "resname LIG"]
+set cen [measure center $lig weight mass]
+foreach {x y z} $cen { break }
+molinfo top set center_matrix "{{1 0 0 [expr -$x]} {0 1 0 [expr -$y]} {0 0 1 [expr -$z]} {0 0 0 1}}"
+# use negative...
+
+```
+
+##### RMSD tool
+
+https://www.ks.uiuc.edu/Research/vmd/plugins/rmsdtt/
+
+In VMD tutorial 4.2 (4: DATA ANALYSIS IN VMD)
+
+- Extensions → Analysis → RMSD Trajectory Tool 
+
+- type your selection
+
+  - backbone: C,CA,N; trace: CA
+
+- Click the Align button (with protein backbone selected?)
+
+- Click the RMSD button. Make sure the Plot checkbox is selected.
+
+- first and last
+
+  ```tcl
+  set sel [atomselect top all frame 0]
+  $sel writepdb first.pdb
+  set sel [atomselect top all frame 199]
+  $sel writepdb last.pdb
+  ```
+
+- 
+
 #### making clusters in gmx
 
 ##### collect trajectory files (prod-window)
@@ -3196,100 +3416,6 @@ cd ..
 
 1. visualize `clusters.pdb`, compare with the initial structure
 2. calculate RMSD with `c01.pdb`
-
-#### RMSD tool in VMD
-
-if we don't need to cluster, we just use VMD.
-
-##### preparation
-
-cat
-
-```shell
-prefix=rdrp-mtp-remtp-ligand-prod
-catdcd -o all.dcd -stride 4 ${prefix}-forward.dcd ${prefix}-backward.dcd 
-prefix=rdrp-mtp-remtp-complex-prod
-catdcd -o all.dcd -stride 4 ${prefix}-forward.dcd ${prefix}-backward.dcd 
-```
-
-> https://www.ks.uiuc.edu/Research/vmd/current/ug/node198.html
->
-> https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/3517.html
->
-> [tcl基本语法：中括号[ ]、大括号{ }、双引号“ ”](https://blog.csdn.net/sinat_41774721/article/details/120884601)
-
-```tcl
-# MD LIG. copy from here. use a script for FEP
-
-# load psf and dcd file
-mol new system.psf type psf
-mol addfile rdrp-remtp-equil-all.dcd type dcd waitfor all
-
-# make representation
-mol delrep 0 top
-mol representation NewCartoon 0.300000 10.000000 4.100000 0
-mol color Structure
-mol selection {protein}
-mol material Opaque
-mol addrep top
-# add rep after setting up
-
-mol representation Licorice 0.300000 12.000000 12.000000
-mol color Type
-mol selection {resname LIG}
-mol material Opaque
-mol addrep top
-
-mol representation VDW 1.000000 12.000000
-mol color Type
-mol selection {resname MG}
-mol material Opaque
-mol addrep top
-
-mol representation Lines 1.000000
-mol color Type
-mol selection {protein and residue 436 to 443 or residue 567 or residue 721}
-mol material Opaque
-mol addrep top
-# Val: 557, 442
-
-# move to center
-set lig [atomselect top "resname LIG"]
-set cen [measure center $lig weight mass]
-foreach {x y z} $cen { break }
-molinfo top set center_matrix "{{1 0 0 [expr -$x]} {0 1 0 [expr -$y]} {0 0 1 [expr -$z]} {0 0 0 1}}"
-# use negative...
-
-```
-
-##### RMSD tool
-
-https://www.ks.uiuc.edu/Research/vmd/plugins/rmsdtt/
-
-In VMD tutorial 4.2 (4: DATA ANALYSIS IN VMD)
-
-- Extensions → Analysis → RMSD Trajectory Tool 
-
-- type your selection
-
-  - backbone: C,CA,N; trace: CA
-
-- Click the Align button (with protein backbone selected?)
-
-- Click the RMSD button. Make sure the Plot checkbox is selected.
-
-- first and last
-
-  ```tcl
-  set sel [atomselect top all frame 0]
-  $sel writepdb first.pdb
-  set sel [atomselect top all frame 199]
-  $sel writepdb last.pdb
-  ```
-
-- 
-
-
 
 ### using alchemlyb
 
