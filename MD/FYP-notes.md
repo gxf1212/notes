@@ -1851,8 +1851,10 @@ iop(6/33=2,6/42=6,6/50=1) pop=CHELPG" -ge ${f}_resp.gesp -gv 1 -at gaff
 g16 ${f}.gjf
 antechamber -i ${f}_resp.gesp -fi gesp -o ${f}.mol2 -fo mol2 -pf y -c resp
 parmchk2 -i ${f}.mol2 -f mol2 -o ${f}.frcmod
-# python ~/Desktop/work/projects/undergraduate/NUS-UROPS/md/prepare/align.py ~/Desktop/work/practice/with others/AroG-PEP $f
-align_gauss `pwd`/ remtp
+align_gauss `pwd`/ remtp h
+
+antechamber -i ${f}.pdb -fi pdb -o ${f}.mol2 -fo mol2 -at gaff -c bcc -rn MOL -nc -4
+parmchk2 -i ${f}.mol2 -f mol2 -o ${f}.frcmod
 ```
 
 #### combine
@@ -1874,7 +1876,7 @@ solvatebox com TIP3PBOX 11.5
 # 0.1 M ion
 charge com
 addIons2 com Cl- 41 Na+ 53
-check com
+
 saveamberparm com com.prmtop com.inpcrd
 quit
 
@@ -1894,11 +1896,16 @@ grep "WAT" -rl ./com.gro | xargs sed -i "s/WAT/SOL/g"
 grep "WAT" -rl ./com.top | xargs sed -i "s/WAT/SOL/g"
 grep " IP " -rl ./com.top | xargs sed -i "s/ IP / Na+ /g" 
 grep " IM " -rl ./com.top | xargs sed -i "s/ IM / Cl- /g" 
-gmx grompp -f em_sol_pme.mdp -c com.gro -r com.gro -p com.top -o em.tpr -maxwarn 1 
+gmx grompp -f em1.mdp -c com.gro -r com.gro -p com.top -o em.tpr -maxwarn 1 
 gmx mdrun -v -deffnm em
-
-
-
+gmx grompp -f em2.mdp -c em.gro -r em.gro -p com.top -o em2.tpr -maxwarn 1 
+gmx mdrun -v -deffnm em2
+gmx make_ndx -f em2.gro -o index.ndx
+gmx grompp -f nvt.mdp -c em.gro -r em.gro -n index.ndx -p com.top -o nvt.tpr
+gmx mdrun -deffnm nvt
+gmx grompp -f npt.mdp -c nvt.gro -r nvt.gro -n index.ndx -t nvt.cpt -p com.top -o npt.tpr
+gmx mdrun -deffnm npt
+gmx grompp -f md.mdp -c npt.gro -r npt.gro -n index.ndx -t npt.cpt -p com.top -o final.tpr
 
 ```
 
@@ -3208,8 +3215,7 @@ data explained https://www.ks.uiuc.edu/Research/namd/2.14/ug/node66.html
 ```shell
 # parsefep -forward ../*forward-all*.fepout -backward ../*backward-all*.fepout -gc 0 -bar
 # now we must use GUI since problem occurs in 'display'
-rm file*
-bash grace.summary.exec
+rm file* && bash grace.summary.exec
 ```
 
 adjusting
