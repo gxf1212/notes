@@ -2940,17 +2940,18 @@ grep "Running FEP window" ./*.log
 obabel *.mol2 -opdb -O *2.pdb -m
 # run make_hybrid.py, after protein, hybrid.rtf/pdb, top files are ready
 vmd -dispdev text -e merge-fep.tcl
+
 vmd -dispdev text -e sol-ion-fep.tcl
 # edit fep
 script_dir=/home/moonlight/Desktop/work/projects/tools/Python-for-MD/make_hybrid_top
 conda activate AmberTools21
 python3 $script_dir/edit_FEP.py `pwd` 
 python3 $script_dir/edit_PSF.py `pwd`
-rm *merged* *solvated*
+rm *merged* *solvated* *psf complex.pdb ligand.pdb
 # common
-vmd -dispdev text -e measure.tcl -args ligand # complex
+vmd -dispdev text -e measure-fep.tcl -args ligand # complex
 # equil
-namd3 +p6 fep-lig-equil > fep-lig-equil.log  # +auto-provision +idlepoll
+namd3 +p4 fep-lig-equil > fep-lig-equil.log  # +auto-provision +idlepoll
 # may go to analysis and check?
 vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
 ```
@@ -3228,6 +3229,22 @@ https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2013-2014/0568.html
 ```shell
 bash ../mknamd_fep_decomp.sh rdrp-mtp-remtp-complex-prod-backward-all.fepout 10000 510000 500
 ```
+
+
+
+We may also just read from .fepout:
+
+```shell
+tail -n 1 *.fepout | cut -c 93- # the final number of the final line
+
+for f in `ls`; do
+cd $f && getfepout && cd ..
+echo $f
+done
+
+```
+
+This is free energy change. ParseFEP only gives dA if only forward is provided.
 
 
 

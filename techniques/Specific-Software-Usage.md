@@ -1348,6 +1348,12 @@ anaconda环境信息同步？
    git config --global http.proxy "" 
    ```
 
+8. [create sth locally and a repository in the web, merge them](https://www.educative.io/edpresso/the-fatal-refusing-to-merge-unrelated-histories-git-error)
+
+   ```shell
+   git pull origin master --allow-unrelated-histories
+   ```
+
 8. 
 
 ### exploration
