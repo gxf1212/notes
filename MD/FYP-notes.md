@@ -3235,16 +3235,27 @@ bash ../mknamd_fep_decomp.sh rdrp-mtp-remtp-complex-prod-backward-all.fepout 100
 We may also just read from .fepout:
 
 ```shell
-tail -n 1 *.fepout | cut -c 93- # the final number of the final line
+tail -n 1 *.fepout | cut -c 92- # the final number of the final line
 
 for f in `ls`; do
 cd $f && getfepout && cd ..
 echo $f
 done
 
+# other
+vmd -dispdev text -e merge-fep.tcl
+vmd -dispdev text -e sol-ion-fep.tcl
+cp -r complex ../equil/complex1
+cp -r ligand ../equil/ligand1
+cp -r complex ../equil/complex2
+cp -r ligand ../equil/ligand2
+tar -cvf xx.tar xx
+/Desktop/work/projects/undergraduate/FYP/FEP/remtp-substu
 ```
 
 This is free energy change. ParseFEP only gives dA if only forward is provided.
+
+but why don't we use BAR? We cannot presume that the binding pocket is favorable for the end-state ligand. We should have equilibrated the end state (MDS) before going on. Plus, we should have started every window from the same equilibrated structure (as done in gmx). In namd starting from the previous window is to minimize the error and just acceptable.
 
 
 

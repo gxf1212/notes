@@ -545,8 +545,10 @@ unrar x -o- -y 'Gaussian 16 Rev. A.03 ES64L Linux x64.part1.rar' .
 zip into some certain-size part files to store in baidunetdisk or qq
 
 ```shell
-tar -zcvf folder.tar.gz folder | split -b 4000M -d -a 1 - folder.tar.gz
+tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
 ```
+
+> `-c` denotes zipping and `-x` denotes unzipping
 
 
 
