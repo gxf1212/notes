@@ -3217,12 +3217,49 @@ data explained https://www.ks.uiuc.edu/Research/namd/2.14/ug/node66.html
 # parsefep -forward ../*forward-all*.fepout -backward ../*backward-all*.fepout -gc 0 -bar
 # now we must use GUI since problem occurs in 'display'
 rm file* && bash grace.summary.exec
+
+exit
+rm file* && plotfep
+cd ../../ligand3/
+mkdir fepout && cd fepout
+vmd
 ```
 
 adjusting
 
 https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2018-2019/0204.html
 https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2013-2014/0568.html
+
+> ```shell
+> # plot
+> xmgrace -pexec arrange (3,1,0.10,0.40,0.20,OFF,OFF,OFF) -pexec with string ;
+>         	                         string on ;
+>         	                         string g0 ;
+>         	                         string loctype view ;
+>         	                         string 0.030, 0.950 ;
+>         	                         string char size 1.6 ;
+>         	                         string def "\f{Helvetica-Bold}ParseFEP\f{Helvetica}: Summary "  -graph 0 -block temp.ParseFEP.log -bxy 1:3 -pexec xaxis ticklabel on ;
+>                                                          xaxis tick major 0.1 ; 
+>                                                          xaxis tick minor 0.02 ;
+>                                                          xaxis ticklabel format decimal ; 
+>                                                          xaxis ticklabel prec 1 ; 
+>                                                          xaxis ticklabel font "Helvetica" ;
+>                                                          xaxis ticklabel char size 0.8 ;
+>                                                          xaxis label char size 1.2 ;
+>                                                          xaxis label place spec ;
+>                                                          xaxis label place  0.00,0.07 ;
+>                                                          xaxis label "\f{Symbol}l" ;
+>                                                          yaxis label char size 1.2 ;
+>                                                          yaxis label place spec ;
+>                                                          yaxis label place  0.00,-1.15 ;
+>                                                          yaxis label  "\r{180}\f{Symbol}D\1G\0\f{Helvetica} (kcal/mol)" ;
+>                                                          yaxis ticklabel format decimal ; 
+>                                                          yaxis ticklabel prec 3 ; 
+>                                                          yaxis ticklabel font "Helvetica" ;
+>                                                          yaxis ticklabel char size 0.8 -pexec kill g1 -pexec kill g2 -hardcopy -printfile summary.png -hdevice PNG
+> ```
+>
+> 
 
 #### decomposition
 
@@ -3237,10 +3274,7 @@ We may also just read from .fepout:
 ```shell
 tail -n 1 *.fepout | cut -c 92- # the final number of the final line
 
-for f in `ls`; do
-cd $f && getfepout && cd ..
-echo $f
-done
+for f in `ls | grep l`; do echo $f; cd $f && tail -n 1 *fepout | cut -c 92- && cd ..; done
 
 # other
 vmd -dispdev text -e merge-fep.tcl
@@ -3249,6 +3283,8 @@ cp -r complex ../equil/complex1
 cp -r ligand ../equil/ligand1
 cp -r complex ../equil/complex2
 cp -r ligand ../equil/ligand2
+cp -r complex ../equil/complex3
+cp -r ligand ../equil/ligand3
 tar -cvf xx.tar xx
 /Desktop/work/projects/undergraduate/FYP/FEP/remtp-substu
 ```
