@@ -4,7 +4,143 @@ This page is all about software installing, both for system and project environm
 
 Mainly recorded while in NUS. The installation of DL environment, Gromacs, and plans are all in `Linux fundamental (Installation and softwares)`.
 
-> 
+## remote control
+
+### tight vnc
+
+[doc](https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/infrastructure-services/TigerVNC/)
+
+[error](https://www.dev2qa.com/how-to-fix-error-job-for-vncserver1-service-failed-because-the-control-process-exited-with-error-code-see-systemctl-status-vncserver1-service-and-journalctl-xe-for-details-when-start-vnc/)
+
+I've removed that but maybe it's ok (you may try to find the viewer).
+
+### real vnc on linux
+
+https://www.realvnc.com/en/connect/download/vnc/linux/
+
+```shell
+rpm -Uhv VNC-Server-6.7.2-Linux-x64.rpm # if there is conflict, add --nodeps --force
+systemctl start vncserver-x11-serviced.service # start service
+vnclicensewiz # GUI to sign in and assign pwd for this host
+systemctl enable vncserver-x11-serviced.service # startup enabled
+```
+
+Kindly remember your password!
+
+Note that you may switch an accout for further use. Install realvnc viewer in your pc logging in with the same account to easily connect them.
+
+https://zhuanlan.zhihu.com/p/46640232
+
+backup (not using): tips when install:
+
+```
+Start or stop the service with:
+  systemctl (start|stop) vncserver-x11-serviced.service
+Mark or unmark the service to be started at boot time with:
+  systemctl (enable|disable) vncserver-x11-serviced.service
+
+Installed systemd unit for VNC Server in Virtual Mode daemon
+Start or stop the service with:
+  systemctl (start|stop) vncserver-virtuald.service
+Mark or unmark the service to be started at boot time with:
+  systemctl (enable|disable) vncserver-virtuald.service
+
+Installed firewalld service configuration. To enable access to VNC services from the public zone, use the following commands:
+For VNC Server in Service Mode:
+  firewall-cmd --zone=public --permanent --add-service=vncserver-x11-serviced
+For VNC Server in Virtual Mode daemon:
+  firewall-cmd --zone=public --permanent --add-service=vncserver-virtuald
+Running as unit: run-r4aa0cc0954b846c993f38c8939dae70a.service
+```
+
+viewer on linux:
+
+```
+rpm -Uhv VNC-Viewer-6.20.529-Linux-x64.rpm --nodeps --force
+```
+
+then open the GUI and sign in
+
+gmail
+
+### sunflower
+
+#### Fedora
+
+https://tieba.baidu.com/p/7157359656
+
+```shell
+elif [ "$os_name"== 'Fedora' ]; then
+        os_version=`cat /etc/fedora-release | cut -d' ' -f3`
+|| [ $os_name== "fedora" ]
+```
+
+see software usage!
+
+## break the wall
+
+[*PN和v2ray、ssr、加速器有什么区别？](https://shutupandshowpages.com/index.php/2021/07/06/vpn%E5%92%8Cv2ray%E3%80%81ssr%E3%80%81%E5%8A%A0%E9%80%9F%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/)
+
+翻墙的方式：*PN、代理、自己搭服务器（淘宝上还有帮忙搭建内网穿透的；自己也可搭ssr啥的？）
+
+总之VPN更安全；v2ray比ssr可靠、难搞
+
+https://sites.google.com/view/honven all kinds of recomm
+
+### airport: sgi.anycast.gay
+
+https://sgi.anycast.gay/user 买ssr流量的网站
+
+https://www.hayaissr.xyz/ 也是个买*PN的？
+
+> ssr can not provide access to YouTube. 极速 browser can view Google but chrome without the plugin can not... it helps with google scholar but the plugin cannot
+
+laowang, can view youtube on the phone
+
+### electron-ssr
+
+configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md
+
+- old VPN for Linux: https://github.com/hannuo/ssr-linux-client-electron
+
+- 22.2.9 [0.2.7](https://github.com/shadowsocksrr/electron-ssr/releases/tag/v0.2.7) and [0.2.6](https://github.com/qingshuisiyuan/electron-ssr-backup/releases/tag/v0.2.6)
+
+1. dependencies (as said in Debian系列安装与配置[Ubuntu.md](https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md))
+
+   ```shell
+   sudo apt install libcanberra-gtk-module libcanberra-gtk3-module gconf2 gconf-service libappindicator1 libssl-dev libsodium-dev
+   sudo apt install python
+   ```
+
+2. depends on Python! It will look like
+
+   ![electron-ssr-py](https://gitee.com/gxf1212/notes/raw/master/techniques/images/electron-ssr-py.png)
+
+   If connection fails,
+
+   https://www.cnblogs.com/geekHao/p/12635970.html
+
+   从源头更改python的链接文件，**推荐这种方法**
+
+   1. 查看已安装的python版本和链接情况：
+
+      ```shell
+      ll /usr/bin/python*
+      ```
+
+   2. 删除原有的Python连接文件 (I don’t have one after reinstalling the system)
+
+      ```shell
+      sudo rm /usr/bin/python
+      ```
+
+   3. 建立指向Python3.X的连接
+
+      ```shell
+      sudo ln -s /usr/bin/python3 /usr/bin/python
+      ```
+
+      then it’s done
 
 ## Docking
 
