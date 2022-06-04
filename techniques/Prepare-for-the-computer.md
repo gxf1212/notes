@@ -1,3 +1,355 @@
+## Analysis tools: Python/cmd tookit
+
+### dssp
+
+https://www.biostars.org/p/348161/
+
+```shell
+conda install -c salilab dssp
+export PATH=$PATH:~/miniconda3/envs/work/bin
+conda install biopython
+# conda install matplotlib seaborn
+```
+
+https://biopython.org/docs/1.75/api/Bio.PDB.DSSP.html
+
+not successful for command line gromacs
+
+https://ssbio.readthedocs.io/en/latest/instructions/dssp.html might be an alternative
+
+report error? https://www.biostars.org/p/19479/
+
+delete /usr/local/bin/dssp....
+
+> failed.
+>
+> install boost from tar.gz, then dssp
+>
+> https://www.linuxidc.com/Linux/2019-03/157605.htm
+>
+> ```shell
+> ./bootstrap.sh --with-libraries=all --with-toolset=gcc
+> ./b2 toolset=gcc
+> ./b2 install --prefix=/usr/local/boost_1_75_0
+> 
+> nano ~/.bashrc
+> export PATH=$PATH:/usr/local/boost_1_75_0
+> ```
+>
+> https://github.com/PDB-REDO/libcifpp
+>
+> ```shell
+> yum install git
+> ./configure --prefix=/usr/local/gromacs/dssp/libcifpp --with-boost=/usr/local/boost_1_75_0
+> make -j 4 # may execute this again to ignore the error
+> make install
+> export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/gromacs/dssp/libcifpp/lib
+> ```
+>
+> https://github.com/PDB-REDO/dssp
+>
+> ```shell
+> cd dssp-trunk
+> ./configure --prefix=/usr/local/gromacs/dssp --with-cif++=/usr/local/gromacs/dssp/libcifpp --with-boost=/usr/local/boost_1_75_0
+> make -j 4
+> make install
+> ```
+>
+> (do not create build...)
+>
+> failed2
+>
+> ```shell
+> dnf install dssp
+> sudo ln -s /usr/bin/mkdssp /usr/local/bin/dssp # for gromacs to use
+> # this only calculates a single pdb
+> ```
+>
+> https://ssbio.readthedocs.io/en/latest/instructions/dssp.html
+
+### gmx_MMPBSA
+
+https://valdes-tresanco-ms.github.io/gmx_MMPBSA/installation/
+
+```shell
+pip install gmx_MMPBSA # should be together with ambertools
+pip install PyQt5
+```
+
+if in conda, no need to add `amber.pythons`
+
+> ### g_mmpbsa
+>
+> failed for version reasons
+>
+> http://rashmikumari.github.io/g_mmpbsa/Download-and-Installation.html
+>
+> ```shell
+> export PATH=$PATH:~/g_mmpbsa/bin
+> ```
+>
+> guide: https://github.com/RashmiKumari/g_mmpbsa
+>
+> http://kangsgo.com/18.html
+>
+> > intro: https://chufang.cf/2019/07/16/gmx_pbsa/
+> >
+> > other: https://jerkwin.github.io/2019/07/31/gmx_mmpbsa%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/
+>
+> ### GMXPBSA
+>
+> https://github.com/aspitaleri/gmxpbsa
+>
+> ```
+> yum install apbs
+> export GMXPBSAHOME=/home/gxf/GMXPBSAtool
+> ```
+
+### GromacsWrapper
+
+https://gromacswrapper.readthedocs.io/en/latest/index.html
+
+```shell
+pip install GromacsWrapper  # use ↓
+conda install -c conda-forge -c bioconda gromacswrapper
+from gromacs.fileformats.xvg import XVG # read .xvg files
+```
+
+### alchemistry
+
+https://github.com/MobleyLab/alchemical-analysis
+
+```shell
+conda install -c conda-forge pymbar
+```
+
+https://anaconda.org/conda-forge/pymbar git address and doc
+
+### alchemical-analysis, alchemlyb
+
+> https://anaconda.org/conda-forge/alchemical-analysis
+>
+> ```shell
+> conda activate AmberTools21 # no! choose python version?
+> conda install -c conda-forge alchemical-analysis
+> ```
+
+We are in the process of migrating all functionality from here to instead use [`alchemlyb`](https://github.com/alchemistry/alchemlyb)
+
+doc: https://alchemlyb.readthedocs.io/en/latest/index.html
+
+pdf: https://alchemlyb.readthedocs.io/en/latest/index.html
+
+datasets for testing: https://alchemtest.readthedocs.io/en/latest/index.html
+
+```shell
+conda activate AmberTools21
+pip install --user alchemlyb
+pip install --user alchemtest
+```
+
+### mdtraj
+
+convert trajectories
+
+```shell
+conda install -c conda-forge mdtraj
+conda uninstall mdtraj
+```
+
+https://mdtraj.org/1.9.4/mdconvert.html
+
+### msmbuilder
+
+http://msmbuilder.org/3.8.0/
+
+```shell
+conda create env -n xxx python==3.6 # 22.3.5
+conda activate
+conda install -c omnia msmbuilder
+```
+
+### Align ligands
+
+1. LigAlign: a pymol tool
+
+   http://compbio.cs.toronto.edu/ligalign/index.html
+
+   ```shell
+   # upon launching pymol
+   run ~/pymol/ligalign/ligand_alignment.py
+   ```
+
+   but too old!
+
+2. Mcsalign https://pymolwiki.org/index.php/Mcsalign
+
+   ```shell
+   conda install -c schrodinger -y pymol pymol-psico
+   conda install -c rdkit rdkit -y
+   conda install -c speleo3 csb -y
+   ```
+
+   run
+
+   ```shell
+   conda activate pymol
+   pymol
+   import psico.mcsalign
+   mcsalign mobile, target
+   ```
+
+### Clustering plugin in VMD
+
+https://github.com/luisico/clustering
+
+## Modelling tools
+
+### AMBER
+
+Amber软件包主要包括2个部分：Amber Tools和Amber，其中Amber Tools可以免费在[Amber官网](http://ambermd.org/AmberTools17-get.html)下载，Tools中包含了Amber几乎所有的模块，Sander、tleap、MMPBSA等最核心的内容都可以免费使用。而另外的Amber则是唯一收费的部分，该部分主要包括了PMEMD以及GPU加速 的功能
+
+installation: https://ambermd.org/InstFedora.php under user
+
+> error:
+>
+> **/home/gxf/amber20_src/AmberTools/src/arpack/dnaitr.f:658:35:**.......fortran error. needs to downgrade gcc
+>
+> install from https://gcc.gnu.org/mirrors.html
+>
+> > configure:5776: error: Building GCC requires GMP 4.2+, MPFR 2.4.0+ and MPC 0.8.0+.
+> > Try the --with-gmp, --with-mpfr and/or --with-mpc options to specify their locations.  Source code for these libraries can be found at their respective hoslaterting sites as well as at ftp://gcc.gnu.org/pub/gcc/infrastructure/.  See also http://gcc.gnu.org/install/prerequisites.html for additional info.
+>
+> try running `./contrib/download_prerequisites.sh` from the gcc source dir. 
+>
+> remember this is always the way to install a different version of gcc, which seems to overwrite the configuration in /usr/bin....
+>
+> failed here: [link](https://stackoom.com/question/3nN9A/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3-archlinux%E4%B8%AD%E7%9A%84gcc%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-sys-ustat-h-%E6%B2%A1%E6%9C%89%E8%BF%99%E6%A0%B7%E7%9A%84%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95)
+
+from miniconda (which only includes python in conda)
+
+https://docs.conda.io/en/latest/miniconda.html
+
+> I'm not using neither openmpi cuda here. maybe refer to [this](https://jerkwin.github.io/2017/12/26/Amber_2017_%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86_%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%AE%89%E8%A3%85/) a intro to Amber program
+>
+> CentOS: https://www.cnblogs.com/wq242424/p/8857296.html
+>
+> Ubuntu: https://blog.csdn.net/qq_33953882/article/details/113995531
+
+a readme: https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml
+
+#### AmberTools
+
+http://ambermd.org/GetAmber.php#ambertools
+
+from conda
+
+```shell
+# AmberTools. for gmx_MMPBSA, not so high python version
+conda create -n AmberTools21 -y
+# conda remove --name AmberTools20 --all 
+conda activate AmberTools21
+# conda install -c conda-forge ambertools=20 -y # old
+conda install -c conda-forge ambertools=21 compilers -y 
+# update
+conda update -c conda-forge ambertools
+```
+
+can also directly get the package
+
+### acpype
+
+this tool should be separate from ambertools...
+
+https://github.com/alanwilter/acpype#how-to-use-acpype
+
+```shell
+# acpype
+conda create -n Acpype python=3.6  # now 3.7. install appropriate version at step 3
+conda activate Acpype
+conda install -c acpype acpype -y # this contains ambertools-17
+```
+
+2022.2.11 update
+
+```shell
+conda create -n Acpype -
+conda install -c conda-forge acpype
+```
+
+### Gaussian16 and view
+
+```shell
+tar -xjvf G16-A03-AVX2.tbz
+mkdir g16/scratch
+```
+
+after extraction, add these to `~/.bashrc` http://sobereva.com/439
+
+```shell
+export g16root=$HOME
+export GAUSS_SCRDIR=$g16root/g16/scratch
+export GAUSS_EXEDIR=$g16root #
+source $g16root/g16/bsd/g16.profile
+export PATH=$PATH:$HOME/g16
+```
+
+> debugging experience 2022.2.10
+>
+> 1. below
+>
+>    ```
+>    PGFIO/stdio: No such file or directory
+>    PGFIO-F-/OPEN/unit=11/error code returned by host stdio - 2.
+>     File name = /home/gxf/g16/scratch/Gau-8001.inp
+>     In source file ml0.f, at line number 197
+>    ```
+>
+>    means you need to `mkdir scratch`
+>
+> 2. below
+>
+>    ```shell
+>    ntrex1: Bad file descriptor
+>    Segmentation fault (core dumped)
+>    ```
+>
+>    means you assigned an improper chk file in your .gjf file like 
+>
+>    `%chk=D:\Doctor\my work\undergraduate\TA\2019\0912\ethylene.chk`
+
+[g16 view csdn](https://download.csdn.net/download/lk2069/10777135), buy at 1 yuan [here](https://www.kerwin.cn/dl/detail/lk2069/275737); [win?](https://getintopc.com/softwares/design/gaussview-6-0-16-free-download/)
+
+[installation guide](http://www.molcalx.com.cn/gaussian-16-installation/)
+
+put the folder `gv` under your g16 folder!! 
+
+You can type `gv` in the terminal to start GView and link to Gaussian as we did in Windows, only if it can be found by g16 path settings!
+
+> icon: downloaded from web
+
+### PMX
+
+```shell
+git clone https://github.com/deGrootLab/pmx pmx
+cd pmx
+# to switch to 'develop' branch type:
+git checkout develop
+
+conda activate  AmberTools21 # whatever
+# conda install pip  # to make sure pip under 
+python -m pip install .
+conda install -c rdkit rdkit -y
+```
+
+### FFparam
+
+http://ffparam.umaryland.edu/
+
+need http://kenno.org/pro/lsfitpar/ and cgenff program, utilizes Gaussian
+
+manual: http://ffparam.umaryland.edu/manual/index.html, install as it says
+
 ### Multiwfn
 
 http://sobereva.com/multiwfn/
@@ -14,7 +366,6 @@ https://fesetup.readthedocs.io
 
 ```shell
 cd /where/I/want/it # replace the path to whatever you like
-
 ./FESetupN_Linux.sh # extract all files into FESetupN/
 ```
 
@@ -23,8 +374,10 @@ Amber/Obabel: use default
 python: `python_exe=/usr/bin/python2.7`
 
 > ImportError: libpython2.7.so.1.0: cannot open shared object file: No such file or directory
-
+>
+> ```shell
 > sudo apt-get install libpython2.7
+> ```
 
 ### rosetta
 
@@ -32,15 +385,10 @@ https://www.rosettacommons.org/downloads/academic/3.13/
 
 ```shell
 gzip -d rosetta_bin_linux_3.12_bundle.tgz -c ../programfiles
-
 # rosetta
-
 export ROSETTA=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/rosetta_bin_linux_2020.08.61146_bundle/
-
 export ROSETTA3_DB=$ROSETTA/main/database
-
 export ROSETTA_BIN=$ROSETTA/main/source/bin
-
 export PATH=$PATH:$ROSETTA_BIN
 ```
 
@@ -60,7 +408,6 @@ https://www.ebi.ac.uk/thornton-srv/software/LigPlus/install.html
 
 ```shell
 export ligplus='java -cp /home/sjxlab/LigPlus/ -jar /home/sjxlab/LigPlus/LigPlus.jar'
-
 $ligplus
 ```
 
@@ -68,7 +415,6 @@ now it is also ok if
 
 ```shell
 java -jar LigPlus.jar
-
 export PATH=$PATH:/home/sjxlab/LigPlus/
 ```
 
@@ -88,19 +434,16 @@ https://blog.csdn.net/qyb19970829/article/details/106947424
 
 $install_bin_dir `/usr/local/bin` This is the location of the startup script ’vmd’.
 
-install_library_dir `/usr/local/lib/install_name` This is the location of all other VMD files.
+$install_library_dir `/usr/local/lib/$install_name` This is the location of all other VMD files.
 
 All files are here.
 
-> customize: `$Home/$install_name/bin`    `$Home/$install_name/lib`
+> customize: `$Home/$install_name/bin`       `$Home/$install_name/lib`
 
 ```shell
 sudo  ./configure LINUXAMD64
-
 sudo  ./configure
-
 cd src
-
 sudo make install
 ```
 
