@@ -611,7 +611,9 @@ Similarly, we can obtain the variation of $\sigma_k$\footnote{Please refer to \h
 \end{equation}
 where $t$ is not included in the variation form.
 
-\mynote The original text: Assuming that the constraints can be expressed in the differential form of eqn. \ref{eq:lag-multiplier}, we must also be able to express them in terms of path displacements δqα in order to incorporate them into the action principle. Unfortunately, doing so requires a further restriction, since it is not possible to guarantee that a perturbed path Q(t) + δQ(t) satisfies the constraints. The latter will hold if the constraints are integrable, in which case they are expressible in terms of path displacements as eqn. \ref{eq:lag-multiplier}.
+\mynote The original text: Assuming that the constraints can be expressed in the differential form of eqn. \ref{eq:lag-multiplier}, we must also be able to express them in terms of path displacements $\delta q_\alpha$ in order to incorporate them into the action principle. Unfortunately, doing so requires a further restriction, since it is not possible to guarantee that a perturbed path $Q(t) + \delta Q(t)$ satisfies the constraints. The latter will hold if the \textbf{constraints are integrable}, in which case they are expressible in terms of path displacements as eqn. \ref{eq:lag-multiplier}.
+
+\supplement My comprehesion. If $\vq(t)$ satisfies $\sigma_k$, then $\vq(t)+\delta\vq(t)$, with only a slight change, will also also satisfy $\sigma_k$. But only $\vq$ is changed/in $\delta \vq(t)$ ($\dvq$ is not), so $\sigma_k$ should only contain $\vq$ and $t$?
 
 In contrast, nonholonomic constraints can not always be expressed in the form of eqn. \ref{eq:lag-multiplier}, but a notable exception is eqn. \ref{eq:kinetic-constrain}
 \begin{gather*}
@@ -628,13 +630,22 @@ Thus, the new equations of motion can be derived from $\delta A=0$:
 \begin{tcolorbox}
 	\begin{equation}
 		\der{}{t}\left(\p{\lag}{\dot{q}_\alpha(t)}\right)-\p{\lag}{q_\alpha(t)}=\sum_{k=1}^{N_c}\lambda_ka_{k\alpha} \qquad \text{for}\ \alpha=1,\dots,3N
+		\label{eq:motion-cons}
 	\end{equation}
 \end{tcolorbox}
 this equation holds for every $\alpha$ because every $\delta q$ is independent of each other.
 
+Also, eqn. \ref{eq:lag-multiplier} can be written as
+\begin{equation}
+	\suman a_{k\alpha}\dot{q}_\alpha+a_{kt}=0
+	\qquad \text{for}\ k=1,\dots,N_c
+	\label{eq:cons-time}
+\end{equation}
+Eqns. \ref{eq:motion-cons} together with eqns. \ref{eq:cons-time} constitute a set of $3N+N_c$ equations for $3N+N_c$ variables ($q_\alpha, \lambda_k$)?
+
 Still for holomonic constraints,
 \begin{equation}
-	\ham=U+K+\sum_{k=1}^{N_c}\sigma_k
+	\ham=U+K+\sum_{k=1}^{N_c}\lambda_k\sigma_k
 \end{equation}
 
 where
@@ -657,8 +668,15 @@ where
 
 \section{Gauss's priniciple of least constraint}
 
+\begin{equation}
+	m\dot{\dot{\vr}}=\vF(\vr)+\lambda\nabla\sigma
+\end{equation}
+
+\section{Rigid body motion}
+We may treat small molecules or groups as a \textit{rigid body}, i.e. fixing the bond length, angles (or for example, the distance between the two hydrogens in a water molecule), etc.
 
 
+\section{}
 
 
 \section{}
