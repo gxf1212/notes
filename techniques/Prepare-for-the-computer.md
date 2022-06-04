@@ -1,3 +1,41 @@
+### UCSF-Chimera
+
+```
+Installation dir:
+    ~/.local/UCSF-Chimera64-1.16/
+Symbolic link of executable:
+    ~/bi
+To (re)install desktop menu and icon later, run:
+    ~/.local/UCSF-Chimera64-1.16/bin/xdg-setup install
+```
+
+## pycharm and miniconda
+
+```shell
+$pycharm # boot
+```
+
+### packages
+
+for AmberTools!!!
+
+```shell
+# https://www.mdanalysis.org/
+conda config --add channels conda-forge
+conda install mdanalysis -y
+conda install -c openbabel openbabel -y
+# conda install -c bioconda pybel # not this
+conda install -c rdkit rdkit -y
+```
+
+usage
+
+```shell
+import openbabel
+import pybel
+mymol = pybel.readstring("smi", "CCCC")
+```
+
 ## Paper
 
 ### foxit reader
