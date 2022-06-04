@@ -17,26 +17,9 @@ I've removed that but maybe it's ok (you may try to find the viewer).
 
 ### real vnc on linux
 
-https://www.realvnc.com/en/connect/download/vnc/linux/
-
-```shell
-rpm -Uhv VNC-Server-6.7.2-Linux-x64.rpm # if there is conflict, add --nodeps --force
-systemctl start vncserver-x11-serviced.service # start service
-vnclicensewiz # GUI to sign in and assign pwd for this host
-systemctl enable vncserver-x11-serviced.service # startup enabled
-```
-
-Kindly remember your password!
-
-Note that you may switch an accout for further use. Install realvnc viewer in your pc logging in with the same account to easily connect them.
-
-https://zhuanlan.zhihu.com/p/46640232
 
 
 
-
-
-ssr
 
 
 
