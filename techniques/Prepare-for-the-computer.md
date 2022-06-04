@@ -1,3 +1,130 @@
+### Multiwfn
+
+http://sobereva.com/multiwfn/
+
+download package and manual
+
+remember to modify `gaupath=` etc. in `settings.ini`. formchk etc: inside g16
+
+### FESetup
+
+https://www.ccpbiosim.ac.uk/software
+
+https://fesetup.readthedocs.io
+
+```shell
+cd /where/I/want/it # replace the path to whatever you like
+
+./FESetupN_Linux.sh # extract all files into FESetupN/
+```
+
+Amber/Obabel: use default
+
+python: `python_exe=/usr/bin/python2.7`
+
+> ImportError: libpython2.7.so.1.0: cannot open shared object file: No such file or directory
+
+> sudo apt-get install libpython2.7
+
+### rosetta
+
+https://www.rosettacommons.org/downloads/academic/3.13/
+
+```shell
+gzip -d rosetta_bin_linux_3.12_bundle.tgz -c ../programfiles
+
+# rosetta
+
+export ROSETTA=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/rosetta_bin_linux_2020.08.61146_bundle/
+
+export ROSETTA3_DB=$ROSETTA/main/database
+
+export ROSETTA_BIN=$ROSETTA/main/source/bin
+
+export PATH=$PATH:$ROSETTA_BIN
+```
+
+### PyAutoFEP
+
+https://github.com/luancarvalhomartins/PyAutoFEP
+
+### SilcsBio (not free)
+
+https://docs.silcsbio.com/2020.1/install.html
+
+## Visualization
+
+### ligplot
+
+https://www.ebi.ac.uk/thornton-srv/software/LigPlus/install.html
+
+```shell
+export ligplus='java -cp /home/sjxlab/LigPlus/ -jar /home/sjxlab/LigPlus/LigPlus.jar'
+
+$ligplus
+```
+
+now it is also ok if
+
+```shell
+java -jar LigPlus.jar
+
+export PATH=$PATH:/home/sjxlab/LigPlus/
+```
+
+Parameters written to file: `/home/moonlight/LigPlus/lib/params/ligplus.par`
+
+### RasMol
+
+http://www.rasmol.org/software/RasMol_2.7.5/INSTALL.html
+
+### VMD
+
+#### pre-compiled version
+
+https://blog.csdn.net/qyb19970829/article/details/106947424
+
+> 2022.2.11, `vmd-1.9.4a55.bin.LINUXAMD64-CUDA102-OptiX650-OSPRay185-RTXRTRT.opengl.tar.gz`
+
+$install_bin_dir `/usr/local/bin` This is the location of the startup script ’vmd’.
+
+install_library_dir `/usr/local/lib/install_name` This is the location of all other VMD files.
+
+All files are here.
+
+> customize: `$Home/$install_name/bin`    `$Home/$install_name/lib`
+
+```shell
+sudo  ./configure LINUXAMD64
+
+sudo  ./configure
+
+cd src
+
+sudo make install
+```
+
+if you don't want to customize, keep the installation folder to run the following when you want to remove vmd
+
+```shell
+sudo make uninstall
+```
+
+You may refer to the pdf attached for more options
+
+uninstall: delete the files  https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/25245.html
+
+#### source code
+
+http://www.ks.uiuc.edu/Research/vmd/doxygen/
+
+1. compile the plugins
+2. compile vmd
+
+#### Python interface
+
+https://vmd.robinbetz.com/
+
 ### DiscoveryStudio Visualizer
 
 https://blog.csdn.net/huanzaizai/article/details/116273464
