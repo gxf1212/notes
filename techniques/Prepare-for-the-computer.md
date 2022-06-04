@@ -186,33 +186,7 @@ chmod a+x Sha*
 
 连接--添加--URI
 
-### easy connect (for school)
-
-https://rvpn.zju.edu.cn/com/installClient.html#auto-common
-
-> 重要启示：点击安装包，显示安装成功，但启动程序时点击图标无响应，可通过命令行终端（Terminal）执行命令来启动。观察怎么个报错法！有道、DS等
-
-```shell
-/usr/share/sangfor/EasyConnect/EasyConnect 
-(EasyConnect:51965): Pango-ERROR **: 15:18:20.035: Harfbuzz version too old (1.3.1)
-追踪与中断点陷阱 (核心已转储)
-```
-
-https://www.cnblogs.com/cocode/p/12890684.html
-
-下载pangolib  我的云盘  链接: https://pan.baidu.com/s/1i8O5ZvMLqnw8K8EzKIrw6Q 提取码: c896
-
-```shell
-sudo cp ./'pango lib'/lib/lib* /usr/share/sangfor/EasyConnect/
-```
-
-server: https://rvpn.zju.edu.cn
-
-It's fine on Windows; but x86 version cannot be installed here! And x64 shows 版本过低 upon reboot
-
-[this version](http://download.sangfor.com.cn/download/product/sslvpn/pkg/linux_01/EasyConnect_x64.deb) does not report this problem. stable!
-
-> ZJU的RVPN：https://www.coolspring8.com/p/rvpn-easyconnect/. see his GitHub https://github.com/Hagb/docker-easyconnect
+> 
 
 ## Docking
 
