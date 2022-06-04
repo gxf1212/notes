@@ -1,3 +1,536 @@
+# Prepare for the computer
+
+This page is all about software installing, both for system and project environment. Also something about Fedora. A little bit messy. Try to be clear about the commands for Dedian/RedHat systems!
+
+Mainly recorded while in NUS. The installation of DL environment, Gromacs, and plans are all in `Linux fundamental (Installation and softwares)`.
+
+## remote control
+
+### tight vnc
+
+[doc](https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/infrastructure-services/TigerVNC/)
+
+[error](https://www.dev2qa.com/how-to-fix-error-job-for-vncserver1-service-failed-because-the-control-process-exited-with-error-code-see-systemctl-status-vncserver1-service-and-journalctl-xe-for-details-when-start-vnc/)
+
+I've removed that but maybe it's ok (you may try to find the viewer).
+
+### real vnc on linux
+
+https://www.realvnc.com/en/connect/download/vnc/linux/
+
+```shell
+rpm -Uhv VNC-Server-6.7.2-Linux-x64.rpm # if there is conflict, add --nodeps --force
+systemctl start vncserver-x11-serviced.service # start service
+vnclicensewiz # GUI to sign in and assign pwd for this host
+systemctl enable vncserver-x11-serviced.service # startup enabled
+```
+
+Kindly remember your password!
+
+Note that you may switch an accout for further use. Install realvnc viewer in your pc logging in with the same account to easily connect them.
+
+https://zhuanlan.zhihu.com/p/46640232
+
+backup (not using): tips when install:
+
+```
+Start or stop the service with:
+  systemctl (start|stop) vncserver-x11-serviced.service
+Mark or unmark the service to be started at boot time with:
+  systemctl (enable|disable) vncserver-x11-serviced.service
+
+Installed systemd unit for VNC Server in Virtual Mode daemon
+Start or stop the service with:
+  systemctl (start|stop) vncserver-virtuald.service
+Mark or unmark the service to be started at boot time with:
+  systemctl (enable|disable) vncserver-virtuald.service
+
+Installed firewalld service configuration. To enable access to VNC services from the public zone, use the following commands:
+For VNC Server in Service Mode:
+  firewall-cmd --zone=public --permanent --add-service=vncserver-x11-serviced
+For VNC Server in Virtual Mode daemon:
+  firewall-cmd --zone=public --permanent --add-service=vncserver-virtuald
+Running as unit: run-r4aa0cc0954b846c993f38c8939dae70a.service
+```
+
+viewer on linux:
+
+```
+rpm -Uhv VNC-Viewer-6.20.529-Linux-x64.rpm --nodeps --force
+```
+
+then open the GUI and sign in
+
+gmail
+
+### sunflower
+
+#### Fedora
+
+https://tieba.baidu.com/p/7157359656
+
+```shell
+elif [ "$os_name"== 'Fedora' ]; then
+        os_version=`cat /etc/fedora-release | cut -d' ' -f3`
+|| [ $os_name== "fedora" ]
+```
+
+see software usage!
+
+## break the wall
+
+[*PN和v2ray、ssr、加速器有什么区别？](https://shutupandshowpages.com/index.php/2021/07/06/vpn%E5%92%8Cv2ray%E3%80%81ssr%E3%80%81%E5%8A%A0%E9%80%9F%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/)
+
+翻墙的方式：*PN、代理、自己搭服务器（淘宝上还有帮忙搭建内网穿透的；自己也可搭ssr啥的？）
+
+总之VPN更安全；v2ray比ssr可靠、难搞
+
+https://sites.google.com/view/honven all kinds of recomm
+
+### airport: sgi.anycast.gay
+
+https://sgi.anycast.gay/user 买ssr流量的网站
+
+https://www.hayaissr.xyz/ 也是个买*PN的？
+
+> ssr can not provide access to YouTube. 极速 browser can view Google but chrome without the plugin can not... it helps with google scholar but the plugin cannot
+
+laowang, can view youtube on the phone
+
+### electron-ssr
+
+configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md
+
+- old VPN for Linux: https://github.com/hannuo/ssr-linux-client-electron
+
+- 22.2.9 [0.2.7](https://github.com/shadowsocksrr/electron-ssr/releases/tag/v0.2.7) and [0.2.6](https://github.com/qingshuisiyuan/electron-ssr-backup/releases/tag/v0.2.6)
+
+1. dependencies (as said in Debian系列安装与配置[Ubuntu.md](https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md))
+
+   ```shell
+   sudo apt install libcanberra-gtk-module libcanberra-gtk3-module gconf2 gconf-service libappindicator1 libssl-dev libsodium-dev
+   sudo apt install python
+   ```
+
+2. depends on Python! It will look like
+
+   ![electron-ssr-py](https://gitee.com/gxf1212/notes/raw/master/techniques/images/electron-ssr-py.png)
+
+   If connection fails,
+
+   https://www.cnblogs.com/geekHao/p/12635970.html
+
+   从源头更改python的链接文件，**推荐这种方法**
+
+   1. 查看已安装的python版本和链接情况：
+
+      ```shell
+      ll /usr/bin/python*
+      ```
+
+   2. 删除原有的Python连接文件 (I don’t have one after reinstalling the system)
+
+      ```shell
+      sudo rm /usr/bin/python
+      ```
+
+   3. 建立指向Python3.X的连接
+
+      ```shell
+      sudo ln -s /usr/bin/python3 /usr/bin/python
+      ```
+
+      then it’s done
+
+3. an usual bug
+
+   similar situation https://github.com/qingshuisiyuan/electron-ssr-backup/issues/26
+
+   ![electron-ssr-dep](https://gitee.com/gxf1212/notes/raw/master/techniques/images/electron-ssr-dep.png)
+
+   > libcrypto is along with `libssl-dev`. 这俩包不重要，主要是代理方式！
+
+   do as https://sobaigu.com/software-shadowsocksr-in-linux.html
+
+   just set the **manual proxy**...
+
+   ```127.0.0.1
+   http://127.0.0.1
+   ```
+
+   > - but without electron-ssr, cannot see baidu.com?
+   > - after rebooting, become "auto-proxy"?? not so ok...switch back to auto, still ok??
+
+   in terminal??
+
+   ```
+   export http_proxy="http://127.0.0.1:12333"
+   ```
+
+### v2ray
+
+> https://rongsp.com/article/96.html
+
+https://github.com/Qv2ray/Qv2ray/releases/tag/v2.7.0 with GUI
+
+intro https://iyuantiao.com/fenxiangfuli/jiaocheng/v2ray.html
+
+### qt-5
+
+https://github.com/shadowsocks/shadowsocks-qt5/releases/tag/v3.0.1
+
+```shell
+chmod a+x Sha*
+./Sha*
+```
+
+连接--添加--URI
+
+### easy connect (for school)
+
+https://rvpn.zju.edu.cn/com/installClient.html#auto-common
+
+> 重要启示：点击安装包，显示安装成功，但启动程序时点击图标无响应，可通过命令行终端（Terminal）执行命令来启动。观察怎么个报错法！有道、DS等
+
+```shell
+/usr/share/sangfor/EasyConnect/EasyConnect 
+(EasyConnect:51965): Pango-ERROR **: 15:18:20.035: Harfbuzz version too old (1.3.1)
+追踪与中断点陷阱 (核心已转储)
+```
+
+https://www.cnblogs.com/cocode/p/12890684.html
+
+下载pangolib  我的云盘  链接: https://pan.baidu.com/s/1i8O5ZvMLqnw8K8EzKIrw6Q 提取码: c896
+
+```shell
+sudo cp ./'pango lib'/lib/lib* /usr/share/sangfor/EasyConnect/
+```
+
+server: https://rvpn.zju.edu.cn
+
+It's fine on Windows; but x86 version cannot be installed here! And x64 shows 版本过低 upon reboot
+
+[this version](http://download.sangfor.com.cn/download/product/sslvpn/pkg/linux_01/EasyConnect_x64.deb) does not report this problem. stable!
+
+> ZJU的RVPN：https://www.coolspring8.com/p/rvpn-easyconnect/. see his GitHub https://github.com/Hagb/docker-easyconnect
+
+## Docking
+
+### Autodock
+
+https://ccsb.scripps.edu/projects/docking/
+
+Installing
+
+    tar xzvf autodock_vina_1_1_2_linux_x86.tgz
+
+Optionally, you can copy the binary files where you want.
+Running
+
+    ./autodock_vina_1_1_2_linux_x86/bin/vina --help
+
+This file is copied into /home/Desktop/work/xufan and /usr/local
+
+http://vina.scripps.edu/manual.html#usage for running docking.
+
+**安装目录和打开的文件不要包含任何中文！！！！！**
+
+### mgl
+
+Still need to install MGL-tools (autodock tools). Just  help with visualization.
+
+Install according to official manual. Remember to configure environmental path.
+
+It also include PMV...see https://ccsb.scripps.edu/mgltools/ for all.
+
+note: for .tar.gz, you should **put the folder right under the directory you want to install**
+
+```shell
+export PATH=$PATH:~/MGLTools-1.5.7/bin
+```
+
+icon path: just search `adt` or `icon`
+
+> adt: $HOME/mgltools_x86_64Linux2_1.5.7/MGLToolsPckgs/Pmv/Icons/128x128/adt.png
+
+> ### backup
+>
+> ```shell
+> # paths
+> export PATH=$PATH:/home/user/MGLTools-1.5.7/bin # mgltools
+> export PATH=$PATH:/home/user/Desktop/work/xufan/bin # vina
+> # now it can run under root
+> ```
+>
+> ### 
+
+### zdock
+
+https://zdock.umassmed.edu/ with server
+
+> **ZDOCK 2.3.3 and ZDOCK 3.0.2**: These versions utilize the Conv3D library and other optimizations to improve speed and memory usage. ZDOCK 2.3.2 is based on the scoring function of ZDOCK 2.3, and ZDOCK 3.0.2 is based on the scoring function of ZDOCK 3.0. Please reference: Pierce BG, Hourai Y, Weng Z (2011). Accelerating Protein Docking in ZDOCK Using an Advanced 3D Convolution Library. PLoS One 6(9): e24657.
+
+seems not this...uninstall it...
+
+snugdock is an Ab docking tool
+
+## MD
+
+### Gromacs (dirty)
+
+I will try cpu version and learn to setup... do not spend time on accelerating here...
+
+```shell
+yum install openssl-devel
+# run in unzipped cmake folder
+./configure
+make # have to install the lower version?
+make install # finish installing cmake from downloading package, all in /usr/local/share ?
+yum remove cmake # lower version
+# make uninstall # to uninstall
+
+# run in unzipped fftw folder: the same
+# maybe add a prefix
+
+# run in unzipped gromacs folder
+cmake .. -DGNX_BUILD_OWN_FFTW=ON -DGMX_FFT_LIBRARY=fftw3 -DGXN_MPI=ON # failed, use instead
+cmake .. -DGNX_BUILD_OWN_FFTW=ON -DGMX_FFT_LIBRARY=fftpack -DGXN_MPI=ON # so not using the fftw I just installed...and succeeded 
+```
+
+how others config: https://www.gitmemory.com/issue/amd/amd-fftw/3/635188942
+
+use cmake: https://blog.csdn.net/Calvin_zhou/article/details/103952153
+
+is installed under root on lab mine
+
+Executable:  /usr/local/gromacs/bin/gmx
+
+also python: (not using)
+
+```shell
+conda install -c bioconda gromacs
+```
+
+### GROMACS installation on a workstation
+
+#### prepare
+
+  Follow this order:
+
+1. check your graphic card driver (and installation)
+
+   https://blog.csdn.net/qq_43265072/article/details/107160297
+
+2. (check gcc version) install cuda and cmake
+
+   - cmake
+     - install: https://jingyan.baidu.com/article/d621e8da56314d2865913f93.html
+     - uninstall: `make uninstall` and `sudo rm -rf` files https://blog.csdn.net/xh_hit/article/details/79639930
+     - I installed it on default path
+   - cuda
+
+3. use cmake to install gromacs
+
+   - https://blog.csdn.net/SuiYueHuYiWan/article/details/110972083
+
+   - install fftw3 by ourselves under root!
+
+     or `sudo apt-get`
+
+     - http://www.fftw.org/fftw2_doc/fftw_6.html
+
+- rather than official manual, I used
+
+#### old try
+
+1. **From here, you should see “on new system”**
+
+   ```shell
+   ./configure --prefix=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
+   # SINGLE AND DOUBLE PRECISION: see official manual
+   # --enable-float : single. default: double, which is not so useful in gromacs but QM/MM needs it..
+   
+   make
+   make -j install
+   ```
+
+   - enter "root" by `su`
+
+     ```shell
+     # under the unzipped gromacs directory
+     mkdir build
+     cd build
+     cmake .. \
+     -DCMAKE_INSTALL_PREFIX=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs-2021 \
+     -DGNX_BUILD_OWN_FFTW=ON \
+     -DGMX_FFT_LIBRARY=fftw3 \
+     -DFFTWF_LIBRARY=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/fftw-single/lib/libfftw3f.so \
+     -DFFTWF_LIBRARY=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/lib/libfftw3f.so \
+     -DFFTWF_INCLUDE_DIR=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/include \
+     -DGNX_MPI=ON \
+     -DGMX_GPU=CUDA \
+     -DGMX_CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda
+     # in older versions, -DGMX_GPU=ON 
+     make
+     make check
+     make install
+     gedit /.bashrc
+     export PATH=$PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs-2021/bin/
+     source /media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs/bin/GMXRC
+     ```
+
+     > - library desired path : /media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs (double). single have a separate folder
+
+> - no problem with cuda
+> - .. = ../ !!!
+> - -DCMAKE_PREFIX_PATH is for cmake to search for library
+
+   problems:
+
+- > Could not find fftw3f library named libfftw3f, please specify its location in CMAKE_PREFIX_PATH or FFTWF_LIBRARY by hand (e.g. -DFFTWF_LIBRARY='/path/to/libfftw3f.so')
+  > CMake Error at cmake/gmxManageFFTLibraries.cmake:92 (MESSAGE):
+  > Cannot find FFTW 3 (with correct precision - libfftw3f for mixed-precision
+  > GROMACS or libfftw3 for double-precision GROMACS).  Either choose the right
+  > precision, choose another FFT(W) library (-DGMX_FFT_LIBRARY), enable
+  >
+  > the
+
+  >   advanced option to let GROMACS build FFTW 3 for you
+  >   (-DGMX_BUILD_OWN_FFTW=ON), or use the really slow GROMACS built-in fftpack
+  >   library (-DGMX_FFT_LIBRARY=fftpack).
+
+  solved
+
+- 上次装到：运行install.sh，报的信息放在build父目录的output。realvnc也不行
+
+  ```
+  
+  ```
+
+  CMake Warning:
+    Manually-specified variables were not used by the project:
+
+      GMX_CUDA_TOOLKIT_ROOT_DIR
+       GNX_BUILD_OWN_FFTW
+      GNX_MPI
+
+  ```
+  
+  ```
+
+so the successful version is 
+
+```shell
+cmake .. -DCMAKE_INSTALL_PREFIX=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs-2021-gpu \
+-DGMX_MPI=ON -DCMAKE_C_COMPILER=mpicc -DCMAKE_CXX_COMPILER=mpicxx \
+-DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/fftw-single/ \
+-DREGRESSIONTEST_DOWNLOAD=ON \
+-DGMX_GPU=CUDA -DCUDA_TOOKIT_ROOT_DIR=/usr/local/cuda/
+
+make -j 6
+make check
+make install
+```
+
+- guide on cmake: https://blog.csdn.net/wgw335363240/article/details/37758337
+
+  - > CMake Error: The current CMakeCache.txt directory /media/kemov`:q!` 强制退出，不保存
+
+  - openssl: https://www.cnblogs.com/new-journey/p/13323301.html
+
+#### on new system
+
+```shell
+# fftw: http://www.fftw.org/download.html
+./configure --prefix=~/fftw-3.3.10 --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
+make -j 6
+make install
+## REMEMBER TO ADD TO LD_LIBRARY_PATH!!!
+
+# mpicc, mpicxx
+sudo apt install openmpi-bin
+
+# cmake
+sudo apt install cmake
+
+# gmx
+cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf/gromacs-2021.5-gpu \
+-DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf/fftw-3.3.10 \
+-DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON \
+-DGMX_GPU=CUDA
+make -j 6
+make check
+make install
+
+# gcc environment
+cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf1212/gromacs-2021.5-gpu -DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf1212/program \# -DFFTWF_LIBRARY=/home/gxf1212/program/lib/libfftw3f.so -DFFTWF_INCLUDE_DIR=/home/gxf1212/programinclude  
+-DCMAKE_C_COMPILER=/home/gxf1212/program/bin/gcc -DCMAKE_CXX_COMPILER=/home/gxf1212/program/bin/g++ -DGMX_CUDA_TARGET_SM=80 -DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON -DGMX_GPU=CUDA # 80: just a workaround
+
+# gmx, mpi
+cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf/gromacs-2021.5-gpu-mpi \
+-DGMX_MPI=ON -DCMAKE_C_COMPILER=/usr/bin/mpicc -DCMAKE_CXX_COMPILER=/usr/bin/mpiccxx \
+-DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf/fftw-3.3.10 \
+-DREGRESSIONTEST_DOWNLOAD=ON \
+-DGMX_GPU=CUDA
+make -j 6
+make check
+make install
+```
+
+gromacs 新版本运行老文件
+
+other issues
+
+- https://gitlab.com/gromacs/gromacs/-/issues/4037
+
+### NAMD
+
+http://bbs.keinsci.com/thread-22004-1-1.html
+
+just unzip...
+
+### VEGA_ZZ
+
+https://www.ddl.unimi.it/cms/index.php?Software_projects:VEGA_ZZ:Main_features
+
+one year trial...
+
+### openmpi
+
+  Open MPI: Open Source High Performance Computing https://www.open-mpi.org
+  The Open MPI Project is an open source Message Passing Interface implementation...
+
+  But it seems not to accelerate...
+
+  https://blog.csdn.net/zziahgf/article/details/72781799
+
+  download and extract. then
+
+```shell
+./configure --prefix=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs --with-cuda=/usr/local/cuda
+make
+make install
+# in ~./bashrc
+export PATH=$PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/bin/ 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/bin/lib/ 
+source ~/.bashrc  
+sudo ldconfig 
+# test in the installing directory
+cd examples
+make
+mpirun -np 8 hello_c
+```
+
+  usage:
+
+```
+Running as root is *strongly* discouraged as any mistake (e.g., in
+defining TMPDIR) or bug can result in catastrophic damage to the OS
+file system, leaving your system in an unusable state.
+
+We strongly suggest that you run mpirun as a non-root user.
+```
+
 ## Analysis tools: Python/cmd tookit
 
 ### dssp
