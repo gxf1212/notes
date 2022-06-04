@@ -1,4 +1,187 @@
+## Paper
 
+### foxit reader
+
+Silly installation
+
+it's good. rename it, and run the .run file under root
+
+```
+./foxit.run
+```
+
+or it will die
+
+### medeley
+
+```shell
+# never run under root!!
+python3 ~/mendeleydesktop-1.19.8-linux-x86_64/bin/mendeleydesktop
+# always sync to avoid losing data!!!
+
+Fatal Python error: _Py_HashRandomization_Init: failed to get random numbers to initialize Python
+Python runtime state: preinitialized
+```
+
+https://stackoverflow.com/questions/47936584/what-does-client-failed-to-connect-to-the-d-bus-daemon-mean
+
+skills:
+
+- I just make notes on the right. may use "favorite"
+- drag the entry to another folder
+- "Enter" to change the position of last name and first 
+- open .ris or .bib ..... with Medeley!!
+- files--add file
+- contents: to quickly compare the papers, to summarize
+
+## download small molecule pdb files for virtual screening
+
+### download all and see data
+
+```shell
+wget -m -np ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound_3D/01_conf_per_cmpd/SDF/ 
+# download **all** the compounds in the current directory
+# /home/work/data lib
+# but that's too big and unnecessary
+```
+
+### download what you need
+
+[bulk download with id file](https://blog.csdn.net/recher_he1107/article/details/106276198?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_utm_term-2&spm=1001.2101.3001.4242)
+
+maybe I'll use smiles to determine similarity between atp and ligands...
+
+### convert .sdf to .pdb in batches
+
+.sdf: structure data file
+
+#### OpenBabel
+
+```shell
+dnf install openbabel-gui # do not support converting to pdb???
+dnf install openbabel # without gui
+sudo apt-get install openbabel # debian
+```
+
+This program has a interface with Python...
+
+It **can do things in batch**, but **no outputing pdb**....but don't forget its functions....
+
+> so use my shell
+> 
+> ```shell
+> # run the following command under where your small molecules are
+> # to convert into any format **in batch**
+> bash /home/user/Desktop/work/xufan/bin/all_to_pdb.sh # to pdb
+> bash /home/user/Desktop/work/xufan/bin/all_to_pdbpt.sh # to pdbpt
+> bash /home/user/Desktop/work/xufan/bin/sdf_split_convert.sh # split multi comformers and convert
+> ```
+> 
+> https://blog.csdn.net/TQCAI666/article/details/99835557?utm_medium=distribute.pc_relevant.none-task-blog-searchFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-searchFromBaidu-1.control
+> 
+> https://blog.csdn.net/u012325865/article/details/77914358
+> 
+> finally I found simpler commands...
+
+also, in python
+
+#### avogadro
+
+### draw your own molecule
+
+use ChemBioDraw, copy into Chem3D, export as any format that openbabel accepts
+
+install? on win
+
+# visualization tools usage
+
+## Pymol
+
+api: https://pymol.org/dokuwiki/doku.php?id=api:cmd:alpha  https://pymol.org/pymol-command-ref.html. for other commands we have to view documentation in pycharm
+
+1. `cd directory`
+
+2. s: show. as.
+   
+   - show as sticks: shows side chain
+
+3. mouse
+   
+   - left click: rotate
+   - right click: zoom
+   - middle and move: move
+   - middle click: center this residue
+
+4. bg_color white/...
+   
+   opaque off, then type `ray`
+
+5. set cartoon_fancy_helices/sheets, 0/1
+
+6. set cartoon_side_chain_helper, on
+   
+   remove the sticks of main chain 
+
+7. save
+   
+   - save as img
+   - save session: to edit the next time
+
+8. action--preset
+   
+   publication (different colors), simple (thin lines, ligands sticks), technical (H bonds), ligand (only ligand H bonds)
+
+9. label
+   
+   - label--residues vs hide--label
+
+10. center
+    
+    ```
+    center object
+    ```
+
+11. must use cmd to align small molecules
+    
+    ```
+    align mol1,mol2
+    ```
+
+12. color by element
+
+13. select
+    
+    ```shell
+    sele /object_name//chain_name/residue/atom_type
+    # eg
+    sele /2cqg//A/PHE`149/CZ
+    ```
+
+14. If you click on where it says “Selecting: Residues”, you can cycle  through the available selection modes below.  These modes are also  available from the “Mouse” menu under “Selection Mode”.   
+    
+    - Atoms
+    - C-alphas
+    - Molecules
+    - Objects
+    - Segments
+    - Chains
+    - Residues  
+
+15. beautify and set background
+    
+    https://zhuanlan.zhihu.com/p/26325764
+    
+    display--background--white
+    
+    right click--ray
+
+16. 
+
+a website to draw electrostatic potential surface: https://server.poissonboltzmann.org. Seeing a blank web page suggests a bad network.
+
+## VMD
+
+windows: https://www.bilibili.com/read/cv7167667
 
 # Fundamental usage of Fedora and KDE
 
