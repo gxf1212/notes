@@ -7,6 +7,9 @@
 - [我的保研待录取通知](/utils/baoyan-doge.md) (bushi)
 - [A poorly developed personal blog](https://gxf1212.github.io/) is on GitHub
 
+My name is Xufan Gao (高旭帆). In Chinese it means sailing to the horizon where the sun rises above the sea.
+
+I've developed a huge interest in math, physics and especially chemistry as soon as I met them. I love writing equations for a physical problem and appreciating chemical structures. Though those may not be the real science, it's a good start in middle school. I was admitted into the best high school in our province (even one of the best in China).
 
 My classmates (and I) easily won 2nd prize in provincial-level contests in math, physics and chemistry. Oh, I got the first prize in chem, after reading tons of books and exercises for months (it's not easy!). During the study I developed interest in chemical structures. But today's not a day to recall iridescent chemistry memories. In one sentence, any strange covalent comounds formed by usual elemtent surprises us; organic synthesis routes is embedded with infinite possibilities; coordination compounds are artworks that we can draw for days...
 
