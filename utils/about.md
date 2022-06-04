@@ -1,6 +1,13 @@
 # About me
 
 
+<center><img src="https://gitee.com/gxf1212/notes/raw/master/_media/photo.jpg" style="zoom:50%;" /></center>
+
+
+My classmates (and I) easily won 2nd prize in provincial-level contests in math, physics and chemistry. Oh, I got the first prize in chem, after reading tons of books and exercises for months (it's not easy!). During the study I developed interest in chemical structures. But today's not a day to recall iridescent chemistry memories. In one sentence, any strange covalent comounds formed by usual elemtent surprises us; organic synthesis routes is embedded with infinite possibilities; coordination compounds are artworks that we can draw for days...
+
+Unluckily, I almost failed in Chinese in the College Entrance Exam (CEE,高考) and also did terribly in biology. Ironically, I got full scores in physics. I enjoy Chinese traditional poems (and even wrote some) and get immersed in beautiful proses, though I'm really worse at Chinese exams than others. But I deem that it is real, heartfelt emotions that make your lines shine. I don't mind being short of splendid words, being mocked. I always try to write down the touching moments in life.
+
 Entering Xi'an Jiaotong University, I realized that science is based on but totally different from what we learned before. Chemistry is, because I saw all professors trying to create strange new materials (create new substances, not wrong). That's not playing with skeletal formulas on the paper! I also ruined experiments I've already did back in high school. I did not get anything new in the beginning chem courses; instead, biology filled in since the second year. I started to get away from chemistry.
 
 It's strange that I turned to biology. I hate memorizing, so verbose names for animals and plants ruled out of mind. It's useless if you don't do research on it. But learning population science in Bilibili is ok. I don't have to remember them for tests. Some of the UPs give presentations 100 times nicer than some certain professors. I'm always wondering how we humans clear pathogens, regulate the hormones and respond to stimulations. I hope to crack the mystery of diseases and beat them into the ground. It's all about knowing ourselves. Health is a key issue in civilized 21st century, and in reviving China. That might be why many of my classmates chose medicine schools (also because the CEE score required to be admitted is a bit lower).
