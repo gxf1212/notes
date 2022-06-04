@@ -1,3 +1,128 @@
+### DiscoveryStudio Visualizer
+
+https://blog.csdn.net/huanzaizai/article/details/116273464
+
+> https://forums.linuxmint.com/viewtopic.php?t=293074
+
+a newer: https://forums.linuxmint.com/viewtopic.php?t=352478
+
+```shell
+## prepare
+sudo apt-get install csh tcsh
+## step 1, get the program in your target path
+# at downloads
+bash BIOVIA_2021.DS2021Client.bin --noexec --target ~/BIOVIA2021
+cd ~/BIOVIA2021
+vi install_DSClient.sh
+# Change "#!/bin/sh" to "#!/bin/bash"
+# Insert "shopt -s expand_aliases" (without quotes) above "alias echoe="echo -e"" and save file.
+bash install_DSClient.sh
+# choose 2, create a folder in the current path as target, (??) then choose 1 (or Enter) twice
+/home/xxx/BIOVIA2021/DiscoveryStudio2021  
+# we just want to add 2021, if not, just use default 'BIOVIA'
+# do not use ~ here. I don't know why
+# ignore './install_lp.sh: 73: Syntax error: redirection unexpected'
+# now you've created an installer
+
+## step 2, configure license pack
+cd lp_installer
+bash ./lp_setup_linux.sh --noexec --target ../ # /home/gxf/BIOVIA2021
+cd ../LicensePack/etc
+./lp_config
+vi lp_echovars
+# change "#! /bin/csh -f" to "#! /bin/tcsh"
+./lp_echovars
+cd ~/BIOVIA2021/DiscoveryStudio2021/bin
+./config_lp_location ~/BIOVIA2021/LicensePack/
+gedit ./DiscoveryStudio2021
+# change "ACCELRYS_DEBUG=0" to "ACCELRYS_DEBUG=1". (all 3?)
+# Then when DSV is started via the terminal, you will get a verbose readout that can be inspected for errors.
+./DiscoveryStudio2021
+```
+
+> ~/BIOVIA2021/DiscoveryStudio2021/bin/../lib/DiscoveryStudio2021-bin: error while loading shared libraries: libpng15.so.15: cannot open shared object file: No such file or directory
+
+just refer to the first tutorial, download from http://sourceforge.net/projects/libpng/files/libpng15/
+
+unzip, install according to file `install`
+
+```shell
+sudo apt install zlib1g # zlib
+./configure --prefix=/home/moonlight/libpng15
+make check
+make install
+cp ~/libpng15/lib/libpng15.so.15 ~/BIOVIA2021/DiscoveryStudio2021/lib/
+```
+
+> working directory should not contain sth like '&'
+
+and it''s working! [Applause]
+
+icon path: `/home/gxf/BIOVIA2021/DiscoveryStudio2021/share/doc/DS/Skins/Favicons` (or DSV)
+
+### pymol
+
+#### in python
+
+the free version: https://zhuanlan.zhihu.com/p/58803491
+
+just buy a license from pymol.org
+
+```shell
+conda install -c schrodinger pymol-bundle
+```
+
+and launch it from anaconda prompt. works in Windows...
+
+> - install with downloaded package
+>
+>   ```shell
+>   conda install -y --use-local pymol-2.5.0a0-py38h4cb1252_9.tar.bz2 
+>   #  y: always yes
+>   ```
+>
+>   都是段错误
+
+for python api use
+
+```shell
+conda create -n pymol
+conda activate pymol
+conda install -c schrodinger pymol-bundle
+```
+
+#### independent
+
+Of course downloading the whole package is convenient!!
+
+https://pymol.org/ep
+
+the password is often `betabarrel`
+
+should use **PyMOL 2.0** (installer) rather than [EduPyMOL-v1.7.4.5-Linux-x86_64.tar.bz2](https://pymol.org/ep/EduPyMOL-v1.7.4.5-Linux-x86_64.tar.bz2)
+
+![pymol](https://gitee.com/gxf1212/notes/raw/master/techniques/images/pymol.jpg)
+
+> Icon=/home/gxf/pymol/share/pymol/data/pymol/icons/icon2_128x128.png
+
+btw, have you ever tried
+
+```shell
+sudo apt install pymol
+```
+
+#### APBS Electrostatics
+
+https://www.poissonboltzmann.org/
+
+### Avogadro
+
+[refer to](https://ubunlog.com/zh-CN/avogadro%E7%BC%96%E8%BE%91%E4%BD%BF%E5%88%86%E5%AD%90%E5%8F%AF%E8%A7%86%E5%8C%96/#Instalar_Avogadro_en_Ubuntu)
+
+official: https://avogadro.cc/devel/compiling
+
+> [install-qt4-ubuntu-20-04](https://ubuntuhandbook.org/index.php/2020/07/install-qt4-ubuntu-20-04/)
+
 ### UCSF-Chimera
 
 ```
