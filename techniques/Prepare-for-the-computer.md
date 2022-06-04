@@ -153,6 +153,10 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
    
    just set the **manual proxy**...
    
+   ```127.0.0.1
+   http://127.0.0.1
+   ```
+   
    > - but without electron-ssr, cannot see baidu.com?
    > - after rebooting, become "auto-proxy"?? not so ok...switch back to auto, still ok??
    
@@ -654,6 +658,29 @@ conda install -c conda-forge pymbar
 
 https://anaconda.org/conda-forge/pymbar git address and doc
 
+### alchemical-analysis, alchemlyb
+
+> https://anaconda.org/conda-forge/alchemical-analysis
+> 
+> ```shell
+> conda activate AmberTools21 # no! choose python version?
+> conda install -c conda-forge alchemical-analysis
+> ```
+
+We are in the process of migrating all functionality from here to instead use [`alchemlyb`](https://github.com/alchemistry/alchemlyb)
+
+doc: https://alchemlyb.readthedocs.io/en/latest/index.html
+
+pdf: https://alchemlyb.readthedocs.io/en/latest/index.html
+
+datasets for testing: https://alchemtest.readthedocs.io/en/latest/index.html
+
+```shell
+conda activate AmberTools21
+pip install --user alchemlyb
+pip install --user alchemtest
+```
+
 ### mdtraj
 
 convert trajectories
@@ -691,9 +718,9 @@ conda install -c omnia msmbuilder
 2. Mcsalign https://pymolwiki.org/index.php/Mcsalign
    
    ```shell
-   conda install -c schrodinger  pymol pymol-psico
-   conda install -c rdkit rdkit
-   conda install -c speleo3 csb
+   conda install -c schrodinger -y pymol pymol-psico
+   conda install -c rdkit rdkit -y
+   conda install -c speleo3 csb -y
    ```
    
    run
@@ -701,7 +728,13 @@ conda install -c omnia msmbuilder
    ```shell
    conda activate pymol
    pymol
+   import psico.mcsalign
+   mcsalign mobile, target
    ```
+
+### Clustering plugin in VMD
+
+https://github.com/luisico/clustering
 
 ## Modelling tools
 
@@ -828,6 +861,36 @@ You can type `gv` in the terminal to start GView and link to Gaussian as we did 
 
 > icon: downloaded from web
 
+### PMX
+
+```shell
+git clone https://github.com/deGrootLab/pmx pmx
+cd pmx
+# to switch to 'develop' branch type:
+git checkout develop
+
+conda activate  AmberTools21 # whatever
+# conda install pip  # to make sure pip under 
+python -m pip install .
+conda install -c rdkit rdkit -y
+```
+
+### FFparam
+
+http://ffparam.umaryland.edu/
+
+need http://kenno.org/pro/lsfitpar/ and cgenff program, utilizes Gaussian
+
+manual: http://ffparam.umaryland.edu/manual/index.html, install as it says
+
+### Multiwfn
+
+http://sobereva.com/multiwfn/
+
+download package and manual
+
+remember to modify `gaupath=` etc. in `settings.ini`. formchk etc: inside g16
+
 ### FESetup
 
 https://www.ccpbiosim.ac.uk/software
@@ -866,7 +929,7 @@ export PATH=$PATH:$ROSETTA_BIN
 
 https://github.com/luancarvalhomartins/PyAutoFEP
 
-### SilcsBio
+### SilcsBio (not free)
 
 https://docs.silcsbio.com/2020.1/install.html
 
@@ -887,6 +950,12 @@ now it is also ok if
 java -jar LigPlus.jar
 export PATH=$PATH:/home/sjxlab/LigPlus/
 ```
+
+Parameters written to file: `/home/moonlight/LigPlus/lib/params/ligplus.par`
+
+### RasMol
+
+http://www.rasmol.org/software/RasMol_2.7.5/INSTALL.html
 
 ### VMD
 
@@ -945,21 +1014,23 @@ a newer: https://forums.linuxmint.com/viewtopic.php?t=352478
 sudo apt-get install csh tcsh
 ## step 1, get the program in your target path
 # at downloads
-bash BIOVIA_2021.DS2021Client.bin --noexec --target /home/gxf/BIOVIA2021
-cd /home/gxf/BIOVIA2021
+bash BIOVIA_2021.DS2021Client.bin --noexec --target ~/BIOVIA2021
+cd ~/BIOVIA2021
 vi install_DSClient.sh
 # Change "#!/bin/sh" to "#!/bin/bash"
 # Insert "shopt -s expand_aliases" (without quotes) above "alias echoe="echo -e"" and save file.
 bash install_DSClient.sh
 # choose 2, create a folder in the current path as target, (??) then choose 1 (or Enter) twice
-/home/gxf/BIOVIA2021/DiscoveryStudio2021  # we just want to add 2021, if not, just use default 'BIOVIA'
+/home/xxx/BIOVIA2021/DiscoveryStudio2021  
+# we just want to add 2021, if not, just use default 'BIOVIA'
+# do not use ~ here. I don't know why
 # ignore './install_lp.sh: 73: Syntax error: redirection unexpected'
 # now you've created an installer
 
 ## step 2, configure license pack
-cd /home/gxf/BIOVIA2021/DiscoveryStudio2021/lp_installer
-bash ./lp_setup_linux.sh --noexec --target /home/gxf/BIOVIA2021
-cd /home/gxf/BIOVIA2021/LicensePack/etc
+cd lp_installer
+bash ./lp_setup_linux.sh --noexec --target ../ # /home/gxf/BIOVIA2021
+cd ../LicensePack/etc
 ./lp_config
 vi lp_echovars
 # change "#! /bin/csh -f" to "#! /bin/tcsh"
@@ -980,10 +1051,10 @@ unzip, install according to file `install`
 
 ```shell
 sudo apt install zlib1g # zlib
-./configure --prefix=/home/gxf/libpng15
+./configure --prefix=/home/moonlight/libpng15
 make check
 make install
-cp /home/gxf/libpng15/lib/libpng15.so.15 ~/BIOVIA2021/DiscoveryStudio2021/lib/
+cp ~/libpng15/lib/libpng15.so.15 ~/BIOVIA2021/DiscoveryStudio2021/lib/
 ```
 
 > working directory should not contain sth like '&'
@@ -1042,6 +1113,10 @@ btw, have you ever tried
 ```shell
 sudo apt install pymol
 ```
+
+#### APBS Electrostatics
+
+https://www.poissonboltzmann.org/
 
 ### Avogadro
 
