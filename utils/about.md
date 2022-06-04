@@ -1,7 +1,11 @@
 # About me
 
-
 <center><img src="https://gitee.com/gxf1212/notes/raw/master/_media/photo.jpg" style="zoom:50%;" /></center>
+
+- [My GitHub site](https://github.com/gxf1212), with some templates and study notes
+- [My Bilibili Channel](https://space.bilibili.com/441196634) with machine-translated YouTube lecture videos
+- [我的保研待录取通知](/utils/baoyan-doge.md) (bushi)
+- [A poorly developed personal blog](https://gxf1212.github.io/) is on GitHub
 
 
 My classmates (and I) easily won 2nd prize in provincial-level contests in math, physics and chemistry. Oh, I got the first prize in chem, after reading tons of books and exercises for months (it's not easy!). During the study I developed interest in chemical structures. But today's not a day to recall iridescent chemistry memories. In one sentence, any strange covalent comounds formed by usual elemtent surprises us; organic synthesis routes is embedded with infinite possibilities; coordination compounds are artworks that we can draw for days...
