@@ -1611,11 +1611,13 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 >
 > But CDN works?
 >
+> <img src="https://unpkg.com/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
+>
 > ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg)
 >
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
 >
-> <img src="https://unpkg.com/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
+> 
 
 ### Customize functions
 
