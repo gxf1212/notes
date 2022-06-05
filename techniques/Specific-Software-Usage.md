@@ -1608,6 +1608,10 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 > Figure in GitHub
 >
 > ![](https://raw.githubusercontent.com/gxf1212/notes/master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg)
+>
+> But CDN works?
+>
+> ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg)
 
 ### Customize functions
 
