@@ -1587,13 +1587,13 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 >
 > 正常本地目录probably not work
 >
-> <img src="/home/gxf/desktop/work/Git-repo/notes/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
+> <img src="~/desktop/work/Git-repo/notes/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
 >
 > this should ok, but `':size=50%'` does not work locally using provided syntax
 >
-> ![logo](/home/gxf/desktop/work/Git-repo/notes/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=50%')
+> ![logo](~/desktop/work/Git-repo/notes/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=50%')
 >
-> ![logo](/home/gxf/desktop/work/Git-repo/notes/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=100%')
+> ![logo](~/desktop/work/Git-repo/notes/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=100%')
 >
 > To use the website, should not contain a single backslash in Typora...
 >
@@ -1604,6 +1604,10 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 > ```
 >
 > 没想到个别的（本地都）显示不了，即使那个图片确实存在
+>
+> Figure in GitHub
+>
+> ![](https://raw.githubusercontent.com/gxf1212/notes/master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg)
 
 ### Customize functions
 
