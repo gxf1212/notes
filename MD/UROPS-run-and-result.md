@@ -1599,7 +1599,7 @@ parmchk2 -i lig.mol2 -f mol2 -o lig.frcmod
 
 https://jerkwin.github.io/GMX/GMXtut-5/#%E6%A6%82%E8%BF%B0
 
-you may use my scripts: [download here](https://gitee.com/gxf1212/notes/raw/master/MD/utils/gmx-md-scripts.zip), but refer to Jerkwin tutorial for details; or modify from his.
+you may use my scripts: [download here](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/utils/gmx-md-scripts.zip), but refer to Jerkwin tutorial for details; or modify from his.
 
 1. 将蛋白质和ligand放到分开的坐标文件中 (I don't need)
 

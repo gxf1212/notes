@@ -1601,6 +1601,7 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 >
 > ```
 > https://gitee.com/gxf1212/notes/raw/master/
+> https://cdn.jsdelivr.net/gh/gxf1212/notes@master/
 > ```
 >
 > 没想到个别的（本地都）显示不了，即使那个图片确实存在

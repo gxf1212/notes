@@ -655,7 +655,7 @@ but **'formatted’ can be recognized by CHARMM-GUI**!
 
 > note: for newly added atoms, parameterization is needed?
 > 
-> <img src="https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/parameterization.jpg" alt="parameterization" style="zoom:80%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/parameterization.jpg" alt="parameterization" style="zoom:80%;" />
 > 
 > but may also use 'formatted’. but for remtp I used remtp_autopsf_temp.pdb
 > 
@@ -830,7 +830,7 @@ then just click, click...and download all files
 
 > charmm-gui, what do the files do? what is needed? these?
 > 
-> ![parameterization](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/parameterization.jpg)
+> ![parameterization](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/parameterization.jpg)
 
 focus on `ligandrm.pdb/psf`, which can be put into a merge.tcl, as **an alternative way of AutoPSF** in generating files for ligand (other tools for protein, etc?). Carefully choose the force field!
 
@@ -2613,7 +2613,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 1. It's found that the aromatic ring cannot retain its planar structure, though in pymol hybrid.pdb still looks fine (though ligand.pdb Ar dotted bonds is gone). 因为后面对芳环只有参数的限制，程序不知道关于芳香键的标记
 
-   ![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral.jpg)
+   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/remtp-dihedral.jpg)
 
    31 17 19 34: CG3C50 CG2R57 NG2RC0 CG2RC0 (purple)
 
@@ -2637,7 +2637,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 2. 1 4 21 23: PG1 OG303 CG321 CG3C51
 
-   ![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral2.jpg) 
+   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/remtp-dihedral2.jpg) 
 
    > ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.6000  1   180.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
    >
@@ -2659,7 +2659,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 4. to prevent the oxygen from folding back. actually 21-23 is nearly perpendicular to the ribose "plane"
 
-   <img src="https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-fold-back.png" alt="remtp-foldback" style="zoom:50%;" />
+   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/remtp-fold-back.png" alt="remtp-foldback" style="zoom:50%;" />
 
    21 23 25 31: CG321 CG3C51 OG3C51 CG3C50
 
@@ -2712,7 +2712,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
    29 31 17 36: CG3C51 CG3C50 CG2R57 CG2R51
 
-   ![remtp-dihedral](https://gitee.com/gxf1212/notes/raw/master/MD/MD.assets/remtp-dihedral3.jpg) 
+   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/remtp-dihedral3.jpg) 
    
    > in hybrid2.prm
    >
