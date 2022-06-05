@@ -262,7 +262,7 @@ RNA的结构？
 
 其他方法：纤维衍射（双螺旋结构）、SAXS（低分辨）、中子衍射（需要大晶体、时间长）
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-flow.png" alt="4-flow" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-flow.png" alt="4-flow" style="zoom:50%;" />
 
 ### (1) 晶体培养
 
@@ -278,7 +278,7 @@ RNA的结构？
 
 原理：
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-solubility.png" alt="4-solubility" style="zoom:30%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-solubility.png" alt="4-solubility" style="zoom:30%;" />
 
 结晶是个熵减过程
 
@@ -457,11 +457,11 @@ RNA的结构？
 
 点群和空间群符号
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-2-point-group-sign.jpg" alt="4-2-point-group-sign" style="zoom: 20%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-2-point-group-sign.jpg" alt="4-2-point-group-sign" style="zoom: 20%;" />
 
 32种点群表
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-2.jpg" alt="4-2" style="zoom:15%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-2.jpg" alt="4-2" style="zoom:15%;" />
 
 > 不用记，但后面那个从数据判断是什么玩意？
 
@@ -473,9 +473,9 @@ RNA的结构？
 
 > 具体对照手写笔记
 >
-> ![4-2-pg](https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-2-pg.jpg)
+> ![4-2-pg](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-2-pg.jpg)
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-dengxiao.png" alt="4-dengxiao" style="zoom:25%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-dengxiao.png" alt="4-dengxiao" style="zoom:25%;" />
 
 P2<sub>1</sub>2<sub>1</sub>2这种：大概都是abc三个方向？按理说不应该是位方向？确实是
 
@@ -489,7 +489,7 @@ P2<sub>1</sub>2<sub>1</sub>2这种：大概都是abc三个方向？按理说不�
 >
 > 如图左上角1/4就是不对称单位
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-asymm.png" alt="4-asymm" style="zoom:60%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-asymm.png" alt="4-asymm" style="zoom:60%;" />
 >
 > 原点的选取，优先次序：高对称点的对称中心---低对称点的对称中心---……
 >
@@ -505,11 +505,11 @@ P2<sub>1</sub>2<sub>1</sub>2这种：大概都是abc三个方向？按理说不�
 >
 > 劳厄群：32个点群中的11种中心对称点群→衍射花样Friedel’s Law  
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-pro-space.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-pro-space.png" style="zoom:50%;" />
 
 由于密堆积和互作的需要，螺旋轴出现概率高于普通旋转轴。
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-rot.png" style="zoom:35%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-rot.png" style="zoom:35%;" />
 
 > 若两个晶体空间群相同，晶胞参数差别小 (1%)，则称二者是同晶的
 >
@@ -529,7 +529,7 @@ Matthews常数$V_M=V_{cell}/(N_z\cdot M_r)$，$N_z$是单位晶胞的蛋白分�
 
 > 假设某个蛋白质的空间群为C2，单位晶胞总体积为 319,000 Å<sup>3</sup>，该蛋白质的分子量为32,100Da，对于$N_Z$ = 2, 4, 或 8 来说，相应的$V_M$ = 5, 2.5, 或 1.25 Å<sup>3</sup>/Da。根据 Matthews 常数的经验分布规律，该蛋白质晶体的单位晶胞中包含4个分子的可能性是非常高的。因为C2空间群的晶体晶胞具有4个不对称单位，所以每个不对称单位包含一个蛋白质分子。
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-2-Usol.png" alt="4-2-Usol" style="zoom:25%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-2-Usol.png" alt="4-2-Usol" style="zoom:25%;" />
 
 ### (3) 衍射数据收集
 
@@ -607,7 +607,7 @@ X射线曝光激发像板材料，磷光能保存较久时间，其中蓝光和�
 
 Diffraction pattern 就是 a 2D projection of a 3D reciprocal lattice
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-collect" alt="image-20211213214729959" style="zoom:45%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-collect" alt="image-20211213214729959" style="zoom:45%;" />
 
 ##### Laue法（Laue's Method）
 
@@ -643,7 +643,7 @@ Laue星芒：晶体内部结构畸变时，会产生衍射斑点的伸长
 
 影响挺大的！
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-3-abso.png" alt="4-3-abso" style="zoom:45%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-3-abso.png" alt="4-3-abso" style="zoom:45%;" />
 
 ##### 镶嵌块
 
@@ -653,7 +653,7 @@ Laue星芒：晶体内部结构畸变时，会产生衍射斑点的伸长
 
 强度等于各块之和，但不同块可能相互影响
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-3-mosaic.png" alt="4-3-mosaic" style="zoom:35%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-3-mosaic.png" alt="4-3-mosaic" style="zoom:35%;" />
 
 ##### 热运动
 
@@ -677,7 +677,7 @@ Laue星芒：晶体内部结构畸变时，会产生衍射斑点的伸长
 
 ##### 分辨率
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-2.png" alt="4-4-2" style="zoom:25%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-2.png" alt="4-4-2" style="zoom:25%;" />
 $$
 \tan\alpha=R/D\\
 \theta_{max}=\alpha/2\\
@@ -747,7 +747,7 @@ $\Delta R$代入上公式，$\theta$ 和 $H$ 取min。
 
 ##### 反常散射的数据收集
 
-> 反常散射：违反Friedel定律<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-friedel.png" alt="4-friedel" style="zoom:55%;" />很多是重原子导致的
+> 反常散射：违反Friedel定律<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-friedel.png" alt="4-friedel" style="zoom:55%;" />很多是重原子导致的
 
 获得尽可能多的**Friedel反射对**: $I(+h,+k,+l)$ 和 $I(-h, -k, -l)$
 
@@ -798,7 +798,7 @@ recall:
 
 指标化后，就把强度积分一下。。
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/integration.png" alt="image-20211213220445679" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/integration.png" alt="image-20211213220445679" style="zoom:50%;" />
 
 > 是绝对的强度，不是相对的
 
@@ -854,7 +854,7 @@ recall:
 
 7. Wilson统计。线性拟合
 
-   <img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-3-wilson.jpg" alt="wil" style="zoom:55%;" /><img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-3-wilson-eq.png" alt="wil" style="zoom:25%;" />
+   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-3-wilson.jpg" alt="wil" style="zoom:55%;" /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-3-wilson-eq.png" alt="wil" style="zoom:25%;" />
 
 ##### 补充：软件使用&数据处理
 
@@ -919,27 +919,27 @@ https://hkl-xray.com/sites/default/files/HKL2000manual-2020/12-OutputStatisticsG
   - 要分（分辨率的）壳层（lower/upper limit)
   - 每个衍射点都有一个
 
-  <img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-data1.jpg" alt="4-data1" style="zoom:60%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-data1.jpg" alt="4-data1" style="zoom:60%;" />
 
 - 下面那个是上面的加权平均
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-data2.jpg" alt="4-data2" style="zoom:60%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-data2.jpg" alt="4-data2" style="zoom:60%;" />
 
 I/sigma的分布
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-data3.jpg" alt="4-data3" style="zoom:60%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-data3.jpg" alt="4-data3" style="zoom:60%;" />
 
 各种指标
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-data4-1.jpg" style="zoom:60%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-data4-1.jpg" style="zoom:60%;" />
 
 系统消光
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-data4.jpg" alt="4-data4" style="zoom:60%;" /><img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-data5.jpg" alt="4-data5" style="zoom:60%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-data4.jpg" alt="4-data4" style="zoom:60%;" /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-data5.jpg" alt="4-data5" style="zoom:60%;" />
 
 如何分析？
 
-![4-3-abs](https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-3-abs.jpg)
+![4-3-abs](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-3-abs.jpg)
 
 > There are two ways to manually check whether or not you have systematic absences. The first is to look at the **Intensities of systematic absences table** at the bottom of the log file, which can be shown using the **Show Log File** button. If you have scaled your data in a space group that is expected to have systematic absences, then the reflections that should be missing will be listed at the bottom of the log file. The table lists these reflections' intensity, sigma, and I/sigma.
 >
@@ -1060,7 +1060,7 @@ $$
 \boldsymbol{H}=(h,k,l)\\
 \boldsymbol{R}=(x,y,z)
 $$
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-patterson.jpg" alt="4-4-patterson" style="zoom:15%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-patterson.jpg" alt="4-4-patterson" style="zoom:15%;" />
 
 可以推导出其和电子密度的数学关系
 $$
@@ -1086,13 +1086,13 @@ Patterson晶胞仅存在<u>不包含平移</u>的对称元素，总共**29个**
 
 Patterson对称群，是蛋白晶体可能有的空间群中，去掉含滑移面、螺旋轴，以及不含对称中心的，剩下的
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-patterson-group.png" alt="4-4-patterson-group" style="zoom:30%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-patterson-group.png" alt="4-4-patterson-group" style="zoom:30%;" />
 
 ###### Harker峰
 
 > Harker截面或Harker线，就是同一套等效点的原子组成的帕特森峰。
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-harker1.jpg" alt="4-4-harker1" style="zoom:13%;" /><img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-harker2.jpg" style="zoom:13%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-harker1.jpg" alt="4-4-harker1" style="zoom:13%;" /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-harker2.jpg" style="zoom:13%;" />
 
 蛋白质分子都是CNO，差别不大，容易重叠。
 
@@ -1153,7 +1153,7 @@ where $F_o(\boldsymbol{H})$ 是待测晶体，$F_c(\boldsymbol{H})$ 是已知晶
 
 > 密堆积分析：寡聚体？
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-close1.jpg" alt="4-4-close1" style="zoom:14%;" /><img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-close2.jpg" alt="4-4-close2" style="zoom:14%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-close1.jpg" alt="4-4-close1" style="zoom:14%;" /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-close2.jpg" alt="4-4-close2" style="zoom:14%;" />
 >
 > 共有24种分子置换的方式。根据晶体对称性，缩小了搜索范围
 
@@ -1171,7 +1171,7 @@ where $F_o(\boldsymbol{H})$ 是待测晶体，$F_c(\boldsymbol{H})$ 是已知晶
 
 1个Se/150 residues对MAD就够了
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-mad.jpg" alt="4-4-mad" style="zoom:25%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-mad.jpg" alt="4-4-mad" style="zoom:25%;" />
 
 要的是F<sub>BA</sub>和G的夹角$\Delta\phi$
 
@@ -1179,7 +1179,7 @@ $F_h=F_{BA}+G$，把$G$代进来换成$F_A$。$F_A$的系数随着波长变化�
 
 多收几组（保证成对），解出系数和相角
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-mad2.jpg" alt="4-4-mad2" style="zoom:25%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-mad2.jpg" alt="4-4-mad2" style="zoom:25%;" />
 
 可能有双解问题，解出电子密度再判断
 
@@ -1337,7 +1337,7 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 
 键长键角什么的
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/4-5.png" alt="4-5" style="zoom:30%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-5.png" alt="4-5" style="zoom:30%;" />
 
 ##### 别的想看的也看一下
 
@@ -1367,13 +1367,13 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 
 和普通光镜的光路相似
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/5-tem.png" alt="5-tem" style="zoom:33%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/5-tem.png" alt="5-tem" style="zoom:33%;" />
 
 #### 模式
 
 成像模式和衍射模式。前者看到的是像，后者是衍射点
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/5-image.png" alt="5-image" style="zoom:50%;" /><img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/5-diffraction.png" alt="5-diffraction" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/5-image.png" alt="5-image" style="zoom:50%;" /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/5-diffraction.png" alt="5-diffraction" style="zoom:50%;" />
 
 #### SEM和TEM区别
 
@@ -1386,7 +1386,7 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 
 中央截面定理：物体的二维投影像的傅里叶变换等于物体的通过原点且与投影方向垂直的一个截面（中央截面）的三维傅里叶变换。累积二维的FT得到三维的FT，逆变换成三维结构。
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/5-3d.png" alt="5-3d" style="zoom:33%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/5-3d.png" alt="5-3d" style="zoom:33%;" />
 
 > 许多截面，所以能看到里面！
 
@@ -1400,9 +1400,9 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 > | 单颗粒技术 | 病毒、大complex  | 全同粒子 | >0.33nm        |
 > | 断层成像   | 细胞器、组织切片 | 单一结构 | 4nm            |
 >
-> ![image-20211104170835340](https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/5-temp.png)
+> ![image-20211104170835340](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/5-temp.png)
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/image-20211104170905611.png" alt="image-20211104170905611" style="zoom: 40%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/image-20211104170905611.png" alt="image-20211104170905611" style="zoom: 40%;" />
 >
 > 模型偏好 (model bias)：优化结果偏向于初猜的模型，可能导致对结构的错误解释。对异质性的样品进行分类分析，可以通过分区的比对和整体比对进行分类
 >
@@ -1465,7 +1465,7 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 
 如何包埋？金属网格吸一层液体，滤纸吸一下，只剩薄液膜，塞进液态乙烷
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/5-1.png" alt="5-1" style="zoom:25%;" /><img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/5-2.jpg" alt="5-2" style="zoom:15%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/5-1.png" alt="5-1" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/5-2.jpg" alt="5-2" style="zoom:15%;" />
 
 ##### 质量控制
 
@@ -1475,7 +1475,7 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 
 样品在辐射下易产生损伤，要低剂量（low dose），<20e/Å. 越高越模糊
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/5-dose.png" alt="5-dose" style="zoom:33%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/5-dose.png" alt="5-dose" style="zoom:33%;" />
 
 ##### 低剂量技术
 
@@ -1510,7 +1510,7 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 
 ### 概述
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/6-flow.png" alt="6-flow" style="zoom:35%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-flow.png" alt="6-flow" style="zoom:35%;" />
 
 > 获得原子间的距离信息，结合约束获得模型。已知一级结构
 
@@ -1545,7 +1545,7 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 >
 > 多维：自己选哪些核
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/6-1d.jpg" alt="6-1d" style="zoom:15%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-1d.jpg" alt="6-1d" style="zoom:15%;" />
 
 #### NOE和J-coupling
 
@@ -1563,7 +1563,7 @@ NOE**与空间作用距离的6次方成反比**，其空间作用距离$<5/sim 6
 
 #### 多维实验的命名
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/6-mt.png" alt="6-mt" style="zoom:20%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-mt.png" alt="6-mt" style="zoom:20%;" />
 
 按传递顺序命名。还要传回来。括号是只传递不共振的
 
@@ -1592,7 +1592,7 @@ NOE**与空间作用距离的6次方成反比**，其空间作用距离$<5/sim 6
 
   - FID曲线经过FT变成一个峰
 
-    <img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/6-fid.jpg" alt="6-fid" style="zoom:12%;" />
+    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-fid.jpg" alt="6-fid" style="zoom:12%;" />
 
 - 相位、基线校正
 
@@ -1630,7 +1630,7 @@ NOE**与空间作用距离的6次方成反比**，其空间作用距离$<5/sim 6
 
 > 我没理解错的话，前者找同一residue的Cα和NH，后者找Cα下一个residue的NH
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/6-main.png" alt="6-main" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-main.png" alt="6-main" style="zoom:50%;" />
 
 ###### 侧链指认
 
@@ -1638,7 +1638,7 @@ NOE**与空间作用距离的6次方成反比**，其空间作用距离$<5/sim 6
 
 > 我没理解错的话，前者找同一个C上的H，后者找下一个
 
-![6-side](https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/6-side.png)
+![6-side](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-side.png)
 
 > COSY：H和H的同核二维；TOCSY：加了spin lock
 
@@ -1648,7 +1648,7 @@ NOE**与空间作用距离的6次方成反比**，其空间作用距离$<5/sim 6
 
 > 因为只要靠近的就可以。详见下面的NOE信号表
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/6-noesy.png" alt="6-noesy" style="zoom:30%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-noesy.png" alt="6-noesy" style="zoom:30%;" />
 >
 > 高维可以减少谱峰堆积
 
@@ -1656,7 +1656,7 @@ NOE**与空间作用距离的6次方成反比**，其空间作用距离$<5/sim 6
 
 ###### 总结
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/6-assign.png" alt="6-assign" style="zoom:20%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-assign.png" alt="6-assign" style="zoom:20%;" />
 
 ##### 结构计算
 
@@ -1682,11 +1682,11 @@ NOE**与空间作用距离的6次方成反比**，其空间作用距离$<5/sim 6
 
 > 判断二级结构，可用特定NOE信号（当然不止这个）
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/6-noe-res.png" alt="6-noe-res" style="zoom:25%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-noe-res.png" alt="6-noe-res" style="zoom:25%;" />
 >
 > 耦合常数也是
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course/Advanced-biology/structural-biology/sb-outline.assets/6-j.png" alt="6-j" style="zoom:33%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-j.png" alt="6-j" style="zoom:33%;" />
 
 ##### 结构评价
 

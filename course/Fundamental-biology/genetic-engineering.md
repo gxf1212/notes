@@ -4,7 +4,7 @@
 
 一个关于这个页面怎么搭建的介绍：https://blog.csdn.net/gxf1212/article/details/123142268
 
-> refer to [link](https://gxf1212.gitee.io/notes/#/techniques/Specific-Software-Usage?id=functions) for docsify functions
+> refer to [link](https://gxf1212.github.io/notes/#/techniques/Specific-Software-Usage?id=functions) for docsify functions
 
 导图是可以缩放、拖动、查找的哦~
 

@@ -4,7 +4,7 @@
 
 我们期望，有了这份提纲，就不用再看课件了。
 
-这份提纲的网页版也上线了：https://gxf1212.gitee.io/notes/#/course/Fundamental-biology/evolutional-bio
+这份提纲的网页版也上线了：https://gxf1212.github.io/notes/#/course/Fundamental-biology/evolutional-bio
 
 > 相对较水的一门课，做个提纲背一背过。恐怕也不用什么图片
 >
@@ -813,7 +813,7 @@ speciation
 
 ### 复杂的种间关系
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Fundamental-biology/evolutional-bio.assets/5-complex.png" alt="5-complex" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Fundamental-biology/evolutional-bio.assets/5-complex.png" alt="5-complex" style="zoom:50%;" />
 
 ## 其他
 
@@ -821,7 +821,7 @@ speciation
 
 人工选择：是指针对特定[性状](https://zh.wikipedia.org/wiki/性狀)进行育种，使这些性状的表现逐渐强化，而人们不需要的性状则可能逐渐消匿的过程。
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Fundamental-biology/evolutional-bio.assets/5-speciation.jpg" alt="5-speciation" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Fundamental-biology/evolutional-bio.assets/5-speciation.jpg" alt="5-speciation" style="zoom:50%;" />
 
 基因工程：是打破物种间生殖隔离的强大力量
 
@@ -1011,11 +1011,11 @@ speciation
 >
 > > http://3.bp.blogspot.com/-tf5Vy1nO9ks/UwdwvAPz3iI/AAAAAAAABho/gYkfOesrtx8/s1600/Stem+and+crown+groups+-+Wikimedia.png
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course//evolutional-bio.assets5-Stem and crown groups.png" alt="5-Stem and crown groups" style="zoom:30%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course//evolutional-bio.assets5-Stem and crown groups.png" alt="5-Stem and crown groups" style="zoom:30%;" />
 >
 > 主要是指宏观生物的灭绝
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course/Fundamental-biology/evolutional-bio.assets/6-mass-extinction.png" style="zoom:50%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Fundamental-biology/evolutional-bio.assets/6-mass-extinction.png" style="zoom:50%;" />
 
 ### 人类世与第六次物种大灭绝
 
@@ -1811,7 +1811,7 @@ Irreducible Complexity
 
 为什么各文明都认为有灵魂？把身体和精神分开的“身心二元论”。
 
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/Fundamental-biology/evolutional-bio.assets/9-1.png" alt="9-1" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Fundamental-biology/evolutional-bio.assets/9-1.png" alt="9-1" style="zoom:50%;" />
 
 ……
 
