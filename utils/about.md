@@ -1,6 +1,6 @@
 # About me
 
-<center><img src="https://github.com/gxf1212/notes/raw/master/_media/photo.jpg" style="zoom:50%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/_media/photo.jpg" style="zoom:50%;" /></center>
 
 - [My GitHub site](https://github.com/gxf1212), with some templates and study notes
 - [My Bilibili Channel](https://space.bilibili.com/441196634) with machine-translated YouTube lecture videos
