@@ -20,7 +20,10 @@ I've removed that but maybe it's ok (you may try to find the viewer).
 https://www.realvnc.com/en/connect/download/vnc/linux/
 
 ```shell
-
+rpm -Uhv VNC-Server-6.7.2-Linux-x64.rpm # if there is conflict, add --nodeps --force
+systemctl start vncserver-x11-serviced.service # start service
+vnclicensewiz # GUI to sign in and assign pwd for this host
+systemctl enable vncserver-x11-serviced.service # startup enabled
 ```
 
 Kindly remember your password!
@@ -63,13 +66,152 @@ gmail
 
 
 
+https://tieba.baidu.com/p/7157359656
 
+```shell
+elif [ "$os_name"== 'Fedora' ]; then
+        os_version=`cat /etc/fedora-release | cut -d' ' -f3`
+|| [ $os_name== "fedora" ]
+```
 
+see software usage!
 
+## break the wall
 
+[*PN和v2ray、ssr、加速器有什么区别？](https://shutupandshowpages.com/index.php/2021/07/06/*PN%E5%92%8Cv2ray%E3%80%81ssr%E3%80%81%E5%8A%A0%E9%80%9F%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/)
 
+翻墙的方式：*PN、代理、自己搭服务器（淘宝上还有帮忙搭建内网穿透的；自己也可搭ssr啥的？）
 
+总之*PN更安全；v2ray比ssr可靠、难搞
 
+https://sites.google.com/view/honven all kinds of recomm
+
+### airport: sgi.anycast.gay
+
+https://sgi.anycast.gay/user 买ssr流量的网站
+
+https://www.hayaissr.xyz/ 也是个买*PN的？
+
+> ssr can not provide access to YouTube. 极速 browser can view Google but chrome without the plugin can not... it helps with google scholar but the plugin cannot
+
+laowang, can view youtube on the phone
+
+### electron-ssr
+
+configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md
+
+- old *PN for Linux: https://github.com/hannuo/ssr-linux-client-electron
+
+- 22.2.9 [0.2.7](https://github.com/shadowsocksrr/electron-ssr/releases/tag/v0.2.7) and [0.2.6](https://github.com/qingshuisiyuan/electron-ssr-backup/releases/tag/v0.2.6)
+
+1. dependencies (as said in Debian系列安装与配置[Ubuntu.md](https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md))
+
+   ```shell
+   sudo apt install libcanberra-gtk-module libcanberra-gtk3-module gconf2 gconf-service libappindicator1 libssl-dev libsodium-dev
+   sudo apt install python
+   ```
+
+2. depends on Python! It will look like
+
+   ![electron-ssr-py](https://gitee.com/gxf1212/notes/raw/master/techniques/images/electron-ssr-py.png)
+
+   If connection fails,
+
+   https://www.cnblogs.com/geekHao/p/12635970.html
+
+   从源头更改python的链接文件，**推荐这种方法**
+
+   1. 查看已安装的python版本和链接情况：
+
+      ```shell
+      ll /usr/bin/python*
+      ```
+
+   2. 删除原有的Python连接文件 (I don’t have one after reinstalling the system)
+
+      ```shell
+      sudo rm /usr/bin/python
+      ```
+
+   3. 建立指向Python3.X的连接
+
+      ```shell
+      sudo ln -s /usr/bin/python3 /usr/bin/python
+      ```
+
+      then it’s done
+
+3. an usual bug
+
+   similar situation https://github.com/qingshuisiyuan/electron-ssr-backup/issues/26
+
+   ![electron-ssr-dep](https://gitee.com/gxf1212/notes/raw/master/techniques/images/electron-ssr-dep.png)
+
+   > libcrypto is along with `libssl-dev`. 这俩包不重要，主要是代理方式！
+
+   do as https://sobaigu.com/software-shadowsocksr-in-linux.html
+
+   just set the **manual proxy**...
+
+   ```127.0.0.1
+   http://127.0.0.1
+   ```
+
+   > - but without electron-ssr, cannot see baidu.com?
+   > - after rebooting, become "auto-proxy"?? not so ok...switch back to auto, still ok??
+
+   in terminal??
+
+   ```
+   export http_proxy="http://127.0.0.1:12333"
+   ```
+
+### v2ray
+
+> https://rongsp.com/article/96.html
+
+https://github.com/Qv2ray/Qv2ray/releases/tag/v2.7.0 with GUI
+
+intro https://iyuantiao.com/fenxiangfuli/jiaocheng/v2ray.html
+
+### qt-5
+
+https://github.com/shadowsocks/shadowsocks-qt5/releases/tag/v3.0.1
+
+```shell
+chmod a+x Sha*
+./Sha*
+```
+
+连接--添加--URI
+
+### easy connect (for school)
+
+> 重要启示：点击安装包，显示安装成功，但启动程序时点击图标无响应，可通过命令行终端（Terminal）执行命令来启动。观察怎么个报错法！有道、DS等
+
+```shell
+/usr/share/sangfor/EasyConnect/EasyConnect 
+(EasyConnect:51965): Pango-ERROR **: 15:18:20.035: Harfbuzz version too old (1.3.1)
+追踪与中断点陷阱 (核心已转储)
+```
+
+https://www.cnblogs.com/cocode/p/12890684.html
+
+下载pangolib  我的云盘  链接: https://pan.baidu.com/s/1i8O5ZvMLqnw8K8EzKIrw6Q 提取码: c896
+
+```shell
+sudo cp ./'pango lib'/lib/lib* /usr/share/sangfor/EasyConnect/
+```
+
+download: https://rvpn.zju.edu.cn/com/installClient.html#auto-common
+
+server: https://rvpn.zju.edu.cn
+
+It's fine on Windows; but x86 version cannot be installed here! And x64 shows 版本过低 upon reboot
+
+[this version](http://download.sangfor.com.cn/download/product/sslvpn/pkg/linux_01/EasyConnect_x64.deb) does not report this problem. stable!
+
+> ZJU的R*PN：https://www.coolspring8.com/p/rvpn-easyconnect/. see his GitHub https://github.com/Hagb/docker-easyconnect
 
 ## Docking
 
