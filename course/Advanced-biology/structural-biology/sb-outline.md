@@ -904,8 +904,6 @@ https://hkl-xray.com/sites/default/files/HKL2000manual-2020/12-OutputStatisticsG
   - 选好选项，再scale sets，如果check后有更高对称性，调整好（reindex）后再scale sets，就可以在space group处选更高的，再scale sets
   - 要一直scale sets直到稳定，迭代
 
-> 
-
 ###### log file analysis
 
 > 我们需要根据这些数据，判断出晶体的空间群、螺旋轴、冗杂度、完整度、I/sigma、Rmerge、xyz轴消光
