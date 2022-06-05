@@ -169,7 +169,7 @@ without client, just use web client...
 
 问了客服，这样配置：
 
-![phddns-config](https://gitee.com/gxf1212/notes/raw/master/techniques/images/phddns-config.jpg)
+![phddns-config](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/phddns-config.jpg)
 
 - 映射类型：TCP
 - TCP类型：普通即可
@@ -1360,7 +1360,7 @@ anaconda环境信息同步？
 
 1. GitHub克隆Gitee的仓库
 
-   ![clone](https://gitee.com/gxf1212/notes/raw/master/techniques/images/clone.jpg)
+   ![clone](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/clone.jpg)
 
    cloning is boring, why not sync a repository?
 
@@ -1556,7 +1556,7 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
     **解决之道**：要用这个打头（算是git的api？）
 
-    https://gitee.com/gxf1212/notes/raw/master/
+    https://cdn.jsdelivr.net/gh/gxf1212/notes@master/
 
     其实git他俩用来做图床就是如此
 
@@ -1575,7 +1575,7 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 >
 > use the website, a centered figure should look like this:
 >
-> <center><img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-c1q.png" alt="5-c1q" style="zoom:50%;" align="center" /></center>
+> <center><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/molecular-immunology/molecular-immunology.assets/5-c1q.png" alt="5-c1q" style="zoom:50%;" align="center" /></center>
 >
 > `align="center" ` does not work.....`<center></center>` or `<p style="text-align:center;"><p/>` works. 
 >
@@ -1597,7 +1597,7 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 >
 > To use the website, should not contain a single backslash in Typora...
 >
-> <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets\5-c1q.png" alt="5-c1q" style="zoom:50%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/molecular-immunology/molecular-immunology.assets\5-c1q.png" alt="5-c1q" style="zoom:50%;" />
 >
 > ```
 > https://gitee.com/gxf1212/notes/raw/master/
