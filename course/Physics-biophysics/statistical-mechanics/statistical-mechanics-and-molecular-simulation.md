@@ -1,12 +1,12 @@
 # Statistical Mechanics and Molecular Simulation
 
-Get the textbook: [Tuckerman, M. E. (2010). Statistical mechanics: Theory and molecular simulation. Oxford: Oxford University Press.](https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/Mark-E-Tuckerman-Statistical-Mechanics-Theory-and-Molecular-Simulation-Oxford-University-Press-USA-(2010).pdf)
+Get the textbook: [Tuckerman, M. E. (2010). Statistical mechanics: Theory and molecular simulation. Oxford: Oxford University Press.](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Physics-biophysics/statistical-mechanics/Mark-E-Tuckerman-Statistical-Mechanics-Theory-and-Molecular-Simulation-Oxford-University-Press-USA-(2010).pdf)
 
 Since there's too many equations to number and refer to, I'll write this in LaTeX.
 
 Just read the following PDF if you have access to GitHub. [If not, read it here](https://stuxjtueducn-my.sharepoint.com/personal/gxf1212_stu_xjtu_edu_cn/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fgxf1212%5Fstu%5Fxjtu%5Fedu%5Fcn%2FDocuments%2FWindows%2FGit%2Drepo%2Fother%2Fstatistical%2Dmechanics%2Fdemo%2Epdf&parent=%2Fpersonal%2Fgxf1212%5Fstu%5Fxjtu%5Fedu%5Fcn%2FDocuments%2FWindows%2FGit%2Drepo%2Fother%2Fstatistical%2Dmechanics&ga=1)
 
-<iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/gxf1212/notes/master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
+<iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Physics-biophysics/statistical-mechanics/demo.pdf" height=800px; width=100%>
 
 
 Other
@@ -23,7 +23,7 @@ Other
 >
 > ````markdown
 > ```pdf
-> https://gitee.com/gxf1212/notes/raw/master/course/Physics-biophysics/statistical-mechanics/demo.pdf
+> https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Physics-biophysics/statistical-mechanics/demo.pdf
 > ```
 > ````
 >
