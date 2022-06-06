@@ -1242,7 +1242,7 @@ anaconda环境信息同步？
    https://www.cnblogs.com/zlting/p/9620259.html
    
    ```shell
-   git remote set-url origin https://gitee.com/gxf1212/notes.git # 设置远程仓库地址
+   git remote set-url origin https://github.com/gxf1212/notes.git # 设置远程仓库地址
    git remote -v
    ```
 
