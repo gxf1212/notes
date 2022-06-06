@@ -4,7 +4,6 @@ This page is all about software installing, both for system and project environm
 
 Mainly recorded while in NUS. The installation of DL environment, Gromacs, and plans are all in `Linux fundamental (Installation and softwares)`.
 
-
 ## remote control
 
 ### tight vnc
@@ -64,8 +63,6 @@ then open the GUI and sign in
 
 gmail
 
-
-
 https://tieba.baidu.com/p/7157359656
 
 ```shell
@@ -103,65 +100,64 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 - old *PN for Linux: https://github.com/hannuo/ssr-linux-client-electron
 
 - 22.2.9 [0.2.7](https://github.com/shadowsocksrr/electron-ssr/releases/tag/v0.2.7) and [0.2.6](https://github.com/qingshuisiyuan/electron-ssr-backup/releases/tag/v0.2.6)
-
 1. dependencies (as said in Debian系列安装与配置[Ubuntu.md](https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md))
-
+   
    ```shell
    sudo apt install libcanberra-gtk-module libcanberra-gtk3-module gconf2 gconf-service libappindicator1 libssl-dev libsodium-dev
    sudo apt install python
    ```
 
 2. depends on Python! It will look like
-
+   
    ![electron-ssr-py](https://gitee.com/gxf1212/notes/raw/master/techniques/images/electron-ssr-py.png)
-
+   
    If connection fails,
-
+   
    https://www.cnblogs.com/geekHao/p/12635970.html
-
+   
    从源头更改python的链接文件，**推荐这种方法**
-
+   
    1. 查看已安装的python版本和链接情况：
-
+      
       ```shell
       ll /usr/bin/python*
       ```
-
+   
    2. 删除原有的Python连接文件 (I don’t have one after reinstalling the system)
-
+      
       ```shell
       sudo rm /usr/bin/python
       ```
-
+   
    3. 建立指向Python3.X的连接
-
+      
       ```shell
       sudo ln -s /usr/bin/python3 /usr/bin/python
       ```
-
+      
       then it’s done
 
 3. an usual bug
-
+   
    similar situation https://github.com/qingshuisiyuan/electron-ssr-backup/issues/26
-
+   
    ![electron-ssr-dep](https://gitee.com/gxf1212/notes/raw/master/techniques/images/electron-ssr-dep.png)
-
+   
    > libcrypto is along with `libssl-dev`. 这俩包不重要，主要是代理方式！
-
+   
    do as https://sobaigu.com/software-shadowsocksr-in-linux.html
-
+   
    just set the **manual proxy**...
-
+   
    ```127.0.0.1
    http://127.0.0.1
    ```
-
+   
    > - but without electron-ssr, cannot see baidu.com?
    > - after rebooting, become "auto-proxy"?? not so ok...switch back to auto, still ok??
-
+   
    in terminal??
-
+   
    ```
    export http_proxy="http://127.0.0.1:12333"
    ```
@@ -253,14 +249,14 @@ icon path: just search `adt` or `icon`
 > adt: $HOME/mgltools_x86_64Linux2_1.5.7/MGLToolsPckgs/Pmv/Icons/128x128/adt.png
 
 > ### backup
->
+> 
 > ```shell
 > # paths
 > export PATH=$PATH:/home/user/MGLTools-1.5.7/bin # mgltools
 > export PATH=$PATH:/home/user/Desktop/work/xufan/bin # vina
 > # now it can run under root
 > ```
->
+> 
 > ### 
 
 ### zdock
@@ -317,11 +313,11 @@ conda install -c bioconda gromacs
   Follow this order:
 
 1. check your graphic card driver (and installation)
-
+   
    https://blog.csdn.net/qq_43265072/article/details/107160297
 
 2. (check gcc version) install cuda and cmake
-
+   
    - cmake
      - install: https://jingyan.baidu.com/article/d621e8da56314d2865913f93.html
      - uninstall: `make uninstall` and `sudo rm -rf` files https://blog.csdn.net/xh_hit/article/details/79639930
@@ -329,21 +325,20 @@ conda install -c bioconda gromacs
    - cuda
 
 3. use cmake to install gromacs
-
+   
    - https://blog.csdn.net/SuiYueHuYiWan/article/details/110972083
-
+   
    - install fftw3 by ourselves under root!
-
+     
      or `sudo apt-get`
-
+     
      - http://www.fftw.org/fftw2_doc/fftw_6.html
-
 - rather than official manual, I used
 
 #### old try
 
 1. **From here, you should see “on new system”**
-
+   
    ```shell
    ./configure --prefix=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
    # SINGLE AND DOUBLE PRECISION: see official manual
@@ -352,9 +347,9 @@ conda install -c bioconda gromacs
    make
    make -j install
    ```
-
+   
    - enter "root" by `su`
-
+     
      ```shell
      # under the unzipped gromacs directory
      mkdir build
@@ -377,7 +372,7 @@ conda install -c bioconda gromacs
      export PATH=$PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs-2021/bin/
      source /media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs/bin/GMXRC
      ```
-
+     
      > - library desired path : /media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs (double). single have a separate folder
 
 > - no problem with cuda
@@ -391,28 +386,28 @@ conda install -c bioconda gromacs
   > Cannot find FFTW 3 (with correct precision - libfftw3f for mixed-precision
   > GROMACS or libfftw3 for double-precision GROMACS).  Either choose the right
   > precision, choose another FFT(W) library (-DGMX_FFT_LIBRARY), enable
-  >
+  > 
   > the
-
+  
   >   advanced option to let GROMACS build FFTW 3 for you
   >   (-DGMX_BUILD_OWN_FFTW=ON), or use the really slow GROMACS built-in fftpack
   >   library (-DGMX_FFT_LIBRARY=fftpack).
-
+  
   solved
 
 - 上次装到：运行install.sh，报的信息放在build父目录的output。realvnc也不行
-
+  
   ```
   
   ```
-
+  
   CMake Warning:
     Manually-specified variables were not used by the project:
-
+  
       GMX_CUDA_TOOLKIT_ROOT_DIR
        GNX_BUILD_OWN_FFTW
       GNX_MPI
-
+  
   ```
   
   ```
@@ -432,9 +427,9 @@ make install
 ```
 
 - guide on cmake: https://blog.csdn.net/wgw335363240/article/details/37758337
-
+  
   - > CMake Error: The current CMakeCache.txt directory /media/kemov`:q!` 强制退出，不保存
-
+  
   - openssl: https://www.cnblogs.com/new-journey/p/13323301.html
 
 #### on new system
@@ -554,11 +549,11 @@ report error? https://www.biostars.org/p/19479/
 delete /usr/local/bin/dssp....
 
 > failed.
->
+> 
 > install boost from tar.gz, then dssp
->
+> 
 > https://www.linuxidc.com/Linux/2019-03/157605.htm
->
+> 
 > ```shell
 > ./bootstrap.sh --with-libraries=all --with-toolset=gcc
 > ./b2 toolset=gcc
@@ -567,9 +562,9 @@ delete /usr/local/bin/dssp....
 > nano ~/.bashrc
 > export PATH=$PATH:/usr/local/boost_1_75_0
 > ```
->
+> 
 > https://github.com/PDB-REDO/libcifpp
->
+> 
 > ```shell
 > yum install git
 > ./configure --prefix=/usr/local/gromacs/dssp/libcifpp --with-boost=/usr/local/boost_1_75_0
@@ -577,26 +572,26 @@ delete /usr/local/bin/dssp....
 > make install
 > export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/gromacs/dssp/libcifpp/lib
 > ```
->
+> 
 > https://github.com/PDB-REDO/dssp
->
+> 
 > ```shell
 > cd dssp-trunk
 > ./configure --prefix=/usr/local/gromacs/dssp --with-cif++=/usr/local/gromacs/dssp/libcifpp --with-boost=/usr/local/boost_1_75_0
 > make -j 4
 > make install
 > ```
->
+> 
 > (do not create build...)
->
+> 
 > failed2
->
+> 
 > ```shell
 > dnf install dssp
 > sudo ln -s /usr/bin/mkdssp /usr/local/bin/dssp # for gromacs to use
 > # this only calculates a single pdb
 > ```
->
+> 
 > https://ssbio.readthedocs.io/en/latest/instructions/dssp.html
 
 ### gmx_MMPBSA
@@ -611,27 +606,27 @@ pip install PyQt5
 if in conda, no need to add `amber.pythons`
 
 > ### g_mmpbsa
->
+> 
 > failed for version reasons
->
+> 
 > http://rashmikumari.github.io/g_mmpbsa/Download-and-Installation.html
->
+> 
 > ```shell
 > export PATH=$PATH:~/g_mmpbsa/bin
 > ```
->
+> 
 > guide: https://github.com/RashmiKumari/g_mmpbsa
->
+> 
 > http://kangsgo.com/18.html
->
+> 
 > > intro: https://chufang.cf/2019/07/16/gmx_pbsa/
-> >
+> > 
 > > other: https://jerkwin.github.io/2019/07/31/gmx_mmpbsa%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/
->
+> 
 > ### GMXPBSA
->
+> 
 > https://github.com/aspitaleri/gmxpbsa
->
+> 
 > ```
 > yum install apbs
 > export GMXPBSAHOME=/home/gxf/GMXPBSAtool
@@ -660,7 +655,7 @@ https://anaconda.org/conda-forge/pymbar git address and doc
 ### alchemical-analysis, alchemlyb
 
 > https://anaconda.org/conda-forge/alchemical-analysis
->
+> 
 > ```shell
 > conda activate AmberTools21 # no! choose python version?
 > conda install -c conda-forge alchemical-analysis
@@ -704,26 +699,26 @@ conda install -c omnia msmbuilder
 ### Align ligands
 
 1. LigAlign: a pymol tool
-
+   
    http://compbio.cs.toronto.edu/ligalign/index.html
-
+   
    ```shell
    # upon launching pymol
    run ~/pymol/ligalign/ligand_alignment.py
    ```
-
+   
    but too old!
 
 2. Mcsalign https://pymolwiki.org/index.php/Mcsalign
-
+   
    ```shell
    conda install -c schrodinger -y pymol pymol-psico
    conda install -c rdkit rdkit -y
    conda install -c speleo3 csb -y
    ```
-
+   
    run
-
+   
    ```shell
    conda activate pymol
    pymol
@@ -744,18 +739,18 @@ Amber软件包主要包括2个部分：Amber Tools和Amber，其中Amber Tools�
 installation: https://ambermd.org/InstFedora.php under user
 
 > error:
->
+> 
 > **/home/gxf/amber20_src/AmberTools/src/arpack/dnaitr.f:658:35:**.......fortran error. needs to downgrade gcc
->
+> 
 > install from https://gcc.gnu.org/mirrors.html
->
+> 
 > > configure:5776: error: Building GCC requires GMP 4.2+, MPFR 2.4.0+ and MPC 0.8.0+.
 > > Try the --with-gmp, --with-mpfr and/or --with-mpc options to specify their locations.  Source code for these libraries can be found at their respective hoslaterting sites as well as at ftp://gcc.gnu.org/pub/gcc/infrastructure/.  See also http://gcc.gnu.org/install/prerequisites.html for additional info.
->
+> 
 > try running `./contrib/download_prerequisites.sh` from the gcc source dir. 
->
+> 
 > remember this is always the way to install a different version of gcc, which seems to overwrite the configuration in /usr/bin....
->
+> 
 > failed here: [link](https://stackoom.com/question/3nN9A/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3-archlinux%E4%B8%AD%E7%9A%84gcc%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-sys-ustat-h-%E6%B2%A1%E6%9C%89%E8%BF%99%E6%A0%B7%E7%9A%84%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95)
 
 from miniconda (which only includes python in conda)
@@ -763,9 +758,9 @@ from miniconda (which only includes python in conda)
 https://docs.conda.io/en/latest/miniconda.html
 
 > I'm not using neither openmpi cuda here. maybe refer to [this](https://jerkwin.github.io/2017/12/26/Amber_2017_%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86_%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%AE%89%E8%A3%85/) a intro to Amber program
->
+> 
 > CentOS: https://www.cnblogs.com/wq242424/p/8857296.html
->
+> 
 > Ubuntu: https://blog.csdn.net/qq_33953882/article/details/113995531
 
 a readme: https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml
@@ -827,27 +822,27 @@ export PATH=$PATH:$HOME/g16
 ```
 
 > debugging experience 2022.2.10
->
+> 
 > 1. below
->
+>    
 >    ```
 >    PGFIO/stdio: No such file or directory
 >    PGFIO-F-/OPEN/unit=11/error code returned by host stdio - 2.
 >     File name = /home/gxf/g16/scratch/Gau-8001.inp
 >     In source file ml0.f, at line number 197
 >    ```
->
+>    
 >    means you need to `mkdir scratch`
->
+> 
 > 2. below
->
+>    
 >    ```shell
 >    ntrex1: Bad file descriptor
 >    Segmentation fault (core dumped)
 >    ```
->
+>    
 >    means you assigned an improper chk file in your .gjf file like 
->
+>    
 >    `%chk=D:\Doctor\my work\undergraduate\TA\2019\0912\ethylene.chk`
 
 [g16 view csdn](https://download.csdn.net/download/lk2069/10777135), buy at 1 yuan [here](https://www.kerwin.cn/dl/detail/lk2069/275737); [win?](https://getintopc.com/softwares/design/gaussview-6-0-16-free-download/)
@@ -906,7 +901,7 @@ Amber/Obabel: use default
 python: `python_exe=/usr/bin/python2.7`
 
 > ImportError: libpython2.7.so.1.0: cannot open shared object file: No such file or directory
->
+> 
 > ```shell
 > sudo apt-get install libpython2.7
 > ```
@@ -1077,12 +1072,12 @@ conda install -c schrodinger pymol-bundle
 and launch it from anaconda prompt. works in Windows...
 
 > - install with downloaded package
->
+>   
 >   ```shell
 >   conda install -y --use-local pymol-2.5.0a0-py38h4cb1252_9.tar.bz2 
 >   #  y: always yes
 >   ```
->
+>   
 >   都是段错误
 
 for python api use
