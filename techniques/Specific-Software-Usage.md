@@ -1744,9 +1744,7 @@ refer to [html](#something-html)
     
     https://gitcode.net/mirrors/stevenjoezhang/live2d-widget/-/tree/master  GitHub镜像。代码两处都要改。
     
-    - 版本一：developer的js
-      
-      components
+    - 版本一：developer的js. components:
       
       - `autoload.js`
         
@@ -1759,6 +1757,10 @@ refer to [html](#something-html)
         - calls the API, your settings, etc.
         
         - modify `live2d_path` if you fork...
+          
+          ```js
+          const live2d_path = "https://fastly.jsdelivr.net/gh/gxf1212/live2d-widget@master/"
+          ```
       
       - `waifu.css`
         
