@@ -1782,7 +1782,7 @@ refer to [html](#something-html)
 
 14. https://blog.csdn.net/weixin_44897405/article/details/103214635
 
-    这个东西叫做：live2d看板娘。https://github.com/stevenjoezhang/live2d-widget
+    这个东西叫做：live2d看板娘。https://github.com/stevenjoezhang/live2d-widget. I've also forked it.
 
     https://gitcode.net/mirrors/stevenjoezhang/live2d-widget/-/tree/master  GitHub镜像。
 
@@ -1813,10 +1813,10 @@ refer to [html](#something-html)
 
       see more settings in the code
 
-    - L2Dwidget.min.js
+    - 版本二：L2Dwidget.min.js
 
       - 就可以设置大小、位置
-      - cannot find the one in developer’s ...
+      - cannot find the one in developer’s model...
       - 但不能说话。。也不能盯着鼠标，甚至还有点模糊 (not in the unpkg.com one)
 
       ```html
