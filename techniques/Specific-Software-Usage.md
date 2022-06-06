@@ -1761,7 +1761,9 @@ refer to [html](#something-html)
           ```js
           const live2d_path = "https://fastly.jsdelivr.net/gh/gxf1212/live2d-widget@master/"
           ```
-      
+
+          also @master in `index.html`.
+          
       - `waifu.css`
         
         - the style: size, position, ...
