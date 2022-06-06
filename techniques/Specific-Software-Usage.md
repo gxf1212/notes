@@ -1744,22 +1744,6 @@ refer to [html](#something-html)
     
     https://gitcode.net/mirrors/stevenjoezhang/live2d-widget/-/tree/master  GitHub镜像。代码两处都要改。
     
-    参考：
-    
-    > [GitHub - evrstr/live2d-widget-models](https://github.com/evrstr/live2d-widget-models) 给的似乎没用？
-    > 
-    > [教你使用看板娘](https://www.icode9.com/content-4-1173614.html) maybe
-    > 
-    > [Hexo博客添加看板娘 | 陈亮的个人博客](http://blog.itchenliang.club/posts/22350780-f32d-11ea-bb4a-d3e1cbe3d592/#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6) hexo的，方案一
-    > 
-    > [Live2d Demo](https://summerscar.me/live2dDemo/) 调试模型、参数的效果，好慢
-    
-    - 人物有哪些选择？参考7. 提供的
-      
-      ```
-      jsonPath: "https://unpkg.com/live2d-widget-model-shizuku@latest/assets/shizuku.model.json",
-      ```
-    
     - 版本一：developer的js
       
       components
@@ -1776,11 +1760,17 @@ refer to [html](#something-html)
         
         - modify `live2d_path` if you fork...
       
+      - `waifu.css`
+        
+        - the style: size, position, ...
+        
+        - see [我的自定义多交互live2d折腾经历 - c10udlnk - 博客园](https://www.cnblogs.com/c10udlnk/p/14727173.html)
+      
       - `waifu-tips.js`
         
-        - defines basic events (with massages), functions, icons, models
+        - defines basic events (with messages), functions, icons, models
         
-        - modelId?
+        - modelId? models also in api? see 我的自定义....
       
       - `waifu-tips.json`
         
@@ -1794,6 +1784,20 @@ refer to [html](#something-html)
       [看板娘对话自定义](https://dp2px.com/2019/09/19/hexo-live2d/#live2d-%E7%9C%8B%E6%9D%BF%E5%A8%98%E5%AF%B9%E8%AF%9D%E8%87%AA%E5%AE%9A%E4%B9%89)
     
     - 版本二：L2Dwidget.min.js
+      
+      > 人物有哪些选择？参考7. 提供的
+      > 
+      > ```
+      > jsonPath: "https://unpkg.com/live2d-widget-model-shizuku@latest/assets/shizuku.model.json",
+      > ```
+      > 
+      > [GitHub - evrstr/live2d-widget-models](https://github.com/evrstr/live2d-widget-models) 给的似乎没用？
+      > 
+      > [教你使用看板娘](https://www.icode9.com/content-4-1173614.html) maybe
+      > 
+      > [Hexo博客添加看板娘 | 陈亮的个人博客](http://blog.itchenliang.club/posts/22350780-f32d-11ea-bb4a-d3e1cbe3d592/#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6) hexo的，方案一
+      > 
+      > [Live2d Demo](https://summerscar.me/live2dDemo/) 调试模型、参数的效果，好慢
       
       - 就可以设置大小、位置
       - cannot find the one in developer’s model...
@@ -1811,7 +1815,9 @@ refer to [html](#something-html)
         </script>
       ```
 
-15. https://www.codenong.com/cs107071378/          https://notebook.js.org/#/
+15. [docsify 构建文档网站之定制功能（全网最全） | 码农家园](https://www.codenong.com/cs107071378/) 
+    
+    [ETS' NoteBook - By Mr.Wu - 微信公众号：码客趣分享 🌹](https://notebook.js.org/#/)
     
     - 显示pdf？
     
