@@ -965,7 +965,7 @@ hla --> 3[class III]
 3 --> 33[other]
 ```
 
-> - HLA-G: Maternal-fetal tolerance, receptor:NKG2
+> - HLA-G: Maternal-fetal tolerance, receptor: NKG2
 > - HLA-E: NK cell tolerance, receptor: KIR
 > 
 > MIC: MHC class I related gene
@@ -978,7 +978,7 @@ DP/DQ etc. has multiple genes in one locus (基因座). Each α and β have 2 ty
 
 Each gene has exons encoding all needed chains.
 
-> Different! In HLA II, A and B expresses α and β chain, respectively; while there's only an α chain in HLA
+> Different! In HLA II, A and B expresses α and β chain, respectively; while there's only one α chain in HLA
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/6-gene2.png" alt="6-gene2" style="zoom:50%;" />
 
@@ -1029,7 +1029,7 @@ Each gene has exons encoding all needed chains.
 
 MHC class I is presented on the surface of any karyocytes (有核细胞) (except 滋养层细胞).
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/6-mhc1.jpg"  style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/6-mhc2.png"  style="zoom:75%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/6-mhc1.jpg"  style="zoom:30%;" /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/6-mhc2.png"  style="zoom: 67%;" />
 
 <center>left: MHC I; right: MHC II</center>
 
@@ -3504,3 +3504,4 @@ magnetic beads:
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/hw2.jpg" alt="hw2" style="zoom:40%;" />
 
 完结撒花！感谢您的陪伴！
+
