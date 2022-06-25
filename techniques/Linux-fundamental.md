@@ -129,6 +129,15 @@ This is a record of my operations during 折腾ing the system, in order not to f
    sudo fc-cache -fv
    ```
 
+   to use in matplotlib
+
+   ```python
+   import matplotlib
+   matplotlib.get_cachedir()
+   ```
+
+   `rm -rf` it!
+
 2. Linux更改桌面（等）路径
 
    ```
@@ -380,7 +389,25 @@ This is a record of my operations during 折腾ing the system, in order not to f
    sudo apt-get install xpad
    ```
 
-   
+5. wine applications!
+
+   https://github.com/zq1997/deepin-wine
+
+   - 首次使用需要添加仓库：
+
+     ```shell
+     wget -O- https://deepin-wine.i-m.dev/setup.sh | sh
+     ```
+
+   - 安装
+
+     ```shell
+     sudo apt-get install com.qq.weixin.deepin
+     ```
+
+   - 应用图标需要注销重登录后才会出现
+
+6. 
 
 ### Operation on files and directory
 
@@ -1096,6 +1123,7 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
   > ```shell
   > sudo apt-get install snap
   > sudo snap install --classic code
+  > sudo snap r codium
   > ```
   >
   > https://www.typora.io/releases/all
@@ -1939,7 +1967,17 @@ Though I only need to re-install programs in gxf (like gmx), a sea of permission
 
    解决：设置中打开passwords and keys，或cmd输入`seahorse`、返回，删掉关于Chrome的所有login的keyrings并无用？或者设一个空的密码。但是每次开Chrome仍会自动创建一个？？
 
-   Chrome 无法自动填充密码：点击右上角头像 - 管理用户 - 移除此用户 - 之后再登录就好楼
+   Chrome 无法自动填充密码：点击右上角头像 - 管理用户 - 移除此用户 - 之后再登录就好喽
+
+   later gives the same problem upon startup but seahorse will not respond (how to open without cmd? pwd and keys does not work now)
+
+   https://wiki.archlinux.org/title/GNOME/Keyring#Passwords_are_not_remembered
+
+   deleting Ubuntu keyring works
+
+   ```shell
+   rm ~/.local/share/keyrings/*
+   ```
 
 2. onedrive client：重装没用，但留下安装folder以便卸载
 

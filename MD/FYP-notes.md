@@ -136,6 +136,8 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 
 ### General
 
+> - refer to [this](https://pengpengyang94.github.io/2020/05/vmd%E4%BD%BF%E7%94%A8%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E/) to make transparent surface+cartoon like in papers
+
 1. run in terminal
    
    ```shell
@@ -219,6 +221,10 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 
 11. In the main menu, press the Save State button found in the File menu; this will bring up a browser window where you can enter a file name in which to save your work. 
 
+11. background color: Graphics--Colors--Categories (display)--background
+
+11. Do not use Display--perspective (透视), choose orthographic projection (正射投影)
+
 11. 
 
 12. To know about your system, like checking the number of atoms, just load it into vmd (also when executing scripts) and see the cmd.
@@ -255,6 +261,18 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 4. Graphics--Representations--Drawing Method, Beta: we may not use that field. So we can replace it with some properties we computed and let VMD color atoms according to it
 
 5. 
+
+## UCSF Chimera
+
+- https://www.researchgate.net/post/How-to-re-number-the-chains-in-PDB-file
+
+  select, Tools--structure editing--the last one
+
+- favorites--side view. 显示/隐藏区域：通过调整蓝框中的两条黄线，显示或隐藏蛋白质的一部分区域. Just like rolling mouse wheel in pymol
+
+- 
+
+
 
 ## shell
 
@@ -2800,6 +2818,9 @@ cutoff                   9.0
 pairlistdist            10.0
 ```
 
+> - 频繁的输出限制了性能。最重要的是，outputEnergies（在 NAMD 2.x 中默认为 1）应该设置得更高。
+> - Because an unnecessarily high damping constant can significantly slow the system’s dynamics, one should always find the minimum langevinDamping coefficient sufficient to maintain the temperature. A value of 1.0 is often a good starting point.
+
 #### alch parameters
 
 recommend
@@ -4023,3 +4044,18 @@ find . -name "*" -type f -size 0c | xargs -n 1 rm -f
 > 现在docking的site调整好了
 
 对接要多给点空间啊！
+
+
+
+## AlphaFold2 modeling
+
+https://github.com/sokrypton/ColabFold
+
+22.6.23 try
+
+may just use AlphaFold2.ipynb to build a (complex) model..
+
+using GPU in colab
+
+20min for each ~944 rdrp (alone) model, more for complexes?
+

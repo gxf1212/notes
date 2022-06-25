@@ -192,8 +192,10 @@ ssh gxf@xxxxx.xxx.xx:port
 手机上APP可以看客户端状态
 
 > issues
-> 
+>
 > 花生壳青春版能用多久？一年，还是因为我快毕业了？
+
+花生壳下线，用`sudo phddns start`
 
 ### ToDesk
 
@@ -250,11 +252,23 @@ https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect�
 
 ## Supercomputers
 
-### ssh and scp
+### tools
 
-under Win, Xshell+Xftp look very good.
+#### ssh and scp
 
-### slurt
+under Win, Xshell+Xftp look very good. Dragging and clicking a visualized folder will be effcient
+
+finalshell does not look so pretty though we can just use it. cannot update
+
+#### electerm
+
+网站：https://electerm.html5beta.com/
+
+functions covers what is in Xshell and Xftp, but kind of small font...but a great tool!
+
+### scheduling system
+
+#### slurts
 
 read the pdf from hpc.xjtu.edu.cn for more
 
@@ -309,10 +323,12 @@ date > log
 ~
 ```
 
-### PBS
+#### PBS
 
 - basics https://www.jianshu.com/p/2f6c799ca147
-  -
+  - `qstat`
+  - `qsub`
+  - `qdel`
 - Environment Variable https://pubs.opengroup.org/onlinepubs/009696699/utilities/qsub.html
   - like `$PBS_O_WORKDIR`
 - 
@@ -348,7 +364,7 @@ date > log
    > 
    > 引申出主题的管理方式：和系统有关。。
    
-   No! finally, vscode theme问题：biosyntax和gmxlang要用它们自己的theme
+   No! finally, vscode theme问题：biosyntax和gmxhelper要用它们自己的theme
    
    solution: disable掉他俩, 然后settings（ctrl+,）里面搜索theme
 
@@ -548,6 +564,39 @@ failed, remove this env...
    > conda install matplotlib==2.0.0 networkx==1.11 pandas==0.20.3 scikit-learn==0.18.2 scipy==0.18.1 numpy==1.13.1
    > ```
 
+## bit by bit programming
+
+一点一滴
+
+### Python 
+
+- python嵌套列表赋值，想更改其中一个元素但是一整列的元素都被更改,是什么原因呢，应该怎么修改？ - Demon的回答 - 知乎
+
+  https://www.zhihu.com/question/355374988/answer/891028270
+
+  always use for loop rather than multiplication...
+
+### LaTeX
+
+notes from Windows
+
+可以在 C:\texlive\2019\texmf-dist\fonts\opentype（你看你的安装目录）下找一个合适的位置，建一个文件夹，把思源字体拷进去，然后在命令行中输入，fc-cache -fv
+
+建一个Libertinus文件夹，放进去
+
+```latex
+\mathop{\arg\min}\limits_{\alpha} % \limits must follow an operator
+\atop %下标换行
+% not a good idea
+sum_{\substack{\text { nonbonded } \\ \text { pairsi,j }}
+```
+
+http://www.noobyard.com/article/p-nymwcdnd-nx.html  插入Python代码升级方案（类似jupyter notebook的配色？）
+
+https://blog.csdn.net/u012428169/article/details/80558331 没有进行特殊命令处理，但是显示的图片和表格标号跟它们在LaTeX编辑环境中放置的章节有关，这并不是一般文章要求的。
+
+https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography not compatible with author-year
+
 ## ThunderBird
 
 xjtu email: just login, default configuration
@@ -557,24 +606,7 @@ xjtu email: just login, default configuration
 1. specify contacts 联系人, signature
 2. plugin: [FileLink Provider for Dropbox](https://addons.thunderbird.net/zh-CN/thunderbird/addon/filelink-provider-for-dropbox/?src=search)
 
-## LaTeX
 
-notes from Windows
-
-可以在 C:\texlive\2019\texmf-dist\fonts\opentype（你看你的安装目录）下找一个合适的位置，建一个文件夹，把思源字体拷进去，然后在命令行中输入，fc-cache -fv
-
-建一个Libertinus文件夹，放进去
-
-```
-\mathop{\arg\min}\limits_{\alpha} % \limits must follow an operator
-\atop %下标换行
-```
-
-http://www.noobyard.com/article/p-nymwcdnd-nx.html  插入Python代码升级方案（类似jupyter notebook的配色？）
-
-https://blog.csdn.net/u012428169/article/details/80558331 没有进行特殊命令处理，但是显示的图片和表格标号跟它们在LaTeX编辑环境中放置的章节有关，这并不是一般文章要求的。
-
-https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography not compatible with author-year
 
 # cloud backup and sync for files in all platforms
 
@@ -748,7 +780,7 @@ and https://www.moerats.com/archives/740/
   
   ```shell
   onedrive --display-config # check
-  gedit /home/moonlight/.config/onedrive/config
+  gedit ~/.config/onedrive/config
   ```
   
   copy default from [here](https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#the-default-configuration-file-is-listed-below)
@@ -784,7 +816,7 @@ and https://www.moerats.com/archives/740/
   ~/.config # bashrc, conda? typora! p
   ```
 
-- sync
+- sync, usually we upload only
   
   ```shell
   onedrive --synchronize 
@@ -792,14 +824,17 @@ and https://www.moerats.com/archives/740/
   onedrive --synchronize --download-only
   ```
   
-  选择性同步
-  如果你不想同步整个网盘，而是某个文件夹，比如MOERATS，使用命令：
+  选择性同步：如果你不想同步整个网盘，而是某个文件夹，比如MOERATS，使用命令：
   
   ```shell
   #使用前提是OneDrive网盘和/root/OneDrive文件夹都有这个文件夹 # ?
   onedrive --synchronize --single-directory MOERATS
   ```
-
+  
+  > [!WARNING]
+  >
+  > 备份的时候用了resync，没下到本地的大轨迹丢了，连个影子都回不来了
+  
 - automatic sync
   
   ```shell
@@ -1333,6 +1368,14 @@ anaconda环境信息同步？
    限时开放至 2022 年 08 月 31 日，在限时开放期结束前，我们将更新相关产品策略。
    
    git actions for gitee? https://gyx8899.gitbook.io/blog/share/syncgithubtogitee
+   
+2. 2022.6 update: no more gitee...
+
+   GitHub虽然自动部署，还是需要清理缓存才能看的
+
+   cdn.jsdelivr.net/npm: does not work well for js scripts? but works fine for figures. different format from unpkg.com
+
+3. 
 
 ## Build a note site with docsify
 
@@ -1763,7 +1806,7 @@ refer to [html](#something-html)
           ```
 
           also @master in `index.html`.
-          
+        
       - `waifu.css`
         
         - the style: size, position, ...
@@ -2229,4 +2272,17 @@ other
 
 re
 
-# Experiences on video/subtitles collection
+
+
+## other
+
+AI chatbots
+
+https://www.cleverbot.com/
+https://myanima.ai/app/
+https://my.replika.ai/
+https://simsimi.com/chat
+
+
+
+# Experiences on video/subtitles collectionone

@@ -4,7 +4,7 @@ This page is all about software installing, both for system and project environm
 
 Mainly recorded while in NUS. The installation of DL environment, Gromacs, and plans are all in `Linux fundamental (Installation and softwares)`.
 
-## remote control
+## remote control and ssh
 
 ### tight vnc
 
@@ -73,7 +73,21 @@ elif [ "$os_name"== 'Fedora' ]; then
 
 see software usage!
 
+### ssh tools
+
+```shell
+sudo rm -r /usr/lib/FinalShell
+
+sudo snap install termius-app
+```
+
+
+
+
+
 ## break the wall
+
+### basics
 
 [*PN和v2ray、ssr、加速器有什么区别？](https://shutupandshowpages.com/index.php/2021/07/06/*PN%E5%92%8Cv2ray%E3%80%81ssr%E3%80%81%E5%8A%A0%E9%80%9F%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/)
 
@@ -81,7 +95,21 @@ see software usage!
 
 总之*PN更安全；v2ray比ssr可靠、难搞
 
-https://sites.google.com/view/honven all kinds of recomm
+https://sites.google.com/view/honven all kinds of recommendations
+
+- 【PAC模式】:也就是智能分流模式
+
+### experiences
+
+- 22.6.24
+
+  all sites (i.e. the airport, coursera, etc. Eng wiki is accessible today! so anycast is ok) are reachable on the mobile phone using both xjtulib wifi or mobile data. 
+
+  the most relevant factor is the selection of your node, not the client program. maybe due to firewalls, ....
+
+- 
+
+
 
 ### airport: sgi.anycast.gay
 
@@ -208,6 +236,17 @@ It's fine on Windows; but x86 version cannot be installed here! And x64 shows �
 [this version](http://download.sangfor.com.cn/download/product/sslvpn/pkg/linux_01/EasyConnect_x64.deb) does not report this problem. stable!
 
 > ZJU的R*PN：https://www.coolspring8.com/p/rvpn-easyconnect/. see his GitHub https://github.com/Hagb/docker-easyconnect
+
+## others for work
+
+### TIM in Linux (wine)
+
+https://www.jianshu.com/p/f38187cdda0f
+
+1. QQ个人文件夹中的文件被占用*，您可以尝试以下操作:*
+
+   如果刚刚退出相同QQ帐号，请等待几秒后重试登录。
+   QQ退出时出现异常无法正常退出，请使用任务管理器结束QQ.exe后再尝试登录
 
 ## Docking
 
