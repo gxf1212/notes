@@ -1361,7 +1361,7 @@ anaconda环境信息同步？
 
    https://blog.tomyail.com/using-git-submodule-lock-project/ 如果需要保持子仓库不变。。
 
-   https://blog.csdn.net/inthat/article/details/108416238 删除submodule
+   https://blog.csdn.net/guotianqing/article/details/82391665 删除submodule
 
 10. remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
 
