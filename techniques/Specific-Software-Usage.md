@@ -1351,7 +1351,13 @@ anaconda环境信息同步？
    git pull origin master --allow-unrelated-histories
    ```
 
-9. 
+9. git submodule
+
+   ```shell
+   git submodule add xxx.git
+   ```
+
+10. 
 
 ### exploration
 
@@ -1374,6 +1380,8 @@ anaconda环境信息同步？
    GitHub虽然自动部署，还是需要清理缓存才能看的
 
    cdn.jsdelivr.net/npm: does not work well for js scripts? but works fine for figures. different format from unpkg.com
+
+3. 
 
 3. 
 
