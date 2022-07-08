@@ -1245,7 +1245,7 @@ anaconda环境信息同步？
 
 # Applications for fun
 
-## Git
+## Git!
 
 ### in cmd
 
@@ -1310,7 +1310,7 @@ anaconda环境信息同步？
 
 5. 对于本地的项目中修改不做保存操作（或代码改崩），可以用到Git pull的强制覆盖
    
-   ```
+   ```shell
    git reset --hard origin/master
    ```
    
@@ -1359,7 +1359,14 @@ anaconda环境信息同步？
 
    但是提交父仓库时还不能直接更新子仓库
 
-10. 
+10. remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+
+    ```shell
+    git clone xxx.git
+    git remote set-url origin https://<your token>@<your username>/<your repo >.git
+    ```
+
+11. 
 
 ### exploration
 
