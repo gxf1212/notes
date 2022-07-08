@@ -1361,6 +1361,8 @@ anaconda环境信息同步？
 
    https://blog.tomyail.com/using-git-submodule-lock-project/ 如果需要保持子仓库不变。。
 
+   https://blog.csdn.net/inthat/article/details/108416238 删除submodule
+
 10. remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
 
     ```shell
@@ -1836,11 +1838,15 @@ refer to [html](#something-html)
         
         - defines basic events (with messages), functions, icons, models
         - model Id? models also in api? see 我的自定义....
-        - 检测用户活动状态：不活动时自动说的话。。
-      
+        - 说话
+          - 检测用户活动状态：不活动时自动说的话。。
+        
       - `waifu-tips.json`
         
         - provides sentences for icons/events (like clicking)?
+        - 说话
+          - "mouseover": [{"selector": "#live2d"...
+          - 
       
       experiences
       
@@ -1848,7 +1854,7 @@ refer to [html](#something-html)
       - 看板娘L2Dwidget盯着鼠标移动（好像已经有了see more settings in the code
       
       [看板娘对话自定义](https://dp2px.com/2019/09/19/hexo-live2d/#live2d-%E7%9C%8B%E6%9D%BF%E5%A8%98%E5%AF%B9%E8%AF%9D%E8%87%AA%E5%AE%9A%E4%B9%89)
-    
+      
     - 版本二：L2Dwidget.min.js
       
       > 人物有哪些选择？参考7. 提供的
@@ -1880,7 +1886,7 @@ refer to [html](#something-html)
           });
         </script>
       ```
-
+    
 15. [docsify 构建文档网站之定制功能（全网最全） | 码农家园](https://www.codenong.com/cs107071378/) 
     
     [ETS' NoteBook - By Mr.Wu - 微信公众号：码客趣分享 🌹](https://notebook.js.org/#/)
