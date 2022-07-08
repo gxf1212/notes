@@ -1357,6 +1357,8 @@ anaconda环境信息同步？
    git submodule add xxx.git
    ```
 
+   但是提交父仓库时还不能直接更新子仓库
+
 10. 
 
 ### exploration
