@@ -18,7 +18,7 @@ go to [onedrive](#Linux)
 
 Connection, *pn, remote control usage
 
-configure *PN: see [prepare-for-the-computer](/techniques/prepare-for-the-computer.md/#break-the-wall)
+configure *PN: see [prepare-for-the-computer](/techniques/Prepare-for-the-computer#break-the-wall)
 
 ### Common
 
@@ -1442,6 +1442,7 @@ a lot of fancy features: https://zxiaosi.cn/archives/cd1d42d1.html
 <!-- comment here -->
 <span> 标签被用来组合文档中的行内元素 </span>
 <hr> 标签定义 HTML 页面中的主题变化(比如话题的转移),并显示为一条水平线。
+<a 
 ```
 
 1. `<a>` 标签的 target 属性规定在何处打开链接文档 https://www.w3school.com.cn/tags/att_a_target.asp
