@@ -3665,8 +3665,9 @@ notes: cgenff_charmm2gmx_py3_nx2.py
 1. get cgenff files for gmx
 
    ```shell
-   l1=atp
-   l2=remtp
+   # l1=atp
+   l1=remtp
+   l2=rempty
    conda activate charmm2gmx
    charmm_path=~/gromacs-2021.5-gpu/share/gromacs/top/charmm36-jul2021.ff
    python cgenff_charmm2gmx_py3_nx2.py LIG ${l1}.mol2 ${l1}.str ${charmm_path}
@@ -3677,14 +3678,14 @@ notes: cgenff_charmm2gmx_py3_nx2.py
    
    charmm2gmx generates 4 files for each ligand: .prm, .itp, .top, _ini.pdb
    
-   > The molecule topology has been written to lig.itp. Additional parameters needed by the molecule are written to lig.prm, which needs to be included in the system .top
+   > The molecule topology has been written to lig.itp. Additional parameters needed by the molecule are written to lig.prm. They are included in the system .top
    
 2.  use pmx to merge the ligands
 
    ```shell
    conda activate AmberTools21
-   pmx atomMapping -i1 ${l1}.pdb -i2 ${l2}.pdb -o1 pairs1.dat
-   pmx ligandHybrid -i1 ${l1}.pdb -i2 ${l2}.pdb -itp1 ${l1}.itp -itp2 ${l2}.itp -pairs pairs1.dat 
+   pmx atomMapping -i1 ${l1}_ini.pdb -i2 ${l2}_ini.pdb -o1 pairs1.dat
+   pmx ligandHybrid -i1 ${l1}_ini.pdb -i2 ${l2}_ini.pdb -itp1 ${l1}.itp -itp2 ${l2}.itp -pairs pairs1.dat 
    
    
    ```
@@ -3700,7 +3701,7 @@ notes: cgenff_charmm2gmx_py3_nx2.py
 > not using or failed
 > ```shell
 >python ./ref/psf2itp.py /home/moonlight/Desktop/work/projects/undergraduate/FYP/FEP/remtp-atp/build-pmx/cgenff/atp atp.psf
-> gmx pdb2gmx -f ${l1}.pdb -o ${l1}_cg.pdb
+> gmx pdb2gmx -f ${l1}_ini.pdb -o ${l1}_cg.pdb
 > ```
 > 
 > s

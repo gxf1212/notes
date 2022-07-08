@@ -1817,7 +1817,7 @@ refer to [html](#something-html)
         
         - defines basic events (with messages), functions, icons, models
         
-        - modelId? models also in api? see 我的自定义....
+        - model Id? models also in api? see 我的自定义....
       
       - `waifu-tips.json`
         
