@@ -18,7 +18,7 @@ go to [onedrive](#Linux)
 
 Connection, *pn, remote control usage
 
-configure *PN: see prepare-for-the-computer
+configure *PN: see [prepare-for-the-computer](/techniques/prepare-for-the-computer.md/#break-the-wall)
 
 ### Common
 
@@ -1359,11 +1359,13 @@ anaconda环境信息同步？
 
    但是提交父仓库时还不能直接更新子仓库
 
+   https://blog.tomyail.com/using-git-submodule-lock-project/ 如果需要保持子仓库不变。。
+
 10. remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
 
     ```shell
     git clone xxx.git
-    git remote set-url origin https://<your token>@<your username>/<your repo >.git
+    git remote set-url origin https://<your token>@<your username>/<your repo name>.git
     ```
 
 11. 
