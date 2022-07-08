@@ -1824,8 +1824,8 @@ refer to [html](#something-html)
       - `waifu-tips.js`
         
         - defines basic events (with messages), functions, icons, models
-        
         - model Id? models also in api? see 我的自定义....
+        - 检测用户活动状态：不活动时自动说的话。。
       
       - `waifu-tips.json`
         
