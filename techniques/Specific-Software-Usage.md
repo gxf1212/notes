@@ -1357,13 +1357,31 @@ anaconda环境信息同步？
    git submodule add xxx.git
    ```
 
-   但是提交父仓库时还不能直接更新子仓库
+   但是提交父仓库时还不能直接更新子仓库. when executing `git commit ...`
+
+   ```
+   Changes not staged for commit:
+     (use "git add <file>..." to update what will be committed)
+     (use "git restore <file>..." to discard changes in working directory)
+     (commit or discard the untracked or modified content in submodules)
+   	modified:   utils/live2d-widget (modified content)
+   ```
+
+   and only pushes the father repo
 
    https://blog.tomyail.com/using-git-submodule-lock-project/ 如果需要保持子仓库不变。。
 
-   https://blog.csdn.net/HandsomeHong/article/details/124173820 删除submodule
+   https://blog.csdn.net/HandsomeHong/article/details/124173820 删除submodule（全套操作）
 
-   https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97
+   直接更新子仓库, [reference](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97) but 递归提交子模块 `git push origin -u master --recurse-submodules=on-demand` failed
+
+   ```shell
+   git submodule foreach git add .
+   git submodule foreach git commit -m 'update threebody quotes'
+   git submodule foreach git push -u origin master
+   ```
+
+   it might work, strange but fine...we can also enter the submodule and push it.
 
 10. remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
 
@@ -1830,7 +1848,7 @@ refer to [html](#something-html)
           const live2d_path = "https://fastly.jsdelivr.net/gh/gxf1212/live2d-widget@master/"
           ```
 
-          also @master in `index.html`.
+          also @master in `index.html`. just modify them two when changing the source.
         
       - `waifu.css`
         
