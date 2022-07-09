@@ -1,6 +1,6 @@
 # UROPS: Running programs
 
-Specific protocol and experiences for the project I did in NUS, Jan~May 2021. Something a little more about Autodock and Gromacs basics will be temporarily added.
+Specific protocol and experiences for the project I did in NUS, Jan~May 2021. Something a little more about Autodock and Gromacs basics will be temporarily added. As I don't have 中文 input method in Singapore (now I do..), most of the content is in English.
 
 UROPS: undergraduate research opportunity project in science. 
 
