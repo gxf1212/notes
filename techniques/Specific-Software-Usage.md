@@ -1363,6 +1363,8 @@ anaconda环境信息同步？
 
    https://blog.csdn.net/HandsomeHong/article/details/124173820 删除submodule
 
+   https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97
+
 10. remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
 
     ```shell
