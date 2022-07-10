@@ -6,7 +6,7 @@ This site shows some of my notes on Linux \& softwares, molecular dynamics simul
 
 I'm just too lazy to make things clear, so these are just what I wrote when I learned. Maybe it's mainly for synchronizing notes 2333...
 
-[Click to see something about me](https://gxf1212.github.io/notes/#/utils/about)
+<a href="https://gxf1212.github.io/notes/#/utils/about" target="_self">Click to see something about me</a>
 
 My Bilibili channel: [东山月光下](https://space.bilibili.com/441196634). From time to time, I will share complete courses, specialized mini-lecture, animated demonstrations and cutting-edge lectures in macromolecular structure study, molecular dynamics simulation/statistical thermodynamics, oncology and immunology. English-Chinese dual subtitles are added for videos from YouTube. Please subscribe and triple click (一键三连)! Representatives:
 

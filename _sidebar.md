@@ -9,7 +9,7 @@
 - [课程学习类](/course/README.md)
   - [高年级生物课](/course/advanced-biology.md)
     - [结构生物学笔记](/course/Advanced-biology/structural-biology/sb-outline.md)
-    - [分子免疫学笔记（未完）](/course/Advanced-biology/molecular-immunology/molecular-immunology.md)
+    - [分子免疫学笔记](/course/Advanced-biology/molecular-immunology/molecular-immunology.md)
     - [生物信息学笔记（部分）](/course/Advanced-biology/bioinformatics/bioinformatics.md)
   - [物理下的生物](/course/physics-biophysics.md)
     - [分子生物物理学（NUS）](/course/Physics-biophysics/molecular-biophysics-NUS/LSM-3243.md)

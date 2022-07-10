@@ -564,11 +564,11 @@ failed, remove this env...
    > conda install matplotlib==2.0.0 networkx==1.11 pandas==0.20.3 scikit-learn==0.18.2 scipy==0.18.1 numpy==1.13.1
    > ```
 
-## bit by bit programming
+# bit by bit programming
 
 一点一滴
 
-### Python 
+## Python 
 
 - python嵌套列表赋值，想更改其中一个元素但是一整列的元素都被更改,是什么原因呢，应该怎么修改？ - Demon的回答 - 知乎
 
@@ -576,26 +576,50 @@ failed, remove this env...
 
   always use for loop rather than multiplication...
 
-### LaTeX
+## LaTeX
 
 notes from Windows
 
-可以在 C:\texlive\2019\texmf-dist\fonts\opentype（你看你的安装目录）下找一个合适的位置，建一个文件夹，把思源字体拷进去，然后在命令行中输入，fc-cache -fv
+### font
 
-建一个Libertinus文件夹，放进去
+1. installing font
 
-```latex
-\mathop{\arg\min}\limits_{\alpha} % \limits must follow an operator
-\atop %下标换行
-% not a good idea
-sum_{\substack{\text { nonbonded } \\ \text { pairsi,j }}
-```
+   可以在 C:\texlive\2019\texmf-dist\fonts\opentype（你看你的安装目录）下找一个合适的位置，建一个文件夹，把思源字体拷进去，然后在命令行中输入，`fc-cache -fv`
 
-http://www.noobyard.com/article/p-nymwcdnd-nx.html  插入Python代码升级方案（类似jupyter notebook的配色？）
+   建一个Libertinus文件夹，放进去
 
-https://blog.csdn.net/u012428169/article/details/80558331 没有进行特殊命令处理，但是显示的图片和表格标号跟它们在LaTeX编辑环境中放置的章节有关，这并不是一般文章要求的。
+2. 
 
-https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography not compatible with author-year
+### math
+
+1. subscript newline
+
+   ```latex
+   \mathop{\arg\min}\limits_{\alpha} % \limits must follow an operator
+   \atop %下标换行
+   % not a good idea
+   sum_{\substack{\text { nonbonded } \\ \text { pairsi,j }}
+   ```
+
+2. 
+
+### bibliography
+
+1. bst file
+   - bst文件介绍 https://liwt31.github.io/2021/03/02/bst/ 
+   - 详细语法 https://www.latexstudio.net/archives/11052
+   - `latex makebst`: [the most detailed guide](https://kingdomhe.wordpress.com/2017/12/02/%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89-bibtex-%E7%9A%84%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E6%A0%BC%E5%BC%8F-bst-%E6%96%87%E4%BB%B6-how-to-generate-a-customized-bst-file/)
+     - make, not modify
+     - dbj to bst: `latex *.dbj`
+2. 
+
+
+
+### 杂碎
+
+- http://www.noobyard.com/article/p-nymwcdnd-nx.html  插入Python代码升级方案（类似jupyter notebook的配色？）
+- https://blog.csdn.net/u012428169/article/details/80558331 没有进行特殊命令处理，但是显示的图片和表格标号跟它们在LaTeX编辑环境中放置的章节有关，这并不是一般文章要求的。
+- https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography not compatible with author-year
 
 ## ThunderBird
 
