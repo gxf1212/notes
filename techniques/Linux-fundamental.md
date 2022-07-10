@@ -104,39 +104,36 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
 1. 字体缺失（WPS等）
 
-   add into system font directory https://zhuanlan.zhihu.com/p/31848590
+   - install Windows fonts https://itsfoss.com/install-microsoft-fonts-ubuntu/ useful?
 
-   ```
-   sudo cp * /usr/share/fonts/wps-office
-   ```
+   - emm
 
-   Windows：`C:\Windows\fonts`
+     ```shell
+     fc-list # 查看当前支持的字体
+     ```
 
-   查看当前支持的字体
+   - another way is to copy from Windows: `C:\Windows\fonts`. copy your fonts into
 
-   ```shell
-   fc-list
-   ```
+     ```shell
+     sudo cp *.otf /usr/share/fonts/opentype
+     sudo cp *.ttf /usr/share/fonts/truetype
+     sudo apt install xfonts-utils
+     mkfontscale
+     mkfontdir
+     sudo fc-cache -fv
+     ```
 
-   in `/usr/share/fonts/`. copy your font into and 
+     [add into system font directory (global)](https://zhuanlan.zhihu.com/p/31848590). You can check in WPS and LibreOffice.
 
-   ```shell
-   sudo cp *.otf /usr/share/fonts/opentype
-   sudo cp *.ttf /usr/share/fonts/truetype
-   sudo apt install xfonts-utils
-   mkfontscale
-   mkfontdir
-   sudo fc-cache -fv
-   ```
+     it seems that we don't have to copy into the two folders, instead, any folder under `/usr/share/fonts/`? (not verifed)
 
-   to use in matplotlib
+   - or only for WPS? (not recommended)
 
-   ```python
-   import matplotlib
-   matplotlib.get_cachedir()
-   ```
+     ```shell
+     sudo cp * /usr/share/fonts/wps-office
+     ```
 
-   `rm -rf` it!
+   - to use in matplotlib: see [here](/techniques/Prepare-for-the-computer#Python) for details
 
 2. Linux更改桌面（等）路径
 

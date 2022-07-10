@@ -378,10 +378,6 @@ date > log
 
 2. [关闭代码风格检查](https://blog.csdn.net/u013088062/article/details/50001189)
 
-3. matplotlib fonts. just copy .ttf files to ~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf
-   
-   https://www.pythonheidong.com/blog/article/498305/f571ce16edc768ad1839/ 
-
 4. 实际上没有那么快自动保存，还是需要ctrl+s。。
 
 ## conda & python cmd
@@ -498,7 +494,7 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   
   https://blog.csdn.net/weixin_41712499/article/details/105430471  it's just the problem with pat
 
-- a
+- 
 
 > icon path: `xxx/anaconda/lib/python3.7/site-packages/anaconda_navigator/static/images/anaconda-icon-256x256.png`
 
@@ -539,7 +535,7 @@ failed, remove this env...
 
 2. 代码提示功能：在base下（default配置！）
    
-   ```
+   ```shell
    pip install jupyter_contrib_nbextensions
    jupyter contrib nbextension install --user
    pip install jupyter_nbextensions_configurator
@@ -550,7 +546,7 @@ failed, remove this env...
 
 3. Add the following code on top of your jupyter notebook:
    
-   ```
+   ```latex
    $$\require{mhchem}$$  
    ```
    
@@ -564,6 +560,19 @@ failed, remove this env...
    > conda install matplotlib==2.0.0 networkx==1.11 pandas==0.20.3 scikit-learn==0.18.2 scipy==0.18.1 numpy==1.13.1
    > ```
 
+
+
+## ThunderBird
+
+xjtu email: just login, default configuration
+
+> https://zhuanlan.zhihu.com/p/152548000
+
+1. specify contacts 联系人, signature
+2. plugin: [FileLink Provider for Dropbox](https://addons.thunderbird.net/zh-CN/thunderbird/addon/filelink-provider-for-dropbox/?src=search), Send later
+
+
+
 # bit by bit programming
 
 一点一滴
@@ -575,6 +584,70 @@ failed, remove this env...
   https://www.zhihu.com/question/355374988/answer/891028270
 
   always use for loop rather than multiplication...
+  
+- 
+
+### matplotlib fonts
+
+-  just copy .ttf files to ~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf
+
+  https://blog.csdn.net/qq_32442683/article/details/108298763
+
+  - [use .ttf file](https://www.cnblogs.com/arkenstone/p/6411055.html)
+
+    ```python
+    from matplotlib.font_manager import FontProperties
+    chinese_font = FontProperties(fname='/usr/share/fonts/MyFonts/YaHei.Consolas.1.11b.ttf')
+    ...
+    plt.text(x, y, display, fontsize=12, fontproperties=chinese_font)
+    ```
+
+  - [check usable Chinese font family in matplotlib](https://www.cnblogs.com/arkenstone/p/6411055.html)
+
+    ```python
+    from matplotlib.font_manager import FontManager
+    import subprocess
+    
+    fm = FontManager()
+    mat_fonts = set(f.name for f in fm.ttflist)
+    
+    output = subprocess.check_output(
+        'fc-list :lang=zh -f "%{family}\n"', shell=True)
+    output = output.decode('utf-8')
+    # print '*' * 10, '系统可用的中文字体', '*' * 10
+    # print output
+    zh_fonts = set(f.split(',', 1)[0] for f in output.split('\n'))
+    available = mat_fonts & zh_fonts
+    
+    print('*' * 10, '可用的字体', '*' * 10)
+    for f in available:
+        print(f)
+    ```
+
+    copy the results into `font_la = {'family': 'dengxian'}`. capitalization does not matter.
+
+  - after installing font for the system (see [here](/techniques/Linux-fundamental#system-settings))
+
+    ```python
+    import matplotlib
+    matplotlib.get_cachedir()
+    ```
+
+    `rm -rf` it! then just use the `available` fonts above. No need to configure as other blogs did.
+
+    [after removing cache....](https://blog.csdn.net/u014712482/article/details/85802563)here's how we can check name for ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190104211934391.jpg)
+
+    ```python
+    import matplotlib as plt
+    import matplotlib.font_manager as font_manager
+    fontpath = '/usr/share/fonts/truetype/msttcorefonts/simkai.ttf'
+    prop = font_manager.FontProperties(fname=fontpath)
+    print(prop.get_name())
+    ```
+
+    
+
+  - 
 
 ## LaTeX
 
@@ -613,24 +686,15 @@ notes from Windows
      - dbj to bst: `latex *.dbj`
 2. 
 
-
-
-### 杂碎
+### fragments
 
 - http://www.noobyard.com/article/p-nymwcdnd-nx.html  插入Python代码升级方案（类似jupyter notebook的配色？）
 - https://blog.csdn.net/u012428169/article/details/80558331 没有进行特殊命令处理，但是显示的图片和表格标号跟它们在LaTeX编辑环境中放置的章节有关，这并不是一般文章要求的。
 - https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography not compatible with author-year
 
-## ThunderBird
+## R language
 
-xjtu email: just login, default configuration
-
-> https://zhuanlan.zhihu.com/p/152548000
-
-1. specify contacts 联系人, signature
-2. plugin: [FileLink Provider for Dropbox](https://addons.thunderbird.net/zh-CN/thunderbird/addon/filelink-provider-for-dropbox/?src=search)
-
-
+to be continue...
 
 # cloud backup and sync for files in all platforms
 
