@@ -684,7 +684,8 @@ notes from Windows
    - `latex makebst`: [the most detailed guide](https://kingdomhe.wordpress.com/2017/12/02/%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89-bibtex-%E7%9A%84%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E6%A0%BC%E5%BC%8F-bst-%E6%96%87%E4%BB%B6-how-to-generate-a-customized-bst-file/)
      - make, not modify
      - dbj to bst: `latex *.dbj`
-2. 
+2. comment in .bib file: `//` or `%`
+2. to prevent websites from appearing, you have to comment out both `url` and `doi`
 
 ### fragments
 
@@ -2139,7 +2140,7 @@ more plugins: https://docsify.js.org/#/awesome?id=plugins，https://docsify.js.o
   
   https://gitee.com/yanglbme/gitee-pages-action
   
-  不想在GitHub上弄一个同样的仓库。。先不弄了
+  不想在GitHub上弄一个同样的仓库。。先不弄了（22年夏天更：已经全转GitHub了）
   
   https://bibichuan.gitee.io/posts/5cbf8e2a.html
 
@@ -2238,18 +2239,19 @@ Google提供的生成器
 > 
 > how to avoid popping out a window? write html...
 
-#### other
+#### other notes
 
 ##### CDN
 
 内容分发网络 (Content delivery network) 是指一种透过互联网互相连接的电脑网络系统，利用最靠近每位用户的服务器，更快、更可靠地将音乐、图片、视频、应用程序及其他文件发送给用户，来提供高性能、可扩展性及低成本的网络内容传递给用户。
 
+[手动刷新Jsdelivr缓存的方法](https://www.aff.vin/refreshing-jsdelivr.html)
+
 unpkg is **a free content delivery network (CDN)** that automatically distributes public packages published to npm. unpkg partners with cloudfare and heroku to make this automatic distributing possible
 
 CSDN：投稿，再次上传markdown文件，链接变了。。。
 
-https://www.bilibili.com/read/cv403592/
-专栏markdown
+https://www.bilibili.com/read/cv403592/ 专栏markdown
 
 ## Build Hexo Pages (not organized yet)
 

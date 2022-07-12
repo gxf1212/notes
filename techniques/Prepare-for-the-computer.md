@@ -89,11 +89,11 @@ sudo snap install termius-app
 
 ### basics
 
-[*PN和v2ray、ssr、加速器有什么区别？](https://shutupandshowpages.com/index.php/2021/07/06/*PN%E5%92%8Cv2ray%E3%80%81ssr%E3%80%81%E5%8A%A0%E9%80%9F%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/)
+[vpn和v2ray、ssr、加速器有什么区别？](https://shutupandshowpages.com/index.php/2021/07/06/vpn%E5%92%8Cv2ray%E3%80%81ssr%E3%80%81%E5%8A%A0%E9%80%9F%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/)
 
-翻墙的方式：*PN、代理、自己搭服务器（淘宝上还有帮忙搭建内网穿透的；自己也可搭ssr啥的？）
+翻墙的方式：vpn、代理、自己搭服务器（淘宝上还有帮忙搭建内网穿透的；自己也可搭ssr啥的？）
 
-总之*PN更安全；v2ray比ssr可靠、难搞
+总之vpn更安全；v2ray比ssr可靠、难搞
 
 https://sites.google.com/view/honven all kinds of recommendations
 
@@ -115,7 +115,7 @@ https://sites.google.com/view/honven all kinds of recommendations
 
 https://sgi.anycast.gay/user 买ssr流量的网站
 
-https://www.hayaissr.xyz/ 也是个买*PN的？
+https://www.hayaissr.xyz/ 也是个买vpn的？
 
 > ssr can not provide access to YouTube. 极速 browser can view Google but chrome without the plugin can not... it helps with google scholar but the plugin cannot
 
@@ -125,7 +125,7 @@ laowang, can view youtube on the phone
 
 configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md
 
-- old *PN for Linux: https://github.com/hannuo/ssr-linux-client-electron
+- old vpn for Linux: https://github.com/hannuo/ssr-linux-client-electron
 
 - 22.2.9 [0.2.7](https://github.com/shadowsocksrr/electron-ssr/releases/tag/v0.2.7) and [0.2.6](https://github.com/qingshuisiyuan/electron-ssr-backup/releases/tag/v0.2.6)
 1. dependencies (as said in Debian系列安装与配置[Ubuntu.md](https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md))
@@ -235,18 +235,22 @@ It's fine on Windows; but x86 version cannot be installed here! And x64 shows �
 
 [this version](http://download.sangfor.com.cn/download/product/sslvpn/pkg/linux_01/EasyConnect_x64.deb) does not report this problem. stable!
 
-> ZJU的R*PN：https://www.coolspring8.com/p/rvpn-easyconnect/. see his GitHub https://github.com/Hagb/docker-easyconnect
+> ZJU的Rvpn：https://www.coolspring8.com/p/rvpn-easyconnect/. see his GitHub https://github.com/Hagb/docker-easyconnect
+
+> [!WARNING]
+> 
+> do not turn on auto login on Linux! cannot change user name (unless you reinstall the client) because https://rvpn.zju.edu.cn will be redirected to the download page.
 
 ## others for work
 
 ### TIM in Linux (wine)
 
-https://www.jianshu.com/p/f38187cdda0f
-
-1. QQ个人文件夹中的文件被占用*，您可以尝试以下操作:*
+1. QQ个人文件夹中的文件被占用，您可以尝试以下操作: https://www.jianshu.com/p/f38187cdda0f
 
    如果刚刚退出相同QQ帐号，请等待几秒后重试登录。
    QQ退出时出现异常无法正常退出，请使用任务管理器结束QQ.exe后再尝试登录
+   
+2. 屏幕截图：必须调出聊天对话框才能截图。。
 
 ## Docking
 

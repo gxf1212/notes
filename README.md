@@ -25,3 +25,4 @@ My Bilibili channel: [东山月光下](https://space.bilibili.com/441196634). Fr
 - [ ] build another site to share large amount of textbooks below with GitHub or Gitee (any suggestions?)
 - [ ] Bilibili preview (cover) for the above representatives?
 - [ ] PDF previewer and meta info
+- [ ] 也许有一天，博客的课程列表那里能做成iGem那个建模首页那样，文字和图片的。
