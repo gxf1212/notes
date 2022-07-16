@@ -223,7 +223,7 @@ flaws
 
 charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 
-### Summary on remote control
+#### Summary on remote control
 
 回家三天，总结一下解决远程控制Linux服务器卡机的修复过程。
 
@@ -262,9 +262,28 @@ finalshell does not look so pretty though we can just use it. cannot update
 
 #### electerm
 
-网站：https://electerm.html5beta.com/
+> functions covers what is in Xshell and Xftp, but kind of small font...but a great tool!
 
-functions covers what is in Xshell and Xftp, but kind of small font...but a great tool!
+（不是恰饭，是我在用）
+
+electerm是一个Linux端的ssh客户端，国产软件。
+
+- 界面简洁，可自定义主题
+- 完全免费，支持所有电脑操作系统
+- 支持复制粘贴路径
+- 支持sftp（就是文件夹的可视化界面，拷文件只需要拖动）
+- 甚至还能当做本地命令行的替代品，还能GitHub、Gitee同步
+
+如果你讨厌用scp往远程服务器上拷文件，可以试试它，每次粘贴一长串文件路径还是挺烦的。
+
+缺点：
+
+- 感觉有时鼠标点击有点不灵敏……准确地说是传输大量文件时就会很卡。。（重启软件就好了）
+- 命令行字体倒是能变，但是这个UI字有点小不能调
+
+下载地址：https://electerm.html5beta.com/ 
+
+https://zhuanlan.zhihu.com/p/348324919
 
 ### scheduling system
 
@@ -344,7 +363,7 @@ date > log
 
 2. 
 
-#### plugins
+### plugins
 
 1. mermaid语法
    - 特殊符号，要加引号才显示 https://github.com/mermaid-js/mermaid/issues/213
@@ -353,6 +372,12 @@ date > log
 ### themes
 
 1. liquid: cannot see the mouse cursor in titles and hyperlinks?
+
+### Crack
+
+just search...
+
+https://www.ghxi.com/typora.html
 
 ## VScode
 
@@ -562,7 +587,9 @@ failed, remove this env...
 
 
 
-## ThunderBird
+## Other
+
+### ThunderBird
 
 xjtu email: just login, default configuration
 
@@ -570,6 +597,28 @@ xjtu email: just login, default configuration
 
 1. specify contacts 联系人, signature
 2. plugin: [FileLink Provider for Dropbox](https://addons.thunderbird.net/zh-CN/thunderbird/addon/filelink-provider-for-dropbox/?src=search), Send later
+
+网易邮箱大师，可以搞个Mac版？
+
+### TIM in Linux (wine)
+
+installation: see [Linux-fundamental](/techniques/Linux-fundamental?id=other-softwares)
+
+1. QQ个人文件夹中的文件被占用，您可以尝试以下操作: https://www.jianshu.com/p/f38187cdda0f
+
+   如果刚刚退出相同QQ帐号，请等待几秒后重试登录。
+   QQ退出时出现异常无法正常退出，请使用任务管理器结束QQ.exe后再尝试登录
+
+2. 屏幕截图：必须调出聊天对话框才能截图。。
+
+3. a terrible problem: cannot locate files well. 
+
+   - default folder, either inside wine or desktop (cannot drag...). 
+   - cannot 'open the folder' (redirect to the browser with wrong path...)
+
+### chembiodraw
+
+全选改字体（18），在file--document setting改线宽，大概0.56（0.4倍粗体），就和Wikipedia的比较接近（平常不用加粗）。
 
 
 
@@ -692,6 +741,20 @@ notes from Windows
 - http://www.noobyard.com/article/p-nymwcdnd-nx.html  插入Python代码升级方案（类似jupyter notebook的配色？）
 - https://blog.csdn.net/u012428169/article/details/80558331 没有进行特殊命令处理，但是显示的图片和表格标号跟它们在LaTeX编辑环境中放置的章节有关，这并不是一般文章要求的。
 - https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography not compatible with author-year
+
+### TODO list
+
+- [ ] XJTU bachelor template
+  - https://www.overleaf.com/project/62c93b67055128749a1563a8
+- [ ] texstudio 参考文献编译链
+
+## Bash (shell)
+
+1. https://cloud.tencent.com/developer/ask/sof/806010
+
+   如何在Bash函数中添加默认参数？`${1:-.}`
+
+2. 
 
 ## R language
 
@@ -821,6 +884,21 @@ Goodnotes：https://zhuanlan.zhihu.com/p/104734199  需科学上网
 个人版的放不下goodnotes啊
 
 #### Linux
+
+> what to sync:
+>
+> - packages
+> - work folder
+> - `.bashrc`
+> - Typora themes
+> - Wall papers
+>
+> ```shell
+> ln ~/.bashrc ~/Documents
+> ln -s ~/.config/Typora/themes ~/Documents
+> ln -s ~/Documents ~/OneDrive/workstation
+> ln -s ~/Pictures~/OneDrive/workstation
+> ```
 
 好多不同的API，看知乎。。看哪个star的多。。
 
@@ -1313,12 +1391,32 @@ https://wzfou.com/seafile-yunpan/
 
 5. 115，会员+签到可弄好多？最大115GB？？
 
+6. https://www.123pan.com/
+   https://zhuanlan.zhihu.com/p/423382563
+   确实良心，只有网页版，但是小公司，会不会跑路
+
 6. 其他
    
    - 腾讯微云 https://www.weiyun.com/ 才10G，要买
    - 亿方云：偏企业，同步
    - 蓝奏云：有点小，不限速
    - MEGA：50G，很受限 https://funletu.com/1113/.html
+
+## Other
+
+### document sync
+
+我的需求：在线版能同步，最好所见所得。本地同步零碎文件还是不强求了
+
+- 幕布：无法导入markdown？不用想了，不支持代码块，只能导图
+- 腾讯文档：不是真正的markdown，只能搞docx文件。虽然所见即所得，但无标题快捷键，无法调整各级标题样式。凑活有代码块等等，虽可不要。也不像有人持续开发？
+- 浙大语雀：完整支持markdown，支持所见即所得，样式还行，高亮等功能完整，也能直接拖入图片。
+- Google drive的各插件：样式一般，源码预览对照。限制很麻烦。
+- 各种在线的markdown往往不能同步，有道云倒还行，但插图片需要VIP。。印象没太会用
+
+### cloud server
+
+https://cloud.tencent.com/act/free  前两个是能白嫖的。。GPU computation, server
 
 ## summary
 
@@ -1806,99 +1904,316 @@ refer to [html](#something-html)
 
 - you should not 
 
-#### functions
+- add things after:
 
-1. add things after:
-   
-   ```html
-   <!-- Docsify v4 -->
-   ```
-   
-   like
-   
-   ```html
-   <script src="//unpkg.com/docsify-copy-code"></script> <!-- copy to clipboard -->
-   <script src="//unpkg.com/prismjs/components/prism-bash.js"></script> <!-- code highlight -->
-   <script src="//unpkg.com/docsify/lib/plugins/search.js"></script> <!--  search engine -->
-   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script> <!--  emoji -->
-   <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script> <!--  equations -->
-   ```
-   
-   to add plug-in
-   
-   > https://github.com/upupming/docsify-katex LaTeX equation support
-   > 
-   > - [**supported functions**!](https://upupming.site/docsify-katex/docs/#/supported)
-   > - https://github.com/upupming/docsify-katex/issues/11 italic fon
-   > 
-   > https://github.com/iPeng6/docsify-sidebar-collapse sidebar collapse
+  ```html
+  <!-- Docsify v4 -->
+  ```
 
-2. blacklist:
-   
-   ```html
-   <script src="//cdn.jsdelivr.net/npm/docsify@latest/lib/docsify.min.js"></script>
-   ```
-   
-   navbar vanishes!..mouse can't scroll. code highlight is gone.
+  like
 
-3. customize title with quoted text
-   
-   ```markdown
-   [NAMD/VMD和FEP计算基本操作](/MD/FYP-notes.md "2333")
-   ```
+  ```html
+  <script src="//unpkg.com/docsify-copy-code"></script> <!-- copy to clipboard -->
+  <script src="//unpkg.com/prismjs/components/prism-bash.js"></script> <!-- code highlight -->
+  <script src="//unpkg.com/docsify/lib/plugins/search.js"></script> <!--  search engine -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script> <!--  emoji -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script> <!--  equations -->
+  ```
 
-4. Gittalk (not applied)
+  to add plug-in
+
+  > https://github.com/upupming/docsify-katex LaTeX equation support
+  >
+  > - [**supported functions**!](https://upupming.site/docsify-katex/docs/#/supported)
+  > - https://github.com/upupming/docsify-katex/issues/11 italic fon
+  >
+  > https://github.com/iPeng6/docsify-sidebar-collapse sidebar collapse
+
+- blacklist:
+
+  ```html
+  <script src="//cdn.jsdelivr.net/npm/docsify@latest/lib/docsify.min.js"></script>
+  ```
+
+  navbar vanishes!..mouse can't scroll. code highlight is gone.
+
+- customize title with quoted text
+
+  ```markdown
+  [NAMD/VMD和FEP计算基本操作](/MD/FYP-notes.md "2333")
+  ```
+
+  the default page title will be that in the sidebar, like "分子免疫学笔记"
+
+- 如何搞背景？
+
+  https://segmentfault.com/a/1190000017576714  失败了
+
+  为啥呢？原来用vue主题就可以了。theme-simple不支持。。。。
+
+  侧边栏还可以搞个图片
+
+#### common functions
+
+1. Fontawesome 
+
+   https://www.npmjs.com/package/docsify-fontawesome
+
+   > not solved! refer to https://jhildenbiddle.github.io/docsify-themeable/#/?
+
+2. scroll to the top
+
+   https://github.com/zhengxiangqi/docsify-scroll-to-top
+
+3. syntax supporting problems like:
+
+   - [x] support of textsubscript: must use `<sub></sub>` tag; 
+
+     must add \ to \~ if there are more than two \~. same for ^
+
+   - [x] support of \ce{NaCl}: may use $\text{Al(OH)}_3$...
+
+   - [x] support of `\begin{align*}` ?? as well as gather, equation ...
+
+4. https://zxiaosi.cn/archives/cd1d42d1.html
+
+   美化。
+
+   - 点击效果，桃心（我想知道其他选择，如富强民主文明和谐
+
+5. https://github.com/827652549/docsify-count
+
+   插件，文字统计
+
+   阅读进度条[docsify-progress ](https://github.com/HerbertHe/docsify-progress) 这个插件与字数插件不兼容
+
+6. sitetime.js：运行时间统计
+
+7. [docsify 构建文档网站之定制功能（全网最全） | 码农家园](https://www.codenong.com/cs107071378/) 
+
+   [ETS' NoteBook - By Mr.Wu - 微信公众号：码客趣分享 🌹](https://notebook.js.org/#/)
+
+   - 显示pdf？
+
+   - Docsify-alerts https://www.npmjs.com/package/docsify-plugin-flexible-alerts
+
+     ```
+     > [!NOTE]
+     > 
+     > [!TIP]
+     > 
+     > [!WARNING]
+     > 
+     > [!ATTENTION]
+     > 
+     ```
+
+     可自定义
+
+8. 更新时间 https://github.com/pfeak/docsify-updated
+
+   write markdown and append to the end
+
+9. PDF reader embedded
+
+   https://github.com/lazypanda10117/docsify-pdf-embed
+
+   uses PDFObject
+
+   - put it between `<body></body>` (not `<head>` as the document said)
+   - use relative path to the repository root
+
+10. 也许有一天，博客的课程列表那里能做成iGem那个建模首页那样，文字和图片的。
+
+#### live2d girl
+
+https://blog.csdn.net/weixin_44897405/article/details/103214635
+
+这个东西叫做：live2d看板娘。https://github.com/stevenjoezhang/live2d-widget. I've also forked it.
+
+https://gitcode.net/mirrors/stevenjoezhang/live2d-widget/-/tree/master  GitHub镜像。代码两处都要改。
+
+##### version 1
+
+developer的js. components:
+
+- `autoload.js`
+
+  - the one needed to be included in `index.html`
+
+    ```html
+      <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+    ```
+
+  - calls the API, your settings, etc.
+
+  - modify `live2d_path` if you fork...
+
+    ```js
+    const live2d_path = "https://fastly.jsdelivr.net/gh/gxf1212/live2d-widget@master/"
+    ```
+
+    also @master in `index.html`. just modify them two when changing the source.
+
+- `waifu.css`
+
+  - the style: size, position, ...
+
+  - see [我的自定义多交互live2d折腾经历 - c10udlnk - 博客园](https://www.cnblogs.com/c10udlnk/p/14727173.html)
+
+- `waifu-tips.js`
+
+  - defines basic events (with messages), functions, icons, models
+  - model Id? models also in api? see 我的自定义....
+  - 说话
+    - 检测用户活动状态：不活动时自动说的话。。
+
+- `waifu-tips.json`
+
+  - provides sentences for icons/events (like clicking)?
+  - 说话
+    - "mouseover": [{"selector": "#live2d"...
+    - 
+
+experiences
+
+- L2Dwidget.init 设置大小、调位置咋样都没用。。要clone下来自己改
+- 看板娘L2Dwidget盯着鼠标移动（好像已经有了see more settings in the code
+
+[看板娘对话自定义](https://dp2px.com/2019/09/19/hexo-live2d/#live2d-%E7%9C%8B%E6%9D%BF%E5%A8%98%E5%AF%B9%E8%AF%9D%E8%87%AA%E5%AE%9A%E4%B9%89)
+
+> 能响应的：
+> \- // 检测用户活动状态，并在空闲时显示消息
+> \- window.addEventListener("copy"，"你都复制了些什么呀
+> \- window.addEventListener("visibilitychange"，"哇，你终于回来了～"
+> \- 欢迎阅读xxx？
+> \- "mouseover": [{"selector": "#live2d",
+> \- "click": [{"selector": "#live2d",
+>  showmessage的text可以是列表？
+
+
+
+##### version 2 (not using)
+
+L2Dwidget.min.js
+
+> 人物有哪些选择？参考7. 提供的
+>
+> ```
+> jsonPath: "https://unpkg.com/live2d-widget-model-shizuku@latest/assets/shizuku.model.json",
+> ```
+>
+> [GitHub - evrstr/live2d-widget-models](https://github.com/evrstr/live2d-widget-models) 给的似乎没用？
+>
+> [教你使用看板娘](https://www.icode9.com/content-4-1173614.html) maybe
+>
+> [Hexo博客添加看板娘 | 陈亮的个人博客](http://blog.itchenliang.club/posts/22350780-f32d-11ea-bb4a-d3e1cbe3d592/#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6) hexo的，方案一
+>
+> [Live2d Demo](https://summerscar.me/live2dDemo/) 调试模型、参数的效果，好慢
+
+- 就可以设置大小、位置
+- cannot find the one in developer’s model...
+- 但不能说话。。也不能盯着鼠标，甚至还有点模糊 (not in the unpkg.com one)
+
+```html
+  <!-- <script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script> -->
+  <script src="https://unpkg.com/live2d-widget/lib/L2Dwidget.min.js"></script>
+  <script src="https://unpkg.com/live2d-widget/lib/L2Dwidget.0.min.js"></script>
+  <script>
+　　L2Dwidget.init({ 
+　　  "model": {jsonPath:"https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json","scale": 1 }, 
+　　  "display": { "position": "right", "width": 100, "height": 200,"hOffset": 0, "vOffset": -20 }
+    });
+  </script>
+```
+
+
+
+#### mindmap
+
+https://github.com/up9cloud/docsify-mindmap 照着做
+
+steps
+
+- iPad端导出xmind为markdown
+- 用写的程序处理
+- 粘到markdown里
+
+note
+
+- mindmap和json有别
+- json放弃了，转换太复杂，必须把字典字符串合理得换行。。
+- 处理markdown文本：#换成缩进，*是七级标题，再缩进再加，还有强制换行的
+- 开头空格无所谓
+- 设计者应该是把空两个作为一个tab的
+- 中文还是支持的
+
+问题
+
+- 美化？
+- Typora看不了都没啥，本地部署预览不了？
+
+https://github.com/fex-team/kityminder-core 更高端的？
+
+> markmap
+>
+> ```
+> npm install yarn
+> yarn add markm
+> ```
+>
+> failed
+>
+> 不适用于xmind的思维导图展示，写代码修改？
+>
+> https://juejin.cn/post/7000874049333100551
+>
+> https://zhuanlan.zhihu.com/p/352795634
+>
+> failed
+
+#### hitokoto
+
+一言开源社区 https://developer.hitokoto.cn/ 
+
+一般方法：https://www.jianshu.com/p/3a58d9a796c3，不需要另外那两个脚本
+
+很好，coverpage不会有。
+
+放在哪呢？docsify的这些主题，往下划，header栏就看不到了
+
+https://hitokoto.cn/dashboard#/ 控制台，看、提交句子的
+
+自定义：
+
+- 自己写点话？审核要一年？？
+
+- 如何查，比如所有关于三体的
+
+- 格式：改js？只能控制show出哪些文字，没法搞局部下划线啥的
+
+  - 解决破折号前空格
+
+- 调节请求参数，可以选定句子范围
+
+- token？
+
+其他
+
+https://www.jinrishici.com/doc/ 今日诗词API
+
+#### other functions
+
+1. Gittalk (not applied)
    
    https://segmentfault.com/a/1190000018072952
    
    https://www.cnblogs.com/fozero/p/10256858.html 
-
-5. Fontawesome 
    
-   https://www.npmjs.com/package/docsify-fontawesome
+5. 插件，share自己的社交媒体
    
-   > not solved! refer to https://jhildenbiddle.github.io/docsify-themeable/#/?
-
-6. scroll to the top
+   https://coroo.github.io/docsify-share/#/?id=getting-started
    
-   https://github.com/zhengxiangqi/docsify-scroll-to-top
-
-7. syntax supporting problems like:
-   
-   - [x] support of textsubscript: must use `<sub></sub>` tag; 
-     
-     must add \ to \~ if there are more than two \~. same for ^
-   
-   - [x] support of \ce{NaCl}: may use $\text{Al(OH)}_3$...
-   
-   - [x] support of `\begin{align*}` ?? as well as gather, equation ...
-
-8. https://coroo.github.io/docsify-share/#/?id=getting-started
-   
-   插件，share自己的社交媒体
-
-9. 如何搞背景？
-   
-   https://segmentfault.com/a/1190000017576714  失败了
-   
-   为啥呢？原来用vue主题就可以了。theme-simple不支持。。。。
-   
-   侧边栏还可以搞个图片
-
-10. https://zxiaosi.cn/archives/cd1d42d1.html
-    
-    美化。
-    
-    - 点击效果，桃心（我想知道其他选择，如富强民主文明和谐
-
-11. https://github.com/827652549/docsify-count
-    
-    插件，文字统计
-    
-    阅读进度条[docsify-progress ](https://github.com/HerbertHe/docsify-progress) 这个插件与字数插件不兼容
-
-12. sitetime.js：运行时间统计
-
 13. 辅以页脚系统 https://github.com/erickjx/docsify-footer-enh
     
     - do not support `\n`, only html `<br/>`
@@ -1912,114 +2227,6 @@ refer to [html](#something-html)
       | style  | Footer CSS inline style                               |
       | class  | Footer Classes to include                             |
       | pre    | Html pre footer text                                  |
-
-14. https://blog.csdn.net/weixin_44897405/article/details/103214635
-    
-    这个东西叫做：live2d看板娘。https://github.com/stevenjoezhang/live2d-widget. I've also forked it.
-    
-    https://gitcode.net/mirrors/stevenjoezhang/live2d-widget/-/tree/master  GitHub镜像。代码两处都要改。
-    
-    - 版本一：developer的js. components:
-      
-      - `autoload.js`
-        
-        - the one needed to be included in `index.html`
-          
-          ```html
-            <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
-          ```
-        
-        - calls the API, your settings, etc.
-        
-        - modify `live2d_path` if you fork...
-          
-          ```js
-          const live2d_path = "https://fastly.jsdelivr.net/gh/gxf1212/live2d-widget@master/"
-          ```
-
-          also @master in `index.html`. just modify them two when changing the source.
-        
-      - `waifu.css`
-        
-        - the style: size, position, ...
-        
-        - see [我的自定义多交互live2d折腾经历 - c10udlnk - 博客园](https://www.cnblogs.com/c10udlnk/p/14727173.html)
-      
-      - `waifu-tips.js`
-        
-        - defines basic events (with messages), functions, icons, models
-        - model Id? models also in api? see 我的自定义....
-        - 说话
-          - 检测用户活动状态：不活动时自动说的话。。
-        
-      - `waifu-tips.json`
-        
-        - provides sentences for icons/events (like clicking)?
-        - 说话
-          - "mouseover": [{"selector": "#live2d"...
-          - 
-      
-      experiences
-      
-      - L2Dwidget.init 设置大小、调位置咋样都没用。。要clone下来自己改
-      - 看板娘L2Dwidget盯着鼠标移动（好像已经有了see more settings in the code
-      
-      [看板娘对话自定义](https://dp2px.com/2019/09/19/hexo-live2d/#live2d-%E7%9C%8B%E6%9D%BF%E5%A8%98%E5%AF%B9%E8%AF%9D%E8%87%AA%E5%AE%9A%E4%B9%89)
-      
-    - 版本二：L2Dwidget.min.js
-      
-      > 人物有哪些选择？参考7. 提供的
-      > 
-      > ```
-      > jsonPath: "https://unpkg.com/live2d-widget-model-shizuku@latest/assets/shizuku.model.json",
-      > ```
-      > 
-      > [GitHub - evrstr/live2d-widget-models](https://github.com/evrstr/live2d-widget-models) 给的似乎没用？
-      > 
-      > [教你使用看板娘](https://www.icode9.com/content-4-1173614.html) maybe
-      > 
-      > [Hexo博客添加看板娘 | 陈亮的个人博客](http://blog.itchenliang.club/posts/22350780-f32d-11ea-bb4a-d3e1cbe3d592/#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6) hexo的，方案一
-      > 
-      > [Live2d Demo](https://summerscar.me/live2dDemo/) 调试模型、参数的效果，好慢
-      
-      - 就可以设置大小、位置
-      - cannot find the one in developer’s model...
-      - 但不能说话。。也不能盯着鼠标，甚至还有点模糊 (not in the unpkg.com one)
-      
-      ```html
-        <!-- <script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script> -->
-        <script src="https://unpkg.com/live2d-widget/lib/L2Dwidget.min.js"></script>
-        <script src="https://unpkg.com/live2d-widget/lib/L2Dwidget.0.min.js"></script>
-        <script>
-      　　L2Dwidget.init({ 
-      　　  "model": {jsonPath:"https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json","scale": 1 }, 
-      　　  "display": { "position": "right", "width": 100, "height": 200,"hOffset": 0, "vOffset": -20 }
-          });
-        </script>
-      ```
-    
-15. [docsify 构建文档网站之定制功能（全网最全） | 码农家园](https://www.codenong.com/cs107071378/) 
-    
-    [ETS' NoteBook - By Mr.Wu - 微信公众号：码客趣分享 🌹](https://notebook.js.org/#/)
-    
-    - 显示pdf？
-    
-    - Docsify-alerts https://www.npmjs.com/package/docsify-plugin-flexible-alerts
-      
-      ```
-      > [!NOTE]
-      > 
-      > [!TIP]
-      > 
-      > [!WARNING]
-      > 
-      > [!ATTENTION]
-      > 
-      ```
-      
-      可自定义
-    
-    - 看板娘
 
 16. badge。 是用什么东西生成的吗。。
     
@@ -2046,91 +2253,8 @@ refer to [html](#something-html)
     <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
     ```
 
-18. 更新时间 https://github.com/pfeak/docsify-updated
+18. 
     
-    write markdown and append to the end
-
-19. 一言开源社区 https://developer.hitokoto.cn/ 
-    
-    一般方法：https://www.jianshu.com/p/3a58d9a796c3，不需要另外那两个脚本
-    
-    很好，coverpage不会有。
-    
-    放在哪呢？docsify的这些主题，往下划，header栏就看不到了
-    
-    https://hitokoto.cn/dashboard#/ 控制台，看、提交句子的
-    
-    自定义：
-    
-    - 自己写点话？审核要一年？？
-    
-    - 如何查，比如所有关于三体的
-    
-    - 格式：改js？只能控制show出哪些文字，没法搞局部下划线啥的
-      
-      - 解决破折号前空格
-    
-    - 调节请求参数，可以选定句子范围
-    
-    - token？
-    
-    其他
-    
-    https://www.jinrishici.com/doc/ 今日诗词API
-
-20. mindmap
-    
-    https://github.com/up9cloud/docsify-mindmap 照着做
-    
-    steps
-    
-    - iPad端导出xmind为markdown
-    - 用写的程序处理
-    - 粘到markdown里
-    
-    note
-    
-    - mindmap和json有别
-    - json放弃了，转换太复杂，必须把字典字符串合理得换行。。
-    - 处理markdown文本：#换成缩进，*是七级标题，再缩进再加，还有强制换行的
-    - 开头空格无所谓
-    - 设计者应该是把空两个作为一个tab的
-    - 中文还是支持的
-    
-    问题
-    
-    - 美化？
-    - Typora看不了都没啥，本地部署预览不了？
-    
-    https://github.com/fex-team/kityminder-core 更高端的？
-    
-    > markmap
-    > 
-    > ```
-    > npm install yarn
-    > yarn add markm
-    > ```
-    > 
-    > failed
-    > 
-    > 不适用于xmind的思维导图展示，写代码修改？
-    > 
-    > https://juejin.cn/post/7000874049333100551
-    > 
-    > https://zhuanlan.zhihu.com/p/352795634
-    > 
-    > failed
-
-21. PDF reader embedded
-    
-    https://github.com/lazypanda10117/docsify-pdf-embed
-    
-    uses PDFObject
-    
-    - put it between `<body></body>` (not `<head>` as the document said)
-    - use relative path to the repository root
-
-22. 
 
 more plugins: https://docsify.js.org/#/awesome?id=plugins，https://docsify.js.org/#/plugins?id=pagination
 
@@ -2422,4 +2546,7 @@ https://simsimi.com/chat
 
 
 
-# Experiences on video/subtitles collectionone
+# Experiences on video/subtitles collection
+
+字幕其实单双行都行，但不要老来回切换
+

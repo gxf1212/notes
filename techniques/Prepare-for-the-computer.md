@@ -81,7 +81,42 @@ sudo rm -r /usr/lib/FinalShell
 sudo snap install termius-app
 ```
 
+### easy connect (for school)
 
+> 重要启示：点击安装包，显示安装成功，但启动程序时点击图标无响应，可通过命令行终端（Terminal）执行命令来启动。观察怎么个报错法！有道、DS等
+
+```shell
+/usr/share/sangfor/EasyConnect/EasyConnect 
+(EasyConnect:51965): Pango-ERROR **: 15:18:20.035: Harfbuzz version too old (1.3.1)
+追踪与中断点陷阱 (核心已转储)
+```
+
+https://www.cnblogs.com/cocode/p/12890684.html
+
+下载pangolib  我的云盘  链接: https://pan.baidu.com/s/1i8O5ZvMLqnw8K8EzKIrw6Q 提取码: c896
+
+```shell
+sudo cp ./'pango lib'/lib/lib* /usr/share/sangfor/EasyConnect/
+```
+
+server: https://rvpn.zju.edu.cn
+
+It's fine on Windows; but x86 version cannot be installed here! And x64 shows 版本过低 upon reboot
+
+[this version (EasyConnect_x64.deb)](http://download.sangfor.com.cn/download/product/sslvpn/pkg/linux_01/EasyConnect_x64.deb) does not report this problem. stable!
+
+> [!NOTE]
+> 7.14 update: using new (my own) account. still install the official version
+>
+> download: https://rvpn.zju.edu.cn/com/installClient.html#auto-common
+
+> ZJU的Rvpn：https://www.coolspring8.com/p/rvpn-easyconnect/. see his GitHub https://github.com/Hagb/docker-easyconnect
+>
+> 7.6.7 version: appropriate for XJTU v
+
+> [!WARNING]
+>
+> do not turn on auto login on Linux! cannot change user name (unless you reinstall the client) because https://rvpn.zju.edu.cn will be redirected to the download page.
 
 
 
@@ -209,48 +244,7 @@ chmod a+x Sha*
 
 连接--添加--URI
 
-### easy connect (for school)
 
-> 重要启示：点击安装包，显示安装成功，但启动程序时点击图标无响应，可通过命令行终端（Terminal）执行命令来启动。观察怎么个报错法！有道、DS等
-
-```shell
-/usr/share/sangfor/EasyConnect/EasyConnect 
-(EasyConnect:51965): Pango-ERROR **: 15:18:20.035: Harfbuzz version too old (1.3.1)
-追踪与中断点陷阱 (核心已转储)
-```
-
-https://www.cnblogs.com/cocode/p/12890684.html
-
-下载pangolib  我的云盘  链接: https://pan.baidu.com/s/1i8O5ZvMLqnw8K8EzKIrw6Q 提取码: c896
-
-```shell
-sudo cp ./'pango lib'/lib/lib* /usr/share/sangfor/EasyConnect/
-```
-
-download: https://rvpn.zju.edu.cn/com/installClient.html#auto-common
-
-server: https://rvpn.zju.edu.cn
-
-It's fine on Windows; but x86 version cannot be installed here! And x64 shows 版本过低 upon reboot
-
-[this version](http://download.sangfor.com.cn/download/product/sslvpn/pkg/linux_01/EasyConnect_x64.deb) does not report this problem. stable!
-
-> ZJU的Rvpn：https://www.coolspring8.com/p/rvpn-easyconnect/. see his GitHub https://github.com/Hagb/docker-easyconnect
-
-> [!WARNING]
-> 
-> do not turn on auto login on Linux! cannot change user name (unless you reinstall the client) because https://rvpn.zju.edu.cn will be redirected to the download page.
-
-## others for work
-
-### TIM in Linux (wine)
-
-1. QQ个人文件夹中的文件被占用，您可以尝试以下操作: https://www.jianshu.com/p/f38187cdda0f
-
-   如果刚刚退出相同QQ帐号，请等待几秒后重试登录。
-   QQ退出时出现异常无法正常退出，请使用任务管理器结束QQ.exe后再尝试登录
-   
-2. 屏幕截图：必须调出聊天对话框才能截图。。
 
 ## Docking
 
@@ -1701,4 +1695,4 @@ Good results especially for ligands with 8 or more rotatable bonds
 
 - exhaustiveness: One execution of Vina tries to predict where and how a putative ligand can best bind to a given protein, in which Vina may repeat the calculations **several times** with different randomizations
 - seed: same seed (explicitly assigned) produces the same results
-- cpu: repeated computation for a ligand is done on separate CPUs at the same time. By default, Vina tries to create as many threads as the number of available cores.
+- cpu: repeated computation for a ligand is done on separate CPUs at the same time. By default, Vina tries to create as many threads as the number of available cores

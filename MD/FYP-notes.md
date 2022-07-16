@@ -2823,15 +2823,22 @@ pairlistdist            10.0
 
 #### alch parameters
 
+https://www.ks.uiuc.edu/Research/namd/2.13/ug/node61.html
+
 recommend
 
 ```shell
 alchVdwLambdaEnd        1.0
 alchElecLambdaStart     0.1        # so early
-alchVdWShiftCoeff       6.0
-alchOutFreq             1000     # should be small
-alchDecouple            off        # our ligand is charged..
+alchVdWShiftCoeff       1.0
+alchOutFreq             1000       # should be small
+alchDecouple            on
 ```
+
+> ```
+> alchVdWShiftCoeff       6.0
+> alchDecouple            off        # our ligand is charged..
+> ```
 
 #### production: backward
 
@@ -2843,7 +2850,6 @@ set  outputbase     rdrp-mtp-remtp-ligand
 set  outputName     $outputbase-prod-backward
 # if you do not want to open this option, assign 0
 set INPUTNAME       0                      ;# use the former outputName, for restarting a simulation
-
 
 # restart or PBC
 if { $INPUTNAME != 0 } {
@@ -3564,14 +3570,6 @@ conda activate AmberTools21
 > in ori, leili's param
 >
 > NH2: 2*0.34-0.915=-0.235, OH: 0.42-0.65=-0.23. no more modification.
-
-
-
-### result
-
-
-
-
 
 
 

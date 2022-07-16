@@ -352,7 +352,7 @@ This is a record of my operations during 折腾ing the system, in order not to f
 
 6. 
 
-#### other
+#### other softwares
 
 1. google download?
 
@@ -556,7 +556,7 @@ the problem rises when installing Gaussian
 sudo apt-get install rar unrar
 ```
 
-unzip multiple files: maybe just select all part files and right click...
+unzip multiple files: <u>maybe just select all part files and right click</u>...
 
 https://www.cnblogs.com/xd502djj/archive/2011/03/25/1995331.html
 
@@ -621,7 +621,7 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
    Icon=/home/gxf/pymol/share/pymol/data/pymol/icons/icon2_128x128.png   #在开始菜>单中的显示图标
    ```
    
-   还是用**alacarte**
+   还是用**alacarte**. need to configure:
 
    ```
    adt
@@ -765,31 +765,33 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
 
 install with .deb
 
-just **double click it** 不能指定目录
+just **double click it** （不能指定目录），进入“软件安装”
 
-命令行法：直接解压到当前目录，然后配置环境变量，即可启动运行程序；
+> 命令行法：直接解压到当前目录，然后配置环境变量，即可启动运行程序；
+>
+> ```shell
+> dpkg -x same.deb 
+> ```
+>
+>  当然，还有另外一个命令，安装到指定目录：
+>
+> ```shell
+> dpkg -i --instdir=/dest/dir/path some.deb # under root
+> ```
+>
 
-```shell
-dpkg -x same.deb 
-```
-
- 当然，还有另外一个命令，安装到指定目录：
-
-```shell
-dpkg -i --instdir=/dest/dir/path some.deb # under root
-```
-
- 关于dpkg：https://blog.csdn.net/weixin_30394633/article/details/98926820
+关于dpkg：https://blog.csdn.net/weixin_30394633/article/details/98926820
 
 - 常用
   
   ```shell
   dpkg -i xx.deb
   dpkg --info xx.deb # 查看信息，包括软件包名，卸载时用！we should remember some of them
+  dpkg -r xx.deb
   dpkg -P xx.deb # 卸载
   dpkg --unpack *.deb # 解压？
   ```
-
+  
 - 查看安装包状态：-l
   
   ```
@@ -814,7 +816,7 @@ dpkg -i --instdir=/dest/dir/path some.deb # under root
   dpkg -L sunloginclient
   ```
 
-- dfa
+- 安装新版本，直接dpkg新的包，就能覆盖安装
 
 debug
 
@@ -1024,8 +1026,8 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 > - [x] 程序图标
 > - [x] 备份系统
 > - [x] 输入法、字体等
+> - [x] 网络工具（easyconnect，ssh client等）
 > - [ ] 其他？（texlive,,mendeley,GitHub Desktop, flash, 浏览器)
-> - [ ] 修理：software?
 > - [ ] 自定义桌面等，如天气，壁纸图片
 >
 > 小问题
@@ -1288,6 +1290,8 @@ my email: stu, `741*******cb`
   - I ran ...run.1 rather than .run ???
   - don't know if this matters: https://blog.davidou.org/archives/1361
 
+- 为啥之前的驱动、cuda、cudnn系列能自动更新？可能是cuda的软件源是latest，自动更的，现在是固定了版本的
+  
 - other
   
   - if "Failed to initialize NVML: Driver/library version mismatch"
@@ -2024,7 +2028,19 @@ Though I only need to re-install programs in gxf (like gmx), a sea of permission
    
    > https://stackoverflow.com/questions/61376694/git-ubuntu-url-has-no-scheme
    
-6. 
+6. tbc
+
+## crash!!!
+
+死机总结
+
+- 现象：
+  - 用的时候突然死，并非内存炸了；远控一连上就死；偶尔开机后很快就死；经常长时间待机就死，无故障时间在几小时到一天之间
+  - 有时显示启动失败那种命令行报错
+- 类型：鼠标能动点不动；啥都不动甚至鼠标消失；屏幕边框消失
+- 重启失败：卡在注销时，卡在检查文件系统，等。
+- 背景：远控导致多次长按电源，后来只能长按，经常长按
+- 推测：重装后又好了？但一开始长按电源就越来越容易死
 
 ## usual problems
 
@@ -2060,6 +2076,8 @@ Though I only need to re-install programs in gxf (like gmx), a sea of permission
 3. 
 
 
+
+TTC字体是TrueType字体集成文件(. TTC文件)，可和ttf放一起
 
 # Other---the first time I install Ubuntu
 
