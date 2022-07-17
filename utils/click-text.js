@@ -1,4 +1,5 @@
 var arr = new Array("♥你好棒♥", "♥加油♥", "♥爱你♥", "♥奥利给♥", "♥好好学习♥", "♥早睡早起♥" ,"♥热爱生活♥", "♥爱护自己♥", "♥再接再厉♥", "♥你可以♥", "♥一定行♥");
+
 !function(e, t, a) {
     function r() {
         for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ");color:" + s[e].color + ";z-index:99999");
