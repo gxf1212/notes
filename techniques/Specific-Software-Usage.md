@@ -269,7 +269,7 @@ finalshell does not look so pretty though we can just use it. cannot update
 electerm是一个Linux端的ssh客户端，国产软件。
 
 - 界面简洁，可自定义主题
-- 完全免费，支持所有电脑操作系统
+- 完全免费开源，支持所有电脑操作系统
 - 支持复制粘贴路径
 - 支持sftp（就是文件夹的可视化界面，拷文件只需要拖动）
 - 甚至还能当做本地命令行的替代品，还能GitHub、Gitee同步
@@ -279,7 +279,7 @@ electerm是一个Linux端的ssh客户端，国产软件。
 缺点：
 
 - 感觉有时鼠标点击有点不灵敏……准确地说是传输大量文件时就会很卡。。（重启软件就好了）
-- 命令行字体倒是能变，但是这个UI字有点小不能调
+- 命令行字体倒是能变，但是这个UI字有点小不能调（可以去提个issue）
 
 下载地址：https://electerm.html5beta.com/ 
 
@@ -754,7 +754,13 @@ notes from Windows
 
    如何在Bash函数中添加默认参数？`${1:-.}`
 
-2. 
+2. download: an example
+
+   ```shell
+   for i in {1..19}; do
+   wget https://ronlevygroup.cst.temple.edu/courses/2020_fall/chem5302/lectures/chem5302_lecture${i}.pdf --no-check-certificate
+   done
+   ```
 
 ## R language
 
@@ -1413,6 +1419,18 @@ https://wzfou.com/seafile-yunpan/
 - 浙大语雀：完整支持markdown，支持所见即所得，样式还行，高亮等功能完整，也能直接拖入图片。
 - Google drive的各插件：样式一般，源码预览对照。限制很麻烦。
 - 各种在线的markdown往往不能同步，有道云倒还行，但插图片需要VIP。。印象没太会用
+
+#### 浙大语雀
+
+add: many functional tools!
+
+cannot export markdown? lakebook就是语雀的格式
+
+can just **paste into Typora**! But remove the linebreaks....
+
+problem: LaTeX formula exported as svg...
+
+
 
 ### cloud server
 
@@ -2370,6 +2388,10 @@ Google提供的生成器
 内容分发网络 (Content delivery network) 是指一种透过互联网互相连接的电脑网络系统，利用最靠近每位用户的服务器，更快、更可靠地将音乐、图片、视频、应用程序及其他文件发送给用户，来提供高性能、可扩展性及低成本的网络内容传递给用户。
 
 [手动刷新Jsdelivr缓存的方法](https://www.aff.vin/refreshing-jsdelivr.html)
+
+```
+https://purge.jsdelivr.net/gh/gxf1212/live2d-widget@master/
+```
 
 unpkg is **a free content delivery network (CDN)** that automatically distributes public packages published to npm. unpkg partners with cloudfare and heroku to make this automatic distributing possible
 
