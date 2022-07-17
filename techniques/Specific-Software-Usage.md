@@ -1995,11 +1995,15 @@ refer to [html](#something-html)
 
    - [x] support of `\begin{align*}` ?? as well as gather, equation ...
 
-4. https://zxiaosi.cn/archives/cd1d42d1.html
+4. 点击效果
 
-   美化。
+   - 桃心
 
-   - 点击效果，桃心（我想知道其他选择，如富强民主文明和谐
+     ```html
+     <script src="//cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/click_heart.js"></script>
+     ```
+
+   - 文本，如富强民主文明和谐  use ``click-text.js`
 
 5. https://github.com/827652549/docsify-count
 
@@ -2111,7 +2115,9 @@ experiences
 > \- "click": [{"selector": "#live2d",
 >  showmessage的text可以是列表？
 
-
+- [ ] why serve locally, it shows other messages like "傍晚了！窗外夕阳的景色很美丽呢，最美不过夕阳红～"
+- [ ] buttons still not there
+- [ ] 欢迎阅读「document」
 
 ##### version 2 (not using)
 
