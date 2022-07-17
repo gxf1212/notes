@@ -1588,6 +1588,8 @@ anaconda环境信息同步？
 
    it might work, strange but fine...we can also enter the submodule and push it.
 
+   actually ``git push xxx` will push submodules if changes are already committed 
+
 10. remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
 
     ```shell
