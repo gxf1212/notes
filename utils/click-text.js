@@ -1,32 +1,49 @@
-var fnTextPopup = function (arr, options) {
-    // arr参数是必须的
-    if (!arr || !arr.length) {
-        return;
+var arr = new Array("♥你好棒♥", "♥加油♥", "♥爱你♥", "♥奥利给♥", "♥好好学习♥", "♥早睡早起♥" ,"♥热爱生活♥", "♥爱护自己♥", "♥再接再厉♥", "♥你可以♥", "♥一定行♥");
+!function(e, t, a) {
+    function r() {
+        for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ");color:" + s[e].color + ";z-index:99999");
+        requestAnimationFrame(r)
     }
-    // 主逻辑
-    var index = 0;
-    document.documentElement.addEventListener('click', function (event) {
-        var x = event.pageX, y = event.pageY;
-        var eleText = document.createElement('span');
-        eleText.className = 'text-popup';
-        this.appendChild(eleText);
-        if (arr[index]) {
-            eleText.innerHTML = arr[index];
-        } else {
-            index = 0;
-            eleText.innerHTML = arr[0];
+    function n() {
+        var t = "function" == typeof e.onclick && e.onclick;
+        e.onclick = function(e) {
+            t && t(),
+            o(e)
         }
-        // 动画结束后删除自己
-        eleText.addEventListener('animationend', function () {
-            eleText.parentNode.removeChild(eleText);
-        });
-        // 位置
-        eleText.style.left = (x - eleText.clientWidth / 2) + 'px';
-        eleText.style.top = (y - eleText.clientHeight) + 'px';
-        // index递增
-        index++;
-    });
-};
-
-// fnTextPopup(['富强', '民主', '文明', '和谐', '自由', '平等', '公正', '法治', '爱国', '敬业', '诚信', '友善']);
-fnTextPopup(['富强', '民主', '文明', '和谐', '自由', '平等', '公正', '法治', '爱国', '敬业', '诚信', '友善']);
+    }
+    function o(e) {
+        var a = t.createElement("div");
+        a.className = "heart",
+        a.innerText = arr[parseInt(arr.length * Math.random())];
+        s.push({
+            el: a,
+            x: e.clientX+5,
+            y: e.clientY-10,
+            scale: 1,
+            alpha: 1,
+            color: c()
+        }),
+        t.body.appendChild(a)
+    }
+    function i(e) {
+        var a = t.createElement("style");
+        a.type = "text/css";
+        try {
+            a.appendChild(t.createTextNode(e))
+        } catch(t) {
+            a.styleSheet.cssText = e
+        }
+        t.getElementsByTagName("head")[0].appendChild(a)
+    }
+    function c() {
+        return "rgb(" + ~~ (255 * Math.random()) + "," + ~~ (255 * Math.random()) + "," + ~~ (255 * Math.random()) + ")"
+    }
+    var s = [];
+    e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame ||
+        function(e) {
+            setTimeout(e, 1e3 / 60)
+        },
+    i(".heart{position: fixed;}"),
+    n(),
+    r()
+} (window, document);

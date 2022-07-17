@@ -2,7 +2,7 @@
 
 Due to the absence of appropriate English online courses that match our course's syllabus, I have to write a note on my own. All the content is based on the newest slides in 2021 and the Chinese textbook. I wound not try to write everything in English because the nouns must be 太难顶了... (I'm reading Chinese materials!)  but from chapter 3 most content is in English. For important terms in English, I have to remark them in Chinese. So it's a bit challenging for general readers, while interesting for those who would love to dive into immunology research in the future. Due to the limited knowledge, there must be errors and omissions. Some of the terms are poorly translated or guessed due to the time limit. The author kindly asks the respected readers for granted criticisms and instructions.
 
-The main reference materials include the slides (not available, but you can watch) our [Medicinal Immunology MOOC](https://www.icourse163.org/learn/XJTU-1206143814?tid=1464315463#/learn/content) in XJTU. I'm sure that the videos are great resources for students in medicine and life sciences. The first part (chapters 1 to 8) is about the components in the immune system, while the second part (the rest) tries to understand it as a whole and describes the processes. That's also what my notes follow. Hope you will like it. I recommend [a MOOC from Drew University](https://www.bilibili.com/video/BV1ui4y1Z75d/) with subtitles, which also covers a lot of details in immunology. You should go to that page because there are **several textbooks** shared in pdf version (see the top comment). BTW, welcome to subscribe [my Bilibili channel](https://space.bilibili.com/441196634) for educational videos from YouTube with Chinese subtitles!
+The main reference materials include the slides (not available, but you can watch) our [Medicinal Immunology MOOC](https://www.icourse163.org/learn/XJTU-1206143814?tid=1464315463#/learn/content) in XJTU. I'm sure that the videos are great resources for students in medicine and life sciences. The first part (chapters 1 to 8) is about the components in the immune system, while the second part (the rest) tries to understand it as a whole and describes the processes. That's also what my notes follow. Hope you will like it. I recommend [a MOOC from Drew University](https://www.bilibili.com/video/BV1ui4y1Z75d/) and [another introductory immunology lecture series](https://www.bilibili.com/video/BV1Lr4y1h7zN) with Chinese-English subtitles, which also covers a lot of details in immunology. You should go to that page because there are **several textbooks** shared in pdf version (see the top comment). BTW, welcome to subscribe [my Bilibili channel](https://space.bilibili.com/441196634) for educational videos from YouTube with Chinese subtitles!
 
 The quoted areas are less-important comments or end-of-chapter questions.
 
@@ -44,31 +44,31 @@ Resources
 分为两部分
 
 - 固有免疫（innate immune）：与生俱来的，第一道防线，高等和低等生物都有
-  
+
   - 组成：免疫屏障，固有免疫细胞，免疫分子 (see [chapter 9](#Chapter-9-Antigen-Presenting))
   - 特点：无特异性，无记忆性
 
 - 特异性免疫（adaptive immune）：高等生物通过接触病原体建立起来的，针对特定病原体的免疫防御能力
-  
+
   - 组成
-    
+
     |      | 谁来介导   | 谁发挥效应                 |
     | ---- | ------ | --------------------- |
     | 体液免疫 | B cell | antibody              |
     | 细胞免疫 | T cell | activated lymphocytes |
-  
+
   - 特点：有特异性和记忆性，作用强大而持久
 
 ## good or bad?
 
-- good 
-  
+- good
+
   - defend pathogens, eliminate cancer cells, clear aging/dead cells
-    
+
     > coresponding to the functions
 
 - bad
-  
+
   - too weak: cannot do above, continuous infection
   - too strong
     - allergy
@@ -132,7 +132,7 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 - 淋巴细胞定居、发挥功能的场所
 
 > 红髓：巨噬细胞；白髓：T细胞
-> 
+>
 > 其他功能：调节血量、过滤血液（拦下一些抗原，便于激活免疫）
 
 #### lymphatic system
@@ -159,24 +159,24 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 ##### lymphocyte homing and recirculation
 
 - 淋巴细胞归巢：某些亚群的淋巴细胞迁移或定居在某些特定区域
-  
+
   淋巴细胞上的归巢受体和血管内皮细胞上的地址素结合，诱导淋巴细胞穿过血管壁
 
 - 淋巴细胞再循环：在两套系统间往复循环的过程
-  
+
   - 在淋巴管中汇集，经胸导管进入血液
   - 在淋巴结中穿入、穿出血管内皮
 
 - 意义：有利于免疫细胞的更新（增殖），调整淋巴细胞在全身的分布，便于在病原体入侵时动员
 
 > questions
-> 
+>
 > - 你知道白血病和淋巴瘤的区别吗？
 > - 胸腺退化是否会引起免疫功能低下？
 > - position of these organs?
-> 
+>
 > 思考与小结
-> 
+>
 > - 克隆选择学说的要点是什么？
 > - 免疫系统的基本功能是什么？
 > - 免疫系统是怎样工作的？
@@ -189,7 +189,7 @@ top[immune organs] --settlement and response--> 2[periphery immune organs]
 
 ## Characteristics
 
-Antigens are substances that can 
+Antigens are substances that can
 
 - induce the generation of antibody, primed lymphocytes (致敏淋巴细胞).
 - be recognized by the immune system and elicit an immune response.
@@ -223,39 +223,39 @@ e.g. antigens carried from mother, HIV, etc.
 categories:
 
 - heterogenetic (**异种**) antigen: come from other species
-  
+
   > food, microbes and their products, heterogenetic serum
 
 - allogeneic (**同种异体**) antigen: other individuals
-  
+
   > blood group antigen, transplant antigen, etc.
 
 - autogeneic (自体) antigen: from yourself
-  
+
   > tissue-specific antigen, denatured protein, etc.
 
 ##### chemical properties
 
 - molecular weight
-  
+
   - **bigger** (\> 10kD) is better
 
 - chemical structure
-  
+
   the more **complex**, the stronger immunogenicity is
-  
+
   1. protein > polysaccharides > nucleic acid > lipids
   2. more aromatic residues
   3. complex 2nd/3rd structure
 
 - physical properties
-  
+
   - granule > soluble
-    
+
     **stay**s longer, harder to decompose
 
 - epitope accessibility
-  
+
   - on the **surface** → stronger
 
 #### host
@@ -277,7 +277,7 @@ The nature of antigen specificity is, the specificity of an immune response.
 e.g. 抗间氨基苯磺酸的抗体和邻位、对位、其他酸的反应弱或没有
 
 - an antigen only activates lymphocytes specific to recognize it
-  
+
   - MHC, BCR or TCR restricted
 
 - products of an immune response only react with that specific antigen
@@ -290,7 +290,7 @@ nature: similar epitope
 
 ### Epitope
 
-表位或抗原决定簇 (antigen determinant): groups/structures that **determine the specificity of antigens**. 
+表位或抗原决定簇 (antigen determinant): groups/structures that **determine the specificity of antigens**.
 
 Also, they are the basic unit to specifically recognize TCR/BCR/antibody.
 
@@ -324,7 +324,7 @@ Also, they are the basic unit to specifically recognize TCR/BCR/antibody.
 Thymus-independent/dependent antigen
 
 - TI-Ag 胸腺非依赖性抗原
-- TD-Ag 胸腺依赖性抗原, most antigen. 
+- TD-Ag 胸腺依赖性抗原, most antigen.
   - Th cell activates B cell
 
 | antigen          | TD-Ag                         | TI-Ag                  |
@@ -351,12 +351,12 @@ be --from--> TD-Ag
 ### Relationship (亲缘关系)
 
 - heterophilic (异嗜性) antigen
-  
+
   - common antigen between humans and other species
   - when a pathogen enters, the immune response causes autoimmunity
 
 - xenogenic (异种) antigen
-  
+
   - from other species, not common
 
 - allogenic (同种异体) antigen
@@ -368,11 +368,11 @@ be --from--> TD-Ag
 Whether it is **synthesized** inside APC
 
 - yes: endogeneous (内源性) antigen.
-  
+
   - viral/tumor Ag
 
 - no: exogeneous (外源性) antigen.
-  
+
   - bacteria, animal serum
 
 ### Other non-antigenic immune stimulators
@@ -397,18 +397,18 @@ general understanding
 丝裂原, which binds to their receptor and stimulates cell growth
 
 > ### epitope mapping
-> 
+>
 > 表位的确定。To determine the action targets, to make vaccines
-> 
+>
 > Build an overlapping library and screen with the antibody
-> 
+>
 > key points
-> 
+>
 > - T cell need degradation (presenting), TCR indirectly recognize
 > - BCR directly recognize both linear (no degradation) or conf (degradation) are ok
 
 > 思考与小结
-> 
+>
 > 1. 抗原的免疫原性和反应原性（抗原性）及其关系
 > 2. 决定免疫原性的因素
 > 3. 载体效应，交叉反应
@@ -433,7 +433,7 @@ Immunoglobulin super family (IgSF, 免疫球蛋白超家族): proteins including
 - Two identical heavy chains (connected by S-S bond) and light chains, between which is a S-S bond
 
 - heavy chain: 50kD, five isotypes (同种型): IgA/G/E/M/D ~ α/γ/ε/μ/δ chain (first letter in α is A, and so on)
-  
+
   light chain: 25kD, two types, κ/λ
 
 ### Domains
@@ -452,7 +452,7 @@ hinge: flexible, between CH1 and CH2. not in IgM/E
 #### function
 
 - VH/VL: antigen binding
-  
+
   - contains a hypervariable region (**HVR**, 高变区) or complement-determining region (**CDR**, 互补决定区)
   - other region is called framework region
 
@@ -476,7 +476,7 @@ hinge: flexible, between CH1 and CH2. not in IgM/E
 - secretary IgA also need a glycopeptide called secretary piece (分泌片)
 
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/4-other.png" alt="4-other" style="zoom:40%;" />
-> 
+>
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/4-iga.png" alt="4-iga" style="zoom:33%;" />
 
 ## Diversity and Immunogenecity
@@ -514,7 +514,7 @@ Ab can also be an antigen. Three types of epitope:
 ### Neutralizing toxins and infection
 
 > [a video for reference](https://www.bilibili.com/video/BV1Gg411P7jS)
-> 
+>
 > - 中和抗体只占人体产生抗体中的一小部分
 > - 它们都能特异性结合病原体，但中和抗体可能结合入侵相关蛋白（如冠状病毒的S蛋白），或结合衣壳蛋白导致病毒核酸无法释放，直接阻止对人体的感染；非中和抗体可能结合其他位点，但无法阻止感染！
 > - 非中和抗体有增强免疫的作用，与病毒结合后可以介导免疫细胞（如巨噬细胞）吞噬、清除病毒，杀敌于“国门之内”，在早期阶段发挥抗病毒作用。
@@ -525,14 +525,14 @@ Ab can also be an antigen. Three types of epitope:
 - CH2: activate **complement** system (see [chapter 5](#Chapter-5-Complement-System) for details)
 
 - CH3: bind Fc receptor on the cell surface
-  
+
   - **opsonization** (调理作用): phagocytosis (吞噬作用) by macrophages and neutrophils through Fc binding to Fc receptor, then into [presenting pathway](#MHC synthesis,-their-transportation-and-assembly)
-    
+
     <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/4-ops.png" alt="4-ops" style="zoom:40%;" align=center />
-  
+
   - enhance **ADCC** (antibody-dependent cell-mediated cytotoxicity) effect of NK cell, also through Fc
-  
-  - mediate [type I **hypersensitivity**](#type-I-hypersensitivity) (超敏反应): mastocytes, basophils (嗜碱性粒细胞), IgE 
+
+  - mediate [type I **hypersensitivity**](#type-I-hypersensitivity) (超敏反应): mastocytes, basophils (嗜碱性粒细胞), IgE
 
 - 穿过胎盘（IgG）与黏膜（分泌型 IgA, CH4）
 
@@ -566,7 +566,7 @@ at **DNA** level, irreversible, from IgM to G to ...
 ### Polyclonal Ab
 
 - a mixture of antibodies targeting a variety of epitopes
-  
+
   > clone: a cell cluster derived from lymphocytes targeting a single epitope
 
 - production: immunize animals with antigen
@@ -580,73 +580,73 @@ at **DNA** level, irreversible, from IgM to G to ...
 - from a single clone, targeting one epitope
 
 - the flow of production
-  
+
   - immunize mouse with Ag, isolate spleen cells
   - fuse them with myeloma cells (骨髓瘤细胞)
   - screen in HAT medium (for hybridoma cell 杂交瘤细胞)
   - identify the monoclonal Ab (for that desired Ab)
   - amplification
-  
+
   > HAT medium:
-  > 
+  >
   > - 氨甲蝶呤：从头合成途径中二氢叶酸还原酶抑制剂
   > - 次黄嘌呤、胸腺嘧啶脱氧核苷：补救合成途径的原料
-  > 
+  >
   > 骨髓瘤细胞的HGPRT（补救合成的一个酶）缺陷，只有和淋巴细胞融合后才能生存
-  > 
+  >
   > B细胞只能在体外生存不超过一周
 
 - features
-  
+
   - high specificity, titer (效价), purity; mass production (大规模生产)
   - murine, hinders clinical applications
-  
+
   > 效价是指某一物质引起生物反应、达到一定效果所需的剂量
 
 - applications
-  
+
   - protein detection/purification, cell isolation
   - hormone/tumor Ag/pathogen detection, therapy
 
 ### Genetically engineered Ab
 
 - also known as recombinant Ab: antibodies whose genes are cut, spliced, modified, and transfected into and expressed in appropriate recipient cells.
-  
+
   通过基因工程技术对抗体各链基因的剪切、拼接、修饰，并转入适当的受体细胞中从而生产出的抗体
-  
+
   - modification: reserve Ag binding domain; simplify non-binding domain
   - goal: humanize, miniaturization (小型化), multi-functionalized. keep specificity and affinity!
 
 - types
-  
+
   - humanized Ab
-    
+
     - chimeric Ab (嵌合抗体): murine V region+human C region
     - reshaped Ab (改型抗体): murine CDR+human rest part
     - transgenic mouse: replaced with human Ig genes, completely humanized
-  
+
   - small Ab fragment
-    
+
     - Fab: L chain+VH+CH, a linker is added
-    
-    - Fv: only VH and VL. If linker, called scFv Ab. 
-      
+
+    - Fv: only VH and VL. If linker, called scFv Ab.
+
       If only VH, called single domain Ab (单域抗体)
-  
+
   - multi-functional Ab
-    
+
     - bispecific Ab: two Fab domains recognize different targets (e.g. tumor and T cell)
-      
+
       maybe Fc also recruits macrophage
-    
+
     - bifunctional Ab: conjugated with enzyme, drug, etc. targeted therapy
 
 - antibody phage display: build a library of V region genes by cloning from polyclonal B cells from immunized humans, importing them into phages. Tandem expression with minor coat protein enables to display Fv antibodies on the surface of phages. Then we can screen Ab with the desired affinity with our antigen.
-  
+
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/4-display.png" alt="4-display" style="zoom:50%;" />
 
 > 小结
-> 
+>
 > 1. 抗体的功能是什么？
 > 2. 各型抗体的特点是什么？
 > 3. 什么是单克隆抗体？什么是多克隆抗体？
@@ -673,7 +673,7 @@ at **DNA** level, irreversible, from IgM to G to ...
 
 1. 固有成分：C1（C1q，C1r，C1s）~C9，MBL，丝氨酸蛋白酶，B因子，D因子，P因子。
 2. 补体受体：CR1~CR4，C3aR，C4aR， C5aR
-3. 调节蛋白 
+3. 调节蛋白
    1. 可溶性分子
    2. 膜结合分子
 
@@ -698,18 +698,18 @@ C1s --> C2 --> C3c
 ```
 
 1. Upon binding to Ag, IgG/M changes its conformation and exposes the C1q binding site on CH2.
-   
+
    > C1q may also recognize the pathogen surface or some specific proteins on it
 
 2. C1q's binding to (more than one) Ab results in the autocatalytic activation of C1r which is bound to C1q
-   
+
    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/5-c1q.png" alt="5-c1q" style="zoom:50%;" />
 
 3. C1r cleaves and activates C1s, which then cleaves circulating C4 and C2. C4b is then bound to the membrane or the Ab, forming a **C4b2a complex**.
-   
+
    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/5-c4b2a.png" alt="5-c1q" style="zoom: 30%;" />
 
-4. The complex is called classical pathway **C3 convertase C4b2a**, which cleaves C3 into C3a and C3b. 
+4. The complex is called classical pathway **C3 convertase C4b2a**, which cleaves C3 into C3a and C3b.
 
 ### Alternative pathway (旁路途径)
 
@@ -719,18 +719,18 @@ C3 --> c3h["C3(H2O)"] --B,D--> c3hb["C3(H2O)Bb"] --C3--> C3b --B,D--> C3bBb
 C3bBb --C3--> C3b
 ```
 
-1. activators: LPS, glucan, 酵母多糖. 
-   
+1. activators: LPS, glucan, 酵母多糖.
+
    > But they only provide a protective environment for the reaction or an adhesive surface, and are not involved in the actual recognition. Without infection, regulator proteins like Factor H and I, inhibit C3bBb and C3b respectively, while pathogen components inhibit regulators.
 
 2. C3 is slightly and spontaneously hydrolyzed into C3(H<sub>2</sub>O), which is usually in the liquid phase, and has C3b-like properties, enabling attachment to the surface.
-   
+
    > in C3(H<sub>2</sub>O), C3a is incompletely released, which also exposes the thiol ester that is then attacked by −OH or -NH2 residues and helps C3b to be located on the surface.
 
 3. C3(H<sub>2</sub>O)/C3b also recruits Factor B, which is cleaved by Factor D into Bb. A factor P is added to stabilize the structure, which makes the primary C3 convertase C3(H<sub>2</sub>O)Bb.
 
 4. C3bBb produces more C3b. **Positive feedback**! C3b goes the same process and induces a large amount of the alternative pathway **C3 convertase C3bBbP**.
-   
+
    > Another kind of C3 convertase, different from the above one!
 
 ![5-alter](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/5-alter.png)
@@ -738,17 +738,17 @@ C3bBb --C3--> C3b
 ### MBL pathway
 
 > MBL means 甘露糖结合凝集素  mannose-binding lectin
-> 
+>
 > lectin: a class of small proteins that bind pathogen-specific carbohydrates
-> 
+>
 > ficolins: another class of sugar-binding proteins
 
 1. MBL binds to mannose residue on the cell wall, activating MASP (MBL-associated serine proteases)
-   
+
    > MBL is also a hexamer like C1q
 
 2. MASP2 cleaves other MASP2 molecules, and then cleaves C4 and C2.
-   
+
    the same as C1s, goes into the classical pathway
 
 3. MASP1 cleaves C3, but goes into the alternative pathway
@@ -779,21 +779,21 @@ c3 --> o[other responses]
 ## Membrane attack complex
 
 1. Whichever C3 convertase + C3b = **C5 convertase**, cleaves C5 into C5a and C5b.
-   
+
    > which includes: C4b2a3b and C3bBb3b (C3bnBb)
 
 2. The binding cascade is shown below:
-   
+
    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/5-mac.png" alt="aaaa" style="zoom:40%;" />
-   
+
    binding induces a conformational change (C7/8/9) that exposes hydrophobic residues and allows inserting into the membrane
 
 3. 10-16 (19?) C9 molecules polymerize and form a pore
-   
+
    > see full structure: [6H04](https://www.rcsb.org/3d-view/6H04)
 
 4. lysing the cell
-   
+
    - loss of plasma membrane integrity
    - causes an influx of water (a few ions) and burst (胀破) of the cell
 
@@ -805,8 +805,8 @@ c3 --> o[other responses]
 
 - based on MAC, defending pathogens like G<sup>-</sup> bacteria and enveloped viruses, or tumor cell
 
-- it may cause human cell lysis. autoimmune disease or transplant rejection. 
-  
+- it may cause human cell lysis. autoimmune disease or transplant rejection.
+
   > the MAC complex might be released and inserted into the membrane of a normal cell
 
 ### Complement-mediated opsonization
@@ -830,21 +830,21 @@ Activated by Ag-Ab complex, C3b is produced and recognized by erythrocytes (红�
 介导炎症反应。mediated by the small fragments that are released into the bloodstream.
 
 - anaphylatoxin (过敏毒素): C3a, C5a
-  
-  recognized by mastocytes, basophils, induces degranulation (脱颗粒), and then histamine (组胺) release (see kinin function); 
-  
+
+  recognized by mastocytes, basophils, induces degranulation (脱颗粒), and then histamine (组胺) release (see kinin function);
+
   activates monocytes to produce cytokines like IL-1
 
 - chemokine (趋化作用): C3a, C4a, C5a
-  
-  attract inflammatory cells, like neutrophils to infiltrate the infected tissue. 
-  
+
+  attract inflammatory cells, like neutrophils to infiltrate the infected tissue.
+
   > chemotaxis (趋化)/metastasis, adhesion molecule production, for cells to move and extravasate
-  > 
+  >
   > also facilitate producing ROS, prostaglandin (前列腺素), etc
 
 - kinin-like function (激肽样作用): C2b
-  
+
   causes vasodilation (血管舒张) of capillaries (毛细血管), increases the permeability
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/5-c5a.png" alt="5-c5a" style="zoom:40%;" />
@@ -868,24 +868,24 @@ C3/4/5b is rapidly degraded in the liquid phase.
 #### Activation
 
 - classical
-  
+
   > liquid phase: C1抑制物 (C1INH)，C4结合蛋白（C4bp)，I 因子
-  > 
+  >
   > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/5-re-c1.png" alt="5-re-c1" style="zoom:25%;" />
-  > 
+  >
   > on the cell surface: 膜辅助蛋白（MCP），衰变加速因子（DAF)，补体受体（CR1)
-  > 
+  >
   > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/5-re-c4b2a.png" alt="5-re-c4b2a" style="zoom:25%;" />
 
 - alternative
-  
+
   > I 因子，H 因子，膜辅助蛋白（MCP），补体受体（CR1)
-  > 
+  >
   > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/5-re-c5.png" alt="5-re-c5" style="zoom:25%;" />
 
 #### MAC
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/5-re-cd59.png" alt="5-re-cd59" style="zoom:25%;" /> 
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/5-re-cd59.png" alt="5-re-cd59" style="zoom:25%;" />
 
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/5-re-mac.jpg" alt="5-re-mac" style="zoom:40%;" />
 
@@ -904,14 +904,14 @@ Types:
 ![5-pathways](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/5-pathways.png)
 
 > 思考题
-> 
+>
 > 1. 补体激活有那三条途径？各自的生物学意义如何？
 > 2. 补体有哪些生物学功能？
 
 # Chapter 6 MHC
 
 > 背景：器官移植
-> 
+>
 > - 遗传学家发现，同基因型个体不排斥，排斥程度符合孟德尔遗传定律
 > - 免疫学家发现，再次移植同一个供体的器官，排斥得更快；能检测到抗供体的受体
 
@@ -967,7 +967,7 @@ hla --> 3[class III]
 
 > - HLA-G: Maternal-fetal tolerance, receptor: NKG2
 > - HLA-E: NK cell tolerance, receptor: KIR
-> 
+>
 > MIC: MHC class I related gene
 
 DP/DQ etc. has multiple genes in one locus (基因座). Each α and β have 2 types of chains.
@@ -987,28 +987,28 @@ Each gene has exons encoding all needed chains.
 - various genes (**多种基因**)
 
 - co-dominance (**共显性**): in an individual, both maternal and paternal alleles are expressed simultaneously (even though they might be heterozygous)
-  
+
   > blood type Ag is also co-dominantly expressed. but Ab: allelic exclusion
 
 - polymorphism (**多态性**): in a population, there are a huge number of alleles in one gene locus.
-  
+
   > HLA is the most polymorphic gene, not one of them. multiple alleles (复等位基因)
 
 - haplotype heredity (**单倍型遗传**): all HLA genes are so closely linked that considered as a complete genetic unit (作为一个整体遗传).
 
 - non-balance distribution and linkage disequilibrium
-  
+
   - **非随机分布**: different alleles express at certain frequencies, which vary with geographical regions.
   - **连锁不平衡**: as above. (the frequency of two alleles presenting in the same chromosome is higher than predicted.)
 
 > provide public access to the data through the websites http://www.ebi.ac.uk/ipd/imgt/hla/ and here at [http://hla.alleles.org](http://hla.alleles.org/nomenclature/index.html). submit the sequences directly to the [IPD-IMGT/HLA Database](http://www.ebi.ac.uk/ipd/imgt/hla/)
-> 
+>
 > check the most updated data there!
 
 > HLA-genotyping (基因分型): determine the genotype of <u>12 HLA molecules</u> in an individual
-> 
+>
 > essential for matching (配型) in organ transplant, paternity test (亲子鉴定), etc.
-> 
+>
 > HLA I seems more diverse.
 
 [Naming Rules](http://hla.alleles.org/nomenclature/naming.html)
@@ -1020,7 +1020,7 @@ Each gene has exons encoding all needed chains.
 ### MHC class I
 
 - extracellular domain
-  
+
   > β2m and α3 linked by a disulfide bond
 
 - transmembrane domain
@@ -1072,25 +1072,25 @@ Some AAs are recognized by MHC and some by TCR.
 ## MHC in medicine
 
 1. HLA与器官移植的关系
-   
+
    常用匹配位点： HLA-A，B，C，DRB1
-   
+
    血清学分型：依据不同HLA蛋白分子的抗原性不同。淋巴细胞混合反应
-   
+
    基因分型：直接比较基因的序列
-   
+
    > major histocompatibility complex: antigens that induce strong and rapid rejection
-   > 
+   >
    > minor: weak and slow
 
 2. HLA与输血反应的关系
-   
+
    白细胞溶血由白细胞携带的HLA不同导致（宿主抗移植物效应）
 
 3. **HLA与疾病的相关性**：见上易感基因。百余种疾病！
 
 4. HLA与法医
-   
+
    利用HLA的多态性（但不会变）进行亲子鉴定和身份确认
 
 5. HLA与新型疫苗的开发
@@ -1171,7 +1171,7 @@ mainly: Mo/Mϕ, endothelial cells, fibroblasts
 
 #### Chemokine
 
-nomenclature: 
+nomenclature:
 
 - chemokine: family + L + num, e.g. CXCL8
 - receptor: family + R + num, e.g. CCR5
@@ -1192,12 +1192,12 @@ Three regions, for signaling.
 
 ### Subunits
 
-- Some subunits are for recognition; some for signaling. 
+- Some subunits are for recognition; some for signaling.
 
 - Some are shared, which have similar functions. e.g. IL-2/4/7/9/15/21
 
 - affinity
-  
+
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/7-receptor.png" alt="7-receptor" style="zoom:33%;" />
 
 ### Soluble cytokine receptor
@@ -1205,7 +1205,7 @@ Three regions, for signaling.
 Some are circulating and only have binding domains. Their work might be:
 
 - inhibiting: competing with membrane receptors
-- enhancing: transport and gather cytokines 
+- enhancing: transport and gather cytokines
 
 ## Biological effects
 
@@ -1255,12 +1255,12 @@ balances tolerance and response
 - 分泌物：眼泪、唾液，anti-bacterial substances
 
 - 免疫细胞
-  
+
   - 皮肤：皮试，试是否过敏
   - 黏膜：丰富的IgA、淋巴细胞、滤泡
 
 - 正常菌群
-  
+
   - 寄生在黏膜表面的，大量微生物
   - 提供营养、免疫防御（如分泌毒素），帮助塑造了免疫系统
 
@@ -1277,7 +1277,7 @@ balances tolerance and response
 ##### blood-brain barrier
 
 - prevents pathogen, lymphocytes and big molecules (like toxins)
-  
+
   > it's newly discovered that there exist lymph-vessels (淋巴管) in the brain, published in Nature
 
 - endothelial cells in the capilliaries are tighly joined, with astroyte (少突胶质细胞) forms 鞘壁 that covers the capilliaries
@@ -1301,22 +1301,22 @@ recognize **common structures** in pathogens directly
 > on the surface of macrophages, DC, organ, and serum, etc.
 
 - PRR inculdes
-  
+
   - membrane: mannose receptor (**MR**), scavenger receptor (**SR**, 清道夫受体), Toll-like receptor (**TLR**)
   - secretory: **MBL**, C reaction protein (**CRP**, C反应蛋白), LPS binding protein (**LBP**)
 
 - its ligand (模式分子)
-  
+
   - pathogen-associated molecular pattern (**PAMP**)
-    
+
     conserved, components on pathogen surface, like LPS, DNA, RNA, phospholipids
-  
+
   - damage-associated molecular pattern (**DAMP**)
-    
+
     HSP, uric acid crystal, ROS, degraded substance (like apoptosis)
 
 > for reference
-> 
+>
 > ![8-prr](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/8-prr.png)
 
 ##### ==macrophage==
@@ -1333,7 +1333,7 @@ recognize **common structures** in pathogens directly
 - pinocytosis
 
 - receptor-mediated endocytosis (like FcR, MR, complement ↓)
-  
+
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/8-receptor-mediated.png" alt="8-receptor-mediated" style="zoom:40%;" />
 
 ###### mode of destruction
@@ -1368,11 +1368,11 @@ morphological features: look like dendrite (树突)
   - immature: Ag uptake (by PRR, opsonic receptor)
   - mature: Ag presentation (by expressing MHC and co-stimulator)
 
-see [chapter 9](#Chapter-9-Antigen-Presenting) for more details! 
+see [chapter 9](#Chapter-9-Antigen-Presenting) for more details!
 
 ##### plasmacytoid DC (pDC)
 
-produces IFN-α/β 
+produces IFN-α/β
 
 #### Natural killer cells
 
@@ -1386,17 +1386,17 @@ Large granular lymphocytes. No sensitization required.
 | activating | MHC I <br />and other | ITAM           | KIR2/3DS, NKG2C-DAP12<br />non-MHC: NKG2D, NCR |
 
 > 免疫酪氨酸抑制性模体: ITIM
-> 
+>
 > 杀伤细胞免疫球蛋白样受体: KIR, 2$\sim$3 Ig domains
-> 
+>
 > 杀伤细胞凝集素样受体: KLR, CD94 and NKG2 family heterodimer
-> 
+>
 > short aa chain--activation, long aa chain--inhibition
-> 
+>
 > 自然细胞毒性受体: NCR
-> 
+>
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/8-nkr.png" alt="8-nkr" style="zoom:60%;" />
-> 
+>
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/8-nkr2.png" style="zoom:60%;" />
 
 ##### mode of action
@@ -1413,7 +1413,7 @@ against infected/tumor cell
 
 #### Innate-like lymphocytes
 
-固有样淋巴细胞 (ILL), is between adaptive and innate immune cells. 
+固有样淋巴细胞 (ILL), is between adaptive and innate immune cells.
 
 Restricted diversity, directly recognize pathogens and become activated.
 
@@ -1432,15 +1432,15 @@ A lot of other cells are involved in innate immune response, like mastocytes.
 - cytokines (see [chapter 7](#Chapter-7-cytokines))
 
 - other
-  
-  - antibacterial peptide. e.g. α-defensin (防御素) 
-    
+
+  - antibacterial peptide. e.g. α-defensin (防御素)
+
     > positive-charged, bind to LPS, 磷壁酸, etc.; hydrophobic part insert into the cell wall
-  
-  - lysozyme: lyse peptidoglycan on the cell wall of Gram-positive bacteria; 
-    
+
+  - lysozyme: lyse peptidoglycan on the cell wall of Gram-positive bacteria;
+
     > requires complement and antibody to destruct Gram-negative bacteria
-  
+
   - β-lysin (乙型溶素): heat-stable; only target G<sup>+</sup>
 
 ## Innate immune response
@@ -1511,7 +1511,7 @@ Two conditions must be satisfied to make it an APC:
 - from myeloid progenitor cells, everywhere in the body.
 - high expression of MHC II, can activate naive T cells (初始T细胞)
 
-classical DC also includes 
+classical DC also includes
 
 - follicular dendritic cells (FDC)
   - in follicles
@@ -1535,14 +1535,14 @@ and become mature DCs as they migrate into peripheral immune organs.
 | **main function**                            | Ag uptake and processing | Ag presentation    |
 
 > what does +- mean? 有但较少
-> 
+>
 > there are a few mature DCs in mucosa and thymus.
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/9-mature.png" alt="9-mature" style="zoom:45%;" />
 
 #### Other
 
-- plasmacytoid DC (pDC): produces **type I IFN** 
+- plasmacytoid DC (pDC): produces **type I IFN**
 - inflammatory DC: from monocytes, in inflammatory region
 - a few DCs negatively regulate .. like Myeloid-derived-suppressor DC (MSDC)
 
@@ -1556,10 +1556,10 @@ and become mature DCs as they migrate into peripheral immune organs.
   - clonal deletion of T cells in thymus (see [Negative selection](#T-Negative-selection))
   - T cell tolerance when immature DCs in tissues interacts with them
 
-Application: cancer vaccines. 
+Application: cancer vaccines.
 
 > Isolate monocytes from the patient and induce them to differentiate into immature DCs (or isolate these). Treat with tumor tissue lysate to maturate DCs. Inject them back.
-> 
+>
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/9-dc.jpg" alt="9-dc" style="zoom:60%;" />
 
 ### Monocytes/Macrophages
@@ -1568,7 +1568,7 @@ Application: cancer vaccines.
 - good at Ag uptake and processing (**both**)
   - expressing various receptors
   - three ways (see [chapter 8](#ways-of-cytosis-(吞噬)))
-- under the action of IFN-γ/TNF-α (from T cell, etc.) 
+- under the action of IFN-γ/TNF-α (from T cell, etc.)
   - high MHC I/II and co-stimulator expression, present Ag to **CD4/8<sup>+</sup>** T cell (not naive)
   - enhanced all kinds of "cytosis"
 - cannot activate naive T cells; so only in secondary response (**再次应答**)
@@ -1615,13 +1615,13 @@ m2c --> # --> membrane
 ```
 
 > phagosome: 吞噬体, phagolysosome: 吞噬溶酶体
-> 
+>
 > 内体：利用酸性来降解
-> 
+>
 > MHC二类小室 (M II C): MHC class II compartment, resembling lysosome
-> 
-> phagolysosome and M II C: acidic, rich in proteases, both involved in degradation! 
-> 
+>
+> phagolysosome and M II C: acidic, rich in proteases, both involved in degradation!
+>
 > into 10$\sim$30 aa fragments
 
 ##### route of MHC II
@@ -1634,14 +1634,14 @@ Ia-associated invariant chain, Ii chain, MHC分子相关恒定链
 - <u>prevent MHC from binding self-peptide!</u>
 - help MHC leave ER, then in the vesicles, it's degraded and only CLIP is left
 
-> Ia is actually a trimer. 
-> 
+> Ia is actually a trimer.
+>
 > CLIP: MHC II类分子相关的恒定链多肽 CLass II-associated Invariant chain Polypeptide.
-> 
+>
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/9-li.png" alt="9-li" style="zoom:50%;" />
 
 - the vesicle enters M II C, where CLIP is removed with the help of HLA-DM
-  
+
   > HLA-DO takes away HLA-DM
 
 - then Ag peptide is loaded and the complex is transported onto the cell surface
@@ -1656,7 +1656,7 @@ subgraph peptide
 v[viral protein] --ubiquitinated--> U-protein
 e[endogenous protein] --ubiquitinated--> U-protein
 U-protein --20S proteaosome--> ap[Ag peptide in cytosol]
-U-protein --26S immunoproteasome--> ap --TAP--> er[Ag in the ER] --ERAP--> m[mature peptide] 
+U-protein --26S immunoproteasome--> ap --TAP--> er[Ag in the ER] --ERAP--> m[mature peptide]
 end
 m --> pMHC
 subgraph TCR
@@ -1672,7 +1672,7 @@ w --no--> l[lysosomal degradation]
 
 - active β subunit of immunoproteasome is called LMP (巨大多功能蛋白酶体/低分子量多肽)
 - TAP: TAP1/TAP2 heterodimer, forming an ATP-dependent pore that opens upon Ag peptide binding
-  - TAP: ABC family. Requirement: 8$\sim$16-aa; basic//hydrophobic C terminal. 
+  - TAP: ABC family. Requirement: 8$\sim$16-aa; basic//hydrophobic C terminal.
 - ERAP: ER resident aminopeptidase (ER驻留的氨基肽酶), cut the peptide into 8$\sim$12-aa length.
 
 #### MHC structure
@@ -1693,11 +1693,11 @@ w --no--> l[lysosomal degradation]
 - no processing is needed
 
 - goes the same way as MHC II (cytosis, endosome)
-  
+
   > Sometimes they two bind to antigen on the cell surface before being recycled.
 
 - its carrier is MHC I-like molecule CD1
-  
+
   > CD1a$\sim$c : specific T cell; CD1d: NKT cell
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/10-apc2.png" alt="10-apc2" style="zoom:70%;" />
@@ -1719,7 +1719,7 @@ situations that can happen:
   - endogenous Ag is released out of the cell and binds to an empty MHC II
 
 > Application: MHC I tetramer, detecting Ag-specific CTL
-> 
+>
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/9-mhc4.png" alt="9-mhc4" style="zoom:60%;" />
 
 # Chapter 10 T/B cell development
@@ -1746,51 +1746,51 @@ Gene recombination: gene segments rearrange.
 #### Recombination
 
 > The real structure
-> 
+>
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/10-2-b-gene.png" alt="10-2-b-gene" style="zoom:70%;" />
 
 - C genes are joined only after VDJ (VJ) genes have combined
 
 - RAG1/2 cut the conservative sequences on both ends of gene segments and connect them
-  
+
   > RAG: recombination activating gene
-  > 
+  >
   > TdT also add dozens of nt to the break end (断端)
 
 - The overall steps are shown below
-  
+
   - heavy chain variable region first, light later
   - only one D/J is left
-  
+
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/10-2-vdj.png" style="zoom: 70%;" />
 
 - a B cell clone only express one type of BCR
-  
+
   - allelic exclusion (等位排斥): if one chromosome successfully undergo recombination, recombination on the other chromosome is inhibited
   - isotype exclusion (同型排斥): if κ chain ...., .... of the other κ chain as well as the λ chains is inhibited.
 
 #### Ab diversity
 
 - combinational diversity: the choice of V, (D,) J genes are independent
-  
+
   > an estimate. (add κ and λ) multiply these numbers!
-  > 
+  >
   > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/10-2-diversity.png" alt="10-2-diversity" style="zoom:80%;" />
 
 - junctional diversity: at the joining end, bases might be randomly added (by TdT) or deleted (not necessarily multiples of three)
 
 - receptor editing: some mIg expressing B cells encounter self-Ag, but clonal deletion does not occur. RAG is re-activated and light chain VJ is recombined to renew the specificity. (If not successful, the B cell undergoes apoptosis)
 
-- somatic hypermutation during affinity maturation (see [chapter 12](#Somatic-hypermutation)). 
-  
+- somatic hypermutation during affinity maturation (see [chapter 12](#Somatic-hypermutation)).
+
   The above three happen in the bone marrow, while this in periphery.
 
 #### Appendix
 
 > mIg and secr
-> 
+>
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/10-2-mig.png" style="zoom:40%;" />
-> 
+>
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/10-2-mig-gene.png" style="zoom:60%;" />
 
 ### B cell development
@@ -1801,7 +1801,7 @@ Gene recombination: gene segments rearrange.
 
 #### B Positive selection
 
-See [Chapter 12](#Events-here) in germinal center. 
+See [Chapter 12](#Events-here) in germinal center.
 
 Periphery tolerance, include somatic hypermutation, affinity maturation, etc.
 
@@ -1813,8 +1813,8 @@ If immature B cell (IgM) encounters self-Ag, it undergoes
 
 - clonal deletion: apoptosis
 
-- clonal anergy: not cleared but no response. 
-  
+- clonal anergy: not cleared but no response.
+
   > in some cases re-activated, causing autoimmunity
 
 - receptor editing: see above
@@ -1856,19 +1856,19 @@ If immature B cell (IgM) encounters self-Ag, it undergoes
 in thymic cortex (胸腺皮质), T cells need to acquire:
 
 - appropriate affinity with self MHC-peptide on the cortical thymic epithelial cell (TEC)
-  
+
   > 3–4 days after the thymocyte first expresses a functional receptor, cTECs give it a survival signal
-  > 
-  > 95% cells whose affinity with pMHC is too low undergo apoptosis and are cleared by macrophages. 
-  > 
+  >
+  > 95% cells whose affinity with pMHC is too low undergo apoptosis and are cleared by macrophages.
+  >
   > too high? not mentioned in the English books...
 
-- the class of MHC determines which one of CD4 and CD8 will be kept. 
-  
+- the class of MHC determines which one of CD4 and CD8 will be kept.
+
   get MHC restriction; becomes immature CD4<sup>+</sup> and CD8<sup>+</sup> T cell
-  
+
   > the other one never gets expressed then
-  > 
+  >
   > MHC restriction: T-cell responses depend on specific peptide+MHC
 
 #### T Negative selection
@@ -1878,9 +1878,9 @@ In the interface of thymic cortex and medulla (髓质),
 those which bind too strongly to self pMHC complex on the DC (macrophage) is cleared in a similar way.
 
 > to prevent autoreactive T cells from generating.
-> 
+>
 > peptide include (just scan):
-> 
+>
 > - from <u>ubiquitous protein</u>
 > - a subset of cells in the thymic medulla express small amounts of <u>tissue-specific antigens</u>
 >   - regulated by transcription factor "autoimmune regulator" (AIRE)
@@ -1937,29 +1937,29 @@ steps
 - Adhesion molecules form transient and reversible pairs; if TCR doesn't recognize pMHC, they separate.
 
 - If TCR binds pMHC, it induces a conformational change in LFA-1 which strengthen the binding and prevent cells from separating.
-  
+
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/10-lfa.png" alt="10-lfa" style="zoom:40%;" />
 
 - Many TCR-pMHC complexes locate themselves in the center of cell interface
-  
+
   - which is surrounded by adhesion molecule pairs, which makes a stable cell junction
   - These changes associate molecules to better transduce signals, i.e. activate pathways, remodel cytoskeleton, etc.
 
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/10-Differences-are-apparent-between-immunological-synapses-formed-by-B-cells-and-dendritic-cells.jpg" alt="10-immunological-synapses" style="zoom:80%;" />
-> 
+>
 > Two models. left: B lymphoma cells; right: dendritic cells.
-> 
+>
 > The immune synapse is also known as the supramolecular activation cluster or *SMAC*
-> 
+>
 > LFA-1: Lymphocyte function-associated antigen 1, in lectin superfamily
-> 
+>
 > Left model (as in text book):
-> 
+>
 > - c: central, except CD28, CD2, etc.; also CD3, Lck, ZAP70, PKC-θ, etc.
 > - p: peripheral. LFA-1-rich; d: distal. microclusters that resemble cSMAC
-> 
+>
 > Right model: DC typically form “multifocal” synapses where TCR-containing clusters are segregated from CD28/PKC-θ containing clusters and no clear “ring” of LFA-1 is formed. (contradiction?)
-> 
+>
 > *Roufaiel, Marian & Wells, James & Steptoe, Raymond. (2015). Impaired T-Cell Function in B-Cell Lymphoma: A Direct Consequence of Events at the Immunological Synapse?. Frontiers in Immunology. 6. 258. 10.3389/fimmu.2015.00258.*
 
 ### CD4<sup>+</sup> T cell activation
@@ -1984,13 +1984,13 @@ Adhesion molecule like CD28
 
 They mediates <u>complete activation</u> by additional proliferation signal, expression of cytokine and its receptor.
 
-Without them, T cell anergy (to avoid excessive activation)! 
+Without them, T cell anergy (to avoid excessive activation)!
 
 Negative signal also inactivtes T cell
 
 > - engineered CTLA-4 (Abatacept), inhibition, autoimmune disease.
 > - CTLA-4 mAb, activation, cancer
-> 
+>
 > CD28 -- IL-2 production, competes with CTLA-4 for CD80/86
 
 #### 3. Cytokines
@@ -2014,7 +2014,7 @@ Roughly the same. All karyocytes express MHC I, but target cell may not express 
 Ag signal$+$cytokines from Th cell
 
 > DCs express both MHC I and II. Th produces IL-2
-> 
+>
 > ![10-th-dep](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/10-th-dep.jpg)
 
 #### Th indepedent
@@ -2024,7 +2024,7 @@ Ag signal$+$cytokines from Th cell
 - cross-priming: APCs also process exogenous Ag. see [chapter 9](#Cross-presentation), the figure for more.
 
 - virus-infected APCs assemble MHC I and viral peptide in them.
-  
+
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/10-Virus-infected-APCs-present-viral-peptides-in-the-context-of-MHC-class-I-or-II-to-naive.jpg" alt="10-Virus-infected" style="zoom:70%;" />
 
 ## T cell effective stage
@@ -2065,7 +2065,7 @@ class Th1,Th2,Th17,CTL subcell
 - Th1 positive feedback, strengthen DC and itself
 
 - Th1 and Th2, both from Th0, inhibiting each other?
-  
+
   > no clear result on IL-2's effect on Th2....??
 
 - CTL is activated by IL-2 (self, Th1)
@@ -2103,9 +2103,9 @@ class Th1,NK,Mϕ,CTL,neutrophil,B subcell
 - Th1 and **macrophage** activate each other; monocyte diff and chemotaxis
 
 - various cytokines activate NK, CTL, neotrophil, B cell, ....
-  
+
   A lot is not shown...
-  
+
   > IFN-γ activates almost all these related cells... TNF-α is also produced by NK, Mϕ, CTL, ...
 
 ##### Other Th cell and effects
@@ -2161,25 +2161,25 @@ A brief recitation
 feature: Ag-specificity, MHC-restriction
 
 1. 效-靶细胞结合
-   
+
    CTLs migrate following chemokines, contact with the target cell, form immunological synapse
 
 2. CTL polarization
-   
+
    Upon recognizing pMHC, TCR and related molecules move towards the interface. Some organelles also re-organize so that the granules (containing perforin/granzyme) can be released.
-   
+
    > polarization: cellular components aggregate on one specific side of the cell
 
 3. 致死性攻击
-   
+
    - perforin: forms a pore on the membrane like C9 does, letting in water that burst the cell
    - granzyme: get inside through the pore, cleaves Bid (and some others) to initiate apoptosis
    - FasL, TNF-α, etc: bind on the receptor and send an apoptosis signal. Fas: caspase-8 pathway
-   
+
    > perforin: pore forming protein, also facilitates granzyme getting inside the cell. need Ca<sup>2+</sup>
-   > 
+   >
    > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/10-cte.png" alt="10-cte" style="zoom:80%;" />
-   > 
+   >
    > > DTH: delayed-type hypersensitivity
 
 ## Effector T cell fate
@@ -2193,7 +2193,7 @@ feature: Ag-specificity, MHC-restriction
    - less requirement on co-stimulators, more cytokine production
 
 > CD8记忆T细胞。研究结果提示
-> 
+>
 > 1. CD8 T<sub>m</sub>的产生无需T细胞分泌的细胞因子参与；
 > 2. CD8 T<sub>m</sub>的维持无需抗原持续刺激和B细胞参与，亦无需Th辅助，但有赖于与MHC I类分子的接触，可能需要T细胞CD28与CD80和CD86结合所产生的共刺激信号持续存在；
 > 3. IFN-α及IL-15等细胞因子在维持CD8 T<sub>m</sub>中可能发挥重要作用。
@@ -2214,11 +2214,11 @@ B细胞介导的免疫应答
 
 BCR-CD79a/b-CD19/CD21/CD81 binds Ag
 
-- BCR binds Ag. 
-  
+- BCR binds Ag.
+
   1) causing the internalization of Ag-Ab complex for Ag presentation
   2) the activation pathway looks like TCR
-  
+
   > - CD79a/b (also known as Igα/β): like CD3, transduction into intracellular region, with ITAM motif
   > - Fyn, Lyn: like Lck; Syk: like ZAP70?
   > - finally NFAT, NFκB, etc.
@@ -2226,11 +2226,11 @@ BCR-CD79a/b-CD19/CD21/CD81 binds Ag
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/12-bcr.png" alt="12-bcr" style="zoom:70%;" />
 
 - Co-receptor: CD19/CD21/CD81
-  
+
   > - CD21: recognizes C3d (C3b is cleaved) that is binding on the Ag
   > - CD81 stabilizes the coreceptor complex
   > - CD19 conformational change, Tyr residues are phosphorylated, recruit SH2 adaptors (Fyn, etc.)
-  
+
   the signal might be amplified 1000 times
 
 - CD79a/79b heterodimer, help transmit the signal, just like CD3
@@ -2250,15 +2250,15 @@ Other than the primary signal, it also needs
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/12-secondary.png" alt="12-secondary" style="zoom:25%;" />
 
 - secondary signal like CD40L from Th2/Tfh2 cell
-  
+
   > without that, B cell anergy
 
 - cytokines from Th cells, macrophages, etc.
-  
+
   so that B cells differentiate and produce Ab.
-  
+
   > Remember, B cells can act as APC that helps with differentiation, and express B7 for CD28 to activate Th cells. The activation is **mutual**.
-  > 
+  >
   > With multiple adhesion molecule pairs, they form an immunological synapse.
 
 ```mermaid
@@ -2279,12 +2279,12 @@ germinal center: 生发中心
 | primary response   | bone marrow | produce IgM       |
 | secondary response | follicles   | high affinity IgG |
 
-Germinal center is formed (about 7 days after infection). 
+Germinal center is formed (about 7 days after infection).
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/12-gc.png" alt="12-gc" style="zoom:60%;" />
 
 > centroblast (生发中心母细胞): the core
-> 
+>
 > centrocyte (中心细胞): differentiated from centroblast
 
 | zone  | cell type            | activity                                          | gathering |
@@ -2293,9 +2293,9 @@ Germinal center is formed (about 7 days after infection).
 | light | centrocyte, fDC, Tfh | the opposite; further differentiation (see below) | loosely   |
 
 > fDC: concentrate Ag on the surface using FcR and CR, for B cell to recognize. Maintain memory
-> 
+>
 > Tfh cells provide co-stimulatory CD40L
-> 
+>
 > mIg: 膜免疫球蛋白, BCR (the same gene as Ab), heavy chain: IgM or IgD (symbol of B cell maturation)
 
 #### Events here
@@ -2310,7 +2310,7 @@ All these are Ag and Th cell dependent!
 
 BCR genes gain mutations highly frequently: $10^{-3}$ in Fv!
 
-> The second stage for B cell to get diversity. 
+> The second stage for B cell to get diversity.
 
 ##### Ig affinity maturation
 
@@ -2389,7 +2389,7 @@ Secondary response can be effective months or years after the primary response.
 ## Ab: biological functions
 
 1. neutralization
-   
+
    > target toxins; prevent the pathogens from adhesion
 
 2. complement activation
@@ -2417,7 +2417,7 @@ Immune Tolerance: a state of unresponsiveness of the immune system to **specific
 - no immune molecules or activated lymphocytes
 - these antigens are called tolerogen (耐受原)
 
-Different from immunodeficiency! 
+Different from immunodeficiency!
 
 > That's abnormal development, proliferation, differentiation and metabolism of lymphocytes.
 
@@ -2444,9 +2444,9 @@ the opposite of [immunogenicity](#Immunogenicity:-influencing-factors)
 other
 
 - 口服 > 静脉＞腹腔＞肌肉＞皮内＞皮下
-  
+
   > depends on other factors, so a substance can be both antigen and tolerogen
-  > 
+  >
   > oral: Ag cleared by mucosa immunity?
 
 - a state of immune cell generation (embryo, infants; immune clearance) is beneficial for tolerance
@@ -2472,27 +2472,27 @@ b --strong--> re[receptor editing]
 
 ### Peripheral tolerance
 
-Still, some autoreactive cells evade, as some of the tissue proteins are not present in thymus/bone marrow. 
+Still, some autoreactive cells evade, as some of the tissue proteins are not present in thymus/bone marrow.
 
 Mechanisms are:
 
 - **clonal ignorance** (克隆忽视): low expression/affinity Ag (<u>primary</u>) cannot stimulate lymphocytes
 
 - **clonal deletion**: with Ag, without <u>secondary</u> signal/cytokines. autoreactive lymphocytes undergo apoptosis
-  
+
   > e.g. B cells exposed to soluble Ag monomers
 
-- **clonal anergy**: the same, but some are always in existence. 
-  
+- **clonal anergy**: the same, but some are always in existence.
+
   > clonal ignorance/anergy might be reversed and cause autoimmunity
 
 - **regulatory cells**: T<sub>reg</sub>, regulatory B cell/DC, etc.
-  
+
   > - iT<sub>reg</sub>: like Th17, from naive T cell
   > - nT<sub>reg</sub>: natural, from autoreactive T cell in negative selection
 
 - **immunological privileged site** (免疫豁免部位): lymphocytes cannot enter 中枢神经组织、胎盘，眼前房等
-  
+
   > barrier; FasL, TGF-β; Th2 response, etc.
 
 ## Establishment and break
@@ -2501,20 +2501,20 @@ Mechanisms are:
 
 ### Establishment/Induction
 
-建立免疫耐受, for self Ag, [hypersensitivity](#Chapter-14-Hypersensitivity) or transplant. 
+建立免疫耐受, for self Ag, [hypersensitivity](#Chapter-14-Hypersensitivity) or transplant.
 
 > only those mentioned in the slides are listed. check [influencing factors](#Influencing-factors) for more
 
 - central: bone marrow/thymus transplant; inject Ag into the thymus
 
 - peripheral
-  
+
   - stronger tolerogen (1st signal): intravenous or oral introduction; soluble antigen, etc.
   - blocking co-stimulatory signals (2nd signal)
   - inducing immune deviation: Th2 response (e.g. by cytokines)
   - adoptive T<sub>reg</sub> cell (or other tolerated cells) transfer
   - peptide antagonists: analogs of self peptide; binds autoreactive TCR but will not send the activation signal
-  
+
   > Ag presented by immature APC; lack of B/T cell cooperation
 
 ### Break
@@ -2522,19 +2522,19 @@ Mechanisms are:
 打破免疫耐受, for infection or tumor therapy
 
 - first signal
-  
+
   > strengthen DC function by: adding adjuvant; expressing co-stimulatory molecules for CD8<sup>+</sup> T cell
 
 - secondary signal
-  
+
   > agnostic Ab of co-stimulatory molecules; antagonistic Ab of inhibitory molecules like PD-1, CTLA-4
 
 - cytokines
-  
+
   > proper usage of stimulatory cytokines and Ab of regulatory cytokines
 
 - T<sub>reg</sub> cells
-  
+
   > eliminate T<sub>reg</sub> cells by targeting specific receptors like CD25, TLR9
 
 # Chapter 14 Hypersensitivity
@@ -2550,38 +2550,38 @@ immediate hypersensitivity (速发型超敏反应) or allergy (过敏反应)
 #### Components
 
 - allergen (变应原): antigens that induce IgE production and type I hypersensitivity.
-  
+
   > through all pathways can me meet allergens
-  > 
+  >
   > - 呼吸道：花粉，粉尘
   > - 消化道：蛋，奶，海鲜
   > - 皮肤：化妆品，染发剂
   > - 其他：药物，金属
 
 - IgE: the lowest Ab in serum, concentrated in the tissues.
-  
+
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/14-ige.png" alt="14-ige" style="zoom:30%;" />
-  
+
   'shrimp-like' structure
-  
+
   - Cε2 of IgE is correspond to the hinge in IgG, Cε3 is like CH2
   - Fab of IgE is less flexible
 
 - receptor: FcεR
-  
-  > - FcεR I: high affinity, high expression in mastocytes and basophils; 
+
+  > - FcεR I: high affinity, high expression in mastocytes and basophils;
   >   - slightly less expression in eosinophils
   >   - IgE won't disassociate from it, because of the hydrophobic interface
   > - FcεR II: low affinity, universally expressed. CD23
   >   - on B cell, IgE-Ag complex reduces IgE production
   >   - but liquid phase CD23 binds B cell CD21 to enhance IgE production...
-  
+
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/14-cells.png" alt="14-cells" style="zoom:40%;" />
-  
+
   <center>left: basophil; right: mastocyte</center>
 
 - cells
-  
+
   - mast cell
     - a mast cell expresses half a million copies of FcεR I, which can bind a vast diversity of IgE
     - long memory: may last a life time
@@ -2615,9 +2615,9 @@ recall [chapter 11](#Other-Th-cell-and-effects) for Th2 response
 When the allergen enters our body **again**,
 
 - IgE cross-linking: upon IgE binding the allergen, multiple FcεR molecules form a complex and send the activation signal through its cytosolic ITAMs.
-  
+
   > a single FcεR cannot transduce the signal
-  > 
+  >
   > abnormal activation: anti-IgE Ab; anti FcεR Ab
 
 - degranulation: the effect is, granules of inflammatory factors is released
@@ -2638,13 +2638,13 @@ When the allergen enters our body **again**,
 |                 |                       |                     |
 
 - pre-synthesized factors: granular contents, released at once
-  
+
   > - histamine: 4 types
   > - kininogenase (激肽原酶)
 
-- 
+-
 
-> - granular contents (including  and proteases) 
+> - granular contents (including  and proteases)
 > - inflammatory cytokines
 > - lipid inflammatory molecules (leukotrienes and prostaglandins).
 
@@ -2705,13 +2705,13 @@ Systemic allergic reactions can occur very rapidly and be life-threatening. They
 1. 查清过敏原，避免接触
 
 2. 脱敏（desensitization）治疗
-   
+
    - 异种血清脱敏：短间隔，小剂量，多次注射。
-     
+
      > all granules are released, can no longer be sensitized; might be temporary
-   
+
    - 特异性变应原脱敏：长间隔，小剂量，反复皮下注射
-     
+
      > produce IgG, inhibit switch to IgE; block the allergen; induce T<sub>reg</sub> cell
 
 ##### 药物治疗
@@ -2765,11 +2765,11 @@ If you have blood type A Ag, you will also have IgM antibody for blood type B Ag
 If you are Rh<sup>-/-</sup>, you will have anti-Rh Ab.
 
 - transfusion
-  
+
   > with wrong ABO type
 
 - hemolytic disease of the newborn (HDN, 新生儿溶血)
-  
+
   - ABO hemolysis
   - Rh hemolysis
 
@@ -2865,8 +2865,8 @@ types of transplantation
 ### Innate immunity
 
 - initiation
-  - damage: 
-- 
+  - damage:
+-
 
 ### Adaptive immunity
 
@@ -2910,7 +2910,7 @@ requirements:
 - mature immune cells in the graft
 - immune suppression in the host
 
-GVL: graft versus lymphoma. 
+GVL: graft versus lymphoma.
 
 攻击白血病细胞. balance!
 
@@ -2923,17 +2923,17 @@ GVL: graft versus lymphoma.
 - HLA
 
 - cross matching
-  
-  - 
+
+  -
 
 - pool reactive Ab
-  
+
   anti-HLA Ab
 
 > 混合淋巴细胞反应：host and graft
-> 
+>
 > 如果增殖，说明能发生反应
-> 
+>
 > 丝裂霉素处理，阻断一方的增殖，便于观察另一个
 
 ### Immunosuppressant
@@ -2950,7 +2950,7 @@ GVL: graft versus lymphoma.
 
 - organ shortage
 - 离体器官 storage
-- 
+-
 
 # Chapter 16 Tumor Immunology
 
@@ -2981,7 +2981,7 @@ tumor cell usually gives endogenous Ag
   - inhibit DC
   - induce apoptosis (PD-L1, etc)
 - anti-apoptosis
-- fdsf: too fast growth (e.g. in children), too late to fight 
+- fdsf: too fast growth (e.g. in children), too late to fight
 
 ## Application
 
@@ -2990,16 +2990,16 @@ tumor cell usually gives endogenous Ag
 early!
 
 - Soluble Ag and Ab
-  
+
   take serum
-  
+
   - AFP, etc
   - Ab
 
 - cell surface Ag
-  
+
   - isotope/fluorophore-labeled Ab, combined with iconography
-    
+
     > need more/better label
 
 ### Treatment
@@ -3011,14 +3011,14 @@ early!
 enhance anti-tumor activity
 
 - non-specific
-  
+
   - adjuvant like 卡介苗，短小棒状杆菌，多糖，OK432等
   - oncolytic virus
 
 - specific: cancer vaccine
-  
+
   > mostly therapeutic, not preventive, not those which blocks cancer-related virus
-  
+
   - inactivated/attenuated vaccine
   - DC vaccine
   - polypeptide (with adjuvant) vaccine
@@ -3028,24 +3028,24 @@ enhance anti-tumor activity
 inject effectors
 
 - antibody
-  
+
   - block key pathways (VEGF, CD20)
   - a tool for targeting (multi-functional/bi-specific Ab)
-  
+
   > drawbacks: cannot get through barriers; rejected by the host
 
 - cytokine
-  
+
   > great side effect
 
 - lymphocytes
-  
+
   - CIK: cytokine-induced killer (from the patient), inject back
-  
+
   - TIL: tumor-infiltrating lymphocyte, activation--inject back
-    
+
     > these two cannot overcome immunosuppression
-  
+
   - CAR-T: chimeric antigen receptor.
 
 ##### CAR-T
@@ -3062,11 +3062,11 @@ inject effectors
 ### Tumor Ag identification
 
 - cDNA library of tumor cells, screen with tumor-specific T cells (tumor cell killed)
-  
+
   > variant: wash out all peptide on the surface of tumor cells. sequence the protein and make a llibrary, still screening...
 
 - NGS
-  
+
   > find mutations, analyze epitopes *in silico*, verification
 
 # Chapter 17 Immunodeficiency
@@ -3080,7 +3080,7 @@ Definition: sydromes caused by loss of immune system components and dysfunction
 Features
 
 - repeated, chronic, uncontrollable, occasional infection
-  
+
   > 机会性病原体引发的感染。这些病原体寄生于免疫功能正常的健康宿主时不致病，但会在宿主出现免疫缺陷时入侵宿主。
 
 - dysfunction, prone to cancer
@@ -3097,14 +3097,14 @@ loss of function, usually in infants, causes early death
 2. 抗体缺陷为主的免疫缺陷
 3. 巨噬细胞缺陷
 4. 补体缺陷
-5. 其他免疫缺陷 
+5. 其他免疫缺陷
 
 > SCID: severe combined immunodificiency disease
-> 
+>
 > 多数为常染色体阴性遗传，如ADA（腺苷脱氨酶）缺陷，少数为X-连锁（IL-2RG）及其他基因缺陷，累及T细胞和B细胞。T<sup>-</sup>B<sup>+</sup> or T<sup>-</sup>B<sup>-</sup>
-> 
+>
 > T cell receptor excision circles (TRECs) test: TCR形成的过程中，可变区片段发生基因重组，其间DNA形成环形DNA被切除。用PCR方法扩增可得到相应的扩增产物。
-> 
+>
 > 干细胞移植是治疗的主要手段，干细胞移植结合基因编辑是未来的发展方向
 
 ## Acquired immunodeficiency
@@ -3116,7 +3116,7 @@ loss of function, usually in infants, causes early death
 > ...引起的免疫缺陷
 
 1. 药物，辐射
-   
+
    > 糖皮质激素，免疫抑制剂，化疗，放疗
 
 2. 营养不良
@@ -3145,7 +3145,7 @@ loss of function, usually in infants, causes early death
 2. **潜伏期**：CD4<sup>+</sup>T细胞持续降低，免疫系统遭破坏
 
 3. **症状期**：出现发热，淋巴结肿大等症状
-   
+
    > 伤口难以愈合，持续加重的疲劳，无力，头痛，体温升高，皮肤感染，腹泻，体重下降，持续的发热，肺炎，持续的干咳，发热，皮肤和指甲真菌感染，疼痛，疱疹
 
 4. 典型的AIDS**发病期**：机会感染，肿瘤，神经系统症状
@@ -3173,13 +3173,13 @@ loss of function, usually in infants, causes early death
    d. 与未感染细胞融合造成健康细胞的感染
 
 2. 病毒的间接损伤作用
-   
+
    1）免疫病理损伤
-   
+
    2）诱导细胞死亡
 
 3. 对其他免疫细胞的影响
-   
+
    - B细胞：多克隆活化
    - 巨噬细胞、树突细胞： HIV的庇护所，传染源
    - NK细胞：功能受损
@@ -3219,23 +3219,23 @@ very much resembles hypersensitivity in that we should inhibit it
 a bit similar to [Ag in type II hypersensitivity](#Sensitization)
 
 - Antigens in immunologically privileged site.
-  
+
   secluded/sequestered antigen (隐蔽/隔离抗原), proteins in those sites like crystallin, never get tolerated, causing a response (to eyes,交感性眼炎)
 
 - Alteration of self antigen (自身抗原改变)
-  
+
   e.g. mutation caused by physical/chemical factors, infection, or [hapten](#Concepts) binding. 类风湿
 
 - Molecular mimicry (分子模拟)
-  
+
   pathogens having similar epitopes as ours
 
 - Epitope spreading (表位扩展)
-  
+
   cells that target cryptic epitopes escape from negative selection. e.g. 系统性红斑狼疮
-  
+
   > primary(原发)/dominant(显性) epitope: the first to induce a response
-  > 
+  >
   > secondary(继发)/cryptic(隐形) epitope: buried or low content
 
 #### Genetics
@@ -3245,7 +3245,7 @@ a bit similar to [Ag in type II hypersensitivity](#Sensitization)
 - or they helps with molecular mimicry
 
 - deficiency in genes of complement components, like C1q, C4
-  
+
   > harder to sweep away Ag-Ab complex, continuous stimulation
 
 #### Other
@@ -3257,25 +3257,25 @@ a bit similar to [Ag in type II hypersensitivity](#Sensitization)
 ### Mechanisms of abnormal tolerance
 
 - abnormal negative selection
-  
+
   > e.g. deficiency in Fas, FasL, AIRE gene
 
 - breaking [immunological ignorance](#Peripheral-tolerance) (low conc Ag)
-  
+
   > e.g. infected DC, [Toll-Like Receptor](#pattern-recognition-receptor) activation (clearance of apoptotic debris)
 
 - polyclonal Ag (on specific bacteria/virus) activation.
 
-- [Activation-Induced Cell Death](#Effector-T-cell-fate) disorder 
-  
+- [Activation-Induced Cell Death](#Effector-T-cell-fate) disorder
+
   > e.g. Fas gene
 
 - T<sub>reg</sub> cell abnormality
-  
+
   > Foxp3 knock-out
 
 - MHC II abnormal expression on target cell
-  
+
   > IFN-γ induces pancreatic B cell...
 
 ## Mechanism of damage
@@ -3283,19 +3283,19 @@ a bit similar to [Ag in type II hypersensitivity](#Sensitization)
 ### Self Ab-mediated
 
 - directly killing cells
-  
+
   > complement, neutrophils, opsonization, ADCC
-  > 
+  >
   > e.g. 自身免疫性血细胞减少症, alteration on red blood cells
 
 - cell dysfunction
-  
-  > activation: mimic ligands (弥漫性甲状腺肿, TSH) 
-  > 
+
+  > activation: mimic ligands (弥漫性甲状腺肿, TSH)
+  >
   > or inihibition: block receptors (重症肌无力, AchR)
 
 - Ag-Ab complex, [type III hypersensitivity](#Type-III-Damage)
-  
+
   > complement, inflammatory cell infiltration
 
 ### Autoreactive T cell-mediated
@@ -3303,7 +3303,7 @@ a bit similar to [Ag in type II hypersensitivity](#Sensitization)
 Th1 and CTL, [type IV hypersensitivity](#Type-IV)
 
 > e.g. 胰岛素依赖性糖尿病 (CTL)
-> 
+>
 > may cooperate with Ab
 
 ## Autoimmune disease
@@ -3319,15 +3319,15 @@ types: systematic (全身性) or organ-specific (器官特异性)
 ### Prevention and treatment
 
 - prevent abnormal tolerance
-  
+
   > avoid being infected; be careful with drugs (alteration)
 
 - block responses to self Ag
-  
+
   > treatment: immunosupressant; block related cytokines, Ab and receptors (by Ab, monovalent Ag,..)
 
 - re-establish tolerance to self Ag
-  
+
   > oral introduction; DC to mimic negative selection, clear those cells
 
 ## Homework
@@ -3335,75 +3335,75 @@ types: systematic (全身性) or organ-specific (器官特异性)
 一、不定项选择题
 
 1. 关于自身免疫，正确的说法是：
-   
+
    A．自身免疫都是有害的
-   
+
    B．自身免疫是生理状态存在的现象，对于维持内环境的稳定具有重要意义
-   
+
    C．自身免疫如果对组织造成持续严重的损伤，则成为自身免疫性疾病
-   
+
    D．自身免疫有利于清除衰老、坏死的组织。
-   
+
    E．自身免疫不产生明显的炎症
-   
+
    > BCD
-   > 
+   >
    > anti-tumor?
 
 2. 自身抗体的致病机制包括：
-   
+
    A．针对细胞表面抗原的自身抗体引发补体活化，破坏细胞
-   
+
    B．针对细胞表面受体的自身抗体阻断受体与配体的结合
-   
+
    C．针对细胞表面受体的自身抗体模拟其配体的功能，对细胞产生持续的激活作用
-   
+
    D．自身抗原与抗体结合后通过免疫调理作用和ADCC效应引起组织损伤
-   
+
    E．循环免疫复合物沉积引起沉积部位的炎症反应
-   
+
    > ABCDE
 
 3. 正常组织蛋白成为被免疫攻击的自身抗原的原因包括：
-   
+
    A．隐蔽抗原的释放
-   
+
    B．自身蛋白因为理化、感染等因素发生改变
-   
+
    C．病原微生物与宿主的组织细胞有相似的蛋白结构
-   
+
    D．随着病程的进展，组织破坏的加剧，更多的表位暴露于免疫系统
-   
+
    E．生活习惯的影响
-   
+
    > ABCDE
 
 4. 病原体感染诱发自身免疫性疾病可能与以下哪些因素有关：
-   
+
    A．改变细胞表面抗原
-   
+
    B．某些成分作为超抗原多克隆激活细胞
-   
+
    C．基因突变导致的中枢耐受失败
-   
+
    D．携带易感基因
-   
+
    E．分子模拟
-   
+
    > ABE
 
 5. 交感性眼炎的发生与以下哪种因素有关？
-   
+
    A．隐蔽抗原的释放
-   
+
    B．自身蛋白因为理化、感染等因素发生改变
-   
+
    C．分子模拟
-   
+
    D．表位扩展
-   
+
    E．调节性T细胞功能异常
-   
+
    > A
 
 # Chapter 18 Application
@@ -3413,13 +3413,13 @@ Only in appropriate concentration when
 Protein assay
 
 - traditional serology method: observation
-  
+
   - agglutination reaction (凝集反应): on the surface of granules (virus, bacteria, etc.)
   - precipitation
-  - 
+  -
 
 - s
-  
+
   - soluble:
   - surface Ag: immunohistochemical
 
@@ -3452,7 +3452,7 @@ ELISA: soluble protein assay. indirect ELISA: enzyme on the secondary Ab (二抗
 - immobilize the Ag on a plate (solid medium)
 - add serum from the patient, wash off other protein until only specific Ab is left
 - add enzyme-linked 2nd Ab. The amount of enzyme left is correlated to the conc of patient Ab
-- 
+-
 
 Advantages:
 
@@ -3466,7 +3466,7 @@ Disadvantages:
 Sandwich ELISA: more used for soluble protein
 
 - immobilize its Ab on the plate. Add sample and wash
-- 
+-
 
 Colloidal gold
 
@@ -3494,14 +3494,13 @@ magnetic beads:
 > 某AIDS患者罹患白血病，在接受了CCR5Δ32/Δ32基因型的同种异体造血干细胞移植后，HIV也被彻底清除。
 
 1. 请根据所学免疫学知识，解释HIV消失的原因。
-   
+
    接受移植后发生了移植物抗宿主反应（GVHR），患者原有的淋巴细胞被清除，而移植来的造血干细胞分化产生的淋巴细胞都是CCR5Δ32/Δ32基因型，不表达正常的CCR5蛋白，该病人体内也不含通过其他受体入侵的HIV变体，所以不能被HIV侵入。于是HIV将逐渐消失。
 
 2. 非CCR5Δ32/Δ32的同种异体造血干细胞移植是否可以起到相同的作用？
-   
+
    可能只能治好白血病，但不能使HIV消失。因为新的淋巴细胞仍表达正常的CCR5蛋白，能被HIV侵入。
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/hw2.jpg" alt="hw2" style="zoom:40%;" />
 
 完结撒花！感谢您的陪伴！
-
