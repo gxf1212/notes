@@ -162,7 +162,7 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
 - old vpn for Linux: https://github.com/hannuo/ssr-linux-client-electron
 
-- 22.2.9 [0.2.7](https://github.com/shadowsocksrr/electron-ssr/releases/tag/v0.2.7) and [0.2.6](https://github.com/qingshuisiyuan/electron-ssr-backup/releases/tag/v0.2.6)
+- 22.2.9 update: [0.2.7](https://github.com/shadowsocksrr/electron-ssr/releases/tag/v0.2.7) and [0.2.6](https://github.com/qingshuisiyuan/electron-ssr-backup/releases/tag/v0.2.6)
 1. dependencies (as said in Debian系列安装与配置[Ubuntu.md](https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md))
    
    ```shell

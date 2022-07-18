@@ -278,7 +278,7 @@ electerm是一个Linux端的ssh客户端，国产软件。
 
 缺点：
 
-- 感觉有时鼠标点击有点不灵敏……准确地说是传输大量文件时就会很卡。。（重启软件就好了）
+- 感觉有时鼠标点击有点不灵敏……准确地说是传输大量文件时就会很卡。。（重启软件就好了）可以另外开一个window
 - 命令行字体倒是能变，但是这个UI字有点小不能调（可以去提个issue）
 
 下载地址：https://electerm.html5beta.com/ 
@@ -1430,7 +1430,7 @@ can just **paste into Typora**! But remove the linebreaks....
 
 problem: LaTeX formula exported as svg...
 
-
+to paste tables into lakebook, <u>create a table</u> and paste, to keep in a proper format
 
 ### cloud server
 

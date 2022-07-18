@@ -820,6 +820,21 @@ just **double click it** （不能指定目录），进入“软件安装”
 
 - 安装新版本，直接dpkg新的包，就能覆盖安装
 
+- Re: dpkg进程卡住，而且杀不死。解决方法：输入以下命令
+
+  ```shell
+  sudo rm /var/cache/apt/archives/lock
+  sudo rm /var/lib/dpkg/lock
+  sudo apt-get update
+  sudo dpkg —configure -a
+  ```
+
+  问题就解决了！
+
+- 
+
+  
+
 debug
 
 - 死机 when installing .deb, reboot. https://mlog.club/article/3533423
@@ -1137,33 +1152,69 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
 - 
 
-  ## fundamental softwares
+  ## upgrading release
 
+  to unbuntu22.04
+  
+  https://os.51cto.com/article/705797.html
+  
+  1. 备份 (if necessary)
+
+     > a tool to create a system image: https://linuxconfig.org/ubuntu-20-04-system-backup-and-restore
+  
+  2. 卸载cuda和nvidia驱动，最好禁用第三方 PPA
+  
+  3. 更新软件
+  
+     ```shell
+     sudo apt update && sudo apt full-upgrade
+     sudo apt autoremove
+     sudo dpkg reconfigure -a # if necessary
+     ```
+  
+  4. `update-manager -d -c`，一步步完成
+  
+     please stay in front of the computer to press 'ok'
+  
+  5. restart. 修复包，更新软件，装回东西
+  
+  > 2022.7.18 notes
+  >
+  > 现在装的还是dev版。新特性
+  >
+  > - UI美化，调颜色等
+  > - 多个workspace，触控屏
+  > - 自带截屏录屏工具
+  > - snap不好
+  > - ……
+  
+  ## fundamental softwares
+  
   1. VScode
      
      > ```shell
      > dpkg -i --instdir=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs code_1.52.1-1608136922_amd64.deb
      > ```
-
+  
   2. realvnc
      
      ```shell
      systemctl start vncserver-x11-serviced.service
      systemctl enable vncserver-x11-serviced.service
      ```
-
+  
   3. GitHub Desktop on Linuxhttps://codechina.csdn.net/mirrors/shiftkey/desktop?utm_source=csdn_github_accelerator
-
+  
   4. xshell http://www.netsarang.com/download/free_license.html
-
+  
   5. https://linux.wps.cn/
-
+  
   6. weather  https://www.ywnz.com/linuxjc/4429.html
-
+  
   7. insync, sync for google, onedrive, dropbox
      
      https://cn.go-travels.com/98643-how-to-use-google-drive-linux-4176144-1291281
-
+  
   8. 
 
 > browsers
