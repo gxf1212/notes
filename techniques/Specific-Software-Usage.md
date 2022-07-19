@@ -1594,7 +1594,8 @@ anaconda环境信息同步？
 
     ```shell
     git clone xxx.git
-    git remote set-url origin https://<your token>@<your username>/<your repo name>.git
+    git remote set-url origin https://<your token>@github.com/<your username>/<your repo name>.git
+    # git r
     ```
 
 11. 
