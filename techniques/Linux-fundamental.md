@@ -1120,29 +1120,19 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
   LC_MEASUREMENT="zh_CN.UTF-8"
   ```
 
-- 安装vi，git, alacarte, gpart, gparted, ethtool, 等基本工具
-
-  configure git
+- 安装vi，git, alacarte, gpart, gparted, ethtool, 等基本工具. configure git
 
   ```shell
   sudo apt-get install vi git alacarte gpart gparted ethtool
   ```
-
+  
 - chrome浏览器，安装vpn，翻墙、校园网
 
   > https://www.google.cn/intl/zh-CN/chrome/
   >
   > go to https://support.google.com/a/answer/135937?hl=en to sync your account
 
-- typora, VScode等办公
-
-  > ```shell
-  > sudo apt-get install snap
-  > sudo snap install --classic code
-  > sudo snap r codium
-  > ```
-  >
-  > https://www.typora.io/releases/all
+- typora, VScode等办公. see [installation](/techniques/Prepare-for-the-computer?id=text-editor)
 
 - 把win的字体拷过来一份
 

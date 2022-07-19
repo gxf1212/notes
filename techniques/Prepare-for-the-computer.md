@@ -200,6 +200,8 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
       
       then it’s done
 
+   But it seems that python2 matters. [how-to-install-python-2-7-on-ubuntu](https://www.how2shout.com/linux/how-to-install-python-2-7-on-ubuntu-20-04-lts/#:~:text=1%20Open%20a%20command%20terminal.%20Although%20everybody%20is,LTS.%20%204%20Uninstall%20%28optional%29.%20%20More%20)
+   
 3. an usual bug
    
    similar situation https://github.com/qingshuisiyuan/electron-ssr-backup/issues/26
@@ -1195,7 +1197,20 @@ import pybel
 mymol = pybel.readstring("smi", "CCCC")
 ```
 
-## Paper
+## Paper, work
+
+### text editor
+
+vscode
+
+```shell
+sudo apt-get install snap
+sudo snap install --classic code
+sudo snap r codium
+```
+- typora: https://www.typora.io/releases/all
+- https://www.sublimetext.com/docs/linux_repositories.html
+- https://atom.io/  sunset...
 
 ### foxit reader
 
