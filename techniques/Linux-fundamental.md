@@ -671,11 +671,9 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
 
 2. 
 
-> #### other
+> #### change software source
 > 
 > Ubuntu20.04软件源更换 - 舟公的文章 - 知乎 https://zhuanlan.zhihu.com/p/142014944
-> 
-> change software source
 > 
 > ```
 > sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak # backup
@@ -1088,7 +1086,7 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
 - 更新软件源，便于下载lightdm等依赖
   
-  - 先注释掉原来的源，update
+  - 先注释掉原来的源，update。但可以直接到‘软件与更新’(software and updates)里面更改
 
 - 安装向日葵，以便远控
 
