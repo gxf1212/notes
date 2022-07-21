@@ -512,10 +512,13 @@ This is a record of 折腾ing the system, in order not to forget.
      -b, --basename         match only the base name of path names
      -h, --help             print this help
      -w, --wholename        match whole path name (default)
-   
    ```
    
    locate命令其实是find -name的另一种写法，但是要比后者快得多，原因在于它不搜索具体目录，而是搜索一个数据库/var/lib/locatedb，这个数据库中含有本地所有文件信息。**Linux系统自动创建这个数据库，并且每天自动更新一次**，所以使用locate命令查不到最新变动过的文件。为了避免这种情况，可以在使用locate之前，先使用updatedb命令，手动更新数据库。
+   
+   ```shell
+   /usr/bin/updatedb && locate
+   ```
    
 6. create file
    
@@ -1153,15 +1156,39 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 
 [reference](https://needis.me/ubuntu/2011/01/11/e9-87-8d-e8-a3-85ubuntu-e7-b3-bb-e7-bb-9f-ef-bc-8c-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e7-9a-84-e6-81-a2-e5-a4-8d.html)
 
-1. sfdafas
+1. 备份已安装软件包列表
 
-2. fdadfsa
+   ```shell
+   sudo dpkg --get-selections | grep -v deinstall > ~/packages.txt
+   ```
+
+2. 备份软件源列表
 
    ```shell
    sudo cp /etc/apt/sources.list ~/sources.list
    ```
 
-   
+   > maybe:
+   >
+   > ```shell
+   > sudo cp -/opt ~/opt.backup
+   > ```
+
+3. 备份Home下的用户文件夹（包括隐藏文件）
+
+   保留home的话，其实没事
+
+新系统安装后的恢复：
+
+1. 复制备份的Sources.list文件：`sudo cp ~/sources.list /etc/apt/sources.list`，并替换（Ctrl+H）文档中的intrepid为jaunty。
+
+   然后更新软件源（`sudo apt-get update`）。
+
+2. 重新下载安装之前系统中的软件（如果你安装的软件数量比较多，可能会花费较长时间） 
+
+    `sudo dpkg –set-selections /home/package.selections && apt-get dselect-upgrade`
+
+3. 最后将备份的主文件夹（/home/用户名）粘贴并覆盖现有主文件夹
 
 but the following still needs re-configure...
 
@@ -2185,7 +2212,6 @@ just be a helper calculator, and a platform to learn Linux. (zheteng is allowed)
 (dad could use it too, but keep good organization)
 
 ## Other
-
 
 
 

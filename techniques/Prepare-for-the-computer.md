@@ -226,6 +226,21 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
    ```
    export http_proxy="http://127.0.0.1:12333"
    ```
+   
+4. remove it all. not useful
+
+   ```shell
+   sudo apt purge electron-ssr && \
+   sudo mv ~/.config/electron-ssr .local/share/Trash/files
+   ```
+
+5. use it in cmd
+
+   ```shell
+   conda deactivate && /opt/electron-ssr/electron-ssr
+   ```
+
+   do not use conda python...and use electron-ssr (same as in alacarte, i.e. by clicking)
 
 ### v2ray
 
