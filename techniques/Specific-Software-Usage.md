@@ -398,12 +398,14 @@ https://www.ghxi.com/typora.html
 ## Pycharm
 
 1. https://blog.csdn.net/qq_41330454/article/details/105906347 控制台命令提示符是In[2]. ipython!
-   
+
    http://errornoerror.com/question/13223264808178804318/
 
 2. [关闭代码风格检查](https://blog.csdn.net/u013088062/article/details/50001189)
 
-4. 实际上没有那么快自动保存，还是需要ctrl+s。。
+3. 实际上没有那么快自动保存，还是需要ctrl+s。。
+
+4. intepreter: create from existing sources. "study" can run both R and Python.
 
 ## conda & python cmd
 

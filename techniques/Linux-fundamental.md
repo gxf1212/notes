@@ -1148,10 +1148,24 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 [common installations reference](https://www.zdaiot.com/Linux/%E8%BD%AF%E4%BB%B6/Ubuntu%E5%AE%89%E8%A3%85%E5%90%8E%E8%A6%81%E8%A3%85%E7%9A%84%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/)
 
 ### quick re-install
-   
+
 Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 
 [reference](https://needis.me/ubuntu/2011/01/11/e9-87-8d-e8-a3-85ubuntu-e7-b3-bb-e7-bb-9f-ef-bc-8c-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e7-9a-84-e6-81-a2-e5-a4-8d.html)
+
+1. sfdafas
+
+2. fdadfsa
+
+   ```shell
+   sudo cp /etc/apt/sources.list ~/sources.list
+   ```
+
+   
+
+but the following still needs re-configure...
+
+- 
 
 ## upgrading release
 
@@ -2172,9 +2186,6 @@ just be a helper calculator, and a platform to learn Linux. (zheteng is allowed)
 
 ## Other
 
-### pycharm tips
-
-- intepreter: create from existing sources. "study" can run both R and Python.
 
 
 
@@ -2182,6 +2193,3 @@ just be a helper calculator, and a platform to learn Linux. (zheteng is allowed)
 
 
 
-
-
-rean
