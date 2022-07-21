@@ -1186,7 +1186,7 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 
 2. 重新下载安装之前系统中的软件（如果你安装的软件数量比较多，可能会花费较长时间） 
 
-    `sudo dpkg –set-selections /home/package.selections && apt-get dselect-upgrade`
+    `sudo dpkg --set-selections < /home/package.selections && sudo apt-get dselect-upgrade`
 
 3. 最后将备份的主文件夹（/home/用户名）粘贴并覆盖现有主文件夹
 
