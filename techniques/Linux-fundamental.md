@@ -1,6 +1,6 @@
 # Linux study
 
-This is a record of my operations during 折腾ing the system, in order not to forget.
+This is a record of 折腾ing the system, in order not to forget.
 
 有些使用方法写在debugging那里了，也许要整理吧，但尽量描述详细，方便搜到
 
@@ -1034,18 +1034,19 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
 ## memo
 
-> 安排存储分配。关键的软件尽量装到root
+> 安排存储分配。关键的软件也许装到root，但不利于重装
 >
-> - [x] 翻墙
-> - [x] 向日葵，vnc viewer
+> - [x] 翻墙 (electron-ssr)
+> - [x] ToDesk。向日葵，vnc viewer？
 > - [x] 显卡驱动, cuda, cudnn
 > - [x] 编程环境 (pycharm, anaconda)
 > - [x] 基本工具（git, gparted这种）、常用写作（typora和主题, VScode）
-> - [x] 分子模拟环境（gmx,openbabel,pymol,gaussian,ambertools,acpype, VMD,DSV）
-> - [x] 配套工具（百度网盘、阅读器、qq、有道词典、WPS）
-> - [x] email client
-> - [x] 程序图标
-> - [x] 备份系统
+> - [x] 分子模拟环境（gmx,NAMD,openbabel,pymol,gaussian,ambertools,acpype,VMD,DSV）
+> - [x] 配套工具（百度网盘、阅读器、wine-TIM、有道词典?、WPS）
+> - [x] email client login
+> - [x] VPN (easy connect, electerm)
+> - [x] 程序图标(4个)
+> - [x] 备份系统(onedrive, timeshift?)
 > - [x] 输入法、字体等
 > - [x] 网络工具（easyconnect，ssh client等）
 > - [ ] 其他？（texlive,,mendeley,GitHub Desktop, flash, 浏览器)
@@ -1146,7 +1147,13 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
 [common installations reference](https://www.zdaiot.com/Linux/%E8%BD%AF%E4%BB%B6/Ubuntu%E5%AE%89%E8%A3%85%E5%90%8E%E8%A6%81%E8%A3%85%E7%9A%84%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/)
 
-  ## upgrading release
+### quick re-install
+   
+Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
+
+[reference](https://needis.me/ubuntu/2011/01/11/e9-87-8d-e8-a3-85ubuntu-e7-b3-bb-e7-bb-9f-ef-bc-8c-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e7-9a-84-e6-81-a2-e5-a4-8d.html)
+
+## upgrading release
 
   to unbuntu22.04
 
@@ -1182,7 +1189,7 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
   > - snap不好
   > - ……
 
-  ## fundamental softwares
+## fundamental softwares
 
   1. VScode
      
