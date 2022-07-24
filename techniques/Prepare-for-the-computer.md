@@ -164,34 +164,39 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
 - 22.2.9 update: [0.2.7](https://github.com/shadowsocksrr/electron-ssr/releases/tag/v0.2.7) and [0.2.6](https://github.com/qingshuisiyuan/electron-ssr-backup/releases/tag/v0.2.6)
 1. dependencies (as said in Debian系列安装与配置[Ubuntu.md](https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md))
-   
+
    ```shell
    sudo apt install libcanberra-gtk-module libcanberra-gtk3-module gconf2 gconf-service libappindicator1 libssl-dev libsodium-dev
    sudo apt install python
    ```
 
+   or just
+
+   ```shell
+   sudo dpkg -i electron-ssr-0.x.x.deb
+   sudo apt install –fix-broken
+   ```
+
 2. depends on Python! It will look like
-   
+
    ![electron-ssr-py](https://gitee.com/gxf1212/notes/raw/master/techniques/images/electron-ssr-py.png)
-   
-   If connection fails,
-   
+
    https://www.cnblogs.com/geekHao/p/12635970.html
-   
-   从源头更改python的链接文件，**推荐这种方法**
-   
+
+   If connection fails，从源头更改python的链接文件，**推荐这种方法**
+
    1. 查看已安装的python版本和链接情况：
       
       ```shell
       ll /usr/bin/python*
       ```
-   
+
    2. 删除原有的Python连接文件 (I don’t have one after reinstalling the system)
       
       ```shell
       sudo rm /usr/bin/python
       ```
-   
+
    3. 建立指向Python3.X的连接
       
       ```shell
@@ -201,46 +206,65 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
       then it’s done
 
    But it seems that python2 matters. [how-to-install-python-2-7-on-ubuntu](https://www.how2shout.com/linux/how-to-install-python-2-7-on-ubuntu-20-04-lts/#:~:text=1%20Open%20a%20command%20terminal.%20Although%20everybody%20is,LTS.%20%204%20Uninstall%20%28optional%29.%20%20More%20)
-   
+
 3. an usual bug
-   
+
    similar situation https://github.com/qingshuisiyuan/electron-ssr-backup/issues/26
-   
+
    ![electron-ssr-dep](https://gitee.com/gxf1212/notes/raw/master/techniques/images/electron-ssr-dep.png)
-   
+
    > libcrypto is along with `libssl-dev`. 这俩包不重要，主要是代理方式！
-   
-   do as https://sobaigu.com/software-shadowsocksr-in-linux.html
-   
-   just set the **manual proxy**...
-   
-   ```127.0.0.1
-   http://127.0.0.1
-   ```
-   
-   > - but without electron-ssr, cannot see baidu.com?
-   > - after rebooting, become "auto-proxy"?? not so ok...switch back to auto, still ok??
-   
-   in terminal??
-   
-   ```
-   export http_proxy="http://127.0.0.1:12333"
-   ```
-   
-4. remove it all. not useful
+   >
+   > ```shell
+   > sudo apt install libssl-dev libsodium
+   > ```
 
-   ```shell
-   sudo apt purge electron-ssr && \
-   sudo mv ~/.config/electron-ssr .local/share/Trash/files
-   ```
+4. setting the proxy
 
-5. use it in cmd
+   - version 1
+
+     just 'auto'...it's ok!
+
+   - version 2 (try when connection fails)
+
+     do as https://sobaigu.com/software-shadowsocksr-in-linux.html
+
+     just set the **manual proxy**...port: 12333, the same as in electron-ssr
+
+     ```127.0.0.1
+     http://127.0.0.1
+     ```
+
+     > - but without electron-ssr, cannot see baidu.com?
+     > - after rebooting, become "auto-proxy"?? not so ok...switch back to auto, still ok??
+
+   - in terminal??
+
+        ```shell
+        export http_proxy="http://127.0.0.1:12333"
+        ```
+
+5. use it (in cmd)
+
+   - `electron-ssr`=`/usr/bin/electron-ssr`=`opt/electron-ssr/electron-ssr`
+   - but be careful of python version!
 
    ```shell
    conda deactivate && /opt/electron-ssr/electron-ssr
    ```
 
-   do not use conda python...and use electron-ssr (same as in alacarte, i.e. by clicking)
+   ...and use electron-ssr (same as in alacarte, i.e. by clicking)
+
+> other
+>
+> 1. remove it all. not useful
+>
+>    ```shell
+>    sudo apt purge electron-ssr && \
+>    sudo mv ~/.config/electron-ssr .local/share/Trash/files
+>    ```
+>
+> 2. 
 
 ### v2ray
 
@@ -249,6 +273,11 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 https://github.com/Qv2ray/Qv2ray/releases/tag/v2.7.0 with GUI
 
 intro https://iyuantiao.com/fenxiangfuli/jiaocheng/v2ray.html
+
+### clash
+
+- https://github.com/Fndroid/clash_for_windows_pkg/releases
+- video reference: https://www.youtube.com/watch?v=pTlso8m_iRk
 
 ### qt-5
 
