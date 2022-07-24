@@ -167,7 +167,7 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
    ```shell
    sudo apt install libcanberra-gtk-module libcanberra-gtk3-module gconf2 gconf-service libappindicator1 libssl-dev libsodium-dev
-   sudo apt install python
+   sudo apt install python3
    ```
 
    or just
@@ -231,17 +231,14 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
      just set the **manual proxy**...port: 12333, the same as in electron-ssr
 
-     ```127.0.0.1
-     http://127.0.0.1
-     ```
-
      > - but without electron-ssr, cannot see baidu.com?
      > - after rebooting, become "auto-proxy"?? not so ok...switch back to auto, still ok??
-
+     
    - in terminal??
 
         ```shell
         export http_proxy="http://127.0.0.1:12333"
+        export https_proxy="https:/ /127.0.0.1:12333"
         ```
 
 5. use it (in cmd)

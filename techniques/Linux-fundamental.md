@@ -11,7 +11,7 @@ This is a record of 折腾ing the system, in order not to forget.
 2. Linux是把要安装的软件分布在整个系统的各个文件夹里面， 比如所有软件的配置文件都安装在`/etc`下面， 软件需要的库文件都安装在`/lib`下面，日志文件都在`/var/log`下面，`/bin`下是常用的程序，等等。 比较复杂 哈哈。
 
 3. rpm包主要应用在RedHat系列包括 Fedora等发行版的Linux系统上，deb包主要应用于Debian系列包括现在比较流行的Ubuntu等发行版上。
-   
+
    transform .rpm to .deb: `sudo alien ./*.rpm`
 
 4. It's hard to change default install directory. And I have to make a boot CD (U disk) to change the storage distribution (like when I'm installing Ubuntu, how much for root, home, swap...).
@@ -19,12 +19,28 @@ This is a record of 折腾ing the system, in order not to forget.
 5. 下面是一些典型的段错误的原因: 由内存管理硬件试图访问一个不存在的内存地址
 
 6. 环境变量
-   
-   root和user的.bashrc是不一样的！
-   
+
+   root和user的`.bashrc`是不一样的！
+
    export的含义 https://askubuntu.com/questions/720678/what-does-export-path-somethingpath-mean
 
 7. Linux操作系统执行可执行文件提示*No such file or directory*的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
+
+8. cp: cannot create regular file 'xxxx' 'xxxx': Invalid argument
+
+   The syntax of your command is correct. “Invalid argument” from cp usually means that the file name is not valid on the target filesystem. It may be too long, contain a forbidden character, or be a reserved word.
+
+   For example Windows filesystems (FAT, NTFS) forbid characters such as : and ? in filenames, so you can't copy these files to a Windows filesystem. 
+
+   exFAT应该是都兼容的一种格式。
+
+9. ubuntu的话，卡死崩溃时你切换到tty1～6然后 sudo pkill X; startx; 一下，就好了。不需要重启。
+
+10. 回收站：`~/.local/share/Trash/files`
+
+11. 四种关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`
+
+
 
 ## Operations
 
@@ -1086,15 +1102,15 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
   
   - 禁用noveu那个
 
-- 安装QQ，方便传送经验
+- 安装QQ/TIM，方便传送经验
 
 - 更新软件源，便于下载lightdm等依赖
   
   - 先注释掉原来的源，update。但可以直接到‘软件与更新’(software and updates)里面更改
 
-- 安装向日葵，以便远控
+- 安装向日葵（ToDesk），以便远控
 
-- 尝试是否能重启
+- 尝试是否能远控重启
 
 - 更改root密码
 
@@ -1102,12 +1118,12 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
   sudo passwd root
   ```
 
-- 挂载home盘，实现自动挂载。找uuid：那个设备的路径
+- 挂载home盘，实现自动挂载。找uuid：那个设备的路径（`blkid`）
 
   ```
   vi /etc/fstab
   添加如下内容：
-  uuid=xxxxxxx /h ext4 defaults 0 0
+  uuid=xxxxxxx /home ext4 defaults 0 0
   ```
 
 - 更改desktop的路径为英文，极端cmd下语言改成英文 [命令行更改系统语言](https://blog.csdn.net/MaryChow/article/details/68494243?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
@@ -1128,6 +1144,8 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
   LC_MEASUREMENT="zh_CN.UTF-8"
   ```
 
+  或者直接装英文的吧
+
 - 安装vi，git, alacarte, gpart, gparted, ethtool, 等基本工具. configure git
 
   ```shell
@@ -1135,6 +1153,14 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
   ```
   
 - chrome浏览器，安装vpn，翻墙、校园网
+
+  https://askubuntu.com/questions/510056/how-to-install-google-chrome
+
+  ```shell
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  sudo apt-get update
+  sudo apt-get install google-chrome-stable
+  ```
 
   > https://www.google.cn/intl/zh-CN/chrome/
   >

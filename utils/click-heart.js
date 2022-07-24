@@ -1,12 +1,11 @@
-// this file shows successfully the list, with coloring changing like the click-heart. and do not conflict with live2d model
-// different from jerry
-var arr = new Array("分子模拟", "蛋白结构", "小分子药", "肿瘤免疫", "计算生物", "生物物理", "化学生物", "Linux系统", "纳米药物", "信号通路",
-                    "B站搬运");
-// var arr = new Array("❤", "💛", "💚", "💙", "💜", "💗", "🖤"); 
+// modified from click-text.js and https://www.toutiao.com/article/7087843770217284132
+// and do not conflict with live2d model 
 
 !function(e, t, a) {
     function r() {
-        for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ");color:" + s[e].color + ";z-index:99999");
+        for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x +
+        "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e]
+        .scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
         requestAnimationFrame(r)
     }
     function n() {
@@ -19,7 +18,6 @@ var arr = new Array("分子模拟", "蛋白结构", "小分子药", "肿瘤免�
     function o(e) {
         var a = t.createElement("div");
         a.className = "heart",
-        a.innerText = arr[parseInt(arr.length * Math.random())];
         s.push({
             el: a,
             x: e.clientX+5,
@@ -48,7 +46,7 @@ var arr = new Array("分子模拟", "蛋白结构", "小分子药", "肿瘤免�
         function(e) {
             setTimeout(e, 1e3 / 60)
         },
-    i(".heart{position: fixed;}"),
+    i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),
     n(),
     r()
 } (window, document);

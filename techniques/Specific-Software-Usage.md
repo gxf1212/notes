@@ -2006,13 +2006,20 @@ refer to [html](#something-html)
      <script src="//cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/click_heart.js"></script>
      ```
 
-   - 文本，如富强民主文明和谐  use ``click-text.js`
+   - 文本，如富强民主文明和谐：use `click-text.js`
 
-5. https://github.com/827652549/docsify-count
+     [十个拿来就能用的网页炫酷特效](https://www.toutiao.com/article/7087843770217284132) or [this](https://chowdera.com/2022/194/202207120537561961.html)：蜘蛛网特效等
 
-   插件，文字统计
+     重要的js code：
 
-   阅读进度条[docsify-progress ](https://github.com/HerbertHe/docsify-progress) 这个插件与字数插件不兼容
+     - `s[e].el.style.cssText = .....`和`i(".heart{width: 10px;height: 10px;position: fixed;background: #f00; .....`是心形版本，并且能调格式。
+     - `var arr = new Array(xx, xx)`和`a.innerText = arr[parseInt(arr.length * Math.random())];`配合，是文字版本
+
+     more icons: search, or fontawesome
+
+5. 插件，文字统计 https://github.com/827652549/docsify-count
+
+   阅读进度条[docsify-progress](https://github.com/HerbertHe/docsify-progress) 这个插件与字数插件不兼容
 
 6. sitetime.js：运行时间统计
 
@@ -2024,7 +2031,7 @@ refer to [html](#something-html)
 
    - Docsify-alerts https://www.npmjs.com/package/docsify-plugin-flexible-alerts
 
-     ```
+     ```markdown
      > [!NOTE]
      > 
      > [!TIP]
@@ -2094,6 +2101,7 @@ developer的js. components:
   - model Id? models also in api? see 我的自定义....
   - 说话
     - 检测用户活动状态：不活动时自动说的话。。
+  - consider switching to https://github.com/mosuzi/live_fe/blob/master/assets/waifu-tips.js, to get a toolbar?
 
 - `waifu-tips.json`
 

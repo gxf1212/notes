@@ -1,3 +1,4 @@
+// modified from https://www.bazhepu.com/625.html
 function siteTime() {
    window.setTimeout("siteTime()", 1000);
    var seconds = 1000;
