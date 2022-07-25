@@ -38,7 +38,7 @@ This is a record of 折腾ing the system, in order not to forget.
 
 10. 回收站：`~/.local/share/Trash/files`
 
-11. 四种关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`
+11. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl `
 
 
 
@@ -1149,7 +1149,7 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 - 安装vi，git, alacarte, gpart, gparted, ethtool, 等基本工具. configure git
 
   ```shell
-  sudo apt-get install vi git alacarte gpart gparted ethtool
+  sudo apt-get install vim git alacarte gpart gparted ethtool
   ```
   
 - chrome浏览器，安装vpn，翻墙、校园网
@@ -1158,11 +1158,12 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
   ```shell
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
   sudo apt-get update
   sudo apt-get install google-chrome-stable
   ```
 
-  > https://www.google.cn/intl/zh-CN/chrome/
+  > deb: https://www.google.cn/intl/zh-CN/chrome/
   >
   > go to https://support.google.com/a/answer/135937?hl=en to sync your account
 
@@ -1197,7 +1198,7 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
    > maybe:
    >
    > ```shell
-   > sudo cp -/opt ~/opt.backup
+   > sudo cp -r /opt ~/opt.backup
    > ```
 
 3. 备份Home下的用户文件夹（包括隐藏文件）
@@ -1206,15 +1207,27 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 
 新系统安装后的恢复：
 
-1. 复制备份的Sources.list文件：`sudo cp ~/sources.list /etc/apt/sources.list`，并替换（Ctrl+H）文档中的intrepid为jaunty。
+1. 一定是保持username不变的重装！（最好所有都别变）才能直接挂载home盘，直接原样使用……否则就需要拷出来一份数据，装完拷回去（比如要格式化一下硬盘）
+
+   ```shell
+   chown -R runoob:runoobgroup *
+   # 将当前前目录下的所有文件与子目录的拥有者皆设为 runoob，群体的使用者 runoobgroup
+   # 需要一段时间
+   ```
+
+2. 复制备份的Sources.list文件：`sudo cp ~/sources.list /etc/apt/sources.list`，并替换（Ctrl+H）文档中的intrepid为jaunty。
 
    然后更新软件源（`sudo apt-get update`）。
 
-2. 重新下载安装之前系统中的软件（如果你安装的软件数量比较多，可能会花费较长时间） 
+3. 重新下载安装之前系统中的软件（如果你安装的软件数量比较多，可能会花费较长时间） 
 
     `sudo dpkg --set-selections < /home/package.selections && sudo apt-get dselect-upgrade`
 
-3. 最后将备份的主文件夹（/home/用户名）粘贴并覆盖现有主文件夹
+4. 最后将备份的主文件夹（/home/用户名）粘贴并覆盖现有主文件夹
+
+    > Linux系统的福利：程序和配置分开，便于迁移，瞬间恢复！！！
+
+    如果是重新挂载U盘，参考第一步
 
 but the following still needs re-configure...
 
