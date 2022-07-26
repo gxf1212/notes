@@ -1197,12 +1197,16 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 
    ```shell
    sudo cp /etc/apt/sources.list ~/sources.list
+   sudo cp /etc/apt/sources.list.d ~/sources.list.d -r
    ```
+
+   `/etc/apt/sources.list.d` contains all 'other software' in 'Software & updates' (after Ubuntu 22.04). 
 
    > maybe:
    >
    > ```shell
    > sudo cp -r /opt ~/opt.backup
+   > # maybe the whole /etc. 
    > ```
 
 3. 备份Home下的用户文件夹（包括隐藏文件）
@@ -1228,15 +1232,22 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
    chown -R runoob:runoobgroup *
    ```
 
-2. 复制备份的Sources.list文件：`sudo cp ~/sources.list /etc/apt/sources.list`
+2. 复制备份的Sources.list文件：
+
+   ```shell
+   sudo cp ~/sources.list /etc/apt/sources.list
+   sudo cp ~/sources.list.d /etc/apt/sources.list.d -r
+   ```
 
    > 并替换（Ctrl+H）文档中的intrepid为jaunty?? no
 
-   然后更新软件源（`sudo apt-get update`）。
+   然后更新软件源（`sudo apt-get update`）。click the sources in 'Software and updates'
 
 3. 重新下载安装之前系统中的软件（如果你安装的软件数量比较多，可能会花费较长时间） 
 
-    `sudo dpkg --set-selections < ~/packages.txt && sudo apt-get dselect-upgrade`
+    ```shell
+    sudo dpkg --set-selections < ~/packages.txt && sudo apt-get dselect-upgrade
+    ```
 
 4. 最后将备份的主文件夹（/home/用户名）粘贴并覆盖现有主文件夹
 

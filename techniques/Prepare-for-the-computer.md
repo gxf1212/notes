@@ -1272,6 +1272,7 @@ sudo apt-get install snap
 sudo snap install --classic code
 sudo snap r codium
 ```
+- vscode: https://code.visualstudio.com/docs/setup/linux
 - typora: https://www.typora.io/releases/all
 - https://www.sublimetext.com/docs/linux_repositories.html
 - https://atom.io/  sunset...
@@ -1774,4 +1775,4 @@ Good results especially for ligands with 8 or more rotatable bonds
 
 - exhaustiveness: One execution of Vina tries to predict where and how a putative ligand can best bind to a given protein, in which Vina may repeat the calculations **several times** with different randomizations
 - seed: same seed (explicitly assigned) produces the same results
-- cpu: repeated computation for a ligand is done on separate CPUs at the same time. By default, Vina tries to create as many threads as the number of available cores
+- cpu: repeated computation for a ligand is done on separate CPUs at the same time. By default, Vina tries to create as many threads as the number of available 
