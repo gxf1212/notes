@@ -40,6 +40,8 @@ This is a record of 折腾ing the system, in order not to forget.
 
 11. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl `
 
+12. [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
+
 
 
 ## Operations
@@ -925,16 +927,18 @@ apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用
   > sudo apt-get upgrade
   > ```
 
-- 
+- apt-key will be deprecated in the future
+
+  https://suay.site/?p=526
 
 ### tar and unzip
 
 - manual
 
   ```shell
-    tar -cf archive.tar foo bar  # Create archive.tar from files foo and bar.
-    tar -tvf archive.tar         # List all files in archive.tar verbosely.
-    tar -xf archive.tar          # Extract all files from archive.tar.
+  tar -cf archive.tar foo bar  # Create archive.tar from files foo and bar.
+  tar -tvf archive.tar         # List all files in archive.tar verbosely.
+  tar -xf archive.tar          # Extract all files from archive.tar.
   
    主操作模式:
   
@@ -954,8 +958,6 @@ apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用
     -Z, --compress, --uncompress   通过 compress 过滤归档
     -v, --verbose              详细地列出处理的文件
   ```
-
-  
 
 - tbz file
 
@@ -1158,6 +1160,8 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
   ```shell
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  # or
+  cat linux_signing_key.pub | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/google-chrome.gpg --import
   sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
   sudo apt-get update
   sudo apt-get install google-chrome-stable
@@ -1210,18 +1214,29 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 1. 一定是保持username不变的重装！（最好所有都别变）才能直接挂载home盘，直接原样使用……否则就需要拷出来一份数据，装完拷回去（比如要格式化一下硬盘）
 
    ```shell
-   chown -R runoob:runoobgroup *
-   # 将当前前目录下的所有文件与子目录的拥有者皆设为 runoob，群体的使用者 runoobgroup
-   # 需要一段时间
+   sudo passwd root
+   # mount home
+   sudo vi /etc/fstab
+   # UUID=xxx /home ext4 defaults 0 0
    ```
 
-2. 复制备份的Sources.list文件：`sudo cp ~/sources.list /etc/apt/sources.list`，并替换（Ctrl+H）文档中的intrepid为jaunty。
+   > 注意在安装时观察你的home盘的状态，比如我当时就变成了ext2...但还是要填ext4。也许这就是我废了的原因
+
+   ```shell
+   # 将当前前目录下的所有文件与子目录的拥有者皆设为 runoob，群体的使用者 runoobgroup
+   # 需要一段时间
+   chown -R runoob:runoobgroup *
+   ```
+
+2. 复制备份的Sources.list文件：`sudo cp ~/sources.list /etc/apt/sources.list`
+
+   > 并替换（Ctrl+H）文档中的intrepid为jaunty?? no
 
    然后更新软件源（`sudo apt-get update`）。
 
 3. 重新下载安装之前系统中的软件（如果你安装的软件数量比较多，可能会花费较长时间） 
 
-    `sudo dpkg --set-selections < /home/package.selections && sudo apt-get dselect-upgrade`
+    `sudo dpkg --set-selections < ~/packages.txt && sudo apt-get dselect-upgrade`
 
 4. 最后将备份的主文件夹（/home/用户名）粘贴并覆盖现有主文件夹
 

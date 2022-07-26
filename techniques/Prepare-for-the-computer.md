@@ -81,7 +81,7 @@ sudo rm -r /usr/lib/FinalShell
 sudo snap install termius-app
 ```
 
-### easy connect (for school)
+### easy connect (for zju)
 
 > 重要启示：点击安装包，显示安装成功，但启动程序时点击图标无响应，可通过命令行终端（Terminal）执行命令来启动。观察怎么个报错法！有道、DS等
 
@@ -134,7 +134,7 @@ https://sites.google.com/view/honven all kinds of recommendations
 
 - 【PAC模式】:也就是智能分流模式
 
-### experiences
+experiences
 
 - 22.6.24
 
@@ -142,19 +142,19 @@ https://sites.google.com/view/honven all kinds of recommendations
 
   the most relevant factor is the selection of your node, not the client program. maybe due to firewalls, ....
 
-- 
 
 
+### airport
 
-### airport: sgi.anycast.gay
+https://sgi.anycast.gay/user 买流量的网站。支持ss, ssr, v2ray, clash等等。便宜，事实上不限流量。
 
-https://sgi.anycast.gay/user 买ssr流量的网站
+https://renzhe.cloud a little more expensive?
 
-https://www.hayaissr.xyz/ 也是个买vpn的？
+the plugin Google-access-helper cannot do anything now
 
-> ssr can not provide access to YouTube. 极速 browser can view Google but chrome without the plugin can not... it helps with google scholar but the plugin cannot
-
-laowang, can view youtube on the phone
+> laowang, can view youtube on the phone
+>
+> https://www.hayaissr.xyz/ 也是个买vpn的？
 
 ### electron-ssr
 
@@ -163,7 +163,9 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 - old vpn for Linux: https://github.com/hannuo/ssr-linux-client-electron
 
 - 22.2.9 update: [0.2.7](https://github.com/shadowsocksrr/electron-ssr/releases/tag/v0.2.7) and [0.2.6](https://github.com/qingshuisiyuan/electron-ssr-backup/releases/tag/v0.2.6)
-1. dependencies (as said in Debian系列安装与配置[Ubuntu.md](https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md))
+
+- 22.7.20 update: after 0.2.7, https://github.com/shadowsocksrr/electron-ssr/releases
+1. installation. dependencies (as said in Debian系列安装与配置[Ubuntu.md](https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md))
 
    ```shell
    sudo apt install libcanberra-gtk-module libcanberra-gtk3-module gconf2 gconf-service libappindicator1 libssl-dev libsodium-dev
@@ -174,7 +176,7 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
    ```shell
    sudo dpkg -i electron-ssr-0.x.x.deb
-   sudo apt install –fix-broken
+   sudo apt install --fix-broken
    ```
 
 2. depends on Python! It will look like
@@ -200,14 +202,26 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
    3. 建立指向Python3.X的连接
       
       ```shell
-      sudo ln -s /usr/bin/python3 /usr/bin/python
+      sudo ln -s /usr/bin/python3 /usr/bin/python # or
+      sudo ln -s ~/anaconda3/envs/electron-ssr/bin/python /usr/bin/python
       ```
       
       then it’s done
 
    But it seems that python2 matters. [how-to-install-python-2-7-on-ubuntu](https://www.how2shout.com/linux/how-to-install-python-2-7-on-ubuntu-20-04-lts/#:~:text=1%20Open%20a%20command%20terminal.%20Although%20everybody%20is,LTS.%20%204%20Uninstall%20%28optional%29.%20%20More%20)
 
-3. an usual bug
+3. use it (in cmd)
+
+   - `electron-ssr`=`/usr/bin/electron-ssr`=`opt/electron-ssr/electron-ssr`
+   - but be careful of python version!
+
+   ```shell
+   conda deactivate && /opt/electron-ssr/electron-ssr
+   ```
+
+   same as the system application, i.e. by clicking the icon
+
+4. an usual bug
 
    similar situation https://github.com/qingshuisiyuan/electron-ssr-backup/issues/26
 
@@ -216,10 +230,10 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
    > libcrypto is along with `libssl-dev`. 这俩包不重要，主要是代理方式！
    >
    > ```shell
-   > sudo apt install libssl-dev libsodium
+   > sudo apt install libssl-dev libsodium-dev
    > ```
 
-4. setting the proxy
+5. setting the proxy
 
    - version 1
 
@@ -241,16 +255,25 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
         export https_proxy="https:/ /127.0.0.1:12333"
         ```
 
-5. use it (in cmd)
+6. electron-ssr icon becomes grey: right click the icon and cllick 'Enable' (‘启用’)
 
-   - `electron-ssr`=`/usr/bin/electron-ssr`=`opt/electron-ssr/electron-ssr`
-   - but be careful of python version!
+7. gpu_data_manager_impl_private.cc(894)] The display compositor is frequently crashing. Goodbye.
 
-   ```shell
-   conda deactivate && /opt/electron-ssr/electron-ssr
-   ```
+   > for 0.3.0 and after. maybe due to newer version of electron? but may also occurs in other applications, in the newly installed system. so the problem of HDD?
 
-   ...and use electron-ssr (same as in alacarte, i.e. by clicking)
+   workaround: `--no-sandbox` 
+
+   https://blog.csdn.net/xianfengdesign/article/details/124946689
+
+   > using lightdm does not help
+
+   
+
+8. port 12333/1080 is taken
+
+   just reboot several times....
+
+9. 
 
 > other
 >
@@ -258,7 +281,7 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 >
 >    ```shell
 >    sudo apt purge electron-ssr && \
->    sudo mv ~/.config/electron-ssr .local/share/Trash/files
+>    sudo mv ~/.config/electron-ssr ~/.local/share/Trash/files
 >    ```
 >
 > 2. 
