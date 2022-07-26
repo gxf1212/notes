@@ -1257,7 +1257,8 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 
 but the following still needs re-configure...
 
-- 
+- vmd
+- windows font
 
 ## upgrading release
 
@@ -1297,29 +1298,27 @@ but the following still needs re-configure...
 
 ## fundamental softwares
 
-  1. VScode
-     
-     > ```shell
-     > dpkg -i --instdir=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs code_1.52.1-1608136922_amd64.deb
-     > ```
+  1. VScode [installation](/techniques/Prepare-for-the-computer?id=text-editor)
 
   2. realvnc
-     
+
      ```shell
      systemctl start vncserver-x11-serviced.service
      systemctl enable vncserver-x11-serviced.service
      ```
 
-  3. GitHub Desktop on Linuxhttps://codechina.csdn.net/mirrors/shiftkey/desktop?utm_source=csdn_github_accelerator
+  3. GitHub Desktop on Linux https://codechina.csdn.net/mirrors/shiftkey/desktop?utm_source=csdn_github_accelerator
 
   4. xshell http://www.netsarang.com/download/free_license.html
 
   5. https://linux.wps.cn/
 
+     snap: https://www.how2shout.com/how-to/how-to-install-wps-office-on-ubuntu-linux-via-command-terminal.html
+
   6. weather  https://www.ywnz.com/linuxjc/4429.html
 
   7. insync, sync for google, onedrive, dropbox
-     
+
      https://cn.go-travels.com/98643-how-to-use-google-drive-linux-4176144-1291281
 
   8. 
