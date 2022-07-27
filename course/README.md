@@ -23,3 +23,9 @@ This is the homepage for course notes. Click the sidebar to view.
 - 课外阅读：如《众病之王——癌症传》英文版
 
 仅用于交流学习，请勿用于商业用途。 
+
+#### notes share
+
+我的一些手写笔记，还没想好怎么分享。先试试Goodnotes提供的功能吧。
+
+https://share.goodnotes.com/s/dQdcOCBJplkjTRKWDpb6h4
