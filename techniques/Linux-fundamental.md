@@ -141,6 +141,8 @@ This is a record of 折腾ing the system, in order not to forget.
      ```shell
      sudo cp *.otf /usr/share/fonts/opentype
      sudo cp *.ttf /usr/share/fonts/truetype
+     sudo cp *.ttc /usr/share/fonts/truetype
+     sudo cp *.TTF /usr/share/fonts/truetype
      sudo apt install xfonts-utils
      mkfontscale
      mkfontdir
@@ -1092,27 +1094,13 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 | \swap | 16G | swap | 逻辑   |
 | \     | 剩下的 | ext4 | 主分区  |
 
-其实boot和efi半个g就够了
+2022.2更新：其实boot和efi半个g就够了，swap倒可多点（32g，2倍内存）
 
 ### Common flow
 
-- 定好系统语言等
+- 安装时定好系统语言等
 
 - 如果不改home的分区，原来磁盘上的文件不会丢失
-
-- 安装完第一件事：确定合适驱动版本，直接在系统里下
-  
-  - 禁用noveu那个
-
-- 安装QQ/TIM，方便传送经验
-
-- 更新软件源，便于下载lightdm等依赖
-  
-  - 先注释掉原来的源，update。但可以直接到‘软件与更新’(software and updates)里面更改
-
-- 安装向日葵（ToDesk），以便远控
-
-- 尝试是否能远控重启
 
 - 更改root密码
 
@@ -1122,10 +1110,10 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
 - 挂载home盘，实现自动挂载。找uuid：那个设备的路径（`blkid`）
 
-  ```
+  ```shell
   vi /etc/fstab
-  添加如下内容：
-  uuid=xxxxxxx /home ext4 defaults 0 0
+  # 添加如下内容：
+  # uuid=xxxxxxx /home ext4 defaults 0 0
   ```
 
 - 更改desktop的路径为英文，极端cmd下语言改成英文 [命令行更改系统语言](https://blog.csdn.net/MaryChow/article/details/68494243?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
@@ -1148,12 +1136,27 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
   或者直接装英文的吧
 
+- 第一个安装：确定合适驱动版本，直接在软件与更新里下
+
+  - 禁用那个开源的Nouveau？没管过
+  - 安好cuda（cudnn）
+
+- 安装QQ/TIM，方便传送经验
+
+- 更新软件源，便于下载lightdm等依赖
+
+  - 先注释掉原来的源，update。但可以直接到‘软件与更新’(software and updates)里面更改
+
+- 安装向日葵（ToDesk），以便远控
+
+  - 尝试是否能远控重启
+
 - 安装vi，git, alacarte, gpart, gparted, ethtool, 等基本工具. configure git
 
   ```shell
-  sudo apt-get install vim git alacarte gpart gparted ethtool
+  sudo apt-get install vim git alacarte gpart gparted ethtool openssh-server openssh-client npm locate
   ```
-  
+
 - chrome浏览器，安装vpn，翻墙、校园网
 
   https://askubuntu.com/questions/510056/how-to-install-google-chrome
@@ -1171,13 +1174,13 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
   >
   > go to https://support.google.com/a/answer/135937?hl=en to sync your account
 
+- 安装显卡下游的gmx（先编译着）、vmd、namd
+
+- 安装输入法；把win的字体拷过来一份
+
 - typora, VScode等办公. see [installation](/techniques/Prepare-for-the-computer?id=text-editor)
 
-- 把win的字体拷过来一份
-
-- 安好cuda、cudnn
-
-- 安装下游的gmx、vmd、namd
+- 安装网络连接的easyconnect、electerm等
 
 [common installations reference](https://www.zdaiot.com/Linux/%E8%BD%AF%E4%BB%B6/Ubuntu%E5%AE%89%E8%A3%85%E5%90%8E%E8%A6%81%E8%A3%85%E7%9A%84%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/)
 
@@ -1186,6 +1189,8 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 
 [reference](https://needis.me/ubuntu/2011/01/11/e9-87-8d-e8-a3-85ubuntu-e7-b3-bb-e7-bb-9f-ef-bc-8c-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e7-9a-84-e6-81-a2-e5-a4-8d.html)
+
+#### backup
 
 1. 备份已安装软件包列表
 
@@ -1196,26 +1201,36 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 2. 备份软件源列表
 
    ```shell
-   sudo cp /etc/apt/sources.list ~/sources.list
-   sudo cp /etc/apt/sources.list.d ~/sources.list.d -r
+   sudo cp -r /etc ~/etc
+   sudo cp -r /opt ~/opt.backup # maybe t
    ```
 
-   `/etc/apt/sources.list.d` contains all 'other software' in 'Software & updates' (after Ubuntu 22.04). 
+   > `/etc/apt/sources.list`是一般的源。`/etc/apt/sources.list.d` contains all 'other software' in 'Software & updates' (after Ubuntu 22.04). 
 
-   > maybe:
-   >
-   > ```shell
-   > sudo cp -r /opt ~/opt.backup
-   > # maybe the whole /etc. 
-   > ```
+3. 如果拷到另一个硬盘，就保留conda环境（不格式化可以不动），因为拷贝的时候会报错（我硬盘可能不兼容。。）。就不要copy `anaconda`, `.anaconda`, `.conda`, `.condarc`这几个文件夹了
 
-3. 备份Home下的用户文件夹（包括隐藏文件）
+   > 咱也不知道 invalid argument 的文件是否影响……
 
-   保留home的话，其实没事
+   ```shell
+   conda-env list
+   conda-env export env-name > filename.yaml
+   ```
 
-新系统安装后的恢复：
+4. 备份Home下的用户文件夹（包括隐藏文件）。保留home的话，其实没事；如需拷到另一个硬盘，那就慢慢拷。。
 
-1. 一定是保持username不变的重装！（最好所有都别变）才能直接挂载home盘，直接原样使用……否则就需要拷出来一份数据，装完拷回去（比如要格式化一下硬盘）
+   ```shell
+   # under root
+   for f in `ls -a`; do  # or `cat files.txt`
+   cp -rf $f /media/username/uuid/folder
+   echo "moved $f"
+   done
+   ```
+
+   
+
+#### recover
+
+1. 新系统安装：一定是保持username不变的重装！（最好所有都别变）才能直接挂载home盘，直接原样使用……
 
    ```shell
    sudo passwd root
@@ -1226,7 +1241,12 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 
    > 注意在安装时观察你的home盘的状态，比如我当时就变成了ext2...但还是要填ext4。也许这就是我废了的原因
 
+   或者，拷出来一份数据，装完系统或格式化完，**拷回去**
+
+   > Linux系统的福利：程序和配置分开，便于迁移，瞬间恢复！！！
+
    ```shell
+   # 如需要
    # 将当前前目录下的所有文件与子目录的拥有者皆设为 runoob，群体的使用者 runoobgroup
    # 需要一段时间
    chown -R runoob:runoobgroup *
@@ -1235,8 +1255,8 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 2. 复制备份的Sources.list文件：
 
    ```shell
-   sudo cp ~/sources.list /etc/apt/sources.list
-   sudo cp ~/sources.list.d /etc/apt/sources.list.d -r
+   sudo cp -r ~/etc /etc
+   sudo cp -r ~/opt /opt
    ```
 
    > 并替换（Ctrl+H）文档中的intrepid为jaunty?? no
@@ -1249,11 +1269,7 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
     sudo dpkg --set-selections < ~/packages.txt && sudo apt-get dselect-upgrade
     ```
 
-4. 最后将备份的主文件夹（/home/用户名）粘贴并覆盖现有主文件夹
-
-    > Linux系统的福利：程序和配置分开，便于迁移，瞬间恢复！！！
-
-    如果是重新挂载U盘，参考第一步
+4. 
 
 but the following still needs re-configure...
 
@@ -2199,6 +2215,49 @@ Though I only need to re-install programs in gxf (like gmx), a sea of permission
 - 重启失败：卡在注销时，卡在检查文件系统，等。
 - 背景：远控导致多次长按电源，后来只能长按，经常长按
 - 推测：重装后又好了？但一开始长按电源就越来越容易死
+
+7.27更新
+
+刚重装了系统，但直接挂了home盘
+
+我觉得每次强制重启就fsck就不好，多数是initramfs，少数是emergency mode，而且修复
+
+- systemd-journal is always running...and its tracker-miner-f...and rsyslogd...
+- startup: ubuntu report internal error, tracker-miner-f崩了？
+
+启动盘中它们不运行
+
+关机时，failed to write ... read-only system
+
+
+
+驱动
+
+每次启动都有nvidia的一个啥啥110 gpu error
+
+无法关机的问题：命令行无效，点击无效，或者点完黑屏，只有左上角一个下划线，无法进入tty——可能内核和驱动不兼容。这样好像是最近才出现的
+
+我想起之前的糟糕系统，远控打开无故障的时间长一点
+
+另外，插一个NTFS系统的U盘也会导致奇怪的卡死、无法重启（似乎仍和systemd有关），拔掉就好了
+
+
+
+总结问题
+
+- systemd占用cpu导致算力下降（之前没有
+- HDD的异常（ext2，fsck等）
+- 图形界面和显卡，和远控，导致的卡死
+- 其他崩溃（CPU stuck，无法关机也无法tty，等）
+- 程序：electron-ssr，3.8.10，好了一次又崩了，所有版本
+
+
+
+https://askubuntu.com/questions/906251/systemd-journald-high-cpu-usage
+
+按此方法，systemd-journal终于被抑制了
+
+
 
 ## usual problems
 

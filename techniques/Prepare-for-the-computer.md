@@ -134,6 +134,8 @@ https://sites.google.com/view/honven all kinds of recommendations
 
 - 【PAC模式】:也就是智能分流模式
 
+https://puppylpg.github.io/2021/11/09/proxy/  自己搭+SS
+
 experiences
 
 - 22.6.24
@@ -1077,7 +1079,7 @@ cd src
 sudo make install
 ```
 
-if you don't want to customize, keep the installation folder to run the following when you want to remove vmd
+if you don't want to customize, keep the installation folder to run the following when you want to remove vmd (I'm just using the default installation, so I deleted it.)
 
 ```shell
 sudo make uninstall
