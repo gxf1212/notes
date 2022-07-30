@@ -2019,7 +2019,7 @@ sudo update-grub
 
 extundelete：恢复rm误删的文件
 
-## 2022.3.2 系统出错并无法恢复,请尝试注销并重新登录。
+## 22.3.2 系统出错并无法恢复,请尝试注销并重新登录。
 
 https://blog.csdn.net/shen_bb/article/details/16983739
 
@@ -2256,6 +2256,30 @@ Though I only need to re-install programs in gxf (like gmx), a sea of permission
 https://askubuntu.com/questions/906251/systemd-journald-high-cpu-usage
 
 按此方法，systemd-journal终于被抑制了
+
+## 22.7.29 device for boot loader installation
+
+During the ubuntu installation, usually we choose the default one (SSD). Actually, choosing your SSD (or even the partition where your EFI is) or HDD (in my case, sda, the only HDD, and not dual-system...) is both fine.
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master\techniques\images\boot-leader" alt="img" style="zoom:25%;" />
+
+references:
+
+- [安装启动引导器的设备](https://www.cxybb.com/article/zhangxiangweide/79989651)
+- [for dual-system, install in Windows boot manager](https://blog.csdn.net/weixin_41053564/article/details/85724884)
+- [he says sda1 works also well](https://icode.best/i/21014233984515)
+
+But my experience was: I seemed to choose 'sda1', and after rebooting, it said
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master\techniques\images\lost-home" alt="img" style="zoom:25%;" />
+
+Then I entered the 'emergency mode'. I had to `fsck -y /dev/sda1`, but millions of lines of messages (fixing inodes?) float in front of the screen. It tooks several minutes to finish. Upon rebooting, I could open the main folder, but EVERYTHING WAS GONE!!
+
+It seems that all the inodes are re-written. I tried re-installing Unbuntu with SSD and HDD as the place for boot leader, but no luck. I haven't tried sda1, neither recovering from 'lost-and-found', but I was hopeless.
+
+Please do not think twice.
+
+> Another thing is, I cannot re-install Ubuntu when choosing 'installation mode'. I usually choose 'something else'.
 
 
 
