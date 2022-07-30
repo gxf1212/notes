@@ -2275,11 +2275,11 @@ But my experience was: I seemed to choose 'sda1', and after rebooting, it said
 
 Then I entered the 'emergency mode'. I had to `fsck -y /dev/sda1`, but millions of lines of messages (fixing inodes?) float in front of the screen. It tooks several minutes to finish. Upon rebooting, I could open the main folder, but EVERYTHING WAS GONE!!
 
+> Another thing is, I cannot re-install Ubuntu when choosing 'installation mode'. I usually choose 'something else'. Without formatting the HDD, all the files under `/home/user` is kept.
+
 It seems that all the inodes are re-written. I tried re-installing Unbuntu with SSD and HDD as the place for boot leader, but no luck. I haven't tried sda1, neither recovering from 'lost-and-found', but I was hopeless.
 
-Please do not think twice.
-
-> Another thing is, I cannot re-install Ubuntu when choosing 'installation mode'. I usually choose 'something else'.
+Please do not think twice. Why data can be lost so confusingly in Linux...
 
 
 
