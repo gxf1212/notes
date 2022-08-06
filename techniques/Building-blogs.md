@@ -380,7 +380,7 @@ refer to [html](#something-html)
 
   to add plug-in
 
-- blacklist:
+- blacklist: don't use latest
 
   ```html
   <script src="//cdn.jsdelivr.net/npm/docsify@latest/lib/docsify.min.js"></script>
