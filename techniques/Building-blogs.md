@@ -252,6 +252,63 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 > 
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
 
+if you want to include figures, you should set the path as (an example):
+
+```shell
+<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-c1q.png" alt="5-c1q" style="zoom:50%;" />
+```
+
+i.e. use the API provided by Gitee. 
+
+- And it does not matter whether you use slash or backslash (but it matters locally in Typora...).
+- If centering is needed, you should use `<center></center>`.
+- You should not use space to avoid issues in html (%20).
+
+> You should write normally in Typora (go back to root), don't change that until figrues are uploaded. 
+>
+> First correct all slashes, then replace `../../` with the website prefix
+
+### Notes on deploying and trial
+
+1. Then after deploying, you should press Ctrl+F5, which will cost ten seconds or so. Or you will see the cache where the content is not updated!
+
+2. Gitee screened words (“可能包含违禁违规内容，请排查调整后再行重试。”). try to avoid them
+
+   - 某PN
+   - 某pǐn（drug）相关
+
+3. including multimedia: all failed as https://www.yumefx.com/?p=5310 said. could as well write html
+
+   > - code
+   >
+   >   ```markdown
+   >   [logging代码块](/utils/click-text.js ':include :type=code :fragment=demo')
+   >   ```
+   >
+   > - video
+   >
+   >   ```markdown
+   >   [分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e ':include :type=video controls width=100%')
+   >   ```
+   >
+   > - audio
+   >
+   > - webpage
+   >
+   >   ```
+   >   [东山月光下的个人主页](https://space.bilibili.com/441196634 ':include :type=iframe width=100% height=800px')
+   >   ```
+   >
+   >   [东山月光下的个人主页](https://space.bilibili.com/441196634 ':include :type=iframe width=100% height=800px')
+
+   <iframe src="//player.bilibili.com/player.html?aid=463175258&bvid=BV1gL411471e&cid=414590978&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=100% height=800px > </iframe>
+
+   - 
+
+     [cinwell website](https://cinwell.com ':include :type=iframe width=100% height=400px')
+
+4. 
+
 ## Customize functions
 
 还是有待发展啊！期待更多好玩的功能
@@ -323,13 +380,6 @@ refer to [html](#something-html)
 
   to add plug-in
 
-  > https://github.com/upupming/docsify-katex LaTeX equation support
-  >
-  > - [**supported functions**!](https://upupming.site/docsify-katex/docs/#/supported)
-  > - https://github.com/upupming/docsify-katex/issues/11 italic fon
-  >
-  > https://github.com/iPeng6/docsify-sidebar-collapse sidebar collapse
-
 - blacklist:
 
   ```html
@@ -362,11 +412,29 @@ refer to [html](#something-html)
 
    > not solved! refer to https://jhildenbiddle.github.io/docsify-themeable/#/?
 
-2. scroll to the top
+2. scroll to the top 
 
    https://github.com/zhengxiangqi/docsify-scroll-to-top
 
-3. syntax supporting problems like:
+3. sidebar collapse 
+
+   https://github.com/iPeng6/docsify-sidebar-collapse 
+
+4. LaTeX equation support https://github.com/upupming/docsify-katex 
+
+   - [**supported functions**!](https://upupming.site/docsify-katex/docs/#/supported)
+   - https://github.com/upupming/docsify-katex/issues/11 italic fon
+
+   note that katex only supports these environments that you often use (of course something other):
+
+   - aligned
+   - gathered
+   - cases
+   - various matrices, array
+
+   check https://upupming.site/docsify-katex/docs/#/supported for more
+
+   syntax supporting problems like:
 
    - [x] support of textsubscript: must use `<sub></sub>` tag; 
 
@@ -376,7 +444,7 @@ refer to [html](#something-html)
 
    - [x] support of `\begin{align*}` ?? as well as gather, equation ...
 
-4. 点击效果
+5. 点击效果
 
    - 桃心
 
@@ -395,13 +463,13 @@ refer to [html](#something-html)
 
      more icons: search, or fontawesome
 
-5. 插件，文字统计 https://github.com/827652549/docsify-count
+6. 插件，文字统计 https://github.com/827652549/docsify-count
 
    阅读进度条[docsify-progress](https://github.com/HerbertHe/docsify-progress) 这个插件与字数插件不兼容
 
-6. sitetime.js：运行时间统计
+7. sitetime.js：运行时间统计
 
-7. [docsify 构建文档网站之定制功能（全网最全） | 码农家园](https://www.codenong.com/cs107071378/) 
+8. [docsify 构建文档网站之定制功能（全网最全） | 码农家园](https://www.codenong.com/cs107071378/) 
 
    [ETS' NoteBook - By Mr.Wu - 微信公众号：码客趣分享 🌹](https://notebook.js.org/#/)
 
@@ -422,11 +490,11 @@ refer to [html](#something-html)
 
      可自定义
 
-8. 更新时间 https://github.com/pfeak/docsify-updated
+9. 更新时间 https://github.com/pfeak/docsify-updated
 
    write markdown and append to the end
 
-9. PDF reader embedded
+10. PDF reader embedded
 
    https://github.com/lazypanda10117/docsify-pdf-embed
 
@@ -435,7 +503,7 @@ refer to [html](#something-html)
    - put it between `<body></body>` (not `<head>` as the document said)
    - use relative path to the repository root
 
-10. 也许有一天，博客的课程列表那里能做成iGem那个建模首页那样，文字和图片的。
+11. 也许有一天，博客的课程列表那里能做成iGem那个建模首页那样，文字和图片的。
 
 ### live2d girl
 

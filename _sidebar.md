@@ -1,5 +1,6 @@
 - [技术学习类](/techniques/README.md)
   - [Linux基础](/techniques/Linux-fundamental.md)
+  - [博客相关](/techniques/Building-blogs.md)
   - [软件安装](/techniques/Prepare-for-the-computer.md)
   - [软件操作](/techniques/Specific-Software-Usage.md)
 - [MD学习类](/MD/README.md)
