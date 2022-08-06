@@ -380,13 +380,15 @@ refer to [html](#something-html)
 
   to add plug-in
 
-- blacklist: don't use latest
+- blacklist:
 
   ```html
   <script src="//cdn.jsdelivr.net/npm/docsify@latest/lib/docsify.min.js"></script>
   ```
 
   navbar vanishes!..mouse can't scroll. code highlight is gone.
+
+  2022.8.6 update: don't use latest **inside `<head>`** (but fine in `<body>`...) or you can't see the page
 
 - customize title with quoted text
 
