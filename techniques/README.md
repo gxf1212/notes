@@ -13,6 +13,8 @@ The content is continuously being updated.
 
 #### Notes on docsify and Gitee usage
 
+will be integrated into the page of docsify usage later.
+
 1. if you want to include figures, you should set the path as (an example):
 
    ```shell
@@ -45,4 +47,35 @@ The content is continuously being updated.
    - 某PN
    - 某pǐn（drug）相关
 
+5. including multimedia: all failed as https://www.yumefx.com/?p=5310 said. could as well write html
+
+   > - code
+>
+   >   ```markdown
+   >   [logging代码块](/utils/click-text.js ':include :type=code :fragment=demo')
+   >   ```
+>
+   > - video
+>
+   >   ```markdown
+>   [分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e ':include :type=video controls width=100%')
+   >   ```
+   >
+   > - audio
+>
+   > - webpage
+>
+   >   ```
+>   [东山月光下的个人主页](https://space.bilibili.com/441196634 ':include :type=iframe width=100% height=800px')
+   >   ```
+>
+   >   [东山月光下的个人主页](https://space.bilibili.com/441196634 ':include :type=iframe width=100% height=800px')
+
+   <iframe src="//player.bilibili.com/player.html?aid=463175258&bvid=BV1gL411471e&cid=414590978&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=100% height=800px > </iframe>
+
+   - 
+   
+     [cinwell website](https://cinwell.com ':include :type=iframe width=100% height=400px')
+
+6. 
 
