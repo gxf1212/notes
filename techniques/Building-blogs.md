@@ -276,7 +276,7 @@ i.e. use the API provided by Gitee.
 
 ### Include files & media
 
-all failed as https://www.yumefx.com/?p=5310 said.
+all failed as https://www.yumefx.com/?p=5310 said. local links don't work.
 
 > - code
 >
@@ -302,9 +302,9 @@ all failed as https://www.yumefx.com/?p=5310 said.
 
 could as well write html. recognized by both Typora and docsify.
 
+即使在此仓库内，也是网络资源，因为要引用cdn，因为本地路径的问题。
 
 
-local file
 
 <pre><code>[click-text.js](../utils/click-text.js ':include :type=code')</code></pre>
 
@@ -313,7 +313,7 @@ local file
 </pre>
 
 
-[audio]("utils/audio/92 《三体》最终季 第十集 歌者.mp3" ':include :type=audio controls width=100%')
+[audio]("https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/92 《三体》最终季 第十集 歌者.mp3" ':include :type=audio controls width=100%')
 
 
 
@@ -322,12 +322,17 @@ local file
 </audio>
 
 
-
+```html
 <iframe src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/92 《三体》最终季 第十集 歌者.mp3" > </iframe>
+```
+
+this one, just start downloading the file...
 
 
 
-online video: it's common to copy from all kinds of video platforms (eg: B站，分享--嵌入代码)
+#### online video
+
+it's common to copy from all kinds of video platforms (eg: B站，分享--嵌入代码；网易云音乐)
 
 ```html
 <iframe src="//player.bilibili.com/player.html?aid=463175258&bvid=BV1gL411471e&cid=414590978&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=100% height=600px > </iframe>
@@ -337,7 +342,7 @@ online video: it's common to copy from all kinds of video platforms (eg: B站，
 
 > no substitles
 
-webpage
+#### webpage
 
 <iframe src="https://space.bilibili.com/441196634" width=100% height=400px > </iframe>
 
