@@ -313,17 +313,17 @@ local file
 </pre>
 
 
-[audio]("_utils/audio/92 《三体》最终季 第十集 歌者.mp3" ':include :type=audio controls width=100%')
+[audio]("utils/audio/92 《三体》最终季 第十集 歌者.mp3" ':include :type=audio controls width=100%')
 
 
 
 <audio id="audio" controls="" preload="none">
-      <source id="mp3" src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/_utils/audio/92 《三体》最终季 第十集 歌者.mp3">
+      <source id="mp3" src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/92 《三体》最终季 第十集 歌者.mp3">
 </audio>
 
 
 
-<iframe src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/_utils/audio/92 《三体》最终季 第十集 歌者.mp3" > </iframe>
+<iframe src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/92 《三体》最终季 第十集 歌者.mp3" > </iframe>
 
 
 
