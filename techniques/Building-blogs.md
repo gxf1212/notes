@@ -150,6 +150,10 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
 ### Show figures
 
+省流：
+
+`<img src="https://cdn.jsdelivr.net/gh/user-name/repo-name@master/path/to/figure" style="zoom:50%;" />`
+
 - common md syntax is ok, Windows backslash and Linux slash are all ok. and zooming:
   
   ```html
@@ -188,7 +192,7 @@ If you want to modify a theme, download from cdn website rather than GitHub!
     
     **解决之道**：要用这个打头（算是git的api？）
     
-    https://cdn.jsdelivr.net/gh/gxf1212/notes@master/
+    `https://cdn.jsdelivr.net/gh/gxf1212/notes@master/`
     
     其实git他俩用来做图床就是如此
   
@@ -276,65 +280,59 @@ i.e. use the API provided by Gitee.
 
 ### Include files & media
 
-all failed as https://www.yumefx.com/?p=5310 said. local links don't work.
+At first, all failed as https://www.yumefx.com/?p=5310 said. Local links don't work, regardless of path! (like '../utils/click-text.js') We have to use the cdn path after all.
 
-> - code
->
->   ```markdown
->   [logging代码块](/utils/click-text.js ':include :type=code :fragment=demo')
->   ```
->
-> - video
->
->   ```markdown
->   [分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e ':include :type=video controls width=100%')
->   ```
->
-> - audio
->
-> - webpage
->
->   ```
->   [东山月光下的个人主页](https://space.bilibili.com/441196634 ':include :type=iframe width=100% height=800px')
->   ```
->
->   [东山月光下的个人主页](https://space.bilibili.com/441196634 ':include :type=iframe width=100% height=800px')
+We could as well **write html**, which is recognized by both Typora and docsify. The spelling of parameters might be identical. You can check [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) for these attributes.
 
-could as well write html. recognized by both Typora and docsify.
+#### code
 
-即使在此仓库内，也是网络资源，因为要引用cdn，因为本地路径的问题。
+```markdown
+[代码块](https://cdn.jsdelivr.net/gh/gxf1212/notes@master//utils/click-text.js ':include :type=code)
+```
 
+[代码块](https://cdn.jsdelivr.net/gh/gxf1212/notes@master//utils/click-text.js ':include :type=code)
 
+`:fragment=demo'`: part of the code
 
-<pre><code>[click-text.js](../utils/click-text.js ':include :type=code')</code></pre>
+#### audio
 
-<pre v-pre data-lang="markdown">
-<code class="lang-markdown">[filename](utils/click-text.js ':include:type=code')</code>
-</pre>
+the markdown format does not allow spaces in the file name...
 
-
+```markdown
 [audio]("https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/92 《三体》最终季 第十集 歌者.mp3" ':include :type=audio controls width=100%')
+```
 
+Because **double qoute is not allowed in markdown path**...removing the spaces, it does not show the audio play bar locally.
 
+[Apologize.mp3](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/Apologize.mp3 ':include :type=audio controls')
 
-[Apologize.mp3]("https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/Apologize.mp3" ':include :type=audio controls')
+```markdown
+[Apologize.mp3](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/Apologize.mp3 ':include :type=audio controls')
+```
 
+this works, and shows play bar locally.
 
+```html
+<audio id="audio" controls="" preload="none"> <source id="mp3" src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/92 《三体》最终季 第十集 歌者.mp3"> </audio>
+```
 
 <audio id="audio" controls="" preload="none">
       <source id="mp3" src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/92 《三体》最终季 第十集 歌者.mp3">
 </audio>
 
+this one, just start downloading the file...because 'iframe' equals to 'open a website'.
 
 ```html
 <iframe src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/92 《三体》最终季 第十集 歌者.mp3" > </iframe>
 ```
 
-this one, just start downloading the file...
+outer link player (will automatically play in Typora?)
 
+```html
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=407761576&auto=1&height=66"></iframe>
+```
 
-
-#### online video
+#### video
 
 it's common to copy from all kinds of video platforms (eg: B站，分享--嵌入代码；网易云音乐)
 
@@ -344,9 +342,29 @@ it's common to copy from all kinds of video platforms (eg: B站，分享--嵌入
 
 <iframe src="//player.bilibili.com/player.html?aid=463175258&bvid=BV1gL411471e&cid=414590978&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=100% height=600px > </iframe>
 
-> no substitles
+> no cc substitles...
+
+For online videos, copy the link of the file/player (corresponding type=video/iframe), rather than the website (as the following)
+
+```
+[分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e ':include :type=video controls width=100%')
+```
+
+We may deal with videos files similarly as audios.
+
+[Tom-on-broom](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/video/Tom-on-broom.mp4 ':include :type=video controls')
 
 #### webpage
+
+both works.
+
+```markdown
+[东山月光下的个人主页](https://space.bilibili.com/441196634 ':include :type=iframe width=100% height=400px')
+```
+
+```html
+<iframe src="https://space.bilibili.com/441196634" width=100% height=400px > </iframe>
+```
 
 <iframe src="https://space.bilibili.com/441196634" width=100% height=400px > </iframe>
 
