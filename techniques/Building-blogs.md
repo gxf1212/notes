@@ -1,12 +1,12 @@
 # Building blogs
 
-
+I've tried docsify and hexo
 
 # Build a note site with docsify
 
 ## References
 
-read through official! https://docsify.js.org/#/quickstart  生成那种模块API的，或者学习笔记的一个框架
+read through the official! https://docsify.js.org/#/quickstart  生成那种模块API的，或者学习笔记的一个框架
 
 also learn settings and styles from https://github.com/jhildenbiddle/docsify-themeable/tree/master/docs
 
@@ -19,7 +19,7 @@ a lot of fancy features: https://zxiaosi.cn/archives/cd1d42d1.html
 
 https://www.yumefx.com/?p=5310
 
-## Basic usage
+## Basics
 
 1. install
    
@@ -62,7 +62,7 @@ https://www.yumefx.com/?p=5310
 
 2. 
 
-## What can docsify do
+## Basic functions
 
 - visualize .md as html
 - customize sidebar, navbar, cover page
@@ -198,58 +198,62 @@ If you want to modify a theme, download from cdn website rather than GitHub!
     - adjust size, so different from those in Typora!
 
 > relative path
-> 
+>
 > https://docsify.js.org/#/zh-cn/configuration?id=relativepath not useful
-> 
+>
 > <font color=red>世界上怎么会有这么傻逼的设计？！！专门跟Typora过不去吗？？不得不改变创作方式！</font>那这话也不合适
-> 
+>
 > **Test figure usage**
-> 
+>
 > use the website, a centered figure should look like this:
-> 
+>
 > <center><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/molecular-immunology/molecular-immunology.assets/5-c1q.png" alt="5-c1q" style="zoom:50%;" align="center" /></center>
-> 
+>
 > `align="center" ` does not work.....`<center></center>` or `<p style="text-align:center;"><p/>` works. 
-> 
+>
 > I'm not particular about centering. The site looks all right though.
-> 
+>
 > 根目录probably not work
-> 
+>
 > <img src="/course/molecular-immunology/molecular-immunology.assets/1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" />
-> 
+>
 > 正常本地目录probably not work
-> 
+>
 > <img src="~/desktop/work/Git-repo/notes/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
-> 
+>
 > this should ok, but `':size=50%'` does not work locally using provided syntax
-> 
+>
 > ![logo](~/desktop/work/Git-repo/notes/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=50%')
-> 
+>
 > ![logo](~/desktop/work/Git-repo/notes/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=100%')
-> 
+>
 > To use the website, should not contain a single backslash in Typora...
-> 
+>
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/molecular-immunology/molecular-immunology.assets\5-c1q.png" alt="5-c1q" style="zoom:50%;" />
-> 
+>
 > ```
 > https://gitee.com/gxf1212/notes/raw/master/
 > https://cdn.jsdelivr.net/gh/gxf1212/notes@master/
 > ```
-> 
+>
 > 没想到个别的（本地都）显示不了，即使那个图片确实存在
-> 
+>
 > Figure in GitHub
-> 
+>
 > ![](https://raw.githubusercontent.com/gxf1212/notes/master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg)
-> 
+>
 > But CDN also works?
-> 
+>
 > <img src="https://unpkg.com/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
-> 
+>
 > ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg)
-> 
+>
 > both markdown and html syntax works ok
-> 
+>
+> ```html
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
+> ```
+>
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
 
 if you want to include figures, you should set the path as (an example):
@@ -260,6 +264,8 @@ if you want to include figures, you should set the path as (an example):
 
 i.e. use the API provided by Gitee. 
 
+> not using now
+
 - And it does not matter whether you use slash or backslash (but it matters locally in Typora...).
 - If centering is needed, you should use `<center></center>`.
 - You should not use space to avoid issues in html (%20).
@@ -268,46 +274,85 @@ i.e. use the API provided by Gitee.
 >
 > First correct all slashes, then replace `../../` with the website prefix
 
+### Include files & media
+
+all failed as https://www.yumefx.com/?p=5310 said.
+
+> - code
+>
+>   ```markdown
+>   [logging代码块](/utils/click-text.js ':include :type=code :fragment=demo')
+>   ```
+>
+> - video
+>
+>   ```markdown
+>   [分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e ':include :type=video controls width=100%')
+>   ```
+>
+> - audio
+>
+> - webpage
+>
+>   ```
+>   [东山月光下的个人主页](https://space.bilibili.com/441196634 ':include :type=iframe width=100% height=800px')
+>   ```
+>
+>   [东山月光下的个人主页](https://space.bilibili.com/441196634 ':include :type=iframe width=100% height=800px')
+
+could as well write html. recognized by both Typora and docsify.
+
+
+
+local file
+
+<pre><code>[click-text.js](../utils/click-text.js ':include :type=code')</code></pre>
+
+<pre v-pre data-lang="markdown">
+<code class="lang-markdown">[filename](utils/click-text.js ':include:type=code')</code>
+</pre>
+
+
+[audio]("_utils/audio/92 《三体》最终季 第十集 歌者.mp3" ':include :type=audio controls width=100%')
+
+
+
+<audio id="audio" controls="" preload="none">
+      <source id="mp3" src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/_utils/audio/92 《三体》最终季 第十集 歌者.mp3">
+</audio>
+
+
+
+<iframe src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/_utils/audio/92 《三体》最终季 第十集 歌者.mp3" > </iframe>
+
+
+
+online video: it's common to copy from all kinds of video platforms (eg: B站，分享--嵌入代码)
+
+```html
+<iframe src="//player.bilibili.com/player.html?aid=463175258&bvid=BV1gL411471e&cid=414590978&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=100% height=600px > </iframe>
+```
+
+<iframe src="//player.bilibili.com/player.html?aid=463175258&bvid=BV1gL411471e&cid=414590978&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=100% height=600px > </iframe>
+
+> no substitles
+
+webpage
+
+<iframe src="https://space.bilibili.com/441196634" width=100% height=400px > </iframe>
+
+> not logged in
+
+
 ### Notes on deploying and trial
 
 1. Then after deploying, you should press Ctrl+F5, which will cost ten seconds or so. Or you will see the cache where the content is not updated!
-
 2. Gitee screened words (“可能包含违禁违规内容，请排查调整后再行重试。”). try to avoid them
 
    - 某PN
    - 某pǐn（drug）相关
+3. 
 
-3. including multimedia: all failed as https://www.yumefx.com/?p=5310 said. could as well write html
-
-   > - code
-   >
-   >   ```markdown
-   >   [logging代码块](/utils/click-text.js ':include :type=code :fragment=demo')
-   >   ```
-   >
-   > - video
-   >
-   >   ```markdown
-   >   [分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e ':include :type=video controls width=100%')
-   >   ```
-   >
-   > - audio
-   >
-   > - webpage
-   >
-   >   ```
-   >   [东山月光下的个人主页](https://space.bilibili.com/441196634 ':include :type=iframe width=100% height=800px')
-   >   ```
-   >
-   >   [东山月光下的个人主页](https://space.bilibili.com/441196634 ':include :type=iframe width=100% height=800px')
-
-   <iframe src="//player.bilibili.com/player.html?aid=463175258&bvid=BV1gL411471e&cid=414590978&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=100% height=800px > </iframe>
-
-   - 
-
-     [cinwell website](https://cinwell.com ':include :type=iframe width=100% height=400px')
-
-4. 
 
 ## Customize functions
 
@@ -446,7 +491,15 @@ refer to [html](#something-html)
 
    - [x] support of `\begin{align*}` ?? as well as gather, equation ...
 
-5. 点击效果
+5. 网页图标
+
+   在 index.html 的 head 部分导入网页图标：
+
+   ```html
+   <link rel="icon" href="static/img/logo.ico" type="image/x-icon"/>
+   ```
+
+6. 点击效果
 
    - 桃心
 
@@ -465,13 +518,13 @@ refer to [html](#something-html)
 
      more icons: search, or fontawesome
 
-6. 插件，文字统计 https://github.com/827652549/docsify-count
+7. 插件，文字统计 https://github.com/827652549/docsify-count
 
    阅读进度条[docsify-progress](https://github.com/HerbertHe/docsify-progress) 这个插件与字数插件不兼容
 
-7. sitetime.js：运行时间统计
+8. sitetime.js：运行时间统计
 
-8. [docsify 构建文档网站之定制功能（全网最全） | 码农家园](https://www.codenong.com/cs107071378/) 
+9. [docsify 构建文档网站之定制功能（全网最全） | 码农家园](https://www.codenong.com/cs107071378/) 
 
    [ETS' NoteBook - By Mr.Wu - 微信公众号：码客趣分享 🌹](https://notebook.js.org/#/)
 
@@ -492,20 +545,20 @@ refer to [html](#something-html)
 
      可自定义
 
-9. 更新时间 https://github.com/pfeak/docsify-updated
+10. 更新时间 https://github.com/pfeak/docsify-updated
 
    write markdown and append to the end
 
-10. PDF reader embedded
+11. PDF reader embedded
 
-   https://github.com/lazypanda10117/docsify-pdf-embed
+    https://github.com/lazypanda10117/docsify-pdf-embed
 
-   uses PDFObject
+    uses PDFObject
 
-   - put it between `<body></body>` (not `<head>` as the document said)
-   - use relative path to the repository root
+    - put it between `<body></body>` (not `<head>` as the document said)
+       - use relative path to the repository root
 
-11. 也许有一天，博客的课程列表那里能做成iGem那个建模首页那样，文字和图片的。
+12. 也许有一天，博客的课程列表那里能做成iGem那个建模首页那样，文字和图片的。
 
 ### live2d girl
 
@@ -672,15 +725,10 @@ https://hitokoto.cn/dashboard#/ 控制台，看、提交句子的
 自定义：
 
 - 自己写点话？审核要一年？？
-
 - 如何查，比如所有关于三体的
-
 - 格式：改js？只能控制show出哪些文字，没法搞局部下划线啥的
-
   - 解决破折号前空格
-
 - 调节请求参数，可以选定句子范围
-
 - token？
 
 其他
