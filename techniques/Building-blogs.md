@@ -352,7 +352,7 @@ For online videos, copy the link of the file/player (corresponding type=video/if
 
 We may deal with videos files similarly as audios.
 
-[Tom-on-broom](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/video/Tom-on-broom.mp4 ':include :type=video controls')
+[Tom-on-broom](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/video/Tom-on-broom.mp4 ':include :type=video controls width=50%')
 
 #### webpage
 
@@ -387,18 +387,18 @@ both works.
 
 TODO list:
 
+- [x] gitee automatically deploy?
+
+- [x] \ce的重新render
+
+- [x] 图片的重新render
+  
 - [ ] figure centralize
-
-- [ ] gitee automatically deploy?
-
+  
 - [ ] 打赏
-
+  
 - [ ] 访问量统计：busuanzi
 
-- [ ] \ce的重新render
-
-- [ ] 图片的重新render
-  
   > https://docsify.js.org/#/zh-cn/markdown?id=markdown-%e9%85%8d%e7%bd%ae
   > 
   > https://github.com/docsifyjs/docsify/issues/850

@@ -301,6 +301,26 @@ intro https://iyuantiao.com/fenxiangfuli/jiaocheng/v2ray.html
 - https://github.com/Fndroid/clash_for_windows_pkg/releases
 - video reference: https://www.youtube.com/watch?v=pTlso8m_iRk
 
+
+
+#### Windows
+
+https://www.cnblogs.com/jasy/p/15182881.html
+
+https://github.com/Fndroid/clash_for_windows_pkg/issues/2871 最详细
+
+https://github.com/Fndroid/clash_for_windows_pkg/issues/3104
+
+https://docs.neobook.co/v/faq/wu-fa-shi-yong-chang-jian-wen-ti-shou-ce/clash-for-windows-yong-bu-le
+
+可能和chrome内核的浏览器冲突？firefox也不怎么快
+
+
+
+管理员运行cmd，`netsh winsock reset`，重启
+
+
+
 ### qt-5
 
 https://github.com/shadowsocks/shadowsocks-qt5/releases/tag/v3.0.1
