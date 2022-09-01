@@ -121,7 +121,7 @@ window.$docsify = {
 };
 ```
 
-background not solved
+background (for `vue.css`)
 
 ```markdown
 in coverpage.md
@@ -152,7 +152,9 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
 省流：
 
-`<img src="https://cdn.jsdelivr.net/gh/user-name/repo-name@master/path/to/figure" style="zoom:50%;" />`
+```html
+<img src="https://cdn.jsdelivr.net/gh/user-name/repo-name@master/path/to/figure" style="zoom:50%;" />
+```
 
 - common md syntax is ok, Windows backslash and Linux slash are all ok. and zooming:
   
@@ -164,11 +166,11 @@ If you want to modify a theme, download from cdn website rather than GitHub!
   ![logo](https://docsify.js.org/_media/icon.svg ':size=10%')
   ```
   
-  > Typora zooming script is not supported in docsify (but is ok in a normal html, but can center)
-  > 
+  > Typora zooming script is not supported in docsify (but is ok in a normal html, but center works)
+  >
   > already asked in CSDN. https://github.com/HanquanHq/MD-Notes
 
-- no, it supports. But the root directory is not the current directory but the repository’s.....
+  no, it supports. But the root directory is not the current directory but the repository’s.....
   
   - in normal md grammar, relative path is ok
   
@@ -176,34 +178,57 @@ If you want to modify a theme, download from cdn website rather than GitHub!
   
   - the problem is, in html, <u>it cannot recognize relative path as markdown does (no matter whether zooming)</u>. But it works if you use path relative to the root of repository...which makes figures invisible in local Typora
   
-  - 本来还猜测只是重新定义了根目录的原因，加个../就认为是相对路径了。事实上是，不管加不加这些东西，都是从the root of repository开始算的。。所以你以为加了../就是父目录了，其实还是root
-    
+  - 本来还猜测只是重新定义了根目录的原因，加个`../`就认为是相对路径了。事实上是，不管加不加这些东西，都是从the root of repository开始算的。。所以你以为加了../就是父目录了，其实还是root
+  
     but still no luck
   
-  - 解决图片问题的思路：
-    
-    - 上传的时候render为正确的格式
-    
-    - 把图上传到另一个地方，链接一个网址（缩放？
-      
-      hexo就是可以渲染出图片，他docsify就是不行
-    
-    引用网址图片也不行
-    
-    **解决之道**：要用这个打头（算是git的api？）
-    
-    `https://cdn.jsdelivr.net/gh/gxf1212/notes@master/`
-    
-    其实git他俩用来做图床就是如此
+- 解决图片问题的思路：
   
-  - future tasks:
+  - 上传的时候render为正确的html格式
+  
+  - 把图上传到另一个地方，链接一个网址以实现缩放
     
-    - centralize figures
-    - adjust size, so different from those in Typora!
+    hexo就是可以渲染出图片，他docsify就是不行
+  
+  引用网址图片也不行
+  
+  **解决之道**：要用这个打头（算是git的api？）
+  
+  `https://cdn.jsdelivr.net/gh/gxf1212/notes@master/` or 
+  
+  `https://gitee.com/gxf1212/notes/raw/master/`
+  
+  其实git他俩用来做图床就是如此
+  
+- both markdown and html (for zooming) syntaxes work ok
 
-> relative path
->
-> https://docsify.js.org/#/zh-cn/configuration?id=relativepath not useful
+  ```markdown
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg)
+  ```
+
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg)
+
+
+  ```html
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
+  ```
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
+
+  - And it does not matter whether you use slash or backslash (but it matters locally in Typora...).
+  - If centering is needed, you should add `<center></center>`.
+  - You should not use space to avoid issues in html (%20).
+
+  > You should write normally in Typora (go back to root), don't change that until figrues are uploaded. 
+  >
+  > First correct all slashes, then replace `../../` with the website prefix
+
+future tasks:
+
+- [ ] centralize figures
+- [ ] adjust size, so different from those in Typora!
+
+> #### 探索历程
 >
 > <font color=red>世界上怎么会有这么傻逼的设计？！！专门跟Typora过不去吗？？不得不改变创作方式！</font>那这话也不合适
 >
@@ -211,17 +236,19 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 >
 > use the website, a centered figure should look like this:
 >
-> <center><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/molecular-immunology/molecular-immunology.assets/5-c1q.png" alt="5-c1q" style="zoom:50%;" align="center" /></center>
+> <center> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" /> </center>
 >
 > `align="center" ` does not work.....`<center></center>` or `<p style="text-align:center;"><p/>` works. 
 >
 > I'm not particular about centering. The site looks all right though.
 >
-> 根目录probably not work
+> relative path  https://docsify.js.org/#/zh-cn/configuration?id=relativepath not useful
+>
+> 根目录probably does not work
 >
 > <img src="/course/molecular-immunology/molecular-immunology.assets/1-lymphnode.jpg" alt="1-lymphnode" style="zoom:50%;" />
 >
-> 正常本地目录probably not work
+> 正常本地目录probably does not work
 >
 > <img src="~/desktop/work/Git-repo/notes/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" alt="1-lymphnode2" style="zoom:50%;" />
 >
@@ -231,7 +258,7 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 >
 > ![logo](~/desktop/work/Git-repo/notes/course/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg ':size=100%')
 >
-> To use the website, should not contain a single backslash in Typora...
+> To use a website link, we **should not contain a single backslash in Typora**...(fine in the website?)
 >
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/molecular-immunology/molecular-immunology.assets\5-c1q.png" alt="5-c1q" style="zoom:50%;" />
 >
@@ -250,49 +277,34 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 >
 > <img src="https://unpkg.com/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
 >
-> ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg)
+> if you want to include figures, you could also set the path as (an example):
 >
-> both markdown and html syntax works ok
->
-> ```html
-> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
+> ```shell
+> <img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-c1q.png" alt="5-c1q" style="zoom:50%;" />
 > ```
 >
-> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
-
-if you want to include figures, you should set the path as (an example):
-
-```shell
-<img src="https://gitee.com/gxf1212/notes/raw/master/course/molecular-immunology/molecular-immunology.assets/5-c1q.png" alt="5-c1q" style="zoom:50%;" />
-```
-
-i.e. use the API provided by Gitee. 
-
-> not using now
-
-- And it does not matter whether you use slash or backslash (but it matters locally in Typora...).
-- If centering is needed, you should use `<center></center>`.
-- You should not use space to avoid issues in html (%20).
-
-> You should write normally in Typora (go back to root), don't change that until figrues are uploaded. 
->
-> First correct all slashes, then replace `../../` with the website prefix
+> i.e. use the API provided by Gitee. not using now
 
 ### Include files & media
 
-At first, all failed as https://www.yumefx.com/?p=5310 said. Local links don't work, regardless of path! (like '../utils/click-text.js') We have to use the cdn path after all.
+At first, all failed as https://www.yumefx.com/?p=5310 said. Local links don't work, regardless of path! (like `../utils/click-text.js`) We have to use the cdn path (like figures) after all.
 
-We could as well **write html**, which is recognized by both Typora and docsify. The spelling of parameters might be identical. You can check [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) for these attributes.
+We could as well **write html**, which is recognized by both Typora and docsify. It's definitely more unlimited than markdown. The spelling of parameters might be identical. You can check [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) for these attributes. Add `<center></center>` to keep the media in the middle.
 
 #### code
 
-```markdown
-[代码块](https://cdn.jsdelivr.net/gh/gxf1212/notes@master//utils/click-text.js ':include :type=code)
-```
+> [!TIP|label:Usage] 
+>
+> ```markdown
+> [代码块](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/jsutility/hitokoto.js ':include :type=code')
+> ```
+>
 
-[代码块](https://cdn.jsdelivr.net/gh/gxf1212/notes@master//utils/click-text.js ':include :type=code)
+it will show
 
-`:fragment=demo'`: part of the code
+[代码块](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/jsutility/hitokoto.js ':include :type=code')
+
+> `:fragment=demo'`: part of the code. refer to [this link](https://docsify.js.org/#/embed-files?id=embedded-code-fragments)
 
 #### audio
 
@@ -304,21 +316,25 @@ the markdown format does not allow spaces in the file name...
 
 Because **double qoute is not allowed in markdown path**...removing the spaces, it does not show the audio play bar locally.
 
-[Apologize.mp3](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/Apologize.mp3 ':include :type=audio controls')
-
-```markdown
-[Apologize.mp3](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/Apologize.mp3 ':include :type=audio controls')
-```
-
-this works, and shows play bar locally.
-
-```html
-<audio id="audio" controls="" preload="none"> <source id="mp3" src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/92 《三体》最终季 第十集 歌者.mp3"> </audio>
-```
-
-<audio id="audio" controls="" preload="none">
-      <source id="mp3" src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/92 《三体》最终季 第十集 歌者.mp3">
-</audio>
+> [!TIP|label:Usage] 
+>
+> the right version is
+>
+> ```markdown
+> [Apologize.mp3](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/Apologize.mp3 ':include :type=audio controls')
+> ```
+>
+> [Apologize.mp3](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/Apologize.mp3 ':include :type=audio controls')
+>
+> html works for paths with spaces, and shows play bar locally.
+>
+> ```html
+> <audio id="audio" controls="" preload="none"> <source id="mp3" src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/92 《三体》最终季 第十集 歌者.mp3"> </audio>
+> ```
+>
+> <audio id="audio" controls="" preload="none">
+>       <source id="mp3" src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/92 《三体》最终季 第十集 歌者.mp3">
+> </audio>
 
 this one, just start downloading the file...because 'iframe' equals to 'open a website'.
 
@@ -326,50 +342,72 @@ this one, just start downloading the file...because 'iframe' equals to 'open a w
 <iframe src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/audio/92 《三体》最终季 第十集 歌者.mp3" > </iframe>
 ```
 
-outer link player (will automatically play in Typora?)
-
-```html
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=407761576&auto=1&height=66"></iframe>
-```
+> Music163 (网易云音乐) outer link player (will automatically play in Typora?)
+>
+> ```html
+> <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=407761576&auto=1&height=66"></iframe>
+> ```
+>
 
 #### video
 
-it's common to copy from all kinds of video platforms (eg: B站，分享--嵌入代码；网易云音乐)
+> [!TIP|label:Usage] 
+>
+> it's common to copy from all kinds of video platforms (eg: B站，分享--嵌入代码)
+>
+> ```html
+> <iframe src="//player.bilibili.com/player.html?aid=463175258&bvid=BV1gL411471e&cid=414590978&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=90% height=500px > </iframe>
+> ```
+>
 
-```html
-<iframe src="//player.bilibili.com/player.html?aid=463175258&bvid=BV1gL411471e&cid=414590978&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=100% height=600px > </iframe>
-```
+<center><iframe src="//player.bilibili.com/player.html?aid=463175258&bvid=BV1gL411471e&cid=414590978&page=1"  scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=90% height=500px > </iframe></center>
 
-<iframe src="//player.bilibili.com/player.html?aid=463175258&bvid=BV1gL411471e&cid=414590978&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=100% height=600px > </iframe>
+> - width and height, choose one?
+> - `align="middle"` doesn't work
+> - no cc substitles...
 
-> no cc substitles...
-
-For online videos, copy the link of the file/player (corresponding type=video/iframe), rather than the website (as the following)
+Copy the link of the file/player (corresponding type=video/iframe), rather than the website (as the following)
 
 ```
 [分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e ':include :type=video controls width=100%')
 ```
 
-We may deal with videos files similarly as audios.
+> https://www.w3schools.com/html/html_youtube.asp
 
-[Tom-on-broom](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/video/Tom-on-broom.mp4 ':include :type=video controls width=50%')
+We may replace it with the link to our videos files. 
+
+> [!TIP|label:Usage] 
+>
+> Also we can write html. Do not include the source file in `iframe`
+>
+> ```html
+> <center><video width=50% controls>  
+>  <source src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/video/Tom-on-broom.mp4" type="video/mp4"> 
+> </video></center>
+> ```
+
+<center><video width=50% controls>  
+    <source src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/video/Tom-on-broom.mp4" type="video/mp4"> 
+</video></center>
 
 #### webpage
 
-both works.
+> [!TIP|label:Usage] 
+>
+> both works.
+>
+> ```markdown
+> [东山月光下的个人主页](https://space.bilibili.com/441196634 ':include :type=iframe width=100% height=400px')
+> ```
+>
+> ```html
+> <iframe src="https://space.bilibili.com/441196634" width=100% height=400px > </iframe>
+> ```
+>
 
-```markdown
-[东山月光下的个人主页](https://space.bilibili.com/441196634 ':include :type=iframe width=100% height=400px')
-```
+<iframe src="https://space.bilibili.com/441196634" width=50% height=400px > </iframe>
 
-```html
-<iframe src="https://space.bilibili.com/441196634" width=100% height=400px > </iframe>
-```
-
-<iframe src="https://space.bilibili.com/441196634" width=100% height=400px > </iframe>
-
-> not logged in
-
+> not logged i
 
 ### Notes on deploying and trial
 

@@ -16,6 +16,12 @@ Resources
 - [a test paper with answers](https://wenku.baidu.com/view/c22d35dbbceb19e8b9f6ba5d.html)
 - [paper 2](https://wenku.baidu.com/view/a47abb9e74eeaeaad1f34693daef5ef7ba0d1285.html)
 
+<iframe src="//player.bilibili.com/player.html?aid=766328982&bvid=BV1Lr4y1h7zN&cid=501683529&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=90% height=500px> </iframe>
+
+<iframe src="//player.bilibili.com/player.html?aid=549646893&bvid=BV1ui4y1Z75d&cid=457877165&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=90% height=500px> </iframe>
+
+Go to Bilibili to see subtitles and star them!
+
 # Chapter 1 Introduction
 
 绪论

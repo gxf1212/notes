@@ -555,6 +555,8 @@ just search...
 
 https://www.ghxi.com/typora.html
 
+Mac：https://macwk.com/soft/typora
+
 ## VScode
 
 1. theme

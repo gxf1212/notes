@@ -2132,7 +2132,7 @@ http://www.noobyard.com/article/p-vgixdwgy-st.html 创建home后解决了？
 
 解决：重写了分区表，相当于格式化吧。重新创建用户。。
 
-## 4.9 after recreating a user, no permission 'apt' installed tools
+## 22.4.9 after recreating a user, no permission 'apt' installed tools
 
 Though I only need to re-install programs in gxf (like gmx), a sea of permission errors occur in all tools previously installed by `sudo apt`. Only with sudo can they be installed or removed. (dpkg: error: requested oper ation requires superuser priviLege)
 
@@ -2261,7 +2261,7 @@ https://askubuntu.com/questions/906251/systemd-journald-high-cpu-usage
 
 During the ubuntu installation, usually we choose the default one (SSD). Actually, choosing your SSD (or even the partition where your EFI is) or HDD (in my case, sda, the only HDD, and not dual-system...) is both fine.
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master\techniques\images\boot-leader" alt="img" style="zoom:25%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/boot-leader" alt="img" style="zoom:20%;" />
 
 references:
 
@@ -2271,15 +2271,37 @@ references:
 
 But my experience was: I seemed to choose 'sda1', and after rebooting, it said
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master\techniques\images\lost-home" alt="img" style="zoom:25%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/lost-home" alt="img" style="zoom:25%;" />
 
-Then I entered the 'emergency mode'. I had to `fsck -y /dev/sda1`, but millions of lines of messages (fixing inodes?) float in front of the screen. It tooks several minutes to finish. Upon rebooting, I could open the main folder, but EVERYTHING WAS GONE!!
+It kept popping out such a window unless I prevented that by pressing Esc (the GUI may crash). Then I entered the 'emergency mode'. I had to `fsck -y /dev/sda1`, but millions of lines of messages (fixing inodes?) float in front of the screen. It tooks several minutes to finish. Upon rebooting, I could open the main folder, but EVERYTHING WAS GONE!!
 
 > Another thing is, I cannot re-install Ubuntu when choosing 'installation mode'. I usually choose 'something else'. Without formatting the HDD, all the files under `/home/user` is kept.
 
 It seems that all the inodes are re-written. I tried re-installing Unbuntu with SSD and HDD as the place for boot leader, but no luck. I haven't tried sda1, neither recovering from 'lost-and-found', but I was hopeless.
 
 Please do not think twice. Why data can be lost so confusingly in Linux...
+
+## 22.8.10 clash causes proxy to fail
+
+https://www.cnblogs.com/jasy/p/15182881.html
+
+https://github.com/Fndroid/clash_for_windows_pkg/issues/2871 最详细
+
+https://github.com/Fndroid/clash_for_windows_pkg/issues/3104
+
+https://docs.neobook.co/v/faq/wu-fa-shi-yong-chang-jian-wen-ti-shou-ce/clash-for-windows-yong-bu-le
+
+> 管理员运行cmd，`netsh winsock reset`，重启
+
+问题描述：最新ShadowsocksR in Windows，正常使用ssr（全平台）。安装clash for windows后部分翻墙。firefox可以（但也不怎么快？），极速浏览器可以，Android手机和iPad可以，Chrome和Edge不行（可能和chrome内核的浏览器冲突？），我的账号不行，买的那个google drive的账号可以。
+
+solution: go back to default. chrome设置---将设置还原为原始默认设置，clash和ssr都能用了
+
+
+
+Windows打开系统代理服务器设置：搜索proxy
+
+clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 
 
