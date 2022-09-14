@@ -1,7 +1,8 @@
 - [技术学习类](/techniques/README.md)
   - [Linux基础](/techniques/Linux-fundamental.md)
-  - [博客相关](/techniques/Building-blogs.md)
   - [软件安装](/techniques/Prepare-for-the-computer.md)
+  - [博客相关](/techniques/Building-blogs.md)
+  - [网盘备份](/techniques/Cloud-backup.md)
   - [软件操作](/techniques/Specific-Software-Usage.md)
 - [MD学习类](/MD/README.md)
   - [虚拟筛选和Gromacs基础操作](/MD/UROPS-run-and-result.md)
@@ -26,4 +27,4 @@
   - [西安交大钱院学辅信息站](https://qyxf.site/)
   - [浙江大学定量生物学中心](http://iqb.zju.edu.cn/)
   - [中国生物物理学会B站号](https://space.bilibili.com/424091950)
-  - <a href="https://gxf1212.github.io/notes/#/utils/about" target="_self">关于我</a>
+- <a href="https://gxf1212.github.io/notes/#/utils/about" target="_self">关于我</a>
