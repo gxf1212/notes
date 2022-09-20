@@ -405,7 +405,7 @@ We may replace it with the link to our videos files.
 > ```
 >
 
-<iframe src="https://space.bilibili.com/441196634" width=50% height=400px > </iframe>
+<iframe src="https://space.bilibili.com/441196634" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=50% height=400px > </iframe>
 
 > not logged i
 

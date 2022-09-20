@@ -18,4 +18,5 @@ The content is continuously being updated.
 
 更多选择，上YouTube搜一下就好了。。
 
-- [壁虎翻墙](https://freegecko.com/index.php/#/register?code=R6kbY2VP)：在win和Linux上用clash都遇到了麻烦，虽然可能是我自己的问题
+- [壁虎翻墙](https://freegecko.com/index.php/#/register?code=R6kbY2VP)：在win和Linux上用clash都遇到了麻烦，虽然可能是我自己的问题。
+    - 更新：clash把我的代理设置全毁了，现在conda、GreenVPN在打开clash时都用不了。已经配置好的童鞋谨慎换客户端吧。。
