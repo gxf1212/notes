@@ -820,7 +820,34 @@ installation: see [Linux-fundamental](/techniques/Linux-fundamental?id=other-sof
    done
    ```
 
-3. - 
+3. shell 统计出现行数
+
+   ```shell
+   cat complex_ATPP.pdb | grep "SOD" | wc -l
+   ```
+
+   - cat显示内容
+   - grep查找字符
+   - wc计算字数
+
+4. if 判断文件或目录是否存在
+
+   https://blog.csdn.net/m0_38039437/article/details/100160042
+
+5. keep the calculated result
+
+   ```shell
+   i=`expr ${f:0-1} + 1`
+   ```
+
+6. syntax error: unexpected end of file
+
+   https://unix.stackexchange.com/questions/591208/fix-syntax-error-unexpected-end-of-file-in-a-for-loop
+   可能是Windows下编辑的问题，MS-DOS CRLF line delimiters?
+
+   解决：去unix编辑
+
+7. 
 
 ### text processing
 
@@ -847,6 +874,7 @@ installation: see [Linux-fundamental](/techniques/Linux-fundamental?id=other-sof
   f=unbound.fepout.csv
   ${f:1:3}  # nbo
   ${f:1:-3} # nbound.fepout.
+  ${f:0-1}  # the last char
   ```
 
 - cut: split with any char

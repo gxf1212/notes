@@ -274,22 +274,6 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 
 
 
-## shell
-
-1. shell 统计出现行数
-   
-   ```shell
-   cat complex_ATPP.pdb | grep "SOD" | wc -l
-   ```
-   
-   - cat显示内容
-   - grep查找字符
-   - wc计算字数
-
-2. if 判断文件或目录是否存在
-   
-   https://blog.csdn.net/m0_38039437/article/details/100160042
-
 ## Some other notes with VMD and NAMD
 
 > ERROR: failed on end of segment MOLECULE DESTROYED BY FATAL ERROR!
@@ -1971,19 +1955,24 @@ we start from (equilibrated?) .pdb after MD. But finally should use those from c
 
 ### Primary protocol
 
-#### A brief flow: MTP
+#### A brief flow
 
 - get stable complex structure, modify the ligand properly to obtain the other one
 
-- get `.mol2`, `.rtf` and `.prm` (in one single `.str`) files from [CGenFF](https://cgenff.umaryland.edu/) or MolFacture in VMD 
+- get `.pdb`, `.rtf` and `.prm` files from CHARMM-GUI Ligand Reader & Modeller 
   
-  - no AutoPSF required, retaining coordinates and names (same for mtp and remtp)
+  - no AutoPSF required, retaining coordinates and names (same for ligand A and B)
 
-- run the make_hybrid code to obtain the hybrid `.rtf` and `.pdb` file (with atoms renamed and B value assigned)
+  > deprecated: get `.mol2`, `.rtf` and `.prm` (in one single `.str`) files from [CGenFF](https://cgenff.umaryland.edu/) or MolFacture in VMD 
+  >
   
-  - did not run very well. Now: just stick to the paper: the CH2 also considered as "common atoms". we only add a neutral hydrogen atom
+- run the make_hybrid code to obtain the `hybrid.rtf` and `hybrid.pdb` file (with atoms renamed and B value assigned)
+  
+  - see below
 
-- run `merge-fep.tcl` to build the ligand and complex with VMD. do use `top_all36_cgenff.rtf`!
+  > for MTP: Now: just stick to the paper: the CH2 also considered as "common atoms". we only add a neutral hydrogen atom
+  
+- run `merge-fep.tcl` to build the ligand and complex with VMD. do include `top_all36_cgenff.rtf`!
 
 - solvate and ionize them. a new version of `sol-ion-fep.tcl` is created to make sure the systems have the same size (ligand more atoms?)
 
@@ -2019,11 +2008,11 @@ Also, the physics of a common molecule is usually unimportant, because  it usual
 
 With that said, there is also a scenario when the common molecule is  important - which is when you actually have the experimental data for  this common molecule. But I don't think we have it.
 
-#### Basic thoughts of make_hybrid script
+#### Basic thoughts of make_hybrid.py script
 
 - data structure
   - The molecule is stored in a `Ligand object`. The core is `atomdict`. the key is the original atom name, the value contains all info, like FF atom type, coordinate (read in the .rtf and .pdb file together).
-  - All other properties are stored by tuples of atom **keys** (atom names initially, +tag in hybrid) (and other data), so that when we change the atom name to write in hybrid molecules, we just index through the dict (by GetXXX functions)
+  - All other properties are stored by tuples of atom **keys** (atom names initially, **+tag** in hybrid) (and other data), so that when we change the atom name to write in hybrid molecules, we just index through the dict (by GetXXX functions)
 - flow
   - read files
     - you will alway need to make sure that your topology and coordinate info match in every line: 1) in order; 2) remember to adjust which line to start reading.
@@ -2035,14 +2024,26 @@ With that said, there is also a scenario when the common molecule is  important 
     - thus we can use **set** operations to merge bonds, etc.
   - output: just write formatted strings into .rtf and .pdb files
 
+
+
+如果所连接的mother atom type不同，就要手动分开所连的H，即使H的type不同
+
+否则：FATAL ERROR: Atom xx has bad hydrogen group size. Check for duplicate bonds.
+
+Hydrogen groups are the base unit for domain decomposition in NAMD. They are determined almost exclusively by bond connectivity and this is usually where issues arise.
+
+Forces are applied only between non-bonded, non-hydrogen pairs of atoms. When using rigid bonds, forces are applied to the center of mass of hydrogen groups.
+
+
+
 > Exploration
-> 
+>
 > 如果编码成图，这个问题叫做：最大公共子图问题
-> 
+>
 > https://drugai.blog.csdn.net/article/details/102626236
-> 
+>
 > https://blog.csdn.net/u012325865/article/details/111478970
-> 
+>
 > - 搜这个子图问题
 >   - `ismags.largest_common_subgraph()` 暂时失败
 > - RDkit：drugAI的code
@@ -2050,37 +2051,37 @@ With that said, there is also a scenario when the common molecule is  important 
 >   - 还是线性思维，能扩展到其他TP
 > - 线性思维一步步
 >   - 对于mtp其实够了
-> 
+>
 > 图同构（英語：graph isomorphism）描述的是图论中，两个图之间的完全等价关系。在图论的观点下，两个同构的图被当作同一个图来研究。
 > https://networkx.org/documentation/stable/_modules/networkx/algorithms/isomorphism/ismags.html
-> 
+>
 > CHARMM-GUI的code，收藏了
-> 
+>
 > - openMM能读写，可能转不了？读完以后能干啥？
 > - RDkit能找子结构，但处理不了文件？
-> 
+>
 > 用rdkit查找子结构是有效的，并且不需要图的数据结构，只要能返回去查找到atom name。并且rdkit可辅助阅读pdb中的信息（非必需
-> 
+>
 > > PH:画出来是P+？
-> 
+>
 > 连在同一个磷上的氧能不能对上看来是随机的
-> 
+>
 > 我们用remtp的骨架，HGA3+CG321就没参数
-> 
+>
 > 写文件：
-> 
+>
 > 自己写？名字问题？type问题？
-> 
+>
 > 文件：改一下原.rtf里面所有atom name，再读进来合并？
-> 
+>
 > prm文件也得改？MD测试一下
-> 
+>
 > 写的时候，写出group？
-> 
+>
 > IC的+-，*都什么意思？
-> 
+>
 > 问题
-> 
+>
 > - charge可合并？差多大。如P1，O1
 > - type不同？如C，差太大，删掉
 > - 坐标微调了，优化了？原来的pdb原子renumber了。既然要用公共的，就排个序。。能对上？是否影响parameterization？跟kevin check一下
@@ -2092,9 +2093,9 @@ With that said, there is also a scenario when the common molecule is  important 
 >   - 没edit的不用了？
 >   - schrondinger可以做。。
 > - prm文件不用改，因为用的是力场里的atom type！但是要合并一下？复制粘贴就可以，但是mtp啥都没有，就不用了
-> 
+>
 > reference
-> 
+>
 > - https://www.rdkit.org/docs/GettingStartedInPython.html
 > - https://www.rdkit.org/docs/Cookbook
 > - https://www.rdkit.org/docs/source/rdkit.Chem.html
@@ -2102,16 +2103,18 @@ With that said, there is also a scenario when the common molecule is  important 
 > - https://www.rdkit.org/docs/source/rdkit.Chem.rdchem.html#rdkit.Chem.rdchem.Atom
 > - https://www.rdkit.org/docs/source/rdkit.Chem.rdFMCS.html?highlight=rdkit%20chem%20rdfmcs%20findmcs#rdkit.Chem.rdFMCS.FindMCS
 > - https://www.rdkit.org/docs/Cookbook.html?highlight=rdkit%20chem%20rdfmcs%20findmcs
-> 
+>
 > Rdkit issues
-> 
+>
 > 1. import rdkit 出现 ImportError: DLL load failed: 找不到指定的模块
->    
+>
 >    解决：版本不对，重装
-> 
+>
 > 2. MolFromMol2File(…)不推荐，容易出bug，pdb还行
 
-#### Rescuing the parameters: extensive trials
+#### Rescuing the parameters
+
+extensive trials on dihedrals
 
 ##### about fep beta
 
