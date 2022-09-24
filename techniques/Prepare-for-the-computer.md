@@ -872,7 +872,7 @@ https://docs.conda.io/en/latest/miniconda.html
 
 a readme: https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml
 
-#### AmberTools
+### AmberTools
 
 http://ambermd.org/GetAmber.php#ambertools
 
@@ -890,6 +890,10 @@ conda update -c conda-forge ambertools
 ```
 
 can also directly get the package
+
+or
+
+https://anaconda.org/conda-forge/ambertools
 
 ### acpype
 
