@@ -8,6 +8,7 @@
   - [虚拟筛选和Gromacs基础操作](/MD/UROPS-run-and-result.md)
   - [NAMD/VMD和FEP计算基本操作](/MD/FYP-notes.md)
   - [MD各软件教程和网络资料学习](/MD/MD-tutorials-all.md)
+  - [PSK-PSKR](/MD/PSK-PSKR.md)
 - [课程学习类](/course/README.md)
   - [高年级生物课](/course/advanced-biology.md)
     - [结构生物学笔记](/course/Advanced-biology/structural-biology/sb-outline.md)

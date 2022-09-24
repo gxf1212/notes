@@ -657,7 +657,7 @@ but **'formatted’ can be recognized by CHARMM-GUI**!
 
 > note: for newly added atoms, parameterization is needed?
 > 
-> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/parameterization.jpg" alt="parameterization" style="zoom:80%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/parameterization.jpg" alt="parameterization" style="zoom:80%;" />
 > 
 > but may also use 'formatted’. but for remtp I used remtp_autopsf_temp.pdb
 > 
@@ -832,7 +832,7 @@ then just click, click...and download all files
 
 > charmm-gui, what do the files do? what is needed? these?
 > 
-> ![parameterization](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/parameterization.jpg)
+> ![parameterization](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/parameterization.jpg)
 
 focus on `ligandrm.pdb/psf`, which can be put into a merge.tcl, as **an alternative way of AutoPSF** in generating files for ligand (other tools for protein, etc?). Carefully choose the force field!
 
@@ -2634,7 +2634,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 1. It's found that the aromatic ring cannot retain its planar structure, though in pymol hybrid.pdb still looks fine (though ligand.pdb Ar dotted bonds is gone). 因为后面对芳环只有参数的限制，程序不知道关于芳香键的标记
 
-   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/remtp-dihedral.jpg)
+   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/remtp-dihedral.jpg)
 
    31 17 19 34: CG3C50 CG2R57 NG2RC0 CG2RC0 (purple)
 
@@ -2658,7 +2658,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 2. 1 4 21 23: PG1 OG303 CG321 CG3C51
 
-   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/remtp-dihedral2.jpg) 
+   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/remtp-dihedral2.jpg) 
 
    > ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.6000  1   180.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
    >
@@ -2680,7 +2680,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 4. to prevent the oxygen from folding back. actually 21-23 is nearly perpendicular to the ribose "plane"
 
-   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/remtp-fold-back.png" alt="remtp-foldback" style="zoom:50%;" />
+   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/remtp-fold-back.png" alt="remtp-foldback" style="zoom:50%;" />
 
    21 23 25 31: CG321 CG3C51 OG3C51 CG3C50
 
@@ -2733,7 +2733,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
    29 31 17 36: CG3C51 CG3C50 CG2R57 CG2R51
 
-   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/remtp-dihedral3.jpg) 
+   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/remtp-dihedral3.jpg) 
    
    > in hybrid2.prm
    >
@@ -3519,6 +3519,10 @@ cd ..
 
 ### using alchemlyb
 
+https://alchemlyb.readthedocs.io/
+
+https://alchemtest.readthedocs.io/en/latest/install.html
+
 steps
 
 - [parsing namd](https://alchemlyb.readthedocs.io/en/latest/parsing/alchemlyb.parsing.namd.html?highlight=namd)
@@ -3528,6 +3532,22 @@ steps
   - `delta_f_.loc[0.00, 1.00]`
 
 alchemlyb这个包处理得十分粗糙，首先没有考虑分开vdW和coul，数据只读取了dE；然后是数据虽然能比较自由得组合，但是其他lambda下的能量根本不知道，留下了许多nan；最后是他给出那个forward和backward合并的方案，难道不是加了两份dE吗？虽然数值不太一样？感觉没道理
+
+`from alchemlyb.parsing import namd`，28个window，每个window输出1000次，最终得到29029*29的DataFrame。29列是所有lambda point，每一组只有那个window两端点的lambda那一列有数据，最后一组（feplambda=1）没有data。data可能是转换后的dE
+
+
+
+temp
+
+```shell
+bash mknamd_fep_decomp.sh *.fepout 10000 510000 500
+
+bash mknamd_fep_decomp_convergence.sh *.fepout 10000 510000 500 10 > outdecomp/log.txt
+```
+
+
+
+
 
 ## Other ligand pairs
 
@@ -4059,5 +4079,5 @@ may just use AlphaFold2.ipynb to build a (complex) model..
 
 using GPU in colab
 
-20min for each ~944 rdrp (alone) model, more for complexes?
+20 min for each ~944 rdrp (alone) model, more for complexes?
 
