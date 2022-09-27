@@ -927,9 +927,9 @@ after extraction, add these to `~/.bashrc` http://sobereva.com/439
 ```shell
 export g16root=$HOME
 export GAUSS_SCRDIR=$g16root/g16/scratch
-export GAUSS_EXEDIR=$g16root #
+export GAUSS_EXEDIR=$g16root/g16
 source $g16root/g16/bsd/g16.profile
-export PATH=$PATH:$HOME/g16
+export PATH=$PATH:$g16root/g16
 ```
 
 > debugging experience 2022.2.10

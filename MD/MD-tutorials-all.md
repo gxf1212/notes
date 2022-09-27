@@ -430,7 +430,6 @@ all tutorial: http://www.ks.uiuc.edu/Training/Tutorials/ including
 - the four files needed
 - generate necessary files through VMD
 - set the configurations
-  - 
 
 ##### notes
 

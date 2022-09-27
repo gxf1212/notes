@@ -687,6 +687,10 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   sudo chmod -R 777 anaconda3/
   ```
 
+- PackagesNotFoundError:
+  
+  https://blog.csdn.net/weixin_43815222/article/details/108549497
+  
 - pip install the package only inside one specific conda environment
   
   ```shell

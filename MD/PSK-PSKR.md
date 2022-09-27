@@ -57,13 +57,14 @@ I remember that we cannot easily import CHARMM FF in Amber.
 
 
 
-## Dealing with novel residues
+## Deal with novel residues
 
 ### make the topology
 
-upload to CHARMM-GUI. [A Jerkwin example of preparation](https://jerkwin.github.io/2017/09/20/GROMACS%E9%9D%9E%E6%A0%87%E5%87%86%E6%AE%8B%E5%9F%BA%E6%95%99%E7%A8%8B2-%E8%8A%8B%E8%9E%BA%E6%AF%92%E7%B4%A0%E5%B0%8F%E8%82%BD%E5%AE%9E%E4%BE%8B/).
+- [A Jerkwin example of preparation](https://jerkwin.github.io/2017/09/20/GROMACS%E9%9D%9E%E6%A0%87%E5%87%86%E6%AE%8B%E5%9F%BA%E6%95%99%E7%A8%8B2-%E8%8A%8B%E8%9E%BA%E6%AF%92%E7%B4%A0%E5%B0%8F%E8%82%BD%E5%AE%9E%E4%BE%8B/).
+- [a zhihu example](https://zhuanlan.zhihu.com/p/87402839)
 
-
+upload to CHARMM-GUI?
 
 
 
@@ -73,9 +74,14 @@ upload to CHARMM-GUI. [A Jerkwin example of preparation](https://jerkwin.github.
 >
 > senior sister: keep the backbone charge distribution of Y-SO3 identical to that of Y, and spare the extra charge in the side chain. I'll use that.
 
+> - `.itp` file: gromacs topology file
+> - `.rtp` file: residue type. its format looks like `.rtf` file in NAMD, defining one and another molecules.
+> - `.atp` file: atom type. looks like `xxx.inp` in NAMD, defining atom types and masses.
+> - `.r2b` file: Residue to rtp building block table. a map.
+> - `.arn` file: atom renaming specification
+> - `.hdb` file:
 
-
-### prepare ff files
+### prepare the ff files
 
 (downloaded from charmm)
 
@@ -91,27 +97,75 @@ gmx: [Adding a Residue to a Force Field](https://manual.gromacs.org/current/how-
 
 
 
+- put `residuetype.dat` in both the cwd and forcefield.ff folder
+
 > maybe I'll handcraft one later
 
 ## System setup
 
-1. we can normally go through gmx workflow. 
+### pre-process the pdb files
 
-   ```shell
-   gmx pdb2gmx -f prot.pdb -o prot.gro -ignh -water tip3p -ff charmm36-jul2021
-   # check ff. no .ff
-   
-   
-   gmx pdb2gmx -f pept.pdb -o pept.gro -ignh -water tip3p -ff charmm36-jul2021
-   ```
+- assign chain names for the receptor and ligand. [reference](https://www.researchgate.net/post/How_to_change_the_protein_chain_names_X_into_A_B_C_D_after_MD_simulations_in_Gromacs)
 
-   
+  ```shell
+  alter sele, chain='A'  # in pymol
+  ```
 
-2. 
+- We may use 'HETATM' for novel residues. The peptide is still considered as 'protein'.
+
+- fix the atom name, e.g. when a terminal COO- turns into the normal CO (atom type OT1, OT2)
+
+- note that we use option `-ter` to automatically fix the terminal residue (NH3+,COO-). So do not add (or just remove) the extra atoms.
+
+- merge them. you can easily mutate a residue in Pymol.
+
+  ```shell
+  cat *.pdb | grep ' A ' > complex.pdb
+  cat *.pdb | grep ' B ' >> complex.pdb
+  ```
+
+  
+
+### gmx workflow
+
+we can normally go through the gmx workflow. 
+
+```shell
+
+
+```
+
+> don't care too much about em 'not converage'?
 
 
 
+draft
+
+```shell
+cp -r ../mdps/charmm36.ff ../mdps/residuetypes.dat .
+gmx pdb2gmx -f *.pdb -o complex.gro -ignh -water tip3p -ff charmm36
+gmx editconf -f complex.gro -o complex_box.gro -c -d 1.2 -bt cubic
+gmx grompp -v -f ../mdps/em_vac_pme.mdp -c complex_box.gro -p topol.top -o em_vac.tpr -maxwarn 1
+gmx mdrun -v -deffnm em_vac
+gmx solvate -cp complex_box.gro -cs spc216.gro -o complex_solv.gro -p topol.top
+gmx grompp -f ../mdps/ions.mdp -c complex_solv.gro -p topol.top -o ions.tpr -maxwarn 1
+echo 13 | gmx genion -s ions.tpr -o complex_solv_ions.gro -p topol.top -pname NA -nname CL -neutral -conc 0.15
+gmx grompp -f ../mdps/em.mdp -c complex_solv_ions.gro -p topol.top -o em.tpr
+gmx mdrun -v -deffnm em
+gmx grompp -f ../mdps/em2.mdp -c em.gro -p topol.top -o em2.tpr
+gmx mdrun -v -deffnm em2
+gmx grompp -f ../mdps/nvt.mdp -c em2.gro -p topol.top -r em2.gro -o nvt.tpr
+gmx mdrun -deffnm nvt
+grep "POSRES" -rl ./topol_Protein_chain_B.itp | xargs sed -i "s/POSRES/TEMPOR/g"
+gmx grompp -f ../mdps/npt.mdp -c nvt.gro -p topol.top -r nvt.gro -t nvt.cpt -o npt.tpr
+nohup bash ../mdps/run_npt.sh 2&>1 &
+gmx grompp -f ../mdps/md.mdp -c npt.gro -p topol.top -t npt.cpt -o final.tpr
+gmx mdrun -deffnm final
 
 
+```
 
+other
+
+- http://sobereva.com/soft/Sobtop/
 
