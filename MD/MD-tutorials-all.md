@@ -402,7 +402,26 @@ Options:
       -ks <keyatom> (Atom occuring once per residue for nonstandard solvent)
 ```
 
+### Mutator
 
+https://www.ks.uiuc.edu/Research/vmd/plugins/mutator/
+
+Extensions---Modeling---Mutate residues
+
+click 'Generate FEP files'
+
+```shell
+mutator_core -psf pept6.psf -pdb pept6.pdb -o pept-gly -resid 33 -mut Gly -FEP hybrid
+```
+
+
+
+note (too old?)
+
+- Because of atom name changes, patches that **modify the side chains** cannot be used with the provided hybrid topologies. Standard patches for the termini should work fine, although it is always advisable to carefully inspect the resulting structure.
+- In the particular case of glycine, **the alpha carbon atom has to be modified** in the transformation. For that reason, most patches will probably cause problems. Also, mutating a glycine will cause some angle and dihedral parameters to be duplicated, possibly modifying backbone conformational preferences. In short, <u>do not mutate a residue from or to glycine unless you know what you are doing</u>.
+- Since proline has a special structure (and is actually not an amino acid), <u>hybrids involving proline are not supported</u>. (now it's fine?)
+- If the PSF produced by Mutator/FEP is further processed (by psfgen, solvate, ionize, etc.), the non bonded exclusion lists are likely to be lost. The resulting PSF should then be [alchemified](http://www.edam.uhp-nancy.fr/Alchemify/) again to add these lists back. (NAMD deals with that!)
 
 
 
@@ -1027,7 +1046,7 @@ The whole last paragraphs are worth reading later......
 
 > In all cases, <u>visualizing MD trajectories</u> is strongly advisable if one wishes to understand the behavior of the system and to solve possible sampling issues. Looking at the present tyrosine-to-alanine trajectories, it appears that the main conformational degree of freedom that has to be sampled is the rotation of the tyrosine hydroxyl group. Convergence is actually faster for the solvated system than for the tripeptide in vacuum, because fluctuations of the solvent help the tyrosine side chain pass the rotational barriers, which does not happen frequently in vacuum.
 
-#### K+ binding to 18C6
+#### K^+^ binding to 18C6
 
 The size-dependence correction imposed by the long-range nature of charge–dipole interactions is expected to cancel out if the dimensions of the simulation cell are identical for the two vertical legs of the thermodynamic cycle.
 

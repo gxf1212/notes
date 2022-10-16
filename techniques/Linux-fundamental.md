@@ -83,6 +83,7 @@ This is a record of 折腾ing the system, in order not to forget.
    ```shell
    cat /proc/driver/nvidia/version
    nvidia-smi
+   nvidia-smi -L  # check the number and info of GPUs
    ```
    
 4. my base board
@@ -171,7 +172,21 @@ This is a record of 折腾ing the system, in order not to forget.
 
 3. upgrade from 18.04 to 20.04. upgraded cuda and graphics driver at the same time!
 
-3. [Ubuntu设置文件默认打开方式](https://jingyan.baidu.com/article/915fc414b686a251394b2080.html)：右键、属性
+4. [Ubuntu设置文件默认打开方式](https://jingyan.baidu.com/article/915fc414b686a251394b2080.html)：右键、属性
+
+5. LD_LIBRARY_PATH不能以终结符（冒号）作为开始和最后一个字符，不能有2个终结符连在一起，所以修改下LD_LIBRARY_PATH即可
+
+6. `sudo gedit /etc/motd`: message at login
+
+7. add user
+
+   `adduser` or `useradd`. we'd better explicitly provide parameters (home dir missing: cannot login; bash missing: cannot use bash?)
+
+   ```shell
+   adduser -m username -d /home/user -s bash
+   ```
+
+8. `/etc/bash.bashrc`: system-wide bashrc file for bash shells. This is for ALL USERS!
 
 #### input method installation
 
@@ -436,35 +451,56 @@ This is a record of 折腾ing the system, in order not to forget.
 
 ### Operation on files and directory
 
+just fundamental usage. for advanced shell syntax, see [this link](/techniques/Specific-Software-Usage.md?id=bash-shell)
+
 #### create and delete
 
 1. create directory: 
-   
+
    ```shell
    mkdir your-directory
+   touch your
    ```
 
 2. rm命令
-   
+
    ```shell
    rm -d 目录名              #删除一个空目录
    rm --dir目录名              #删除一个空目录
    rm -r 目录名              #删除一个非空目录
    rm 文件名                  #删除文件
    ```
-   
+
    - -f：在删除过程中不给任何指示，直接删除。
    - -r：将参数中列出的全部目录和子目录都递归地删除。若删除目录则必须配合选项"-r"
    - -i：与-f选项相反，交互式删除，在删除每个文件时都给出提示。
 
-3. delete all files under a directory: 
-   
+3. delete all files under a directory:
+
    ```shell
-   rm ./*
+   rm -r /your/path/* #  empty the folder
+   rm -r /your/path # delete the directory
+   rmdir /your/path # delete an empty directory
+   find . -name query -type d -exec rm -rf {} \; # delete all directories with "query" in name. 
+   ```
+
+   https://my.oschina.net/u/4328928/blog/3315425
+
+   directory: /
+
+   ```shell
+   rm -rf */ 
+   # remove all directories
+   ```
+
+   move to trash
+
+   ```shell
+   mv file ~/.local/share/Trash/files
    ```
 
 4. check the size of a folder: https://zhidao.baidu.com/question/1178566665695139419.html
-   
+
    ```shell
    du -sh /directory
    ```
@@ -473,7 +509,22 @@ This is a record of 折腾ing the system, in order not to forget.
 
    https://www.runoob.com/linux/linux-comm-ls.html
 
-6. 
+   ```shell
+   du -d 1 -h  # show folder and size
+   ```
+
+   
+
+6. cp
+
+   报错如下：`cp: omitting directory './nginx-1.12.1'`
+
+   原因：要移动的目录下还存在有目录
+
+   解决：`cp -r 文件名 地址`
+
+   注意：这里的-r代表递归的意思。
+
 
 #### other
 
@@ -486,11 +537,13 @@ This is a record of 折腾ing the system, in order not to forget.
 2. create a **soft link** (short cut). Files stored in `gxf1` are actually occupying space in `gxf`. 
    
    ```shell
-   sudo ln -s /gxf/ ./gxf1
+   sudo ln -s /source/dir/ ./target
    ```
    
-   > (However, I still have to specify the install directory.)
+   We'd better put the absolute path here...
 
+   > (However, I still have to specify the install directory.)
+   
    create a **hard link**:
    
    ```shell
@@ -515,13 +568,7 @@ This is a record of 折腾ing the system, in order not to forget.
    
 4. `su root`: enter root. pw: a
 
-5. find:
-   
-   ```shell
-   sudo find / -name "*your-query*" # all that contains your query
-   ```
-
-6. another tool to search
+5. another tool to search
    
    ```shell
    locate -h
@@ -568,16 +615,8 @@ This is a record of 折腾ing the system, in order not to forget.
    sudo apt-get install tree
    ```
 
-10. check file size
-
-    ```shell
-    man ls
-    ls -l # kb
-    ls -lh # proper magnitud
-    ls -l --blocksize=g  # gb
-    ```
-
 10. 
+
 
 #### zip and unzip
 
@@ -1570,7 +1609,7 @@ not sure how to do...
     Test passed!
     ```
 
-# Debugging experiences on the system
+# Debugging experiences Ubuntu
 
 ## TOC
 
@@ -2317,6 +2356,8 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
    ```
 
 2. https://sudoedit.com/linux-server-wont-reboot/
+
+3. checking media presense开不了机: just turn off 'secure boot'
 
 
 

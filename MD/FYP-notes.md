@@ -727,8 +727,49 @@ writepsf merged.psf
 > - `toppar_water_ions.str`: contains **TIP3** water model and **ion** topology and parameter information. This is now **the only file** that contains these entities.
 > - you'd better use capital letter ('MG') for use in CHARMM
 
+2022.10.16 update:
+
+```tcl
+# vmd -dispdev text -e merge-sol-ion.tcl
+package require psfgen
+topology top_all36_prot.rtf
+topology top_all36_cgenff.rtf
+topology toppar_water_ions_namd.str
+
+topology remtp.rtf
+segment LIG {pdb remtp.pdb}
+coordpdb remtp.pdb LIG
+
+segment MG {pdb mg.pdb}
+coordpdb mg.pdb MG
+
+# maybe not using alias here
+pdbalias residue HIS HSE
+pdbalias atom ILE CD1 CD
+pdbalias atom SER HG HG1
+pdbalias atom CYS HG HG1
+
+segment PRO {pdb rdrp.pdb}
+coordpdb rdrp.pdb PRO
+
+guesscoord
+writepdb merged.pdb
+writepsf merged.psf
+
+psfcontext reset
+mol load psf merged.psf pdb merged.pdb
+package require solvate
+solvate merged.psf merged.pdb -t 11.5 -o solvated
+# files are written
+mol delete all
+package require autoionize
+autoionize -psf solvated.psf -pdb solvated.pdb -sc 0.1 -o system
+
+exit
+```
+
 > failed commands
-> 
+>
 > ```tcl
 > package require psfgen
 > resetpsf
@@ -746,15 +787,15 @@ writepsf merged.psf
 > puts "Finished"
 > quit
 > ```
-> 
+>
 > completely failure. don’t know what .inp file the tutorials used.
-> 
+>
 > ```shell
 > grep "PROT" -rl ./rdrp.pdb | xargs sed -i "s/PROT/    /g" 
 > ```
-> 
+>
 > this does not matter. later ligands: just use PRO for segment name!
-> 
+>
 > ```tcl
 > package require psfgen
 > resetpsf
@@ -764,9 +805,9 @@ writepsf merged.psf
 > segment ATP {pdb atp.pdb}
 > coordpdb atp.pdb ATP
 > ```
-> 
+>
 > still not work for ATP. even though ATPP $\to$ ATP, still “unknown atom type ON3”
-> 
+>
 > ```
 > topology toppar_all36_na_nad_ppi.str
 > # autopsf, this probably failed..
@@ -774,21 +815,21 @@ writepsf merged.psf
 > readpsf atp_autopsf.psf
 > coordpdb atp_autopsf_formatted.pdb
 > ```
-> 
+>
 > still not work for ATP. cannot recognize atoms. without “formatted” have correct names, but position of PO4 changed.
-> 
+>
 > **So we still MUST use CHARMM-GUI if we don’t directly aliase pdb**
-> 
+>
 > the second try for remTP
-> 
+>
 > Use method 2: 
-> 
+>
 > > ERROR: failed on end of segment
 > > 
 > > unknown residue type LIG
-> 
+>
 > tried AutoPSF and gmx
-> 
+>
 > note that in both cases the molecule structure in the first page of CHARMM-GUI might be strange, and the final structure is broken
 
 ### build complex-method 3
@@ -1929,7 +1970,7 @@ readings
 
 - https://www.cresset-group.com/about/news/fep-drug-discovery-toolbox/
   
-  - FEP要求尽量稳定不动，这是不同于MD的
+  - FEP可能稳定不动，但如果pose变了，是应该动的
   - FEP要求尽量不要改变电荷数
 
 - https://www.ks.uiuc.edu/Research/namd/2.14/ug/node63.html
@@ -1980,6 +2021,10 @@ we start from (equilibrated?) .pdb after MD. But finally should use those from c
 
 - run the 3rd script `edit_psf.py` to remove unparametrized angles/dihedrals, etc.
 
+  - regenerate angles dihedrals is not useful
+
+  - auto-detect triple bonds is ok
+
 - normal measurement, equilibration and run, but not necessary to gradually heat up (but if you like...)
 
 principles
@@ -2023,8 +2068,7 @@ With that said, there is also a scenario when the common molecule is  important 
     - atomdict, key is name+tag, same value, count common atoms point to the same `Atom` object
     - thus we can use **set** operations to merge bonds, etc.
   - output: just write formatted strings into .rtf and .pdb files
-
-
+- 
 
 如果所连接的mother atom type不同，就要手动分开所连的H，即使H的type不同
 
@@ -2241,6 +2285,65 @@ It's better to make all parts both neutral. add H paradigm works ok but two-carb
 > transfer：应该是把transfer写出的东西粘到str里面然后正常合并
 > 
 > 有几个还是和文献值差距有点大
+
+### merge
+
+22.10.16, FEbuilder generate script
+
+```tcl
+# usage: vmd -dispdev text -e merge-and-solvate.tcl > vmd.log
+
+package require psfgen
+psfcontext reset
+# ff
+topology ./toppar_water_ions_namd.str
+topology ./top_all36_prot.rtf
+topology ./top_all36_cgenff.rtf
+topology hybrid.rtf
+
+# load hybrid
+segment LIG {pdb hybrid.pdb}
+coordpdb hybrid.pdb LIG
+# other pdb
+segment MG {pdb mg.pdb}
+coordpdb mg.pdb MG
+# write ligand
+writepdb ligand-merged.pdb
+writepsf ligand-merged.psf
+
+# load protein
+pdbalias residue HIS HSE
+segment PRO {pdb rdrp.pdb}
+coordpdb rdrp.pdb PRO
+guesscoord
+# write complex
+writepdb complex-merged.pdb
+writepsf complex-merged.psf
+# solvation and ionization
+package require solvate
+package require autoionize
+# ionize complex
+mol delete all
+mol load psf complex-merged.psf pdb complex-merged.pdb
+solvate complex-merged.psf complex-merged.pdb -t 11.5 -o complex-solvated
+mol delete all
+autoionize -psf complex-solvated.psf -pdb complex-solvated.pdb -sc 0.15 -o complex
+set everyone [atomselect top all]
+set minmax [measure minmax $everyone]
+
+# identical volume, but a little difference in number of atoms
+mol delete all
+mol load psf ligand-merged.psf pdb ligand-merged.pdb
+solvate ligand-merged.psf ligand-merged.pdb -minmax $minmax -o ligand-solvated
+mol delete all
+autoionize -psf ligand-solvated.psf -pdb ligand-solvated.pdb -sc 0.15 -o ligand
+
+exit
+```
+
+
+
+
 
 ### QM-optimized parameters
 
@@ -3062,172 +3165,9 @@ for {set x 0} {$x <= } {incr x} {
 
 ### debug and problems
 
-the history
+- debug: FATAL ERROR: Atom 9 has bad hydrogen group size.  Check for duplicate bonds. 居然是vmd1.9.3的锅
 
-- ligand parameterization (C#N dihedral)
-- ligand building (common atom, params)
-- ligand huddling up (simulation parameter)
-- ligand bad conformation
 
-#### tests
-
-try-4.21.xlsx
-
-> c: complex
-> 
-> (piston)表示100, 50的参数
-
-现在要验证一个用我参数的
-
-先调好最好的配置，然后用在normal系统上吧，two carbon可能难指望
-
-> - 所有的模拟中，连接芳环的键那里不再是平面，是一直存在的问题
->   - 芳环应该修一下，但hybrid都好着
->   - pymol edit一下可能稍稍改变atom order
->   - 参数上少个约束吧，其实整个芳环都有点歪（不管）
->   - 在使用真正的remtp之前，都没有过这个问题
->   - tut-nvt不是很严重
-> - alpha磷酸离芳环氢有点近了，都这样
-> - timestep 1.0
-
-> 后来算了：
-> 
-> - complex+tutorial+my cutoff+edited hybrid.prm
->   - 改参数是修好了键的问题
->   - 改cutoff毁掉了ligand
-> - 现在以my-piston为基础，改cutoff为8，10，10.小一点的diheral k
->   - 只改cutoff三连可以毁掉tut，但不能拯救my-piston
->   - pme加到tut没啥影响
-> - tut-piston-pme，调dihedral，也ok
->   - 两个键恐怕只能8，5组合才能成功限制？没事
-> - 加上其他参数
->   - 跑得没有tut-piston远。这几个hybrid都不算太远；transfer也没比normal少跑
-> 
-> 芳环的事已经有所改善，但后面是否还应该使用限制性的参数？
-> 
-> final：ligand那组还是有点变化了，complex炸了
-> 
-> - 奇怪的是去掉那几个其他参数，hgroupcutoff、wrap water，就好了？并没好？？
-> 
-> 现在的框架应该是tut+piston+pme+other，但其实是**有时候成功有时候不太行**。很可能是piston等压的问题，pme和other影响都不大吧，alpha磷酸离芳环氢有点近了的情况基本都存在，tut-piston也是？
-
-总结：
-
-- **是否NPT**当然是最重要的之一
-
-- tutorial的参数构象都还行；my param使得三磷酸翘起来
-  
-  - 可能的重要因素：**cutoff三连**（langevin damping，PME?）
-
-- npt使得距离变化？爆炸？**piston那俩参数**还是有影响。。
-
-#### 4.21
-
-> FATAL ERROR: ABNORMAL EOF FOUND -buffer=*END
-
-This is an end-of-file error. Check the end of your pdb,psf and parameter files (all inputs). Probably one of them has been interrupted while being created. I can help you more if you upload the files.
-
-#### 4.21
-
-> compare tutorial
-> 
-> ```tcl
-> switchdist               8.0
-> cutoff                   9.0
-> pairlistdist            10.0
-> 
-> timestep                1.0
-> fullElectFrequency      2
-> nonbondedFreq           1
-> 
-> rigidbonds              all
-> rigidtolerance          0.000001
-> rigiditerations         400
-> 
-> langevin                on
-> langevinTemp            $temp
-> langevinDamping         10.0
-> ```
-> 
-> and my config
-> 
-> ```tcl
-> vdwForceSwitching       yes;
-> cutoff                      12.0;              # may use smaller, maybe 10., with PME
-> switchdist              10.0;              
-> pairlistdist            14.0;
-> 
-> timestep                1.0;               # 2fs/step
-> nonbondedFreq           1;                 # nonbonded forces every step
-> fullElectFrequency      2; 
-> stepspercycle           20;                # 20 redo pairlists every ten steps
-> pairlistsPerCycle        2;                
-> rigidBonds              all;               # needed for 2fs steps. Bound constraint all bonds involving H are fixed in length
-> 
-> margin                  1.0
-> 
-> langevin                   on;         # do langevin dynamics
-> langevinDamping             1;         # damping coefficient (gamma) of 1/ps
-> langevinTemp            $temp;
-> langevinHydrogen          off;
-> 
-> wrapWater               on;                # wrap water to central cell
-> wrapAll                 on;                # wrap other molecules too
-> wrapNearest             off;               # use for non-rectangular cells (wrap to the nearest image)
-> 
-> PME                     yes
-> PMEGridSpacing          1.0
-> PMETolerance            10e-6
-> PMEInterpOrder          4
-> useGroupPressure        yes;           # needed for rigid bonds (rigidBonds/SHAKE)
-> useFlexibleCell         no;            # yes for anisotropic system like membrane 
-> useConstantRatio        no;            # keeps the ratio of the unit cell in the x-y plane constant A=B
-> langevinPiston          on
-> langevinPistonTarget    1.01325
-> langevinPistonPeriod    100;         # 100?
-> langevinPistonDecay     50;         # 50?
-> langevinPistonTemp      $temp
-> StrainRate              0.0 0.0 0.0
-> 
-> 
-> # SPACE PARTITIONING
-> splitpatch              hydrogen
-> hgroupcutoff            2.8
-> ```
-> 
-> fep似乎是nvt或npt都行？查一下
-> 
-> tutorial和程序我记得都是nvt？biggin那个书是吉布斯
-
-#### 4.23~24
-
-问题：在一次中断后restart
-
-> FATAL ERROR: CudaTileListKernel::buildTileLists, maximum shared memory allocation exceeded. Too many atoms in a patch
-
-[CUDA source](https://www.ks.uiuc.edu/Research/namd/doxygen/classCudaTileListKernel.html#ae2ecf8db799a4ffedde6062e772e7ad0)
-
-namd no gpu: namd fatal error: patch has ... atoms, maximum allowed is 65535
-
-核心问题：namd Too many atoms in a patch，不是cuda. 正常run的patch只有几百atoms。观察对比log file中patch grid 等参数
-
-The command "twoAwayX yes" (same for Y and Z) will double the number of
-patches. Trying to run 3.5 million atoms on only 16 processors is asking a
-lot of NAMD though.
-[Improving Parallel Scaling](https://www.ks.uiuc.edu/Research/namd/2.9/ug/node90.html)
-[NamdPerformanceTuning](http://www.ks.uiuc.edu/Research/namd/wiki/?NamdPerformanceTuning)
-
-在zju上
-Info: PATCH GRID IS 12 (PERIODIC) BY 10 (PERIODIC) BY 13 (PERIODIC)
-Info: PATCH GRID IS 2-AWAY BY 2-AWAY BY 2-AWAY
-Info: LARGEST PATCH (785) HAS 102993 ATOMS
-*numprocs* = (2) *numpatches* + 1
-
-放弃！
-
-> https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2020-2021/0939.html
-> 
-> http://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2010-2011/2282.html
 
 ## FEP results
 
@@ -3235,9 +3175,13 @@ Info: LARGEST PATCH (785) HAS 102993 ATOMS
 
 > 4.25: see mail list
 
-### ParseFEP
 
-#### basics
+
+### Free enery analysis
+
+#### ParseFEP
+
+##### basics
 
 see tutorial-FEP for basic usage.
 
@@ -3291,7 +3235,7 @@ https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2013-2014/0568.html
 >
 > 
 
-#### decomposition
+##### decomposition
 
 ```shell
 bash ../mknamd_fep_decomp.sh rdrp-mtp-remtp-complex-prod-backward-all.fepout 10000 510000 500
@@ -3323,9 +3267,147 @@ This is free energy change. ParseFEP only gives dA if only forward is provided.
 
 but why don't we use BAR? We cannot presume that the binding pocket is favorable for the end-state ligand. We should have equilibrated the end state (MDS) before going on. Plus, we should have started every window from the same equilibrated structure (as done in gmx). In namd starting from the previous window is to minimize the error and just acceptable.
 
+#### using alchemlyb
+
+https://alchemlyb.readthedocs.io/
+
+https://alchemtest.readthedocs.io/en/latest/install.html
+
+steps
+
+- [parsing namd](https://alchemlyb.readthedocs.io/en/latest/parsing/alchemlyb.parsing.namd.html?highlight=namd)
+- combine forward and backward, substitute np.nan
+- check convergence
+- fit with a estimator
+  - `delta_f_.loc[0.00, 1.00]`
+
+alchemlyb这个包处理得十分粗糙，首先没有考虑分开vdW和coul，数据只读取了dE；然后是数据虽然能比较自由得组合，但是其他lambda下的能量根本不知道，留下了许多nan；最后是他给出那个forward和backward合并的方案，难道不是加了两份dE吗？虽然数值不太一样？感觉没道理
+
+`from alchemlyb.parsing import namd`，28个window，每个window输出1000次，最终得到29029*29的DataFrame。29列是所有lambda point，每一组只有那个window两端点的lambda那一列有数据，最后一组（feplambda=1）没有data。data可能是转换后的dE
 
 
-### trajectory analysis
+
+temp
+
+```shell
+bash mknamd_fep_decomp.sh *.fepout 10000 510000 500
+
+bash mknamd_fep_decomp_convergence.sh *.fepout 10000 510000 500 10 > outdecomp/log.txt
+```
+
+
+
+### Trajectory analysis
+
+22.10.16 update: a recent VMD script that does everything
+
+> cannot execute by vmd -dispdev ... (when 这些抠出来的命令 was added)
+
+```tcl
+# vmd
+# source ../../vis_traj.tcl 
+# under prod
+# resname HYB
+# don't remember to update selection!!
+
+# set path complex1
+set path ligand3
+
+# set path [lindex $argv 0]
+set sys [string range ${path} 0 end-1]
+if {$sys == "complex"} then {set name "bound"} else {set name "unbound"}
+
+# load psf and dcd file
+mol new ../common/${sys}-fep.psf type psf
+mol addfile ./${path}/rdrp-${name}-prod-forward.dcd type dcd waitfor all
+
+display projection   Orthographic
+# display axes off
+color Display {Background} white
+
+# make representation
+mol delrep 0 top
+mol representation NewCartoon 0.300000 10.000000 4.100000 0
+# mol color Structure
+mol color Beta
+mol selection {protein}
+mol material AOShiny
+mol addrep top
+
+# add rep after setting up
+mol representation Licorice 0.300000 12.000000 12.000000
+mol color Type
+mol selection {resname HYB}
+mol material Opaque
+mol addrep top
+# mol drawframes top 0 {0:10:559}
+
+mol representation VDW 1.000000 12.000000
+mol color Type
+mol selection {resname MG}
+mol material Opaque
+mol addrep top
+
+mol representation CPK 0.200000
+mol color Type
+# mol selection {protein and residue 436 to 443 or residue 567 or residue 721}
+# mol selection {(within 5 of (resname HYB)) and (not water)}
+mol selection {protein and noh and (same residue as within 5 of residue HYB)}
+mol material Opaque
+# update selection every frame
+mol addrep top
+
+## from rmsdtt.tcl
+proc align_bound {} {
+# align the protein
+package require rmsdtt
+# open the window
+set w [rmsdtt_tk_cb]
+# set the states of checkboxes
+set rmsdtt::trace_only 0
+set rmsdtt::noh 0
+set rmsdtt::bb_only 1
+# rmsdtt::set_sel  # verify selection
+rmsdtt::doAlign
+
+# change selection text
+$w.top.left.sel delete 1.0 end
+$w.top.left.sel insert end "resname HYB"
+set rmsdtt::bb_only 0
+# set rmsdtt::xmgrace 1
+# set rmsdtt::multiplot 0
+set rmsdtt::plot_sw 1
+set rmsdtt::save_sw 1
+set rmsdtt::save_file ${path}-rmsd.dat
+rmsdtt::doRmsd
+}
+
+# aligning the ligand
+proc align_unbound {} {
+package require rmsdtt
+set w [rmsdtt_tk_cb]
+$w.top.left.sel delete 1.0 end
+$w.top.left.sel insert end "resname HYB"
+set rmsdtt::trace_only 0
+set rmsdtt::noh 0
+set rmsdtt::bb_only 0
+rmsdtt::doAlign
+}
+
+# align_bound
+align_unbound
+
+# move to center. maybe execute again after aligning the protein...
+set lig [atomselect top "resname HYB" frame 1]
+set cen [measure center $lig weight mass]
+foreach {x y z} $cen { break }
+molinfo top set center_matrix "{{1 0 0 [expr -$x]} {0 1 0 [expr -$y]} {0 0 1 [expr -$z]} {0 0 0 1}}"
+# use negative...
+```
+
+search: `rmsdtt.tcl`
+
+
 
 #### RMSD tool in VMD
 
@@ -3423,7 +3505,153 @@ In VMD tutorial 4.2 (4: DATA ANALYSIS IN VMD)
 
 - 
 
-#### making clusters in gmx
+#### RMSD each window
+
+https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/att-3497/rmsd.tcl
+
+```tcl
+# vmd -dispdev text -e ../../get_rmsd.tcl -args complex1 560 28
+
+proc rmsd_lig { psffile dcdfile selligand } {
+    mol new $psffile type psf
+    mol addfile $dcdfile type dcd waitfor all
+
+    set molid top
+    set seltext "protein and name C CA N"
+    set ref [atomselect $molid $seltext frame 0]
+    set sel [atomselect $molid $seltext]
+    set all [atomselect $molid all]
+    set n [molinfo $molid get numframes]
+
+    for { set i 1 } { $i < $n } { incr i } {
+      $sel frame $i 
+      $all frame $i
+      $all move [measure fit $sel $ref]
+    }
+
+    set ref [atomselect $molid $selligand frame 0]
+    set sel [atomselect $molid $selligand]
+    set n [molinfo $molid get numframes]
+
+    for { set i 1 } { $i < $n } { incr i } {
+      $sel frame $i
+      lappend rms [ measure rmsd $sel $ref ]
+    }
+
+    $ref delete
+    $sel delete
+    mol delete all
+    return $rms
+}
+
+
+set path [lindex $argv 0]
+set sys [string range ${path} 0 end-1]
+if {$sys == "complex"} then {set name "bound"} else {set name "unbound"}
+
+set total [lindex $argv 1]
+set numwin [lindex $argv 2]
+set frameperwin [ expr $total / $numwin ]
+
+file delete ${path}-rmsd-window.dat
+set outfile [open ${path}-rmsd-window.dat w]
+puts -nonewline $outfile "n"
+for { set i 1 } { $i <= $frameperwin } { incr i } { puts -nonewline $outfile [format { %s} $i] }
+puts $outfile ""
+
+for { set i 0 } { $i < $numwin } { incr i } {
+    set ii [expr $i+1]
+    catdcd -o temp.dcd -first [expr $i * $frameperwin + 1 ] -last [expr $ii * $frameperwin] ./${path}/rdrp-${name}-prod-forward.dcd
+    set dcdfile temp.dcd
+    set psffile ../common/${sys}-fep.psf
+    set selligand "resname HYB"
+
+    set res [rmsd_lig $psffile $dcdfile $selligand]
+    set mean [vecmean $res]
+
+    puts -nonewline $outfile [format {%.2d} ${ii}]
+    foreach rms $res { puts -nonewline $outfile [format { %.3f} $rms] }
+    puts $outfile [format { %.3f} $mean]
+
+    file delete temp.dcd
+    puts "finished window $ii"
+}
+
+close $outfile
+exit
+```
+
+#### Time convergence
+
+- Kevin's decomp and .fepout file don't agree
+
+  Kevin's agree with parseFEP, but parseFEP says it's calculating ΔA (FEP)....
+
+
+
+#### VMD movie making
+
+```tcl
+package require vmdmovie
+MovieMaker::moviemaker
+# install netpbm
+# set MovieMaker::presmooth 1
+set MovieMaker::prescale 1
+set MovieMaker::movieformat imgif
+set MovieMaker::framerate 30
+set MovieMaker::workdir ./
+set MovieMaker::basename ${path}
+set MovieMaker::trjstep 20
+set MovieMaker::renderer libtachyon
+set MovieMaker::movietype trajectory
+# you should click on the trjstep. this window doesn't really recognize what we write there...
+MovieMaker::buildmovie
+```
+
+we are using Tachyon Internal
+
+options: https://www.ks.uiuc.edu/Research/vmd/current/ug/node112.html
+
+render: https://www.ks.uiuc.edu/Research/vmd/current/ug/node147.html
+
+To scale and smooth: `conda install netpbm` (smoothing causes error)
+
+[tutorial (just see see)](http://www.ks.uiuc.edu/Training/Tutorials/vmd-imgmv/imgmv/imgmv-tutorial.pdf)
+
+Most of the supported renderers perform lighting calculations at every pixel, and so there’s less need to set the graphical representation res- olution parameters to high values.
+
+how to display many frames at once. Click the Trajectory tab again. Above the smoothing control, notice the Draw Multiple Frames control. It is set to now by default, which is simply the current frame. Enter 0:10:199, which selects every tenth frame from the range 0 to 199.
+
+> other not using
+>
+> - http://sobereva.com/15
+>
+> - http://www.ks.uiuc.edu/Research/vmd/script_library/scripts/trajectory_movie/
+>
+>   don't use this because we can't process rgb files
+>
+>   明明有png却unsupported，明明有单独都能用却invalid command name全部已读
+>
+> - another solution
+>
+>   ```tcl
+>   for {set fn 0} {$fn < ${numframes}} {incr fn 20} {
+>      set filename snap.[format "%05d" $fn]
+>      render TachyonInternal $filename.tga
+>      animate goto $fn
+>   }
+>   exec convert -delay 5 -loop 4 -colors 32 snap.*.tga $path.gif
+>   foreach k [glob *.tga] { file delete $k }
+>   foreach k [glob *.dat] { file delete $k }
+>   ```
+>
+>   but not so clear...
+
+
+
+
+
+#### Making clusters in gmx
 
 ##### collect trajectory files (prod-window)
 
@@ -3517,35 +3745,144 @@ cd ..
 1. visualize `clusters.pdb`, compare with the initial structure
 2. calculate RMSD with `c01.pdb`
 
-### using alchemlyb
+#### see the last frames
 
-https://alchemlyb.readthedocs.io/
+not that useful
 
-https://alchemtest.readthedocs.io/en/latest/install.html
+in VMD
 
-steps
-
-- [parsing namd](https://alchemlyb.readthedocs.io/en/latest/parsing/alchemlyb.parsing.namd.html?highlight=namd)
-- combine forward and backward, substitute np.nan
-- check convergence
-- fit with a estimator
-  - `delta_f_.loc[0.00, 1.00]`
-
-alchemlyb这个包处理得十分粗糙，首先没有考虑分开vdW和coul，数据只读取了dE；然后是数据虽然能比较自由得组合，但是其他lambda下的能量根本不知道，留下了许多nan；最后是他给出那个forward和backward合并的方案，难道不是加了两份dE吗？虽然数值不太一样？感觉没道理
-
-`from alchemlyb.parsing import namd`，28个window，每个window输出1000次，最终得到29029*29的DataFrame。29列是所有lambda point，每一组只有那个window两端点的lambda那一列有数据，最后一组（feplambda=1）没有data。data可能是转换后的dE
-
-
-
-temp
-
-```shell
-bash mknamd_fep_decomp.sh *.fepout 10000 510000 500
-
-bash mknamd_fep_decomp_convergence.sh *.fepout 10000 510000 500 10 > outdecomp/log.txt
+```tcl
+set sys "complex"
+if {$sys == "complex"} then {set name "bound"} else {set name "unbound"}
+foreach i {1 2 3 4 5 6} {
+mol new ../common/${sys}-fep.psf type psf
+mol addfile ./${sys}${i}/rdrp-${name}-prod-forward.dcd type dcd waitfor all
+# mol addfile ./${sys}${i}/rdrp-mtp-remtp-${sys}-prod-forward.dcd type dcd waitfor all
+set numframes [molinfo top get numframes]
+# set sel [atomselect top "protein or resname HYB or resname MG" frame 0]
+# $sel writepdb 0-${path}.pdb
+set sel [atomselect top "protein or resname HYB or resname MG" frame [expr ${numframes} - 1]]
+$sel writepdb last-${sys}${i}.pdb
+mol delete all
+}
 ```
 
+in pymol
 
+```pymol
+load last-complex1.pdb
+load last-complex2.pdb
+load last-complex3.pdb
+load last-complex4.pdb
+load last-complex5.pdb
+load last-complex6.pdb
+align last-complex2, last-complex1
+align last-complex3, last-complex1
+align last-complex4, last-complex1
+align last-complex5, last-complex1
+align last-complex6, last-complex1
+hide cartoon, last-complex2
+hide cartoon, last-complex3
+hide cartoon, last-complex4
+hide cartoon, last-complex5
+hide cartoon, last-complex6
+# color secondary structure
+color red, ss h
+color yellow, ss s
+color green, ss l+''
+color atomic, resn HYB
+hide everything, resn MG
+set cartoon_transparency, 0.6, last-complex1 and chain P
+bg_color white
+center (last-complex1 and resn HYB)
+```
+
+### FEP notes
+
+#### analysis
+
+- 计算stddev好说。stderr单个的好说，差值的有两种：
+
+  - bound和unbound挨个相减算stderr（粗略）
+  - repeat次数相同，分别算stderr，像stddev一样平方根号（没算过是不是和上面一样）
+
+- 误差范围：实验±1。两个结果都是0.4几，-0.2几，等于没啥区别。
+
+- five independent runs were started from different initial configurations randomly chosen from the MD simulations for improved sampling. 其实没这么严格
+
+- 几次重复，通常unbound的误差会小一点；而bound有outlier要谨慎去除，或者多重复几次。
+
+- outlier能知道为什么最好，可能是二面角变化、丢了个离子等等
+
+- 总误差是平方相加根号，最好不要超过1（stderr。。）
+
+- fep就有可能有构象变化，不能说变了就是不对的
+
+  - RMSD, movie, last frame都是看有没有变的
+
+- FEP真正能分析的，就是
+
+  - dG-λ
+    - window均匀的一段，dG应该大致是直线
+    - 有一个转折，在那两个start end参数处
+    - step and accumulated 都要放
+  - time convergence
+  - each window RMSD：也就能看哪里有跳跃
+
+  好像也没啥了。MD里面的contact分析什么的。
+
+- FEP虽然麻烦，但有严格的规范，单独做没啥创新的
+
+  实验有活性的计算应该有活性，计算有活性的实验应该有几个有活性，实验没活性的……差得不要太多
+
+  差一点的发个纯计算的文章，好的可以加实验、加更多……
+
+- 即使我们只是优化了结合能力，也是有意义的，因为直接筛还是难度。但不管我们怎么算，还是要验证的。当然，没到临床的实验都不能说真的有效。
+
+- 和实验对比：要是测结合力才exactly match，EC~50~也不等于亲和力
+
+![image-20221016231054417](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/fep.png)
+
+#### charged mutation
+
+solution：
+
+- 伴随一个离子 is a bad idea
+
+- bound state和unbound box size一样，这部分抵消（单个dG比较大，ddG还可以）
+
+  - 关于charge，tutorial上好像也有correction公式
+
+- 远端做个相反的mutation。仍然，bound和unbound的epsilon不一样，仍有系统误差
+
+- 先让uncommon的电荷消失，alchemical transformation，再让电荷长出来
+
+  gmx那就是先变成dummy atom。这个是比较准的。
+
+- 把bound和unbound放同一个盒子，一个正向一个反向。不知道对不对，但肯定很麻烦
+
+
+
+#### protein mutation
+
+double mutation, DG12-DG1-DG2最多2~3kcal
+
+多肽，每个AA的buried area
+
+#### design
+
+- filter the mutation site: through buried area of each residue (residue expose analysis), or alanine scan?
+
+#### presenting your results
+
+[an example](https://drugdesigndata.org/upload/community-components/d3r/webinar2017/presentations/Cournia_lab_D3R_webinar.pdf)
+
+- 画图，颜色清晰简洁
+- 最好别放出outliers，否则要说为什么
+- 每一张只讲一件事，包含：做了什么（what），为什么要做（why），结果（是否符合期待）
+- FEP significant number: two digits
+- 如何导出那种，作者、杂志、年期卷的格式
+- 结构图每次都标出residue name
 
 
 
@@ -3596,6 +3933,12 @@ conda activate AmberTools21
 
 
 
+# Stage 3 Protocol: new FEP
+
+
+
+
+
 
 
 # Stage n protocol: GMX FEP
@@ -3606,7 +3949,7 @@ conda activate AmberTools21
 
 #### pmx package
 
-[installation guide](https://gxf1212.gitee.io/notes/#/techniques/Prepare-for-the-computer?id=pmx)
+[installation guide](https://gxf1212.github.io/notes/#/techniques/Prepare-for-the-computer?id=pmx)
 
 https://degrootlab.github.io/pmx/index.html 官方文档
 
@@ -4080,4 +4423,14 @@ may just use AlphaFold2.ipynb to build a (complex) model..
 using GPU in colab
 
 20 min for each ~944 rdrp (alone) model, more for complexes?
+
+
+
+not that useful (cannot recognize my pdb file):
+
+https://www.rcsb.org/alignment
+
+
+
+## Deal with Halogen in CHARMM/NAMD
 

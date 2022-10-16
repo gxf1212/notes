@@ -183,7 +183,7 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
 2. depends on Python! It will look like
 
-   ![electron-ssr-py](https://gitee.com/gxf1212/notes/raw/master/techniques/images/electron-ssr-py.png)
+   ![electron-ssr-py](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/electron-ssr-py.png)
 
    https://www.cnblogs.com/geekHao/p/12635970.html
 
@@ -227,7 +227,7 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
    similar situation https://github.com/qingshuisiyuan/electron-ssr-backup/issues/26
 
-   ![electron-ssr-dep](https://gitee.com/gxf1212/notes/raw/master/techniques/images/electron-ssr-dep.png)
+   ![electron-ssr-dep](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/electron-ssr-dep.png)
 
    > libcrypto is along with `libssl-dev`. 这俩包不重要，主要是代理方式！
    >
@@ -375,6 +375,35 @@ https://zdock.umassmed.edu/ with server
 seems not this...uninstall it...
 
 snugdock is an Ab docking tool
+
+## pycharm and miniconda
+
+```shell
+$pycharm # boot
+```
+
+### packages
+
+for AmberTools!!!
+
+```shell
+# https://www.mdanalysis.org/
+conda config --add channels conda-forge
+conda install mdanalysis -y
+conda install -c openbabel openbabel -y
+# conda install -c bioconda pybel # not this
+conda install -c rdkit rdkit -y
+```
+
+usage
+
+```shell
+import openbabel
+import pybel
+mymol = pybel.readstring("smi", "CCCC")
+```
+
+conda installed openbabel contains the cmd command `obabel`
 
 ## MD
 
@@ -633,6 +662,20 @@ We strongly suggest that you run mpirun as a non-root user.
 ```
 
 ## Analysis tools: Python/cmd tookit
+
+### xmgrace
+
+https://plasma-gate.weizmann.ac.il/Grace/
+
+compile from source: `configure: error: M*tif has not been found`
+
+not solve by `conda install openmotif`. compiling: need `sudo`
+
+`conda install xmgrace`: no documentation, no cmd command, python2.7, didn't work 
+
+
+
+![image-20221016211602695](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/xmgrace.png)![image-20221016211759336](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/xmgrace-gmx.png)
 
 ### dssp
 
@@ -1106,6 +1149,14 @@ http://www.ks.uiuc.edu/Research/vmd/doxygen/
 
 https://vmd.robinbetz.com/
 
+not good
+
+#### ImageMagick
+
+```conda install -c conda-forge imagemagick```
+
+
+
 ### DiscoveryStudio Visualizer
 
 https://blog.csdn.net/huanzaizai/article/details/116273464
@@ -1209,7 +1260,7 @@ the password is often `betabarrel`
 
 should use **PyMOL 2.0** (installer) rather than [EduPyMOL-v1.7.4.5-Linux-x86_64.tar.bz2](https://pymol.org/ep/EduPyMOL-v1.7.4.5-Linux-x86_64.tar.bz2)
 
-![pymol](https://gitee.com/gxf1212/notes/raw/master/techniques/images/pymol.jpg)
+![pymol](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/pymol.jpg)
 
 > Icon=/home/gxf/pymol/share/pymol/data/pymol/icons/icon2_128x128.png
 
@@ -1242,34 +1293,15 @@ To (re)install desktop menu and icon later, run:
     ~/.local/UCSF-Chimera64-1.16/bin/xdg-setup install
 ```
 
-## pycharm and miniconda
-
-```shell
-$pycharm # boot
-```
-
-### packages
-
-for AmberTools!!!
-
-```shell
-# https://www.mdanalysis.org/
-conda config --add channels conda-forge
-conda install mdanalysis -y
-conda install -c openbabel openbabel -y
-# conda install -c bioconda pybel # not this
-conda install -c rdkit rdkit -y
-```
-
-usage
-
-```shell
-import openbabel
-import pybel
-mymol = pybel.readstring("smi", "CCCC")
-```
+dependence: `conda install -c conda-forge xorg-libxscrnsaver`
 
 ## Paper, work
+
+### office
+
+https://www.libreoffice.org/download/appimage/  ok
+
+https://github.com/linlinger/wps-appimage/releases/tag/1.0 dependence unsatisfied...
 
 ### text editor
 
@@ -1319,7 +1351,9 @@ skills:
 - files--add file
 - contents: to quickly compare the papers, to summarize
 
-## download small molecule pdb files for virtual screening
+## download small molecule pdb files 
+
+for virtual screening
 
 ### download all and see data
 
@@ -1558,112 +1592,6 @@ windows: https://www.bilibili.com/read/cv7167667
    perform any math: (()) or between ``
    
    `$( )` to store any outputed number in a variable
-
-### operate on files and directories in batch
-
-1. ls
-   
-   https://www.runoob.com/linux/linux-comm-grep.html 
-   
-   this computer's folder cannot find name! 
-
-2. grep
-   
-   ```shell
-   ls|grep query # return all direcotries and files containing the query string
-   ls -l | grep query | wc -l # count the number of files whose names contain
-   grep -o query filename | wc -l # count the number of query appearances in a text file
-   grep -n query filename # return lines with line numbers
-   ```
-
-3. delete
-   
-   ```shell
-   rm -r your/path/* #  empty the folder
-   rm -r your/path # delete the directory
-   rmdir your/path # delete an empty directory
-   find . -name query -type d -exec rm -rf {} \; # delete all directories with "query" in name. 
-   ```
-   
-   https://my.oschina.net/u/4328928/blog/3315425
-   
-   move to trash
-   
-   ```shell
-   mv file ~/.local/share/Trash/files
-   ```
-
-4. count string
-   
-   ```shell
-   grep -o '$$$$' atp.sdf | wc -l
-   ```
-
-5. readline
-   
-   https://www.cnblogs.com/iloveyoucc/archive/2012/07/10/2585529.html
-
-6. select file according to size:
-   
-   https://blog.csdn.net/Cassiel60/article/details/89016530?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control
-   
-   ```shell
-   find . -name "*" -type f -size 0c > out.txt # output
-   find . -name "*" -type f -size 0c | xargs -n 1 rm -f # delete
-   ```
-
-7. unify the format of file names
-   
-   https://blog.csdn.net/vipchenvip/article/details/103280418
-   
-   ```shell
-   # length=12
-   rename ZINC ZINC0 ZINC????????.pdbqt # 8
-   rename ZINC ZINC0 ZINC?????????.pdbqt # 9
-   # 10
-   # 11
-   # in order!!
-   rename ZINC0 ZINC ZINC??????????????.pdbqt # 14
-   rename ZINC0 ZINC ZINC?????????????.pdbqt # 13
-   ```
-
-8. directory: /
-   
-   ```shell
-   rm -rf */ # remove all directories
-   ```
-
-9. cp
-   
-   报错如下：
-   
-   cp: omitting directory `./nginx-1.12.1'
-   
-   原因：
-   
-   要移动的目录下还存在有目录
-   
-   解决：
-   
-   cp -r 文件名 地址
-   
-   注意：
-   
-   这里的-r代表递归的意思。
-
-10. 
-
-11. 
-
-12. 
-
-13. 
-
-14. 
-
-15. 
-
-16. 
 
 ### other
 

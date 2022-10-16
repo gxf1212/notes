@@ -571,7 +571,7 @@ Mac：https://macwk.com/soft/typora
    
    solution: disable掉他俩, 然后settings（ctrl+,）里面搜索theme
 
-2. 
+2. https://jingyan.baidu.com/article/e6c8503ca7706de54f1a18f4.html vs code 字体分辨率
 
 ## Pycharm
 
@@ -812,46 +812,19 @@ installation: see [Linux-fundamental](/techniques/Linux-fundamental?id=other-sof
 
 ## Bash (shell)
 
-1. https://cloud.tencent.com/developer/ask/sof/806010
+跟系统相关的，请阅读《Linux基础》
 
-   如何在Bash函数中添加默认参数？`${1:-.}`
-
-2. download: an example
-
-   ```shell
-   for i in {1..19}; do
-   wget https://ronlevygroup.cst.temple.edu/courses/2020_fall/chem5302/lectures/chem5302_lecture${i}.pdf --no-check-certificate
-   done
-   ```
-
-3. shell 统计出现行数
-
-   ```shell
-   cat complex_ATPP.pdb | grep "SOD" | wc -l
-   ```
-
-   - cat显示内容
-   - grep查找字符
-   - wc计算字数
-
-4. if 判断文件或目录是否存在
-
-   https://blog.csdn.net/m0_38039437/article/details/100160042
-
-5. keep the calculated result
-
-   ```shell
-   i=`expr ${f:0-1} + 1`
-   ```
-
-6. syntax error: unexpected end of file
+1. syntax error: unexpected end of file
 
    https://unix.stackexchange.com/questions/591208/fix-syntax-error-unexpected-end-of-file-in-a-for-loop
    可能是Windows下编辑的问题，MS-DOS CRLF line delimiters?
 
    解决：去unix编辑
 
-7. 
+2. 
+
+3. 
+
 
 ### text processing
 
@@ -905,85 +878,155 @@ awk '/^#Free energy/ {printf "%.5f,%.5f,%.9f\n",$8,$9,$12}' ${fn}.fepout > ${fn}
 
 > take all lines with "#Free energy", print the no. 8,9,12 word (separated by space) to the output file
 
+### file processing
+
+#### ls 
+
+1. check file size
+
+   ```shell
+   man ls
+   ls -l # kb
+   ls -lh # proper magnitud
+   ls -l --blocksize=g  # gb
+   ```
+
+2. 
+
+#### find
+
+1. find:
+
+   ```shell
+   sudo find / -name "*your-query*" # all that contains your query
+   ```
+
+2. select file according to size:
+
+   https://blog.csdn.net/Cassiel60/article/details/89016530?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control
+
+   ```shell
+   find . -name "*" -type f -size 0c > out.txt # output
+   find . -name "*" -type f -size 0c | xargs -n 1 rm -f # delete
+   ```
+
+3. 
+
+#### count
+
+1. shell 统计出现行数
+
+   ```shell
+   cat complex_ATPP.pdb | grep "SOD" | wc -l
+   ```
+
+   - cat显示内容
+   - grep查找字符
+   - wc计算字数
+
+   ```shell
+   ls | grep query # return all direcotries and files containing the query string
+   ls -l | grep query | wc -l # count the number of files whose names contain
+   grep -o query filename | wc -l # count the number of query appearances in a text file
+   grep -n query filename # return lines with line numbers
+   ```
+
+2. count string
+
+   https://www.runoob.com/linux/linux-comm-grep.html
+
+   ```shell
+   grep -o '$$$$' atp.sdf | wc -l
+   ```
+
+3. 
+
+#### other
+
+1. unify the format of file names
+
+   https://blog.csdn.net/vipchenvip/article/details/103280418
+
+   ```shell
+   # length=12
+   rename ZINC ZINC0 ZINC????????.pdbqt # 8
+   rename ZINC ZINC0 ZINC?????????.pdbqt # 9
+   # 10
+   # 11
+   # in order!!
+   rename ZINC0 ZINC ZINC??????????????.pdbqt # 14
+   rename ZINC0 ZINC ZINC?????????????.pdbqt # 13
+   ```
+
+2. 
+
+### advanced (scripting)
+
+1. process files line by line
+
+   https://www.cnblogs.com/iloveyoucc/archive/2012/07/10/2585529.html
+
+   ```shell
+   while read line
+   do
+       echo $line
+   done < file
+   ```
+
+2. https://cloud.tencent.com/developer/ask/sof/806010
+
+   如何在Bash函数中添加默认参数？`${1:-.}`
+
+3. if 判断文件或目录是否存在
+
+   https://blog.csdn.net/m0_38039437/article/details/100160042
+
+4. keep the calculated result
+
+   ```shell
+   i=`expr ${f:0-1} + 1`
+   ```
+
+5. shell-if表达式关于文件存在判断，变量比较判断用法
+
+   https://blog.csdn.net/khx0910/article/details/106383294/
+
+6. 
+
+### tools
+
+1. download: an example
+
+   ```shell
+   for i in {1..19}; do
+   wget https://ronlevygroup.cst.temple.edu/courses/2020_fall/chem5302/lectures/chem5302_lecture${i}.pdf --no-check-certificate
+   done
+   ```
+
+2. 
+
+## Tcl programming
+
+https://sunxiaoquan.wordpress.com/2015/02/20/vmd-tcltk-output-results-to-the-text-file/ 
+
+https://www.ks.uiuc.edu/Research/vmd/current/ug/node193.html 
+
+https://wiki.tcl-lang.org/page/format
+
+https://www.tcl.tk/man/tcl/TclCmd/foreach.html
+
+```tcl
+set x {}
+foreach i {a b c} j {d e f g} {
+    lappend x $i $j
+}
+```
+
 
 
 ## Python 
 
-- python嵌套列表赋值，想更改其中一个元素但是一整列的元素都被更改,是什么原因呢，应该怎么修改？ - Demon的回答 - 知乎
-
-  https://www.zhihu.com/question/355374988/answer/891028270
-
-  always use for loop rather than multiplication...
-  
-- 
-
-### matplotlib fonts
-
--  just copy .ttf files to ~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf
-
-  https://blog.csdn.net/qq_32442683/article/details/108298763
-
-  - [use .ttf file](https://www.cnblogs.com/arkenstone/p/6411055.html)
-
-    ```python
-    from matplotlib.font_manager import FontProperties
-    chinese_font = FontProperties(fname='/usr/share/fonts/MyFonts/YaHei.Consolas.1.11b.ttf')
-    ...
-    plt.text(x, y, display, fontsize=12, fontproperties=chinese_font)
-    ```
-
-  - [check usable Chinese font family in matplotlib](https://www.cnblogs.com/arkenstone/p/6411055.html)
-
-    ```python
-    from matplotlib.font_manager import FontManager
-    import subprocess
-    
-    fm = FontManager()
-    mat_fonts = set(f.name for f in fm.ttflist)
-    
-    output = subprocess.check_output(
-        'fc-list :lang=zh -f "%{family}\n"', shell=True)
-    output = output.decode('utf-8')
-    # print '*' * 10, '系统可用的中文字体', '*' * 10
-    # print output
-    zh_fonts = set(f.split(',', 1)[0] for f in output.split('\n'))
-    available = mat_fonts & zh_fonts
-    
-    print('*' * 10, '可用的字体', '*' * 10)
-    for f in available:
-        print(f)
-    ```
-
-    copy the results into `font_la = {'family': 'dengxian'}`. capitalization does not matter.
-
-  - after installing font for the system (see [here](/techniques/Linux-fundamental#system-settings))
-
-    ```python
-    import matplotlib
-    matplotlib.get_cachedir()
-    ```
-
-    `rm -rf` it! then just use the `available` fonts above. No need to configure as other blogs did.
-
-    [after removing cache....](https://blog.csdn.net/u014712482/article/details/85802563)here's how we can check name for ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190104211934391.jpg)
-
-    ```python
-    import matplotlib as plt
-    import matplotlib.font_manager as font_manager
-    fontpath = '/usr/share/fonts/truetype/msttcorefonts/simkai.ttf'
-    prop = font_manager.FontProperties(fname=fontpath)
-    print(prop.get_name())
-    ```
-
-    
-
-  - a
-
-### files
-
-os.walk()
-
-
+see [Python-for-MD](/MD/Python-for-MD.md)
 
 ## LaTeX
 
