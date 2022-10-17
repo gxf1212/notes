@@ -5,7 +5,7 @@
   - [网盘备份](/techniques/Cloud-backup.md)
   - [软件操作](/techniques/Specific-Software-Usage.md)
 - [MD学习类](/MD/README.md)
-  - [用于MD的Python包](/MD/Python-for-MD.md)
+  - [用于MD的编程](/MD/Programming-for-MD.md)
   - [虚拟筛选和Gromacs基础操作](/MD/UROPS-run-and-result.md)
   - [NAMD/VMD和FEP计算基本操作](/MD/FYP-notes.md)
   - [MD各软件教程和网络资料学习](/MD/MD-tutorials-all.md)

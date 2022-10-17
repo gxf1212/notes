@@ -6,7 +6,7 @@
   - [Cloud drive backup](/techniques/Cloud-backup.md)
   - [Specific Tools Usage](/techniques/Specific-Software-Usage.md)
 - [MD study](/MD/README.md)
-  - [Python packages for MD](/MD/Python-for-MD.md)
+  - [Programming for MD](/MD/Programming-for-MD.md)
   - [Virtual screening and Gromacs](/MD/UROPS-run-and-result.md)
   - [NAMD/VMD/FEP basics (tbc)](/MD/FYP-notes.md)
   - [MD official and online tutorials](/MD/MD-tutorials-all.md)
