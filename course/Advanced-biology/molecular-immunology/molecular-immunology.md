@@ -729,7 +729,7 @@ C3bBb --C3--> C3b
 
    > But they only provide a protective environment for the reaction or an adhesive surface, and are not involved in the actual recognition. Without infection, regulator proteins like Factor H and I, inhibit C3bBb and C3b respectively, while pathogen components inhibit regulators.
 
-2. C3 is slightly and spontaneously hydrolyzed into C3(H<sub>2</sub>O), which is usually in the liquid phase, and has C3b-like properties, enabling attachment to the surface.
+2. C3 is slightly and spontaneously hydrolyzed into C3(H<sub>2</sub>O), which is usually in the liquid phase, and has C3b-like properties, enabling its attachment to the surface.
 
    > in C3(H<sub>2</sub>O), C3a is incompletely released, which also exposes the thiol ester that is then attacked by −OH or -NH2 residues and helps C3b to be located on the surface.
 
@@ -2783,6 +2783,8 @@ If you are Rh<sup>-/-</sup>, you will have anti-Rh Ab.
 
 #### Ab of essential recptors
 
+
+
 ## Type III hypersensitivity
 
 also called immune complex-mediated hypersensitivity, 免疫复合物型超敏反应
@@ -2872,7 +2874,7 @@ types of transplantation
 
 - initiation
   - damage:
--
+  -
 
 ### Adaptive immunity
 

@@ -3816,6 +3816,8 @@ center (last-complex1 and resn HYB)
 
 - 总误差是平方相加根号，最好不要超过1（stderr。。）
 
+- ligand的charge分布，最好倒是大部分相同，不是算QM，因为FEP对charge敏感。。
+
 - fep就有可能有构象变化，不能说变了就是不对的
 
   - RMSD, movie, last frame都是看有没有变的
@@ -3841,7 +3843,7 @@ center (last-complex1 and resn HYB)
 
 - 和实验对比：要是测结合力才exactly match，EC~50~也不等于亲和力
 
-![image-20221016231054417](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/fep.png)
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/fep.png" alt="image-20221016231054417" style="zoom:50%;" />
 
 #### charged mutation
 

@@ -13,7 +13,7 @@ The content is continuously being updated.
 
 这几个机场都是我用过的，都还不错的，适用于ssr、clash等多种连接方式，配有详细的教程。欢迎点击以下几个连接注册账号，根据需要购买合适的套餐。
 
-- [云翻墙](https://support.dellcomputer.online/auth/register?code=bLKC)
+- [云翻墙](https://support.dellcomputer.online/auth/register?code=dZNd)
 - [忍者云](https://renzhe.cloud/auth/register?code=pE4p)
 
 更多选择，上YouTube搜一下就好了。。

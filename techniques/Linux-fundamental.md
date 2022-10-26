@@ -186,7 +186,7 @@ This is a record of 折腾ing the system, in order not to forget.
    adduser -m username -d /home/user -s bash
    ```
 
-8. `/etc/bash.bashrc`: system-wide bashrc file for bash shells. This is for ALL USERS!
+8. `/etc/bash.bashrc` or `/etc/bashrc`: system-wide bashrc file for bash shells. This is for ALL USERS!
 
 #### input method installation
 

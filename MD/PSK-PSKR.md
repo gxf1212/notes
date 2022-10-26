@@ -385,9 +385,28 @@ exit
 
 - `mutator_core`: is just from VMD plugin [Mutator](https://www.ks.uiuc.edu/Research/vmd/plugins/mutator/)
 
+- don't worry if you see the following error:
+
+  ```
+  Info) Using plugin psf for structure file ligand.fep.psf
+  psfplugin) Failed to parse segname in PSF file:
+  psfplugin)   '         1 PEP      28       TYM      N        NH3     -0.300000       14.0070           0
+  ```
+
+  - also, patches don't destroy standard residue mutations
+  - also, some other errors in VMD that won't interrupt the execution.
+
+- `mutator_core -psf pept-fixed.psf -pdb pept-fixed.pdb -o pept_MUTATE -resid 32 -mut LYS -FEP ligand`
+
+  if `-FEP` is provided, it will mutate to the hybrid residue rather than the new residue.
+
+  That program may need some certain mechanism to generate the atom coordinates and beta value, which aren't provided in `top_all36_hybrid.inp`.
+
+- 
 
 
 
+是啊，突变成大的最好多平衡一会大基团。。
 
 
 

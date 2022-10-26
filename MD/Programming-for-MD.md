@@ -199,20 +199,34 @@ awk '/^#Free energy/ {printf "%.5f,%.5f,%.9f\n",$8,$9,$12}' ${fn}.fepout > ${fn}
 
 # Tcl programming
 
-https://sunxiaoquan.wordpress.com/2015/02/20/vmd-tcltk-output-results-to-the-text-file/ 
+- if...else
 
-https://www.ks.uiuc.edu/Research/vmd/current/ug/node193.html 
+  ```tcl
+  if {boolean_expression} {
+    # statement(s) will execute if the boolean expression is true 
+  } else {
+    # statement(s) will execute if the boolean expression is false
+  }
+  ```
 
-https://wiki.tcl-lang.org/page/format
+  
 
-https://www.tcl.tk/man/tcl/TclCmd/foreach.html
+- https://sunxiaoquan.wordpress.com/2015/02/20/vmd-tcltk-output-results-to-the-text-file/ 
 
-```tcl
-set x {}
-foreach i {a b c} j {d e f g} {
-    lappend x $i $j
-}
-```
+- https://www.ks.uiuc.edu/Research/vmd/current/ug/node193.html 
+
+- https://wiki.tcl-lang.org/page/format
+
+  https://www.tcl.tk/man/tcl/TclCmd/foreach.html
+
+  ```tcl
+  set x {}
+  foreach i {a b c} j {d e f g} {
+      lappend x $i $j
+  }
+  ```
+
+  - 
 
 
 
