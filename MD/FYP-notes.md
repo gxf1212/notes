@@ -49,28 +49,6 @@ The binding energy data reveal that compound-17 (−59.6 kcal/mol) binds  more s
 
 - 
 
-# Software usage
-
-record sth general
-
-## gmx
-
-1. check installation info
-   
-   ```shell
-   gmx -version
-   ```
-
-2. 
-
-### .mdp options
-
-#### vdw
-
-use “switch”, Smoothly switches the potential to zero between rvdw-switch (page 211) and rvdw (page 212). i.e. a switching distance of 10 Å and a smooth cutoff distance of 12Å in the paper
-
-With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.gromacs.org/documentation/2018/onlinehelp/gmx-mdrun.html#gmx-mdrun) will automatically tune the CPU/GPU load balance by scaling [`rcoulomb`](https://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html#mdp-rcoulomb) and the grid spacing.
-
 > ## MD simulation (ATP-Mg^2+^) with Gromacs
 > 
 > The ATP system, energy minimization and indexing have been done. 
@@ -95,182 +73,6 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 > 2. npt
 > 
 > 3. 
-
-## Gaussian
-
-1. segmentation violation
-   
-   成因：提供这种报错信息毫无意义，任何原因Gaussian报错退出都会有类似的输出。
-   
-   解决：**用文本编辑器打开输出文件**，如上图中为“a.out”文件，**拖到最后看最终报错**。Linux下也是如此，可用 nano, tail, cat, vi 等命令阅读文件。看到真正报错后，可按照相应信息（如下文中涉及的这些报错）进行解决。
-
-2. 高斯软件出现PGFIO/stdio: No space left on device错误
-   
-   首先这不是高斯软件的问题，而是服务器的问题。当你的计算量太大或者服务器队列很满的话就有可能有这样的问题。这是个occasion的错误，重新提交任务有可能解决，不行就再提交，实在不行就问问你的服务器管理员。
-
-3. specify log file
-   
-   ```shell
-   nohup g16 qm.gau qm.log 2>&1 &
-   ```
-
-4. don't use too many CPU cores because g1 uses more than you think. use two if you have 8 CPU cores
-
-## Pymol
-
-1. delete命令！
-
-2. select atom name
-   
-   ```
-   sele name HA
-   ```
-   
-   see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
-
-3. 
-
-## VMD techniques
-
-杂记, some extra functions, that I encountered. for details, check vmd-ug.pdf
-
-### General
-
-> - refer to [this](https://pengpengyang94.github.io/2020/05/vmd%E4%BD%BF%E7%94%A8%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E/) to make transparent surface+cartoon like in papers
-
-1. run in terminal
-   
-   ```shell
-   vmd -dispdev text -e combine.tcl
-   ```
-   
-   vmd scripting, [pass parameters](http://timchen314.com/vmd%E7%AC%94%E8%AE%B0/)
-   
-   ```
-   set file [lindex $argv 0]
-   vmd .... -args arg arg2
-   ```
-
-2. question mark prompt and return to the normal vmd> prompt? that mean the tcl interpreter is waiting for you to **close a brace**, so try } or ] or ) followed by enter. you may need to enter it a couple of times.
-
-3. How to run TCL script on VMD?
-   
-   This is very easy to do. Just use any text editor to write your script file, and in a VMD session, use the command 
-   
-   ```shell
-   source filename
-   ```
-   
-   to execute the file. (either VMD command line or Tk Console)
-
-4. Clears the structure, topology definitions, and aliases, creating clean environment just like a new context.
-   
-   ```tcl
-   psfcontext reset
-   ```
-
-5. resize font in TkConsole https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/29151.html
-   
-   type in TkConsole: tkcon font <type> <size>
-   
-   ```
-   tkcon font Courier 16
-   ```
-   
-   size of the window is automatically changed. But font type not affected?
-
-6. As for the global font: the higher resolution your screen is, the smaller your font is
-   
-   Maybe because the source code specifies pixels??
-
-7. TkConsole auto-loads history file?
-   
-   https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/8543.html
-   
-   Yeah, just about last 10 commands you typed, with the starting number 48. 强迫症犯了。。
-   
-   >    history command
-   > 
-   >    https://www.tcl.tk/man/tcl8.4/TclCmd/history.html
-   > 
-   > ```tcl
-   > history clear
-   > ```
-   > 
-   >    or Ctrl+r, but no use
-   > 
-   > ```tcl
-   > clear
-   > ```
-   > 
-   >    just clears the screen
-
-8. select certain frames
-   
-   ```tcl
-   atomselect top "within 5 of resname LYR" frame 23
-   ```
-
-9. Menu--Mouse--Center: pick an atom to center
-
-10. path to plugins
-    
-    ```shell
-    /usr/local/lib/vmd/plugins/noarch/tcl/
-    ```
-
-11. In the main menu, press the Save State button found in the File menu; this will bring up a browser window where you can enter a file name in which to save your work. 
-
-11. background color: Graphics--Colors--Categories (display)--background
-
-11. Do not use Display--perspective (透视), choose orthographic projection (正射投影)
-
-11. 
-
-12. To know about your system, like checking the number of atoms, just load it into vmd (also when executing scripts) and see the cmd.
-
-### VMD Graphics
-
-1. Graphics--Representations: for visualization.
-   
-   - Draw Style
-     - Drawing Method 
-       - Beta: temperature factor
-   - Selected Atoms--Selection
-     - frequently used
-       - all, protein, nucleic, lipid, water (including monomers)
-       - backbone, sidechain, ...
-       - helix, sheet, ..
-       - carbon, hydrogen, nitrogen, ...
-     - `not` as logic? see more syntax in Selection--Marco definition
-
-2. Graphics--colors
-   
-   - background
-   - other many settings, like element, residue, 2d structure. may set default color
-
-3. Labeling a few atoms
-   
-   - Mouse--Label--Atoms (etc.). Mouse--Pick
-   - Graphics--Labels, click on an atom, info shows up. 
-   - Graphics--Color--Label--Atoms (etc)---choose your favorite color
-   - Mouse--Label--Atoms (etc.). Mouse--Pick
-   - Click on any atom and a piece of text will show up
-   - Graphics--Labels--Properties (of the text)
-
-4. Graphics--Representations--Drawing Method, Beta: we may not use that field. So we can replace it with some properties we computed and let VMD color atoms according to it
-
-5. 
-
-## UCSF Chimera
-
-- https://www.researchgate.net/post/How-to-re-number-the-chains-in-PDB-file
-
-  select, Tools--structure editing--the last one
-
-- favorites--side view. 显示/隐藏区域：通过调整蓝框中的两条黄线，显示或隐藏蛋白质的一部分区域. Just like rolling mouse wheel in pymol
-
-- 
 
 
 
@@ -2000,6 +1802,8 @@ we start from (equilibrated?) .pdb after MD. But finally should use those from c
 
 - get stable complex structure, modify the ligand properly to obtain the other one
 
+  可以不用GaussView编辑啊，直接在charmm-gui上。。
+
 - get `.pdb`, `.rtf` and `.prm` files from CHARMM-GUI Ligand Reader & Modeller 
   
   - no AutoPSF required, retaining coordinates and names (same for ligand A and B)
@@ -3089,6 +2893,8 @@ namd3 +p4 fep-lig-equil > fep-lig-equil.log  # +auto-provision +idlepoll
 vmd ../common/system.psf -pdb ../common/system.pdb -dcd rdrp-atp-equil.dcd
 ```
 
+**MAKE SURE WE MEASURED PBC BOX**!!! I don't know if the result is totally unreliable (pbc wrap may save the visualization) but we'd better don't do this (the PBC settings may cannot be changed later (.xst?))
+
 ##### check: is this run ok
 
 structural integrity, when protein is always fine. you may check work report for more (random move, overlap)
@@ -3863,7 +3669,13 @@ solution：
 
 - 把bound和unbound放同一个盒子，一个正向一个反向。不知道对不对，但肯定很麻烦
 
+about charges in FEP
 
+- 自由能对charge（即使是分布）比较敏感，要谨慎
+
+  带电的离子，大分子也许可能会影响
+
+- 
 
 #### protein mutation
 
@@ -3875,22 +3687,48 @@ double mutation, DG12-DG1-DG2最多2~3kcal
 
 - filter the mutation site: through buried area of each residue (residue expose analysis), or alanine scan?
 
+讨论总结： 
+
+- 后面：继续。程序让其他人用用。patent也可以考虑…… 
+- 感受：你做了PPT老师就感觉你要讲给他听；你展示的内容决定了老师能给你什么输出；老师比较在乎名声
+- 变的位点：2',3'算一个；CN估计不动，但可以试硝基？芳环NH2，大小两个环上的C上加东西（看结构）
+- 变的思路：如果没有明显的就填空。1）比如，och3变好那能不能换点别的大基团，比如och2ch3，延长一个;芳环上NH2也是；2）常见那几个，推荐了COOH；3）ch3用得少？就是纯填空，填空可用支链烷基
+
+#### other
+
+- propagation of error. X, Y are independent variables.
+
+  <img src="E:\GitHub_repo\notes\MD\FYP-notes.assets\image-20221106091013292.png" alt="image-20221106091013292" style="zoom:40%;" />
+
+- 
+
 #### presenting your results
 
 [an example](https://drugdesigndata.org/upload/community-components/d3r/webinar2017/presentations/Cournia_lab_D3R_webinar.pdf)
 
 - 画图，颜色清晰简洁
+
 - 最好别放出outliers，否则要说为什么
+
 - 每一张只讲一件事，包含：做了什么（what），为什么要做（why），结果（是否符合期待）
+
 - FEP significant number: two digits
-- 如何导出那种，作者、杂志、年期卷的格式
+
+- 如何导出那种，作者、杂志、年期卷的格式，放在PPT最下面？
+
 - 结构图每次都标出residue name
+
+- 标注上那个FEP的母分子长啥样；要想问他怎么设计，就好好给老师放个结构；
+
+  > 可以画那种动画，消失的为虚的，出现的为实的 
+
+- 
 
 
 
 ## Other ligand pairs
 
-We'll use GAFF (2?). CGenFF sucks.
+> We'll use GAFF (2?). CGenFF sucks.
 
 ```shell
 conda activate AmberTools21
@@ -4436,3 +4274,33 @@ https://www.rcsb.org/alignment
 
 ## Deal with Halogen in CHARMM/NAMD
 
+不用charmm力场当然不会有问题. I met [this error](https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2020-2021/1575.html) and:
+
+```
+Warning: The Langevin gamma parameters differ over the particles, 
+Warning: requiring extra work per step to constrain rigid bonds. 
+Warning: Disabling lonepair support due to incompatability with SOA.
+```
+
+- `LPH CLGR1 0.00 0.0000 ! aromatic halogen to lone pair`: such bonded terms no longer exist in cgenff.prm file (namd older version uses that). [reference](https://www.charmm.org/ubbthreads/ubbthreads.php?ubb=showflat&Number=38297)
+- You need to build it using PSFGen 2.0.  It should be correct if you see a !NUMLP  section (in .psf), as Dave pointed out. 倒也没必要手动删掉这个键
+- 最新namd3也没办法，该问题正在解决中。
+- [an interesting try]([https://notebooks.githubusercontent.com/view/ipynb?browser=chrome&color_mode=auto&commit=4592b5cde47f385ade6a78c854a2989f25417775&device=unknown&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f7175616e74616f73756e2f6e6f7465626f6f6b2f343539326235636465343766333835616465366137386338353461323938396632353431373737352f2545372542422539442545352541462542392545372542422539332545352539302538382545382538372541412545372539342542312545382538332542442545352542392542332545382541312541312532425f654142465f254534254241253843254535253930253838254534254238253830424645455f316d71355f6571756c6962726174696f696e2e6970796e62&logged_in=false&nwo=quantaosun%2Fnotebook&path=%E7%BB%9D%E5%AF%B9%E7%BB%93%E5%90%88%E8%87%AA%E7%94%B1%E8%83%BD%E5%B9%B3%E8%A1%A1%2B_eABF_%E4%BA%8C%E5%90%88%E4%B8%80BFEE_1mq5_equlibratioin.ipynb&platform=android&repository_id=358492452&repository_type=Repository&version=104](https://notebooks.githubusercontent.com/view/ipynb?browser=chrome&color_mode=auto&commit=4592b5cde47f385ade6a78c854a2989f25417775&device=unknown&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f7175616e74616f73756e2f6e6f7465626f6f6b2f343539326235636465343766333835616465366137386338353461323938396632353431373737352f2545372542422539442545352541462542392545372542422539332545352539302538382545382538372541412545372539342542312545382538332542442545352542392542332545382541312541312532425f654142465f254534254241253843254535253930253838254534254238253830424645455f316d71355f6571756c6962726174696f696e2e6970796e62&logged_in=false&nwo=quantaosun%2Fnotebook&path=绝对结合自由能平衡%2B_eABF_二合一BFEE_1mq5_equlibratioin.ipynb&platform=android&repository_id=358492452&repository_type=Repository&version=104))
+
+**目前的办法：加参数，用namd3普通或namd2跑。add 'lonepairs on' to namd.conf and don't  use CUDASOAintergrate**
+
+```
+!!! IMPORTANT!!!
+!!! The following topology & parameter files should be read before reading top_all36_cgenff.rtf/par_all36_cgenff.prm
+!!! for correctly implementing the TERM between the chlorine with the lone-pair and the carbonyl oxygen in amides
+!!! 1) top_all36_prot.rtf/par_all36_prot.rtf
+!!! 2) top_all36_na.rtf/par_all36_na.rtf
+!!! 3) top_all36_carb.rtf/par_all36_carb.rtf
+```
+
+F没有lonepair
+
+Question: 
+
+- 脂肪族的cl可以不用加lone pair呀 (like CH3Cl in cgenff.ref), but CHARMM-GUI still adds a lone pair
+- charmm-gui recognizes Cl as CH3???

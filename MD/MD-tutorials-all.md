@@ -572,6 +572,13 @@ xmgrace TEMP.dat
      - but tutorials use it as topology??
      - `.tcl` = `.pgn`
 
+#### Appendix: details in topology files
+
+- ref中的ACCE：acceptor
+- IC and BILD are equivalent; BUILd would appear to be a 3rd synonym.
+- <u>Explicit hydrogen bond terms are no longer present in the CHARMM force field</u> and are therefore not calculated by NAMD. The DONOR and ACCEPTOR statements, shown below, specify pairs of atoms eligible to form hydrogen bonds. The psfgen module in VMD ignores these statements and does not incorporate hydrogen bonding information into the PSF file.
+- The DOUBLE statement is a synonym for BOND and does not affect the resulting PSF file. The order of bonds, or of the atoms within a bond, is not significant.
+
 ### My exploration
 
 #### building the system

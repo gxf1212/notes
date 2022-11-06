@@ -53,50 +53,58 @@ This is a record of 折腾ing the system, in order not to forget.
 #### system info
 
 1. check the system
-   
+
    ```shell
    uname -a # check system version, kernel, etc.
-   cat /proc/version # check Linux, OS, gcc version
+   cat /proc/version # check Linux, gcc version
    ```
 
-2. path:
-   
+2. OS info
+
    ```shell
-   sudo gedit ~/.bashrc
-   source ~/.bashrc
+   cat /etc/os-release
+   lsb_release -a
+   hostnamectl
    ```
 
 3. inspect cpu information
-   
+
    https://lijian.ac.cn/posts/2018/09/linux-information/
-   
+
    https://blog.51cto.com/feihan21/1174677
-   
+
    ```shell
    cat /proc/cpuinfo
    ```
-   
+
    mine: i7 9700k, 8 cores
 
 4. gpu info
-   
+
    ```shell
    cat /proc/driver/nvidia/version
    nvidia-smi
    nvidia-smi -L  # check the number and info of GPUs
    ```
-   
-4. my base board
-   
+
+5. my base board
+
    https://www.asus.com/hk/Motherboards-Components/Motherboards/PRIME/PRIME-Z390-P/ 华硕PRIME Z390-P
-   
+
 6. [check shell version](https://blog.csdn.net/electrocrazy/article/details/78313962): `bash --version`
 
 7. [update kernel](https://ubuntuhandbook.org/index.php/2022/05/kernel-5-18-released-install-in-ubuntu-2204/): just install the four packages
 
    https://kernel.ubuntu.com/~kernel-ppa/mainline. find 'amd'
 
-8. 
+8. edit path:
+
+   ```shell
+   sudo gedit ~/.bashrc
+   source ~/.bashrc
+   ```
+
+9. 
 
 #### monitor resource usage
 
@@ -678,7 +686,7 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
 #### GNOME
 
 1. 在Ubuntu的系统中如何将应用程序添加到开始菜单中 https://blog.csdn.net/qk1992919/article/details/51034361/ https://ubuntuqa.com/article/1235.html
-   
+
    ```
    Name=Pymol   #此软件在菜单中当语言为英语的时候的显示名称      
    Name[zh_CN]=Pymol  #此软件在菜单中当语言为中文的时候的显示名称
@@ -690,7 +698,7 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
    Type=Application      #程序的类型
    Icon=/home/gxf/pymol/share/pymol/data/pymol/icons/icon2_128x128.png   #在开始菜>单中的显示图标
    ```
-   
+
    还是用**alacarte**. need to configure:
 
    ```
@@ -702,15 +710,15 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
    Pycharm
    anaconda-navigator
    ```
-   
+
 2. 软件中心点开没反应？ 
-   
+
    ```shell
    sudo apt-get update  
    sudo apt-get dist-upgrade
    sudo apt-get install --reinstall ubuntu-software
    ```
-   
+
    也没用
 
 3. 设置→隐私→**屏幕**锁定→设置时间
@@ -724,6 +732,12 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
    setting 
 
    <img src="https://img-blog.csdnimg.cn/20191111203143905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Npcml1c0V4cGxvcmVy,size_16,color_FFFFFF,t_70" style="zoom:50%;" />
+
+6. 有时候打开文件发现侧边栏不见了，这时候设置别的也没办法
+
+   解决但其实只要一个按键就好啦，就是F9
+
+7. 
 
 ### customs
 

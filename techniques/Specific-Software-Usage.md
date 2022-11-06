@@ -522,11 +522,22 @@ date > log
 
 - basics https://www.jianshu.com/p/2f6c799ca147
   - `qstat`
+  
+    ```shell
+    # 查询作业号为211 的作业的具体信息。
+    qstat -f 211
+    # 查询用户gxf的所有作业。
+    ```
+  
   - `qsub`
+  
   - `qdel`
+  
 - Environment Variable https://pubs.opengroup.org/onlinepubs/009696699/utilities/qsub.html
   - like `$PBS_O_WORKDIR`
+  
 - 
+
 - 
 
 ## Typora
@@ -769,7 +780,15 @@ failed, remove this env...
    > conda install matplotlib==2.0.0 networkx==1.11 pandas==0.20.3 scikit-learn==0.18.2 scipy==0.18.1 numpy==1.13.1
    > ```
 
+## MS office
 
+### Word
+
+
+
+### Excel
+
+- [Excel 将文本或数字的格式设置为上标或下标](https://support.microsoft.com/zh-cn/office/%E5%B0%86%E6%96%87%E6%9C%AC%E6%88%96%E6%95%B0%E5%AD%97%E7%9A%84%E6%A0%BC%E5%BC%8F%E8%AE%BE%E7%BD%AE%E4%B8%BA%E4%B8%8A%E6%A0%87%E6%88%96%E4%B8%8B%E6%A0%87-3649411b-adf4-483e-b0e8-7b844605da74)
 
 ## Other
 
@@ -802,7 +821,8 @@ installation: see [Linux-fundamental](/techniques/Linux-fundamental?id=other-sof
 
 ### chembiodraw
 
-全选改字体（18），在file--document setting改线宽，大概0.56（0.4倍粗体），就和Wikipedia的比较接近（平常不用加粗）。
+- 全选改字体（18），在file--document setting改线宽，大概0.56（0.4倍粗体），就和Wikipedia的比较接近（平常不用加粗）。
+- ChemDraw中内置多种模板，蛋白质支链模板是比较典型的一种了，通过模板可以快速添加蛋白质支链结构。而可以在Text tool或者模板工具中找到Templates（模板），然后选择Amino Acid Side Chain（蛋白质支链模板）即可。
 
 
 
@@ -818,11 +838,21 @@ see [Python-for-MD](/MD/Python-for-MD.md)
 
 notes from Windows
 
+### basic
+
+- The Comprehensive Tex Archive Network = CTAN
+- The Missing \begin{document} is because you're using it in the preamble
+- https://tex.stackexchange.com/questions/174030/misplaced-alignment-tab-character-error-when-citing-a-particular-entry Look for & in a bibliographic item and change it into \&
+
+### float
+
+- https://blog.csdn.net/u012428169/article/details/80558331 没有进行特殊命令处理，但是显示的图片和表格标号跟它们在LaTeX编辑环境中放置的章节有关，这并不是一般文章要求的。
+
 ### font
 
 1. installing font
 
-   可以在 C:\texlive\2019\texmf-dist\fonts\opentype（你看你的安装目录）下找一个合适的位置，建一个文件夹，把思源字体拷进去，然后在命令行中输入，`fc-cache -fv`
+   可以在 `C:\texlive\2019\texmf-dist\fonts\opentype`（你看你的安装目录）下找一个合适的位置，建一个文件夹，把思源字体拷进去，然后在命令行中输入，`fc-cache -fv`
 
    建一个Libertinus文件夹，放进去
 
@@ -849,14 +879,44 @@ notes from Windows
    - `latex makebst`: [the most detailed guide](https://kingdomhe.wordpress.com/2017/12/02/%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89-bibtex-%E7%9A%84%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E6%A0%BC%E5%BC%8F-bst-%E6%96%87%E4%BB%B6-how-to-generate-a-customized-bst-file/)
      - make, not modify
      - dbj to bst: `latex *.dbj`
-2. comment in .bib file: `//` or `%`
-2. to prevent websites from appearing, you have to comment out both `url` and `doi`
+2. https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography not compatible with author-year
+3. comment in .bib file: `//` or `%`
+4. to prevent websites from appearing, you have to comment out both `url` and `doi`
+5. 万方可以直接导出bibtex，辣鸡知网就不行. whatever
+6. citation keys cases https://tex.stackexchange.com/questions/623482/case-mismatch-between-cite-keys
 
-### fragments
+### ifdefined
 
-- http://www.noobyard.com/article/p-nymwcdnd-nx.html  插入Python代码升级方案（类似jupyter notebook的配色？）
-- https://blog.csdn.net/u012428169/article/details/80558331 没有进行特殊命令处理，但是显示的图片和表格标号跟它们在LaTeX编辑环境中放置的章节有关，这并不是一般文章要求的。
-- https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography not compatible with author-year
+```latex
+\ifcsname foo\endcsname
+  \message{\string\foo\space is defined}%
+\else
+  \message{no command \string\foo}%
+\fi
+```
+
+这些newtoks不是没被定义，而是没被赋值（值为empty）
+https://www-sop.inria.fr/marelle/tralics/auxdir/tdoc1cid2.html
+
+```latex
+\makeatletter
+\ifcsname foo\endcsname A\else a\fi
+\ifx\foo\undefined  B\else b\fi
+\ifdefined\foo  C\else c\fi
+\@ifundefined{FOO}{D}{d}
+\ifcsname FOO\endcsname E\else e\fi
+\ifdefined\FOO F\else f\fi
+```
+
+
+
+### code
+
+http://www.noobyard.com/article/p-nymwcdnd-nx.html  插入Python代码升级方案（类似jupyter notebook的配色？）
+
+### other
+
+- https://blog.csdn.net/weixin_44556141/article/details/121429470  ctexart才有这个，article没有
 
 ### TODO list
 
@@ -959,9 +1019,4 @@ https://myanima.ai/app/
 https://my.replika.ai/
 https://simsimi.com/chat
 
-
-
-# Experiences on video/subtitles collection
-
-字幕其实单双行都行，但不要老来回切换
 

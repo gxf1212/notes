@@ -301,7 +301,7 @@ intro https://iyuantiao.com/fenxiangfuli/jiaocheng/v2ray.html
 - https://github.com/Fndroid/clash_for_windows_pkg/releases
 - video reference: https://www.youtube.com/watch?v=pTlso8m_iRk
 
-
+2022: I won't use that since it breaks system configurations and caused problems (GreenVPN, conda proxy error) in both Windows and Linux
 
 ### qt-5
 
@@ -314,7 +314,26 @@ chmod a+x Sha*
 
 连接--添加--URI
 
+### iOS翻墙
 
+https://support.apple.com/zh-cn/HT201389
+
+更改 Apple ID 国家或地区
+
+https://www.bilibili.com/video/av545350018/
+
+美区 PayPal 绑定美区 Apple ID 付款(2021)，AppStore 添加付款方式（换国家和地区）
+
+买一个shadowrocket，3 dollars
+
+步骤
+
+- 买账号或代注册账号
+- 买礼品卡充值
+- 下载软件
+- 导入订阅链接
+
+https://blog.shuziyimin.org/171  国内办的信用卡也是用不了，没有全局代理、国内信用卡下注册的PayPal账户也被认为是国内的
 
 ## Docking
 
@@ -958,6 +977,21 @@ conda create -n Acpype -
 conda install -c conda-forge acpype
 ```
 
+### Propka
+
+https://propka.readthedocs.io/en/latest/quickstart.html
+
+https://wiki.pymol.org/index.php/Propka
+
+#### run
+
+```shell
+propka3 merged.pdb -o 7.4 > merged.log
+# see merged.pka
+```
+
+It can process multiple chIt's strange that when the system contains sth other than protein, HIS is not present (only combine protein chains...)
+
 ### Gaussian16 and view
 
 ```shell
@@ -1296,6 +1330,14 @@ To (re)install desktop menu and icon later, run:
 dependence: `conda install -c conda-forge xorg-libxscrnsaver`
 
 ## Paper, work
+
+### Chat
+
+https://github.com/Hackerl/Wine_Appimage
+
+https://github.com/eNkru/freechat/releases
+
+https://github.com/askme765cs/Wine-QQ-TIM
 
 ### office
 
