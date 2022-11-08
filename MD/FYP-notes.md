@@ -1208,18 +1208,22 @@ animate read dcd rdrp-atp-equil.dcd
 animate read dcd rdrp-atp-prod.dcd
 ```
 
-### Run in Gromacs (prepare)
+## Setup MD in Gromacs
+
+### convert namd to Gromacs formats
 
 > prepare, equillibrate in NAMD, run in gmx. i.e. convert equilibrated system to gmx (.gro/top, ndx, velocity)
-> 
+>
 > just a try. not suitable for fep
+
+**This is also important if we want to cluster in gmx.** Refer to [Making clusters in gmx](/MD/FYP-notes?id=making-clusters-in-gmx).
 
 https://www.ks.uiuc.edu/Research/vmd/plugins/topotools/
 
 TopoTools, not only converting to gmx and lammps, more importantly editing your topology
 
 1. make the latest coordinates as pdb, and then .gro
-   
+
    ```tcl
    # under ./equil
    mol load psf ../common/system.psf
@@ -1228,18 +1232,18 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    $sel writepdb equilibrated.pdb
    quit
    ```
-   
+
    make a box. find the length of cell basis vector from your measure or `equil.namd`
-   
+
    ```shell
    # under gmx
    gmx editconf -f equilibrated.pdb -o equilibrated.gro \
    -box 102.76400184631348 93.35700035095215 108.42400050163269 \
    -center 57.934000968933105 58.11250019073486 57.53700029850006 # x y z
    ```
-   
+
    check in pymol to see if they are the same
-   
+
    > for FEP
    > 
    > ```tcl
@@ -1257,16 +1261,16 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    > -box 102.65199661254883 92.91299819946289 112.18100357055664 \
    > -center 2.9200000762939453 -1.5814990997314453 -3.010499954223633 
    > ```
-   
+
 2. to run in gmx, specify T coupling groups:
-   
+
    ```shell
    gmx make_ndx -f equilibrated.gro -o index.ndx
    > 1|13|14
    > 21|22|23
    > q
    ```
-   
+
    > Protein_ATP_Mg    TIP3_SOD_CLA
    > 
    > refer to
@@ -1278,7 +1282,7 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    > ```
 
 3. get .top file
-   
+
    ```tcl
    # vmd, under equil
    package require topotools
@@ -1292,9 +1296,9 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    # par_all36_na.prm
    exit
    ```
-   
+
    be sure to include `lig.prm` and the water_ions one!
-   
+
    > don't include `param.prm ` because gmx never tolerate duplication a little bit
    > 
    > ```
@@ -1303,29 +1307,11 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    > atoms, with either different parameters and/or the first block has
    > multiple lines. This is not supported.
    > ```
-   
-   CHRAMM ff website also provides many .itp file for gmx
-   
-   > copy your folder downloaded from http://mackerell.umaryland.edu/charmm_ff.shtml to `~/gromacs-2021.5-gpu/share/gromacs/top` and you can add at the beginning of `.top` file:
-   > 
-   > ```c
-   > #include "charmm36-jul2021.ff/forcefield.itp"
-   > ```
-   
-   > but we don't need that much, which causes hundreds of duplications again (for atomtype, just warnings).
-   > 
-   > ```c
-   > #include "charmm36-jul2021.ff/ffnonbonded.itp"
-   > ```
-   > 
-   > which really includes parameters for these ions. `ions.itp` only defines atoms.
-   > 
-   > Put it before the first `[ atomtypes ]` in your `.top` file
-   > 
-   > > I'm doing this because I forgot toppar_water_ions_namd.str before...
-   
-4. also the velocity in the last frame! (find how to load into gmx, .cpt?)
-   
+
+4. also the velocity in the last frame (find how to load into gmx, .cpt?)
+
+   not doing this now
+
    ```tcl
    # from tutorial
    # read in vmd
@@ -1340,13 +1326,13 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    
    close $fil
    ```
-   
+
    > converting binary file: you'd better load into vmd and save
    > 
    > can't do it now, just set `gen_vel` to yes and `continuation` to no
 
 5. make the .tpr file
-   
+
    ```shell
    # This would be prepared for simulation using grompp to create a tpr file
    gmx grompp -f md.mdp -c equilibrated.gro -r equilibrated.gro \
@@ -1356,8 +1342,34 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    -t velocity.cpt 
    gmx mdrun -deffnm simulation -nb gpu
    ```
-   
+
    > cannot resolve the problem of duplicated dihedral angles...
+
+### build in gmx 
+
+#### CHARMM FF
+
+CHRAMM ff website also provides many .itp file for gmx
+
+> copy your folder downloaded from http://mackerell.umaryland.edu/charmm_ff.shtml to `~/gromacs-2021.5-gpu/share/gromacs/top` and you can add at the beginning of `.top` file:
+>
+> ```c
+> #include "charmm36-jul2021.ff/forcefield.itp"
+> ```
+
+> but we don't need that much, which causes hundreds of duplications again (for atomtype, just warnings).
+>
+> ```c
+> #include "charmm36-jul2021.ff/ffnonbonded.itp"
+> ```
+>
+> which really includes parameters for these ions. `ions.itp` only defines atoms.
+>
+> Put it before the first `[ atomtypes ]` in your `.top` file
+>
+> > I'm doing this because I forgot toppar_water_ions_namd.str before...
+
+#### Amber?
 
 ## Clustering Anaylsis
 
@@ -3105,7 +3117,9 @@ bash mknamd_fep_decomp_convergence.sh *.fepout 10000 510000 500 10 > outdecomp/l
 
 ### Trajectory analysis
 
-22.10.16 update: a recent VMD script that does everything
+#### visualization in VMD
+
+22.11.7 update: a recent VMD script that does everything
 
 > cannot execute by vmd -dispdev ... (when 这些抠出来的命令 was added)
 
@@ -3134,10 +3148,11 @@ color Display {Background} white
 # make representation
 mol delrep 0 top
 mol representation NewCartoon 0.300000 10.000000 4.100000 0
-# mol color Structure
 mol color Beta
+# mol color Structure
 mol selection {protein}
 mol material AOShiny
+# mol material Transparent
 mol addrep top
 
 # add rep after setting up
@@ -3160,8 +3175,11 @@ mol color Type
 # mol selection {(within 5 of (resname HYB)) and (not water)}
 mol selection {protein and noh and (same residue as within 5 of residue HYB)}
 mol material Opaque
-# update selection every frame
 mol addrep top
+# update selection every frame
+mol selupdate 3 top 1
+mol colupdate 3 top 1
+# 3 means no.3 rep; 1 means True
 
 ## from rmsdtt.tcl
 proc align_bound {} {
@@ -3200,8 +3218,11 @@ set rmsdtt::bb_only 0
 rmsdtt::doAlign
 }
 
-# align_bound
-align_unbound
+if { $sys == "bound"} {
+	align_bound
+} else {
+	align_unbound
+}
 
 # move to center. maybe execute again after aligning the protein...
 set lig [atomselect top "resname HYB" frame 1]
@@ -3211,7 +3232,11 @@ molinfo top set center_matrix "{{1 0 0 [expr -$x]} {0 1 0 [expr -$y]} {0 0 1 [ex
 # use negative...
 ```
 
-search: `rmsdtt.tcl`
+code source: 
+
+- save visualization state
+- `rmsdtt.tcl`
+- https://www.ks.uiuc.edu/Research/vmd/plugins/pbctools/
 
 
 
@@ -3387,6 +3412,20 @@ close $outfile
 exit
 ```
 
+#### clustering in VMD
+
+http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.1/ug/node136.html
+
+- [QT algorithm](https://sites.google.com/site/dataclusteringalgorithms/quality-threshold-clustering-algorithm-1). similar to `gmx cluster -method gromos` ?
+
+https://github.com/luisico/clustering
+
+> https://readthedocs.org/projects/bitclust/downloads/pdf/latest/
+
+
+
+
+
 #### Time convergence
 
 - Kevin's decomp and .fepout file don't agree
@@ -3403,6 +3442,7 @@ MovieMaker::moviemaker
 # install netpbm
 # set MovieMaker::presmooth 1
 set MovieMaker::prescale 1
+set MovieMaker::cleanfiles 0
 set MovieMaker::movieformat imgif
 set MovieMaker::framerate 30
 set MovieMaker::workdir ./
@@ -3412,6 +3452,7 @@ set MovieMaker::renderer libtachyon
 set MovieMaker::movietype trajectory
 # you should click on the trjstep. this window doesn't really recognize what we write there...
 MovieMaker::buildmovie
+bash create_movie.sh $path
 ```
 
 we are using Tachyon Internal
@@ -3424,9 +3465,33 @@ To scale and smooth: `conda install netpbm` (smoothing causes error)
 
 [tutorial (just see see)](http://www.ks.uiuc.edu/Training/Tutorials/vmd-imgmv/imgmv/imgmv-tutorial.pdf)
 
-Most of the supported renderers perform lighting calculations at every pixel, and so there’s less need to set the graphical representation res- olution parameters to high values.
+> Most of the supported renderers perform lighting calculations at every pixel, and so there’s less need to set the graphical representation res- olution parameters to high values.
+>
+> how to display many frames at once. Click the Trajectory tab again. Above the smoothing control, notice the Draw Multiple Frames control. It is set to now by default, which is simply the current frame. Enter 0:10:199, which selects every tenth frame from the range 0 to 199.
 
-how to display many frames at once. Click the Trajectory tab again. Above the smoothing control, notice the Draw Multiple Frames control. It is set to now by default, which is simply the current frame. Enter 0:10:199, which selects every tenth frame from the range 0 to 199.
+```shell
+for file in *ppm; do
+f=`basename $file .ppm`
+convert $f.ppm $f.png
+done
+python png2gif.py $1
+rm *png *ppm untitled.gif
+```
+
+where 
+
+```python
+import imageio as iio
+import os, sys
+
+giffile = sys.argv[1]+'.gif'
+images_data = []
+for f in sorted(os.listdir('.')):
+    if f.endswith('.png'):
+        data = iio.v3.imread(f)
+        images_data.append(data)
+iio.mimwrite(giffile, images_data, format= '.gif', fps = 5)
+```
 
 > other not using
 >
@@ -3773,7 +3838,7 @@ conda activate AmberTools21
 
 
 
-# Stage 3 Protocol: new FEP
+# Stage 3 Protocol: new MD
 
 
 
