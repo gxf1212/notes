@@ -596,6 +596,10 @@ Mac：https://macwk.com/soft/typora
 
 4. intepreter: create from existing sources. "study" can run both R and Python.
 
+5. [Markdown Support](https://www.jetbrains.com/help/pycharm/markdown.html)
+
+6. 非常傻逼的一点是，正常运行和调试（或cmd中python）的`sys.path`不一样。。不好通用地找程序所在路径
+
 ## conda & python cmd
 
 https://blog.csdn.net/zhayushui/article/details/80433768
@@ -790,6 +794,15 @@ failed, remove this env...
 
 - [Excel 将文本或数字的格式设置为上标或下标](https://support.microsoft.com/zh-cn/office/%E5%B0%86%E6%96%87%E6%9C%AC%E6%88%96%E6%95%B0%E5%AD%97%E7%9A%84%E6%A0%BC%E5%BC%8F%E8%AE%BE%E7%BD%AE%E4%B8%BA%E4%B8%8A%E6%A0%87%E6%88%96%E4%B8%8B%E6%A0%87-3649411b-adf4-483e-b0e8-7b844605da74)
 
+
+
+### PPT
+
+- [PPT中如何将多个图形等距分布](https://jingyan.baidu.com/article/fec7a1e5c51b1d1190b4e7ca.html)
+- 美化大师插件：批量删除动画；PPT工具栏
+
+
+
 ## Other
 
 ### ThunderBird
@@ -823,6 +836,12 @@ installation: see [Linux-fundamental](/techniques/Linux-fundamental?id=other-sof
 
 - 全选改字体（18），在file--document setting改线宽，大概0.56（0.4倍粗体），就和Wikipedia的比较接近（平常不用加粗）。
 - ChemDraw中内置多种模板，蛋白质支链模板是比较典型的一种了，通过模板可以快速添加蛋白质支链结构。而可以在Text tool或者模板工具中找到Templates（模板），然后选择Amino Acid Side Chain（蛋白质支链模板）即可。
+
+### Scientific writing
+
+https://www.home-for-researchers.com/static/index.html#/
+
+https://app.bibguru.com/: fast citation generation
 
 
 
@@ -1018,5 +1037,4 @@ https://www.cleverbot.com/
 https://myanima.ai/app/
 https://my.replika.ai/
 https://simsimi.com/chat
-
 

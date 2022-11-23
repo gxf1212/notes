@@ -4,6 +4,7 @@
   - [Installation for working](/techniques/Prepare-for-the-computer.md)
   - [Building blogs](/techniques/Building-blogs.md)
   - [Cloud drive backup](/techniques/Cloud-backup.md)
+  - [Play with videos](/techniques/Deal-with-videos.md)
   - [Specific Tools Usage](/techniques/Specific-Software-Usage.md)
 - [MD study](/MD/README.md)
   - [Programming for MD](/MD/Programming-for-MD.md)

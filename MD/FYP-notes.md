@@ -2,86 +2,6 @@
 
 Notes on the final year project (毕设), Nov 2021~May 2022.
 
-Starting reading from [Stage1 Protocol](#Stage-1-Protocol)
-
-# background
-
-> 9.27
-
-- It was originally developed by Gilead Sciences, Inc. to treat Ebola virus disease.
-- RdRp=NSP12. cofactor: nsp7/nsp8, etc.
-  - of course needs helicase (NSP13), etc.
-- 老药新用：drug repurposing
-
-## Mechanism
-
-- *Mechanism of SARS-CoV-2 polymerase stalling by remdesivir* (nature communications)
-
-We show that <u>addition of the fourth nucleotide following remdesivir incorporation</u> into the RNA product is impaired by <u>a barrier to further RNA translocation</u>. This translocation barrier causes retention of the RNA 3ʹ-nucleotide in the substrate-binding site of the RdRp and interferes with entry of the next nucleoside triphosphate, thereby **stalling RdRp**. In the structure of the remdesivir-stalled state, the 3ʹ-nucleotide of the RNA product is matched and located with the  template base in the active center, and this may impair proofreading by  the viral 3ʹ-exonuclease.
-
-- *Remdesivir is a delayed translocation inhibitor of SARS-CoV-2 replication* (PDB: [7L1F](http://www.rcsb.org/pdb/explore.do?structureId=7L1F))
-
-Here, we present a 3.9-Å-resolution cryo-EM reconstruction of a <u>remdesivir-stalled RNA-dependent RNA polymerase complex</u>, revealing full  <u>incorporation of 3 copies of remdesivir monophosphate (RMP) and a  partially incorporated fourth RMP</u> in the active site. The structure reveals that RMP blocks RNA translocation after incorporation of 3 bases following RMP, resulting in delayed chain termination
-
-- *Structural basis for inhibition of the RNA-dependent RNA polymerase from SARS-CoV-2 by remdesivir* (science)
-
-Here we report the cryo–electron microscopy structure of the SARS-CoV-2  RdRp, both in the apo form at 2.8-angstrom resolution and <u>in complex with a 50-base template-primer RNA and remdesivir</u> at 2.5-angstrom resolution. The complex structure reveals that the partial double-stranded RNA template is inserted into the central channel of the RdRp, where remdesivir is covalently incorporated into the primer  strand at the first replicated base pair, and terminates chain elongation.
-
-## simulation
-
-- *Revealing the Inhibition Mechanism of RNA-Dependent RNA Polymerase (RdRp) of  SARS-CoV-2 by Remdesivir and Nucleotide Analogues: A Molecular Dynamics  Simulation Study*
-
-In this work, we have examined the action of remdesivir and other two  ligands <u>screened from the library of nucleotide analogues</u> using docking  and molecular dynamics (MD) simulation studies.
-
-The binding energy data reveal that compound-17 (−59.6 kcal/mol) binds  more strongly as compared to compound-8 (−46.3 kcal/mol) and remdesivir  (−29.7 kcal/mol) with RdRp. 找到两个更强的
-
-筛选的更是一大堆了，搜    remdesivir analog screening sars-cov-2 RdRp
-
-## other similar simulation
-
-- *High-throughput rational design of the remdesivir binding site in the RdRp of SARS-CoV-2: implications for potential resistance*
-  
-  哪些突变能resistance
-
-- *SARS-CoV-2 RNA dependent RNA polymerase (RdRp) targeting: an in silico perspective*
-  
-  2021 April, only RdRp dynamic. docked several our drugs with vina
-
-- 
-
-> ## MD simulation (ATP-Mg^2+^) with Gromacs
-> 
-> The ATP system, energy minimization and indexing have been done. 
-> 
-> the most important setting is 
-> 
-> - vdW and electrostatic
-> - energy groups?
-> - length
-> 
-> do not need to repeat MD
-> 
-> 1. nvt
->    
->    ```shell
->    gmx grompp -f nvt.mdp -c minim.gro -r minim.gro -n solion.ndx -p solion.top -o nvt.tpr
->    gmx mdrun -deffnm nvt
->    echo "15\n0" | gmx energy -f nvt.edr -o nvt.xvg # temperature
->    xmgrace nvt.xvg
->    ```
-> 
-> 2. npt
-> 
-> 3. 
-
-
-
-## Some other notes with VMD and NAMD
-
-> ERROR: failed on end of segment MOLECULE DESTROYED BY FATAL ERROR!
-
-probably need to add top/itp file
-
 # Stage 1 Protocol: MD
 
 stage 1: from structure to FEP
@@ -123,8 +43,6 @@ to dock two molecules together, we may:
 | autodock | known pocket position, make a box | polar H | polar H | a little verbose? ok |
 | zdock    | select contacting residue?        |         |         |                      |
 | haddock  |                                   |         |         |                      |
-|          |                                   |         |         |                      |
-|          |                                   |         |         |                      |
 
 ### Autodock vina
 
@@ -1244,24 +1162,6 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 
    check in pymol to see if they are the same
 
-   > for FEP
-   > 
-   > ```tcl
-   > # vmd
-   > mol load psf ligand.psf
-   > mol addfile ../equil/ligand-fine/rdrp-mtp-remtp-ligand-equil.coor
-   > set sel [atomselect top all]
-   > $sel writepdb equilibrated.pdb
-   > exit
-   > ```
-   > 
-   > ```shell
-   > # shell
-   > gmx editconf -f equilibrated.pdb -o equilibrated.gro \
-   > -box 102.65199661254883 92.91299819946289 112.18100357055664 \
-   > -center 2.9200000762939453 -1.5814990997314453 -3.010499954223633 
-   > ```
-
 2. to run in gmx, specify T coupling groups:
 
    ```shell
@@ -1814,7 +1714,7 @@ we start from (equilibrated?) .pdb after MD. But finally should use those from c
 
 - get stable complex structure, modify the ligand properly to obtain the other one
 
-  可以不用GaussView编辑啊，直接在charmm-gui上。。
+  > 可以不用GaussView编辑啊，直接在charmm-gui上。。但是tnd给我把手性搞错。。。
 
 - get `.pdb`, `.rtf` and `.prm` files from CHARMM-GUI Ligand Reader & Modeller 
   
@@ -3115,6 +3015,12 @@ bash mknamd_fep_decomp_convergence.sh *.fepout 10000 510000 500 10 > outdecomp/l
 
 
 
+怎么把bound和unbound放在一起decomposition？
+
+
+
+
+
 ### Trajectory analysis
 
 #### visualization in VMD
@@ -3122,6 +3028,8 @@ bash mknamd_fep_decomp_convergence.sh *.fepout 10000 510000 500 10 > outdecomp/l
 22.11.7 update: a recent VMD script that does everything
 
 > cannot execute by vmd -dispdev ... (when 这些抠出来的命令 was added)
+
+##### overall
 
 ```tcl
 # vmd
@@ -3238,7 +3146,24 @@ code source:
 - `rmsdtt.tcl`
 - https://www.ks.uiuc.edu/Research/vmd/plugins/pbctools/
 
+##### pbc wrap
 
+https://www.ks.uiuc.edu/Research/vmd/plugins/pbctools/
+
+vmd加的水是各边添加pad，如果蛋白是个长条（x轴），转一下，y轴可能伸出去。。pbc也没用
+
+即使是为了别让两个image相互作用，也应该让水盒子大一些
+
+我们要的只是把所有的component放在一起。必须先pbc再align。
+
+```tcl
+
+
+# after that, maybe ..
+animate write dcd my.dcd
+```
+
+ 
 
 #### RMSD tool in VMD
 
@@ -3414,13 +3339,32 @@ exit
 
 #### clustering in VMD
 
-http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.1/ug/node136.html
+http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.4/ug/node139.html
 
 - [QT algorithm](https://sites.google.com/site/dataclusteringalgorithms/quality-threshold-clustering-algorithm-1). similar to `gmx cluster -method gromos` ?
 
-https://github.com/luisico/clustering
+plugin: https://github.com/luisico/clustering
+
+https://github.com/anjibabuIITK/CLUSTER-ANALYSIS-USING-VMD-TCL/blob/master/clustering.tcl
 
 > https://readthedocs.org/projects/bitclust/downloads/pdf/latest/
+
+
+
+
+
+```tcl
+# after loading trajectory and aligning protein backbone
+set number 3
+set rcutoff 1
+set step_size 1
+set nframes [molinfo top get numframes]
+set inf 0
+set nf $nframes
+set totframes [expr $nf - 1 ]
+set selA [atomselect top "resname LIG"]
+foreach {listA listB listC listD} [measure cluster $selA num $number cutoff $rcutoff first $inf last $totframes  step $step_size distfunc rmsd weight mass ] break
+```
 
 
 
@@ -3523,6 +3467,10 @@ iio.mimwrite(giffile, images_data, format= '.gif', fps = 5)
 
 
 #### Making clusters in gmx
+
+> [!NOTE]
+>
+>I have to note all of you that calculating (whole traj) RMSD and making clusters in FEP is MEANINGLESS.
 
 ##### collect trajectory files (prod-window)
 
@@ -3669,6 +3617,24 @@ center (last-complex1 and resn HYB)
 ```
 
 ### FEP notes
+
+#### workflow
+
+- FEP的前提：
+
+  - 结合构象没太变
+  - 时间足够长，收敛
+
+  构象不对，符号也难；第二个不对，大概是只能相信符号，数值不太行
+
+- 跑MD找构象：
+
+  - 三个MD 200ns，分别聚类，该构象持续100ns以上
+  - 三个聚类的一样最好，不一样可以再跑
+  - 或者都做FEP
+  - 一个MD不能说明问题；重复的三次有一个稳定，都可以再延长时间以确认，稳定就能用
+
+- 如果变得大，每个window可以多一些时间
 
 #### analysis
 
@@ -3822,7 +3788,7 @@ conda activate AmberTools21
 > before merging: C4A 0.051 C4B 0.043 ave= 0.047
 > before merging: O4A -0.648 O4B -0.646 ave= -0.647
 > +1: -3.999
-> -1: -3.997
+> -1: -3.997amb
 > 0: -4.65
 > ```
 >
@@ -3838,9 +3804,71 @@ conda activate AmberTools21
 
 
 
-# Stage 3 Protocol: new MD
+# Stage 3 Protocol: the full system
+
+## MD simulation
+
+general materials
+
+- [Introduction to Ion Parameters](https://ambermd.org/AmberModels_ions.php)
+- [Amber file format: frcmod](https://ambermd.org/FileFormats.php#frcmod)
+- [Tutorial for Modeling Metal Ions in AMBER](https://ambermd.org/tutorials/advanced/tutorial20/index.htm): provide index(es)
+  - MCPB.py
+  - Nonbonded Model: 12-6 and 12-6-4
+- use Amber in CHARMM
+  - https://ambermd.org/tutorials/pengfei/gaff4charmm.htm
+  - use ParmEd to convert Amber prmtop file to gromacs and CHARMM formats: amb2chm_psf_crd.py
+
+- other
+  - namd可以有一个范德华势能-距离曲线的势能
 
 
+### Mg<sup>2+</sup> force field
+
+![protein-RNA-ligand-Mg](FYP-notes.assets\protein-RNA-ligand-Mg.png)
+
+we should use iod (ion-oxygen distances)? 
+
+> Panteva and York Fine-Tuned Divalent Cation Parameters for Nucleic Acids?
+
+should be matched to water model
+
+
+
+### Zn<sup>2+</sup> force field
+
+- [Modeling Zinc Enzyme System using the 12-6 LJ Nonbonded Model](https://ambermd.org/tutorials/advanced/tutorial20/12_6.htm)
+  - only the ion parameters for +3 and +4 ions had errors in these four files
+- ZAFF: https://ambermd.org/tutorials/advanced/tutorial20/ZAFF.htm
+- [other: multi-point ](https://www.mayo.edu/research/labs/computer-aided-molecular-design/projects/zinc-protein-simulations-using-cationic-dummy-atom-cada-approach)
+
+deprotonated cysteine residue stabilizes zinc-finger structure even in the preference of negatively charged DNA molecule
+
+
+
+### Amber+new Mg FF
+
+#### AmberTools
+
+##### debug
+
+- pdb4amber does a preliminary check on your PDB file and cleans potential errors in the protein structure.
+
+- tleap reports 'FATAL: Atom .R<A 930>.A<OP2 22> does not have a type.'
+
+  remove 5TER of your RNA from .pdb file
+
+- 
+
+### other methods
+
+#### CHARMM-GUI solution builder
+
+> it's a bit slow but effective and versatile
+
+
+
+## FEP
 
 
 
@@ -3978,6 +4006,14 @@ notes: cgenff_charmm2gmx_py3_nx2.py
 
 
 # Extra protocol
+
+## FEprepare
+
+主要是LibParGen，OPLS-AA
+
+就算FEprepare支持cgenff，也要转mol2为pdb
+
+
 
 ## VS draft
 
@@ -4369,3 +4405,10 @@ Question:
 
 - 脂肪族的cl可以不用加lone pair呀 (like CH3Cl in cgenff.ref), but CHARMM-GUI still adds a lone pair
 - charmm-gui recognizes Cl as CH3???
+
+
+
+
+
+
+

@@ -507,13 +507,16 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
    mv file ~/.local/share/Trash/files
    ```
 
-4. check the size of a folder: https://zhidao.baidu.com/question/1178566665695139419.html
+4. Usage: rmdir [OPTION]... DIRECTORY...
+   Remove the DIRECTORY(ies), if they are empty
+
+5. check the size of a folder: https://zhidao.baidu.com/question/1178566665695139419.html
 
    ```shell
    du -sh /directory
    ```
 
-5. ls
+6. ls
 
    https://www.runoob.com/linux/linux-comm-ls.html
 
@@ -523,7 +526,7 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
 
    
 
-6. cp
+7. cp
 
    报错如下：`cp: omitting directory './nginx-1.12.1'`
 

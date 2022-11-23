@@ -254,7 +254,11 @@ awk必须单引号
   }
   ```
 
-  - 
+- `llength $list`: Count the number of elements in a list
+
+- 
+
+  
 
 
 
@@ -262,9 +266,58 @@ awk必须单引号
 
 ## RDkit
 
-> 
 
-RDkit cannot read PDB files well...without connect, bond order info is lost. Assign from template? the molecule has to match exactly!
+
+### fundamental
+
+- show structure quickly (not in jupyter notebook): `rdkit.Chem.Draw.MolToImage(mol).show()`
+
+
+
+### MCS search
+
+让RDkit得到正确的手性信息：除了一一对应pybel和rdkit的原子，去改那个chiralTag，估计没啥好办法
+
+
+
+future reference:
+
+- R里面的MCS search：https://academic.oup.com/bioinformatics/article/29/21/2792/195951
+
+
+
+### pdb file
+
+RDkit cannot read PDB files well...without connect, bond order info is lost. Assign from template? the molecule has to match exactly! This template (smiles) could come from `pybel.readfile`. 
+
+But no such way to assign chirality...
+
+读pdb啥手性都没有，sdf有些没必要的（磷），smiles甚至有氧。这些识别的不对，还不如pdb。同时其实sdf下所有氢被排除在common之外，并不清楚其和手性的关系，反正就是不行
+
+failed to read chirality even (with the help of openbabel)
+
+```python
+    def _get_rdk_mol(self, mol, format: str = 'smiles'):
+        """
+        Return: RDKit Mol (w/o H)
+        """
+        if format == 'pdb':
+            return Chem.rdmolfiles.MolFromPDBBlock(mol.write("pdb"))
+        elif format == 'smiles':
+            return Chem.rdmolfiles.MolFromSmiles(mol.write("smiles"))
+
+        # cp = subprocess.call(["obabel", lig.pdbfile+".pdb", "-osdf", '-O', lig.pdbfile+".sdf"],
+        #                      stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+        # rmol = Chem.MolFromPDBFile(lig.pdbfile+'.pdb.pdb', removeHs=False)
+        # pmol = pybel.readfile('pdb', lig.pdbfile+".pdb.pdb").__next__()  # only one file.
+        # template = AllChem.MolFromSmiles(pmol.write('smi').split('\t')[0])
+        # AllChem.AssignBondOrdersFromTemplate(template, rmol)
+        # Chem.MolToSmiles(rdmol)
+        # rdmol = Chem.MolFromMol2File()
+        # AllChem.AssignAtomChiralTagsFromStructure(rmol)
+        # AllChem.AssignAtomChiralTagsFromStructure(rmol)
+        # AllChem.AssignStereochemistryFrom3D(rmol)
+```
 
 
 
@@ -278,7 +331,24 @@ RDkit cannot read PDB files well...without connect, bond order info is lost. Ass
 >
 > 
 
-### 22.10.7
+
+
+- write files
+
+  ```python
+  with Chem.SDWriter(prefix+'.sdf') as w:
+      w.write(m)
+  ```
+
+- 
+
+- 
+
+### file formats
+
+- smiles: Configuration at tetrahedral carbon is specified by @ or @@. Consider the four bonds in the order in which they appear, left to right, in the SMILES form. Looking toward the central carbon from the perspective of the first bond, the other three are either clockwise or counter-clockwise. These cases are indicated with @@ and @, respectively (because the @ symbol itself is a counter-clockwise spiral).
+
+### examples
 
 detect triple bonds and remove dihedrals
 
@@ -286,11 +356,13 @@ detect triple bonds and remove dihedrals
 - openbabel (python) read PDB file
 - get all bonds with bond order 3
 - get the two atoms, find through the index
--  your operations
+- your operations
 
 > https://open-babel.readthedocs.io/en/latest/UseTheLibrary/PythonDoc.html
 >
 > http://openbabel.org/dev-api/classOpenBabel_1_1OBAtom.shtml
+
+
 
 
 
@@ -401,6 +473,54 @@ detect triple bonds and remove dihedrals
 
 ## operating files and cmd
 
+### about bash commands
+
+- [调用外部进程的几种方法](https://juejin.cn/post/6912824179511263240)
+
+  Python的os等包也并不是内置了shell的功能，而是调用。最好不要调用bash的东西，否则Windows下可能用不了。最好用Python内置的命令，比如os，也有更高级的
+
+- `r = os.popen(cmd).read`: get bash output
+
+- 
+
+- 
+
+- 
+
+shutil是个增强版的：
+
+- 
+- 也没有grep
+
+有时候os.system可能执行不完就开始进行下一个命令，但是文件还没有生成完，所以就会报错了。所以要用：
+
+### subprocess
+
+read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arguments
+
+- 调用后一直阻塞到执行结束：
+
+  ```shell
+  subprocess.call()
+  ```
+
+  `call()` cannot process output; `run()` cannot stuck until finished
+
+  `subprocess.Popen()`有个`wait()`表示等待子进程结束，但不行？
+
+- [subprocess.Popen重定向输出](https://blog.csdn.net/linxinfa/article/details/93595913) or [this](https://blog.csdn.net/weixin_39622628/article/details/111438771)
+
+  ```python
+  cp = subprocess.Popen(["grep", str(var)+".pdb"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+  out, err = cp.communicate()
+  ```
+
+- `shell=True`: call shell; provide a single string as cmd is ok
+
+
+
+### about path
+
 - When we execute a Python script in cmd in another folder, os.curdir is still your cwd. i.e. cmd parameters is fine.
 
   But within a script, if you want to execute another file (in the same folder, like .tcl), it can still find it. All the output will be in your cwd.
@@ -409,7 +529,15 @@ detect triple bonds and remove dihedrals
 
 - `os.walk()` : walk through all sub-folders
 
-- `r = os.popen(cmd).read`: get bash output
+- `os.getenv(PATH)`：获取环境变量（Windows/Linux通用），而不是`popen("which xxx")`
+
+- [glob — Unix style pathname pattern expansion](https://docs.python.org/3/library/glob.html#module-glob).
+
+
+
+### read and write
+
+- If you want to write bytes then you should open the file in binary mode. `f = open('/tmp/output', 'wb')`
 
 
 
@@ -423,6 +551,8 @@ detect triple bonds and remove dihedrals
 
 ### argparse
 
+references
+
 https://zhuanlan.zhihu.com/p/56922793
 
 https://blog.csdn.net/xiaotianlan/article/details/119216435
@@ -435,11 +565,23 @@ https://juejin.cn/post/6844903919978545160
 
 
 
-nargs是用来说明传入的参数个数， 
+- nargs是用来说明传入的参数个数， 
 
-- nargs='*' 表示参数可设置零个或多个 
-- nargs='+' 表示参数可设置一个或多个 
-- nargs='?' 表示参数可设置零个或一个
+  - nargs='*' 表示参数可设置零个或多个 
+  - nargs='+' 表示参数可设置一个或多个 
+  - nargs='?' 表示参数可设置零个或一个
+
+- this argument = True if defined, False if not in cmd
+
+  ```python
+  parser.add_argument('--feature', action=argparse.BooleanOptionalAction)
+  ```
+
+  but only works when python version >= 3.9. [history syntax](https://nono.ma/attributeerror-module-argparse-has-no-attribute-booleanoptionalaction)
+
+- 
+
+
 
 ### warning
 
@@ -621,6 +763,10 @@ even `python xx.py -W` didn't work
 
 5. Do not use Display--perspective (透视), choose orthographic projection (正射投影)
 
+### other
+
+The current VMD source code has been tested to compile with Python versions 2.4 to 2.6 on a few platforms. Don't use that....
+
 
 
 ## UCSF Chimera
@@ -741,3 +887,27 @@ vdw and elec, common cutoff/switchdist
 - pocket alignment，最好只用pocket的原子
 
 - 如果你是用GROMACS的话，pdb2gmx产生的蛋白拓扑文件时可以加上-his选项来人工选择各个组氨酸的质子化态
+
+- https://manual.gromacs.org/documentation/2020-current/onlinehelp/gmx-pdb2gmx.html  add -ff folder. xx.ff, forcefield.itp in 
+
+
+
+# NAMD
+
+and VMD and CHARMM FF
+
+
+
+https://anaconda.org/conda-forge/psfgen
+
+
+
+vmd自带的力场就是把TIP3的两个氢之间的bond注释掉
+
+
+
+## other
+
+https://www.cresset-group.com/software/flare/
+
+like DSV
