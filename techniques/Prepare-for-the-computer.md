@@ -1045,16 +1045,24 @@ You can type `gv` in the terminal to start GView and link to Gaussian as we did 
 
 ### PMX
 
+https://github.com/deGrootLab/pmx/tree/develop
+
+develop!
+
+remember to set gmxlib: https://degrootlab.github.io/pmx/installation.html#gmxlib
+
 ```shell
-git clone https://github.com/deGrootLab/pmx pmx
+git clone https://github.com/deGrootLab/pmx.git
 cd pmx
 # to switch to 'develop' branch type:
 git checkout develop
 
-conda activate  AmberTools21 # whatever
-# conda install pip  # to make sure pip under 
+conda activate  AmberTools22 # whatever
+# conda install pip
+conda install -c conda-forge rdkit -y
 python -m pip install .
-conda install -c rdkit rdkit -y
+# add to .bashrc
+export GMXLIB=/path/to/conda3/envs/env-name/lib/python3.10/site-packages/pmx/data/mutff
 ```
 
 ### FFparam

@@ -1,27 +1,29 @@
 # Structural Biology outline
 
 > 我收集的几个结构生物学的课本放在百度网盘了
->
+> 
 > 链接：https://pan.baidu.com/s/15gEAJwKFv_uwT2G8mEK8qw 
 > 提取码：qypq 
->
+> 
 > 包括：
->
+> 
 > - Principles Of Protein X-Ray Crystallography
+> 
 > - 单晶结构分析原理与实践 
->
+> 
 > - X射线晶体学基础 第二版 梁栋材 
+> 
 > - 结构生物学：从原子到生命（瑞典）利尔加斯
->
+> 
 > 都挺好的。后面有NMR和Cryo-EM的会更新放进去
->
+> 
 > 植入广告：
->
-> *   我搬运的[结构生物学课程](https://www.bilibili.com/video/BV1A34y1m7ie)，完整且有英文字幕
-> *   我搬运的[分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e/)，讲得非常好，老师是分子动力学领域的大牛
-> *   [加州理工学院 冷冻电镜入门](https://www.bilibili.com/video/BV143411k7KJ/)，也讲得非常棒
-> *   [加州理工学院 冷冻电镜样品制备](https://www.bilibili.com/video/BV1r44y1i71P/)，都有英文字幕
->
+> 
+> * 我搬运的[结构生物学课程](https://www.bilibili.com/video/BV1A34y1m7ie)，完整且有英文字幕
+> * 我搬运的[分子生物物理学课程](https://www.bilibili.com/video/BV1gL411471e/)，讲得非常好，老师是分子动力学领域的大牛
+> * [加州理工学院 冷冻电镜入门](https://www.bilibili.com/video/BV143411k7KJ/)，也讲得非常棒
+> * [加州理工学院 冷冻电镜样品制备](https://www.bilibili.com/video/BV1r44y1i71P/)，都有英文字幕
+> 
 > 还有很多，可以直接到[我的B站空间](https://space.bilibili.com/441196634)去看
 
 讲这么快，肯定看个大概就行了。。总结的时候不要在意技术细节
@@ -29,24 +31,27 @@
 了解这几种方法的区别，知道原理就行。现在具体的算法都有软件可以用，不需要掌握公式
 
 > 考试要求
->
+> 
 > 1. **考试题型包括单选15个，名词解释7个，简答2个，分析题1个**
 > 2. 考试不涉及计算。关键公式需要掌握每项代表的物理意义，如密度公式中的相位、振幅、结构因子等
 > 3. 数据库和软件不用记很多，知道PDB数据库的意思就行
 > 4. 关注一些关键知识点其定义，和一些实用的信息。如根据氨基酸类型判断二级结构，晶体筛选与优化过程，晶体衍射数据收集注意事项，帕特森函数性质等。
-> 4. 会给出一套数据的log统计表，判断数据质量和相关的参数
+> 5. 会给出一套数据的log统计表，判断数据质量和相关的参数
+> 
+> 其他：
 > 
 > 对称性不用很深，知道原理就行。需要<u>了解系统消光，通过数据判断空间群</u>
+> 
 > 消光怎样判断螺旋轴和滑移面呢
+> 
 > 先按高对称性处理，观察对应hkl数据强度，判断是否存在螺旋轴
+> 
 > 不会计算F中的复数怎么办呢
+> 
 > 这个是需要考试的时候根据坐标自己计算F来判断消光规律吗
+> 
 > 通过数据统计表判断就行
-> 这个表考试时会提供吗
-> 怎么根据hkl数据判断是否存在螺旋轴呢
-> 这个讲过吗
-> 怎样计算出晶胞参数
-> 老师找个时间答疑吧，问题真的太多了
+> 
 > 根据HKL是只能判断出面心，体心这些吗，还是可以判断出三斜，正交这些
 
 ## 1. 简介
@@ -59,19 +64,19 @@
 结构生物学是以生命物质的精确空间结构及其运动为基础，来阐明生命活动规律和生命现象本质的学科，其核心内容是蛋白质及其复合物、组装体和由此形成的细胞各类组分的**三维结构、运动和相互作用**，以及它们**与正常的生物学功能和异常病理现象的关系**。
 
 > 诞生：劳厄、布拉格、**沃森克里克**，1959，Kendrew和Perutz（肌红蛋白、血红蛋白）
->
+> 
 > 1971，PDB建立；1972，提出结构生物学
->
+> 
 > 1975，电镜，细菌视紫红质；1983，二维NMR
->
+> 
 > ……
->
+> 
 > 现在：结构基因组学，复杂过程，SBDD
 
 我国科学家：人工合成结晶牛胰岛素
 
 > 研究现状
->
+> 
 > - 前沿和主流，渗入各个领域
 > - 深入解释机理
 > - 和健康、疾病密切相关
@@ -79,34 +84,35 @@
 
 研究方法：XRD、NMR、Cryo-EM、各种谱学、MD。生化、生信……
 
-```
-比较：具体看后面
-- X-射线晶体学
-  优点:分辨率高，测定分子大; 缺点:需要制备单晶，有相位问题
-- 核磁共振波谱学
-  优点:溶液构象，无相位问题;缺点:限于较小 的蛋白质分子(目前MW<40kDa)
-- 电子晶体学和电镜三维重构
-  优点:不需大单晶，无相位问题;缺点:目前分 辨率尚不如前二者高
-```
+> [!NOTE]
+> 
+> 比较：具体看后面
+> 
+> - X-射线晶体学
+>   优点:分辨率高，测定分子大；缺点：需要制备单晶，有相位问题
+> - 核磁共振波谱学
+>   优点:溶液构象，无相位问题；缺点：限于较小的蛋白质分子(目前MW<40kDa)
+> - 电子晶体学和电镜三维重构
+>   优点:不需大单晶，无相位问题；缺点：有时分辨率尚不如前二者高
 
 > **核酸序列**数据库
->
+> 
 > - GenBank: http://www.ncbi.nlm.nih.gov/Genbank/
 > - EMBL: http://www.ebi.ac.uk/embl/
->
+> 
 > **蛋白质序列**数据库 (SWISS-PROT)
->
+> 
 > - http://www.ebi.ac.uk/ EMBL-EBI
 > - http://www.cbi.pku.edu.cn/ （不是数据库吧。。）
->
+> 
 > 蛋白质结构数据库 (PDB) http://www.rcsb.org/pdb/
->
+> 
 > 核酸结构数据库(NDB) http://ndbserver.rutgers.edu/
->
+> 
 > 蛋白质二级结构数据库(DSSP) http://www.sander.ebi.ac.uk/dssp/
->
+> 
 > 蛋白质结构分类数据库
->
+> 
 > - SCOP: http://scop.mrc-lmb.cam.ac.uk/scop/
 > - CATH: http://www.biochem.ucl.ac.uk/bcm/cath/  
 
@@ -123,7 +129,6 @@ DNA双螺旋结构模型要点，三种结构
 染色质结构，核小体等
 
 多链DNA，C<sup>+</sup>GC氢键
-
 
 RNA的结构？
 
@@ -152,15 +157,15 @@ RNA的结构？
 骨架，氢键
 
 - α螺旋：性质
-
+  
   > 有利：ALEM，不利：PGNYC
 
 - β折叠：结构
-
+  
   > 强烈：VIY，不利：E（PG？）
 
 - β转角、β环：有功能
-
+  
   > Turn: X-P-(G)-X
 
 拉氏图；有利的AA！
@@ -184,20 +189,20 @@ RNA的结构？
 #### 小心名词解释
 
 > - 二级结构是**多肽链骨架（主链）**的**局部空间结构**，不涉及侧链的构象及整个肽链的空间排列。
->
+> 
 > - 超二级结构：两个或**多个二级结构单元**被连接多肽连接起来，进一步组合成有特殊的几何排列的**局部**空间结构，称为超二级结构（supersecondary structure），又称为模体（motif）。
->
+> 
 > - 折叠子：蛋白质分子中**主要二级结构单元**的空间排布和拓扑连接方式，称为折叠子。折叠子反映了蛋白质**核心结构**的拓扑结构模式。一个fold包含多个超家族
->
+> 
 > - <font color=red>结构域</font>：折叠成**紧密的相对独立的结构实体**的肽链，有一定的三级结构，而且往往还具有**特定的、但还不完全**的生物活性。
->
+>   
 >   - 一般：100~200个连续的残基。作为一个模式结构来参与蛋白质分子的装配
 >   - 结构域之间的连接比较松散，具有一定的灵活性
->
+> 
 > - 模块（module）是残基数较少的、结构独立性不明显的结构域
->
+> 
 > - > 三级结构：指一条多肽链在二级结构或者超二级结构甚至结构域的基础上，进一步盘绕，折叠，依靠次级键的维系固定所形成的特定空间结构成为蛋白质的三级结构。
->
+> 
 > - 四级结构：相同或不同的蛋白质亚单位（亚基）通过非共价键结合在一起时的组合方式
 
 ## 3. 蛋白结构与功能
@@ -223,7 +228,7 @@ RNA的结构？
 - https://www.bilibili.com/video/BV1bq4y1k7TS/ 第三集，倒易空间，Ewald sphere
 
 - https://www.bilibili.com/video/BV1ir4y1k7Mg/
-
+  
   Ewald sphere 3D representation。旋转晶体相当于旋转球，最终能扫到的球（limiting sphere）的半径为$2\cdot\frac{1}{d}$，所以波长越小能收到更多衍射点
 
 - Ewald球就是反射球
@@ -306,7 +311,7 @@ RNA的结构？
 ##### 液相扩散法
 
 - 微量透析法
-
+  
   > 界面扩散法等
 
 用半透膜隔开母液和外液，随着扩散、离子浓度平衡，可能结晶
@@ -369,7 +374,7 @@ RNA的结构？
 天然蛋白太少，基本使用分子生物学手段来生产，生化手段纯化
 
 > 要求：
->
+> 
 > - 化学组成均一
 > - 分子构象均一
 
@@ -408,7 +413,7 @@ RNA的结构？
 #### 晶体的点阵结构
 
 > 晶体：三维周期重复排列
->
+> 
 > 点阵点：重复部分抽象成一个点
 
 根据点阵、按照对称元素划分晶胞。要求对称性最高、体积最小
@@ -430,7 +435,7 @@ RNA的结构？
 - 微观：平移、滑移面、螺旋轴
 
 > 微观就是加了平移的几个
->
+> 
 > 第一类对称元素（不带反映、反演的），不产生对映体；第二类对称元素，产生对映体  
 
 ##### 对称变换
@@ -438,7 +443,7 @@ RNA的结构？
 - 反演
 
 - 旋转：1,2,3,4,6次
-
+  
   > 对称操作：转$\dfrac{m}{n}\ (n=1,2,3,4,6, m=\forall\mathbb{N^*} < n)$圈
 
 - 旋转反演
@@ -472,9 +477,9 @@ RNA的结构？
 等效点系：一个点经对称元素操作后和另一点完全一致
 
 > 具体对照手写笔记
->
+> 
 > ![4-2-pg](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-2-pg.jpg)
->
+> 
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-dengxiao.png" alt="4-dengxiao" style="zoom:25%;" />
 
 P2<sub>1</sub>2<sub>1</sub>2这种：大概都是abc三个方向？按理说不应该是位方向？确实是
@@ -482,19 +487,19 @@ P2<sub>1</sub>2<sub>1</sub>2这种：大概都是abc三个方向？按理说不�
 单斜和三斜都只有一个（所以看到P2只能是单斜，P1是三斜）。三个的就是正交
 
 > 所以真的要把空间群表放这供参考，不用记。。见下方，蛋白质晶体
->
+> 
 > 思考，关于那个数据处理：P4是简单四方，P4<sub>1</sub>是金刚石了。。所以螺旋轴对称性这么高吗
 
 > 最小体积重复单元：不对称单位或独立区
->
+> 
 > 如图左上角1/4就是不对称单位
->
+> 
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-asymm.png" alt="4-asymm" style="zoom:60%;" />
->
+> 
 > 原点的选取，优先次序：高对称点的对称中心---低对称点的对称中心---……
->
+> 
 > 坐标轴的轮换与对换
->
+> 
 > 坐标变换矩阵
 
 #### 蛋白质晶体
@@ -502,7 +507,7 @@ P2<sub>1</sub>2<sub>1</sub>2这种：大概都是abc三个方向？按理说不�
 蛋白本身有手性，不存在能引起手性的对称变换，所以蛋白晶体可能的空间群仅**65个**。
 
 > 本来230个；
->
+> 
 > 劳厄群：32个点群中的11种中心对称点群→衍射花样Friedel’s Law  
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-pro-space.png" style="zoom:50%;" />
@@ -512,7 +517,7 @@ P2<sub>1</sub>2<sub>1</sub>2这种：大概都是abc三个方向？按理说不�
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-rot.png" style="zoom:35%;" />
 
 > 若两个晶体空间群相同，晶胞参数差别小 (1%)，则称二者是同晶的
->
+> 
 > 不同条件可能不同晶体
 
 #### 赝对称
@@ -528,7 +533,7 @@ Matthews常数$V_M=V_{cell}/(N_z\cdot M_r)$，$N_z$是单位晶胞的蛋白分�
 可用于推测结构、估计晶体含溶剂的体积分数
 
 > 假设某个蛋白质的空间群为C2，单位晶胞总体积为 319,000 Å<sup>3</sup>，该蛋白质的分子量为32,100Da，对于$N_Z$ = 2, 4, 或 8 来说，相应的$V_M$ = 5, 2.5, 或 1.25 Å<sup>3</sup>/Da。根据 Matthews 常数的经验分布规律，该蛋白质晶体的单位晶胞中包含4个分子的可能性是非常高的。因为C2空间群的晶体晶胞具有4个不对称单位，所以每个不对称单位包含一个蛋白质分子。
->
+> 
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-2-Usol.png" alt="4-2-Usol" style="zoom:25%;" />
 
 ### (3) 衍射数据收集
@@ -562,11 +567,11 @@ Matthews常数$V_M=V_{cell}/(N_z\cdot M_r)$，$N_z$是单位晶胞的蛋白分�
 解决了散热问题
 
 > Cu靶：
->
+> 
 > Kα1 1.54051 Å，Kα2 1.54433 Å，Kβ 1.39217 Å
->
+> 
 > Kα1的强度约为Kα2的两倍， 故Kα平均波长取为1.54178 Å
->
+> 
 > Mo靶导热性没那么好，若使用封闭管。0.71 Å
 
 ###### 同步辐射装置
@@ -624,12 +629,13 @@ Laue星芒：晶体内部结构畸变时，会产生衍射斑点的伸长
 #### 影响衍射强度的若干因素**
 
 > 复习晶体学。结构因子为
->
+> 
 > $$
 > F_{hkl}=\sum_{j=1}^{N}f_i\exp\left[i\cdot 2\pi(hx_i+ky_i+lz_i)\right]\\
-> \text{or}\quad F(\boldsymbol{H})=\sum_{j=1}^N\exp\left[i\cdot 2\pi\boldsymbol{H}\cdot\boldsymbol{r_j}\right]\\
-> \text{where}\ \boldsymbol{H}=(h,k,l), \boldsymbol{r_j}=(x_j,y_j,z_j)\\
+\text{or}\quad F(\boldsymbol{H})=\sum_{j=1}^N\exp\left[i\cdot 2\pi\boldsymbol{H}\cdot\boldsymbol{r_j}\right]\\
+\text{where}\ \boldsymbol{H}=(h,k,l), \boldsymbol{r_j}=(x_j,y_j,z_j)\\
 > $$
+> 
 > $f_i$ 为散射因子。$\boldsymbol{H}$是倒易矢量
 
 ##### 晶体安装方式
@@ -688,9 +694,9 @@ $1/|H_{max}|$为晶面间距，$|H_{max}|$为估计的分辨率的数值。**角
 可以根据随着分辨率增加，衍射斑点的平均强度的下降来了解晶体内部的有序度
 
 > ##### 单晶性质的判断
->
+> 
 > 斑点的形状，是否锐利
->
+> 
 > 如果两个点非常接近，可能：不是单晶、D太小、晶胞某个方向太长
 
 ##### 晶体和探测器间距的选择
@@ -706,16 +712,15 @@ $\Delta R$代入上公式，$\theta$ 和 $H$ 取min。
 （单次）回摆角度
 
 - 回摆角度过小，导致每张画面上的衍射斑点过少；但噪声减少
-
+  
   > 并会导致部分记录反射，一个衍射点可能分布在几张连续的画面上，需要在后续阶段将它们的强度合并。但是不准，有时不计。还是要增加回摆角度
 
 - 回摆角度过大，有可能导致画面上的衍射斑点重叠（不就是过多嘛）。
-
+  
   - 通常取1~2°
   - 晶胞大时需要适当减小角度
 
-
-  > 我明白了！回摆那个范围的所有衍射点被记录在一张image上了
+> 我明白了！回摆那个范围的所有衍射点被记录在一张image上了
 
 ##### 画面张数vs衍射盲区
 
@@ -771,7 +776,6 @@ $$
 \end{aligned}
 $$
 
-
 目标：从(h,k,l)反推回(x,y,z)坐标
 
 recall:
@@ -785,7 +789,7 @@ recall:
 - $(a^*,b^*,c^*)$是倒易空间的基矢，模长为1埃
 
 > strange! 
->
+> 
 > $(x\boldsymbol{a}+y\boldsymbol{b}+z\boldsymbol{c})\cdot(h\boldsymbol{a^*}+k\boldsymbol{b^*}+l\boldsymbol{c^*})=hx+ky+lz$
 
 基本步骤：
@@ -811,7 +815,7 @@ recall:
 - 选取对称性最低、尽可能不产生系统消光的空间群，作为强度积分与合并的依据
 
 - 积分、合并后，再根据算出来的系统消光、衍射强度关系，推出更多对称元素，修正点阵类型
-
+  
   > 从简单开始，不要丢失赝对称！
 
 因为手性，蛋白质可能有的空间群有65种
@@ -819,41 +823,43 @@ recall:
 ##### 衍射强度数据的质量评估
 
 1. 衍射**分辨率**
-
+   
    > 晶面间距越小，要求分辨率越高，θ越高，越难收集
 
 2. 数据（衍射点）**完整度**
-
+   
    > 一般要求：> 80 %
-   >
+   > 
    > 理论衍射点数与分辨率倒数的三次方成正比
 
 3. 强度的**信噪比**（强度/偏差）：I/sigma
-
+   
    > 越大越好，应>2。每个衍射点都有，故每个hkl有多个I
-   >
+   > 
    > sigma: 强度的偏差error，指个别测定值与测定的平均值之差。即下式中的$\Big| I_j(\boldsymbol{H})-<I(\boldsymbol{H})>\Big|$
-   >
+   > 
    > sigma就是强度merge时产生的误差。见《单晶结构》p64
 
 4. 数据合并的**偏离因子**R<sub>merge</sub>（越大越不好）
-
+   
    > 重复测量的衍射点，重复数据是否相差大。
+   > 
    > $$
    > R_{merge}=\dfrac{\sum\limits_\boldsymbol{H}\sum\limits_j\Big| I_j(\boldsymbol{H})-<I(\boldsymbol{H})>\Big|}{\sum\limits_\boldsymbol{H}<I(\boldsymbol{H})>}
    > $$
+   > 
    > 是对一部分（某壳层）衍射点求和的
-   >
+   > 
    > - 应该<50%
 
 5. 对称性相关衍射点重复测量的平均次数 redundancy**冗余度**
-
+   
    > 为观测衍射点数目与独立衍射点数目的比值， 应大于4
 
 6. 同种晶体不同个体，衍射数据的分别收集，能合并的程度
 
 7. Wilson统计。线性拟合
-
+   
    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-3-wilson.jpg" alt="wil" style="zoom:55%;" /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-3-wilson-eq.png" alt="wil" style="zoom:25%;" />
 
 ##### 补充：软件使用&数据处理
@@ -867,23 +873,22 @@ https://hkl-xray.com/sites/default/files/HKL2000manual-2020/12-OutputStatisticsG
 软件：HKL2000
 
 > - $\chi^2$
->
+>   
 >   > if χ2 > 1 and you see a clear resolution dependence of the χ2 for scaling with merged Friedel pairs (i.e., the χ2 increases as the resolution decreases), there is a strong indication of the presence of an anomalous signal. The resolution dependence allows you to determine where to cut off your resolution to calculate an anomalous difference Patterson map with an optimal signal to noise.
->
+>   
 >   描述是否有反常散射的
->
+> 
 > - Linear R-fac
->
+>   
 >   - 就是R<sub>merge</sub>
->
+> 
 > > 都是描述是否有反常散射的
->
+> 
 > ```
 > R linear = SUM ( ABS(I - <I>)) / SUM (I)
 > R square = SUM ( (I - <I>) ** 2) / SUM (I ** 2)
 > Chi**2 = SUM ( (I - <I>) ** 2) / [(Error ** 2) * N / (N-1) ]
 > ```
->
 
 - 导入数据，display衍射图
 
@@ -896,10 +901,11 @@ https://hkl-xray.com/sites/default/files/HKL2000manual-2020/12-OutputStatisticsG
 - peak情况（红色：rejected，黄色：多张图片上有intensity，绿色：完整）；zoom放大查看
 
 - integrate所有图片，然后
-
+  
   > Integrated intensities are written to .x files, One .x file for each film
 
 - scale---scale sets：normalize，combine，merge
+  
   - 先用low symmetry space group 来 scale，再check space group
   - 选好选项，再scale sets，如果check后有更高对称性，调整好（reindex）后再scale sets，就可以在space group处选更高的，再scale sets
   - 要一直scale sets直到稳定，迭代
@@ -907,16 +913,16 @@ https://hkl-xray.com/sites/default/files/HKL2000manual-2020/12-OutputStatisticsG
 ###### log file analysis
 
 > 我们需要根据这些数据，判断出晶体的空间群、螺旋轴、冗杂度、完整度、I/sigma、Rmerge、xyz轴消光
->
+> 
 > 不过不一定会考。就是在log文件里面找数字，填上去就行
 
 指标见上
 
 - 统计性质
-
+  
   - 要分（分辨率的）壳层（lower/upper limit)
   - 每个衍射点都有一个
-
+  
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-data1.jpg" alt="4-data1" style="zoom:60%;" />
 
 - 下面那个是上面的加权平均
@@ -940,11 +946,11 @@ I/sigma的分布
 ![4-3-abs](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-3-abs.jpg)
 
 > There are two ways to manually check whether or not you have systematic absences. The first is to look at the **Intensities of systematic absences table** at the bottom of the log file, which can be shown using the **Show Log File** button. If you have scaled your data in a space group that is expected to have systematic absences, then the reflections that should be missing will be listed at the bottom of the log file. The table lists these reflections' intensity, sigma, and I/sigma.
->
+> 
 > 所有带**平移操作**的对称元素(包括带心点阵、滑移面、螺旋轴）都会产生系统消光现象
->
+> 
 > 系统消光规律是确定晶体空间群的重要依据
->
+> 
 > 分析系统消光规律的次序：晶格、滑移面、螺旋轴
 
 ##### 发表数据（初步分析）应注意的问题
@@ -1065,7 +1071,6 @@ $$
 P(\boldsymbol{U})=\int_\boldsymbol{R}\rho(\boldsymbol{R})\rho(\boldsymbol{U}+\boldsymbol{R})\mathrm{d}\boldsymbol{R}
 $$
 
-
 只有当两个位置相差$\boldsymbol{U}$，$\rho$ 都不为零时，$P(\boldsymbol{U})$才不为零
 
 ###### 性质
@@ -1073,11 +1078,15 @@ $$
 > 峰的数量、对称性、周期性
 
 - 峰的位置（三维），为**原子间矢量**
-- $N(N-1)$个非原点峰
 
+- $N(N-1)$个非原点峰
+  
   - 总是**中心对称**
+
 - $N$个原点峰，自己和自己
+
 - 强度和两原子的电荷数之积成正比
+
 - 是**周期性**的，与晶胞的周期性完全一致
 
 Patterson晶胞仅存在<u>不包含平移</u>的对称元素，总共**29个**
@@ -1089,7 +1098,7 @@ Patterson对称群，是蛋白晶体可能有的空间群中，去掉含滑移�
 ###### Harker峰
 
 > Harker截面或Harker线，就是同一套等效点的原子组成的帕特森峰。
->
+> 
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-harker1.jpg" alt="4-4-harker1" style="zoom:13%;" /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-harker2.jpg" style="zoom:13%;" />
 
 蛋白质分子都是CNO，差别不大，容易重叠。
@@ -1107,7 +1116,7 @@ Patterson对称群，是蛋白晶体可能有的空间群中，去掉含滑移�
 ##### 分子置换法
 
 > 同源：序列不一定相同（identical），但尺寸、疏水性等性质可能相同
->
+> 
 > 序列同源，很可能三维结构折叠类型也同源
 
 同源**但不同晶**的，用分子置换法（同晶的用同晶差值傅里叶法）。亚单位可能同源
@@ -1147,18 +1156,19 @@ $$
 $$
 R=\dfrac{\sum_\boldsymbol{H}|F_o(\boldsymbol{H})-F_c(\boldsymbol{H})|}{\sum_\boldsymbol{H}F_o(\boldsymbol{H})}
 $$
+
 where $F_o(\boldsymbol{H})$ 是待测晶体，$F_c(\boldsymbol{H})$ 是已知晶体
 
 > 密堆积分析：寡聚体？
->
+> 
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-close1.jpg" alt="4-4-close1" style="zoom:14%;" /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/4-4-close2.jpg" alt="4-4-close2" style="zoom:14%;" />
->
+> 
 > 共有24种分子置换的方式。根据晶体对称性，缩小了搜索范围
 
 平移函数：类似与旋转函数
 
 > 前面不是已经有目标函数了吗
->
+> 
 > 改进：同时平移旋转、取向修正
 
 ##### 多波长反常色散法（MAD)
@@ -1218,8 +1228,6 @@ $F_h=F_{BA}+G$，把$G$代进来换成$F_A$。$F_A$的系数随着波长变化�
 
 差异很小的、同晶的蛋白，用人家的结构来计算相位，计算更简单
 
-
-
 ### (5) 第五节
 
 #### 电子密度图的计算和解释
@@ -1268,10 +1276,10 @@ mmCIF：也叫PDBx，用键值对的方式存储，便于处理，没有每行�
 - 检查合理性、密度的连续性等，迭代。。
 
 > 以下是提纲没有的
->
+> 
 > - 同源结构：总体上问题不大，局部需重新判断
 > - 新蛋白：只能从头判断
->
+> 
 > 高分辨率能用类似小分子的程序，中分辩只能原子团，用蛋白的程序
 
 #### 计算电子密度函数
@@ -1341,9 +1349,6 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 
 算啦
 
-
-
-
 ## 5. 冷冻透射电镜三维重构
 
 - 优点：样品制备简单；自然状态结构；对样品（是球蛋白、膜蛋白、复合体）没有限制
@@ -1356,11 +1361,13 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 #### 仪器结构
 
 - 电子透镜系统（镜筒）
+  
   - 照明系统（电子枪、聚光镜）
   - 成像系统（物镜、中间镜、投影镜）
   - 观察系统（荧光屏？CCD）
 
 - 真空系统
+
 - 电源系统
 
 和普通光镜的光路相似
@@ -1389,21 +1396,21 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 > 许多截面，所以能看到里面！
 
 > 去年的，不管了。。
->
+> 
 > 三种方法
->
-> | 方法       | 样品             | 特点     | 分辨率（现在？ |
-> | ---------- | ---------------- | -------- | -------------- |
-> | 电子晶体学 | 二维晶体         | 周期排列 | >0.19nm        |
-> | 单颗粒技术 | 病毒、大complex  | 全同粒子 | >0.33nm        |
-> | 断层成像   | 细胞器、组织切片 | 单一结构 | 4nm            |
->
+> 
+> | 方法    | 样品          | 特点   | 分辨率（现在？ |
+> | ----- | ----------- | ---- | ------- |
+> | 电子晶体学 | 二维晶体        | 周期排列 | >0.19nm |
+> | 单颗粒技术 | 病毒、大complex | 全同粒子 | >0.33nm |
+> | 断层成像  | 细胞器、组织切片    | 单一结构 | 4nm     |
+> 
 > ![image-20211104170835340](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/5-temp.png)
->
+> 
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/image-20211104170905611.png" alt="image-20211104170905611" style="zoom: 40%;" />
->
+> 
 > 模型偏好 (model bias)：优化结果偏向于初猜的模型，可能导致对结构的错误解释。对异质性的样品进行分类分析，可以通过分区的比对和整体比对进行分类
->
+> 
 > ……
 
 ### 冷冻电镜技术
@@ -1424,23 +1431,23 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 制样→冷冻→拍摄→采集数据→处理、三维重构→结构分析、评价
 
 > ##### 方法分类
->
+> 
 > - tomography
 > - 单颗粒重构
 > - 2D电子晶体学
 > - 微电子衍射
 
 > #### 蛋白二维晶体的生长
->
+> 
 > 这节提纲也没说
->
+> 
 > 膜蛋白二维晶体的特征：连续的脂双层或单层，规则地排列着蛋白质，多种形态，靠疏水相互作用维持
->
+> 
 > 膜蛋白二维晶体的生长
->
+> 
 > - 膜中重排，天然或诱导形成晶体
 > - 负提纯、透析
->
+> 
 > 水溶性：在脂单层表面结晶？？
 
 #### 样品制备
@@ -1459,7 +1466,6 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 - 冰包埋技术
   - 用液氮极速冷冻到-160℃以下，蛋白处于非晶态的冰中
   - 保持天然结构，防止损伤，分辨率高，现在最好的办法
-
 
 如何包埋？金属网格吸一层液体，滤纸吸一下，只剩薄液膜，塞进液态乙烷
 
@@ -1492,9 +1498,9 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
   - 三维重构
 
 > 其他：single particle analysis，仪器参数
->
+> 
 > ### 应用
->
+> 
 > - 大的蛋白复合体结构
 > - 动态过程
 > - 三种蛋白都可
@@ -1540,7 +1546,7 @@ $k$为比例因子，$W$为“用于修正”的hkl，$T$为“用于监测”�
 先做一维谱，看有没有结构
 
 > 二维：HN-HSQC
->
+> 
 > 多维：自己选哪些核
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-1d.jpg" alt="6-1d" style="zoom:15%;" />
@@ -1555,7 +1561,7 @@ NOE**与空间作用距离的6次方成反比**，其空间作用距离$<5/sim 6
 
 > Magnetization transfer through space > NOE
 > Magnetization transfer through bonds > J-coupling
->
+> 
 > J-耦合：是自旋核与自旋核间的相互作用，在谱图可引起谱线裂分，这种偶合作用是通过成键电子传递，发生在化学键相连的磁性等价核之间。
 > NOE效应：任意两原子核由于偶极-偶极相互作用所产生的相互影响。该效应与化学键无关，只与距离相关  
 
@@ -1587,9 +1593,9 @@ NOE**与空间作用距离的6次方成反比**，其空间作用距离$<5/sim 6
 - 线性预测、加窗函数、充零：补全缺失值？
 
 - **傅里叶变换**（多维：每一维都考虑）
-
+  
   - FID曲线经过FT变成一个峰
-
+    
     <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-fid.jpg" alt="6-fid" style="zoom:12%;" />
 
 - 相位、基线校正
@@ -1611,9 +1617,9 @@ NOE**与空间作用距离的6次方成反比**，其空间作用距离$<5/sim 6
 ##### 三维实验、化学位移指认
 
 > 参考概述
->
+> 
 > 背一下方法。可以组合
->
+> 
 > 都是说：<u>有这个信号，俩基团就在一起</u>
 
 化学位移：原子的身份证。可用来确定是哪个residue。（HSQC就可，3D也同时用）
@@ -1645,9 +1651,9 @@ NOE**与空间作用距离的6次方成反比**，其空间作用距离$<5/sim 6
 ###### NOE可以指认both主链和侧链
 
 > 因为只要靠近的就可以。详见下面的NOE信号表
->
+> 
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-noesy.png" alt="6-noesy" style="zoom:30%;" />
->
+> 
 > 高维可以减少谱峰堆积
 
 > [NOESY拓展](https://chem.libretexts.org/Bookshelves/General_Chemistry/Book%3A_Structure_and_Reactivity_in_Organic_Biological_and_Inorganic_Chemistry_(Schaller)/II%3A_Practical_Aspects_of_Structure_-_Purification_and_Spectroscopy/05%3A_2D_NMR/5.04%3A_NOESY_Spectra)
@@ -1666,12 +1672,14 @@ NOE**与空间作用距离的6次方成反比**，其空间作用距离$<5/sim 6
 约束生成，from NOE
 
 - 指认
+  
   - Unique：只有一种可能
     Ambiguous：有多种可能
   - 其中一种可能是正确的
     多种可能都是正确的（谱峰重叠）  
 
 - 转化为距离
+  
   - 通常可检测<5Å
   - 距离不太精确
   - 得到大量距离，可推出结构
@@ -1679,18 +1687,16 @@ NOE**与空间作用距离的6次方成反比**，其空间作用距离$<5/sim 6
 二面角约束可来自Ramachandran图
 
 > 判断二级结构，可用特定NOE信号（当然不止这个）
->
+> 
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-noe-res.png" alt="6-noe-res" style="zoom:25%;" />
->
+> 
 > 耦合常数也是
->
+> 
 > <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/structural-biology/sb-outline.assets/6-j.png" alt="6-j" style="zoom:33%;" />
 
 ##### 结构评价
 
 能量、二级结构、拉氏图、RMSD（收敛）
-
-
 
 ## 7. 分子模拟和结构预测
 
@@ -1744,7 +1750,7 @@ NMR受限多，晶体学样品难
 SAXS（small angle X-ray scattering）：50μL溶液，0.1-10mg/mL，无分子量限制、晶体结构改变，时间短、实验简单、原位、动态
 
 1. 得不到详细信息，能看出**分子的大致形状**
-
+   
    > 用球谐函数拟合外形
 
 2. 能看到柔性的loop区域
@@ -1752,7 +1758,7 @@ SAXS（small angle X-ray scattering）：50μL溶液，0.1-10mg/mL，无分子�
 3. 分析复合物中各亚基位置
 
 4. 晶体学的packing force可能推出错误结论
-
+   
    - eg：转录因子的linear-bent
 
 5. 能分析溶液中是几聚体
@@ -1780,9 +1786,7 @@ FEL（free electron laser）
 
 ……
 
-
-
-## 终极总结 
+## 终极总结
 
 一个纯列表、极简单的大纲
 

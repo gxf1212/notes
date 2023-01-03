@@ -19,6 +19,7 @@
   - [物理下的生物](/course/physics-biophysics.md)
     - [分子生物物理学（NUS）](/course/Physics-biophysics/molecular-biophysics-NUS/LSM-3243.md)
     - [统计力学和分子模拟](/course/Physics-biophysics/statistical-mechanics/statistical-mechanics-and-molecular-simulation.md)
+    - [化院的统计热力学](/course/Physics-biophysics/statistical-thermodynamics-ZJU/statistical-thermodynamics-ZJU.md)
   - [生物基础课程](/course/fundamental-biology.md)
     - [进化生物学](/course/Fundamental-biology/evolutional-bio.md "Evolutional bio")
     - [遗传学&基因组学](/course/Fundamental-biology/genetics.md)

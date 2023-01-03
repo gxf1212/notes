@@ -3339,15 +3339,14 @@ exit
 
 #### clustering in VMD
 
-http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.4/ug/node139.html
+cmd: http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.4/ug/node139.html
 
 - [QT algorithm](https://sites.google.com/site/dataclusteringalgorithms/quality-threshold-clustering-algorithm-1). similar to `gmx cluster -method gromos` ?
+- [a well-wrapped code](https://github.com/anjibabuIITK/CLUSTER-ANALYSIS-USING-VMD-TCL/blob/master/clustering.tcl)
 
 plugin: https://github.com/luisico/clustering
 
-https://github.com/anjibabuIITK/CLUSTER-ANALYSIS-USING-VMD-TCL/blob/master/clustering.tcl
-
-> https://readthedocs.org/projects/bitclust/downloads/pdf/latest/
+> other programs: https://readthedocs.org/projects/bitclust/downloads/pdf/latest/
 
 
 
@@ -3882,7 +3881,9 @@ deprotonated cysteine residue stabilizes zinc-finger structure even in the prefe
 
 #### pmx package
 
-[installation guide](https://gxf1212.github.io/notes/#/techniques/Prepare-for-the-computer?id=pmx)
+[installation summary](https://gxf1212.github.io/notes/#/techniques/Prepare-for-the-computer?id=pmx)
+
+[official installation. remember to set gmxlib](https://degrootlab.github.io/pmx/installation.html#gmxlib)
 
 https://degrootlab.github.io/pmx/index.html 官方文档
 
@@ -4009,7 +4010,7 @@ notes: cgenff_charmm2gmx_py3_nx2.py
 
 ## FEprepare
 
-主要是LibParGen，OPLS-AA
+主要是LibParGen，OPLS-AA，现在用不了？
 
 就算FEprepare支持cgenff，也要转mol2为pdb
 

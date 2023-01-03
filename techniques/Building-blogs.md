@@ -647,6 +647,12 @@ developer的js. components:
 
   - calls the API, your settings, etc.
 
+    ```js
+    cdnPath: "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/"
+    ```
+
+    which contains info about the models. 
+
   - modify `live2d_path` if you fork...
 
     ```js
@@ -695,6 +701,7 @@ experiences
 - [ ] why serve locally, it shows other messages like "傍晚了！窗外夕阳的景色很美丽呢，最美不过夕阳红～"
 - [ ] buttons still not there
 - [ ] 欢迎阅读「document」
+- [ ] switch models?
 
 #### version 2 (not using)
 
@@ -978,6 +985,20 @@ unpkg is **a free content delivery network (CDN)** that automatically distribute
 CSDN：投稿，再次上传markdown文件，链接变了。。。
 
 https://www.bilibili.com/read/cv403592/ 专栏markdown
+
+
+
+# Build Python documentation in Sphinx
+
+hahaha
+
+
+
+
+
+
+
+
 
 # Build Hexo Pages (not organized yet)
 
