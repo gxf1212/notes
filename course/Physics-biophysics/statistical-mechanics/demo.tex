@@ -12,16 +12,16 @@
 
 
 \title{Principles}
-\subtitle{Notes on Statistical Mechanics for Molecular Simulation}  % 可选
+\subtitle{Notes on Statistical Mechanics: Theory and Molecular Simulation}  % 可选
 \author{Xufan Gao}
 \date{\today}
 \typo{Xufan Gao}  % 排版人员信息，选填
 
 % 定制元信息
-\org{\Large\textit{西安交通大学}\\\textsc{Xi'an Jiaotong University}}
-\footorg{\textsc{Qian Yuan Xue Fu}}
-\cover{\includegraphics[width=.6\textwidth]{qyxf-logo.pdf}}
-\license{}  % 清空许可证信息
+\org{\Large\textit{浙江大学定量生物中心}\\\textsc{Institute of Quantitative Biology\\Zhejiang University}}
+\footorg{\textsc{By Xufan Gao}}
+\cover{\includegraphics[width=.8\textwidth]{mdh.png}}
+%\license{}  % 清空许可证信息
 
 % 调整封面标题大小
 \renewcommand{\titlefont}{\Huge\bfseries}
@@ -39,8 +39,8 @@
 
 % 作品信息、环境名称是中文格式
 \renewcommand{\chaptername}{Chapter\ }
-\titleformat{\chapter}[block]{\color{\TitleColor}\centering\bfseries\fontsize{2.25em}{1.2ex}\selectfont}{\chaptername\thechapter}{1em}{}
-\titleformat{\section}{\color{\TitleColor}\fontsize{1.75em}{1.225ex}\selectfont\bfseries\centering}{\S\,\thesection}{1em}{}
+\titleformat{\chapter}[block]{\color{\TitleColor}\centering\bfseries\fontsize{2.25em}{4.8ex}\selectfont\renewcommand{\arraystretch}{2}\linespread{2}}{\chaptername\thechapter}{1em}{}
+\titleformat{\section}{\color{\TitleColor}\fontsize{1.75em}{2.5ex}\selectfont\bfseries\centering}{\S\,\thesection}{1em}{}
 \renewcommand{\tablename}{Tab.}
 \renewcommand{\figurename}{Fig.}
 \renewcommand{\bibname}{References}
@@ -59,11 +59,10 @@
 \input{./chapters/preface.tex}
 
 \newpage
-
 \tableofcontents
 
 \input{./chapters/chp1.tex}
-
+\input{./chapters/chp2.tex}
 
 
 

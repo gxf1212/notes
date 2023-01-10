@@ -18,7 +18,7 @@ why only one Mg? 虽然确实要两个，但第二个的位置至今under debate
 
 notice the binding mode?
 
-## Prepare the docked structure (ligand)
+## Prepare the docked structure of ligand (no)
 
 ### basic
 
@@ -1279,15 +1279,13 @@ preparation
 catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
 ```
 
-### Clustering
-
-#### in gmx
+### Clustering in gmx
 
 - https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2011-2012/0654.htmlanalyze .dcd in gmx
 - http://www.ks.uiuc.edu/Development/MDTools/catdcd/ catdcd: dcd I/O basics. failed
 - [Using GROMACS force distribution analysis (FDA) tool with NAMD trajectories](9https://hits-mbm.github.io/guides/namd-fda.html) a good reference! do as him!
 
-##### prepare
+#### prepare
 
 1. make the initial structure, topology file, as did in [Run in Gromacs](#Run-in-Gromacs). We need `.tpr` or `.gro` for option `-s`
    
@@ -1375,7 +1373,7 @@ catdcd -o rdrp-atp-prod-all.dcd rdrp-atp-prod*dcd
    > 
    > just change 'MG' to 'Mg' in .pdb, solved. Do this only when gmx is needed...
 
-##### clustering
+#### clustering
 
 We performed clustering analysis based on the RMSD of NTPs during the simulations, with SARS-COV-2 NSP12 aligned. 
 
@@ -1451,7 +1449,7 @@ questions
 >   
 >   maybe caused by: namd running is different from gmx?
 
-##### analysis
+#### analysis
 
 1. basics
    
@@ -1485,16 +1483,16 @@ questions
 2. structural
    
    ```shell
-      # pymol
+   # pymol
    split_states cluster
    ```
    
    ???cluster???????frame?????rmsd?
 
-##### other
+#### other
 
 1. trjcat? no!
-   
+
    ```shell
    f=rdrp-atp-prod
    gmx trjcat -f ${f}.dcd -o ${f}.xtc
@@ -1502,27 +1500,349 @@ questions
    ```
 
 2. failed [catdcd](http://www.ks.uiuc.edu/Development/MDTools/catdcd/)
-   
+
    ```tcl
    set f rdrp-atp-prod
    catdcd -o ${f}.trr -otype trr -i equilibrated.pdb -dcd ${f}.dcd
    ```
 
    do not add index file
-   
+
 3. 
+
+### 2023.1 update
+
+#### a full working example
+
+> https://blog.sciencenet.cn/blog-548663-981600.html
+
+##### prepare
+
+```shell
+# bash ../../make_equil_clus.sh
+vmd -dispdev text -e ../../make_equil_clus.tcl
+
+gmx editconf -f equilibrated.pdb -o equilibrated.gro \
+-box 98.8560037612915 96.41799974441528 117.86500322818756  \
+-center 56.079001903533936 55.97199988365173 56.9505016207695
+
+echo -e "13|2|3\n 10|11|12\n q" | gmx make_ndx -f equilibrated.gro -o index.ndx
+
+gmx grompp -f ../../md_fake.mdp -c equilibrated.gro -r equilibrated.gro \
+-p structure.top -n index.ndx -o simulation.tpr -maxwarn 4
+
+mv structure.top index.ndx simulation.tpr equilibrated.gro ../prod2  # prod prod3
+```
+
+```tcl
+# vmd -dispdev text -e ../../make_equil_clus.tcl
+
+mol load psf ../common/system.psf
+mol addfile rdrp-remtp-equil.coor
+set sel [atomselect top all]
+$sel writepdb equilibrated.pdb
+mol delete all
+
+package require topotools
+mol new ../common/system.psf
+mol addfile equilibrated.pdb
+cd ../common/toppar
+topo writegmxtop ../../equil2/structure.top [list par_all36m_prot.prm par_all36_cgenff.prm toppar_water_ions_namd.str remtp.prm] 
+# change the target directory here!
+
+quit
+```
+
+##### 1st round
+
+```shell
+f=rdrp-remtp-prod
+mdconvert -o ${f}.xtc -t equilibrated.gro ../${f}.dcd 
+echo 24 | gmx trjconv -f ${f}.xtc -s simulation.tpr -o ${f}_nojump.xtc -pbc nojump -n index.ndx
+echo 16 24 | gmx trjconv -f ${f}_nojump.xtc -s simulation.tpr -o ${f}_fit.xtc -fit rot+trans -n index.ndx
+rm ${f}.xtc ${f}_nojump.xtc
+echo 16 2 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig.xpm -tu ns
+mv rmsd.xvg rmsd-lig.xvg
+
+rm \#*\#
+echo 16 24 | gmx cluster -s ../simulation.tpr -n ../index.ndx -f ../${f}_fit.xtc -dm ../rmsd-lig.xpm \
+-dist rmsd-distribution.xvg -o clusters.xpm -sz cluster-sizes.xvg -tr cluster-transitions.xpm \
+-ntr cluster-transitions.xvg -clid cluster-id-over-time.xvg -cl clusters.pdb \
+-cutoff 0.25 -method gromos
+obabel -ipdb clusters.pdb -opdb -O c1-0.1-.pdb -m 1&>split.log  # not good
+for f in *.pdb; do mv $f c1-0.1-$f; done
+```
+
+> tu is micro second?
+
+visualize
+
+```shell
+xmgrace cluster-id-over-time.xvg
+xmgrace cluster-sizes.xvg
+pymol *.pdb
+split_states cluster
+save c01.pdb, *001
+save c02.pdb, *002
+align initial, *
+# align all to initial
+set cartoon_transparency, 0.6
+bg_color white
+```
+
+```tcl
+animate delete beg 0 end 0
+animate write dcd prod.dcd sel [atomselect top "protein or resname LIG or resname MG"] waitfor all
+```
+
+##### 2nd round
+
+```shell
+# in cluster
+echo -e "chain p & 16 & r ... \n name 26 pocket_bb \n q" | \
+gmx make_ndx -f ../../common/system.pdb -n index.ndx -o index_clus.ndx
+
+f=rdrp-remtp-prod
+echo 26 2 | gmx rms -s simulation.tpr -n index_clus.ndx -f ${f}_fit.xtc -m rmsd-lig_pocket.xpm -tu ns
+mv rmsd.xvg rmsd-lig_pocket.xvg
+
+mkdir clus-0.1-pocket && cd clus-0.1-pocket
+rm \#*\#
+echo 26 24 | gmx cluster -s ../simulation.tpr -n ../index_clus.ndx -f ../${f}_fit.xtc -dm ../rmsd-lig_pocket.xpm \
+-dist rmsd-distribution.xvg -o clusters.xpm -sz cluster-sizes.xvg -tr cluster-transitions.xpm \
+-ntr cluster-transitions.xvg -clid cluster-id-over-time.xvg -cl clusters.pdb \
+-cutoff 0.1 -method gromos
+
+obabel -ipdb clusters.pdb -opdb -O c1-0.1-po-.pdb -m # 1&>split.log
+mkdir clusters
+for f in c1*.pdb; do mv $f clusters/$f; done
+```
+
+> using system.pdb, thus we can select chain
+
+```
+set sele ""
+set sel [atomselect top "protein and name CA and (same residue as within 10 of (resname LIG))"]
+foreach resid [$sel get resid] {
+    append sele  " $resid"
+}
+puts $sele
+```
+
+##### more about PBC processing
+
+https://manual.gromacs.org/documentation/current/onlinehelp/gmx-trjconv.html
+
+- Our goal is just making what we are interested in together...once that is done, fit rot+trans may not be necessary...
+
+- if the system interacts with its image, then this trajectory is WRONG.
+
+- [GROMACS轨迹周期性边界条件的处理](https://blog.sciencenet.cn/blog-548663-981600.html)：`-pbc whole`, `-pbc atom -center`. not useful all the time
+
+- if gmx does not work, just try VMD first.
+
+- when trjconv fitting, 
+  `Masses were requested, but for some atom(s) masses could not be found in the database. Use a tpr file as input, if possible, or add these atoms to the mass database.`
+  that's why I must use .tpr (Mg2+!)
+  by default it weights by mass
+
+  Also,
+  pbc mol puts the center of mass of molecules in the box, and requires a run input file to be supplied with -s.
+
+- 
+
+some suggests
+
+> If the .tpr file is good, i.e. has everything assembled the way you want, then the first step is `trjconv -pbc nojump`. That will make sure that nothing gets split over PBC. Then center the protein in the box (`trjconv -center`), and subsequently put all molecules in the box (`-pbc mol -ur compact/rect`).
+
+I've tried
+
+```shell
+# problematic
+f=rdrp-remtp-prod
+# pbc fixed
+mdconvert -o ${f}_all.xtc -t equilibrated.gro prod.dcd
+echo 24 | gmx trjconv -f ${f}_all.xtc -s simulation.tpr -o ${f}_fit.xtc -n index.ndx
+echo 16 2 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig.xpm -tu ns
+mv rmsd.xvg rmsd-lig.xvg
+
+# yq, should always work for simple protein-ligand
+f=rdrp-remtp-prod
+mdconvert -o ${f}.xtc -t equilibrated.gro ../${f}.dcd
+echo 0 24 | gmx editconf -f equilibrated.gro -c -o dry.gro -n index.ndx  # for visualization
+echo 24 | gmx trjconv -f ${f}.xtc -s simulation.tpr -o ${f}_pbcwhole.xtc -pbc whole -n index.ndx 
+echo 24 | gmx trjconv -f ${f}_pbcwhole.xtc -s simulation.tpr -o ${f}_nojump.xtc -pbc nojump -n index.ndx
+echo 24 | gmx trjconv -f ${f}_nojump.xtc -s simulation.tpr -o ${f}_pbcmol.xtc -pbc mol -ur compact -n index.ndx 
+echo 16 24 | gmx trjconv -f ${f}_pbcmol.xtc -s simulation.tpr -o ${f}_fit.xtc -fit rot+trans -n index.ndx
+
+source ../../../yq_pbc.sh
+do_pbc ../../common/system.psf ../rdrp-remtp-prod.dcd
+mdconvert -o ${f}.xtc -t equilibrated.gro wrapped.dcd 
+echo 24 | gmx trjconv -f ${f}.xtc -s simulation.tpr -o ${f}_pbcwhole.xtc -pbc whole -n index.ndx
+echo 16 24 | gmx trjconv -f ${f}_pbcwhole.xtc -s simulation.tpr -o ${f}_fit.xtc -fit rot+trans -n index.ndx
+rm wrapped.dcd ${f}.xtc ${f}_pbcwhole.xtc 
+echo 16 2 | gmx rms -s simulation.tpr -n index.ndx -f ${f}_fit.xtc -m rmsd-lig.xpm -tu ns
+```
+
+##### plotting the result
+
+> https://docs.mdanalysis.org/1.0.0/documentation_pages/auxiliary/XVG.html MDAnalysis can also read xvg?
+
+```python
+from gromacs.fileformats.xvg import XVG
+from matplotlib import font_manager
+import matplotlib.pyplot as plt
+import numpy as np
+import re,os
+import pandas as pd
+
+
+def read_gmx_xvg(xvg_path):
+    xvg_rmsd = XVG(xvg_path)
+    data = xvg_rmsd.array.T
+    return data
+
+
+path = '/home/gxf1212/data/work/RdRp/9.12-temp/new-build/11.15-RemTP-site-MD/MD/new-md/clustering/1st/'
+data = read_gmx_xvg(path+'2-0.1.xvg')
+plot_clustering(data[:,1], 0.5)
+# 0.5: ns per frame
+```
+
+where
+
+```python
+def plot_clustering(idxs, nsperframe, biggest=10):
+    fig = plt.figure(figsize=(8,6))
+    ax = fig.add_subplot(111)
+    labels = ax.get_xticklabels() + ax.get_yticklabels()
+    [label.set_fontname('Arial') for label in labels]
+    [label.set_fontsize(14) for label in labels]
+    [label.set_fontweight('roman') for label in labels]
+    font_la = {'family': 'Microsoft YaHei', 'weight': 'demibold', 'size': 16}
+    plt.xlabel('time(ns)', fontdict=font_la)
+    plt.ylabel('cluster id #', fontdict=font_la)
+    biggest = min(biggest, int(max(idxs)))
+    plt.yticks(np.arange(biggest+1))
+
+    x = np.arange(len(idxs))*nsperframe
+    y = [min(i, biggest) for i in idxs]
+    plt.scatter(x, y, s=1)
+    plt.show()
+    print("The number of clusters: {0:d}".format(len(set(idxs))))
+    print("The biggest cluster lasted for {0:.1f} ns ({1:.1%})".format(np.sum(idxs==1)*nsperframe, np.sum(idxs==1)/len(idxs)))
+    print("The second  cluster lasted for {0:.1f} ns ({1:.1%})".format(np.sum(idxs==2)*nsperframe, np.sum(idxs==2)/len(idxs)))
+    print("The unclustered frames (>=no. {2:d}) occupies {0:.1f} ns or {1:.1%}".format(np.sum(idxs>=biggest)*nsperframe, np.sum(idxs>=biggest)/len(idxs), biggest))
+```
 
 #### in VMD
 
-see below
+gmx其实正常make index还好，但是涉及RNA、segment之类的就恶心，序号乱了、难以选择。用完trjconv可以转回dcd用vmd聚类。gmx还不告诉我聚类的是哪一帧。以后尽量还是vmd。
 
-> [VMD plugin](https://github.com/luisico/clustering), but not for dcd?
+cmd: http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.4/ug/node139.html
+
+- [QT algorithm](https://sites.google.com/site/dataclusteringalgorithms/quality-threshold-clustering-algorithm-1). similar to `gmx cluster -method gromos` ?
+- [a well-wrapped code](https://github.com/anjibabuIITK/CLUSTER-ANALYSIS-USING-VMD-TCL/blob/master/clustering.tcl)
+
+```tcl
+# after loading trajectory and aligning protein backbone
+# modified from: http://github.com/anjibabuIITK/CLUSTER-ANALYSIS-USING-VMD-TCL
+set number 9
+set rcutoff 1
+set step_size 1
+set nframes [molinfo top get numframes]
+set inf 0
+set nf $nframes
+set totframes [expr $nf - 1 ]
+set selA [atomselect top "resname LIG"]
+set lists [measure cluster $selA num $number cutoff $rcutoff first $inf last $totframes step $step_size distfunc rmsd weight mass]
+set file [open "clus_result.dat" w]
+for {set i 1} {$i <= [llength $lists]} {incr i} {
+    set lst [lindex $lists [expr $i-1]]
+    puts $file [format "cluster %d: %d" $i [llength $lst]]
+    puts $file $lst
+    puts $file ""
+}
+close $file
+
+set c01 [lindex [lindex $lists 0] 0]
+set sel [atomselect top all frame $c01]
+set real_frame [expr $c01+1]
+$sel writepdb c01_${real_frame}.pdb
+puts [format "write the centroid of 1st cluster: frame %d" $real_frame]
+
+set c02 [lindex [lindex $lists 1] 0]
+set sel [atomselect top all frame $c02]
+set real_frame [expr $c02+1]
+$sel writepdb c02_${real_frame}.pdb
+puts [format "write the centroid of 2nd cluster: frame %d" $real_frame]
+```
+
+and plot as done in gmx
+
+```python
+def read_vmd_clus_result(file):
+    data = []
+    with open(file, 'r') as f:
+        while f.readline().strip().startswith('cluster'):
+            line = f.readline().strip()
+            data.append([int(fr) for fr in line.split()])
+            _ = f.readline()  # empty
+    return data
+
+
+path = 'xxx/clus_result.dat'
+data = read_vmd_clus_result(path)
+
+id_with_time = []
+for i in range(len(data)):
+    cl = data[i]
+    id_with_time += [(fr, i+1) for fr in cl]
+id_with_time.sort(key=lambda x:x[0])
+plot_clustering(np.array(id_with_time)[:,1], 0.5)
+```
+
+> other programs: https://readthedocs.org/projects/bitclust/downloads/pdf/latest/
+>
+> a plugin: https://github.com/luisico/clustering
+
+#### pocket alignment
+
+after getting a centroid aligning protein backbone
+
+```tcl
+# output for gmx
+set sele ""
+set sel [atomselect top "protein and name CA and (same residue as within 10 of (resname LIG))"]
+foreach resid [$sel get resid] {
+    append sele  " $resid"
+}
+puts $sele
+# output for vmd
+set sele "segname PRO and ("
+set sel [atomselect top "protein and name CA and (same residue as within 10 of (resname LIG))"]
+foreach resid [$sel get resid] {
+    append sele  "residue $resid or "
+}
+puts $sele
+# output for pymol
+set sele ""
+set sel [atomselect top "protein and name CA and (same residue as within 10 of (resname LIG))"]
+foreach resid [$sel get resid] {
+    append sele  "$resid+"
+}
+puts $sele
+```
+
+
+
+
 
 ### Analysis of binding mode?
 
 Here not that much is required...
 
-## GAFF
+## GAFF (not using)
 
 ### building steps
 
@@ -1709,6 +2029,10 @@ we start from (equilibrated?) .pdb after MD. But finally should use those from c
 > VMD molecule editor: http://www.ks.uiuc.edu/Research/vmd/plugins/molefacture/, conjugation with ffTk, paratool, CGenFF server, etc. AutoPSF?
 
 ### Primary protocol
+
+> [!NOTES]
+>
+> This part will be integrated into FEbuilder documentation later....
 
 #### A brief flow
 
@@ -2057,11 +2381,13 @@ autoionize -psf ligand-solvated.psf -pdb ligand-solvated.pdb -sc 0.15 -o ligand
 exit
 ```
 
+### other
+
+https://molvs.readthedocs.io/en/latest/index.html  Molecule Validation and Standardization, maybe correct the smiles, process small molecules
 
 
 
-
-### QM-optimized parameters
+### QM-optimized parameters (tbc)
 
 Depending on CHARMM-GUI, always not so accurate...the fatal error is something like the cyano group, with no proper parameters in CGenFF...
 
@@ -2895,7 +3221,7 @@ for {set x 0} {$x <= } {incr x} {
 
 
 
-### Free enery analysis
+### Free energy analysis
 
 #### ParseFEP
 
@@ -3003,9 +3329,61 @@ alchemlyb这个包处理得十分粗糙，首先没有考虑分开vdW和coul，�
 
 `from alchemlyb.parsing import namd`，28个window，每个window输出1000次，最终得到29029*29的DataFrame。29列是所有lambda point，每一组只有那个window两端点的lambda那一列有数据，最后一组（feplambda=1）没有data。data可能是转换后的dE
 
+#### dG-λ plot
+
+```python
+def plot_both_dg_lambda(data, title=None, filename=None):
+    # fig = plt.figure(figsize=(12,9))
+    fig=plt.figure(figsize=(6,7.5))
+    ax = fig.add_subplot(111)
+    font_la = {'family': 'dengxian', 'weight': 'demibold', 'size': 14}  # Arial,dengxian,Microsoft YaHei
+    # latex is supported. embrace your code with $
+    plt.xlabel('$\mathbf{\lambda}$', fontdict=font_la, labelpad=20)
+    plt.ylabel('$\Delta G$ (kcal/mol)', fontdict=font_la, labelpad=20)
+    plt.xticks([])
+    plt.yticks([])
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    x = (data[0] + data[1]) / 2
+    ax1 = fig.add_subplot(211)
+    ax1.plot(x,data[2])
+    ax1.plot(x, pd.Series([0] * len(x)), color='k')
+    ax1.set_title('Each-step $\Delta G$')
+    ax2 = fig.add_subplot(212)
+    ax2.plot(x,data[3])
+    ax2.set_title('Accumulated $\Delta G$')
+
+    # plt.tight_layout()
+    if title is not None:
+        plt.title(title)
+    if filename is not None:
+        plt.savefig(filename+'.png')
+    plt.show()
+
+filename = 'xxx.fepout'
+if not os.path.exists(filename+'.csv'):
+    os.system('bash get_dg_lambda.sh '+filename)
+data = pd.read_csv(filename+'.csv',header=None)
+plot_both_dg_lambda(data, filename=os.path.join(os.path.dirname(filename),'dg_lambda'))
+```
+
+and
+
+```shell
+# bash get_dg_lambda.sh filename
+fn=$1
+awk '/^#Free energy/ {printf "%.5f,%.5f,%.9f,%.4f\n",$8,$9,$12,$19}' ${fn}.fepout > ${fn}.csv
+```
 
 
-temp
+
+
+
+
+
+#### Kevin's decomposition
 
 ```shell
 bash mknamd_fep_decomp.sh *.fepout 10000 510000 500
@@ -3041,17 +3419,15 @@ bash mknamd_fep_decomp_convergence.sh *.fepout 10000 510000 500 10 > outdecomp/l
 # set path complex1
 set path ligand3
 
-# set path [lindex $argv 0]
 set sys [string range ${path} 0 end-1]
-if {$sys == "complex"} then {set name "bound"} else {set name "unbound"}
-
-# load psf and dcd file
 mol new ../common/${sys}-fep.psf type psf
-mol addfile ./${path}/rdrp-${name}-prod-forward.dcd type dcd waitfor all
+mol addfile ./${path}/${sys}-prod-forward.dcd type dcd waitfor all
 
-display projection   Orthographic
+display projection Orthographic
 # display axes off
 color Display {Background} white
+label textthickness 2.5
+set numframes [molinfo top get numframes]
 
 # make representation
 mol delrep 0 top
@@ -3126,7 +3502,7 @@ set rmsdtt::bb_only 0
 rmsdtt::doAlign
 }
 
-if { $sys == "bound"} {
+if { $complex == "bound"} {
 	align_bound
 } else {
 	align_unbound
@@ -3335,34 +3711,6 @@ for { set i 0 } { $i < $numwin } { incr i } {
 
 close $outfile
 exit
-```
-
-#### clustering in VMD
-
-cmd: http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.4/ug/node139.html
-
-- [QT algorithm](https://sites.google.com/site/dataclusteringalgorithms/quality-threshold-clustering-algorithm-1). similar to `gmx cluster -method gromos` ?
-- [a well-wrapped code](https://github.com/anjibabuIITK/CLUSTER-ANALYSIS-USING-VMD-TCL/blob/master/clustering.tcl)
-
-plugin: https://github.com/luisico/clustering
-
-> other programs: https://readthedocs.org/projects/bitclust/downloads/pdf/latest/
-
-
-
-
-
-```tcl
-# after loading trajectory and aligning protein backbone
-set number 3
-set rcutoff 1
-set step_size 1
-set nframes [molinfo top get numframes]
-set inf 0
-set nf $nframes
-set totframes [expr $nf - 1 ]
-set selA [atomselect top "resname LIG"]
-foreach {listA listB listC listD} [measure cluster $selA num $number cutoff $rcutoff first $inf last $totframes  step $step_size distfunc rmsd weight mass ] break
 ```
 
 
@@ -3617,7 +3965,44 @@ center (last-complex1 and resn HYB)
 
 ### FEP notes
 
-#### workflow
+#### find the starting structure
+
+- 跑MD找构象：
+
+  - 三个MD 200ns，分别聚类，该构象持续100ns以上（但我不都做了很长了嘛。300ns可以调整局部构象了）
+  - 三个聚类的一样最好，不一样可以再跑
+  - 或者都做FEP
+  - 一个MD不能说明问题；重复的三次有一个稳定，都可以再延长时间以确认，稳定就能用
+
+- a cutoff of 0.1 nm is usually ok; in this case cluster 1 and 2 don't differ a lot
+
+  you may use 0.15 nm, or 0.25 nm if your ligand is really big or flexible
+
+  replicas 统一用同一个cutoff
+
+- “自洽”的聚类：每条轨迹用自己的pocket residues，各有自己的pbc
+
+- 观察cluster-id-with-time
+
+  如果跳跃，应该多跑
+
+  <img src="E:\GitHub_repo\notes\MD\FYP-notes.assets\cluster-id-with-time" style="zoom:33%;" />
+
+- 
+
+> I've started doing FEP in the post-insertion model. The plan is to try to compare with experimental data as we did before, starting from all four conformations we got in the clustering. Maybe we'll pick the one that fits the best.
+
+You only need to **pick one of them, since all four are essentially the same**. Pick the one with the highest stability (highest amount of time being in one cluster). Otherwise, you will need to run 5 FEPs for each of the conformation, which is unnecessary.
+
+> I came across another question: do I need to run MD simulation for all RemTP analogs to inspect their binding mode? It might be time-consuming and I didn't do that in the previous FEP. If the modification is not significant and the binding mode does not change too much in FEP, maybe MD simulations for analogs are not needed. What do you think?
+
+**Our modifications are not big, so you don't need to run MD simulations for them.** I don't want to confuse you with other ways of thinking about this issue right now. So please proceed with the FEP simulations with RemTP binding mode and we will discuss this issue next time we meet.
+
+> By the way, I just wonder what you think of the clustered structure of pre-insertion site.
+
+I took a look and what you showed me was correct - **run1 and run3 are different**, and both different from the initial binding state. So I would suggest you to **keep running the stable clusters from run1 and run3. Try to see if one of them reaches a more stable state.** Do you remember the difference in the parameters between your RemTP and my RemTP? I wonder why there is such a difference.
+
+#### FEP workflow
 
 - FEP的前提：
 
@@ -3626,14 +4011,12 @@ center (last-complex1 and resn HYB)
 
   构象不对，符号也难；第二个不对，大概是只能相信符号，数值不太行
 
-- 跑MD找构象：
-
-  - 三个MD 200ns，分别聚类，该构象持续100ns以上
-  - 三个聚类的一样最好，不一样可以再跑
-  - 或者都做FEP
-  - 一个MD不能说明问题；重复的三次有一个稳定，都可以再延长时间以确认，稳定就能用
-
 - 如果变得大，每个window可以多一些时间
+
+- 加window可以根据dG-lambda图中dG比较大的window附近加，虽然也有累计error
+
+- 教训：**charmm-gui的时候检查一遍手性；merge完了检查一遍结构**。养成习惯，每次如此！
+
 
 #### analysis
 
@@ -3724,6 +4107,16 @@ double mutation, DG12-DG1-DG2最多2~3kcal
 - 变的位点：2',3'算一个；CN估计不动，但可以试硝基？芳环NH2，大小两个环上的C上加东西（看结构）
 - 变的思路：如果没有明显的就填空。1）比如，och3变好那能不能换点别的大基团，比如och2ch3，延长一个;芳环上NH2也是；2）常见那几个，推荐了COOH；3）ch3用得少？就是纯填空，填空可用支链烷基
 
+更新
+
+- F的负电，和O排斥，可能是疏水的原因
+
+  疏水相互作用：多少水处在unhappy的状态
+
+- pi-pi, pi-cation are important! 8~9 kcal/mol?
+
+- H bond and electrostatic, not very strong if exposed to water (1~2, 3~4 kcal/mol). water  forms these too. only works if $\varepsilon_r$ is small.
+
 #### other
 
 - propagation of error. X, Y are independent variables.
@@ -3807,6 +4200,8 @@ conda activate AmberTools21
 
 ## MD simulation
 
+### Mg<sup>2+</sup> force field
+
 general materials
 
 - [Introduction to Ion Parameters](https://ambermd.org/AmberModels_ions.php)
@@ -3820,9 +4215,6 @@ general materials
 
 - other
   - namd可以有一个范德华势能-距离曲线的势能
-
-
-### Mg<sup>2+</sup> force field
 
 ![protein-RNA-ligand-Mg](FYP-notes.assets\protein-RNA-ligand-Mg.png)
 
@@ -3859,11 +4251,17 @@ deprotonated cysteine residue stabilizes zinc-finger structure even in the prefe
 
 - 
 
-### other methods
-
-#### CHARMM-GUI solution builder
+### CHARMM-GUI solution builder
 
 > it's a bit slow but effective and versatile
+
+### other
+
+edit RNA: cannot easily mutate a novel base to a normal base in either VMD or pymol, I don't know why. 
+
+CHARMM-GUI cannot mutate NA?? rubbish! but if we have made novel nucleotides' FF, we can just upload and model it. Maybe just vmd can do this.
+
+solution: edit the structure, edit the atom names to agree with the normal base, model it in vmd. if you don't edit atom names, they won't be recognized by vmd.
 
 
 
@@ -3873,7 +4271,7 @@ deprotonated cysteine residue stabilizes zinc-finger structure even in the prefe
 
 
 
-# Stage n protocol: GMX FEP
+# Stage n protocol: GMX FEP 
 
 ## FEP building systems
 
@@ -3915,6 +4313,8 @@ https://github.com/deGrootLab/pmx/tree/develop
 pmx -h
 pmx mutate -h
 ```
+
+`xxx/miniconda3/envs/pmx/lib/python3.10/site-packages/pmx/data/mutff`: path to hybrid residue ff database
 
 - protein
   - mutate       Mutate protein or DNA/RNA
@@ -4006,7 +4406,7 @@ notes: cgenff_charmm2gmx_py3_nx2.py
 
 
 
-# Extra protocol
+# Extra protocol (not using)
 
 ## FEprepare
 

@@ -170,7 +170,99 @@ $$
 \beta=\frac{1}{k T}
 $$
 
-# 第二节 
+# 第二节 统计力学实验
+
+略
+
+# 第三节 单个分子的行为
+
+## 分子的运动
+
+分子的运动包括：
+
+- “转动、振动、电子、核运动” 属于分子内部运动。
+- “平动” 属于分子自身的运动，所谓 “外部” 运动。  
+
+$$
+\varepsilon_t<\varepsilon_r<\varepsilon_v<\varepsilon_e<\varepsilon_n
+$$
+
+![image-20230106205647092](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Physics-biophysics/statistical-thermodynamics-ZJU/statistical-thermodynamics-ZJU.assets/image-20230106205647092.png)
+
+- 热运动：分子在各能级上的分配（分布）随温度而变化（平动、转动、振动）。
+- 非热运动：一般的温度变化难以产生能级的跃迁或激发（电子运动、核运动）。
+
+
+
+- 原则上，系统的微观状态实质上是一种量子态，应该用系统的波函数来描述。
+- 对于独立子系统，系统的波函数可以用组成该系统的N个独立子(分子）的波函数之乘积来表示。每一个分子的量子态又可以近似地由平动(t)、转动(r)、振动(v)、电子(e)和核运动(n)的量子态来表示。
+- 简并度：当有两个以上的量子态的能量相同时，具有相同能量的量子态数。
+
+## 平动
+
+$$
+\varepsilon_{\mathrm{t}}=\frac{h^2}{8 m}\left(\frac{n_x^2}{a^2}+\frac{n_y^2}{b^2}+\frac{n_z^2}{c^2}\right) \quad\left(n_x, n_y, n_z=1,2,3, \ldots\right)
+$$
+$m$ 为分子质量, $a, b, c$ 为容器边长, $h$ 为 Planck 常数。基态为 $n_x=1, n_y=1, n_z=1$ 。
+
+若为立方势箱, 即 $a=b=c$, 则能量表示式为:
+$$
+\varepsilon_{\mathrm{t}}=\frac{h^2}{8 m V^{2 / 3}}\left(n_x^2+n_y^2+n_z^2\right)
+$$
+相邻平动能级能量差非常小，约为 $10^{-40}$J，在通常温度下 $\Delta \varepsilon_{\mathrm{t}} \approx \mathbf{1 0}{ }^{-19} k T$，所谓能级完全开放。在此情况下，平动能级可以认为是连续的，即量子化效应很不显著，可用经典力学方法处理。
+
+## 转动
+
+分子的转动可近似地看作是刚性转子，由量子力学，其转动能为:
+$$
+\varepsilon_{\mathrm{r}}=\frac{J(J+1) h^2}{8 \pi^2 I} \quad(J=0,1,2,3, \ldots)
+$$
+其中，$J$ 为转动量子数，取值 $0,1,2,3,\ldots$ 等正整数; $I$ 为 转动惯量。
+$$
+I=\mu R_0^2
+$$
+$R_0$ 为分子平衡键长，$\mu$ 为分子折合质量。对于双原子分子, 若两个原子的质量分别为 $m_1, m_2$, 则 $\mu=\frac{m_1 m_2}{m_1+m_2}$。
+
+当转动量子数为 $J$ 时，简并度 $g^{\mathrm{r}}=2 J+1$ 。
+
+常温下，相邻转动能级的 $\Delta \varepsilon_{\mathrm{r}} \approx 10^{-2} k T$，一般也可视为完全开放。所以，转动能级也可以近似认为是连续的。
+
+分子的转动光谱：远红外光谱。一般将 25~1000 mm 的红外波段划为远红外区。
+
+刚性转子模型得到的纯转动谱就是一组等距离的谱线，谱线的间隔 $\Delta v(\sim) = 2B$， $B$：转动常数。
+
+## 振动
+
+分子振动有多种模式：对称伸缩振动、非对称伸缩振动和面内弯曲振动。  
+
+![image-20230106210937241](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Physics-biophysics/statistical-thermodynamics-ZJU/statistical-thermodynamics-ZJU.assets/image-20230106210937241.png)
+
+由量子力学, 其振动能为:
+$$
+\varepsilon_{\nu}=\left(\nu+\frac{1}{2}\right) h v \quad(\nu=0,1,2,3, \ldots)
+$$
+$\nu$ 为振动量子数，取值 $0,1,2,3,\ldots$ 等正整数，$\nu$ 为简谐振子的振动基频。可从分子振动光谱得到。
+
+- 对任何能级，振动都是非简并的
+- $\Delta \varepsilon_{\nu} \approx 1 0 k T$
+
+## 电子运动与核运动
+
+粒子的这两种运动一般均处于基态。
+
+
+
+## 分子光谱
+
+### 红外光谱
+
+### Raman光谱
+
+### 微波波谱
+
+### 紫外-可见光谱
+
+### 荧光光谱
 
 # 第四节 体系的宏观性质
 
@@ -211,7 +303,35 @@ Hamilton 运动方程
 
 
 
+## 配分函数的拆分
 
+规定：各独立运动形式的能量0点为各自的基态能级，即指定基态能级为能量0点。
+
+### 平动配分函数
+
+$$
+\begin{aligned}
+q^{\mathrm{t}} & =\sum_i g_i^{\mathrm{t}} \mathrm{e}^{-\varepsilon_i^{\mathrm{t}} / k T} \\
+& =\sum_{n_x=1}^{\infty} \sum_{n_y=1}^{\infty} \sum_{n_z=1}^{\infty} \exp \left[-\frac{h^2}{8 m k T}\left(\frac{n_x^2}{a^2}+\frac{n_y^2}{b^2}+\frac{n_z^2}{c^2}\right)\right]
+\end{aligned}
+$$
+
+### 转动配分函数
+
+$$
+\begin{gathered}
+q^{\mathrm{r}}=\sum_i g_i^{\mathrm{r}} \exp \left(-\frac{\varepsilon_i^{\mathrm{r}}}{k T}\right)=\sum_{J=0}^{\infty}(2 J+1) \exp \left[-\frac{J(J+1) h^2}{8 \pi^2 I k T}\right] \\
+q^{\mathrm{r}}=\sum_{J=0}^{\infty}(2 J+1) \exp \left(-\frac{J(J+1) \Theta_{\mathrm{r}}}{T}\right)
+\end{gathered}
+$$
+
+其中 $\Theta_{\mathrm{r}}=\dfrac{h^2}{8 \pi^2 I k}$，称为转动特征温度。
+
+
+
+
+
+## 统计熵与量热熵
 
 残余熵：非完美晶体
 
@@ -257,6 +377,9 @@ $$
 
 刘维（Liouville）定理：对保守力学体系，在相空间中体系的相点沿任何相轨迹运动时，其相密度和相几率密度在运动中不随时间改变。或者说，相密度守恒。
 
+$$
+\frac{\mathrm{d}\rho}{\mathrm{d}t}=\frac{\mathrm{d}f}{\mathrm{d}t}=0
+$$
 
 
 
@@ -423,6 +546,25 @@ $$
 
 ## 气体状态方程
 
+$$
+\begin{aligned}
+& \frac{1}{N ! h^{3 N}} \int \cdots \int \exp \left[-\frac{1}{2 m k T} \sum_{i=1}^N\left(p_{x i}^2+p_{y i}^2+p_{z i}^2\right)\right] d p \\
+& =\frac{1}{N ! h^{3 N}} \prod_{i=1}^{3 N} \int_{-\infty}^{\infty} \exp \left(-\frac{p_i^2}{2 m k T}\right) d p_i \\
+& =\frac{1}{N ! h^{3 N}} \prod_{i=1}^{3 N}(2 \pi m k T)^{1 / 2} \\
+& =\frac{1}{N ! h^{3 N}}(2 \pi m k T)^{3 N / 2} \\
+& =\frac{1}{N !}\left[\left(\frac{2 \pi m k T}{h^2}\right)^{3 / 2}\right]^N \equiv \frac{1}{N ! \Lambda^{3 N}} \\
+&
+\end{aligned}
+$$
+其中
+
+
+$$
+\Lambda=\left(\frac{h^2}{2 \pi m k T}\right)^{1 / 2}
+$$
+
+称为德布罗意热波长。如果 $U(q)=0$，则$\int \cdots \int \exp [-U(q) / k T] d q=V^N$。
+
 ### 构型积分
 
 相依子体系下，如果将体系配分函数分解成外部配分函数（平动）和内部配分函数（转动、振动、电子、核）两部分，则只有外部配分函数与分子间相互作用势 $U$ 有关，而内部配分函数与 $U$ 无关。
@@ -433,7 +575,7 @@ Z_{\text {外 }}= & \frac{1}{N ! h^{3 N}} \int \cdots \int \exp \left[-\frac{1}{
 & \times \int \cdots \int \exp [-U(q) / k T]\mathrm{d} q
 \end{aligned}
 $$
-第二项称为构型积分，记为 $Z_C$
+第二项称为构型积分，记为 $Z_C$。
 
 ### 推导状态方程
 
@@ -756,50 +898,112 @@ $$
 
 #### Yvon-Born-Green 积分方程
 
+recall
+$$
+\rho^{(n)}\left(\vec{r}_1 \cdots \vec{r}_n\right) =\dfrac{N !}{(N-n)!}\frac{\int \cdots \int \exp [-U(q) / k T]\mathrm{d}\vec{r}_{n+1} \cdots\mathrm{d}\vec{r}_N}{Z_{\mathrm{C}}}
+$$
+thus
+$$
+\begin{aligned}
+\frac{\partial \rho^{(n)}}{\partial \vec{r}_i}=&\frac{N !}{(N-n)!} \cdot \frac{1}{Z_{\mathrm{C}}}\left(-\frac{1}{k T}\right) \int \cdots \int \sum_{j\neq i}^N \frac{\partial u\left(\vec{r}_i, \vec{r}_j\right)}{\partial \vec{r}_i} e^{-U(r)/kT}\mathrm{d}\vec{r}_{n+1} \cdots\mathrm{d}\vec{r}_N \\
+k T \frac{\partial \rho^{(n)}}{\partial \vec{r}_i}=&\frac{N !}{(N-n) !} \cdot \frac{1}{Z_{\mathrm{C}}} \int \cdots \int \sum_{j\neq i}^n \frac{\partial u\left(\vec{r}_i, \vec{r}_j\right)}{\partial \vec{r}_i} e^{-U(r) / k T}\mathrm{d}\vec{r}_{n+1} \cdots\mathrm{d}\vec{r}_N\\
+&+\frac{N !}{(N-n)!} \cdot \frac{1}{Z_{\mathrm{C}}}\int \cdots \int \sum_{j=n+1}^N \frac{\partial u\left(\vec{r}_i, \vec{r}_j\right)}{\partial \vec{r}_i} e^{-U(r) / k T}\mathrm{d}\vec{r}_{n+1} \cdots\mathrm{d}\vec{r}_N\\
+=&\frac{N !}{(N-n)!} \cdot \frac{1}{Z_{\mathrm{C}}} \int \cdots \int \sum_{j\neq i}^n \frac{\partial u\left(\vec{r}_i, \vec{r}_j\right)}{\partial \vec{r}_i} e^{-U(r) / k T}\mathrm{d}\vec{r}_{n+1} \cdots\mathrm{d}\vec{r}_N\\
+&+\frac{N !}{(N-n) !} \cdot \frac{1}{Z_{\mathrm{C}}}\cdot (N-n)\int \cdots \int  \frac{\partial u\left(\vec{r}_i, \vec{r}_{n+1}\right)}{\partial \vec{r}_i} e^{-U(r) / k T}\mathrm{d}\vec{r}_{n+1} \cdots\mathrm{d}\vec{r}_N\\
+=&-\rho^{(n)} \sum_{j\neq i}^n \frac{\partial u\left(\vec{r}_i, \vec{r}_j\right)}{\partial \vec{r}_i}-\int \frac{\partial u\left(\vec{r}_i, \vec{r}_{n+1}\right)}{\partial \vec{r}_i} \rho^{(n+1)}\mathrm{d}\vec{r}_{n+1}
+\end{aligned}
+$$
 
+> $\dfrac{\partial Z_{\mathrm{C}}}{\partial \vec{r}_i}=0$ ??
 
-
+上式由 Yvon 首先导出，Born 和 Green 利用 Kirkwoo\mathrm{d}提出的联系 $\rho^{(3)}$ 与 $\rho^{(2)}$ 的迭加近似式:
+$$
+\rho^{(3)}\left(\vec{r}_1, \vec{r}_2, \vec{r}_3\right)=\rho^{(2)}\left(\vec{r}_1, \vec{r}_2\right) \rho^{(2)}\left(\vec{r}_1, \vec{r}_3\right) \rho^{(2)}\left(\vec{r}_2, \vec{r}_3\right) / \rho^3
+$$
+得出:
+$$
+k T \frac{\partial \ln \rho^{(2)}}{\partial \vec{r}_1}=-\frac{\partial u\left(\vec{r}_1, \vec{r}_2\right)}{\partial \vec{r}_1}-\frac{1}{\rho^3} \int \frac{\partial u\left(\vec{r}_1, \vec{r}_3\right)}{\partial \vec{r}_1} \rho^{(2)}\left(\vec{r}_1, \vec{r}_3\right) \rho^{(2)}\left(\vec{r}_2, \vec{r}_3\right)\mathrm{d}\vec{r}_3
+$$
+称为 Yvon-Born-Green 方程: $u(r) \longrightarrow \rho^{(2)} \longrightarrow g(r)$
 
 #### Ornstein-Zernike (OZ) 方程
 
 总相关函数：$h(r)=g(r)-1$  
 
-
-
-$C(r)$：直接相关函数  
+**直接**相关函数：$C(r)$
 $$
-h\left(r_{12}\right)=C\left(r_{12}\right)+\rho \int C\left(r_{13}\right) h\left(r_{23}\right) d \vec{r}_3
+h\left(r_{12}\right)=C\left(r_{12}\right)+\rho \int C\left(r_{13}\right) h\left(r_{23}\right)\mathrm{d}\vec{r}_3
 $$
-右边第二项为分子 3 对分子 1 和 分子 2 的间接影响。
+右边第二项为分子 3 对分子 1 和 分子 2 的**间接**影响，以位置为权重求平均值。
+
+利用径向分布函数的图论展开, 可以将 $\mathrm{OZ}$ 方程表示成:
 $$
-1+4 \pi \rho \int_0^{\infty} h(r) r^2 d r=\left[1-4 \pi \rho \int_0^{\infty} C(r) r^2 d r\right]^{-1}
+C(r)=h(r)-\ln [1+h(r)]-\beta u(r)+B(r)
 $$
+或
+$$
+h(r)=\exp [-\beta u(r)+h(r)-C(r)+B(r)]-1
+$$
+其中 $\beta=\dfrac{1}{kT}$；$B(r)$ ：桥函数, 非常复杂, 无法确知。需引入一定的近似。
 
+> http://www.sklogwiki.org/SklogWiki/index.php/Ornstein-Zernike_relation
+>
+> https://www.youtube.com/watch?v=TuO4CieIsZ0
 
+![image-20230103231842429](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Physics-biophysics/statistical-thermodynamics-ZJU/statistical-thermodynamics-ZJU.assets/image-20230103231842429.png)
 
+最终跟所有的都相关。。
 
+#### Percus-Yevick (PY) 近似
 
-
-#### Percus-Yevick (PY) 方程
-
+$\boldsymbol{B}(\boldsymbol{r})=\mathbf{0}$
 $$
 \begin{aligned}
-& \boldsymbol{B}(\boldsymbol{r})=\mathbf{0} \\
-& \quad \exp [h(r)-C(r)] \approx 1+h(r)-C(r)+\cdots \cdots \\
-& h(r)=\exp [-\beta u(r)] \cdot[1+h(r)-C(r)]-1 \\
-& g(r)=C(r)[1-\exp (\beta u(r))]^{-1}
+\quad \exp [h(r)-C(r)] & \approx 1+h(r)-C(r)+\cdots \cdots \\
+h(r) & =\exp [-\beta u(r)] \cdot[1+h(r)-C(r)]-1 \\
+g(r) & =C(r)[1-\exp (\beta u(r))]^{-1}
 \end{aligned}
 $$
 Percus 和 Yevick 导得 $h(r)$ 或 $g(r)$ 与 $u(r)$ 的关系如下:
 $$
-g\left(r_{12}\right) e^{u\left(r_{12}\right) / k T}=1+\rho \int\left[1-e^{u\left(r_{13}\right) / k T}\right] g\left(r_{13}\right)\left[g\left(r_{23}\right)-1\right] d \vec{r}_3
+g\left(r_{12}\right) e^{u\left(r_{12}\right) / k T}=1+\rho \int\left[1-e^{u\left(r_{13}\right) / k T}\right] g\left(r_{13}\right)\left[g\left(r_{23}\right)-1\right]\mathrm{d}\vec{r}_3
 $$
 
+#### 超网链近似
+
+Hyper Netted Chain, 简称 HNC
+
+$\boldsymbol{B}(\boldsymbol{r})=\mathbf{0}$
+$$
+\begin{aligned}
+ h(r)&=\exp [-\beta u(r)+h(r)-C(r)]-1 \\
+ g(r)&=\exp [-\beta u(r)+h(r)-C(r)] 
+\end{aligned}
+$$
+可以导出
+$$
+\ln g\left(r_{12}\right)+\frac{u\left(r_{12}\right)}{k T} \rho \int\left[g\left(r_{13}\right)-1-\ln g\left(r_{13}\right)-\frac{u\left(r_{13}\right)}{k T}\right]\left[g\left(r_{23}\right)-1\right]\mathrm{d}\vec{r}_3
+$$
+对有吸引力的体系，在低温和中等密度下，HNC方程能给出较好的结果，但却存在收敛速度慢的问题。在一-些高密度或临界条件下，存在不收敛或假收敛的情况。
 
 #### 平均球近似
 
 平均球近似 (Mean Spherical Approximation, MSA)
-将分子假设为不可穿透的硬核球体，硬核直径为σ。
+
+将分子假设为不可穿透的硬核球体，硬核直径为σ。$\boldsymbol{B}(\boldsymbol{r})=\mathbf{0}$
+
+$$
+\begin{array}{lr}
+C(r)=-\beta u(r) & r>\sigma \\
+g(r)=0 & r<\sigma
+\end{array}
+$$
+
+
+$$
+h(r)=\exp [-\beta u(r)+h(r)-C(r)]-1 \approx 1-\beta u(r)+h(r)-C(r)-1
+$$
+
 
 
 
@@ -807,18 +1011,132 @@ $$
 
 ## 微扰理论
 
-微扰理论基本思想:将实际流体(例如:液体、溶液)考虑为某种参考流体(通常是硬球流体)的微扰体系。
-参考流体的热力学性质是已知的。
-硬球模型是最简单的描述相互作用的模型，其性质被研究得很完善，状态方程也有解析表达式。所以通常被用来作参考流体。
-在数学处理上，是将位形能量、位形配分函数，或密度等，按其对参考流体的偏离，进行泰勒级数展开，从而根据参考流体的性质来计算实际流体的性质。
-为了获得Lennard-Jones流体的状态方程，Zwanzig 以硬球流体作参考体系，将自由能展开为β= 1/kT的级数。
+### 基本思想
 
-对于 Lennard-Jones 流体（虽然是简单流体，但是接近于实际流体），在高密度下，其径向分布函数和具有相同半径的硬球模型（无吸引力）是非常相似的。
+微扰理论基本思想：将实际流体（例如液体、溶液）考虑为某种参考流体（通常是硬球流体）的微扰体系。在数学处理上，是将位形能量、位形配分函数，或密度等，按其对参考流体的偏离，进行**泰勒级数展开**，从而根据参考流体的性质来计算实际流体的性质。
 
-关于液体结构，一个基本的认知是，对于简单流体（比如Lennard-Jones 流体）或一般液体，其结构更大程度上是由分子间排斥力决定的，而吸引力对液体结构的贡献不大。
+参考流体的热力学性质是已知的。硬球模型是最简单的描述相互作用的模型，其性质被研究得很完善，状态方程也有解析表达式。所以通常被用来作参考流体。
 
 
+为了获得Lennard-Jones流体的状态方程，Zwanzig 以硬球流体作参考体系，将自由能展开为β= 1/kT的级数。对于 Lennard-Jones 流体（虽然是简单流体，但是接近于实际流体），在高密度下，其径向分布函数和具有相同半径的硬球模型（无吸引力）是非常相似的。
 
+> 关于液体结构，一个基本的认知是，对于简单流体（比如Lennard-Jones 流体）或一般液体，其结构更大程度上是由分子间排斥力决定的，而吸引力对液体结构的贡献不大。
+
+### 推导
+
+$U(q)=U^{(0)}(q)+U^{(1)}(q)$，分别是实际流体和参考流体的内能。
+$$
+\begin{aligned}
+Z_{\mathrm{C}}= & \int \cdots \int \exp \left[-\beta\left(U^{(0)}+U^{(1)}\right)\right]\mathrm{d}r_1 \cdots\mathrm{d}r_N \\
+= & \int \cdots \int \exp \left[-\beta U^{(0)}\right]\mathrm{d}r_1 \cdots\mathrm{d}r_N \times \frac{\int \cdots \int \exp \left[-\beta U^{(1)}\right] \exp \left[-\beta U^{(0)}\right]\mathrm{d}r_1 \cdots\mathrm{d}r_N}{\int \cdots \int \exp \left[-\beta U^{(0)}\right]\mathrm{d}r_1 \cdots\mathrm{d}r_N} \\
+= & \ Z_{\mathrm{C}}^{(0)} \times\left\langle\exp \left[-\beta U^{(1)}\right]\right\rangle_0 \\
+A= & -k T \ln Z=-k T \ln \frac{Z_{\mathrm{C}}}{N ! \Lambda^{3 N}} \\
+-\beta A= & \ \ln \frac{Z_{\mathrm{C}}^{(0)}}{N ! \Lambda^{3 N}}+\ln \left\langle\exp \left[-\beta U^{(1)}\right]\right\rangle_0=-\beta A^{(0)}-\beta A^{(1)}
+\end{aligned}
+$$
+其中
+
+
+$$
+\Lambda=\left(\frac{h^2}{2 \pi m k T}\right)^{1 / 2}
+$$
+
+称为德布罗意热波长。对 $\exp \left[-\beta U^{(1)}\right]$，取 $\exp (x)=1+x+\dfrac{1}{2}x^2+\cdots$ 的近似：
+
+$$
+\begin{aligned}
+-\beta A^{(1)} & = \left\langle\exp \left[-\beta U^{(1)}\right]\right\rangle_0=1-\beta\left\langle U^{(1)}\right\rangle_0+\frac{\beta^2}{2 !}\left\langle U^{(1) 2}\right\rangle_0-\cdots \cdots \\
+& =\sum_{k=0}^{\infty} \frac{(-\beta)^k}{k !}\left\langle U^{(1) k}\right\rangle_0
+\end{aligned}
+$$
+又可以将 $-\beta A^{(1)}$ 在 $-\beta=0$ 处展开：
+$$
+\begin{aligned}
+-\beta A^{(1)}& =\sum_{n=1}^{\infty} \frac{\omega_n}{n !}(-\beta)^n \\
+\exp \left[-\beta A^{(1)}\right]& =\exp \left[\sum_{n=1}^{\infty} \frac{\omega_n}{n !}(-\beta)^n\right] \\
+& =\sum_{k=0}^{\infty} \frac{1}{k !}\left[\sum_{n=1}^{\infty} \frac{\omega_n}{n !}(-\beta)^n\right]^k \\
+& =\cdots \cdots \\
+& =\sum_{k=0}^{\infty}(-\beta)^k \sum_{n_j} \prod_{j=1}^{\infty} \frac{1}{n_{j} !}\left(\frac{\omega_j}{j !}\right)^{n_j}
+\end{aligned}
+$$
+$\omega_i$ 可看做 $\beta$ 的函数。按照 $\beta$ 的次数对比两式得：
+$$
+\begin{aligned}
+\left\langle U^{(1) k}\right\rangle_0&=k ! \sum_{n_j} \prod_{j=1}^{\infty} \frac{1}{n_{j} !}\left(\frac{\omega_j}{j !}\right)^{n_j} \\
+\left\langle U^{(1)}\right\rangle_0&=\omega_1 \\
+\left\langle U^{(1) 2}\right\rangle_0&=\omega_2+\omega_1^2 \\
+\left\langle U^{(1) 3}\right\rangle_0&=\omega_3+3 \omega_2 \omega_1+\omega_1^3 \\
+\left\langle U^{(1) 4}\right\rangle_0&=\omega_4+4 \omega_3 \omega_1+3 \omega_2^2+6 \omega_2 \omega_1+\omega_1^4
+\end{aligned}
+$$
+可以反解出 $\omega_i$：
+$$
+\begin{aligned}
+& \omega_1=\left\langle U^{(1)}\right\rangle_0 \\
+& \omega_2=\left\langle U^{(1) 2}\right\rangle_0-\left\langle U^{(1)}\right\rangle_0^2 \\
+& \omega_3=\left\langle U^{(1) 3}\right\rangle_0-3\left\langle U^{(1) 2}\right\rangle_0\left\langle U^{(1)}\right\rangle_0+2\left\langle U^{(1)}\right\rangle_0^3 \\
+& \omega_4=\left\langle U^{(1) 4}\right\rangle_0-4\left\langle U^{(1) 3}\right\rangle_0\left\langle U^{(1)}\right\rangle_0-3\left\langle U^{(1) 2}\right\rangle_0^2 \\
+&\ \ \ \ \ \ \ \ +12\left\langle U^{(1) 2}\right\rangle_0\left\langle U^{(1)}\right\rangle_0^2-6\left\langle U^{(1)}\right\rangle_0^4
+\end{aligned}
+$$
+最终将自由能表示为
+$$
+A=A^{(0)}+A^{(1)}=A^{(0)}+\sum_{n=1}^{\infty} \frac{\omega_n}{n !}(-\beta)^{n-1}
+$$
+当温度不是太低时, 略去 $\beta^2$ 以后的各项。
+$$
+A=A^{(0)}+A^{(1)}=A^{(0)}+\omega_1-\frac{\omega_2}{2 k T}+O\left(\beta^2\right)
+$$
+而 $\omega_i$ 如何计算？
+$$
+\begin{aligned}
+\omega_1&=\left\langle U^{(1)}\right\rangle_0=\frac{1}{2} \sum_{i \neq j}\left\langle u^{(1)}\left(r_{i j}\right)\right\rangle_0=\frac{N(N-1)}{2}\left\langle u^{(1)}\left(r_{12}\right)\right\rangle_0 \\
+& =\frac{N(N-1)}{2} \frac{\int \cdots \int u^{(1)}\left(r_{12}\right) \exp \left[-\beta U^{(0)}\right]\mathrm{d}r_1 \cdots\mathrm{d}r_N}{\int \cdots \int \exp \left[-\beta U^{(0)}\right]\mathrm{d}r_1 \cdots\mathrm{d}r_N} \\
+& =\frac{N(N-1)}{2} \iint_V u^{(1)}\left(r_{12}\right) \frac{\int \cdots \int \exp \left[-\beta U^{(0)}\right]\mathrm{d}r_3 \cdots\mathrm{d}r_N}{Z_{\mathrm{C}}^{(0)}}\mathrm{d}r_1\mathrm{d}r_2\\
+& =\frac{N(N-1)}{2 V} \int_0^{\infty} u^{(1)}\left(r_{12}\right) \frac{V \int \cdots \int \exp \left[-\beta U^{(0)}\right]\mathrm{d}r_3 \cdots\mathrm{d}r_N}{Z_{\mathrm{C}}^{(0)}}\mathrm{d}r_{12} 4 \pi r^2\mathrm{d}r \\
+& =\frac{1}{2} N \rho \int_0^{\infty} u^{(1)}(r) g^{(0)}(r) 4 \pi r^2\mathrm{d}r
+\end{aligned}
+$$
+这样, 我们只要知道分子间势能和参考流体的径向分布函 数 $g^{(0)}(r)$, 便可以求出实际体系的一阶微扰项 $\omega_1$ 。
+
+但是，由于二阶微扰项的严格表达式涉及参考流体的三体相关函 数 $g^{(3)(0)}\left(r_1, r_2, r_3\right)$, 计算有困难, 使得应用受到限制。
+
+
+
+### Barker-Henderson (B-H) 微扰理论
+
+$$
+\begin{aligned}
+& \beta\left(A-A^{(0)}\right)=\beta\left\langle U^{(1)}\right\rangle_0-\frac{\beta^2}{2}\left(\left\langle U^{(1) 2}\right\rangle_0-\left\langle U^{(1)}\right\rangle_0^2\right)+O\left(\beta^3\right) \\
+& =\beta\left\langle\sum_i^n N_i u_i^{(1)}\right\rangle_0-\frac{\beta^2}{2}\left[\left\langle\left(\sum_i^n N_i u_i^{(1)}\right)\left(\sum_j^n N_j u_j^{(1)}\right)\right\rangle_0-\left\langle\sum_i^n N_i u_i^{(1)}\right\rangle_0\left\langle\sum_j^n N_j u_j^{(1)}\right\rangle_0-\right. \\
+& =\beta \sum_i\left\langle N_i\right\rangle_0 u_i^{(1)}-\frac{\beta^2}{2}\left[\sum_i \sum_j\left(\left\langle N_i N_j\right\rangle_0-\left\langle N_i\right\rangle_0\left\langle N_j\right\rangle_0\right) u_i^{(1)} u_j^{(1)}\right]
+\end{aligned}
+$$
+- 该式中第一项即前述一阶微扰项 $\omega_1$ :
+
+$$
+\begin{aligned}
+& \left\langle U^{(1)}\right\rangle_0=\omega_1=\frac{1}{2} N \rho \int_0^{\infty} u^{(1)}(r) g^{(0)}(r) 4 \pi r^2 d r \\
+& \left\langle N_i\right\rangle_0=\frac{1}{2} N \rho \int_{r_i}^{r_{+1}} g^{(0)}(r) 4 \pi r^2 d r
+\end{aligned}
+$$
+
+
+
+
+
+### Weeks-Chandler-Andersen (WCA) 微扰理论
+
+$$
+u^{(0)}(r)=\left\{\begin{array}{ll}
+u_{\mathrm{LJ}}(r)+\varepsilon & r<2^{1 / 6} \sigma \\
+0 & r \geq 2^{1 / 6} \sigma
+\end{array} \qquad\\
+u^{(1)}(r)=\left\{\begin{array}{cc}
+-\varepsilon & r<2^{1 / 6} \sigma \\
+u_{\mathrm{LJ}}(r) & r \geq 2^{1 / 6} \sigma
+\end{array}\right.\right.
+$$
 
 
 
@@ -835,7 +1153,8 @@ $$
 
 
 
-常用数学公式
+## 常用数学公式
+
 $$
 \begin{aligned}
 & N !=\left(\frac{N}{e}\right)^N(2 \pi N)^{1 / 2} \quad N>20 \\
@@ -848,13 +1167,10 @@ $$
 $$
 
 
+
 # 第七节 分子间相互作用
 
-
-
-
-
-## 范德华力
+## 分子间作用力
 
 分子间作用力（范德华力）的特点：
 
@@ -876,17 +1192,109 @@ $$
 
 其中色散力是最广泛存在的。
 
+### 取向力
+
+
+
+### 诱导力
+
+
+
+### 色散力
+
+
+
+### 氢键
+
+
+
+## 势能函数
+
+### Lennard-Jones 势能函数
+
+
+
+### 其他常见势能函数
+
+#### Kihara 势能函数
+
+$$
+U(r)=4 \varepsilon\left[\left(\frac{\sigma-2 a}{r-2 a}\right)^{12}-\left(\frac{\sigma-2 a}{\eta-2 a}\right)^6\right]
+$$
+即在 Lennard-Jones 势函数的基础上扣除分子硬核 $2 a$ 。
+
+![image-20230107011947933](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Physics-biophysics/statistical-thermodynamics-ZJU/statistical-thermodynamics-ZJU.assets/image-20230107011947933.png)
+
+#### Stockmeyer 势能函数
+
+极性分子间的势能函数：$U(r)=U(r)^{\mathrm{LJ}}+$ 静电作用项
+$$
+U(r)=4 \varepsilon\left[\left(\frac{\sigma}{r}\right)^{12}-\left(\frac{\sigma}{r}\right)^6\right]-\frac{\mu_1 \mu_2}{r^3}\left[2 \cos \theta_1 \cos \theta_2-\sin \theta_1 \sin \theta_2 \cos \left(\phi_1-\phi_2\right)\right]
+$$
+$U(r)$ 与分子的空间取向有关。如果将静电作用和诱导作用 按方位角分布求其统计平均值, 得到:
+$$
+\langle U(r)\rangle=4 \varepsilon\left[\left(\frac{\sigma}{r}\right)^{12}-\left(\frac{\sigma}{r}\right)^6\right]-\frac{1}{r^6}\left[\frac{2 \mu_1^2 \mu_2^2}{3 k T}+\left(\alpha_1 \mu_2^2+\alpha_2 \mu_1^2\right)\right]
+$$
+该势能函数能很好地拟合极性分子的物性。
+
+#### 通用分子势能函数（TIPs）
+
+$$
+U\left(r_{i j}\right)=\sum_{i=1}^m \sum_{j=1}^n\left[\frac{q_i q_j e^2}{r_{i j}}+\frac{\mathrm{A}_i \mathrm{~A}_j}{r_{i j}^{12}}-\frac{\mathrm{C}_i \mathrm{C}_j}{r_{i j}^6}\right]
+$$
+半经验, 适合于较复杂分子的相互作用。如水分子的 TIP3P 模型, TIP4P 模型, TIP5P 模型。
+
+#### 改进的 Buckingham 势能函数  
+
+也称为 exp-6 势能函数  
+$$
+U(r)=\frac{u_0}{1-6 / \alpha}\left[\left(\frac{6}{\alpha}\right) e^{\alpha\left(1-\dfrac{r}{r_0}\right)}-\left(\frac{r_0}{r}\right)^6\right]
+$$
 
 
 
 
-### 势能函数
+#### Morse势能函数
 
-将分子看成有吸引力的硬球
+$$
+U(r)=D_{\mathrm{e}}\left[1-e^{-a\left(r-r_{\mathrm{e}}\right)}\right]^2
+$$
+
+Morse势是一种描述双原子分子间势能的模型。由于它隐含地包括了键断裂现象，所以它对分子振动的精细结构有良好的描述，有可能用来模拟化学反应。
+Morse势包含了谐振子模型所缺乏的特性，如:非成键态。
+相对于量子谐振子模型，Morse势更加真实，因为它能描述非谐效应、倍频及组合频率。
 
 
 
-Sutherland势能函数  
+### 简化的势能函数
+
+#### 硬球势能函数
+
+将分子看成是没有吸引力的硬球，直径为 $\sigma$。
+$$
+u(r)= \begin{cases}\infty & r \leq \sigma \\ 0 & r>\sigma\end{cases}
+$$
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Physics-biophysics/statistical-thermodynamics-ZJU/statistical-thermodynamics-ZJU.assets/image-20230107010724828.png" alt="image-20230107010724828" style="zoom:60%;" />
+
+#### 方阱势能函数
+
+但吸引力仅在 $\sigma$ 到 $R\sigma$ 之间起作用，且为恒定值（势阱）。
+$$
+u(r)=\left\{\begin{array}{cl}
+\infty & r \leq \sigma \\
+-\varepsilon & \sigma<r \leq R \sigma \\
+0 & r>R \sigma
+\end{array}\right.
+$$
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Physics-biophysics/statistical-thermodynamics-ZJU/statistical-thermodynamics-ZJU.assets/image-20230107010854396.png" alt="image-20230107010854396" style="zoom:60%;" />
+
+可将真实分子的势能曲线用多个方阱势的叠加来表示。
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Physics-biophysics/statistical-thermodynamics-ZJU/statistical-thermodynamics-ZJU.assets/image-20230107011133074.png" alt="image-20230107011133074" style="zoom:60%;" />
+
+#### Sutherland势能函数
+
+将分子看成有吸引力的硬球。
 $$
 u(r)= \begin{cases}\infty & r \leq \sigma \\ -\varepsilon\left(\dfrac{\sigma}{r}\right)^6 & r>\sigma\end{cases}
 $$
@@ -894,17 +1302,32 @@ $$
 
 
 
-Yukawa势能函数  
+#### Yukawa势能函数
 
 
 $$
 u(r)= \begin{cases}\infty & r \leq \sigma \\ -\varepsilon \dfrac{\exp \left[-\lambda\left(\dfrac{r}{\sigma}-1\right)\right]}{\left(\dfrac{r}{\sigma}\right)} & r>\sigma\end{cases}
 $$
+
 ![image-20230102002440191](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Physics-biophysics/statistical-thermodynamics-ZJU/statistical-thermodynamics-ZJU.assets/image-20230102002440191.png)
 
 $\lambda=1.8$ 时，Y 势与 L-J 势相当
 
+#### 总结
 
+硬球型势能函数的第二维里系数 $B(T)$
+$$
+\begin{aligned}
+u(r) & = \begin{cases}\infty & r \leqslant \sigma \\
+u(r) & r>\sigma\end{cases} \\
+B(T) & =-\frac{1}{2} N \beta_1=-2 \pi N \int_0^{\infty}\left[\mathrm{e}^{-u(r) / k T}-1\right] r^2 \mathrm{d}r \\
+& =-2 \pi N \int_0^\sigma\left[\mathrm{e}^{-u(r) / k T}-1\right] r^2 \mathrm{d}r-2 \pi N \int_\sigma^{\infty}\left[\mathrm{e}^{-u(r) / k T}-1\right] r^2 \mathrm{d}r \\
+& =2 \pi N \int_0^\sigma r^2 \mathrm{d}r-2 \pi N \int_\sigma^{\infty}\left[\mathrm{e}^{-u(r) / k T}-1\right] r^2 \mathrm{d}r \\
+& =\frac{2}{3} \pi N \sigma^3-2 \pi N \int_\sigma^{\infty}\left[\mathrm{e}^{-u(r) / k T}-1\right] r^2 \mathrm{d}r
+\end{aligned}
+$$
+
+## 分子力场
 
 # 第八节 量子统计
 
@@ -1042,12 +1465,12 @@ $$
 
 $$
 \begin{aligned}
-& N=4 \pi V\left(\frac{2 m}{h^2}\right)^{3 / 2} \int_0^{\infty} \frac{\varepsilon^{1 / 2}}{e^\alpha e^{\varepsilon / k T}+1} d \varepsilon \\
-& \lim _{T \rightarrow 0} \int_0^{\infty} \frac{\varepsilon^{1 / 2}}{e^\alpha e^{\varepsilon / k T}+1} d \varepsilon=\lim _{T \rightarrow 0} \int_0^{\infty} \frac{\varepsilon^{1 / 2}}{e^{(\varepsilon-\mu) / k T}+1} d \varepsilon \\
-& =\lim _{T \rightarrow 0} \int_0^{\mu_0} \frac{\varepsilon^{1 / 2}}{e^{(\varepsilon-\mu) / k T}+1} d \varepsilon+\lim _{T \rightarrow 0} \int_{\mu_0}^{\infty} \frac{\varepsilon^{1 / 2}}{e^{(\varepsilon-\mu) / k T}+1} d \varepsilon \\
-& \approx \int_0^{\mu_0} \varepsilon^{1 / 2} d \varepsilon+0=\frac{2}{3} \mu_0^{3 / 2} \\
-& N=4 \pi V\left(\frac{2 m}{h^2}\right)^{3 / 2} \cdot \frac{2}{3} \mu_0^{3 / 2} \\
-& \mu_0=\frac{h^2}{8 m}\left(\frac{3 N}{\pi V}\right)^{2 / 3}
+N & =4 \pi V\left(\frac{2 m}{h^2}\right)^{3 / 2} \int_0^{\infty} \frac{\varepsilon^{1 / 2}}{e^\alpha e^{\varepsilon / k T}+1}\mathrm{d}\varepsilon \\
+\lim_{T \rightarrow 0} & \int_0^{\infty} \frac{\varepsilon^{1 / 2}}{e^\alpha e^{\varepsilon / k T}+1}\mathrm{d}\varepsilon=\lim _{T \rightarrow 0} \int_0^{\infty} \frac{\varepsilon^{1 / 2}}{e^{(\varepsilon-\mu) / k T}+1}\mathrm{d}\varepsilon \\
+& =\lim _{T \rightarrow 0} \int_0^{\mu_0} \frac{\varepsilon^{1 / 2}}{e^{(\varepsilon-\mu) / k T}+1}\mathrm{d}\varepsilon+\lim _{T \rightarrow 0} \int_{\mu_0}^{\infty} \frac{\varepsilon^{1 / 2}}{e^{(\varepsilon-\mu) / k T}+1}\mathrm{d}\varepsilon \\
+& \approx \int_0^{\mu_0} \varepsilon^{1 / 2}\mathrm{d}\varepsilon+0=\frac{2}{3} \mu_0^{3 / 2} \\
+N & =4 \pi V\left(\frac{2 m}{h^2}\right)^{3 / 2} \cdot \frac{2}{3} \mu_0^{3 / 2} \\
+\mu_0 & =\frac{h^2}{8 m}\left(\frac{3 N}{\pi V}\right)^{2 / 3}
 \end{aligned}
 $$
 
@@ -1061,7 +1484,7 @@ $$
 
 低温下，流体的粘度几乎消失，变成超流动性流体。
 
-- ${ }^4 \mathrm{He}$ 的 $\boldsymbol{e}^\alpha=0.67$, 量子效应显著。
+- $\ce{^4He}$ 的 $\boldsymbol{e}^\alpha=0.67$, 量子效应显著。
 - 质子数 $+$ 中子数 $=4$ 用 B-E 分布
 
 在很低的温度，由于 $\beta>>1, \varepsilon_0<\varepsilon_1<\varepsilon_2<\cdots$，有$e^{\beta \varepsilon_0} \ll e^{\beta \varepsilon_1} \ll e^{\beta \varepsilon_2} \ll \cdots$

@@ -24,6 +24,8 @@ This is a record of 折腾ing the system, in order not to forget.
 
    export的含义 https://askubuntu.com/questions/720678/what-does-export-path-somethingpath-mean
 
+   LD_LIBRARY_PATH最初是空的，第一个不要有多余的`:`
+
 7. Linux操作系统执行可执行文件提示*No such file or directory*的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
 
 8. cp: cannot create regular file 'xxxx' 'xxxx': Invalid argument
@@ -41,6 +43,8 @@ This is a record of 折腾ing the system, in order not to forget.
 11. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl `
 
 12. [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
+
+13. 标准库的大部分函数通常放在文件 libc.a 中（文件名后缀.a代表“achieve”，译为“获取”），或者放在用于共享的动态链接文件 libc.so 中（文件名后缀.so代表“share object”，译为“共享对象”）。这些链接库一般位于 /lib/ 或 /usr/lib/，或者位于 GCC 默认搜索的其他目录。
 
 
 
@@ -104,7 +108,8 @@ This is a record of 折腾ing the system, in order not to forget.
    source ~/.bashrc
    ```
 
-9. 
+9. 查看当前系统的glibc版本: `/lib64/libc.so.6`
+
 
 #### monitor resource usage
 
@@ -357,7 +362,7 @@ This is a record of 折腾ing the system, in order not to forget.
    - https://www.wallpaperflare.com/search?wallpaper=chemistry
    - https://www.flickr.com/photos/zeissmicro/
    - https://wallpaperaccess.com/beautiful-biology  good!
-   - 
+   - https://blog.csdn.net/Eumenidus/article/details/124504631  Nature 封面
 
    > https://cdn.shopify.com/s/files/1/1064/0118/files/periodic-table-of-tech-standalone_alt.png?v=1579813258
 
@@ -388,7 +393,11 @@ This is a record of 折腾ing the system, in order not to forget.
 
    https://www.geeksforgeeks.org/python-opencv-cv2-copymakeborder-method/
 
-5. install lightdm: https://blog.csdn.net/hgtjcxy/article/details/90645838
+5. 截图
+
+   ![](E:\GitHub_repo\notes\techniques\images\screenshot.png)
+
+6. install lightdm: https://blog.csdn.net/hgtjcxy/article/details/90645838
 
    display managers: https://ubuntuqa.com/article/6577.html
 
@@ -401,7 +410,7 @@ This is a record of 折腾ing the system, in order not to forget.
    reboot
    ```
 
-6. 
+7. 
 
 #### other softwares
 
@@ -482,6 +491,8 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
    - -f：在删除过程中不给任何指示，直接删除。
    - -r：将参数中列出的全部目录和子目录都递归地删除。若删除目录则必须配合选项"-r"
    - -i：与-f选项相反，交互式删除，在删除每个文件时都给出提示。
+
+   To remove a file whose name starts with a '-', for example '-foo', use one of these commands: `rm -- -foo` or `rm ./-foo`
 
 3. delete all files under a directory:
 
@@ -830,11 +841,17 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
   
   - esc: stop editing
 
-- insert: edit
+- `i` insert: edit
 
 - :set fileencoding
 
   https://www.cnblogs.com/sharesdk/p/9208349.html
+  
+- shift+G, to the end of the file
+
+  gg: head
+
+- 
 
 
 

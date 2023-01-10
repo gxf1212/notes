@@ -2,6 +2,8 @@
 
 see [here](/techniques/Prepare-for-the-computer.md) for installation
 
+this page also includes usage of pymol, vmd, gmx, etc.
+
 # Bash (shell)
 
 跟系统相关的，请阅读《Linux基础》
@@ -73,6 +75,16 @@ awk '/^#Free energy/ {printf "%.5f,%.5f,%.9f\n",$8,$9,$12}' ${fn}.fepout > ${fn}
 awk必须单引号
 
 ## file processing
+
+### grep
+
+1. [grep多个关键字“与”和“或”](https://blog.csdn.net/mmbbz/article/details/51035401)
+
+   ```shell
+   grep -E '123|abc' filename
+   ```
+
+2. 
 
 ### ls
 
@@ -185,7 +197,15 @@ awk必须单引号
 
    https://blog.csdn.net/khx0910/article/details/106383294/
 
-6. 
+6. 默认参数(变量默认值) 比较low的方式
+
+   ```shell
+   if [ ! $1 ]; then
+       $1='default'
+   fi
+   ```
+
+7. 
 
 ## examples
 
@@ -195,6 +215,16 @@ awk必须单引号
    for i in {1..19}; do
    wget https://ronlevygroup.cst.temple.edu/courses/2020_fall/chem5302/lectures/chem5302_lecture${i}.pdf --no-check-certificate
    done
+   ```
+
+   advanced: https://linuxhandbook.com/seq-command/
+
+   ```shell
+   user@localhost:~$ seq 3 6
+   3
+   4
+   5
+   6
    ```
 
 2. batch submit jobs
@@ -237,15 +267,17 @@ awk必须单引号
   }
   ```
 
-  
+- [Output results to the text file](https://sunxiaoquan.wordpress.com/2015/02/20/vmd-tcltk-output-results-to-the-text-file/)
 
-- https://sunxiaoquan.wordpress.com/2015/02/20/vmd-tcltk-output-results-to-the-text-file/ 
+- Vectors: https://www.ks.uiuc.edu/Research/vmd/current/ug/node193.html 
 
-- https://www.ks.uiuc.edu/Research/vmd/current/ug/node193.html 
+- format strings: https://wiki.tcl-lang.org/page/format
 
-- https://wiki.tcl-lang.org/page/format
+- everything about lists https://zetcode.com/lang/tcl/lists/
 
-  https://www.tcl.tk/man/tcl/TclCmd/foreach.html
+- foreach: https://www.tcl.tk/man/tcl/TclCmd/foreach.html
+
+  double:
 
   ```tcl
   set x {}
@@ -256,7 +288,7 @@ awk必须单引号
 
 - `llength $list`: Count the number of elements in a list
 
-- 
+- append something to a string: https://wiki.tcl-lang.org/page/append
 
   
 
@@ -270,13 +302,37 @@ awk必须单引号
 
 ### fundamental
 
-- show structure quickly (not in jupyter notebook): `rdkit.Chem.Draw.MolToImage(mol).show()`
+- show structure quickly (not in jupyter notebook): 
+
+  ```python
+  def see_mol(mol):
+      newmol = Chem.MolFromSmiles(Chem.MolToSmiles(mol))
+      Chem.Draw.MolToImage(newmol, size=(600, 600)).show()
+  ```
+
+  直接画三维的反倒看不清
+
+  RDKit isn't actually adding Hs here, it just recognizes that the P atoms have implicit Hs on them and then when drawing the molecule shows those implicit Hs.
+
+- 
 
 
 
 ### MCS search
 
 让RDkit得到正确的手性信息：除了一一对应pybel和rdkit的原子，去改那个chiralTag，估计没啥好办法
+
+
+
+Assign bond order的过程，虽然可能改变smiles或者说这个原子上连了几个氢，但事实上在find mcS的过程中，还是用原来pdb的氢去align的
+
+I'm using a modified version of `AssignBondOrdersFromTemplate` that does not set the number of explicit hydrogens.
+
+
+
+https://www.rdkit.org/docs/source/rdkit.Chem.rdmolops.html
+
+various utilities
 
 
 
@@ -325,13 +381,25 @@ failed to read chirality even (with the help of openbabel)
 
 ## openbabel
 
-> http://blog.molcalx.com.cn/2021/12/29/oechem-perceive-bond-orders.html
+> - http://blog.molcalx.com.cn/2021/12/29/oechem-perceive-bond-orders.html
 >
-> OEchem is a cool tool. Can we get a edu version? Most people don't have it?
+>   OEchem is a cool tool. Can we get a edu version? Most people don't have it? PubChem and CHARMM-GUI are using that.
 >
-> 
+> - 
 
+### pybel and obabel
 
+https://openbabel.github.io/api/3.0/classOpenBabel_1_1OBAtom.shtml
+
+this might actually be cpp api, but it's callable in Python (boost package)
+
+pybel is written 10 years ago!! but it's just calling `OBMol.obconversion.ReadFile`
+
+so pybel is just a Python interface...
+
+但可以通过pybelMol.OBMol下OBMol的methods来操纵这个pybelMol的结构！！
+
+### read/write files
 
 - write files
 
@@ -340,13 +408,17 @@ failed to read chirality even (with the help of openbabel)
       w.write(m)
   ```
 
-- 
+- `obabel -isdf remtp.pdb.sdf -osmi` in cmd 等价于 `mol.write('smi')` in Python
 
 - 
 
 ### file formats
 
 - smiles: Configuration at tetrahedral carbon is specified by @ or @@. Consider the four bonds in the order in which they appear, left to right, in the SMILES form. Looking toward the central carbon from the perspective of the first bond, the other three are either clockwise or counter-clockwise. These cases are indicated with @@ and @, respectively (because the @ symbol itself is a counter-clockwise spiral).
+
+  [obabel](https://openbabel.github.io/api/3.0/classOpenBabel_1_1OBTetrahedralStereo.shtml), [rdkit](https://www.rdkit.org/docs/source/rdkit.Chem.rdchem.html?highlight=rdkit%20chem%20rdchem%20chiraltype#rdkit.Chem.rdchem.ChiralType)
+
+- smiles: 小写是芳香，大写是脂肪；可以带电荷
 
 ### examples
 
@@ -364,7 +436,9 @@ detect triple bonds and remove dihedrals
 
 
 
+### other
 
+https://pypi.org/project/chemdraw/
 
 # Fundamental Python
 
@@ -515,6 +589,8 @@ read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arg
   out, err = cp.communicate()
   ```
 
+- PIPE本身可容纳的量比较小，所以程序会卡死，所以一大堆内容输出过来的时候，会导致PIPE不足够处理这些内容，因此需要将输出内容定位到其他地方，例如临时文件等
+
 - `shell=True`: call shell; provide a single string as cmd is ok
 
 
@@ -527,7 +603,7 @@ read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arg
 
   We usually don't need `exepath = os.path.dirname(sys.argv[0])`, nor any path when using `os.system()`.
 
-- `os.walk()` : walk through all sub-folders
+- `os.walk()` : walk through all sub-folders. https://www.runoob.com/python/os-walk.html
 
 - `os.getenv(PATH)`：获取环境变量（Windows/Linux通用），而不是`popen("which xxx")`
 
@@ -595,11 +671,20 @@ but failed. if you call a method from other packages, warnings cannot be filtere
 
 even `python xx.py -W` didn't work
 
+### other
 
+https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules
 
 # Visualize: clicking your mouse
 
+## comparison
 
+default
+
+- vmd aligns protein noh 
+- pymol aligns protein Calpha 
+
+be careful doing selection
 
 ## Pymol
 
@@ -614,6 +699,28 @@ even `python xx.py -W` didn't work
    see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 3. Using Editing Mode to Move Atoms Now, please set the mouse mode to Editing, and CTRL-Left-drag on an atom.
+
+4. pymol show contact residues http://shdf611.lofter.com/post/1cd0a1d0_a6e8874
+
+5. align pocket in Pymol: https://pymolwiki.org/index.php/Focus_alignment
+
+6. renumber residues and fix names
+
+   ```shell
+   # substitute (all) with other selections
+   load PR1.pdb
+   alter (all), chain='P'
+   alter (all), segi='PR1'
+   alter (all), resi=str(int(resi)+121)
+   save PR1.pdb
+   delete all
+   ```
+
+   ref: https://pymolwiki.org/index.php?title=Alter&redirect=no
+
+   other
+   
+   http://dunbrack3.fccc.edu/PDBrenum/
 
 ## VMD techniques
 
@@ -739,6 +846,7 @@ even `python xx.py -W` didn't work
        - helix, sheet, ..
        - carbon, hydrogen, nitrogen, ...
      - `not` as logic? see more syntax in Selection--Marco definition
+   - Periodic, 选择+X或-X体系在X反向的映象, 就可看到两条链处于一起了
 
 2. Graphics--colors
 
@@ -762,6 +870,51 @@ even `python xx.py -W` didn't work
    But now it looks good in white if all beta is 0
 
 5. Do not use Display--perspective (透视), choose orthographic projection (正射投影)
+
+6. Drawing Method--HBond
+
+7. 
+
+8. VMD representation里面写变量$ligname是可以的
+
+   ```tcl
+   set ligname UDCA
+   
+   mol representation CPK 0.200000
+   mol color Type
+   mol selection {(protein or water) and (same residue as within 5 of residue $ligname)}
+   mol material Opaque
+   mol addrep top
+   # update selection every frame
+   mol selupdate 2 top 1
+   mol colupdate 2 top 0
+   
+   pbc wrap -centersel "protein or residue ${ligname}" -compound segid -center com -all
+   # align the protein
+   package require rmsdtt
+   # open the window
+   set w [rmsdtt_tk_cb]
+   $w.top.left.sel delete 1.0 end
+   $w.top.left.sel insert end "protein"
+   # set the states of checkboxes1
+   set rmsdtt::trace_only 0
+   set rmsdtt::noh 0
+   set rmsdtt::bb_only 1
+   # rmsdtt::set_sel  # verify selection
+   rmsdtt::doAlign
+   # change selection text
+   $w.top.left.sel delete 1.0 end
+   $w.top.left.sel insert end "residue ${ligname}"
+   set rmsdtt::bb_only 0
+   # set rmsdtt::xmgrace 1
+   # set rmsdtt::multiplot 0
+   set rmsdtt::plot_sw 1
+   set rmsdtt::save_sw 1
+   set rmsdtt::save_file sys-rmsd.dat
+   rmsdtt::doRmsd
+   ```
+
+9. 
 
 ### other
 
@@ -813,7 +966,32 @@ The current VMD source code has been tested to compile with Python versions 2.4 
 
 2. 
 
-## .mdp options
+## Common commands
+
+### pdb2gmx
+
+prepare the system
+
+- 如果你是用GROMACS的话，pdb2gmx产生的蛋白拓扑文件时可以加上-his选项来人工选择各个组氨酸的质子化态
+
+- https://manual.gromacs.org/documentation/2020-current/onlinehelp/gmx-pdb2gmx.html  add -ff folder. xx.ff, forcefield.itp in 
+
+### make_ndx
+
+https://manual.gromacs.org/documentation/current/onlinehelp/gmx-make_ndx.html
+
+https://www.compchems.com/how-to-create-an-index-file-in-gromacs/#creating-a-new-index
+
+type 'h' for help...
+
+![make_ndx](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/Programming-for-MD.assets/make_ndx.png)
+
+`-n index.ndx`: based on an existing index file
+
+> 选区用于选择原子/分子/残基以进行后续分析. 与传统索引(index)文件不同, 选区可以是动态的, 即, 可以对轨迹中的不同帧选择不同的原子. GROMACS手册的第八章《分析》中有一小节对选区进行了简短的介绍, 并给出了一些建议. 当你初次接触选区概念时, 这些建议可帮助你熟悉它. 下面将就选区的技术细节和语法方面给出更加详细的说明.
+> [在命令行中指定选区](https://jerkwin.github.io/GMX/GMXsel/#在命令行中指定选区)
+
+## .mdp options and running
 
 ### vdw
 
@@ -825,9 +1003,7 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 
 vdw and elec, common cutoff/switchdist
 
-
-
-#### notes
+### trajectory
 
 - gmx log file not that useful
 
@@ -840,20 +1016,9 @@ vdw and elec, common cutoff/switchdist
 
   in npt.mdp. nstlog=0 in em.mdp
 
-- run consecutively
+- 
 
-  ```shell
-  sleep 6h && gmx mdrun ....  # if the first run uses 'nohup'
-  ```
 
-  or in a local machine
-
-  ```shell
-  namd3 ..... [Enter]
-  namd3 .... # before job finishes
-  ```
-
-- 最好把本地机设成禁止自动suspend、black screen (gnome Settings--power)，否则跑着跑着无法看到图形界面。。
 
 - gmx中断后保持步数? 
 
@@ -871,24 +1036,60 @@ vdw and elec, common cutoff/switchdist
 
   recover interrupted simulation, to get the .gro
 
-- default
+- [gmx逐步放开限制：暴力修改`itp`文件](https://jerkwin.github.io/2017/10/20/GROMACS%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E6%8B%9F%E6%95%99%E7%A8%8B-%E5%A4%9A%E8%82%BD-%E8%9B%8B%E7%99%BD%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/#9-%E6%94%BE%E5%BC%80%E9%99%90%E5%88%B6-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E9%A2%84%E5%B9%B3%E8%A1%A1)
 
-  - vmd aligns protein noh 
-  - pymol aligns protein Calpha 
+## result
 
-  be careful doing selection
+
+
+
+
+
+
+
+
+## other
+
+notes to be classified
+
+- 
+
+- run consecutively
+
+  ```shell
+  sleep 6h && gmx mdrun ....  # if the first run uses 'nohup'
+  ```
+
+  or in a local machine
+
+  ```shell
+  namd3 ..... [Enter]
+  namd3 .... # before job finishes
+  ```
+
+- 最好把本地机设成禁止自动suspend、black screen (gnome Settings--power)，否则跑着跑着无法看到图形界面。。
+
+- 
+
+- 
 
 - In gromacs, chain names are lost!
 
-- pymol show contact residues http://shdf611.lofter.com/post/1cd0a1d0_a6e8874
+- 
 
 - doing MSA: cluster omega
 
 - pocket alignment，最好只用pocket的原子
 
-- 如果你是用GROMACS的话，pdb2gmx产生的蛋白拓扑文件时可以加上-his选项来人工选择各个组氨酸的质子化态
+- 
 
-- https://manual.gromacs.org/documentation/2020-current/onlinehelp/gmx-pdb2gmx.html  add -ff folder. xx.ff, forcefield.itp in 
+- 
+
+- 
+
+- 
+
+- [分子动力学模拟为什么会有先NVT后NVE？](http://bbs.keinsci.com/thread-9699-1-1.html)
 
 
 

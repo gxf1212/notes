@@ -1,51 +1,6 @@
 # PSK project
 
-## Background
-
-2022.9.17
-
-背景：结合这个受体，能促进植物生长、保鲜
-
-天然底物：YIYTQ，五肽，两个Y上有SO3H
-
-结构：蛋白保守；结合位点稳定（保守），一个反β sheet扣住五肽
-
-目标：找更强的；成本降低（SO3H贵，摆脱掉？）
-
-已经发现
-
-- 两个SO3H对反β sheet的结合重要，变成A会破坏。但好像并没有很贡献结合能？跟带正电的都不太稳定
-- 1号和4号的很多FEP都不太行，或被实验否掉
-- 5号Q变为RK等正电的可能有希望
-
-另外，实验发现Q上结合biotin会保持结合力。基于biotin做设计？
-
-其他实验也很多，可以据此设计
-
-The atomic coordinates and structure factors have been deposited in the Protein Data Bank. The PDB code of free DcPSKRLRR is 4Z62. The PDB codes of PSK–PSKR1LRR and PSK–DcPSKRLRR are 4Z63 and 4Z5W, respectively. The PDB codes of PSK–PSKR1LRR–SERK1LRR and PSK–DcPSKRLRR–SERK2LRR are 4Z64 and
-4Z61, respectively  
-
-想法：
-
-- 应该不用管coreceptor
-
-- biotin结合的位置？β重复单元，还是反β sheet？
-
-  <img src="E:\GitHub_repo\notes\MD\PSK-PSKR.assets\PSKR-biotin.png" alt="PSKR-biotin" style="zoom:67%;" />
-
-  此图可能支持前者？biotin能不能缩短哪个链？
-
-- 但也可能只是，不影响活性。。
-
-- biotin能不能变为正常AA？但是延长我觉得也应该在N端
-
-- 
-
-第一步：长出来一个AA，两边都看看
-
-变动：都行。也可以Q5K再添加。
-
-
+somethin about amino acid modification, MD and FEP
 
 # Stage 1: add a residue
 
@@ -54,8 +9,6 @@ To test the stability, we add a residue and run MD first. Don't worry about the 
 We will perform MDS with non-standard AA in gmx. We use CHARMM FF. 
 
 I remember that we cannot easily import CHARMM FF in Amber.
-
-
 
 ## Deal with novel residues
 

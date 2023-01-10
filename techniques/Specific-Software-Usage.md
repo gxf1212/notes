@@ -254,7 +254,7 @@ https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect�
 
 ### in cmd
 
-1. basic
+1. basic usage
 
    ```shell
    # in your repository path
@@ -268,6 +268,8 @@ https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect�
    > **`git push <remote> <place>`**
    >
    > https://www.cnblogs.com/suihang/p/10556519.html
+
+   commit是防止远程直接覆盖你本地，只要有修改都会让你commit，提示你pull原因是因为你远程当中有最新的东西和你本地不一致，git知道，远程分支的东西不能丢掉，所以让你pull下来存到本地，让本地变成最新的最后push上去，难么同理的方式你本地就是最新，便会去修改远程的。
 
    ```shell
    # other
@@ -422,7 +424,9 @@ https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect�
 
    cdn.jsdelivr.net/npm: does not work well for js scripts? but works fine for figures. different format from unpkg.com
 
-3. 
+3. https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/making-changes-in-a-branch/viewing-the-branch-history
+
+   viewing the branch history in desktop vscode
 
 4. 
 
@@ -463,7 +467,7 @@ https://zhuanlan.zhihu.com/p/348324919
 
 ### scheduling system
 
-#### slurts
+#### slurm
 
 read the pdf from hpc.xjtu.edu.cn for more
 
@@ -527,6 +531,7 @@ date > log
     # 查询作业号为211 的作业的具体信息。
     qstat -f 211
     # 查询用户gxf的所有作业。
+    qstat -u gxf
     ```
   
   - `qsub`
@@ -539,6 +544,12 @@ date > log
 - 
 
 - 
+
+### run in backend
+
+namd好像也不能在命令行直接nohup，现在这个2&>xx.log会导致最后没有输出（只有restart）
+
+应该是1>& xx.log!
 
 ## Typora
 
@@ -570,19 +581,21 @@ Mac：https://macwk.com/soft/typora
 
 ## VScode
 
-1. theme
-   
+1. VScode安装完默认不能自动换行，需要我们手动配置。 文本超出显示时，会溢出，如图： 进入文件>首选项>设置，打开设置界面，在常用设置下找到Editor:Word Wrap选项，默认为off,设置为on即可。
+
+2. theme
+
    (description) I also met [this question](https://stackoverflow.com/questions/70221994/unable-to-change-theme-in-vs-code) or [this](https://www.reddit.com/r/vscode/comments/lx7536/any_idea_why_my_theme_is_suddenly_changing_every/)
-   
+
    > [Workbench Appearance color theme keeps being overridden](https://github.com/microsoft/vscode/issues/105102)
    > 
    > 引申出主题的管理方式：和系统有关。。
-   
+
    No! finally, vscode theme问题：biosyntax和gmxhelper要用它们自己的theme
-   
+
    solution: disable掉他俩, 然后settings（ctrl+,）里面搜索theme
 
-2. https://jingyan.baidu.com/article/e6c8503ca7706de54f1a18f4.html vs code 字体分辨率
+3. https://jingyan.baidu.com/article/e6c8503ca7706de54f1a18f4.html vs code 字体分辨率
 
 ## Pycharm
 
@@ -599,6 +612,8 @@ Mac：https://macwk.com/soft/typora
 5. [Markdown Support](https://www.jetbrains.com/help/pycharm/markdown.html)
 
 6. 非常傻逼的一点是，正常运行和调试（或cmd中python）的`sys.path`不一样。。不好通用地找程序所在路径
+
+7. ![image](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/pycharm-=.png)
 
 ## conda & python cmd
 
@@ -718,7 +733,44 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   
   https://blog.csdn.net/weixin_41712499/article/details/105430471  it's just the problem with pat
 
-- 
+- https://blog.csdn.net/qazplm12_3/article/details/108924561
+
+  卡在solving environment这一步：现在安装的东西太多，垃圾太多，搜索兼容。。
+
+  > https://blog.csdn.net/qq_27377201/article/details/107009927
+
+  ```shell
+  conda update --strict-channel-priority --all
+  conda update --all
+  conda install mamba -c conda-forge
+  ```
+
+  也没用
+
+  maybe don't put too many channels. https://www.jianshu.com/p/1dbaef6b3209
+
+  ```
+  channels:
+    - conda-forge
+    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
+    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
+    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+    - defaults
+  ```
+
+- .condarc文件在`C:\User\xx\`目录下，或者使用win+R后在运行窗口中输入`%HOMEPATH%`进入
+
+- https://blog.csdn.net/shuiyixin/article/details/90370588
+
+  ImportError: DLL load failed: 找不到指定的模块. 文件受损（如安装不全），重装那个包
+
+  ```shell
+  conda install -c conda-forge rdkit -y --force-reinstall
+  ```
+
+  
+
+  
 
 > icon path: `xxx/anaconda/lib/python3.7/site-packages/anaconda_navigator/static/images/anaconda-icon-256x256.png`
 
@@ -788,7 +840,11 @@ failed, remove this env...
 
 ### Word
 
+- 表格左上角斜线
 
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/word-table.png)
+
+- 
 
 ### Excel
 
@@ -843,7 +899,35 @@ https://www.home-for-researchers.com/static/index.html#/
 
 https://app.bibguru.com/: fast citation generation
 
+## Origin
 
+https://www.zhihu.com/column/c_1368227352443572224
+
+- 平滑处理
+
+  ![155d089533fea23d52058037b510cb9e](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/origin-smooth.png)
+
+- https://www.jianshu.com/p/7f93c9c2b777
+
+  origin更新上下标，要在book（data）那里Ctrl+S
+
+- [数据导入到Origin后全变成了#号的原因](https://www.office68.com/openoffice/9159.html)：不够长
+
+- [origin怎么进行线性拟合](https://www.zhihu.com/question/29392864/answer/104174248)
+
+- [Origin如何让坐标轴刻度向内](https://jingyan.baidu.com/article/2fb0ba404b095200f2ec5f16.html)
+
+- 调整ticks
+
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/origin-ticks.png)
+
+- [Origin如何在右侧插入列](https://www.10kn.com/originpro-insert-right-col/)
+
+- ![origin-equation](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/origin-equation.png)
+
+- 
+
+- [origin自动载入xvg数据作图](https://jerkwin.github.io/2018/08/06/origin%E8%87%AA%E5%8A%A8%E8%BD%BD%E5%85%A5xvg%E6%95%B0%E6%8D%AE%E4%BD%9C%E5%9B%BE/)
 
 # bit by bit programming
 
@@ -877,6 +961,16 @@ notes from Windows
 
 2. 
 
+### title
+
+1. `\titlecontents`：目录中的格式
+
+### fancyhdr
+
+1. 如何在目录页去掉页码：可以在目录生成命令后加入`\thispagestyle{empty}`即可。
+
+   https://www.latexstudio.net/archives/7985.html
+
 ### math
 
 1. subscript newline
@@ -888,7 +982,7 @@ notes from Windows
    sum_{\substack{\text { nonbonded } \\ \text { pairsi,j }}
    ```
 
-2. 
+2. 尖括号, \langle \rangle, ⟨⟩
 
 ### bibliography
 

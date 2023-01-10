@@ -990,13 +990,35 @@ https://www.bilibili.com/read/cv403592/ 专栏markdown
 
 # Build Python documentation in Sphinx
 
-hahaha
+- https://www.sphinx-doc.org/en/master/
+- api https://sphinx-apidoc.readthedocs.io/zh_CN/latest/
+- doc https://zh-sphinx-doc.readthedocs.io/en/latest/
+
+> [使用Sphinx写项目文档](https://blog.hszofficial.site/recommend/2020/11/27/%E4%BD%BF%E7%94%A8Sphinx%E5%86%99%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3/)
+>
+> https://www.bilibili.com/read/cv11923872
+
+examples:
+
+- https://github.com/openbabel/documentation
+- 
 
 
 
 
 
+一般也就把所有code放最外面，建一个docs的文件夹，还有example等。不一定要建个src文件夹
 
+
+
+```shell
+pandoc README.md --from markdown --to rst -s -o readme.rst
+```
+
+theme
+
+- https://www.sphinx-doc.org/en/master/usage/theming.html#builtin-themes
+- https://sphinx-themes.org/
 
 
 
