@@ -605,7 +605,15 @@ Mac：https://macwk.com/soft/typora
 
 2. [关闭代码风格检查](https://blog.csdn.net/u013088062/article/details/50001189)
 
-3. 实际上没有那么快自动保存，还是需要ctrl+s。。
+   - 关闭拼写检查，setting-->Inspections-->Spelling-->Typo
+
+   - 关闭代码风格检查，setting-->Inspections-->Python-->PEP8
+
+   - Python code style
+
+     <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/pycharm-=.png" alt="image" style="zoom:80%;" />
+
+3. 实际上没有那么快自动保存，还是需要ctrl+s，尤其是引用别的包的时候
 
 4. intepreter: create from existing sources. "study" can run both R and Python.
 
@@ -613,7 +621,7 @@ Mac：https://macwk.com/soft/typora
 
 6. 非常傻逼的一点是，正常运行和调试（或cmd中python）的`sys.path`不一样。。不好通用地找程序所在路径
 
-7. ![image](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/pycharm-=.png)
+7. 
 
 ## conda & python cmd
 
@@ -857,7 +865,17 @@ failed, remove this env...
 - [PPT中如何将多个图形等距分布](https://jingyan.baidu.com/article/fec7a1e5c51b1d1190b4e7ca.html)
 - 美化大师插件：批量删除动画；PPT工具栏
 
+## Chem tools
 
+### ChemBioDraw
+
+- 全选改字体（18），在file--document setting--Drawing改线宽，大概0.56（0.4倍粗体），就和Wikipedia的比较接近（平常不用加粗）。全选--右键--Object Settings也可以。
+
+  ![image-20230119225838463](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/chembiodraw-drawing)
+
+- ChemDraw中内置多种模板，蛋白质支链模板是比较典型的一种了，通过模板可以快速添加蛋白质支链结构。而可以在Text tool或者模板工具中找到Templates（模板），然后选择Amino Acid Side Chain（蛋白质支链模板）即可。
+
+- [怎样在ChemDraw中设置字体的默认格式？](https://www.sohu.com/a/104294282_395309)
 
 ## Other
 
@@ -888,11 +906,6 @@ installation: see [Linux-fundamental](/techniques/Linux-fundamental?id=other-sof
    - default folder, either inside wine or desktop (cannot drag...). 
    - cannot 'open the folder' (redirect to the browser with wrong path...)
 
-### chembiodraw
-
-- 全选改字体（18），在file--document setting改线宽，大概0.56（0.4倍粗体），就和Wikipedia的比较接近（平常不用加粗）。
-- ChemDraw中内置多种模板，蛋白质支链模板是比较典型的一种了，通过模板可以快速添加蛋白质支链结构。而可以在Text tool或者模板工具中找到Templates（模板），然后选择Amino Acid Side Chain（蛋白质支链模板）即可。
-
 ### Scientific writing
 
 https://www.home-for-researchers.com/static/index.html#/
@@ -905,7 +918,7 @@ https://www.zhihu.com/column/c_1368227352443572224
 
 - 平滑处理
 
-  ![155d089533fea23d52058037b510cb9e](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/origin-smooth.png)
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/origin-smooth.png" style="zoom:80%;" />
 
 - https://www.jianshu.com/p/7f93c9c2b777
 

@@ -22,13 +22,14 @@ https://www.yumefx.com/?p=5310
 ## Basics
 
 1. install
-   
+
    ```shell
    sudo npm i docsify-cli -g
+   npm i docsify-cli -g	# windows
    ```
 
 2. serve locally
-   
+
    ```shell
    docsify serve ./ # http://localhost:3000
    ```
@@ -407,7 +408,7 @@ We may replace it with the link to our videos files.
 
 <iframe src="https://space.bilibili.com/441196634" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=50% height=400px > </iframe>
 
-> not logged i
+> not logged in
 
 ### Notes on deploying and trial
 
@@ -679,8 +680,8 @@ developer的js. components:
 
   - provides sentences for icons/events (like clicking)?
   - 说话
-    - "mouseover": [{"selector": "#live2d"...
-    - 
+    - `"mouseover": [{"selector": "#live2d"...`
+    - ...
 
 experiences
 
@@ -987,38 +988,148 @@ CSDN：投稿，再次上传markdown文件，链接变了。。。
 https://www.bilibili.com/read/cv403592/ 专栏markdown
 
 
-
 # Build Python documentation in Sphinx
 
 - https://www.sphinx-doc.org/en/master/
 - api https://sphinx-apidoc.readthedocs.io/zh_CN/latest/
 - doc https://zh-sphinx-doc.readthedocs.io/en/latest/
 
-> [使用Sphinx写项目文档](https://blog.hszofficial.site/recommend/2020/11/27/%E4%BD%BF%E7%94%A8Sphinx%E5%86%99%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3/)
->
-> https://www.bilibili.com/read/cv11923872
-
 examples:
 
 - https://github.com/openbabel/documentation
-- 
+- https://degrootlab.github.io/pmx/index.html
+- https://alchemlyb.readthedocs.io/en/latest/
+- https://deepchem.readthedocs.io/en/latest/index.html
 
 
 
+## Basics
 
+> - [使用Sphinx写项目文档](https://blog.hszofficial.site/recommend/2020/11/27/%E4%BD%BF%E7%94%A8Sphinx%E5%86%99%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3/)
+>- [Sphinx+gitee+Read the Docs搭建在线文档系统](https://www.bilibili.com/read/cv11923872)
 
-一般也就把所有code放最外面，建一个docs的文件夹，还有example等。不一定要建个src文件夹
+steps
+- start
 
+  ```shell
+  mkdir docs
+  cd docs
+  sphinx-quickstart
+  ```
 
+  一般也就把所有code放最外面，建一个docs的文件夹，还有example等。不一定要建个src文件夹
+
+- build
+
+  ```shell
+  # in /xx/docs
+  make html
+  ```
+
+- change a theme: do as they stated (see below)
+
+- enable markdown (see below)
 
 ```shell
-pandoc README.md --from markdown --to rst -s -o readme.rst
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple sphinx-autobuild
 ```
 
-theme
+
+
+## Markdown support
+
+https://www.sphinx-doc.org/en/master/usage/markdown.html
+
+https://sphinx-doc.readthedocs.io/zh_CN/master/usage/markdown.html
+
+extensions:
+
+https://github.com/ryanfox/sphinx-markdown-tables
+
+```shell
+pip install --upgrade recommonmark
+pip install --upgrade myst-parser
+pip install sphinx-markdown-tables
+pip install sphinxcontrib-mermaid
+```
+
+> a simple example written in markdown: https://www.cnblogs.com/jonnyan/p/14207711.html
+
+### interpreter
+
+recommonmark
+
+```
+```
+
+myst-parser
+
+```
+```
+
+
+
+
+
+
+
+### extensions
+
+
+
+
+
+
+
+
+
+> other
+>
+> ```shell
+> pandoc README.md --from markdown --to rst -s -o readme.rst
+> ```
+>
+> todo:
+>
+> - [ ] multilingual
+> - [ ] python code api. `sphinx-apidoc`
+
+## themes
 
 - https://www.sphinx-doc.org/en/master/usage/theming.html#builtin-themes
 - https://sphinx-themes.org/
+
+```shell
+pip install -i sphinx_theme
+```
+
+https://pypi.org/project/sphinx-rtd-theme/
+
+
+
+1. https://github.com/LinxiFan/Sphinx-theme
+
+   ```shell
+   pip install sphinx_theme
+   ```
+
+2. https://github.com/schettino72/sphinx_press_theme
+
+   ```shell
+   pip install sphinx_press_theme
+   ```
+
+3. 
+
+
+
+## readthedocs
+
+Private repositories are not supported...
+
+
+
+
 
 
 

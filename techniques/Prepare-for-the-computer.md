@@ -811,24 +811,7 @@ conda install -c conda-forge -c bioconda gromacswrapper
 from gromacs.fileformats.xvg import XVG # read .xvg files
 ```
 
-### alchemistry
-
-https://github.com/MobleyLab/alchemical-analysis
-
-```shell
-conda install -c conda-forge pymbar
-```
-
-https://anaconda.org/conda-forge/pymbar git address and doc
-
 ### alchemical-analysis, alchemlyb
-
-> https://anaconda.org/conda-forge/alchemical-analysis
-> 
-> ```shell
-> conda activate AmberTools21 # no! choose python version?
-> conda install -c conda-forge alchemical-analysis
-> ```
 
 We are in the process of migrating all functionality from here to instead use [`alchemlyb`](https://github.com/alchemistry/alchemlyb)
 
@@ -841,8 +824,23 @@ datasets for testing: https://alchemtest.readthedocs.io/en/latest/index.html
 ```shell
 conda activate AmberTools21
 pip install --user alchemlyb
+# or 
+conda install -c conda-forge alchemlyb
 pip install --user alchemtest
 ```
+
+https://anaconda.org/conda-forge/pymbar git address and doc
+
+
+> https://anaconda.org/conda-forge/alchemical-analysis or https://github.com/MobleyLab/alchemical-analysis
+>
+> but not using
+>
+> ```shell
+> conda activate AmberTools21 # no! choose python version?
+> conda install -c conda-forge alchemical-analysis
+> ```
+
 
 ### mdtraj
 

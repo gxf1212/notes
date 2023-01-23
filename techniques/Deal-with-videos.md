@@ -72,7 +72,7 @@ Wondershare
 
 
 
-[用SrtEdit软件校准字幕时间](https://jingyan.baidu.com/article/925f8cb8fe1132c0dde0563f.html)
+[用SrtEdit软件校准字幕时间](https://jingyan.baidu.com/article/925f8cb8fe1132c0dde0563f.html)   [Download here](https://www.pc6.com/softview/SoftView_51082.html)
 
 记住校准所有！！缺点：是不是有些符号不能识别？弄完还要edit一下，去掉乱码
 
@@ -84,7 +84,7 @@ Wondershare
 >
 > 感觉还是用PR。喵影还算方便、多样化，但目前没发现能加在下方
 >
-> https://www.bilibili.com/s/video/BV1Pa4y1s75q 批量合并字幕用那个软件，可软，但不知B站是否可
+> https://www.bilibili.com/s/video/BV1Pa4y1s75q 批量合并字幕用Gihosoft TubeGet，可软，但不知B站是否可
 >
 > https://zhuanlan.zhihu.com/p/240417302
 >
@@ -98,7 +98,13 @@ Wondershare
 
 ## 获取、识别
 
-下载B站：https://gitee.com/KGDKL/BiliCC-Srt   自己的则在编辑字幕的界面上传和下载
+下载B站：
+
+> https://gitee.com/KGDKL/BiliCC-Srt   
+
+单个的也可在bilibili助手下载
+
+自己的则在编辑字幕的界面上传和下载
 
 > 但是剪映（要转格式）和万兴（有限制）应该都可以识别英文吧
 
@@ -128,7 +134,7 @@ https://jingyan.baidu.com/article/597a0643786861702b5243b4.html
 >
 > 识别英文：https://www.huiyingzimu.com （已经用掉免费的机会了
 
-## 翻译
+## YouTube&翻译
 
 - downsub翻译质量不错 https://downsub.com/
 
@@ -138,9 +144,14 @@ https://jingyan.baidu.com/article/597a0643786861702b5243b4.html
 
   安装Tampermonkey插件，根据下方https://mind.airmore.cn/doc/9a21605043提示安装脚本
 
-- https://www.dual-subtitles.com/zh-CN/whatsnew/3.6.0 这个插件也能下，它跟DownSub的内容似乎一样。。只能在每个视频的页面上点开、下载
+- https://www.dual-subtitles.com/zh-CN/whatsnew/3.6.0 这个插件也能下，它跟DownSub的内容似乎一样，断句不太一样。。只能在每个视频的页面上点开、下载
 
   但他俩的前提都是要YouTube本身提供cc字幕。
+  
+- 
+
+> - https://checksub.com/   no dual-subtitle, all languages
+> - 
 
 ### 如果没有翻译
 
@@ -217,7 +228,7 @@ https://jingyan.baidu.com/article/597a0643786861702b5243b4.html
 > - http://www.autocaption.net/home 还挺快？
 > - https://www.1sj.tv/ 人工翻
 
-### 批量获取双语字幕
+### 批量获取双语字幕（trying
 
 video url粘进downsub，搜索。按f12，转到“网络”，搜索playlist，~~url copy下来然后请求~~ 直接copy响应值保存到json文件。
 
@@ -263,7 +274,9 @@ dl_coursera --cookies coursera.org_cookies.txt --slug chemical-biology --outdir 
 
 下载YouTube视频：CRTubeGet
 
-下原有、自动生成的、机器翻译的YouTube字幕：https://downsub.com/
+> also free: https://www.dvdvideosoft.com/en8
+
+
 
 单个视频Google上还挺多，但分辨率限制？
 
@@ -293,70 +306,7 @@ B站、YouTube等的playlist应该都行
 
 > 现在好像没在用？
 
-### youtube-dl
 
-https://github.com/ytdl-org/youtube-dl
-
-CRTubeGet调用？`yt_dlp.utils.RegexNotFoundError: Unable to extract Initial JS player n function name`的时候可以直接用youtube-dl程序下载
-
-```shell
-pip install --upgrade youtube-dl
-# template
-# youtube-dl -o "%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s" https://www.youtube.com/playlist?list=PLqMa4P1M6Ha6iHID5YGXeU_b5WMS-P_f9
-
-conda activate download
-youtube-dl -o "E:\VideoDownloaded\immunology\%(title)s.%(ext)s" -f mp4 --write-auto-sub -sub-format srt --sub-lang en,zh -u "Xufan Gao" -p 123465acb 	https://www.youtube.com/playlist?list=PLqMa4P1M6Ha6iHID5YGXeU_b5WMS-P_f9
---embed-subs -k 
-
-# try
-conda activate download
-# youtube-dl -o "E:\VideoDownloaded\test\%(title)s.%(ext)s" --write-sub --sub-format srt --sub-lang en,zh-Hans -u "Xufan Gao" -p 123465acb https://www.youtube.com/watch?v=HGykUOcXz-A
-yt-dlp --write-auto-subs --sub-format srt --sub-langs en,zh-Hans --skip-download https://www.youtube.com/watch?v=HGykUOcXz-A
-
-curl \
-  'https://youtube.googleapis.com/youtube/v3/captions/4IrifI8LXo0?tlang=en&key=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' \
-  --header 'Authorization: Bearer 203161431239-u3s315gg27fitijtsr2cvbhmkm9veqft.apps.googleusercontent.com' \
-  --header 'Accept: application/json' \
-  --compressed
-
-```
-
-- must double quote in Windows
-- 缺点：网速极慢；合并字幕功能？
-- 分辨率那个还是没成功啊！
-- 字幕只有vtt文件？
-
-### other APIs
-
-1. https://github.com/jdepoix/youtube-transcript-api
-
-   https://www.geeksforgeeks.org/python-downloading-captions-from-youtube/
-
-   连不上
-
-2. https://pytube.io/
-
-   https://steam.oxxostudio.tw/category/python/example/youtube-download.html#a5
-
-   没有自动字幕
-
-3. https://zhuanlan.zhihu.com/p/422397038   https://www.bilibili.com/video/BV1g44y1t7PY 升级版youtube-dl
-
-   是那种连着两行的（翻译的和之前一样，会有部分缺失）。对应倒是没问题
-
-4. 直接Google API
-
-   https://developers.google.com/explorer-help/code-samples#curl
-
-   https://segmentfault.com/a/1190000012769292
-
-   https://developers.google.com/explorer-help/code-samples#curl
-
-   https://developers.google.com/oauthplayground
-
-   https://developers.google.com/youtube/v3/docs/captions/download?apix=true
-
-5. 
 
 ### 各种视频
 
