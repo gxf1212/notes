@@ -136,6 +136,8 @@ https://jingyan.baidu.com/article/597a0643786861702b5243b4.html
 
 ## YouTube&翻译
 
+### 直接获取（手动一个个）
+
 - downsub翻译质量不错 https://downsub.com/
 
   > subdown好像很垃圾
@@ -193,6 +195,11 @@ https://jingyan.baidu.com/article/597a0643786861702b5243b4.html
 
 - （没试过）不过可以先推荐一个能完成第一步的：Google Chrome现在可以为英语视频自动生成字幕。在Chrome中打开【设置】→【高级】→【无障碍】（英文版：Settings→Advanced→Accessibility），如下图所示，开启【实时字幕】选项；Chrome会自动下载实时字幕文件，下载完毕后就可以开始生成字幕了。
 
+- 自动翻译字幕，下载SubtitleTranslate？
+
+  [https://github.com/mepeichun/SubtitleTranslate](https://link.zhihu.com/?target=https%3A//github.com/mepeichun/SubtitleTranslate/archive/refs/heads/master.zip)
+
+
 > 感觉不太行的
 >
 > - https://translatesubtitles.com/subtitletranslator/index.php
@@ -213,6 +220,10 @@ https://jingyan.baidu.com/article/597a0643786861702b5243b4.html
 >
 >   提出来，放搜狗？（可以指定生物医学话题）但还是无法联系多行
 >
+> - Free YouTube Subtitles Download https://www.dvdvideosoft.com/download.htm?fname=FreeYouTubeSubtitlesDownload.exe&ls=allDownloads
+>
+>   free, failed...and not batch...
+>
 > - https://www.zimujiang.com/lan/trans.html 要钱，可以识别和翻译。人工智障。。以后不要用了
 >
 > - https://github.com/1c7/Translate-Subtitle-File 只是个集成接口
@@ -228,7 +239,140 @@ https://jingyan.baidu.com/article/597a0643786861702b5243b4.html
 > - http://www.autocaption.net/home 还挺快？
 > - https://www.1sj.tv/ 人工翻
 
-### 批量获取双语字幕（trying
+### 批量获取双语字幕
+
+#### youtube_transcript_api
+
+[youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api), one-line substitle, it's easier than yt-dlp...
+
+```shell
+pip install youtube_transcript_api
+youtube_transcript_api 5UuLFnUhkMA --languages en zh-Hans --format srt > xxx.srt
+```
+
+we may need `pip install --upgrade youtube-dl` for parsing playlist. You can also do that with simple crawling packages or other toolkits.
+
+```python
+# please switch your vpn to global mode
+# paste the link here, execute this block, then choose one of the rest blocks
+url = 'https://www.youtube.com/playlist?list=PLp6SESWaMNKLk5dPAqYlB1NAmqXrrKAA8'
+
+import os, time
+sleep = 1
+from youtube_dl import YoutubeDL
+
+def youtubeDL(url):
+    # https://imyshare.com/article/19/
+    ydl = YoutubeDL({'cachedir': False, 'quiet': True, 'extract_flat': True,})
+    result = ydl.extract_info(url, download=False,)
+    return result
+
+# TODO: we have to provide link to the playlist, not one of the videos with playlist id
+info = youtubeDL(url)
+ids = [video['id'] for video in info['entries']]
+titles = [video['title'] for video in info['entries']]
+dirname = info['title']
+os.chdir('E:\VideoDownloaded')
+if not os.path.exists(dirname):
+    os.mkdir(dirname)
+os.chdir(dirname)
+```
+
+Download
+
+```python
+from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api.formatters import SRTFormatter
+formatter = SRTFormatter()
+for i in range(len(ids)):
+    # get data
+    vid = ids[i]
+    title = titles[i]
+    transcript_list = YouTubeTranscriptApi.list_transcripts(vid)
+    transcript = transcript_list.find_transcript(['en'])
+    en = transcript.fetch()
+    zhHans = transcript.translate('zh-Hans').fetch()
+    # match English and Chinese lines
+    entime = [str(entry['start']) for entry in en]
+    zhtime = [str(entry['start']) for entry in zhHans]
+    zhdict = dict(zip(zhtime, zhHans))
+    enzhdict = dict(zip(entime, en))
+    add_zh = []
+    for ek in entime:
+        if ek in zhtime:
+            enzhdict[ek]['text'] += '\n'+zhdict[ek]['text']
+    en_zh = list(enzhdict.values())
+    # write into a file
+    formatted = formatter.format_transcript(en_zh)
+    with open(title+'.srt', 'w', encoding='utf-8') as file:
+        file.write(formatted)
+    print('Finished no. {} of {} videos: {}'.format(i, len(ids), titles[i]))
+    time.sleep(sleep)
+
+```
+
+都没有合并字幕功能，好在不难
+
+各种语言的字幕条数不一样？各种工具下下来的都是
+
+但英语一定是最长的那个嘛？（看起来是没有相同是start time的）
+
+解决办法：把其他语言的按照start time匹配到英语的上
+
+
+
+#### debug
+
+`WARNING: [youtube] <urlopen error timed out>. Retrying (1/3)... `
+
+> when I first time met this problem in the command of youtube-dl of downloading, I have tried to change the VPN software V2rayU from the pac mode to (全局)/**global mode**, then everything is ok. Maybe it can help you.
+
+this also solved [youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api) connection error...
+
+but youtube api:
+
+```
+TimeoutError: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+```
+
+#### YouTube API
+
+请告诉我使用 Python 从 YouTube API 获取 YouTube 视频的字幕的详细步骤，附上相关的图片、网页链接等
+
+ChatGPT：由于我不能提供图片、链接等，因此只能提供您一个简略的指南。
+
+1. 创建Google API项目：首先，您需要创建一个Google API项目并启用YouTube API，以便使用YouTube API的功能。您可以在Google Developers Console上创建项目（https://console.developers.google.com/）。
+2. 获取API密钥：然后，您需要获取YouTube API的密钥，以便使用API访问YouTube视频。
+3. 安装必要的库：接下来，您需要安装必要的库，例如Google API Client库。您可以使用pip安装该库：
+
+```shell
+pip install --upgrade google-api-python-client
+```
+
+1. 获取YouTube视频的ID：接下来，您需要获取YouTube视频的ID，以便在后面使用YouTube API访问该视频。
+2. 访问YouTube API：接下来，您需要使用YouTube API访问该视频的字幕，并获取字幕信息。以下是使用Python代码的示例：
+
+```python
+from googleapiclient.discovery import build
+
+# Build the service
+service = build("youtube", "v3", developerKey="YOUR_API_KEY")
+
+# Call the API to retrieve the caption tracks for a video
+video_id = "YOUR_VIDEO_ID"
+results = service.captions().list(part="snippet", videoId=video_id).execute()
+
+# Iterate through the captions and print the language and name
+for caption in results.get("items", []):
+    print("Language: %s" % caption["snippet"]["language"])
+    print("Name: %s" % caption["snippet"]["name"])
+```
+
+请注意，在上述代码中，您需要替换“YOUR_API_KEY”和“YOUR_VIDEO_
+
+#### other failed
+
+##### crawl from downsub
 
 video url粘进downsub，搜索。按f12，转到“网络”，搜索playlist，~~url copy下来然后请求~~ 直接copy响应值保存到json文件。
 
@@ -236,7 +380,36 @@ video url粘进downsub，搜索。按f12，转到“网络”，搜索playlist�
 
 最关键的是那个urlEncrypt，每次下载（刷新）都不一样
 
+##### youtube-dl
 
+https://github.com/ytdl-org/youtube-dl
+
+CRTubeGet调用它？
+
+`yt_dlp.utils.RegexNotFoundError: Unable to extract Initial JS player n function name`的时候可以直接用youtube-dl程序下载
+
+网速极慢？。。
+
+```shell
+pip install --upgrade youtube-dl
+youtube-dl -o "E:\VideoDownloaded\immunology\%(title)s.%(ext)s" -f mp4 --write-auto-sub -sub-format srt --sub-lang en,zh -u xxx -p xxx 	https://www.youtube.com/playlist?list=PLqMa4P1M6Ha6iHID5YGXeU_b5WMS-P_f9
+```
+
+
+
+##### yt-dlp
+
+https://github.com/yt-dlp/yt-dlp
+
+字幕只有vtt文件？用：https://pypi.org/project/vtt-to-srt3/
+
+```shell
+pip install -U yt-dlp vtt_to_srt3
+yt-dlp --write-auto-subs --sub-format srt --sub-langs en,zh-Hans --skip-download https://www.youtube.com/watch?v=HGykUOcXz-A
+vtt_to_srt.py xx.srt
+```
+
+https://you-get.org/  no Chinese?
 
 # 下载
 
@@ -274,7 +447,9 @@ dl_coursera --cookies coursera.org_cookies.txt --slug chemical-biology --outdir 
 
 下载YouTube视频：CRTubeGet
 
-> also free: https://www.dvdvideosoft.com/en8
+> also free: https://www.dvdvideosoft.com/en8, and subtitle downloader, converter
+>
+> Gihosoft TubeGet: good, but not free...
 
 
 
@@ -326,7 +501,7 @@ B站、YouTube等的playlist应该都行
 
 https://www.apowersoft.cn/  一个处理视频的网站
 
-短视频截图（封面）可用，本地还是用爱奇艺播放器，左边的相机标志
+短视频截图（封面）可用，本地还是用爱奇艺播放器，左边的相机标志可截图
 
 ## 其他
 

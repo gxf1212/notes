@@ -1001,14 +1001,19 @@ examples:
 - https://alchemlyb.readthedocs.io/en/latest/
 - https://deepchem.readthedocs.io/en/latest/index.html
 
+more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
 
+> other documentation types:
+>
+> - [MMPBSA](https://github.com/Valdes-Tresanco-MS/gmx_MMPBSA): purely markdown+readthedocs?
 
 ## Basics
 
 > - [使用Sphinx写项目文档](https://blog.hszofficial.site/recommend/2020/11/27/%E4%BD%BF%E7%94%A8Sphinx%E5%86%99%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3/)
 >- [Sphinx+gitee+Read the Docs搭建在线文档系统](https://www.bilibili.com/read/cv11923872)
 
-steps
+### elements
+
 - start
 
   ```shell
@@ -1017,7 +1022,7 @@ steps
   sphinx-quickstart
   ```
 
-  一般也就把所有code放最外面，建一个docs的文件夹，还有example等。不一定要建个src文件夹
+  generally they put all your code in GitHub, `mkdir docs` (or sth like `examples`). Some `mkdir src` and put all code there, but it's not necessary.
 
 - build
 
@@ -1026,15 +1031,44 @@ steps
   make html
   ```
 
+- 
+
+- table of contents
+
+  ```rst
+  .. toctree::
+     :maxdepth: 1
+     :caption: User Documentation
+  
+     installation
+     Tutorials/index.rst
+     principle
+  ```
+
+  - these will show up in main text as well as the left sidebar
+  - write valid file names here (`.rst` or `.md` or others). It's ok without the extension name.
+  - but rendered as the first **first level title**.
+    - other first level titles in one `.md` file are also shown in the sidebar...
+
 - change a theme: do as they stated (see below)
 
 - enable markdown (see below)
 
-```shell
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple sphinx-autobuild
-```
 
+>other not using
+>
+>- [sphinx-autobuild](https://sphinx-extensions.readthedocs.io/en/latest/sphinx-autobuild.html): access http://127.0.0.1:8000/ with your browser
+>
+>  ```shell
+>  pip install -i https://pypi.tuna.tsinghua.edu.cn/simple sphinx-autobuild
+>  ```
+>
+>- ...
+>
 
+### rst syntax
+
+- 
 
 ## Markdown support
 
@@ -1057,17 +1091,39 @@ pip install sphinxcontrib-mermaid
 
 ### interpreter
 
-recommonmark
+**choose only one of them**
+
+[recommonmark](https://recommonmark.readthedocs.io/en/latest/index.html)
 
 ```
+extensions = ['recommonmark']
 ```
 
 myst-parser
 
 ```
+extensions = ['myst_parser']
 ```
 
 
+
+### emm
+
+[insert other file formats (MyST)](https://myst-parser.readthedocs.io/en/latest/faq/index.html)
+
+e.g. insert .md into .rst
+
+````markdown
+```{eval-rst}
+.. include:: include-rst.rst
+```
+````
+
+insert .rst into .md
+
+```rst
+.. include:: include.md
+```
 
 
 
@@ -1127,7 +1183,7 @@ https://pypi.org/project/sphinx-rtd-theme/
 
 Private repositories are not supported...
 
-
+https://www.cnblogs.com/jonnyan/p/14207711.html
 
 
 
