@@ -1031,7 +1031,7 @@ Z_{\mathrm{C}}= & \int \cdots \int \exp \left[-\beta\left(U^{(0)}+U^{(1)}\right)
 = & \int \cdots \int \exp \left[-\beta U^{(0)}\right]\mathrm{d}r_1 \cdots\mathrm{d}r_N \times \frac{\int \cdots \int \exp \left[-\beta U^{(1)}\right] \exp \left[-\beta U^{(0)}\right]\mathrm{d}r_1 \cdots\mathrm{d}r_N}{\int \cdots \int \exp \left[-\beta U^{(0)}\right]\mathrm{d}r_1 \cdots\mathrm{d}r_N} \\
 = & \ Z_{\mathrm{C}}^{(0)} \times\left\langle\exp \left[-\beta U^{(1)}\right]\right\rangle_0 \\
 A= & -k T \ln Z=-k T \ln \frac{Z_{\mathrm{C}}}{N ! \Lambda^{3 N}} \\
--\beta A= & \ \ln \frac{Z_{\mathrm{C}}^{(0)}}{N ! \Lambda^{3 N}}+\ln \left\langle\exp \left[-\beta U^{(1)}\right]\right\rangle_0=-\beta A^{(0)}-\beta A^{(1)}
+-\beta A= & -\beta A^{(0)}-\beta A^{(1)} =\ln \frac{Z_{\mathrm{C}}^{(0)}}{N ! \Lambda^{3 N}}+\ln \left\langle\exp \left[-\beta U^{(1)}\right]\right\rangle_0
 \end{aligned}
 $$
 其中
@@ -1049,7 +1049,7 @@ $$
 & =\sum_{k=0}^{\infty} \frac{(-\beta)^k}{k !}\left\langle U^{(1) k}\right\rangle_0
 \end{aligned}
 $$
-又可以将 $-\beta A^{(1)}$ 在 $-\beta=0$ 处展开：
+又可以将 $-\beta A^{(1)}$ 在 $-\beta=0$ 处展开，并做同样的近似：
 $$
 \begin{aligned}
 -\beta A^{(1)}& =\sum_{n=1}^{\infty} \frac{\omega_n}{n !}(-\beta)^n \\
@@ -1131,11 +1131,11 @@ $$
 u^{(0)}(r)=\left\{\begin{array}{ll}
 u_{\mathrm{LJ}}(r)+\varepsilon & r<2^{1 / 6} \sigma \\
 0 & r \geq 2^{1 / 6} \sigma
-\end{array} \qquad\\
+\end{array} \right.\\
 u^{(1)}(r)=\left\{\begin{array}{cc}
--\varepsilon & r<2^{1 / 6} \sigma \\
-u_{\mathrm{LJ}}(r) & r \geq 2^{1 / 6} \sigma
-\end{array}\right.\right.
+-\varepsilon & \qquad r<2^{1 / 6} \sigma \\
+u_{\mathrm{LJ}}(r) & \qquad r \geq 2^{1 / 6} \sigma
+\end{array}\right.
 $$
 
 
@@ -1174,17 +1174,17 @@ $$
 
 分子间作用力（范德华力）的特点：
 
-Ø 弱相互作用
+- 弱相互作用
 
-Ø 短程力
+- 短程力
 
 分子间作用力包含：
 
-Ø 取向力：“偶极-偶极” 相互作用，极性分子间，静电作用力
+- 取向力：“偶极-偶极” 相互作用，极性分子间，静电作用力
 
-Ø 诱导力：“偶极-诱导偶极” 相互作用
+- 诱导力：“偶极-诱导偶极” 相互作用
 
-Ø 色散力：“瞬时偶极-瞬时偶极” 相互作用，非极性分子间
+- 色散力：“瞬时偶极-瞬时偶极” 相互作用，非极性分子间
 
 氢键、电荷转移（弱化学相互作用）
 
