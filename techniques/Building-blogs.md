@@ -667,6 +667,8 @@ developer的js. components:
   - the style: size, position, ...
 
   - see [我的自定义多交互live2d折腾经历 - c10udlnk - 博客园](https://www.cnblogs.com/c10udlnk/p/14727173.html)
+    - 常用配置说明
+    - 运用CDN添加自定义模型
 
 - `waifu-tips.js`
 
@@ -691,13 +693,15 @@ experiences
 [看板娘对话自定义](https://dp2px.com/2019/09/19/hexo-live2d/#live2d-%E7%9C%8B%E6%9D%BF%E5%A8%98%E5%AF%B9%E8%AF%9D%E8%87%AA%E5%AE%9A%E4%B9%89)
 
 > 能响应的：
-> \- // 检测用户活动状态，并在空闲时显示消息
-> \- window.addEventListener("copy"，"你都复制了些什么呀
-> \- window.addEventListener("visibilitychange"，"哇，你终于回来了～"
-> \- 欢迎阅读xxx？
-> \- "mouseover": [{"selector": "#live2d",
-> \- "click": [{"selector": "#live2d",
+> - // 检测用户活动状态，并在空闲时显示消息
+> - window.addEventListener("copy"，"你都复制了些什么呀
+> - window.addEventListener("visibilitychange"，"哇，你终于回来了～"
+> - 欢迎阅读xxx？
+> - "mouseover": [{"selector": "#live2d",
+> - "click": [{"selector": "#live2d",
 >  showmessage的text可以是列表？
+
+problems
 
 - [ ] why serve locally, it shows other messages like "傍晚了！窗外夕阳的景色很美丽呢，最美不过夕阳红～"
 - [ ] buttons still not there
