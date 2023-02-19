@@ -670,6 +670,8 @@ developer的js. components:
     - 常用配置说明
     - 运用CDN添加自定义模型
 
+  ![waifu-tips-arguments](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/waifu-tips-arguments.png)
+
 - `waifu-tips.js`
 
   - defines basic events (with messages), functions, icons, models
