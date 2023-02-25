@@ -444,29 +444,5 @@
   }
 }
 
-% user added
-% math symbols
-\newcommand{\md}{\mathrm{d}}
-\newcommand{\der}[2]{\dfrac{\md #1}{\md #2}}
-\newcommand{\dd}[2]{\dfrac{\md^2 #1}{\md #2^2}}
-\newcommand{\p}[2]{\dfrac{\partial #1}{\partial #2}}
-\newcommand{\pp}[2]{\dfrac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\pd}[3]{\dfrac{\partial^2 #1}{\partial #2 \partial #3}}
-\newcommand{\vF}{\boldsymbol{F}}
-\newcommand{\vr}{\boldsymbol{r}}
-\newcommand{\vp}{\boldsymbol{p}}
-\newcommand{\vq}{\boldsymbol{q}}
-\newcommand{\vl}{\boldsymbol{l}}
-\newcommand{\vx}{\boldsymbol{x}}
-\newcommand{\dvr}{\dot{\vr}}
-\newcommand{\ddvr}{\ddot{\vr}}
-\newcommand{\dvq}{\dot{\vq}}
-\newcommand{\dt}{\mathrm{d}t}
-\newcommand{\half}{\dfrac{1}{2}}
-\newcommand{\sumin}{\sum_{i=1}^N}
-\newcommand{\suman}{\sum_{\alpha=1}^{3N}}
-\newcommand{\lag}{\mathcal{L}} % Lagrangian
-\newcommand{\ham}{\mathcal{H}} % Hamiltionian
-\newcommand{\inttot}{\int_{t_1}^{t_2}}
 
 \endinput

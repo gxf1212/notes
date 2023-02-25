@@ -1,6 +1,8 @@
-# PSK project
+# Protein MD and Amino Acid FEP
 
-somethin about amino acid modification, MD and FEP
+Somethin about amino acid modification, MD and FEP. Maybe running MD using Gromacs.
+
+> the following part is written during the PSK project
 
 # Stage 1: add a residue
 
@@ -98,7 +100,7 @@ It's acceptable to make the topology by hand (since examination is necessary), b
 >
 > read FF files, always gain so much...
 
-<img src="E:\GitHub_repo\notes\MD\PSK-PSKR.assets\search-nonstandard-residue.png" alt="image-20221105205515004" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/AA-MD-FEP.assets/search-nonstandard-residue.png" alt="image-20221105205515004" style="zoom:50%;" />
 
 
 #### Notes during making tys.rtf

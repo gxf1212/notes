@@ -672,6 +672,13 @@ developer的js. components:
 
   ![waifu-tips-arguments](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/waifu-tips-arguments.png)
 
+  to show three lines completely: 
+
+  ```json
+  	margin: -45px 20px;  
+  	min-height: 85px;
+  ```
+
 - `waifu-tips.js`
 
   - defines basic events (with messages), functions, icons, models
@@ -1018,8 +1025,17 @@ more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
 > - [使用Sphinx写项目文档](https://blog.hszofficial.site/recommend/2020/11/27/%E4%BD%BF%E7%94%A8Sphinx%E5%86%99%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3/)
 >- [Sphinx+gitee+Read the Docs搭建在线文档系统](https://www.bilibili.com/read/cv11923872)
 
-### elements
+### steps & elements
 
+- installation
+
+  ```shell
+  conda create -n sphinx
+  conda activate sphinx
+  pip install -U sphinx
+  conda install sphinx
+  ```
+  
 - start
 
   ```shell
@@ -1039,6 +1055,28 @@ more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
 
 - 
 
+- change a theme: do as they stated (see [below](#sphinx-themes))
+
+- enable markdown (see [below](#markdown-support))
+
+
+>other not using
+>
+>- [sphinx-autobuild](https://sphinx-extensions.readthedocs.io/en/latest/sphinx-autobuild.html): access http://127.0.0.1:8000/ with your browser
+>
+>  ```shell
+>  pip install -i https://pypi.tuna.tsinghua.edu.cn/simple sphinx-autobuild
+>  ```
+>
+>- 
+>
+
+### rst syntax
+
+https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
+
+- [section headers](https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#sections) are created by underlining (and optionally overlining) the section title with a punctuation character, **at least as long as the text**.
+
 - table of contents
 
   ```rst
@@ -1056,25 +1094,19 @@ more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
   - but rendered as the first **first level title**.
     - other first level titles in one `.md` file are also shown in the sidebar...
 
-- change a theme: do as they stated (see below)
+- insert figures, and control its size/position
 
-- enable markdown (see below)
+  ```rst
+  .. image:: cycle.png
+      :width: 400px
+      :align: center
+  ```
 
-
->other not using
->
->- [sphinx-autobuild](https://sphinx-extensions.readthedocs.io/en/latest/sphinx-autobuild.html): access http://127.0.0.1:8000/ with your browser
->
->  ```shell
->  pip install -i https://pypi.tuna.tsinghua.edu.cn/simple sphinx-autobuild
->  ```
->
->- ...
->
-
-### rst syntax
+  markdown cannot do this (html can).
 
 - 
+
+
 
 ## Markdown support
 
@@ -1087,8 +1119,10 @@ extensions:
 https://github.com/ryanfox/sphinx-markdown-tables
 
 ```shell
-pip install --upgrade recommonmark
-pip install --upgrade myst-parser
+# pip install --upgrade recommonmark
+pip install --upgrade myst-parser # or
+conda install -c conda-forge myst-parser
+conda install docutils
 pip install sphinx-markdown-tables
 pip install sphinxcontrib-mermaid
 ```
@@ -1111,11 +1145,11 @@ myst-parser
 extensions = ['myst_parser']
 ```
 
+mr2
 
+### insert other file formats (MyST)
 
-### emm
-
-[insert other file formats (MyST)](https://myst-parser.readthedocs.io/en/latest/faq/index.html)
+[reference](https://myst-parser.readthedocs.io/en/latest/faq/index.html)
 
 e.g. insert .md into .rst
 
@@ -1125,10 +1159,11 @@ e.g. insert .md into .rst
 ```
 ````
 
-insert .rst into .md
+insert .md into .rst
 
 ```rst
 .. include:: include.md
+  :parser: myst_parser.sphinx_
 ```
 
 
@@ -1141,22 +1176,32 @@ insert .rst into .md
 
 
 
-
-
-
-
 > other
 >
 > ```shell
 > pandoc README.md --from markdown --to rst -s -o readme.rst
 > ```
 >
-> todo:
->
-> - [ ] multilingual
-> - [ ] python code api. `sphinx-apidoc`
 
-## themes
+
+
+### recommonmark
+
+```python
+extensions = [
+    'recommonmark',
+    'sphinx.ext.mathjax'
+    ]
+# source_parsers = {'.md': 'recommonmark.parser.CommonMarkParser'}
+```
+
+
+
+
+
+
+
+## sphinx themes
 
 - https://www.sphinx-doc.org/en/master/usage/theming.html#builtin-themes
 - https://sphinx-themes.org/
@@ -1182,6 +1227,13 @@ https://pypi.org/project/sphinx-rtd-theme/
    ```
 
 3. 
+
+
+
+## todo
+
+- [ ] multilingual
+- [ ] python code api. `sphinx-apidoc`
 
 
 
