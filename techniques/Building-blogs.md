@@ -1032,9 +1032,14 @@ more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
   ```shell
   conda create -n sphinx
   conda activate sphinx
-  pip install -U sphinx
+  pip install -U sphinx  # or
   conda install sphinx
   ```
+  
+  other basic installation:
+  
+  - markdown and extensions
+  - themes
   
 - start
 
@@ -1077,6 +1082,14 @@ https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
 
 - [section headers](https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#sections) are created by underlining (and optionally overlining) the section title with a punctuation character, **at least as long as the text**.
 
+  - convention
+    - `#` with overline, for parts
+    - `*` with overline, for chapters
+    - `=` for sections
+    - `-` for subsections
+    - `^` for subsubsections
+    - `"` for paragraphs
+
 - table of contents
 
   ```rst
@@ -1089,10 +1102,13 @@ https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
      principle
   ```
 
-  - these will show up in main text as well as the left sidebar
   - write valid file names here (`.rst` or `.md` or others). It's ok without the extension name.
+  - these will show up in main text as well as the left sidebar
+  - blue titles (section in toc?), as in pmx site: just add multiple tocs
+  - maxdepth: controls depth shown in the page (not sidebar)
   - but rendered as the first **first level title**.
-    - other first level titles in one `.md` file are also shown in the sidebar...
+    - in rtd/alabaster/stanford/etc. theme, other first level titles in one `.md` file are also shown in the sidebar...
+    - so we just **start from second level title** in a page.
 
 - insert figures, and control its size/position
 
@@ -1102,7 +1118,7 @@ https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
       :align: center
   ```
 
-  markdown cannot do this (html can).
+  markdown cannot do this (only html can).
 
 - 
 
@@ -1114,17 +1130,10 @@ https://www.sphinx-doc.org/en/master/usage/markdown.html
 
 https://sphinx-doc.readthedocs.io/zh_CN/master/usage/markdown.html
 
-extensions:
-
-https://github.com/ryanfox/sphinx-markdown-tables
-
 ```shell
 # pip install --upgrade recommonmark
 pip install --upgrade myst-parser # or
-conda install -c conda-forge myst-parser
-conda install docutils
-pip install sphinx-markdown-tables
-pip install sphinxcontrib-mermaid
+conda install -c conda-forge myst-parser docutils -y
 ```
 
 > a simple example written in markdown: https://www.cnblogs.com/jonnyan/p/14207711.html
@@ -1166,11 +1175,14 @@ insert .md into .rst
   :parser: myst_parser.sphinx_
 ```
 
-
-
-
-
 ### extensions
+
+https://github.com/ryanfox/sphinx-markdown-tables
+
+```shell
+pip install sphinx-markdown-tables
+pip install sphinxcontrib-mermaid
+```
 
 
 
@@ -1203,32 +1215,33 @@ extensions = [
 
 ## sphinx themes
 
+To hunt for themes
+
 - https://www.sphinx-doc.org/en/master/usage/theming.html#builtin-themes
 - https://sphinx-themes.org/
 
+before everything starts:
+
 ```shell
-pip install -i sphinx_theme
+pip install sphinx_theme
 ```
 
-https://pypi.org/project/sphinx-rtd-theme/
+> https://github.com/LinxiFan/Sphinx-theme
 
+1. [sphinx-rtd-theme](https://pypi.org/project/sphinx-rtd-theme/)  one of the most classical: [alchemyb](https://alchemlyb.readthedocs.io/en/latest/)
+2. [Stanford](https://sphinx-themes.org/#theme-sphinx-theme): color changed
+3. [press_theme](https://github.com/schettino72/sphinx_press_theme). ruined by sidebar title level
+4. [Yummy](https://sphinx-themes.org/#theme-yummy-sphinx-theme). beautiful page, terrible font
+5. [Sizzle](https://sphinx-themes.org/#theme-sphinx-sizzle-theme): font. cannot fold sidebar??
+6. [Renku](https://sphinx-themes.org/#theme-renku-sphinx-theme): light background? change GitHub link?
+7. [Book](https://sphinx-themes.org/#theme-sphinx-book-theme): great. [Basicstrap](https://sphinx-themes.org/#theme-sphinxjp-themes-basicstrap): also great. 
+8. [Material](https://sphinx-themes.org/#theme-sphinx-material): toc on the right
+9. But they don't work with including markdown??
 
-
-1. https://github.com/LinxiFan/Sphinx-theme
-
-   ```shell
-   pip install sphinx_theme
-   ```
-
-2. https://github.com/schettino72/sphinx_press_theme
-
-   ```shell
-   pip install sphinx_press_theme
-   ```
-
-3. 
-
-
+> other
+>
+> - [sphinxdoc](https://sphinx-themes.org/#theme-default-sphinxdoc): openbabel
+> - [classic](https://sphinx-themes.org/#theme-default-classic): gromacs
 
 ## todo
 

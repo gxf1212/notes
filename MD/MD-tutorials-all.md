@@ -423,7 +423,19 @@ note (too old?)
 - Since proline has a special structure (and is actually not an amino acid), <u>hybrids involving proline are not supported</u>. (now it's fine?)
 - If the PSF produced by Mutator/FEP is further processed (by psfgen, solvate, ionize, etc.), the non bonded exclusion lists are likely to be lost. The resulting PSF should then be [alchemified](http://www.edam.uhp-nancy.fr/Alchemify/) again to add these lists back. (NAMD deals with that!)
 
+### check structure
 
+### other tips
+
+- GPU determine VMD capability; memory determines how big (and parallel) trajectory you can load.
+
+  https://www.ks.uiuc.edu/Research/vmd/current/ug/node12.html
+
+  > Since the choice of the GPU chipset or card has the biggest impact on the visualization capabilities and performance of VMD, this is the hardware component that is worth spending money on if one's intended use of VMD is primarily focused on visualization related tasks.....
+  >
+  > Following the choice of graphics accelerator, the amount of available system memory tends to have the next most significant impact on the performance and capability of VMD. The more memory a machine has, the more frames can be loaded at once from large molecular dynamics trajectory files. For batch-mode analysis tasks that consist primarily of scripting, system memory is frequently the resource that limits feasability of many analysis tasks.
+
+  Actually VMD didn't take too many memory here
 
 ## NAMD
 
@@ -1672,8 +1684,6 @@ xmgrace 2d.xvg
 >
 > `-proj`：分别输出各个
 
-
-
 尝试理解
 
 - 聚类画的图横坐标是时间，PCA画的图横坐标是空间。
@@ -1682,7 +1692,10 @@ xmgrace 2d.xvg
   - 前者是直接算距离，后者是提出新指标
   - 纵坐标是构象，一般搞成概率密度。算能量（？）
 
+23.1 dPCA 二面角主成分分析
 
+- https://zhuanlan.zhihu.com/p/479009558
+- [Jerkwin](https://jerkwin.github.io/GMX/GMXman-8/#811-二面角主成分分析)
 
 ## 22.5.2 SDH
 

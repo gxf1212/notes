@@ -250,7 +250,144 @@ easyconnect：没事不要老开着，当自动断开时就重启一下！！
 
 https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect，但没launchctl这个命令
 
-## Git!
+## Supercomputers
+
+### tools
+
+#### ssh and scp
+
+under Win, Xshell+Xftp look very good. Dragging and clicking a visualized folder will be effcient
+
+finalshell does not look so pretty though we can just use it. cannot update
+
+#### electerm
+
+> functions covers what is in Xshell and Xftp, but kind of small font...but a great tool!
+
+（不是恰饭，是我在用）
+
+electerm是一个Linux端的ssh客户端，国产软件。
+
+- 界面简洁，可自定义主题
+- 完全免费开源，支持所有电脑操作系统
+- 支持复制粘贴路径
+- 支持sftp（就是文件夹的可视化界面，拷文件只需要拖动）
+- 甚至还能当做本地命令行的替代品，还能GitHub、Gitee同步
+
+如果你讨厌用scp往远程服务器上拷文件，可以试试它，每次粘贴一长串文件路径还是挺烦的。
+
+缺点：
+
+- 感觉有时鼠标点击有点不灵敏……准确地说是传输大量文件时就会很卡。。（重启软件就好了）可以另外开一个window
+- 命令行字体倒是能变，但是这个UI字有点小不能调（可以去提个issue）
+
+下载地址：https://electerm.html5beta.com/ 
+
+https://zhuanlan.zhihu.com/p/348324919
+
+#### Xshell & Xftp
+
+1. Xshell font (for only for one dialog)
+
+   <img src="E:\GitHub-repo\notes\techniques\images\xshell-font.png" alt="xshell-font" style="zoom:150%;" />
+
+   
+
+2. xftp sync
+
+   <img src="E:\GitHub-repo\notes\techniques\images\xftp-sync.png" style="zoom:50%;" />
+
+### scheduling system
+
+#### slurm
+
+read the pdf from hpc.xjtu.edu.cn for more
+
+https://blog.csdn.net/qq_33275276/article/details/105060613
+
+```shell
+# install
+module load gcc8.5
+module load cmake320
+cmake .. -DCMAKE_INSTALL_PREFIX=~/program/gromacs-2020.1-cpu -DGMX_BUILD_OWN_FFTW=ON -DGMX_GPU=off -DCMAKE_C_COMPILER=/share/apps/gcc-8.5/bin/gcc -DCMAKE_CXX_COMPILER=/share/apps/gcc-8.5/bin/g++
+make -j 8
+make install
+
+cd ~/gmx/lig2
+source ~/program/gromacs-2020.1-cpu/bin/GMXRC.bash
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/lib64/
+module load gcc8.5
+module load intel20u4
+
+squeue
+scontrol show job jobid
+```
+
+write absolute path when submitting jobs...
+
+an example script. submitted under your working directory
+
+```shell
+#!/bin/bash
+#SBATCH -J lig2
+#SBATCH -n 8
+#SBATCH -p node
+#SBATCH -N 1
+##SBATCH --tmp=MB 
+#SBATCH -p gpu
+#SBATCH --gres=gpu:1
+
+job=final_com
+
+#source /share/apps/gromacs/20211/bin/GMXRC.bash
+source /share/apps/gromacs/20211new/bin/GMXRC.bash
+
+module load cuda11.1
+##module load cuda10.2
+module load gcc8.5
+module load intel20u4
+
+##Run  Gromacs
+date > log
+gmx mdrun -deffnm $job -nb gpu
+date > log
+~
+```
+
+#### PBS
+
+- basics https://www.jianshu.com/p/2f6c799ca147
+  - `qstat`
+  
+    ```shell
+    # 查询作业号为211 的作业的具体信息。
+    qstat -f 211
+    # 查询用户gxf的所有作业。
+    qstat -u gxf
+    ```
+  
+  - `qsub`
+  
+  - `qdel`
+  
+- Environment Variable https://pubs.opengroup.org/onlinepubs/009696699/utilities/qsub.html
+  - like `$PBS_O_WORKDIR`
+  
+- 运行qsub命令时，报错: `script is written in DOS/Windows text format`。 解决办法：输入 
+
+  ```shell
+  dos2unix <pbs-script-file>
+  ```
+
+- 
+
+### run in backend
+
+namd好像也不能在命令行直接nohup，现在这个2&>xx.log会导致最后没有输出（只有restart）
+
+应该是1>& xx.log!
+
+## Git
 
 ### in cmd
 
@@ -430,126 +567,9 @@ https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect�
 
 4. 
 
-## Supercomputers
+### git bash
 
-### tools
-
-#### ssh and scp
-
-under Win, Xshell+Xftp look very good. Dragging and clicking a visualized folder will be effcient
-
-finalshell does not look so pretty though we can just use it. cannot update
-
-#### electerm
-
-> functions covers what is in Xshell and Xftp, but kind of small font...but a great tool!
-
-（不是恰饭，是我在用）
-
-electerm是一个Linux端的ssh客户端，国产软件。
-
-- 界面简洁，可自定义主题
-- 完全免费开源，支持所有电脑操作系统
-- 支持复制粘贴路径
-- 支持sftp（就是文件夹的可视化界面，拷文件只需要拖动）
-- 甚至还能当做本地命令行的替代品，还能GitHub、Gitee同步
-
-如果你讨厌用scp往远程服务器上拷文件，可以试试它，每次粘贴一长串文件路径还是挺烦的。
-
-缺点：
-
-- 感觉有时鼠标点击有点不灵敏……准确地说是传输大量文件时就会很卡。。（重启软件就好了）可以另外开一个window
-- 命令行字体倒是能变，但是这个UI字有点小不能调（可以去提个issue）
-
-下载地址：https://electerm.html5beta.com/ 
-
-https://zhuanlan.zhihu.com/p/348324919
-
-### scheduling system
-
-#### slurm
-
-read the pdf from hpc.xjtu.edu.cn for more
-
-https://blog.csdn.net/qq_33275276/article/details/105060613
-
-```shell
-# install
-module load gcc8.5
-module load cmake320
-cmake .. -DCMAKE_INSTALL_PREFIX=~/program/gromacs-2020.1-cpu -DGMX_BUILD_OWN_FFTW=ON -DGMX_GPU=off -DCMAKE_C_COMPILER=/share/apps/gcc-8.5/bin/gcc -DCMAKE_CXX_COMPILER=/share/apps/gcc-8.5/bin/g++
-make -j 8
-make install
-
-cd ~/gmx/lig2
-source ~/program/gromacs-2020.1-cpu/bin/GMXRC.bash
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/lib64/
-module load gcc8.5
-module load intel20u4
-
-squeue
-scontrol show job jobid
-```
-
-write absolute path when submitting jobs...
-
-an example script. submitted under your working directory
-
-```shell
-#!/bin/bash
-#SBATCH -J lig2
-#SBATCH -n 8
-#SBATCH -p node
-#SBATCH -N 1
-##SBATCH --tmp=MB 
-#SBATCH -p gpu
-#SBATCH --gres=gpu:1
-
-job=final_com
-
-#source /share/apps/gromacs/20211/bin/GMXRC.bash
-source /share/apps/gromacs/20211new/bin/GMXRC.bash
-
-module load cuda11.1
-##module load cuda10.2
-module load gcc8.5
-module load intel20u4
-
-##Run  Gromacs
-date > log
-gmx mdrun -deffnm $job -nb gpu
-date > log
-~
-```
-
-#### PBS
-
-- basics https://www.jianshu.com/p/2f6c799ca147
-  - `qstat`
-  
-    ```shell
-    # 查询作业号为211 的作业的具体信息。
-    qstat -f 211
-    # 查询用户gxf的所有作业。
-    qstat -u gxf
-    ```
-  
-  - `qsub`
-  
-  - `qdel`
-  
-- Environment Variable https://pubs.opengroup.org/onlinepubs/009696699/utilities/qsub.html
-  - like `$PBS_O_WORKDIR`
-  
-- 
-
-- 
-
-### run in backend
-
-namd好像也不能在命令行直接nohup，现在这个2&>xx.log会导致最后没有输出（只有restart）
-
-应该是1>& xx.log!
+- [如何修改 Git Bash 窗口中默认的字体大小](https://www.cnblogs.com/heroljy/p/8989123.html)：点击右键，选择 Options
 
 ## Typora
 
@@ -579,7 +599,9 @@ https://www.ghxi.com/typora.html
 
 Mac：https://macwk.com/soft/typora
 
-## VScode
+## Coding
+
+### VScode
 
 1. VScode安装完默认不能自动换行，需要我们手动配置。 文本超出显示时，会溢出，如图： 进入文件>首选项>设置，打开设置界面，在常用设置下找到Editor:Word Wrap选项，默认为off,设置为on即可。
 
@@ -597,7 +619,9 @@ Mac：https://macwk.com/soft/typora
 
 3. https://jingyan.baidu.com/article/e6c8503ca7706de54f1a18f4.html vs code 字体分辨率
 
-## Pycharm
+4. https://zhuanlan.zhihu.com/p/68577071  run remote code, but view locally
+
+### Pycharm
 
 1. https://blog.csdn.net/qq_41330454/article/details/105906347 控制台命令提示符是In[2]. ipython!
 
@@ -615,7 +639,9 @@ Mac：https://macwk.com/soft/typora
 
 3. 实际上没有那么快自动保存，还是需要ctrl+s，尤其是引用别的包的时候
 
-4. intepreter: create from existing sources. "study" can run both R and Python.
+4. intepreter: create from existing sources. 
+
+   [Configure a conda virtual environment](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html#ffac721c)
 
 5. [Markdown Support](https://www.jetbrains.com/help/pycharm/markdown.html)
 
@@ -623,59 +649,92 @@ Mac：https://macwk.com/soft/typora
 
 7. 
 
-## conda & python cmd
+### conda & python cmd
 
 https://blog.csdn.net/zhayushui/article/details/80433768
 
-- upon installation
-  
+#### Basics
+
+- https://blog.csdn.net/xiangfengl/article/details/127597065 on a new machine. OpenSSL appears to be unavailable on this machine.
+
+- Add to path! https://blog.csdn.net/sdnuwjw/article/details/112207440
+
+- maybe 
+
   ```shell
   conda init shell
   ```
 
-- on environments
-  
-  - see
-    
-    ```shell
-    conda env list
-    ```
-    
-    or `conda info`: information
-    
-    - -e: environments
-  
-  - create 
-    
-    - normal
-      
-      ```shell
-      conda create -n env_name
-      ```
-    
-    - from yaml https://blog.csdn.net/vola9527/article/details/80744540
-      
-      ```shell
-      conda env create -f study.yaml
-      ```
-    
-    - export
-      
-      ```
-      conda activate your_env
-      conda env export > environment.yaml # in your current directory
-      ```
-      
-      注：.yaml文件移植过来的环境只是安装了你原来环境里用conda install等命令直接安装的包，你用pip之类装的东西没有移植过来，需要你重新安装。
-    
-    - remove
-      
-      ```shell
-      conda env remove xxx --all # or rm the file manually
-      ```
+- Please update conda by running
 
-- on packages of an environment
-  
+  ```shell
+  conda update -n base conda
+  ```
+
+- 
+
+#### Environments
+
+- see env list
+
+  ```shell
+  conda env list
+  ```
+
+  or `conda info`: information
+
+  - -e: environments
+
+- create 
+
+  - normal
+
+    ```shell
+    conda create -n env_name
+    ```
+
+  - from yaml https://blog.csdn.net/vola9527/article/details/80744540
+
+    ```shell
+    conda env create -f study.yaml
+    ```
+
+- export
+
+  ```
+  conda activate your_env
+  conda env export > environment.yaml # in your current directory
+  ```
+
+  注：.yaml文件移植过来的环境只是安装了你原来环境里用conda install等命令直接安装的包，你用pip之类装的东西没有移植过来，需要你重新安装。
+
+- remove
+
+  ```shell
+  conda env remove xxx --all # or rm the file manually
+  ```
+
+- conda 环境迁移, 修改conda路径（复制文件夹 + 软连接）https://blog.csdn.net/qq_34342853/article/details/123020957
+
+  没成功
+
+  https://www.jb51.net/article/256139.htm
+
+  add env path to .condarc, and change the priority of D:\Anaconda3 (both package and environment directory)
+
+  ```shell
+  conda config --add envs_dirs newdir
+  conda config --add pkgs_dirs newdir
+  ```
+
+  No writeable pkgs directories configured: https://blog.csdn.net/qq_37142541/article/details/125428689
+
+- 
+
+#### Packages
+
+- packages of an environment
+
   ```shell
   conda list # list envs
   conda list -n env # list packages
@@ -683,54 +742,48 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   ```
 
 - win32 or win_amd64 means version of python
-  
+
   in win, run python in cmd to know version.
-  
+
   my win: 3.7, 32bit 
-  
+
   station: 3.8, 64bit
-  
+
   https://blog.csdn.net/taquguodedifang/article/details/78039181 in linux
 
 - some packages
-  
+
   ```shell
   conda install -c anaconda scikit-learn -y
   conda install -c conda-forge opencv -y
   ```
 
-- path to anaconda icon  [link](https://dannyda.com/2020/03/21/how-to-create-shortcut-icon-for-anaconda-anaconda3-navigator-launch-anaconda-navigator-in-linux-debian-ubuntu-kali-linux/?__cf_chl_managed_tk__=8b0602f628e3697df877a10ef8acbd1aaed57efe-1624180568-0-AQN5TbG3O_yGaDEn0fVCjKdPwJeitKXjQ5dGrRfek69NylD0fJ5-atmRV2JoCodX4-mn_CX-vH8Ay_KzM9Ew77recYhgLQF_b3AqC85p9Pt8IVjBso98tTdFN9TknxGj5tTJFM_8KyF_S4qbMmoTpsiUnMKl2kc3rlzmRlQZvO0AJaILgZakK-WjM6xFauMno73HWqkCE4IaHB35y0M0C0dnw8t2b5qReINgAcLiCZuHX897fWj-OLS6yNbAVjmkgOPbkazSG3X8a-o_AgziC8zfKXi584jpGmet4WwRwFnSaWJvOAp7BA7vSIkcSJ7UAOFWzpvkDilEtFoa-XMd6jpZQgKbtBVQn4vLT5LUl1_XLFU3M7B9G_vN7vcyUcFjLV2gl6xdDcx9WA-JypLtICF3nbFVjS3gvK_WCEqs30dnW38X3Ceuk9Bhq7FFyegkaQmnFy5a4V5KeJob3h_gXQRaWwaeAFAHoeuYY0RXfAtfD82sJgJP0UOOYC8IBBV43rGAmhSOsLhiC2u3hk2hwLIEy7mG10sSUlGq_3I_dPjha1qlIAP0APiBXaWOOdujGD2gFeot6PQGwrg71cglm4rQc1Zei_kF8QfHdYerOFjLLtbfWC0HTeoFZ_L7Qu9R9c8npxn9Z5Np2O_IqqsKo3yaDAxR_aV8JVS3rS-a4mxAunZXcWj734HTBAJaTTSdepNfW2PdqnUEbsnD5bAyjeDPVQQupDNG_1qz8fsEzThDBSPP04GMtGJGqpEBawQvu2Nk857rXxA-_V2AwE9s7Og)
-  
-  `/home/user/anaconda3/lib/python3.7/site-packages/anaconda_navigator/static/images/anaconda-icon-256x256.png`
+- 
+
+#### Bugs
 
 - An unexpected error has occurred. Conda has prepared the above report.
-  
+
   https://blog.csdn.net/Felaim/article/details/108368598
-  
+
   ```shell
   conda clean -i
   ```
 
-- Please update conda by running
-  
-  ```shell
-  conda update -n base conda
-  ```
-
 - EnvironmentNotWritableError: The current user does not have write permissions to the targe...
-  
+
   https://www.jianshu.com/p/95e52d6b46ac   problem: permission 权限
-  
+
   ```shell
   sudo chmod -R 777 anaconda3/
   ```
 
 - PackagesNotFoundError:
-  
+
   https://blog.csdn.net/weixin_43815222/article/details/108549497
-  
+
 - pip install the package only inside one specific conda environment
-  
+
   ```shell
   # make sure
   which pip
@@ -738,7 +791,7 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   conda install pip
   # in it before installing with pip
   ```
-  
+
   https://blog.csdn.net/weixin_41712499/article/details/105430471  it's just the problem with pat
 
 - https://blog.csdn.net/qazplm12_3/article/details/108924561
@@ -757,6 +810,8 @@ https://blog.csdn.net/zhayushui/article/details/80433768
 
   maybe don't put too many channels. https://www.jianshu.com/p/1dbaef6b3209
 
+  .condarc文件在`C:\User\xx\`目录（Windows的HOME）下，或者使用win+R后在运行窗口中输入`%HOMEPATH%`进入
+
   ```
   channels:
     - conda-forge
@@ -766,7 +821,7 @@ https://blog.csdn.net/zhayushui/article/details/80433768
     - defaults
   ```
 
-- .condarc文件在`C:\User\xx\`目录下，或者使用win+R后在运行窗口中输入`%HOMEPATH%`进入
+- 
 
 - https://blog.csdn.net/shuiyixin/article/details/90370588
 
@@ -778,11 +833,12 @@ https://blog.csdn.net/zhayushui/article/details/80433768
 
   
 
-  
 
-> icon path: `xxx/anaconda/lib/python3.7/site-packages/anaconda_navigator/static/images/anaconda-icon-256x256.png`
+> icon path: `xxx/anaconda/lib/python3.7/site-packages/anaconda_navigator/static/images/anaconda-icon-256x256.png` 
+>
+> [link](https://dannyda.com/2020/03/21/how-to-create-shortcut-icon-for-anaconda-anaconda3-navigator-launch-anaconda-navigator-in-linux-debian-ubuntu-kali-linux/?__cf_chl_managed_tk__=8b0602f628e3697df877a10ef8acbd1aaed57efe-1624180568-0-AQN5TbG3O_yGaDEn0fVCjKdPwJeitKXjQ5dGrRfek69NylD0fJ5-atmRV2JoCodX4-mn_CX-vH8Ay_KzM9Ew77recYhgLQF_b3AqC85p9Pt8IVjBso98tTdFN9TknxGj5tTJFM_8KyF_S4qbMmoTpsiUnMKl2kc3rlzmRlQZvO0AJaILgZakK-WjM6xFauMno73HWqkCE4IaHB35y0M0C0dnw8t2b5qReINgAcLiCZuHX897fWj-OLS6yNbAVjmkgOPbkazSG3X8a-o_AgziC8zfKXi584jpGmet4WwRwFnSaWJvOAp7BA7vSIkcSJ7UAOFWzpvkDilEtFoa-XMd6jpZQgKbtBVQn4vLT5LUl1_XLFU3M7B9G_vN7vcyUcFjLV2gl6xdDcx9WA-JypLtICF3nbFVjS3gvK_WCEqs30dnW38X3Ceuk9Bhq7FFyegkaQmnFy5a4V5KeJob3h_gXQRaWwaeAFAHoeuYY0RXfAtfD82sJgJP0UOOYC8IBBV43rGAmhSOsLhiC2u3hk2hwLIEy7mG10sSUlGq_3I_dPjha1qlIAP0APiBXaWOOdujGD2gFeot6PQGwrg71cglm4rQc1Zei_kF8QfHdYerOFjLLtbfWC0HTeoFZ_L7Qu9R9c8npxn9Z5Np2O_IqqsKo3yaDAxR_aV8JVS3rS-a4mxAunZXcWj734HTBAJaTTSdepNfW2PdqnUEbsnD5bAyjeDPVQQupDNG_1qz8fsEzThDBSPP04GMtGJGqpEBawQvu2Nk857rXxA-_V2AwE9s7Og)
 
-### For R language
+#### For R language
 
 when pycharm is open, working directory is set to the current. to install a package (dependent on) tcl
 
@@ -803,7 +859,7 @@ conda install -c intel tcl
 
 failed, remove this env...
 
-## Jupyter Notebook, Google Colab, etc.
+### Jupyter Notebook, Google Colab, etc.
 
 1. Jupyter Notebook 更换主题（背景、字体）:  https://www.cnblogs.com/shanger/p/12006161.html
    
@@ -846,6 +902,10 @@ failed, remove this env...
 
 ## MS office
 
+### Common
+
+- [查看 Office 文件的先前版本](https://support.microsoft.com/zh-cn/office/查看-office-文件的先前版本-5c1e076f-a9c9-41b8-8ace-f77b9642e2c2)
+
 ### Word
 
 - 表格左上角斜线
@@ -865,17 +925,51 @@ failed, remove this env...
 - [PPT中如何将多个图形等距分布](https://jingyan.baidu.com/article/fec7a1e5c51b1d1190b4e7ca.html)
 - 美化大师插件：批量删除动画；PPT工具栏
 
-## Chem tools
+## Scientific
 
-### ChemBioDraw
+### Origin
 
-- 全选改字体（18），在file--document setting--Drawing改线宽，大概0.56（0.4倍粗体），就和Wikipedia的比较接近（平常不用加粗）。全选--右键--Object Settings也可以。
+https://www.zhihu.com/column/c_1368227352443572224
 
-  ![image-20230119225838463](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/chembiodraw-drawing)
+- 平滑处理
 
-- ChemDraw中内置多种模板，蛋白质支链模板是比较典型的一种了，通过模板可以快速添加蛋白质支链结构。而可以在Text tool或者模板工具中找到Templates（模板），然后选择Amino Acid Side Chain（蛋白质支链模板）即可。
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/origin-smooth.png" style="zoom:80%;" />
 
-- [怎样在ChemDraw中设置字体的默认格式？](https://www.sohu.com/a/104294282_395309)
+- https://www.jianshu.com/p/7f93c9c2b777
+
+  origin更新上下标，要在book（data）那里Ctrl+S
+
+- [数据导入到Origin后全变成了#号的原因](https://www.office68.com/openoffice/9159.html)：不够长
+
+- [origin怎么进行线性拟合](https://www.zhihu.com/question/29392864/answer/104174248)
+
+- [Origin如何让坐标轴刻度向内](https://jingyan.baidu.com/article/2fb0ba404b095200f2ec5f16.html)
+
+- 调整ticks
+
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/origin-ticks.png)
+
+- [Origin如何在右侧插入列](https://www.10kn.com/originpro-insert-right-col/)
+
+- ![origin-equation](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/origin-equation.png)
+
+- 
+
+- [origin自动载入xvg数据作图](https://jerkwin.github.io/2018/08/06/origin%E8%87%AA%E5%8A%A8%E8%BD%BD%E5%85%A5xvg%E6%95%B0%E6%8D%AE%E4%BD%9C%E5%9B%BE/)
+
+### GraphPad Prism
+
+
+
+#### other
+
+- linear regression: https://www.graphpad.com/quickcalcs/linear1/
+
+### Scientific writing
+
+https://www.home-for-researchers.com/static/index.html#/
+
+https://app.bibguru.com/: fast citation generation
 
 ## Other
 
@@ -905,42 +999,6 @@ installation: see [Linux-fundamental](/techniques/Linux-fundamental?id=other-sof
 
    - default folder, either inside wine or desktop (cannot drag...). 
    - cannot 'open the folder' (redirect to the browser with wrong path...)
-
-### Scientific writing
-
-https://www.home-for-researchers.com/static/index.html#/
-
-https://app.bibguru.com/: fast citation generation
-
-## Origin
-
-https://www.zhihu.com/column/c_1368227352443572224
-
-- 平滑处理
-
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/origin-smooth.png" style="zoom:80%;" />
-
-- https://www.jianshu.com/p/7f93c9c2b777
-
-  origin更新上下标，要在book（data）那里Ctrl+S
-
-- [数据导入到Origin后全变成了#号的原因](https://www.office68.com/openoffice/9159.html)：不够长
-
-- [origin怎么进行线性拟合](https://www.zhihu.com/question/29392864/answer/104174248)
-
-- [Origin如何让坐标轴刻度向内](https://jingyan.baidu.com/article/2fb0ba404b095200f2ec5f16.html)
-
-- 调整ticks
-
-  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/origin-ticks.png)
-
-- [Origin如何在右侧插入列](https://www.10kn.com/originpro-insert-right-col/)
-
-- ![origin-equation](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/origin-equation.png)
-
-- 
-
-- [origin自动载入xvg数据作图](https://jerkwin.github.io/2018/08/06/origin%E8%87%AA%E5%8A%A8%E8%BD%BD%E5%85%A5xvg%E6%95%B0%E6%8D%AE%E4%BD%9C%E5%9B%BE/)
 
 # bit by bit programming
 

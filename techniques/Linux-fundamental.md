@@ -524,18 +524,13 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
 5. check the size of a folder: https://zhidao.baidu.com/question/1178566665695139419.html
 
    ```shell
-   du -sh /directory
+   du -sh /directory  # total size. default is .
+   du -d 1 -h  # show folder and size, finally total size
    ```
 
 6. ls
 
    https://www.runoob.com/linux/linux-comm-ls.html
-
-   ```shell
-   du -d 1 -h  # show folder and size
-   ```
-
-   
 
 7. cp
 
@@ -1512,7 +1507,7 @@ my email: stu, `741*******cb`
   >
   > Logfile is /var/log/cuda-installer.log
   
-- to verify success: https://blog.csdn.net/weixin_38208741/article/details/70848364
+- to verify success: [link](https://blog.csdn.net/weixin_38208741/article/details/70848364)  [link](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#running-the-compiled-examples )
   
   ```shell
   cd /usr/local/cuda/samples/1_Utilities/deviceQuery #由自己电脑目录决定
@@ -1525,6 +1520,10 @@ my email: stu, `741*******cb`
   # deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 11.4, CUDA Runtime Version = 11.4, NumDevs = 1
   Result = PASS
   ```
+  
+  on Windows, similarly: `path\to\NVIDIA GPU Computing Toolkit\CUDA\vxx.x\extras\demo_suite\deviceQuery.exe`
+  
+  > https://blog.csdn.net/GreatcloudL/article/details/105209287
   
   or
   
@@ -2399,11 +2398,17 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 # Windows notes
 
-1. windows如何查看用户名 https://zhuanlan.zhihu.com/p/129858590
+## General
+
+1. Find operating system info in Windows 11
+
+   Select Start > Settings > System > About (系统信息). Open About settings.
+
+2. windows如何查看用户名 https://zhuanlan.zhihu.com/p/129858590
 
    控制面板--用户账户
 
-2. win下扩容？
+3. win下扩容？
 
    https://www.cnblogs.com/yunweis/p/8023098.html
 
@@ -2411,11 +2416,70 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
    diskgenius可以无损扩容？
 
-3. 
+   [mklink命令给C盘软件搬家](https://www.cnblogs.com/life-of-coding/p/10871831.html)：等搞清楚了哪些地方比较大就整
+
+4. win11系统如何显示文件后缀名：搜索“文件资源管理器选项”
+
+   http://www.ujiaoshou.com/xtjc/164431010.html
+
+5. [windows如何查看目前显存的占用情况](https://zhidao.baidu.com/question/136674799462427125.html)：任务管理器---性能
+
+   > [主存、辅存、内存、外存、存储器是什么？还傻傻分不清楚？看完这一篇就够了](https://zhuanlan.zhihu.com/p/113869761)
+   >
+   > RAM是memory（主要是内存）的一部分
+
+6. Windows 11 22H2大版本：文件夹标签页。直接在设置的检查更新里
+
+7. 快捷键
+
+   - 联想，打开键盘灯光：Fn+空格键
+   - alt加双击直接打开属性，F2重命名
+
+8. Windows-Unix reference table
+
+   | Windows command | Unix command |
+   | --------------- | ------------ |
+   | `dir`           | `ls`         |
+   | `cls`           | `clear`      |
+   | `curl`          | `curl`       |
+
+   
+
+9. duplicate tab with the same path in cmd
+
+   https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/new-tab-same-directory
+
+10. TTC字体是TrueType字体集成文件(. TTC文件)，可和ttf放一起
+
+## WSL
+
+- WSL is highly memory-demanding...
+- WSL 可以使用 `[tool-name].exe` 直接从 WSL 命令行运行 Windows 工具。 例如，`notepad.exe`。
+
+# 知识
+
+maybe a new .md file in the future
+
+## cs
+
+**Tesla A100 is...2~3x** faster than the V100 using 32-bit precision.
 
 
 
-TTC字体是TrueType字体集成文件(. TTC文件)，可和ttf放一起
+重写(Override)与重载(Overload)
+
+- 重写是子类对父类的允许访问的方法的实现过程进行重新编写, 返回值和形参都不能改变。**即外壳不变，核心重写！**
+- 重载(overloading) 是在一个类里面，方法名字相同，而参数不同。返回类型可以相同也可以不同。
+
+## chembio
+
+- 药物分子中的羧基可以用磺酰胺，磷酸酯，四唑等代替。
+- 基团反转是常见的一种非经典电子等排类型，是同一功能基团间进行的电子等排。-COR 与 ROC-基团，都是酯，且有相似的疏水性
+- 不改变环大小的等排体？
+- 环内CH=CH和NH、S（缩环），O-C=O；CH=和N=
+- 芳香甲酸酯，相比于脂肪酸酯，更不易水解吗？
+
+
 
 # Other---the first time I install Ubuntu
 

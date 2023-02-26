@@ -1123,28 +1123,6 @@ https://docs.silcsbio.com/2020.1/install.html
 
 ## Visualization
 
-### ligplot
-
-https://www.ebi.ac.uk/thornton-srv/software/LigPlus/install.html
-
-```shell
-export ligplus='java -cp /home/sjxlab/LigPlus/ -jar /home/sjxlab/LigPlus/LigPlus.jar'
-$ligplus
-```
-
-now it is also ok if
-
-```shell
-java -jar LigPlus.jar
-export PATH=$PATH:/home/sjxlab/LigPlus/
-```
-
-Parameters written to file: `/home/moonlight/LigPlus/lib/params/ligplus.par`
-
-### RasMol
-
-http://www.rasmol.org/software/RasMol_2.7.5/INSTALL.html
-
 ### VMD
 
 #### pre-compiled version
@@ -1177,6 +1155,12 @@ sudo make uninstall
 You may refer to the pdf attached for more options
 
 uninstall: delete the files  https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/25245.html
+
+#### windows
+
+**Unable to load NVML library, GPU-CPU affinity unavailable.** after installing CUDA?
+
+http://bbs.keinsci.com/thread-25477-1-1.html windows VMD1.9.4alpha可能就是有问题？还好
 
 #### source code
 
@@ -1335,6 +1319,28 @@ To (re)install desktop menu and icon later, run:
 
 dependence: `conda install -c conda-forge xorg-libxscrnsaver`
 
+### ligplot+
+
+https://www.ebi.ac.uk/thornton-srv/software/LigPlus/install.html
+
+```shell
+export ligplus='java -cp /home/sjxlab/LigPlus/ -jar /home/sjxlab/LigPlus/LigPlus.jar'
+$ligplus
+```
+
+now it is also ok if
+
+```shell
+java -jar LigPlus.jar
+export PATH=$PATH:/home/sjxlab/LigPlus/
+```
+
+Parameters written to file: `/home/moonlight/LigPlus/lib/params/ligplus.par`
+
+### RasMol
+
+http://www.rasmol.org/software/RasMol_2.7.5/INSTALL.html
+
 ## Paper, work
 
 ### Chat
@@ -1460,95 +1466,11 @@ use ChemBioDraw, copy into Chem3D, export as any format that openbabel accepts
 
 install? on win
 
-# visualization tools usage
+链接: https://pan.baidu.com/s/1p0Sc7Fz1Fhwmx1FtnFdFmA 提取码: vcsi
 
-## Pymol
+StoneMIND Collector: https://www.stonewise.ai/mol_product  (https://www.chemrss.com/1560.html)
 
-api: https://pymol.org/dokuwiki/doku.php?id=api:cmd:alpha  https://pymol.org/pymol-command-ref.html. for other commands we have to view documentation in pycharm
-
-1. `cd directory`
-
-2. s: show. as.
-   
-   - show as sticks: shows side chain
-
-3. mouse
-   
-   - left click: rotate
-   - right click: zoom
-   - middle and move: move
-   - middle click: center this residue
-
-4. bg_color white/...
-   
-   opaque off, then type `ray`
-
-5. set cartoon_fancy_helices/sheets, 0/1
-
-6. set cartoon_side_chain_helper, on
-   
-   remove the sticks of main chain 
-
-7. save
-   
-   - save as img
-   - save session: to edit the next time
-
-8. action--preset
-   
-   publication (different colors), simple (thin lines, ligands sticks), technical (H bonds), ligand (only ligand H bonds)
-
-9. label
-   
-   - label--residues vs hide--label
-
-10. center
-    
-    ```
-    center object
-    ```
-
-11. must use cmd to align small molecules
-    
-    ```
-    align mol1,mol2
-    ```
-
-12. color by element
-
-13. select
-    
-    ```shell
-    sele /object_name//chain_name/residue/atom_type
-    # eg
-    sele /2cqg//A/PHE`149/CZ
-    ```
-
-14. If you click on where it says “Selecting: Residues”, you can cycle  through the available selection modes below.  These modes are also  available from the “Mouse” menu under “Selection Mode”.   
-    
-    - Atoms
-    - C-alphas
-    - Molecules
-    - Objects
-    - Segments
-    - Chains
-    - Residues  
-
-15. beautify and set background
-    
-    https://zhuanlan.zhihu.com/p/26325764
-    
-    display--background--white
-    
-    right click--ray
-
-16. 
-
-a website to draw electrostatic potential surface: https://server.poissonboltzmann.org. Seeing a blank web page suggests a bad network.
-
-## VMD
-
-windows: https://www.bilibili.com/read/cv7167667
+MathPix can also recognize figure as smiles.
 
 # Fundamental usage of Fedora and KDE
 

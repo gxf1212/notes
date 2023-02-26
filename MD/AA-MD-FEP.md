@@ -14,7 +14,7 @@ I remember that we cannot easily import CHARMM FF in Amber.
 
 ## Deal with novel residues
 
-### make the topology (gmx)
+### Make the topology (gmx)
 
 - [A Jerkwin example of preparation](https://jerkwin.github.io/2017/09/20/GROMACS%E9%9D%9E%E6%A0%87%E5%87%86%E6%AE%8B%E5%9F%BA%E6%95%99%E7%A8%8B2-%E8%8A%8B%E8%9E%BA%E6%AF%92%E7%B4%A0%E5%B0%8F%E8%82%BD%E5%AE%9E%E4%BE%8B/).
 - [a zhihu example](https://zhuanlan.zhihu.com/p/87402839)
@@ -36,7 +36,7 @@ upload to CHARMM-GUI?
 > - `.arn` file: atom renaming specification
 > - `.hdb` file:
 
-### prepare the ff files
+### Prepare the ff files
 
 (downloaded from charmm)
 
@@ -56,7 +56,7 @@ gmx: [Adding a Residue to a Force Field](https://manual.gromacs.org/current/how-
 
 > maybe I'll handcraft one later. now using previously made ff
 
-### make the topology (namd)
+### Make the topology (namd)
 
 summary
 - hybrid topology做对是一切的基础
@@ -102,6 +102,8 @@ It's acceptable to make the topology by hand (since examination is necessary), b
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/AA-MD-FEP.assets/search-nonstandard-residue.png" alt="image-20221105205515004" style="zoom:50%;" />
 
+visit [this site](https://www.charmm-gui.org/?doc=input/pdbreader_uaa&jobid=6615771465&rowId=0&segid=PROA)!
+
 
 #### Notes during making tys.rtf
 
@@ -114,7 +116,94 @@ Both of the workflows get different atom types from normal TYR. I'll just keep m
 - It's strange in the provided .str that the atomtype of CB is like that of small molecules (CG321), whose bond parameters with CA (CT1) doesn't exist...as the partial charges are the same, I just change CG321 into CT2 (like normal residues), but it still won't work. **So all atom types (that could be aligned) in the side chain should also align with the parent standard residue.**
 - Maybe, we can transfer the IC terms of TYR to TYS (if cannot align?)...
 
+### Write a two-end patch
 
+写一个类似disulfide的patch的技术要领：
+
+- find a template for the new group (atom type, charge, etc.)
+- delete unnecessary atoms, but keep those aligned
+- add or redefine atoms
+- add necessary bonds (if pdb file is nicely built, no need to add angles/dihedrals)
+- add necessary parameters (copy from others)
+
+e.g. connecting lysine and glutamate
+
+```
+read rtf card append
+* residues and patches associated with reactive RNA FF
+*
+31  1
+! from ALY, stick to protein atom types. 
+! other refs: KHB/LA2, PRK
+
+!  HN-N                   
+!    HE1  HZ1   HG1
+!    |    /    /
+!  --CE--NZ   CG--
+!    |     \ /  \ 
+!    HE2    CD   HG2
+!           ||
+!           OE1
+PRES NHGC       ! Lysine NH2 linked to Glutamic acid CO(O-)
+DELETE ATOM 1HZ2
+DELETE ATOM 1HZ3
+DELETE ATOM 2OE2
+GROUP   
+ATOM 1CE  CT2    -0.02
+ATOM 1HE1 HA2     0.09
+ATOM 1HE2 HA2     0.09
+ATOM 1NZ  NH1    -0.47
+ATOM 1HZ1 H       0.31
+GROUP
+ATOM 2CD  C       0.51
+ATOM 2OE1 O      -0.51
+GROUP
+ATOM 2CG  CT2    -0.18  
+ATOM 2HG1 HA2     0.09 
+ATOM 2HG2 HA2     0.09  
+
+BOND 1NZ  2CD
+
+END
+
+ANGLES
+CT2A CT2  C      52.000   108.0000 ! from CT2  CT1  C
+
+DIHEDRALS
+C    CT2  CT2A  CT1     0.2000  3     0.00 ! From X    CT1  CT2  X  !temporary RJP
+CT2A CT2  C    O        1.4000  1     0.00 ! from O    C    CT1  CT2
+HA2  CT2A CT2  C        0.2000  3     0.00 ! Same as C CT CT3 HA3 ; kevo
+```
+
+and
+
+```tcl
+package require psfgen
+psfcontext reset
+
+topology top_all36_prot_1.rtf
+topology conh2.str
+pdbalias residue HIS HSE
+pdbalias atom ILE CD1 CD
+
+segment PEP {
+    pdb peptide_dh.pdb
+    first NTER
+    last CT2
+    }
+patch NHGC PEP:14 PEP:10
+# regenerate angles dihedrals
+coordpdb peptide_dh.pdb PEP
+guesscoord
+writepdb peptide.pdb
+writepsf peptide.psf
+package require solvate
+# ionize complex
+mol delete all
+mol load psf peptide.psf pdb peptide.pdb
+solvate peptide.psf peptide.pdb -t 12 -o system
+exit
+```
 
 ## System setup
 

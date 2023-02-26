@@ -18,7 +18,7 @@ why only one Mg? 虽然确实要两个，但第二个的位置至今under debate
 
 notice the binding mode?
 
-## Prepare the docked structure of ligand (no)
+## Prepare the docked structure of ligand (not using)
 
 ### basic
 
@@ -154,16 +154,6 @@ tools that can **both draw** a molecule **and convert** through SMILES.  Your ow
   obabel -:$f --gen3d -opdbqt -O atp.pdbqt -as -h --partialcharge gasteiger # for vina
   ```
 
-### Avogadro
-
-> an alternative for ChemBioOffice in Linux
-
-[building-with-smiles](https://avogadro.cc/docs/building-molecules/building-with-smiles/): Build--Insert
-
-output: File--Export--Molecule--xxx.pdb
-
-https://avogadro.cc/docs/tools/draw-tool/
-
 ## Draw and edit molecule
 
 minimization won't change its position too much, but so helpful for later use. Or just modify on minimized ATP...
@@ -172,33 +162,7 @@ minimization won't change its position too much, but so helpful for later use. O
 obminimize -ff MMFF94 -n 1000 atp.pdb > atp_m.pdb
 ```
 
-### GaussView
-
-load pdb into it. Almost no changes in the position. But we are so familiar with modeling!
-
-Try to make every bond and hydrogen right! Maybe Ar ring should be made into single-double-bond-interspaced.
-
-One thing you MUST do after that is: unify the residue name (change for edited atoms). or AutoPSF says sth like 'failed on end of segment'
-
-### Pymol--builder
-
-Also as easy to use as GaussView
-
-also need to edit the atom names
-
-> when editing for FEP, remember to edit the names before going into CHARMM-GUI, or it will cause trouble for scripting!
-
-I think it's better to check the aromatic bonds here because it looks strange in GV..?
-
-### DSV
-
-may also edit small molecule and prepare for docking (usable?)
-
-`Small Molecules` in the second line of menu. Also `Chemistry` in the 1st line. Delete in the 3rd line. 
-
-May vary a bit if you `Clean Geometry` to optimize structure. 
-
-Not as familiar as Gauss.
+We use Gview and Pymol.
 
 > UCSF-Chimera doesn' t seem to add groups. So does Avogradro
 > 
@@ -557,39 +521,6 @@ exit
 build with Gromacs and AmberTools?
 
 #### Appendix: CHARMM-GUI generate files for ligand
-
-> <font size=5>if you want to perfectly retain its coordinates and atom names, use CGenFF server!</font>
-> 
-> slightly different charge. I think remtp's params are closer to the paper.
-
-but not used in method 1
-
-> https://cgenff.umaryland.edu/  itself, the program to assign parameters for your ligand
-> 
-> the "penalty score" is returned to the user as a measure for the accuracy of the approximation. in `.rtf`
-
-Use CHARMM-GUI---input generator---ligand reader and modeller
-
-refer to preparation videos mentioned above, and [the official one](https://www.bilibili.com/video/BV1bM4y1P7tB)
-
-> **CHARMM GUI basic tips**
-> 
-> - after GUI, the ligand name is changed into LIG
-> - Only molecules in the **HETATM** record in a PDB file are recognized.
-> - **adopt available RCSB SDF structure** preferentially
-> - make sure that the Marvin JS structure is correct
-> - <font color=red>All hydrogen and missing atoms should be explicitly placed for accurate result.</font> or report error
->   - **edit the protonation states yourself!**
-> - Users can modify the protonation state if necessary. 
->   - or select other protonation state in the next step
-> - **The coordinates will be preserved if you upload .pdb file.**
->   - uploading your own .pdb file is suggested
->   - you can align .pdb files later, only it considers coordinates
->   - if you are to upload file, .mol2 is prefered? 
-> - you may want to “Find similar residues in the CHARMM FF”, only when your ligand is special to be included in the ff...
-> - the outputed residue name is ‘LIG’
-
-then just click, click...and download all files
 
 > charmm-gui, what do the files do? what is needed? these?
 > 
@@ -1996,6 +1927,8 @@ gmx grompp -f md.mdp -c npt.gro -r npt.gro -n index.ndx -t npt.cpt -p com.top -o
 
 ### Fundamentals
 
+please see FEbuilder document....
+
 NAMD supports such a traditional dual-topology alchemical setup, which may be applied to perform both absolute and relative FEP calculation
 
 VMD does not yet provide a hybrid topology setup tool, and CHARMM-GUI is testing a beta version (that is not yet available online) to automatically generate all input files for NAMD. For the time being, users can utilize an alternative hybrid structure preparation tool, such as FESetup or AmberTools, and then manually convert the generated CHARMM-formatted input files into a format that can be read by NAMD.
@@ -2221,14 +2154,14 @@ We also get .prm file from CHARMM-GUI. manually merge the .prm file for later, b
 Because: these are new "hybrid" angles forming between the ligands.
 
 > 无语了，写中文
-> 
+>
 > - 讨厌的是，新生成的键还需要提供参数，这就意味着只做两个ligand的charmm-gui是不够的
 > - 我找遍了各种prm文件，gui生成的、charmm ff文件包的、vmd自带的、tutorial的，都没有这些参数。且有相关原子的大多都是`par_all36_cgenff.prm `
 > - 离谱的是，有几个ATP环上的参数，普通MD也找不到，但普通MD就可以跑
 > - 手动添加参数到prm文件，就可以运行。必须添加所有缺的，似乎说明参数完整才能跑
-> 
+>
 > 结论：直接用那个psf的话，没有那几个dihedral，不需要参数，VMD+rtf好心地全都加上了
-> 
+>
 > ```
 > Warning: UNABLE TO FIND ANGLE PARAMETERS FOR CG321 OG303 CG331 (ATOMS 6 7 18)
 > Warning: ALCHEMY MODULE WILL REMOVE ANGLE OR RAISE ERROR
@@ -2251,13 +2184,15 @@ Because: these are new "hybrid" angles forming between the ligands.
 > Warning: UNABLE TO FIND DIHEDRAL PARAMETERS FOR NG2R51 CG3C50 CG1N1 NG1T1 (ATOMS 30 29 37 32)
 > Warning: ALCHEMY MODULE WILL REMOVE DIHEDRAL OR RAISE ERROR
 > ```
-> 
+>
 > search command drafts
-> 
+>
 > ```shell
 > grep 'CG1N1' ./* | grep 'X'
 > grep  NG2R51 ./* | grep CG3C50
 > ```
+>
+> 事后回答：namd3已经自动忽略互相看不见的bonded parameters了，只是warning而已
 
 Editing .psf files: read from the log file reporting the lacking parameters
 
@@ -3377,12 +3312,6 @@ fn=$1
 awk '/^#Free energy/ {printf "%.5f,%.5f,%.9f,%.4f\n",$8,$9,$12,$19}' ${fn}.fepout > ${fn}.csv
 ```
 
-
-
-
-
-
-
 #### Kevin's decomposition
 
 ```shell
@@ -3390,8 +3319,6 @@ bash mknamd_fep_decomp.sh *.fepout 10000 510000 500
 
 bash mknamd_fep_decomp_convergence.sh *.fepout 10000 510000 500 10 > outdecomp/log.txt
 ```
-
-
 
 怎么把bound和unbound放在一起decomposition？
 
@@ -3457,7 +3384,7 @@ mol representation CPK 0.200000
 mol color Type
 # mol selection {protein and residue 436 to 443 or residue 567 or residue 721}
 # mol selection {(within 5 of (resname HYB)) and (not water)}
-mol selection {protein and noh and (same residue as within 5 of residue HYB)}
+mol selection {(protein or water) and (same residue as within 5 of (residue LIG or segname MG))}
 mol material Opaque
 mol addrep top
 # update selection every frame
@@ -3521,6 +3448,15 @@ code source:
 - save visualization state
 - `rmsdtt.tcl`
 - https://www.ks.uiuc.edu/Research/vmd/plugins/pbctools/
+
+in Windows, we have to load the pdb file...so
+
+```tcl
+set sys [string range ${path} 0 end-1]
+mol new ../common/${sys}-fep.pdb type pdb first 0 last -1 step 1 filebonds 1 autobonds 1 waitfor all
+mol addfile ./${path}/${sys}-prod-forward.dcd type dcd waitfor all
+animate delete beg 0 end 0
+```
 
 ##### pbc wrap
 
@@ -4263,8 +4199,6 @@ CHARMM-GUI cannot mutate NA?? rubbish! but if we have made novel nucleotides' FF
 
 solution: edit the structure, edit the atom names to agree with the normal base, model it in vmd. if you don't edit atom names, they won't be recognized by vmd.
 
-
-
 ## FEP
 
 
@@ -4789,7 +4723,7 @@ Warning: Disabling lonepair support due to incompatability with SOA.
 - 最新namd3也没办法，该问题正在解决中。
 - [an interesting try]([https://notebooks.githubusercontent.com/view/ipynb?browser=chrome&color_mode=auto&commit=4592b5cde47f385ade6a78c854a2989f25417775&device=unknown&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f7175616e74616f73756e2f6e6f7465626f6f6b2f343539326235636465343766333835616465366137386338353461323938396632353431373737352f2545372542422539442545352541462542392545372542422539332545352539302538382545382538372541412545372539342542312545382538332542442545352542392542332545382541312541312532425f654142465f254534254241253843254535253930253838254534254238253830424645455f316d71355f6571756c6962726174696f696e2e6970796e62&logged_in=false&nwo=quantaosun%2Fnotebook&path=%E7%BB%9D%E5%AF%B9%E7%BB%93%E5%90%88%E8%87%AA%E7%94%B1%E8%83%BD%E5%B9%B3%E8%A1%A1%2B_eABF_%E4%BA%8C%E5%90%88%E4%B8%80BFEE_1mq5_equlibratioin.ipynb&platform=android&repository_id=358492452&repository_type=Repository&version=104](https://notebooks.githubusercontent.com/view/ipynb?browser=chrome&color_mode=auto&commit=4592b5cde47f385ade6a78c854a2989f25417775&device=unknown&enc_url=68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f7175616e74616f73756e2f6e6f7465626f6f6b2f343539326235636465343766333835616465366137386338353461323938396632353431373737352f2545372542422539442545352541462542392545372542422539332545352539302538382545382538372541412545372539342542312545382538332542442545352542392542332545382541312541312532425f654142465f254534254241253843254535253930253838254534254238253830424645455f316d71355f6571756c6962726174696f696e2e6970796e62&logged_in=false&nwo=quantaosun%2Fnotebook&path=绝对结合自由能平衡%2B_eABF_二合一BFEE_1mq5_equlibratioin.ipynb&platform=android&repository_id=358492452&repository_type=Repository&version=104))
 
-**目前的办法：加参数，用namd3普通或namd2跑。add 'lonepairs on' to namd.conf and don't  use CUDASOAintergrate**
+**目前的办法：加参数，用namd3普通或namd2跑。Add 'lonepairs on' to namd.conf and don't  use CUDASOAintergrate**. And remember to include various .rtf files.
 
 ```
 !!! IMPORTANT!!!
@@ -4799,6 +4733,10 @@ Warning: Disabling lonepair support due to incompatability with SOA.
 !!! 2) top_all36_na.rtf/par_all36_na.rtf
 !!! 3) top_all36_carb.rtf/par_all36_carb.rtf
 ```
+
+> 我当时就把CUDASOAintegrate on注释掉，然后将CPU核增加到11个，和跑gromacs一样的配置。
+>
+> 1GPU+10CPU速度还可以。比一堆纯CPU快很多。和正常跑差多少呢？60%-70%的样子
 
 F没有lonepair
 
