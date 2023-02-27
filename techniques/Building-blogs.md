@@ -1033,8 +1033,10 @@ more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
   conda create -n sphinx
   conda activate sphinx
   pip install -U sphinx  # or
-  conda install sphinx
+  # conda install sphinx
   ```
+  
+  > it's recommended to use `pip`, at least on Windows
   
   other basic installation:
   
@@ -1130,13 +1132,16 @@ https://www.sphinx-doc.org/en/master/usage/markdown.html
 
 https://sphinx-doc.readthedocs.io/zh_CN/master/usage/markdown.html
 
+The official site says *MyST-Parser*...
+
 ```shell
 # pip install --upgrade recommonmark
+# here we use
 pip install --upgrade myst-parser # or
-conda install -c conda-forge myst-parser docutils -y
+# conda install -c conda-forge myst-parser docutils -y
 ```
 
-> a simple example written in markdown: https://www.cnblogs.com/jonnyan/p/14207711.html
+If something is wrong, maybe re-install MyST-parser
 
 ### interpreter
 
@@ -1144,17 +1149,17 @@ conda install -c conda-forge myst-parser docutils -y
 
 [recommonmark](https://recommonmark.readthedocs.io/en/latest/index.html)
 
-```
+```python
 extensions = ['recommonmark']
 ```
 
-myst-parser
+[myst-parser](https://myst-parser.readthedocs.io/en/latest/index.html)
 
-```
+```python
 extensions = ['myst_parser']
 ```
 
-mr2
+[mr2](https://github.com/miyakogi/m2r) is archived. Maybe m2r2....
 
 ### insert other file formats (MyST)
 
@@ -1228,19 +1233,27 @@ pip install sphinx_theme
 
 > https://github.com/LinxiFan/Sphinx-theme
 
-1. [sphinx-rtd-theme](https://pypi.org/project/sphinx-rtd-theme/)  one of the most classical: [alchemyb](https://alchemlyb.readthedocs.io/en/latest/)
-2. [Stanford](https://sphinx-themes.org/#theme-sphinx-theme): color changed
-3. [press_theme](https://github.com/schettino72/sphinx_press_theme). ruined by sidebar title level
-4. [Yummy](https://sphinx-themes.org/#theme-yummy-sphinx-theme). beautiful page, terrible font
-5. [Sizzle](https://sphinx-themes.org/#theme-sphinx-sizzle-theme): font. cannot fold sidebar??
-6. [Renku](https://sphinx-themes.org/#theme-renku-sphinx-theme): light background? change GitHub link?
-7. [Book](https://sphinx-themes.org/#theme-sphinx-book-theme): great. [Basicstrap](https://sphinx-themes.org/#theme-sphinxjp-themes-basicstrap): also great. 
-8. [Material](https://sphinx-themes.org/#theme-sphinx-material): toc on the right
-9. But they don't work with including markdown??
+1. [Stanford](https://sphinx-themes.org/#theme-sphinx-theme): color changed
+2. [press_theme](https://github.com/schettino72/sphinx_press_theme). ruined by sidebar title level
+3. [Yummy](https://sphinx-themes.org/#theme-yummy-sphinx-theme). beautiful page, terrible font
+4. [Sizzle](https://sphinx-themes.org/#theme-sphinx-sizzle-theme): font. cannot fold sidebar??
+5. [Basicstrap](https://sphinx-themes.org/#theme-sphinxjp-themes-basicstrap): also great. 
+6. [Material](https://sphinx-themes.org/#theme-sphinx-material): toc on the right
+7. [Piccolo](https://sphinx-themes.org/#theme-piccolo-theme)
+8. 
 
 > other
 >
+> - [sphinx-rtd-theme](https://pypi.org/project/sphinx-rtd-theme/)  one of the most classical: [alchemyb](https://alchemlyb.readthedocs.io/en/latest/)
+>
+>   [Renku](https://sphinx-themes.org/#theme-renku-sphinx-theme): light background? change GitHub link?
+>
+>   [Book](https://sphinx-themes.org/#theme-sphinx-book-theme): great.
+>
+>   But they don't work with sphinx 5.3.0, thus including markdown failed
+>
 > - [sphinxdoc](https://sphinx-themes.org/#theme-default-sphinxdoc): openbabel
+>
 > - [classic](https://sphinx-themes.org/#theme-default-classic): gromacs
 
 ## todo

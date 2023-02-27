@@ -384,6 +384,8 @@ video url粘进downsub，搜索。按f12，转到“网络”，搜索playlist�
 
 https://github.com/ytdl-org/youtube-dl
 
+https://imyshare.com/article/19/
+
 CRTubeGet调用它？
 
 `yt_dlp.utils.RegexNotFoundError: Unable to extract Initial JS player n function name`的时候可以直接用youtube-dl程序下载
@@ -449,7 +451,7 @@ dl_coursera --cookies coursera.org_cookies.txt --slug chemical-biology --outdir 
 
 > also free: https://www.dvdvideosoft.com/en8, and subtitle downloader, converter
 >
-> Gihosoft TubeGet: good, but not free...
+> Gihosoft TubeGet: good, but not free...老报错，正版的就能成功解析。。
 
 
 
@@ -588,6 +590,26 @@ Z-lib打不开。。
 
 - https://pay.bilibili.com/pay-v2-web/shell_withdraw  创作激励提现
 
+# 观看视频
+
+去除广告的插件：
+
+- AD block
+- 广告终结者
+
+腾讯视频国际版（App）也还好
+
+
+
+GreasyFork脚本：[全网VIP视频免费破解去广告、全网音乐直接下载……](https://greasyfork.org/zh-CN/scripts/370634-%E6%87%92%E4%BA%BA%E4%B8%93%E7%94%A8-%E5%85%A8%E7%BD%91vip%E8%A7%86%E9%A2%91%E5%85%8D%E8%B4%B9%E7%A0%B4%E8%A7%A3%E5%8E%BB%E5%B9%BF%E5%91%8A-%E5%85%A8%E7%BD%91%E9%9F%B3%E4%B9%90%E7%9B%B4%E6%8E%A5%E4%B8%8B%E8%BD%BD-%E7%9F%A5%E4%B9%8E%E5%A2%9E%E5%BC%BA-%E7%9F%AD%E8%A7%86%E9%A2%91%E6%97%A0%E6%B0%B4%E5%8D%B0%E4%B8%8B%E8%BD%BD-%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E7%9B%B4%E6%8E%A5%E4%B8%8B%E8%BD%BD%E7%AD%89%E5%A4%9A%E5%8A%9F%E8%83%BD%E5%B7%A5%E5%85%B7%E7%AE%B1-%E5%8A%9F%E8%83%BD%E5%8F%AF%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%85%B3-%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0-%E6%94%BE%E5%BF%83%E4%BD%BF%E7%94%A8-v6)
+
+其实是从别的渠道得到的视频，嵌入到原来的网页中。。所以弹幕之类的有的就没了，且可能不清晰
+
+必须要点左边的vip，选择源
+
+
+
+迅雷影音：放视频自动匹配字幕文件。可是它流氓啊？？ 
 
 # 处理视频
 

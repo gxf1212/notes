@@ -289,13 +289,13 @@ https://zhuanlan.zhihu.com/p/348324919
 
 1. Xshell font (for only for one dialog)
 
-   <img src="E:\GitHub-repo\notes\techniques\images\xshell-font.png" alt="xshell-font" style="zoom:150%;" />
+   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/xshell-font.png" alt="xshell-font" style="zoom:150%;" />
 
    
 
 2. xftp sync
 
-   <img src="E:\GitHub-repo\notes\techniques\images\xftp-sync.png" style="zoom:50%;" />
+   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/xftp-sync.png" style="zoom:50%;" />
 
 ### scheduling system
 
@@ -714,20 +714,7 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   conda env remove xxx --all # or rm the file manually
   ```
 
-- conda 环境迁移, 修改conda路径（复制文件夹 + 软连接）https://blog.csdn.net/qq_34342853/article/details/123020957
-
-  没成功
-
-  https://www.jb51.net/article/256139.htm
-
-  add env path to .condarc, and change the priority of D:\Anaconda3 (both package and environment directory)
-
-  ```shell
-  conda config --add envs_dirs newdir
-  conda config --add pkgs_dirs newdir
-  ```
-
-  No writeable pkgs directories configured: https://blog.csdn.net/qq_37142541/article/details/125428689
+- 
 
 - 
 
@@ -739,6 +726,12 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   conda list # list envs
   conda list -n env # list packages
   python -V
+  ```
+
+  查看pip安装了多少包
+
+  ```shell
+  pip list
   ```
 
 - win32 or win_amd64 means version of python
@@ -821,9 +814,24 @@ https://blog.csdn.net/zhayushui/article/details/80433768
     - defaults
   ```
 
-- 
+- conda 环境迁移, 修改conda路径（复制文件夹 + 软连接）https://blog.csdn.net/qq_34342853/article/details/123020957
+
+  没成功
+
+  https://www.jb51.net/article/256139.htm
+
+  add env path to .condarc, and change the priority of D:\Anaconda3 (both package and environment directory)
+
+  ```shell
+  conda config --add envs_dirs newdir
+  conda config --add pkgs_dirs newdir
+  ```
+
+  No writeable pkgs directories configured: https://blog.csdn.net/qq_37142541/article/details/125428689
 
 - https://blog.csdn.net/shuiyixin/article/details/90370588
+
+  [Windows conda ImportError: DLL load failed while importing shell_Ayka的博客-CSDN博客](https://blog.csdn.net/yihuajack/article/details/122123674)
 
   ImportError: DLL load failed: 找不到指定的模块. 文件受损（如安装不全），重装那个包
 
@@ -831,8 +839,9 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   conda install -c conda-forge rdkit -y --force-reinstall
   ```
 
-  
+- [Unable to update anaconda - KeyError('pkgs_dirs')](https://github.com/ContinuumIO/anaconda-issues/issues/13051)
 
+- 
 
 > icon path: `xxx/anaconda/lib/python3.7/site-packages/anaconda_navigator/static/images/anaconda-icon-256x256.png` 
 >

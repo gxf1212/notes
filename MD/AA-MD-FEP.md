@@ -1008,7 +1008,7 @@ cwd
 
 #### on the correction of charge change
 
-![image-20221105160917232](E:\GitHub_repo\notes\MD\PSK-PSKR.assets\image-20221105160917232.png)
+![image-20221105160917232](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/AA-MD-FEP.assets/image-20221105160917232.png)
 
 
 

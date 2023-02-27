@@ -395,7 +395,7 @@ This is a record of 折腾ing the system, in order not to forget.
 
 5. 截图
 
-   ![](E:\GitHub_repo\notes\techniques\images\screenshot.png)
+   ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/notes//techniques/images/screenshot.png)
 
 6. install lightdm: https://blog.csdn.net/hgtjcxy/article/details/90645838
 
@@ -2449,7 +2449,15 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
    https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/new-tab-same-directory
 
-10. TTC字体是TrueType字体集成文件(. TTC文件)，可和ttf放一起
+10. cmd：ˇ中的设置
+
+    config file: `C:\Users\Lenovo\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`  
+
+    [link](https://learn.microsoft.com/zh-cn/windows/terminal/install#settings-json-file)
+
+11. [计算机桌面图标不见了，怎么恢复](https://consumer.huawei.com/cn/support/content/zh-cn00695687/)
+
+12. TTC字体是TrueType字体集成文件(. TTC文件)，可和ttf放一起
 
 ## WSL
 
@@ -2473,11 +2481,59 @@ maybe a new .md file in the future
 
 ## chembio
 
+### bioisosteres
+
+> reading material
+>
+> - https://mp.weixin.qq.com/s/Q-X5F3KWaNV2_JXmrmEEHQ
+> - https://mp.weixin.qq.com/s/S5tX-4WJbD_1a0qMI3z4EQ
+> - https://zhuanlan.zhihu.com/p/493305578
+> - https://mp.weixin.qq.com/s/BDPBPu7EyK2lAfqW48HQxQ 五氟硫基
+
 - 药物分子中的羧基可以用磺酰胺，磷酸酯，四唑等代替。
+  - 在羧基的各种生物电子等排体中，羟肟酸的酸性稍弱，离子化程度较低，能显著提高透膜能力，然而在体内容易被代谢成羧酸，可在其氮原子上引入大一点的基团来提高其代谢稳定性。
 - 基团反转是常见的一种非经典电子等排类型，是同一功能基团间进行的电子等排。-COR 与 ROC-基团，都是酯，且有相似的疏水性
 - 不改变环大小的等排体？
 - 环内CH=CH和NH、S（缩环），O-C=O；CH=和N=
-- 芳香甲酸酯，相比于脂肪酸酯，更不易水解吗？
+- 芳香甲酸酯，相比于脂肪族羧酸酯，更不易水解
+
+
+
+卤素基本是通过谷胱甘肽结合来代谢的
+
+
+
+异头碳效应：连接在异头碳的杂原子取代基更倾向于处于直立键。可能也是二卤代烷稳定的原因
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/notes/anomeric-carbon.jpg" alt="anomeric-carbon" style="zoom: 50%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/notes/anomeric-carbon2.jpg" alt="anomeric-carbon2" style="zoom: 45%;" />
+
+
+
+
+
+
+
+
+
+自然界几乎所有天然存在的糖类化合物均是D构型，D-核糖的三个手性碳均为D构型。
+
+
+
+
+
+https://mp.weixin.qq.com/s/pDRzy7FjNzBm1dAkxLP7Qg  “骨架跃迁”FEP
+
+
+
+
+
+[甲醛中毒的化学原理是什么？ - 知乎](https://www.zhihu.com/question/363622944/answer/963100232)
+
+
+
+
 
 
 
