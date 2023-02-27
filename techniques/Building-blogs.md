@@ -1036,7 +1036,8 @@ more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
   # conda install sphinx
   ```
   
-  > it's recommended to use `pip`, at least on Windows
+  > - it's recommended to use `pip`, at least on Windows
+  > - if you want to build a code API or insert docstrings, please install sphinx right in the environment for development! The packages needs to be imported.
   
   other basic installation:
   
@@ -1080,49 +1081,86 @@ more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
 
 ### rst syntax
 
-https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
+- https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
+- https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html  all kinds of directives
 
-- [section headers](https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#sections) are created by underlining (and optionally overlining) the section title with a punctuation character, **at least as long as the text**.
 
-  - convention
-    - `#` with overline, for parts
-    - `*` with overline, for chapters
-    - `=` for sections
-    - `-` for subsections
-    - `^` for subsubsections
-    - `"` for paragraphs
 
-- table of contents
+1. [section headers](https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#sections) are created by underlining (and optionally overlining) the section title with a punctuation character, **at least as long as the text**.
 
-  ```rst
-  .. toctree::
-     :maxdepth: 1
-     :caption: User Documentation
-  
-     installation
-     Tutorials/index.rst
-     principle
-  ```
+   - convention
+     - `#` with overline, for parts
+     - `*` with overline, for chapters
+     - `=` for sections
+     - `-` for subsections
+     - `^` for subsubsections
+     - `"` for paragraphs
 
-  - write valid file names here (`.rst` or `.md` or others). It's ok without the extension name.
-  - these will show up in main text as well as the left sidebar
-  - blue titles (section in toc?), as in pmx site: just add multiple tocs
-  - maxdepth: controls depth shown in the page (not sidebar)
-  - but rendered as the first **first level title**.
-    - in rtd/alabaster/stanford/etc. theme, other first level titles in one `.md` file are also shown in the sidebar...
-    - so we just **start from second level title** in a page.
+2. table of contents
 
-- insert figures, and control its size/position
+   ```rst
+   .. toctree::
+      :maxdepth: 1
+      :caption: User Documentation
+   
+      installation
+      Tutorials/index.rst
+      principle
+   ```
 
-  ```rst
-  .. image:: cycle.png
-      :width: 400px
-      :align: center
-  ```
+   - write valid file names here (`.rst` or `.md` or others). It's ok without the extension name.
+   - these will show up in main text as well as the left sidebar
+   - blue titles (section in toc?), as in pmx site: just add multiple tocs
+   - maxdepth: controls depth shown in the page (not sidebar)
+   - but rendered as the first **first level title**.
+     - in rtd/alabaster/stanford/etc. theme, other first level titles in one `.md` file are also shown in the sidebar...
+     - so we just **start from second level title** in a page.
 
-  markdown cannot do this (only html can).
+3. insert figures, and control its size/position
 
-- 
+   ```rst
+   .. image:: cycle.png
+       :width: 400px
+       :align: center
+   ```
+
+   markdown cannot do this (only html can).
+
+4. alert
+
+   ```rst
+   alert
+   ----------
+   
+   .. important::
+   
+       This sample documentation was generated on |today|, and `today` will be replaced by that date.
+   
+   .. note::
+      This is note text. 
+      
+      Use a note for information you want the user to pay particular attention to.
+   ```
+
+5. todo
+
+   https://www.sphinx-doc.org/en/master/usage/extensions/todo.html#confval-todo_include_todos
+
+   ```python
+   extensions = [
+       "sphinx.ext.todo",
+       ]
+   todo_include_todos = True
+   ```
+
+   then
+
+   ```rst
+   .. todo::   
+      Move this whole section into a guide on rST or directives
+   ```
+
+6. 
 
 
 
@@ -1185,8 +1223,7 @@ insert .md into .rst
 https://github.com/ryanfox/sphinx-markdown-tables
 
 ```shell
-pip install sphinx-markdown-tables
-pip install sphinxcontrib-mermaid
+pip install sphinx-markdown-tables sphinxcontrib-mermaid
 ```
 
 
@@ -1215,10 +1252,7 @@ extensions = [
 
 
 
-
-
-
-## sphinx themes
+## Themes
 
 To hunt for themes
 
@@ -1236,11 +1270,11 @@ pip install sphinx_theme
 1. [Stanford](https://sphinx-themes.org/#theme-sphinx-theme): color changed
 2. [press_theme](https://github.com/schettino72/sphinx_press_theme). ruined by sidebar title level
 3. [Yummy](https://sphinx-themes.org/#theme-yummy-sphinx-theme). beautiful page, terrible font
-4. [Sizzle](https://sphinx-themes.org/#theme-sphinx-sizzle-theme): font. cannot fold sidebar??
+4. [Sizzle](https://sphinx-themes.org/#theme-sphinx-sizzle-theme): font. cannot fold sidebar?? caption font??
 5. [Basicstrap](https://sphinx-themes.org/#theme-sphinxjp-themes-basicstrap): also great. 
 6. [Material](https://sphinx-themes.org/#theme-sphinx-material): toc on the right
 7. [Piccolo](https://sphinx-themes.org/#theme-piccolo-theme)
-8. 
+8. [Karma](https://sphinx-themes.org/#theme-karma-sphinx-theme)
 
 > other
 >
@@ -1256,10 +1290,129 @@ pip install sphinx_theme
 >
 > - [classic](https://sphinx-themes.org/#theme-default-classic): gromacs
 
+## Code API
+
+Using autodoc extension. 
+
+### Steps
+
+[a full guide](https://www.slideshare.net/shimizukawa/sphinx-autodoc-automated-api-documentation-europython-2015-in-bilbao)
+
+1. add path to code
+
+   ```python
+   import sys, os
+   sys.path.insert(0, os.path.abspath('../../'))
+   ```
+
+2. add extension
+
+   ```python
+   extensions = [
+       ...
+       'sphinx.ext.autodoc',
+       ...
+       ]
+   ```
+
+3. write in any .rst file or block. See below.
+
+4. Your code will be executed at `make html`. If you document scripts (as opposed to library modules), make sure their main routine is protected by a `if __name__ == '__main__'` condition.
+
+### Autodoc syntax
+
+Refer to [autodoc document](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html) ([intro to autodoc](https://www.sphinx-doc.org/en/master/usage/quickstart.html#autodoc)) for more
+
+```rst
+api content
+------------
+
+.. automodule:: module name (.py file)
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autofunction:: get_triple_bond_pairs
+   
+    `make_hybrid.get_triple_bond_pairs`. Extra text that will follow the docstring is added here. A blank line must be present before the extra text.
+    
+.. autofunction:: AssignBondOrdersFromTemplate
+   
+    Not from make_hybrid, but prefix is `make_hybrid.Assign...`!!
+    
+.. autofunction:: utils.AssignBondOrdersFromTemplate
+   
+    This works well if put elsewhere (without `automodule`). Don't worry about the warning 'duplicate object description of ...' if a function shows up twice throughout the document.
+  
+references
+------------
+:class:`make_hybrid.Ligand` generates a link to the API reference (automodule).
+
+
+```
+
+
+
+
+
+### Docstrings
+
+- https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html examples
+- https://www.sphinx-doc.org/en/master/tutorial/describing-code.html maybe also write in .rst
+
+
+
+```rst
+.. py:function:: lumache.get_random_ingredients(kind=None, num=3)
+
+    Return a list of random ingredients as strings. ``kind`` will be parsed as code, while `kind` will be rendered italic. Refer to :py:func:`utils.get_ff`.
+   
+    Leave a blank line as a line break.
+   
+    	An indent of 4 characters is a quote box.
+        
+        	Nesting quote box
+	
+	.. note::
+		it's also ok to use rst directives here.
+
+	code:
+
+    >>> lines = open(file, 'r').readlines()
+    >>> for line in lines:
+    >>>     if line.startswith('ATOM') or line.startswith('HETATM'):
+    >>>         segname = line[72:76].strip()  # original segname
+    >>>         if segname != '':
+    >>>             return segname
+
+    :param kind: Optional "kind" of ingredients. Here it's ok to just ignore the blank line.
+    :type kind: list[str] or None
+    :param num: Another parameter.
+    :type num: int
+    :return: The ingredients list.
+    :rtype: list[str]
+```
+
+
+
+
+
+
+
+
+
 ## todo
 
+- [x] python code api. 
+  - [ ] `sphinx-apidoc`?
+
+- [ ] figure icon above the search bar
 - [ ] multilingual
-- [ ] python code api. `sphinx-apidoc`
+- [ ] in-line rst inserted into markdown
+- [x] alert?
+- [x] docstring format (more?)
+- [x] utils.AssignBondOrdersFromTemplate
+- [ ] math
 
 
 

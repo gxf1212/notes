@@ -32,8 +32,10 @@
 
 % customization
 % English
-\usepackage[UTF8]{ctex}  % for rare Chinese comments
-\ctexset{today=old}
+%\usepackage[UTF8]{ctex}  % for rare Chinese comments
+%\ctexset{today=old}
+\usepackage{xeCJK}  % for rare Chinese comments
+\linespread{1.2}  % together with xeCJK
 \numberwithin{equation}{section}
 \usepackage[version=4]{mhchem}
 
@@ -74,8 +76,6 @@
 \begin{document}
 
 \maketitle
-
-\chapter*{Preface}
 
 \input{./chapters/preface.tex}
 
