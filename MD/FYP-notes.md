@@ -3901,6 +3901,16 @@ center (last-complex1 and resn HYB)
 
 ### FEP notes
 
+#### FEP itself
+
+- single topology不准？所有的interaction都关掉。只能$R^2=0.3\sim 0.43$
+
+  FEP is not screening：还是算力不够；绝对结合能不是太准
+
+- Schrodinger“行业标准”：FEP+REST，蛋白多个构象时会比较有用
+
+- 采样好的话，是包含熵的，且是显式溶剂，一般要比对接类的好
+
 #### find the starting structure
 
 - 跑MD找构象：
@@ -3922,7 +3932,7 @@ center (last-complex1 and resn HYB)
 
   如果跳跃，应该多跑
 
-  <img src="E:\GitHub_repo\notes\MD\FYP-notes.assets\cluster-id-with-time" style="zoom:33%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/cluster-id-with-time" style="zoom:33%;" />
 
 - 
 
@@ -4057,7 +4067,7 @@ double mutation, DG12-DG1-DG2最多2~3kcal
 
 - propagation of error. X, Y are independent variables.
 
-  <img src="E:\GitHub_repo\notes\MD\FYP-notes.assets\image-20221106091013292.png" alt="image-20221106091013292" style="zoom:40%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/image-20221106091013292.png" alt="image-20221106091013292" style="zoom:40%;" />
 
 - 
 

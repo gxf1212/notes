@@ -1009,6 +1009,27 @@ installation: see [Linux-fundamental](/techniques/Linux-fundamental?id=other-sof
    - default folder, either inside wine or desktop (cannot drag...). 
    - cannot 'open the folder' (redirect to the browser with wrong path...)
 
+new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
+
+### ChatGPT series
+
+- OpenAI's services are not available in your country. (error=unsupported_country)
+  解决方法：全局模式
+- [ChatGPT 常见错误原因及解决方案：报错、回答不完整、网络错误等](https://blog.csdn.net/marin1993/article/details/128219198)。搞不定就换节点，刷新
+- Edge dev: https://www.microsoftedgeinsider.com/zh-tw/download
+
+
+
+
+
+**[腾讯会议 自动会议纪要-操作指南](https://cloud.tencent.com/document/product/1095/53483)**。但是要企业版
+
+[Windows 实时语音转文字](https://blog.csdn.net/qq_41095608/article/details/126308275)
+
+联想语音助手已经满足我的需要了
+
+
+
 # bit by bit programming
 
 一点一滴
@@ -1101,7 +1122,16 @@ https://www-sop.inria.fr/marelle/tralics/auxdir/tdoc1cid2.html
 \ifdefined\FOO F\else f\fi
 ```
 
+### Chinese
 
+- **[latex显示中文 - CodeAntenna](https://codeantenna.com/a/NF4HbNFgM4)**
+
+  分为两种情况，情况一是文章需要显示少量中文（CJK），情况二是文章包括很多中文（ctex）。
+
+- https://jdhao.github.io/2018/03/29/latex-chinese.zh/
+  http://mirrors.ibiblio.org/CTAN/macros/xetex/latex/xecjk/xeCJK.pdf
+  xeCJK 只提供了字体和标点控制等基本 CJK 语言支持。对于中文文档，可以使用更为高 层的 ctex 宏包或文档类，它将自动调用 xeCJK 并设置好中文字体，同时提供了进一步的本地化支持。详细内容参看 ctex 宏包套件的说明。
+  所以用的还是英文的缩进方式。
 
 ### code
 
@@ -1116,6 +1146,22 @@ http://www.noobyard.com/article/p-nymwcdnd-nx.html  插入Python代码升级方�
 - [ ] XJTU bachelor template
   - https://www.overleaf.com/project/62c93b67055128749a1563a8
 - [ ] texstudio 参考文献编译链
+
+## TexStudio
+
+### Language checking
+
+![image-20230228143910914](E:\GitHub-repo\notes\techniques\images\language-checking.png)
+
+https://tex.stackexchange.com/questions/319580/texstudio-how-to-get-access-to-the-added-words-to-dictionary
+
+menu > Options > Configure TexStudio > Language checking > Spelling dictionary directories.
+
+
+
+
+
+[texstudio structure（结构）不见了，如何进行查找](https://blog.csdn.net/liuyiming2019/article/details/115272007)：就在左下角。。
 
 
 

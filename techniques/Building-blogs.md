@@ -1220,6 +1220,14 @@ insert .md into .rst
 
 ### extensions
 
+#### math
+
+https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#math-shortcuts
+
+the same as usual...
+
+#### other
+
 https://github.com/ryanfox/sphinx-markdown-tables
 
 ```shell
@@ -1412,7 +1420,7 @@ references
 - [x] alert?
 - [x] docstring format (more?)
 - [x] utils.AssignBondOrdersFromTemplate
-- [ ] math
+- [x] math
 
 
 

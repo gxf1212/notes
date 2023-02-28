@@ -413,13 +413,17 @@ Not as familiar as Gauss.
 
 - 全选改字体（18），在file--document setting--Drawing改线宽，大概0.56（0.4倍粗体），就和Wikipedia的比较接近（平常不用加粗）。全选--右键--Object Settings也可以。
 
-  ![image-20230119225838463](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/chembiodraw-drawing)
+  ![image-20230119225838463](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/Common-tools.assets/chembiodraw-drawing.png)
 
 - ChemDraw中内置多种模板，蛋白质支链模板是比较典型的一种了，通过模板可以快速添加蛋白质支链结构。而可以在Text tool或者模板工具中找到Templates（模板），然后选择Amino Acid Side Chain（蛋白质支链模板）即可。
 
 - [怎样在ChemDraw中设置字体的默认格式？](https://www.sohu.com/a/104294282_395309)
 
 - [ChemDraw如何一键对齐所有化合物结构](https://jingyan.baidu.com/article/86112f133bc47766379787b8.html)。对选中的右键也行
+
+- 选中碳，在ChemDraw的“Object”菜单中选择“Show Stereochemistry”，它会自动在手性碳上显示其正确构型。
+
+
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/Common-tools.assets/CD_cheatsheet.png" alt="image.png" style="zoom: 60%;" />
 
@@ -647,5 +651,7 @@ like DSV
 
 
 
+# Other
 
+[Download EPI Suite™ - Estimation Program Interface v4.11 | US EPA](https://www.epa.gov/tsca-screening-tools/download-epi-suitetm-estimation-program-interface-v411): predict properties of small molecules
 

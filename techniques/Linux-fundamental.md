@@ -1059,6 +1059,27 @@ get part of the files in one GitHub repository
 
 - https://blog.csdn.net/q279838089/article/details/44751039
 
+### history
+
+https://blog.csdn.net/allway2/article/details/121215930
+
+bash 的历史函数依赖于一个名为 *HISTFILE* 的变量，通常设置为当前用户的 *.bash_history* 文件（位于用户的主目录中）。
+
+- clear history in the current shell
+
+  ```shell
+  history -c
+  ```
+
+- 您可以使用 `history -d offset` 从当前 shell 的历史记录中删除特定行。如果您想删除一系列行，可以用循环包装它。
+
+  ```shell
+  for i in {1..N}; do history -d START_NUM; done
+  ```
+
+  表示从 `START_NUM` 号命令开始往后删除 N 条记录。
+  
+
 ### npm
 
 install nodejs first.
@@ -2333,7 +2354,7 @@ https://askubuntu.com/questions/906251/systemd-journald-high-cpu-usage
 
 During the ubuntu installation, usually we choose the default one (SSD). Actually, choosing your SSD (or even the partition where your EFI is) or HDD (in my case, sda, the only HDD, and not dual-system...) is both fine.
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/boot-leader" alt="img" style="zoom:20%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/boot-leader.png" alt="img" style="zoom:20%;" />
 
 references:
 
@@ -2343,7 +2364,7 @@ references:
 
 But my experience was: I seemed to choose 'sda1', and after rebooting, it said
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/lost-home" alt="img" style="zoom:25%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/lost-home.png" alt="img" style="zoom:25%;" />
 
 It kept popping out such a window unless I prevented that by pressing Esc (the GUI may crash). Then I entered the 'emergency mode'. I had to `fsck -y /dev/sda1`, but millions of lines of messages (fixing inodes?) float in front of the screen. It tooks several minutes to finish. Upon rebooting, I could open the main folder, but EVERYTHING WAS GONE!!
 
@@ -2433,6 +2454,7 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 7. 快捷键
 
    - 联想，打开键盘灯光：Fn+空格键
+   - 关闭NumLock，小键盘可以当做上下键、End等用
    - alt加双击直接打开属性，F2重命名
 
 8. Windows-Unix reference table
@@ -2464,6 +2486,12 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 - WSL is highly memory-demanding...
 - WSL 可以使用 `[tool-name].exe` 直接从 WSL 命令行运行 Windows 工具。 例如，`notepad.exe`。
 
+
+
+
+
+
+
 # 知识
 
 maybe a new .md file in the future
@@ -2483,6 +2511,8 @@ maybe a new .md file in the future
 
 ### bioisosteres
 
+[SwissBioisostere - A database of molecular replacements for ligand design](http://www.swissbioisostere.ch/)
+
 > reading material
 >
 > - https://mp.weixin.qq.com/s/Q-X5F3KWaNV2_JXmrmEEHQ
@@ -2490,12 +2520,39 @@ maybe a new .md file in the future
 > - https://zhuanlan.zhihu.com/p/493305578
 > - https://mp.weixin.qq.com/s/BDPBPu7EyK2lAfqW48HQxQ 五氟硫基
 
-- 药物分子中的羧基可以用磺酰胺，磷酸酯，四唑等代替。
+- 药物分子中的羧基可以用磺酰胺，磷酸酯，四唑，硼酸等代替。
   - 在羧基的各种生物电子等排体中，羟肟酸的酸性稍弱，离子化程度较低，能显著提高透膜能力，然而在体内容易被代谢成羧酸，可在其氮原子上引入大一点的基团来提高其代谢稳定性。
+  - ![boric-acid](E:\GitHub-repo\notes\techniques\notes\boric-acid.png)
+
+
+
+
+
 - 基团反转是常见的一种非经典电子等排类型，是同一功能基团间进行的电子等排。-COR 与 ROC-基团，都是酯，且有相似的疏水性
 - 不改变环大小的等排体？
 - 环内CH=CH和NH、S（缩环），O-C=O；CH=和N=
-- 芳香甲酸酯，相比于脂肪族羧酸酯，更不易水解
+- 在药物分子设计中可以将偕二氟乙烯基看作是醛基或者酮基的生物电子等排体，应用于酶抑制剂的机理研究
+
+
+
+[综述| 药物发现中的共价抑制剂](https://mp.weixin.qq.com/s/B0iYLWQIvlcn4N_0F2o_rw)
+
+![BHO](E:\GitHub-repo\notes\techniques\notes\BHO.png)
+
+
+
+
+
+- 芳香甲酸酯，相比于脂肪族羧酸酯，更不易水解。
+
+  Generally speaking, aromatic esters are more stable than aliphatic esters towards hydrolysis under both acidic and basic conditions.
+  The rate-limiting step of hydrolysis of carboxylic esters under basic condition is the nucleophilic attack of hydroxide ion on the carbonyl carbon of the ester.
+
+  - the aromatic ring stabilizes the carbonyl group of the ester by resonance, making it less reactive towards nucleophilic attack by water or hydroxide ions. (electronic)
+  - Aromatic carboxylic esters are also more difficult to hydrolyze than aliphatic carboxylic esters because they form less stable tetrahedral intermediates during the reaction. (size)
+
+  However, aromatic esters may have electron-withdrawing groups that increase their reactivity towards hydrolysis. Some aliphatic esters may have bulky groups that hinder their hydrolysis.
+  [reference](https://chem.libretexts.org/Courses/Brevard_College/CHE_202%3A_Organic_Chemistry_II/02%3A_Carboxylic_Acids_and_Esters/2.10%3A_Reactions_of_Esters)
 
 
 
