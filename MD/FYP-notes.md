@@ -3212,39 +3212,36 @@ https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2013-2014/0568.html
 >                                                          yaxis ticklabel char size 0.8 -pexec kill g1 -pexec kill g2 -hardcopy -printfile summary.png -hdevice PNG
 > ```
 >
-> 
 
-##### decomposition
 
-```shell
-bash ../mknamd_fep_decomp.sh rdrp-mtp-remtp-complex-prod-backward-all.fepout 10000 510000 500
+
+- For unidirectional FEP calculations, ParseFEP provides a graphical representation of the underlying probability distribution (black), the Boltzmann weight (red), and the product of the two (green). 
+
+  ![parsefep-probability.1](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/parsefep-probability.1.png)
+
+- For bidirectional FEP calculations, ParseFEP displays the probability distributions characterizing the forward and the backward transformations. These distibutions are shown for all the windows, or strata, found in the *alchOutFile* file. It is, therefore, assumed that the output files for the FEP calculations performed in the two directions contain the same number of intermediate states.
+
+
+
+##### fepout file
+
+**fullElectFrequency** number of timesteps between full electrostatic evaluations. It should be either divided by `stepspercycle` or the inverse. Or NAMD3 just stops.
+
+It should also be either divided by `alchOutFreq` (.fepout) and `outputenergies` (.log) or the inverse. 
+
+The values we are using is 
+
+```tcl
+stepspercycle           20
+fullElectFrequency      1
+alchOutFreq				5
 ```
 
+2/10 is also ok
+
+> https://www.ks.uiuc.edu/Research/namd/2.14/ug/node37.html
 
 
-We may also just read from .fepout:
-
-```shell
-tail -n 1 *.fepout | cut -c 92- # the final number of the final line
-
-for f in `ls | grep l`; do echo $f; cd $f && tail -n 1 *fepout | cut -c 92- && cd ..; done
-
-# other
-vmd -dispdev text -e merge-fep.tcl
-vmd -dispdev text -e sol-ion-fep.tcl
-cp -r complex ../equil/complex1
-cp -r ligand ../equil/ligand1
-cp -r complex ../equil/complex2
-cp -r ligand ../equil/ligand2
-cp -r complex ../equil/complex3
-cp -r ligand ../equil/ligand3
-tar -cvf xx.tar xx
-/Desktop/work/projects/undergraduate/FYP/FEP/remtp-substu
-```
-
-This is free energy change. ParseFEP only gives dA if only forward is provided.
-
-but why don't we use BAR? We cannot presume that the binding pocket is favorable for the end-state ligand. We should have equilibrated the end state (MDS) before going on. Plus, we should have started every window from the same equilibrated structure (as done in gmx). In namd starting from the previous window is to minimize the error and just acceptable.
 
 #### using alchemlyb
 
@@ -3316,13 +3313,24 @@ awk '/^#Free energy/ {printf "%.5f,%.5f,%.9f,%.4f\n",$8,$9,$12,$19}' ${fn}.fepou
 
 ```shell
 bash mknamd_fep_decomp.sh *.fepout 10000 510000 500
-
 bash mknamd_fep_decomp_convergence.sh *.fepout 10000 510000 500 10 > outdecomp/log.txt
 ```
+
+This gives dA?
 
 怎么把bound和unbound放在一起decomposition？
 
 
+We may also just read from .fepout:
+
+```shell
+tail -n 1 *.fepout | cut -c 92- # the final number of the final line
+for f in `ls | grep l`; do echo $f; cd $f && tail -n 1 *fepout | cut -c 92- && cd ..; done
+```
+
+This gives dG. ParseFEP only gives dA if only forward is provided.
+
+but why don't we use BAR? We cannot presume that the binding pocket is favorable for the end-state ligand. We should have equilibrated the end state (MDS) before going on. Plus, we should have started every window from the same equilibrated structure (as done in gmx). In namd starting from the previous window is to minimize the error and just acceptable.
 
 
 
@@ -3932,7 +3940,7 @@ center (last-complex1 and resn HYB)
 
   如果跳跃，应该多跑
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/cluster-id-with-time" style="zoom:33%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/cluster-id-with-time.png" style="zoom:33%;" />
 
 - 
 

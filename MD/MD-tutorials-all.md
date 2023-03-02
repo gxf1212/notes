@@ -436,6 +436,12 @@ note (too old?)
   > Following the choice of graphics accelerator, the amount of available system memory tends to have the next most significant impact on the performance and capability of VMD. The more memory a machine has, the more frames can be loaded at once from large molecular dynamics trajectory files. For batch-mode analysis tasks that consist primarily of scripting, system memory is frequently the resource that limits feasability of many analysis tasks.
 
   Actually VMD didn't take too many memory here
+  
+- http://www.ks.uiuc.edu/Research/vmd/plugins/paratool/usersguide.html
+
+  it's just manual editing and QM calculation, no automation of cgenff parameterization
+
+- 
 
 ## NAMD
 

@@ -2558,6 +2558,8 @@ maybe a new .md file in the future
 
 卤素基本是通过谷胱甘肽结合来代谢的
 
+[Halogenation of drugs enhances membrane binding and permeation](https://pubmed.ncbi.nlm.nih.gov/15122640/)
+
 
 
 异头碳效应：连接在异头碳的杂原子取代基更倾向于处于直立键。可能也是二卤代烷稳定的原因

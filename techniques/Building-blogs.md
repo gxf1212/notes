@@ -1110,7 +1110,7 @@ more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
 
    - write valid file names here (`.rst` or `.md` or others). It's ok without the extension name.
    - these will show up in main text as well as the left sidebar
-   - blue titles (section in toc?), as in pmx site: just add multiple tocs
+   - blue titles (section in toc?), as in pmx site: just add multiple tocs, as pmx doc did
    - maxdepth: controls depth shown in the page (not sidebar)
    - but rendered as the first **first level title**.
      - in rtd/alabaster/stanford/etc. theme, other first level titles in one `.md` file are also shown in the sidebar...
@@ -1257,7 +1257,7 @@ extensions = [
 # source_parsers = {'.md': 'recommonmark.parser.CommonMarkParser'}
 ```
 
-
+[sphinx-markdown-checkbox](https://pypi.org/project/sphinx-markdown-checkbox/)
 
 
 ## Themes

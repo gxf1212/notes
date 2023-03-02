@@ -1121,6 +1121,13 @@ https://github.com/luancarvalhomartins/PyAutoFEP
 
 https://docs.silcsbio.com/2020.1/install.html
 
+### LigParGen
+
+[How to Install LigParGen Server Locally ?](https://quantumchemistryniser.wordpress.com/2017/11/12/how-to-install-ligpargen-server-locally/)
+
+Please request BOSS executable from Prof. William L. Jorgensen (It is free for academic users). Once you have BOSS, set `$BOSSdir`; type `conda install -c mc-robinson ligpargen openbabel ` to install the package
+Download the files from here and copy them to `BOSSdir/scripts` folder
+
 ## Visualization
 
 ### VMD

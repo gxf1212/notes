@@ -1045,8 +1045,14 @@ notes from Windows
 ### basic
 
 - The Comprehensive Tex Archive Network = CTAN
+
 - The Missing \begin{document} is because you're using it in the preamble
-- https://tex.stackexchange.com/questions/174030/misplaced-alignment-tab-character-error-when-citing-a-particular-entry Look for & in a bibliographic item and change it into \&
+
+- 在子文档中编译整个文档。毕业论文的模板包含多个文件，写作往往在子文件里，然而如果不加设置地直接编译子文件是会报错的。这时需要在“选项”中设置主文档或者在主文档第一行中加入meta信息`% !TeX root = main.tex`(假设主文档是main.tex的话)。这样在任何一个子文件都可以直接编译，等价于编译main.tex。
+
+  [Texstudio使用经验](http://haccanri.github.io/tools/2015/04/22/tex_editor.html)
+
+- 
 
 ### float
 
@@ -1098,6 +1104,7 @@ notes from Windows
 4. to prevent websites from appearing, you have to comment out both `url` and `doi`
 5. 万方可以直接导出bibtex，辣鸡知网就不行. whatever
 6. citation keys cases https://tex.stackexchange.com/questions/623482/case-mismatch-between-cite-keys
+7. https://tex.stackexchange.com/questions/174030/misplaced-alignment-tab-character-error-when-citing-a-particular-entry Look for & in a bibliographic item and change it into \&
 
 ### ifdefined
 
@@ -1157,7 +1164,9 @@ https://tex.stackexchange.com/questions/319580/texstudio-how-to-get-access-to-th
 
 menu > Options > Configure TexStudio > Language checking > Spelling dictionary directories.
 
+https://yinqingwang.wordpress.com/ Language Tool
 
+[How to remove added word from dictionary in texstudio?](https://blog.csdn.net/ChenglinBen/article/details/117150581) check user words
 
 
 

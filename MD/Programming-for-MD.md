@@ -698,3 +698,10 @@ even `python xx.py -W` didn't work
 
 https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules
 
+### Debug
+
+- [AttributeError: partially initialized module ''has no attribute''(most likely due to a circular import](https://blog.csdn.net/c_lanxiaofang/article/details/103997425)
+
+  Don't name your .py file the same as any package you're going to import.
+
+- 
