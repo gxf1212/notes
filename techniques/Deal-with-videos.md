@@ -250,11 +250,12 @@ pip install youtube_transcript_api
 youtube_transcript_api 5UuLFnUhkMA --languages en zh-Hans --format srt > xxx.srt
 ```
 
-we may need `pip install --upgrade youtube-dl` for parsing playlist. You can also do that with simple crawling packages or other toolkits.
+we may need `pip install --upgrade youtube-dl` for parsing playlist. You can also do that with simple crawling packages or other toolkits. <font color=red>This is a full workflow I'm using (2023.3.10).</font>
 
 ```python
 # please switch your vpn to global mode
 # paste the link here, execute this block, then choose one of the rest blocks
+# this block is just about preparation
 url = 'https://www.youtube.com/playlist?list=PLp6SESWaMNKLk5dPAqYlB1NAmqXrrKAA8'
 
 import os, time
@@ -447,13 +448,17 @@ dl_coursera --cookies coursera.org_cookies.txt --slug chemical-biology --outdir 
 
 ## YouTube/各种视频
 
-下载YouTube视频：CRTubeGet
+下载YouTube视频：<font color=red> **CR TubeGet**</font> 。直接搜索下载。
+
+> 特殊时期，只有正版的能成功解析。。
+
+
+
+其他的，都只是玩。我下载基本都用**CR TubeGet**了
 
 > also free: https://www.dvdvideosoft.com/en8, and subtitle downloader, converter
 >
 > Gihosoft TubeGet: good, but not free...老报错，正版的就能成功解析。。
-
-
 
 单个视频Google上还挺多，但分辨率限制？
 

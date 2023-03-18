@@ -1065,13 +1065,15 @@ animate read dcd rdrp-atp-prod.dcd
 >
 > just a try. not suitable for fep
 
-**This is also important if we want to cluster in gmx.** Refer to [Making clusters in gmx](/MD/FYP-notes?id=making-clusters-in-gmx).
+**This is also important if we want to cluster in gmx.** Refer to [Making clusters in gmx](/MD/FYP-notes?id=making-clusters-in-gmx) and [2023.1 update](#_20231-update).
 
 https://www.ks.uiuc.edu/Research/vmd/plugins/topotools/
 
 TopoTools, not only converting to gmx and lammps, more importantly editing your topology
 
 1. make the latest coordinates as pdb, and then .gro
+
+   this workflow may also help you skip building CHARMM FF for gromacs (if you encounter a complicated system). In this case, please use the .pdb file and skip to making a box. Also refer to [CHARMM-GUI solution builder](#charmm-gui-solution-builder).
 
    ```tcl
    # under ./equil
@@ -1087,13 +1089,19 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    ```shell
    # under gmx
    gmx editconf -f equilibrated.pdb -o equilibrated.gro \
-   -box 102.76400184631348 93.35700035095215 108.42400050163269 \
-   -center 57.934000968933105 58.11250019073486 57.53700029850006 # x y z
+   -box 9.88560037612915 9.641799974441528 11.786500322818756  \
+   -center 5.6079001903533936 5.597199988365173 5.69505016207695 # x y z
    ```
 
    check in pymol to see if they are the same
 
-2. to run in gmx, specify T coupling groups:
+   > [!WARNING]
+   >
+   > pymol/vmd measurement in angstrom; gmx: nm!!!
+   >
+   > divide the numbers got from namd by 10....
+
+2. to specify T coupling groups in gmx:
 
    ```shell
    gmx make_ndx -f equilibrated.gro -o index.ndx
@@ -1103,13 +1111,14 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    ```
 
    > Protein_ATP_Mg    TIP3_SOD_CLA
-   > 
-   > refer to
-   > 
+   >
+   > paste into
+   >
    > ```shell
    > tc_grps        = non-Water Water # Membrane-containing MD simulation
-   > tc_grps        = Protein_ligand_ion Other # normal system
-   > compressed-x-grp or energygrps  = Protein MOL MN # list all main species
+   > tc_grps        = Protein_ligand_ion Other # normal solution system
+   > ## deprecated
+   > # compressed-x-grp or energygrps  = Protein MOL MN # list all main species 
    > ```
 
 3. get .top file
@@ -1141,7 +1150,9 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
 
 4. also the velocity in the last frame (find how to load into gmx, .cpt?)
 
-   not doing this now
+   > [!NOTE]
+   >
+   > you might not need the velocity (since usually we need to equilibrate the system again when converted to gmx).
 
    ```tcl
    # from tutorial
@@ -1175,6 +1186,8 @@ TopoTools, not only converting to gmx and lammps, more importantly editing your 
    ```
 
    > cannot resolve the problem of duplicated dihedral angles...
+
+
 
 ### build in gmx 
 
@@ -1454,8 +1467,8 @@ questions
 vmd -dispdev text -e ../../make_equil_clus.tcl
 
 gmx editconf -f equilibrated.pdb -o equilibrated.gro \
--box 98.8560037612915 96.41799974441528 117.86500322818756  \
--center 56.079001903533936 55.97199988365173 56.9505016207695
+-box 9.88560037612915 9.641799974441528 11.786500322818756  \
+-center 5.6079001903533936 5.597199988365173 5.69505016207695
 
 echo -e "13|2|3\n 10|11|12\n q" | gmx make_ndx -f equilibrated.gro -o index.ndx
 
@@ -4193,6 +4206,8 @@ deprotonated cysteine residue stabilizes zinc-finger structure even in the prefe
 
 ### Amber+new Mg FF
 
+refer to [GAFF (not using)](#GAFF-not-using)
+
 #### AmberTools
 
 ##### debug
@@ -4207,7 +4222,9 @@ deprotonated cysteine residue stabilizes zinc-finger structure even in the prefe
 
 ### CHARMM-GUI solution builder
 
-> it's a bit slow but effective and versatile
+> it's a bit slow in the solvating step, but effective and versatile (gmx+charmm)
+
+
 
 ### other
 

@@ -425,14 +425,15 @@ the final table may include:
   
 - structure
   - active residue? or hydrogen bond, non H bond on the protein 
+  
   - ligand H-Donor and Acceptor atom
   
-  > consider: number of interactions, bond length, conformation
+    > consider: number of interactions, bond length, conformation
   
   - plot
     - ligPlot?
     - APBS?
-    - 
+    - ?
   - close contact?
   
 - goal

@@ -21,7 +21,9 @@ https://www.yumefx.com/?p=5310
 
 ## Basics
 
-1. install
+1. installation
+
+   Windows: Node.js; Unix: `sudo apt install npm`
 
    ```shell
    sudo npm i docsify-cli -g
@@ -54,6 +56,13 @@ https://www.yumefx.com/?p=5310
 ```
 
 1. `<a>` 标签的 target 属性规定在何处打开链接文档 https://www.w3school.com.cn/tags/att_a_target.asp
+2. `href` rules (also, in markdown, `[content](#link)`)
+   - case-insensitive
+   - replace space with `-`
+   - remove parethesis. e.g. `GAFF (not using)` should write`#GAFF-not-using`
+   - special: `2023.1 update` should write `_20231-update`; 
+   - 
+1. 
 
 ### something JavaScript
 
@@ -467,11 +476,11 @@ refer to [html](#something-html)
   once get an element, we can put it in any tag, just by refering to `id`:
   
   ```html
-  <span id="sitetime"></span> # in footer['copy']
-  <p id="sitetime"></p> # add a linebreak..
+  <span id="sitetime"></span> // in footer['copy']
+  <p id="sitetime"></p> // add a linebreak..
   ```
 
-- you should not 
+- you should not ...
 
 - add things after:
 
@@ -551,9 +560,9 @@ refer to [html](#something-html)
 
    - [x] support of textsubscript: must use `<sub></sub>` tag; 
 
-     must add \ to \~ if there are more than two \~. same for ^
+     > must add `\` to `\~` if there are more than two `\~`. same for `^` in typora. 
 
-   - [x] support of \ce{NaCl}: may use $\text{Al(OH)}_3$...
+   - [x] support of `\ce{NaCl}`: may use $\text{Al(OH)}_3$...
 
    - [x] support of `\begin{align*}` ?? as well as gather, equation ...
 
@@ -577,7 +586,7 @@ refer to [html](#something-html)
 
      [十个拿来就能用的网页炫酷特效](https://www.toutiao.com/article/7087843770217284132) or [this](https://chowdera.com/2022/194/202207120537561961.html)：蜘蛛网特效等
 
-     重要的js code：
+     重要的 js code：
 
      - `s[e].el.style.cssText = .....`和`i(".heart{width: 10px;height: 10px;position: fixed;background: #f00; .....`是心形版本，并且能调格式。
      - `var arr = new Array(xx, xx)`和`a.innerText = arr[parseInt(arr.length * Math.random())];`配合，是文字版本
@@ -1000,8 +1009,9 @@ CSDN：投稿，再次上传markdown文件，链接变了。。。
 
 https://www.bilibili.com/read/cv403592/ 专栏markdown
 
-
 # Build Python documentation in Sphinx
+
+sphinx
 
 - https://www.sphinx-doc.org/en/master/
 - api https://sphinx-apidoc.readthedocs.io/zh_CN/latest/
@@ -1013,6 +1023,11 @@ examples:
 - https://degrootlab.github.io/pmx/index.html
 - https://alchemlyb.readthedocs.io/en/latest/
 - https://deepchem.readthedocs.io/en/latest/index.html
+
+writing contents, refer to:
+
+- https://openbabel.org/docs/dev/UseTheLibrary/Python_PybelAPI.html
+- https://www.rdkit.org/docs/source/rdkit.Chem.rdchem.html
 
 more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
 
@@ -1160,7 +1175,7 @@ more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
       Move this whole section into a guide on rST or directives
    ```
 
-6. 
+6. glossary  https://sphinx-themes.org/sample-sites/sphinx-sizzle-theme/kitchen-sink/lists/#glossary
 
 
 
@@ -1278,11 +1293,12 @@ pip install sphinx_theme
 1. [Stanford](https://sphinx-themes.org/#theme-sphinx-theme): color changed
 2. [press_theme](https://github.com/schettino72/sphinx_press_theme). ruined by sidebar title level
 3. [Yummy](https://sphinx-themes.org/#theme-yummy-sphinx-theme). beautiful page, terrible font
-4. [Sizzle](https://sphinx-themes.org/#theme-sphinx-sizzle-theme): font. cannot fold sidebar?? caption font??
+4. [Sizzle](https://sphinx-themes.org/#theme-sphinx-sizzle-theme): font. caption font??
 5. [Basicstrap](https://sphinx-themes.org/#theme-sphinxjp-themes-basicstrap): also great. 
 6. [Material](https://sphinx-themes.org/#theme-sphinx-material): toc on the right
 7. [Piccolo](https://sphinx-themes.org/#theme-piccolo-theme)
 8. [Karma](https://sphinx-themes.org/#theme-karma-sphinx-theme)
+9. [Furo](https://sphinx-themes.org/#theme-furo): new gromacs doc
 
 > other
 >
@@ -1298,7 +1314,37 @@ pip install sphinx_theme
 >
 > - [classic](https://sphinx-themes.org/#theme-default-classic): gromacs
 
-## Code API
+### sizzle
+
+https://github.com/vsajip/sphinx_sizzle_theme
+
+https://docs.red-dove.com/sphinx_sizzle_theme/index.html
+
+- [sidebar](https://docs.red-dove.com/sphinx_sizzle_theme/index.html#sidebar)
+- https://docs.red-dove.com/sphinx_sizzle_theme/index.html#summary-detail-lists
+
+### theme options
+
+usually these are theme-specific.
+
+
+
+[HTML Theming — Sphinx documentation (sphinx-doc.org)](https://www.sphinx-doc.org/en/master/usage/theming.html#builtin-themes)
+
+
+
+
+
+
+
+- sidebar toc title font
+- insert inline rst into .md file
+- chemical formula support
+- icon
+
+
+
+## Code API/reference
 
 Using autodoc extension. 
 
@@ -1313,7 +1359,7 @@ Using autodoc extension.
    sys.path.insert(0, os.path.abspath('../../'))
    ```
 
-2. add extension
+2. add `autodoc` extension
 
    ```python
    extensions = [
@@ -1373,18 +1419,41 @@ references
 ```rst
 .. py:function:: lumache.get_random_ingredients(kind=None, num=3)
 
-    Return a list of random ingredients as strings. ``kind`` will be parsed as code, while `kind` will be rendered italic. Refer to :py:func:`utils.get_ff`.
-   
-    Leave a blank line as a line break.
+    Return a list of random ingredients as strings. ``kind`` will be parsed as code, while `kind` will be rendered italic. **Bold text** is also supported.
+    
+    Refering to methods/classes/modules is different from that in .rst file. 
+    
+    - :py:func:`utils.get_ff`
+    
+    - :class:`make_hybrid.Ligand`
+    
+    - add module name before function/class name, or the reference will fail
+    
+    - :mod:`make_hybrid`. :mod: and :py:mod: are both ok.
+    
+    - from other packages: `text <url>`_.
+    
+    - download: :download:`text <url>`_.
+    
+    - leave a blank line between each item.
+   	You should not add linebreak inside an item. This line is outside the list, and causes a warning: "WARNING: Bullet list ends without a blank line; unexpected unindent.".
+   	
+    What if we add a tab?
+    
+    - This line is rendered bold
+    	This line gets an indent, and linebreaks here are supported.
    
     	An indent of 4 characters is a quote box.
         
-        	Nesting quote box
+        	Nesting quote box...
 	
 	.. note::
-		it's also ok to use rst directives here.
+		it's also ok to use rst directives here. Two colons!!
+	
+	.. deprecated:: 0
+		add version number after that
 
-	code:
+	code (also, a blank line):
 
     >>> lines = open(file, 'r').readlines()
     >>> for line in lines:
@@ -1393,19 +1462,30 @@ references
     >>>         if segname != '':
     >>>             return segname
 
+    :Example:
+    
+    example box above. Maybe code here.
+    
+    Leave a blank line, and...
+    
     :param kind: Optional "kind" of ingredients. Here it's ok to just ignore the blank line.
     :type kind: list[str] or None
     :param num: Another parameter.
     :type num: int
     :return: The ingredients list.
     :rtype: list[str]
+    
+    Also, leave a blank line if you have something after that; otherwise, "WARNING: Field list ends without a blank line; unexpected unindent."
 ```
 
 
 
 
 
-
+- 写完整的句子，首字母大写、加句号
+- vmd, obabel用正常字体，扩展名、文件名用斜体，代码片段用双反引号，某个方法要引用，甚至引用如rdkit的文档（超链接？待定）
+- TODO之前缩进一下
+- notes for developers?
 
 
 
@@ -1515,4 +1595,10 @@ npm install --save hexo-pdf
 https://bibichuan.github.io/posts/5affe24.html
 
 使用hexo等工具，在git上只提交下面的一个`.deploy_git`文件夹。。clone根本没用
+
+
+
+
+
+
 
