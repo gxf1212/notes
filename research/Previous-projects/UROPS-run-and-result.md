@@ -1560,27 +1560,31 @@ parmchk2 -i lig.mol2 -f mol2 -o lig.frcmod
 3. convert to gmx
    
    >   history command (in 2021)
-   >   
-   >     ```shell
-   >    conda activate Acpype
-   >    acpype -p com.prmtop -x com.inpcrd -d -c user
-   >    # rename
-   >    mv com_GMX.gro com.gro
-   >    mv com_GMX.top com.top
-   >    # also generated em.mdp and md.mdp for test
-   >    mv em.mdp em_test.mdp
-   >    mv md.mdp md_test.mdp
-   >     ```
    >
-   >    and process some text
+   >   
    >
    >    ```shell
-   >    grep "WAT" -rl ./com.gro | xargs sed -i "s/WAT/SOL/g" 
-   >    grep "WAT" -rl ./com.top | xargs sed -i "s/WAT/SOL/g"
-   >    # change in topol.top (under "atom") IM to Cl-, IP to Na+
-   >    grep " IP " -rl ./com.top | xargs sed -i "s/ IP / Na+ /g" 
-   >    grep " IM " -rl ./com.top | xeargs sed -i "s/ IM / Cl- /g" 
+   >   conda activate Acpype
+   >   acpype -p com.prmtop -x com.inpcrd -d -c user
+   >   # rename
+   >   mv com_GMX.gro com.gro
+   >   mv com_GMX.top com.top
+   >   # also generated em.mdp and md.mdp for test
+   >   mv em.mdp em_test.mdp
+   >   mv md.mdp md_test.mdp
    >    ```
+   >
+   >   and process some text
+   >
+   >   
+   >
+   >   ```shell
+   >   grep "WAT" -rl ./com.gro | xargs sed -i "s/WAT/SOL/g" 
+   >   grep "WAT" -rl ./com.top | xargs sed -i "s/WAT/SOL/g"
+   >   # change in topol.top (under "atom") IM to Cl-, IP to Na+
+   >   grep " IP " -rl ./com.top | xargs sed -i "s/ IP / Na+ /g" 
+   >   grep " IM " -rl ./com.top | xeargs sed -i "s/ IM / Cl- /g" 
+   >   ```
    
    note that the output has changed in 2022! output into a folder; add a run.sh and .itp file, but we don't use them.
    
@@ -1600,7 +1604,7 @@ parmchk2 -i lig.mol2 -f mol2 -o lig.frcmod
 
 https://jerkwin.github.io/GMX/GMXtut-5/#%E6%A6%82%E8%BF%B0
 
-you may use my scripts: [download here](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/utils/gmx-md-scripts.zip), but refer to Jerkwin tutorial for details; or modify from his.
+you may use my scripts: [download here](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/utils/gmx-md-scripts.zip), but refer to Jerkwin tutorial for details; or modify from his.
 
 1. 将蛋白质和ligand放到分开的坐标文件中 (I don't need)
 

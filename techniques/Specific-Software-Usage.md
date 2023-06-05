@@ -250,7 +250,7 @@ easyconnect：没事不要老开着，当自动断开时就重启一下！！
 
 https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect，但没launchctl这个命令
 
-## Supercomputers
+## Cluster/Supercomputers
 
 ### tools
 
@@ -635,7 +635,7 @@ Mac：https://macwk.com/soft/typora
 
    - Python code style
 
-     <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/pycharm-=.png" alt="image" style="zoom:80%;" />
+     <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/pycharm.png" alt="image" style="zoom:80%;" />
 
 3. 实际上没有那么快自动保存，还是需要ctrl+s，尤其是引用别的包的时候
 
@@ -648,6 +648,16 @@ Mac：https://macwk.com/soft/typora
 6. 非常傻逼的一点是，正常运行和调试（或cmd中python）的`sys.path`不一样。。不好通用地找程序所在路径
 
 7. 
+
+#### other execution notes
+
+- [AttributeError: partially initialized module ''has no attribute''(most likely dueto a circular import_懒笑翻的博客](https://blog.csdn.net/c_lanxiaofang/article/details/103997425)
+
+  don't name your .py file the same as a standard module you import in it....
+
+- 
+
+
 
 ### conda & python cmd
 
@@ -909,13 +919,13 @@ failed, remove this env...
    > conda install matplotlib==2.0.0 networkx==1.11 pandas==0.20.3 scikit-learn==0.18.2 scipy==0.18.1 numpy==1.13.1
    > ```
 
-## MS office
+## Office
 
 ### Common
 
 - [查看 Office 文件的先前版本](https://support.microsoft.com/zh-cn/office/查看-office-文件的先前版本-5c1e076f-a9c9-41b8-8ace-f77b9642e2c2)
 
-### Word
+### MS Word
 
 - 表格左上角斜线
 
@@ -923,16 +933,38 @@ failed, remove this env...
 
 - 
 
-### Excel
+### MS Excel
+
+also for LibreOffice Calc, many commands are the same....
 
 - [Excel 将文本或数字的格式设置为上标或下标](https://support.microsoft.com/zh-cn/office/%E5%B0%86%E6%96%87%E6%9C%AC%E6%88%96%E6%95%B0%E5%AD%97%E7%9A%84%E6%A0%BC%E5%BC%8F%E8%AE%BE%E7%BD%AE%E4%B8%BA%E4%B8%8A%E6%A0%87%E6%88%96%E4%B8%8B%E6%A0%87-3649411b-adf4-483e-b0e8-7b844605da74)
 
+- Excel的paste special必须是复制，辣鸡！Calc就可以剪切
 
+- To calculate the correlation coefficient, you can use the `CORREL` function. In an empty cell, enter the formula `=CORREL(A1:A10,B1:B10)`, replacing `A1:A10` and `B1:B10` with the cell ranges containing your data.
 
-### PPT
+- In both Excel and LibreOffice Calc, you can calculate the dot product (点积) of two vectors by using similar formulas.
+  In Excel, you can use the `SUMPRODUCT` function to calculate the dot product of two vectors. For example, if your first vector is in cells A2:A8 and your second vector is in cells B2:B8, you can use the following formula: `=SUMPRODUCT(A2:A8,B2:B8)`. This formula multiplies corresponding entries in the given arrays and returns the sum of those products.
+  In LibreOffice Calc, you can also use the `SUMPRODUCT` function
+  
+- 除了使用快捷键可以进行换行外，换行符也可以在公式中进行。 CHAR(10)是表示换行符，10表示换行符的ASCII码值。 将下面的两个信息进行连接，并且连接符为换行符。 在C2单元格中输入公式：=A2&CHAR(10)&B2，然后单击Enter键后单击 即可。
+
+  e.g. 
+
+  ```excel
+  ="\includegraphics[width=0.75\textwidth]{"&B1&".png} & \hspace{12pt} $"&ROUND(B12,2)&"\ \pm$&$\ "&ROUND(B11,2)&"$ \\"&CHAR(10)
+  ```
+
+- When you copy the text out of Excel, it adds double quotes to preserve the linebreak character.
+
+### MS PPT
 
 - [PPT中如何将多个图形等距分布](https://jingyan.baidu.com/article/fec7a1e5c51b1d1190b4e7ca.html)
 - 美化大师插件：批量删除动画；PPT工具栏
+
+### Foxit Reader
+
+- Alt+F3：手型工具
 
 ## Scientific
 
@@ -948,7 +980,7 @@ https://www.zhihu.com/column/c_1368227352443572224
 
   origin更新上下标，要在book（data）那里Ctrl+S
 
-- [数据导入到Origin后全变成了#号的原因](https://www.office68.com/openoffice/9159.html)：不够长
+- [数据导入到Origin后全变成了#号的原因](https://www.office68.com/openoffice/9159.html)：不够宽。。
 
 - [origin怎么进行线性拟合](https://www.zhihu.com/question/29392864/answer/104174248)
 
@@ -993,6 +1025,11 @@ xjtu email: just login, default configuration
 
 网易邮箱大师，可以搞个Mac版？
 
+### Gmail
+
+在搜索栏输入 in:**inbox** is:unread 筛选出**收**件**箱**中所有**未读邮件**； 点击左上角的选中全部； 在页面上面点击“选择与此搜索匹配的所有会话”选择出所有**未读邮件**。 之后点击“**标记**为**已读**”即可将收件箱中的所有**未读邮件**一键**标记**为**已读**状态：
+[谷歌邮箱 Gmail 如何一次性将所有未读邮件标为已读？ - 老王博客](https://www.bing.com/ck/a?!&&p=3890c46df33db1bcJmltdHM9MTY3ODc1MjAwMCZpZ3VpZD0yYmEyOWMwMi1lZDI3LTZlNTQtMDBmNC04ZWJlZWM2ZDZmODgmaW5zaWQ9NTQwNA&ptn=3&hsh=3&fclid=2ba29c02-ed27-6e54-00f4-8ebeec6d6f88&psq=gmail的inbox中总是有11封邮件未读，但又看不到，如何将它们标记为已读或删除？&u=a1aHR0cHM6Ly9sYW93YW5nYmxvZy5jb20vZ21haWwtcmVhZC1hbGwuaHRtbCM6fjp0ZXh0PSVFNSU5QyVBOCVFNiU5MCU5QyVFNyVCNCVBMiVFNiVBMCU4RiVFOCVCRSU5MyVFNSU4NSVBNSUyMGluJTNBaW5ib3glMjBpcyUzQXVucmVhZCwlRTclQUQlOUIlRTklODAlODklRTUlODclQkElRTYlOTQlQjYlRTQlQkIlQjYlRTclQUUlQjElRTQlQjglQUQlRTYlODklODAlRTYlOUMlODklRTYlOUMlQUElRTglQUYlQkIlRTklODIlQUUlRTQlQkIlQjYlRUYlQkMlOUIlMjAlRTclODIlQjklRTUlODclQkIlRTUlQjclQTYlRTQlQjglOEElRTglQTclOTIlRTclOUElODQlRTklODAlODklRTQlQjglQUQlRTUlODUlQTglRTklODMlQTglRUYlQkMlOUIlMjAlRTUlOUMlQTglRTklQTElQjUlRTklOUQlQTIlRTQlQjglOEElRTklOUQlQTIlRTclODIlQjklRTUlODclQkIlRTIlODAlOUMlRTklODAlODklRTYlOEIlQTklRTQlQjglOEUlRTYlQUQlQTQlRTYlOTAlOUMlRTclQjQlQTIlRTUlOEMlQjklRTklODUlOEQlRTclOUElODQlRTYlODklODAlRTYlOUMlODklRTQlQkMlOUElRTglQUYlOUQlRTIlODAlOUQlRTklODAlODklRTYlOEIlQTklRTUlODclQkElRTYlODklODAlRTYlOUMlODklRTYlOUMlQUElRTglQUYlQkIlRTklODIlQUUlRTQlQkIlQjYlRTMlODAlODIlMjAlRTQlQjklOEIlRTUlOTAlOEUlRTclODIlQjklRTUlODclQkIlRTIlODAlOUMlRTYlQTAlODclRTglQUUlQjAlRTQlQjglQkElRTUlQjclQjIlRTglQUYlQkIlRTIlODAlOUQlRTUlOEQlQjMlRTUlOEYlQUYlRTUlQjAlODYlRTYlOTQlQjYlRTQlQkIlQjYlRTclQUUlQjElRTQlQjglQUQlRTclOUElODQlRTYlODklODAlRTYlOUMlODklRTYlOUMlQUElRTglQUYlQkIlRTklODIlQUUlRTQlQkIlQjYlRTQlQjglODAlRTklOTQlQUUlRTYlQTAlODclRTglQUUlQjAlRTQlQjglQkElRTUlQjclQjIlRTglQUYlQkIlRTclOEElQjYlRTYlODAlODElRUYlQkMlOUE&ntb=1)
+
 ### TIM in Linux (wine)
 
 installation: see [Linux-fundamental](/techniques/Linux-fundamental?id=other-softwares)
@@ -1017,16 +1054,27 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
   解决方法：全局模式
 - [ChatGPT 常见错误原因及解决方案：报错、回答不完整、网络错误等](https://blog.csdn.net/marin1993/article/details/128219198)。搞不定就换节点，刷新
 - Edge dev: https://www.microsoftedgeinsider.com/zh-tw/download
+- https://platform.openai.com/ get your API key
 
 
 
+### 钉钉
 
+钉钉客户免费享有聊天消息云端存储180天
+
+开通钉钉专业版，内部聊天记录（包含内部群以及内部单聊）保存时间将从180天调整为2年
+
+### 会议纪要
 
 **[腾讯会议 自动会议纪要-操作指南](https://cloud.tencent.com/document/product/1095/53483)**。但是要企业版
 
 [Windows 实时语音转文字](https://blog.csdn.net/qq_41095608/article/details/126308275)
 
-联想语音助手已经满足我的需要了
+联想语音助手已经满足我的需要了，但是这玩意半天退出不了
+
+最后就用系统自带的录音机。可以上传到钉钉，或加载到剪映以转换成文字
+
+
 
 
 
@@ -1053,6 +1101,10 @@ notes from Windows
   [Texstudio使用经验](http://haccanri.github.io/tools/2015/04/22/tex_editor.html)
 
 - 
+
+### table
+
+- [Latex 表格文字居中（垂直和水平居中）_latex表格文字居中_ICQQ123的博客-CSDN博客](https://blog.csdn.net/ICQQ123/article/details/114701859)
 
 ### float
 
@@ -1101,12 +1153,13 @@ notes from Windows
      - dbj to bst: `latex *.dbj`
 2. https://www.codenong.com/cs106438317/ 解决! Package natbib Error: Bibliography not compatible with author-year
 3. comment in .bib file: `//` or `%`
-4. to prevent websites from appearing, you have to comment out both `url` and `doi`
-5. 万方可以直接导出bibtex，辣鸡知网就不行. whatever
-6. citation keys cases https://tex.stackexchange.com/questions/623482/case-mismatch-between-cite-keys
-7. https://tex.stackexchange.com/questions/174030/misplaced-alignment-tab-character-error-when-citing-a-particular-entry Look for & in a bibliographic item and change it into \&
+4. 如果将某个参考文献中的某一个项目去掉，可以在这一行前加『//』。不是去掉@就行吗？
+5. to prevent websites from appearing, you have to comment out both `url` and `doi`
+6. 万方可以直接导出bibtex，辣鸡知网就不行. whatever
+7. citation keys cases https://tex.stackexchange.com/questions/623482/case-mismatch-between-cite-keys
+8. https://tex.stackexchange.com/questions/174030/misplaced-alignment-tab-character-error-when-citing-a-particular-entry Look for & in a bibliographic item and change it into \&
 
-### ifdefined
+### if statement
 
 ```latex
 \ifcsname foo\endcsname
@@ -1135,10 +1188,29 @@ https://www-sop.inria.fr/marelle/tralics/auxdir/tdoc1cid2.html
 
   分为两种情况，情况一是文章需要显示少量中文（CJK），情况二是文章包括很多中文（ctex）。
 
+  1. 在源文件中导言部分加入代码`\usepackage{CJKutf8}`
+
+  2. 代码前后可以紧接着加入其它文字，比如
+
+       ```latex
+       Software \begin{CJK*}{UTF8}{gbsn}软件\end{CJK*}vulnerabilities
+       ```
+
+  3. 此时需要用pdfLaTeX编译。
+
 - https://jdhao.github.io/2018/03/29/latex-chinese.zh/
   http://mirrors.ibiblio.org/CTAN/macros/xetex/latex/xecjk/xeCJK.pdf
   xeCJK 只提供了字体和标点控制等基本 CJK 语言支持。对于中文文档，可以使用更为高 层的 ctex 宏包或文档类，它将自动调用 xeCJK 并设置好中文字体，同时提供了进一步的本地化支持。详细内容参看 ctex 宏包套件的说明。
   所以用的还是英文的缩进方式。
+  
+  ```latex
+  % 该文件使用 xelatex 命令可以编译通过
+  \documentclass[12pt, a4paper]{article}
+  \usepackage{fontspec}
+  \usepackage[slantfont, boldfont]{xeCJK}
+  ```
+  
+  
 
 ### code
 
@@ -1164,19 +1236,58 @@ https://tex.stackexchange.com/questions/319580/texstudio-how-to-get-access-to-th
 
 menu > Options > Configure TexStudio > Language checking > Spelling dictionary directories.
 
-https://yinqingwang.wordpress.com/ Language Tool
+https://yinqingwang.wordpress.com/    [LanguageTool](https://www.languagetool.org/)
 
-[How to remove added word from dictionary in texstudio?](https://blog.csdn.net/ChenglinBen/article/details/117150581) check user words
+[How to remove added word from dictionary in texstudio?](https://blog.csdn.net/ChenglinBen/article/details/117150581) [another ref](https://tex.stackexchange.com/questions/319580/texstudio-how-to-get-access-to-the-added-words-to-dictionary) check user words. 点击tools, 然后找到Check Spelling
 
 
 
-[texstudio structure（结构）不见了，如何进行查找](https://blog.csdn.net/liuyiming2019/article/details/115272007)：就在左下角。。
+- [texstudio structure（结构）不见了，如何进行查找](https://blog.csdn.net/liuyiming2019/article/details/115272007)：就在左下角。。
+
+- http://haccanri.github.io/tools/2015/04/22/tex_editor.html
+
+  在子文档中编译整个文档。毕业论文的模板包含多个文件，写作往往在子文件里，然而如果不加设置地直接编译子文件是会报错的。这时需要在“选项”中设置主文档或者在主文档第一行中加入meta信息`% !TeX root = main.tex`(假设主文档是main.tex的话)。这样在任何一个子文件都可以直接编译，等价于编译main.tex。
+
+- [TeXstudio 设置定时自动保存_Amnesia Greens的博客](https://blog.csdn.net/amnesiagreen/article/details/120879230)
 
 
 
 ## R language
 
 to be continue...
+
+
+
+## Adobe series
+
+see [Deal with videos](Deal-with-videos.md)
+
+### Adobe illustrator
+
+- 我们可以按快捷键Ctrl+，就是放大视图，按快捷键Ctrl-就是缩小视图；滚轮是上下，Ctrl+滚轮是左右
+
+  [ai画板上下左右移动快捷键，画板缩小放大快捷键-百度经验](https://jingyan.baidu.com/article/9113f81b7e4bdc2b3314c740.html)
+
+- 使用定界框旋转对象
+
+  1. 选择一个或多个对象。
+  2. 使用“选择”工具 ，将位于定界框外部的鼠标指针移近一个定界框手柄，待指针形状变为 之后再拖动鼠标。
+
+  https://helpx.adobe.com/cn/illustrator/using/rotating-reflecting-objects.html
+
+### PR
+
+### basics
+
+- 轨道右侧是工具栏，比如说剃刀工具，可以剪切视频和音频。
+
+- [PR如何给视频的某一段中的局部添加马赛克？ - 知乎](https://www.zhihu.com/question/67869397/answer/2313201400)
+
+[Adobe premiere怎么把浮动面板关闭？_火星网校](https://www.hxsd.tv/wenda/11068/)
+
+
+
+
 
 
 

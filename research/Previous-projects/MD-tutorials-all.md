@@ -476,7 +476,7 @@ all tutorial: http://www.ks.uiuc.edu/Training/Tutorials/ including
 
   The viable states are one in which the δ nitrogen of histidine is protonated (listed with residue name “HSD" in the topology file), one in which the $\varepsilon$ nitrogen of histidine is protonated (“HSE"), and one in which both nitrogens are protonated (“HSP").
 
-  ![组氨酸- 生物百科- 生物行](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/his.png)
+  ![组氨酸](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/his.png)
 
 - load .psf and then .pdb file
 
@@ -639,7 +639,7 @@ xmgrace TEMP.dat
   quit
   ```
 
-  ![prms](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/prms.png)
+  ![prms](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD.assets/prms.png)
 
   > he has to add a lot of prm files because of not adding topology when building! not recommended.
 
@@ -988,7 +988,7 @@ Analysis: To obtain BAR free-energy differences, Extensions $\to$ Analysis $\to$
 
 The distance separating the cation in the primary and the adjacent cells = 30 $\AA$
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/MD.assets/sendpix0.jpg" alt="lambda" style="zoom: 80%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD.assets/sendpix0.jpg" alt="lambda" style="zoom: 80%;" />
 
 Solid lines represent outgoing atoms and dashed lines represent incoming atoms.
 Two variables define how the perturbed system is coupled or decoupled from its environment, viz. λ~elec~ (alchElecLambdaStart) and λ~vdW~ (alchVdwLambdaEnd). 

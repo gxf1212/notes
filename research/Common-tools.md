@@ -4,7 +4,7 @@ see [here](/techniques/Prepare-for-the-computer.md) for installation
 
 this page also includes usage of pymol, vmd, gmx, etc.
 
-# Visualization
+# Visualization & Modeling
 
 ## Basics
 
@@ -15,25 +15,75 @@ By default
 
 be careful doing selection
 
+
+
+pymol/vmd measurement in angstrom. gmx: nm!!!
+
+https://manual.gromacs.org/documentation/current/onlinehelp/gmx-editconf.html#gmx-editconf
+
 ## Pymol
 
-1. delete命令！
+### Basics
 
-2. select atom name
+- mouse
 
-   ```
-   sele name HA
-   ```
+  - left click: rotate
+  - right click: zoom
+  - middle and move: move
+  - middle click: center this residue
 
-   see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
+### Selection
 
-3. Using Editing Mode to Move Atoms Now, please set the mouse mode to Editing, and CTRL-Left-drag on an atom.
+see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
-4. pymol show contact residues http://shdf611.lofter.com/post/1cd0a1d0_a6e8874
+- select atom name
 
-5. align pocket in Pymol: https://pymolwiki.org/index.php/Focus_alignment
+  ```
+  sele name HA
+  ```
 
-6. renumber residues and fix names
+- select
+
+  ```shell
+  sele /object_name//chain_name/residue/atom_type
+  # eg
+  sele /2cqg//A/PHE`149/CZ
+  ```
+
+- If you click on where it says “Selecting: Residues”, you can cycle  through the available selection modes below.  These modes are also  available from the “Mouse” menu under “Selection Mode”.   
+
+  - Atoms
+  - C-alphas
+  - Molecules
+  - Objects
+  - Segments
+  - Chains
+  - Residues  
+
+- save
+
+  - save as img
+  - save session: to edit the next time
+
+### Action
+
+- In PyMOL you can use A > align > all to this option to align all the open structures to a particular structure in a single step.
+
+  https://www.researchgate.net/post/How_to_overlay_multiple_structures_in_Pymol
+
+- align pocket in Pymol: https://pymolwiki.org/index.php/Focus_alignment
+
+  pocket alignment，最好只用pocket的原子
+
+- action--preset
+
+  publication (different colors), simple (thin lines, ligands sticks), technical (H bonds), ligand (only ligand H bonds)
+
+### Editing
+
+1. Using Editing Mode to Move Atoms Now, please set the mouse mode to Editing, and CTRL-Left-drag on an atom.
+
+2. renumber residues and fix names
 
    ```shell
    # substitute (all) with other selections
@@ -48,92 +98,88 @@ be careful doing selection
    ref: https://pymolwiki.org/index.php?title=Alter&redirect=no
 
    other
-   
+
    http://dunbrack3.fccc.edu/PDBrenum/
 
-To do:
+3. 
 
-api: https://pymol.org/dokuwiki/doku.php?id=api:cmd:alpha  https://pymol.org/pymol-command-ref.html. for other commands we have to view documentation in pycharm
+### Show
 
-1. `cd directory`
+1. pymol show contact residues http://shdf611.lofter.com/post/1cd0a1d0_a6e8874
 
 2. s: show. as.
 
    - show as sticks: shows side chain
 
-3. mouse
+3. You can use positive numbers for point sizes or negative numbers for Angstrom-based sizes.
 
-   - left click: rotate
-   - right click: zoom
-   - middle and move: move
-   - middle click: center this residue
+   [For example, to set the label size to 10pt, you can use the command](https://pymolwiki.org/index.php/Label_size)
 
-4. bg_color white/...
+   ```
+   set label_size, 10
+   ```
 
-   opaque off, then type `ray`
-
-5. set cartoon_fancy_helices/sheets, 0/1
-
-6. set cartoon_side_chain_helper, on
-
-   remove the sticks of main chain 
-
-7. save
-
-   - save as img
-   - save session: to edit the next time
-
-8. action--preset
-
-   publication (different colors), simple (thin lines, ligands sticks), technical (H bonds), ligand (only ligand H bonds)
-
-9. label
+   https://pymolwiki.org/index.php/Label_size
 
    - label--residues vs hide--label
 
-10. center
+4. https://pymolwiki.org/index.php/Sphere_scale
 
-    ```
-    center object
-    ```
+5. `bg_color white`...
 
-11. must use cmd to align small molecules
+   opaque off, then type `ray`
 
-    ```
-    align mol1,mol2
-    ```
+6. set cartoon_fancy_helices/sheets, 0/1
 
-12. color by element
+7. set cartoon_side_chain_helper, on
 
-13. select
+   remove the sticks of main chain 
 
-    ```shell
-    sele /object_name//chain_name/residue/atom_type
-    # eg
-    sele /2cqg//A/PHE`149/CZ
-    ```
+8. center
 
-14. If you click on where it says “Selecting: Residues”, you can cycle  through the available selection modes below.  These modes are also  available from the “Mouse” menu under “Selection Mode”.   
+   ```
+   center object
+   ```
 
-    - Atoms
-    - C-alphas
-    - Molecules
-    - Objects
-    - Segments
-    - Chains
-    - Residues  
+9. beautify and set background
 
-15. beautify and set background
+   https://zhuanlan.zhihu.com/p/26325764
 
-    https://zhuanlan.zhihu.com/p/26325764
+   display--background--white
 
-    display--background--white
+   right click--ray
 
-    right click--ray
+10. https://pymolwiki.org/index.php/Rock
 
-16. 
+11. 
+
+### cmd & API
+
+1. `cd directory`
+
+2. delete命令！
+
+3. must use cmd to align small molecules
+
+   ```
+   align mol1,mol2
+   ```
+
+4. api: https://pymol.org/dokuwiki/doku.php?id=api:cmd:alpha  https://pymol.org/pymol-command-ref.html. for other commands we have to view documentation in pycharm
+
+
+
+### plugin
 
 a website to draw electrostatic potential surface: https://server.poissonboltzmann.org. Seeing a blank web page suggests a bad network.
+
+
+
+
+
+
+
+
 
 ## VMD techniques
 
@@ -288,7 +334,13 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
 7. 
 
-8. VMD representation里面写变量$ligname是可以的
+8. https://www.ks.uiuc.edu/Research/vmd/current/ug/node33.html
+
+   label bonds in vmd, shows distance automatically
+
+   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Common-tools.assets/color-bond.png" alt="color-bond" style="zoom:20%;" />
+
+9. VMD representation里面写变量$ligname只是不报错，还是得手动改
 
    ```tcl
    set ligname UDCA
@@ -327,7 +379,19 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
    rmsdtt::doRmsd
    ```
 
-9. 
+10. 
+
+
+
+### PBC processing
+
+http://bbs.keinsci.com/thread-2085-1-1.html
+
+gmx generated trajectory, must be processed by trjconv nojump. vmd pbc wrap doesn't work. However, coordinated water molecules are lost; in the original trajectory, protein goes across the pbc. What fxxk doing clustering with gmx! 
+
+usually we use -pbc mol...
+
+
 
 ### other
 
@@ -387,6 +451,40 @@ The current VMD source code has been tested to compile with Python versions 2.4 
 
    or AutoPSF says sth like 'failed on end of segment' (my `modify_gv`)
 
+## ChemBioDraw
+
+### Font
+
+- 全选改字体（18），在file--document setting--Drawing改线宽，大概0.56（0.4倍粗体），就和Wikipedia的比较接近（平常不用加粗）。全选--右键--Object Settings也可以。
+
+  ![image-20230119225838463](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Common-tools.assets/chembiodraw-drawing.png)
+
+- [怎样在ChemDraw中设置字体的默认格式？](https://www.sohu.com/a/104294282_395309)
+
+- 
+
+### Drawing
+
+- ChemDraw中内置多种模板，蛋白质支链模板是比较典型的一种了，通过模板可以快速添加蛋白质支链结构。而可以在Text tool或者模板工具中找到Templates（模板），然后选择Amino Acid Side Chain（蛋白质支链模板）即可。
+
+- 
+
+- [ChemDraw如何一键对齐所有化合物结构](https://jingyan.baidu.com/article/86112f133bc47766379787b8.html)。对选中的右键也行
+
+- 选中碳，在ChemDraw的“Object”菜单中选择“Show Stereochemistry”，它会自动在手性碳上显示其正确构型。
+
+- 从“Structure”菜单中，选择“Clean Up Structure”命令，结构将被规范化
+
+  https://www.chemdraw.com.cn/ruheshiyong/jiegou-zhengli.html
+  
+- 组合多个对象：选中多个对象，Ctrl+G
+
+
+
+### Cheat sheet
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Common-tools.assets/CD_cheatsheet.png" alt="image.png" style="zoom: 60%;" />
+
 ## Other
 
 ### Avogadro
@@ -409,80 +507,17 @@ May vary a bit if you `Clean Geometry` to optimize structure.
 
 Not as familiar as Gauss.
 
-### ChemBioDraw
+https://www.cresset-group.com/software/flare/
 
-- 全选改字体（18），在file--document setting--Drawing改线宽，大概0.56（0.4倍粗体），就和Wikipedia的比较接近（平常不用加粗）。全选--右键--Object Settings也可以。
-
-  ![image-20230119225838463](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/Common-tools.assets/chembiodraw-drawing.png)
-
-- ChemDraw中内置多种模板，蛋白质支链模板是比较典型的一种了，通过模板可以快速添加蛋白质支链结构。而可以在Text tool或者模板工具中找到Templates（模板），然后选择Amino Acid Side Chain（蛋白质支链模板）即可。
-
-- [怎样在ChemDraw中设置字体的默认格式？](https://www.sohu.com/a/104294282_395309)
-
-- [ChemDraw如何一键对齐所有化合物结构](https://jingyan.baidu.com/article/86112f133bc47766379787b8.html)。对选中的右键也行
-
-- 选中碳，在ChemDraw的“Object”菜单中选择“Show Stereochemistry”，它会自动在手性碳上显示其正确构型。
-
-
-
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/Common-tools.assets/CD_cheatsheet.png" alt="image.png" style="zoom: 60%;" />
-
-# Modeling
-
-or parametrization
-
-## CHARMM-GUI
-
-### LigandRM
-
-or CgenFF
-
-#### Basics
-
-> if you want to perfectly retain its coordinates and atom names, use CGenFF server!
->
-> oh...CHARMM-GUI slightly optimizes the coordinates. It doesn't matter.
->
-> slightly different charge. I think remtp's params are closer to the paper.
-
-but not used in method 1
-
-> https://cgenff.umaryland.edu/  itself, the program to assign parameters for your ligand
->
-> the "penalty score" is returned to the user as a measure for the accuracy of the approximation. in `.rtf`
-
-Use CHARMM-GUI---input generator---ligand reader and modeller
-
-refer to preparation videos mentioned above, and [the official one](https://www.bilibili.com/video/BV1bM4y1P7tB)
-
-> **CHARMM GUI basic tips**
->
-> - after GUI, the ligand/residue name is changed into LIG
-> - Only molecules in the **HETATM** record in a PDB file are recognized.
-> - **adopt available RCSB SDF structure** preferentially
-> - make sure that the Marvin JS structure is correct
-> - <font color=red>All hydrogen and missing atoms should be explicitly placed for accurate result.</font> or report error
->   - **edit the protonation states yourself!**
-> - Users can modify the protonation state if necessary. 
->   - or select other protonation state in the next step
-> - **The coordinates will be preserved if you upload .pdb file.**
->   - uploading your own .pdb file is suggested
->   - you can align .pdb files later, only it considers coordinates
->   - if you are to upload file, .mol2 is prefered? 
-> - you may want to “Find similar residues in the CHARMM FF”, only when your ligand is special to be included in the ff...
-> - 
-
-then just click, click...and download all files
-
-
-
-**attype warning: triple bonded non-nitrile nitrogen not supported; skipped molecule.**
-
-## AmberTools
+like DSV
 
 
 
 # Gromacs
+
+This section is about basics and common usage. For more, see other pages about specific systems and applications.
+
+
 
 1. check installation info
 
@@ -490,7 +525,7 @@ then just click, click...and download all files
    gmx -version
    ```
 
-2. 
+2. In gromacs, chain names are lost?!
 
 ## Common commands
 
@@ -498,9 +533,24 @@ then just click, click...and download all files
 
 prepare the system
 
-- 如果你是用GROMACS的话，pdb2gmx产生的蛋白拓扑文件时可以加上-his选项来人工选择各个组氨酸的质子化态
+- The protonation state of N- and C-termini can be chosen interactively with the `-ter` flag.
+
+- pdb2gmx产生的蛋白拓扑文件时可以加上-his选项来人工选择各个组氨酸的质子化态
 
 - https://manual.gromacs.org/documentation/2020-current/onlinehelp/gmx-pdb2gmx.html  add -ff folder. xx.ff, forcefield.itp in 
+
+- `pdb2gmx` can recognize terminal residues COO^-^ if chain ID is assigned
+
+Force field
+
+- source: local directory, installation top folder, GMXLIB variable
+
+- 
+
+
+### editconf
+
+- https://gromacs.bioexcel.eu/t/merging-two-gro-files/2960/2 editconf converts between .pdb and .gro (etc.) freely
 
 ### make_ndx
 
@@ -510,7 +560,7 @@ https://www.compchems.com/how-to-create-an-index-file-in-gromacs/#creating-a-new
 
 type 'h' for help...
 
-![make_ndx](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/Programming-for-MD.assets/make_ndx.png)
+![make_ndx](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/make_ndx.png)
 
 `-n index.ndx`: based on an existing index file
 
@@ -564,7 +614,9 @@ vdw and elec, common cutoff/switchdist
 
 - [gmx逐步放开限制：暴力修改`itp`文件](https://jerkwin.github.io/2017/10/20/GROMACS%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E6%8B%9F%E6%95%99%E7%A8%8B-%E5%A4%9A%E8%82%BD-%E8%9B%8B%E7%99%BD%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/#9-%E6%94%BE%E5%BC%80%E9%99%90%E5%88%B6-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E9%A2%84%E5%B9%B3%E8%A1%A1)
 
-## result
+## trjconv
+
+- `-dt`: not real time, but how many frames we go through each time we collect one frame
 
 
 
@@ -575,10 +627,6 @@ vdw and elec, common cutoff/switchdist
 
 
 ## other
-
-notes to be classified
-
-- 
 
 - run consecutively
 
@@ -599,55 +647,117 @@ notes to be classified
 
 - 
 
-- In gromacs, chain names are lost!
+
+
+
+## debug
+
+https://gromacs.org-gmx-users.maillist.sys.kth.narkive.com/J6lqsB6H/gmx-users-increasing-cut-off-and-pme-grid-spacing
+box too big!
+
+
+
+
+
+# NAMD and Amber
+
+and VMD and CHARMM FF? I don't feel too much to say since they are just responsible for running MD (refer to pmemd as Amber)... so just put (common/fundamental) debug experiences here (no system-specific debug?...).
+
+## FF and MD engine
+
+- [AMBER、GROMOS、OPLS、CHARMM最新版本的GROMACS力场包 - 分子模拟 (Molecular Modeling) - 计算化学公社](http://bbs.keinsci.com/thread-15094-1-1.html)
+
+  amber14sb_OL15.ff_corrected-Na-cation-params.tar.gz
+
+  possible problem:
+
+  - [grompp 出現報錯：No default Improper Dih. types - 分子模拟 (Molecular Modeling) - 计算化学公社](http://bbs.keinsci.com/thread-25936-1-1.html)
+  - [amber14SB力场报错“No default Improper Dih. types”的解决办法](https://zhuanlan.zhihu.com/p/389786141)
+  - or [Fixing bugs in FF14SB port for Gromacs](http://zhenglz.blogspot.com/2017/05/fixing-bugs-in-ff14sb-port-for-gromacs.html)
+
+- CHAMBER: Comprehensive support for CHARMM force fields within the AMBER software
+
+  CHAMBER is part of ParmEd, and parmed is part of AmberTools
+
+- Amber FF (tleap)，nonbon板块的距离（$r_e$的一半，Å）*2除以$\sqrt[6]{2}$等于gromacs的top文件的距离（σ, nm）
+  能量都是ε，Amber单位是kcal，top文件单位是kJ
+
+
+
+## NAMD Debug
+
+- FATAL ERROR: Atom 9 has bad hydrogen group size.  Check for duplicate bonds. 居然是vmd1.9.3的锅
+
+- I'm running MD simulation of a protein-ligand system (pdb id: 5tbm) with NAMD3 and CHARMM36/CgenFF force field. I removed extra components (except a water molecule near the ligand binding site which forms hydrogen bonds), and fixed the protein structure. After minimization, NVT, NPT with restrain, and NPT equilibration, everything went well. Then I performed 100ns MD simulation (delta t is 1 femtosecond), following by a 500ns MD simulation (delta t is 2 femtosecond). However, the latter simulation reports the following error after 200~300ns:
+  Error: atoms moving too fast at timestep 107643652; simulation has become unstable (0 atoms at pe 0).
+  FATAL ERROR:SequencerCUDA: Atoms moving too fast.
+  Only one of three simulations survive. I'm setting rigidbonds to all.
+  The structure looks fine until the last frame recorded. I didn't find the initial structure unstable. Nor does bonds break apart.
+  I've also tried setting margin to 4, but the simulations stops even earlier.
+  What should I do to solve this problem? Should I just run production MD with a timestep of 1fs?
+  I hope to obtain the clustered binding structure and perform FEP (to compare with experimental data). In the cystal structure, the water molecule acts as two H bond donors; while after NVT, it accepts a O-H from a nearby tyrosine residue. Will that difference affect FEP results a lot?
+
+  atom moving too fast?
+
+  1. check the structure, system volume?
+  2. minimize and equilibration ok?
+  3. use shorter timestep
+  4. increase margin?
+  5. gradually heat the system
+  6. more (langevin) parameters?
+
+  
+
+  > *> try these*
+  > *>*
+  > *> 1] Apply the temperature step by step (100 200 290 ..)*
+  > *> 2] You can use smaller time step (1 fs or 0.5 fs)*
+  > *> 3] make sure all atoms inside the cell basis vector*
+  > *> 4] use Velocity control or Temperature control with Langivin Dynamics*
+  > Use "margin 3" or larger.
+  >
+  > In rare special circumstances atoms that are involved in bonded terms (bonds, angles, dihedrals, or impropers) or nonbonded exclusions (especially implicit exclusions due to bonds) will be placed on non-neighboring patches because they are more than the cutoff distance apart. This can result in the simulation dying with a message of “bad global exclusion count”. If an “atoms moving too fast; simulation has become unstable”, “bad global exclusion count”, or similar error happens on the first timestep then there is likely something very wrong with the input coordinates, such as the atoms with uninitialized coordinates or different atom orders in the PSF and PDB file. Looking at the system in VMD will often reveal an abnormal structure. Be aware that the atom IDs in the “Atoms moving too fast” error message are 1-based, while VMD’s atom indices are 0-based. If an “atoms moving too fast; simulation has become unstable”, “bad global exclusion count”, or similar error happens later in the simulation then the dynamics have probably become unstable, resulting in the system “exploding” apart. Energies printed at every timestep should show an exponential increase. This may be due to a timestep that is too long, or some other strange feature. **Saving a trajectory of every step** and working backwards in can also sometimes reveal the origin of the instability. 
 
 - 
 
-- doing MSA: cluster omega
-
-- pocket alignment，最好只用pocket的原子
-
-- 
-
-- 
-
-- 
-
-- 
-
-- [分子动力学模拟为什么会有先NVT后NVE？](http://bbs.keinsci.com/thread-9699-1-1.html)
-
-
-
-# NAMD
-
-and VMD and CHARMM FF
-
-
-
-https://anaconda.org/conda-forge/psfgen
-
-
-
-vmd自带的力场就是把TIP3的两个氢之间的bond注释掉
-
-
-
-## other
-
-https://www.cresset-group.com/software/flare/
-
-like DSV
 
 
 
 
 
-# Docking
 
-## AutoDock Tools and vina
+## Amber MD debug
 
 
+
+
+
+IEEE underflow
+
+it doesn't matter...
+
+
+
+
+
+# Bioinformatics
+
+RCSB里面，只能通过advanced search来进行BLAST？
+https://www.rcsb.org/news/5764422199cccf72e74ca34f
+
+https://www.rcsb.org/docs/additional-resources/sequence-analysis
+
+https://www.rcsb.org/alignment
+
+
+
+好几家BLAST的，谁能直接筛选？
+
+
+
+doing MSA: cluster omega
+
+[Clustal Omega < Multiple Sequence Alignment < EMBL-EBI](https://www.ebi.ac.uk/Tools/msa/clustalo/)
 
 
 
@@ -656,4 +766,8 @@ like DSV
 [How to Use US EPA EPI Suite to Predict Chemical Substance Properties](https://www.chemsafetypro.com/Topics/CRA/How_to_Use_US_EPA_EPI_Suite_to_Predict_Chemical_Substance_Properties.html)
 
 [Download EPI Suite™ - Estimation Program Interface v4.11 | US EPA](https://www.epa.gov/tsca-screening-tools/download-epi-suitetm-estimation-program-interface-v411): predict properties of small molecules
+
+
+
+
 

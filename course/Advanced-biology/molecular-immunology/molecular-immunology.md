@@ -532,7 +532,7 @@ Ab can also be an antigen. Three types of epitope:
 
 - CH3: bind Fc receptor on the cell surface
 
-  - **opsonization** (调理作用): phagocytosis (吞噬作用) by macrophages and neutrophils through Fc binding to Fc receptor, then into [presenting pathway](#MHC synthesis,-their-transportation-and-assembly)
+  - **opsonization** (调理作用): phagocytosis (吞噬作用) by macrophages and neutrophils through Fc binding to Fc receptor, then into [presenting pathway](#MHC-synthesis,-their-transportation-and-assembly)
 
     <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/4-ops.png" alt="4-ops" style="zoom:40%;" align=center />
 

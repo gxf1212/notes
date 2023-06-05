@@ -1,18 +1,12 @@
 # Protein MD and Amino Acid FEP
 
-Somethin about amino acid modification, MD and FEP. Maybe running MD using Gromacs.
+Somethin about amino acid modification, MD and FEP.
 
-> the following part is written during the PSK project
+> the first part is written during the PSK project. Then contents are added (e.g. from connexin Ab project).
 
-# Stage 1: add a residue
+remove stages later
 
-To test the stability, we add a residue and run MD first. Don't worry about the parameters, because we'll do FEP later. (We won't mention these trials in the paper?)
-
-We will perform MDS with non-standard AA in gmx. We use CHARMM FF. 
-
-I remember that we cannot easily import CHARMM FF in Amber.
-
-## Deal with novel residues
+# Modeling novel residues
 
 ### Make the topology (gmx)
 
@@ -59,6 +53,7 @@ gmx: [Adding a Residue to a Force Field](https://manual.gromacs.org/current/how-
 ### Make the topology (namd)
 
 summary
+
 - hybrid topology做对是一切的基础
 - 需更改mutator.tcl
 - 需手动设定在哪突变
@@ -69,24 +64,24 @@ summary
 #### Making correct topology files for novel residues
 
 - 一个原则是，尽量和parent residue接近。
-  
-    Take the sulfonated TYR as example, the partial charges in the aromatic ring will change, but the atom types of your common part had better be the same as your parent residue. 
+
+  Take the sulfonated TYR as example, the partial charges in the aromatic ring will change, but the atom types of your common part had better be the same as your parent residue. 
 
   > correction: mainchain atom charges must be the same. That's one of the reasons why we mutate everything to Ala instead of Gly.
-  
+
 - 另一个原则是，如果不想编辑pdb文件（两个态单独pdb都要生成），就需要写完整的IC，还要check sidechain conformation
-  
-    只要有IC，完全可以不需要PDB文件。但是CHARMM-GUI和cgenff不会提供任何IC，只有从现存的rtf中找
+
+  只要有IC，完全可以不需要PDB文件。但是CHARMM-GUI和cgenff不会提供任何IC，只有从现存的rtf中找
 
 Ways to generate novel residue topology:
 
 1. in CHARMM FF folder (toppar/stream/prot). You may search and visualize them in [CHARMM-GUI PDB reader](https://www.charmm-gui.org/?doc=input/pdbreader) --- Non-standard amino acid / RNA substitution --- select image (the figure below). Search by "Parent amino acid" or smiles substructure. 
 
-    - `toppar_all36_prot_modify_res.str`: a lot of modified residues
-    - `toppar_all36_prot_c36m_d_aminoacids.str`: D amino acids
-    those files also include common patches.
+   - `toppar_all36_prot_modify_res.str`: a lot of modified residues
+   - `toppar_all36_prot_c36m_d_aminoacids.str`: D amino acids
+     those files also include common patches.
 
-    Finally, find to residue entries in those files.
+   Finally, find to residue entries in those files.
 
 2. in CHARMM-GUI LigandRM, search for similar residues. Upload that residue, and it may suggest similar parts from cgenff.rtf, etc (but may not include `prot_modify_res.str`). 
 
@@ -100,7 +95,7 @@ It's acceptable to make the topology by hand (since examination is necessary), b
 >
 > read FF files, always gain so much...
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/AA-MD-FEP.assets/search-nonstandard-residue.png" alt="image-20221105205515004" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/AA-MD-FEP.assets/search-nonstandard-residue.png" alt="image-20221105205515004" style="zoom:50%;" />
 
 visit [this site](https://www.charmm-gui.org/?doc=input/pdbreader_uaa&jobid=6615771465&rowId=0&segid=PROA)!
 
@@ -113,6 +108,7 @@ visit [this site](https://www.charmm-gui.org/?doc=input/pdbreader_uaa&jobid=6615
 
 
 Both of the workflows get different atom types from normal TYR. I'll just keep most of the types aligned with standard TYR. 
+
 - It's strange in the provided .str that the atomtype of CB is like that of small molecules (CG321), whose bond parameters with CA (CT1) doesn't exist...as the partial charges are the same, I just change CG321 into CT2 (like normal residues), but it still won't work. **So all atom types (that could be aligned) in the side chain should also align with the parent standard residue.**
 - Maybe, we can transfer the IC terms of TYR to TYS (if cannot align?)...
 
@@ -205,124 +201,25 @@ solvate peptide.psf peptide.pdb -t 12 -o system
 exit
 ```
 
-## System setup
-
-### pre-process the pdb files
-
-- assign chain names for the receptor and ligand. [reference](https://www.researchgate.net/post/How_to_change_the_protein_chain_names_X_into_A_B_C_D_after_MD_simulations_in_Gromacs) or [this](https://pymolwiki.org/index.php?title=Alter)
-
-  ```shell
-  alter sele, chain='A'  # in pymol
-  ```
-
-- We may not use 'HETATM' for novel residues? (maybe fixed later) The peptide should still be considered as 'protein'!
-
-- fix the atom name, e.g. when a terminal COO- turns into the normal CO (atom type OT1, OT2)
-
-- note that we use option `-ter` to automatically fix the terminal residue (NH3<sup>+</sup>,COO<sup>-</sup>). So do not add (or just remove) the extra atoms.
-
-- merge them. you can easily mutate a residue in Pymol.
-
-  ```shell
-  cat *.pdb | grep ' A ' > complex.pdb
-  cat *.pdb | grep ' B ' >> complex.pdb
-  ```
-
-- 
-
-### mutate a residue
-
-In pymol: https://pymolwiki.org/index.php/Mutagenesis
-
-then select a proper rotamer.
-
-### gmx workflow
-
-we can normally go through the gmx workflow. 
-
-```shell
-# cd the folder where the complex pdb file is
-# charmm36.ff is the folder containing all ff needed
-cp -r ../mdps/charmm36.ff ../mdps/residuetypes.dat .
-gmx pdb2gmx -f *.pdb -o complex.gro -ignh -water tip3p -ff charmm36
-gmx editconf -f complex.gro -o complex_box.gro -c -d 1.2 -bt cubic
-gmx grompp -v -f ../mdps/em_vac_pme.mdp -c complex_box.gro -p topol.top -o em_vac.tpr -maxwarn 1
-gmx mdrun -v -deffnm em_vac
-gmx solvate -cp complex_box.gro -cs spc216.gro -o complex_solv.gro -p topol.top
-gmx grompp -f ../mdps/ions.mdp -c complex_solv.gro -p topol.top -o ions.tpr -maxwarn 1
-echo 13 | gmx genion -s ions.tpr -o complex_solv_ions.gro -p topol.top -pname NA -nname CL -neutral -conc 0.15
-gmx grompp -f ../mdps/em.mdp -c complex_solv_ions.gro -p topol.top -o em.tpr
-gmx mdrun -v -deffnm em
-gmx grompp -f ../mdps/em2.mdp -c em.gro -p topol.top -o em2.tpr
-gmx mdrun -v -deffnm em2
-gmx grompp -f ../mdps/nvt.mdp -c em2.gro -p topol.top -r em2.gro -o nvt.tpr
-gmx mdrun -deffnm nvt
-grep "POSRES" -rl ./topol_Protein_chain_B.itp | xargs sed -i "s/POSRES/TEMPOR/g"  # no more restrain for the ligand
-gmx grompp -f ../mdps/npt.mdp -c nvt.gro -p topol.top -r nvt.gro -t nvt.cpt -o npt.tpr
-nohup bash ../mdps/run_npt.sh 2&>1 &
-gmx grompp -f ../mdps/md.mdp -c npt.gro -p topol.top -t npt.cpt -o final.tpr -maxwarn 1
-gmx mdrun -deffnm final
-
-# index
-echo -e "5 & a 1-9470 \n 1 & ! a 1-9470 \n q" | gmx make_ndx -f final.tpr -o index.ndx
-echo -e "\n[center] \n9528\n\n" >> index.ndx
-grep "MainChain" -rl index.ndx | xargs sed -i "s/MainChain_&_a_1-9470/Receptor_Mainchain/g"
-grep "MainChain" -rl index.ndx | xargs sed -i "s/Protein_&_\!a_1-9470/Peptide/g"
-
-# to restart
-gmx mdrun -s npt.tpr -cpi npt.cpt -append
-nohup bash ../mdps/run_npt2.sh 2&>1 &
-# get coordinates from cpt
-echo 0 | gmx trjconv -f npt.cpt -s npt.tpr -o npt_cpt.gro
-```
-
-> don't care too much about em 'not converage'?
-
-### post-processing
-
-```shell
-echo "21 0" | gmx trjconv -s final.tpr -f final*.xtc -o 720ns_center.gro -n index.ndx -pbc atom -center -b 720000 -e 720000
-# 500ps a frame
-remove resn SOL or resn NA or resn CL
-save 720ns_center.pdb
-
-## under result
-# nojump
-cp ../index.ndx .
-echo 21 0 | gmx trjconv -s final.tpr -f final.part*.xtc -o final_nojump.xtc -n index.ndx -pbc nojump -center -dt 1000
-# fit
-echo 19 21 1 | gmx trjconv -s final.tpr -f final_nojump.xtc -o final_fit.xtc -n index.ndx -fit rot+trans -center -dt 1000
-# rms
-echo 19 20 | gmx rms -s final.tpr -f final_fit.xtc -m rmsd-lig.xpm -n index.ndx -o rmsd_lig.xvg
-xmgrace rmsd_lig.xvg
-# visualization
-pymol 
-load ../complex.gro
-load final_fit.xtc, complex
-show lines, resi 200-550 within 4 of resi 33
-show sticks, resi 28-33
-# clustering
-
-cd ..
-rm -r cluster
-mkdir cluster
-cd cluster
-# run
-echo 20 1 | gmx cluster -s ../final.tpr -n ../index.ndx -f ../final_fit.xtc -dm ../rmsd-lig.xpm \
--dist rmsd-distribution.xvg -o clusters.xpm -sz cluster-sizes.xvg -tr cluster-transitions.xpm \
--ntr cluster-transitions.xvg -clid cluster-id-over-time.xvg -cl clusters.pdb \
--cutoff 0.15 -method gromos
-rm \#*\#
-
-split_states clusters
-save c01.pdb, clusters_0001
-
-
-```
 
 
 
-## FEP
+
+
+
+# NAMD+CHARMM
+
+Stage 1: add a residue
+
+To test the stability, we add a residue and run MD first. Don't worry about the parameters, because we'll do FEP later. (We won't mention these trials in the paper?)
+
+We will perform MDS with non-standard AA in gmx. We use CHARMM FF. 
+
+I remember that we cannot easily import CHARMM FF in Amber.
+
+
+
+## FEP in NAMD
 
 three situations
 
@@ -538,7 +435,7 @@ exit
 
   we have to check the structure after building up...
 
-- An alternative choice is to copy atom coordinates. See [fep-sidechain-correction.py](/MD/PSK-PSKR?id=fep-sidechain-correctionpy) for details.
+- An alternative choice is to copy atom coordinates. See [fep-sidechain-correction.py](/research/PSK-PSKR?id=fep-sidechain-correctionpy) for details.
 
 - charge of residue: the sum of the two residues. 
 
@@ -762,7 +659,7 @@ edit_coor(ori, fep)
 
 ```
 
-### remove a terminal residue
+### Remove a terminal residue
 
 file structure
 
@@ -1004,11 +901,318 @@ cwd
 
 
 
-### notes
+### notes for AA FEP (temp)
 
-#### on the correction of charge change
+on the correction of charge change
 
-![image-20221105160917232](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/AA-MD-FEP.assets/image-20221105160917232.png)
+![image-20221105160917232](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/AA-MD-FEP.assets/image-20221105160917232.png)
+
+
+
+double mutation, DG12-DG1-DG2最多2~3kcal
+
+多肽，每个AA的buried area
+
+
+
+filter the mutation site: through buried area of each residue (residue expose analysis), or alanine scan?
+
+
+
+# Gromacs MD
+
+## System setup
+
+### pre-process the pdb files
+
+- assign chain names for the receptor and ligand. [reference](https://www.researchgate.net/post/How_to_change_the_protein_chain_names_X_into_A_B_C_D_after_MD_simulations_in_Gromacs) or [this](https://pymolwiki.org/index.php?title=Alter)
+
+  ```shell
+  alter sele, chain='A'  # in pymol
+  ```
+
+- We may not use 'HETATM' for novel residues? (maybe fixed later) The peptide should still be considered as 'protein'!
+
+- fix the atom name, e.g. when a terminal COO- turns into the normal CO (atom type OT1, OT2)
+
+- note that we use option `-ter` to automatically fix the terminal residue (NH3<sup>+</sup>,COO<sup>-</sup>). So do not add (or just remove) the extra atoms.
+
+- merge them. you can easily mutate a residue in Pymol.
+
+  ```shell
+  cat *.pdb | grep ' A ' > complex.pdb
+  cat *.pdb | grep ' B ' >> complex.pdb
+  ```
+
+- 
+
+### mutate a residue
+
+In pymol: https://pymolwiki.org/index.php/Mutagenesis
+
+then select a proper rotamer.
+
+### gmx workflow
+
+we can normally go through the gmx workflow. 
+
+```shell
+# cd the folder where the complex pdb file is
+# charmm36.ff is the folder containing all ff needed
+cp -r ../mdps/charmm36.ff ../mdps/residuetypes.dat .
+gmx pdb2gmx -f *.pdb -o complex.gro -ignh -water tip3p -ff charmm36
+gmx editconf -f complex.gro -o complex_box.gro -c -d 1.2 -bt cubic
+gmx grompp -v -f ../mdps/em_vac_pme.mdp -c complex_box.gro -p topol.top -o em_vac.tpr -maxwarn 1
+gmx mdrun -v -deffnm em_vac
+gmx solvate -cp complex_box.gro -cs spc216.gro -o complex_solv.gro -p topol.top
+gmx grompp -f ../mdps/ions.mdp -c complex_solv.gro -p topol.top -o ions.tpr -maxwarn 1
+echo 13 | gmx genion -s ions.tpr -o complex_solv_ions.gro -p topol.top -pname NA -nname CL -neutral -conc 0.15
+gmx grompp -f ../mdps/em.mdp -c complex_solv_ions.gro -p topol.top -o em.tpr
+gmx mdrun -v -deffnm em
+gmx grompp -f ../mdps/em2.mdp -c em.gro -p topol.top -o em2.tpr
+gmx mdrun -v -deffnm em2
+gmx grompp -f ../mdps/nvt.mdp -c em2.gro -p topol.top -r em2.gro -o nvt.tpr
+gmx mdrun -deffnm nvt
+grep "POSRES" -rl ./topol_Protein_chain_B.itp | xargs sed -i "s/POSRES/TEMPOR/g"  # no more restrain for the ligand
+gmx grompp -f ../mdps/npt.mdp -c nvt.gro -p topol.top -r nvt.gro -t nvt.cpt -o npt.tpr
+nohup bash ../mdps/run_npt.sh 2&>1 &
+gmx grompp -f ../mdps/md.mdp -c npt.gro -p topol.top -t npt.cpt -o final.tpr -maxwarn 1
+gmx mdrun -deffnm final
+
+# index
+echo -e "5 & a 1-9470 \n 1 & ! a 1-9470 \n q" | gmx make_ndx -f final.tpr -o index.ndx
+echo -e "\n[center] \n9528\n\n" >> index.ndx
+grep "MainChain" -rl index.ndx | xargs sed -i "s/MainChain_&_a_1-9470/Receptor_Mainchain/g"
+grep "MainChain" -rl index.ndx | xargs sed -i "s/Protein_&_\!a_1-9470/Peptide/g"
+
+# to restart
+gmx mdrun -s npt.tpr -cpi npt.cpt -append
+nohup bash ../mdps/run_npt2.sh 2&>1 &
+# get coordinates from cpt
+echo 0 | gmx trjconv -f npt.cpt -s npt.tpr -o npt_cpt.gro
+```
+
+> don't care too much about em 'not converage'?
+
+### post-processing
+
+```shell
+echo "21 0" | gmx trjconv -s final.tpr -f final*.xtc -o 720ns_center.gro -n index.ndx -pbc atom -center -b 720000 -e 720000
+# 500ps a frame
+remove resn SOL or resn NA or resn CL
+save 720ns_center.pdb
+
+## under result
+# nojump
+cp ../index.ndx .
+echo 21 0 | gmx trjconv -s final.tpr -f final.part*.xtc -o final_nojump.xtc -n index.ndx -pbc nojump -center -dt 1000
+# fit
+echo 19 21 1 | gmx trjconv -s final.tpr -f final_nojump.xtc -o final_fit.xtc -n index.ndx -fit rot+trans -center -dt 1000
+# rms
+echo 19 20 | gmx rms -s final.tpr -f final_fit.xtc -m rmsd-lig.xpm -n index.ndx -o rmsd_lig.xvg
+xmgrace rmsd_lig.xvg
+# visualization
+pymol 
+load ../complex.gro
+load final_fit.xtc, complex
+show lines, resi 200-550 within 4 of resi 33
+show sticks, resi 28-33
+# clustering
+
+cd ..
+rm -r cluster
+mkdir cluster
+cd cluster
+# run
+echo 20 1 | gmx cluster -s ../final.tpr -n ../index.ndx -f ../final_fit.xtc -dm ../rmsd-lig.xpm \
+-dist rmsd-distribution.xvg -o clusters.xpm -sz cluster-sizes.xvg -tr cluster-transitions.xpm \
+-ntr cluster-transitions.xvg -clid cluster-id-over-time.xvg -cl clusters.pdb \
+-cutoff 0.15 -method gromos
+rm \#*\#
+
+split_states clusters
+save c01.pdb, clusters_0001
+
+
+```
+
+
+
+# Gromacs FEP
+
+from Connexin. **update the code later**
+
+## pmx residue mutation
+
+### bound
+
+```
+# to pdb and split
+box=`tail -n 1 system*.gro | awk '{printf "%-10s %-10s %-10s", $1, $2, $3}'`
+gmx editconf -f system*.gro -o wt.pdb 
+cat wt.pdb | grep -E "SOL|K  |CL  " > wt_sol.pdb
+head -n 8470 wt.pdb > wt_con.pdb
+# extract the middle part (Ab) as wt_h.pdb
+endofh=`grep -n -m 1 'SOL' wt.pdb | cut -d : -f 1`
+head -n $((endofh-1)) wt.pdb | tail -n +8471 > wt_h.pdb
+
+# mutate
+pmx mutate -f wt_h.pdb -o h.pdb --keep_resid -ff amber99sb-star-ildn-mut
+# get proper .itp for the edited chain
+gmx pdb2gmx -f h.pdb -o h.gro -ff amber99sb-star-ildn-mut -water none
+sed -i 's/\/home\/gxf1212\/data\/local-programs\/miniconda3\/envs\/pmx\/lib\/python3.10\/site-packages\/pmx\/data\/mutff\///g' topol.top 
+pmx gentop -p topol.top -o topol_Protein_chain_H_hybrid.itp
+# get the hybrid chain and remember to 
+# 1. modify the [ moleculetype ] 
+# 2. remove the #include xx.ff/forcefield.itp and the final [ system ] etc. field
+# but atom orders are changed. in h.gro they are right
+sed -i '1,/^\#include "amber99sb-star-ildn-mut.ff\/forcefield.itp"/d' topol_Protein_chain_H_hybrid.itp
+sed -i '/#ifdef POSRES/,$d' topol_Protein_chain_H_hybrid.itp
+sed -i 's/Protein_chain_A/Protein_chain_H/g' topol_Protein_chain_H_hybrid.itp
+rm topol.top posre.itp
+gmx editconf -f h.gro -o h_final.pdb
+cat wt_con.pdb h_final.pdb wt_sol.pdb | grep -v END | grep -v TER > sys.pdb
+# get the full .gro, copying the original box size (change this for every system!!)
+gmx editconf -f sys.pdb -o bound.gro -box $box
+# copy the original topol.top from elsewhere as newtop.top and modify: 
+# 1. replace the original .itp file for the chain to mutate 
+#    with the new hybrid .itp file: topol_Protein_chain_H_hybrid.itp
+# 2. replacing all the original ff with the mutation ff in pmx
+sed -i "s/amber99sb-ildn/amber99sb-star-ildn-mut/g" topol.top
+sed -i "s/topol_Protein_chain_H/topol_Protein_chain_H_hybrid/g" topol.top
+
+mv topol.top newtop.top
+
+rm \#*
+mkdir editchains
+mv wt*.pdb h* sys.pdb editchains
+mkdir bound
+mkdir bound/system
+mv `ls -F | grep -v /` bound/system/
+# move all these to ./bound/system
+```
+
+### unbound
+
+even if we can mutate on the whole gro file, we have to split the Ab chain out...
+
+```
+# now we should add water, but keep the box size the same as bound state
+echo 0 | gmx pdb2gmx -f editchains/h.pdb -o h.gro -ff amber99sb-star-ildn-mut -water tip3p
+sed -i 's/\/home\/gxf1212\/data\/local-programs\/miniconda3\/envs\/pmx\/lib\/python3.10\/site-packages\/pmx\/data\/mutff\///g' topol.top 
+pmx gentop -p topol.top -o top.top  # right after the topol.top is built
+gmx editconf -f h.gro -o h_box.gro -box $box
+gmx solvate -cp h_box.gro -cs spc216.gro -p top.top -o h_sol.gro -box $box
+gmx grompp -f ../mdps/ions.mdp -c h_sol.gro -r h_sol.gro -p top.top -o ions.tpr
+echo "SOL" | gmx genion -s ions.tpr -pname K -nname CL -conc 0.15 -neutral -o free.gro -p top.top
+# add the below definition in newtop.top (in this specific system) to be consistent with the bound state (but restrains nothing)
+#ifdef POSRES_abiss 
+#endif
+sed -i '/#include "posre.itp"/d' top.top
+sed '0,/#ifdef POSRES/{s/#ifdef POSRES/#ifdef POSRES_abiss/}' top.top > newtop.top
+
+rm \#* posre.itp topol.top mdout.mdp ions.tpr top.top
+mkdir free
+mkdir free/system
+mv `ls -F | grep -v /` free/system/
+# move all these to ./free/system
+```
+
+### TEST
+
+```
+# normal test, get a copy of the folder and
+cd bound/system
+gmx grompp -f ../../../mdps/em.mdp -c bound.gro -r bound.gro -p newtop.top -o em.tpr -v -maxwarn 2
+rm em.tpr mdout.mdp
+cd ../../
+cd free/system
+gmx grompp -f ../../../mdps/em.mdp -c free.gro -r free.gro -p newtop.top -o em.tpr -v -maxwarn 2
+rm em.tpr mdout.mdp
+cd ../../
+
+gmx mdrun -ntmpi 1 -ntomp 15 -v -deffnm em
+gmx grompp -f ../../../mdps/nvt.mdp -c em.gro -r em.gro -p newtop.top -o nvt.tpr -maxwarn 2
+gmx mdrun -s nvt.tpr -deffnm nvt -ntmpi 1 -ntomp 15 -nb gpu -bonded gpu -gpu_id 0
+gmx grompp -f ../../../mdps/npt.mdp -c nvt.gro -r nvt.gro -t nvt.cpt -p newtop.top -o npt.tpr -maxwarn 2
+gmx mdrun -s npt.tpr -deffnm npt -ntmpi 1 -ntomp 15 -nb gpu -bonded gpu -gpu_id 0
+gmx grompp -f ../../../mdps/md0.mdp -c npt.gro -r npt.gro -p newtop.top -o md.tpr -maxwarn 2
+gmx mdrun -s md.tpr -deffnm md -ntmpi 1 -ntomp 15 -nb gpu -bonded gpu -gpu_id 0
+```
+
+### visualize
+
+```
+remove resn K or resn Cl or resn SOL or resn POC
+hide sticks, all
+hide lines, all
+hide spheres, all
+set cartoon_transparency, 0.6
+set sphere_scale, 0.4
+bg_color white
+
+align--all_to_this
+```
+
+### other
+
+```
+python /data/gxf1212/work/make_hybrid_top/FEbuilder/get_segments_pdb.py sys.pdb
+```
+
+check if finished all:
+
+```
+ls */repeat*/lambda_31/prod/prod.gro
+```
+
+## MD workflow
+
+```
+# to pdb and split
+box=`tail -n 1 c*.gro | awk '{printf "%-10s %-10s %-10s", $1, $2, $3}'`
+gmx editconf -f c*.gro -o wt.pdb 
+cat wt.pdb | grep SOL > wt_sol.pdb
+cat wt.pdb | grep 'K  ' >> wt_sol.pdb
+cat wt.pdb | grep 'CL  ' >> wt_sol.pdb
+head -n 8470 wt.pdb > wt_con.pdb
+endofh=`grep -n -m 1 'SOL' wt.pdb | cut -d : -f 1`
+head -n $((endofh-1)) wt.pdb | tail -n +8471 > wt_h.pdb
+pymol wt_h.pdb
+# pick a similar rotamer of the residue in wt_h.pdb, save as h.pdb
+# get proper .itp for the edited chain
+gmx pdb2gmx -f h.pdb -o h.gro -ff amber99sb-star-ildn-mut -water none -ignh 
+mv topol.top topol_Protein_chain_H_hybrid.itp
+rm posre.itp
+code topol_Protein_chain_H_hybrid.itp
+# get the hybrid chain and remember to 
+# 1. modify the [ moleculetype ] 
+# 2. remove the #include xx.ff/forcefield.itp and the final [ system ] etc. field
+# but atom orders are changed. in h.gro they are right
+gmx editconf -f h.gro -o h_final.pdb
+cat wt_con.pdb h_final.pdb wt_sol.pdb | grep -v END | grep -v TER > sys.pdb
+# get the full .gro, copying the original box size (change this for every system!!)
+gmx editconf -f sys.pdb -o bound.gro -box $box
+code newtop.top
+# copy the original topol.top from elsewhere as newtop.top and modify: 
+# 1. replace the original .itp file for the chain to mutate 
+#    with the new hybrid .itp file: topol_Protein_chain_H_hybrid.itp
+# 2. replacing all the original ff with the mutation ff in pmx
+
+mkdir editchains
+mv wt*.pdb h* sys.pdb c*.gro editchains
+```
+
+if the system is not neutral, just edit...
+
+- gro, total number of atoms
+- gro, remove an ion; top, change the number of ions
+
+
+
+## Analysis
+
+Do not use histograms unless you’re certain you need it. It's kind of big
 
 
 

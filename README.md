@@ -1,12 +1,10 @@
 # Notes Site
 
-This site shows some of my notes on Linux \& softwares, molecular dynamics simulation tutorials \& experiences, and more importantly, notes on core courses.
+I am a graduate student in biophysics in ZJU. This site shows some of my notes on Linux \& softwares, molecular dynamics simulation tutorials \& experiences, and notes on core courses.
 
 > You may notice that TOCs in sidebar and navigating bar are generally the same.
 
 I'm just too lazy to make things clear, so these are just what I wrote when I learned. Maybe it's mainly for synchronizing notes 2333...
-
-> But a recent task is: put contents considering common tool usage in UROPS and FYP.md to other md files (programming, tools) and FEbuilder document. Those project documents are going to record the workflow of a specific task (virtual screening, FEP, etc.).
 
 <a href="https://gxf1212.github.io/notes/#/utils/about" target="_self">Click to see something about me</a>
 
@@ -18,9 +16,19 @@ My Bilibili channel: [东山月光下](https://space.bilibili.com/441196634). Fr
 - [Introduction to Immunology Lecture Series 2020, by Sarah Sletten](https://www.bilibili.com/video/BV1Lr4y1h7zN)
 - [Lecture: Molecular Dynamics and Drug Discovery, by Andrew McCammon](https://www.bilibili.com/video/BV1Fq4y1A7Sc)
 
+
+
+
+
+
+
+
+
 ## TODO and plans
 
-- [ ] beautify the theme (sidebar?), I'm lazy...
+- [ ] RENAME MD TO RESEARCH
+  - [ ] a recent task is: put contents considering common tool usage in UROPS and FYP.md to other md files (programming, tools) and FEbuilder document. Those project documents are going to record the workflow of a specific task (virtual screening, FEP, etc.).
+- [ ] **beautify the theme** (sidebar?), I'm lazy...
 - [ ] try interesting plugins
 - [ ] make badges? beautify hyperref?
 - [ ] English/Chinese management

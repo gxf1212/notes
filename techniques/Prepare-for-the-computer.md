@@ -130,6 +130,8 @@ It's fine on Windows; but x86 version cannot be installed here! And x64 shows �
 
 总之vpn更安全；v2ray比ssr可靠、难搞
 
+[好用的VPN推荐，国内仅2款好用(2023年2月翻墙避坑)](https://vpncn.github.io/)  看这一篇就够了。买两年版好像也有和SSR差不多价钱的
+
 https://sites.google.com/view/honven all kinds of recommendations
 
 - 【PAC模式】:也就是智能分流模式
@@ -143,8 +145,11 @@ experiences
   all sites (i.e. the airport, coursera, etc. Eng wiki is accessible today! so anycast is ok) are reachable on the mobile phone using both xjtulib wifi or mobile data. 
 
   the most relevant factor is the selection of your node, not the client program. maybe due to firewalls, ....
+  
+- 在开大会等特殊时间梯子会不好用。尝试下载YouTube视频，用非免费版的CRTubeGet就可以，免费的就不行
 
-
+https://www.cyberghostvpn.com/zh/
+一个邮箱，试用一天
 
 ### airport
 
@@ -955,6 +960,8 @@ or
 
 https://anaconda.org/conda-forge/ambertools
 
+parmed is along with ambertools. won't need to install alone
+
 ### acpype
 
 this tool should be separate from ambertools...
@@ -1127,6 +1134,20 @@ https://docs.silcsbio.com/2020.1/install.html
 
 Please request BOSS executable from Prof. William L. Jorgensen (It is free for academic users). Once you have BOSS, set `$BOSSdir`; type `conda install -c mc-robinson ligpargen openbabel ` to install the package
 Download the files from here and copy them to `BOSSdir/scripts` folder
+
+### EPI suite
+
+https://www.chemsafetypro.com/Topics/CRA/How_to_Use_US_EPA_EPI_Suite_to_Predict_Chemical_Substance_Properties.html
+
+### MATCH
+
+https://brooks.chem.lsa.umich.edu/index.php?page=match&subdir=articles/resources/software
+
+server: https://brooks.chem.lsa.umich.edu/index.php?matchserver=submit
+
+https://brooks.chem.lsa.umich.edu/download/software/match/MATCH_RELEASE.tar.gz
+
+
 
 ## Visualization
 

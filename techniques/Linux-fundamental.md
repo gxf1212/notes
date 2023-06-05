@@ -4,7 +4,12 @@ This is a record of 折腾ing the system, in order not to forget.
 
 有些使用方法写在debugging那里了，也许要整理吧，但尽量描述详细，方便搜到
 
-## basics
+**Tutorial share**
+
+- [鸟哥的Linux私房菜-基础学习篇](https://gitee.com/gxf1212/notes/raw/master/utils/tutorials/鸟哥的Linux私房菜-基础学习篇(第四版)高清完整书签PDF版.pdf)
+- [Linux就该这么学](https://gitee.com/gxf1212/notes/raw/master/utils/tutorials/Linux就该这么学-高清晰PDF.pdf)
+
+## Basics
 
 1. kde and gnome are two types of desktop interface. KDE looks like Windows desktop and gnome is the classic Linux desktop interface.
 
@@ -16,7 +21,7 @@ This is a record of 折腾ing the system, in order not to forget.
 
 4. It's hard to change default install directory. And I have to make a boot CD (U disk) to change the storage distribution (like when I'm installing Ubuntu, how much for root, home, swap...).
 
-5. 下面是一些典型的段错误的原因: 由内存管理硬件试图访问一个不存在的内存地址
+5. 下面是一些典型的段错误的原因：由内存管理硬件试图访问一个不存在的内存地址
 
 6. 环境变量
 
@@ -40,7 +45,7 @@ This is a record of 折腾ing the system, in order not to forget.
 
 10. 回收站：`~/.local/share/Trash/files`
 
-11. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl `
+11. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
 
 12. [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
 
@@ -362,7 +367,9 @@ This is a record of 折腾ing the system, in order not to forget.
    - https://www.wallpaperflare.com/search?wallpaper=chemistry
    - https://www.flickr.com/photos/zeissmicro/
    - https://wallpaperaccess.com/beautiful-biology  good!
+   - [Wallpapers | Unsplash](https://unsplash.com/t/wallpapers)
    - https://blog.csdn.net/Eumenidus/article/details/124504631  Nature 封面
+   - https://pixabay.com/
 
    > https://cdn.shopify.com/s/files/1/1064/0118/files/periodic-table-of-tech-standalone_alt.png?v=1579813258
 
@@ -395,7 +402,7 @@ This is a record of 折腾ing the system, in order not to forget.
 
 5. 截图
 
-   ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/notes//techniques/images/screenshot.png)
+   ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/notes/techniques/images/screenshot.png)
 
 6. install lightdm: https://blog.csdn.net/hgtjcxy/article/details/90645838
 
@@ -694,7 +701,13 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
 
 #### GNOME
 
-1. 在Ubuntu的系统中如何将应用程序添加到开始菜单中 https://blog.csdn.net/qk1992919/article/details/51034361/ https://ubuntuqa.com/article/1235.html
+1. [How to Check GNOME Version*- Linux Nightly*](https://www.bing.com/ck/a?!&&p=e77723a6a2d79f1cJmltdHM9MTY3OTUyOTYwMCZpZ3VpZD0wYmUxMDdlNC03MWMxLTZlM2ItMGNlMi0xNTVhNzBjOTZmYWQmaW5zaWQ9NTQyNQ&ptn=3&hsh=3&fclid=0be107e4-71c1-6e3b-0ce2-155a70c96fad&u=a1aHR0cHM6Ly9saW51eG5pZ2h0bHkuY29tL2hvdy10by1jaGVjay1nbm9tZS12ZXJzaW9uLyM6fjp0ZXh0PTElMjBTdGVwJTIwMS4lMjBHbyUyMHRvJTIwdGhlJTIwQWN0aXZpdGllcyUyMG1lbnUsR05PTUUlMjB2ZXJzaW9uJTIwdGhhdCUyMGlzJTIwaW5zdGFsbGVkJTIwaW4lMjB5b3VyJTIwc3lzdGVtLg&ntb=1)
+
+   ```shell
+   gnome-shell --version
+   ```
+
+2. 在Ubuntu的系统中如何将应用程序添加到开始菜单中 https://blog.csdn.net/qk1992919/article/details/51034361/ https://ubuntuqa.com/article/1235.html
 
    ```
    Name=Pymol   #此软件在菜单中当语言为英语的时候的显示名称      
@@ -720,7 +733,7 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
    anaconda-navigator
    ```
 
-2. 软件中心点开没反应？ 
+3. 软件中心点开没反应？ 
 
    ```shell
    sudo apt-get update  
@@ -730,11 +743,11 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
 
    也没用
 
-3. 设置→隐私→**屏幕**锁定→设置时间
+4. 设置→隐私→**屏幕**锁定→设置时间
 
-4. https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu windows环境，装qq微信等
+5. https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu windows环境，装qq微信等
 
-5. Ubuntu分屏 https://blog.csdn.net/SiriusExplorer/article/details/103016747
+6. Ubuntu分屏 https://blog.csdn.net/SiriusExplorer/article/details/103016747
 
    go to https://extensions.gnome.org/extension/39/put-windows/
 
@@ -742,11 +755,13 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
 
    <img src="https://img-blog.csdnimg.cn/20191111203143905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Npcml1c0V4cGxvcmVy,size_16,color_FFFFFF,t_70" style="zoom:50%;" />
 
-6. 有时候打开文件发现侧边栏不见了，这时候设置别的也没办法
+7. 有时候打开文件发现侧边栏不见了，这时候设置别的也没办法
 
    解决但其实只要一个按键就好啦，就是F9
 
-7. 
+8. [Gnome设置双屏 - 掘金 (juejin.cn)](https://juejin.cn/post/7158803954175279112)
+
+9. 
 
 ### customs
 
@@ -814,51 +829,9 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
 
 ## Specific commands
 
-### vim
+### installation
 
-- `:w` 保存但不退出
-
-- `:wq` 保存并退出
-  
-  - `:q` 退出
-
-- `:q!` 强制退出，不保存
-  
-  - `:e!` 放弃所有修改，从上次保存文件开始再编辑命令历史                                                                                                                 
-
-- `:e!` 放弃所有修改，从上次保存文件开始再编辑命令历史                                                                                                                 
-
-- :q<Enter>               退出                                    
-  
-  - :help<Enter>  或  <F1>  查看在线帮助                            
-
-- :help version8<Enter>   查看版本信息
-  
-  - esc: stop editing
-
-- `i` insert: edit
-
-- :set fileencoding
-
-  https://www.cnblogs.com/sharesdk/p/9208349.html
-  
-- shift+G, to the end of the file
-
-  gg: head
-
-- 
-
-
-
-### ssh and scp
-
-
-
-### make
-
-`make`命令是运行的所在目录下的`Makefile`文件, 如果*Make*file 里有*check*的话, 会执行测试,也就是检查下编译出来的东西能不能用
-
-### dpkg: installation
+#### dpkg
 
 install with .deb
 
@@ -938,7 +911,7 @@ debug
 
   
 
-### apt-get
+#### apt-get
 
 https://blog.csdn.net/liudsl/article/details/79200134
 
@@ -1001,7 +974,73 @@ apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用
 
   https://suay.site/?p=526
 
-### tar and unzip
+#### other during installation
+
+1. run .sh files:
+
+   ```shell
+   sh file.sh
+   chmod a+x file.sh
+   ```
+
+   We can put our commands (like open pycharm) in a text file and save as .sh file. Put them in the desktop.
+
+2. install with .tar.gz
+
+   ```shell
+   tar xvzf filename.tar.gz # /your/directory
+   # enter the directory
+   ./configure # --prefix=...
+   make
+   make install
+   ```
+
+   maybe
+
+   ```shell
+   tar xvzf filename.run.tar.gz # get a .run file
+   ```
+
+3. install with .run
+
+   just **double click it**...or
+
+   ```shell
+   chmod +x filename.run
+   sudo ./filename.run # like .exe in win
+   ```
+
+4. install flatpakref package
+
+   ```shell
+   sudo apt install flatpak
+   sudo apt install gnome-software-plugin-flatpak # GUI
+   ```
+
+5. 
+
+6. check version: `软件名 -version`
+
+7. under root, no need to add `sudo`
+
+8. wget失败：拒绝连接 https://www.jianshu.com/p/cba95f62dc35  ??
+
+#### npm
+
+install nodejs first.
+
+change source: https://www.cnblogs.com/feng-hao/p/11774543.html
+
+### after installation
+
+#### make
+
+`make`命令是运行的所在目录下的`Makefile`文件, 如果*Make*file 里有*check*的话, 会执行测试,也就是检查下编译出来的东西能不能用
+
+make -jn (install...)
+n代表同时编译的进程，可以加快编译速度，n由用户计算机的配置与性能决定，当前的典型值为10。所以`make -j10`
+
+#### tar and unzip
 
 - manual
 
@@ -1037,7 +1076,7 @@ apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用
 
 - unzip
 
-### privilige: chown and chmod
+#### privilige: chown and chmod
 
 change owner, change mode
 
@@ -1046,6 +1085,46 @@ Linux/Unix 的文件调用权限分为三级 : 文件所有者（Owner）、用�
 https://www.runoob.com/linux/linux-comm-chmod.html  great!
 
 https://www.runoob.com/linux/linux-comm-chown.html
+
+### vim
+
+- `:w` 保存但不退出
+
+- `:wq` 保存并退出
+
+  - `:q` 退出
+
+- `:q!` 强制退出，不保存
+
+  - `:e!` 放弃所有修改，从上次保存文件开始再编辑命令历史                                                                                                                 
+
+- `:e!` 放弃所有修改，从上次保存文件开始再编辑命令历史                                                                                                                 
+
+- :q<Enter>               退出                                    
+
+  - :help<Enter>  或  <F1>  查看在线帮助                            
+
+- :help version8<Enter>   查看版本信息
+
+  - esc: stop editing
+
+- `i` insert: edit
+
+- :set fileencoding
+
+  https://www.cnblogs.com/sharesdk/p/9208349.html
+
+- shift+G, to the end of the file
+
+  gg: head
+
+- 
+
+
+
+### ssh and scp
+
+see ...
 
 ### svn
 
@@ -1080,65 +1159,24 @@ bash 的历史函数依赖于一个名为 *HISTFILE* 的变量，通常设置为
   表示从 `START_NUM` 号命令开始往后删除 N 条记录。
   
 
-### npm
 
-install nodejs first.
 
-change source: https://www.cnblogs.com/feng-hao/p/11774543.html
+### directory exploration
 
-### other during installation
+#### du
 
-1. run .sh files:
-   
-   ```shell
-   sh file.sh
-   chmod a+x file.sh
-   ```
-   
-   We can put our commands (like open pycharm) in a text file and save as .sh file. Put them in the desktop.
+The `du` command is used to estimate file space usage. The `-d 1` option specifies the maximum depth of 1 level for the directory tree and the `-h` option prints sizes in human-readable format.
+To sort the output of `du -d 1 -h` in dictionary order, you can pipe the output to the `sort` command with the `-k 2` option to specify that sorting should be performed on the second field (i.e., the directory names). Here’s an example:
 
-2. install with .tar.gz
-   
-   ```shell
-   tar xvzf filename.tar.gz # /your/directory
-   # enter the directory
-   ./configure # --prefix=...
-   make
-   make install
-   ```
-   
-   maybe
-   
-   ```shell
-   tar xvzf filename.run.tar.gz # get a .run file
-   ```
+```
+du -d 1 -h | sort -k 2
+```
 
-3. install with .run
-   
-   just **double click it**...or
-   
-   ```shell
-   chmod +x filename.run
-   sudo ./filename.run # like .exe in win
-   ```
+This will print the sizes of the directories in the current directory and its subdirectories, sorted in dictionary order by directory name.
 
-4. install flatpakref package
-   
-   ```shell
-   sudo apt install flatpak
-   sudo apt install gnome-software-plugin-flatpak # GUI
-   ```
-   
-4. make -jn (install...)
-   n代表同时编译的进程，可以加快编译速度，n由用户计算机的配置与性能决定，当前的典型值为10。所以`make -j10`
+#### tree
 
-5. check version: `软件名 -version`
 
-6. under root, no need to add `sudo`
-
-7. wget失败：拒绝连接 https://www.jianshu.com/p/cba95f62dc35  ??
-
-8. 
 
 # Installation and softwares
 
@@ -2471,7 +2509,7 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
    https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/new-tab-same-directory
 
-10. cmd：ˇ中的设置
+10. cmd的设置
 
     config file: `C:\Users\Lenovo\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`  
 
@@ -2481,6 +2519,24 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 12. TTC字体是TrueType字体集成文件(. TTC文件)，可和ttf放一起
 
+13. （联想）win11护眼模式：文件夹中右键--护眼卫士
+
+14. In the Command Prompt window, press and hold the F7 key (no Fn) to view the history of Command Prompt. Then it will open the list of commands you currently typed in.
+
+    https://www.alphr.com/view-command-history-command-prompt/
+
+    but only this cmd...
+
+15. 选择任务栏上的" 任务视图"，然后选择" 新建桌面"，然后打开所需的应用。 若要在虚拟桌面之间移动应用，请选择" 任务视图"，然后将所需的应用从一个桌面拖到另一个桌面。 或通过将应用拖动到新桌面来创建另一个虚拟桌面。
+
+16. https://home.csulb.edu/~murdock/tree.html
+
+17. 今日弄完VPN，普通网络都上不了。解决方法：
+
+    ![restore-network](E:\GitHub-repo\notes\techniques\images\restore-network.png)
+
+18. 
+
 ## WSL
 
 - WSL is highly memory-demanding...
@@ -2488,111 +2544,15 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 
 
+# MacOS notes
 
+## iOS
 
 
 
-# 知识
-
-maybe a new .md file in the future
-
-## cs
-
-**Tesla A100 is...2~3x** faster than the V100 using 32-bit precision.
-
-
-
-重写(Override)与重载(Overload)
-
-- 重写是子类对父类的允许访问的方法的实现过程进行重新编写, 返回值和形参都不能改变。**即外壳不变，核心重写！**
-- 重载(overloading) 是在一个类里面，方法名字相同，而参数不同。返回类型可以相同也可以不同。
-
-## chembio
-
-### bioisosteres
-
-[SwissBioisostere - A database of molecular replacements for ligand design](http://www.swissbioisostere.ch/)
-
-> reading material
->
-> - https://mp.weixin.qq.com/s/Q-X5F3KWaNV2_JXmrmEEHQ
-> - https://mp.weixin.qq.com/s/S5tX-4WJbD_1a0qMI3z4EQ
-> - https://zhuanlan.zhihu.com/p/493305578
-> - https://mp.weixin.qq.com/s/BDPBPu7EyK2lAfqW48HQxQ 五氟硫基
-
-- 药物分子中的羧基可以用磺酰胺，磷酸酯，四唑，硼酸等代替。
-  - 在羧基的各种生物电子等排体中，羟肟酸的酸性稍弱，离子化程度较低，能显著提高透膜能力，然而在体内容易被代谢成羧酸，可在其氮原子上引入大一点的基团来提高其代谢稳定性。
-  - ![boric-acid](E:\GitHub-repo\notes\techniques\notes\boric-acid.png)
-
-
-
-
-
-- 基团反转是常见的一种非经典电子等排类型，是同一功能基团间进行的电子等排。-COR 与 ROC-基团，都是酯，且有相似的疏水性
-- 不改变环大小的等排体？
-- 环内CH=CH和NH、S（缩环），O-C=O；CH=和N=
-- 在药物分子设计中可以将偕二氟乙烯基看作是醛基或者酮基的生物电子等排体，应用于酶抑制剂的机理研究
-
-
-
-[综述| 药物发现中的共价抑制剂](https://mp.weixin.qq.com/s/B0iYLWQIvlcn4N_0F2o_rw)
-
-![BHO](E:\GitHub-repo\notes\techniques\notes\BHO.png)
-
-
-
-
-
-- 芳香甲酸酯，相比于脂肪族羧酸酯，更不易水解。
-
-  Generally speaking, aromatic esters are more stable than aliphatic esters towards hydrolysis under both acidic and basic conditions.
-  The rate-limiting step of hydrolysis of carboxylic esters under basic condition is the nucleophilic attack of hydroxide ion on the carbonyl carbon of the ester.
-
-  - the aromatic ring stabilizes the carbonyl group of the ester by resonance, making it less reactive towards nucleophilic attack by water or hydroxide ions. (electronic)
-  - Aromatic carboxylic esters are also more difficult to hydrolyze than aliphatic carboxylic esters because they form less stable tetrahedral intermediates during the reaction. (size)
-
-  However, aromatic esters may have electron-withdrawing groups that increase their reactivity towards hydrolysis. Some aliphatic esters may have bulky groups that hinder their hydrolysis.
-  [reference](https://chem.libretexts.org/Courses/Brevard_College/CHE_202%3A_Organic_Chemistry_II/02%3A_Carboxylic_Acids_and_Esters/2.10%3A_Reactions_of_Esters)
-
-
-
-卤素基本是通过谷胱甘肽结合来代谢的
-
-[Halogenation of drugs enhances membrane binding and permeation](https://pubmed.ncbi.nlm.nih.gov/15122640/)
-
-
-
-异头碳效应：连接在异头碳的杂原子取代基更倾向于处于直立键。可能也是二卤代烷稳定的原因
-
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/notes/anomeric-carbon.jpg" alt="anomeric-carbon" style="zoom: 50%;" />
-
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/notes/anomeric-carbon2.jpg" alt="anomeric-carbon2" style="zoom: 45%;" />
-
-
-
-
-
-
-
-
-
-自然界几乎所有天然存在的糖类化合物均是D构型，D-核糖的三个手性碳均为D构型。
-
-
-
-
-
-https://mp.weixin.qq.com/s/pDRzy7FjNzBm1dAkxLP7Qg  “骨架跃迁”FEP
-
-
-
-
-
-[甲醛中毒的化学原理是什么？ - 知乎](https://www.zhihu.com/question/363622944/answer/963100232)
-
-
-
-
+苹果手机提示icloud储存空间不足
+首先，在设置中，点击最上面的选项进入自己的AppleID的设置。 点击管理储存空间;选择你不想用的那部分，点击打开，选择【停用和删除】即可。
+要不就停用iCloud（不推荐），要不就买。没办法
 
 
 

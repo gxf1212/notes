@@ -341,7 +341,7 @@ but **'formatted’ can be recognized by CHARMM-GUI**!
 
 > note: for newly added atoms, parameterization is needed?
 > 
-> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/parameterization.jpg" alt="parameterization" style="zoom:80%;" />
+> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/parameterization.jpg" alt="parameterization" style="zoom:80%;" />
 > 
 > but may also use 'formatted’. but for remtp I used remtp_autopsf_temp.pdb
 > 
@@ -524,7 +524,7 @@ build with Gromacs and AmberTools?
 
 > charmm-gui, what do the files do? what is needed? these?
 > 
-> ![parameterization](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/parameterization.jpg)
+> ![parameterization](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/parameterization.jpg)
 
 focus on `ligandrm.pdb/psf`, which can be put into a merge.tcl, as **an alternative way of AutoPSF** in generating files for ligand (other tools for protein, etc?). Carefully choose the force field!
 
@@ -1065,7 +1065,7 @@ animate read dcd rdrp-atp-prod.dcd
 >
 > just a try. not suitable for fep
 
-**This is also important if we want to cluster in gmx.** Refer to [Making clusters in gmx](/MD/FYP-notes?id=making-clusters-in-gmx) and [2023.1 update](#_20231-update).
+**This is also important if we want to cluster in gmx.** Refer to [Making clusters in gmx](/research/Previous-projects/FYP-notes?id=making-clusters-in-gmx) and [2023.1 update](#_20231-update).
 
 https://www.ks.uiuc.edu/Research/vmd/plugins/topotools/
 
@@ -2727,7 +2727,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 1. It's found that the aromatic ring cannot retain its planar structure, though in pymol hybrid.pdb still looks fine (though ligand.pdb Ar dotted bonds is gone). 因为后面对芳环只有参数的限制，程序不知道关于芳香键的标记
 
-   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/remtp-dihedral.jpg)
+   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/remtp-dihedral.jpg)
 
    31 17 19 34: CG3C50 CG2R57 NG2RC0 CG2RC0 (purple)
 
@@ -2751,7 +2751,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 2. 1 4 21 23: PG1 OG303 CG321 CG3C51
 
-   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/remtp-dihedral2.jpg) 
+   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/remtp-dihedral2.jpg) 
 
    > ./par_all36_cgenff.prm:CG3C51 CG321  OG303  PG1        0.6000  1   180.00 ! B5SP carbocyclic sugars reset to EP_2 phospho-ser/thr
    >
@@ -2773,7 +2773,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
 4. to prevent the oxygen from folding back. actually 21-23 is nearly perpendicular to the ribose "plane"
 
-   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/remtp-fold-back.png" alt="remtp-foldback" style="zoom:50%;" />
+   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/remtp-fold-back.png" alt="remtp-foldback" style="zoom:50%;" />
 
    21 23 25 31: CG321 CG3C51 OG3C51 CG3C50
 
@@ -2826,7 +2826,7 @@ order: make lig-equil, modify into com-equil/lig-prod-forward, then into backwar
 
    29 31 17 36: CG3C51 CG3C50 CG2R57 CG2R51
 
-   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/remtp-dihedral3.jpg) 
+   ![remtp-dihedral](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/remtp-dihedral3.jpg) 
    
    > in hybrid2.prm
    >
@@ -2916,6 +2916,36 @@ pairlistdist            10.0
 
 > - 频繁的输出限制了性能。最重要的是，outputEnergies（在 NAMD 2.x 中默认为 1）应该设置得更高。
 > - Because an unnecessarily high damping constant can significantly slow the system’s dynamics, one should always find the minimum langevinDamping coefficient sufficient to maintain the temperature. A value of 1.0 is often a good starting point.
+
+debug
+
+- **`fullElectFrequency `** number of timesteps between full electrostatic evaluations 
+  **Acceptable Values:** positive integer factor of `stepspercycle`
+  **Default Value:** `nonbondedFreq`
+  **Description:** This parameter specifies the number of timesteps between each full electrostatics evaluation. It is recommended that `fullElectFrequency` be chosen so that the product of `fullElectFrequency` and `timestep` does not exceed 4.0 unless `rigidBonds all` or `molly on` is specified, in which case the upper limit is perhaps doubled.
+
+  https://www.ks.uiuc.edu/Research/namd/2.14/ug/node37.html
+
+  fepout frequency should be divisible by**`fullElectFrequency `**, or it outputs strange values like 
+
+  ```
+  #            STEP                 Elec                            vdW                    dE           dE_avg         Temp             dG
+  #                           l             l+dl             l            l+dl         E(l+dl)-E(l)
+  #NEW FEP WINDOW: LAMBDA SET TO 0 LAMBDA2 1e-05
+  FepEnergy:      5   -2714273.9751  -2714273.9751     43874.7888     43874.7886        -0.0002        -0.0009       309.7335        -0.0009
+  FepEnergy:     10    -570204.1720   -570204.1724     44091.0213     44091.0210        -0.0007        -0.0009       310.7679        -0.0009
+  FepEnergy:     15   -2715308.6708  -2715308.6709     44325.5930     44325.5927        -0.0005        -0.0009       311.2865        -0.0009
+  FepEnergy:     20    -570867.6301   -570867.6303     44489.5360     44489.5357        -0.0005        -0.0009       311.4340        -0.0009
+  FepEnergy:     25   -2714179.2297  -2714179.2298     43204.0980     43204.0977        -0.0004        -0.0009       311.2577        -0.0009
+  FepEnergy:     30    -570252.3523   -570252.3528     43980.1734     43980.1732        -0.0007        -0.0009       311.2319        -0.0009
+  FepEnergy:     35   -2714092.7010  -2714092.7011     43537.0497     43537.0495        -0.0003        -0.0009       310.0326        -0.0009
+  ```
+
+  although the energy difference is similar
+
+- aaa
+
+
 
 #### alch parameters
 
@@ -3157,7 +3187,7 @@ for {set x 0} {$x <= } {incr x} {
 
 ### debug and problems
 
-- debug: FATAL ERROR: Atom 9 has bad hydrogen group size.  Check for duplicate bonds. 居然是vmd1.9.3的锅
+- 
 
 
 
@@ -3230,7 +3260,7 @@ https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2013-2014/0568.html
 
 - For unidirectional FEP calculations, ParseFEP provides a graphical representation of the underlying probability distribution (black), the Boltzmann weight (red), and the product of the two (green). 
 
-  ![parsefep-probability.1](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/parsefep-probability.1.png)
+  ![parsefep-probability.1](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/parsefep-probability.1.png)
 
 - For bidirectional FEP calculations, ParseFEP displays the probability distributions characterizing the forward and the backward transformations. These distibutions are shown for all the windows, or strata, found in the *alchOutFile* file. It is, therefore, assumed that the output files for the FEP calculations performed in the two directions contain the same number of intermediate states.
 
@@ -3920,200 +3950,6 @@ bg_color white
 center (last-complex1 and resn HYB)
 ```
 
-### FEP notes
-
-#### FEP itself
-
-- single topology不准？所有的interaction都关掉。只能$R^2=0.3\sim 0.43$
-
-  FEP is not screening：还是算力不够；绝对结合能不是太准
-
-- Schrodinger“行业标准”：FEP+REST，蛋白多个构象时会比较有用
-
-- 采样好的话，是包含熵的，且是显式溶剂，一般要比对接类的好
-
-#### find the starting structure
-
-- 跑MD找构象：
-
-  - 三个MD 200ns，分别聚类，该构象持续100ns以上（但我不都做了很长了嘛。300ns可以调整局部构象了）
-  - 三个聚类的一样最好，不一样可以再跑
-  - 或者都做FEP
-  - 一个MD不能说明问题；重复的三次有一个稳定，都可以再延长时间以确认，稳定就能用
-
-- a cutoff of 0.1 nm is usually ok; in this case cluster 1 and 2 don't differ a lot
-
-  you may use 0.15 nm, or 0.25 nm if your ligand is really big or flexible
-
-  replicas 统一用同一个cutoff
-
-- “自洽”的聚类：每条轨迹用自己的pocket residues，各有自己的pbc
-
-- 观察cluster-id-with-time
-
-  如果跳跃，应该多跑
-
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/cluster-id-with-time.png" style="zoom:33%;" />
-
-- 
-
-> I've started doing FEP in the post-insertion model. The plan is to try to compare with experimental data as we did before, starting from all four conformations we got in the clustering. Maybe we'll pick the one that fits the best.
-
-You only need to **pick one of them, since all four are essentially the same**. Pick the one with the highest stability (highest amount of time being in one cluster). Otherwise, you will need to run 5 FEPs for each of the conformation, which is unnecessary.
-
-> I came across another question: do I need to run MD simulation for all RemTP analogs to inspect their binding mode? It might be time-consuming and I didn't do that in the previous FEP. If the modification is not significant and the binding mode does not change too much in FEP, maybe MD simulations for analogs are not needed. What do you think?
-
-**Our modifications are not big, so you don't need to run MD simulations for them.** I don't want to confuse you with other ways of thinking about this issue right now. So please proceed with the FEP simulations with RemTP binding mode and we will discuss this issue next time we meet.
-
-> By the way, I just wonder what you think of the clustered structure of pre-insertion site.
-
-I took a look and what you showed me was correct - **run1 and run3 are different**, and both different from the initial binding state. So I would suggest you to **keep running the stable clusters from run1 and run3. Try to see if one of them reaches a more stable state.** Do you remember the difference in the parameters between your RemTP and my RemTP? I wonder why there is such a difference.
-
-#### FEP workflow
-
-- FEP的前提：
-
-  - 结合构象没太变
-  - 时间足够长，收敛
-
-  构象不对，符号也难；第二个不对，大概是只能相信符号，数值不太行
-
-- 如果变得大，每个window可以多一些时间
-
-- 加window可以根据dG-lambda图中dG比较大的window附近加，虽然也有累计error
-
-- 教训：**charmm-gui的时候检查一遍手性；merge完了检查一遍结构**。养成习惯，每次如此！
-
-
-#### analysis
-
-- 计算stddev好说。stderr单个的好说，差值的有两种：
-
-  - bound和unbound挨个相减算stderr（粗略）
-  - repeat次数相同，分别算stderr，像stddev一样平方根号（没算过是不是和上面一样）
-
-- 误差范围：实验±1。两个结果都是0.4几，-0.2几，等于没啥区别。
-
-- five independent runs were started from different initial configurations randomly chosen from the MD simulations for improved sampling. 其实没这么严格
-
-- 几次重复，通常unbound的误差会小一点；而bound有outlier要谨慎去除，或者多重复几次。
-
-- outlier能知道为什么最好，可能是二面角变化、丢了个离子等等
-
-- 总误差是平方相加根号，最好不要超过1（stderr。。）
-
-- ligand的charge分布，最好倒是大部分相同，不是算QM，因为FEP对charge敏感。。
-
-- fep就有可能有构象变化，不能说变了就是不对的
-
-  - RMSD, movie, last frame都是看有没有变的
-
-- FEP真正能分析的，就是
-
-  - dG-λ
-    - window均匀的一段，dG应该大致是直线
-    - 有一个转折，在那两个start end参数处
-    - step and accumulated 都要放
-  - time convergence
-  - each window RMSD：也就能看哪里有跳跃
-
-  好像也没啥了。MD里面的contact分析什么的。
-
-- FEP虽然麻烦，但有严格的规范，单独做没啥创新的
-
-  实验有活性的计算应该有活性，计算有活性的实验应该有几个有活性，实验没活性的……差得不要太多
-
-  差一点的发个纯计算的文章，好的可以加实验、加更多……
-
-- 即使我们只是优化了结合能力，也是有意义的，因为直接筛还是难度。但不管我们怎么算，还是要验证的。当然，没到临床的实验都不能说真的有效。
-
-- 和实验对比：要是测结合力才exactly match，EC~50~也不等于亲和力
-
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/fep.png" alt="image-20221016231054417" style="zoom:50%;" />
-
-#### charged mutation
-
-solution：
-
-- 伴随一个离子 is a bad idea
-
-- bound state和unbound box size一样，这部分抵消（单个dG比较大，ddG还可以）
-
-  - 关于charge，tutorial上好像也有correction公式
-
-- 远端做个相反的mutation。仍然，bound和unbound的epsilon不一样，仍有系统误差
-
-- 先让uncommon的电荷消失，alchemical transformation，再让电荷长出来
-
-  gmx那就是先变成dummy atom。这个是比较准的。
-
-- 把bound和unbound放同一个盒子，一个正向一个反向。不知道对不对，但肯定很麻烦
-
-about charges in FEP
-
-- 自由能对charge（即使是分布）比较敏感，要谨慎
-
-  带电的离子，大分子也许可能会影响
-
-- 
-
-#### protein mutation
-
-double mutation, DG12-DG1-DG2最多2~3kcal
-
-多肽，每个AA的buried area
-
-#### design
-
-- filter the mutation site: through buried area of each residue (residue expose analysis), or alanine scan?
-
-讨论总结： 
-
-- 后面：继续。程序让其他人用用。patent也可以考虑…… 
-- 感受：你做了PPT老师就感觉你要讲给他听；你展示的内容决定了老师能给你什么输出；老师比较在乎名声
-- 变的位点：2',3'算一个；CN估计不动，但可以试硝基？芳环NH2，大小两个环上的C上加东西（看结构）
-- 变的思路：如果没有明显的就填空。1）比如，och3变好那能不能换点别的大基团，比如och2ch3，延长一个;芳环上NH2也是；2）常见那几个，推荐了COOH；3）ch3用得少？就是纯填空，填空可用支链烷基
-
-更新
-
-- F的负电，和O排斥，可能是疏水的原因
-
-  疏水相互作用：多少水处在unhappy的状态
-
-- pi-pi, pi-cation are important! 8~9 kcal/mol?
-
-- H bond and electrostatic, not very strong if exposed to water (1~2, 3~4 kcal/mol). water  forms these too. only works if $\varepsilon_r$ is small.
-
-#### other
-
-- propagation of error. X, Y are independent variables.
-
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/MD/FYP-notes.assets/image-20221106091013292.png" alt="image-20221106091013292" style="zoom:40%;" />
-
-- 
-
-#### presenting your results
-
-[an example](https://drugdesigndata.org/upload/community-components/d3r/webinar2017/presentations/Cournia_lab_D3R_webinar.pdf)
-
-- 画图，颜色清晰简洁
-
-- 最好别放出outliers，否则要说为什么
-
-- 每一张只讲一件事，包含：做了什么（what），为什么要做（why），结果（是否符合期待）
-
-- FEP significant number: two digits
-
-- 如何导出那种，作者、杂志、年期卷的格式，放在PPT最下面？
-
-- 结构图每次都标出residue name
-
-- 标注上那个FEP的母分子长啥样；要想问他怎么设计，就好好给老师放个结构；
-
-  > 可以画那种动画，消失的为虚的，出现的为实的 
-
-- 
-
 
 
 ## Other ligand pairs
@@ -4317,7 +4153,7 @@ notes: cgenff_charmm2gmx_py3_nx2.py
 - To avoid duplicated parameters, do NOT select the 'Include parameters that are already in CGenFF' option when uploading a molecule into CGenFF.
 - If your topology has lone pairs, you must use GROMACS version 2020 or newer to use 2fd construction
 
-### Flow
+### From CgenFF to pmx
 
 
 1. Preparation
@@ -4372,6 +4208,16 @@ notes: cgenff_charmm2gmx_py3_nx2.py
 > ```
 > 
 > s
+
+
+
+### From MATCH to pmx
+
+
+
+
+
+
 
 
 

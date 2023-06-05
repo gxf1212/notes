@@ -74,6 +74,26 @@ awk '/^#Free energy/ {printf "%.5f,%.5f,%.9f\n",$8,$9,$12}' ${fn}.fepout > ${fn}
 
 awk必须单引号
 
+
+
+examples
+
+- I have a commas-separated file, please use awk to get the second element in each line and also filter those lines containing keyword 'spiro'Sent message. I have a commas-separated file, please use awk to get the second element in each line and also filter those lines containing keyword 'spiro'
+
+  Hello, this is Bing. I can help you with your question.
+  To use awk to get the second element in each line and also filter those lines containing keyword ‘spiro’, you can use a command like this:
+
+  ```shell
+  awk -F ',' '$0~/spiro/ {print $2}' file.csv
+  ```
+
+  This command will:
+
+  - Use a comma (,) as the field separator (-F) for each line
+  - Match lines that contain ‘spiro’ in any field ($0~/spiro/)
+  - Print the second field ($2) of those lines
+  - Read from file.csv
+
 ## file processing
 
 ### grep
@@ -209,11 +229,19 @@ awk必须单引号
 
 ## examples
 
-1. download: an example
+1. download: an example of for loop
 
    ```shell
    for i in {1..19}; do
    wget https://ronlevygroup.cst.temple.edu/courses/2020_fall/chem5302/lectures/chem5302_lecture${i}.pdf --no-check-certificate
+   done
+   ```
+
+   or
+
+   ```shell
+   for i in aa bb cc; do
+   echo $i
    done
    ```
 
@@ -257,6 +285,25 @@ awk必须单引号
 
 # Tcl programming
 
+- for loop
+
+  ```tcl
+  for {set i 1} {$i <= 8} {incr i} { 
+  	puts $i 
+  } 
+  ```
+  
+  or
+  
+  ```tcl
+  set list {1 2 3 4 5}
+  foreach item $list {
+      puts $item
+  }
+  ```
+  
+  
+  
 - control
 
   - if...else
@@ -352,6 +399,18 @@ various utilities
 future reference:
 
 - R里面的MCS search：https://academic.oup.com/bioinformatics/article/29/21/2792/195951
+
+
+
+[RDKit blog - 3D maximum common substructure](https://greglandrum.github.io/rdkit-blog/posts/2022-06-23-3d-mcs.html)
+
+http://rdkit.blogspot.com/2020/04/new-drawing-options-in-202003-release.html
+
+
+
+[add_formal_charges.ipynb (github.com)](https://gist.github.com/greglandrum/7f546d1e35c2df537c68a64d887793b8)
+
+
 
 
 
@@ -471,7 +530,11 @@ https://pypi.org/project/chemdraw/
 
   [python去除字符串中开头|结尾|所有字母、数字](https://cloud.tencent.com/developer/article/1610931)
 
-  
+- [Python 中下划线的 5 种含义 | 菜鸟教程 (runoob.com)](https://www.runoob.com/w3cnote/python-5-underline.html)
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/underline.png" alt="underline" style="zoom:50%;" />
+
+- 
 
 ## operating files and cmd
 
@@ -544,6 +607,26 @@ read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arg
 - If you want to write bytes then you should open the file in binary mode. `f = open('/tmp/output', 'wb')`
 
 ## matplotlib 
+
+
+
+```python
+for axis in ['top','bottom','left','right']:
+    ax.spines[axis].set_linewidth(30)  #设置坐标轴的粗细
+    ax.spines[axis].set_color("gold")
+    ax.spines[axis].set_zorder(0)
+```
+
+
+
+If you want to set this for *all* the ticks in your axes,
+
+```python
+ax = plt.gca()
+ax.tick_params(width=5,...)
+```
+
+
 
 ### fonts
 
@@ -676,7 +759,7 @@ https://juejin.cn/post/6844903919978545160
 
 - 互斥参数组：https://michael728.github.io/2018/12/09/python-argparse-note/ 
 
-  <img src="E:\GitHub-repo\notes\MD\Programming-for-MD.assets\exclusive.png" alt="exclusive" style="zoom:80%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/exclusive.png" alt="exclusive" style="zoom:80%;" />
 
 - 
 
@@ -696,7 +779,8 @@ even `python xx.py -W` didn't work
 
 ### other
 
-https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules
+- https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules
+- When a project reaches major version v1 it is considered stable.
 
 ### Debug
 

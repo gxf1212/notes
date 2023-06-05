@@ -158,6 +158,8 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 > 
 > vue’ s sidebar needs improving
 
+[docsify-darklight-theme](https://docsify-darklight-theme.boopathikumar.me/#/configuration): only color (no format) is cha
+
 ### Show figures
 
 省流：
@@ -1074,6 +1076,7 @@ more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
   ```shell
   # in /xx/docs
   make html
+  make html SPHINXOPTS=-vvv # to debug
   ```
 
 - 
@@ -1127,10 +1130,8 @@ more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
    - these will show up in main text as well as the left sidebar
    - blue titles (section in toc?), as in pmx site: just add multiple tocs, as pmx doc did
    - maxdepth: controls depth shown in the page (not sidebar)
-   - but rendered as the first **first level title**.
-     - in rtd/alabaster/stanford/etc. theme, other first level titles in one `.md` file are also shown in the sidebar...
-     - so we just **start from second level title** in a page.
-
+   - multiple such toc in the index, to make the sidebar in sections (like pmx, etc.)
+   
 3. insert figures, and control its size/position
 
    ```rst
@@ -1272,7 +1273,7 @@ extensions = [
 # source_parsers = {'.md': 'recommonmark.parser.CommonMarkParser'}
 ```
 
-[sphinx-markdown-checkbox](https://pypi.org/project/sphinx-markdown-checkbox/)
+[sphinx-markdown-checkbox](https://pypi.org/project/sphinx-markdown-checkbox/): Inspired by [sphinx-markdown-tables](https://github.com/ryanfox/sphinx-markdown-tables), this project renders markdown checkboxes as HTML using [pycmarkgfm](https://github.com/zopieux/pycmarkgfm), because [Recommonmark](https://github.com/rtfd/recommonmark) does not support markdown checkboxes.
 
 
 ## Themes
@@ -1313,6 +1314,23 @@ pip install sphinx_theme
 > - [sphinxdoc](https://sphinx-themes.org/#theme-default-sphinxdoc): openbabel
 >
 > - [classic](https://sphinx-themes.org/#theme-default-classic): gromacs
+
+### Press
+
+press theme causes the first level title shown twice,
+
+一个md文件，除了第一个一级标题外没有别的小标题时，sidebar就会有两个这个一级标题。。
+
+I guess the mechanism is: press downgrade the title levels, while stanford keeps all first-levels in sidebar and removes duplicated titles
+
+### stanford
+
+while in stanford theme, other first level titles in one `.md` file are also shown in the sidebar...
+
+but rendered as the first **first level title**.
+
+- in rtd/alabaster/stanford/etc. theme, other first level titles in one `.md` file are also shown in the sidebar...
+- so we just **start from second level title** in a page.
 
 ### sizzle
 
@@ -1413,6 +1431,7 @@ references
 
 - https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html examples
 - https://www.sphinx-doc.org/en/master/tutorial/describing-code.html maybe also write in .rst
+- You can see the string by `help(function name)`
 
 
 
@@ -1480,7 +1499,7 @@ references
 
 
 
-
+docstring基本是得写rst格式
 
 - 写完整的句子，首字母大写、加句号
 - vmd, obabel用正常字体，扩展名、文件名用斜体，代码片段用双反引号，某个方法要引用，甚至引用如rdkit的文档（超链接？待定）

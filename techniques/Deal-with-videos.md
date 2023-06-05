@@ -446,6 +446,12 @@ dl_coursera --cookies coursera.org_cookies.txt --slug chemical-biology --outdir 
 
 能再看就不下视频了，当练习
 
+
+
+[Question Detail (coursera.support)](https://www.coursera.support/s/question/0D51U00003BlZ0jSAF/purchase-course-to-unlock-this-item-but-i-already-have-the-full-course-by-financial-aid?language=en_US)
+
+
+
 ## YouTube/各种视频
 
 下载YouTube视频：<font color=red> **CR TubeGet**</font> 。直接搜索下载。
@@ -520,6 +526,10 @@ https://www.apowersoft.cn/  一个处理视频的网站
 
 不管用了。。网页端VIP的只给播放1min
 
+[怎么直接下载网页版酷狗音乐上的歌曲，在哪保存-百度经验](https://jingyan.baidu.com/article/2a138328dad459074a134fcc.html)
+
+网易云直接得到mp3：https://blog.csdn.net/songxiaolingbaobao/article/details/117747808
+
 ### 歌词文件
 
 网易云音乐怎么下载歌词? - superDog的回答 - 知乎 https://www.zhihu.com/question/27638171/answer/146004899
@@ -583,6 +593,10 @@ Z-lib打不开。。
 
 https://mp.weixin.qq.com/s/2FlSEINnaAfjIPdTYDvU3A 百度文库、视频解析
 
+
+
+
+
 # B站
 
 - B站审核：中国地图；敏感词汇：（工人）运动，反gong。。
@@ -620,6 +634,12 @@ GreasyFork脚本：[全网VIP视频免费破解去广告、全网音乐直接下
 
 迅雷影音：放视频自动匹配字幕文件。可是它流氓啊？？ 
 
+
+
+电脑里的视频画面比声音快是因为配置不够？
+
+
+
 # 处理视频
 
 ## ffmpeg
@@ -634,19 +654,60 @@ ffmpeg -i meeting_01.mp4 -vcodec copy -acodec copy -ss 00:00:37 -to 00:51:00 mee
 
 
 
+## Adobe series
+
+see [Deal with videos](Deal-with-videos.md)
+
+### Adobe illustrator
+
+- 我们可以按快捷键Ctrl+，就是放大视图，按快捷键Ctrl-就是缩小视图；滚轮是上下，Ctrl+滚轮是左右
+
+  [ai画板上下左右移动快捷键，画板缩小放大快捷键-百度经验](https://jingyan.baidu.com/article/9113f81b7e4bdc2b3314c740.html)
+
+- 使用定界框旋转对象
+
+  1. 选择一个或多个对象。
+  2. 使用“选择”工具 ，将位于定界框外部的鼠标指针移近一个定界框手柄，待指针形状变为 之后再拖动鼠标。
+
+  https://helpx.adobe.com/cn/illustrator/using/rotating-reflecting-objects.html
+
+### PR
+
+### basics
+
+- 轨道右侧是工具栏，比如说剃刀工具，可以剪切视频和音频。
+
+- [PR如何给视频的某一段中的局部添加马赛克？ - 知乎](https://www.zhihu.com/question/67869397/answer/2313201400)
+
+- [Premiere Pro 中的语音到文本功能](https://helpx.adobe.com/cn/premiere-pro/using/speech-to-text.html)
+
+- [Adobe premiere怎么把浮动面板关闭？_火星网校](https://www.hxsd.tv/wenda/11068/)
 
 
 
 
-钉钉客户免费享有聊天消息云端存储180天
 
-开通钉钉专业版，内部聊天记录（包含内部群以及内部单聊）保存时间将从180天调整为2年
-
+### PS
 
 
 
 
 
+
+
+
+
+
+
+
+
+# 秀米
+
+[秀米编辑器如何设置文字上标 - 百度经验](https://jingyan.baidu.com/article/3c48dd34dd97d3a00be358ff.html)
+第三步：在出现的界面中，输入内容后光标定位在需要设置角标的地方，点击【格式】，选择【文字上标】，并在编辑界面中，输入文字即可。
+
+https://c.xiumi.us/board/v5/2a5va/287435172
+文字格式刷设置
 
 
 
