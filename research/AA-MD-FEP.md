@@ -1046,7 +1046,7 @@ from Connexin. **update the code later**
 
 ### bound
 
-```
+```shell
 # to pdb and split
 box=`tail -n 1 system*.gro | awk '{printf "%-10s %-10s %-10s", $1, $2, $3}'`
 gmx editconf -f system*.gro -o wt.pdb 
@@ -1096,7 +1096,7 @@ mv `ls -F | grep -v /` bound/system/
 
 even if we can mutate on the whole gro file, we have to split the Ab chain out...
 
-```
+```shell
 # now we should add water, but keep the box size the same as bound state
 echo 0 | gmx pdb2gmx -f editchains/h.pdb -o h.gro -ff amber99sb-star-ildn-mut -water tip3p
 sed -i 's/\/home\/gxf1212\/data\/local-programs\/miniconda3\/envs\/pmx\/lib\/python3.10\/site-packages\/pmx\/data\/mutff\///g' topol.top 
@@ -1120,7 +1120,7 @@ mv `ls -F | grep -v /` free/system/
 
 ### TEST
 
-```
+```shell
 # normal test, get a copy of the folder and
 cd bound/system
 gmx grompp -f ../../../mdps/em.mdp -c bound.gro -r bound.gro -p newtop.top -o em.tpr -v -maxwarn 2
@@ -1140,7 +1140,7 @@ gmx grompp -f ../../../mdps/md0.mdp -c npt.gro -r npt.gro -p newtop.top -o md.tp
 gmx mdrun -s md.tpr -deffnm md -ntmpi 1 -ntomp 15 -nb gpu -bonded gpu -gpu_id 0
 ```
 
-### visualize
+### visualize in Pymol
 
 ```
 remove resn K or resn Cl or resn SOL or resn POC
@@ -1154,21 +1154,38 @@ bg_color white
 align--all_to_this
 ```
 
-### other
+### FEP parameters
+
+不需要0.00001那种；其实vdw和columb谁先变都差不多 
+
+
+
+An example .mdp file is
 
 ```
+```
+
+
+
+
+
+### other
+
+```shell
 python /data/gxf1212/work/make_hybrid_top/FEbuilder/get_segments_pdb.py sys.pdb
 ```
 
 check if finished all:
 
-```
+```shell
 ls */repeat*/lambda_31/prod/prod.gro
 ```
 
 ## MD workflow
 
-```
+Maybe we need to confirm the end state conformation....
+
+```shell
 # to pdb and split
 box=`tail -n 1 c*.gro | awk '{printf "%-10s %-10s %-10s", $1, $2, $3}'`
 gmx editconf -f c*.gro -o wt.pdb 
@@ -1218,7 +1235,9 @@ Do not use histograms unless you’re certain you need it. It's kind of big
 
 
 
+## Other notes
 
+- [What is best way to get multiple chains? (kth.se)](https://mailman-1.sys.kth.se/pipermail/gromacs.org_gmx-users/2009-October/045869.html)
 
 
 

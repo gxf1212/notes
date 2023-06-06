@@ -2,65 +2,9 @@
 
 关于处理视频、图片（搬运）等技术
 
-# 剪辑
-
-[学生党适合的10款视频剪辑软件！ - 章鱼剪辑的文章 - 知乎](https://zhuanlan.zhihu.com/p/266663791)
-
-[各位 B 站的 up 主们，你们一般用什么视频软件进行剪辑？ - 导演盒饭呢的回答 - 知乎](https://www.zhihu.com/question/48412892/answer/2063926466)
-
-- 剪映（抖音
-
-- 万兴喵影 https://miao.wondershare.cn/
-
-视频剪辑导出太慢，是配置太菜，或资源被占
-
-万兴耗时间也差不多，最好的分辨率大小也差不多
-
-## 剪映
-
-剪映的不可取代之处在于：
-
-- 免费识别和导出字幕
-- 他俩一些基础的特效，是免费的
-
-剪映要在C盘留缓存
-
-> 清除缓存文件?不影响历史草稿使用，如需使用贴纸、特效等素材将重新下载。
->
-> 我的视频呢？缓存明显比界面显示的多。。
-
-notes
-
-- 画面叠放：画面---层级
-- 剪映导出就要大，按1920\*1080（**1080p**），调整视频大小为**16:9**
-
-> 导出时才明白，我那个画面太小，按正常720p导出，导致在B站上很小有一堆黑屏。。
-
-## 喵影
-
-Wondershare
-
-> 喵影的不可取代之处在于：
->
-> - 字幕的效果也不错
-> - 必剪不支持导入srt。。
-
-它好像缓存文件在安装的那里（必剪似乎也是？），但wfp文件保存了视频信息吧。。
-
-## 其他
-
-- 必剪：可以加三连啥的，可以识别，不能导入srt
-- 裁剪视频：https://split-video.com/zh/ （也要挺久）
-
-## 常识
-
-- 在Premiere Pro cc中，有时视频像素较高，像4K,8K,而我们的电脑配置又不是那么高,在pr中预览视频的时候就会出现卡顿,而代理剪辑就可以对素材进行代理处理,方便我们进行编辑预览
-
-  代理剪辑：如素材为4K视频,直接通过pr软件打开,电脑配置如果不是特别高的话,可能就无法正常预览编辑,而代理剪辑则是将4K视频先进行转码,使我们的电脑可以正常预览剪辑,等编辑完成后在转换成原始4K格式
 
 
-
-# 字幕
+# 字幕工作
 
 ## 编辑
 
@@ -76,7 +20,7 @@ Wondershare
 
 记住校准所有！！缺点：是不是有些符号不能识别？弄完还要edit一下，去掉乱码
 
-[PR导入字幕](https://jingyan.baidu.com/article/d621e8daeaee396965913f8f.html)
+
 
 > 下方黑边：https://tieba.baidu.com/p/2232837166
 >
@@ -414,7 +358,7 @@ vtt_to_srt.py xx.srt
 
 https://you-get.org/  no Chinese?
 
-# 下载
+# 下载视频等
 
 ## 国内课程
 
@@ -468,11 +412,13 @@ dl_coursera --cookies coursera.org_cookies.txt --slug chemical-biology --outdir 
 
 单个视频Google上还挺多，但分辨率限制？
 
-私享视频（private video）：别人看不了，生成字幕？
+私享视频（private video）：别人看不了，用来生成字幕？
 
 ### you-get
 
-命令行，下各种视频：https://github.com/soimort/you-get
+命令行，下各种视频：https://github.com/soimort/you-get。B站、YouTube等的playlist应该都行
+
+之前好像用来下过爱奇艺视频，但发现CR TubeGet也能用。现在好像没在用？
 
 ```shell
 conda install you-get ffmpeg
@@ -489,10 +435,6 @@ you-get -i https://www.iqiyi.com/v_19rrnai4ck.html
 you-get -o E:\VideoDownloaded\TomAndJerry 
 you-get -o E:\VideoDownloaded 
 ```
-
-B站、YouTube等的playlist应该都行
-
-> 现在好像没在用？
 
 
 
@@ -595,23 +537,130 @@ https://mp.weixin.qq.com/s/2FlSEINnaAfjIPdTYDvU3A 百度文库、视频解析
 
 
 
+# 剪辑、处理视频
+
+[学生党适合的10款视频剪辑软件！ - 章鱼剪辑的文章 - 知乎](https://zhuanlan.zhihu.com/p/266663791)
+
+[各位 B 站的 up 主们，你们一般用什么视频软件进行剪辑？ - 导演盒饭呢的回答 - 知乎](https://www.zhihu.com/question/48412892/answer/2063926466)
+
+- 剪映（抖音
+
+- 万兴喵影 https://miao.wondershare.cn/
+
+视频剪辑导出太慢，是配置太菜，或资源被占
+
+万兴耗时间也差不多，最好的分辨率大小也差不多
+
+## 剪映
+
+剪映的不可取代之处在于：
+
+- 免费识别和导出字幕
+- 他俩一些基础的特效，是免费的
+
+剪映要在C盘留缓存
+
+> 清除缓存文件?不影响历史草稿使用，如需使用贴纸、特效等素材将重新下载。
+>
+> 我的视频呢？缓存明显比界面显示的多。。
+
+notes
+
+- 画面叠放：画面---层级
+- 剪映导出就要大，按1920\*1080（**1080p**），调整视频大小为**16:9**
+
+> 导出时才明白，我那个画面太小，按正常720p导出，导致在B站上很小有一堆黑屏。。
+
+## 喵影
+
+Wondershare
+
+> 喵影的不可取代之处在于：
+>
+> - 字幕的效果也不错
+> - 必剪不支持导入srt。。
+
+它好像缓存文件在安装的那里（必剪似乎也是？），但wfp文件保存了视频信息吧。。
 
 
-# B站
 
-- B站审核：中国地图；敏感词汇：（工人）运动，反gong。。
+## ffmpeg
 
-- B站分段章节、视频链接、问卷等功能  https://www.bilibili.com/read/cv13543699
+crop a video. remove 'to' option: until the end
 
-  > YouTube可自动生成视频章节
+```shell
+ffmpeg -i meeting_01.mp4 -vcodec copy -acodec copy -ss 00:00:37 -to 00:51:00 meeting_01_strip.mp4 -y
+```
 
-- 上传到B站，课程也就1080P，否则压制；动画720P就行了
 
-- 可能必须要参与特定活动才能联合投稿，直接在投稿里面设置就可以。而且我现在创作等级也不够
 
-- 必剪 PC 端可以登录B站账号，在视频作品导出完成后，就能在软件中马上发布。和B站网页版的上传流程、界面完全一致，能够修改封面、添加标签，也能定时发布。
 
-- https://pay.bilibili.com/pay-v2-web/shell_withdraw  创作激励提现
+
+### PR
+
+#### basics
+
+- 轨道右侧是工具栏，比如说剃刀工具，可以剪切视频和音频。
+
+- [PR如何给视频的某一段中的局部添加马赛克？ - 知乎](https://www.zhihu.com/question/67869397/answer/2313201400)
+
+- [Premiere Pro 中的语音到文本功能](https://helpx.adobe.com/cn/premiere-pro/using/speech-to-text.html)
+
+- [Adobe premiere怎么把浮动面板关闭？_火星网校](https://www.hxsd.tv/wenda/11068/)
+
+- [PR导入字幕](https://jingyan.baidu.com/article/d621e8daeaee396965913f8f.html)
+
+
+
+## 其他
+
+- 必剪：可以加三连啥的，可以识别，不能导入srt
+- 裁剪视频：https://split-video.com/zh/ （也要挺久）
+
+
+
+## 常识
+
+- 在Premiere Pro cc中，有时视频像素较高，像4K,8K，而我们的电脑配置又不是那么高，在pr中预览视频的时候就会出现卡顿，而代理剪辑就可以对素材进行代理处理，方便我们进行编辑预览
+
+  代理剪辑：如素材为4K视频，直接通过pr软件打开，电脑配置如果不是特别高的话，可能就无法正常预览编辑，而代理剪辑则是将4K视频先进行转码，使我们的电脑可以正常预览剪辑，等编辑完成后在转换成原始4K格式
+
+
+
+## Adobe series
+
+see [Deal with videos](Deal-with-videos.md)
+
+### Adobe illustrator
+
+- 我们可以按快捷键Ctrl+，就是放大视图，按快捷键Ctrl-就是缩小视图；滚轮是上下，Ctrl+滚轮是左右
+
+  [ai画板上下左右移动快捷键，画板缩小放大快捷键-百度经验](https://jingyan.baidu.com/article/9113f81b7e4bdc2b3314c740.html)
+
+- 使用定界框旋转对象
+
+  1. 选择一个或多个对象。
+  2. 使用“选择”工具 ，将位于定界框外部的鼠标指针移近一个定界框手柄，待指针形状变为 之后再拖动鼠标。
+
+  https://helpx.adobe.com/cn/illustrator/using/rotating-reflecting-objects.html
+
+
+
+### PS
+
+
+
+# 录制视频
+
+[Win11录屏没有声音怎么办？Win11录屏带声音的三种方法](https://zhuanlan.zhihu.com/p/562793694)
+
+自带工具就行了。。
+
+
+
+腾讯会议录制者好像只会录共享的屏幕……然后只要有人开麦就有声音。但不要单独录音频文件
+
+
 
 # 观看视频
 
@@ -640,67 +689,6 @@ GreasyFork脚本：[全网VIP视频免费破解去广告、全网音乐直接下
 
 
 
-# 处理视频
-
-## ffmpeg
-
-crop a video. remove 'to' option: until the end
-
-```shell
-ffmpeg -i meeting_01.mp4 -vcodec copy -acodec copy -ss 00:00:37 -to 00:51:00 meeting_01_strip.mp4 -y
-```
-
-腾讯会议录制者好像只会录共享的屏幕……然后只要有人开麦就有声音。但不要单独录音频文件
-
-
-
-## Adobe series
-
-see [Deal with videos](Deal-with-videos.md)
-
-### Adobe illustrator
-
-- 我们可以按快捷键Ctrl+，就是放大视图，按快捷键Ctrl-就是缩小视图；滚轮是上下，Ctrl+滚轮是左右
-
-  [ai画板上下左右移动快捷键，画板缩小放大快捷键-百度经验](https://jingyan.baidu.com/article/9113f81b7e4bdc2b3314c740.html)
-
-- 使用定界框旋转对象
-
-  1. 选择一个或多个对象。
-  2. 使用“选择”工具 ，将位于定界框外部的鼠标指针移近一个定界框手柄，待指针形状变为 之后再拖动鼠标。
-
-  https://helpx.adobe.com/cn/illustrator/using/rotating-reflecting-objects.html
-
-### PR
-
-### basics
-
-- 轨道右侧是工具栏，比如说剃刀工具，可以剪切视频和音频。
-
-- [PR如何给视频的某一段中的局部添加马赛克？ - 知乎](https://www.zhihu.com/question/67869397/answer/2313201400)
-
-- [Premiere Pro 中的语音到文本功能](https://helpx.adobe.com/cn/premiere-pro/using/speech-to-text.html)
-
-- [Adobe premiere怎么把浮动面板关闭？_火星网校](https://www.hxsd.tv/wenda/11068/)
-
-
-
-
-
-### PS
-
-
-
-
-
-
-
-
-
-
-
-
-
 # 秀米
 
 [秀米编辑器如何设置文字上标 - 百度经验](https://jingyan.baidu.com/article/3c48dd34dd97d3a00be358ff.html)
@@ -710,4 +698,28 @@ https://c.xiumi.us/board/v5/2a5va/287435172
 文字格式刷设置
 
 
+
+# B站运营
+
+- B站审核：中国地图；敏感词汇：（工人）运动，反gong。。
+
+- B站分段章节、视频链接、问卷等功能  https://www.bilibili.com/read/cv13543699
+
+  > YouTube可自动生成视频章节
+
+- 上传到B站，课程也就1080P，否则压制；动画720P就行了
+
+- 可能必须要参与特定活动才能联合投稿，直接在投稿里面设置就可以。而且我现在创作等级也不够
+
+- 必剪 PC 端可以登录B站账号，在视频作品导出完成后，就能在软件中马上发布。和B站网页版的上传流程、界面完全一致，能够修改封面、添加标签，也能定时发布。
+
+- https://pay.bilibili.com/pay-v2-web/shell_withdraw  创作激励提现
+
+
+
+提现
+
+
+
+推广金
 

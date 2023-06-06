@@ -56,13 +56,15 @@ HSE no!
 
   [PlayMolecule - Click. Compute. Discover.](https://playmolecule.com/proteinPrepare)
 
-- 
+- https://github.com/isayevlab/pKa-ANI
 
 
 
 
 
 # System setup
+
+also refer to [related programming](Programming-for-MD.md#modeling-and-analysis)
 
 ## CHARMM-GUI
 
@@ -236,9 +238,11 @@ end structure
 
 # Virtual Screening of Drugs
 
-This part is from 2021 UROPS project
+This part is from 2021 UROPS project. 
 
 for basic usage of Python packages like rdkit and openbabel, please [go to this link](Programming-for-MD#small-molecule). If I use them to construct a library, maybe I'll write here.
+
+Contents need more organization....
 
 ## Database setup
 
@@ -397,10 +401,68 @@ for more databases, see http://cheminfo.charite.de/superdrug2/downloads.html
 ### backup
 
 > [https://tripod.nih.gov/npc/](https://www.researchgate.net/deref/https%3A%2F%2Ftripod.nih.gov%2Fnpc%2F)Currently having more than 7000 FDA approved compounds.It is free and updated daily.Install it and select criteria according to your need and export file as .tsv(can be opened in excel)The exported file will have drug name, SMILES and other required information.SMILES can be converted to SDF or mol or mol2 according to your need using OpenBabel tool.
+>
+> ## download small molecule pdb files 
+>
+> for virtual screening
+>
+> ### download all and see data
+>
+> ```shell
+> wget -m -np ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound_3D/01_conf_per_cmpd/SDF/ 
+> # download **all** the compounds in the current directory
+> # /home/work/data lib
+> # but that's too big and unnecessary
+> ```
+>
+> ### download what you need
+>
+> [bulk download with id file](https://blog.csdn.net/recher_he1107/article/details/106276198?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_utm_term-2&spm=1001.2101.3001.4242)
+>
+> maybe I'll use smiles to determine similarity between atp and ligands...
+>
+> ### convert .sdf to .pdb in batches
+>
+> .sdf: structure data file
+>
+> Openbabel has a interface with Python...
+>
+> It **can do things in batch**, but **no outputing pdb**....but don't forget its functions....
+>
+> > so use my shell
+> >
+> > ```shell
+> > # run the following command under where your small molecules are
+> > # to convert into any format **in batch**
+> > bash /home/user/Desktop/work/xufan/bin/all_to_pdb.sh # to pdb
+> > bash /home/user/Desktop/work/xufan/bin/all_to_pdbpt.sh # to pdbpt
+> > bash /home/user/Desktop/work/xufan/bin/sdf_split_convert.sh # split multi comformers and convert
+> > ```
+> >
+> > https://blog.csdn.net/TQCAI666/article/details/99835557?utm_medium=distribute.pc_relevant.none-task-blog-searchFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-searchFromBaidu-1.control
+> >
+> > https://blog.csdn.net/u012325865/article/details/77914358
+> >
+> > finally I found simpler commands...
 
-## Virtual Screening
+## AutoDock Tools and vina
 
-with AutoDock Tools and vina
+Good results especially for ligands with 8 or more rotatable bonds 
+
+### Basics
+
+#### algorithms and settings
+
+- docking box: the search space (for the whole ligand rather than the center)
+- 
+
+#### parameters
+
+- exhaustiveness: One execution of Vina tries to predict where and how a putative ligand can best bind to a given protein, in which Vina may repeat the calculations **several times** with different randomizations
+- seed: same seed (explicitly assigned) produces the same results
+- cpu: repeated computation for a ligand is done on separate CPUs at the same time. By default, Vina tries to create as many threads as the number of available 
+
+#### Files
 
 - pdb file: 
 
@@ -413,7 +475,7 @@ with AutoDock Tools and vina
 
 - .mol2 file format: http://paulbourke.net/dataformats/mol2/
 
-### flow
+### Workflow
 
 ```shell
 # visualized window
@@ -591,28 +653,74 @@ bash vina_screen_local.sh conf_rigid.txt # conf as argument
 
 flexible: over 100 times of time consumption. I would only use it to do deep screening
 
-my workstation: 42 sec for 1st ligand (1 min ~20 sec on lab). about 2 times faster cpu
-
-
-
 do not run multiple tasks together?! it make all tasks stop..
 
+```shell
+#! /bin/bash
+
+count=0 # progress
+num=$(ls -l | grep ZINC | wc -l) # total number of ligands
+start=$(date +%s)
+
+for f in ZINC*.pdbqt; do
+    b=basename $f .pdbqt
+    let count++
+    
+    echo 
+    echo 
+    echo Processing ligand $b \($count of $num\).
+    mkdir -p $b
+    vina --config $1 --ligand $f --out ${b}/out.pdbqt --log ${b}/log.txt 
+    # replaced conf.txt by $1
+    
+    now=$(date +%s)
+    hour=$(( (now-start)/3600 ))
+    min=$(( (now-start-3600*hour)/60 ))
+    sec=$(( (now-start)%60 ))
+    echo 
+    echo 
+    echo Finished processing ligand $b \($count of $num\). Running for $hour hours $min minutes $sec seconds.
+done
+```
+
+`config_rigid.txt`:
+
+```
+receptor = 2cqg_1_rigid.pdbqt
+
+center_x =  5.714
+center_y = -4.169
+center_z = -0.78
+
+size_x = 30
+size_y = 34
+size_z = 22
+
+exhaustiveness=24
+num_modes=9
+```
 
 
-### running result
 
-#### try1
 
-- lab: 712, about 6 hours
-- my workstation: the first one, 81min, about 60 times of rigid in lab; first 5, about 5 hours
-- use little memory but **most of the cpu** (90% in lab)
-- really no GPU acceleration on Vina, maybe optimized algorithm. autodock has GPU version
 
-#### try2
-
-- my: 56 for 13min9sec (789sec). exhau=24
-  - 3221 will be 12.6 hours
-- lab: 16 for 28min54sec (1736sec). 1575 will be 47.47 hours
+> ### running result
+>
+> my workstation: 42 sec for 1st ligand (1 min ~20 sec on lab). about 2 times faster cpu
+>
+> #### try1
+>
+> - lab: 712, about 6 hours
+> - my workstation: the first one, 81min, about 60 times of rigid in lab; first 5, about 5 hours
+> - use little memory but **most of the cpu** (90% in lab)
+> - really no GPU acceleration on Vina, maybe optimized algorithm. autodock has GPU version
+>
+> #### try2
+>
+> - my: 56 for 13min9sec (789sec). exhau=24
+>   - 3221 will be 12.6 hours
+> - lab: 16 for 28min54sec (1736sec). 1575 will be 47.47 hours
+>
 
 
 
@@ -656,7 +764,18 @@ the final table may include:
    bash ./vina_split_batch.sh # in batch
    ```
    
-   run my python code for ranking
+   run my python code for ranking, where
+   
+   ```shell
+   #! /bin/bash
+   
+   for f in ligand_*/; do
+       cd $f
+       vina_split --input out.pdbqt
+       echo splited $f
+       cd ..
+   done
+   ```
    
 2. ADT: analyze
    1. marcomolecule--choose

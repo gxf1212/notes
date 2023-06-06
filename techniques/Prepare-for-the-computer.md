@@ -1,6 +1,6 @@
 # Prepare for the computer
 
-This page is all about software installing, both for system and project environment. Also something about Fedora. A little bit messy. Try to be clear about the commands for Dedian/RedHat systems!
+This page is all about software installing (Linux), both for system and project environment. Also something about Fedora. A little bit messy. 
 
 Mainly recorded while in NUS. The installation of DL environment, Gromacs, and plans are all in `Linux fundamental (Installation and softwares)`.
 
@@ -340,94 +340,7 @@ https://www.bilibili.com/video/av545350018/
 
 https://blog.shuziyimin.org/171  国内办的信用卡也是用不了，没有全局代理、国内信用卡下注册的PayPal账户也被认为是国内的
 
-## Docking
 
-### Autodock
-
-https://ccsb.scripps.edu/projects/docking/
-
-Installing
-
-    tar xzvf autodock_vina_1_1_2_linux_x86.tgz
-
-Optionally, you can copy the binary files where you want.
-Running
-
-    ./autodock_vina_1_1_2_linux_x86/bin/vina --help
-
-This file is copied into /home/Desktop/work/xufan and /usr/local
-
-http://vina.scripps.edu/manual.html#usage for running docking.
-
-**安装目录和打开的文件不要包含任何中文！！！！！**
-
-### mgl
-
-Still need to install MGL-tools (autodock tools). Just  help with visualization.
-
-Install according to official manual. Remember to configure environmental path.
-
-It also include PMV...see https://ccsb.scripps.edu/mgltools/ for all.
-
-note: for .tar.gz, you should **put the folder right under the directory you want to install**
-
-```shell
-export PATH=$PATH:~/MGLTools-1.5.7/bin
-```
-
-icon path: just search `adt` or `icon`
-
-> adt: $HOME/mgltools_x86_64Linux2_1.5.7/MGLToolsPckgs/Pmv/Icons/128x128/adt.png
-
-> ### backup
-> 
-> ```shell
-> # paths
-> export PATH=$PATH:/home/user/MGLTools-1.5.7/bin # mgltools
-> export PATH=$PATH:/home/user/Desktop/work/xufan/bin # vina
-> # now it can run under root
-> ```
-> 
-> ### 
-
-### zdock
-
-https://zdock.umassmed.edu/ with server
-
-> **ZDOCK 2.3.3 and ZDOCK 3.0.2**: These versions utilize the Conv3D library and other optimizations to improve speed and memory usage. ZDOCK 2.3.2 is based on the scoring function of ZDOCK 2.3, and ZDOCK 3.0.2 is based on the scoring function of ZDOCK 3.0. Please reference: Pierce BG, Hourai Y, Weng Z (2011). Accelerating Protein Docking in ZDOCK Using an Advanced 3D Convolution Library. PLoS One 6(9): e24657.
-
-seems not this...uninstall it...
-
-snugdock is an Ab docking tool
-
-## pycharm and miniconda
-
-```shell
-$pycharm # boot
-```
-
-### packages
-
-for AmberTools!!!
-
-```shell
-# https://www.mdanalysis.org/
-conda config --add channels conda-forge
-conda install mdanalysis -y
-conda install -c openbabel openbabel -y
-# conda install -c bioconda pybel # not this
-conda install -c rdkit rdkit -y
-```
-
-usage
-
-```shell
-import openbabel
-import pybel
-mymol = pybel.readstring("smi", "CCCC")
-```
-
-conda installed openbabel contains the cmd command `obabel`
 
 ## MD
 
@@ -473,21 +386,23 @@ conda install -c bioconda gromacs
   Follow this order:
 
 1. check your graphic card driver (and installation)
-   
+
    https://blog.csdn.net/qq_43265072/article/details/107160297
 
-2. (check gcc version) install cuda and cmake
-   
+2. check gcc version
+
+3. install cuda and cmake
+
    - cmake
      - install: https://jingyan.baidu.com/article/d621e8da56314d2865913f93.html
      - uninstall: `make uninstall` and `sudo rm -rf` files https://blog.csdn.net/xh_hit/article/details/79639930
      - I installed it on default path
    - cuda
 
-3. use cmake to install gromacs
-   
+4. use cmake to install gromacs
+
    - https://blog.csdn.net/SuiYueHuYiWan/article/details/110972083
-   
+
    - install fftw3 by ourselves under root!
      
      or `sudo apt-get`
@@ -495,104 +410,7 @@ conda install -c bioconda gromacs
      - http://www.fftw.org/fftw2_doc/fftw_6.html
 - rather than official manual, I used
 
-#### old try
-
-1. **From here, you should see “on new system”**
-   
-   ```shell
-   ./configure --prefix=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
-   # SINGLE AND DOUBLE PRECISION: see official manual
-   # --enable-float : single. default: double, which is not so useful in gromacs but QM/MM needs it..
-   
-   make
-   make -j install
-   ```
-   
-   - enter "root" by `su`
-     
-     ```shell
-     # under the unzipped gromacs directory
-     mkdir build
-     cd build
-     cmake .. \
-     -DCMAKE_INSTALL_PREFIX=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs-2021 \
-     -DGNX_BUILD_OWN_FFTW=ON \
-     -DGMX_FFT_LIBRARY=fftw3 \
-     -DFFTWF_LIBRARY=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/fftw-single/lib/libfftw3f.so \
-     -DFFTWF_LIBRARY=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/lib/libfftw3f.so \
-     -DFFTWF_INCLUDE_DIR=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/include \
-     -DGNX_MPI=ON \
-     -DGMX_GPU=CUDA \
-     -DGMX_CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda
-     # in older versions, -DGMX_GPU=ON 
-     make
-     make check
-     make install
-     gedit /.bashrc
-     export PATH=$PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs-2021/bin/
-     source /media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs/bin/GMXRC
-     ```
-     
-     > - library desired path : /media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs (double). single have a separate folder
-
-> - no problem with cuda
-> - .. = ../ !!!
-> - -DCMAKE_PREFIX_PATH is for cmake to search for library
-
-   problems:
-
-- > Could not find fftw3f library named libfftw3f, please specify its location in CMAKE_PREFIX_PATH or FFTWF_LIBRARY by hand (e.g. -DFFTWF_LIBRARY='/path/to/libfftw3f.so')
-  > CMake Error at cmake/gmxManageFFTLibraries.cmake:92 (MESSAGE):
-  > Cannot find FFTW 3 (with correct precision - libfftw3f for mixed-precision
-  > GROMACS or libfftw3 for double-precision GROMACS).  Either choose the right
-  > precision, choose another FFT(W) library (-DGMX_FFT_LIBRARY), enable
-  > 
-  > the
-  
-  >   advanced option to let GROMACS build FFTW 3 for you
-  >   (-DGMX_BUILD_OWN_FFTW=ON), or use the really slow GROMACS built-in fftpack
-  >   library (-DGMX_FFT_LIBRARY=fftpack).
-  
-  solved
-
-- 上次装到：运行install.sh，报的信息放在build父目录的output。realvnc也不行
-  
-  ```
-  
-  ```
-  
-  CMake Warning:
-    Manually-specified variables were not used by the project:
-  
-      GMX_CUDA_TOOLKIT_ROOT_DIR
-       GNX_BUILD_OWN_FFTW
-      GNX_MPI
-  
-  ```
-  
-  ```
-
-so the successful version is 
-
-```shell
-cmake .. -DCMAKE_INSTALL_PREFIX=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/gromacs-2021-gpu \
--DGMX_MPI=ON -DCMAKE_C_COMPILER=mpicc -DCMAKE_CXX_COMPILER=mpicxx \
--DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/fftw-single/ \
--DREGRESSIONTEST_DOWNLOAD=ON \
--DGMX_GPU=CUDA -DCUDA_TOOKIT_ROOT_DIR=/usr/local/cuda/
-
-make -j 6
-make check
-make install
-```
-
-- guide on cmake: https://blog.csdn.net/wgw335363240/article/details/37758337
-  
-  - > CMake Error: The current CMakeCache.txt directory /media/kemov`:q!` 强制退出，不保存
-  
-  - openssl: https://www.cnblogs.com/new-journey/p/13323301.html
-
-#### on new system
+#### installation
 
 ```shell
 # fftw: http://www.fftw.org/download.html
@@ -600,11 +418,12 @@ make install
 make -j 6
 make install
 ## REMEMBER TO ADD TO LD_LIBRARY_PATH!!!
+# 2023 note: not necessary...
 
 # mpicc, mpicxx
 sudo apt install openmpi-bin
 
-# cmake
+# cmake, usually no need to compile
 sudo apt install cmake
 
 # gmx
@@ -614,11 +433,17 @@ cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf/gromacs-2021.5-gpu \
 -DGMX_GPU=CUDA
 make -j 6
 make check
-make install
+make install -j32
+# make check and -DREGRESSIONTEST_DOWNLOAD=ON is optional
 
-# gcc environment
-cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf1212/gromacs-2021.5-gpu -DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf1212/program \# -DFFTWF_LIBRARY=/home/gxf1212/program/lib/libfftw3f.so -DFFTWF_INCLUDE_DIR=/home/gxf1212/programinclude  
--DCMAKE_C_COMPILER=/home/gxf1212/program/bin/gcc -DCMAKE_CXX_COMPILER=/home/gxf1212/program/bin/g++ -DGMX_CUDA_TARGET_SM=80 -DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON -DGMX_GPU=CUDA # 80: just a workaround
+# specifying gcc version
+cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf1212/data/local-programs/gromacs-2023 \
+-DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/opt/fftw3/3.3.9 \
+-DCMAKE_C_COMPILER=/data/gxf1212/local-programs/gcc-10.2.0/bin/gcc \
+-DCMAKE_CXX_COMPILER=/data/gxf1212/local-programs/gcc-10.2.0/bin/g++ \
+-DGMX_MPI=OFF -DGMX_GPU=CUDA
+make -j 32
+make install -j32
 
 # gmx, mpi
 cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf/gromacs-2021.5-gpu-mpi \
@@ -631,11 +456,43 @@ make check
 make install
 ```
 
-gromacs 新版本运行老文件
+gromacs newer version reads older files fine sometimes, but not vice versa
 
 other issues
 
 - https://gitlab.com/gromacs/gromacs/-/issues/4037
+
+- gmx 2023
+
+  ```
+  #error -- unsupported GNU version! gcc versions later than 10 are not supported! The nvcc flag '-allow-unsupported-compiler' can be used to override this version check; however, using an unsupported host compiler may cause compilation failure or incorrect run time execution. Use at your own risk.
+  ```
+
+- 
+
+
+
+on my previous workstation
+
+```shell
+# gcc environment
+../configure --enable-language=c,c++ --disable-multilib --prefix=/opt/gcc/11.1.0
+make -j32
+make install
+# then give gcc path
+cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf1212/gromacs-2021.5-gpu -DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf1212/program \# -DFFTWF_LIBRARY=/home/gxf1212/program/lib/libfftw3f.so -DFFTWF_INCLUDE_DIR=/home/gxf1212/programinclude  
+-DCMAKE_C_COMPILER=/home/gxf1212/program/bin/gcc -DCMAKE_CXX_COMPILER=/home/gxf1212/program/bin/g++ -DGMX_CUDA_TARGET_SM=80 -DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON -DGMX_GPU=CUDA # 80: just a workaround
+```
+
+
+
+
+
+### Amber22
+
+see [Amber22安（cai）装（keng）过程分享 - 哔哩哔哩 (bilibili.com)](https://www.bilibili.com/read/cv23212288)
+
+
 
 ### NAMD
 
@@ -904,6 +761,33 @@ https://github.com/luisico/clustering
 
 ## Modelling tools
 
+### pycharm and miniconda
+
+no difficulty...
+
+common packages
+
+```shell
+# https://www.mdanalysis.org/
+conda config --add channels conda-forge
+conda install mdanalysis -y
+conda install -c openbabel openbabel -y
+# conda install -c bioconda pybel # not this
+conda install -c rdkit rdkit -y
+```
+
+#### OpenBabel
+
+may also
+
+```shell
+dnf install openbabel-gui # do not support converting to pdb???
+dnf install openbabel # without gui
+sudo apt-get install openbabel # debian
+```
+
+
+
 ### AMBER
 
 Amber软件包主要包括2个部分：Amber Tools和Amber，其中Amber Tools可以免费在[Amber官网](http://ambermd.org/AmberTools17-get.html)下载，Tools中包含了Amber几乎所有的模块，Sander、tleap、MMPBSA等最核心的内容都可以免费使用。而另外的Amber则是唯一收费的部分，该部分主要包括了PMEMD以及GPU加速 的功能
@@ -1149,6 +1033,70 @@ https://brooks.chem.lsa.umich.edu/download/software/match/MATCH_RELEASE.tar.gz
 
 
 
+## Docking
+
+### Autodock
+
+https://ccsb.scripps.edu/projects/docking/
+
+Installing
+
+    tar xzvf autodock_vina_1_1_2_linux_x86.tgz
+
+Optionally, you can copy the binary files where you want.
+Running
+
+    ./autodock_vina_1_1_2_linux_x86/bin/vina --help
+
+This file is copied into /home/Desktop/work/xufan and /usr/local
+
+http://vina.scripps.edu/manual.html#usage for running docking.
+
+**安装目录和打开的文件不要包含任何中文！！！！！**
+
+### mgl
+
+Still need to install MGL-tools (autodock tools). Just  help with visualization.
+
+Install according to official manual. Remember to configure environmental path.
+
+It also include PMV...see https://ccsb.scripps.edu/mgltools/ for all.
+
+note: for .tar.gz, you should **put the folder right under the directory you want to install**
+
+```shell
+export PATH=$PATH:~/MGLTools-1.5.7/bin
+```
+
+icon path: just search `adt` or `icon`
+
+> adt: $HOME/mgltools_x86_64Linux2_1.5.7/MGLToolsPckgs/Pmv/Icons/128x128/adt.png
+
+> ### backup
+>
+> ```shell
+> # paths
+> export PATH=$PATH:/home/user/MGLTools-1.5.7/bin # mgltools
+> export PATH=$PATH:/home/user/Desktop/work/xufan/bin # vina
+> # now it can run under root
+> ```
+>
+> ### 
+
+### zdock
+
+https://zdock.umassmed.edu/ with server
+
+> **ZDOCK 2.3.3 and ZDOCK 3.0.2**: These versions utilize the Conv3D library and other optimizations to improve speed and memory usage. ZDOCK 2.3.2 is based on the scoring function of ZDOCK 2.3, and ZDOCK 3.0.2 is based on the scoring function of ZDOCK 3.0. Please reference: Pierce BG, Hourai Y, Weng Z (2011). Accelerating Protein Docking in ZDOCK Using an Advanced 3D Convolution Library. PLoS One 6(9): e24657.
+
+seems not this...uninstall it...
+
+snugdock is an Ab docking tool
+
+
+
+
+
 ## Visualization
 
 ### VMD
@@ -1326,6 +1274,22 @@ sudo apt install pymol
 
 https://www.poissonboltzmann.org/
 
+usually along with Pymol Edu
+
+### ChemBioDraw, etc.
+
+draw your own molecule; recognize molecules from figure
+
+use ChemBioDraw, copy into Chem3D, export as any format that openbabel accepts
+
+install? on win
+
+链接: https://pan.baidu.com/s/1p0Sc7Fz1Fhwmx1FtnFdFmA 提取码: vcsi
+
+StoneMIND Collector: https://www.stonewise.ai/mol_product  (https://www.chemrss.com/1560.html)
+
+MathPix can also recognize figure as smiles.
+
 ### Avogadro
 
 [refer to](https://ubunlog.com/zh-CN/avogadro%E7%BC%96%E8%BE%91%E4%BD%BF%E5%88%86%E5%AD%90%E5%8F%AF%E8%A7%86%E5%8C%96/#Instalar_Avogadro_en_Ubuntu)
@@ -1403,13 +1367,19 @@ sudo snap r codium
 
 Silly installation
 
-it's good. rename it, and run the .run file under root
+- install: run the .run file
 
-```
-./foxit.run
-```
+  - it's good. rename it, and run the .run file under root
 
-or it will die
+    ```
+    ./foxit.run
+    ```
+
+    or it will die
+
+- remove: find the uninstall file under /home/opt/foxitsoftware/...
+
+- cannot open: kill the process...
 
 ### medeley
 
@@ -1424,240 +1394,17 @@ Python runtime state: preinitialized
 
 https://stackoverflow.com/questions/47936584/what-does-client-failed-to-connect-to-the-d-bus-daemon-mean
 
-skills:
 
-- I just make notes on the right. may use "favorite"
-- drag the entry to another folder
-- "Enter" to change the position of last name and first 
-- open .ris or .bib ..... with Medeley!!
-- files--add file
-- contents: to quickly compare the papers, to summarize
 
-## download small molecule pdb files 
 
-for virtual screening
 
-### download all and see data
+## Other thing I did at Fedora and KDE
 
-```shell
-wget -m -np ftp://ftp.ncbi.nlm.nih.gov/pubchem/Compound_3D/01_conf_per_cmpd/SDF/ 
-# download **all** the compounds in the current directory
-# /home/work/data lib
-# but that's too big and unnecessary
-```
-
-### download what you need
-
-[bulk download with id file](https://blog.csdn.net/recher_he1107/article/details/106276198?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_utm_term-2&spm=1001.2101.3001.4242)
-
-maybe I'll use smiles to determine similarity between atp and ligands...
-
-### convert .sdf to .pdb in batches
-
-.sdf: structure data file
-
-#### OpenBabel
-
-```shell
-dnf install openbabel-gui # do not support converting to pdb???
-dnf install openbabel # without gui
-sudo apt-get install openbabel # debian
-```
-
-This program has a interface with Python...
-
-It **can do things in batch**, but **no outputing pdb**....but don't forget its functions....
-
-> so use my shell
-> 
-> ```shell
-> # run the following command under where your small molecules are
-> # to convert into any format **in batch**
-> bash /home/user/Desktop/work/xufan/bin/all_to_pdb.sh # to pdb
-> bash /home/user/Desktop/work/xufan/bin/all_to_pdbpt.sh # to pdbpt
-> bash /home/user/Desktop/work/xufan/bin/sdf_split_convert.sh # split multi comformers and convert
-> ```
-> 
-> https://blog.csdn.net/TQCAI666/article/details/99835557?utm_medium=distribute.pc_relevant.none-task-blog-searchFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-searchFromBaidu-1.control
-> 
-> https://blog.csdn.net/u012325865/article/details/77914358
-> 
-> finally I found simpler commands...
-
-also, in python
-
-#### avogadro
-
-### draw your own molecule
-
-use ChemBioDraw, copy into Chem3D, export as any format that openbabel accepts
-
-install? on win
-
-链接: https://pan.baidu.com/s/1p0Sc7Fz1Fhwmx1FtnFdFmA 提取码: vcsi
-
-StoneMIND Collector: https://www.stonewise.ai/mol_product  (https://www.chemrss.com/1560.html)
-
-MathPix can also recognize figure as smiles.
-
-# Fundamental usage of Fedora and KDE
-
-1. directory of U disk: /run/media/user/u disk name
-
-2. https://docs.flatpak.org/en/latest/using-flatpak.html
-   
-   install with flatpak: add a remote, download a flatpakref file, and install
-
-3. mainly use rpm, no deb:
-   
-   ```shell
-   rpm -Uhv package.rpm # install
-   rpm -Uhv package.rpm --nodeps --force # force to install
-   ```
-   
-   https://docs.fedoraproject.org/ro/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch02s03.html
-   
-   but you can still double click!!
-
-4. check sys info
-   
-   ```
-   cat /proc/cpuinfo # cpu
-   ```
-
-5. have to use 
-   
-   ```shell
-   tar xf xx.tar.gz # or:
-   tar -zxvf xx.tar.gz                                                                                                                                                                                                                                      
-   ```
-   
-   rather than xvrf...
-
-6. yum
-   
-   ```shell
-   yum -y update
-   yum -y upgrade
-   ```
-
-7. https://os.51cto.com/art/200902/109883.htm
-   
-   如何在KDE桌面添加启动程序
-
-8. change user name
-   
-   https://blog.csdn.net/lanxuezaipiao/article/details/43153367
-   
-   log in with another user (or root), execute the commands, change your .bashrc and so on manually
-
-9. watch temperature https://zhuanlan.zhihu.com/p/143123436
-   
-   ```shell
-   sensors-detect # root
-   ```
-
-10. give user sudo privilege
-    
-    https://blog.csdn.net/Dream_angel_Z/article/details/45841109
-
-11. 养成--prefix的好习惯
-
-12. do not forget export $PATH:, or 
-    
-    https://blog.csdn.net/xiaoshunzi111/article/details/50623078
-
-13. 
-
-## basic shell
-
-### basic syntax
-
-1. \enter
-   
-   反斜杠后面紧跟回车，表示下一行是当前行的续行。
-   
-   but only valid in root!
-
-2. multiple paths:
-   
-   ```shell
-   PATH='/path/one;path/two;...'
-   ```
-
-3. perform string: [[]]
-   
-   perform any math: (()) or between ``
-   
-   `$( )` to store any outputed number in a variable
-
-### other
-
-1. date: https://cloud.tencent.com/developer/article/1441802
-
-2. .sh file has arguments: https://www.runoob.com/linux/linux-shell-passing-arguments.html
-
-3. what if message is too long? add `|more` https://blog.csdn.net/weixin_34293911/article/details/86473042
-
-4. use yum and dnf in user (not root):
-   
-   ```shell
-   sudo yum install xx
-   ```
-
-5. 
-
-## when system halted
-
-1. do not double click .sdf file with multiple conformations...it occupies all memory..
-
-2. 1st solution
-   
-   1. press ctrl+alt+F1~6 to enter tty. 
-      - F7 or F8: exit? not useful. maybe directly `reboot`..
-   2. use `top` to see threads. 
-      - top: https://www.cnblogs.com/ggjucheng/archive/2012/01/08/2316399.html
-   3. `kill id` to release.
-
-3. 2nd solution
-   
-   https://blog.csdn.net/openswc/article/details/9105071
-   
-   search SysRq fedora
-   
-   I've tried https://fedoraproject.org/wiki/QA/Sysrq#How_do_I_enable_the_magic_SysRq_key.3F, don't know if it's applicable on this computer
-
-4. tree: show directory as tree
-   
-   https://blog.csdn.net/xuehuafeiwu123/article/details/53817161
-
-5. 
-
-### system stuck
-
-http://www.mamicode.com/info-detail-2913916.html
-
-also stop, disable .....but only under user.....
-
-https://blog.csdn.net/xinxinqqt/article/details/44784195
-
-https://blog.csdn.net/fryingpan/article/details/42641999
-
-might because handling too many files in a folder...?
-
-## other thing I did
+Try to be clear about the commands for Dedian/RedHat systems!
 
 ### installation
 
-1. installed foxit reader
-   
-   - install: run the .run file
-   - remove: find the uninstall file under /home/opt/foxitsoftware/...
-   - cannot open: kill the process...
-
-2. activated Meta+D to show desktop (system settings--shortcuts--global--Kwin)
-
-3. typora
+1. typora
    
    - https://github.com/RPM-Outpost/typora in fedora, generate a rpm package
      
@@ -1694,19 +1441,3 @@ google scholar, pubmed
 
 all from library home!
 
-# Principles of softwares
-
-## vina
-
-Good results especially for ligands with 8 or more rotatable bonds 
-
-### algorithms and settings
-
-- docking box: the search space (for the whole ligand rather than the center)
-- 
-
-### parameters
-
-- exhaustiveness: One execution of Vina tries to predict where and how a putative ligand can best bind to a given protein, in which Vina may repeat the calculations **several times** with different randomizations
-- seed: same seed (explicitly assigned) produces the same results
-- cpu: repeated computation for a ligand is done on separate CPUs at the same time. By default, Vina tries to create as many threads as the number of available 

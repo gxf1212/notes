@@ -913,7 +913,7 @@ failed, remove this env...
 
 4. 
 
-5. > social network网课
+5. social network网课
    
    > ```
    > conda install matplotlib==2.0.0 networkx==1.11 pandas==0.20.3 scikit-learn==0.18.2 scipy==0.18.1 numpy==1.13.1
@@ -1012,6 +1012,23 @@ https://www.home-for-researchers.com/static/index.html#/
 
 https://app.bibguru.com/: fast citation generation
 
+
+
+## Literature
+
+### Mendeley
+
+skills:
+
+- I just make notes on the right. may use "favorite"
+- drag the entry to another folder
+- "Enter" to change the position of last name and first 
+- open .ris or .bib ..... with Medeley!!
+- files--add file
+- contents: to quickly compare the papers, to summarize
+
+
+
 ## Other
 
 ### ThunderBird
@@ -1048,13 +1065,14 @@ installation: see [Linux-fundamental](/techniques/Linux-fundamental?id=other-sof
 
 new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 
-### ChatGPT series
+### ChatGPT etc.
 
 - OpenAI's services are not available in your country. (error=unsupported_country)
   解决方法：全局模式
 - [ChatGPT 常见错误原因及解决方案：报错、回答不完整、网络错误等](https://blog.csdn.net/marin1993/article/details/128219198)。搞不定就换节点，刷新
 - Edge dev: https://www.microsoftedgeinsider.com/zh-tw/download
 - https://platform.openai.com/ get your API key
+- 只需要在 Chrome 浏览器上下载安装[ `Bing Chained` ](https://chrome.google.com/webstore/detail/bing-unchained-use-new-bi/laldfnbbeocphnilnofhedhcjcnchbld/related)这个插件，再访问 [www.bing.com](https://link.juejin.cn/?target=http%3A%2F%2Fwww.bing.com) 就会出现 New Bing AI 入口
 
 
 

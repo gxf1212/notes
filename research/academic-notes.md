@@ -210,21 +210,22 @@ rhizosphere: 根际，是指受植物根系活动影响，在物理、化学和�
 
 # Computer science
 
-**Tesla A100 is...2~3x** faster than the V100 using 32-bit precision.
-
-
+## Coding
 
 重写(Override)与重载(Overload)
 
 - 重写是子类对父类的允许访问的方法的实现过程进行重新编写, 返回值和形参都不能改变。**即外壳不变，核心重写！**
 - 重载(overloading) 是在一个类里面，方法名字相同，而参数不同。返回类型可以相同也可以不同。
 
+## HPC
 
+- **Tesla A100 is...2~3x** faster than the V100 using 32-bit precision.
+- SIMD stands for **Single Instruction, Multiple Data**. It is a type of parallel processing in Flynn’s taxonomy. [SIMD describes computers with multiple processing elements that perform the same operation on multiple data points simultaneously](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data)
 
 # AI
 
-RLHF就是基于人类反馈（Human Feedback）对语言模型进行强化学习（Reinforcement Learning），和一般的fine-tune过程乃至prompt tuning自然也不同。
-https://zhuanlan.zhihu.com/p/591474085
+- RLHF就是基于人类反馈（Human Feedback）对语言模型进行强化学习（Reinforcement Learning），和一般的fine-tune过程乃至prompt tuning自然也不同。
+  https://zhuanlan.zhihu.com/p/591474085
 
 
 

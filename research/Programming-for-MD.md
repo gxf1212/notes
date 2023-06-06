@@ -1,8 +1,8 @@
 # Programming for MD
 
-see [here](/techniques/Prepare-for-the-computer.md) for installation
+See [here](/techniques/Prepare-for-the-computer.md) for installation
 
-this page also includes usage of pymol, vmd, gmx, etc.
+This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about basic programming. Specific tools are included.
 
 # Bash (shell)
 
@@ -15,9 +15,19 @@ this page also includes usage of pymol, vmd, gmx, etc.
 
    解决：去unix编辑
 
-2. 
+2. 反斜杠后面紧跟回车，表示下一行是当前行的续行。
 
-3. 
+   but only valid in root!
+
+3. multiple paths:
+
+   ```shell
+   PATH='/path/one;path/two;...'
+   ```
+
+4. 
+
+5. 
 
 
 ## text processing
@@ -56,11 +66,11 @@ this page also includes usage of pymol, vmd, gmx, etc.
 
   > d: delimiter
 
-- b
+- 
 
-- c
+- 
 
-- d
+- 
 
 ### awk
 
@@ -167,6 +177,53 @@ examples
 
 3. 
 
+### Control
+
+#### for loop
+
+
+
+#### if statement
+
+1. shell-if表达式关于文件存在判断，变量比较判断用法
+
+   https://blog.csdn.net/khx0910/article/details/106383294/
+
+2. if 判断文件或目录是否存在
+
+   https://blog.csdn.net/m0_38039437/article/details/100160042
+
+
+#### arguments
+
+1. .sh file has arguments: https://www.runoob.com/linux/linux-shell-passing-arguments.html
+
+2. 默认参数(变量默认值) 比较low的方式
+
+   ```shell
+   if [ ! $1 ]; then
+       $1='default'
+   fi
+   ```
+
+3. 
+
+#### math
+
+1. perform string: [[]]
+
+   perform any math: (()) or between ``
+
+   `$( )` to store any outputed number in a variable
+
+2. keep the calculated result
+
+   ```shell
+   i=`expr ${f:0-1} + 1`
+   ```
+
+3. 
+
 ### other
 
 1. unify the format of file names
@@ -203,29 +260,10 @@ examples
 
    如何在Bash函数中添加默认参数？`${1:-.}`
 
-3. if 判断文件或目录是否存在
+3. 
 
-   https://blog.csdn.net/m0_38039437/article/details/100160042
+4. 
 
-4. keep the calculated result
-
-   ```shell
-   i=`expr ${f:0-1} + 1`
-   ```
-
-5. shell-if表达式关于文件存在判断，变量比较判断用法
-
-   https://blog.csdn.net/khx0910/article/details/106383294/
-
-6. 默认参数(变量默认值) 比较low的方式
-
-   ```shell
-   if [ ! $1 ]; then
-       $1='default'
-   fi
-   ```
-
-7. 
 
 ## examples
 
@@ -354,163 +392,7 @@ examples
 
 
 
-# Small molecule
 
-## RDkit
-
-
-
-### fundamental
-
-- show structure quickly (not in jupyter notebook): 
-
-  ```python
-  def see_mol(mol):
-      newmol = Chem.MolFromSmiles(Chem.MolToSmiles(mol))
-      Chem.Draw.MolToImage(newmol, size=(600, 600)).show()
-  ```
-
-  直接画三维的反倒看不清
-
-  RDKit isn't actually adding Hs here, it just recognizes that the P atoms have implicit Hs on them and then when drawing the molecule shows those implicit Hs.
-
-- 
-
-
-
-### MCS search
-
-让RDkit得到正确的手性信息：除了一一对应pybel和rdkit的原子，去改那个chiralTag，估计没啥好办法
-
-
-
-Assign bond order的过程，虽然可能改变smiles或者说这个原子上连了几个氢，但事实上在find mcS的过程中，还是用原来pdb的氢去align的
-
-I'm using a modified version of `AssignBondOrdersFromTemplate` that does not set the number of explicit hydrogens.
-
-
-
-https://www.rdkit.org/docs/source/rdkit.Chem.rdmolops.html
-
-various utilities
-
-
-
-future reference:
-
-- R里面的MCS search：https://academic.oup.com/bioinformatics/article/29/21/2792/195951
-
-
-
-[RDKit blog - 3D maximum common substructure](https://greglandrum.github.io/rdkit-blog/posts/2022-06-23-3d-mcs.html)
-
-http://rdkit.blogspot.com/2020/04/new-drawing-options-in-202003-release.html
-
-
-
-[add_formal_charges.ipynb (github.com)](https://gist.github.com/greglandrum/7f546d1e35c2df537c68a64d887793b8)
-
-
-
-
-
-### pdb file
-
-RDkit cannot read PDB files well...without connect, bond order info is lost. Assign from template? the molecule has to match exactly! This template (smiles) could come from `pybel.readfile`. 
-
-But no such way to assign chirality...
-
-读pdb啥手性都没有，sdf有些没必要的（磷），smiles甚至有氧。这些识别的不对，还不如pdb。同时其实sdf下所有氢被排除在common之外，并不清楚其和手性的关系，反正就是不行
-
-failed to read chirality even (with the help of openbabel)
-
-```python
-    def _get_rdk_mol(self, mol, format: str = 'smiles'):
-        """
-        Return: RDKit Mol (w/o H)
-        """
-        if format == 'pdb':
-            return Chem.rdmolfiles.MolFromPDBBlock(mol.write("pdb"))
-        elif format == 'smiles':
-            return Chem.rdmolfiles.MolFromSmiles(mol.write("smiles"))
-
-        # cp = subprocess.call(["obabel", lig.pdbfile+".pdb", "-osdf", '-O', lig.pdbfile+".sdf"],
-        #                      stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-        # rmol = Chem.MolFromPDBFile(lig.pdbfile+'.pdb.pdb', removeHs=False)
-        # pmol = pybel.readfile('pdb', lig.pdbfile+".pdb.pdb").__next__()  # only one file.
-        # template = AllChem.MolFromSmiles(pmol.write('smi').split('\t')[0])
-        # AllChem.AssignBondOrdersFromTemplate(template, rmol)
-        # Chem.MolToSmiles(rdmol)
-        # rdmol = Chem.MolFromMol2File()
-        # AllChem.AssignAtomChiralTagsFromStructure(rmol)
-        # AllChem.AssignAtomChiralTagsFromStructure(rmol)
-        # AllChem.AssignStereochemistryFrom3D(rmol)
-```
-
-
-
-
-
-## openbabel
-
-> - http://blog.molcalx.com.cn/2021/12/29/oechem-perceive-bond-orders.html
->
->   OEchem is a cool tool. Can we get a edu version? Most people don't have it? PubChem and CHARMM-GUI are using that.
->
-> - 
-
-### pybel and obabel
-
-https://openbabel.github.io/api/3.0/classOpenBabel_1_1OBAtom.shtml
-
-this might actually be cpp api, but it's callable in Python (boost package)
-
-pybel is written 10 years ago!! but it's just calling `OBMol.obconversion.ReadFile`
-
-so pybel is just a Python interface...
-
-但可以通过pybelMol.OBMol下OBMol的methods来操纵这个pybelMol的结构！！
-
-### read/write files
-
-- write files
-
-  ```python
-  with Chem.SDWriter(prefix+'.sdf') as w:
-      w.write(m)
-  ```
-
-- `obabel -isdf remtp.pdb.sdf -osmi` in cmd 等价于 `mol.write('smi')` in Python
-
-- 
-
-### file formats
-
-- smiles: Configuration at tetrahedral carbon is specified by @ or @@. Consider the four bonds in the order in which they appear, left to right, in the SMILES form. Looking toward the central carbon from the perspective of the first bond, the other three are either clockwise or counter-clockwise. These cases are indicated with @@ and @, respectively (because the @ symbol itself is a counter-clockwise spiral).
-
-  [obabel](https://openbabel.github.io/api/3.0/classOpenBabel_1_1OBTetrahedralStereo.shtml), [rdkit](https://www.rdkit.org/docs/source/rdkit.Chem.rdchem.html?highlight=rdkit%20chem%20rdchem%20chiraltype#rdkit.Chem.rdchem.ChiralType)
-
-- smiles: 小写是芳香，大写是脂肪；可以带电荷
-
-### examples
-
-detect triple bonds and remove dihedrals
-
-- obabel convert, to format
-- openbabel (python) read PDB file
-- get all bonds with bond order 3
-- get the two atoms, find through the index
-- your operations
-
-> https://open-babel.readthedocs.io/en/latest/UseTheLibrary/PythonDoc.html
->
-> http://openbabel.org/dev-api/classOpenBabel_1_1OBAtom.shtml
-
-
-
-### other
-
-https://pypi.org/project/chemdraw/
 
 # Fundamental Python
 
@@ -789,3 +671,228 @@ even `python xx.py -W` didn't work
   Don't name your .py file the same as any package you're going to import.
 
 - 
+
+# Regular expression
+
+These are mainly from coding of my VScode extension.
+
+
+
+# Small molecule
+
+## RDkit
+
+
+
+### fundamental
+
+- show structure quickly (not in jupyter notebook): 
+
+  ```python
+  def see_mol(mol):
+      newmol = Chem.MolFromSmiles(Chem.MolToSmiles(mol))
+      Chem.Draw.MolToImage(newmol, size=(600, 600)).show()
+  ```
+
+  直接画三维的反倒看不清
+
+  RDKit isn't actually adding Hs here, it just recognizes that the P atoms have implicit Hs on them and then when drawing the molecule shows those implicit Hs.
+
+- 
+
+
+
+### MCS search
+
+让RDkit得到正确的手性信息：除了一一对应pybel和rdkit的原子，去改那个chiralTag，估计没啥好办法
+
+
+
+Assign bond order的过程，虽然可能改变smiles或者说这个原子上连了几个氢，但事实上在find mcS的过程中，还是用原来pdb的氢去align的
+
+I'm using a modified version of `AssignBondOrdersFromTemplate` that does not set the number of explicit hydrogens.
+
+
+
+https://www.rdkit.org/docs/source/rdkit.Chem.rdmolops.html
+
+various utilities
+
+
+
+future reference:
+
+- R里面的MCS search：https://academic.oup.com/bioinformatics/article/29/21/2792/195951
+
+
+
+[RDKit blog - 3D maximum common substructure](https://greglandrum.github.io/rdkit-blog/posts/2022-06-23-3d-mcs.html)
+
+http://rdkit.blogspot.com/2020/04/new-drawing-options-in-202003-release.html
+
+
+
+[add_formal_charges.ipynb (github.com)](https://gist.github.com/greglandrum/7f546d1e35c2df537c68a64d887793b8)
+
+
+
+
+
+### pdb file
+
+RDkit cannot read PDB files well...without connect, bond order info is lost. Assign from template? the molecule has to match exactly! This template (smiles) could come from `pybel.readfile`. 
+
+But no such way to assign chirality...
+
+读pdb啥手性都没有，sdf有些没必要的（磷），smiles甚至有氧。这些识别的不对，还不如pdb。同时其实sdf下所有氢被排除在common之外，并不清楚其和手性的关系，反正就是不行
+
+failed to read chirality even (with the help of openbabel)
+
+```python
+    def _get_rdk_mol(self, mol, format: str = 'smiles'):
+        """
+        Return: RDKit Mol (w/o H)
+        """
+        if format == 'pdb':
+            return Chem.rdmolfiles.MolFromPDBBlock(mol.write("pdb"))
+        elif format == 'smiles':
+            return Chem.rdmolfiles.MolFromSmiles(mol.write("smiles"))
+
+        # cp = subprocess.call(["obabel", lig.pdbfile+".pdb", "-osdf", '-O', lig.pdbfile+".sdf"],
+        #                      stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+        # rmol = Chem.MolFromPDBFile(lig.pdbfile+'.pdb.pdb', removeHs=False)
+        # pmol = pybel.readfile('pdb', lig.pdbfile+".pdb.pdb").__next__()  # only one file.
+        # template = AllChem.MolFromSmiles(pmol.write('smi').split('\t')[0])
+        # AllChem.AssignBondOrdersFromTemplate(template, rmol)
+        # Chem.MolToSmiles(rdmol)
+        # rdmol = Chem.MolFromMol2File()
+        # AllChem.AssignAtomChiralTagsFromStructure(rmol)
+        # AllChem.AssignAtomChiralTagsFromStructure(rmol)
+        # AllChem.AssignStereochemistryFrom3D(rmol)
+```
+
+
+
+
+
+## openbabel
+
+> - http://blog.molcalx.com.cn/2021/12/29/oechem-perceive-bond-orders.html
+>
+>   OEchem is a cool tool. Can we get a edu version? Most people don't have it? PubChem and CHARMM-GUI are using that.
+>
+> - 
+
+### pybel and obabel
+
+usage
+
+```shell
+import openbabel
+import pybel
+mymol = pybel.readstring("smi", "CCCC")
+```
+
+conda installed openbabel contains the cmd command `obabel`
+
+https://openbabel.github.io/api/3.0/classOpenBabel_1_1OBAtom.shtml
+
+this might actually be cpp api, but it's callable in Python (boost package)
+
+pybel is written 10 years ago!! but it's just calling `OBMol.obconversion.ReadFile`
+
+so pybel is just a Python interface...
+
+但可以通过pybelMol.OBMol下OBMol的methods来操纵这个pybelMol的结构！！
+
+### read/write files
+
+- write files
+
+  ```python
+  with Chem.SDWriter(prefix+'.sdf') as w:
+      w.write(m)
+  ```
+
+- `obabel -isdf remtp.pdb.sdf -osmi` in cmd 等价于 `mol.write('smi')` in Python
+
+- 
+
+### file formats
+
+- smiles: Configuration at tetrahedral carbon is specified by @ or @@. Consider the four bonds in the order in which they appear, left to right, in the SMILES form. Looking toward the central carbon from the perspective of the first bond, the other three are either clockwise or counter-clockwise. These cases are indicated with @@ and @, respectively (because the @ symbol itself is a counter-clockwise spiral).
+
+  [obabel](https://openbabel.github.io/api/3.0/classOpenBabel_1_1OBTetrahedralStereo.shtml), [rdkit](https://www.rdkit.org/docs/source/rdkit.Chem.rdchem.html?highlight=rdkit%20chem%20rdchem%20chiraltype#rdkit.Chem.rdchem.ChiralType)
+
+- smiles: 小写是芳香，大写是脂肪；可以带电荷
+
+### examples
+
+detect triple bonds and remove dihedrals
+
+- obabel convert, to format
+- openbabel (python) read PDB file
+- get all bonds with bond order 3
+- get the two atoms, find through the index
+- your operations
+
+> https://open-babel.readthedocs.io/en/latest/UseTheLibrary/PythonDoc.html
+>
+> http://openbabel.org/dev-api/classOpenBabel_1_1OBAtom.shtml
+
+
+
+### other
+
+https://pypi.org/project/chemdraw/
+
+
+
+# Modeling and analysis
+
+## ParmEd
+
+In ParmEd, the `idx` attribute of a `Residue` object represents the index of the residue in the `Structure` object that contains it. This attribute is automatically set and updated by ParmEd and should not be changed manually.
+
+Though, we can modify residue numbers for Amber files
+
+```python
+# both .gro and .top
+# python ../convert_amber2gmx_via_parmed.py pro 688
+
+import parmed as pmd 
+import sys
+prefix = sys.argv[1]
+offset = int(sys.argv[2])
+amber = pmd.load_file(prefix+'.prmtop', prefix+'.inpcrd')
+
+for residue in amber.residues:
+    _ = residue.idx
+    residue._idx += offset
+    residue.number += offset
+# 'all': maintain order. Option combine is from the following two functions, under parmed/gromacs/gromacstop/gro.py
+# pmd.gromacs.GromacsGroFile.write(amber, prefix+'.gro', combine='all')
+# pmd.gromacs.GromacsTopologyFile.from_structure(amber).write(prefix+'.top', combine='all')
+amber.save(prefix+'.top', overwrite=True, combine='all')
+amber.save(prefix+'.gro', overwrite=True, combine='all')
+```
+
+> call .idx before assigning value for ._idx, works.....removing the second line just causes no edit, and residue.idx = xx is not allowed
+> remember that _a is not a private variable...
+>
+> https://parmed.github.io/ParmEd/html/_modules/parmed/gromacs/gromacstop.html#GromacsTopologyFile.from_structure
+>
+> https://parmed.github.io/ParmEd/html/_modules/parmed/topologyobjects.html#Residue
+
+
+
+but not editable for gmx files?
+
+
+
+## MDAnalysis
+
+
+
+
+

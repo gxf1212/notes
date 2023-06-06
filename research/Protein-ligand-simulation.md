@@ -4,7 +4,9 @@ Mainly from UROPS project and FYP experiences. May also include some general MD 
 
 This page includes general results, not project-specific details.
 
-## Gromacs MD simulation
+# Gromacs MD simulation
+
+## UROPS worflow (Amber+GAFF)
 
 - https://manual.gromacs.org/archive/5.0.4/online/gro.html gro file format
 
@@ -929,6 +931,8 @@ parmchk2 -i lig.mol2 -f mol2 -o lig.frcmod
 
 ### MD with one ligand
 
+#### Workflow
+
 https://jerkwin.github.io/GMX/GMXtut-5/#%E6%A6%82%E8%BF%B0
 
 you may use my scripts: [download here](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/utils/gmx-md-scripts.zip), but refer to Jerkwin tutorial for details; or modify from his.
@@ -1849,7 +1853,7 @@ input: .tpr, .xtc, .ndx
 
 
 
-### Debug
+## Debug
 
 1. system explosion (blowing up), too large force: [from Jerkwin](https://jerkwin.github.io/2016/12/28/GROMACS%E6%9C%AF%E8%AF%AD-%E7%88%86%E7%A0%B4(Blowing_Up)/)
 
@@ -2123,6 +2127,10 @@ combine the hybrid ligand with protein
 
 - 采样好的话，是包含熵的，且是显式溶剂，一般要比对接类的好
 
+- free energy methods rely on one basic idea: to force the system to where it doesn’t want to be, and then measure by how much it doesn’t want to be there. In potential of mean force, we apply mechanical force to decouple ligand and receptor. In free energy perturbation methods, we transform the system through a set of unphysical (alchemical) states, that connect two physical states we are interested in.
+
+  [How to Calculate the Free Energy of Methane in Water Using Gromacs with Cloud HPC](https://www.cloudam.io/post/how-to-calculate-the-free-energy-of-methane-in-water-using-gromacs-with-cloud-hpc)
+
 ### find the starting structure
 
 - 跑MD找构象：
@@ -2349,7 +2357,7 @@ bug：Chemical Science那篇文章，无法根据缩略版的条目搜到文章�
 
 
 
-# visualize protein-ligand
+# Visualize protein-ligand
 
 ## 2D
 
@@ -2391,7 +2399,7 @@ Commerical:
 
 
 
-[Explore Ligand Interactions in 3D](https://www.rcsb.org/news/feature/57e30fd490f5613003407f09): only for pdb structures, will deprecate in the future....
+[Explore Ligand Interactions in 3D](https://www.rcsb.org/news/feature/57e30fd490f5613003407f09): NGL viewer is great but please support user's own pdb files, or only for pdb structures, will deprecate in the future....
 
 <img src="https://cdn.rcsb.org/news/2016/ligand-interaction.png" alt="RCSB PDB News Image" style="zoom: 67%;" />
 
@@ -2405,7 +2413,7 @@ Mol* viewer. I don't like it.
 
 
 
-[Molsoft L.L.C.: ICM-Browser](https://www.molsoft.com/icm_browser.html)
+[Molsoft L.L.C.: ICM-Browser](https://www.molsoft.com/icm_browser.html): commerical
 
 
 

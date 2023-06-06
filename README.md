@@ -26,7 +26,7 @@ My Bilibili channel: [东山月光下](https://space.bilibili.com/441196634). Fr
 
 ## TODO and plans
 
-- [ ] RENAME MD TO RESEARCH
+- [ ] remodel the notes
   - [ ] a recent task is: put contents considering common tool usage in UROPS and FYP.md to other md files (programming, tools) and FEbuilder document. Those project documents are going to record the workflow of a specific task (virtual screening, FEP, etc.).
 - [ ] **beautify the theme** (sidebar?), I'm lazy...
 - [ ] try interesting plugins

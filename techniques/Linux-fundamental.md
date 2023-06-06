@@ -51,6 +51,14 @@ This is a record of 折腾ing the system, in order not to forget.
 
 13. 标准库的大部分函数通常放在文件 libc.a 中（文件名后缀.a代表“achieve”，译为“获取”），或者放在用于共享的动态链接文件 libc.so 中（文件名后缀.so代表“share object”，译为“共享对象”）。这些链接库一般位于 /lib/ 或 /usr/lib/，或者位于 GCC 默认搜索的其他目录。
 
+14. under root, no need to add `sudo`
+
+15. date: https://cloud.tencent.com/developer/article/1441802
+
+16. 
+
+17. what if message is too long? add `|more` https://blog.csdn.net/weixin_34293911/article/details/86473042
+
 
 
 ## Operations
@@ -115,6 +123,16 @@ This is a record of 折腾ing the system, in order not to forget.
 
 9. 查看当前系统的glibc版本: `/lib64/libc.so.6`
 
+   https://lindevs.com/check-glibc-version-in-linux: `ldd --version`
+
+10. watch temperature with `lm-sensor` https://zhuanlan.zhihu.com/p/143123436
+
+    ```shell
+    sensors-detect # root
+    ```
+
+11. 
+
 
 #### monitor resource usage
 
@@ -134,7 +152,7 @@ This is a record of 折腾ing the system, in order not to forget.
 2. Linux中/var空间不足的解决办法 https://blog.csdn.net/hqzhon/article/details/49027351
 
    not use this partition anymore
-   
+
 3. on disk check
 
    > see below debugging 22.1.14
@@ -143,7 +161,11 @@ This is a record of 折腾ing the system, in order not to forget.
 
 5. [解决类似umount target is busy挂载盘卸载不掉问题 - Adrian·Ding - 博客园](https://www.cnblogs.com/ding2016/p/9605526.html)
 
-#### system settings
+6. directory of U disk: `/run/media/user/u disk name`
+
+7. 
+
+#### system/user settings
 
 1. 字体缺失（WPS等）
 
@@ -194,9 +216,15 @@ This is a record of 折腾ing the system, in order not to forget.
 
 5. LD_LIBRARY_PATH不能以终结符（冒号）作为开始和最后一个字符，不能有2个终结符连在一起，所以修改下LD_LIBRARY_PATH即可
 
-6. `sudo gedit /etc/motd`: message at login
+6. 养成--prefix的好习惯
 
-7. add user
+7. do not forget export $PATH:, or 
+
+   https://blog.csdn.net/xiaoshunzi111/article/details/50623078
+
+8. `sudo gedit /etc/motd`: message at login
+
+9. add user
 
    `adduser` or `useradd`. we'd better explicitly provide parameters (home dir missing: cannot login; bash missing: cannot use bash?)
 
@@ -204,7 +232,17 @@ This is a record of 折腾ing the system, in order not to forget.
    adduser -m username -d /home/user -s bash
    ```
 
-8. `/etc/bash.bashrc` or `/etc/bashrc`: system-wide bashrc file for bash shells. This is for ALL USERS!
+10. `/etc/bash.bashrc` or `/etc/bashrc`: system-wide bashrc file for bash shells. This is for ALL USERS!
+
+11. change user name
+
+    https://blog.csdn.net/lanxuezaipiao/article/details/43153367
+
+    log in with another user (or root), execute the commands, change your .bashrc and so on manually
+
+12. give user sudo privilege
+
+    https://blog.csdn.net/Dream_angel_Z/article/details/45841109
 
 #### input method installation
 
@@ -670,6 +708,15 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
 
 
 
+```shell
+tar xf xx.tar.gz # or:
+tar -zxvf xx.tar.gz                       
+```
+
+rather than xvrf...
+
+
+
 #### disk
 
 1. 自我检测分析与报告技术smart: https://www.cnblogs.com/xqzt/p/5512075.html
@@ -686,18 +733,25 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
 
 2. 
 
-### desktop manager
+### desktop managers
 
-#### K desktop specific settings (not using)
+#### KDE
 
 1. fonts
+
 2. settings manager 
    - lightdm desktop manager
      - taskbar fonts
    - appearance
      - desktop icon and font
+   
 3. add "show desktop": http://www.linuxdiyf.com/view_134588.html
-4. sf
+
+   activate Meta+D to show desktop (system settings--shortcuts--global--Kwin)
+
+4. https://os.51cto.com/art/200902/109883.htm
+
+   如何在KDE桌面添加启动程序
 
 #### GNOME
 
@@ -763,13 +817,7 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
 
 9. 
 
-### customs
 
-1. to denote path, separate the sentence by / like:
-   
-   "/path/to/libfftw3f"
-
-2. 
 
 > #### change software source
 > 
@@ -827,91 +875,15 @@ tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
 > https://packages.ubuntu.com
 > https://packages.debian.org
 
+
+
+
+
 ## Specific commands
 
 ### installation
 
-#### dpkg
-
-install with .deb
-
-just **double click it** （不能指定目录），进入“软件安装”
-
-> 命令行法：直接解压到当前目录，然后配置环境变量，即可启动运行程序；
->
-> ```shell
-> dpkg -x same.deb 
-> ```
->
->  当然，还有另外一个命令，安装到指定目录：
->
-> ```shell
-> dpkg -i --instdir=/dest/dir/path some.deb # under root
-> ```
->
-
-关于dpkg：https://blog.csdn.net/weixin_30394633/article/details/98926820
-
-- 常用
-  
-  ```shell
-  dpkg -i xx.deb
-  dpkg --info xx.deb # 查看信息，包括软件包名，卸载时用！we should remember some of them
-  dpkg -r xx.deb
-  dpkg -P xx.deb # 卸载
-  dpkg --unpack *.deb # 解压？
-  ```
-  
-- 查看安装包状态：-l
-  
-  ```
-  期望状态=未知(u)/安装(i)/删除(r)/清除(p)/保持(h)
-  | 状态=未安装(n)/已安装(i)/仅存配置(c)/仅解压缩(U)/配置失败(F)/不完全安装(H)/触发器等待(W)/触发器未决(T)
-  |/ 错误?=(无)/须重装(R) (状态，错误：大写=故障)
-  ```
-  
-  https://zhuanlan.zhihu.com/p/57472336
-  
-  https://www.jianshu.com/p/3bbd0cf2debe 也许能删
-  
-  ```shell
-  dpkg -l | grep R
-  ```
-  
-  found: real-vnc-server
-
-- 查看应用程序安装路径
-  
-  ```shell
-  dpkg -L sunloginclient
-  ```
-
-- 安装新版本，直接dpkg新的包，就能覆盖安装
-
-- Re: dpkg进程卡住，而且杀不死。解决方法：输入以下命令
-
-  ```shell
-  sudo rm /var/cache/apt/archives/lock
-  sudo rm /var/lib/dpkg/lock
-  sudo apt-get update
-  sudo dpkg —configure -a
-  ```
-
-  问题就解决了！
-
-- 
-
-  
-
-debug
-
-- 死机 when installing .deb, reboot. https://mlog.club/article/3533423
-
-  just fsck your root
-
-  
-
-#### apt-get
+#### apt
 
 https://blog.csdn.net/liudsl/article/details/79200134
 
@@ -974,6 +946,25 @@ apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用
 
   https://suay.site/?p=526
 
+#### yum
+
+similar....
+
+1. use yum and dnf in user (not root):
+
+   ```shell
+   sudo yum install xx
+   ```
+
+2. yum
+
+   ```shell
+   yum -y update
+   yum -y upgrade
+   ```
+
+3. 
+
 #### other during installation
 
 1. run .sh files:
@@ -1017,13 +1008,107 @@ apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用
    sudo apt install gnome-software-plugin-flatpak # GUI
    ```
 
-5. 
+   https://docs.flatpak.org/en/latest/using-flatpak.html
 
-6. check version: `软件名 -version`
+   install with flatpak: add a remote, download a flatpakref file, and install
 
-7. under root, no need to add `sudo`
+5. check version: `软件名 -version`
 
-8. wget失败：拒绝连接 https://www.jianshu.com/p/cba95f62dc35  ??
+6. 
+
+7. wget失败：拒绝连接 https://www.jianshu.com/p/cba95f62dc35  ??
+
+#### dpkg
+
+install with .deb
+
+just **double click it** （不能指定目录），进入“软件安装”
+
+> 命令行法：直接解压到当前目录，然后配置环境变量，即可启动运行程序；
+>
+> ```shell
+> dpkg -x same.deb 
+> ```
+>
+> 当然，还有另外一个命令，安装到指定目录：
+>
+> ```shell
+> dpkg -i --instdir=/dest/dir/path some.deb # under root
+> ```
+
+关于dpkg：https://blog.csdn.net/weixin_30394633/article/details/98926820
+
+- 常用
+
+  ```shell
+  dpkg -i xx.deb
+  dpkg --info xx.deb # 查看信息，包括软件包名，卸载时用！we should remember some of them
+  dpkg -r xx.deb
+  dpkg -P xx.deb # 卸载
+  dpkg --unpack *.deb # 解压？
+  ```
+
+- 查看安装包状态：-l
+
+  ```
+  期望状态=未知(u)/安装(i)/删除(r)/清除(p)/保持(h)
+  | 状态=未安装(n)/已安装(i)/仅存配置(c)/仅解压缩(U)/配置失败(F)/不完全安装(H)/触发器等待(W)/触发器未决(T)
+  |/ 错误?=(无)/须重装(R) (状态，错误：大写=故障)
+  ```
+
+  https://zhuanlan.zhihu.com/p/57472336
+
+  https://www.jianshu.com/p/3bbd0cf2debe 也许能删
+
+  ```shell
+  dpkg -l | grep R
+  ```
+
+  found: real-vnc-server
+
+- 查看应用程序安装路径
+
+  ```shell
+  dpkg -L sunloginclient
+  ```
+
+- 安装新版本，直接dpkg新的包，就能覆盖安装
+
+- Re: dpkg进程卡住，而且杀不死。解决方法：输入以下命令
+
+  ```shell
+  sudo rm /var/cache/apt/archives/lock
+  sudo rm /var/lib/dpkg/lock
+  sudo apt-get update
+  sudo dpkg —configure -a
+  ```
+
+  问题就解决了！
+
+- 
+
+  
+
+debug
+
+- 死机 when installing .deb, reboot. https://mlog.club/article/3533423
+
+  just fsck your root
+
+  
+
+#### rpm
+
+in RedHat, use rpm, no deb:
+
+```shell
+rpm -Uhv package.rpm # install
+rpm -Uhv package.rpm --nodeps --force # force to install
+```
+
+https://docs.fedoraproject.org/ro/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch02s03.html
+
+but you can still double click!!
 
 #### npm
 
@@ -1176,7 +1261,49 @@ This will print the sizes of the directories in the current directory and its su
 
 #### tree
 
+```shell
+tree .
+```
 
+
+
+## When system halted
+
+1. do not double click .sdf file with multiple conformations...it occupies all memory..
+
+2. 1st solution
+
+   1. press ctrl+alt+F1~6 to enter tty. 
+      - F7 or F8: exit? not useful. maybe directly `reboot`..
+   2. use `top` to see threads. 
+      - top: https://www.cnblogs.com/ggjucheng/archive/2012/01/08/2316399.html
+   3. `kill id` to release.
+
+3. 2nd solution
+
+   https://blog.csdn.net/openswc/article/details/9105071
+
+   search SysRq fedora
+
+   I've tried https://fedoraproject.org/wiki/QA/Sysrq#How_do_I_enable_the_magic_SysRq_key.3F, don't know if it's applicable on this computer
+
+4. tree: show directory as tree
+
+   https://blog.csdn.net/xuehuafeiwu123/article/details/53817161
+
+5. 
+
+### system stuck
+
+http://www.mamicode.com/info-detail-2913916.html
+
+also stop, disable .....but only under user.....
+
+https://blog.csdn.net/xinxinqqt/article/details/44784195
+
+https://blog.csdn.net/fryingpan/article/details/42641999
+
+might because handling too many files in a folder...?
 
 # Installation and softwares
 
@@ -1439,7 +1566,7 @@ but the following still needs re-configure...
   > - snap不好
   > - ……
 
-## fundamental softwares
+## Fundamental softwares
 
   1. VScode [installation](/techniques/Prepare-for-the-computer?id=text-editor)
 
@@ -1496,7 +1623,7 @@ but the following still needs re-configure...
 > 
 >     - 软件商店
 
-## DL environment
+## CUDA environment
 
     1. `nvidia smi` shows cuda version 11.1, driver is 455.45.01. We should not use an open source driver. check additional driver from 'start'.
     2. nivida.cn also shows 455.45, so do I need to install the driver? Now no.
@@ -2453,8 +2580,6 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 
 
-
-
 # Windows notes
 
 ## General
@@ -2548,55 +2673,9 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 ## iOS
 
-
-
 苹果手机提示icloud储存空间不足
 首先，在设置中，点击最上面的选项进入自己的AppleID的设置。 点击管理储存空间;选择你不想用的那部分，点击打开，选择【停用和删除】即可。
 要不就停用iCloud（不推荐），要不就买。没办法
-
-
-
-# Other---the first time I install Ubuntu
-
-not helpful now
-
-> 既然可以制定路径，那为啥不新建一个文件夹呢？以后还是直接在programfiles吧
-
-## thinking
-
-### todo
-
-1. language!!
-2. how to directly operate files in that mechanical hard disk...rather than in command line
-3. anaconda
-   2. cuda, cudnn
-   3. gromacs, ...
-4. connection
-   1. Linux账户和密码，访问密码，SSH等
-5. gnome desktop, and beautify kde
-6. 
-
-### extra things I did
-
-- installed `build-essential`, which helps compile c and c++ (gcc?..) 
-  
-  https://blog.csdn.net/yzpbright/article/details/81515459
-
-- installed `fcitx-libpinyin`
-
-- failed to install `nextstrain`
-
-### my objective
-
-don't do too much on this machine, like writing LaTeX...
-
-just be a helper calculator, and a platform to learn Linux. (zheteng is allowed)
-
-(dad could use it too, but keep good organization)
-
-## Other
-
-
 
 
 

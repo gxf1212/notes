@@ -6,6 +6,8 @@ this page also includes usage of pymol, vmd, gmx, etc.
 
 # Visualization & Modeling
 
+This part will include fundamentals of the tools as well as code for visualization examples. No specific pages for visualization and analysis alone for now. Maybe in the future.
+
 ## Basics
 
 By default
@@ -155,17 +157,23 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 ### cmd & API
 
-1. `cd directory`
+1. pymol save session as a script: impossible now. write `.pml` file yourself and 
 
-2. delete命令！
+   ```shell
+   pymol xx.pml
+   ```
 
-3. must use cmd to align small molecules
+2. `cd directory`
+
+3. delete命令！
+
+4. must use cmd to align small molecules
 
    ```
    align mol1,mol2
    ```
 
-4. api: https://pymol.org/dokuwiki/doku.php?id=api:cmd:alpha  https://pymol.org/pymol-command-ref.html. for other commands we have to view documentation in pycharm
+5. api: https://pymol.org/dokuwiki/doku.php?id=api:cmd:alpha  https://pymol.org/pymol-command-ref.html. for other commands we have to view documentation in pycharm
 
 
 
@@ -379,7 +387,7 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
    rmsdtt::doRmsd
    ```
 
-10. 
+10. Distance, angle, dihedral measurements: To begin a measurement, use the right-mouse button (or the left-mouse button and the Control key/Control key and mouse click) to select 1, 2, 3 or 4 atoms. Complete the measurement by selecting the final atom twice. Depending on how many atoms are selected, the distance (2 atoms), the angle (3 atoms) or the dihedral angle (4 atoms) is measured and displayed. Deselect all atoms with a right-click in empty space. To remove a measurement, re-select all involved atoms and then the last atom twice in a row.
 
 
 
@@ -527,7 +535,7 @@ This section is about basics and common usage. For more, see other pages about s
 
 2. In gromacs, chain names are lost?!
 
-## Common commands
+## Modeling
 
 ### pdb2gmx
 
@@ -567,7 +575,11 @@ type 'h' for help...
 > 选区用于选择原子/分子/残基以进行后续分析. 与传统索引(index)文件不同, 选区可以是动态的, 即, 可以对轨迹中的不同帧选择不同的原子. GROMACS手册的第八章《分析》中有一小节对选区进行了简短的介绍, 并给出了一些建议. 当你初次接触选区概念时, 这些建议可帮助你熟悉它. 下面将就选区的技术细节和语法方面给出更加详细的说明.
 > [在命令行中指定选区](https://jerkwin.github.io/GMX/GMXsel/#在命令行中指定选区)
 
-## .mdp options and running
+## minimization
+
+- For efficient BFGS minimization, use switch/shift/pme instead of cut-off.
+
+## mdrun and .mdp options
 
 ### vdw
 
@@ -649,11 +661,42 @@ vdw and elec, common cutoff/switchdist
 
 
 
-
 ## debug
 
-https://gromacs.org-gmx-users.maillist.sys.kth.narkive.com/J6lqsB6H/gmx-users-increasing-cut-off-and-pme-grid-spacing
-box too big!
+### general and notes
+
+- https://gromacs.org-gmx-users.maillist.sys.kth.narkive.com/J6lqsB6H/gmx-users-increasing-cut-off-and-pme-grid-spacing
+  box too big!
+
+- 
+
+- does not matter for ions?
+
+  ```
+  NOTE 1 [file pro.top, line 195053]:
+    In moleculetype 'system' 112 atoms are not bound by a potential or
+    constraint to any other atom in the same moleculetype. Although
+    technically this might not cause issues in a simulation, this often means
+    that the user forgot to add a bond/potential/constraint or put multiple
+    molecules in the same moleculetype definition by mistake. Run with -v to
+    get information for each atom.
+  ```
+
+  [Atoms are not bound by a potential or constraint to any other atom in the same moleculetype - User discussions - GROMACS forums (bioexcel.eu)](https://gromacs.bioexcel.eu/t/atoms-are-not-bound-by-a-potential-or-constraint-to-any-other-atom-in-the-same-moleculetype/3510/2)
+
+  It depends on whether the force field model you’ve chosen can maintain appropriate Zn2+ coordination relying solely on nonbonded interactions. This is not often the case with simple additive, monoatomic representations of these species.
+
+- I don't know....
+
+  ```
+  With PME there is a minor soft core effect present at the cut-off,
+    proportional to (LJsigma/rcoulomb)^6. This could have a minor effect on
+    energy conservation, but usually other effects dominate. With a common
+    sigma value of 0.34 nm the fraction of the particle-particle potential at
+    the cut-off at lambda=0.5 is around 2.2e-05, while ewald-rtol is 1.0e-06.
+  ```
+
+- 
 
 
 
@@ -663,7 +706,11 @@ box too big!
 
 and VMD and CHARMM FF? I don't feel too much to say since they are just responsible for running MD (refer to pmemd as Amber)... so just put (common/fundamental) debug experiences here (no system-specific debug?...).
 
+Maybe copying some fundamentals of NAMD (file format) from FYP-notes.
+
 ## FF and MD engine
+
+This part is about general MD and comparison between them
 
 - [AMBER、GROMOS、OPLS、CHARMM最新版本的GROMACS力场包 - 分子模拟 (Molecular Modeling) - 计算化学公社](http://bbs.keinsci.com/thread-15094-1-1.html)
 
@@ -684,7 +731,15 @@ and VMD and CHARMM FF? I don't feel too much to say since they are just responsi
 
 
 
-## NAMD Debug
+## NAMD 
+
+### Basics
+
+
+
+
+
+### Debug
 
 - FATAL ERROR: Atom 9 has bad hydrogen group size.  Check for duplicate bonds. 居然是vmd1.9.3的锅
 
@@ -726,11 +781,19 @@ and VMD and CHARMM FF? I don't feel too much to say since they are just responsi
 
 
 
-## Amber MD debug
+## Amber 
+
+### Basics
+
+[prmtop.pdf](https://ambermd.org/prmtop.pdf). only after .prmtop file is read into parmed do the residues have indices....
 
 
 
+sander and pmemd are both MD engines.
 
+
+
+### MD debug
 
 IEEE underflow
 
