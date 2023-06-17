@@ -521,6 +521,140 @@ like DSV
 
 
 
+# Molecular dynamics
+
+Maybe copying some fundamentals of NAMD (file format) from FYP-notes.
+
+This part is about general MD and comparison between common MD engines. These contents are similar to [academic notes](academic-notes.md). We put it here temporarily.
+
+## Force field
+
+- [AMBER、GROMOS、OPLS、CHARMM最新版本的GROMACS力场包 - 分子模拟 (Molecular Modeling) - 计算化学公社](http://bbs.keinsci.com/thread-15094-1-1.html)
+
+  amber14sb_OL15.ff_corrected-Na-cation-params.tar.gz
+
+  possible problem:
+
+  - [grompp 出現報錯：No default Improper Dih. types - 分子模拟 (Molecular Modeling) - 计算化学公社](http://bbs.keinsci.com/thread-25936-1-1.html)
+  - [amber14SB力场报错“No default Improper Dih. types”的解决办法](https://zhuanlan.zhihu.com/p/389786141)
+  - or [Fixing bugs in FF14SB port for Gromacs](http://zhenglz.blogspot.com/2017/05/fixing-bugs-in-ff14sb-port-for-gromacs.html)
+
+- CHAMBER: Comprehensive support for CHARMM force fields within the AMBER software
+
+  CHAMBER is part of ParmEd, and parmed is part of AmberTools
+
+- 
+  
+- 
+
+
+
+
+
+- vmd自带的力场就是把TIP3的两个氢之间的bond注释掉
+- CgenFF: epsilon F<Cl<Br<S
+- For C=O and COO-, Amber14 is a little more polarized than CHARMM36.
+
+rename O to OH2 and HOH to TIP3 if you are using NAMD/CHARMM
+many other more H names in Amber/PDB cannot be renamed easily...
+
+Maybe remove all hydrogens and let tleap/vmd fix missing H.
+
+
+
+### LJ parameters
+
+namd用的是和tleap一样的kcal和Rmin
+
+
+
+Amber FF (tleap)，nonbon板块的距离（$r_e$的一半，Å）*2除以$\sqrt[6]{2}$等于gromacs的top文件的距离（σ, nm）
+能量都是ε，Amber单位是kcal，top文件单位是kJ
+
+
+
+tleap
+给的是
+
+
+
+|                   | distance | unit | $\varepsilon$ unit |
+| ----------------- | -------- | ---- | ------------------ |
+| Gromacs .top file |          |      | kJ/mol             |
+| tleap             | Rmin     |      | kcal/mol           |
+| CHARMM .rtf/psf   |          |      |                    |
+|                   |          |      |                    |
+|                   |          |      |                    |
+
+
+
+Amber parmed check
+$$
+C_6=4\varepsilon\sigma^6\\
+C_{12}=4\varepsilon\sigma^{12}
+$$
+
+
+
+
+
+
+## Algorithm reading
+
+### Basic
+
+[分子动力学模拟为什么会有先NVT后NVE？](http://bbs.keinsci.com/thread-9699-1-1.html)
+
+
+
+### Control
+
+[center-of-mass-motion](https://manual.gromacs.org/current/reference-manual/algorithms/molecular-dynamics.html#center-of-mass-motion)
+
+we may usually see
+
+```
+Removing center of mass motion in the presence of position restraints
+  might cause artifacts. When you are using position restraints to
+  equilibrate a macro-molecule, the artifacts are usually negligible.
+```
+
+
+
+
+
+### Free energy calculations
+
+[Free energy calculations - GROMACS documentation](https://manual.gromacs.org/documentation/current/reference-manual/algorithms/free-energy-calculations.html)
+
+In GROMACS, FEP calculations are performed by running a series of simulations at different values of the coupling parameter λ, which controls the transformation between the two states. During each simulation, the system is sampled at a fixed value of λ, and the energies of the neighboring states are calculated. [These energies are then used to estimate the free energy difference between the two states using techniques such as Bennett acceptance ratio or thermodynamic integration](https://manual.gromacs.org/current/reference-manual/special/free-energy-implementation.html).
+
+In NAMD, FEP calculations can be performed using either the “alchemical” or “slow growth” methods. In the alchemical method, the system is gradually transformed from one state to another by changing the value of λ during the simulation. [In each window, the value of λ is gradually changed from one value to another, and the free energy difference is estimated using techniques such as thermodynamic integration](https://www.ks.uiuc.edu/Research/namd/2.13/features.html).
+
+> it seems right....and namd doesn't sample the last window.
+
+
+
+- [Free energy interactions - GROMACS documentation](https://manual.gromacs.org/documentation/current/reference-manual/functions/free-energy-interactions.html)
+
+  Gromacs perturbs every parameter.
+
+- We don't need to define `couple-moltype`, `couple-lambda0`, `couple-lambda1`, and `couple-intramol` if we've defined B state. The couple parameters are for solvation free-energies.
+
+- it is simpler to do everything with a single lambda setup without the lambda for interaction types.
+
+- Dummy atoms have epsilon and q both in zero, so no worry
+
+
+
+## Other
+
+
+
+
+
+
+
 # Gromacs
 
 This section is about basics and common usage. For more, see other pages about specific systems and applications.
@@ -705,29 +839,6 @@ vdw and elec, common cutoff/switchdist
 # NAMD and Amber
 
 and VMD and CHARMM FF? I don't feel too much to say since they are just responsible for running MD (refer to pmemd as Amber)... so just put (common/fundamental) debug experiences here (no system-specific debug?...).
-
-Maybe copying some fundamentals of NAMD (file format) from FYP-notes.
-
-## FF and MD engine
-
-This part is about general MD and comparison between them
-
-- [AMBER、GROMOS、OPLS、CHARMM最新版本的GROMACS力场包 - 分子模拟 (Molecular Modeling) - 计算化学公社](http://bbs.keinsci.com/thread-15094-1-1.html)
-
-  amber14sb_OL15.ff_corrected-Na-cation-params.tar.gz
-
-  possible problem:
-
-  - [grompp 出現報錯：No default Improper Dih. types - 分子模拟 (Molecular Modeling) - 计算化学公社](http://bbs.keinsci.com/thread-25936-1-1.html)
-  - [amber14SB力场报错“No default Improper Dih. types”的解决办法](https://zhuanlan.zhihu.com/p/389786141)
-  - or [Fixing bugs in FF14SB port for Gromacs](http://zhenglz.blogspot.com/2017/05/fixing-bugs-in-ff14sb-port-for-gromacs.html)
-
-- CHAMBER: Comprehensive support for CHARMM force fields within the AMBER software
-
-  CHAMBER is part of ParmEd, and parmed is part of AmberTools
-
-- Amber FF (tleap)，nonbon板块的距离（$r_e$的一半，Å）*2除以$\sqrt[6]{2}$等于gromacs的top文件的距离（σ, nm）
-  能量都是ε，Amber单位是kcal，top文件单位是kJ
 
 
 

@@ -254,11 +254,27 @@ https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect�
 
 ### tools
 
+#### connection: ssh key
+
+重要的经验
+
+- [传输文件的四种方式](https://blog.csdn.net/qw_xingzhe/article/details/80167888)
+
+- 免密码登录
+
+  ```
+  ssh-keygen -t rsa -P ""
+  ```
+
+- Linux远程执行命令：`sh [options] [user@]host [command]`，如`ssh -p 606 gxf1212@10.77.14.186 "ls $workdir/prod"`
+
 #### ssh and scp
 
 under Win, Xshell+Xftp look very good. Dragging and clicking a visualized folder will be effcient
 
 finalshell does not look so pretty though we can just use it. cannot update
+
+[Linux使用scp拷贝多个文件到远程服务器](https://blog.csdn.net/weixin_40918067/article/details/117376103) 
 
 #### electerm
 
@@ -381,11 +397,40 @@ date > log
 
 - 
 
+
+
+| system     | PBS        | SLURM          |
+| ---------- | ---------- | -------------- |
+|            | qsub       | sbatch         |
+|            | qstat      | squeue         |
+|            | qdel       | scancel        |
+| job name   | -N (name)  | -J (job)       |
+| queue name | -q (queue) | -p (partition) |
+|            |            |                |
+
+
+
 ### run in backend
 
 namd好像也不能在命令行直接nohup，现在这个2&>xx.log会导致最后没有输出（只有restart）
 
 应该是1>& xx.log!
+
+
+
+[如何在ssh断开后继续让程序在后台运行](https://blog.csdn.net/liuyanfeier/article/details/62422742)
+
+
+
+- 一但把当前控制台关掉(退出帐户时)，作业就会停止运行。nohup命令可以在你退出帐户之后继续运行相应的进程。标准输出和标准错误缺省会被重定向到 nohup.out 文件中。
+
+- 当在前台运行某个作业时，终端被该作业占据；可以在命令后面加上& 实现后台运行。
+
+- 2与>结合代表错误重定向，而1则代表错误重定向到一个文件1，而不代表标准输出；换成2>&1，&与1结合就代表标准输出了，就变成错误重定向到标准输出
+
+- - 也可以正常重定向输出
+
+- 可以用进程号来监控该进程，或杀死它
 
 ## Git
 

@@ -32,6 +32,10 @@ Multimer
 
 ## Protonation state
 
+放弃了，反正case-by-case，实在是想起来了就用一下H++
+
+His整体是6.0，one that is part of an imidazole ring (Nπ) and one that is part of an imine group (Nτ). The Nπ nitrogen has a lone pair of electrons that can act as a Lewis base and accept a proton（带双键那个）。这就是MD的不足了，只能同时用一个形式，不能叠加态。
+
 ### H++ server
 
 

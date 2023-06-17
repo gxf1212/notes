@@ -2,34 +2,6 @@
 
 maybe a new .md file in the future
 
-# MD, FF, etc
-
-- 放弃了，反正case-by-case，实在是想起来了就用一下H++
-
-  his整体是6.0，one that is part of an imidazole ring (Nπ) and one that is part of an imine group (Nτ). The Nπ nitrogen has a lone pair of electrons that can act as a Lewis base and accept a proton（带双键那个）
-
-  这就是MD的不足了，只能同时用一个形式，不能叠加态
-
-
-
-[分子动力学模拟为什么会有先NVT后NVE？](http://bbs.keinsci.com/thread-9699-1-1.html)
-
-
-
-- vmd自带的力场就是把TIP3的两个氢之间的bond注释掉
-- CgenFF: epsilon F<Cl<Br<S
-- For C=O and COO-, Amber14 is a little more polarized than CHARMM36.
-
-
-
-# Physics
-
-Dissipated work is a concept in thermodynamics that refers to the amount of work that is lost to heat during a process. When work is done on or by a system, some of the energy may be transferred to the system’s surroundings as heat. This heat transfer represents a loss of useful energy, as it is no longer available to do work. The amount of work that is lost in this way is called dissipated work. For example, when you rub your hands together, you are doing work to overcome the friction between your hands. Some of the energy from this work is transferred to your hands as heat, warming them up. This heat transfer represents dissipated work.
-
-
-
-
-
 
 
 # Chemistry
@@ -226,6 +198,16 @@ rhizosphere: 根际，是指受植物根系活动影响，在物理、化学和�
 
 - RLHF就是基于人类反馈（Human Feedback）对语言模型进行强化学习（Reinforcement Learning），和一般的fine-tune过程乃至prompt tuning自然也不同。
   https://zhuanlan.zhihu.com/p/591474085
+
+
+
+
+
+# Physics
+
+Dissipated work is a concept in thermodynamics that refers to the amount of work that is lost to heat during a process. When work is done on or by a system, some of the energy may be transferred to the system’s surroundings as heat. This heat transfer represents a loss of useful energy, as it is no longer available to do work. The amount of work that is lost in this way is called dissipated work. For example, when you rub your hands together, you are doing work to overcome the friction between your hands. Some of the energy from this work is transferred to your hands as heat, warming them up. This heat transfer represents dissipated work.
+
+
 
 
 

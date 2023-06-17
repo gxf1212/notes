@@ -1205,12 +1205,6 @@ https://www.runoob.com/linux/linux-comm-chown.html
 
 - 
 
-
-
-### ssh and scp
-
-see ...
-
 ### svn
 
 get part of the files in one GitHub repository
