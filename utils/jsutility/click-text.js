@@ -1,9 +1,9 @@
 // this file shows successfully the list, with coloring changing like the click-heart. and do not conflict with live2d model
 // different from jerry
 var arr = new Array("分子模拟", "分子动力学", "增强采样", "自由能微扰", "肿瘤免疫", "计算生物", "定量生物", "生物物理", "化学生物", "生物化学", 
-    "纳米药物", "小分子药", "核酸药物", "多肽药物", "RNA结构", "蛋白结构", "信号通路", "蛋白设计", "药物设计", "AI算法", "结构预测",
-    "pHLA-TCR", "SARS-CoV-2", "分子机制", 
-    "B站搬运", "GPU计算", "生物信息", "Python", "程序开发", "LaTeX", "Linux系统");
+    "纳米药物", "小分子药", "核酸药物", "多肽药物", "RNA结构", "蛋白结构", "信号通路", "抗原肽设计", "蛋白设计", "药物设计", "AI算法", "结构预测",
+    "pHLA-TCR", "病毒生物学", "分子机制", "蛋白折叠", "RNA折叠", "理性设计", "单点突变", "新生抗原", "力场参数",
+    "B站搬运", "高性能计算", "生物信息", "Python", "程序开发", "LaTeX", "Linux系统");
 // var arr = new Array("❤", "💛", "💚", "💙", "💜", "💗", "🖤"); 
 
 !function(e, t, a) {
