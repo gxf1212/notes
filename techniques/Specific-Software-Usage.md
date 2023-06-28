@@ -252,7 +252,7 @@ https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect�
 
 ## Cluster/Supercomputers
 
-### tools
+### Tools
 
 #### connection: ssh key
 
@@ -313,9 +313,15 @@ https://zhuanlan.zhihu.com/p/348324919
 
    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/xftp-sync.png" style="zoom:50%;" />
 
-### scheduling system
+### Scheduling system
 
 #### slurm
+
+##### basics
+
+- 
+
+##### example
 
 read the pdf from hpc.xjtu.edu.cn for more
 
@@ -389,15 +395,28 @@ date > log
 - Environment Variable https://pubs.opengroup.org/onlinepubs/009696699/utilities/qsub.html
   - like `$PBS_O_WORKDIR`
   
-- 运行qsub命令时，报错: `script is written in DOS/Windows text format`。 解决办法：输入 
+- 如果您有三个参数，例如`arg1`，`arg2`和`arg3`，您可以这样提交作业：
 
-  ```shell
-  dos2unix <pbs-script-file>
+  ```
+  qsub script.sh -F "arg1 arg2 arg3"
   ```
 
-- 
+  不能省略双引号
+  在脚本中，您可以使用`$1`，`$2`和`$3`来访问这些参数。例如，下面的脚本将打印出传递给它的三个参数：
+
+  ```
+  #!/bin/bash
+  #PBS -N myjob
+  
+  echo "Argument 1: $1"
+  echo "Argument 2: $2"
+  echo "Argument 3: $3"
+  ```
 
 
+
+
+#### Summary
 
 | system     | PBS        | SLURM          |
 | ---------- | ---------- | -------------- |
@@ -410,7 +429,7 @@ date > log
 
 
 
-### run in backend
+### run in backend and redirection
 
 namd好像也不能在命令行直接nohup，现在这个2&>xx.log会导致最后没有输出（只有restart）
 
@@ -419,8 +438,6 @@ namd好像也不能在命令行直接nohup，现在这个2&>xx.log会导致最�
 
 
 [如何在ssh断开后继续让程序在后台运行](https://blog.csdn.net/liuyanfeier/article/details/62422742)
-
-
 
 - 一但把当前控制台关掉(退出帐户时)，作业就会停止运行。nohup命令可以在你退出帐户之后继续运行相应的进程。标准输出和标准错误缺省会被重定向到 nohup.out 文件中。
 
@@ -431,6 +448,32 @@ namd好像也不能在命令行直接nohup，现在这个2&>xx.log会导致最�
 - - 也可以正常重定向输出
 
 - 可以用进程号来监控该进程，或杀死它
+
+
+
+- If you want to see only the standard output (stdout) on the screen and redirect the standard error (stderr) to a file, you can use the `>` operator to redirect the stderr to a file. Here’s an example:
+
+  ```
+  bash xx.sh 2>error.log
+  ```
+
+  This will run the `xx.sh` script and redirect its standard error output to a file named `error.log`. Only the standard output will be displayed on the screen.
+
+
+
+I have a bash script which contains tens of gmx mdrun commands. Each of them generates an independent process and will not start until the previous one finishes (i.e. they are not running in parallel). I'm running like nohup bash xx.sh &. How can I kill this bash script or all gmx processes at once?
+If you want to kill the bash script that is running the `gmx mdrun` commands sequentially, you can use the `ps` command to find its process ID and then use the `kill` command to send it a `SIGTERM` signal. For example:
+
+```
+ps aux | grep "bash xx.sh"
+# Find the process ID (PID) from the output of the above command
+kill <PID>
+```
+
+This will send a `SIGTERM` signal to the bash script process, causing it to terminate gracefully.
+Then We just need to kill gmx once and the whole script will terminate.
+
+
 
 ## Git
 
@@ -582,7 +625,14 @@ namd好像也不能在命令行直接nohup，现在这个2&>xx.log会导致最�
     # git r
     ```
 
-11. 
+11. If the repository has a specific development branch that you want to clone, you can use the `-b` option followed by the name of the branch. For example:
+
+    ```shell
+    git clone -b development https://github.com/username/repository.git
+    ```
+
+    This will clone only the specified branch of the repository.
+
 
 ### exploration
 
@@ -666,6 +716,10 @@ Mac：https://macwk.com/soft/typora
 
 4. https://zhuanlan.zhihu.com/p/68577071  run remote code, but view locally
 
+5. [How to format source code in Visual Studio Code (VSCode) - Mkyong.com](https://mkyong.com/vscode/how-to-format-source-code-in-visual-studio-code-vscode/)
+
+6. 
+
 ### Pycharm
 
 1. https://blog.csdn.net/qq_41330454/article/details/105906347 控制台命令提示符是In[2]. ipython!
@@ -678,7 +732,7 @@ Mac：https://macwk.com/soft/typora
 
    - 关闭代码风格检查，setting-->Inspections-->Python-->PEP8
 
-   - Python code style
+   - [Code Style. Python | PyCharm](https://www.jetbrains.com/help/pycharm/code-style-python.html)
 
      <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/pycharm.png" alt="image" style="zoom:80%;" />
 
@@ -986,10 +1040,14 @@ also for LibreOffice Calc, many commands are the same....
 
 - Excel的paste special必须是复制，辣鸡！Calc就可以剪切
 
-- To calculate the correlation coefficient, you can use the `CORREL` function. In an empty cell, enter the formula `=CORREL(A1:A10,B1:B10)`, replacing `A1:A10` and `B1:B10` with the cell ranges containing your data.
+- To calculate the correlation coefficient, you can use the `CORREL` function. 
+
+  In an empty cell, enter the formula `=CORREL(A1:A10,B1:B10)`, replacing `A1:A10` and `B1:B10` with the cell ranges containing your data.
 
 - In both Excel and LibreOffice Calc, you can calculate the dot product (点积) of two vectors by using similar formulas.
-  In Excel, you can use the `SUMPRODUCT` function to calculate the dot product of two vectors. For example, if your first vector is in cells A2:A8 and your second vector is in cells B2:B8, you can use the following formula: `=SUMPRODUCT(A2:A8,B2:B8)`. This formula multiplies corresponding entries in the given arrays and returns the sum of those products.
+  In Excel, you can use the `SUMPRODUCT` function to calculate the dot product of two vectors. 
+  
+  For example, if your first vector is in cells A2:A8 and your second vector is in cells B2:B8, you can use the following formula: `=SUMPRODUCT(A2:A8,B2:B8)`. This formula multiplies corresponding entries in the given arrays and returns the sum of those products.
   In LibreOffice Calc, you can also use the `SUMPRODUCT` function
   
 - 除了使用快捷键可以进行换行外，换行符也可以在公式中进行。 CHAR(10)是表示换行符，10表示换行符的ASCII码值。 将下面的两个信息进行连接，并且连接符为换行符。 在C2单元格中输入公式：=A2&CHAR(10)&B2，然后单击Enter键后单击 即可。
@@ -1050,6 +1108,7 @@ https://www.zhihu.com/column/c_1368227352443572224
 #### other
 
 - linear regression: https://www.graphpad.com/quickcalcs/linear1/
+- [GraphPad Prism 9 Curve Fitting Guide - Equation: Competitive inhibition](https://www.graphpad.com/guides/prism/latest/curve-fitting/reg_competitive_inhibition.htm)
 
 ### Scientific writing
 
@@ -1293,7 +1352,7 @@ http://www.noobyard.com/article/p-nymwcdnd-nx.html  插入Python代码升级方�
 
 ### Language checking
 
-![image-20230228143910914](E:\GitHub-repo\notes\techniques\images\language-checking.png)
+![image-20230228143910914](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/language-checking.png)
 
 https://tex.stackexchange.com/questions/319580/texstudio-how-to-get-access-to-the-added-words-to-dictionary
 

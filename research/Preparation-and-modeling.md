@@ -22,11 +22,9 @@ Can it just add missing residues, rather than build all side chains again? Maybe
 
 ## AF2
 
+https://alphafold.ebi.ac.uk/ 
 
-
-Multimer
-
-
+https://colab.research.google.com/github/deepmind/alphafold/blob/main/notebooks/AlphaFold.ipynb
 
 
 
@@ -38,7 +36,7 @@ His整体是6.0，one that is part of an imidazole ring (Nπ) and one that is pa
 
 ### H++ server
 
-
+[H++ (web-based computational prediction of protonation states and pK of ionizable groups in macromolecules)](http://newbiophysics.cs.vt.edu/H++/)
 
 The right way to obtain Amber FF file:
 
@@ -170,7 +168,7 @@ https://anaconda.org/conda-forge/psfgen
 
 - addIonsRand
 
-   or ions are on one surface
+   otherwise, ions are on one surface
 
    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Preparation-and-modeling.assets/tleap-ion.png" alt="tleap-ion" style="zoom: 50%;" />
 
@@ -215,6 +213,35 @@ end structure
 
 
 ## Special purposes
+
+### Renumber residues
+
+- [Renumber a PDB file from 1 (umcn.nl)](https://swift.cmbi.umcn.nl/servers/html/renumb.html)
+- http://dunbrack3.fccc.edu/PDBrenum/ only for PDB and UniProt?? 
+- I remember a tool to set arbitrary numbers?
+
+common tools can also do this
+
+- [Chimera](https://www.cgl.ucsf.edu/chimera/docs/ContributedSoftware/editing/renumber.html)
+
+- Pymol
+
+  ```
+  alter (all), resi=str(int(resi)+688)
+  alter sele, resi=str(int(resi)+688)
+  ```
+
+- VMD 
+
+  ```tcl
+  set all [atomselect top "protein or resname AL or resid 1 to 1500"]
+  foreach idx [$all get index] {
+      set atom [atomselect top "index $idx"]
+      $atom set resid [expr [$atom get resid] + 688]
+  }
+  ```
+
+it would also be simple in Python with my `read_pdb` code....
 
 
 

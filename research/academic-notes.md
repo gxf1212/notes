@@ -68,6 +68,16 @@ hypophosphorylated (comparative more hypophosphorylated, superlative most hypoph
 
 
 
+![DNAPol](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/DNAPol.png)
+
+
+
+The inhibitory constant (Ki) is a type of equilibrium dissociation constant (Kd) that represents the equilibrium binding affinity for a ligand that reduces the activity of its binding partner.
+
+Ki is associated with thermodynamic parameters in that ΔG = RTln(Ki), where ΔG, R, and T are the absolute binding free energy, the gas constant, and the absolute temperature, respectively
+
+
+
 # Pharmacology
 
 ## bioisosteres
@@ -83,7 +93,7 @@ hypophosphorylated (comparative more hypophosphorylated, superlative most hypoph
 
 - 药物分子中的羧基可以用磺酰胺，磷酸酯，四唑，硼酸等代替。
   - 在羧基的各种生物电子等排体中，羟肟酸的酸性稍弱，离子化程度较低，能显著提高透膜能力，然而在体内容易被代谢成羧酸，可在其氮原子上引入大一点的基团来提高其代谢稳定性。
-  - ![boric-acid](academic-notes.assets/boric-acid.png)
+  - ![boric-acid](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/boric-acid.png)
 
 
 
@@ -98,11 +108,11 @@ hypophosphorylated (comparative more hypophosphorylated, superlative most hypoph
 
 [综述| 药物发现中的共价抑制剂](https://mp.weixin.qq.com/s/B0iYLWQIvlcn4N_0F2o_rw)
 
-![BHO](academic-notes.assets/BHO.png)
+![BHO](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/BHO.png)
 
 
 
-![ring-design](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/ring-design.png)
+![ring-design](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/ring-design.png)
 
 
 
@@ -142,23 +152,23 @@ The exact mechanisms behind why prostate cancer prefers to metastasize to the bo
 
 双膦酸盐是一类可防止骨密度降低的药物，用于治疗骨质疏松症和类似疾病。双膦酸盐类药物吸附于骨表面上的羟磷灰石结合位点，尤其是在骨质吸收活跃的骨表面。当破骨细胞开始重吸收充满双膦酸盐的骨质时，骨质吸收期间释放的双膦酸盐就会损害破骨细胞形成皱褶缘、黏附于骨表面和产生持续骨质吸收所必需的质子的能力。双膦酸盐类药物也可通过减少破骨细胞前体细胞的发育和募集以及促进破骨细胞凋亡，来降低破骨细胞的活性。
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/bisphosphates.png" alt="bisphosphates" style="zoom: 33%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/bisphosphates.png" alt="bisphosphates" style="zoom: 33%;" />
 
 
 
 sexual hormones
 
-![sexual-hormones](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/sexual-hormones.png)
+![sexual-hormones](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/sexual-hormones.png)
 
 
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/bicalutamine.png" alt="bicalutamine" style="zoom:25%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/bicalutamine.png" alt="bicalutamine" style="zoom:25%;" />
 
 bicalutamine，比卡鲁胺
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/Enzalutamide.png" alt="Enzalutamide" style="zoom:25%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/Enzalutamide.png" alt="Enzalutamide" style="zoom:25%;" />
 
 恩杂鲁胺 (Enzalutamide)
 

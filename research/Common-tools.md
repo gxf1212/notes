@@ -193,9 +193,9 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
 杂记, some extra functions, that I encountered. for details, check vmd-ug.pdf (MD-tutorials.md)
 
-### General
+### Scripts
 
-#### run scripts
+#### Basics
 
 1. run in terminal
 
@@ -222,37 +222,47 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
 3. question mark prompt and return to the normal vmd> prompt? that mean the tcl interpreter is waiting for you to **close a brace**, so try } or ] or ) followed by enter. you may need to enter it a couple of times.
 
-4. Clears the structure, topology definitions, and aliases, creating clean environment just like a new context.
+4. 在VMD的`atomselect`命令中，您可以使用Tcl变量替换来引用变量的值。例如，如果您已经定义了一个名为`my_variable`的变量并将其值设置为`5`，则可以使用以下命令在`atomselect`命令中引用该变量的值（不要加"{}"）：
 
    ```tcl
-   psfcontext reset
+   set sel [atomselect top "resid $my_variable"]
    ```
+
+   This also works for RMSD Trajectory Tool (`$resid` is just replaced), 但创建representation时仍不行？It just doesn't interpret the variable
+
+   ```tcl
+   set resid 34
+   puts "
+   mol representation Licorice 0.200000 12.000000 12.000000
+   mol color Type
+   mol selection {resid $resid}
+   mol material Opaque
+   mol addrep top
+   
+   mol representation CPK 0.200000
+   mol color Type
+   mol selection {same residue as within 5 of resid $resid}
+   mol material Opaque
+   mol addrep top
+   # update selection every frame
+   mol selupdate 2 top 1
+   mol colupdate 2 top 0
+   "
+   ```
+
+   or cover with "{}"
 
 5. 
 
-6. select certain frames
+6. 
+
+7. select certain frames
 
    ```tcl
    atomselect top "within 5 of resname LYR" frame 23
    ```
 
-7. Menu--Mouse--Center: pick an atom to center
-
-8. path to plugins
-
-   ```shell
-   /usr/local/lib/vmd/plugins/noarch/tcl/
-   ```
-
-   maybe just `locate`
-
-9. In the main menu, press the Save State button found in the File menu; this will bring up a browser window where you can enter a file name in which to save your work. 
-
-10. VMD的快捷键等号，把当前显示的东西们center一下。
-
-11. 
-
-12. To know about your system, like checking the number of atoms, just load it into vmd (also when executing scripts) and see the cmd.
+8. 
 
 #### Tkconsole
 
@@ -296,15 +306,21 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
 ### Visualization
 
+点点点的操作
+
 > references:
 >
 > - refer to [this](https://pengpengyang94.github.io/2020/05/vmd%E4%BD%BF%E7%94%A8%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E/) to make transparent surface+cartoon (material--Transparent) like in papers
 > - labeling: https://chryswoods.com/dynamics/visualisation/picking.html
 
-1. Graphics--Representations: for visualization.
+1. Extensions---VMD preferences---Write Settings to VMDRC
+
+   [VMD启动时自动调整窗口的设置方法](https://www.bilibili.com/read/cv7167667)
+
+2. Graphics--Representations: for visualization.
 
    - Draw Style
-     - Drawing Method 
+     - Drawing Method
        - Beta: temperature factor
    - Selected Atoms--Selection
      - frequently used
@@ -315,12 +331,12 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
      - `not` as logic? see more syntax in Selection--Marco definition
    - Periodic, 选择+X或-X体系在X反向的映象, 就可看到两条链处于一起了
 
-2. Graphics--colors
+3. Graphics--colors
 
    - Graphics--Colors--Categories (display)--background
    - other many settings, like element, residue, 2d structure. may set default color
 
-3. Labeling a few atoms
+4. Labeling a few atoms
 
    - Mouse--Label--Atoms (etc.). Mouse--Pick
    - Graphics--Labels, click on an atom, info shows up. 
@@ -330,25 +346,27 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
    - Graphics--Labels--Properties (of the text)
    - Mouse--Rotate mode: exit labeling....
 
-4. Graphics--Representations--Drawing Method
+5. Graphics--Representations--Drawing Method
 
    Beta: we may not use that field. So we can replace it with some properties we computed and let VMD color atoms according to it
 
    But now it looks good in white if all beta is 0
 
-5. Do not use Display--perspective (透视), choose orthographic projection (正射投影)
+6. Do not use Display--perspective (透视), choose orthographic projection (正射投影)
 
-6. Drawing Method--HBond
+7. Drawing Method--HBond
 
-7. 
+8. 
 
-8. https://www.ks.uiuc.edu/Research/vmd/current/ug/node33.html
+9. https://www.ks.uiuc.edu/Research/vmd/current/ug/node33.html
 
-   label bonds in vmd, shows distance automatically
+   label bonds in vmd, it shows distance automatically
+
+   set label colors
 
    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Common-tools.assets/color-bond.png" alt="color-bond" style="zoom:20%;" />
 
-9. VMD representation里面写变量$ligname只是不报错，还是得手动改
+10. VMD representation里面写变量$ligname只是不报错，还是得手动改
 
    ```tcl
    set ligname UDCA
@@ -387,9 +405,27 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
    rmsdtt::doRmsd
    ```
 
-10. Distance, angle, dihedral measurements: To begin a measurement, use the right-mouse button (or the left-mouse button and the Control key/Control key and mouse click) to select 1, 2, 3 or 4 atoms. Complete the measurement by selecting the final atom twice. Depending on how many atoms are selected, the distance (2 atoms), the angle (3 atoms) or the dihedral angle (4 atoms) is measured and displayed. Deselect all atoms with a right-click in empty space. To remove a measurement, re-select all involved atoms and then the last atom twice in a row.
+11. Distance, angle, dihedral measurements: To begin a measurement, use the right-mouse button (or the left-mouse button and the Control key/Control key and mouse click) to select 1, 2, 3 or 4 atoms. Complete the measurement by selecting the final atom twice. Depending on how many atoms are selected, the distance (2 atoms), the angle (3 atoms) or the dihedral angle (4 atoms) is measured and displayed. Deselect all atoms with a right-click in empty space. To remove a measurement, re-select all involved atoms and then the last atom twice in a row.
 
+    ? see [VMD Measurements: Analyze Distances and Angles with VMD - Compchems](https://www.compchems.com/vmd-measurements-analyze-distances-and-angles-with-vmd/#simplifying-your-vmd-display-removing-labels)
 
+12. In the main menu, press the Save State button found in the File menu; this will bring up a browser window where you can enter a file name in which to save your work. 
+
+13. VMD的快捷键等号，把当前显示的东西们center一下。
+
+14. Menu--Mouse--Center: pick an atom to center
+
+15. 
+
+### psfgen
+
+1. Clears the structure, topology definitions, and aliases, creating clean environment just like a new context.
+
+   ```tcl
+   psfcontext reset
+   ```
+
+2. 
 
 ### PBC processing
 
@@ -401,13 +437,21 @@ usually we use -pbc mol...
 
 
 
-### other
+### Other
 
-The current VMD source code has been tested to compile with Python versions 2.4 to 2.6 on a few platforms. Don't use that....
+- path to plugins
 
-[VMD启动时自动调整窗口的设置方法](https://www.bilibili.com/read/cv7167667)
+  ```shell
+  /usr/local/lib/vmd/plugins/noarch/tcl/
+  ```
 
+  maybe just `locate`
 
+- To know about your system, like checking the number of atoms, just load it into vmd (also when executing scripts) and see the cmd.
+
+- The current VMD source code has been tested to compile with Python versions 2.4 to 2.6 on a few platforms. Don't use that....
+
+- 
 
 ## UCSF Chimera
 
@@ -609,17 +653,34 @@ $$
 
 ### Control
 
-[center-of-mass-motion](https://manual.gromacs.org/current/reference-manual/algorithms/molecular-dynamics.html#center-of-mass-motion)
+1. [center-of-mass-motion](https://manual.gromacs.org/current/reference-manual/algorithms/molecular-dynamics.html#center-of-mass-motion)
 
-we may usually see
+   The center-of-mass velocity is normally set to zero at every step...If such changes are not quenched, an appreciable center-of-mass motion can develop in long runs, and the temperature will be significantly misinterpreted. 
 
-```
-Removing center of mass motion in the presence of position restraints
-  might cause artifacts. When you are using position restraints to
-  equilibrate a macro-molecule, the artifacts are usually negligible.
-```
+   Something similar may happen due to overall rotational motion, but only when an isolated cluster is simulated. In periodic systems with filled boxes, the overall rotational motion is coupled to other degrees of freedom and does not cause such problems.
 
+   we may usually see
 
+   ```
+   Removing center of mass motion in the presence of position restraints
+     might cause artifacts. When you are using position restraints to
+     equilibrate a macro-molecule, the artifacts are usually negligible.
+   ```
+
+2. Note that mdrun will redetermine rlist based on the actual pair-list setup
+
+3. 
+
+4. 
+
+### Pressure control
+
+1. [C-rescale](https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp-value-pcoupl-C-rescale)
+2. The Berendsen barostat does not generate any strictly correct ensemble,
+    and should not be used for new production simulations (in our opinion).
+    For isotropic scaling we would recommend the C-rescale barostat that also
+    ensures fast relaxation without oscillations, and for anisotropic scaling
+    you likely want to use the Parrinello-Rahman barostat.
 
 
 
@@ -649,9 +710,12 @@ In NAMD, FEP calculations can be performed using either the “alchemical” or 
 
 ## Other
 
+RT:
 
+- 300K: 2.4942 kJ/mol, 0.596 kcal/mol, kT: 0.414 kJ/molecule
+- 310K: 2.57734 kJ/mol, 0.616 kcal/mol, kT: 0.4278 kJ/molecule
 
-
+we don't use kT in macroscopic world (or the final dG data)? 
 
 
 
@@ -725,6 +789,8 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 
 vdw and elec, common cutoff/switchdist
 
+
+
 ### trajectory
 
 - gmx log file not that useful
@@ -760,9 +826,16 @@ vdw and elec, common cutoff/switchdist
 
 - [gmx逐步放开限制：暴力修改`itp`文件](https://jerkwin.github.io/2017/10/20/GROMACS%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E6%8B%9F%E6%95%99%E7%A8%8B-%E5%A4%9A%E8%82%BD-%E8%9B%8B%E7%99%BD%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/#9-%E6%94%BE%E5%BC%80%E9%99%90%E5%88%B6-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E9%A2%84%E5%B9%B3%E8%A1%A1)
 
+
+
+`mdout.mdp`: all arguments actually used. help with debugging....
+
+
+
 ## trjconv
 
 - `-dt`: not real time, but how many frames we go through each time we collect one frame
+- Using `-cat`, you can simply paste several files together without removal of frames with identical time stamps.
 
 
 
@@ -828,6 +901,15 @@ vdw and elec, common cutoff/switchdist
     energy conservation, but usually other effects dominate. With a common
     sigma value of 0.34 nm the fraction of the particle-particle potential at
     the cut-off at lambda=0.5 is around 2.2e-05, while ewald-rtol is 1.0e-06.
+  ```
+
+- 至哥说有时候小体系会出这个问题，调一下核数就行。只要不影响运行就行
+
+  ```
+  NOTE: The number of threads is not equal to the number of (logical) cpus
+     and the -pin option is set to auto: will not pin threads to cpus.
+     This can lead to significant performance degradation.
+     Consider using -pin on (and -pinoffset in case you run multiple jobs).'
   ```
 
 - 

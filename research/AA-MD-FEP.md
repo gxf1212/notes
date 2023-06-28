@@ -1040,9 +1040,17 @@ save c01.pdb, clusters_0001
 
 # Gromacs FEP
 
+> https://tutorials.gromacs.org/docs/free-energy-of-solvation.html
+>
+> [Free energy perturbation - mdp parameters - User discussions - GROMACS forums (bioexcel.eu)](https://gromacs.bioexcel.eu/t/free-energy-perturbation-mdp-parameters/2061)
+>
+> [How to Calculate the Free Energy of Methane in Water Using Gromacs with Cloud HPC (cloudam.io)](https://www.cloudam.io/post/how-to-calculate-the-free-energy-of-methane-in-water-using-gromacs-with-cloud-hpc)
+
 from Connexin. **update the code later**
 
 ## pmx residue mutation
+
+This workflow is about taking one chain for mutation from one frame in MD simulation
 
 ### bound
 
@@ -1156,20 +1164,148 @@ align--all_to_this
 
 ### FEP parameters
 
-不需要0.00001那种；其实vdw和columb谁先变都差不多 
+dummy atoms have epsilon and q both in zero, so 不需要0.00001那种；其实vdw和columb谁先变都差不多.  Of course, still adding soft-core.
 
-
+Also, since we defined B state, the interactions are always there. We don't need to decouple coulomb first and then vdWs as they did when eliminating something from the solution
 
 An example .mdp file is
 
 ```
+;====================================================
+title = production MD simulation
+;====================================================
+
+;----------------------------------------------------
+; RUN CONTROL
+;----------------------------------------------------
+; define                = -DPOSRES  ; position restrain the protein
+; define                = -DPOSRES_abiss  ; position restrain the membrane part
+integrator              = md        ; leap-frog integrator
+nsteps                  = 250000    ; 2 * 250000 = 500 ps
+dt                      = 0.002     ; 2 fs
+
+;----------------------------------------------------
+; OUTPUT CONTROL
+;----------------------------------------------------
+nstxout                 = 0       ; don't save coordinates to .trr
+nstvout                 = 0       ; don't save velocities to .trr
+nstfout                 = 0       ; don't save forces to .trr
+nstxout-compressed      = 25000   ; xtc compressed trajectory output every 1000 steps (2 ps)
+compressed-x-precision  = 1000    ; precision with which to write to the compressed trajectory file
+nstlog                  = 50000   ; update log file every 10.0 ps
+nstenergy               = 0       ; don't save energies
+nstcalcenergy           = 100     ; calculate energies every 100 steps
+
+
+;----------------------------------------------------
+; NEIGHBOR SEARCHING
+;----------------------------------------------------
+cutoff-scheme           = Verlet
+; ns-type                 = grid      ; search neighboring grid cells
+nstlist                 = 20        ; With parallel simulations and/or non-bonded force calculation on the GPU, a value of 20 or 40 often gives the best performance. (default is 10)
+rlist                   = 1.2       ; short-range neighborlist cutoff (in nm). must be equal to rcoulomb here?
+pbc     			    = xyz       ; 3-D PBC
+comm-mode       	    = Linear    ; Remove center of mass translation
+comm-grps         	    = system    ; group(s) for center of mass motion removal, default is the whole system
+nstcomm                 = 100       ; frequency for center of mass motion removal
+
+;----------------------------------------------------
+; BONDS
+;----------------------------------------------------
+continuation            = no        ; first dynamics run
+constraint_algorithm    = lincs     ; holonomic constraints
+constraints             = H-bonds   ; all bonds (even heavy atom-H bonds) constrained
+lincs_iter              = 1         ; accuracy of LINCS (1 is default)
+lincs_order             = 12        ; also related to accuracy (4 is default)
+; lincs-warnangle         = 30         ; maximum angle that a bond can rotate before LINCS will complain (30 is default)
+
+;----------------------------------------------------
+; ELECTROSTATICS
+;----------------------------------------------------
+coulombtype     	    = PME       ; Particle Mesh Ewald for long-range electrostatics
+rcoulomb                = 1.2       ; short-range electrostatic cutoff (in nm)
+pme_order       	    = 4         ; cubic interpolation
+fourierspacing  	    = 0.10      ; grid spacing for FFT
+ewald-rtol              = 1e-6      ; default is 10e-5. relative strength of the Ewald-shifted direct potential at rcoulomb
+
+;----------------------------------------------------
+; VDW
+;----------------------------------------------------
+vdwtype                 = cutoff    ; Plain cut-off
+vdw-modifier            = potential-switch  ; Smoothly switches the potential to zero between rvdw-switch and rvdw.
+rvdw-switch             = 1.0       ; (0) [nm] where to start switching the LJ force and possibly the potential
+rvdw                    = 1.2       ; short-range van der Waals cutoff (in nm)
+ewald-rtol-lj           = 1e-3      ; default is 10e-3. in the same way as ewald-rtol controls the electrostatic potential
+lj-pme-comb-rule        = Geometric ; lj-pme-comb-rule
+DispCorr    		    = EnerPres  ; account for cut-off vdW scheme
+
+;----------------------------------------------------
+; TEMPERATURE & PRESSURE COUPL
+;----------------------------------------------------
+; Temperature coupling is on
+tcoupl      		    = V-rescale             ; modified Berendsen thermostat
+tc-grps     		    = Protein non-Protein   ; two coupling groups - more accurate
+tau_t       		    = 1.0  1.0              ; [ps] time constant for coupling (one for each group in tc-grps), -1 means no temperature coupling
+ref_t       		    = 310  310              ; reference temperature, one for each group, in K
+; Pressure coupling is off
+pcoupl                  = Berendsen             ; combine position restraints with pressure coupling
+pcoupltype              = isotropic           
+tau_p                   = 1.0                   ; (1) time constant (ps) for pressure coupling (one value for all directions).
+ref_p                   = 1.0                   ; reference pressure (bar)
+compressibility         = 4.5e-05               ; isothermal compressibility of water (bar^-1)
+refcoord-scaling        = com
+
+;----------------------------------------------------
+; VELOCITY GENERATION
+;----------------------------------------------------
+gen_vel     		    = no        ; assign velocities from Maxwell distribution (if gen_vel is 'yes', continuation should be 'no')
+
+;----------------------------------------------------
+; FREE ENERGY CALCULATIONS
+;----------------------------------------------------
+free-energy             = yes
+;couple-moltype           = non-Water
+;couple-lambda0           = vdw-q
+;couple-lambda1           = nonea
+;couple-intramol          = no
+separate-dhdl-file      = yes
+;if no for sc-coul dVcoul/dl might be nan
+sc-coul                 = yes       ; apply the soft-core free energy interaction transformation to the Columbic interaction
+sc-alpha                = 0.5       ; sc-function=beutler. default = 0
+sc-power                = 1         ; default = 1
+sc-sigma                = 0.3       ; default = 0.3
+nstdhdl                 = 100       ; default = 100. must be a multiple of nstcalcenergy
+dhdl-derivatives        = yes       ; default is yes
+calc-lambda-neighbors   = -1        ; -1: all states; 1: both neighbors. For normal BAR such as with gmx bar, a value of 1 is sufficient, while for MBAR -1 should be used.
+init-lambda-state       = 0
+;init-lambda-state      = 0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28  29   30   31
+mass-lambdas            = 0.00 0.01 0.02 0.04 0.06 0.09 0.12 0.16 0.20 0.24 0.28 0.32 0.36 0.40 0.44 0.48 0.52 0.56 0.60 0.64 0.68 0.72 0.76 0.80 0.84 0.88 0.91 0.94 0.96 0.98 0.99 1.00
+bonded-lambdas          = 0.00 0.01 0.02 0.04 0.06 0.09 0.12 0.16 0.20 0.24 0.28 0.32 0.36 0.40 0.44 0.48 0.52 0.56 0.60 0.64 0.68 0.72 0.76 0.80 0.84 0.88 0.91 0.94 0.96 0.98 0.99 1.00
+coul-lambdas            = 0.00 0.01 0.02 0.04 0.06 0.09 0.12 0.16 0.20 0.24 0.28 0.32 0.36 0.40 0.44 0.48 0.52 0.56 0.60 0.64 0.68 0.72 0.76 0.80 0.84 0.88 0.91 0.94 0.96 0.98 0.99 1.00
+vdw-lambdas             = 0.00 0.01 0.02 0.04 0.06 0.09 0.12 0.16 0.20 0.24 0.28 0.32 0.36 0.40 0.44 0.48 0.52 0.56 0.60 0.64 0.68 0.72 0.76 0.80 0.84 0.88 0.91 0.94 0.96 0.98 0.99 1.00
+; our restrains should persist
+; because all components of the lambda vector that are not specified will use fep-lambdas
+
 ```
 
+> You are combining position restraints with Parrinello-Rahman pressure
+>  coupling, which can lead to instabilities. If you really want to combine
+>  position restraints with pressure coupling, we suggest to use Berendsen
+>  pressure coupling instead.
+>
+> Cannot compute PME interactions on a GPU, because PME GPU does not support
+> free energy calculations with perturbed charges (multiple grids).
+>
+> - 第一输出控制，但是这块并没有控制的很好，所以最后还是直接删掉那些文件；
+> - 第2部分是一般性参数，这个基本上是follow网上那个tutorial的，第3部分是f1p部分主要follow了师兄的。
+>
+> 原则一是所有文件已经尽量保持一致，二是参数之间不要冲突，不要出warning和note。
 
 
 
+### anaylsis
 
-### other
+to save as .pdb file to view in pymol
 
 ```shell
 python /data/gxf1212/work/make_hybrid_top/FEbuilder/get_segments_pdb.py sys.pdb
@@ -1180,6 +1316,39 @@ check if finished all:
 ```shell
 ls */repeat*/lambda_31/prod/prod.gro
 ```
+
+visualize
+
+```
+hide sticks, all
+hide lines, all
+hide spheres, all
+set cartoon_transparency, 0.6
+set sphere_scale, 0.4
+set label_size, 20
+bg_color white
+```
+
+
+
+### notes
+
+- FEP模拟中会使用多个window来计算自由能变化，有时会出现某些window无法运行的情况。
+- 可以尝试重新运行出现问题的window，或者修改随机数等参数，也可以考虑减少窗口数量。
+- 大量窗口的FEP模拟容易出现问题，可以尝试采用更少的窗口，例如22个窗口。
+
+- window多了，可能用上一个window作为输入应该可以大概率避免这个情况，这可能就是kevin之前提到的，在某个lambda它就是姿势不舒服或者什么其他问题
+
+- FEP模拟中使用的lambda值可能会出现精度问题，导致计算出现偏差。
+
+- 非5和0的lambda引入以后，再四舍五入以后出现大的偏差。纯猜测，没证据
+
+- GROMACS软件在进行计算时会进行近似处理，例如离散化等，这也可能会导致计算出现问题。
+- pmx也可以指定fep怎么mapping?
+- "state B has non-zero total charge": 没办法
+- Some parameters for bonded interaction involving perturbed atoms are specified explicitly in state A, but not B - copying A to B
+
+
 
 ## MD workflow
 
@@ -1233,11 +1402,25 @@ Do not use histograms unless you’re certain you need it. It's kind of big
 
 
 
+WARNING: Some of these results violate the Second Law of Thermodynamics:
+     This is can be the result of severe undersampling, or (more likely)
+     there is something wrong with the simulations.
+
+This is triggered when the shared entropy in one or the other direction is negative: that is an unphysical result that can be the result of very few sampling points leading to large fluctuations.
+
+more windows doesn't solve the second law of thermodynamics problem
+
 
 
 ## Other notes
 
-- [What is best way to get multiple chains? (kth.se)](https://mailman-1.sys.kth.se/pipermail/gromacs.org_gmx-users/2009-October/045869.html)
+- [What is best way to get multiple chains? (kth.se)](https://mailman-1.sys.kth.se/pipermail/gromacs.org_gmx-users/2009-October/045869.html) modeling in gmx
+
+- but in the case of mutating one molecule to another, wherein bonded and nonbonded terms may change, the old-style modifications (the so-called "dual topology approach") would still be required. The GROMACS manual, section 5.7.4, provides an example of such a transformation.
+
+  not checked
+
+- 
 
 
 

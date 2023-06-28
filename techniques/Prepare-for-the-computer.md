@@ -1343,6 +1343,8 @@ https://github.com/eNkru/freechat/releases
 
 https://github.com/askme765cs/Wine-QQ-TIM
 
+[vscode qq extension based on android qq protocol](https://github.com/takayama-lily/vscode-qq)
+
 ### office
 
 https://www.libreoffice.org/download/appimage/  ok

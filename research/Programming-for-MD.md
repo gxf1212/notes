@@ -17,7 +17,7 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
 
 2. 反斜杠后面紧跟回车，表示下一行是当前行的续行。
 
-   but only valid in root!
+   but only valid in root ?
 
 3. multiple paths:
 
@@ -25,7 +25,7 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
    PATH='/path/one;path/two;...'
    ```
 
-4. 
+4. 在`=`运算符两边不能有空格。
 
 5. 
 
@@ -49,14 +49,16 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
   - #: keep right, * at left; %: keep left, * at right
   - one # or %: cut the first one; two: keep the last one
 
-- exact length
+- exact length: `${parameter:offset:length}`
 
   ```shell
   f=unbound.fepout.csv
   ${f:1:3}  # nbo
   ${f:1:-3} # nbound.fepout.
-  ${f:0-1}  # the last char
+  ${f: -1}  # the last char
   ```
+
+  To get the last character of a string in a shell script, you can use the following command: `echo "${str: -1}"`. The space after the colon (:) is REQUIRED
 
 - cut: split with any char
 
@@ -293,7 +295,20 @@ examples
    6
    ```
 
-2. batch submit jobs
+2. 如果你想要更简单的方法来生成一个包含两位数字符串的数组，可以使用以下命令：
+
+   ```shell
+   numbers=($(seq -f "%02g" 1 20))
+   ```
+
+   这将创建一个名为`numbers`的数组变量，其中包含20个元素，每个元素都是一个两位数的字符串。
+   你可以使用`${numbers[@]}`来访问数组中的所有元素。例如，要打印数组中的所有元素，可以使用以下命令：
+
+   ```shell
+   echo ${numbers[@]}
+   ```
+
+3. batch submit jobs
 
    https://www.cnblogs.com/wutou/p/16398524.html
 
@@ -319,7 +334,7 @@ examples
    done
    ```
 
-3. 
+4. 
 
 # Tcl programming
 
@@ -895,4 +910,39 @@ but not editable for gmx files?
 
 
 
+
+
+
+
+
+## NetworX
+
+### basics
+
+In NetworkX, you can add nodes to a graph using the `add_node` method. You can specify the name of the node as the first argument to this method. For example:
+
+```python
+import networkx as nx
+
+G = nx.Graph()
+G.add_node('A')
+G.add_node('B')
+```
+
+This will create a new graph `G` with two nodes named `'A'` and `'B'`.
+To add edges between nodes, you can use the `add_edge` method. This method takes two arguments, which are the names of the nodes that you want to connect with an edge. For example:
+
+```python
+G.add_edge('A', 'B')
+```
+
+This will add an edge between nodes `'A'` and `'B'`.
+If you want to add edges by node index instead of node name, you can use the `nodes` attribute of the graph to get a list of nodes and then use indexing to access the nodes by their index. For example:
+
+```python
+nodes = list(G.nodes)
+G.add_edge(nodes[0], nodes[1])
+```
+
+This will add an edge between the first and second nodes in the graph.
 

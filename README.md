@@ -28,7 +28,9 @@ My Bilibili channel: [东山月光下](https://space.bilibili.com/441196634). Fr
 
 - [ ] remodel the notes
   - [ ] a recent task is: put contents considering common tool usage in UROPS and FYP.md to other md files (programming, tools) and FEbuilder document. Those project documents are going to record the workflow of a specific task (virtual screening, FEP, etc.).
-  - [ ] scp, ssh, pbs and slu
+  - [ ] scp, ssh, pbs and slurm
+  - [ ] 整理笔记时过一遍ChatGPT的记录？但很多都记过了。。
+  - [ ] CUDA environment section in Linux-funda
 - [ ] **beautify the theme** (sidebar?), I'm lazy...
 - [ ] try interesting plugins
 - [ ] make badges? beautify hyperref?

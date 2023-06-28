@@ -63,7 +63,7 @@ This is a record of 折腾ing the system, in order not to forget.
 
 ## Operations
 
-1. the .sh files on the desktop needs "bash"
+
 
 ### Fundamental settings and softwares
 
@@ -521,10 +521,16 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
 
    ```shell
    mkdir your-directory
-   touch your
    ```
 
-2. rm命令
+   create file
+
+   ```shell
+   touch .xxx # create
+   ls -a # check
+   ```
+
+2. `rm`命令
 
    ```shell
    rm -d 目录名              #删除一个空目录
@@ -566,18 +572,7 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
 4. Usage: rmdir [OPTION]... DIRECTORY...
    Remove the DIRECTORY(ies), if they are empty
 
-5. check the size of a folder: https://zhidao.baidu.com/question/1178566665695139419.html
-
-   ```shell
-   du -sh /directory  # total size. default is .
-   du -d 1 -h  # show folder and size, finally total size
-   ```
-
-6. ls
-
-   https://www.runoob.com/linux/linux-comm-ls.html
-
-7. cp
+5. `cp`
 
    报错如下：`cp: omitting directory './nginx-1.12.1'`
 
@@ -587,51 +582,23 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
 
    注意：这里的-r代表递归的意思。
 
+6. `mv`
 
-#### other
+   move file in terminal: https://blog.csdn.net/qq_38451119/article/details/81121906
 
-1. move file in terminal: https://blog.csdn.net/qq_38451119/article/details/81121906
-   
    ```shell
    sudo mv filename target-dir
    ```
 
-2. create a **soft link** (short cut). Files stored in `gxf1` are actually occupying space in `gxf`. 
-   
-   ```shell
-   sudo ln -s /source/dir/ ./target
-   ```
-   
-   We'd better put the absolute path here...
+   change file name
 
-   > (However, I still have to specify the install directory.)
-   
-   create a **hard link**:
-   
    ```shell
-   sudo ln ./source ./target
+   sudo mv test.txt new.txt
+   sudo mv ./fca58054-9480-4790-a8ab-bc37f33823a4/ ./mechanical
    ```
-   
-   https://zhuanlan.zhihu.com/p/88891362
-   
-   my comprehension: 都是一个指针
-   
-   硬链接和源文件是一样的，指向相同的内容（文件、inode）；
-   
-   软链接指向一个东西（链接文件），这个东西（也算是指针）告诉你某处有个文件（源文件内容）。
-   
-   区别就是删了源文件，硬链接还能访问，软的就不行。但是两种链接都可以改名字？
-   
-   如果要类比，硬链接就像win备份用的那个符号链接，软链接则像快捷方式
-   
-   ![img](https://pic4.zhimg.com/80/v2-679da10fd5e4193d0098e6d6a35d5e1b_1440w.jpg)
-   
-   <img src="https://pic3.zhimg.com/80/v2-9abd33350e3bcb401f379752874f9b52_1440w.jpg" alt="img" style="zoom:80%;" />
-   
-4. `su root`: enter root. pw: a
 
-5. another tool to search
-   
+7. another tool to search
+
    ```shell
    locate -h
    Usage: locate [OPTION]... [PATTERN]...
@@ -642,25 +609,11 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
      -h, --help             print this help
      -w, --wholename        match whole path name (default)
    ```
-   
+
    locate命令其实是find -name的另一种写法，但是要比后者快得多，原因在于它不搜索具体目录，而是搜索一个数据库/var/lib/locatedb，这个数据库中含有本地所有文件信息。**Linux系统自动创建这个数据库，并且每天自动更新一次**，所以使用locate命令查不到最新变动过的文件。为了避免这种情况，可以在使用locate之前，先使用updatedb命令，手动更新数据库。
-   
+
    ```shell
    /usr/bin/updatedb && locate
-   ```
-   
-6. create file
-   
-   ```shell
-   touch .xxx # create
-   ls -a # check
-   ```
-
-7. change file name
-   
-   ```shell
-   sudo mv test.txt new.txt
-   sudo mv ./fca58054-9480-4790-a8ab-bc37f33823a4/ ./mechanical
    ```
 
 8. `rename` to change 
@@ -678,6 +631,80 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
    ```
 
 10. 
+
+#### check dir
+
+1. check the size of a folder: https://zhidao.baidu.com/question/1178566665695139419.html
+
+   ```shell
+   du -sh /directory  # total size. default is .
+   du -d 1 -h  # show folder and size, finally total size
+   ```
+
+   The `-d 1` option specifies the maximum depth of 1 level for the directory tree and the `-h` option prints sizes in human-readable format.
+   To sort the output of `du -d 1 -h` in dictionary order, you can pipe the output to the `sort` command with the `-k 2` option to specify that sorting should be performed on the second field (i.e., the directory names). Here’s an example:
+
+   ```
+   du -d 1 -h | sort -k 2
+   ```
+
+   This will print the sizes of the directories in the current directory and its subdirectories, sorted in dictionary order by directory name.
+
+2. `ls`
+
+   https://www.runoob.com/linux/linux-comm-ls.html
+
+3. `tree`
+
+4. `locate`
+
+5. `find`
+
+6. 
+
+#### other
+
+1. create a **soft link** (short cut). Files stored in `gxf1` are actually occupying space in `gxf`. 
+
+   ```shell
+   sudo ln -s /source/dir/ ./target
+   ```
+
+   We'd better put the absolute path here...
+
+   > (However, I still have to specify the install directory.)
+
+   create a **hard link**:
+
+   ```shell
+   sudo ln ./source ./target
+   ```
+
+   https://zhuanlan.zhihu.com/p/88891362
+
+   my comprehension: 都是一个指针
+
+   硬链接和源文件是一样的，指向相同的内容（文件、inode）；
+
+   软链接指向一个东西（链接文件），这个东西（也算是指针）告诉你某处有个文件（源文件内容）。
+
+   区别就是删了源文件，硬链接还能访问，软的就不行。但是两种链接都可以改名字？
+
+   如果要类比，硬链接就像win备份用的那个符号链接，软链接则像快捷方式
+
+   ![img](https://pic4.zhimg.com/80/v2-679da10fd5e4193d0098e6d6a35d5e1b_1440w.jpg)
+
+   <img src="https://pic3.zhimg.com/80/v2-9abd33350e3bcb401f379752874f9b52_1440w.jpg" alt="img" style="zoom:80%;" />
+
+2. `su root`: enter root. pw: a
+
+3. 运行qsub命令时，报错: `script is written in DOS/Windows text format`。 解决办法：输入 
+
+   ```shell
+   dos2unix <pbs-script-file>
+   ```
+
+4. 
 
 
 #### zip and unzip
@@ -965,59 +992,6 @@ similar....
 
 3. 
 
-#### other during installation
-
-1. run .sh files:
-
-   ```shell
-   sh file.sh
-   chmod a+x file.sh
-   ```
-
-   We can put our commands (like open pycharm) in a text file and save as .sh file. Put them in the desktop.
-
-2. install with .tar.gz
-
-   ```shell
-   tar xvzf filename.tar.gz # /your/directory
-   # enter the directory
-   ./configure # --prefix=...
-   make
-   make install
-   ```
-
-   maybe
-
-   ```shell
-   tar xvzf filename.run.tar.gz # get a .run file
-   ```
-
-3. install with .run
-
-   just **double click it**...or
-
-   ```shell
-   chmod +x filename.run
-   sudo ./filename.run # like .exe in win
-   ```
-
-4. install flatpakref package
-
-   ```shell
-   sudo apt install flatpak
-   sudo apt install gnome-software-plugin-flatpak # GUI
-   ```
-
-   https://docs.flatpak.org/en/latest/using-flatpak.html
-
-   install with flatpak: add a remote, download a flatpakref file, and install
-
-5. check version: `软件名 -version`
-
-6. 
-
-7. wget失败：拒绝连接 https://www.jianshu.com/p/cba95f62dc35  ??
-
 #### dpkg
 
 install with .deb
@@ -1115,6 +1089,74 @@ but you can still double click!!
 install nodejs first.
 
 change source: https://www.cnblogs.com/feng-hao/p/11774543.html
+
+#### other
+
+1. run .sh files:
+
+   ```shell
+   sh file.sh
+   bash file.sh
+   # or
+   chmod a+x file.sh
+   ./file.sh
+   ```
+
+   We can put our commands (like open pycharm) in a text file and save as .sh file. Put them in the desktop.
+
+2. install with .tar.gz
+
+   ```shell
+   tar xvzf filename.tar.gz # /your/directory
+   # enter the directory
+   ./configure # --prefix=...
+   make
+   make install
+   ```
+
+   maybe
+
+   ```shell
+   tar xvzf filename.run.tar.gz # get a .run file
+   ```
+
+3. install with .run
+
+   just **double click it**...or
+
+   ```shell
+   chmod +x filename.run
+   sudo ./filename.run # like .exe in win
+   ```
+
+4. install flatpakref package
+
+   ```shell
+   sudo apt install flatpak
+   sudo apt install gnome-software-plugin-flatpak # GUI
+   ```
+
+   https://docs.flatpak.org/en/latest/using-flatpak.html
+
+   install with flatpak: add a remote, download a flatpakref file, and install
+
+5. check version: `软件名 -version`
+
+6. 
+
+7. wget失败：拒绝连接 https://www.jianshu.com/p/cba95f62dc35  ??
+
+8. in our cluster
+
+   ```
+   warning:  Clock skew detected.  Your build may be incomplete.
+   ```
+
+   time is problematic (install time in the future?) but it doesn't matter.
+
+9. 
+
+
 
 ### after installation
 
@@ -1259,9 +1301,15 @@ This will print the sizes of the directories in the current directory and its su
 tree .
 ```
 
+## Hardware-related
+
+- HDMI线必须要插在主机的偏下一点，也就是直接插在显卡上，偏上的那个口是没有用的
 
 
-## When system halted
+
+## Emergency
+
+### When system halted
 
 1. do not double click .sdf file with multiple conformations...it occupies all memory..
 
@@ -1299,7 +1347,9 @@ https://blog.csdn.net/fryingpan/article/details/42641999
 
 might because handling too many files in a folder...?
 
-# Installation and softwares
+
+
+# Fundamental installation and softwares
 
 note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
@@ -1308,8 +1358,8 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 > 安排存储分配。关键的软件也许装到root，但不利于重装
 >
 > - [x] 翻墙 (electron-ssr)
-> - [x] ToDesk。向日葵，vnc viewer？
-> - [x] 显卡驱动, cuda, cudnn
+> - [x] ToDesk, 向日葵，vnc viewer？(remote control)
+> - [x] 显卡驱动, cuda, (cudnn)
 > - [x] 编程环境 (pycharm, anaconda)
 > - [x] 基本工具（git, gparted这种）、常用写作（typora和主题, VScode）
 > - [x] 分子模拟环境（gmx,NAMD,openbabel,pymol,gaussian,ambertools,acpype,VMD,DSV）
@@ -1326,8 +1376,6 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 > 小问题
 >
 > - [x] 输入法点不开  界面（算了）
-> - [ ] 
-> - [ ] 
 
 ## 重装系统
 
@@ -1382,7 +1430,7 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
   LC_MEASUREMENT="zh_CN.UTF-8"
   ```
 
-  或者直接装英文的吧
+  或者直接装英文的吧，加个中文输入法
 
 - 第一个安装：确定合适驱动版本，直接在软件与更新里下
 
@@ -1399,7 +1447,7 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
   - 尝试是否能远控重启
 
-- 安装vi，git, alacarte, gpart, gparted, ethtool, 等基本工具. configure git
+- 安装vi, git, alacarte, gpart, gparted, ethtool, 等基本工具. configure git
 
   ```shell
   sudo apt-get install vim git alacarte gpart gparted ethtool openssh-server openssh-client npm locate
@@ -1619,36 +1667,28 @@ but the following still needs re-configure...
 
 ## CUDA environment
 
-    1. `nvidia smi` shows cuda version 11.1, driver is 455.45.01. We should not use an open source driver. check additional driver from 'start'.
-    2. nivida.cn also shows 455.45, so do I need to install the driver? Now no.
-
-  dependence:
+dependence: install driver then cuda then cudnn. then configure conda environment
 
 ```mermaid
-graph TB;
-anaconda-->cuda
-cuda-->driver
-cuda-->cudnn
+graph LR;
+cudnn--> cuda -->driver
 ```
 
-### pycharm 
+### pycharm
 
 student (professional)
 
 https://blog.csdn.net/qq_51468843/article/details/110561151
 
-my email: stu, `741*******cb`
-
-1. problem! can only run .sh file now!
-2. cooooonfiiigure a command for them
+my email: stu, `74********cb`
 
 ### Anaconda
 
 1. no need to copy a .sh file. You can assign a directory.
 
-2. under `su root`
+2. no need under `su root`
 
-3. `conda: no command`: add path. https://blog.csdn.net/freezeplantt/article/details/80176215
+3. `conda: no command`: add path? open a new terminal https://blog.csdn.net/freezeplantt/article/details/80176215
 
 4. cannot activate at the first time: run `source activate`
    
@@ -1662,31 +1702,10 @@ my email: stu, `741*******cb`
 
   .run https://blog.csdn.net/weixin_38369492/article/details/107957296
 
-  both: don't forget blacklist nouveau
+  both: don't forget to blacklist nouveau
 
-- > Driver:   Not Selected
-  > Toolkit:  Installed in /usr/local/cuda-11.1/
-  > Samples:  Installed in /home/kemove/, but missing recommended libraries
-  >
-  > Please make sure that
-  >
-  > - PATH includes /usr/local/cuda-11.1/bin
-  > - LD_LIBRARY_PATH includes /usr/local/cuda-11.1/lib64, or, add /usr/local/cuda-11.1/lib64 to /etc/ld.so.conf and run ldconfig as root
-  >
-  > ```shell
-  > export PATH=$PATH:/usr/local/cuda/bin
-  > export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
-  > ```
-  >
-  > **To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-11.1/bin**
-  >
-  > > ***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least .00 is required for CUDA 11.1 functionality to work.
-  > > To install the driver using this installer, run the following command, replacing <CudaInstaller> with the name of this run file:
-  >
-  >     sudo <CudaInstaller>.run --silent --driver
-  >
-  > Logfile is /var/log/cuda-installer.log
-  
+- To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-11.1/bin
+
 - to verify success: [link](https://blog.csdn.net/weixin_38208741/article/details/70848364)  [link](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#running-the-compiled-examples )
   
   ```shell
@@ -1710,30 +1729,51 @@ my email: stu, `741*******cb`
   ```shell
   nvcc -V 
   ```
-  
+
+#### other issues
+
 - problems
-  
+
   - I ran ...run.1 rather than .run ???
   - don't know if this matters: https://blog.davidou.org/archives/1361
 
 - 为啥之前的驱动、cuda、cudnn系列能自动更新？可能是cuda的软件源是latest，自动更的，现在是固定了版本的
-  
-- other
-  
-  - if "Failed to initialize NVML: Driver/library version mismatch"
-    
-    https://comzyh.com/blog/archives/967/
-    
-    if it's due to software update, just reboot. driver and cuda toolkit is simultaneously updated...
+
+- if "Failed to initialize NVML: Driver/library version mismatch"
+
+  https://comzyh.com/blog/archives/967/
+
+  if it's due to software update, just reboot. driver and cuda toolkit is simultaneously updated...
 
 - other ways to check gpu
-  
+
   ```shell
   pip install gpustat
   gpustat
   ```
 
 - multiple version of cuda: https://bluesmilery.github.io/blogs/a687003b/
+
+- > Driver:   Not Selected
+  > Toolkit:  Installed in /usr/local/cuda-11.1/
+  > Samples:  Installed in /home/kemove/, but missing recommended libraries
+  >
+  > Please make sure that
+  >
+  > - PATH includes /usr/local/cuda-11.1/bin
+  > - LD_LIBRARY_PATH includes /usr/local/cuda-11.1/lib64, or, add /usr/local/cuda-11.1/lib64 to /etc/ld.so.conf and run ldconfig as root
+  >
+  > ```shell
+  > export PATH=$PATH:/usr/local/cuda/bin
+  > export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+  > ```
+  >
+  > > ***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least .00 is required for CUDA 11.1 functionality to work.
+  > > To install the driver using this installer, run the following command, replacing <CudaInstaller> with the name of this run file:
+  >
+  >     sudo <CudaInstaller>.run --silent --driver
+  >
+  > Logfile is /var/log/cuda-installer.log
 
 ### cudnn
 
@@ -1774,7 +1814,7 @@ not sure how to do...
 
 #### other issues
 
-1. to remove cudnn
+1. to remove cudnn (method 1)
 
    ```shell
    sudo rm -rf /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
@@ -1822,7 +1862,15 @@ not sure how to do...
     Test passed!
     ```
 
-# Debugging experiences Ubuntu
+### Not using
+
+>     1. `nvidia smi` shows cuda version 11.1, driver is 455.45.01. We should not use an open source driver. check additional driver from 'start'.
+>     2. nivida.cn also shows 455.45, so do I need to install the driver? Now no.
+>
+> 1. problem! can only run .sh file now!
+> 2. configure a command for them
+
+# Debugging experiences for Ubuntu
 
 ## TOC
 
@@ -2652,9 +2700,13 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 17. 今日弄完VPN，普通网络都上不了。解决方法：
 
-    ![restore-network](E:\GitHub-repo\notes\techniques\images\restore-network.png)
+    ![restore-network](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/restore-network.png)
 
-18. 
+18. [切换盘符：使用cmd命令行 cd e: 无法切换到E盘-CSDN博客](https://blog.csdn.net/u011288271/article/details/52781342)
+
+    切换盘符和切换路径是分离的。想要切盘符 直接使用命令 `e:` 或者 `cd /d e:` 即可
+
+19. 
 
 ## WSL
 
