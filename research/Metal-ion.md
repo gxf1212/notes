@@ -7,11 +7,31 @@ From the PSKR1-Al<sup>3+</sup> project. Modeling (inclulding advanced FF paramet
 
 
 
+# Fundamental usage
+
+## First things to know
+
+- parameter fitting targets: IOD, HFE, CN, 
+
+  water residence time or exchange rate, coefficient of diffusion
+
+- 
+
+- 
+
+
+
+## 12-6-4 model
+
+https://ambermd.org/tutorials/advanced/tutorial20/12_6_4.php
 
 
 
 
-# Parametrization
+
+
+
+# QM-refitted parameters
 
 ## Sobtop
 
@@ -34,6 +54,10 @@ This tool is compatible with Amber FF modeling without any pain...
 ### Hydrated Al<sup>3+</sup>
 
 Oh, they will just keep the six waters. Don't include more...
+
+
+
+
 
 
 

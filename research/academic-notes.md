@@ -40,23 +40,20 @@ maybe a new .md file in the future
 
 # Biochemistry
 
-卤素基本是通过谷胱甘肽结合来代谢的
+## Protein
 
-[Halogenation of drugs enhances membrane binding and permeation](https://pubmed.ncbi.nlm.nih.gov/15122640/)
-
-
-
-自然界几乎所有天然存在的糖类化合物均是D构型，D-核糖的三个手性碳均为D构型。
+- hypophosphorylated (comparative more hypophosphorylated, superlative most hypophosphorylated) (biochemistry) phosphorylated to a less than normal extent, or less than fully.
+- Heavy metal ions can precipitate proteins by bonding with negatively charged parts of the protein molecule, reducing the tendency of the protein to attract a layer of water molecules around it, allowing the protein molecules to interact with one another and precipitate out of solution.
 
 
 
-[甲醛中毒的化学原理是什么？ - 知乎](https://www.zhihu.com/question/363622944/answer/963100232)
+## Nucleic acids
+
+![DNAPol](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/DNAPol.png)
 
 
 
-Heavy metal ions can precipitate proteins by bonding with negatively charged parts of the protein molecule, reducing the tendency of the protein to attract a layer of water molecules around it, allowing the protein molecules to interact with one another and precipitate out of solution.
-
-
+## Lipids
 
 The most abundant membrane lipids are the phospholipids. These have a polar head group and two hydrophobic hydrocarbon tails.
 [Phosphatidylcholine (PC) and phosphatidylethanolamine (PE) are the most abundant phospholipids in all mammalian cell membranes](https://pubmed.ncbi.nlm.nih.gov/28411170/).
@@ -64,19 +61,37 @@ The most abundant membrane lipids are the phospholipids. These have a polar head
 
 
 
-hypophosphorylated (comparative more hypophosphorylated, superlative most hypophosphorylated) (biochemistry) phosphorylated to a less than normal extent, or less than fully.
+## Saccharides/Carbonhydrates
+
+自然界几乎所有天然存在的糖类化合物均是D构型，D-核糖的三个手性碳均为D构型。
 
 
 
-![DNAPol](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/DNAPol.png)
 
 
+## Principle
 
 The inhibitory constant (Ki) is a type of equilibrium dissociation constant (Kd) that represents the equilibrium binding affinity for a ligand that reduces the activity of its binding partner.
 
 Ki is associated with thermodynamic parameters in that ΔG = RTln(Ki), where ΔG, R, and T are the absolute binding free energy, the gas constant, and the absolute temperature, respectively
 
 
+
+## Structural biology
+
+PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
+
+
+
+## Other general
+
+[甲醛中毒的化学原理是什么？ - 知乎](https://www.zhihu.com/question/363622944/answer/963100232)
+
+
+
+卤素基本是通过谷胱甘肽结合来代谢的
+
+[Halogenation of drugs enhances membrane binding and permeation](https://pubmed.ncbi.nlm.nih.gov/15122640/)
 
 # Pharmacology
 
@@ -178,8 +193,6 @@ RNA aptamer targeting AR (v7) DNA binding domain?
 
 
 
-
-
 # Other Biology
 
 rhizosphere: 根际，是指受植物根系活动影响，在物理、化学和生物学性质上不同于土体的那部分微域环境。根际一般指离根轴表面数毫米范围之内，是土壤-根系-微生物相互作用的微区域，也是不同植物种类或品种、土壤和环境条件形成的特定的微生态系统。 
@@ -203,6 +216,7 @@ rhizosphere: 根际，是指受植物根系活动影响，在物理、化学和�
 
 - **Tesla A100 is...2~3x** faster than the V100 using 32-bit precision.
 - SIMD stands for **Single Instruction, Multiple Data**. It is a type of parallel processing in Flynn’s taxonomy. [SIMD describes computers with multiple processing elements that perform the same operation on multiple data points simultaneously](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data)
+- NCCL：Nvidia Collective multi-GPU Communication Library，多GPU通讯
 
 # AI
 

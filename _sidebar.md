@@ -3,7 +3,7 @@
   - [软件安装](/techniques/Prepare-for-the-computer.md)
   - [博客相关](/techniques/Building-blogs.md)
   - [网盘备份](/techniques/Cloud-backup.md)
-  - [玩转视频](/techniques/Deal-with-videos.md)
+  - [玩转媒体](/techniques/Deal-with-media.md)
   - [软件操作](/techniques/Specific-Software-Usage.md)
 - [科研学习类](/research/README.md)
   - [用于MD的编程](/research/Programming-for-MD.md)

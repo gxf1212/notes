@@ -11,19 +11,19 @@ This is a record of 折腾ing the system, in order not to forget.
 
 ## Basics
 
-1. kde and gnome are two types of desktop interface. KDE looks like Windows desktop and gnome is the classic Linux desktop interface.
+1. Linux是把要安装的软件分布在整个系统的各个文件夹里面， 比如所有软件的配置文件都安装在`/etc`下面， 软件需要的库文件都安装在`/lib`下面，日志文件都在`/var/log`下面，`/bin`下是常用的程序，等等。 比较复杂 哈哈。
 
-2. Linux是把要安装的软件分布在整个系统的各个文件夹里面， 比如所有软件的配置文件都安装在`/etc`下面， 软件需要的库文件都安装在`/lib`下面，日志文件都在`/var/log`下面，`/bin`下是常用的程序，等等。 比较复杂 哈哈。
-
-3. rpm包主要应用在RedHat系列包括 Fedora等发行版的Linux系统上，deb包主要应用于Debian系列包括现在比较流行的Ubuntu等发行版上。
+2. rpm包主要应用在RedHat系列包括 Fedora等发行版的Linux系统上，deb包主要应用于Debian系列包括现在比较流行的Ubuntu等发行版上。
 
    transform .rpm to .deb: `sudo alien ./*.rpm`
 
-4. It's hard to change default install directory. And I have to make a boot CD (U disk) to change the storage distribution (like when I'm installing Ubuntu, how much for root, home, swap...).
+3. Bash cheat sheet: Top 25 commands and creating custom commands
 
-5. 下面是一些典型的段错误的原因：由内存管理硬件试图访问一个不存在的内存地址
+   https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
-6. 环境变量
+4. 下面是一些典型的段错误的原因：由内存管理硬件试图访问一个不存在的内存地址
+
+5. 环境变量
 
    root和user的`.bashrc`是不一样的！
 
@@ -31,9 +31,9 @@ This is a record of 折腾ing the system, in order not to forget.
 
    LD_LIBRARY_PATH最初是空的，第一个不要有多余的`:`
 
-7. Linux操作系统执行可执行文件提示*No such file or directory*的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
+6. Linux操作系统执行可执行文件提示*No such file or directory*的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
 
-8. cp: cannot create regular file 'xxxx' 'xxxx': Invalid argument
+7. cp: cannot create regular file 'xxxx' 'xxxx': Invalid argument
 
    The syntax of your command is correct. “Invalid argument” from cp usually means that the file name is not valid on the target filesystem. It may be too long, contain a forbidden character, or be a reserved word.
 
@@ -41,23 +41,23 @@ This is a record of 折腾ing the system, in order not to forget.
 
    exFAT应该是都兼容的一种格式。
 
-9. ubuntu的话，卡死崩溃时你切换到tty1～6然后 sudo pkill X; startx; 一下，就好了。不需要重启。
+8. ubuntu的话，卡死崩溃时你切换到tty1～6然后 sudo pkill X; startx; 一下，就好了。不需要重启。
 
-10. 回收站：`~/.local/share/Trash/files`
+9. 回收站：`~/.local/share/Trash/files`
 
-11. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
+10. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
 
-12. [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
+11. [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
 
-13. 标准库的大部分函数通常放在文件 libc.a 中（文件名后缀.a代表“achieve”，译为“获取”），或者放在用于共享的动态链接文件 libc.so 中（文件名后缀.so代表“share object”，译为“共享对象”）。这些链接库一般位于 /lib/ 或 /usr/lib/，或者位于 GCC 默认搜索的其他目录。
+12. 标准库的大部分函数通常放在文件 libc.a 中（文件名后缀.a代表“achieve”，译为“获取”），或者放在用于共享的动态链接文件 libc.so 中（文件名后缀.so代表“share object”，译为“共享对象”）。这些链接库一般位于 /lib/ 或 /usr/lib/，或者位于 GCC 默认搜索的其他目录。
 
-14. under root, no need to add `sudo`
+13. under root, no need to add `sudo`
 
-15. date: https://cloud.tencent.com/developer/article/1441802
+14. date: https://cloud.tencent.com/developer/article/1441802
 
-16. 
+15. 
 
-17. what if message is too long? add `|more` https://blog.csdn.net/weixin_34293911/article/details/86473042
+16. what if message is too long? add `|more` https://blog.csdn.net/weixin_34293911/article/details/86473042
 
 
 
@@ -762,6 +762,8 @@ rather than xvrf...
 
 ### desktop managers
 
+kde and gnome are two types of desktop interface. KDE looks like Windows desktop and gnome is the classic Linux desktop interface.
+
 #### KDE
 
 1. fonts
@@ -908,7 +910,7 @@ rather than xvrf...
 
 ## Specific commands
 
-### installation
+### Installation
 
 #### apt
 
@@ -998,7 +1000,7 @@ install with .deb
 
 just **double click it** （不能指定目录），进入“软件安装”
 
-> 命令行法：直接解压到当前目录，然后配置环境变量，即可启动运行程序；
+> 命令行：直接解压到当前目录，然后配置环境变量，即可启动运行程序；
 >
 > ```shell
 > dpkg -x same.deb 
@@ -1009,6 +1011,8 @@ just **double click it** （不能指定目录），进入“软件安装”
 > ```shell
 > dpkg -i --instdir=/dest/dir/path some.deb # under root
 > ```
+>
+> It's hard to change default install directory. And I have to make a boot CD (U disk) to change the storage distribution (like when I'm installing Ubuntu, how much for root, home, swap...).
 
 关于dpkg：https://blog.csdn.net/weixin_30394633/article/details/98926820
 
@@ -1158,16 +1162,59 @@ change source: https://www.cnblogs.com/feng-hao/p/11774543.html
 
 
 
-### after installation
+### privilige: chown and chmod
 
-#### make
+change owner, change mode
 
-`make`命令是运行的所在目录下的`Makefile`文件, 如果*Make*file 里有*check*的话, 会执行测试,也就是检查下编译出来的东西能不能用
+Linux/Unix 的文件调用权限分为三级 : 文件所有者（Owner）、用户组（Group）、其它用户（Other Users）。
 
-make -jn (install...)
-n代表同时编译的进程，可以加快编译速度，n由用户计算机的配置与性能决定，当前的典型值为10。所以`make -j10`
+https://www.runoob.com/linux/linux-comm-chmod.html  great!
 
-#### tar and unzip
+https://www.runoob.com/linux/linux-comm-chown.html
+
+
+
+### Download
+
+#### wget
+
+```shell
+wget http://example.com/file.zip
+```
+
+
+
+#### curl
+
+Here is an example of how you can use the `curl` command to download a file from the internet:
+
+```shell
+curl -o file.zip http://example.com/file.zip
+```
+
+In this example, we use the `curl` command with the `-o` option to specify the name of the file where we want to save the downloaded data (`file.zip`). We then provide the URL of the file we want to download (`http://example.com/file.zip`).
+
+If you want to download a file using `curl` and save it with the same name as the remote file, you can use the `-O` (capital letter O) option instead of the `-o` (lowercase letter o) option. Here is an example:
+
+```shell
+curl -O http://example.com/file.zip
+```
+
+#### svn
+
+get part of the files in one GitHub repository
+
+- `svn checkout url`, trunk
+
+  Then the files are downloaded to the current directory of terminal.
+
+  https://blog.csdn.net/ai_faker/article/details/107823359?utm_medium=distribute.pc_relevant.none-task-blog-title-2&spm=1001.2101.3001.4242
+
+- https://blog.csdn.net/q279838089/article/details/44751039
+
+
+
+### tar and unzip
 
 - manual
 
@@ -1203,15 +1250,24 @@ n代表同时编译的进程，可以加快编译速度，n由用户计算机的
 
 - unzip
 
-#### privilige: chown and chmod
 
-change owner, change mode
 
-Linux/Unix 的文件调用权限分为三级 : 文件所有者（Owner）、用户组（Group）、其它用户（Other Users）。
+### Compile
 
-https://www.runoob.com/linux/linux-comm-chmod.html  great!
+[What does "./configure; make; make install" do?](https://askubuntu.com/questions/173088/what-does-configure-make-make-install-do)
 
-https://www.runoob.com/linux/linux-comm-chown.html
+- `./configure` checks if you have everything needed to build the application and informs you of any critical errors
+- `make` builds (compiles) the source code
+- `make install` installs the compiled code into your system.
+
+#### make
+
+`make`命令是运行的所在目录下的`Makefile`文件, 如果*Make*file 里有*check*的话, 会执行测试,也就是检查下编译出来的东西能不能用
+
+`make -jn (install...)`
+n代表同时编译的进程，可以加快编译速度，n由用户计算机的配置与性能决定，当前的典型值为10。所以`make -j10`
+
+
 
 ### vim
 
@@ -1247,17 +1303,7 @@ https://www.runoob.com/linux/linux-comm-chown.html
 
 - 
 
-### svn
-
-get part of the files in one GitHub repository
-
-- `svn checkout url`, trunk
-
-  Then the files are downloaded to the current directory of terminal.
-
-  https://blog.csdn.net/ai_faker/article/details/107823359?utm_medium=distribute.pc_relevant.none-task-blog-title-2&spm=1001.2101.3001.4242
-
-- https://blog.csdn.net/q279838089/article/details/44751039
+- 
 
 ### history
 
@@ -1282,7 +1328,7 @@ bash 的历史函数依赖于一个名为 *HISTFILE* 的变量，通常设置为
 
 
 
-### directory exploration
+### Directory exploration
 
 #### du
 
@@ -1349,7 +1395,7 @@ might because handling too many files in a folder...?
 
 
 
-# Fundamental installation and softwares
+# Fundamental softwares installation
 
 note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 

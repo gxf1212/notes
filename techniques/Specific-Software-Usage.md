@@ -2,6 +2,8 @@
 
 Here shows some specific experiences on daily working.
 
+See [Deal-with-media.md](Deal-with-media.md) for applications about videos, etc.
+
 Fret not over bygones, and the forward journey take.
 
 > wakeonlan
@@ -1186,20 +1188,9 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 
 开通钉钉专业版，内部聊天记录（包含内部群以及内部单聊）保存时间将从180天调整为2年
 
-### 会议纪要
-
-**[腾讯会议 自动会议纪要-操作指南](https://cloud.tencent.com/document/product/1095/53483)**。但是要企业版
-
-[Windows 实时语音转文字](https://blog.csdn.net/qq_41095608/article/details/126308275)
-
-联想语音助手已经满足我的需要了，但是这玩意半天退出不了
-
-最后就用系统自带的录音机。可以上传到钉钉，或加载到剪映以转换成文字
 
 
-
-
-
+```
 # bit by bit programming
 
 一点一滴
@@ -1207,30 +1198,21 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 ## Python 
 
 see [Python-for-MD](/MD/Python-for-MD.md)
+```
 
-## LaTeX
+
+
+# LaTeX
 
 notes from Windows
 
-### basic
+## Basics
 
 - The Comprehensive Tex Archive Network = CTAN
 
 - The Missing \begin{document} is because you're using it in the preamble
 
-- 在子文档中编译整个文档。毕业论文的模板包含多个文件，写作往往在子文件里，然而如果不加设置地直接编译子文件是会报错的。这时需要在“选项”中设置主文档或者在主文档第一行中加入meta信息`% !TeX root = main.tex`(假设主文档是main.tex的话)。这样在任何一个子文件都可以直接编译，等价于编译main.tex。
-
-  [Texstudio使用经验](http://haccanri.github.io/tools/2015/04/22/tex_editor.html)
-
 - 
-
-### table
-
-- [Latex 表格文字居中（垂直和水平居中）_latex表格文字居中_ICQQ123的博客-CSDN博客](https://blog.csdn.net/ICQQ123/article/details/114701859)
-
-### float
-
-- https://blog.csdn.net/u012428169/article/details/80558331 没有进行特殊命令处理，但是显示的图片和表格标号跟它们在LaTeX编辑环境中放置的章节有关，这并不是一般文章要求的。
 
 ### font
 
@@ -1246,13 +1228,27 @@ notes from Windows
 
 1. `\titlecontents`：目录中的格式
 
+## Float
+
+- https://blog.csdn.net/u012428169/article/details/80558331 没有进行特殊命令处理，但是显示的图片和表格标号跟它们在LaTeX编辑环境中放置的章节有关，这并不是一般文章要求的。
+
+### table
+
+- [Latex 表格文字居中（垂直和水平居中）_latex表格文字居中_ICQQ123的博客-CSDN博客](https://blog.csdn.net/ICQQ123/article/details/114701859)
+
+## Page
+
+- The command `\clearpage` forces a page break and flushes all floats (e.g., figures and tables) that have not yet been placed. The command `\pagestyle{empty}` changes the page style for the current and subsequent pages to `empty`, which means that the headers and footers will be empty.
+  The command `\cleardoublepage` is similar to `\clearpage`, but it also ensures that the next page is an odd-numbered page (i.e., a right-hand page in a two-sided document). If the current page is already an odd-numbered page, then `\cleardoublepage` simply issues a new page. Otherwise, it issues two new pages.
+  In summary, the command `\clearpage{\pagestyle{empty}\cleardoublepage}` forces a page break, flushes all floats, changes the page style to `empty`, and ensures that the next page is an odd-numbered page.
+
 ### fancyhdr
 
 1. 如何在目录页去掉页码：可以在目录生成命令后加入`\thispagestyle{empty}`即可。
 
    https://www.latexstudio.net/archives/7985.html
 
-### math
+## Math
 
 1. subscript newline
 
@@ -1263,9 +1259,9 @@ notes from Windows
    sum_{\substack{\text { nonbonded } \\ \text { pairsi,j }}
    ```
 
-2. 尖括号, \langle \rangle, ⟨⟩
+2. 尖括号`⟨⟩`: `\langle`, `\rangle`
 
-### bibliography
+## Bibliography
 
 1. bst file
    - bst文件介绍 https://liwt31.github.io/2021/03/02/bst/ 
@@ -1281,30 +1277,7 @@ notes from Windows
 7. citation keys cases https://tex.stackexchange.com/questions/623482/case-mismatch-between-cite-keys
 8. https://tex.stackexchange.com/questions/174030/misplaced-alignment-tab-character-error-when-citing-a-particular-entry Look for & in a bibliographic item and change it into \&
 
-### if statement
-
-```latex
-\ifcsname foo\endcsname
-  \message{\string\foo\space is defined}%
-\else
-  \message{no command \string\foo}%
-\fi
-```
-
-这些newtoks不是没被定义，而是没被赋值（值为empty）
-https://www-sop.inria.fr/marelle/tralics/auxdir/tdoc1cid2.html
-
-```latex
-\makeatletter
-\ifcsname foo\endcsname A\else a\fi
-\ifx\foo\undefined  B\else b\fi
-\ifdefined\foo  C\else c\fi
-\@ifundefined{FOO}{D}{d}
-\ifcsname FOO\endcsname E\else e\fi
-\ifdefined\FOO F\else f\fi
-```
-
-### Chinese
+## Chinese
 
 - **[latex显示中文 - CodeAntenna](https://codeantenna.com/a/NF4HbNFgM4)**
 
@@ -1314,9 +1287,9 @@ https://www-sop.inria.fr/marelle/tralics/auxdir/tdoc1cid2.html
 
   2. 代码前后可以紧接着加入其它文字，比如
 
-       ```latex
-       Software \begin{CJK*}{UTF8}{gbsn}软件\end{CJK*}vulnerabilities
-       ```
+     ```latex
+     Software \begin{CJK*}{UTF8}{gbsn}软件\end{CJK*}vulnerabilities
+     ```
 
   3. 此时需要用pdfLaTeX编译。
 
@@ -1324,22 +1297,68 @@ https://www-sop.inria.fr/marelle/tralics/auxdir/tdoc1cid2.html
   http://mirrors.ibiblio.org/CTAN/macros/xetex/latex/xecjk/xeCJK.pdf
   xeCJK 只提供了字体和标点控制等基本 CJK 语言支持。对于中文文档，可以使用更为高 层的 ctex 宏包或文档类，它将自动调用 xeCJK 并设置好中文字体，同时提供了进一步的本地化支持。详细内容参看 ctex 宏包套件的说明。
   所以用的还是英文的缩进方式。
-  
+
   ```latex
   % 该文件使用 xelatex 命令可以编译通过
   \documentclass[12pt, a4paper]{article}
   \usepackage{fontspec}
   \usepackage[slantfont, boldfont]{xeCJK}
   ```
+
   
+
+## Advanced Control
+
+### if statement
+
+- `\ifcsname`
+
+  ```latex
+  \ifcsname foo\endcsname
+    \message{\string\foo\space is defined}%
+  \else
+    \message{no command \string\foo}%
+  \fi
+  ```
+
+  这些newtoks不是没被定义，而是没被赋值（值为empty）
+  https://www-sop.inria.fr/marelle/tralics/auxdir/tdoc1cid2.html
+
+  ```latex
+  \makeatletter
+  \ifcsname foo\endcsname A\else a\fi
+  \ifx\foo\undefined  B\else b\fi
+  \ifdefined\foo  C\else c\fi
+  \@ifundefined{FOO}{D}{d}
+  \ifcsname FOO\endcsname E\else e\fi
+  \ifdefined\FOO F\else f\fi
+  ```
+
+- If you want to put the conditional statement in the preamble (i.e., before the `\begin{document}` command), you can use the `\AtBeginDocument` command to delay the execution of the conditional statement until after the `\begin{document}` command. Here is an example:
+
+  ```latex
+  \documentclass{article}
+  \newif\ifxxx
+  \AtBeginDocument{
+    \ifxxx
+      The condition is true.
+    \else
+      The condition is false.
+    \fi
+  }
+  \begin{document}
   
+  \xxxtrue % Set the condition to true
+  hahaha
+  
+  \end{document}
+  ```
 
-### code
 
-http://www.noobyard.com/article/p-nymwcdnd-nx.html  插入Python代码升级方案（类似jupyter notebook的配色？）
 
-### other
+## Other
 
+- code: http://www.noobyard.com/article/p-nymwcdnd-nx.html  插入Python代码升级方案（类似jupyter notebook的配色？）
 - https://blog.csdn.net/weixin_44556141/article/details/121429470  ctexart才有这个，article没有
 
 ### TODO list
@@ -1366,9 +1385,9 @@ https://yinqingwang.wordpress.com/    [LanguageTool](https://www.languagetool.or
 
 - [texstudio structure（结构）不见了，如何进行查找](https://blog.csdn.net/liuyiming2019/article/details/115272007)：就在左下角。。
 
-- http://haccanri.github.io/tools/2015/04/22/tex_editor.html
+- 在子文档中编译整个文档。毕业论文的模板包含多个文件，写作往往在子文件里，然而如果不加设置地直接编译子文件是会报错的。这时需要在“选项”中设置主文档或者在主文档第一行中加入meta信息`% !TeX root = main.tex`(假设主文档是main.tex的话)。这样在任何一个子文件都可以直接编译，等价于编译main.tex。
 
-  在子文档中编译整个文档。毕业论文的模板包含多个文件，写作往往在子文件里，然而如果不加设置地直接编译子文件是会报错的。这时需要在“选项”中设置主文档或者在主文档第一行中加入meta信息`% !TeX root = main.tex`(假设主文档是main.tex的话)。这样在任何一个子文件都可以直接编译，等价于编译main.tex。
+  [Texstudio使用经验](http://haccanri.github.io/tools/2015/04/22/tex_editor.html)
 
 - [TeXstudio 设置定时自动保存_Amnesia Greens的博客](https://blog.csdn.net/amnesiagreen/article/details/120879230)
 
@@ -1377,39 +1396,6 @@ https://yinqingwang.wordpress.com/    [LanguageTool](https://www.languagetool.or
 ## R language
 
 to be continue...
-
-
-
-## Adobe series
-
-see [Deal with videos](Deal-with-videos.md)
-
-### Adobe illustrator
-
-- 我们可以按快捷键Ctrl+，就是放大视图，按快捷键Ctrl-就是缩小视图；滚轮是上下，Ctrl+滚轮是左右
-
-  [ai画板上下左右移动快捷键，画板缩小放大快捷键-百度经验](https://jingyan.baidu.com/article/9113f81b7e4bdc2b3314c740.html)
-
-- 使用定界框旋转对象
-
-  1. 选择一个或多个对象。
-  2. 使用“选择”工具 ，将位于定界框外部的鼠标指针移近一个定界框手柄，待指针形状变为 之后再拖动鼠标。
-
-  https://helpx.adobe.com/cn/illustrator/using/rotating-reflecting-objects.html
-
-### PR
-
-### basics
-
-- 轨道右侧是工具栏，比如说剃刀工具，可以剪切视频和音频。
-
-- [PR如何给视频的某一段中的局部添加马赛克？ - 知乎](https://www.zhihu.com/question/67869397/answer/2313201400)
-
-[Adobe premiere怎么把浮动面板关闭？_火星网校](https://www.hxsd.tv/wenda/11068/)
-
-
-
-
 
 
 

@@ -454,7 +454,7 @@ shutil是个增强版的：
 - 
 - 也没有grep
 
-有时候os.system可能执行不完就开始进行下一个命令，但是文件还没有生成完，所以就会报错了。所以要用：
+有时候`os.system`可能执行不完就开始进行下一个命令，但是文件还没有生成完，所以就会报错了。所以要用：
 
 ### subprocess
 
@@ -491,9 +491,22 @@ read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arg
 
   We usually don't need `exepath = os.path.dirname(sys.argv[0])`, nor any path when using `os.system()`.
 
-- `os.walk()` : walk through all sub-folders. https://www.runoob.com/python/os-walk.html
+- `os.walk()` : walk through all sub-folders. see https://www.runoob.com/python/os-walk.html
 
 - `os.getenv(PATH)`：获取环境变量（Windows/Linux通用），而不是`popen("which xxx")`
+
+  也可以使用 `os` 模块中的 `os.environ` 和 `os.pathsep` 来获取 `PATH` 环境变量并将其转换为目录列表。下面是一个示例代码：
+
+  ```
+  import os
+  
+  path = os.environ['PATH']
+  dirs = path.split(os.pathsep)
+  
+  print(dirs)
+  ```
+
+  这段代码首先从 `os.environ` 字典中获取 `PATH` 环境变量的值，然后使用 `os.pathsep`（路径分隔符）将其分割为目录列表。最后，打印出目录列表。
 
 - [glob — Unix style pathname pattern expansion](https://docs.python.org/3/library/glob.html#module-glob).
 
@@ -660,6 +673,22 @@ https://juejin.cn/post/6844903919978545160
 
 - 
 
+### logging
+
+In Python’s `logging` module, there are several methods you can use to log messages of different levels of severity. Here are some examples:
+
+```
+import logging
+
+logging.debug('This is a debug message.')
+logging.info('This is an informational message.')
+logging.warning('This is a warning message.')
+logging.error('This is an error message.')
+logging.critical('This is a critical message.')
+```
+
+### pyinstall
+
 
 
 ### warning
@@ -717,6 +746,12 @@ These are mainly from coding of my VScode extension.
 
 
 
+[rdkit.Chem.rdMolDescriptors module — The RDKit 2023.03.1 documentation](https://www.rdkit.org/docs/source/rdkit.Chem.rdMolDescriptors.html?highlight=maccs)
+
+various kinds of finge
+
+
+
 ### MCS search
 
 让RDkit得到正确的手性信息：除了一一对应pybel和rdkit的原子，去改那个chiralTag，估计没啥好办法
@@ -753,7 +788,7 @@ http://rdkit.blogspot.com/2020/04/new-drawing-options-in-202003-release.html
 
 
 
-### pdb file
+### about pdb file
 
 RDkit cannot read PDB files well...without connect, bond order info is lost. Assign from template? the molecule has to match exactly! This template (smiles) could come from `pybel.readfile`. 
 

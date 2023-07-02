@@ -4,9 +4,9 @@ This page is all about software installing (Linux), both for system and project 
 
 Mainly recorded while in NUS. The installation of DL environment, Gromacs, and plans are all in `Linux fundamental (Installation and softwares)`.
 
-## remote control and ssh
+# remote control and ssh
 
-### tight vnc
+## tight vnc
 
 [doc](https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/infrastructure-services/TigerVNC/)
 
@@ -14,7 +14,7 @@ Mainly recorded while in NUS. The installation of DL environment, Gromacs, and p
 
 I've removed that but maybe it's ok (you may try to find the viewer).
 
-### real vnc on linux
+## real vnc on linux
 
 https://www.realvnc.com/en/connect/download/vnc/linux/
 
@@ -73,7 +73,7 @@ elif [ "$os_name"== 'Fedora' ]; then
 
 see software usage!
 
-### ssh tools
+## ssh tools
 
 ```shell
 sudo rm -r /usr/lib/FinalShell
@@ -81,7 +81,7 @@ sudo rm -r /usr/lib/FinalShell
 sudo snap install termius-app
 ```
 
-### easy connect (for zju)
+## easy connect (for zju)
 
 > 重要启示：点击安装包，显示安装成功，但启动程序时点击图标无响应，可通过命令行终端（Terminal）执行命令来启动。观察怎么个报错法！有道、DS等
 
@@ -118,11 +118,45 @@ It's fine on Windows; but x86 version cannot be installed here! And x64 shows �
 >
 > do not turn on auto login on Linux! cannot change user name (unless you reinstall the client) because https://rvpn.zju.edu.cn will be redirected to the download page.
 
+## extend LAN to WLAN
 
+[https://github.com/QSCTech/zjunet](https://github.com/QSCTech/zjunet)
 
-## break the wall
+just install....
 
-### basics
+usage:
+
+```shell
+sudo zjunet vpn -c
+```
+
+can only activate in one IP per account?
+
+# break the wall
+
+## 禾斗学上网
+
+这几个机场都是我用过的，都还不错的，适用于ssr、clash等多种连接方式，配有详细的教程。欢迎点击以下几个连接注册账号，根据需要购买合适的套餐。
+
+- [云翻墙](https://support.dellcomputer.online/auth/register?code=dZNd)
+- [忍者云](https://renzhe.cloud/auth/register?code=pE4p)
+
+更多选择，上YouTube搜一下就好了。。
+
+- [壁虎翻墙](https://freegecko.com/index.php/#/register?code=R6kbY2VP)：在win和Linux上用clash都遇到了麻烦，虽然可能是我自己的问题。SSR上不能用。
+  - 更新：clash把我的代理设置全毁了，现在conda、GreenVPN在打开clash时都用不了。用回ShadowsocksR才好了。已经配置好的童鞋谨慎换客户端吧。。
+
+客户端：
+
+- https://github.com/HMBSbige/ShadowsocksR-Windows
+- https://github.com/shadowsocksrr/electron-ssr  Linux
+- https://github.com/Fndroid/clash_for_windows_pkg
+
+大概步骤：安装electron-ssr，导入订阅链接。教程参考[云翻墙](https://support.dellcomputer.online/auth/register?code=dZNd)等官网的说明。
+
+VPN：之前用过[GreenVPN](https://www.greenvpn.host/)，感觉还可以，流量包是3 US dollar 10个G。但这家现在被ChatGPT封了。
+
+## basics
 
 [vpn和v2ray、ssr、加速器有什么区别？](https://shutupandshowpages.com/index.php/2021/07/06/vpn%E5%92%8Cv2ray%E3%80%81ssr%E3%80%81%E5%8A%A0%E9%80%9F%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F/)
 
@@ -151,7 +185,7 @@ experiences
 https://www.cyberghostvpn.com/zh/
 一个邮箱，试用一天
 
-### airport
+## airport
 
 https://sgi.anycast.gay/user 买流量的网站。支持ss, ssr, v2ray, clash等等。便宜，事实上不限流量。
 
@@ -163,7 +197,7 @@ the plugin Google-access-helper cannot do anything now
 >
 > https://www.hayaissr.xyz/ 也是个买vpn的？
 
-### electron-ssr
+## electron-ssr
 
 configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md
 
@@ -293,7 +327,7 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 >
 > 2. 
 
-### v2ray
+## v2ray
 
 > https://rongsp.com/article/96.html
 
@@ -301,14 +335,14 @@ https://github.com/Qv2ray/Qv2ray/releases/tag/v2.7.0 with GUI
 
 intro https://iyuantiao.com/fenxiangfuli/jiaocheng/v2ray.html
 
-### clash
+## clash
 
 - https://github.com/Fndroid/clash_for_windows_pkg/releases
 - video reference: https://www.youtube.com/watch?v=pTlso8m_iRk
 
 2022: I won't use that since it breaks system configurations and caused problems (GreenVPN, conda proxy error) in both Windows and Linux
 
-### qt-5
+## qt-5
 
 https://github.com/shadowsocks/shadowsocks-qt5/releases/tag/v3.0.1
 
@@ -319,7 +353,7 @@ chmod a+x Sha*
 
 连接--添加--URI
 
-### iOS翻墙
+## iOS翻墙
 
 https://support.apple.com/zh-cn/HT201389
 
@@ -342,9 +376,26 @@ https://blog.shuziyimin.org/171  国内办的信用卡也是用不了，没有�
 
 
 
-## MD
+# MD engine
 
-### Gromacs (dirty)
+## Auxillary tools
+
+### gcc
+
+https://blog.csdn.net/zhaozhiyuan111/article/details/118566452
+
+- `-disable-multilib`： 不生成编译为其他平台可执行代码的交叉编译器。add this according to the error prompt
+- `gcc-path/contrib/download_prerequisites`: if you don't have mpfr, etc.
+
+An important note: add correct gcc version you used when compiling gmx/Amber when you run MD, otherwise the performance will be significantly hurt!
+
+### fftw
+
+see Gromacs section
+
+
+
+## Gromacs (dirty)
 
 I will try cpu version and learn to setup... do not spend time on accelerating here...
 
@@ -379,9 +430,9 @@ also python: (not using)
 conda install -c bioconda gromacs
 ```
 
-### GROMACS installation on a workstation
+## GROMACS installation on a workstation
 
-#### prepare
+### prepare
 
   Follow this order:
 
@@ -410,14 +461,14 @@ conda install -c bioconda gromacs
      - http://www.fftw.org/fftw2_doc/fftw_6.html
 - rather than official manual, I used
 
-#### installation
+### installation
 
 ```shell
 # fftw: http://www.fftw.org/download.html
 ./configure --prefix=~/fftw-3.3.10 --enable-float --enable-shared --enable-sse2 --enable-avx --enable-threads
 make -j 6
 make install
-## REMEMBER TO ADD TO LD_LIBRARY_PATH!!!
+# REMEMBER TO ADD TO LD_LIBRARY_PATH!!!
 # 2023 note: not necessary...
 
 # mpicc, mpicxx
@@ -484,29 +535,85 @@ cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf1212/gromacs-2021.5-gpu -DGMX_FFT_LIBRA
 -DCMAKE_C_COMPILER=/home/gxf1212/program/bin/gcc -DCMAKE_CXX_COMPILER=/home/gxf1212/program/bin/g++ -DGMX_CUDA_TARGET_SM=80 -DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON -DGMX_GPU=CUDA # 80: just a workaround
 ```
 
+## plumed
 
 
 
-
-### Amber22
+## Amber22
 
 see [Amber22安（cai）装（keng）过程分享 - 哔哩哔哩 (bilibili.com)](https://www.bilibili.com/read/cv23212288)
 
+> - https://prof.uok.ac.ir/m.irani/index_files/Page312.htm
+> - https://zhuanlan.zhihu.com/p/479919955
+
+### from the manual
+
+- If you have an existing miniconda distribution, please remove it from your `PATH` while building Amber.
+- To use Anaconda as a python interpreter only, all that is needed is to disable Miniconda (`-DDOWNLOAD_MINICONDA=FALSE`) and activate your conda env before you build Amber. Just make sure to keep the conda env active whenever you use Amber, and everything should work fine. To also link libraries from Anaconda by default, use `-DUSE_CONDA_LIBS=TRUE` (this must be passed the first time you run CMake). The build system will search for the conda executable in your `PATH`, find your Anaconda installation, and add it to the front of the library search path.
+- Our final option is to just use your existing system Python interpreter. Set `DOWNLOAD_MINICONDA` to `FALSE`, and let CMake find your Python interpreter on the PATH. By default, it will prefer the latest versioned python available, so `python3.6` would be found before `python2.7`. To select a different interpreter, set the `PYTHON_EXECUTABLE` variable to point to it. Amber requires certain Python packages to be installed: currently numpy, scipy, matplotlib, cython, setuptools, and tkinter.
+
+### Dependencies
+
+> 2023.7
+
+[CUDA GNU compatibility](https://gist.github.com/ax3l/9489132)
+
+https://docs.nvidia.com/cuda/archive/11.7.1/cuda-installation-guide-linux/index.html   
+
+**Table 1. Native Linux Distribution Support in CUDA.** check the version you care
+
+```
+9.2 GCC < 8
+10.1 - 10.2 GCC < 9
+11.0 GCC < 10
+11.1 - 11.3 GCC < 11
+11.4 - 11.7 GCC < 12
+```
 
 
-### NAMD
 
-http://bbs.keinsci.com/thread-22004-1-1.html
+notes:
+
+- [Amber-Wiki - C Make-Common-Options](http://ambermd.org/pmwiki/pmwiki.php/Main/CMake-Common-Options)
+- 
+
+other possible notes:
+
+- http://archive.ambermd.org/202105/0167.html
+
+- https://stackoverflow.com/questions/64514666/what-does-performing-test-cmake-have-libc-pthread-failed-actually-mean
+
+  This output is common for Unix-like systems. Despite "Failed" and "not found" words, this is perfectly good output.
+
+- 
+
+其实主要是做好依赖，安装起来就像大多数没用的博文一样，简单的几步就搞定了
+
+## NAMD
+
+If your workstation has a CUDA-capable GPU, you should try downloading Linux-x86_64-multicore-CUDA. If you wish to run multi-copy algorithms, such as replica-exchange MD, you should try the "netlrts" builds, such as Linux-x86_64-netlrts-smp or Linux-x86_64-netlrts-smp-CUDA. Windows users are encouraged to install WSL ([Windows for Linux Subsystem](https://learn.microsoft.com/en-us/windows/wsl/install)) in order to run our most recent Linux builds.
 
 just unzip...
 
-### VEGA_ZZ
+https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=NAMD
+
+3.0beta version is available!
+
+[NAMD3alpha](https://www.ks.uiuc.edu/Research/namd/alpha/3.0alpha/)
+
+
+
+http://bbs.keinsci.com/thread-22004-1-1.html
+
+
+
+## VEGA_ZZ
 
 https://www.ddl.unimi.it/cms/index.php?Software_projects:VEGA_ZZ:Main_features
 
 one year trial...
 
-### openmpi
+## openmpi
 
   Open MPI: Open Source High Performance Computing https://www.open-mpi.org
   The Open MPI Project is an open source Message Passing Interface implementation...
@@ -542,9 +649,9 @@ file system, leaving your system in an unusable state.
 We strongly suggest that you run mpirun as a non-root user.
 ```
 
-## Analysis tools: Python/cmd tookit
+# Analysis tools: Python/cmd tookit
 
-### xmgrace
+## xmgrace
 
 https://plasma-gate.weizmann.ac.il/Grace/
 
@@ -558,7 +665,7 @@ not solve by `conda install openmotif`. compiling: need `sudo`
 
 ![image-20221016211602695](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/xmgrace.png)![image-20221016211759336](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/xmgrace-gmx.png)
 
-### dssp
+## dssp
 
 https://www.biostars.org/p/348161/
 
@@ -625,7 +732,7 @@ delete /usr/local/bin/dssp....
 > 
 > https://ssbio.readthedocs.io/en/latest/instructions/dssp.html
 
-### gmx_MMPBSA
+## gmx_MMPBSA
 
 https://valdes-tresanco-ms.github.io/gmx_MMPBSA/installation/
 
@@ -636,7 +743,7 @@ pip install PyQt5
 
 if in conda, no need to add `amber.pythons`
 
-> ### g_mmpbsa
+> ## g_mmpbsa
 > 
 > failed for version reasons
 > 
@@ -654,7 +761,7 @@ if in conda, no need to add `amber.pythons`
 > > 
 > > other: https://jerkwin.github.io/2019/07/31/gmx_mmpbsa%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/
 > 
-> ### GMXPBSA
+> ## GMXPBSA
 > 
 > https://github.com/aspitaleri/gmxpbsa
 > 
@@ -663,7 +770,7 @@ if in conda, no need to add `amber.pythons`
 > export GMXPBSAHOME=/home/gxf/GMXPBSAtool
 > ```
 
-### GromacsWrapper
+## GromacsWrapper
 
 https://gromacswrapper.readthedocs.io/en/latest/index.html
 
@@ -673,7 +780,7 @@ conda install -c conda-forge -c bioconda gromacswrapper
 from gromacs.fileformats.xvg import XVG # read .xvg files
 ```
 
-### alchemical-analysis, alchemlyb
+## alchemical-analysis, alchemlyb
 
 We are in the process of migrating all functionality from here to instead use [`alchemlyb`](https://github.com/alchemistry/alchemlyb)
 
@@ -704,7 +811,7 @@ https://anaconda.org/conda-forge/pymbar git address and doc
 > ```
 
 
-### mdtraj
+## mdtraj
 
 convert trajectories
 
@@ -715,7 +822,7 @@ conda uninstall mdtraj
 
 https://mdtraj.org/1.9.4/mdconvert.html
 
-### msmbuilder
+## msmbuilder
 
 http://msmbuilder.org/3.8.0/
 
@@ -725,7 +832,7 @@ conda activate
 conda install -c omnia msmbuilder
 ```
 
-### Align ligands
+## Align ligands
 
 1. LigAlign: a pymol tool
    
@@ -755,13 +862,13 @@ conda install -c omnia msmbuilder
    mcsalign mobile, target
    ```
 
-### Clustering plugin in VMD
+## Clustering plugin in VMD
 
 https://github.com/luisico/clustering
 
-## Modelling tools
+# Modelling tools
 
-### pycharm and miniconda
+## pycharm and miniconda
 
 no difficulty...
 
@@ -776,7 +883,7 @@ conda install -c openbabel openbabel -y
 conda install -c rdkit rdkit -y
 ```
 
-#### OpenBabel
+### OpenBabel
 
 may also
 
@@ -788,7 +895,7 @@ sudo apt-get install openbabel # debian
 
 
 
-### AMBER
+## AMBER
 
 Amber软件包主要包括2个部分：Amber Tools和Amber，其中Amber Tools可以免费在[Amber官网](http://ambermd.org/AmberTools17-get.html)下载，Tools中包含了Amber几乎所有的模块，Sander、tleap、MMPBSA等最核心的内容都可以免费使用。而另外的Amber则是唯一收费的部分，该部分主要包括了PMEMD以及GPU加速 的功能
 
@@ -821,7 +928,7 @@ https://docs.conda.io/en/latest/miniconda.html
 
 a readme: https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml
 
-### AmberTools
+## AmberTools
 
 http://ambermd.org/GetAmber.php#ambertools
 
@@ -846,7 +953,7 @@ https://anaconda.org/conda-forge/ambertools
 
 parmed is along with ambertools. won't need to install alone
 
-### acpype
+## acpype
 
 this tool should be separate from ambertools...
 
@@ -866,13 +973,13 @@ conda create -n Acpype -
 conda install -c conda-forge acpype
 ```
 
-### Propka
+## Propka
 
 https://propka.readthedocs.io/en/latest/quickstart.html
 
 https://wiki.pymol.org/index.php/Propka
 
-#### run
+### run
 
 ```shell
 propka3 merged.pdb -o 7.4 > merged.log
@@ -881,7 +988,7 @@ propka3 merged.pdb -o 7.4 > merged.log
 
 It can process multiple chIt's strange that when the system contains sth other than protein, HIS is not present (only combine protein chains...)
 
-### Gaussian16 and view
+## Gaussian16 and view
 
 ```shell
 tar -xjvf G16-A03-AVX2.tbz
@@ -932,7 +1039,7 @@ You can type `gv` in the terminal to start GView and link to Gaussian as we did 
 
 > icon: downloaded from web
 
-### PMX
+## PMX
 
 https://github.com/deGrootLab/pmx/tree/develop
 
@@ -954,7 +1061,7 @@ python -m pip install .
 export GMXLIB=/path/to/conda3/envs/env-name/lib/python3.10/site-packages/pmx/data/mutff
 ```
 
-### FFparam
+## FFparam
 
 http://ffparam.umaryland.edu/
 
@@ -962,7 +1069,7 @@ need http://kenno.org/pro/lsfitpar/ and cgenff program, utilizes Gaussian
 
 manual: http://ffparam.umaryland.edu/manual/index.html, install as it says
 
-### Multiwfn
+## Multiwfn
 
 http://sobereva.com/multiwfn/
 
@@ -970,7 +1077,7 @@ download package and manual
 
 remember to modify `gaupath=` etc. in `settings.ini`. formchk etc: inside g16
 
-### FESetup
+## FESetup
 
 https://www.ccpbiosim.ac.uk/software
 
@@ -991,7 +1098,7 @@ python: `python_exe=/usr/bin/python2.7`
 > sudo apt-get install libpython2.7
 > ```
 
-### rosetta
+## rosetta
 
 https://www.rosettacommons.org/downloads/academic/3.13/
 
@@ -1004,26 +1111,26 @@ export ROSETTA_BIN=$ROSETTA/main/source/bin
 export PATH=$PATH:$ROSETTA_BIN
 ```
 
-### PyAutoFEP
+## PyAutoFEP
 
 https://github.com/luancarvalhomartins/PyAutoFEP
 
-### SilcsBio (not free)
+## SilcsBio (not free)
 
 https://docs.silcsbio.com/2020.1/install.html
 
-### LigParGen
+## LigParGen
 
 [How to Install LigParGen Server Locally ?](https://quantumchemistryniser.wordpress.com/2017/11/12/how-to-install-ligpargen-server-locally/)
 
 Please request BOSS executable from Prof. William L. Jorgensen (It is free for academic users). Once you have BOSS, set `$BOSSdir`; type `conda install -c mc-robinson ligpargen openbabel ` to install the package
 Download the files from here and copy them to `BOSSdir/scripts` folder
 
-### EPI suite
+## EPI suite
 
 https://www.chemsafetypro.com/Topics/CRA/How_to_Use_US_EPA_EPI_Suite_to_Predict_Chemical_Substance_Properties.html
 
-### MATCH
+## MATCH
 
 https://brooks.chem.lsa.umich.edu/index.php?page=match&subdir=articles/resources/software
 
@@ -1033,9 +1140,9 @@ https://brooks.chem.lsa.umich.edu/download/software/match/MATCH_RELEASE.tar.gz
 
 
 
-## Docking
+# Docking
 
-### Autodock
+## Autodock
 
 https://ccsb.scripps.edu/projects/docking/
 
@@ -1054,7 +1161,7 @@ http://vina.scripps.edu/manual.html#usage for running docking.
 
 **安装目录和打开的文件不要包含任何中文！！！！！**
 
-### mgl
+## mgl
 
 Still need to install MGL-tools (autodock tools). Just  help with visualization.
 
@@ -1072,7 +1179,7 @@ icon path: just search `adt` or `icon`
 
 > adt: $HOME/mgltools_x86_64Linux2_1.5.7/MGLToolsPckgs/Pmv/Icons/128x128/adt.png
 
-> ### backup
+> ## backup
 >
 > ```shell
 > # paths
@@ -1081,9 +1188,9 @@ icon path: just search `adt` or `icon`
 > # now it can run under root
 > ```
 >
-> ### 
+> ## 
 
-### zdock
+## zdock
 
 https://zdock.umassmed.edu/ with server
 
@@ -1097,11 +1204,11 @@ snugdock is an Ab docking tool
 
 
 
-## Visualization
+# Visualization
 
-### VMD
+## VMD
 
-#### pre-compiled version
+### pre-compiled version
 
 https://blog.csdn.net/qyb19970829/article/details/106947424
 
@@ -1132,32 +1239,32 @@ You may refer to the pdf attached for more options
 
 uninstall: delete the files  https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/25245.html
 
-#### windows
+### windows
 
 **Unable to load NVML library, GPU-CPU affinity unavailable.** after installing CUDA?
 
 http://bbs.keinsci.com/thread-25477-1-1.html windows VMD1.9.4alpha可能就是有问题？还好
 
-#### source code
+### source code
 
 http://www.ks.uiuc.edu/Research/vmd/doxygen/
 
 1. compile the plugins
 2. compile vmd
 
-#### Python interface
+### Python interface
 
 https://vmd.robinbetz.com/
 
 not good
 
-#### ImageMagick
+### ImageMagick
 
 ```conda install -c conda-forge imagemagick```
 
 
 
-### DiscoveryStudio Visualizer
+## DiscoveryStudio Visualizer
 
 https://blog.csdn.net/huanzaizai/article/details/116273464
 
@@ -1219,9 +1326,9 @@ and it''s working! [Applause]
 
 icon path: `/home/gxf/BIOVIA2021/DiscoveryStudio2021/share/doc/DS/Skins/Favicons` (or DSV)
 
-### pymol
+## pymol
 
-#### in python
+### in python
 
 the free version: https://zhuanlan.zhihu.com/p/58803491
 
@@ -1250,7 +1357,7 @@ conda activate pymol
 conda install -c schrodinger pymol-bundle
 ```
 
-#### independent
+### independent
 
 Of course downloading the whole package is convenient!!
 
@@ -1270,13 +1377,13 @@ btw, have you ever tried
 sudo apt install pymol
 ```
 
-#### APBS Electrostatics
+### APBS Electrostatics
 
 https://www.poissonboltzmann.org/
 
 usually along with Pymol Edu
 
-### ChemBioDraw, etc.
+## ChemBioDraw, etc.
 
 draw your own molecule; recognize molecules from figure
 
@@ -1290,7 +1397,7 @@ StoneMIND Collector: https://www.stonewise.ai/mol_product  (https://www.chemrss.
 
 MathPix can also recognize figure as smiles.
 
-### Avogadro
+## Avogadro
 
 [refer to](https://ubunlog.com/zh-CN/avogadro%E7%BC%96%E8%BE%91%E4%BD%BF%E5%88%86%E5%AD%90%E5%8F%AF%E8%A7%86%E5%8C%96/#Instalar_Avogadro_en_Ubuntu)
 
@@ -1298,7 +1405,7 @@ official: https://avogadro.cc/devel/compiling
 
 > [install-qt4-ubuntu-20-04](https://ubuntuhandbook.org/index.php/2020/07/install-qt4-ubuntu-20-04/)
 
-### UCSF-Chimera
+## UCSF-Chimera
 
 ```
 Installation dir:
@@ -1311,7 +1418,7 @@ To (re)install desktop menu and icon later, run:
 
 dependence: `conda install -c conda-forge xorg-libxscrnsaver`
 
-### ligplot+
+## ligplot+
 
 https://www.ebi.ac.uk/thornton-srv/software/LigPlus/install.html
 
@@ -1329,13 +1436,13 @@ export PATH=$PATH:/home/sjxlab/LigPlus/
 
 Parameters written to file: `/home/moonlight/LigPlus/lib/params/ligplus.par`
 
-### RasMol
+## RasMol
 
 http://www.rasmol.org/software/RasMol_2.7.5/INSTALL.html
 
-## Paper, work
+# Paper, work
 
-### Chat
+## Chat
 
 https://github.com/Hackerl/Wine_Appimage
 
@@ -1345,13 +1452,13 @@ https://github.com/askme765cs/Wine-QQ-TIM
 
 [vscode qq extension based on android qq protocol](https://github.com/takayama-lily/vscode-qq)
 
-### office
+## office
 
 https://www.libreoffice.org/download/appimage/  ok
 
 https://github.com/linlinger/wps-appimage/releases/tag/1.0 dependence unsatisfied...
 
-### text editor
+## text editor
 
 vscode
 
@@ -1365,7 +1472,7 @@ sudo snap r codium
 - https://www.sublimetext.com/docs/linux_repositories.html
 - https://atom.io/  sunset...
 
-### foxit reader
+## foxit reader
 
 Silly installation
 
@@ -1383,7 +1490,7 @@ Silly installation
 
 - cannot open: kill the process...
 
-### medeley
+## medeley
 
 ```shell
 # never run under root!!
@@ -1400,11 +1507,11 @@ https://stackoverflow.com/questions/47936584/what-does-client-failed-to-connect-
 
 
 
-## Other thing I did at Fedora and KDE
+# Other thing I did at Fedora and KDE
 
 Try to be clear about the commands for Dedian/RedHat systems!
 
-### installation
+## installation
 
 1. typora
    
@@ -1435,7 +1542,7 @@ Try to be clear about the commands for Dedian/RedHat systems!
   killall -9 FoxitReader
   ```
 
-### library
+## library
 
 https://libfaq.nus.edu.sg/faq/71315
 

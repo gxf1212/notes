@@ -25,6 +25,10 @@ https://manual.gromacs.org/documentation/current/onlinehelp/gmx-editconf.html#gm
 
 ## Pymol
 
+ref:
+
+- [Visualizing protein-protein docking using PyMOL | by The Bioinformatics Manual | Medium](https://medium.com/@snippetsbio/visualizing-protein-protein-docking-using-pymol-cc49494e54bb)
+
 ### Basics
 
 - mouse
@@ -52,7 +56,7 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
   sele /2cqg//A/PHE`149/CZ
   ```
 
-- If you click on where it says “Selecting: Residues”, you can cycle  through the available selection modes below.  These modes are also  available from the “Mouse” menu under “Selection Mode”.   
+- If you click on where it says “Selecting: Residues”, you can cycle  through the available selection modes below.  These modes are also available from the “Mouse” menu under “Selection Mode”.   
 
   - Atoms
   - C-alphas
@@ -61,6 +65,8 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
   - Segments
   - Chains
   - Residues  
+
+- You can use the command` show sticks, (byres [selection]) within 5 of [selection]` to show sticks of (residues) within 5 angstroms of a selection in PyMOL command line
 
 - save
 
@@ -80,6 +86,12 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 - action--preset
 
   publication (different colors), simple (thin lines, ligands sticks), technical (H bonds), ligand (only ligand H bonds)
+  
+- You can use the center command in PyMOL command line to center atoms. The syntax for this command is `center [selection]`.
+
+  - `zoom` or `orient` also do centering...
+
+- 
 
 ### Editing
 
@@ -105,7 +117,17 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 3. 
 
-### Show
+### Label
+
+- select atoms/residues and 
+
+  ```python
+  label sele, "%s%s" % (resn, resi)
+  ```
+
+- 
+
+### View
 
 1. pymol show contact residues http://shdf611.lofter.com/post/1cd0a1d0_a6e8874
 
@@ -189,9 +211,9 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
 
 
-## VMD techniques
+## VMD
 
-杂记, some extra functions, that I encountered. for details, check vmd-ug.pdf (MD-tutorials.md)
+杂记, some extra functions, that I encountered. for details, check vmd-ug.pdf or [MD-tutorials.md](MD-tutorials.md)
 
 ### Scripts
 
@@ -741,17 +763,24 @@ prepare the system
 
 - The protonation state of N- and C-termini can be chosen interactively with the `-ter` flag.
 
-- pdb2gmx产生的蛋白拓扑文件时可以加上-his选项来人工选择各个组氨酸的质子化态
+- pdb2gmx产生的蛋白拓扑文件时可以加上`-his`选项来人工选择各个组氨酸的质子化态
+
+- `-ter` option for termini (only useful for proteins)
 
 - https://manual.gromacs.org/documentation/2020-current/onlinehelp/gmx-pdb2gmx.html  add -ff folder. xx.ff, forcefield.itp in 
 
-- `pdb2gmx` can recognize terminal residues COO^-^ if chain ID is assigned
+- `pdb2gmx` can recognize terminal residue's COO^-^ if chain ID is assigned
 
 Force field
 
-- source: local directory, installation top folder, GMXLIB variable
+- source: local directory, installation top folder, `GMXLIB` variable
 
 - 
+
+### topology file
+
+[defaults]是1-4 scaling之类的东西，不同力场不一样
+
 
 
 ### editconf
@@ -988,9 +1017,12 @@ sander and pmemd are both MD engines.
 
 ### MD debug
 
-IEEE underflow
+https://wiki.usask.ca/display/MESH/IEEE+errors+using+GNU+compiler
 
-it doesn't matter...
+`IEEE_OVERFLOW_FLAG` is triggered when the result of an expression exceeds the precision of the variable being assigned the value. For most MESH variables this means a number larger than E+38. This exception will also trigger `IEEE_DENORMAL`.
+The term **arithmetic underflow** (also **floating point underflow**, or just **underflow**) is a condition in a computer program where the result of a calculation is a number of more precise absolute value than the computer can actually represent in memory on its central processing unit (CPU). Arithmetic underflow can occur when the true result of a floating point operation is smaller in magnitude (that is, closer to zero) than the smallest value representable as a normal floating point number in the target datatype. 
+
+In one word, it doesn't matter...
 
 
 
