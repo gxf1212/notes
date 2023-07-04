@@ -2,11 +2,11 @@
 
 This is research page. Click on the sidebar to select a chapter and start reading!
 
-- [Programming for MD](/research/Programming-for-MD.md): Python, tcl, bash, etc.
-- [Common tools for MD](/research/Common-tools.md): visualization programs, Gromacs basics, etc.
-- [Preparation and modeling](/research/Preparation-and-modeling.md)
-- [Protein-ligand MD and FEP](/research/Protein-ligand-simulation.md)
-- [Protein/Amino Acid FEP](/research/AA-MD-FEP.md)
+- [Programming for MD](/research/Programming-for-MD.md): Python, tcl, bash, specific Python packages, etc.
+- [Common tools for MD](/research/Common-tools.md): visualization programs, Gromacs/NAMD/Amber basics, etc.
+- [Preparation and modeling](/research/Preparation-and-modeling.md): general modeling: protein (AF2, Swiss-Model, etc.), protonation state, Leap/VMD, packmol, docking and VS (distribute to other pages later?)
+- [Protein-ligand MD and FEP](/research/Protein-ligand-simulation.md): MD/FEP with all MD engines
+- [Protein/Amino Acid FEP](/research/AA-MD-FEP.md): MD/FEP with all MD engines
 - [Systems with metal ions](/research/Metal-ion.md)
 - [Fragments of science](/research/academic-notes.md)
 - [MD official tutorials](/research/Previous-projects/MD-tutorials-all.md)

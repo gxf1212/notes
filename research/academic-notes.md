@@ -141,7 +141,7 @@ The inhibitory constant (Ki) is a type of [equilibrium dissociation constant (Kd
 
 
 
-# Molecular Cell Biology
+# Molecular & Cell Biology
 
 ## General
 
@@ -155,7 +155,8 @@ A **non-receptor tyrosine kinase** (**nRTK**) is a [cytosolic](https://en.wikipe
 
 ## Cancer biology
 
-[The main difference between hyperplasia and neoplasia is that hyperplasia is an increase in the number of cells either due to physiological or pathological conditions, whereas neoplasia is unregulated cell proliferation due to genetic changes](https://pediaa.com/what-is-the-difference-between-hyperplasia-and-neoplasia/). Hyperplasia is generally benign, meaning that once the stimulus causing it is removed, the abnormal increase in cell number stops. [On the other hand, neoplasia can be malignant](https://www.healthresearchpolicy.org/hyperplastic/).
+- [The main difference between hyperplasia and neoplasia is that hyperplasia is an increase in the number of cells either due to physiological or pathological conditions, whereas neoplasia is unregulated cell proliferation due to genetic changes](https://pediaa.com/what-is-the-difference-between-hyperplasia-and-neoplasia/). Hyperplasia is generally benign, meaning that once the stimulus causing it is removed, the abnormal increase in cell number stops. [On the other hand, neoplasia can be malignant](https://www.healthresearchpolicy.org/hyperplastic/).
+- <u>A micronucleus</u> is a small nucleus that forms whenever a chromosome or a fragment of a chromosome is not incorporated into one of the daughter nuclei during cell division. It usually is a sign of genotoxic events and chromosomal instability. Micronuclei are commonly seen in cancerous cells and may indicate genomic instability
 
 
 
@@ -207,10 +208,11 @@ rhizosphere: 根际，是指受植物根系活动影响，在物理、化学和�
 
 ## Coding
 
-重写(Override)与重载(Overload)
+- 重写(Override)与重载(Overload)
 
-- 重写是子类对父类的允许访问的方法的实现过程进行重新编写, 返回值和形参都不能改变。**即外壳不变，核心重写！**
-- 重载(overloading) 是在一个类里面，方法名字相同，而参数不同。返回类型可以相同也可以不同。
+  - 重写是子类对父类的允许访问的方法的实现过程进行重新编写, 返回值和形参都不能改变。**即外壳不变，核心重写！**
+  - 重载(overloading) 是在一个类里面，方法名字相同，而参数不同。返回类型可以相同也可以不同。
+- C language is faster than Python because it is a compiled language while Python is an interpreted language. This means that C code is directly translated into machine code by the compiler, while Python code is first translated into bytecode and then interpreted by the interpreter
 
 ## HPC
 

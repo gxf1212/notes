@@ -440,7 +440,7 @@ This is a record of 折腾ing the system, in order not to forget.
 
 5. 截图
 
-   ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/notes/techniques/images/screenshot.png)
+   ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/screenshot.png)
 
 6. install lightdm: https://blog.csdn.net/hgtjcxy/article/details/90645838
 
@@ -844,7 +844,7 @@ kde and gnome are two types of desktop interface. KDE looks like Windows desktop
 
 8. [Gnome设置双屏 - 掘金 (juejin.cn)](https://juejin.cn/post/7158803954175279112)
 
-9. 
+9. terminal可以Ctrl+Shift+F
 
 
 
@@ -1775,6 +1775,8 @@ my email: stu, `74********cb`
   ```shell
   nvcc -V 
   ```
+  
+  after adding `/usr/local/cuda/bin` to `$PATH`
 
 #### other issues
 

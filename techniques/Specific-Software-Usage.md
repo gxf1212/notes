@@ -720,7 +720,7 @@ Mac：https://macwk.com/soft/typora
 
 5. [How to format source code in Visual Studio Code (VSCode) - Mkyong.com](https://mkyong.com/vscode/how-to-format-source-code-in-visual-studio-code-vscode/)
 
-6. 
+6. [VS Code: How to Compare Two Files (Find the Difference)](https://www.kindacode.com/article/vs-code-how-to-compare-two-files-find-the-difference/)
 
 ### Pycharm
 
@@ -1175,10 +1175,18 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 
 - OpenAI's services are not available in your country. (error=unsupported_country)
   解决方法：全局模式
+  
 - [ChatGPT 常见错误原因及解决方案：报错、回答不完整、网络错误等](https://blog.csdn.net/marin1993/article/details/128219198)。搞不定就换节点，刷新
+
 - Edge dev: https://www.microsoftedgeinsider.com/zh-tw/download
+
 - https://platform.openai.com/ get your API key
+
 - 只需要在 Chrome 浏览器上下载安装[ `Bing Chained` ](https://chrome.google.com/webstore/detail/bing-unchained-use-new-bi/laldfnbbeocphnilnofhedhcjcnchbld/related)这个插件，再访问 [www.bing.com](https://link.juejin.cn/?target=http%3A%2F%2Fwww.bing.com) 就会出现 New Bing AI 入口
+
+- https://github.com/xcanwin/KeepChatGPT
+
+  https://mp.weixin.qq.com/s/ngOXSb296BLf74usmc9kqw
 
 
 
@@ -1381,6 +1389,12 @@ https://yinqingwang.wordpress.com/    [LanguageTool](https://www.languagetool.or
 
 [How to remove added word from dictionary in texstudio?](https://blog.csdn.net/ChenglinBen/article/details/117150581) [another ref](https://tex.stackexchange.com/questions/319580/texstudio-how-to-get-access-to-the-added-words-to-dictionary) check user words. 点击tools, 然后找到Check Spelling
 
+https://tex.stackexchange.com/questions/87650/dictionary-for-texstudio-no-dictionary-available
+
+texstudio中文红线，临时的办法 https://www.cnblogs.com/litifeng/p/11633360.html
+
+![](E:\GitHub-repo\notes\techniques\images\LaTeX-check-spelling.png)
+
 
 
 - [texstudio structure（结构）不见了，如何进行查找](https://blog.csdn.net/liuyiming2019/article/details/115272007)：就在左下角。。
@@ -1390,6 +1404,8 @@ https://yinqingwang.wordpress.com/    [LanguageTool](https://www.languagetool.or
   [Texstudio使用经验](http://haccanri.github.io/tools/2015/04/22/tex_editor.html)
 
 - [TeXstudio 设置定时自动保存_Amnesia Greens的博客](https://blog.csdn.net/amnesiagreen/article/details/120879230)
+
+- 
 
 
 

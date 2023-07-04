@@ -378,8 +378,6 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
 7. Drawing Method--HBond
 
-8. 
-
 9. https://www.ks.uiuc.edu/Research/vmd/current/ug/node33.html
 
    label bonds in vmd, it shows distance automatically
@@ -437,7 +435,7 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
 14. Menu--Mouse--Center: pick an atom to center
 
-15. 
+15. [vmd粗粒化显示插件bendix简单介绍](https://kangsgo.cn/p/vmd粗粒化显示插件bendix简单介绍/)
 
 ### psfgen
 
@@ -671,6 +669,10 @@ $$
 
 [分子动力学模拟为什么会有先NVT后NVE？](http://bbs.keinsci.com/thread-9699-1-1.html)
 
+The nature of molecular dynamics is such that the course of the  calculation is very dependent on the order of arithmetical operations  and the machine arithmetic implementation, i.e., the method used for  round-off. Because each step of the calculation depends on the results  of the previous step, the slightest difference will eventually lead to a divergence in trajectories. As an initially identical dynamics run  progresses on two different machines, the trajectories will eventually  become completely uncorrelated. Neither of them are "wrong;" they are  just exploring different regions of phase space. Hence, states at the  end of long simulations are not very useful for verifying correctness.  Averages are meaningful, provided that normal statistical fluctuations  are taken into account. "Different machines" in this context means any  difference in floating point hardware, word size, or rounding modes, as  well as any differences in compilers or libraries. Differences in the  order of arithmetic operations will affect round-off behavior; (a + b) + c is not necessarily the same as a + (b + c). Different optimization  levels will affect operation order, and may therefore affect the course  of the calculations.
+
+> from Amber manual
+
 
 
 ### Control
@@ -863,10 +865,16 @@ vdw and elec, common cutoff/switchdist
 
 ## trjconv
 
+### Basics
+
 - `-dt`: not real time, but how many frames we go through each time we collect one frame
 - Using `-cat`, you can simply paste several files together without removal of frames with identical time stamps.
 
+### pbc processing
 
+http://blog.sciencenet.cn/blog-548663-981600.html
+
+https://www.jianshu.com/p/5dc493663ed2
 
 
 
@@ -1011,7 +1019,11 @@ and VMD and CHARMM FF? I don't feel too much to say since they are just responsi
 
 
 
-sander and pmemd are both MD engines.
+sander and pmemd are both MD engines. pmemd can also be run with acceleration from graphics processing units (GPU) through pmemd.cuda or the MPI parallel version pmemd.mpi.
+
+
+
+
 
 
 

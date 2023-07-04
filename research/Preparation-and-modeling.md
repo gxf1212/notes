@@ -143,7 +143,7 @@ https://anaconda.org/conda-forge/psfgen
 
 ## AmberTools (tleap)
 
-
+leap stands for "Livermore Energy-aware molecular Prototyping".
 
 - tleap will always renumber residues (starting from 1) and you cannot set residue index in tleap.
 

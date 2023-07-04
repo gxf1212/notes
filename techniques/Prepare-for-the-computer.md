@@ -384,10 +384,18 @@ https://blog.shuziyimin.org/171  国内办的信用卡也是用不了，没有�
 
 https://blog.csdn.net/zhaozhiyuan111/article/details/118566452
 
-- `-disable-multilib`： 不生成编译为其他平台可执行代码的交叉编译器。add this according to the error prompt
+- `-disable-multilib`： 不生成编译为其他平台 (e.g. 32bit) 可执行代码的交叉编译器。add this according to the error prompt
 - `gcc-path/contrib/download_prerequisites`: if you don't have mpfr, etc.
 
 An important note: add correct gcc version you used when compiling gmx/Amber when you run MD, otherwise the performance will be significantly hurt!
+
+### intel oneapi
+
+https://www.intel.com/content/www/us/en/developer/tools/oneapi/hpc-toolkit-download.html
+
+[Linux中ifort的安装教程及使用方法](https://www.bilibili.com/read/cv15164219)
+
+
 
 ### fftw
 
@@ -551,6 +559,8 @@ see [Amber22安（cai）装（keng）过程分享 - 哔哩哔哩 (bilibili.com)]
 - If you have an existing miniconda distribution, please remove it from your `PATH` while building Amber.
 - To use Anaconda as a python interpreter only, all that is needed is to disable Miniconda (`-DDOWNLOAD_MINICONDA=FALSE`) and activate your conda env before you build Amber. Just make sure to keep the conda env active whenever you use Amber, and everything should work fine. To also link libraries from Anaconda by default, use `-DUSE_CONDA_LIBS=TRUE` (this must be passed the first time you run CMake). The build system will search for the conda executable in your `PATH`, find your Anaconda installation, and add it to the front of the library search path.
 - Our final option is to just use your existing system Python interpreter. Set `DOWNLOAD_MINICONDA` to `FALSE`, and let CMake find your Python interpreter on the PATH. By default, it will prefer the latest versioned python available, so `python3.6` would be found before `python2.7`. To select a different interpreter, set the `PYTHON_EXECUTABLE` variable to point to it. Amber requires certain Python packages to be installed: currently numpy, scipy, matplotlib, cython, setuptools, and tkinter.
+
+A full list of the options, with descriptions of what each one does, is available by using the ccmake or cmake-gui tools to configure the project interactively. 
 
 ### Dependencies
 

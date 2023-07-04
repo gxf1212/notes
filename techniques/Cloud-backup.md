@@ -644,28 +644,6 @@ https://wzfou.com/seafile-yunpan/
 
 # Other
 
-## document sync
-
-我的需求：在线版能同步，最好所见所得。本地同步零碎文件还是不强求了
-
-- 幕布：无法导入markdown？不用想了，不支持代码块，只能导图
-- 腾讯文档：不是真正的markdown，只能搞docx文件。虽然所见即所得，但无标题快捷键，无法调整各级标题样式。凑活有代码块等等，虽可不要。也不像有人持续开发？
-- 浙大语雀：完整支持markdown，支持所见即所得，样式还行，高亮等功能完整，也能直接拖入图片。
-- Google drive的各插件：样式一般，源码预览对照。限制很麻烦。
-- 各种在线的markdown往往不能同步，有道云倒还行，但插图片需要VIP。。印象没太会用
-
-### 浙大语雀
-
-add: many functional tools!
-
-cannot export markdown? lakebook就是语雀的格式
-
-can just **paste into Typora**! But remove the linebreaks....
-
-problem: LaTeX formula exported as svg...
-
-to paste tables into lakebook, <u>create a table</u> and paste, to keep in a proper format
-
 ## cloud server
 
 https://cloud.tencent.com/act/free  前两个是能白嫖的。。GPU computation, server
@@ -681,3 +659,40 @@ https://post.smzdm.com/p/apz0wrd2/
 anaconda环境信息同步？
 
 白嫖GPU：https://www.zhihu.com/question/271520755
+
+
+
+# Online notes
+
+or document sync
+
+我的需求：在线版能同步，最好所见所得。本地同步零碎文件还是不强求了
+
+- 幕布：无法导入markdown？不用想了，不支持代码块，只能导图
+- 腾讯文档：不是真正的markdown，只能搞docx文件。虽然所见即所得，但无标题快捷键，无法调整各级标题样式。凑活有代码块等等，虽可不要。也不像有人持续开发？
+- 浙大语雀：完整支持markdown，支持所见即所得，样式还行，高亮等功能完整，也能直接拖入图片。
+- Google drive的各插件：样式一般，源码预览对照。限制很麻烦。
+- 各种在线的markdown往往不能同步，有道云倒还行，但插图片需要VIP。。印象没太会用
+
+### 浙大语雀
+
+add: many functional tools!
+
+cannot export markdown? lakebook就是语雀的格式
+
+we can just **paste into Typora**! But remove the linebreaks....
+
+problems: 
+
+- LaTeX formula exported as svg...
+- to paste tables into lakebook, <u>create a table</u> and paste, to keep in a proper format
+- too slow to load for large documents...and cannot load sometimes (but it's secure)
+
+
+
+useful WYWIWYG markdown-supported sites:
+
+- notion.so
+- coda.io
+- wolai.com
+
