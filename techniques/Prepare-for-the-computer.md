@@ -6,13 +6,7 @@ Mainly recorded while in NUS. The installation of DL environment, Gromacs, and p
 
 # remote control and ssh
 
-## tight vnc
-
-[doc](https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/infrastructure-services/TigerVNC/)
-
-[error](https://www.dev2qa.com/how-to-fix-error-job-for-vncserver1-service-failed-because-the-control-process-exited-with-error-code-see-systemctl-status-vncserver1-service-and-journalctl-xe-for-details-when-start-vnc/)
-
-I've removed that but maybe it's ok (you may try to find the viewer).
+See [here](Specific-Software-Usage.md#clustersupercomputers) for details on usage of `ssh` and scheduling system.
 
 ## real vnc on linux
 
@@ -73,13 +67,17 @@ elif [ "$os_name"== 'Fedora' ]; then
 
 see software usage!
 
-## ssh tools
+> other:
+>
+> tight vnc
+>
+> - [doc](https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/infrastructure-services/TigerVNC/)
+>
+> - [error](https://www.dev2qa.com/how-to-fix-error-job-for-vncserver1-service-failed-because-the-control-process-exited-with-error-code-see-systemctl-status-vncserver1-service-and-journalctl-xe-for-details-when-start-vnc/)
+>
+> I've removed that but maybe it's ok (you may try to find the viewer). 
 
-```shell
-sudo rm -r /usr/lib/FinalShell
-
-sudo snap install termius-app
-```
+domestic: sunlogin, todesk
 
 ## easy connect (for zju)
 
@@ -544,6 +542,45 @@ cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf1212/gromacs-2021.5-gpu -DGMX_FFT_LIBRA
 ```
 
 ## plumed
+
+
+
+
+
+final notes:
+
+```
+Install prefix : /home/gxf/plumed-2.9.0
+Full name      : plumed
+
+Setup your environment
+- Ensure this is in your execution path         : /home/gxf/plumed-2.9.0/bin
+- Ensure this is in your include path           : /home/gxf/plumed-2.9.0/include
+- Ensure this is in your library path           : /home/gxf/plumed-2.9.0/lib
+- Ensure this is in your PKG_CONFIG_PATH path   : /home/gxf/plumed-2.9.0/lib/pkgconfig
+For runtime binding:
+- Set this environment variable                 : PLUMED_KERNEL=/home/gxf/plumed-2.9.0/lib/libplumedKernel.so
+
+To create a tcl module that sets all the variables above, use this one as a starting point:
+/home/gxf/plumed-2.9.0/lib/plumed/modulefile
+
+To uninstall, remove the following files and directories:
+/home/gxf/plumed-2.9.0/lib/plumed
+/home/gxf/plumed-2.9.0/share/doc/plumed
+/home/gxf/plumed-2.9.0/include/plumed
+/home/gxf/plumed-2.9.0/bin/plumed
+/home/gxf/plumed-2.9.0/bin/plumed-patch
+/home/gxf/plumed-2.9.0/bin/plumed-config
+/home/gxf/plumed-2.9.0/lib/pkgconfig/plumed.pc
+/home/gxf/plumed-2.9.0/lib/libplumed.so
+/home/gxf/plumed-2.9.0/lib/libplumedKernel.so
+A vim plugin can be found here: /home/gxf/plumed-2.9.0/lib/plumed/vim/
+Copy it to /home/gxf/.vim/ directory
+Alternatively:
+- Set this environment variable         : PLUMED_VIMPATH=/home/gxf/plumed-2.9.0/lib/plumed/vim
+- Add the command 'let &runtimepath.=','.$PLUMED_VIMPATH' to your .vimrc file
+From vim, you can use :set syntax=plumed to enable it
+```
 
 
 

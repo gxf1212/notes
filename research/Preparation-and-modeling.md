@@ -484,7 +484,7 @@ Good results especially for ligands with 8 or more rotatable bonds
 
 #### algorithms and settings
 
-- docking box: the search space (for the whole ligand rather than the center)
+- docking box: the search space (for the whole ligand, rather than the center)
 - 
 
 #### parameters
@@ -605,6 +605,8 @@ pythonsh /home/user/Desktop/work/xufan/bin/raccoon.py # in mgltools/bin
 ##### process
 
 **should use GAFF force field!!**
+
+2023 Q: just MMFF94 for docking?
 
 ```shell
 # minimize the energy of ligands. overwrite the sdf files. not always necessary.
@@ -733,25 +735,9 @@ num_modes=9
 
 
 
+Benchmark?
 
-
-> ### running result
->
-> my workstation: 42 sec for 1st ligand (1 min ~20 sec on lab). about 2 times faster cpu
->
-> #### try1
->
-> - lab: 712, about 6 hours
-> - my workstation: the first one, 81min, about 60 times of rigid in lab; first 5, about 5 hours
-> - use little memory but **most of the cpu** (90% in lab)
-> - really no GPU acceleration on Vina, maybe optimized algorithm. autodock has GPU version
->
-> #### try2
->
-> - my: 56 for 13min9sec (789sec). exhau=24
->   - 3221 will be 12.6 hours
-> - lab: 16 for 28min54sec (1736sec). 1575 will be 47.47 hours
->
+running result in UROPS.md
 
 
 
@@ -785,6 +771,20 @@ the final table may include:
 - goal
 
   - self-justification, interacting with key residues
+
+
+
+
+
+
+
+see [Protein-ligand simulation](/research/Protein-ligand-simulation.md#visualize-protein-ligand).
+
+
+
+
+
+
 
 
 
@@ -858,35 +858,6 @@ the final table may include:
 
    https://pymolwiki.org/index.php/Displaying_Biochemical_Properties
 
-4. Discovery Studio
-
-   - Interaction analysis
-
-5. LigPlot
-
-   - prepare
-
-     - must make a complex
-
-       ```shell
-       pymol cat.pml -- ./ 2cqg_1_rigid.pdb out_ligand_1.pdb # failed to customize parameters. use the simple one
-       python 
-       ```
-
-     - or try save molecule together in pymol
-
-   - The molecular interactions (hydrogen bonds and hydrophobic interactions) between the target proteins and compounds
-
-6. PLP https://plip-tool.biotec.tu-dresden.de/plip-web/plip/index
-
-   - may ruin the ligand?? no
-   - should have hydrophobic...
-   - download the pse file
-
-7. Protein Plus https://proteins.plus/ containing poseview
-
-   
-
 8. ADMET: http://www.swissadme.ch
 
    - accepts smiles, each line one molecule (in batch)
@@ -901,99 +872,10 @@ the final table may include:
 
 
 
-### docking result
-
 
 
 ### attention
 
 - You should probably avoid search spaces bigger than  `30 x 30 x 30` Angstrom, unless you also increase "`--exhaustiveness`".
-
-
-
-### appendix
-
-1. obminimize options
-
-   ```shell
-   obminimize # see options. other tutorials to further discuss these!!
-   
-   options:      description:
-     -c crit     set convergence criteria (default=1e-6)
-     -cg         use conjugate gradients algorithm (default)
-     -sd         use steepest descent algorithm
-     -newton     use Newton2Num linesearch (default=Simple)
-     -ff ffid    select a forcefield:
-     		GAFF    General Amber Force Field (GAFF).
-   		Ghemical    Ghemical force field.
-   		MMFF94    MMFF94 force field. # good for ligands
-   		MMFF94s    MMFF94s force field.
-   		UFF    Universal Force Field.
-     -h          add hydrogen atoms
-     -n steps    specify the maximum numer of steps (default=2500)
-     -cut        use cut-off (default=don't use cut-off)
-     -rvdw rvdw  specify the VDW cut-off distance (default=6.0)
-     -rele rele  specify the Electrostatic cut-off distance (default=10.0)
-     -pf freq    specify the frequency to update the non-bonded pairs (default=10)
-   ```
-
-   necessary? https://www.researchgate.net/post/Energy_Minimization_and_Docking_why_is_it_necessary
-
-2. vina
-
-   ```shell
-   vina --help # or any wrong input.
-   Input:
-     --receptor arg        rigid part of the receptor (PDBQT)
-     --flex arg            flexible side chains, if any (PDBQT)
-     --ligand arg          ligand (PDBQT)
-   
-   Search space (required):
-     --center_x arg        X coordinate of the center
-     --center_y arg        Y coordinate of the center
-     --center_z arg        Z coordinate of the center
-     --size_x arg          size in the X dimension (Angstroms)
-     --size_y arg          size in the Y dimension (Angstroms)
-     --size_z arg          size in the Z dimension (Angstroms)
-   
-   Output (optional):
-     --out arg             output models (PDBQT), the default is chosen based on 
-                           the ligand file name
-     --log arg             optionally, write log file
-   
-   Misc (optional):
-     --cpu arg                 the number of CPUs to use (the default is to try to
-                               detect the number of CPUs or, failing that, use 1)
-     --seed arg                explicit random seed
-     --exhaustiveness arg (=8) exhaustiveness of the global search (roughly 
-                               proportional to time): 1+
-     --num_modes arg (=9)      maximum number of binding modes to generate
-     --energy_range arg (=3)   maximum energy difference between the best binding 
-                               mode and the worst one displayed (kcal/mol)
-   
-   Configuration file (optional):
-     --config arg          the above options can be put here
-   
-   Information (optional):
-     --help                display usage summary
-     --help_advanced       display usage summary with advanced options
-     --version             display program version
-   # You should probably avoid search spaces bigger than 30 x 30 x 30 Angstrom, unless you also increase "--exhaustiveness".
-   ```
-
-   
-
-3. other commands
-
-   ```shell
-   cat *.smi > total.smi # into one file
-   ```
-
-
-
-
-
-
-
 
 

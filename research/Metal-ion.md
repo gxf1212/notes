@@ -60,6 +60,12 @@ Note: `solvate` is not able to rotate the molecule very well as tleap (or N ter 
 
 ## 12-6-4 model
 
+> The new potential with designed parameters could reproduce the experimental HFE, IOD and CN values at the same time without significant compromise. Especially for the highly charged metal ions, the 12-6-4 LJ-type nonbonded model performs much better than the 12-6 one overall.
+
+NOT for CN!!
+
+
+
 https://ambermd.org/tutorials/advanced/tutorial20/12_6_4.php
 
 ```shell
@@ -128,19 +134,15 @@ Oh, they will just keep the six waters. Don't include more...
 
 
 
+## Other
+
+`OptC4.py` optimizes the C4 terms in the metal-site-complex of a protein system. See Subsection 18.2.4.
+
+haven't been updated since 8 years ago...
+
 
 
 # Run MD
-
-
-
-## Simple MD with Amber22
-
-https://ambermd.org/tutorials/basic/tutorial0/index.php
-
-[How to do MDs - ChengLab](http://wiki.chenglab.net/mediawiki/index.php/How_to_do_MDs#Amber)
-
-
 
 
 

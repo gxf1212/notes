@@ -254,9 +254,13 @@ https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect�
 
 ## Cluster/Supercomputers
 
-### Tools
+### ssh and scp
 
-#### connection: ssh key
+#### Basics
+
+[Linux使用scp拷贝多个文件到远程服务器](https://blog.csdn.net/weixin_40918067/article/details/117376103) 
+
+#### ssh key
 
 重要的经验
 
@@ -270,13 +274,43 @@ https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect�
 
 - Linux远程执行命令：`sh [options] [user@]host [command]`，如`ssh -p 606 gxf1212@10.77.14.186 "ls $workdir/prod"`
 
-#### ssh and scp
+#### Debug
+
+- [First check ssh service and opened port](https://www.thegeekdiary.com/error-bind-to-port-2222-on-0-0-0-0-failed-permission-denied-error-while-starting-sshd-service-on-centos-rhel/)
+
+  ```shell
+  grep ssh /etc/services
+  ```
+
+- [Linux中修改SSH端口号](https://www.jianshu.com/p/de8a5a69c9ea)
+
+  ```shell
+  vim /etc/ssh/sshd_config`
+  将`#Port 22`修改为`Port 端口号
+  ```
+
+  刚打开时被注释掉了
+
+- [linux打开端口](https://www.aiops.com/news/post/5409.html)
+
+  ```shell
+  firewall-cmd --zone=public --add-port=端口/通讯协议 --permanent
+  # 22/tcp
+  ```
+
+  and check. No need to bother like this?
+
+  [bad port (most likely missing protocol)](https://blog.csdn.net/Vrobron/article/details/55006182): you missed tcp
+
+- 
+
+### ssh/sftp Tools
 
 under Win, Xshell+Xftp look very good. Dragging and clicking a visualized folder will be effcient
 
 finalshell does not look so pretty though we can just use it. cannot update
 
-[Linux使用scp拷贝多个文件到远程服务器](https://blog.csdn.net/weixin_40918067/article/details/117376103) 
+
 
 #### electerm
 
@@ -314,6 +348,13 @@ https://zhuanlan.zhihu.com/p/348324919
 2. xftp sync
 
    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/xftp-sync.png" style="zoom:50%;" />
+
+other
+
+```shell
+sudo rm -r /usr/lib/FinalShell
+sudo snap install termius-app
+```
 
 ### Scheduling system
 
@@ -720,7 +761,13 @@ Mac：https://macwk.com/soft/typora
 
 5. [How to format source code in Visual Studio Code (VSCode) - Mkyong.com](https://mkyong.com/vscode/how-to-format-source-code-in-visual-studio-code-vscode/)
 
-6. [VS Code: How to Compare Two Files (Find the Difference)](https://www.kindacode.com/article/vs-code-how-to-compare-two-files-find-the-difference/)
+6. [VS Code: How to Compare Two Files (Find the Difference)](https://www.kindacode.com/article/vs-code-how-to-compare-two-files-find-the-difference/)\
+
+7. format code
+
+   ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/vscode-format-code.png)
+
+8. 
 
 ### Pycharm
 
@@ -1062,6 +1109,10 @@ also for LibreOffice Calc, many commands are the same....
 
 - When you copy the text out of Excel, it adds double quotes to preserve the linebreak character.
 
+- Change the default language in LibreOffice for the whole document
+  Choose Tools > Options. Go to Language Settings > Languages. Under Default languages for documents, select the document language for all newly created documents.
+
+
 ### MS PPT
 
 - [PPT中如何将多个图形等距分布](https://jingyan.baidu.com/article/fec7a1e5c51b1d1190b4e7ca.html)
@@ -1393,7 +1444,7 @@ https://tex.stackexchange.com/questions/87650/dictionary-for-texstudio-no-dictio
 
 texstudio中文红线，临时的办法 https://www.cnblogs.com/litifeng/p/11633360.html
 
-![](E:\GitHub-repo\notes\techniques\images\LaTeX-check-spelling.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/LaTeX-check-spelling.png)
 
 
 

@@ -9,6 +9,8 @@ This is a record of 折腾ing the system, in order not to forget.
 - [鸟哥的Linux私房菜-基础学习篇](https://gitee.com/gxf1212/notes/raw/master/utils/tutorials/鸟哥的Linux私房菜-基础学习篇(第四版)高清完整书签PDF版.pdf)
 - [Linux就该这么学](https://gitee.com/gxf1212/notes/raw/master/utils/tutorials/Linux就该这么学-高清晰PDF.pdf)
 
+Linux desktop的优势：可以直接为cluster做测试
+
 ## Basics
 
 1. Linux是把要安装的软件分布在整个系统的各个文件夹里面， 比如所有软件的配置文件都安装在`/etc`下面， 软件需要的库文件都安装在`/lib`下面，日志文件都在`/var/log`下面，`/bin`下是常用的程序，等等。 比较复杂 哈哈。
@@ -41,29 +43,36 @@ This is a record of 折腾ing the system, in order not to forget.
 
    exFAT应该是都兼容的一种格式。
 
-8. ubuntu的话，卡死崩溃时你切换到tty1～6然后 sudo pkill X; startx; 一下，就好了。不需要重启。
+8. ubuntu的话，卡死崩溃时你切换到tty1～6然后 
 
-9. 回收站：`~/.local/share/Trash/files`
+   ```shell
+   sudo pkill X
+   startx
+   ```
 
-10. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
+   一下，就好了。不需要重启。
 
-11. [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
+9. 在Linux中，TTY是终端设备的一种表示方式，它代表“teletypewriter”的缩写。在早期计算机系统中，TTY是指打字机终端设备。随着技术的发展，TTY逐渐演变为代表终端设备的抽象概念，包括物理终端、虚拟终端、串口终端等。因此，在这个语境下，TTY的全称是“teletypewriter”。
 
-12. 标准库的大部分函数通常放在文件 libc.a 中（文件名后缀.a代表“achieve”，译为“获取”），或者放在用于共享的动态链接文件 libc.so 中（文件名后缀.so代表“share object”，译为“共享对象”）。这些链接库一般位于 /lib/ 或 /usr/lib/，或者位于 GCC 默认搜索的其他目录。
+10. 回收站：`~/.local/share/Trash/files`
 
-13. under root, no need to add `sudo`
+11. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
 
-14. date: https://cloud.tencent.com/developer/article/1441802
+12. [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
 
-15. 
+13. 标准库的大部分函数通常放在文件 libc.a 中（文件名后缀.a代表“achieve”，译为“获取”），或者放在用于共享的动态链接文件 libc.so 中（文件名后缀.so代表“share object”，译为“共享对象”）。这些链接库一般位于 /lib/ 或 /usr/lib/，或者位于 GCC 默认搜索的其他目录。
 
-16. what if message is too long? add `|more` https://blog.csdn.net/weixin_34293911/article/details/86473042
+14. under root, no need to add `sudo`
+
+15. date: https://cloud.tencent.com/developer/article/1441802
+
+16. 
+
+17. what if message is too long? add `|more` https://blog.csdn.net/weixin_34293911/article/details/86473042
 
 
 
 ## Operations
-
-
 
 ### Fundamental settings and softwares
 
@@ -108,30 +117,34 @@ This is a record of 折腾ing the system, in order not to forget.
 
    https://www.asus.com/hk/Motherboards-Components/Motherboards/PRIME/PRIME-Z390-P/ 华硕PRIME Z390-P
 
-6. [check shell version](https://blog.csdn.net/electrocrazy/article/details/78313962): `bash --version`
+6. change hostname 
 
-7. [update kernel](https://ubuntuhandbook.org/index.php/2022/05/kernel-5-18-released-install-in-ubuntu-2204/): just install the four packages
+   - just type: `sudo hostname new_hostname`, but works temporarily
+
+7. [check shell version](https://blog.csdn.net/electrocrazy/article/details/78313962): `bash --version`
+
+8. [update kernel](https://ubuntuhandbook.org/index.php/2022/05/kernel-5-18-released-install-in-ubuntu-2204/): just install the four packages
 
    https://kernel.ubuntu.com/~kernel-ppa/mainline. find 'amd'
 
-8. edit path:
+9. edit path:
 
    ```shell
    sudo gedit ~/.bashrc
    source ~/.bashrc
    ```
 
-9. 查看当前系统的glibc版本: `/lib64/libc.so.6`
+10. 查看当前系统的glibc版本: `/lib64/libc.so.6`
 
    https://lindevs.com/check-glibc-version-in-linux: `ldd --version`
 
-10. watch temperature with `lm-sensor` https://zhuanlan.zhihu.com/p/143123436
+11. watch temperature with `lm-sensor` https://zhuanlan.zhihu.com/p/143123436
 
     ```shell
     sensors-detect # root
     ```
 
-11. 
+12. 
 
 
 #### monitor resource usage
@@ -774,13 +787,19 @@ kde and gnome are two types of desktop interface. KDE looks like Windows desktop
    - appearance
      - desktop icon and font
    
-3. add "show desktop": http://www.linuxdiyf.com/view_134588.html
-
-   activate Meta+D to show desktop (system settings--shortcuts--global--Kwin)
+3. 
 
 4. https://os.51cto.com/art/200902/109883.htm
 
    如何在KDE桌面添加启动程序
+
+> deprecated 
+>
+> 1. add "show desktop": http://www.linuxdiyf.com/view_134588.html
+>
+>    activate Meta+D to show desktop (system settings--shortcuts--global--Kwin)
+>
+>    now this is activated by default
 
 #### GNOME
 
@@ -994,6 +1013,20 @@ similar....
 
 3. 
 
+#### dnf
+
+dnf, which has many useful subcommands, has replaced yum in newer RHEL OS like CentOS 8 or later...
+
+https://landoflinux.com/linux_dnf_command_examples.html
+
+
+
+
+
+
+
+
+
 #### dpkg
 
 install with .deb
@@ -1077,7 +1110,7 @@ debug
 
 #### rpm
 
-in RedHat, use rpm, no deb:
+in RedHat, use `.rpm`, no `.deb`. `rpm` is RHEL `dpkg`
 
 ```shell
 rpm -Uhv package.rpm # install
@@ -1395,6 +1428,105 @@ might because handling too many files in a folder...?
 
 
 
+# during Fedora38 installation
+
+will try to sort them into various sections later...
+
+- Checking KDE Version? In konsole just type :
+  ```shell
+  kwin --version
+  ```
+
+- 重启KWin：黑屏的时候用。。。
+
+  ```shell
+  kwin_x11 --replace # For X11
+  kwin_wayland --replace # For wayland
+  ```
+
+  kwin_wayland is the KDE window manager. Nothing like lightdm, gdm, sddm,....
+
+  `kwin_x11 --replace` kills all processes and applications, but no need to reboot
+
+  [是否可以不注销而重新启动KDE Plasma Desktop？](http://129.226.226.195/post/31487.html)
+
+  ```shell
+  killall plasmashell # to stop it
+  kstart plasmashell # to restart it
+  ```
+
+  run all these in tty or a remote client
+
+- CentOs 重启ssh服务的命令如下：
+
+  ```shell
+  service sshd restart
+  ```
+
+  which fix "ssh cannot connect" problem
+
+  `/etc/init.d/sshd restart` does not work here
+
+- 要查看所有服务的状态，您可以在终端中运行以下命令：
+
+  ```shell
+  systemctl list-units --type=service
+  ```
+
+- Nvidia-powerd is only for mobile Ampere gpus so it’s useless with your 2080. Please disable and mask the service.
+  https://forums.developer.nvidia.com/t/nvidia-powerd-fails-to-start/235498
+
+  ```shell
+  systemctl disable nvidia-powerd
+  ```
+
+
+
+- KDE
+
+  - Default shortcut for creating a folder: F10
+
+  - Add application: you may want to add items to the KDE Menu toolbar. In order to do so, select/search Utilities, Menu Editor.
+
+  - [Linux中设置开机启动脚本（fedora）](https://blog.csdn.net/s651665496/article/details/51569729)
+
+  - 使用CTRL键和功能键组合在一起可切换到指定的桌面，例如，CTRL-F1切换到1个桌面，CTRL-F3切换到第三个桌面。
+
+    ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/switch-desktop.jpg)
+
+  - 
+
+
+
+debugging zjunet
+
+```shell
+sudo systemctl status xl2tpd.service
+sudo journalctl -u xl2tpd.service
+# similar error
+# maybe https://github.com/hwdsl2/docker-ipsec-vpn-server/issues/261
+
+sudo dnf install NetworkManager-l2tp
+# https://github.com/QSCTech/zjunet/issues/68
+
+```
+
+
+
+https://docs.fedoraproject.org/en-US/epel/
+Note that EPEL is not suitable for use in Fedora! Fedora is not Enterprise Linux. EPEL provides "a high quality set of additional packages for Enterprise Linux, including, but not limited to, Red Hat Enterprise Linux (RHEL), CentOS and Scientific Linux (SL), Oracle Linux (OL)". Put simply, Enterprise Linux is a term that refers to Red Hat Enterprise Linux or one of its clones. And Fedora is not a Red Hat clone.
+
+That is why you cannot install the "epel-release" package in Fedora. It simply does not exist. Don't try to use EPEL on Fedora.
+
+As noted before, the Fedora repositories provide most (if not all) of the EPEL packages. Additional software for Fedora is available in the RPMFusion repositories. In their own words, RPMFusion is "an extension of Fedora" that "provides software that the Fedora Project or Red Hat doesn't want to ship." RPMFusion can not be used on Enterprise Linux. You could see RPMFusion as the "EPEL alternative" for Fedora, but be aware that the software collections provided by RPMFusion and EPEL are entirely unrelated and uncomparable.
+
+
+
+https://www.techtarget.com/whatis/definition/daemon
+（古希腊神话中的）半神半人的精灵
+
+
+
 # Fundamental softwares installation
 
 note: some used stupid old strange paths. replace with yours (eg: your `/home`)
@@ -1423,7 +1555,7 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 >
 > - [x] 输入法点不开  界面（算了）
 
-## 重装系统
+## Re-installation
 
 ### Partition
 
@@ -1618,7 +1750,7 @@ but the following still needs re-configure...
 - vmd
 - windows font
 
-## upgrading release
+## Upgrading Ubuntu release
 
   to unbuntu22.04
 
@@ -1654,6 +1786,14 @@ but the following still needs re-configure...
   > - snap不好
   > - ……
 
+## Upgrading CentOS release
+
+No official tool...
+
+
+
+Finally failed updating system packages like `dnf`, `systemd`, etc., which proves this workflow may not work at all!
+
 ## Fundamental softwares
 
   1. VScode [installation](/techniques/Prepare-for-the-computer?id=text-editor)
@@ -1667,7 +1807,7 @@ but the following still needs re-configure...
 
   3. GitHub Desktop on Linux https://codechina.csdn.net/mirrors/shiftkey/desktop?utm_source=csdn_github_accelerator
 
-  4. xshell http://www.netsarang.com/download/free_license.html
+  4. xshell http://www.netsarang.com/download/free_license.html not for Linux?
 
   5. https://linux.wps.cn/
 

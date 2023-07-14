@@ -1445,8 +1445,10 @@ GPU的配置
   - 到底用哪个，每个体系还是测试一下
 
 - NAMD 计算时，计算量、CPU进程数和 GPU 数量匹配很重要。
+  
   - **体系太小，GPU利用率很低，加速不明显。**
     - 甚至GPU个数越少越好,太并行不好!!! GPU过多,增加CPU也没用.
+  
   - CPU进程数增加也能帮助小体系，CPU数多才启用GPU。。（namd2/3的自动机制）
   - p.s. more GPU means more communication time
   - 

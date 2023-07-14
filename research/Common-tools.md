@@ -593,6 +593,8 @@ This part is about general MD and comparison between common MD engines. These co
 
 ## Force field
 
+### Packages and support
+
 - [AMBER、GROMOS、OPLS、CHARMM最新版本的GROMACS力场包 - 分子模拟 (Molecular Modeling) - 计算化学公社](http://bbs.keinsci.com/thread-15094-1-1.html)
 
   amber14sb_OL15.ff_corrected-Na-cation-params.tar.gz
@@ -607,17 +609,18 @@ This part is about general MD and comparison between common MD engines. These co
 
   CHAMBER is part of ParmEd, and parmed is part of AmberTools
 
+  pmemd supports charmm FF?
+
 - 
   
 - 
 
 
 
-
+### Water
 
 - vmd自带的力场就是把TIP3的两个氢之间的bond注释掉
-- CgenFF: epsilon F<Cl<Br<S
-- For C=O and COO-, Amber14 is a little more polarized than CHARMM36.
+- 
 
 rename O to OH2 and HOH to TIP3 if you are using NAMD/CHARMM
 many other more H names in Amber/PDB cannot be renamed easily...
@@ -626,7 +629,12 @@ Maybe remove all hydrogens and let tleap/vmd fix missing H.
 
 
 
-### LJ parameters
+### Unit
+
+- gmx: https://manual.gromacs.org/documentation/current/reference-manual/topologies/topology-file-formats.html
+- 
+
+#### LJ parameters
 
 namd用的是和tleap一样的kcal和Rmin
 
@@ -658,8 +666,18 @@ C_6=4\varepsilon\sigma^6\\
 C_{12}=4\varepsilon\sigma^{12}
 $$
 
+#### Other
+
+- `restraint_wt`: The weight (kcal · mol−1 · Å−2) for Cartesian restraints when ntr = 1.
+
+  restraint_wt=10/4.18 is roughly the same as gromacs 1000
 
 
+
+### Other
+
+- CgenFF: epsilon F<Cl<Br<S
+- For C=O and COO-, Amber14 is a little more polarized than CHARMM36.
 
 
 
@@ -699,7 +717,7 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 
 ### Pressure control
 
-1. [C-rescale](https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp-value-pcoupl-C-rescale)
+1. [C-rescale](https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp-value-pcoupl-C-rescale) in gmx
 2. The Berendsen barostat does not generate any strictly correct ensemble,
     and should not be used for new production simulations (in our opinion).
     For isotropic scaling we would recommend the C-rescale barostat that also
@@ -730,6 +748,36 @@ In NAMD, FEP calculations can be performed using either the “alchemical” or 
 
 - Dummy atoms have epsilon and q both in zero, so no worry
 
+## GPU
+
+Read this: https://ambermd.org/GPULogistics.php
+
+
+
+While this full double precision approach has been implemented in the GPU code (read on), it gives very poor performance and so the default precision model used when running on GPUs is a combination of single and fixed precision, termed hybrid precision (SPFP).
+
+We recommend using the CPU code for energy minimization. One limitation of either GPU precision model is that forces can be truncated or, in the worst case, overflow the fixed precision representation. This should never be a problem during MD simulations for any well behaved system. However, for minimization or very early in the heating phase it can present a problem. This is especially true if two atoms are close to each other and thus have large VDW repulsions.
+
+
+
+> [see also](/research/Previous-projects/MD-tutorials-all.md#gpu-tutorial)
+
+If you encounter problems during a simulation on the GPU you should first try to run the identical simulation on the CPU to ensure that it is not your simulation setup causing the problems.
+
+## Performance
+
+https://developer.nvidia.com/hpc-application-performance
+
+several benchmark data
+
+Amber≈Gromacs>NAMD?
+
+Typically the performance differential between GPU and CPU runs will increase as atom count increases.
+
+
+
+
+
 
 
 ## Other
@@ -740,6 +788,8 @@ RT:
 - 310K: 2.57734 kJ/mol, 0.616 kcal/mol, kT: 0.4278 kJ/molecule
 
 we don't use kT in macroscopic world (or the final dG data)? 
+
+
 
 
 
@@ -1011,15 +1061,54 @@ and VMD and CHARMM FF? I don't feel too much to say since they are just responsi
 
 
 
-## Amber 
+## Amber
 
 ### Basics
 
-[prmtop.pdf](https://ambermd.org/prmtop.pdf). only after .prmtop file is read into parmed do the residues have indices....
+[prmtop format](https://ambermd.org/prmtop.pdf). only after .prmtop file is read into parmed do the residues have indices....
 
 
 
 sander and pmemd are both MD engines. pmemd can also be run with acceleration from graphics processing units (GPU) through pmemd.cuda or the MPI parallel version pmemd.mpi.
+
+Amber提供两套功能完全一致的MD运行程序：sander与pmemd，**使用方法完全一样**。pmemd实质为sander的付费版，计算时间远远小于sander。
+
+Also, `pbsa.cuda`, etc.
+
+
+
+> The thing about pmemd.cuda is that it runs the entire calculation on the GPU, so adding CPUs buys you nothing.
+> The way it is designed, each CPU thread will launch a GPU thread as well.
+
+http://archive.ambermd.org/201405/0364.html
+
+双GPU还不如分别跑两个任务（除了REMD、隐式溶剂等）
+
+> 我测试了一下，cpu的线程数和GPU的块数1:1时较快。
+
+http://bbs.keinsci.com/thread-5203-1-1.html
+
+
+
+topology: `.prmtop`, `.parm7`?
+
+coordinates: `.nc`, `.rst7`
+
+
+
+Manual 21.7. Potential function parameters
+
+
+
+### Simple MD & Tutorials
+
+https://ambermd.org/tutorials/basic/tutorial0/index.php
+
+https://ambermd.org/tutorials/basic/tutorial14/index.php
+
+[How to do MDs - ChengLab](http://wiki.chenglab.net/mediawiki/index.php/How_to_do_MDs#Amber)
+
+[AMBER Tutorials](https://ringo.ams.stonybrook.edu/index.php/AMBER_Tutorials)
 
 
 
@@ -1029,14 +1118,30 @@ sander and pmemd are both MD engines. pmemd can also be run with acceleration fr
 
 ### MD debug
 
-https://wiki.usask.ca/display/MESH/IEEE+errors+using+GNU+compiler
+- https://wiki.usask.ca/display/MESH/IEEE+errors+using+GNU+compiler
 
-`IEEE_OVERFLOW_FLAG` is triggered when the result of an expression exceeds the precision of the variable being assigned the value. For most MESH variables this means a number larger than E+38. This exception will also trigger `IEEE_DENORMAL`.
-The term **arithmetic underflow** (also **floating point underflow**, or just **underflow**) is a condition in a computer program where the result of a calculation is a number of more precise absolute value than the computer can actually represent in memory on its central processing unit (CPU). Arithmetic underflow can occur when the true result of a floating point operation is smaller in magnitude (that is, closer to zero) than the smallest value representable as a normal floating point number in the target datatype. 
+  [Subnormal number - Wikipedia](https://en.wikipedia.org/wiki/Subnormal_number): has a significand with a leading digit of zero
 
-In one word, it doesn't matter...
+  `IEEE_OVERFLOW_FLAG` is triggered when the result of an expression exceeds the precision of the variable being assigned the value. For most MESH variables this means a number larger than E+38. This exception will also trigger `IEEE_DENORMAL`.
+  The term **arithmetic underflow** (also **floating point underflow**, or just **underflow**) is a condition in a computer program where the result of a calculation is a number of more precise absolute value than the computer can actually represent in memory on its central processing unit (CPU). Arithmetic underflow can occur when the true result of a floating point operation is smaller in magnitude (that is, closer to zero) than the smallest value representable as a normal floating point number in the target datatype. 
 
+  see [this](http://archive.ambermd.org/202108/0046.html) or [this](https://fluka-forum.web.cern.ch/t/the-following-floating-point-exceptions-are-signalling/593/2)
 
+  In one word, it doesn't matter...
+
+- `.in`最后一行没有换行，否则
+
+  ```shell
+  Fortran runtime error: End of file
+  Error termination. Backtrace:.....
+  ```
+
+- 
+
+### Selection syntax
+
+23.1.1. ambmask 
+mask syntax
 
 
 

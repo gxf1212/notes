@@ -196,9 +196,12 @@ RNA aptamer targeting AR (v7) DNA binding domain?
 
 # Other Biology
 
-rhizosphere: 根际，是指受植物根系活动影响，在物理、化学和生物学性质上不同于土体的那部分微域环境。根际一般指离根轴表面数毫米范围之内，是土壤-根系-微生物相互作用的微区域，也是不同植物种类或品种、土壤和环境条件形成的特定的微生态系统。 
+## Plant physiology
 
-
+- rhizosphere: 根际，是指受植物根系活动影响，在物理、化学和生物学性质上不同于土体的那部分微域环境。根际一般指离根轴表面数毫米范围之内，是土壤-根系-微生物相互作用的微区域，也是不同植物种类或品种、土壤和环境条件形成的特定的微生态系统。 
+- https://www.rseco.org/content/363-ions-charge-and-membrane-voltages.html
+  Ions such as potassium and chloride (K+ and Cl–) are major osmotic solutes in plant cells.
+  Plasma membranes are normally about -116 mV, which would keep K+ concentrations inside a cell 100 times higher and Cl- concentrations 100 times lower than in the external solution.
 
 
 
