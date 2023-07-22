@@ -677,7 +677,7 @@ https://juejin.cn/post/6844903919978545160
 
 In Python’s `logging` module, there are several methods you can use to log messages of different levels of severity. Here are some examples:
 
-```
+```python
 import logging
 
 logging.debug('This is a debug message.')
@@ -686,6 +686,8 @@ logging.warning('This is a warning message.')
 logging.error('This is an error message.')
 logging.critical('This is a critical message.')
 ```
+
+The logging levels in Python’s logging module are used to indicate the severity of log messages. The available levels, in increasing order of severity, are: DEBUG, INFO, WARNING, ERROR, and CRITICAL. When you log a message using one of the logging methods (debug, info, warning, error, or critical), the message is only recorded if its level is greater than or equal to the logging level of the logger and all its handlers.
 
 ### pyinstall
 

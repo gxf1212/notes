@@ -1261,9 +1261,9 @@ https://blog.csdn.net/qyb19970829/article/details/106947424
 
 > 2022.2.11, `vmd-1.9.4a55.bin.LINUXAMD64-CUDA102-OptiX650-OSPRay185-RTXRTRT.opengl.tar.gz`
 
-$install_bin_dir `/usr/local/bin` This is the location of the startup script ’vmd’.
+`$install_bin_dir`: `/usr/local/bin` This is the location of the startup script ’vmd’.
 
-$install_library_dir `/usr/local/lib/$install_name` This is the location of all other VMD files.
+`$install_library_dir`: `/usr/local/lib/$install_name` This is the location of all other VMD files.
 
 All files are here.
 

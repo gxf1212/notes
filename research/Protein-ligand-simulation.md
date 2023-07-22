@@ -48,7 +48,6 @@ This page includes general results, not project-specific details.
 
       Always check your .pdb file for entries listed under the comment MISSING
 
-      the PDB file should contain only protein atoms
 
 #### method 1: pdb2gmx
 
@@ -600,10 +599,6 @@ see method 1 for detailed parameters
 
 ### Generate the topology of ligands
 
-> choose a good conformation:
->
-> - atp: drugbank 5, **pubchem 5**(=zinc6)
-
 > see: 
 >
 > - [使用GAFF力场参数化小分子的自动化工具](https://jerkwin.github.io/2019/07/14/%E8%AE%B8%E6%A5%A0-%E4%BD%BF%E7%94%A8GAFF%E5%8A%9B%E5%9C%BA%E5%8F%82%E6%95%B0%E5%8C%96%E5%B0%8F%E5%88%86%E5%AD%90%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/) but did not understood the script
@@ -631,13 +626,18 @@ see method 1 for detailed parameters
    f=atp_pubchem_5
    obabel $f.pdb -opdb -O ${f}_h.pdb -p 7.0
    obminimize -ff MMFF94 -n 1000 ${f}_h.pdb > ${f}_m.pdb
-   # below is not useful
-   # reduce $f.pdb > ${f}_h.pdb
-   # pdb4amber -i $f.pdb -o ${f}_h.pdb --reduce
-   # no longer -h, p adds h considering pH
    ```
+   
+   no matter what tool you are using, you should always check...in other words, no perfect automatic tools.
 
-   or try adtools (laji!) or pymol (also laji!)
+   > ```shell
+   > # below is not useful
+   > # reduce $f.pdb > ${f}_h.pdb
+   > # pdb4amber -i $f.pdb -o ${f}_h.pdb --reduce
+   > # no longer -h, p adds h considering pH
+   > ```
+   >
+   > or try adtools (laji!) or pymol (also laji!)
 
    but I believe non-polar hydrogen should be added
 
@@ -799,15 +799,16 @@ parmchk2 -i lig.mol2 -f mol2 -o lig.frcmod
    # if no english, you can copy and paste...
    ```
 
+   > Try removing the hydrogen atoms from the PDB file in those residues.  Leap will add the ones it needs back in.  If you continue to get complaints involving unrecognized hydrogens, you can remove all hydrogens using "reduce" with "-Trim".  See the manual for instructions on using reduce.
+   >
    > FATAL:  Atom .R<NLYS 102>.A<H 25> does not have a type.
    >
    > ```shell
    > reduce 2cqg_1_a.pdb -Trim > 2cqg_1_noh.pdb
    > ```
    >
-   > Try removing the hydrogen atoms from the PDB file in those residues.  Leap will add the ones it needs back in.  If you continue to get complaints involving unrecognized hydrogens, you can remove all hydrogens using "reduce" with "-Trim".  See the manual for instructions on using reduce.
-   >
-   > 以上在tleap里的操作是一步一步来做，一个简单的办法是将以上所有操作写入leap.in文件，按如下操作一步完成：
+
+   以上在tleap里的操作是一步一步来做，一个简单的办法是将以上所有操作写入leap.in文件，按如下操作一步完成：
 
    ```
    tleap -s -f leap.in > leap.out
@@ -871,29 +872,25 @@ parmchk2 -i lig.mol2 -f mol2 -o lig.frcmod
 
    > calculate the number of ions: https://ambermd.org/tutorials/basic/tutorial8/index.php https://www.phys.ksu.edu/personal/schmit/SLTCAP/SLTCAP.html
    >
-   > - mw of protein: 9.762 kDa
-   > - concentration: 150
-   > - Net charge: 2.00
-   > - number of water: 5206
-   >
-   > Warning: The unperturbed charge of the unit (1.999900) is not zero.
-   >
-   > Warning: Close contact of 1.432869 angstroms between .R<CASP 185>.A<H 2> and .R<MOL 186>.A<H10 41>
-   >
-   > one thing that matters is, when measuring mw of the protein, we must **include hydrogens**:
-   >
-   > ```shell
-   > conda activate AmberTools21
-   > reduce 2fbw_pro.pdb > 2fbw_h.pdb  # add hydrogen
-   > python3 ~/Desktop/work/projects/tools/Python-for-MD/prepare/mw.py ~/Desktop/work/projects/undergraduate/SDH/md/lig1/ 2fbw_h.pdb
+   > The following usually does not matter:
    > 
    > ```
+   > Warning: Close contact of 1.432869 angstroms between .R<CASP 185>.A<H 2> and .R<MOL 186>.A<H10 41>
+   >```
+   > 
+   >one thing that matters is, when measuring mw of the protein, we must **include hydrogens**:
+   > 
+   >```shell
+   > conda activate AmberTools21
+   >reduce 2fbw_pro.pdb > 2fbw_h.pdb  # add hydrogen
+   > python3 ~/Desktop/work/projects/tools/Python-for-MD/prepare/mw.py ~/Desktop/work/projects/undergraduate/SDH/md/lig1/ 2fbw_h.pdb
+   > ```
+   > 
+   > 2023 update: load in Pymol, A--compute--molecular weight--with inplicit hydrogen
 
 3. convert to gmx
 
    >   history command (in 2021)
-   >
-   >   
    >
    >   ```shell
    >   conda activate Acpype
@@ -908,8 +905,6 @@ parmchk2 -i lig.mol2 -f mol2 -o lig.frcmod
    >
    >   and process some text
    >
-   >   
-   >
    >   ```shell
    >   grep "WAT" -rl ./com.gro | xargs sed -i "s/WAT/SOL/g" 
    >   grep "WAT" -rl ./com.top | xargs sed -i "s/WAT/SOL/g"
@@ -917,20 +912,26 @@ parmchk2 -i lig.mol2 -f mol2 -o lig.frcmod
    >   grep " IP " -rl ./com.top | xargs sed -i "s/ IP / Na+ /g" 
    >   grep " IM " -rl ./com.top | xeargs sed -i "s/ IM / Cl- /g" 
    >   ```
-
-   note that the output has changed in 2022! output into a folder; add a run.sh and .itp file, but we don't use them.
-
-   ```shell
-   conda activate Acpype
-   acpype -p com.prmtop -x com.inpcrd -d -c user
-   cd com.amb2gmx
-   mv com_GMX.gro com.gro
-   mv com_GMX.top com.top
-   grep "WAT" -rl ./com.gro | xargs sed -i "s/WAT/SOL/g" 
-   grep "WAT" -rl ./com.top | xargs sed -i "s/WAT/SOL/g" 
-   ```
-
-   > [acpype server](https://www.bio2byte.be/acpype/), but not using
+   >
+   >   note that the output has changed in 2022! output into a folder; add a run.sh and .itp file, but we don't use them.
+   >
+   >   ```shell
+   >   conda activate Acpype
+   >   acpype -p com.prmtop -x com.inpcrd -d -c user
+   >   cd com.amb2gmx
+   >   mv com_GMX.gro com.gro
+   >   mv com_GMX.top com.top
+   >   grep "WAT" -rl ./com.gro | xargs sed -i "s/WAT/SOL/g" 
+   >   grep "WAT" -rl ./com.top | xargs sed -i "s/WAT/SOL/g" 
+   >   ```
+   >
+   >   [acpype server](https://www.bio2byte.be/acpype/), but not using
+   
+   Update 2023: Acpype suckes for the whole system! I cann't fix the solvent/ion name problem. Just use Parmed....but it renumbers all residues....more precisely, Amber files do not have residue number info, just starting from 1....
+   
+   Garbage!
+   
+   ![在座各位都是垃圾表情图片-九蛙工具箱](https://www.jiuwa.net/pic/20170406/1491491996428429.jpg)
 
 ### MD with one ligand
 
@@ -1897,6 +1898,341 @@ input: .tpr, .xtc, .ndx
 
 
 
+### CHARMM-GUI for ligands
+
+see also FEbuilder document...
+
+Preface: CgenFF is thought to be not as good as GAFF series...however it (or MATCH) is more transferable. And I prefer dual topology in FEP. ~~BTW, we focus on the final properties in MD simulation, not really the individual charges??~~
+
+But CgenFF does not support special species like:
+
+- azide (-N=N=N)
+- -SeH
+- ....
+
+
+
+
+
+Check the printed structure!!!! like
+
+- <font color=red>check every single bond in GaussView before building anything, and CHARMM-GUI may mis-assign the aromatic bonds!</font>
+- the Ar ring completeness
+- remove Hs added to phosphate....
+
+Choose 'Exact', 'Make CGenFF topology'
+
+Then we obtain all .pdb, .psf, etc. that is needed.
+
+> other files:
+>
+> - drawing: the recognized structure on the 1st page
+> - copy `charmm-gui-xxxxx/toppar/lig.prm` (lig: residue name of your ligand) for use in your simulation! shown in [this video](https://www.youtube.com/watch?v=Pj40ZnybXds)
+
+
+
+#### Other ways to generate ligand topology
+
+- https://cgenff.umaryland.edu is what CHARMM-GUI calls for ligand, the same. but stupidly we cannot `wget` files
+- https://www.swissparam.ch/ MMFF/CHARMM22, too old
+- MATCH
+
+### Setup with VMD
+
+```tcl
+# usage: vmd -dispdev text -e merge-and-solvate.tcl > vmd.log
+
+package require psfgen
+psfcontext reset
+# force field
+topology "toppar/top_all36_carb.rtf"
+topology "toppar/top_all36_na.rtf"
+topology "toppar/top_all36_prot.rtf"
+topology "toppar/top_all36_cgenff.rtf"
+topology "toppar/toppar_water_ions_namd.str"
+
+# load hybrid
+topology lig.rtf
+segment LIG {pdb ligandrm.pdb}
+coordpdb ligandrm.pdb LIG
+# I think rtf file is usually more useful, but the capability to read psf files is an advantage over tleap and gmx!
+# readpsf ligandrm.psf
+# coordpdb ligandrm.pdb
+
+# crystal water
+# segment CRW {
+#     pdb crw.pdb
+#     auto none
+# }
+# coordpdb crw.pdb CRW
+
+# load receptor
+pdbalias residue HIS HSE
+pdbalias atom ILE CD1 CD
+segment PRO {
+    pdb pr1.pdb
+    first ACE
+    last CT3
+}
+# other protein chains
+# segment PR2 {
+#     pdb pr2.pdb
+#     first ACE
+#     last CT3
+# }
+coordpdb pr1.pdb PRO
+# coordpdb pr2.pdb PR2
+guesscoord
+
+writepdb merged.pdb
+writepsf merged.psf
+# solvation and ionization
+package require solvate
+package require autoionize
+# ionize complex
+mol delete all
+mol load psf merged.psf pdb merged.pdb
+solvate merged.psf merged.pdb -t 12 -o solvated
+mol delete all
+autoionize -psf solvated.psf -pdb solvated.pdb -sc 0.15 -o system
+
+mv system.pdb ../common
+mv system.psf ../common
+mv lig.prm ../common/toppar
+file delete solvated.log
+file delete solvated.pdb
+file delete solvated.psf
+file delete merged.psf
+
+cd ../common
+vmd -dispdev text -e measure.tcl -args system
+vmd -dispdev text -e fix_backbone_restrain_ca_with_ligand.tcl
+
+exit
+```
+
+#### parametrization
+
+
+
+
+
+##### about the topology
+
+When you encouter errors when reading .str file:
+
+> “psfgen) ERROR!  FAILED TO RECOGNIZE SET.  Line 319: set para” etc.
+>
+> FATAL ERROR: UNKNOWN PARAMETER IN CHARMM PARAMETER FILE ../common/toppar_water_ions.str
+> LINE=*set app*
+
+[How-can-I-use-charm36-forcefiled-for-a-protein-bound-to-ATP-and-MG](https://www.researchgate.net/post/How-can-I-use-charm36-forcefiled-for-a-protein-bound-to-ATP-and-MG-Can-you-help-me)
+
+1. First, you need to edit the stream file so that it is compatible with the NAMD/VMD psfgen tool.  To do that, you must comment out (or remove) all the lines containing CHARMM scripting code, since psfgen doesn't recognize them. 
+
+2. Furthermore, the **na_nad_ppi.str** and file you mention requires parsing the "**top_all36_na.rtf**" file containing original nucleic acid parameters, so you need that too. 
+
+   > also, just put toppar_water_ions.str after na.rtf and prot.rtf
+
+3. You **should use both** the parameters from the stream files and the original **nucleic acid prm file**.  The stream files do not contain full parameters, some of them (for example some **non-bonded terms**) are expected to be found in the prm files. However, they are needed for accurate representation of these "extra" molecules they describe
+
+
+
+#### solvation
+
+- solvate https://www.ks.uiuc.edu/Research/vmd/plugins/solvate/
+- autoionize https://www.ks.uiuc.edu/Research/vmd/plugins/autoionize/
+
+
+
+> autoionize not replacing water mols, it adds ions
+
+
+
+#### measurement
+
+```tcl
+#!/bin/bash
+# vmd -dispdev text -e measure.tcl -args system
+
+set file [lindex $argv 0]
+package require psfgen
+psfcontext reset
+# readpsf system.psf
+# coordpdb system.pdb
+mol load psf $file.psf pdb $file.pdb
+# measure and assign values
+set everyone [atomselect top all]
+set minmax [measure minmax $everyone]
+# set center [measure center $everyone]
+foreach {min max} $minmax { break }
+foreach {xmin ymin zmin} $min { break }
+foreach {xmax ymax zmax} $max { break }
+
+# generate output for .namd file. if you do not use non-standard/rotated box
+set file [open "PBCBOX-$file.dat" w]
+puts $file "cellBasisVector1 [ expr $xmax - $xmin ] 0 0 "
+puts $file "cellBasisVector2 0 [ expr $ymax - $ymin ] 0 "
+puts $file "cellBasisVector3 0 0 [ expr $zmax - $zmin ] "
+puts $file "cellOrigin [ expr ($xmax + $xmin)/2 ] [ expr ($ymax + $ymin)/2 ] [ expr ($zmax + $zmin)/2 ] "
+
+exit
+```
+
+this file looks like normal setting statements:
+
+```shell
+# PBCBOX-system.dat
+cellBasisVector1 70.44500064849854 0 0 
+cellBasisVector2 0 56.54799842834473 0 
+cellBasisVector3 0 0 56.80599784851074 
+cellOrigin 25.47849988937378 -2.505000114440918 -11.279999732971191 
+```
+
+in NAMD conf file:
+
+```
+source ../common/PBCBOX-system.dat
+```
+
+
+
+
+
+#### adding restraint
+
+Basically, select something, set the beta value and save a `.pdb` file.
+
+```shell
+## copied from the tutorial
+# usage: vmd -dispdev text -e fix_backbone_restrain_ca_with_ligand.tcl
+
+# package require psfgen
+mol delete all
+mol load psf system.psf pdb system.pdb
+
+# Mark atoms to fix for initial minimization
+# We'll start by fixing the protein backbone and minimizing everything else.
+# also fix ligand. then remove fix and minimize
+# ZN and MG: only modify the coordinated ones. let the free ions free
+
+set all [atomselect top all]
+set to_fix [atomselect top "(protein or nucleic) and backbone or segname LIG or segname CRW"]
+$all set beta 0
+$to_fix set beta 1
+$all writepdb fix_backbone.pdb
+
+mol delete all
+mol load psf system.psf pdb system.pdb
+
+# Put harmonic restraints on the CA atoms for heating and unit cell
+# equilibration.  Use the coordinates from the last simulation frame.
+
+set all [atomselect top all]
+set sel [atomselect top "protein and name CA or segname LIG or segname CRW"]
+$all set beta 0
+$sel set beta 0.5
+$all writepdb restrain_ca.pdb
+
+mol delete all
+mol load psf system.psf pdb system.pdb
+
+# Put harmonic restraints on the ligand atoms to equilibrate the interaction
+# adjust the side chain conformation of the protein to fit the ligand
+# here we hope the arginines can fix the TP group and the base does not go deeper away
+
+set all [atomselect top all]
+set sel [atomselect top "segname LIG or segname CRW"]
+$all set beta 0
+$sel set beta 1
+$all writepdb restrain_ligand.pdb
+
+exit
+```
+
+
+
+in NAMD conf file
+
+```
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### special ligand file
+
+I got this ligand file from seniors with strange residue/atom names so that it's not  recognized by CHARMM-GUI?
+
+
+
+Maybe we can rename them (element+number) with AutoPSF in vmd.
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/parameterization.jpg" alt="parameterization" style="zoom:80%;" />
+
+It seems that **`xxx_formatted` can be recognized by CHARMM-GUI**. Try a few other pdb files if necessary.
+
+> Another way to generate uploadable .pdb is:
+>
+> ```shell
+> gmx pdb2gmx -f remtp.pdb -o remtp.gro # though with error? messages, we use that .gro file
+> obabel -igro remtp.gro -opdb -O remtp-gro.pdb
+> ```
+
+
+
+#### All by GUI
+
+##### Setup
+
+Extension--Modeling--Automatic PSF Builder--Options, check 'add solvation box' and 'ionization' options, follow the PSF building protocol, and you will get completely solvated and ionized system!!! But the parameters cannot be set...
+
+##### Solvation
+
+Extension--Modeling--Add Solvation Box
+
+- You can rotate to minimize volume
+
+- WT: residue name for waters. can change
+
+- if you check 'use molecular dimension', the min and max in 3D will be calculated automatically, and you only need to add 'padding' (and measure) as we usually did. 
+
+  otherwise we can specify all the parameters manually
+
+- Click 'solvate', molecular info (# of water) is shown in Terminal again.
+
+> this GUI doesn’t have ionization, neither choose water model?? TIP3P water is the default...
+
+##### Ionization
+
+Extensions--Modeling--Add ions (autoionize)
+
+very straightforward
+
+- Choose salt, additional ions
+- Neutralize and set NaCl concentration to 0.15 mol/L
+
+
+
+
+
+---
+
+
+
+the following are from FYP and to be summarized into the above newly-written workflow
+
 ### build complex-method 2 (using)
 
 > use console, include topology. [How to create a PSF file](https://sassie-web.chem.utk.edu/docs/structures_and_force_fields/notes.html)
@@ -1927,27 +2263,9 @@ but **'formatted’ can be recognized by CHARMM-GUI**!
 >
 > but may also use 'formatted’. but for remtp I used remtp_autopsf_temp.pdb
 >
-> Another way to generate uploadable .pdb is:
+> 
 >
-> ```shell
-> gmx pdb2gmx -f remtp.pdb -o remtp.gro # though failed, we use that .gro file
-> obabel -igro remtp.gro -opdb -O remtp-gro.pdb
-> ```
-
-Check the printed structure!!!! like
-
-- <font color=red>check every single bond in GaussView before building anything, and CHARMM-GUI may mis-assign the aromatic bonds!</font>
-- the Ar ring completeness
-- remove Hs added to phosphate....
-
-Choose 'Exact', 'Make CGenFF topology'
-
-Then we obtain all .pdb, .psf, etc. that is needed.
-
-> other files:
->
-> - drawing: the recognized structure on the 1st page
-> - copy `charmm-gui-xxxxx/toppar/lig.prm` (lig: residue name of your ligand) for use in your simulation! shown in [this video](https://www.youtube.com/watch?v=Pj40ZnybXds)
+> 
 
 the successful version:
 
@@ -2187,84 +2505,9 @@ autoionize -psf solvated.psf -pdb solvated.pdb -sc 0.1 -o system
 
 ```
 
-#### method 2-GUI
+- 
 
-> note: a trick: Extension--Modeling--Automatic PSF Builder--Options, check 'add solvation box' and 'ionization' options, follow the PSF building protocol, and you will get completely solvated and ionized system!!!
->
-> though the parameters cannot be set...
-
-##### Solvation
-
-Extension--Modeling--Add Solvation Box
-
-- You can rotate to minimize volume
-
-- WT: residue name for waters. can change
-
-- if you check 'use molecular dimension', the min and max in 3D will be calculated automatically, and you only need to add 'padding' (and measure) as we usually did. 
-
-  otherwise we can specify all the parameters manually
-
-- Click 'solvate', molecular info (# of water) is shown in Terminal again.
-
-> this GUI doesn’t have ionization, neither choose water model?? TIP3P water is the default...
-
-##### Ionization
-
-Extensions--Modeling--Add ions (autoionize)
-
-very straightforward
-
-- Choose salt, additional ions
-- Neutralize and set NaCl concentration to 0.15 mol/L
-
-> it’s not replacing water mols, it adds ions
-
-#### measurement of the system
-
-In a new vmd session, load the solvated and ionized structure
-
-```tcl
-# you can ignore this if you come from method1. just load files
-package require psfgen
-psfcontext reset
-# readpsf system.psf
-# coordpdb system.pdb
-mol load psf system.psf pdb system.pdb
-# measure and assign values
-set everyone [atomselect top all]
-set minmax [measure minmax $everyone]
-# set center [measure center $everyone]
-foreach {min max} $minmax { break }
-foreach {xmin ymin zmin} $min { break }
-foreach {xmax ymax zmax} $max { break }
-
-# generate output for .namd file. if you do not use non-standard/rotated box
-puts "# Periodic Boundary Conditions"
-puts "cellBasisVector1 [ expr $xmax - $xmin ] 0 0 "
-puts "cellBasisVector2 0 [ expr $ymax - $ymin ] 0 "
-puts "cellBasisVector3 0 0 [ expr $zmax - $zmin ] "
-puts "cellOrigin [ expr ($xmax + $xmin)/2 ] [ expr ($ymax + $ymin)/2 ] [ expr ($zmax + $zmin)/2 ] "
-```
-
-we need length of 3 edges and coordinate of the center
-
-```shell
-vmd -dispdev text -e measure.tcl
-```
-
-> info: see the folder...probably similar for all ligands
->
-> RdRp-ATP
->
-> ```
-> cellBasisVector1 102.76400184631348 0 0 
-> cellBasisVector2 0 93.35700035095215 0 
-> cellBasisVector3 0 0 108.42400050163269 
-> cellOrigin 57.934000968933105 58.11250019073486 57.53700029850006 
-> ```
->
-> 96013 atoms, 27704 water
+> 
 
 ## Setting up a MD simulation
 
@@ -2913,7 +3156,7 @@ combine the hybrid ligand with protein
 
   如果跳跃，应该多跑
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/FYP-notes.assets/cluster-id-with-time.png" style="zoom:33%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/cluster-id-with-time.png" style="zoom:33%;" />
 
 Leili's notes
 

@@ -285,8 +285,8 @@ https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect�
 - [Linux中修改SSH端口号](https://www.jianshu.com/p/de8a5a69c9ea)
 
   ```shell
-  vim /etc/ssh/sshd_config`
-  将`#Port 22`修改为`Port 端口号
+  vim /etc/ssh/sshd_config
+  将`#Port 22`修改为`Port 端口号`
   ```
 
   刚打开时被注释掉了

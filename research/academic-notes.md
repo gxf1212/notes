@@ -49,7 +49,11 @@ maybe a new .md file in the future
 
 ## Nucleic acids
 
+### DNA/RNA polymerase
+
 ![DNAPol](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/DNAPol.png)
+
+3'-OH和Pβ的O形成氢键是有道理的！焦磷酸离去之后直接把3'-OH去质子化了！！
 
 
 

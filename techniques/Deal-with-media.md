@@ -6,77 +6,20 @@
 
 # 字幕工作
 
-## 编辑
+## 总结
 
-确定是否有字幕的方法：找个播放器。。
+YouTube很多视频本身就带字幕，可以用插件、网站什么的下载：
 
-万兴喵影，编辑srt：https://miao.wondershare.cn/help/video-guide/edit-srt.html
+- youtube-dual-subtitles
+- https://downsub.com/
 
-剪映大概也行
+还可以写代码批量下载
 
+没有字幕的也可以用常见的剪辑软件自动识别（如剪映）
 
-
-[用SrtEdit软件校准字幕时间](https://jingyan.baidu.com/article/925f8cb8fe1132c0dde0563f.html)   [Download here](https://www.pc6.com/softview/SoftView_51082.html)
-
-记住校准所有！！缺点：是不是有些符号不能识别？弄完还要edit一下，去掉乱码
-
+但没有特别好的翻译工具，因为YouTube没有自动生成字幕很可能是因为音频质量较差，你识别的也不准
 
 
-> 下方黑边：https://tieba.baidu.com/p/2232837166
->
-> https://jingyan.baidu.com/article/c275f6bafcbf16a23d7567b0.html
->
-> 感觉还是用PR。喵影还算方便、多样化，但目前没发现能加在下方
->
-> https://www.bilibili.com/s/video/BV1Pa4y1s75q 批量合并字幕用Gihosoft TubeGet，可软，但不知B站是否可
->
-> https://zhuanlan.zhihu.com/p/240417302
->
-> Arctime和Aegisub可以尝试，对照视频编辑srt字幕。能不能导入导出？
->
-> smartling那个用的是CAT tool
->
-> https://arctime.org/guide.html
->
-> 
-
-## 获取、识别
-
-下载B站：
-
-> https://gitee.com/KGDKL/BiliCC-Srt   
-
-单个的也可在bilibili助手下载
-
-自己的则在编辑字幕的界面上传和下载
-
-> 但是剪映（要转格式）和万兴（有限制）应该都可以识别英文吧
-
-https://jingyan.baidu.com/article/597a0643786861702b5243b4.html
-
-关于剪映识别：
-
-- Indian English识别错误我也没辙
-- 有批量替换的功能
-- 字幕轴和视频播放轴可跳转
-
-总的来说，编辑文字比万兴好一点
-
-> outdated
->
-> 转换工具官网 https://guihet.com/jianyingtool.html 好东西！
->
-> JianYingSRT.exe，剪映导出字幕的位置：
->
-> C:\Users\Lenovo\AppData\Local\JianyingPro\User Data\Projects\com.lveditor.draft\课程字幕\draft_content.json
->
-> 剪映无法导入，其他无法导出，要改英文的话，只能一次改好
->
-> 下载B站：https://gitee.com/KGDKL/BiliCC-Srt   自己的则在编辑字幕的界面上传和下载
-> 
-> 各种文件格式的转换器（要钱） https://gotranscript.com/subtitle-converter vtt转srt
->
-> 识别英文：https://www.huiyingzimu.com （已经用掉免费的机会了
 
 ## YouTube&翻译
 
@@ -357,6 +300,78 @@ vtt_to_srt.py xx.srt
 ```
 
 https://you-get.org/  no Chinese?
+
+## 获取、识别
+
+下载B站：
+
+> https://gitee.com/KGDKL/BiliCC-Srt   
+
+单个的也可在bilibili助手下载
+
+自己的则在编辑字幕的界面上传和下载
+
+> 但是剪映（要转格式）和万兴（有限制）应该都可以识别英文吧
+
+https://jingyan.baidu.com/article/597a0643786861702b5243b4.html
+
+关于剪映识别：
+
+- Indian English识别错误我也没辙
+- 有批量替换的功能
+- 字幕轴和视频播放轴可跳转
+
+总的来说，编辑文字比万兴好一点
+
+> outdated
+>
+> 转换工具官网 https://guihet.com/jianyingtool.html 好东西！
+>
+> JianYingSRT.exe，剪映导出字幕的位置：
+>
+> C:\Users\Lenovo\AppData\Local\JianyingPro\User Data\Projects\com.lveditor.draft\课程字幕\draft_content.json
+>
+> 剪映无法导入，其他无法导出，要改英文的话，只能一次改好
+>
+> 下载B站：https://gitee.com/KGDKL/BiliCC-Srt   自己的则在编辑字幕的界面上传和下载
+>
+> 各种文件格式的转换器（要钱） https://gotranscript.com/subtitle-converter vtt转srt
+>
+> 识别英文：https://www.huiyingzimu.com （已经用掉免费的机会了
+
+## 编辑
+
+确定是否有字幕的方法：找个播放器。。
+
+万兴喵影，编辑srt：https://miao.wondershare.cn/help/video-guide/edit-srt.html
+
+剪映大概也行
+
+
+
+[用SrtEdit软件校准字幕时间](https://jingyan.baidu.com/article/925f8cb8fe1132c0dde0563f.html)   [Download here](https://www.pc6.com/softview/SoftView_51082.html)
+
+记住校准所有！！缺点：是不是有些符号不能识别？弄完还要edit一下，去掉乱码
+
+
+
+> 下方黑边：https://tieba.baidu.com/p/2232837166
+>
+> https://jingyan.baidu.com/article/c275f6bafcbf16a23d7567b0.html
+>
+> 感觉还是用PR。喵影还算方便、多样化，但目前没发现能加在下方
+>
+> https://www.bilibili.com/s/video/BV1Pa4y1s75q 批量合并字幕用Gihosoft TubeGet，可软，但不知B站是否可
+>
+> https://zhuanlan.zhihu.com/p/240417302
+>
+> Arctime和Aegisub可以尝试，对照视频编辑srt字幕。能不能导入导出？
+>
+> smartling那个用的是CAT tool
+>
+> https://arctime.org/guide.html
+>
+> 
 
 # 下载视频等
 

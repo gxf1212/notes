@@ -1432,6 +1432,24 @@ might because handling too many files in a folder...?
 
 will try to sort them into various sections later...
 
+## KDE
+
+- Default shortcut for creating a folder: F10
+
+- Add application: you may want to add items to the KDE Menu toolbar. In order to do so, select/search Utilities, Menu Editor.
+
+- [Linux中设置开机启动脚本（fedora）](https://blog.csdn.net/s651665496/article/details/51569729)
+
+- 使用CTRL键和功能键组合在一起可切换到指定的桌面，例如，CTRL-F1切换到1个桌面，CTRL-F3切换到第三个桌面。
+
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/switch-desktop.jpg)
+
+- The quick way to open a terminal: Ctrl+Alt+T
+
+
+
+## Check
+
 - Checking KDE Version? In konsole just type :
   ```shell
   kwin --version
@@ -1482,23 +1500,9 @@ will try to sort them into various sections later...
 
 
 
-- KDE
-
-  - Default shortcut for creating a folder: F10
-
-  - Add application: you may want to add items to the KDE Menu toolbar. In order to do so, select/search Utilities, Menu Editor.
-
-  - [Linux中设置开机启动脚本（fedora）](https://blog.csdn.net/s651665496/article/details/51569729)
-
-  - 使用CTRL键和功能键组合在一起可切换到指定的桌面，例如，CTRL-F1切换到1个桌面，CTRL-F3切换到第三个桌面。
-
-    ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/switch-desktop.jpg)
-
-  - 
 
 
-
-debugging zjunet
+## debugging zjunet
 
 ```shell
 sudo systemctl status xl2tpd.service
@@ -1513,6 +1517,8 @@ sudo dnf install NetworkManager-l2tp
 
 
 
+## Other info
+
 https://docs.fedoraproject.org/en-US/epel/
 Note that EPEL is not suitable for use in Fedora! Fedora is not Enterprise Linux. EPEL provides "a high quality set of additional packages for Enterprise Linux, including, but not limited to, Red Hat Enterprise Linux (RHEL), CentOS and Scientific Linux (SL), Oracle Linux (OL)". Put simply, Enterprise Linux is a term that refers to Red Hat Enterprise Linux or one of its clones. And Fedora is not a Red Hat clone.
 
@@ -1523,6 +1529,9 @@ As noted before, the Fedora repositories provide most (if not all) of the EPEL p
 
 
 https://www.techtarget.com/whatis/definition/daemon
+
+https://zh.wikipedia.org/wiki/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B
+
 （古希腊神话中的）半神半人的精灵
 
 

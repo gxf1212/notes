@@ -17,4 +17,4 @@ In the future, I will try not to write pages by project, but will still focus on
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/utils/21c.png" alt="21c" style="zoom: 33%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/utils/21c.png" alt="21c" style="zoom: 20%;" />

@@ -593,7 +593,7 @@ This part is about general MD and comparison between common MD engines. These co
 
 ## Force field
 
-### Packages and support
+### Support
 
 - [AMBER、GROMOS、OPLS、CHARMM最新版本的GROMACS力场包 - 分子模拟 (Molecular Modeling) - 计算化学公社](http://bbs.keinsci.com/thread-15094-1-1.html)
 
@@ -645,18 +645,15 @@ Amber FF (tleap)，nonbon板块的距离（$r_e$的一半，Å）*2除以$\sqrt[
 
 
 
-tleap
-给的是
+vdW parameters
 
-
-
-|                   | distance | unit | $\varepsilon$ unit |
-| ----------------- | -------- | ---- | ------------------ |
-| Gromacs .top file |          |      | kJ/mol             |
-| tleap             | Rmin     |      | kcal/mol           |
-| CHARMM .rtf/psf   |          |      |                    |
-|                   |          |      |                    |
-|                   |          |      |                    |
+|                   | distance        | unit | $\varepsilon$ unit |
+| ----------------- | --------------- | ---- | ------------------ |
+| Gromacs .top file | σ               | nm   | kJ/mol             |
+| tleap             | R<sub>min</sub> | Å    | kcal/mol           |
+| CHARMM .rtf/psf   | R<sub>min</sub> | Å    | kcal/mol           |
+|                   |                 |      |                    |
+|                   |                 |      |                    |
 
 
 
@@ -668,9 +665,20 @@ $$
 
 #### Other
 
-- `restraint_wt`: The weight (kcal · mol−1 · Å−2) for Cartesian restraints when ntr = 1.
+- `restraint_wt`: The weight (kcal · mol<sup>−1</sup> · Å<sup>−2</sup>) for Cartesian restraints when ntr = 1.
 
-  restraint_wt=10/4.18 is roughly the same as gromacs 1000
+  restraint_wt=10/4.18 is roughly the same as gromacs 1000 (kJ · mol<sup>−1</sup> · nm<sup>−2</sup>) [reference](https://manual.gromacs.org/documentation/current/reference-manual/topologies/topology-file-formats.html)
+  
+- RT:
+
+  - 300K: 2.4942 kJ/mol, 0.596 kcal/mol, kT: 0.414 kJ/molecule
+  - 310K: 2.57734 kJ/mol, 0.616 kcal/mol, kT: 0.4278 kJ/molecule
+  
+  we don't use kT in macroscopic world (or the final dG data)? 
+  
+  
+  
+  
 
 
 
@@ -681,7 +689,7 @@ $$
 
 
 
-## Algorithm reading
+## Algorithm & special
 
 ### Basic
 
@@ -691,7 +699,7 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 
 > from Amber manual
 
-
+<img src="E:\GitHub-repo\notes\research\Common-tools.assets\nvt-npt.png" alt="1689997407699" style="zoom: 80%;" />
 
 ### Control
 
@@ -726,6 +734,12 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 
 
 
+## Restraint
+
+在GROMACS中，SHAKE算法用于对键和角施加约束，以固定它们的长度或角度。而restraint则是一种更广泛的概念，它可以用来对模拟中的各种属性施加约束。
+
+
+
 ### Free energy calculations
 
 [Free energy calculations - GROMACS documentation](https://manual.gromacs.org/documentation/current/reference-manual/algorithms/free-energy-calculations.html)
@@ -752,17 +766,23 @@ In NAMD, FEP calculations can be performed using either the “alchemical” or 
 
 Read this: https://ambermd.org/GPULogistics.php
 
+and 22.6.7. Considerations for Maximizing GPU Performance
+
+> [see also: NAMD GPU tutorial](/research/Previous-projects/MD-tutorials-all.md#gpu-tutorial). combine these two?
+
+- While this full double precision approach has been implemented in the GPU code (read on), it gives very poor performance and so the default precision model used when running on GPUs is a combination of single and fixed precision, termed hybrid precision (SPFP).
+
+  <u>We recommend using the CPU code for energy minimization.</u> One limitation of either GPU precision model is that forces can be truncated or, in the worst case, **overflow** the fixed precision representation. This should never be a problem during MD simulations for any well behaved system. However, for minimization or very early in the heating phase it can present a problem. This is especially true if two atoms are close to each other and thus have <u>large VDW repulsions</u>.
+
+- Due to certain aspects of our GPU pair list operation, we have found that it is unsafe to run simulations that are <u>less than three times the non-bonded cutoff in any given direction</u>, and these cases will be trapped with an error message until a fix can be implemented. Furthermore, the pair list is only designed once on the current GPU implementation and may become invalid if the <u>simulation box shrinks too drastically</u>, as may happen in systems that have not undergone pressure equilibration.
+
+  In summary, GPU is better for large systems but can cause problems for small systems.
+
+- If you encounter problems during a simulation on the GPU you should first try to run the identical simulation on the CPU to ensure that it is not your simulation setup causing the problems.
+
+- Anton的硬件架构被设计成能够快速执行分子动力学相关的计算，但它并不包含将代码写入硬件的过程。代码仍然是在处理器上运行的，只不过这些处理器被设计成能够快速执行特定类型的计算。如并行、快速数据传输等。
 
 
-While this full double precision approach has been implemented in the GPU code (read on), it gives very poor performance and so the default precision model used when running on GPUs is a combination of single and fixed precision, termed hybrid precision (SPFP).
-
-We recommend using the CPU code for energy minimization. One limitation of either GPU precision model is that forces can be truncated or, in the worst case, overflow the fixed precision representation. This should never be a problem during MD simulations for any well behaved system. However, for minimization or very early in the heating phase it can present a problem. This is especially true if two atoms are close to each other and thus have large VDW repulsions.
-
-
-
-> [see also](/research/Previous-projects/MD-tutorials-all.md#gpu-tutorial)
-
-If you encounter problems during a simulation on the GPU you should first try to run the identical simulation on the CPU to ensure that it is not your simulation setup causing the problems.
 
 ## Performance
 
@@ -778,24 +798,13 @@ Typically the performance differential between GPU and CPU runs will increase as
 
 
 
-
-
 ## Other
-
-RT:
-
-- 300K: 2.4942 kJ/mol, 0.596 kcal/mol, kT: 0.414 kJ/molecule
-- 310K: 2.57734 kJ/mol, 0.616 kcal/mol, kT: 0.4278 kJ/molecule
-
-we don't use kT in macroscopic world (or the final dG data)? 
-
-
 
 
 
 # Gromacs
 
-This section is about basics and common usage. For more, see other pages about specific systems and applications.
+This section is about basics and common usage. For more (theory, concepts), see other pages about specific systems and applications.
 
 
 
@@ -1084,6 +1093,13 @@ http://archive.ambermd.org/201405/0364.html
 
 双GPU还不如分别跑两个任务（除了REMD、隐式溶剂等）
 
+```shell
+export CUDA_VISIBLE_DEVICES="0"
+nohup ${AMBERHOME}/bin/pmemd.cuda -O -i mdin -o mdout -p prmtop -c inpcrd -r restrt -x mdcrd -inf mdinfo &
+```
+
+
+
 > 我测试了一下，cpu的线程数和GPU的块数1:1时较快。
 
 http://bbs.keinsci.com/thread-5203-1-1.html
@@ -1096,10 +1112,6 @@ coordinates: `.nc`, `.rst7`
 
 
 
-Manual 21.7. Potential function parameters
-
-
-
 ### Simple MD & Tutorials
 
 https://ambermd.org/tutorials/basic/tutorial0/index.php
@@ -1108,11 +1120,57 @@ https://ambermd.org/tutorials/basic/tutorial14/index.php
 
 [How to do MDs - ChengLab](http://wiki.chenglab.net/mediawiki/index.php/How_to_do_MDs#Amber)
 
-[AMBER Tutorials](https://ringo.ams.stonybrook.edu/index.php/AMBER_Tutorials)
+[stonybrook AMBER Tutorials](https://ringo.ams.stonybrook.edu/index.php/AMBER_Tutorials)
+
+[CPPTRAJ one-liners – AMBER-hub (utah.edu)](https://amberhub.chpc.utah.edu/cpptraj-cookbook/cpptraj-one-liners/)
 
 
 
+To check simulation parameters, see the following sections in Amber Manual:
 
+- 21.6. General minimization and dynamics parameters
+- 21.7. Potential function parameters
+
+Other (e.g. modeling):
+
+- 
+
+
+
+refer [here](Metal-ion.md#Amber+12-6-4)
+
+"Plain" molecular dynamics run
+
+```
+molecular dynamics run
+ &cntrl
+  imin=0，irest=1， ntx=5，(restart MD)
+  ntt=3，temp0=300.0， gamma_ 1n=5.0， (temperature control)
+  ntp=1，taup=2.0， (pressure control) 
+  ntb=2，ntc=2， ntf=2，(SHAKE， periodic bc.)
+  nstl im=500000，(run for 0.5 nsec)
+  ntwx=1000，ntpr=200， (output frequency)
+/
+```
+
+
+
+- 在Amber的mdin文件中，您可以使用!符号来添加注释。
+
+- Due to performance regressions (about 20%) with running with the force switching on, it is recommended that simulations run with fswitch off unless using a force field that requires or recommends using the force switch.
+
+  > the force cutoff smoothly approaches 0 between the region of the fswitch value to the cut value.
+
+- The &ewald namelist is read immediately after the &cntrl namelist. We have tried hard to make the defaults
+  for these parameters appropriate for solvated simulations. Please take care in changing any values from their
+  defaults.
+
+
+
+#### Selection syntax
+
+23.1.1. ambmask 
+mask syntax
 
 
 
@@ -1136,12 +1194,10 @@ https://ambermd.org/tutorials/basic/tutorial14/index.php
   Error termination. Backtrace:.....
   ```
 
-- 
+- Note: If SHAKE is used (see NTC), it is not necessary to calculate forces for the constrained bonds.
 
-### Selection syntax
+- http://archive.ambermd.org/201704/0092.html
 
-23.1.1. ambmask 
-mask syntax
 
 
 
