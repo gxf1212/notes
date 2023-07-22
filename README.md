@@ -34,6 +34,7 @@ My Bilibili channel: [东山月光下](https://space.bilibili.com/441196634). Fr
     - [ ] during Fedora installation
   - [ ] scp, ssh, pbs and slurm (software usage)
   - [ ] 整理笔记时过一遍ChatGPT的记录？但很多都记过了。。
+  - [ ] Google chat, slack
   - [ ] CUDA environment section in Linux-funda
 - [ ] **beautify the theme** (sidebar?)
 - [ ] try interesting plugins

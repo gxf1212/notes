@@ -1931,6 +1931,12 @@ Then we obtain all .pdb, .psf, etc. that is needed.
 
 
 
+Note: it's ok to upload a protein-ligand complex `.pdb` file. CHARMM-GUI parametrizes the ligand and produces `.psf` and `.pdb` file of the whole that can be solvated and ionized in vmd. Try this if your protein does not need special treatment. 
+
+I haven't tried 
+
+
+
 #### Other ways to generate ligand topology
 
 - https://cgenff.umaryland.edu is what CHARMM-GUI calls for ligand, the same. but stupidly we cannot `wget` files
@@ -3326,9 +3332,37 @@ about charges in FEP
 
 - propagation of error. X, Y are independent variables.
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/FYP-notes.assets/image-20221106091013292.png" alt="image-20221106091013292" style="zoom:40%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/image-20221106091013292.png" alt="image-20221106091013292" style="zoom:40%;" />
 
 - leili认为，做benchmark需要对dataset的十几个以上的ligand跑MD、确定构象，比较离谱的可以扔掉
+
+### Benchmarking
+
+FXR那个太challenging，不应该benchmark
+
+行业标准是简单的那个，大家都能做出来
+最好是标准居多，挑战性的有几个
+看一下这三篇的correlation
+
+最好是先选别人做得比较好的体系REST：也是可以做
+直接跑，如果MD采样有问题
+
+100~200ns MD就行，真的要找最稳定的话要用REMD等等，而且也不一定100% occupancy
+
+用REST做FEP，要保证多个构象都要采得到
+
+
+扩环最好是整个环变化添加中间分子，确实还没人做，但是更少人用了
+
+周围charge变化比较大，我们应该尽量少一点变化，还是尊重charge的变化？
+手动做的时代，变得少，可能有一些平均。
+最好是用benchmark检验，也算一个测试了Leili讲的是流程，能做什么，我讲一下dual topology
+
+
+至于采用common多一点还是少一点，可以让用户自己决定他还觉得似乎考虑charge更合理
+
+意见一：一些gmx中的residue name需要alias
+意见二：哪些电荷变了最好做整齐一点
 
 ### Presenting your results
 

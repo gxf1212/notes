@@ -636,6 +636,12 @@ other possible notes:
 
 其实主要是做好依赖，安装起来就像大多数没用的博文一样，简单的几步就搞定了
 
+#### debug
+
+> 重新做了一遍Python环境还是没好，装了一下boost又卸掉了以后又好了
+>
+> http://archive.ambermd.org/202204/0094.html
+
 ## NAMD
 
 If your workstation has a CUDA-capable GPU, you should try downloading Linux-x86_64-multicore-CUDA. If you wish to run multi-copy algorithms, such as replica-exchange MD, you should try the "netlrts" builds, such as Linux-x86_64-netlrts-smp or Linux-x86_64-netlrts-smp-CUDA. Windows users are encouraged to install WSL ([Windows for Linux Subsystem](https://learn.microsoft.com/en-us/windows/wsl/install)) in order to run our most recent Linux builds.

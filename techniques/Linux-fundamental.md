@@ -19,23 +19,7 @@ Linux desktop的优势：可以直接为cluster做测试
 
    transform .rpm to .deb: `sudo alien ./*.rpm`
 
-3. Bash cheat sheet: Top 25 commands and creating custom commands
-
-   https://www.educative.io/blog/bash-shell-command-cheat-sheet
-
-4. 下面是一些典型的段错误的原因：由内存管理硬件试图访问一个不存在的内存地址
-
-5. 环境变量
-
-   root和user的`.bashrc`是不一样的！
-
-   export的含义 https://askubuntu.com/questions/720678/what-does-export-path-somethingpath-mean
-
-   LD_LIBRARY_PATH最初是空的，第一个不要有多余的`:`
-
-6. Linux操作系统执行可执行文件提示*No such file or directory*的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
-
-7. cp: cannot create regular file 'xxxx' 'xxxx': Invalid argument
+3. cp: cannot create regular file 'xxxx' 'xxxx': Invalid argument
 
    The syntax of your command is correct. “Invalid argument” from cp usually means that the file name is not valid on the target filesystem. It may be too long, contain a forbidden character, or be a reserved word.
 
@@ -43,36 +27,35 @@ Linux desktop的优势：可以直接为cluster做测试
 
    exFAT应该是都兼容的一种格式。
 
-8. ubuntu的话，卡死崩溃时你切换到tty1～6然后 
+4. 环境变量
 
-   ```shell
-   sudo pkill X
-   startx
-   ```
+   root和user的`.bashrc`是不一样的！
 
-   一下，就好了。不需要重启。
+   export的含义 https://askubuntu.com/questions/720678/what-does-export-path-somethingpath-mean
+
+   LD_LIBRARY_PATH最初是空的，第一个不要有多余的`:`
+
+5. 回收站：`~/.local/share/Trash/files`
+
+6. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
+
+7. [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
+
+8. 标准库的大部分函数通常放在文件 libc.a 中（文件名后缀.a代表“achieve”，译为“获取”），或者放在用于共享的动态链接文件 libc.so 中（文件名后缀.so代表“share object”，译为“共享对象”）。这些链接库一般位于 /lib/ 或 /usr/lib/，或者位于 GCC 默认搜索的其他目录。
 
 9. 在Linux中，TTY是终端设备的一种表示方式，它代表“teletypewriter”的缩写。在早期计算机系统中，TTY是指打字机终端设备。随着技术的发展，TTY逐渐演变为代表终端设备的抽象概念，包括物理终端、虚拟终端、串口终端等。因此，在这个语境下，TTY的全称是“teletypewriter”。
 
-10. 回收站：`~/.local/share/Trash/files`
+10. 下面是一些典型的段错误的原因：由内存管理硬件试图访问一个不存在的内存地址
 
-11. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
-
-12. [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
-
-13. 标准库的大部分函数通常放在文件 libc.a 中（文件名后缀.a代表“achieve”，译为“获取”），或者放在用于共享的动态链接文件 libc.so 中（文件名后缀.so代表“share object”，译为“共享对象”）。这些链接库一般位于 /lib/ 或 /usr/lib/，或者位于 GCC 默认搜索的其他目录。
-
-14. under root, no need to add `sudo`
-
-15. date: https://cloud.tencent.com/developer/article/1441802
-
-16. 
-
-17. what if message is too long? add `|more` https://blog.csdn.net/weixin_34293911/article/details/86473042
+11. Linux操作系统执行可执行文件提示*No such file or directory*的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
 
 
 
 ## Operations
+
+Bash cheat sheet: Top 25 commands and creating custom commands
+
+https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 ### Fundamental settings and softwares
 
@@ -83,6 +66,7 @@ Linux desktop的优势：可以直接为cluster做测试
    ```shell
    uname -a # check system version, kernel, etc.
    cat /proc/version # check Linux, gcc version
+   uname -r # view the current kernel version and build date
    ```
 
 2. OS info
@@ -256,6 +240,18 @@ Linux desktop的优势：可以直接为cluster做测试
 12. give user sudo privilege
 
     https://blog.csdn.net/Dream_angel_Z/article/details/45841109
+
+13. under root, no need to add `sudo`
+
+14. `su` or `su root`: enter root. 
+
+15. forgot root passwd (without sudo) https://www.bbsmax.com/A/rV57qW6VzP/
+
+    boot with rescue CD and remove that in `vi /etc/shadow`
+
+16. 
+
+
 
 #### input method installation
 
@@ -637,13 +633,14 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
    rename 's/a/b/' *a*
    ```
 
-9. tree: list subdirectories
+9. 
 
-   ```shell
-   sudo apt-get install tree
-   ```
 
-10. 
+#### view file
+
+1. `vi`
+2. `head` and `tail`
+3. what if message is too long? add `|more` https://blog.csdn.net/weixin_34293911/article/details/86473042
 
 #### check dir
 
@@ -667,7 +664,13 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
 
    https://www.runoob.com/linux/linux-comm-ls.html
 
-3. `tree`
+3. `tree`: show directory as tree
+
+   https://blog.csdn.net/xuehuafeiwu123/article/details/53817161
+
+   ```shell
+   sudo apt-get install tree
+   ```
 
 4. `locate`
 
@@ -709,15 +712,13 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
 
    <img src="https://pic3.zhimg.com/80/v2-9abd33350e3bcb401f379752874f9b52_1440w.jpg" alt="img" style="zoom:80%;" />
 
-2. `su root`: enter root. pw: a
-
-3. 运行qsub命令时，报错: `script is written in DOS/Windows text format`。 解决办法：输入 
+2. 运行qsub命令时，报错: `script is written in DOS/Windows text format`。 解决办法：输入 
 
    ```shell
    dos2unix <pbs-script-file>
    ```
 
-4. 
+3. 
 
 
 #### zip and unzip
@@ -1388,7 +1389,20 @@ tree .
 
 ## Emergency
 
-### When system halted
+[技术|详解在 Ubuntu 中引导到救援模式或紧急模式 (linux.cn)](https://linux.cn/article-14709-1.html)
+
+1. ubuntu的话，卡死崩溃时你切换到tty1～6然后 
+
+   ```shell
+   sudo pkill X
+   startx
+   ```
+
+   一下，就好了。不需要重启。
+
+   
+
+When system halted/stuck
 
 1. do not double click .sdf file with multiple conformations...it occupies all memory..
 
@@ -1408,23 +1422,18 @@ tree .
 
    I've tried https://fedoraproject.org/wiki/QA/Sysrq#How_do_I_enable_the_magic_SysRq_key.3F, don't know if it's applicable on this computer
 
-4. tree: show directory as tree
+4. 
 
-   https://blog.csdn.net/xuehuafeiwu123/article/details/53817161
+5. http://www.mamicode.com/info-detail-2913916.html
 
-5. 
+   also stop, disable .....but only under user.....
 
-### system stuck
+   https://blog.csdn.net/xinxinqqt/article/details/44784195
 
-http://www.mamicode.com/info-detail-2913916.html
+   https://blog.csdn.net/fryingpan/article/details/42641999
 
-also stop, disable .....but only under user.....
+   might because handling too many files in a folder...?
 
-https://blog.csdn.net/xinxinqqt/article/details/44784195
-
-https://blog.csdn.net/fryingpan/article/details/42641999
-
-might because handling too many files in a folder...?
 
 
 

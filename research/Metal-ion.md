@@ -394,14 +394,14 @@ NPT
   ntc=2, ntf=2, ! SHAKE
   temp0=310.0, ! final temperature
   ntt=3, gamma_ln=5.0, ig=-1, ! thermostat
-  ntp=1, pres0=1.0, taup=2, barostat=2,  ! barostat=1,
+  ntp=1, pres0=1.0, taup=2, barostat=2,  ! 
   nstlim=2500000, dt=0.002, ! 5ns
   ntpr=25000, ntwx=25000, ntwr=25000, ! output
 /
 
 ```
 
-
+barostat= 1 (default) for Berendsen, 2 for MC barostat (recommended)
 
 
 
@@ -433,6 +433,38 @@ pmemd.cuda -O -i ./infile/md.in -p ${topfile} -c npt.rst7 -r md.rst7 -o md.out -
 ```
 
 - -ref refc input (optional) reference coords for position restraints
+
+
+
+restarting: http://archive.ambermd.org/201706/0128.html
+
+```
+MD
+ &cntrl
+  imin=0, ! md
+  iwrap=1, irest=1, ntx=5,
+  cut=12, ! ntb=2, 
+  ntc=2, ntf=2, ! SHAKE
+  temp0=310.0, ! final temperature
+  ntt=3, gamma_ln=5.0, ig=-1, ! thermostat
+  ntp=1, pres0=1.0, taup=2, barostat=2 ! barostat
+  nstlim=500000000, dt=0.002, ! 1000ns
+  ntpr=50000, ntwx=250000, ntwr=250000, ! output
+/
+
+```
+
+and
+
+```shell
+#!/bin/bash
+# nohup bash ./infile/md_conti.sh 2&>error.log &
+
+topfile=./system/pro-1264.prmtop
+inicrd=./system/pro-1264.inpcrd
+pmemd.cuda -O -i ./infile/md.in -p ${topfile} -c md.rst7 -r md.rst7 -o md2.out -inf md.info -x md2.nc;
+
+```
 
 
 

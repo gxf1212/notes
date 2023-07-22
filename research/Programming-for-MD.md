@@ -431,7 +431,7 @@ examples
 
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/underline.png" alt="underline" style="zoom:50%;" />
 
-- 
+- [Convert Letters to Numbers and vice versa in Python | bobbyhadz](https://bobbyhadz.com/blog/python-convert-letters-to-numbers): `chr()`, `ord()`
 
 ## operating files and cmd
 

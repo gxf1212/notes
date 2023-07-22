@@ -1197,7 +1197,7 @@ pip install --upgrade myst-parser # or
 
 If something is wrong, maybe re-install MyST-parser
 
-### interpreter
+### interpreters
 
 **choose only one of them**
 
@@ -1233,6 +1233,25 @@ insert .md into .rst
 .. include:: include.md
   :parser: myst_parser.sphinx_
 ```
+
+#### syntax
+
+- [subscript-superscript](https://myst-parser.readthedocs.io/en/latest/syntax/typography.html#subscript-superscript)
+- [Cross-references](https://myst-parser.readthedocs.io/en/latest/syntax/cross-referencing.html#inline-links-with-implicit-text): normal markdown inline links
+- [Images and figures](https://myst-parser.readthedocs.io/en/latest/syntax/images_and_figures.html#figures-images-with-captions) not quite successful?
+
+
+
+For centered figures with captions:
+
+```html
+<center>
+<img src="../_static/images/interactive.png" style="zoom:100%;" />
+FEbuilder will pop out figures like this
+<center/>
+```
+
+
 
 ### extensions
 
@@ -1619,5 +1638,12 @@ https://bibichuan.github.io/posts/5affe24.html
 
 
 
+## thoughts
 
+如果要把自己的code拆成很多个分页面，并且不用手动把每个页面加入到目录中，那么notion和语雀之类的东西反倒是比较有效的，而长得比较好看的那种博客，都要手动设置
+那个wiki template是不是也可以这样？
+我忘记了docsify那个自动整目录怎么整
+然后docsify还有语雀，应该是可以写评论的
+语雀就是纯内部用，然后其他平台比较适合公开
 
+语雀的问题：单次上传文件个数限制；不认识的文件格式不让上传

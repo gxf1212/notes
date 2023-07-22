@@ -726,13 +726,32 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 ### Pressure control
 
 1. [C-rescale](https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp-value-pcoupl-C-rescale) in gmx
-2. The Berendsen barostat does not generate any strictly correct ensemble,
+
+2. http://www.sklogwiki.org/SklogWiki/index.php/Berendsen_barostat
+
+    in newer gmx:
+
+    ```
+    The Berendsen barostat does not generate any strictly correct ensemble,
     and should not be used for new production simulations (in our opinion).
     For isotropic scaling we would recommend the C-rescale barostat that also
     ensures fast relaxation without oscillations, and for anisotropic scaling
     you likely want to use the Parrinello-Rahman barostat.
+    ```
+
+    Amber: Berendsen Barostat converges fast and is generally well-behaving, but gives you wrong sampling.
+
+3. Berendsen thermostat is very efficient in equilibrating the system. However, it does not sample the exact NPT statistical ensemble. Recently several efficient Monte Carlo methods have been introduced. Monte Carlo pressure control samples volume fluctuations at a predefined number of steps at a given constant external pressure. It involves generation of a random volume change from a uniform distribution followed by evaluation of the potential energy of the trial system. The volume move is then accepted with the standard Monte-Carlo probability.
+
+    It's possible that it may take a while for the MC barostat to find an effective step size. But it is actually a more rigorously correct barostat. And quite a bit faster for pmemd.cuda.
+
+    https://computecanada.github.io/molmodsim-md-theory-lesson-novice/08-barostats/index.html
+
+4. 
 
 
+
+![U2@WL5VJQVCP9WN@VO~F7GA](E:\GitHub-repo\notes\research\Common-tools.assets\pcontrol.png)
 
 ## Restraint
 
@@ -749,18 +768,16 @@ In GROMACS, FEP calculations are performed by running a series of simulations at
 In NAMD, FEP calculations can be performed using either the “alchemical” or “slow growth” methods. In the alchemical method, the system is gradually transformed from one state to another by changing the value of λ during the simulation. [In each window, the value of λ is gradually changed from one value to another, and the free energy difference is estimated using techniques such as thermodynamic integration](https://www.ks.uiuc.edu/Research/namd/2.13/features.html).
 
 > it seems right....and namd doesn't sample the last window.
+>
+> Also strangely, Kevin's gmx FEP decomposition script also ignores the last window.
+
+http://ambermd.org/tutorials/advanced/tutorial9/#overview
+
+Within the TI region there will be atoms which are linearly transformed (LTA) directly from one atom type into another in a "**single–topology**" fashion and thus share coordinates (black atoms). Disappearing or appearing atoms are treated in a special way with "softcore" potentials (SCA) but in principal any atom can be defined as softcore atom depending on the user's needs. These atoms do not "see" each other that is no interaction will ever be calculated between them (blue atom for benzene and green atoms for phenol, the number labels are the respective atom indices).
 
 
 
-- [Free energy interactions - GROMACS documentation](https://manual.gromacs.org/documentation/current/reference-manual/functions/free-energy-interactions.html)
 
-  Gromacs perturbs every parameter.
-
-- We don't need to define `couple-moltype`, `couple-lambda0`, `couple-lambda1`, and `couple-intramol` if we've defined B state. The couple parameters are for solvation free-energies.
-
-- it is simpler to do everything with a single lambda setup without the lambda for interaction types.
-
-- Dummy atoms have epsilon and q both in zero, so no worry
 
 ## GPU
 
@@ -919,6 +936,20 @@ vdw and elec, common cutoff/switchdist
 
 
 `mdout.mdp`: all arguments actually used. help with debugging....
+
+
+
+### Free energy
+
+- [Free energy interactions - GROMACS documentation](https://manual.gromacs.org/documentation/current/reference-manual/functions/free-energy-interactions.html)
+
+  Gromacs perturbs every parameter.
+
+- We don't need to define `couple-moltype`, `couple-lambda0`, `couple-lambda1`, and `couple-intramol` if we've defined B state. The couple parameters are for solvation free-energies.
+
+- it is simpler to do everything with a single lambda setup without the lambda for interaction types.
+
+- Dummy atoms have epsilon and q both in zero, so no worry
 
 
 
@@ -1114,17 +1145,18 @@ coordinates: `.nc`, `.rst7`
 
 ### Simple MD & Tutorials
 
-https://ambermd.org/tutorials/basic/tutorial0/index.php
+- https://ambermd.org/tutorials/basic/tutorial0/index.php
 
-https://ambermd.org/tutorials/basic/tutorial14/index.php
+- https://ambermd.org/tutorials/basic/tutorial14/index.php
 
-[How to do MDs - ChengLab](http://wiki.chenglab.net/mediawiki/index.php/How_to_do_MDs#Amber)
+- [How to do MDs - ChengLab](http://wiki.chenglab.net/mediawiki/index.php/How_to_do_MDs#Amber)
 
-[stonybrook AMBER Tutorials](https://ringo.ams.stonybrook.edu/index.php/AMBER_Tutorials)
+- [stonybrook AMBER Tutorials](https://ringo.ams.stonybrook.edu/index.php/AMBER_Tutorials)
 
-[CPPTRAJ one-liners – AMBER-hub (utah.edu)](https://amberhub.chpc.utah.edu/cpptraj-cookbook/cpptraj-one-liners/)
+other:
 
-
+- https://zhuanlan.zhihu.com/p/612853742
+- 
 
 To check simulation parameters, see the following sections in Amber Manual:
 
@@ -1152,8 +1184,6 @@ molecular dynamics run
   ntwx=1000，ntpr=200， (output frequency)
 /
 ```
-
-
 
 - 在Amber的mdin文件中，您可以使用!符号来添加注释。
 
@@ -1200,8 +1230,26 @@ mask syntax
 
 
 
+## Analysis
+
+### Trajectory
+
+- [CPPTRAJ one-liners – AMBER-hub (utah.edu)](https://amberhub.chpc.utah.edu/cpptraj-cookbook/cpptraj-one-liners/)
+- [CPPTRAJ (amber-md.github.io)](https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml)
+
+
+
+
+
+- [Combining multiple trajectory files into a single trajectory and remove water molecules to save space. – AMBER-hub (utah.edu)](https://amberhub.chpc.utah.edu/combining-multiple-trajectory-files-into-a-single-trajectory-and-remove-water-molecules-to-save-space/)
+
+
+
+
 
 # Bioinformatics
+
+## MSA
 
 RCSB里面，只能通过advanced search来进行BLAST？
 https://www.rcsb.org/news/5764422199cccf72e74ca34f
@@ -1219,6 +1267,16 @@ https://www.rcsb.org/alignment
 doing MSA: cluster omega
 
 [Clustal Omega < Multiple Sequence Alignment < EMBL-EBI](https://www.ebi.ac.uk/Tools/msa/clustalo/)
+
+
+
+UniProt has a ClustalW interface but no showing colors. Just export sequences and upload...
+
+## Shannon's entropy plot
+
+Uniqueness and relative abundance of protein sequences....
+
+
 
 
 
