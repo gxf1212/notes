@@ -1186,6 +1186,18 @@ skills:
 
 
 
+### Export a brief format
+
+
+
+
+
+For ACS papers, copy from here
+
+![](E:\GitHub-repo\notes\techniques\images\acs-cite.png)
+
+
+
 ## Other
 
 ### ThunderBird
@@ -1548,8 +1560,8 @@ re
 
 AI chatbots
 
-https://www.cleverbot.com/
-https://myanima.ai/app/
-https://my.replika.ai/
-https://simsimi.com/chat
+- https://www.cleverbot.com/
+- https://myanima.ai/app/
+- https://my.replika.ai/
+- https://simsimi.com/chat
 

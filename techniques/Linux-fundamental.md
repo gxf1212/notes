@@ -13,21 +13,33 @@ Linux desktop的优势：可以直接为cluster做测试
 
 ## Basics
 
-1. Linux是把要安装的软件分布在整个系统的各个文件夹里面， 比如所有软件的配置文件都安装在`/etc`下面， 软件需要的库文件都安装在`/lib`下面，日志文件都在`/var/log`下面，`/bin`下是常用的程序，等等。 比较复杂 哈哈。
+### Concepts
 
-2. rpm包主要应用在RedHat系列包括 Fedora等发行版的Linux系统上，deb包主要应用于Debian系列包括现在比较流行的Ubuntu等发行版上。
+- Linux是把要安装的软件分布在整个系统的各个文件夹里面， 比如所有软件的配置文件都安装在`/etc`下面， 软件需要的库文件都安装在`/lib`下面，日志文件都在`/var/log`下面，`/bin`下是常用的程序，等等。 比较复杂 哈哈。
 
-   transform .rpm to .deb: `sudo alien ./*.rpm`
+- 标准库的大部分函数通常放在文件 libc.a 中（文件名后缀.a代表“achieve”，译为“获取”），或者放在用于共享的动态链接文件 libc.so 中（文件名后缀.so代表“share object”，译为“共享对象”）。这些链接库一般位于 /lib/ 或 /usr/lib/，或者位于 GCC 默认搜索的其他目录。
 
-3. cp: cannot create regular file 'xxxx' 'xxxx': Invalid argument
+- 在Linux中，TTY是终端设备的一种表示方式，它代表“teletypewriter”的缩写。在早期计算机系统中，TTY是指打字机终端设备。随着技术的发展，TTY逐渐演变为代表终端设备的抽象概念，包括物理终端、虚拟终端、串口终端等。因此，在这个语境下，TTY的全称是“teletypewriter”。
 
-   The syntax of your command is correct. “Invalid argument” from cp usually means that the file name is not valid on the target filesystem. It may be too long, contain a forbidden character, or be a reserved word.
+- rpm包主要应用在RedHat系列包括 Fedora等发行版的Linux系统上，deb包主要应用于Debian系列包括现在比较流行的Ubuntu等发行版上。
 
-   For example Windows filesystems (FAT, NTFS) forbid characters such as : and ? in filenames, so you can't copy these files to a Windows filesystem. 
+  transform .rpm to .deb: `sudo alien ./*.rpm`
 
-   exFAT应该是都兼容的一种格式。
+### File
 
-4. 环境变量
+- cp: cannot create regular file 'xxxx' 'xxxx': Invalid argument
+
+  The syntax of your command is correct. “Invalid argument” from cp usually means that the file name is not valid on the target filesystem. It may be too long, contain a forbidden character, or be a reserved word.
+
+  For example Windows filesystems (FAT, NTFS) forbid characters such as : and ? in filenames, so you can't copy these files to a Windows filesystem. 
+
+  exFAT应该是都兼容的一种格式。
+
+- 回收站：`~/.local/share/Trash/files`
+
+
+
+1. 环境变量
 
    root和user的`.bashrc`是不一样的！
 
@@ -35,21 +47,24 @@ Linux desktop的优势：可以直接为cluster做测试
 
    LD_LIBRARY_PATH最初是空的，第一个不要有多余的`:`
 
-5. 回收站：`~/.local/share/Trash/files`
+2. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
 
-6. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
+3. [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
 
-7. [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
+### Common errors
 
-8. 标准库的大部分函数通常放在文件 libc.a 中（文件名后缀.a代表“achieve”，译为“获取”），或者放在用于共享的动态链接文件 libc.so 中（文件名后缀.so代表“share object”，译为“共享对象”）。这些链接库一般位于 /lib/ 或 /usr/lib/，或者位于 GCC 默认搜索的其他目录。
+- 下面是一些典型的段错误的原因：由内存管理硬件试图访问一个不存在的内存地址
+- Linux操作系统执行可执行文件提示*No such file or directory*的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
 
-9. 在Linux中，TTY是终端设备的一种表示方式，它代表“teletypewriter”的缩写。在早期计算机系统中，TTY是指打字机终端设备。随着技术的发展，TTY逐渐演变为代表终端设备的抽象概念，包括物理终端、虚拟终端、串口终端等。因此，在这个语境下，TTY的全称是“teletypewriter”。
+### Releases
 
-10. 下面是一些典型的段错误的原因：由内存管理硬件试图访问一个不存在的内存地址
+[技术|最适合程序员的 10 款 Linux 发行版](https://linux.cn/article-14547-1.html)
 
-11. Linux操作系统执行可执行文件提示*No such file or directory*的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
+linux核心的东西都一样，发行版之间最大的区别无非是包管理和发行周期，以及默认带的软件包。
 
+- The big thing with CentOS 9 Stream is that it’s kind of the polar opposite of what CentOS once was. In the past, CentOS was all about stability. Because of that, packages were very slow to upgrade to new releases. In fact, you would often find packages that were a few releases old. That was done by design, to keep the operating system as absolutely rock-solid as possible. And it worked. CentOS was always amazingly stable.
 
+This time I installed https://labs.fedoraproject.org/scientific/
 
 ## Operations
 
@@ -104,6 +119,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 6. change hostname 
 
    - just type: `sudo hostname new_hostname`, but works temporarily
+   - 
 
 7. [check shell version](https://blog.csdn.net/electrocrazy/article/details/78313962): `bash --version`
 
@@ -1455,6 +1471,8 @@ will try to sort them into various sections later...
 
 - The quick way to open a terminal: Ctrl+Alt+T
 
+- 要切换窗口可以用Alt+Tab来进行
+
 
 
 ## Check
@@ -1506,6 +1524,12 @@ will try to sort them into various sections later...
   ```shell
   systemctl disable nvidia-powerd
   ```
+
+
+
+## CUDA
+
+
 
 
 
@@ -1768,9 +1792,9 @@ but the following still needs re-configure...
 - vmd
 - windows font
 
-## Upgrading Ubuntu release
+## Upgrading release
 
-  to unbuntu22.04
+### Ubuntu22.04
 
   https://os.51cto.com/article/705797.html
 
@@ -1804,13 +1828,40 @@ but the following still needs re-configure...
   > - snap不好
   > - ……
 
-## Upgrading CentOS release
+### CentOS
 
 No official tool...
 
-
-
 Finally failed updating system packages like `dnf`, `systemd`, etc., which proves this workflow may not work at all!
+
+
+
+```shell
+rpm -qa | grep -i devel | xargs -n 1 dnf remove -y
+```
+
+removed many important packages...
+
+
+
+#### Deleting the kernel
+
+This did not work either
+
+https://juejin.cn/s/Linux 删除内核无法开机
+
+https://blog.51cto.com/zhaoqifly/1841868 记一次CentOS7内核kernel的删除重装
+
+Fedora启动盘：在rescue模式下包只能一个个装，强制安装（`--force --nodeps`）新版内核仍然无法开机。`dnf`和`yum`都用不了，想修复也无法把修复包装给那个root，copy不过去。无法进行批量依赖修复，工作量太大。
+
+CentOS启动盘的修复模式还是能回到之前开机时的状态的（troubleshoot）
+
+Download packages:
+
+- [kernel | Package Info | CentOS Stream BuildSys](https://kojihub.stream.centos.org/koji/packageinfo?packageID=800)
+- [CentOS 8 Packages](https://linuxsoft.cern.ch/cern/centos/8/BaseOS/x86_64/os/Packages/)
+
+
 
 ## Fundamental softwares
 

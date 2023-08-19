@@ -10,6 +10,7 @@ It's statistical mechanics' job to communicate between macroscopic thermodynamic
 	\item in real-world systems, the interactions between particles are highly nontrivial;
 	\item \textit{Loschmidt's paradox}: microscopic mechanical laws are "inherently reversible", while the second law of thermodynamics prescribes a direction of time.
 \end{itemize}
+
 People then realized that macroscopic properties of a system do not depend strongly on the motion of every particle, but rather on gross averages that "wash out" microscopic details. 
 
 The principal conceptual breakthrough is that of an \textit{ensemble}, which refers to a collection of systems that share common macroscopic properties. This chapter is mainly about this genius idea.
@@ -19,44 +20,64 @@ The principal conceptual breakthrough is that of an \textit{ensemble}, which ref
 Here are some concepts.
 \begin{itemize}
 	\item The thermodynamic system is a macroscopic system. The rest of the universe is called its surroundings.
-	\item \textit{Isolated system}: no heat or material is exchange between a system and its surroundings.
+	\item \textit{Isolated system}: no heat or material is exchanged between a system and its surroundings.
 	\item A thermodynamic \textit{state} is specified by all thermodynamic parameters (like $p, V, T$) provided experimentally.
-	\item The \textit{equation of state} of a system is 
-	\item \textit{Thermodynamic transformation}: 
+	\item The \textit{equation of state} of a system is a relationship between those thermodynamic parameters under various equilibrium states. A general form is 
+	\begin{equation}
+		g(p,V,T,n)=0
+	\end{equation}
+	The \textit{ideal gas law}:
+	\begin{equation}
+		pV=nRT
+	\end{equation}
+	\item \textit{Thermodynamic transformation}: a change in thermodynamic state, usually effected by external conditions. Either \textit{reversible} (change slowly enough for the system to adjust to the condition) or \textit{irreversible}.
 	\item \textit{Thermodynamic equilibrium}: thermodynamic state doesn't change in time.
-	\item \textit{State function}:
+	\item \textit{State function}: any function $f(p,V,T,n)$ that only depends on the initial and final states.
 	\item \textit{Work}: 
 		\begin{equation}
 			\md W_{rev}=-p\md V+\mu\md n
 		\end{equation}
-		$\mu$ is called \textit{chemical potential}.
+		$\mu$ is called the \textit{chemical potential}.
 	\item \textit{Heat}:
 		\begin{equation}
 			\md Q_{rev}=C\md T
 		\end{equation}
+		$C$ is called the \textit{heat capacity}.
 \end{itemize}
 
 \subsection{The first law of thermodynamics}
 
+The first law of thermodynamics is a statement of \textbf{energy conservation}. The internal energy is changed by both work performed on it and heat absorbed. So
 
 \begin{equation}
 	\Delta E=\Delta Q+\Delta W
 \end{equation}
 
-$W_{irrev}>W_{rev}$
-
-$\Delta E_{uni}=\Delta E_{sys}+\Delta E_{sur}$
+Energy of the whole universe is not changed, so $\Delta E_{uni}=\Delta E_{sys}+\Delta E_{sur}=0$.
 
 \subsection{The second law of thermodynamics}
 
 \subsubsection{The Carnot cycle}
+
+A \textit{Carnot engine} takes in heat and delivers useful work, whose thermodynamic cycle A$\to$B$\to$C$\to$D$\to$A is illustrated in Fig. \ref{fig:2.3-carnot}. 
+
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.6\linewidth]{figure/2.3-carnot}
 	\caption{The Carnot cycle}
-	\label{fig:2}
+	\label{fig:2.3-carnot}
 \end{figure}
 
+\begin{itemize}
+	\item Path AB and CD are isothermal expansion/compression under different temperatures.
+	\item Path BC and DA are adiabatical expansion/compression.
+\end{itemize}
+
+\subsubsection{Irreversible work}
+
+Consider a system with fixed number of moles
+
+$W_{irrev}>W_{rev}$
 
 \subsubsection{The second law}
 

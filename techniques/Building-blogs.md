@@ -1552,7 +1552,7 @@ https://www.cnblogs.com/jonnyan/p/14207711.html
 
 
 
-# Build Hexo Pages (not organized yet)
+# Hexo (not organized yet)
 
 [build-blog-website-by-hexo](https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html#%E4%BD%BF%E7%94%A8hexo%E5%86%99%E5%8D%9A%E5%AE%A2)
 
@@ -1634,11 +1634,37 @@ https://bibichuan.github.io/posts/5affe24.html
 
 使用hexo等工具，在git上只提交下面的一个`.deploy_git`文件夹。。clone根本没用
 
+# Jekyll
+
+## installation
+
+https://www.jekyll.com.cn/docs/
+
+https://www.jekyll.com.cn/docs/installation/
+
+https://rubyinstaller.org/
+
+
+
+## templates
+
+https://jekyllrb.com/showcase/
+
+Jekyll官网也可以做成程序文档的样子？
 
 
 
 
-## thoughts
+
+## step-by-step guide
+
+https://www.jekyll.com.cn/docs/step-by-step/01-setup/
+
+
+
+
+
+# Thoughts
 
 如果要把自己的code拆成很多个分页面，并且不用手动把每个页面加入到目录中，那么notion和语雀之类的东西反倒是比较有效的，而长得比较好看的那种博客，都要手动设置
 那个wiki template是不是也可以这样？
@@ -1647,3 +1673,7 @@ https://bibichuan.github.io/posts/5affe24.html
 语雀就是纯内部用，然后其他平台比较适合公开
 
 语雀的问题：单次上传文件个数限制；不认识的文件格式不让上传
+
+如果放集群使用等信息，需要考虑安全性，那只能是语雀或钉钉群这种，都要验证
+
+其实像Kevin那个repo的形式就挺好的

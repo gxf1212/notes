@@ -338,6 +338,54 @@ examples
 
 # Tcl programming
 
+## String
+
+- format strings: https://wiki.tcl-lang.org/page/format
+
+- append something to a string: https://wiki.tcl-lang.org/page/append
+
+
+
+## List
+
+everything about lists https://zetcode.com/lang/tcl/lists/
+
+- `llength $list`: Count the number of elements in a list
+
+- [Adding & Deleting members of a list (tcl.tk)](https://tcl.tk/man/tcl8.5/tutorial/Tcl15.html)
+
+  ```tcl
+  lappend listName ?arg1 arg2 ... argn?
+  ```
+
+- [从 Tcl 中的列表中删除重复元素 - IT工具网 (coder.work)](https://www.coder.work/article/6876472)
+
+  ```tcl
+  set uniqueList [lsort -unique $myList]
+  ```
+
+- 
+
+
+
+## Vector
+
+Everything: https://www.ks.uiuc.edu/Research/vmd/current/ug/node193.html 
+
+
+
+## Control
+
+- if...else
+
+  ```tcl
+  if {boolean_expression} {
+    # statement(s) will execute if the boolean expression is true 
+  } else {
+    # statement(s) will execute if the boolean expression is false
+  }
+  ```
+
 - for loop
 
   ```tcl
@@ -345,65 +393,66 @@ examples
   	puts $i 
   } 
   ```
-  
-  or
-  
+
+- foreach: https://www.tcl.tk/man/tcl/TclCmd/foreach.html
+
+  [TCL foreach的用法-CSDN博客](https://blog.csdn.net/ciscomonkey/article/details/118881550)
+
   ```tcl
   set list {1 2 3 4 5}
   foreach item $list {
       puts $item
   }
   ```
-  
-  
-  
-- control
 
-  - if...else
+  multiple lists:
 
-    ```tcl
-    if {boolean_expression} {
-      # statement(s) will execute if the boolean expression is true 
-    } else {
-      # statement(s) will execute if the boolean expression is false
-    }
-    ```
-
-  - foreach: https://www.tcl.tk/man/tcl/TclCmd/foreach.html
-
-    double:
-
-    ```tcl
-    set x {}
-    foreach i {a b c} j {d e f g} {
-        lappend x $i $j
-    }
-    ```
-
-  - 
-
-- vector and list
-
-  - everything about lists https://zetcode.com/lang/tcl/lists/
-
-  - `llength $list`: Count the number of elements in a list
-
-  - Vectors: https://www.ks.uiuc.edu/Research/vmd/current/ug/node193.html 
-
-- strings
-
-  - format strings: https://wiki.tcl-lang.org/page/format
-
-  - append something to a string: https://wiki.tcl-lang.org/page/append
-
-- files
-
-  - [Output results to the text file](https://sunxiaoquan.wordpress.com/2015/02/20/vmd-tcltk-output-results-to-the-text-file/)
-  - https://wiki.tcl-lang.org/page/file+delete
+  ```tcl
+  set x {}
+  foreach i {a b c} j {d e f g} {
+      lappend x $i $j
+  }
+  ```
 
 - 
 
-  
+
+
+## Files
+
+- [Output results to the text file](https://sunxiaoquan.wordpress.com/2015/02/20/vmd-tcltk-output-results-to-the-text-file/)
+- https://wiki.tcl-lang.org/page/file+delete
+
+
+
+## Function
+
+[Tcl Tutorial 笔记9 · proc 参数传递与return_tcl proc { a 16}_Taurus_ZSZ的博客-CSDN博客](https://blog.csdn.net/qq_39597489/article/details/111411707)
+
+```tcl
+proc example {first {second ""} args} {
+    if {$second eq ""} {
+        puts "There is only one argument and it is: $first"
+        return 1
+    } else {
+        if {$args eq ""} {
+            puts "There are two arguments - $first and $second"
+            return 2
+        } else {
+            puts "There are many arguments:\n$first and $second and $args"
+            return "many"
+        }
+    }
+}
+
+set count1 [example ONE]
+set count2 [example ONE TWO]
+set count3 [example ONE TWO THREE]
+set count4 [example ONE TWO THREE FOUR]
+
+puts "The example was called with a varying number of arguments:"
+puts "    $count1, $count2, $count3, and $count4"
+```
 
 
 
@@ -720,7 +769,19 @@ even `python xx.py -W` didn't work
 
 # Regular expression
 
-These are mainly from coding of my VScode extension.
+These are mainly from my VScode extension.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
