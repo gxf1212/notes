@@ -226,7 +226,11 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
 
-This zooming works in local and preview but not really the web page??
+This zooming works in local and preview but not really the web page?? This also failed
+
+```html
+<center><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/utils/21c.png" alt="21c" style="zoom: 25%;" class="center" /></center>
+```
 
   - And it does not matter whether you use slash or backslash (but it matters locally in Typora...).
   - If centering is needed, you should add `<center></center>`.

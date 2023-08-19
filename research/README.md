@@ -1,6 +1,6 @@
 # Research hub
 
-<center><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/utils/21c.png" alt="21c" style="zoom: 25%;" class="center" /></center>
+<div align="center"><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/utils/21c.png" alt="21c" style="zoom: 25%;" /></div>
 
 ![logo](/utils/21c.png ':size=300')
 
@@ -69,12 +69,4 @@ installation: https://github.com/skblnw/mkrun/blob/master/Installation/compile_g
 我个人认为学操作之前不一定学很深的理论（如果只是为应用的话），大概知道MD在干啥、力场是啥就行了。不如在用的时候遇到什么问题再去查或问别人。对具体算法感兴趣，可以再看看。先了解概念、学会技术，再根据需要去看理论的书。
 
 如果是蛋白互作，可以忽略小分子相关软件（chemdraw、openbabel之类的），知道哪些对接是小分子、哪些是大分子就行；软件也不一定都学，比如vmd和pymol先学其中一个，比如Amber和gmx搭体系先选一个。流程就是：建蛋白模型--对接多肽/蛋白--准备体系--进行模拟。主要是先把流程走通。如可以先不看同源建模，先从pdb拿。然后做第二个体系，再尝试把其他的加进去。
-
-
-
-
-
-```html
-<center><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/utils/21c.png" alt="21c" style="zoom: 25%;" /></center>
-```
 
