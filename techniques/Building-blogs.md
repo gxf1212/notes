@@ -61,7 +61,6 @@ https://www.yumefx.com/?p=5310
    - replace space with `-`
    - remove parethesis. e.g. `GAFF (not using)` should write`#GAFF-not-using`
    - special: `2023.1 update` should write `_20231-update`; 
-   - 
 1. 
 
 ### something JavaScript
@@ -226,6 +225,8 @@ If you want to modify a theme, download from cdn website rather than GitHub!
   ```
 
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/course/Advanced-biology/molecular-immunology/molecular-immunology.assets/1-lymphnode2.jpg" style="zoom:50%;" />
+
+This zooming works in local and preview but not really the web page??
 
   - And it does not matter whether you use slash or backslash (but it matters locally in Typora...).
   - If centering is needed, you should add `<center></center>`.
@@ -413,11 +414,11 @@ We may replace it with the link to our videos files.
 > ```
 >
 > ```html
-> <iframe src="https://space.bilibili.com/441196634" width=100% height=400px > </iframe>
+> <iframe src="https://space.bilibili.com/441196634" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=100% height=600px > </iframe>
 > ```
 >
 
-<iframe src="https://space.bilibili.com/441196634" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=50% height=400px > </iframe>
+<iframe src="https://space.bilibili.com/441196634" scrolling="yes" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=100% height=600px > </iframe>
 
 > not logged in
 
