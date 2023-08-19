@@ -1,8 +1,6 @@
 # Research hub
 
-<div align="center"><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/utils/21c.png" alt="21c" width=400 /></div>
-
-![logo](/utils/21c.png ':size=300')
+<center><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/utils/21c.png" alt="21c" width=40% /></center>
 
 This is research hub page. Click on the sidebar to select a chapter and start reading!
 

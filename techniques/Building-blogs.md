@@ -177,10 +177,12 @@ If you want to modify a theme, download from cdn website rather than GitHub!
   ![logo](https://docsify.js.org/_media/icon.svg ':size=10%')
   ```
   
+  centering is not supported here...
+  
   > Typora zooming script is not supported in docsify (but is ok in a normal html, but center works)
   >
   > already asked in CSDN. https://github.com/HanquanHq/MD-Notes
-
+  
   no, it supports. But the root directory is not the current directory but the repository’s.....
   
   - in normal md grammar, relative path is ok
@@ -230,6 +232,12 @@ This zooming works in local and preview but not really the web page?? This also 
 
 ```html
 <center><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/utils/21c.png" alt="21c" style="zoom: 25%;" class="center" /></center>
+```
+
+`width=400` or `width=40%` work (as for videos), and all kinds of centering always works:
+
+```shell
+<div align="center"><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/utils/21c.png" alt="21c" width=400 /></div>
 ```
 
   - And it does not matter whether you use slash or backslash (but it matters locally in Typora...).
