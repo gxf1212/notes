@@ -440,14 +440,14 @@ date > log
   
 - 如果您有三个参数，例如`arg1`，`arg2`和`arg3`，您可以这样提交作业：
 
-  ```
+  ```shell
   qsub script.sh -F "arg1 arg2 arg3"
   ```
 
   不能省略双引号
   在脚本中，您可以使用`$1`，`$2`和`$3`来访问这些参数。例如，下面的脚本将打印出传递给它的三个参数：
 
-  ```
+  ```shell
   #!/bin/bash
   #PBS -N myjob
   
@@ -455,6 +455,9 @@ date > log
   echo "Argument 2: $2"
   echo "Argument 3: $3"
   ```
+  
+- To check which node a job is running on in PBS, you can use the qstat -f <job_id> command, where <job_id> is the ID of your PBS job. This command will display detailed information about the job, including the node on which it is running.
+一旦您知道了作业运行的节点，您可以使用ssh命令登录到该节点，例如 ssh node_name。登录后，您可以使用诸如free或top之类的命令来查看节点的内存使用情况。
 
 
 
@@ -972,6 +975,8 @@ https://blog.csdn.net/zhayushui/article/details/80433768
     - defaults
   ```
 
+  [解决.condarc文件找不到的问题-CSDN博客](https://blog.csdn.net/ljx0951/article/details/104121844)：只有当用户第一次使用conda config命令时，系统才会自动创建.condarc文件。`conda config --add channels defaults`
+
 - conda 环境迁移, 修改conda路径（复制文件夹 + 软连接）https://blog.csdn.net/qq_34342853/article/details/123020957
 
   没成功
@@ -1085,20 +1090,16 @@ failed, remove this env...
 
 also for LibreOffice Calc, many commands are the same....
 
-- [Excel 将文本或数字的格式设置为上标或下标](https://support.microsoft.com/zh-cn/office/%E5%B0%86%E6%96%87%E6%9C%AC%E6%88%96%E6%95%B0%E5%AD%97%E7%9A%84%E6%A0%BC%E5%BC%8F%E8%AE%BE%E7%BD%AE%E4%B8%BA%E4%B8%8A%E6%A0%87%E6%88%96%E4%B8%8B%E6%A0%87-3649411b-adf4-483e-b0e8-7b844605da74)
+#### General
 
 - Excel的paste special必须是复制，辣鸡！Calc就可以剪切
+- Change the default language in LibreOffice for the whole document
+  Choose Tools > Options. Go to Language Settings > Languages. Under Default languages for documents, select the document language for all newly created documents.
 
-- To calculate the correlation coefficient, you can use the `CORREL` function. 
+#### Text & Format
 
-  In an empty cell, enter the formula `=CORREL(A1:A10,B1:B10)`, replacing `A1:A10` and `B1:B10` with the cell ranges containing your data.
+- [Excel 将文本或数字的格式设置为上标或下标](https://support.microsoft.com/zh-cn/office/%E5%B0%86%E6%96%87%E6%9C%AC%E6%88%96%E6%95%B0%E5%AD%97%E7%9A%84%E6%A0%BC%E5%BC%8F%E8%AE%BE%E7%BD%AE%E4%B8%BA%E4%B8%8A%E6%A0%87%E6%88%96%E4%B8%8B%E6%A0%87-3649411b-adf4-483e-b0e8-7b844605da74)
 
-- In both Excel and LibreOffice Calc, you can calculate the dot product (点积) of two vectors by using similar formulas.
-  In Excel, you can use the `SUMPRODUCT` function to calculate the dot product of two vectors. 
-  
-  For example, if your first vector is in cells A2:A8 and your second vector is in cells B2:B8, you can use the following formula: `=SUMPRODUCT(A2:A8,B2:B8)`. This formula multiplies corresponding entries in the given arrays and returns the sum of those products.
-  In LibreOffice Calc, you can also use the `SUMPRODUCT` function
-  
 - 除了使用快捷键可以进行换行外，换行符也可以在公式中进行。 CHAR(10)是表示换行符，10表示换行符的ASCII码值。 将下面的两个信息进行连接，并且连接符为换行符。 在C2单元格中输入公式：=A2&CHAR(10)&B2，然后单击Enter键后单击 即可。
 
   e.g. 
@@ -1107,11 +1108,27 @@ also for LibreOffice Calc, many commands are the same....
   ="\includegraphics[width=0.75\textwidth]{"&B1&".png} & \hspace{12pt} $"&ROUND(B12,2)&"\ \pm$&$\ "&ROUND(B11,2)&"$ \\"&CHAR(10)
   ```
 
-- When you copy the text out of Excel, it adds double quotes to preserve the linebreak character.
+- When you copy the text out of Excel, it adds double quotes to preserve the linebreak character??
 
-- Change the default language in LibreOffice for the whole document
-  Choose Tools > Options. Go to Language Settings > Languages. Under Default languages for documents, select the document language for all newly created documents.
+#### Calculation
 
+- To calculate the correlation coefficient, you can use the `CORREL` function. 
+
+  In an empty cell, enter the formula `=CORREL(A1:A10,B1:B10)`, replacing `A1:A10` and `B1:B10` with the cell ranges containing your data.
+
+- In both Excel and LibreOffice Calc, you can calculate the dot product (点积) of two vectors by using similar formulas.
+  In Excel, you can use the `SUMPRODUCT` function to calculate the dot product of two vectors. 
+
+  For example, if your first vector is in cells A2:A8 and your second vector is in cells B2:B8, you can use the following formula: `=SUMPRODUCT(A2:A8,B2:B8)`. This formula multiplies corresponding entries in the given arrays and returns the sum of those products.
+  In LibreOffice Calc, you can also use the `SUMPRODUCT` function
+
+- *SUMXMY2*(array_x, array_y) 返回两数组中对应数值之差的平方和。For example:
+
+  ```
+  =SQRT(SUMXMY2(B12:J12,B13:J13)/COUNT(B12:J12))
+  ```
+
+- if your vector is in cells A1 to A5, you can use the formula =SUMSQ(A1:A5) to calculate the sum of squares of the values in those cells.
 
 ### MS PPT
 
@@ -1121,6 +1138,12 @@ also for LibreOffice Calc, many commands are the same....
 ### Foxit Reader
 
 - Alt+F3：手型工具
+
+### Convert
+
+https://cloudconvert.com/epub-to-pdf
+
+https://www.freepdfconvert.com/epub-to-pdf
 
 ## Scientific
 
@@ -1188,7 +1211,24 @@ skills:
 
 ### Export a brief format
 
+导出那种，作者、杂志、年期卷的格式，放在PPT最下面：
 
+- 导入到bibguru，生成Vancouver格式的reference list
+- 粘贴进ChatGPT，让它生成
+
+> prompt:
+>
+> I will give you reference to literatures, such as: 
+>
+> Sánchez-Aparicio J-E, Tiessler-Sala L, Velasco-Carneros L, Roldán-Martín L, Sciortino G, Maréchal J-D. BioMetAll: Identifying metal-binding sites in proteins from backbone preorganization. J Chem Inf Model [Internet]. 2021;61(1):311–23. Available from: http://dx.doi.org/10.1021/acs.jcim.0c00827 
+>
+> It's usually in the format of: *journal name*. year, volume, issue, page and can you give me a shorter version of citation in markdown format? 
+>
+> In the above example, you should give me: `[*J Chem Inf Model* 2021, 61, 1, 311–23.](http://dx.doi.org/10.1021/acs.jcim.0c00827) `
+>
+> journal names should be italic. no need to add [source] after that. no need to add author names. you should also add hyperlink of the website to the citation string. it is, in this case, "http://dx.doi.org/10.1021/acs.jcim.0c00827".
+
+bug：Chemical Science那篇文章，无法根据缩略版的条目搜到文章，但是加上作者名字就可以。。
 
 
 
@@ -1293,7 +1333,11 @@ notes from Windows
 
    建一个Libertinus文件夹，放进去
 
-2. 
+- Simply load ulem with the option normalem, otherwise all \emphasized words will be underlined.
+
+  https://tex.stackexchange.com/questions/179691/removing-underline-from-journal-title-when-using-hyperref
+
+  
 
 ### title
 

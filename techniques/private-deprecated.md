@@ -1,7 +1,5 @@
 # private temp
 
-
-
 > https://you-get.org/  no Chinese?
 >
 > https://github.com/yt-dlp/yt-dlp
@@ -208,3 +206,48 @@ don't do too much on this machine, like writing LaTeX...
 just be a helper calculator, and a platform to learn Linux. (zheteng is allowed)
 
 (dad could use it too, but keep good organization)
+
+# Other thing I did at Fedora and KDE
+
+Try to be clear about the commands for Dedian/RedHat systems!
+
+## installation
+
+1. typora
+
+   - https://github.com/RPM-Outpost/typora in fedora, generate a rpm package
+
+     ```
+     yum install rpm-build -y
+     ```
+
+   - theme directory (in Fedora): 
+
+     ```
+     /var/lib/flatpak/app/io.typora.Typora/x86_64/stable/67e4ba33309d2516bf011b564be7292dc9a5a1fa46c3bfb0a4a09b8f647cec52/files/typora/resources/app/style/themes
+     ```
+
+- use sync in firefox to share with pc...but I can **ctrl+c,v**..
+
+- maybe I'll send email to send files from laptop..
+
+- screenshot: PrtSc. Kolourpaint.
+
+- ocr: ru
+
+  ```
+  /home/user/Desktop/work/xufan/bin/Image2LaTeX-linux/bin/Image2LaTeX
+  ```
+
+  ```
+  killall -9 FoxitReader
+  ```
+
+## library
+
+https://libfaq.nus.edu.sg/faq/71315
+
+google scholar, pubmed
+
+all from library home!
+

@@ -585,7 +585,7 @@ like DSV
 
 
 
-# Molecular dynamics
+# Molecular Dynamics Basics
 
 Maybe copying some fundamentals of NAMD (file format) from FYP-notes.
 
@@ -753,13 +753,13 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 
 ![U2@WL5VJQVCP9WN@VO~F7GA](E:\GitHub-repo\notes\research\Common-tools.assets\pcontrol.png)
 
-## Restraint
+### Restraint
 
 在GROMACS中，SHAKE算法用于对键和角施加约束，以固定它们的长度或角度。而restraint则是一种更广泛的概念，它可以用来对模拟中的各种属性施加约束。
 
 
 
-### Free energy calculations
+## Free energy calculations
 
 [Free energy calculations - GROMACS documentation](https://manual.gromacs.org/documentation/current/reference-manual/algorithms/free-energy-calculations.html)
 
@@ -779,7 +779,7 @@ Within the TI region there will be atoms which are linearly transformed (LTA) di
 
 
 
-## GPU
+## GPU and Performance
 
 Read this: https://ambermd.org/GPULogistics.php
 
@@ -801,8 +801,6 @@ and 22.6.7. Considerations for Maximizing GPU Performance
 
 
 
-## Performance
-
 https://developer.nvidia.com/hpc-application-performance
 
 several benchmark data
@@ -811,7 +809,19 @@ Amber≈Gromacs>NAMD?
 
 Typically the performance differential between GPU and CPU runs will increase as atom count increases.
 
+## Advanced topics
 
+### Enhanced Sampling
+
+PMF等等可能耗时更长
+
+人们不知道使用什么CV可以增强采样，所以才用温度，用REST
+
+
+
+### Polarizable FF
+
+AMOEBA (Atomic Multipole Optimized Energetics for Biomolecular Simulation) is a polarizable force field
 
 
 
@@ -830,6 +840,8 @@ This section is about basics and common usage. For more (theory, concepts), see 
    ```shell
    gmx -version
    ```
+
+   or just `gmx`
 
 2. In gromacs, chain names are lost?!
 
@@ -1235,7 +1247,8 @@ mask syntax
 ### Trajectory
 
 - [CPPTRAJ one-liners – AMBER-hub (utah.edu)](https://amberhub.chpc.utah.edu/cpptraj-cookbook/cpptraj-one-liners/)
-- [CPPTRAJ (amber-md.github.io)](https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml)
+- [cpptraj document](https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml)
+
 
 
 
@@ -1290,3 +1303,10 @@ Uniqueness and relative abundance of protein sequences....
 
 
 
+
+
+## CASP
+
+![](E:\GitHub-repo\notes\research\Common-tools.assets\casp.png)
+
+![](E:\GitHub-repo\notes\research\Common-tools.assets\casp15.png)

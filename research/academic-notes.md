@@ -23,9 +23,9 @@ maybe a new .md file in the future
 
 异头碳效应：连接在异头碳的杂原子取代基更倾向于处于直立键。可能也是二卤代烷稳定的原因
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/anomeric-carbon.jpg" alt="anomeric-carbon" style="zoom: 50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/anomeric-carbon.jpg" alt="anomeric-carbon" width=50% />
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/anomeric-carbon2.jpg" alt="anomeric-carbon2" style="zoom: 45%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/anomeric-carbon2.jpg" alt="anomeric-carbon2" width=45% />
 
 
 
@@ -36,7 +36,7 @@ maybe a new .md file in the future
 
 
 
-<img src="E:\GitHub-repo\notes\research\academic-notes.asssets\halogen-bond.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/halogen-bond.png" alt="anomeric-carbon" width=50% />
 
 # Biochemistry
 
@@ -142,6 +142,18 @@ The inhibitory constant (Ki) is a type of [equilibrium dissociation constant (Kd
 *K*i is associated with thermodynamic parameters in that Δ*G* = *RT*ln(*K*i), where Δ*G*, *R*, and *T* are the absolute binding free energy, the gas constant, and the absolute temperature, respectively
 
 
+
+## Other
+
+In-house drug discovery refers to the process of discovering new drugs within a company or organization, rather than outsourcing the process to another company.
+
+
+
+大环内酯（Macrolide）是一类广谱抗生素，能够有效抑制细菌的生长和繁殖。大环内酯分子结构由16-环的大环和一定的糖基组成，作用于细菌的机理主要是通过抑制细菌蛋白质的合成。
+
+具体来说，大环内酯可与细菌的50S亚基上的23S rRNA结合，阻止细菌RNA依赖性蛋白合成。此外，大环内酯还可以诱导靶菌的形态学变化，使其形态异常，从而使其生长和繁殖受到抑制。
+
+值得注意的是，由于细菌和人类细胞的核糖体结构存在差异，大环内酯对于人类细胞的影响比较小，因此在治疗感染时，大环内酯具有较低的毒副作用和较高的选择性，被广泛用于临床抗菌药物的治疗中。
 
 
 

@@ -12,6 +12,8 @@ This is research hub page. Click on the sidebar to select a chapter and start re
 - [Systems with metal ions](/research/Metal-ion.md)
 - [Fragments of science](/research/academic-notes.md)
 - [MD official tutorials](/research/Previous-projects/MD-tutorials-all.md)
+- RNA simulation (future)
+- Coarse Grain Simulations (future)
 
 In the future, I will try not to write pages by project, but will still focus on specific themes in each page. Previous projects:
 - [NUS project: virtual screening and MD simulation with Gromacs](/research/Previous-projects/UROPS-run-and-result.md)

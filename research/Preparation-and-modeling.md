@@ -8,6 +8,16 @@ This page is about protein/ligand/.... structure modeling and preprocessing.
 
 ## Homology modeling
 
+精细side chain控制，还是要谨慎用AlphaFold呀，不如同源建模
+
+### Swiss-Model
+
+you can provide alignment file or .pdb file as a template in Swiss-Model server
+
+Swiss-Model的结果，最长也就是模板的长度？？
+
+
+
 ### Modeller
 
 [ModWeb (ucsf.edu)](https://modbase.compbio.ucsf.edu/modweb/)
@@ -17,6 +27,16 @@ This page is about protein/ligand/.... structure modeling and preprocessing.
 
 
 Can it just add missing residues, rather than build all side chains again? Maybe ligand interaction map will be changed...
+
+
+
+### Other
+
+Prime: Schrödinger that incorporates homology modeling and fold recognition into one package. remove mutations introduced in the crystallization constructs (if any) and build missing side chains and missing loops.
+
+
+
+http://www.sbg.bio.ic.ac.uk/phyre2/html/page.cgi?id=index
 
 
 
@@ -257,7 +277,19 @@ it would also be simple in Python with my `read_pdb` code....
 
 
 
-## Protein-peptide docking
+## Protein-protein docking
+
+or Protein-peptide
+
+
+
+
+
+### Clus Pro 2.0
+
+https://cluspro.bu.edu/home.php
+
+
 
 
 
@@ -877,5 +909,4 @@ see [Protein-ligand simulation](/research/Protein-ligand-simulation.md#visualize
 ### attention
 
 - You should probably avoid search spaces bigger than  `30 x 30 x 30` Angstrom, unless you also increase "`--exhaustiveness`".
-
 

@@ -11,13 +11,12 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
 1. syntax error: unexpected end of file
 
    https://unix.stackexchange.com/questions/591208/fix-syntax-error-unexpected-end-of-file-in-a-for-loop
+
    可能是Windows下编辑的问题，MS-DOS CRLF line delimiters?
 
    解决：去unix编辑
 
 2. 反斜杠后面紧跟回车，表示下一行是当前行的续行。
-
-   but only valid in root ?
 
 3. multiple paths:
 
@@ -482,6 +481,8 @@ puts "    $count1, $count2, $count3, and $count4"
 
 - [Convert Letters to Numbers and vice versa in Python | bobbyhadz](https://bobbyhadz.com/blog/python-convert-letters-to-numbers): `chr()`, `ord()`
 
+- pmx倒是有个规范：类内方法都是下划线开头
+
 ## operating files and cmd
 
 ### about bash commands
@@ -719,6 +720,10 @@ https://juejin.cn/post/6844903919978545160
 - 互斥参数组：https://michael728.github.io/2018/12/09/python-argparse-note/ 
 
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/exclusive.png" alt="exclusive" style="zoom:80%;" />
+
+- `parser.print_help()`
+
+  `parser.parse_args(['-h'])`: just exits here and print help
 
 - 
 

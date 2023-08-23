@@ -1896,8 +1896,6 @@ input: .tpr, .xtc, .ndx
 
 > from FYP
 
-
-
 ### CHARMM-GUI for ligands
 
 see also FEbuilder document...
@@ -1907,43 +1905,57 @@ Preface: CgenFF is thought to be not as good as GAFF series...however it (or MAT
 But CgenFF does not support special species like:
 
 - azide (-N=N=N)
-- -SeH
+- -SeH and many heavy atoms
 - ....
 
+You can follow two pathways:
 
+- edit your ligand locally and save as `.mol2` or `.sdf` file, so that GUI gets a nearly correct structure (not possibly 100% right...)
+- or save a roughly-right (e.g. `.pdb`) file and
 
+**Check the structure on the MarvinJS panel before and after parameterization!!!!** like
 
-
-Check the printed structure!!!! like
-
-- <font color=red>check every single bond in GaussView before building anything, and CHARMM-GUI may mis-assign the aromatic bonds!</font>
+- bond orders, especially for pdb files
 - the Ar ring completeness
-- remove Hs added to phosphate....
+- protonation states
+  - add Hs to amine groups
+  - remove Hs added to phosphate....
 
-Choose 'Exact', 'Make CGenFF topology'
+- add all hydrogens explicitly! including non-polar hydrogens
+- Atom names with lowercase letters (like Cl, Br) might be recognized incorrectly, e.g. only capitalized letter are left. 
+- ...
 
-Then we obtain all .pdb, .psf, etc. that is needed.
+<img src="E:\GitHub-repo\notes\research\Protein-ligand-simulation.assets\charmm-gui-ligandrm-eg.png" style="zoom:50%;" />
 
-> other files:
->
-> - drawing: the recognized structure on the 1st page
-> - copy `charmm-gui-xxxxx/toppar/lig.prm` (lig: residue name of your ligand) for use in your simulation! shown in [this video](https://www.youtube.com/watch?v=Pj40ZnybXds)
+Usually we won't need to "Find similar residues in the CHARMM FF" if the ligand is not in CgenFF database. This option is not to specify a template to copy parameters from, but just build this molecule...and it takes longer to search.
 
+Choose 'Exact', 'Make CGenFF topology'. Then we obtain all files as a .zip file.
 
+- we use `ligandrm.pdb` (maybe `ligandrm.psf`, `toppar/lig.rtf`, `toppar/lig.prm` (lig: residue name of your ligand) 
+- the `gromacs` folder is for gmx
+- `drawing_3D.mol2`: structure on the MarvinJS panel
+- refer to [this video](https://www.youtube.com/watch?v=Pj40ZnybXds)
 
-Note: it's ok to upload a protein-ligand complex `.pdb` file. CHARMM-GUI parametrizes the ligand and produces `.psf` and `.pdb` file of the whole that can be solvated and ionized in vmd. Try this if your protein does not need special treatment. 
-
-I haven't tried 
-
-
+Note: it's ok to upload a protein-ligand complex `.pdb` file. CHARMM-GUI parametrizes the ligand and produces `.psf` and `.pdb` file of the whole that can be solvated and ionized in vmd. Try this if your protein does not need special treatment. I don't really follow this, though.
 
 #### Other ways to generate ligand topology
 
-- https://cgenff.umaryland.edu is what CHARMM-GUI calls for ligand, the same. but stupidly we cannot `wget` files
+- https://cgenff.umaryland.edu is what CHARMM-GUI calls for an ligand
+  - we might call it through http request or an extension in vmd (not tried)
+  - stupidly we cannot `wget` files, just Ctrl+S on the web page
+
+- https://brooks.chem.lsa.umich.edu/index.php?matchserver=submit MATCH: an alternative of CgenFF
+  - trained with CgenFF ligands?
+  - strange shorten atom types that causes incompatibility
+  - similar parameters, (maybe) better transferability
+
 - https://www.swissparam.ch/ MMFF/CHARMM22, too old
-- MATCH
+
+these servers generate files for multiple MD engines
 
 ### Setup with VMD
+
+[How to create a PSF file](https://sassie-web.chem.utk.edu/docs/structures_and_force_fields/notes.html)
 
 ```tcl
 # usage: vmd -dispdev text -e merge-and-solvate.tcl > vmd.log
@@ -1975,6 +1987,8 @@ coordpdb ligandrm.pdb LIG
 # load receptor
 pdbalias residue HIS HSE
 pdbalias atom ILE CD1 CD
+pdbalias atom SER HG HG1
+pdbalias atom CYS HG HG1
 segment PRO {
     pdb pr1.pdb
     first ACE
@@ -1992,10 +2006,9 @@ guesscoord
 
 writepdb merged.pdb
 writepsf merged.psf
-# solvation and ionization
+# solvation and ionization. files are written with the command (no more writepdb)
 package require solvate
 package require autoionize
-# ionize complex
 mol delete all
 mol load psf merged.psf pdb merged.pdb
 solvate merged.psf merged.pdb -t 12 -o solvated
@@ -2017,13 +2030,7 @@ vmd -dispdev text -e fix_backbone_restrain_ca_with_ligand.tcl
 exit
 ```
 
-#### parametrization
-
-
-
-
-
-##### about the topology
+#### About the topology files
 
 When you encouter errors when reading .str file:
 
@@ -2034,26 +2041,22 @@ When you encouter errors when reading .str file:
 
 [How-can-I-use-charm36-forcefiled-for-a-protein-bound-to-ATP-and-MG](https://www.researchgate.net/post/How-can-I-use-charm36-forcefiled-for-a-protein-bound-to-ATP-and-MG-Can-you-help-me)
 
-1. First, you need to edit the stream file so that it is compatible with the NAMD/VMD psfgen tool.  To do that, you must comment out (or remove) all the lines containing CHARMM scripting code, since psfgen doesn't recognize them. 
+1. First, you need to edit the stream file so that it is compatible with the NAMD/VMD psfgen tool.  To do that, you must comment out (or remove) all the lines containing CHARMM scripting code, since psfgen doesn't recognize them. This problem might emerge from uncommon files from CHARMM website. Take care or just use files in vmd plugin readcharmmtop, especially for `toppar_water_ions_namd.str`.
 
-2. Furthermore, the **na_nad_ppi.str** and file you mention requires parsing the "**top_all36_na.rtf**" file containing original nucleic acid parameters, so you need that too. 
+2. Furthermore, some `.rtf` files like `top_all36_cgenff.rtf` and stream files required reading other fundamental files first; otherwise, some atom types are missing. Read the head of these files first before using them.
 
-   > also, just put toppar_water_ions.str after na.rtf and prot.rtf
+   > e.g. the **na_nad_ppi.str** and file you mention requires parsing the "**top_all36_na.rtf**" file containing original nucleic acid parameters, so you need that too. 
+   >
+   > also, just put `toppar_water_ions.str` after `na.rtf` and `prot.rtf`
 
 3. You **should use both** the parameters from the stream files and the original **nucleic acid prm file**.  The stream files do not contain full parameters, some of them (for example some **non-bonded terms**) are expected to be found in the prm files. However, they are needed for accurate representation of these "extra" molecules they describe
-
-
 
 #### solvation
 
 - solvate https://www.ks.uiuc.edu/Research/vmd/plugins/solvate/
 - autoionize https://www.ks.uiuc.edu/Research/vmd/plugins/autoionize/
 
-
-
-> autoionize not replacing water mols, it adds ions
-
-
+> autoionize not replacing water molecules, it adds ions
 
 #### measurement
 
@@ -2097,13 +2100,9 @@ cellOrigin 25.47849988937378 -2.505000114440918 -11.279999732971191
 
 in NAMD conf file:
 
-```
+```tcl
 source ../common/PBCBOX-system.dat
 ```
-
-
-
-
 
 #### adding restraint
 
@@ -2156,38 +2155,42 @@ $all writepdb restrain_ligand.pdb
 exit
 ```
 
-
-
 in NAMD conf file
 
+```tcl
+set FIXPDB      ../common/fix_backbone
+set CONSPDB     ../common/restrain_ca
+set CONSSCALE   1                      ;# default; initial value if you want to change
+
+# Fixed atoms
+if { $FIXPDB != 0 } {
+    fixedAtoms      yes
+    fixedAtomsForces yes
+    fixedAtomsFile  $FIXPDB.pdb
+    fixedAtomsCol   B                   ;# beta
+}
+
+# Positional restraints
+if { $CONSPDB != 0 } {
+    Constraints          yes
+    ConsRef              $CONSPDB.pdb
+    ConsKFile            $CONSPDB.pdb
+    ConskCol             B
+    constraintScaling    $CONSSCALE
+}
 ```
-```
 
+You can close these options after `run xxxsteps` by something like `fixedAtoms off`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### special ligand file
+#### Special ligand file
 
 I got this ligand file from seniors with strange residue/atom names so that it's not  recognized by CHARMM-GUI?
-
-
 
 Maybe we can rename them (element+number) with AutoPSF in vmd.
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/parameterization.jpg" alt="parameterization" style="zoom:80%;" />
 
-It seems that **`xxx_formatted` can be recognized by CHARMM-GUI**. Try a few other pdb files if necessary.
+It seems that `xxx_formatted`(or temp?) can be recognized by CHARMM-GUI. Try a few other pdb files if necessary.
 
 > Another way to generate uploadable .pdb is:
 >
@@ -2196,9 +2199,9 @@ It seems that **`xxx_formatted` can be recognized by CHARMM-GUI**. Try a few oth
 > obabel -igro remtp.gro -opdb -O remtp-gro.pdb
 > ```
 
-
-
 #### All by GUI
+
+Not using
 
 ##### Setup
 
@@ -2208,9 +2211,9 @@ Extension--Modeling--Automatic PSF Builder--Options, check 'add solvation box' a
 
 Extension--Modeling--Add Solvation Box
 
-- You can rotate to minimize volume
+- You can rotate to minimize volume (not working well?)
 
-- WT: residue name for waters. can change
+- WT: residue name for waters. you can change
 
 - if you check 'use molecular dimension', the min and max in 3D will be calculated automatically, and you only need to add 'padding' (and measure) as we usually did. 
 
@@ -2239,281 +2242,11 @@ very straightforward
 
 the following are from FYP and to be summarized into the above newly-written workflow
 
-### build complex-method 2 (using)
 
-> use console, include topology. [How to create a PSF file](https://sassie-web.chem.utk.edu/docs/structures_and_force_fields/notes.html)
 
-Modeling--Tk Console
 
-- create segment for our molecule first...if you start with .pdb file
-- for normal ligand, just build normally with the above files, na_nad just deplicates and abandoned
 
-```shell
-vmd -dispdev text -e merge.tcl
-```
-
-for atp, still built with AutoPSF, topology files **only include top_all36_na.rtf, top_all36_cgenff.rtf**. May also
-
-and only 'formatted' provides the right coordinates! _autopsf adjusts coordinates a little bit (why?)
-
-but Tk console reports error!
-
-> ERROR) Error reading optional structure information from coordinate file atp_autopsf_formatted.pdb
-> ERROR) Will ignore structure information in this file.
-
-but **'formatted’ can be recognized by CHARMM-GUI**!
-
-> note: for newly added atoms, parameterization is needed?
->
-> <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/parameterization.jpg" alt="parameterization" style="zoom:80%;" />
->
-> but may also use 'formatted’. but for remtp I used remtp_autopsf_temp.pdb
->
-> 
->
-> 
-
-the successful version:
-
-```tcl
-# for atp, still built with AutoPSF, topology files except top_all36_na.rtf,
-# top_all36_cgenff.rtf are deleted..and only 'formatted' provides the right coordinates!
-# lig_g.rtf: agroups
-package require psfgen
-resetpsf
-topology top_all36_prot.rtf
-topology toppar_water_ions.str
-topology lig_g.rtf
-
-# maybe not using alias here
-alias residue HIS HSE           
-alias atom ILE CD1 CD        
-alias atom SER HG HG1         
-alias atom CYS HG HG1          
-
-segment PRO {pdb rdrp.pdb}
-coordpdb rdrp.pdb PRO
-
-# use files from CHARMM-GUI
-readpsf ligandrm2.psf
-coordpdb ligandrm2.pdb
-# aligned standard atp
-# readpsf ligandrm.psf
-# coordpdb ligandrm_aligned.pdb
-# autopsf
-# readpsf atp_autopsf.psf
-# coordpdb atp_autopsf_formatted.pdb
-
-segment MG {pdb mg.pdb}
-coordpdb mg.pdb MG
-
-guesscoord
-writepdb merged.pdb
-writepsf merged.psf
-```
-
-> notes
->
-> - `toppar_water_ions.str`: contains **TIP3** water model and **ion** topology and parameter information. This is now **the only file** that contains these entities.
-> - you'd better use capital letter ('MG') for use in CHARMM
-
-2022.10.16 update:
-
-```tcl
-# vmd -dispdev text -e merge-sol-ion.tcl
-package require psfgen
-topology top_all36_prot.rtf
-topology top_all36_cgenff.rtf
-topology toppar_water_ions_namd.str
-
-topology remtp.rtf
-segment LIG {pdb remtp.pdb}
-coordpdb remtp.pdb LIG
-
-segment MG {pdb mg.pdb}
-coordpdb mg.pdb MG
-
-# maybe not using alias here
-pdbalias residue HIS HSE
-pdbalias atom ILE CD1 CD
-pdbalias atom SER HG HG1
-pdbalias atom CYS HG HG1
-
-segment PRO {pdb rdrp.pdb}
-coordpdb rdrp.pdb PRO
-
-guesscoord
-writepdb merged.pdb
-writepsf merged.psf
-
-psfcontext reset
-mol load psf merged.psf pdb merged.pdb
-package require solvate
-solvate merged.psf merged.pdb -t 11.5 -o solvated
-# files are written
-mol delete all
-package require autoionize
-autoionize -psf solvated.psf -pdb solvated.pdb -sc 0.1 -o system
-
-exit
-```
-
-> failed commands
->
-> ```tcl
-> package require psfgen
-> resetpsf
-> topology /home/gxf/vmd/lib/plugins/noarch/tcl/readcharmmtop1.2/top_all27_prot_lipid_na.inp
-> topology top_all22_prot.rtf
-> topology top_all27_prot_lipid.inp
-> coordpdb rdrp.pdb
-> 
-> topology top_all36_na.rtf
-> topology top_all36_cgenff.rtf
-> coordpdb atp.pdb
-> topology toppar_water_ions_namd.str
-> coordpdb mg.pdb
-> 
-> puts "Finished"
-> quit
-> ```
->
-> completely failure. don’t know what .inp file the tutorials used.
->
-> ```shell
-> grep "PROT" -rl ./rdrp.pdb | xargs sed -i "s/PROT/    /g" 
-> ```
->
-> this does not matter. later ligands: just use PRO for segment name!
->
-> ```tcl
-> package require psfgen
-> resetpsf
-> topology top_all36_na.rtf
-> topology top_all36_cgenff.rtf
-> topology toppar_all36_na_nad_ppi.str
-> segment ATP {pdb atp.pdb}
-> coordpdb atp.pdb ATP
-> ```
->
-> still not work for ATP. even though ATPP $\to$ ATP, still “unknown atom type ON3”
->
-> ```
-> topology toppar_all36_na_nad_ppi.str
-> # autopsf, this probably failed..
-> # segment LIG {pdb atp_autopsf_formatted.pdb}
-> readpsf atp_autopsf.psf
-> coordpdb atp_autopsf_formatted.pdb
-> ```
->
-> still not work for ATP. cannot recognize atoms. without “formatted” have correct names, but position of PO4 changed.
->
-> **So we still MUST use CHARMM-GUI if we don’t directly aliase pdb**
->
-> the second try for remTP
->
-> Use method 2: 
->
-> > ERROR: failed on end of segment
-> >
-> > unknown residue type LIG
->
-> tried AutoPSF and gmx
->
-> note that in both cases the molecule structure in the first page of CHARMM-GUI might be strange, and the final structure is broken
-
-### build complex-method 3
-
-build with Gromacs and AmberTools?
-
-#### Appendix: CHARMM-GUI generate files for ligand
-
-> charmm-gui, what do the files do? what is needed? these?
->
-> ![parameterization](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/parameterization.jpg)
-
-focus on `ligandrm.pdb/psf`, which can be put into a merge.tcl, as **an alternative way of AutoPSF** in generating files for ligand (other tools for protein, etc?). Carefully choose the force field!
-
-> my experience
->
-> at first, when I upload the built .pdb file, or replace ATOM with HETATM, or add hydrogen, the server did not recognize the ligand, always.
->
-> 1. 11.27, align 2ILY (original structure) with the built .pdb, use its ATP
->
->    find 2 kinds of topologies in step 2
->
->    - **toppar_all36_na_nad_ppi.str**            NAD, NADH, ADP, ATP and others.
->    - top_all36_cgenff.rtf., par_all36_cgenff.prm. but with hydrogen. can I later remove?
->      - if you modify the protonation state, you can still not generate a correct cGenFF structure. The “Exact” field only provides ATP in toppar_all36_na_nad_ppi.str
->      - maybe I’ll use toppar_all36_na_nad_ppi.str first
->
-> 2. 11.28, CHARMM-GUI failed building Mg2+
->
-> for ‘formatted’:
->
-> still **toppar_all36_na_nad_ppi.str** , a little change: Ar ring not planar!! position basically the same
-
-#### Appendix 2: about the topology
-
-When you encouter errors when reading .str file:
-
-> “psfgen) ERROR!  FAILED TO RECOGNIZE SET.  Line 319: set para” etc.
->
-> FATAL ERROR: UNKNOWN PARAMETER IN CHARMM PARAMETER FILE ../common/toppar_water_ions.str
-> LINE=*set app*
-
-[How-can-I-use-charm36-forcefiled-for-a-protein-bound-to-ATP-and-MG](https://www.researchgate.net/post/How-can-I-use-charm36-forcefiled-for-a-protein-bound-to-ATP-and-MG-Can-you-help-me)
-
-1. First, you need to edit the stream file so that it is compatible with the NAMD/VMD psfgen tool.  To do that, you must comment out (or remove) all the lines containing CHARMM scripting code, since psfgen doesn't recognize them. 
-
-2. Furthermore, the **na_nad_ppi.str** and file you mention requires parsing the "**top_all36_na.rtf**" file containing original nucleic acid parameters, so you need that too. 
-
-   > also, just put toppar_water_ions.str after na.rtf and prot.rtf
-
-3. You **should use both** the parameters from the stream files and the original **nucleic acid prm file**.  The stream files do not contain full parameters, some of them (for example some **non-bonded terms**) are expected to be found in the prm files. However, they are needed for accurate representation of these "extra" molecules they describe
-
-#### Appendix 3: other ways to generate ligand topology
-
-- https://cgenff.umaryland.edu is what CHARMM-GUI calls for ligand, the same. but stupidly we cannot `wget` files
-- https://www.swissparam.ch/ MMFF/CHARMM22, too old
-
-these servers generate files for multiple MD engines
-
-### solvation and ionization
-
-- solvate https://www.ks.uiuc.edu/Research/vmd/plugins/solvate/
-- autoionize https://www.ks.uiuc.edu/Research/vmd/plugins/autoionize/
-
-#### method 1 (scripting, easier?)
-
-In the last step, you have obtained combine.pdb and .psf. open them with vmd
-
-```shell
-vmd merged.psf -pdb merged.pdb
-```
-
-you can directly do the following after merged in vmd:
-
-```tcl
-# if you'd like to make a .tcl file
-package require psfgen
-psfcontext reset
-mol load psf merged.psf pdb merged.pdb
-# the solvation script writes:
-package require solvate
-solvate merged.psf merged.pdb -t 11.5 -o solvated
-# files are written
-mol delete all
-# the ionization script writes:
-package require autoionize
-autoionize -psf solvated.psf -pdb solvated.pdb -sc 0.1 -o system
-# params, to be consistent
-
-```
-
-- 
-
-> 
+Go to NAMD basics page?
 
 ## Setting up a MD simulation
 
@@ -2625,7 +2358,7 @@ see tutorial [Building Gramicidin A](http://www.ks.uiuc.edu/Research/namd/tutori
 
 - When initially assembling a system it is sometimes useful to fix the protein while equilibrating water or lipids around it. These options read a PDB file containing flags for the atoms to fix. The number and order of atoms in the PDB file must exactly match that of the PSF and other input files.
 
-  ```
+  ```tcl
   fixedAtoms          on
   fixedAtomsFile      myfixedatoms.pdb  ;# flags are in this file
   fixedAtomsCol       B                 ;# set beta non-zero to fix an atom
@@ -2637,7 +2370,7 @@ see tutorial [Building Gramicidin A](http://www.ks.uiuc.edu/Research/namd/tutori
 
 - PME is only applicable to periodic simulations. PME grid dimensions should have small integer factors only and be greater than or equal to length of the basis vector.
 
-  ```
+  ```tcl
   #PME (for full-system periodic electrostatics)
   PME                 yes
   ```
@@ -2799,7 +2532,7 @@ namd3 +p1 +devices 0 pro-lig-prod > pro-lig-prod.log
 
 > 1. https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2003-2004/0295.html
 >
->    You will need to have a non binary coord file with as well as a binary one. Don't know why, thats just the way it is...
+>    You will need to have a non binary coord file with as well as a binary one. Don't know why, that's just the way it is...
 >
 > 2. how to monitor your simulation?
 >
@@ -2961,6 +2694,10 @@ just setup. for anaysis and run FEP, please see AA FEP
 
 ### pmx
 
+https://www.youtube.com/watch?v=MdaTPYLL2Gs
+
+https://www.youtube.com/watch?v=ZqWdo_2YZdg
+
 #### CHARMM-GUI 
 
 ```
@@ -3115,7 +2852,7 @@ cgenff的mol2不对，磷酸氧还是自由基，它检测不了总电荷。。�
 
 所以不要上传pdb。。
 
-obabel没见总电荷的选项，antechamber有
+obabel没见总电荷的选项，antechamber有，做不对还是得在Pymol等里面画好
 
 
 
@@ -3127,21 +2864,23 @@ combine the hybrid ligand with protein
 
 ## FEP notes
 
-### FEP itself
+### How to understand/see FEP
 
 - single topology不准？所有的interaction都关掉。只能$R^2=0.3\sim 0.43$
 
-  FEP is not screening：还是算力不够；绝对结合能不是太准
+- FEP can not do screening：还是算力不够；绝对结合能不是太准
 
-- Schrodinger“行业标准”：FEP+REST，蛋白多个构象时会比较有用
+- Schrodinger的“行业标准”：FEP+REST，蛋白多个构象时会比较有用
 
 - 采样好的话，是包含熵的，且是显式溶剂，一般要比对接类的好
 
 - free energy methods rely on one basic idea: to force the system to where it doesn’t want to be, and then measure by how much it doesn’t want to be there. In potential of mean force, we apply mechanical force to decouple ligand and receptor. In free energy perturbation methods, we transform the system through a set of unphysical (alchemical) states, that connect two physical states we are interested in.
 
   [How to Calculate the Free Energy of Methane in Water Using Gromacs with Cloud HPC](https://www.cloudam.io/post/how-to-calculate-the-free-energy-of-methane-in-water-using-gromacs-with-cloud-hpc)
+  
+- Zhou：小分子没有conceptual novelity
 
-### find the starting structure
+### Find the starting structure
 
 - 跑MD找构象：
 
@@ -3162,7 +2901,7 @@ combine the hybrid ligand with protein
 
   如果跳跃，应该多跑
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/cluster-id-with-time.png" style="zoom:33%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Protein-ligand-simulation.assets/cluster-id-with-time.png" style="zoom:33%;" />
 
 Leili's notes
 
@@ -3185,15 +2924,25 @@ I took a look and what you showed me was correct - **run1 and run3 are different
   - 结合构象没太变
   - 时间足够长，收敛
 
-  构象不对，符号也难；第二个不对，大概是只能相信符号，数值不太行
+  构象不对，符号也难做对；第二个不对，大概是只能相信符号，数值不太行
 
-- 如果变得大，每个window可以多一些时间
+- 如果结构变得大，每个window可以多一些时间
 
 - 加window可以根据dG-lambda图中dG比较大的window附近加，虽然也有累计error
 
 - 教训：**charmm-gui的时候检查一遍手性；merge完了检查一遍结构**。养成习惯，每次如此！
 
-Kevin's notes
+- My thoughts: [谈谈FEP中unbound state的选取](https://www.bilibili.com/read/cv22663298)
+
+- yq：L-AA换成D-AA，可以以Gly为中介。或者搞一个两个侧链的，都做消掉
+
+- 尽量避免突变PG？
+
+- IDP：变成有功能态时，是相变？
+
+
+
+### Kevin's notes on FEP path
 
 - FEP sharp的地方，加window和长时间都是为了充分采样
 
@@ -3205,33 +2954,25 @@ Kevin's notes
 
   in general, 消掉大的group的irreversiblility小一点
 
-- Kevin认为，不光是alchElecLambdaStart有这个问题。
-  每个原子/interaction按理都可以设一个lambda，但是麻烦。
-
-  其实最终的dG差不多就行
-
-- 小分子，topology更重要。and是否构象变了
-
+- Kevin认为，不光是`alchElecLambdaStart`有这个问题。每个原子/interaction按理都可以设一个lambda，但是麻烦，甚至可以搞机器学习的path。其实最终的dG差不多就行
+  
 - Kevin认为，键变了啥的都还好，就怕给周围group瞎转的机会
 
-- Gromacs中FEP每个窗门应该独立跑还是接着上一个窗口跑？
-  如果都能采到，就都可以
-  听起来namd更合理，但是还是有跑岔路的风险
+- Q：Gromacs中FEP每个窗门应该独立跑还是接着上一个窗口跑？
+  
+  A：如果都能采到，就都可以。听起来namd更合理，但是还是有跑岔路的风险
 
   跑岔路：路径依赖，偏离了一下，后面回不来了，或者单个这个window回不来了。增加时长可能导致走岔路
 
-- 你的实验做的dG，ddG的误差只能传递过来
-  组会放的数据就是stderr
-
-- yq：L-AA换成D-AA，可以以Gly为中介。或者搞一个两个侧链的，都做消掉
-
-- 尽量避免突变PG？
-
-- IDP：变成有功能态时，是相变？
-
-[谈谈FEP中unbound state的选取 - 哔哩哔哩 (bilibili.com)](https://www.bilibili.com/read/cv22663298)
+- 
 
 ### Analysis
+
+- 你的实验做的dG，ddG的误差只能从dG传递过来。组会放的数据就是stderr
+
+  propagation of error. X, Y are independent variables.
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/Protein-ligand-simulation.assets/error.png" style="zoom:40%;" />
 
 - 计算stddev好说。stderr单个的好说，差值的有两种：
 
@@ -3275,13 +3016,38 @@ Kevin's notes
 
 - 和实验对比：要是测结合力才exactly match，EC~50~也不等于亲和力
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/FYP-notes.assets/fep.png" alt="image-20221016231054417" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Protein-ligand-simulation.assets/fep.png" alt="image-20221016231054417" style="zoom:50%;" />
 
 Zhou's notes:
 
 新长出来的group把一个水挤出来可能导致ddG变负
 
-小分子双突变一般不太行？
+### Small molecule
+
+- 
+- 小分子，topology怎么做更重要。and是否构象变了
+- 小分子双突变一般不太行？
+
+
+
+扩环最好是整个环变化添加中间分子，确实还没人做，但是更少人用了。FEP填充中间小分子，一得说服别人，二要提升本身的准确度
+
+calculating free energies for transformations involving ring openings and net charge changes，还没解决！
+
+
+
+### About charges in FEP
+
+- 自由能对charge（即使是分布）比较敏感，要谨慎
+
+  带电的离子，大分子也许可能会影响
+
+- 周围charge变化比较大，我们应该尽量少一点变化，还是尊重charge的变化？
+  手动做的时代，变得少，可能有一些平均。
+  最好是用benchmark检验，也算一个测试了
+
+  至于采用common多一点还是少一点，可以让用户自己决定。Leili还觉得似乎考虑charge更合理
+
 
 ### Charged mutation
 
@@ -3301,48 +3067,25 @@ solution：
 
 - 把bound和unbound放同一个盒子，一个正向一个反向。不知道对不对，但肯定很麻烦
 
-about charges in FEP
-
-- 自由能对charge（即使是分布）比较敏感，要谨慎
-
-  带电的离子，大分子也许可能会影响
-
 - 
 
+### How to design
 
-
-讨论总结： 
-
-- 后面：继续。程序让其他人用用。patent也可以考虑…… 
-- 感受：你做了PPT老师就感觉你要讲给他听；你展示的内容决定了老师能给你什么输出；老师比较在乎名声
-- 变的位点：2',3'算一个；CN估计不动，但可以试硝基？芳环NH2，大小两个环上的C上加东西（看结构）
+- 
 - 变的思路：如果没有明显的就填空。1）比如，och3变好那能不能换点别的大基团，比如och2ch3，延长一个;芳环上NH2也是；2）常见那几个，推荐了COOH；3）ch3用得少？就是纯填空，填空可用支链烷基
-
-更新
-
-- F的负电，和O排斥，可能是疏水的原因
-
-  疏水相互作用：多少水处在unhappy的状态
-
+- F的负电，和O排斥，可能是疏水的原因.疏水相互作用：多少水处在unhappy的状态
 - pi-pi, pi-cation are important! 8~9 kcal/mol?
-
 - H bond and electrostatic, not very strong if exposed to water (1~2, 3~4 kcal/mol). water  forms these too. only works if $\varepsilon_r$ is small.
 
-### other
-
-- propagation of error. X, Y are independent variables.
-
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Previous-projects/FYP-notes.assets/image-20221106091013292.png" alt="image-20221106091013292" style="zoom:40%;" />
-
-- leili认为，做benchmark需要对dataset的十几个以上的ligand跑MD、确定构象，比较离谱的可以扔掉
-
 ### Benchmarking
+
+leili认为，做benchmark需要对dataset的十几个以上的ligand跑MD、确定构象，比较离谱的可以扔掉
 
 FXR那个太challenging，不应该benchmark
 
 行业标准是简单的那个，大家都能做出来
 最好是标准居多，挑战性的有几个
-看一下这三篇的correlation
+看一下这些benchmark文章的的correlation
 
 最好是先选别人做得比较好的体系REST：也是可以做
 直接跑，如果MD采样有问题
@@ -3352,17 +3095,11 @@ FXR那个太challenging，不应该benchmark
 用REST做FEP，要保证多个构象都要采得到
 
 
-扩环最好是整个环变化添加中间分子，确实还没人做，但是更少人用了
-
-周围charge变化比较大，我们应该尽量少一点变化，还是尊重charge的变化？
-手动做的时代，变得少，可能有一些平均。
-最好是用benchmark检验，也算一个测试了Leili讲的是流程，能做什么，我讲一下dual topology
-
-
-至于采用common多一点还是少一点，可以让用户自己决定他还觉得似乎考虑charge更合理
 
 意见一：一些gmx中的residue name需要alias
 意见二：哪些电荷变了最好做整齐一点
+
+
 
 ### Presenting your results
 
@@ -3382,16 +3119,13 @@ FXR那个太challenging，不应该benchmark
 
   > 可以画那种动画，消失的为虚的，出现的为实的 
 
-- yq thought only when the results are not so good should you put the above decomposition figures here
+- yq: only when the results are not so good should you put the above decomposition figures here
 
+讨论总结： 
 
-
-导出那种，作者、杂志、年期卷的格式，放在PPT最下面：
-
-- 导入到bibguru，生成Vancouver格式的reference list
-- 粘贴进ChatGPT，让它生成
-
-bug：Chemical Science那篇文章，无法根据缩略版的条目搜到文章，但是加上作者名字就可以。。
+- 后面：继续。程序让其他人用用。patent也可以考虑…… 
+- 感受：你做了PPT老师就感觉你要讲给他听；你展示的内容决定了老师能给你什么输出；老师比较在乎名声
+- 变的位点：2',3'算一个；CN估计不动，但可以试硝基？芳环NH2，大小两个环上的C上加东西（看结构）
 
 
 
@@ -3399,14 +3133,14 @@ bug：Chemical Science那篇文章，无法根据缩略版的条目搜到文章�
 
 ## 2D
 
-
+### ProLIF
 
 https://prolif.readthedocs.io/en/latest/notebooks/visualisation.html
 maybe analysis
 
 ![img](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Protein-ligand-simulation.assets/prolif.png)
 
-
+### PlayMolecule
 
 [PlayMolecule - Click. Compute. Discover.](https://playmolecule.com/PlexView/)
 
@@ -3424,20 +3158,16 @@ must make a complex
 
 
 
-Commerical:
+### Commerical
 
 - Flare
 - MOE
-- Mastreo
+- Mastreo (maybe academic license...)
 - https://www.molsoft.com/gui/ligand-receptor-interaction.html
-
-
-
-
 
 ## 3D
 
-
+### PLIP
 
 [PLIP - Welcome (tu-dresden.de)](https://plip-tool.biotec.tu-dresden.de/plip-web/plip/index)
 
@@ -3445,11 +3175,9 @@ Commerical:
 - should have hydrophobic...
 - download the pse file
 
+### NGL
 
-
-
-
-[Explore Ligand Interactions in 3D](https://www.rcsb.org/news/feature/57e30fd490f5613003407f09): NGL viewer is great but please support user's own pdb files, or only for pdb structures, will deprecate in the future....
+[Explore Ligand Interactions in 3D](https://www.rcsb.org/news/feature/57e30fd490f5613003407f09): NGL viewer is great but please support user's own pdb files, or only for pdb structures, will deprecate in rcsb in the future....CHARMM-GUI uses it too
 
 <img src="https://cdn.rcsb.org/news/2016/ligand-interaction.png" alt="RCSB PDB News Image" style="zoom: 67%;" />
 
@@ -3463,13 +3191,15 @@ Mol* viewer. I don't like it.
 
 
 
-Protein Plus https://proteins.plus/ containing poseview
+### Protein Plus
+
+https://proteins.plus/ containing poseview
 
 
 
+### Commerical
 
-
-[Molsoft L.L.C.: ICM-Browser](https://www.molsoft.com/icm_browser.html): commerical
+[Molsoft L.L.C.: ICM-Browser](https://www.molsoft.com/icm_browser.html): 
 
 
 

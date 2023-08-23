@@ -110,13 +110,15 @@ It's fine on Windows; but x86 version cannot be installed here! And x64 shows �
 
 > ZJU的Rvpn：https://www.coolspring8.com/p/rvpn-easyconnect/. see his GitHub https://github.com/Hagb/docker-easyconnect
 >
-> 7.6.7 version: appropriate for XJTU v
+> 7.6.7 version: appropriate for XJTU
 
 > [!WARNING]
 >
 > do not turn on auto login on Linux! cannot change user name (unless you reinstall the client) because https://rvpn.zju.edu.cn will be redirected to the download page.
 
-## extend LAN to WLAN
+## ZJUnet: extend LAN to WLAN
+
+> https://github.com/xelerance/xl2tpd
 
 [https://github.com/QSCTech/zjunet](https://github.com/QSCTech/zjunet)
 
@@ -126,9 +128,26 @@ usage:
 
 ```shell
 sudo zjunet vpn -c
+sudo zjunet vpn -d
 ```
 
 can only activate in one IP per account?
+
+first time:
+
+```shell
+$ zjunet user add 
+username: student id number
+password: normal pwd
+```
+
+### ZJU wired
+
+冷知识：只连有线的时候仍能`sudo yum install`
+
+[给Ubuntu更换自定义源(ZJU)](https://blog.csdn.net/xelloq/article/details/79424759), but maybe go to ZJU mirror website. 
+
+[Configure ZJU source for conda](http://mirror.zju.edu.cn/docs/anaconda/)
 
 # break the wall
 
@@ -1556,50 +1575,13 @@ Python runtime state: preinitialized
 
 https://stackoverflow.com/questions/47936584/what-does-client-failed-to-connect-to-the-d-bus-daemon-mean
 
+## Other
 
+无线网卡 (英文名称：**Wireless network interface controller**，缩写为WNIC) driver
 
+https://www.nnnxxx.cn/
 
+https://github.com/the-tcpdump-group/libpcap
 
-# Other thing I did at Fedora and KDE
-
-Try to be clear about the commands for Dedian/RedHat systems!
-
-## installation
-
-1. typora
-   
-   - https://github.com/RPM-Outpost/typora in fedora, generate a rpm package
-     
-     ```
-     yum install rpm-build -y
-     ```
-   
-   - theme directory (in Fedora): 
-     
-     ```
-     /var/lib/flatpak/app/io.typora.Typora/x86_64/stable/67e4ba33309d2516bf011b564be7292dc9a5a1fa46c3bfb0a4a09b8f647cec52/files/typora/resources/app/style/themes
-     ```
-- use sync in firefox to share with pc...but I can **ctrl+c,v**..
-
-- maybe I'll send email to send files from laptop..
-
-- screenshot: PrtSc. Kolourpaint.
-
-- ocr: ru
-  
-  ```
-  /home/user/Desktop/work/xufan/bin/Image2LaTeX-linux/bin/Image2LaTeX
-  ```
-  
-  ```
-  killall -9 FoxitReader
-  ```
-
-## library
-
-https://libfaq.nus.edu.sg/faq/71315
-
-google scholar, pubmed
-
-all from library home!
+https://askubuntu.com/questions/537170/no-such-file-or-directory-net-bpf-h
 

@@ -641,11 +641,11 @@ see [Deal with videos](Deal-with-videos.md)
   1. 选择一个或多个对象。
   2. 使用“选择”工具 ，将位于定界框外部的鼠标指针移近一个定界框手柄，待指针形状变为 之后再拖动鼠标。
 
-  https://helpx.adobe.com/cn/illustrator/using/rotating-reflecting-objects.html
+- [如何在 Illustrator 中移动、对齐和分布对象 (adobe.com)](https://helpx.adobe.com/cn/illustrator/using/moving-aligning-distributing-objects.html)
 
 ## PR
 
-#### basics
+### basics
 
 - 轨道右侧是工具栏，比如说剃刀工具，可以剪切视频和音频。
 
