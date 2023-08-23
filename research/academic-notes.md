@@ -4,7 +4,7 @@ maybe a new .md file in the future
 
 
 
-# Chemistry
+# Biochemistry
 
 ## Organic Chemistry
 
@@ -38,7 +38,11 @@ maybe a new .md file in the future
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/halogen-bond.png" alt="anomeric-carbon" width=50% />
 
-# Biochemistry
+## Bioinorganic Chemistry
+
+Mammalian metallothioneins (MTs) are a group of cysteine-rich proteins that bind metal ions in two α- and β-domains and represent a major cellular Zn(II)/Cu(I) buffering system in the cell.
+
+
 
 ## Protein
 
@@ -48,6 +52,8 @@ maybe a new .md file in the future
 
 
 ## Nucleic acids
+
+RNA aptamer柔性比DNA强，理论上能达到更高的亲和力
 
 ### DNA/RNA polymerase
 
@@ -267,6 +273,7 @@ https://escholarship.org/content/qt95k0h86q/qt95k0h86q.pdf  also an Amber TI exa
 
 Dissipated work is a concept in thermodynamics that refers to the amount of work that is lost to heat during a process. When work is done on or by a system, some of the energy may be transferred to the system’s surroundings as heat. This heat transfer represents a loss of useful energy, as it is no longer available to do work. The amount of work that is lost in this way is called dissipated work. For example, when you rub your hands together, you are doing work to overcome the friction between your hands. Some of the energy from this work is transferred to your hands as heat, warming them up. This heat transfer represents dissipated work.
 
+Rupture force 断裂力 is the external force put on a material of interest that causes it to break or rupture. It can be calculated using a formula that takes into account the load force and size dimensions of the material1. It can also be measured using an atomic force microscope (AFM) for single covalent bonds
 
 
 

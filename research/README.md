@@ -5,7 +5,7 @@
 This is research hub page. Click on the sidebar to select a chapter and start reading!
 
 - [Programming for MD](/research/Programming-for-MD.md): Python, tcl, bash, specific Python packages, etc.
-- [Common tools for MD](/research/Common-tools.md): visualization programs, molecular dynamics basics, Gromacs/NAMD/Amber basics, etc.
+- [MD Fundamentals.md](/research/MD-fundamentals.md): visualization programs, molecular dynamics basics, Gromacs/NAMD/Amber basics, etc.
 - [Preparation and modeling](/research/Preparation-and-modeling.md): general modeling: protein (AF2, Swiss-Model, etc.), protonation state, Leap/VMD, packmol, docking and VS (distribute to other pages later?)
 - [Protein-ligand simulation](/research/Protein-ligand-simulation.md): MD/FEP with all MD engines
 - [Protein/Amino Acid FEP](/research/AA-MD-FEP.md): MD/FEP with all MD engines

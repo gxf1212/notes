@@ -165,9 +165,10 @@ make install
 
   - openssl: https://www.cnblogs.com/new-journey/p/13323301.html
 
+contents
 
-
-
+- [虚拟筛选和Gromacs基础操作](/research/Previous-projects/UROPS-run-and-result.md)
+- [NAMD/VMD和FEP计算基本操作](/research/Previous-projects/FYP-notes.md)
 
 # Other---the first time I install Ubuntu
 

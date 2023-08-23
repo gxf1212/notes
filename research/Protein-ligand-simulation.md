@@ -1929,10 +1929,13 @@ You can follow two pathways:
 
 Usually we won't need to "Find similar residues in the CHARMM FF" if the ligand is not in CgenFF database. This option is not to specify a template to copy parameters from, but just build this molecule...and it takes longer to search.
 
-Choose 'Exact', 'Make CGenFF topology'. Then we obtain all files as a .zip file.
+Click 'Make CGenFF topology'. Then we obtain all files as a .zip file. Choose 'Exact' if available, but now it doesn't provide you a `.rtf`/`.prm` file (already in CHARMM).
 
 - we use `ligandrm.pdb` (maybe `ligandrm.psf`, `toppar/lig.rtf`, `toppar/lig.prm` (lig: residue name of your ligand) 
 - the `gromacs` folder is for gmx
+  - problem: it can't generate files for gromacs if the ligand carries a virtual site.
+  - also provides scripts like `psf2itp.py` for your reference
+
 - `drawing_3D.mol2`: structure on the MarvinJS panel
 - refer to [this video](https://www.youtube.com/watch?v=Pj40ZnybXds)
 
@@ -1947,8 +1950,9 @@ Note: it's ok to upload a protein-ligand complex `.pdb` file. CHARMM-GUI paramet
 - https://brooks.chem.lsa.umich.edu/index.php?matchserver=submit MATCH: an alternative of CgenFF
   - trained with CgenFF ligands?
   - strange shorten atom types that causes incompatibility
+  - also, no LP atoms
   - similar parameters, (maybe) better transferability
-
+  
 - https://www.swissparam.ch/ MMFF/CHARMM22, too old
 
 these servers generate files for multiple MD engines
@@ -2031,6 +2035,8 @@ exit
 ```
 
 #### About the topology files
+
+> RTF: Residue Topology File
 
 When you encouter errors when reading .str file:
 
@@ -2692,6 +2698,8 @@ copy...
 
 just setup. for anaysis and run FEP, please see AA FEP
 
+how to visualize a single-topology hybrid ligand easily?
+
 ### pmx
 
 https://www.youtube.com/watch?v=MdaTPYLL2Gs
@@ -2700,13 +2708,15 @@ https://www.youtube.com/watch?v=ZqWdo_2YZdg
 
 #### CHARMM-GUI 
 
-```
+...the bond/angle/dihedral parameters are not explicitly provided in the topology. This would mean that the topology that you got from charmm-gui is not compatible for use with pmx and, firstly, the parameters need to be filled into it.
+
+```shell
 python ~/data/work/make_hybrid_top/pmx/fill_cgenff_itp.py -h
 ```
 
 fill the bonded parameters to the terms. Also add missing terms and values from charmm36.ff
 
-kindly provided by [Vytautas Gapsys](https://scholar.google.com.hk/citations?user=L4BQrLQAAAAJ&hl=en)
+kindly provided by [Vytautas Gapsys](https://scholar.google.com.hk/citations?user=L4BQrLQAAAAJ&hl=en). download it [here](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/utils/fill_cgenff_itp.py)
 
 ```shell
 f=38
@@ -2725,8 +2735,6 @@ echo '#include "ffmerged.itp"' > ligand.itp && cat merged.itp >> ligand.itp
 why the OH hydrogen is always affected?
 
 ![image.png](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Protein-ligand-simulation.assets/pmx-cgenff.png)
-
-how to visualize more easily?
 
 semi-manual setup
 
@@ -2823,6 +2831,14 @@ problems:
 is it necessary to use a different atom for 0.001 charge difference?
 
 
+
+#### LigParGen
+
+http://zarbi.chem.yale.edu/ligpargen/gmx_tutorial.html
+
+Protein Ligand Complex Simulations with OPLS-AA
+
+还是要手动改top
 
 
 

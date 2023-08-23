@@ -483,6 +483,10 @@ puts "    $count1, $count2, $count3, and $count4"
 
 - pmx倒是有个规范：类内方法都是下划线开头
 
+- `assert`: https://www.tutorialsteacher.com/python/python-assert
+  应该assert还是try except呢？后处理内容比较多、不一定退出程序时，只能用except
+
+
 ## operating files and cmd
 
 ### about bash commands
@@ -746,6 +750,8 @@ The logging levels in Python’s logging module are used to indicate the severit
 ### pyinstall
 
 
+
+it requires a few minutes to pack up...
 
 ### warning
 

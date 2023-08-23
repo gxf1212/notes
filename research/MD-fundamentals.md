@@ -1,4 +1,4 @@
-# Common Tools
+# MD Fundamentals
 
 see [here](/techniques/Prepare-for-the-computer.md) for installation
 
@@ -384,7 +384,7 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
    set label colors
 
-   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Common-tools.assets/color-bond.png" alt="color-bond" style="zoom:20%;" />
+   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/color-bond.png" alt="color-bond" style="zoom:20%;" />
 
 10. VMD representation里面写变量$ligname只是不报错，还是得手动改
 
@@ -529,7 +529,7 @@ usually we use -pbc mol...
 
 - 全选改字体（18），在file--document setting--Drawing改线宽，大概0.56（0.4倍粗体），就和Wikipedia的比较接近（平常不用加粗）。全选--右键--Object Settings也可以。
 
-  ![image-20230119225838463](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Common-tools.assets/chembiodraw-drawing.png)
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/chembiodraw-drawing.png)
 
 - [怎样在ChemDraw中设置字体的默认格式？](https://www.sohu.com/a/104294282_395309)
 
@@ -555,7 +555,7 @@ usually we use -pbc mol...
 
 ### Cheat sheet
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Common-tools.assets/CD_cheatsheet.png" alt="image.png" style="zoom: 60%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/CD_cheatsheet.png" alt="image.png" style="zoom: 60%;" />
 
 ## Other
 
@@ -699,7 +699,7 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 
 > from Amber manual
 
-<img src="E:\GitHub-repo\notes\research\Common-tools.assets\nvt-npt.png" alt="1689997407699" style="zoom: 80%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/nvt-npt.png" alt="1689997407699" style="zoom: 80%;" />
 
 ### Control
 
@@ -751,7 +751,7 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 
 
 
-![U2@WL5VJQVCP9WN@VO~F7GA](E:\GitHub-repo\notes\research\Common-tools.assets\pcontrol.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/pcontrol.png)
 
 ### Restraint
 
@@ -1307,6 +1307,6 @@ Uniqueness and relative abundance of protein sequences....
 
 ## CASP
 
-![](E:\GitHub-repo\notes\research\Common-tools.assets\casp.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/casp.png)
 
-![](E:\GitHub-repo\notes\research\Common-tools.assets\casp15.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/casp15.png)

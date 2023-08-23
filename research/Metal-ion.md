@@ -5,11 +5,9 @@ From the PSKR1-Al<sup>3+</sup> project. Modeling (inclulding advanced FF paramet
 - Amber special setup (e.g. MCPB.py)
 - special MD (US, etc.)
 
-
-
-# Fundamental usage
-
 ## First things to know
+
+- Alkaline earth metal ions are expected to bind to dsDNA through electrostatic and van der Waals interactions due to their closed-shell electronic structure; therefore, classical force fields can accurately model DNA–ion interactions of alkaline earth metal ions.
 
 - parameter fitting targets: IOD, HFE, CN, 
 
@@ -20,6 +18,8 @@ From the PSKR1-Al<sup>3+</sup> project. Modeling (inclulding advanced FF paramet
 - 
 
 
+
+# Fundamental usage
 
 
 
@@ -529,6 +529,22 @@ exit
 Here we have only one protein but multiple ions in the solution. We first fix the protein structure with `-pbc mol`. Then we should make the protein in the center of the box in every frame <u>so that protein-ion contact events are correctly recorded</u>, otherwise, some part of the protein are in the vaccum. This does not seem achievable in `gmx trjconv`. But VMD cannot produce a smaller `.xtc` file...
 
 For the later kinase-substrate system (with ATP and Al ion?), `-pbc nojump` easily makes the two chains together
+
+
+
+
+
+# Analysis
+
+
+
+## RDF
+
+The spatial distribution of ions surrounding DNA was analyzed using radial distribution functions (RDFs) and occupancy of DNA binding sites.
+
+https://docs.mdanalysis.org/stable/documentation_pages/analysis/rdf.html
+
+https://amberhub.chpc.utah.edu/radial-rdf/
 
 
 

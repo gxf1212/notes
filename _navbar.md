@@ -8,7 +8,7 @@
   - [Play with media](/techniques/Deal-with-media.md)
 - [Research](/research/README.md)
   - [Programming for MD](/research/Programming-for-MD.md)
-  - [Common tools for MD](/research/Common-tools.md)
+  - [MD Fundamentals.md](/research/MD-fundamentals.md)
   - [Preparation and modeling](/research/Preparation-and-modeling.md)
   - [Protein-ligand MD and FEP](/research/Protein-ligand-simulation.md)
   - [Protein/Amino Acid FEP](/research/AA-MD-FEP.md)
