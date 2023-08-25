@@ -11,9 +11,9 @@ This is a record of 折腾ing the system, in order not to forget.
 
 Linux desktop的优势：可以直接为cluster做测试
 
-## Basics
+# Basics
 
-### Concepts
+## Concepts
 
 - Linux是把要安装的软件分布在整个系统的各个文件夹里面， 比如所有软件的配置文件都安装在`/etc`下面， 软件需要的库文件都安装在`/lib`下面，日志文件都在`/var/log`下面，`/bin`下是常用的程序，等等。 比较复杂 哈哈。
 
@@ -23,9 +23,17 @@ Linux desktop的优势：可以直接为cluster做测试
 
 - rpm包主要应用在RedHat系列包括 Fedora等发行版的Linux系统上，deb包主要应用于Debian系列包括现在比较流行的Ubuntu等发行版上。
 
-  transform .rpm to .deb: `sudo alien ./*.rpm`
+  transform `.rpm` to `.deb`: `sudo alien ./*.rpm`
+  
+- 
 
-### File
+- https://www.techtarget.com/whatis/definition/daemon
+
+  https://zh.wikipedia.org/wiki/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B
+
+  （古希腊神话中的）半神半人的精灵
+
+## File
 
 - cp: cannot create regular file 'xxxx' 'xxxx': Invalid argument
 
@@ -43,38 +51,40 @@ Linux desktop的优势：可以直接为cluster做测试
 
    root和user的`.bashrc`是不一样的！
 
-   export的含义 https://askubuntu.com/questions/720678/what-does-export-path-somethingpath-mean
+   `export`的含义 https://askubuntu.com/questions/720678/what-does-export-path-somethingpath-mean
 
-   LD_LIBRARY_PATH最初是空的，第一个不要有多余的`:`
+   `$LD_LIBRARY_PATH`最初是空的，第一个不要有多余的`:`
 
 2. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
 
 3. [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
 
-### Common errors
+## Common errors
 
 - 下面是一些典型的段错误的原因：由内存管理硬件试图访问一个不存在的内存地址
 - Linux操作系统执行可执行文件提示*No such file or directory*的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
 
-### Releases
+## Releases
 
 [技术|最适合程序员的 10 款 Linux 发行版](https://linux.cn/article-14547-1.html)
 
-linux核心的东西都一样，发行版之间最大的区别无非是包管理和发行周期，以及默认带的软件包。
+[2022 年适合初学者的 10 个最佳 Linux 发行版 - Linux迷 (linuxmi.com)](https://www.linuxmi.com/2022-10-top-linux.html)
+
+linux核心的东西都一样，发行版之间最大的区别无非是包管理和发行周期，以及默认带的软件包。当然，还有桌面管理和外观。。
 
 - The big thing with CentOS 9 Stream is that it’s kind of the polar opposite of what CentOS once was. In the past, CentOS was all about stability. Because of that, packages were very slow to upgrade to new releases. In fact, you would often find packages that were a few releases old. That was done by design, to keep the operating system as absolutely rock-solid as possible. And it worked. CentOS was always amazingly stable.
 
 This time I installed https://labs.fedoraproject.org/scientific/
 
-## Operations
+# Operations
 
 Bash cheat sheet: Top 25 commands and creating custom commands
 
 https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
-### Fundamental settings and softwares
+## Fundamental settings and softwares
 
-#### system info
+### system info
 
 1. check the system
 
@@ -88,6 +98,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
    ```shell
    cat /etc/os-release
+   more /etc/redhat-release
    lsb_release -a
    hostnamectl
    ```
@@ -147,14 +158,14 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 12. 
 
 
-#### monitor resource usage
+### monitor resource usage
 
 [ref](https://blog.csdn.net/liaomin416100569/article/details/76920328)
 
 1. `top`
 2. 
 
-#### disk management
+### disk management
 
 1. 删除分区用gparted
 
@@ -178,7 +189,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 7. 
 
-#### system/user settings
+### system/user settings
 
 1. 字体缺失（WPS等）
 
@@ -269,12 +280,12 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 
 
-#### input method installation
+### input method installation
 
 - fcitx
-  
+
   - steps
-  
+
     ```shell
     # use software market or commmand line:
     sudo apt install fcitx fcitx-config-gtk # configure GUI
@@ -283,16 +294,16 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
     # say goodbye to ibus
     sudo apt purge ibus
     ```
-    
+
   - also set fcitx in "language support". reboot.
-  
+
   - uninstall: https://jingyan.baidu.com/article/d5c4b52b95eb52da570dc511.html
-  
+
     ```shell
     sudo apt-get remove fcitx fcitx-module* fcitx-frontend*
     sudo apt-get purge fcitx* # config
     ```
-  
+
 - 迅飞输入法
 
   - install https://www.yoki.moe/Intstu/24.html and https://www.52pojie.cn/thread-1243805-1-1.html
@@ -319,7 +330,6 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
   - 开启了细胞词库功能  https://blog.csdn.net/Teri_Tor/article/details/111461984
 
     > 感觉搜狗拼音输入法比谷歌拼音输入法更好，因为有最新流行词汇，可以打出表情符号等等。
-    >
 
     dictionaries: https://pinyin.sogou.com/dict/
 
@@ -342,16 +352,16 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
     > still can't see conf gui, but `gedit /home/gxf/.config/sogoupinyin/dict/shell.conf`
 
 - 2022.1.4 use google pinyin. 至少能用。。先用吧阿巴阿巴
-  
+
   ```shell
   sudo apt-get install fcitx-googlepinyin
   whereis googlepinyin
   ```
-  
+
   > ` /usr/lib/x86_64-linux-gnu/googlepinyin/data`  词库目录
 
 - setting commands
-  
+
   ```shell
   fcitx-config-gtk3 # global configuration
   im-config
@@ -364,14 +374,14 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 - skin?
 
 - other, see fcitx project
-  
+
   ```shell
   sudo apt-get install fcitx-libpinyin
   ```
 
 
 
-#### figures&media
+### figures&media
 
 1. cannot play video?
 
@@ -482,7 +492,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 7. 
 
-#### other softwares
+### other softwares
 
 1. google download?
 
@@ -536,11 +546,11 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 6. 
 
-### Operation on files and directory
+## Operation on files and directories
 
-just fundamental usage. for advanced shell syntax, see [this link](/techniques/Specific-Software-Usage.md?id=bash-shell)
+just fundamental usage. For advanced shell syntax as well as commands used in programming (`sed`, `grep`, etc.), see [this link](/research/Programming-for-MD.md?id=bash-shell)
 
-#### create and delete
+### create and delete
 
 1. create directory: 
 
@@ -652,13 +662,13 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
 9. 
 
 
-#### view file
+### view file
 
 1. `vi`
 2. `head` and `tail`
 3. what if message is too long? add `|more` https://blog.csdn.net/weixin_34293911/article/details/86473042
 
-#### check dir
+### check dir
 
 1. check the size of a folder: https://zhidao.baidu.com/question/1178566665695139419.html
 
@@ -694,7 +704,7 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
 
 6. 
 
-#### other
+### other
 
 1. create a **soft link** (short cut). Files stored in `gxf1` are actually occupying space in `gxf`. 
 
@@ -737,7 +747,7 @@ just fundamental usage. for advanced shell syntax, see [this link](/techniques/S
 3. 
 
 
-#### zip and unzip
+### zip and unzip
 
 the problem rises when installing Gaussian
 
@@ -774,120 +784,12 @@ rather than xvrf...
 
 
 
-#### disk
+### change software source manually
 
-1. 自我检测分析与报告技术smart: https://www.cnblogs.com/xqzt/p/5512075.html
+in GNOME, maybe click Software & updates
 
-#### debian series features
-
-1. 解决依赖问题：it seems after failing to install a .deb package (due to dependent packages), the dpkg always remember this error, and even automatically install the dependent packages if you open **software updater**. or
-   
-   ```shell
-   sudo apt-get -f install
-   ```
-   
-   如果让我删，就手动`apt-get install`几个再用软件更新器
-
-2. 
-
-### desktop managers
-
-kde and gnome are two types of desktop interface. KDE looks like Windows desktop and gnome is the classic Linux desktop interface.
-
-#### KDE
-
-1. fonts
-
-2. settings manager 
-   - lightdm desktop manager
-     - taskbar fonts
-   - appearance
-     - desktop icon and font
-   
-3. 
-
-4. https://os.51cto.com/art/200902/109883.htm
-
-   如何在KDE桌面添加启动程序
-
-> deprecated 
->
-> 1. add "show desktop": http://www.linuxdiyf.com/view_134588.html
->
->    activate Meta+D to show desktop (system settings--shortcuts--global--Kwin)
->
->    now this is activated by default
-
-#### GNOME
-
-1. [How to Check GNOME Version*- Linux Nightly*](https://www.bing.com/ck/a?!&&p=e77723a6a2d79f1cJmltdHM9MTY3OTUyOTYwMCZpZ3VpZD0wYmUxMDdlNC03MWMxLTZlM2ItMGNlMi0xNTVhNzBjOTZmYWQmaW5zaWQ9NTQyNQ&ptn=3&hsh=3&fclid=0be107e4-71c1-6e3b-0ce2-155a70c96fad&u=a1aHR0cHM6Ly9saW51eG5pZ2h0bHkuY29tL2hvdy10by1jaGVjay1nbm9tZS12ZXJzaW9uLyM6fjp0ZXh0PTElMjBTdGVwJTIwMS4lMjBHbyUyMHRvJTIwdGhlJTIwQWN0aXZpdGllcyUyMG1lbnUsR05PTUUlMjB2ZXJzaW9uJTIwdGhhdCUyMGlzJTIwaW5zdGFsbGVkJTIwaW4lMjB5b3VyJTIwc3lzdGVtLg&ntb=1)
-
-   ```shell
-   gnome-shell --version
-   ```
-
-2. 在Ubuntu的系统中如何将应用程序添加到开始菜单中 https://blog.csdn.net/qk1992919/article/details/51034361/ https://ubuntuqa.com/article/1235.html
-
-   ```
-   Name=Pymol   #此软件在菜单中当语言为英语的时候的显示名称      
-   Name[zh_CN]=Pymol  #此软件在菜单中当语言为中文的时候的显示名称
-   Comment=pymol   #此软件在菜单中当语言为英语的时候的说明       
-   Comment[zh_CN]=pymol   #此软件在菜单中当语言为中文的时候的说明
-   Exec=/home/gxf/pymol/pymol     #要执行的程序的名称
-   Terminal=false        #执行时是否启动终端
-   X-MultipleArgs=false   #是否有多个参数
-   Type=Application      #程序的类型
-   Icon=/home/gxf/pymol/share/pymol/data/pymol/icons/icon2_128x128.png   #在开始菜>单中的显示图标
-   ```
-
-   还是用**alacarte**. need to configure:
-
-   ```
-   adt
-   pymol
-   DSV
-   GaussView
-   chimera
-   Pycharm
-   anaconda-navigator
-   ```
-
-3. 软件中心点开没反应？ 
-
-   ```shell
-   sudo apt-get update  
-   sudo apt-get dist-upgrade
-   sudo apt-get install --reinstall ubuntu-software
-   ```
-
-   也没用
-
-4. 设置→隐私→**屏幕**锁定→设置时间
-
-5. https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu windows环境，装qq微信等
-
-6. Ubuntu分屏 https://blog.csdn.net/SiriusExplorer/article/details/103016747
-
-   go to https://extensions.gnome.org/extension/39/put-windows/
-
-   setting 
-
-   <img src="https://img-blog.csdnimg.cn/20191111203143905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Npcml1c0V4cGxvcmVy,size_16,color_FFFFFF,t_70" style="zoom:50%;" />
-
-7. 有时候打开文件发现侧边栏不见了，这时候设置别的也没办法
-
-   解决但其实只要一个按键就好啦，就是F9
-
-8. [Gnome设置双屏 - 掘金 (juejin.cn)](https://juejin.cn/post/7158803954175279112)
-
-9. terminal可以Ctrl+Shift+F
-
-
-
-> #### change software source
-> 
 > Ubuntu20.04软件源更换 - 舟公的文章 - 知乎 https://zhuanlan.zhihu.com/p/142014944
-> 
+>
 > ```
 > sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak # backup
 > sudo vim /etc/apt/sources.list
@@ -911,11 +813,8 @@ kde and gnome are two types of desktop interface. KDE looks like Windows desktop
 > # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
 > deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
 > # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse multiverse
-> ```
-> 
-> ```shell
 > # deepin
-> deb http://mirrors.aliyun.com/deepin/ bionic main restricted universe multiverse
+>deb http://mirrors.aliyun.com/deepin/ bionic main restricted universe multiverse
 > deb-src http://mirrors.aliyun.com/deepin/ bionic main restricted universe multiverse
 > 
 > deb http://mirrors.aliyun.com/deepin/ bionic-security main restricted universe multiverse
@@ -933,39 +832,39 @@ kde and gnome are two types of desktop interface. KDE looks like Windows desktop
 > 
 > E: 仓库 “http://mirrors.aliyun.com/deepin bionic Release” 没有 Release 文件。
 > 
-> N: 无法安全地用该源进行更新，所以默认禁用该源。
+>N: 无法安全地用该源进行更新，所以默认禁用该源。
 > 
-> N: 参见 apt-secure(8) 手册以了解仓库创建和用户配置方面的细节。
+>N: 参见 apt-secure(8) 手册以了解仓库创建和用户配置方面的细节。
 > 
-> https://packages.ubuntu.com
+>https://packages.ubuntu.com
 > https://packages.debian.org
 
 
 
+# Specific commands
 
+## Installation
 
-## Specific commands
+### apt
 
-### Installation
-
-#### apt
-
-https://blog.csdn.net/liudsl/article/details/79200134
-
-apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用命令选项的集合。
+> !NOTE
+>
+> https://blog.csdn.net/liudsl/article/details/79200134
+>
+> apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用命令选项的集合。
 
 - install with apt-get or apt
-  
+
   ```shell
   sudo apt-get install xxx
   sudo apt-get remove xxx # 会删除软件包而保留软件的配置文件
   sudo apt-get purge xxx # 会同时清除软件包和软件的配置文件，彻底地刪除
   ```
-  
+
   https://www.cnblogs.com/oddcat/articles/9706393.html
 
 - 更新
-  
+
   ```shell
   sudo apt update # 更新可用软件包；已安装的软件包是否有可用的更新？
   sudo apt upgrade # 更新已安装的软件包
@@ -978,7 +877,7 @@ apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用
 - `sudo apt-get` is hard to assign prefix: 不能理解命令行选项与其他选项的搭配"--prefix=xxx"与其他选项的搭配
 
 - 安装缺失的包
-  
+
   ```shell
   sudo apt install -f
   sudo apt fix --broken # ?
@@ -986,23 +885,23 @@ apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用
   ```
 
 - 更新软件源
-  
+
   ```shell
   sudo gedit /etc/apt/sources.list
   ```
 
 - https://blog.csdn.net/jenyzhang/article/details/72510631  
-  
+
   [Ubuntu apt-get upgrade 时候忽略某些安装包](https://blog.csdn.net/u010544187/article/details/76512290?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
-  
+
   ```shell
   sudo apt-mark hold package
   sudo apt-mark unhold package
   sudo dpkg --get-selections | grep hold
   ```
-  
+
   > do not use `spt update` any more because typora cannot be connected
-  > 
+  >
   > ```shell
   > sudo apt-get upgrade
   > ```
@@ -1011,7 +910,15 @@ apt 和 apt-get的区别：apt = apt-get、apt-cache 和 apt-config 中最常用
 
   https://suay.site/?p=526
 
-#### yum
+- 解决依赖问题：it seems after failing to install a .deb package (due to dependent packages), the dpkg always remember this error, and even automatically install the dependent packages if you open **software updater**. or
+
+  ```shell
+  sudo apt-get -f install
+  ```
+
+  如果让我删，就手动`apt-get install`几个再用软件更新器
+
+### yum
 
 similar....
 
@@ -1030,21 +937,27 @@ similar....
 
 3. 
 
-#### dnf
+### dnf
 
 dnf, which has many useful subcommands, has replaced yum in newer RHEL OS like CentOS 8 or later...
 
-https://landoflinux.com/linux_dnf_command_examples.html
+READ THIS: [Linux dnf command examples](https://landoflinux.com/linux_dnf_command_examples.html)
+
+common:
+
+```shell
+dnf list installed/available/updates
+dnf install/remove/reinstall/update package
+dnf update/upgrade
+dnf clean
+dnf repolist
+```
+
+`distro-sync` synchronize system with all available repositories, but `upgrade` only upgrade your system.
 
 
 
-
-
-
-
-
-
-#### dpkg
+### dpkg
 
 install with .deb
 
@@ -1125,26 +1038,29 @@ debug
 
   
 
-#### rpm
+### rpm
 
-in RedHat, use `.rpm`, no `.deb`. `rpm` is RHEL `dpkg`
+- in RedHat, use `.rpm`, no `.deb`. `rpm` is `dpkg` in RHEL
 
-```shell
-rpm -Uhv package.rpm # install
-rpm -Uhv package.rpm --nodeps --force # force to install
-```
+  ```shell
+  rpm -i   package.rpm
+  rpm -Uhv package.rpm # install
+  rpm -Uhv package.rpm --nodeps --force # force to install
+  ```
 
-https://docs.fedoraproject.org/ro/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch02s03.html
+  https://docs.fedoraproject.org/ro/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch02s03.html
 
-but you can still double click!!
+  but you can still double click!!
 
-#### npm
+- The command `rpm -qa` is used to query all installed RPM packages on a system. The `-q` flag stands for "query" and the `-a` flag stands for "all"
+
+### npm
 
 install nodejs first.
 
 change source: https://www.cnblogs.com/feng-hao/p/11774543.html
 
-#### other
+### other
 
 1. run .sh files:
 
@@ -1212,21 +1128,21 @@ change source: https://www.cnblogs.com/feng-hao/p/11774543.html
 
 
 
-### privilige: chown and chmod
+## privilige
 
-change owner, change mode
+`chown` and `chmod`, means change owner, change mode respectively
 
 Linux/Unix 的文件调用权限分为三级 : 文件所有者（Owner）、用户组（Group）、其它用户（Other Users）。
 
-https://www.runoob.com/linux/linux-comm-chmod.html  great!
+https://www.runoob.com/linux/linux-comm-chmod.html  great tutorial!
 
 https://www.runoob.com/linux/linux-comm-chown.html
 
 
 
-### Download
+## Download
 
-#### wget
+### wget
 
 ```shell
 wget http://example.com/file.zip
@@ -1234,7 +1150,7 @@ wget http://example.com/file.zip
 
 
 
-#### curl
+### curl
 
 Here is an example of how you can use the `curl` command to download a file from the internet:
 
@@ -1250,21 +1166,21 @@ If you want to download a file using `curl` and save it with the same name as th
 curl -O http://example.com/file.zip
 ```
 
-#### svn
+### svn
 
 get part of the files in one GitHub repository
 
-- `svn checkout url`, trunk
+- `svn checkout url`, 将地址中的 `/tree/master/` 换成 `/trunk/`
 
   Then the files are downloaded to the current directory of terminal.
 
-  https://blog.csdn.net/ai_faker/article/details/107823359?utm_medium=distribute.pc_relevant.none-task-blog-title-2&spm=1001.2101.3001.4242
+  [如何在github下载一个项目中的单个文件或者子文件](https://blog.csdn.net/ai_faker/article/details/107823359)
 
 - https://blog.csdn.net/q279838089/article/details/44751039
 
 
 
-### tar and unzip
+## tar and unzip
 
 - manual
 
@@ -1302,7 +1218,7 @@ get part of the files in one GitHub repository
 
 
 
-### Compile
+## Compile
 
 [What does "./configure; make; make install" do?](https://askubuntu.com/questions/173088/what-does-configure-make-make-install-do)
 
@@ -1310,14 +1226,18 @@ get part of the files in one GitHub repository
 - `make` builds (compiles) the source code
 - `make install` installs the compiled code into your system.
 
-#### make
+### make
 
 `make`命令是运行的所在目录下的`Makefile`文件, 如果*Make*file 里有*check*的话, 会执行测试,也就是检查下编译出来的东西能不能用
 
-`make -jn (install...)`
-n代表同时编译的进程，可以加快编译速度，n由用户计算机的配置与性能决定，当前的典型值为10。所以`make -j10`
+```
+make -jn (install...)`
+n代表同时编译的进程，可以加快编译速度，n由用户计算机的配置与性能决定，当前的典型值为10。所以`make -j10
+```
 
 
+
+## Text editor
 
 ### vim
 
@@ -1355,6 +1275,10 @@ n代表同时编译的进程，可以加快编译速度，n由用户计算机的
 
 - 
 
+### nano
+
+## System function
+
 ### history
 
 https://blog.csdn.net/allway2/article/details/121215930
@@ -1374,13 +1298,18 @@ bash 的历史函数依赖于一个名为 *HISTFILE* 的变量，通常设置为
   ```
 
   表示从 `START_NUM` 号命令开始往后删除 N 条记录。
-  
+
+### process management
+
+- The `-9` option specifies that the `SIGKILL` signal should be sent, which **immediately terminates** the process without giving it a chance to clean up or save its state.
+- The `killall` command is used to send a signal to one or more processes specified by name.  So, `killall -9 process_name` will immediately terminate all processes with the name `process_name`.
+- By default, `pkill` sends the `SIGTERM` signal, which asks the process to terminate gracefully. `pkill -u username` will send the `SIGTERM` signal to all processes owned by the user `username`
 
 
 
-### Directory exploration
+## Directory exploration
 
-#### du
+### du
 
 The `du` command is used to estimate file space usage. The `-d 1` option specifies the maximum depth of 1 level for the directory tree and the `-h` option prints sizes in human-readable format.
 To sort the output of `du -d 1 -h` in dictionary order, you can pipe the output to the `sort` command with the `-k 2` option to specify that sorting should be performed on the second field (i.e., the directory names). Here’s an example:
@@ -1391,32 +1320,22 @@ du -d 1 -h | sort -k 2
 
 This will print the sizes of the directories in the current directory and its subdirectories, sorted in dictionary order by directory name.
 
-#### tree
+### tree
 
 ```shell
 tree .
 ```
 
-## Hardware-related
+# Hardware-related
 
 - HDMI线必须要插在主机的偏下一点，也就是直接插在显卡上，偏上的那个口是没有用的
+- disk自我检测分析与报告技术smart: https://www.cnblogs.com/xqzt/p/5512075.html
 
 
 
-## Emergency
+# Emergency
 
 [技术|详解在 Ubuntu 中引导到救援模式或紧急模式 (linux.cn)](https://linux.cn/article-14709-1.html)
-
-1. ubuntu的话，卡死崩溃时你切换到tty1～6然后 
-
-   ```shell
-   sudo pkill X
-   startx
-   ```
-
-   一下，就好了。不需要重启。
-
-   
 
 When system halted/stuck
 
@@ -1429,6 +1348,15 @@ When system halted/stuck
    2. use `top` to see threads. 
       - top: https://www.cnblogs.com/ggjucheng/archive/2012/01/08/2316399.html
    3. `kill id` to release.
+
+   ubuntu的话，卡死崩溃时你切换到tty1～6然后 
+
+   ```shell
+   sudo pkill X
+   startx
+   ```
+
+   一下，就好了。不需要重启。
 
 3. 2nd solution
 
@@ -1450,37 +1378,123 @@ When system halted/stuck
 
    might because handling too many files in a folder...?
 
+# Desktop managers
+
+kde and gnome are two types of desktop interface. KDE looks like Windows desktop and gnome is the classic Linux desktop interface.
 
 
 
-# during Fedora38 installation
+## GNOME
 
-will try to sort them into various sections later...
+1. [How to Check GNOME Version*- Linux Nightly*](https://www.bing.com/ck/a?!&&p=e77723a6a2d79f1cJmltdHM9MTY3OTUyOTYwMCZpZ3VpZD0wYmUxMDdlNC03MWMxLTZlM2ItMGNlMi0xNTVhNzBjOTZmYWQmaW5zaWQ9NTQyNQ&ptn=3&hsh=3&fclid=0be107e4-71c1-6e3b-0ce2-155a70c96fad&u=a1aHR0cHM6Ly9saW51eG5pZ2h0bHkuY29tL2hvdy10by1jaGVjay1nbm9tZS12ZXJzaW9uLyM6fjp0ZXh0PTElMjBTdGVwJTIwMS4lMjBHbyUyMHRvJTIwdGhlJTIwQWN0aXZpdGllcyUyMG1lbnUsR05PTUUlMjB2ZXJzaW9uJTIwdGhhdCUyMGlzJTIwaW5zdGFsbGVkJTIwaW4lMjB5b3VyJTIwc3lzdGVtLg&ntb=1)
+
+   ```shell
+   gnome-shell --version
+   ```
+
+2. 在Ubuntu的系统中如何将应用程序添加到开始菜单中 https://blog.csdn.net/qk1992919/article/details/51034361/ https://ubuntuqa.com/article/1235.html
+
+   ```
+   Name=Pymol   #此软件在菜单中当语言为英语的时候的显示名称      
+   Name[zh_CN]=Pymol  #此软件在菜单中当语言为中文的时候的显示名称
+   Comment=pymol   #此软件在菜单中当语言为英语的时候的说明       
+   Comment[zh_CN]=pymol   #此软件在菜单中当语言为中文的时候的说明
+   Exec=/home/gxf/pymol/pymol     #要执行的程序的名称
+   Terminal=false        #执行时是否启动终端
+   X-MultipleArgs=false   #是否有多个参数
+   Type=Application      #程序的类型
+   Icon=/home/gxf/pymol/share/pymol/data/pymol/icons/icon2_128x128.png   #在开始菜>单中的显示图标
+   ```
+
+   还是用**alacarte**. need to configure:
+
+   ```
+   adt
+   pymol
+   DSV
+   GaussView
+   chimera
+   Pycharm
+   anaconda-navigator
+   ```
+
+3. 软件中心点开没反应？ 
+
+   ```shell
+   sudo apt-get update  
+   sudo apt-get dist-upgrade
+   sudo apt-get install --reinstall ubuntu-software
+   ```
+
+   也没用
+
+4. 设置→隐私→**屏幕**锁定→设置时间
+
+5. https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu windows环境，装qq微信等
+
+6. Ubuntu分屏 https://blog.csdn.net/SiriusExplorer/article/details/103016747
+
+   go to https://extensions.gnome.org/extension/39/put-windows/
+
+   setting 
+
+   <img src="https://img-blog.csdnimg.cn/20191111203143905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Npcml1c0V4cGxvcmVy,size_16,color_FFFFFF,t_70" style="zoom:50%;" />
+
+7. 有时候打开文件发现侧边栏不见了，这时候设置别的也没办法
+
+   解决但其实只要一个按键就好啦，就是F9
+
+8. [Gnome设置双屏 - 掘金 (juejin.cn)](https://juejin.cn/post/7158803954175279112)
+
+9. terminal可以Ctrl+Shift+F
 
 ## KDE
 
-- Default shortcut for creating a folder: F10
+1. Checking KDE Version? In konsole just type :
 
-- Add application: you may want to add items to the KDE Menu toolbar. In order to do so, select/search Utilities, Menu Editor.
+   ```shell
+   kwin --version
+   ```
 
-- [Linux中设置开机启动脚本（fedora）](https://blog.csdn.net/s651665496/article/details/51569729)
+2. Default shortcut for creating a folder: F10; F2: rename
 
-- 使用CTRL键和功能键组合在一起可切换到指定的桌面，例如，CTRL-F1切换到1个桌面，CTRL-F3切换到第三个桌面。
+3. Add application: you may want to add items to the KDE Menu toolbar. In order to do so, select/search Utilities, Menu Editor.
 
-  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/switch-desktop.jpg)
+4. [Linux中设置开机启动脚本（fedora）](https://blog.csdn.net/s651665496/article/details/51569729)
 
-- The quick way to open a terminal: Ctrl+Alt+T
+5. 使用CTRL键和功能键组合在一起可切换到指定的桌面，例如，CTRL-F1切换到1个桌面，CTRL-F3切换到第三个桌面。
 
-- 要切换窗口可以用Alt+Tab来进行
+   ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/switch-desktop.jpg)
 
+6. The quick way to open a terminal: Ctrl+Alt+T
 
+7. 要切换窗口可以用Alt+Tab来进行
 
-## Check
+8. https://os.51cto.com/art/200902/109883.htm
 
-- Checking KDE Version? In konsole just type :
-  ```shell
-  kwin --version
-  ```
+   如何在KDE桌面添加启动程序
+
+> deprecated 
+>
+> 1. add "show desktop": http://www.linuxdiyf.com/view_134588.html
+>
+>    activate Meta+D to show desktop (system settings--shortcuts--global--Kwin)
+>
+>    now this is activated by default
+
+### Fedora38 Scientific
+
+https://labs.fedoraproject.org/scientific/
+
+评价：
+
+- gcc有点太新了，人家最多12.x它已经13.1了
+- 确实有各种花里胡哨的工具（或在应用商店里），但也不太用
+  - 默认的Spyder无法配自己的conda环境，默认的Pymol字体太小，等等
+
+其他和正常KDE差不多
+
+### Fix problems
 
 - 重启KWin：黑屏的时候用。。。
 
@@ -1501,6 +1515,8 @@ will try to sort them into various sections later...
   ```
 
   run all these in tty or a remote client
+
+- 
 
 - CentOs 重启ssh服务的命令如下：
 
@@ -1527,49 +1543,7 @@ will try to sort them into various sections later...
 
 
 
-## CUDA
-
-
-
-
-
-
-
-## debugging zjunet
-
-```shell
-sudo systemctl status xl2tpd.service
-sudo journalctl -u xl2tpd.service
-# similar error
-# maybe https://github.com/hwdsl2/docker-ipsec-vpn-server/issues/261
-
-sudo dnf install NetworkManager-l2tp
-# https://github.com/QSCTech/zjunet/issues/68
-
-```
-
-
-
-## Other info
-
-https://docs.fedoraproject.org/en-US/epel/
-Note that EPEL is not suitable for use in Fedora! Fedora is not Enterprise Linux. EPEL provides "a high quality set of additional packages for Enterprise Linux, including, but not limited to, Red Hat Enterprise Linux (RHEL), CentOS and Scientific Linux (SL), Oracle Linux (OL)". Put simply, Enterprise Linux is a term that refers to Red Hat Enterprise Linux or one of its clones. And Fedora is not a Red Hat clone.
-
-That is why you cannot install the "epel-release" package in Fedora. It simply does not exist. Don't try to use EPEL on Fedora.
-
-As noted before, the Fedora repositories provide most (if not all) of the EPEL packages. Additional software for Fedora is available in the RPMFusion repositories. In their own words, RPMFusion is "an extension of Fedora" that "provides software that the Fedora Project or Red Hat doesn't want to ship." RPMFusion can not be used on Enterprise Linux. You could see RPMFusion as the "EPEL alternative" for Fedora, but be aware that the software collections provided by RPMFusion and EPEL are entirely unrelated and uncomparable.
-
-
-
-https://www.techtarget.com/whatis/definition/daemon
-
-https://zh.wikipedia.org/wiki/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B
-
-（古希腊神话中的）半神半人的精灵
-
-
-
-# Fundamental softwares installation
+# System installation
 
 note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
@@ -1830,304 +1804,94 @@ but the following still needs re-configure...
 
 ### CentOS
 
-No official tool...
+workflows:
+
+- [How To Convert From CentOS 7 To CentOS Stream 8 - TechViewLeo](https://techviewleo.com/how-to-convert-from-centos-to-centos-stream/?expand_article=1)
+- [How to upgrade CentOS 7 to CentOS 8 Linux - Techglimpse](https://techglimpse.com/how-to-upgrade-centos-7-to-centos-8-linux/)
+- [How to Upgrade Centos 7 to 8](https://www.howtoforge.com/how-to-upgrade-centos-7-core-to-8/)
+
+就像那人说的，没有官方的升级方法
+
+证明网上的更新方法存在根本问题，`dnf distro-sync`这个命令不容易一次性升级好系统的基础包。
+
+The central problem: [centos8 - CentOS Stream 8 - DNF Broken - Unable to Run Update/Upgrade - Stack Overflow](https://stackoverflow.com/questions/71070277/centos-stream-8-dnf-broken-unable-to-run-update-upgrade)
+
+> Problem: The operation would result in removing the following protected packages: dnf
 
 Finally failed updating system packages like `dnf`, `systemd`, etc., which proves this workflow may not work at all!
 
-
+Then I followed a terrible suggestion:
 
 ```shell
 rpm -qa | grep -i devel | xargs -n 1 dnf remove -y
 ```
 
-removed many important packages...
+helped me removed many important packages...like the old gcc, cuda, nvidia etc., which should have pushed the upgrade, but dependencies failed.
+
+> [GCC Problems upgrading CentOS from 7 to 8 - CentOS](https://forums.centos.org/viewtopic.php?t=75172)
+>
+> ```
+> (gcc >= 8 with gcc < 9) is needed by annobin-11.13-1.el8.x86_64
+> rpmlib(RichDependencies) <= 4.12.0-1 is needed by annobin-11.13-1.el8.x86_64
+> ((grub2 >= 2.02-99) if grub2) is needed by kernel-core-4.18.0-500.el8.x86_64
+> ((grub2-efi >= 2.02-99) if grub2-efi) is needed by kernel-core-4.18.0-500.el8.x86_64
+> rpmlib(RichDependencies) <= 4.12.0-1 is needed by kernel-core-4.18.0-500.el8.x86_64
+> ```
 
 
 
 #### Deleting the kernel
 
-This did not work either
+In Step 14 I deleted the kernel, which did not push forward the upgrade either.
 
-https://juejin.cn/s/Linux 删除内核无法开机
+[删除内核后无法重新开机](https://juejin.cn/s/Linux删除内核无法开机)，虽然执行完删除命令后系统还在运行
 
 https://blog.51cto.com/zhaoqifly/1841868 记一次CentOS7内核kernel的删除重装
+
+> 如果您没有其他可用的内核版本，可以使用 Live CD 或 USB 作为启动介质，然后进入救援模式进行修复。根据您使用的发行版不同，步骤可能也会略有不同，以下为一些通用的方法：
+>
+> - 挂载根目录：在命令行中输入 `sudo mount /dev/sda1 /mnt` （`sda1` 代表您的系统根目录所在的分区）。
+> - 挂载必要目录：如果您的根目录使用了其他分区（例如 `/var`），则需要分别挂载这些分区。例如，如果 `/var` 所在的分区为 `/dev/sda2`，则可以使用 `sudo mount /dev/sda2 /mnt/var` 命令挂载 `/var` 分区。
+> - 更改根目录：在命令行中输入 `sudo chroot /mnt`，将根目录更改为 `/mnt`。
+> - 安装新的内核：在命令行中输入 `sudo apt-get install linux-image-generic` 命令安装一个新的内核版本。
+> - 更新 GRUB：在命令行中输入 `sudo update-grub` 命令更新 GRUB 配置文件。
+> - 退出救援模式：在命令行中输入 `exit` 命令退出救援模式。
+> - 重启系统：在命令行中输入 `sudo reboot` 命令重新启动系统。
 
 Fedora启动盘：在rescue模式下包只能一个个装，强制安装（`--force --nodeps`）新版内核仍然无法开机。`dnf`和`yum`都用不了，想修复也无法把修复包装给那个root，copy不过去。无法进行批量依赖修复，工作量太大。
 
 CentOS启动盘的修复模式还是能回到之前开机时的状态的（troubleshoot）
 
-Download packages:
+possible package download site:
 
 - [kernel | Package Info | CentOS Stream BuildSys](https://kojihub.stream.centos.org/koji/packageinfo?packageID=800)
 - [CentOS 8 Packages](https://linuxsoft.cern.ch/cern/centos/8/BaseOS/x86_64/os/Packages/)
 
+cannot run dnf, rpm; yum is already removed: [rpm 和 yum 失败并显示“错误：无法初始化 NSS 库”](https://ericmouafo-wordpress-com.translate.goog/2020/09/21/rpm-and-yum-fail-with-error-failed-to-initialize-nss-library/?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=sc)
 
+而且出现不应该有的依赖，`/bin/sh`不存在这种
 
-## Fundamental softwares
-
-  1. VScode [installation](/techniques/Prepare-for-the-computer?id=text-editor)
-
-  2. realvnc
-
-     ```shell
-     systemctl start vncserver-x11-serviced.service
-     systemctl enable vncserver-x11-serviced.service
-     ```
-
-  3. GitHub Desktop on Linux https://codechina.csdn.net/mirrors/shiftkey/desktop?utm_source=csdn_github_accelerator
-
-  4. xshell http://www.netsarang.com/download/free_license.html not for Linux?
-
-  5. https://linux.wps.cn/
-
-     snap: https://www.how2shout.com/how-to/how-to-install-wps-office-on-ubuntu-linux-via-command-terminal.html
-
-  6. weather  https://www.ywnz.com/linuxjc/4429.html
-
-  7. insync, sync for google, onedrive, dropbox
-
-     https://cn.go-travels.com/98643-how-to-use-google-drive-linux-4176144-1291281
-
-  8. 
-
-> browsers
-> 
-> - google chrome
->   
->   - 包名：google-chrome-stable
->   
-> - firefox
-> 
-> - edge
-> 
-> - opera
-> 
-> - falcon (from snap)
-> 
-> - 360
-> 
-> - epiphany-browser (web)
-> 
->     ```shell
->   sudo apt-get install epiphany-browser -y
->   ```
-> 
-> - netsurf
-> 
->     https://flatpak.org/setup/Ubuntu/ then download flatpak package
-> 
-> - Chromium
-> 
->     - 软件商店
-
-## CUDA environment
-
-dependence: install driver then cuda then cudnn. then configure conda environment
-
-```mermaid
-graph LR;
-cudnn--> cuda -->driver
-```
-
-### pycharm
-
-student (professional)
-
-https://blog.csdn.net/qq_51468843/article/details/110561151
-
-my email: stu, `74********cb`
-
-### Anaconda
-
-1. no need to copy a .sh file. You can assign a directory.
-
-2. no need under `su root`
-
-3. `conda: no command`: add path? open a new terminal https://blog.csdn.net/freezeplantt/article/details/80176215
-
-4. cannot activate at the first time: run `source activate`
-   
-   then run `conda activate` or `conda deactivate`
-   
-   see https://blog.csdn.net/qq_36338754/article/details/97009338
-
-### cuda
-
-- .deb just follow official guide
-
-  .run https://blog.csdn.net/weixin_38369492/article/details/107957296
-
-  both: don't forget to blacklist nouveau
-
-- To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-11.1/bin
-
-- to verify success: [link](https://blog.csdn.net/weixin_38208741/article/details/70848364)  [link](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#running-the-compiled-examples )
-  
-  ```shell
-  cd /usr/local/cuda/samples/1_Utilities/deviceQuery #由自己电脑目录决定
-  sudo make
-  sudo ./deviceQuery
-  ```
-  
-  ```shell
-  /usr/local/cuda/samples/1_Utilities/deviceQuery/deviceQuery
-  # deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 11.4, CUDA Runtime Version = 11.4, NumDevs = 1
-  Result = PASS
-  ```
-  
-  on Windows, similarly: `path\to\NVIDIA GPU Computing Toolkit\CUDA\vxx.x\extras\demo_suite\deviceQuery.exe`
-  
-  > https://blog.csdn.net/GreatcloudL/article/details/105209287
-  
-  or
-  
-  ```shell
-  nvcc -V 
-  ```
-  
-  after adding `/usr/local/cuda/bin` to `$PATH`
-
-#### other issues
-
-- problems
-
-  - I ran ...run.1 rather than .run ???
-  - don't know if this matters: https://blog.davidou.org/archives/1361
-
-- 为啥之前的驱动、cuda、cudnn系列能自动更新？可能是cuda的软件源是latest，自动更的，现在是固定了版本的
-
-- if "Failed to initialize NVML: Driver/library version mismatch"
-
-  https://comzyh.com/blog/archives/967/
-
-  if it's due to software update, just reboot. driver and cuda toolkit is simultaneously updated...
-
-- other ways to check gpu
-
-  ```shell
-  pip install gpustat
-  gpustat
-  ```
-
-- multiple version of cuda: https://bluesmilery.github.io/blogs/a687003b/
-
-- > Driver:   Not Selected
-  > Toolkit:  Installed in /usr/local/cuda-11.1/
-  > Samples:  Installed in /home/kemove/, but missing recommended libraries
-  >
-  > Please make sure that
-  >
-  > - PATH includes /usr/local/cuda-11.1/bin
-  > - LD_LIBRARY_PATH includes /usr/local/cuda-11.1/lib64, or, add /usr/local/cuda-11.1/lib64 to /etc/ld.so.conf and run ldconfig as root
-  >
-  > ```shell
-  > export PATH=$PATH:/usr/local/cuda/bin
-  > export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
-  > ```
-  >
-  > > ***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least .00 is required for CUDA 11.1 functionality to work.
-  > > To install the driver using this installer, run the following command, replacing <CudaInstaller> with the name of this run file:
-  >
-  >     sudo <CudaInstaller>.run --silent --driver
-  >
-  > Logfile is /var/log/cuda-installer.log
-
-### cudnn
-
-follow offical guide
-
-https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html
-
-#### method 1
-
-download [cuDNN Library for Linux (x86_64)](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.2.4/11.4_20210831/cudnn-11.4-linux-x64-v8.2.4.15.tgz)
-
-```shell
-# 22 Jan. 1st time
-sudo cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include 
-sudo cp -P cudnn-*-archive/lib/libcudnn* /usr/local/cuda/lib64 
-sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-# 22 Feb. 2nd time
-sudo cp cudnn/cuda/include/cudnn*.h /usr/local/cuda/include 
-sudo cp -P cudnn/cuda/lib64/libcudnn* /usr/local/cuda/lib64 
-sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-```
-
-also need the code samples
-
-#### method 2??
-
-download:
-
-- [cuDNN Runtime Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8_8.2.1.32-1+cuda11.3_amd64.deb)
-- [cuDNN Developer Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-dev_8.2.1.32-1+cuda11.3_amd64.deb)
-- [cuDNN Code Samples and User Guide for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-samples_8.2.1.32-1+cuda11.3_amd64.deb)
-
-```shell
-sudo dpkg -i lib*
-```
-
-not sure how to do...
-
-#### other issues
-
-1. to remove cudnn (method 1)
-
-   ```shell
-   sudo rm -rf /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-   ```
-
-2.  test.c:1:10: fatal error: FreeImage.h: 没有那个文件或目录 https://blog.csdn.net/xhw205/article/details/116297555
-
-   ```shell
-   sudo apt-get install libfreeimage3 libfreeimage-dev
-   ```
-   
-3. You may also need this
-
-   ```shell
-   sudo dpkg -i libcudnn*
-   ```
-   
-   to check success. You'd better install in order! (libcudnn, dev, example)
-   
-4. check success (tar.gz)
-
-   > [strange??? but a complete guide!!](https://blog.csdn.net/weixin_28691441/article/details/112144795) 
-   >
-   > ```shell
-   > cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 
-   > ```
-   >
-   > It's  old! let’s follow the official guide below
-   
-   ```shell
-   # Copy the cuDNN samples to a writable path.
-   HOME=./
-   cp -r /usr/src/cudnn_samples_v8/ $HOME
-   # Go to the writable path.
-   cd $HOME/cudnn_samples_v8/mnistCUDNN
-   # Compile the mnistCUDNN sample.
-   make clean && make
-   # Run the mnistCUDNN sample.
-   ./mnistCUDNN
-   ```
-   
-   If cuDNN is properly installed and running on your Linux system, you will see a message similar to the following:
-   
-    ```
-    Test passed!
-    ```
-
-### Not using
-
->     1. `nvidia smi` shows cuda version 11.1, driver is 455.45.01. We should not use an open source driver. check additional driver from 'start'.
->     2. nivida.cn also shows 455.45, so do I need to install the driver? Now no.
+> fedora boot USB device, trouble shooting, start faster than for installation
 >
-> 1. problem! can only run .sh file now!
-> 2. configure a command for them
+> fedora36和38的启动盘，rescue时看到的挂载情况还不一样。后者看不到原来的root盘，只能看到home？
+>
 
-# Debugging experiences for Ubuntu
+## Other info (Basics)
+
+https://docs.fedoraproject.org/en-US/epel/
+Note that EPEL is not suitable for use in Fedora! Fedora is not Enterprise Linux. EPEL provides "a high quality set of additional packages for Enterprise Linux, including, but not limited to, Red Hat Enterprise Linux (RHEL), CentOS and Scientific Linux (SL), Oracle Linux (OL)". Put simply, Enterprise Linux is a term that refers to Red Hat Enterprise Linux or one of its clones. And Fedora is not a Red Hat clone.
+
+That is why you cannot install the "epel-release" package in Fedora. It simply does not exist. Don't try to use EPEL on Fedora.
+
+As noted before, the Fedora repositories provide most (if not all) of the EPEL packages. Additional software for Fedora is available in the RPMFusion repositories. In their own words, RPMFusion is "an extension of Fedora" that "provides software that the Fedora Project or Red Hat doesn't want to ship." RPMFusion can not be used on Enterprise Linux. You could see RPMFusion as the "EPEL alternative" for Fedora, but be aware that the software collections provided by RPMFusion and EPEL are entirely unrelated and uncomparable.
+
+[Failed to synchronize cache for repos for RHEL 8 - Red Hat Customer Portal](https://access.redhat.com/discussions/4222851?tour=8)
+
+
+
+# Debugging experiences 
+
+mainly for previous Ubuntu workstation
 
 ## TOC
 

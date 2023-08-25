@@ -6,6 +6,32 @@ maybe a new .md file in the future
 
 # Biochemistry
 
+## General chemistry
+
+- A coordinate bond (also called a dative covalent bond) is a covalent bond (a shared pair of electrons) in which both electrons come from the same atom.
+
+- [3.2.1: Hard and Soft Acid and Base Theory - Chemistry LibreTexts](https://chem.libretexts.org/Courses/Saint_Marys_College_Notre_Dame_IN/CHEM_342%3A_Bio-inorganic_Chemistry/Readings/Week_3%3A_Metal-Ligand_Interactions_continued..../3.2%3A_The_identity_of_metal_ion_and_the_ligand_donor_atom(s)_affects_affinity/3.2.1%3A_Hard_and_Soft_Acid_and_Base_Theory)
+
+  ![](E:\GitHub-repo\notes\research\academic-notes.asssets\hsab.jpg)
+
+- 
+
+## Bioinorganic Chemistry
+
+- Cadmium can replace zinc, but is toxic because it does not have the same catalytic ability.
+
+  Mercury can bind to thiol groups, which are found in the amino acid cysteine in proteins. This can disrupt the function of proteins and enzymes that contain cysteine residues. Mercury can also replace zinc ions in certain proteins (SH)
+
+- 
+
+### Metal and Metalloproteins
+
+- one-third of all proteins are estimated to be metalloprotein
+- Mammalian metallothioneins (MTs) are a group of cysteine-rich proteins that bind metal ions in two α- and β-domains and represent a major cellular Zn(II)/Cu(I) buffering system in the cell.
+- Heavy metal ions can precipitate proteins by bonding with negatively charged parts of the protein molecule, reducing the tendency of the protein to attract a layer of water molecules around it, allowing the protein molecules to interact with one another and precipitate out of solution.
+
+
+
 ## Organic Chemistry
 
 - 芳香甲酸酯，相比于脂肪族羧酸酯，更不易水解。
@@ -38,16 +64,15 @@ maybe a new .md file in the future
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/halogen-bond.png" alt="anomeric-carbon" width=50% />
 
-## Bioinorganic Chemistry
-
-Mammalian metallothioneins (MTs) are a group of cysteine-rich proteins that bind metal ions in two α- and β-domains and represent a major cellular Zn(II)/Cu(I) buffering system in the cell.
-
-
-
 ## Protein
 
 - hypophosphorylated (comparative more hypophosphorylated, superlative most hypophosphorylated) (biochemistry) phosphorylated to a less than normal extent, or less than fully.
-- Heavy metal ions can precipitate proteins by bonding with negatively charged parts of the protein molecule, reducing the tendency of the protein to attract a layer of water molecules around it, allowing the protein molecules to interact with one another and precipitate out of solution.
+- 
+- 关于His：
+  反正case-by-case，实在是想起来了就用一下H++ 
+  his整体是6.0，one that is part of an imidazole ring (Nπ) and one that is part of an imine group (Nτ). The Nπ nitrogen has a lone pair of electrons that can act as a Lewis base and accept a proton（带双键那个）
+  这就是MD的不足了，只能同时用一个形式，不能叠加态
+  有些具体case，如酶：https://en.wikipedia.org/wiki/Histidine。传递质子的作用
 
 
 
@@ -99,13 +124,47 @@ PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
 
 
 
+
+
+
+
+# Pharmacology
+
+## Concepts
+
+- The inhibitory constant (Ki) is a type of [equilibrium dissociation constant (Kd)](https://pharmacologycanada.org/equilibrium-dissociation-constant-Kd) that represents the equilibrium binding [affinity](https://pharmacologycanada.org/Affinity) for a ligand that reduces the activity of its binding partner.
+
+  *K*i is associated with thermodynamic parameters in that Δ*G* = *RT*ln(*K*i), where Δ*G*, *R*, and *T* are the absolute binding free energy, the gas constant, and the absolute temperature, respectively
+
+- In-house drug discovery refers to the process of discovering new drugs within a company or organization, rather than outsourcing the process to another company.
+
+## Categories
+
+### Peptide
+
+- 干扰PPI很难使用小分子，因为：1）没有明显口袋，容易被水竞争掉；2）界面高度柔性，小分子可能刚性难调整。可以截一段蛋白作为多肽药
+
+### Macrolide
+
+大环内酯（Macrolide）是一类广谱抗生素，能够有效抑制细菌的生长和繁殖。大环内酯分子结构由16-环的大环和一定的糖基组成，作用于细菌的机理主要是通过抑制细菌蛋白质的合成。
+
+具体来说，大环内酯可与细菌的50S亚基上的23S rRNA结合，阻止细菌RNA依赖性蛋白合成。此外，大环内酯还可以诱导靶菌的形态学变化，使其形态异常，从而使其生长和繁殖受到抑制。
+
+值得注意的是，由于细菌和人类细胞的核糖体结构存在差异，大环内酯对于人类细胞的影响比较小，因此在治疗感染时，大环内酯具有较低的毒副作用和较高的选择性，被广泛用于临床抗菌药物的治疗中。
+
+### Halogenation
+
 卤素基本是通过谷胱甘肽结合来代谢的
 
 [Halogenation of drugs enhances membrane binding and permeation](https://pubmed.ncbi.nlm.nih.gov/15122640/)
 
-# Pharmacology
+## Strategy of design
 
-## bioisosteres
+![](E:\GitHub-repo\notes\research\academic-notes.asssets\synthetic-lethals.jpg)
+
+
+
+### bioisosteres
 
 [SwissBioisostere - A database of molecular replacements for ligand design](http://www.swissbioisostere.ch/)
 
@@ -118,9 +177,8 @@ PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
 
 - 药物分子中的羧基可以用磺酰胺，磷酸酯，四唑，硼酸等代替。
   - 在羧基的各种生物电子等排体中，羟肟酸的酸性稍弱，离子化程度较低，能显著提高透膜能力，然而在体内容易被代谢成羧酸，可在其氮原子上引入大一点的基团来提高其代谢稳定性。
-  - ![boric-acid](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/boric-acid.png)
-
-
+  
+    ![boric-acid](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/boric-acid.png)
 
 
 
@@ -131,6 +189,8 @@ PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
 
 
 
+### Covalent inhibitor
+
 [综述| 药物发现中的共价抑制剂](https://mp.weixin.qq.com/s/B0iYLWQIvlcn4N_0F2o_rw)
 
 ![BHO](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/BHO.png)
@@ -140,26 +200,6 @@ PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
 ![ring-design](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/ring-design.png)
 
 
-
-
-
-The inhibitory constant (Ki) is a type of [equilibrium dissociation constant (Kd)](https://pharmacologycanada.org/equilibrium-dissociation-constant-Kd) that represents the equilibrium binding [affinity](https://pharmacologycanada.org/Affinity) for a ligand that reduces the activity of its binding partner.
-
-*K*i is associated with thermodynamic parameters in that Δ*G* = *RT*ln(*K*i), where Δ*G*, *R*, and *T* are the absolute binding free energy, the gas constant, and the absolute temperature, respectively
-
-
-
-## Other
-
-In-house drug discovery refers to the process of discovering new drugs within a company or organization, rather than outsourcing the process to another company.
-
-
-
-大环内酯（Macrolide）是一类广谱抗生素，能够有效抑制细菌的生长和繁殖。大环内酯分子结构由16-环的大环和一定的糖基组成，作用于细菌的机理主要是通过抑制细菌蛋白质的合成。
-
-具体来说，大环内酯可与细菌的50S亚基上的23S rRNA结合，阻止细菌RNA依赖性蛋白合成。此外，大环内酯还可以诱导靶菌的形态学变化，使其形态异常，从而使其生长和繁殖受到抑制。
-
-值得注意的是，由于细菌和人类细胞的核糖体结构存在差异，大环内酯对于人类细胞的影响比较小，因此在治疗感染时，大环内酯具有较低的毒副作用和较高的选择性，被广泛用于临床抗菌药物的治疗中。
 
 
 
@@ -264,6 +304,7 @@ https://escholarship.org/content/qt95k0h86q/qt95k0h86q.pdf  also an Amber TI exa
 
 - RLHF就是基于人类反馈（Human Feedback）对语言模型进行强化学习（Reinforcement Learning），和一般的fine-tune过程乃至prompt tuning自然也不同。
   https://zhuanlan.zhihu.com/p/591474085
+- In artificial intelligence (AI), particularly machine learning (ML), ablation study **investigates the performance of an AI system by removing certain components to understand the contribution of the component to the overall system**.
 
 
 

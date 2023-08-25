@@ -244,6 +244,14 @@ Try to be clear about the commands for Dedian/RedHat systems!
   killall -9 FoxitReader
   ```
 
+1. fonts
+
+2. settings manager 
+   - lightdm desktop manager
+     - taskbar fonts
+   - appearance
+     - desktop icon and font
+
 ## library
 
 https://libfaq.nus.edu.sg/faq/71315

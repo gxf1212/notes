@@ -625,45 +625,18 @@ ffmpeg -i meeting_01.mp4 -vcodec copy -acodec copy -ss 00:00:37 -to 00:51:00 mee
 - 在Premiere Pro cc中，有时视频像素较高，像4K,8K，而我们的电脑配置又不是那么高，在pr中预览视频的时候就会出现卡顿，而代理剪辑就可以对素材进行代理处理，方便我们进行编辑预览
 
   代理剪辑：如素材为4K视频，直接通过pr软件打开，电脑配置如果不是特别高的话，可能就无法正常预览编辑，而代理剪辑则是将4K视频先进行转码，使我们的电脑可以正常预览剪辑，等编辑完成后在转换成原始4K格式
+  
+- 视频压制是通过使用一些算法和技术来减小视频文件的大小，以便更容易地存储、传输和共享视频。这些算法和技术可以减少视频中的冗余数据，并对视频进行压缩，从而减小视频文件的大小，而不会对视频的质量产生太大的影响。压制视频的过程可以简单地理解为压缩（编码）+重新制作。在压制视频时，可以根据需要将字幕加入原视频，避免被平台进行二压处理。
 
-# Adobe series
+  虽然GPU加速可以提高视频压制的速度和效率，但GPU加速在编码速度上可能会稍逊于一些传统的CPU编码器，对于一些对视频质量要求较高的场景，如专业影视制作，仍然推荐使用CPU进行视频压制。
 
-see [Deal with videos](Deal-with-videos.md)
-
-## Adobe illustrator
-
-- 我们可以按快捷键Ctrl+，就是放大视图，按快捷键Ctrl-就是缩小视图；滚轮是上下，Ctrl+滚轮是左右
-
-  [ai画板上下左右移动快捷键，画板缩小放大快捷键-百度经验](https://jingyan.baidu.com/article/9113f81b7e4bdc2b3314c740.html)
-
-- 使用定界框旋转对象
-
-  1. 选择一个或多个对象。
-  2. 使用“选择”工具 ，将位于定界框外部的鼠标指针移近一个定界框手柄，待指针形状变为 之后再拖动鼠标。
-
-- [如何在 Illustrator 中移动、对齐和分布对象 (adobe.com)](https://helpx.adobe.com/cn/illustrator/using/moving-aligning-distributing-objects.html)
-
-## PR
-
-### basics
-
-- 轨道右侧是工具栏，比如说剃刀工具，可以剪切视频和音频。
-
-- [PR如何给视频的某一段中的局部添加马赛克？ - 知乎](https://www.zhihu.com/question/67869397/answer/2313201400)
-
-- [Premiere Pro 中的语音到文本功能](https://helpx.adobe.com/cn/premiere-pro/using/speech-to-text.html)
-
-- [Adobe premiere怎么把浮动面板关闭？_火星网校](https://www.hxsd.tv/wenda/11068/)
-
-- [PR导入字幕](https://jingyan.baidu.com/article/d621e8daeaee396965913f8f.html)
+- 
 
 
 
-## PS
+# 其他常用功能
 
-
-
-# 处理音频
+## 处理音频
 
 ### 会议纪要
 
@@ -679,7 +652,7 @@ see [Deal with videos](Deal-with-videos.md)
 
 
 
-# 录制视频
+## 录制视频
 
 [Win11录屏没有声音怎么办？Win11录屏带声音的三种方法](https://zhuanlan.zhihu.com/p/562793694)
 
@@ -691,7 +664,7 @@ see [Deal with videos](Deal-with-videos.md)
 
 
 
-# 观看视频
+## 观看视频
 
 去除广告的插件：
 
@@ -715,6 +688,41 @@ GreasyFork脚本：[全网VIP视频免费破解去广告、全网音乐直接下
 
 
 电脑里的视频画面比声音快是因为配置不够？
+
+
+
+# Adobe series
+
+## PR
+
+### basics
+
+- 轨道右侧是工具栏，比如说剃刀工具，可以剪切视频和音频。
+
+- [PR如何给视频的某一段中的局部添加马赛克？ - 知乎](https://www.zhihu.com/question/67869397/answer/2313201400)
+
+- [Premiere Pro 中的语音到文本功能](https://helpx.adobe.com/cn/premiere-pro/using/speech-to-text.html)
+
+- [Adobe premiere怎么把浮动面板关闭？_火星网校](https://www.hxsd.tv/wenda/11068/)
+
+- [PR导入字幕](https://jingyan.baidu.com/article/d621e8daeaee396965913f8f.html)
+
+## Adobe illustrator
+
+- 我们可以按快捷键Ctrl+，就是放大视图，按快捷键Ctrl-就是缩小视图；滚轮是上下，Ctrl+滚轮是左右
+
+  [ai画板上下左右移动快捷键，画板缩小放大快捷键-百度经验](https://jingyan.baidu.com/article/9113f81b7e4bdc2b3314c740.html)
+
+- 使用定界框旋转对象
+
+  1. 选择一个或多个对象。
+  2. 使用“选择”工具 ，将位于定界框外部的鼠标指针移近一个定界框手柄，待指针形状变为 之后再拖动鼠标。
+
+- [如何在 Illustrator 中移动、对齐和分布对象 (adobe.com)](https://helpx.adobe.com/cn/illustrator/using/moving-aligning-distributing-objects.html)
+
+## PS
+
+钉钉里那些。。。？
 
 
 

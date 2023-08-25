@@ -13,6 +13,8 @@ From the PSKR1-Al<sup>3+</sup> project. Modeling (inclulding advanced FF paramet
 
   water residence time or exchange rate, coefficient of diffusion
 
+- we should consider charge transfer or covalent bonds, which may be important for accurately modeling transition metal ion interactions with dsDNA. old force field may fail to do this
+
 - 
 
 - 

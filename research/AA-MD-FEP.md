@@ -8,7 +8,7 @@ remove stages later
 
 # Modeling novel residues
 
-### Make the topology (gmx)
+## Make the topology (gmx)
 
 - [A Jerkwin example of preparation](https://jerkwin.github.io/2017/09/20/GROMACS%E9%9D%9E%E6%A0%87%E5%87%86%E6%AE%8B%E5%9F%BA%E6%95%99%E7%A8%8B2-%E8%8A%8B%E8%9E%BA%E6%AF%92%E7%B4%A0%E5%B0%8F%E8%82%BD%E5%AE%9E%E4%BE%8B/).
 - [a zhihu example](https://zhuanlan.zhihu.com/p/87402839)
@@ -42,15 +42,15 @@ sudo cp -r charmm36-jul2021.ff /your/working/directory
 
 and modify files related to that residue
 
-gmx: [Adding a Residue to a Force Field](https://manual.gromacs.org/current/how-to/topology.html#adding-a-residue-to-a-force-field)
+### Adding a Residue to a Force Field
 
-
+[reference](https://manual.gromacs.org/current/how-to/topology.html#adding-a-residue-to-a-force-field)
 
 - put `residuetype.dat` in both the cwd and forcefield.ff folder
 
 > maybe I'll handcraft one later. now using previously made ff
 
-### Make the topology (namd)
+## Make the topology (namd)
 
 summary
 
@@ -61,7 +61,7 @@ summary
 
 做topology的要求：
 
-#### Making correct topology files for novel residues
+### For novel residues
 
 - 一个原则是，尽量和parent residue接近。
 
@@ -73,21 +73,20 @@ summary
 
   只要有IC，完全可以不需要PDB文件。但是CHARMM-GUI和cgenff不会提供任何IC，只有从现存的rtf中找
 
-Ways to generate novel residue topology:
+#### Search from similar topology
 
 1. in CHARMM FF folder (toppar/stream/prot). You may search and visualize them in [CHARMM-GUI PDB reader](https://www.charmm-gui.org/?doc=input/pdbreader) --- Non-standard amino acid / RNA substitution --- select image (the figure below). Search by "Parent amino acid" or smiles substructure. 
 
    - `toppar_all36_prot_modify_res.str`: a lot of modified residues
    - `toppar_all36_prot_c36m_d_aminoacids.str`: D amino acids
      those files also include common patches.
+   - `toppar_all36_prot_na_combined.str`: phosphorylated residues or patches
 
    Finally, find to residue entries in those files.
 
 2. in CHARMM-GUI LigandRM, search for similar residues. Upload that residue, and it may suggest similar parts from cgenff.rtf, etc (but may not include `prot_modify_res.str`). 
 
 3. If no exact match is found, we may combine groups from >=2 residues. Modularization in CHARMM FF is great! [Force field tutorial](https://www.ks.uiuc.edu/Training/Tutorials/science/forcefield-tutorial/forcefield.pdf) seems to provide an example of combining.
-
-I do not recommend building with LigandRM since it just treats our residue as a normal small molecule and atom names are not that of amino acids.
 
 It's acceptable to make the topology by hand (since examination is necessary), but FEP should be automatic.
 
@@ -97,10 +96,18 @@ It's acceptable to make the topology by hand (since examination is necessary), b
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/AA-MD-FEP.assets/search-nonstandard-residue.png" alt="image-20221105205515004" style="zoom:50%;" />
 
-visit [this site](https://www.charmm-gui.org/?doc=input/pdbreader_uaa&jobid=6615771465&rowId=0&segid=PROA)!
+visit [this site](https://www.charmm-gui.org/?doc=input/pdbreader_uaa&jobid=6615771465&rowId=0&segid=PROA) for the above page!
 
+##### steps
 
-#### Notes during making tys.rtf
+- find where you can graft topologies
+- copy atoms here
+  - adjust charges
+  - add bonds (and impr, etc.)
+  - add IC terms
+- try setup and run, so that you know what parameters are missing
+
+##### Notes during making tys.rtf
 
 > - the provided TYM.rtf is different from the provided TYS residue. It was built like general small molecules. Though Leili also mentioned this CHARMM-GUI workflow, I will try to avoid using LigandRM. 
 > - Doing that manually doesn't hurt because I have to inspect the files. But for small molecules, (automatically) doing some QM optimization is useful.
@@ -111,6 +118,14 @@ Both of the workflows get different atom types from normal TYR. I'll just keep m
 
 - It's strange in the provided .str that the atomtype of CB is like that of small molecules (CG321), whose bond parameters with CA (CT1) doesn't exist...as the partial charges are the same, I just change CG321 into CT2 (like normal residues), but it still won't work. **So all atom types (that could be aligned) in the side chain should also align with the parent standard residue.**
 - Maybe, we can transfer the IC terms of TYR to TYS (if cannot align?)...
+
+#### Modify from LigandRM
+
+I do not recommend building with LigandRM since it just treats our residue as a normal small molecule and atom names are not that of amino acids, unless you make an effort to replace the standard AA part (e.g. a small molecule attached to a standard AA) back, and add missing parameter terms...
+
+But one advantage for this: theoretically this can be automated (for many similar ligands).
+
+
 
 ### Write a two-end patch
 
@@ -1077,6 +1092,7 @@ pmx gentop -p topol.top -o topol_Protein_chain_H_hybrid.itp
 sed -i '1,/^\#include "amber99sb-star-ildn-mut.ff\/forcefield.itp"/d' topol_Protein_chain_H_hybrid.itp
 sed -i '/#ifdef POSRES/,$d' topol_Protein_chain_H_hybrid.itp
 sed -i 's/Protein_chain_A/Protein_chain_H/g' topol_Protein_chain_H_hybrid.itp
+fixpmxmass topol_Protein_chain_H_hybrid.itp 
 rm topol.top posre.itp
 gmx editconf -f h.gro -o h_final.pdb
 cat wt_con.pdb h_final.pdb wt_sol.pdb | grep -v END | grep -v TER > sys.pdb
@@ -1118,6 +1134,7 @@ echo "SOL" | gmx genion -s ions.tpr -pname K -nname CL -conc 0.15 -neutral -o fr
 #endif
 sed -i '/#include "posre.itp"/d' top.top
 sed '0,/#ifdef POSRES/{s/#ifdef POSRES/#ifdef POSRES_abiss/}' top.top > newtop.top
+fixpmxmass newtop.top 
 
 rm \#* posre.itp topol.top mdout.mdp ions.tpr top.top
 mkdir free
@@ -1125,6 +1142,20 @@ mkdir free/system
 mv `ls -F | grep -v /` free/system/
 # move all these to ./free/system
 ```
+
+pmx assigns a wrong mass for dummy atoms (divided by 100/33??? what the hell...), so fix it. Someone else report that if you don't edit the simulation is unstable, though I didn't encounter this.
+
+```shell
+function fixpmxmass {
+sed -i 's/ 3.9633/12.0100/g' $1
+sed -i 's/ 1.0000/ 1.0080/g' $1
+sed -i 's/ 5.2800/16.0000/g' $1
+sed -i 's/ 4.6233/14.0100/g' $1
+sed -i 's/10.5798/32.0600/g' $1
+}
+```
+
+
 
 ### TEST
 
@@ -1170,7 +1201,7 @@ Also, since we defined B state, the interactions are always there. We don't need
 
 An example .mdp file is
 
-```
+```shell
 ;====================================================
 title = production MD simulation
 ;====================================================
@@ -1308,7 +1339,7 @@ vdw-lambdas             = 0.00 0.01 0.02 0.04 0.06 0.09 0.12 0.16 0.20 0.24 0.28
 to save as .pdb file to view in pymol
 
 ```shell
-python /data/gxf1212/work/make_hybrid_top/FEbuilder/get_segments_pdb.py sys.pdb
+python xxx/get_segments_pdb.py sys.pdb
 ```
 
 check if finished all:
@@ -1328,6 +1359,18 @@ set sphere_scale, 0.4
 set label_size, 20
 bg_color white
 ```
+
+Do not use histograms unless you’re certain you need it. It's kind of big
+
+
+
+WARNING: Some of these results violate the Second Law of Thermodynamics:
+     This is can be the result of severe undersampling, or (more likely)
+     there is something wrong with the simulations.
+
+This is triggered when the shared entropy in one or the other direction is negative: that is an unphysical result that can be the result of very few sampling points leading to large fluctuations.
+
+more windows doesn't solve the second law of thermodynamics problem
 
 
 
@@ -1350,65 +1393,85 @@ bg_color white
 
 
 
-## MD workflow
+## More on FEP
 
-Maybe we need to confirm the end state conformation....
+### ddG decomposition
 
-```shell
-# to pdb and split
-box=`tail -n 1 c*.gro | awk '{printf "%-10s %-10s %-10s", $1, $2, $3}'`
-gmx editconf -f c*.gro -o wt.pdb 
-cat wt.pdb | grep SOL > wt_sol.pdb
-cat wt.pdb | grep 'K  ' >> wt_sol.pdb
-cat wt.pdb | grep 'CL  ' >> wt_sol.pdb
-head -n 8470 wt.pdb > wt_con.pdb
-endofh=`grep -n -m 1 'SOL' wt.pdb | cut -d : -f 1`
-head -n $((endofh-1)) wt.pdb | tail -n +8471 > wt_h.pdb
-pymol wt_h.pdb
-# pick a similar rotamer of the residue in wt_h.pdb, save as h.pdb
-# get proper .itp for the edited chain
-gmx pdb2gmx -f h.pdb -o h.gro -ff amber99sb-star-ildn-mut -water none -ignh 
-mv topol.top topol_Protein_chain_H_hybrid.itp
-rm posre.itp
-code topol_Protein_chain_H_hybrid.itp
-# get the hybrid chain and remember to 
-# 1. modify the [ moleculetype ] 
-# 2. remove the #include xx.ff/forcefield.itp and the final [ system ] etc. field
-# but atom orders are changed. in h.gro they are right
-gmx editconf -f h.gro -o h_final.pdb
-cat wt_con.pdb h_final.pdb wt_sol.pdb | grep -v END | grep -v TER > sys.pdb
-# get the full .gro, copying the original box size (change this for every system!!)
-gmx editconf -f sys.pdb -o bound.gro -box $box
-code newtop.top
-# copy the original topol.top from elsewhere as newtop.top and modify: 
-# 1. replace the original .itp file for the chain to mutate 
-#    with the new hybrid .itp file: topol_Protein_chain_H_hybrid.itp
-# 2. replacing all the original ff with the mutation ff in pmx
+It is hard to do this in Gromacs since none of the files record vdW and columb energy at every step for FEP as NAMD does. We have to rerun all production trajectories. 
 
-mkdir editchains
-mv wt*.pdb h* sys.pdb c*.gro editchains
+> rerun: [Useful mdrun features - GROMACS documentation](https://manual.gromacs.org/current/user-guide/mdrun-features.html#re-running-a-simulation)
+
+It is even impossible for sth like pmx-based AA FEP:
+
+```
 ```
 
-if the system is not neutral, just edit...
-
-- gro, total number of atoms
-- gro, remove an ion; top, change the number of ions
+This is an issue as long as there is an element type (essentially, mass) changed from A to B (rather than defining dummy atom for both A/B state, which looks like dual-topology paradigm).
 
 
 
-## Analysis
-
-Do not use histograms unless you’re certain you need it. It's kind of big
 
 
+### Time convergence
 
-WARNING: Some of these results violate the Second Law of Thermodynamics:
-     This is can be the result of severe undersampling, or (more likely)
-     there is something wrong with the simulations.
+also works for other FEP in gmx
 
-This is triggered when the shared entropy in one or the other direction is negative: that is an unphysical result that can be the result of very few sampling points leading to large fluctuations.
 
-more windows doesn't solve the second law of thermodynamics problem
+
+```shell
+```
+
+
+
+
+
+## MD workflow
+
+Not using? He has provided me a full workflow
+
+> Maybe we need to confirm the end state conformation....
+>
+> ```shell
+> # to pdb and split
+> box=`tail -n 1 c*.gro | awk '{printf "%-10s %-10s %-10s", $1, $2, $3}'`
+> gmx editconf -f c*.gro -o wt.pdb 
+> cat wt.pdb | grep SOL > wt_sol.pdb
+> cat wt.pdb | grep 'K  ' >> wt_sol.pdb
+> cat wt.pdb | grep 'CL  ' >> wt_sol.pdb
+> head -n 8470 wt.pdb > wt_con.pdb
+> endofh=`grep -n -m 1 'SOL' wt.pdb | cut -d : -f 1`
+> head -n $((endofh-1)) wt.pdb | tail -n +8471 > wt_h.pdb
+> pymol wt_h.pdb
+> # pick a similar rotamer of the residue in wt_h.pdb, save as h.pdb
+> # get proper .itp for the edited chain
+> gmx pdb2gmx -f h.pdb -o h.gro -ff amber99sb-star-ildn-mut -water none -ignh 
+> mv topol.top topol_Protein_chain_H_hybrid.itp
+> rm posre.itp
+> code topol_Protein_chain_H_hybrid.itp
+> # get the hybrid chain and remember to 
+> # 1. modify the [ moleculetype ] 
+> # 2. remove the #include xx.ff/forcefield.itp and the final [ system ] etc. field
+> # but atom orders are changed. in h.gro they are right
+> gmx editconf -f h.gro -o h_final.pdb
+> cat wt_con.pdb h_final.pdb wt_sol.pdb | grep -v END | grep -v TER > sys.pdb
+> # get the full .gro, copying the original box size (change this for every system!!)
+> gmx editconf -f sys.pdb -o bound.gro -box $box
+> code newtop.top
+> # copy the original topol.top from elsewhere as newtop.top and modify: 
+> # 1. replace the original .itp file for the chain to mutate 
+> #    with the new hybrid .itp file: topol_Protein_chain_H_hybrid.itp
+> # 2. replacing all the original ff with the mutation ff in pmx
+> 
+> mkdir editchains
+> mv wt*.pdb h* sys.pdb c*.gro editchains
+> ```
+>
+> if the system is not neutral, just edit...
+>
+> - gro, total number of atoms
+> - gro, remove an ion; top, change the number of ions
+>
+> 
 
 
 

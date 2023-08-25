@@ -33,7 +33,7 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
 
 ### string spliting
 
-- separator
+- delimiter
 
   ```shell
   f=unbound.fepout.csv
@@ -71,39 +71,82 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
 
 - 
 
-- 
+### Output
+
+- `printf "format" $variable`
 
 ### awk
 
-example
-
-```shell
-awk '/^#Free energy/ {printf "%.5f,%.5f,%.9f\n",$8,$9,$12}' ${fn}.fepout > ${fn}.csv
-```
-
-> take all lines with "#Free energy", print the no. 8,9,12 word (separated by space) to the output file
-
-awk必须单引号
+- **awk必须单引号**
 
 
 
 examples
 
+- take all lines with "#Free energy", print the no. 8,9,12 word (separated by space) to the output file
+
+  ```shell
+  awk '/^#Free energy/ {printf "%.5f,%.5f,%.9f\n",$8,$9,$12}' ${fn}.fepout > ${fn}.csv
+  ```
+  
 - I have a commas-separated file, please use awk to get the second element in each line and also filter those lines containing keyword 'spiro'Sent message. I have a commas-separated file, please use awk to get the second element in each line and also filter those lines containing keyword 'spiro'
 
-  Hello, this is Bing. I can help you with your question.
   To use awk to get the second element in each line and also filter those lines containing keyword ‘spiro’, you can use a command like this:
-
+  
   ```shell
   awk -F ',' '$0~/spiro/ {print $2}' file.csv
   ```
-
+  
   This command will:
-
+  
   - Use a comma (,) as the field separator (-F) for each line
   - Match lines that contain ‘spiro’ in any field ($0~/spiro/)
   - Print the second field ($2) of those lines
   - Read from file.csv
+
+### sed
+
+#### working with lines
+
+- [bash - Sed: get lines beginning with some prefix - Stack Overflow](https://stackoverflow.com/questions/13202715/sed-get-lines-beginning-with-some-prefix/13202791#13202791)
+
+  Try doing this :
+
+  ```bash
+  awk '/^RIM-COD/' file.txt
+  ```
+
+  Or
+
+  ```bash
+  grep "^RIM-COD" file.txt
+  ```
+
+  Or
+
+  ```bash
+  sed -n '/^RIM-COD/p' file.txt
+  ```
+
+- 
+
+
+
+- another most application: replacing text
+
+  ```shell
+  sed -i 's/to be replaced/to fill in/g'
+  ```
+
+  regex is supported. For example:
+
+  ```shell
+  sed -i "s/init-lambda-state.*/init-lambda-state = $jj/g" ../mdps/md_$jj.mdp
+  ```
+
+- 
+
+- 
 
 ## file processing
 
@@ -124,7 +167,7 @@ examples
    ```shell
    man ls
    ls -l # kb
-   ls -lh # proper magnitud
+   ls -lh # proper magnitude
    ls -l --blocksize=g  # gb
    ```
 
@@ -178,13 +221,13 @@ examples
 
 3. 
 
-### Control
+## Control
 
-#### for loop
+### for loop
 
 
 
-#### if statement
+### if statement
 
 1. shell-if表达式关于文件存在判断，变量比较判断用法
 
@@ -195,7 +238,7 @@ examples
    https://blog.csdn.net/m0_38039437/article/details/100160042
 
 
-#### arguments
+### arguments
 
 1. .sh file has arguments: https://www.runoob.com/linux/linux-shell-passing-arguments.html
 
@@ -209,7 +252,7 @@ examples
 
 3. 
 
-#### math
+### math
 
 1. perform string: [[]]
 
@@ -243,6 +286,20 @@ examples
    ```
 
 2. 
+
+## stdin stdout
+
+### xargs
+
+The `xargs` command is used to build and execute command lines from standard input. So, `xargs -n 1` means that `xargs` will use at most one argument per command line. For example:
+
+```shell
+rpm -qa | grep -i devel | xargs -n 1 dnf remove -y
+```
+
+### pipeline
+
+
 
 ## advanced (scripting)
 
@@ -333,7 +390,20 @@ examples
    done
    ```
 
-4. 
+4. The error message "value too great for base" occurs because the leading zero in the number 09 is interpreted as an octal (base 8) number in Bash, and octal numbers cannot have a digit 9.
+   To overcome this issue and generate the desired two-digit numbers with leading zeros, you can use the printf function with a format specifier. Here's an example:
+
+   ```bash
+   #!/bin/bash
+   for ii in 09 10 11
+   do
+       jj=$(printf "%02d" $((10#$ii+1)))
+       echo "ii: $ii, jj: $jj"
+   done
+   ```
+   
+   In this example, `10#$ii` is used to explicitly specify that the variable $ii should be interpreted as a base-10 number. The printf statement then formats the number with %02d, which ensures it is printed with two digits and leading zeros if necessary.
+
 
 # Tcl programming
 
@@ -780,9 +850,11 @@ even `python xx.py -W` didn't work
 
 # Regular expression
 
-These are mainly from my VScode extension.
+These are mainly from Development of VScode syntax highlight tool
 
+## workflow
 
+https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide
 
 
 
@@ -800,9 +872,28 @@ These are mainly from my VScode extension.
 
 ## RDkit
 
+- [The RDKit Documentation](https://www.rdkit.org/docs/index.html)
+- The RDKit blog is now hosted here: https://greglandrum.github.io/rdkit-blog/
+
+### Fundamental
+
+- RDkit is stronger in ipynb
 
 
-### fundamental
+
+### Read/Write/Convert
+
+- 
+
+
+
+
+
+
+
+### Plot molecule
+
+- `Draw.MolsToGridImage` is equivalent to typing the Mol variable in ipynb
 
 - show structure quickly (not in jupyter notebook): 
 
@@ -816,13 +907,18 @@ These are mainly from my VScode extension.
 
   RDKit isn't actually adding Hs here, it just recognizes that the P atoms have implicit Hs on them and then when drawing the molecule shows those implicit Hs.
 
-- 
+- [MartonVass_MCSAlignedDepiction.ipynb (github.com)](https://gist.github.com/greglandrum/82d9a86acb3b00d3bb1df502779a5810)
 
+  https://www.jianshu.com/p/b0148c74e85d 
 
+- [add rdkit image into matplotlib image](https://gist.github.com/iwatobipen/1b384d145024663151b3252bf16d2aa8) 
 
-[rdkit.Chem.rdMolDescriptors module — The RDKit 2023.03.1 documentation](https://www.rdkit.org/docs/source/rdkit.Chem.rdMolDescriptors.html?highlight=maccs)
+- [RDKit: New drawing options in the 2020.03 release](http://rdkit.blogspot.com/2020/04/new-drawing-options-in-202003-release.html)
 
-various kinds of finge
+  - 
+
+- rdkit确实改不了字体
+
 
 
 
@@ -844,25 +940,24 @@ various utilities
 
 
 
-future reference:
+> other
+>
+> - R里面的MCS search：https://academic.oup.com/bioinformatics/article/29/21/2792/195951
+> - [RDKit blog - 3D maximum common substructure](https://greglandrum.github.io/rdkit-blog/posts/2022-06-23-3d-mcs.html)
 
-- R里面的MCS search：https://academic.oup.com/bioinformatics/article/29/21/2792/195951
+### Fingerprint
 
-
-
-[RDKit blog - 3D maximum common substructure](https://greglandrum.github.io/rdkit-blog/posts/2022-06-23-3d-mcs.html)
-
-http://rdkit.blogspot.com/2020/04/new-drawing-options-in-202003-release.html
-
-
-
-[add_formal_charges.ipynb (github.com)](https://gist.github.com/greglandrum/7f546d1e35c2df537c68a64d887793b8)
+[rdkit.Chem.rdMolDescriptors module — The RDKit documentation](https://www.rdkit.org/docs/source/rdkit.Chem.rdMolDescriptors.html?highlight=maccs)
 
 
 
+### Other
+
+[add_formal_charges.ipynb](https://gist.github.com/greglandrum/7f546d1e35c2df537c68a64d887793b8)
 
 
-### about pdb file
+
+#### about pdb file
 
 RDkit cannot read PDB files well...without connect, bond order info is lost. Assign from template? the molecule has to match exactly! This template (smiles) could come from `pybel.readfile`. 
 
@@ -873,29 +968,27 @@ But no such way to assign chirality...
 failed to read chirality even (with the help of openbabel)
 
 ```python
-    def _get_rdk_mol(self, mol, format: str = 'smiles'):
-        """
-        Return: RDKit Mol (w/o H)
-        """
-        if format == 'pdb':
-            return Chem.rdmolfiles.MolFromPDBBlock(mol.write("pdb"))
-        elif format == 'smiles':
-            return Chem.rdmolfiles.MolFromSmiles(mol.write("smiles"))
+def _get_rdk_mol(self, mol, format: str = 'smiles'):
+    """
+    Return: RDKit Mol (w/o H)
+    """
+    if format == 'pdb':
+        return Chem.rdmolfiles.MolFromPDBBlock(mol.write("pdb"))
+    elif format == 'smiles':
+        return Chem.rdmolfiles.MolFromSmiles(mol.write("smiles"))
 
-        # cp = subprocess.call(["obabel", lig.pdbfile+".pdb", "-osdf", '-O', lig.pdbfile+".sdf"],
-        #                      stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-        # rmol = Chem.MolFromPDBFile(lig.pdbfile+'.pdb.pdb', removeHs=False)
-        # pmol = pybel.readfile('pdb', lig.pdbfile+".pdb.pdb").__next__()  # only one file.
-        # template = AllChem.MolFromSmiles(pmol.write('smi').split('\t')[0])
-        # AllChem.AssignBondOrdersFromTemplate(template, rmol)
-        # Chem.MolToSmiles(rdmol)
-        # rdmol = Chem.MolFromMol2File()
-        # AllChem.AssignAtomChiralTagsFromStructure(rmol)
-        # AllChem.AssignAtomChiralTagsFromStructure(rmol)
-        # AllChem.AssignStereochemistryFrom3D(rmol)
+    # cp = subprocess.call(["obabel", lig.pdbfile+".pdb", "-osdf", '-O', lig.pdbfile+".sdf"],
+    #                      stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+    # rmol = Chem.MolFromPDBFile(lig.pdbfile+'.pdb.pdb', removeHs=False)
+    # pmol = pybel.readfile('pdb', lig.pdbfile+".pdb.pdb").__next__()  # only one file.
+    # template = AllChem.MolFromSmiles(pmol.write('smi').split('\t')[0])
+    # AllChem.AssignBondOrdersFromTemplate(template, rmol)
+    # Chem.MolToSmiles(rdmol)
+    # rdmol = Chem.MolFromMol2File()
+    # AllChem.AssignAtomChiralTagsFromStructure(rmol)
+    # AllChem.AssignAtomChiralTagsFromStructure(rmol)
+    # AllChem.AssignStereochemistryFrom3D(rmol)
 ```
-
-
 
 
 
@@ -976,6 +1069,8 @@ https://pypi.org/project/chemdraw/
 
 ## ParmEd
 
+### Convert among MD engines
+
 In ParmEd, the `idx` attribute of a `Residue` object represents the index of the residue in the `Structure` object that contains it. This attribute is automatically set and updated by ParmEd and should not be changed manually.
 
 Though, we can modify residue numbers for Amber files
@@ -1010,17 +1105,77 @@ amber.save(prefix+'.gro', overwrite=True, combine='all')
 
 
 
+```python
+# both .gro and .top
+# python convert_charmm2gmx_via_parmed.py pro 688
+
+import parmed as pmd 
+from parmed.charmm import CharmmParameterSet
+import sys
+prefix = sys.argv[1]
+offset = int(sys.argv[2])
+# test
+# import os
+# os.chdir('...../build/')
+# prefix = 'pro'
+# offset = 688
+
+structure = pmd.load_file(prefix+'.psf')
+for residue in structure.residues:
+    _ = residue.idx
+    residue._idx += offset
+    residue.number += offset
+parameter = CharmmParameterSet('par_all36m_prot.prm', 'toppar_water_ions_namd.str')
+# parmed does not realize that gmx adopts the absolute value while charmm files store the real value (negative!)
+for atomname, atomtype in parameter.atom_types.items():
+    atomtype.epsilon *= -1
+    atomtype.epsilon_14 *= -1
+structure.load_parameters(parameter)
+structure.save(prefix+'.top', overwrite=True, combine='all')
+# a simple convert
+structure = pmd.load_file(prefix+'.pdb')
+structure.save(prefix+'.gro', overwrite=True, combine='all')
+```
+
+
+
 but not editable for gmx files?
 
 
 
 ## MDAnalysis
 
+### Basics
 
+#### read data
+
+```python
+import MDAnalysis as mda
+u = mda.Universe('md.tpr', 'md.xtc')  # gmx
+u = mda.Universe('pro.prmtop', 'md.nc')  # Amber
+```
+
+
+
+#### selection
 
 [3. Selection commands — MDAnalysis 2.5.0 documentation](https://docs.mdanalysis.org/stable/documentation_pages/selections.html)
 
+Mostly looks like vmd syntax
 
+#### work through all frames
+
+```python
+for i in range(len(u.trajectory)):
+    u.trajectory[i]
+    ...
+```
+
+
+
+### GromacsWrapper
+
+https://gromacswrapper.readthedocs.io/en/latest/
 
 
 

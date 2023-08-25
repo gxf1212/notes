@@ -94,46 +94,7 @@ also refer to [related programming](Programming-for-MD.md#modeling-and-analysis)
 
 or CgenFF
 
-#### Basics
-
-> if you want to perfectly retain its coordinates and atom names, use CGenFF server!
->
-> oh...CHARMM-GUI slightly optimizes the coordinates. It doesn't matter.
->
-> slightly different charge. I think remtp's params are closer to the paper.
-
-but not used in method 1
-
-> https://cgenff.umaryland.edu/  itself, the program to assign parameters for your ligand
->
-> the "penalty score" is returned to the user as a measure for the accuracy of the approximation. in `.rtf`
-
-Use CHARMM-GUI---input generator---ligand reader and modeller
-
-refer to preparation videos mentioned above, and [the official one](https://www.bilibili.com/video/BV1bM4y1P7tB)
-
-> **CHARMM GUI basic tips**
->
-> - after GUI, the ligand/residue name is changed into LIG
-> - Only molecules in the **HETATM** record in a PDB file are recognized.
-> - **adopt available RCSB SDF structure** preferentially
-> - make sure that the Marvin JS structure is correct
-> - <font color=red>All hydrogen and missing atoms should be explicitly placed for accurate result.</font> or report error
->   - **edit the protonation states yourself!**
-> - Users can modify the protonation state if necessary. 
->   - or select other protonation state in the next step
-> - **The coordinates will be preserved if you upload .pdb file.**
->   - uploading your own .pdb file is suggested
->   - you can align .pdb files later, only it considers coordinates
->   - if you are to upload file, .mol2 is prefered? 
-> - you may want to “Find similar residues in the CHARMM FF”, only when your ligand is special to be included in the ff...
-> - 
-
-then just click, click...and download all files
-
-
-
-**attype warning: triple bonded non-nitrile nitrogen not supported; skipped molecule.**
+see [P]()
 
 
 
@@ -151,11 +112,17 @@ CSML search: whether this ligand already in FF. If not, go to LigandRM.
 
 ## VMD
 
-for visualization with VMD, see [Common tools](Common-tools.md#VMD)
+for visualization with VMD, see [MD fundamentals](MD-fundamentals.md#VMD)
 
 
 
-https://anaconda.org/conda-forge/psfgen
+[mkrun/Gromacs/fep/mkpy_split_chains.py at master · skblnw/mkrun · GitHub](https://github.com/skblnw/mkrun/blob/master/Gromacs/fep/mkpy_split_chains.py)
+
+
+
+
+
+> https://anaconda.org/conda-forge/psfgen
 
 
 

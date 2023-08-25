@@ -34,19 +34,19 @@ This page includes general results, not project-specific details.
 
 ### Single protein
 
-1. for each protein, always check:
+for each protein, always check:
 
-   1. **if the position is right**
+1. **if the position is right**
 
-   2. **if non-polar hydrogens are added** (only for method 1)
+2. **if non-polar hydrogens are added** (only for method 1)
 
-   3. delete water (we can skip)
+3. delete water (if strange errors emerge)
 
-      ```shell
-      grep -v HOH 2cqg_1.pdb > 2cqg_1.pdb
-      ```
+   ```shell
+   grep -v HOH 2cqg_1.pdb > 2cqg_1.pdb
+   ```
 
-      Always check your .pdb file for entries listed under the comment MISSING
+   Always check your .pdb file for entries listed under the comment MISSING
 
 
 #### method 1: pdb2gmx
@@ -57,9 +57,9 @@ This page includes general results, not project-specific details.
    gmx pdb2gmx -f 2cqg_1.pdb -o 2cqg_1.gro -water tip3p -ignh
    ```
 
-   **choose a force field: type the number**
+   **choose a force field: type the number, or `-ff folder_name.ff`**
 
-   AMBER99SB-ILDN protein, nucleic AMBER94 (Lindorff-Larsen et al., Proteins 78, 1950-58, 2010)
+   here: AMBER99SB-ILDN protein, nucleic AMBER94 (Lindorff-Larsen et al., Proteins 78, 1950-58, 2010)
 
    - `-water spc`指定所用的水的模型
      - https://lammps.sandia.gov/doc/Howto_tip3p.html
@@ -1896,58 +1896,98 @@ input: .tpr, .xtc, .ndx
 
 > from FYP
 
+refer to [this video](https://www.youtube.com/watch?v=Pj40ZnybXds)
+
 ### CHARMM-GUI for ligands
+
+[CHARMM-GUI Ligand Reader & Modeler](https://www.charmm-gui.org/?doc=input/ligandrm)
 
 see also FEbuilder document...
 
-Preface: CgenFF is thought to be not as good as GAFF series...however it (or MATCH) is more transferable. And I prefer dual topology in FEP. ~~BTW, we focus on the final properties in MD simulation, not really the individual charges??~~
+Use CHARMM-GUI---input generator---ligand reader and modeller
 
-But CgenFF does not support special species like:
+refer to preparation videos mentioned above, and [this official one](https://www.bilibili.com/video/BV1bM4y1P7tB)
 
-- azide (-N=N=N)
-- -SeH and many heavy atoms
-- ....
+#### What to upload
 
 You can follow two pathways:
 
 - edit your ligand locally and save as `.mol2` or `.sdf` file, so that GUI gets a nearly correct structure (not possibly 100% right...)
-- or save a roughly-right (e.g. `.pdb`) file and
+- or save a roughly-right (e.g. `.pdb`) file and upload it
 
-**Check the structure on the MarvinJS panel before and after parameterization!!!!** like
+> !Note
+>
+> - uploading your own file is suggested. **The coordinates will be preserved if you upload .pdb file.**
+>   - you can graft coordinates later, which are exclusively provided by .pdb files. But why don't you make them right in the first place...
+> - Only molecules in the **HETATM record** in a PDB file are recognized as a ligand!
 
-- bond orders, especially for pdb files
-- the Ar ring completeness
-- protonation states
-  - add Hs to amine groups
-  - remove Hs added to phosphate....
+> it's ok to upload a protein-ligand complex `.pdb` file. CHARMM-GUI parametrizes the ligand and produces `.psf` and `.pdb` file of the whole that can be solvated and ionized in vmd. Try this if your protein does not need special treatment. I don't really follow this, though.
 
-- add all hydrogens explicitly! including non-polar hydrogens
-- Atom names with lowercase letters (like Cl, Br) might be recognized incorrectly, e.g. only capitalized letter are left. 
-- ...
+#### Usage
+
+Read the notes above the Marvin JS panel before uploading.
 
 <img src="E:\GitHub-repo\notes\research\Protein-ligand-simulation.assets\charmm-gui-ligandrm-eg.png" style="zoom:50%;" />
 
-Usually we won't need to "Find similar residues in the CHARMM FF" if the ligand is not in CgenFF database. This option is not to specify a template to copy parameters from, but just build this molecule...and it takes longer to search.
+- <font color=red>All hydrogen and missing atoms should be explicitly added, including non-polar hydrogens.</font> or it reports error
 
-Click 'Make CGenFF topology'. Then we obtain all files as a .zip file. Choose 'Exact' if available, but now it doesn't provide you a `.rtf`/`.prm` file (already in CHARMM).
+- **Check the structure on the MarvinJS panel before and after parameterization!!!!** like
+
+  - bond orders, especially for pdb files, Ar rings...
+  - protonation states
+    - add Hs to amine groups
+    - remove Hs added to phosphate....
+    - ...
+  - Atom names with lowercase letters (like Cl, Br) might be recognized incorrectly, e.g. only capitalized letter are left. 
+
+- Then click "Next Step", after the GUI, the ligand/residue name is changed into LIG. You can modify at step 2.
+
+  Click 'Make CGenFF topology'. Then we obtain all files as a .zip file. 
+
+For ligands already in CgenFF:
+
+- Choose 'Exact' if available in CgenFF, but now it doesn't provide you a `.rtf`/`.prm` file (already in CHARMM FF package).
+- you can also select other protonation state if available
+
+> Usually we won't need to "Find similar residues in the CHARMM FF". This option is not to specify a template to copy parameters from, but just build another similar molecule...and it takes a bit longer to search.
+
+#### Results
 
 - we use `ligandrm.pdb` (maybe `ligandrm.psf`, `toppar/lig.rtf`, `toppar/lig.prm` (lig: residue name of your ligand) 
 - the `gromacs` folder is for gmx
   - problem: it can't generate files for gromacs if the ligand carries a virtual site.
   - also provides scripts like `psf2itp.py` for your reference
 
-- `drawing_3D.mol2`: structure on the MarvinJS panel
-- refer to [this video](https://www.youtube.com/watch?v=Pj40ZnybXds)
+- `drawing_3D.mol2`: structure on the MarvinJS panel, exactly right.
 
-Note: it's ok to upload a protein-ligand complex `.pdb` file. CHARMM-GUI parametrizes the ligand and produces `.psf` and `.pdb` file of the whole that can be solvated and ionized in vmd. Try this if your protein does not need special treatment. I don't really follow this, though.
+the "penalty score" is returned to the user as a measure for the accuracy of the approximation. in `.rtf`
 
-#### Other ways to generate ligand topology
+#### limitations
+
+Preface: CgenFF is thought to be not as good as GAFF series...however it (or MATCH) is more transferable. And I prefer dual topology in FEP. ~~BTW, we focus on the final properties in MD simulation, not really the individual charges??~~
+
+But CgenFF does not support special species like:
+
+- azide (-N=N=N), but OCN works
+- triple bonded non-nitrile nitrogen (e.g. 异腈)
+- -SeH and many heavier atoms
+- ....
+
+#### Other ways to generate CgenFF parameters
 
 - https://cgenff.umaryland.edu is what CHARMM-GUI calls for an ligand
+  - slightly different version, charge.
+  
   - we might call it through http request or an extension in vmd (not tried)
+  
   - stupidly we cannot `wget` files, just Ctrl+S on the web page
-
+  
+  - CHARMM-GUI slightly optimizes the coordinates. It doesn't matter.
+  
+    if you want to *perfectly* retain its coordinates and atom names, use CGenFF server
+  
 - https://brooks.chem.lsa.umich.edu/index.php?matchserver=submit MATCH: an alternative of CgenFF
+  - online and offline is the same; ML-MATCH is not public
   - trained with CgenFF ligands?
   - strange shorten atom types that causes incompatibility
   - also, no LP atoms
@@ -1956,6 +1996,8 @@ Note: it's ok to upload a protein-ligand complex `.pdb` file. CHARMM-GUI paramet
 - https://www.swissparam.ch/ MMFF/CHARMM22, too old
 
 these servers generate files for multiple MD engines
+
+
 
 ### Setup with VMD
 
@@ -2732,10 +2774,6 @@ pmx ligandHybrid -i1 42.pdb -i2 38.pdb -itp1 42_full.itp -itp2 38_full.itp -pair
 echo '#include "ffmerged.itp"' > ligand.itp && cat merged.itp >> ligand.itp
 ```
 
-why the OH hydrogen is always affected?
-
-![image.png](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Protein-ligand-simulation.assets/pmx-cgenff.png)
-
 semi-manual setup
 
 ```shell
@@ -2798,12 +2836,15 @@ problems:
 - add that ffmerged.itp for new atom types
 - keep the same box size
 
-atom mapping:
+#### MATCH
 
-- the two merge?.pdb files only differ a little in coordinates
-- Maybe hydroxyl H are forced to be separated, i.e. each of them has a dummy?
+```shell
+MATCH.pl --forcefield top_all36_cgenff -CreatePdb output.pdb input.pdb
+```
 
-#### amber series ff
+
+
+#### Amber series FF
 
 ```shell
 for l in 38 8; do
@@ -2818,17 +2859,8 @@ l1=38
 l2=8
 pmx atomMapping -i1 ${l1}_NEW.pdb -i2 ${l2}_NEW.pdb -o1 pairs1.dat
 pmx ligandHybrid -i1 ${l1}_NEW.pdb -i2 ${l2}_NEW.pdb -itp1 ${l1}.itp -itp2 ${l2}.itp -pairs pairs1.dat
-echo '#include "ffmerged.itp"' > ligand.itp && cat merged.itp >> ligand.itp
+echo '#include "ffmerged.itp"' > ligand.itp && cat merged.itp > ligand.itp
 ```
-
-problems:
-
-```
-    27          ho      1    LIG     H2     27    0.439000     1.0080      DUM_ho    0.000000     1.0080
-    42      DUM_ho      1    LIG    HV2     42    0.000000     1.0080          ho    0.438000     1.0080
-```
-
-is it necessary to use a different atom for 0.001 charge difference?
 
 
 
@@ -2839,6 +2871,31 @@ http://zarbi.chem.yale.edu/ligpargen/gmx_tutorial.html
 Protein Ligand Complex Simulations with OPLS-AA
 
 还是要手动改top
+
+
+
+#### Atom mapping results
+
+- the two merge?.pdb files only differ a little in coordinates
+
+- Maybe hydroxyl H are forced to be separated, i.e. each of them has a dummy? Take the above 38-8 example:
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Protein-ligand-simulation.assets/pmx-cgenff.png" alt="image.png" style="zoom: 33%;" />
+
+  in Amber series FF:
+
+  ```
+      27          ho      1    LIG     H2     27    0.439000     1.0080      DUM_ho    0.000000     1.0080
+      42      DUM_ho      1    LIG    HV2     42    0.000000     1.0080          ho    0.438000     1.0080
+  ```
+
+  is it necessary to use a different atom for 0.001 charge difference?
+
+- but that top NH2 and O are really single topology, not separated and dummy...
+
+  ![1692775708473](E:\GitHub-repo\notes\research\Protein-ligand-simulation.assets\AG.png)
+
+- 
 
 
 
@@ -2881,6 +2938,13 @@ combine the hybrid ligand with protein
 ## FEP notes
 
 ### How to understand/see FEP
+
+- single vs dual topology
+
+  ![Two-topology-generation-approaches-illustrated-by-an-example-of-a-methyl-to-ethyl_W640](E:\GitHub-repo\notes\research\Protein-ligand-simulation.assets\Two-topology-generation-approaches-illustrated-by-an-example-of-a-methyl-to-ethyl_W640.jpg)
+
+- CHARMM-GUI Relative Ligand Solvator outputs two separate ligands (with restraint). This is hybrid single-dual topology.
+  I'm using dual topology
 
 - single topology不准？所有的interaction都关掉。只能$R^2=0.3\sim 0.43$
 
@@ -3143,7 +3207,9 @@ FXR那个太challenging，不应该benchmark
 - 感受：你做了PPT老师就感觉你要讲给他听；你展示的内容决定了老师能给你什么输出；老师比较在乎名声
 - 变的位点：2',3'算一个；CN估计不动，但可以试硝基？芳环NH2，大小两个环上的C上加东西（看结构）
 
+写作
 
+- All systems **were subjected to** 10,000 steps of energy minimization and equilibrated for 8–10 ns in constant temperature and pressure conditions at 300 K and 1 atm
 
 # Visualize protein-ligand
 
@@ -3197,7 +3263,7 @@ must make a complex
 
 <img src="https://cdn.rcsb.org/news/2016/ligand-interaction.png" alt="RCSB PDB News Image" style="zoom: 67%;" />
 
-
+![](E:\GitHub-repo\notes\research\Protein-ligand-simulation.assets\ngl.jpg)
 
 https://www.rcsb.org/3d-view
 

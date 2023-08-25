@@ -1072,6 +1072,40 @@ failed, remove this env...
    > conda install matplotlib==2.0.0 networkx==1.11 pandas==0.20.3 scikit-learn==0.18.2 scipy==0.18.1 numpy==1.13.1
    > ```
 
+### Spyder
+
+#### setup
+
+spyder conda interpreter：光设置没用，直接打开conda里每个对应环境的Spyder
+
+要是只有miniconda，对不起。按照提示（此为Fedora38 Scientific上的）：
+
+<img src="E:\GitHub-repo\notes\techniques\images\spyder-error.jpg" style="zoom:50%;" />
+
+安装时总是报conda底层的错（要report），版本不对还不行
+
+#### shortcut
+
+https://www.cnblogs.com/grace731/articles/15029832.html
+
+Ctrl+1：注释、取消注释
+Ctrl+4/5：块注释/取消块注释
+F12：断点/取消断点/在语句前进行双击
+F5：运行全文档
+F9：运行当前行
+Ctrl+F5：启动调试
+Ctrl+F10：单步调试，跳过函数内部实现
+Ctrl+F11：单步调试，进入函数内部实现
+F9：从当前光标所在行开始执行
+F8：查看编译结果（包括Erro和Warning信息）
+Ctrl+Shift+W：关闭所有打开的.py文件
+Ctrl+Alt+←：光标跳回之前所在位置
+Ctrl+L：跳转到行号
+F11：全屏
+Tab：空行前是代码缩进；在输入一个字母后，按Tab健会自动补全或者代码提示。
+Shift+Tab：撤销代码缩进
+Ctrl+双击：打开加载包源代码
+
 ## Office
 
 ### Common
@@ -1287,9 +1321,15 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 
 - 只需要在 Chrome 浏览器上下载安装[ `Bing Chained` ](https://chrome.google.com/webstore/detail/bing-unchained-use-new-bi/laldfnbbeocphnilnofhedhcjcnchbld/related)这个插件，再访问 [www.bing.com](https://link.juejin.cn/?target=http%3A%2F%2Fwww.bing.com) 就会出现 New Bing AI 入口
 
-- https://github.com/xcanwin/KeepChatGPT
+- Bing AI for Firefox: [Get this Extension for 🦊 Firefox (en-US) (mozilla.org)](https://addons.mozilla.org/en-US/firefox/addon/bing-ai-for-firefox/)
+
+- https://github.com/xcanwin/KeepChatGPT 
 
   https://mp.weixin.qq.com/s/ngOXSb296BLf74usmc9kqw
+  
+- a domestic new choice: [天工AI搜索 — 知识从这里开始 (tiangong.cn)](https://search.tiangong.cn/)，除了百度、讯飞、阿里等
+
+- 
 
 
 
@@ -1298,19 +1338,6 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 钉钉客户免费享有聊天消息云端存储180天
 
 开通钉钉专业版，内部聊天记录（包含内部群以及内部单聊）保存时间将从180天调整为2年
-
-
-
-```
-# bit by bit programming
-
-一点一滴
-
-## Python 
-
-see [Python-for-MD](/MD/Python-for-MD.md)
-```
-
 
 
 # LaTeX
@@ -1595,8 +1622,6 @@ pygame连连看 https://juejin.cn/post/6969082546801868807
 other
 
 > https://blog.csdn.net/weixin_40957741/article/details/102761183  Python variable underline
-
-re
 
 
 

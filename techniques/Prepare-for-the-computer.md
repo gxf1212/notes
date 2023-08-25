@@ -4,7 +4,275 @@ This page is all about software installing (Linux), both for system and project 
 
 Mainly recorded while in NUS. The installation of DL environment, Gromacs, and plans are all in `Linux fundamental (Installation and softwares)`.
 
-# remote control and ssh
+
+
+# Fundamental softwares
+
+## For work
+
+### pycharm
+
+student (professional)
+
+https://blog.csdn.net/qq_51468843/article/details/110561151
+
+my email: stu, `74********cb`
+
+### Anaconda
+
+1. no need to copy a .sh file. You can assign a directory.
+
+2. no need under `su root`
+
+3. `conda: no command`: add path? open a new terminal https://blog.csdn.net/freezeplantt/article/details/80176215
+
+4. cannot activate at the first time: run `source activate`
+
+   then run `conda activate` or `conda deactivate`
+
+   see https://blog.csdn.net/qq_36338754/article/details/97009338
+
+### Other
+
+  1. VScode [installation](/techniques/Prepare-for-the-computer?id=text-editor)
+
+  2. realvnc
+
+     ```shell
+     systemctl start vncserver-x11-serviced.service
+     systemctl enable vncserver-x11-serviced.service
+     ```
+
+  3. GitHub Desktop on Linux https://codechina.csdn.net/mirrors/shiftkey/desktop?utm_source=csdn_github_accelerator
+
+  4. xshell http://www.netsarang.com/download/free_license.html not for Linux?
+
+  5. https://linux.wps.cn/
+
+     snap: https://www.how2shout.com/how-to/how-to-install-wps-office-on-ubuntu-linux-via-command-terminal.html
+
+  6. weather  https://www.ywnz.com/linuxjc/4429.html
+
+  7. insync, sync for google, onedrive, dropbox
+
+     https://cn.go-travels.com/98643-how-to-use-google-drive-linux-4176144-1291281
+
+> browsers
+>
+> - google chrome
+>
+>   - 包名：google-chrome-stable
+>
+> - firefox
+>
+> - edge
+>
+> - opera
+>
+> - falcon (from snap)
+>
+> - 360
+>
+> - epiphany-browser (web)
+>
+>   ```shell
+>   sudo apt-get install epiphany-browser -y
+>   ```
+>
+> - netsurf
+>
+>   https://flatpak.org/setup/Ubuntu/ then download flatpak package
+>
+> - Chromium
+>
+>   - 软件商店
+
+## CUDA environment
+
+dependence: install driver then cuda then cudnn. then configure conda environment
+
+```mermaid
+graph LR;
+cudnn--> cuda -->driver
+```
+
+### cuda
+
+- .deb just follow official guide
+
+  .run https://blog.csdn.net/weixin_38369492/article/details/107957296
+
+  both: don't forget to blacklist nouveau
+
+- To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-11.1/bin
+
+- to verify success: [link](https://blog.csdn.net/weixin_38208741/article/details/70848364)  [link](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#running-the-compiled-examples )
+
+  ```shell
+  cd /usr/local/cuda/samples/1_Utilities/deviceQuery #由自己电脑目录决定
+  sudo make
+  sudo ./deviceQuery
+  ```
+
+  ```shell
+  /usr/local/cuda/samples/1_Utilities/deviceQuery/deviceQuery
+  # deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 11.4, CUDA Runtime Version = 11.4, NumDevs = 1
+  Result = PASS
+  ```
+
+  on Windows, similarly: `path\to\NVIDIA GPU Computing Toolkit\CUDA\vxx.x\extras\demo_suite\deviceQuery.exe`
+
+  > https://blog.csdn.net/GreatcloudL/article/details/105209287
+
+  or
+
+  ```shell
+  nvcc -V 
+  ```
+
+  after adding `/usr/local/cuda/bin` to `$PATH`
+
+#### other issues
+
+- problems
+
+  - I ran ...run.1 rather than .run ???
+  - don't know if this matters: https://blog.davidou.org/archives/1361
+
+- 为啥之前的驱动、cuda、cudnn系列能自动更新？可能是cuda的软件源是latest，自动更的，现在是固定了版本的
+
+- if "Failed to initialize NVML: Driver/library version mismatch"
+
+  https://comzyh.com/blog/archives/967/
+
+  if it's due to software update, just reboot. driver and cuda toolkit is simultaneously updated...
+
+- other ways to check gpu
+
+  ```shell
+  pip install gpustat
+  gpustat
+  ```
+
+- multiple version of cuda: https://bluesmilery.github.io/blogs/a687003b/
+
+- > Driver:   Not Selected
+  > Toolkit:  Installed in /usr/local/cuda-11.1/
+  > Samples:  Installed in /home/kemove/, but missing recommended libraries
+  >
+  > Please make sure that
+  >
+  > - PATH includes /usr/local/cuda-11.1/bin
+  > - LD_LIBRARY_PATH includes /usr/local/cuda-11.1/lib64, or, add /usr/local/cuda-11.1/lib64 to /etc/ld.so.conf and run ldconfig as root
+  >
+  > ```shell
+  > export PATH=$PATH:/usr/local/cuda/bin
+  > export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+  > ```
+  >
+  > > ***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least .00 is required for CUDA 11.1 functionality to work.
+  > > To install the driver using this installer, run the following command, replacing <CudaInstaller> with the name of this run file:
+  >
+  >     sudo <CudaInstaller>.run --silent --driver
+  >
+  > Logfile is /var/log/cuda-installer.log
+
+### cudnn
+
+follow offical guide
+
+https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html
+
+#### method 1
+
+download [cuDNN Library for Linux (x86_64)](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.2.4/11.4_20210831/cudnn-11.4-linux-x64-v8.2.4.15.tgz)
+
+```shell
+# 22 Jan. 1st time
+sudo cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include 
+sudo cp -P cudnn-*-archive/lib/libcudnn* /usr/local/cuda/lib64 
+sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+# 22 Feb. 2nd time
+sudo cp cudnn/cuda/include/cudnn*.h /usr/local/cuda/include 
+sudo cp -P cudnn/cuda/lib64/libcudnn* /usr/local/cuda/lib64 
+sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+```
+
+also need the code samples
+
+#### method 2??
+
+download:
+
+- [cuDNN Runtime Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8_8.2.1.32-1+cuda11.3_amd64.deb)
+- [cuDNN Developer Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-dev_8.2.1.32-1+cuda11.3_amd64.deb)
+- [cuDNN Code Samples and User Guide for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-samples_8.2.1.32-1+cuda11.3_amd64.deb)
+
+```shell
+sudo dpkg -i lib*
+```
+
+not sure how to do...
+
+#### other issues
+
+1. to remove cudnn (method 1)
+
+   ```shell
+   sudo rm -rf /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+   ```
+
+2. test.c:1:10: fatal error: FreeImage.h: 没有那个文件或目录 https://blog.csdn.net/xhw205/article/details/116297555
+
+   ```shell
+   sudo apt-get install libfreeimage3 libfreeimage-dev
+   ```
+
+3. You may also need this
+
+   ```shell
+   sudo dpkg -i libcudnn*
+   ```
+
+   to check success. You'd better install in order! (libcudnn, dev, example)
+
+4. check success (tar.gz)
+
+   > [strange??? but a complete guide!!](https://blog.csdn.net/weixin_28691441/article/details/112144795) 
+   >
+   > ```shell
+   > cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 
+   > ```
+   >
+   > It's  old! let’s follow the official guide below
+
+   ```shell
+   # Copy the cuDNN samples to a writable path.
+   HOME=./
+   cp -r /usr/src/cudnn_samples_v8/ $HOME
+   # Go to the writable path.
+   cd $HOME/cudnn_samples_v8/mnistCUDNN
+   # Compile the mnistCUDNN sample.
+   make clean && make
+   # Run the mnistCUDNN sample.
+   ./mnistCUDNN
+   ```
+
+   If cuDNN is properly installed and running on your Linux system, you will see a message similar to the following:
+
+    ```
+   Test passed!
+    ```
+
+### Not using
+
+>     1. `nvidia smi` shows cuda version 11.1, driver is 455.45.01. We should not use an open source driver. check additional driver from 'start'.
+>     2. nivida.cn also shows 455.45, so do I need to install the driver? Now no.
+>
+>     3. problem! can only run .sh file now!
+>     4. configure a command for them
+
+# Remote control and ssh
 
 See [here](Specific-Software-Usage.md#clustersupercomputers) for details on usage of `ssh` and scheduling system.
 
@@ -122,7 +390,7 @@ It's fine on Windows; but x86 version cannot be installed here! And x64 shows �
 
 [https://github.com/QSCTech/zjunet](https://github.com/QSCTech/zjunet)
 
-just install....
+just install....直接运行 `install.sh` may also work
 
 usage:
 
@@ -140,6 +408,21 @@ $ zjunet user add
 username: student id number
 password: normal pwd
 ```
+
+### debug
+
+```shell
+sudo systemctl status xl2tpd.service
+sudo journalctl -u xl2tpd.service
+# similar error
+# maybe https://github.com/hwdsl2/docker-ipsec-vpn-server/issues/261
+
+sudo dnf install NetworkManager-l2tp
+# https://github.com/QSCTech/zjunet/issues/68
+
+```
+
+
 
 ### ZJU wired
 
@@ -395,6 +678,8 @@ https://blog.shuziyimin.org/171  国内办的信用卡也是用不了，没有�
 
 # MD engine
 
+Refer to https://github.com/skblnw/mkrun/tree/master/Installation
+
 ## Auxillary tools
 
 ### gcc
@@ -556,13 +841,13 @@ on my previous workstation
 make -j32
 make install
 # then give gcc path
-cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf1212/gromacs-2021.5-gpu -DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf1212/program \# -DFFTWF_LIBRARY=/home/gxf1212/program/lib/libfftw3f.so -DFFTWF_INCLUDE_DIR=/home/gxf1212/programinclude  
+cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf1212/gromacs-2021.5-gpu -DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf1212/program \# -DFFTWF_LIBRARY=/home/gxf1212/program/lib/libfftw3f.so -DFFTWF_INCLUDE_DIR=/home/gxf1212/program/include  
 -DCMAKE_C_COMPILER=/home/gxf1212/program/bin/gcc -DCMAKE_CXX_COMPILER=/home/gxf1212/program/bin/g++ -DGMX_CUDA_TARGET_SM=80 -DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON -DGMX_GPU=CUDA # 80: just a workaround
 ```
 
 ## plumed
 
-
+installation with conda is simpler but may not make use of the best efficiency?
 
 
 
@@ -711,15 +996,15 @@ make
 mpirun -np 8 hello_c
 ```
 
-  usage:
+check openmpi info: `ompi_info | grep cuda`
 
-```
-Running as root is *strongly* discouraged as any mistake (e.g., in
-defining TMPDIR) or bug can result in catastrophic damage to the OS
-file system, leaving your system in an unusable state.
-
-We strongly suggest that you run mpirun as a non-root user.
-```
+> ```
+> Running as root is *strongly* discouraged as any mistake (e.g., in
+> defining TMPDIR) or bug can result in catastrophic damage to the OS
+> file system, leaving your system in an unusable state.
+> 
+> We strongly suggest that you run mpirun as a non-root user.
+> ```
 
 # Analysis tools: Python/cmd tookit
 

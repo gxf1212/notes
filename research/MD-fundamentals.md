@@ -378,7 +378,7 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
 7. Drawing Method--HBond
 
-9. https://www.ks.uiuc.edu/Research/vmd/current/ug/node33.html
+8. https://www.ks.uiuc.edu/Research/vmd/current/ug/node33.html
 
    label bonds in vmd, it shows distance automatically
 
@@ -386,56 +386,56 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/color-bond.png" alt="color-bond" style="zoom:20%;" />
 
-10. VMD representation里面写变量$ligname只是不报错，还是得手动改
+9. VMD representation里面写变量`$ligname`只是不报错，还是得手动改
 
-   ```tcl
-   set ligname UDCA
-   
-   mol representation CPK 0.200000
-   mol color Type
-   mol selection {(protein or water) and (same residue as within 5 of residue $ligname)}
-   mol material Opaque
-   mol addrep top
-   # update selection every frame
-   mol selupdate 2 top 1
-   mol colupdate 2 top 0
-   
-   pbc wrap -centersel "protein or residue ${ligname}" -compound segid -center com -all
-   # align the protein
-   package require rmsdtt
-   # open the window
-   set w [rmsdtt_tk_cb]
-   $w.top.left.sel delete 1.0 end
-   $w.top.left.sel insert end "protein"
-   # set the states of checkboxes1
-   set rmsdtt::trace_only 0
-   set rmsdtt::noh 0
-   set rmsdtt::bb_only 1
-   # rmsdtt::set_sel  # verify selection
-   rmsdtt::doAlign
-   # change selection text
-   $w.top.left.sel delete 1.0 end
-   $w.top.left.sel insert end "residue ${ligname}"
-   set rmsdtt::bb_only 0
-   # set rmsdtt::xmgrace 1
-   # set rmsdtt::multiplot 0
-   set rmsdtt::plot_sw 1
-   set rmsdtt::save_sw 1
-   set rmsdtt::save_file sys-rmsd.dat
-   rmsdtt::doRmsd
-   ```
+      ```tcl
+      set ligname UDCA
+      
+      mol representation CPK 0.200000
+      mol color Type
+      mol selection {(protein or water) and (same residue as within 5 of residue $ligname)}
+      mol material Opaque
+      mol addrep top
+      # update selection every frame
+      mol selupdate 2 top 1
+      mol colupdate 2 top 0
+      
+      pbc wrap -centersel "protein or residue ${ligname}" -compound segid -center com -all
+      # align the protein
+      package require rmsdtt
+      # open the window
+      set w [rmsdtt_tk_cb]
+      $w.top.left.sel delete 1.0 end
+      $w.top.left.sel insert end "protein"
+      # set the states of checkboxes1
+      set rmsdtt::trace_only 0
+      set rmsdtt::noh 0
+      set rmsdtt::bb_only 1
+      # rmsdtt::set_sel  # verify selection
+      rmsdtt::doAlign
+      # change selection text
+      $w.top.left.sel delete 1.0 end
+      $w.top.left.sel insert end "residue ${ligname}"
+      set rmsdtt::bb_only 0
+      # set rmsdtt::xmgrace 1
+      # set rmsdtt::multiplot 0
+      set rmsdtt::plot_sw 1
+      set rmsdtt::save_sw 1
+      set rmsdtt::save_file sys-rmsd.dat
+      rmsdtt::doRmsd
+      ```
 
-11. Distance, angle, dihedral measurements: To begin a measurement, use the right-mouse button (or the left-mouse button and the Control key/Control key and mouse click) to select 1, 2, 3 or 4 atoms. Complete the measurement by selecting the final atom twice. Depending on how many atoms are selected, the distance (2 atoms), the angle (3 atoms) or the dihedral angle (4 atoms) is measured and displayed. Deselect all atoms with a right-click in empty space. To remove a measurement, re-select all involved atoms and then the last atom twice in a row.
+10. Distance, angle, dihedral measurements: To begin a measurement, use the right-mouse button (or the left-mouse button and the Control key/Control key and mouse click) to select 1, 2, 3 or 4 atoms. Complete the measurement by selecting the final atom twice. Depending on how many atoms are selected, the distance (2 atoms), the angle (3 atoms) or the dihedral angle (4 atoms) is measured and displayed. Deselect all atoms with a right-click in empty space. To remove a measurement, re-select all involved atoms and then the last atom twice in a row.
 
     ? see [VMD Measurements: Analyze Distances and Angles with VMD - Compchems](https://www.compchems.com/vmd-measurements-analyze-distances-and-angles-with-vmd/#simplifying-your-vmd-display-removing-labels)
 
-12. In the main menu, press the Save State button found in the File menu; this will bring up a browser window where you can enter a file name in which to save your work. 
+11. In the main menu, press the Save State button found in the File menu; this will bring up a browser window where you can enter a file name in which to save your work. 
 
-13. VMD的快捷键等号，把当前显示的东西们center一下。
+12. VMD的快捷键等号，把当前显示的东西们center一下。
 
-14. Menu--Mouse--Center: pick an atom to center
+13. Menu--Mouse--Center: pick an atom to center
 
-15. [vmd粗粒化显示插件bendix简单介绍](https://kangsgo.cn/p/vmd粗粒化显示插件bendix简单介绍/)
+14. [vmd粗粒化显示插件bendix简单介绍](https://kangsgo.cn/p/vmd粗粒化显示插件bendix简单介绍/)
 
 ### psfgen
 
@@ -591,6 +591,8 @@ Maybe copying some fundamentals of NAMD (file format) from FYP-notes.
 
 This part is about general MD and comparison between common MD engines. These contents are similar to [academic notes](academic-notes.md). We put it here temporarily.
 
+https://www.cryst.bbk.ac.uk/pps97/course/index.html Section 7: molecular forces
+
 ## Force field
 
 ### Support
@@ -612,20 +614,24 @@ This part is about general MD and comparison between common MD engines. These co
   pmemd supports charmm FF?
 
 - 
-  
-- 
 
 
 
-### Water
+<img src="E:\GitHub-repo\notes\research\Protein-ligand-simulation.assets\c4.png" alt="1692793734134" style="zoom: 50%;" />
 
+### Water Model
+
+- The SPC/E (Extended Simple Point Charge) and TIP3P (Transferable Intermolecular Potential with 3 Points) water models are both popular rigid 3-point models used to simulate water in molecular dynamics simulations. Both the length of the oxygen-hydrogen bonds and the angle between those bonds are fixed. The models have a single Lennard-Jones site centered on the oxygen atom and point charges centered on each atom.
+
+  The main difference between the two models lies in their parameters. The SPC/E model is a slight reparameterization of the SPC (Simple Point Charge) model of water, with a modified value for the charges on the atoms. The TIP3P model uses the experimentally observed HOH angle of 104.52° instead of the ideal tetrahedral angle of 109.47° adopted by SPC. The SPC/E model has been shown to result in a better density and diffusion constant than the SPC model.
+
+
+
+- rename O to OH2 and HOH to TIP3 if you are using NAMD/CHARMM
+  many other more H names in Amber/PDB cannot be renamed easily...
+
+  Maybe remove all hydrogens and let tleap/vmd fix missing H.
 - vmd自带的力场就是把TIP3的两个氢之间的bond注释掉
-- 
-
-rename O to OH2 and HOH to TIP3 if you are using NAMD/CHARMM
-many other more H names in Amber/PDB cannot be renamed easily...
-
-Maybe remove all hydrogens and let tleap/vmd fix missing H.
 
 
 
@@ -669,17 +675,17 @@ $$
 
   restraint_wt=10/4.18 is roughly the same as gromacs 1000 (kJ · mol<sup>−1</sup> · nm<sup>−2</sup>) [reference](https://manual.gromacs.org/documentation/current/reference-manual/topologies/topology-file-formats.html)
   
-- RT:
+- RT
 
   - 300K: 2.4942 kJ/mol, 0.596 kcal/mol, kT: 0.414 kJ/molecule
+  
   - 310K: 2.57734 kJ/mol, 0.616 kcal/mol, kT: 0.4278 kJ/molecule
   
   we don't use kT in macroscopic world (or the final dG data)? 
   
-  
-  
-  
+- 0.001987: This value represents the ideal gas constant (R) in units of kcal/(mol·K).
 
+- 
 
 
 ### Other
@@ -781,6 +787,14 @@ Within the TI region there will be atoms which are linearly transformed (LTA) di
 
 ## GPU and Performance
 
+### Concepts
+
+[hardware background information - Gromacs document](https://manual.gromacs.org/current/user-guide/mdrun-performance.html#hardware-background-information)
+
+
+
+
+
 Read this: https://ambermd.org/GPULogistics.php
 
 and 22.6.7. Considerations for Maximizing GPU Performance
@@ -799,7 +813,7 @@ and 22.6.7. Considerations for Maximizing GPU Performance
 
 - Anton的硬件架构被设计成能够快速执行分子动力学相关的计算，但它并不包含将代码写入硬件的过程。代码仍然是在处理器上运行的，只不过这些处理器被设计成能够快速执行特定类型的计算。如并行、快速数据传输等。
 
-
+### Performance
 
 https://developer.nvidia.com/hpc-application-performance
 
@@ -827,13 +841,28 @@ AMOEBA (Atomic Multipole Optimized Energetics for Biomolecular Simulation) is a 
 
 ## Other
 
+### Techniques
 
+- run consecutively
+
+  ```shell
+  sleep 6h && gmx mdrun ....  # if the first run uses 'nohup'
+  ```
+
+  or in a local machine
+
+  ```shell
+  namd3 ..... [Enter]
+  namd3 .... # before job finishes
+  ```
+
+- 最好把本地机设成禁止自动suspend、black screen (gnome Settings--power)，否则跑着跑着无法看到图形界面。。
+
+- 
 
 # Gromacs
 
 This section is about basics and common usage. For more (theory, concepts), see other pages about specific systems and applications.
-
-
 
 1. check installation info
 
@@ -967,6 +996,8 @@ vdw and elec, common cutoff/switchdist
 
 ## trjconv
 
+It is a pity that gmx itself cannot process trajectories in parallel. MPI is for cross-node communication and does not work.
+
 ### Basics
 
 - `-dt`: not real time, but how many frames we go through each time we collect one frame
@@ -980,28 +1011,7 @@ https://www.jianshu.com/p/5dc493663ed2
 
 
 
-
-
-
-
 ## other
-
-- run consecutively
-
-  ```shell
-  sleep 6h && gmx mdrun ....  # if the first run uses 'nohup'
-  ```
-
-  or in a local machine
-
-  ```shell
-  namd3 ..... [Enter]
-  namd3 .... # before job finishes
-  ```
-
-- 最好把本地机设成禁止自动suspend、black screen (gnome Settings--power)，否则跑着跑着无法看到图形界面。。
-
-- 
 
 - 
 
