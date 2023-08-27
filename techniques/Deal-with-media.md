@@ -733,10 +733,11 @@ GreasyFork脚本：[全网VIP视频免费破解去广告、全网音乐直接下
 - [秀米编辑器如何设置文字上标 - 百度经验](https://jingyan.baidu.com/article/3c48dd34dd97d3a00be358ff.html)
   第三步：在出现的界面中，输入内容后光标定位在需要设置角标的地方，点击【格式】，选择【文字上标】，并在编辑界面中，输入文字即可。
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/xiumi-text.png" alt="xiumi-text" style="zoom:80%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/xiumi-text.png" alt="xiumi-text" style="zoom: 50%;" />
 
-- https://c.xiumi.us/board/v5/2a5va/287435172
-  文字格式刷设置
+- [第二节 调整细节格式](https://c.xiumi.us/board/v5/2a5va/287435172) 文字格式刷设置
+  
+- [在秀米中前后元素的重叠规律以及如何改变前后元素的重叠层次 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/430995397)
 
 
 

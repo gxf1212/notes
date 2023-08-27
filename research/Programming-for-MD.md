@@ -148,7 +148,7 @@ examples
 
 - 
 
-## file processing
+## File processing
 
 ### grep
 
@@ -172,25 +172,6 @@ examples
    ```
 
 2. 
-
-### find
-
-1. find:
-
-   ```shell
-   sudo find / -name "*your-query*" # all that contains your query
-   ```
-
-2. select file according to size:
-
-   https://blog.csdn.net/Cassiel60/article/details/89016530?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control
-
-   ```shell
-   find . -name "*" -type f -size 0c > out.txt # output
-   find . -name "*" -type f -size 0c | xargs -n 1 rm -f # delete
-   ```
-
-3. 
 
 ### count
 
@@ -662,6 +643,12 @@ ax.tick_params(width=5,...)
 
 
 
+### Other about plot
+
+[python翻转和旋转图片 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/53492846)
+
+
+
 ### fonts
 
 - how to add fonts?
@@ -887,7 +874,7 @@ https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide
 
 
 
-
+### Working with Molecules
 
 
 
@@ -922,9 +909,25 @@ https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide
 
 
 
-### MCS search
+### Substructure search
 
 让RDkit得到正确的手性信息：除了一一对应pybel和rdkit的原子，去改那个chiralTag，估计没啥好办法
+
+
+
+> other
+>
+> - R里面的MCS search：https://academic.oup.com/bioinformatics/article/29/21/2792/195951
+> - [RDKit blog - 3D maximum common substructure](https://greglandrum.github.io/rdkit-blog/posts/2022-06-23-3d-mcs.html)
+
+
+
+
+
+### Utilities
+
+- https://www.rdkit.org/docs/source/rdkit.Chem.rdmolops.html
+- https://www.rdkit.org/docs/source/rdkit.Chem.AllChem.html
 
 
 
@@ -934,16 +937,7 @@ I'm using a modified version of `AssignBondOrdersFromTemplate` that does not set
 
 
 
-https://www.rdkit.org/docs/source/rdkit.Chem.rdmolops.html
 
-various utilities
-
-
-
-> other
->
-> - R里面的MCS search：https://academic.oup.com/bioinformatics/article/29/21/2792/195951
-> - [RDKit blog - 3D maximum common substructure](https://greglandrum.github.io/rdkit-blog/posts/2022-06-23-3d-mcs.html)
 
 ### Fingerprint
 

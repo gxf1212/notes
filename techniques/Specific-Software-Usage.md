@@ -6,14 +6,6 @@ See [Deal-with-media.md](Deal-with-media.md) for applications about videos, etc.
 
 Fret not over bygones, and the forward journey take.
 
-> wakeonlan
-> 
-> future: onedrive cloud mount, not occupying  my HD...
-> 
-> 能装/home还是尽量
-
-go to [onedrive](#Linux)
-
 # Commonly used for working
 
 ## Connect and remote control
@@ -83,12 +75,6 @@ configure *PN: see [prepare-for-the-computer](/techniques/Prepare-for-the-comput
    > 内外网：https://www.zhihu.com/question/63098230/answer/1989327965
    
    ssh可以解决卡机，wakeonlan可以解决误关机（挂起？），但系统要是坏了……能否登录救援模式
-
-5. scp: secure copy
-   
-   https://www.cnblogs.com/l199616j/p/12092113.html
-   
-   see `cluster_usage.md` detailed
 
 6. 一般服务器是要买公网IP的，如果你要搞化生网站就是如此吧？
    搭建云盘也是这样，但是存储空间还得靠自己。。常说NAS。存储设备几百块钱跟网上说的差不多
@@ -246,19 +232,17 @@ charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 
 希望以后的工作能顺利进行。😭😭
 
-### easyconnect
-
-easyconnect：没事不要老开着，当自动断开时就重启一下！！
-
-https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect，但没launchctl这个命令
-
 ## Cluster/Supercomputers
 
 ### ssh and scp
 
 #### Basics
 
-[Linux使用scp拷贝多个文件到远程服务器](https://blog.csdn.net/weixin_40918067/article/details/117376103) 
+- scp: sesure copy
+
+  https://www.cnblogs.com/l199616j/p/12092113.html
+
+  [Linux使用scp拷贝多个文件到远程服务器](https://blog.csdn.net/weixin_40918067/article/details/117376103) 
 
 #### ssh key
 
@@ -268,49 +252,21 @@ https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect�
 
 - 免密码登录
 
-  ```
+  ```shell
   ssh-keygen -t rsa -P ""
   ```
 
 - Linux远程执行命令：`sh [options] [user@]host [command]`，如`ssh -p 606 gxf1212@10.77.14.186 "ls $workdir/prod"`
 
-#### Debug
-
-- [First check ssh service and opened port](https://www.thegeekdiary.com/error-bind-to-port-2222-on-0-0-0-0-failed-permission-denied-error-while-starting-sshd-service-on-centos-rhel/)
-
-  ```shell
-  grep ssh /etc/services
-  ```
-
-- [Linux中修改SSH端口号](https://www.jianshu.com/p/de8a5a69c9ea)
-
-  ```shell
-  vim /etc/ssh/sshd_config
-  将`#Port 22`修改为`Port 端口号`
-  ```
-
-  刚打开时被注释掉了
-
-- [linux打开端口](https://www.aiops.com/news/post/5409.html)
-
-  ```shell
-  firewall-cmd --zone=public --add-port=端口/通讯协议 --permanent
-  # 22/tcp
-  ```
-
-  and check. No need to bother like this?
-
-  [bad port (most likely missing protocol)](https://blog.csdn.net/Vrobron/article/details/55006182): you missed tcp
-
 - 
 
 ### ssh/sftp Tools
 
+xshell http://www.netsarang.com/download/free_license.html not for Linux?
+
 under Win, Xshell+Xftp look very good. Dragging and clicking a visualized folder will be effcient
 
-finalshell does not look so pretty though we can just use it. cannot update
-
-
+finalshell does not look so pretty though we can just use it. cannot update..?
 
 #### electerm
 
@@ -688,13 +644,13 @@ Then We just need to kill gmx once and the whole script will terminate.
 
    cloning is boring, why not sync a repository?
 
-   https://gitee.com/help/articles/4336#article-header10
+   [仓库镜像管理（Gitee<->Github 双向同步） | Gitee 产品文档](https://help.gitee.com/repository/settings/sync-between-gitee-github#article-header10)
 
    **进入需要使用镜像功能的仓库，进入「管理」找到「仓库镜像管理」选项**
 
    限时开放至 2022 年 08 月 31 日，在限时开放期结束前，我们将更新相关产品策略。
 
-   git actions for gitee? https://gyx8899.gitbook.io/blog/share/syncgithubtogitee
+   git actions for gitee? [3步自动同步你的 Github 仓库到 Gitee 仓库](https://gyx8899.gitbook.io/blog/share/syncgithubtogitee)
 
 2. 2022.6 update: no more gitee...
 
@@ -702,9 +658,7 @@ Then We just need to kill gmx once and the whole script will terminate.
 
    cdn.jsdelivr.net/npm: does not work well for js scripts? but works fine for figures. different format from unpkg.com
 
-3. https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/making-changes-in-a-branch/viewing-the-branch-history
-
-   viewing the branch history in desktop vscode
+3. [Viewing the branch history in GitHub Desktop - GitHub Docs](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/making-changes-in-a-branch/viewing-the-branch-history-in-github-desktop)
 
 4. 
 
@@ -712,27 +666,31 @@ Then We just need to kill gmx once and the whole script will terminate.
 
 - [如何修改 Git Bash 窗口中默认的字体大小](https://www.cnblogs.com/heroljy/p/8989123.html)：点击右键，选择 Options
 
-## Typora
+## Coding and writing
+
+### Typora
+
+install: https://www.typora.io/releases/all
 
 1. 自定义快捷键
-   
+
    https://blog.csdn.net/December_shi/article/details/108690116
-   
+
    Ctrl+5 in Linux does not work?
 
 2. 
 
-### plugins
+#### plugins
 
 1. mermaid语法
    - 特殊符号，要加引号才显示 https://github.com/mermaid-js/mermaid/issues/213
 2. 
 
-### themes
+#### themes
 
 1. liquid: cannot see the mouse cursor in titles and hyperlinks?
 
-### Crack
+#### Crack
 
 just search...
 
@@ -740,9 +698,9 @@ https://www.ghxi.com/typora.html
 
 Mac：https://macwk.com/soft/typora
 
-## Coding
-
 ### VScode
+
+#### Basics
 
 1. VScode安装完默认不能自动换行，需要我们手动配置。 文本超出显示时，会溢出，如图： 进入文件>首选项>设置，打开设置界面，在常用设置下找到Editor:Word Wrap选项，默认为off,设置为on即可。
 
@@ -773,6 +731,8 @@ Mac：https://macwk.com/soft/typora
 8. 
 
 ### Pycharm
+
+#### Basics
 
 1. https://blog.csdn.net/qq_41330454/article/details/105906347 控制台命令提示符是In[2]. ipython!
 
@@ -813,6 +773,22 @@ Mac：https://macwk.com/soft/typora
 ### conda & python cmd
 
 https://blog.csdn.net/zhayushui/article/details/80433768
+
+#### Initialize
+
+1. no need to copy the installation .sh file to where to install. You can specify a directory.
+
+2. no need to be under `su root`
+
+3. `conda: no command`: add path? open a new terminal after installation 
+
+   https://blog.csdn.net/freezeplantt/article/details/80176215
+
+4. cannot activate at the first time: run `source activate`
+
+   then run `conda activate` or `conda deactivate`
+
+   see https://blog.csdn.net/qq_36338754/article/details/97009338
 
 #### Basics
 
@@ -1171,6 +1147,8 @@ also for LibreOffice Calc, many commands are the same....
 
 ### Foxit Reader
 
+#### Shortcuts
+
 - Alt+F3：手型工具
 
 ### Convert
@@ -1209,7 +1187,7 @@ https://www.zhihu.com/column/c_1368227352443572224
 
 - 
 
-- [origin自动载入xvg数据作图](https://jerkwin.github.io/2018/08/06/origin%E8%87%AA%E5%8A%A8%E8%BD%BD%E5%85%A5xvg%E6%95%B0%E6%8D%AE%E4%BD%9C%E5%9B%BE/)
+> [origin自动载入xvg数据作图](https://jerkwin.github.io/2018/08/06/origin%E8%87%AA%E5%8A%A8%E8%BD%BD%E5%85%A5xvg%E6%95%B0%E6%8D%AE%E4%BD%9C%E5%9B%BE/)
 
 ### GraphPad Prism
 
@@ -1273,6 +1251,8 @@ For ACS papers, copy from here
 
 
 ## Other
+
+[浙大邮箱 帮助中心](https://mail.zju.edu.cn/coremail/help/clientoption_zh_CN.jsp)
 
 ### ThunderBird
 
@@ -1338,6 +1318,13 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 钉钉客户免费享有聊天消息云端存储180天
 
 开通钉钉专业版，内部聊天记录（包含内部群以及内部单聊）保存时间将从180天调整为2年
+
+
+
+### Browser
+
+[键盘快捷键 | Firefox 帮助 (mozilla.org)](https://support.mozilla.org/zh-CN/kb/键盘快捷键)
+
 
 
 # LaTeX

@@ -4,64 +4,111 @@ This page is all about software installing (Linux), both for system and project 
 
 Mainly recorded while in NUS. The installation of DL environment, Gromacs, and plans are all in `Linux fundamental (Installation and softwares)`.
 
+# General
 
+## Coding
 
-# Fundamental softwares
+### Pycharm
 
-## For work
+To activate the professional version
 
-### pycharm
+[免费使用PyCharm（学生）+GitHub学生认证](https://blog.csdn.net/qq_51468843/article/details/110561151); [PyCharm学生认证邮箱失效怎么办](https://blog.csdn.net/qq_51468843/article/details/110572719)
 
-student (professional)
+现在edu邮箱滥用，必须用GitHub或学信网学籍验证才行
 
-https://blog.csdn.net/qq_51468843/article/details/110561151
+### VScode
 
-my email: stu, `74********cb`
+[Running Visual Studio Code on Linux](https://code.visualstudio.com/docs/setup/linux)
 
-### Anaconda
+or via snap
 
-1. no need to copy a .sh file. You can assign a directory.
+```shell
+sudo apt-get install snap
+sudo snap install --classic code
+sudo snap r codium
+```
 
-2. no need under `su root`
+other text editors
 
-3. `conda: no command`: add path? open a new terminal https://blog.csdn.net/freezeplantt/article/details/80176215
+- https://www.sublimetext.com/docs/linux_repositories.html
+- https://atom.io/  sunset...
 
-4. cannot activate at the first time: run `source activate`
+## Chat
 
-   then run `conda activate` or `conda deactivate`
+These are for old systems:
 
-   see https://blog.csdn.net/qq_36338754/article/details/97009338
+https://github.com/Hackerl/Wine_Appimage
 
-### Other
+https://github.com/eNkru/freechat/releases
 
-  1. VScode [installation](/techniques/Prepare-for-the-computer?id=text-editor)
+https://github.com/askme765cs/Wine-QQ-TIM
 
-  2. realvnc
+[vscode qq extension based on android qq protocol](https://github.com/takayama-lily/vscode-qq)
 
-     ```shell
-     systemctl start vncserver-x11-serviced.service
-     systemctl enable vncserver-x11-serviced.service
-     ```
+Now QQ, Dingtalk, Slack, etc. should all be avaibable
 
-  3. GitHub Desktop on Linux https://codechina.csdn.net/mirrors/shiftkey/desktop?utm_source=csdn_github_accelerator
+## Office
 
-  4. xshell http://www.netsarang.com/download/free_license.html not for Linux?
+### LibreOffice
 
-  5. https://linux.wps.cn/
+Usually already installed
 
-     snap: https://www.how2shout.com/how-to/how-to-install-wps-office-on-ubuntu-linux-via-command-terminal.html
+Appimage for my previous old system: https://www.libreoffice.org/download/appimage/  ok
 
-  6. weather  https://www.ywnz.com/linuxjc/4429.html
+### WPS
 
-  7. insync, sync for google, onedrive, dropbox
+https://github.com/linlinger/wps-appimage/releases/tag/1.0 dependence unsatisfied...
+
+https://linux.wps.cn/
+
+via snap: https://www.how2shout.com/how-to/how-to-install-wps-office-on-ubuntu-linux-via-command-terminal.html
+
+### Foxit Reader
+
+ Linux installation is also Silly
+
+- install: run the .run file
+
+  - it's good. rename it, and run the .run file under root
+
+    ```
+    ./foxit.run
+    ```
+
+    or it will die
+
+- remove: find the uninstall file under /home/user/opt/foxitsoftware/...
+
+- cannot open: kill the process...
+
+### Mendeley
+
+> at NUS machine
+
+```shell
+# never run under root!!
+python3 ~/mendeleydesktop-1.19.8-linux-x86_64/bin/mendeleydesktop
+# always sync to avoid losing data!!!
+
+Fatal Python error: _Py_HashRandomization_Init: failed to get random numbers to initialize Python
+Python runtime state: preinitialized
+```
+
+https://stackoverflow.com/questions/47936584/what-does-client-failed-to-connect-to-the-d-bus-daemon-mean
+
+## Other
+
+  1. GitHub Desktop on Linux https://codechina.csdn.net/mirrors/shiftkey/desktop?utm_source=csdn_github_accelerator
+
+  2. weather  https://www.ywnz.com/linuxjc/4429.html
+
+  3. insync, sync for google, onedrive, dropbox
 
      https://cn.go-travels.com/98643-how-to-use-google-drive-linux-4176144-1291281
 
 > browsers
 >
-> - google chrome
->
->   - 包名：google-chrome-stable
+> - google chrome         包名：google-chrome-stable
 >
 > - firefox
 >
@@ -87,194 +134,11 @@ my email: stu, `74********cb`
 >
 >   - 软件商店
 
-## CUDA environment
-
-dependence: install driver then cuda then cudnn. then configure conda environment
-
-```mermaid
-graph LR;
-cudnn--> cuda -->driver
-```
-
-### cuda
-
-- .deb just follow official guide
-
-  .run https://blog.csdn.net/weixin_38369492/article/details/107957296
-
-  both: don't forget to blacklist nouveau
-
-- To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-11.1/bin
-
-- to verify success: [link](https://blog.csdn.net/weixin_38208741/article/details/70848364)  [link](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#running-the-compiled-examples )
-
-  ```shell
-  cd /usr/local/cuda/samples/1_Utilities/deviceQuery #由自己电脑目录决定
-  sudo make
-  sudo ./deviceQuery
-  ```
-
-  ```shell
-  /usr/local/cuda/samples/1_Utilities/deviceQuery/deviceQuery
-  # deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 11.4, CUDA Runtime Version = 11.4, NumDevs = 1
-  Result = PASS
-  ```
-
-  on Windows, similarly: `path\to\NVIDIA GPU Computing Toolkit\CUDA\vxx.x\extras\demo_suite\deviceQuery.exe`
-
-  > https://blog.csdn.net/GreatcloudL/article/details/105209287
-
-  or
-
-  ```shell
-  nvcc -V 
-  ```
-
-  after adding `/usr/local/cuda/bin` to `$PATH`
-
-#### other issues
-
-- problems
-
-  - I ran ...run.1 rather than .run ???
-  - don't know if this matters: https://blog.davidou.org/archives/1361
-
-- 为啥之前的驱动、cuda、cudnn系列能自动更新？可能是cuda的软件源是latest，自动更的，现在是固定了版本的
-
-- if "Failed to initialize NVML: Driver/library version mismatch"
-
-  https://comzyh.com/blog/archives/967/
-
-  if it's due to software update, just reboot. driver and cuda toolkit is simultaneously updated...
-
-- other ways to check gpu
-
-  ```shell
-  pip install gpustat
-  gpustat
-  ```
-
-- multiple version of cuda: https://bluesmilery.github.io/blogs/a687003b/
-
-- > Driver:   Not Selected
-  > Toolkit:  Installed in /usr/local/cuda-11.1/
-  > Samples:  Installed in /home/kemove/, but missing recommended libraries
-  >
-  > Please make sure that
-  >
-  > - PATH includes /usr/local/cuda-11.1/bin
-  > - LD_LIBRARY_PATH includes /usr/local/cuda-11.1/lib64, or, add /usr/local/cuda-11.1/lib64 to /etc/ld.so.conf and run ldconfig as root
-  >
-  > ```shell
-  > export PATH=$PATH:/usr/local/cuda/bin
-  > export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
-  > ```
-  >
-  > > ***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least .00 is required for CUDA 11.1 functionality to work.
-  > > To install the driver using this installer, run the following command, replacing <CudaInstaller> with the name of this run file:
-  >
-  >     sudo <CudaInstaller>.run --silent --driver
-  >
-  > Logfile is /var/log/cuda-installer.log
-
-### cudnn
-
-follow offical guide
-
-https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html
-
-#### method 1
-
-download [cuDNN Library for Linux (x86_64)](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.2.4/11.4_20210831/cudnn-11.4-linux-x64-v8.2.4.15.tgz)
-
-```shell
-# 22 Jan. 1st time
-sudo cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include 
-sudo cp -P cudnn-*-archive/lib/libcudnn* /usr/local/cuda/lib64 
-sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-# 22 Feb. 2nd time
-sudo cp cudnn/cuda/include/cudnn*.h /usr/local/cuda/include 
-sudo cp -P cudnn/cuda/lib64/libcudnn* /usr/local/cuda/lib64 
-sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-```
-
-also need the code samples
-
-#### method 2??
-
-download:
-
-- [cuDNN Runtime Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8_8.2.1.32-1+cuda11.3_amd64.deb)
-- [cuDNN Developer Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-dev_8.2.1.32-1+cuda11.3_amd64.deb)
-- [cuDNN Code Samples and User Guide for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-samples_8.2.1.32-1+cuda11.3_amd64.deb)
-
-```shell
-sudo dpkg -i lib*
-```
-
-not sure how to do...
-
-#### other issues
-
-1. to remove cudnn (method 1)
-
-   ```shell
-   sudo rm -rf /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-   ```
-
-2. test.c:1:10: fatal error: FreeImage.h: 没有那个文件或目录 https://blog.csdn.net/xhw205/article/details/116297555
-
-   ```shell
-   sudo apt-get install libfreeimage3 libfreeimage-dev
-   ```
-
-3. You may also need this
-
-   ```shell
-   sudo dpkg -i libcudnn*
-   ```
-
-   to check success. You'd better install in order! (libcudnn, dev, example)
-
-4. check success (tar.gz)
-
-   > [strange??? but a complete guide!!](https://blog.csdn.net/weixin_28691441/article/details/112144795) 
-   >
-   > ```shell
-   > cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 
-   > ```
-   >
-   > It's  old! let’s follow the official guide below
-
-   ```shell
-   # Copy the cuDNN samples to a writable path.
-   HOME=./
-   cp -r /usr/src/cudnn_samples_v8/ $HOME
-   # Go to the writable path.
-   cd $HOME/cudnn_samples_v8/mnistCUDNN
-   # Compile the mnistCUDNN sample.
-   make clean && make
-   # Run the mnistCUDNN sample.
-   ./mnistCUDNN
-   ```
-
-   If cuDNN is properly installed and running on your Linux system, you will see a message similar to the following:
-
-    ```
-   Test passed!
-    ```
-
-### Not using
-
->     1. `nvidia smi` shows cuda version 11.1, driver is 455.45.01. We should not use an open source driver. check additional driver from 'start'.
->     2. nivida.cn also shows 455.45, so do I need to install the driver? Now no.
->
->     3. problem! can only run .sh file now!
->     4. configure a command for them
-
 # Remote control and ssh
 
 See [here](Specific-Software-Usage.md#clustersupercomputers) for details on usage of `ssh` and scheduling system.
+
+I don't use remote control now...
 
 ## real vnc on linux
 
@@ -317,7 +181,7 @@ Running as unit: run-r4aa0cc0954b846c993f38c8939dae70a.service
 
 viewer on linux:
 
-```
+```shell
 rpm -Uhv VNC-Viewer-6.20.529-Linux-x64.rpm --nodeps --force
 ```
 
@@ -333,21 +197,13 @@ elif [ "$os_name"== 'Fedora' ]; then
 || [ $os_name== "fedora" ]
 ```
 
-see software usage!
-
-> other:
->
-> tight vnc
->
-> - [doc](https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/infrastructure-services/TigerVNC/)
->
-> - [error](https://www.dev2qa.com/how-to-fix-error-job-for-vncserver1-service-failed-because-the-control-process-exited-with-error-code-see-systemctl-status-vncserver1-service-and-journalctl-xe-for-details-when-start-vnc/)
+> tight vnc: [doc](https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/infrastructure-services/TigerVNC/), [error](https://www.dev2qa.com/how-to-fix-error-job-for-vncserver1-service-failed-because-the-control-process-exited-with-error-code-see-systemctl-status-vncserver1-service-and-journalctl-xe-for-details-when-start-vnc/)
 >
 > I've removed that but maybe it's ok (you may try to find the viewer). 
 
-domestic: sunlogin, todesk
+Domestic: sunlogin, todesk. Easy to install. See [Specific Software Usage](#Specific-Software-Usage.md#connect-and-remote-control)
 
-## easy connect (for zju)
+## easy connect (Linux, for zju)
 
 > 重要启示：点击安装包，显示安装成功，但启动程序时点击图标无响应，可通过命令行终端（Terminal）执行命令来启动。观察怎么个报错法！有道、DS等
 
@@ -384,6 +240,14 @@ It's fine on Windows; but x86 version cannot be installed here! And x64 shows �
 >
 > do not turn on auto login on Linux! cannot change user name (unless you reinstall the client) because https://rvpn.zju.edu.cn will be redirected to the download page.
 
+usage: 没事不要老开着，当自动断开时就重启一下！！
+
+> https://www.cc98.org/topic/5521873  ZJU Connect
+
+https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect，但没launchctl这个命令
+
+[Web of Science检索平台 - 数据库导航 - 浙江大学图书馆](http://210.32.137.90/s/lib/libtb/show/405)：[校外使用WOS](https://www.webofknowledge.com/?auth=ShibbolethIdPForm&entityID=https%3A%2F%2Fidp.zju.edu.cn%2Fidp%2Fshibboleth&target=https%253A%252F%252Fwww.webofknowledge.com%252F%253FDestApp%253DUA&ShibFederation=ChineseFederation&DestApp=UA)
+
 ## ZJUnet: extend LAN to WLAN
 
 > https://github.com/xelerance/xl2tpd
@@ -411,6 +275,15 @@ password: normal pwd
 
 ### debug
 
+https://github.com/QSCTech/zjunet/issues/68
+
+"username"->"xxxxxxxx@y"
+y应为a, b, c其中一个，我的套餐是10元档所以填的a。
+
+not useful here
+
+
+
 ```shell
 sudo systemctl status xl2tpd.service
 sudo journalctl -u xl2tpd.service
@@ -419,18 +292,65 @@ sudo journalctl -u xl2tpd.service
 
 sudo dnf install NetworkManager-l2tp
 # https://github.com/QSCTech/zjunet/issues/68
-
 ```
 
+## Configure wired
 
-
-### ZJU wired
+### Source
 
 冷知识：只连有线的时候仍能`sudo yum install`
 
 [给Ubuntu更换自定义源(ZJU)](https://blog.csdn.net/xelloq/article/details/79424759), but maybe go to ZJU mirror website. 
 
 [Configure ZJU source for conda](http://mirror.zju.edu.cn/docs/anaconda/)
+
+### ports
+
+- [First check ssh service and opened port](https://www.thegeekdiary.com/error-bind-to-port-2222-on-0-0-0-0-failed-permission-denied-error-while-starting-sshd-service-on-centos-rhel/)
+
+  ```shell
+  grep ssh /etc/services
+  ```
+
+- [Linux中修改SSH端口号](https://www.jianshu.com/p/de8a5a69c9ea)
+
+  ```shell
+  vim /etc/ssh/sshd_config
+  将`#Port 22`修改为`Port 端口号`
+  ```
+
+  刚打开时被注释掉了
+
+- To add more ports
+
+  ```shell
+  systemctl start firewalld
+  firewall-cmd --zone=public --add-port=1935/tcp --permanent
+  # --zone 作用域 
+  # 添加端口，格式为：端口/通讯协议
+  # --permanent 永久生效，没有此参数重启后失效
+  
+  # 重启防火墙
+  firewall-cmd --reload
+  # 查看端口号
+  netstat -ntlp
+  ```
+
+  and check. No need to bother like this?
+
+  https://blog.csdn.net/Vrobron/article/details/55006182
+
+  [linux打开端口](https://www.aiops.com/news/post/5409.html)
+
+  error: [bad port (most likely missing protocol)](https://blog.csdn.net/Vrobron/article/details/55006182): you missed tcp
+
+  [“error: Bind to port 2222 on 0.0.0.0 failed: Permission denied” – error while starting sshd service on CentOS/RHEL – The Geek Diary](https://www.thegeekdiary.com/error-bind-to-port-2222-on-0-0-0-0-failed-permission-denied-error-while-starting-sshd-service-on-centos-rhel/)
+
+- ...
+
+### Fixed IP
+
+
 
 # break the wall
 
@@ -479,7 +399,7 @@ experiences
   all sites (i.e. the airport, coursera, etc. Eng wiki is accessible today! so anycast is ok) are reachable on the mobile phone using both xjtulib wifi or mobile data. 
 
   the most relevant factor is the selection of your node, not the client program. maybe due to firewalls, ....
-  
+
 - 在开大会等特殊时间梯子会不好用。尝试下载YouTube视频，用非免费版的CRTubeGet就可以，免费的就不行
 
 https://www.cyberghostvpn.com/zh/
@@ -506,6 +426,7 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 - 22.2.9 update: [0.2.7](https://github.com/shadowsocksrr/electron-ssr/releases/tag/v0.2.7) and [0.2.6](https://github.com/qingshuisiyuan/electron-ssr-backup/releases/tag/v0.2.6)
 
 - 22.7.20 update: after 0.2.7, https://github.com/shadowsocksrr/electron-ssr/releases
+
 1. installation. dependencies (as said in Debian系列安装与配置[Ubuntu.md](https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master/Ubuntu.md))
 
    ```shell
@@ -529,24 +450,24 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
    If connection fails，从源头更改python的链接文件，**推荐这种方法**
 
    1. 查看已安装的python版本和链接情况：
-      
+
       ```shell
       ll /usr/bin/python*
       ```
 
    2. 删除原有的Python连接文件 (I don’t have one after reinstalling the system)
-      
+
       ```shell
       sudo rm /usr/bin/python
       ```
 
    3. 建立指向Python3.X的连接
-      
+
       ```shell
       sudo ln -s /usr/bin/python3 /usr/bin/python # or
       sudo ln -s ~/anaconda3/envs/electron-ssr/bin/python /usr/bin/python
       ```
-      
+
       then it’s done
 
    But it seems that python2 matters. [how-to-install-python-2-7-on-ubuntu](https://www.how2shout.com/linux/how-to-install-python-2-7-on-ubuntu-20-04-lts/#:~:text=1%20Open%20a%20command%20terminal.%20Although%20everybody%20is,LTS.%20%204%20Uninstall%20%28optional%29.%20%20More%20)
@@ -588,13 +509,13 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
      > - but without electron-ssr, cannot see baidu.com?
      > - after rebooting, become "auto-proxy"?? not so ok...switch back to auto, still ok??
-     
+
    - in terminal??
 
-        ```shell
-        export http_proxy="http://127.0.0.1:12333"
-        export https_proxy="https:/ /127.0.0.1:12333"
-        ```
+     ```shell
+     export http_proxy="http://127.0.0.1:12333"
+     export https_proxy="https:/ /127.0.0.1:12333"
+     ```
 
 6. electron-ssr icon becomes grey: right click the icon and cllick 'Enable' (‘启用’)
 
@@ -674,7 +595,260 @@ https://www.bilibili.com/video/av545350018/
 
 https://blog.shuziyimin.org/171  国内办的信用卡也是用不了，没有全局代理、国内信用卡下注册的PayPal账户也被认为是国内的
 
+# CUDA environment
 
+dependence: install driver then cuda then cudnn. then configure conda environment
+
+```mermaid
+graph LR;
+cudnn--> cuda -->driver
+```
+
+## Driver
+
+### Official
+
+Search for your system in [Official Drivers | NVIDIA](https://www.nvidia.com/Download/index.aspx?lang=en-us)
+
+### GNOME
+
+Go to Software & Updates...
+
+
+
+### Install Nvidia in Fedora
+
+```shell
+echo -e "blacklist nouveau" | tee -a /etc/modprobe.d/blacklist.conf
+mv /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).img.bak
+dracut -v /boot/initramfs-$(uname -r).img $(uname -r)
+```
+
+[Configuration - RPM Fusion](https://rpmfusion.org/Configuration)
+
+[Howto/NVIDIA - RPM Fusion](https://rpmfusion.org/Howto/NVIDIA#CUDA)
+
+```shell
+# rpmfusion
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+# driver
+sudo dnf install xorg-x11-drv-nvidia-cuda
+```
+
+install cuda as usual
+
+[如何在 Fedora Linux 中安装 Nvidia 驱动 | Linux 中国 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/147186283)
+
+[How to Set Nvidia as Primary GPU on Optimus-based Laptops :: Fedora Docs (fedoraproject.org)](https://docs.fedoraproject.org/en-US/quick-docs/how-to-set-nvidia-as-primary-gpu-on-optimus-based-laptops/)
+
+> [manjaro kde 21.2.5安装nvidia显卡驱动以解决笔记本电脑亮度调节问题](https://blog.csdn.net/a772304419/article/details/124141154)
+
+### Debug
+
+[Failed to start nvidia powerd service after update - Fedora Discussion](https://discussion.fedoraproject.org/t/failed-to-start-nvidia-powerd-service-after-update/77482)
+
+"To me it looks like the xorg-x11-drv-nvidia-power package may not have gotten properly updated for the newer nvidia driver."
+
+[Reddit - failure with nvidiapowerd](https://www.reddit.com/r/Fedora/comments/sobsgb/anyone_experiencing_failure_with_nvidiapowerd/?onetap_auto=true)
+
+Nvidia-powerd is only for mobile Ampere gpus so it’s useless with your 2080. Please disable and mask the service.
+https://forums.developer.nvidia.com/t/nvidia-powerd-fails-to-start/235498
+
+```shell
+systemctl disable nvidia-powerd
+```
+
+
+
+## cuda
+
+### Installation
+
+- `.deb` just follow official guide
+
+  `.run` [新装操作系统Ubuntu18.04上安装NVIDIA驱动、CUDA、CUDNN](https://blog.csdn.net/weixin_38369492/article/details/107957296)  no need to install the driver again
+
+  both: don't forget to blacklist nouveau
+
+- To uninstall the CUDA Toolkit, run cuda-uninstaller in `/usr/local/cuda-1x.x/bin`
+
+- to verify success: [link](https://blog.csdn.net/weixin_38208741/article/details/70848364)  [link](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#running-the-compiled-examples )
+
+  ```shell
+  cd /usr/local/cuda/samples/1_Utilities/deviceQuery #由自己电脑目录决定
+  sudo make
+  sudo ./deviceQuery
+  ```
+
+  ```shell
+  /usr/local/cuda/samples/1_Utilities/deviceQuery/deviceQuery
+  # deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 11.4, CUDA Runtime Version = 11.4, NumDevs = 1
+  Result = PASS
+  ```
+
+  on Windows, similarly: `path\to\NVIDIA GPU Computing Toolkit\CUDA\vxx.x\extras\demo_suite\deviceQuery.exe`
+
+  > https://blog.csdn.net/GreatcloudL/article/details/105209287
+
+  or
+
+  ```shell
+  nvcc -V 
+  ```
+
+  after adding `/usr/local/cuda/bin` to `$PATH`
+
+### other issues
+
+- 为啥之前的驱动、cuda、cudnn系列能自动更新？可能是cuda的软件源是latest，自动更的，现在是固定了版本的
+
+- if "Failed to initialize NVML: Driver/library version mismatch"
+
+  https://comzyh.com/blog/archives/967/
+
+  if it's due to software update, just reboot. driver and cuda toolkit is simultaneously updated...
+
+- other ways to check gpu
+
+  ```shell
+  pip install gpustat
+  gpustat
+  ```
+
+- [简记Ubuntu在安装NVIDIA驱动后黑屏无法启动进入图形桌面的一种可能原因](https://www.cnblogs.com/izwb003/p/ubuntu_nvidia_blackscreen_solution.html)
+
+  以后再安装，这个就选No得了
+
+  ```shell
+  sudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf.backup
+  ```
+
+- 
+
+- multiple version of cuda: https://bluesmilery.github.io/blogs/a687003b/
+
+- problems
+
+  - I ran ...run.1 rather than .run ???
+  - don't know if this matters: https://blog.davidou.org/archives/1361
+
+> log file using `.run`
+>
+> Driver:   Not Selected
+> Toolkit:  Installed in /usr/local/cuda-11.1/
+> Samples:  Installed in /home/kemove/, but missing recommended libraries
+>
+> Please make sure that
+>
+> - PATH includes /usr/local/cuda-11.1/bin
+> - LD_LIBRARY_PATH includes /usr/local/cuda-11.1/lib64, or, add /usr/local/cuda-11.1/lib64 to /etc/ld.so.conf and run ldconfig as root
+>
+> ```shell
+> export PATH=$PATH:/usr/local/cuda/bin
+> export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+> ```
+>
+> > ***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least .00 is required for CUDA 11.1 functionality to work.
+> > To install the driver using this installer, run the following command, replacing <CudaInstaller> with the name of this run file:
+>
+> ​    sudo <CudaInstaller>.run --silent --driver
+>
+> Logfile is /var/log/cuda-installer.log
+
+## cudnn
+
+follow offical guide
+
+https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html
+
+### method 1
+
+download [cuDNN Library for Linux (x86_64)](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.2.4/11.4_20210831/cudnn-11.4-linux-x64-v8.2.4.15.tgz)
+
+```shell
+# 22 Jan. 1st time
+sudo cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include 
+sudo cp -P cudnn-*-archive/lib/libcudnn* /usr/local/cuda/lib64 
+sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+# 22 Feb. 2nd time
+sudo cp cudnn/cuda/include/cudnn*.h /usr/local/cuda/include 
+sudo cp -P cudnn/cuda/lib64/libcudnn* /usr/local/cuda/lib64 
+sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+```
+
+also need the code samples
+
+### method 2??
+
+download:
+
+- [cuDNN Runtime Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8_8.2.1.32-1+cuda11.3_amd64.deb)
+- [cuDNN Developer Library for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-dev_8.2.1.32-1+cuda11.3_amd64.deb)
+- [cuDNN Code Samples and User Guide for Ubuntu20.04 x86_64 (Deb)](https://developer.nvidia.cn/compute/machine-learning/cudnn/secure/8.2.1.32/11.3_06072021/Ubuntu20_04-x64/libcudnn8-samples_8.2.1.32-1+cuda11.3_amd64.deb)
+
+```shell
+sudo dpkg -i lib*
+```
+
+not sure how to do...
+
+### other issues
+
+1. to remove cudnn (method 1)
+
+   ```shell
+   sudo rm -rf /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+   ```
+
+2. test.c:1:10: fatal error: FreeImage.h: 没有那个文件或目录 https://blog.csdn.net/xhw205/article/details/116297555
+
+   ```shell
+   sudo apt-get install libfreeimage3 libfreeimage-dev
+   ```
+
+3. You may also need this
+
+   ```shell
+   sudo dpkg -i libcudnn*
+   ```
+
+   to check success. You'd better install in order! (libcudnn, dev, example)
+
+4. check success (tar.gz)
+
+   > [strange??? but a complete guide!!](https://blog.csdn.net/weixin_28691441/article/details/112144795) 
+   >
+   > ```shell
+   > cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 
+   > ```
+   >
+   > It's  old! let’s follow the official guide below
+
+   ```shell
+   # Copy the cuDNN samples to a writable path.
+   HOME=./
+   cp -r /usr/src/cudnn_samples_v8/ $HOME
+   # Go to the writable path.
+   cd $HOME/cudnn_samples_v8/mnistCUDNN
+   # Compile the mnistCUDNN sample.
+   make clean && make
+   # Run the mnistCUDNN sample.
+   ./mnistCUDNN
+   ```
+
+   If cuDNN is properly installed and running on your Linux system, you will see a message similar to the following:
+
+    ```
+   Test passed!
+    ```
+
+## Not using
+
+>     1. `nvidia smi` shows cuda version 11.1, driver is 455.45.01. We should not use an open source driver. check additional driver from 'start'.
+>     2. nivida.cn also shows 455.45, so do I need to install the driver? Now no.
+>
+>     3. problem! can only run .sh file now!
+>     4. configure a command for them
 
 # MD engine
 
@@ -690,6 +864,16 @@ https://blog.csdn.net/zhaozhiyuan111/article/details/118566452
 - `gcc-path/contrib/download_prerequisites`: if you don't have mpfr, etc.
 
 An important note: add correct gcc version you used when compiling gmx/Amber when you run MD, otherwise the performance will be significantly hurt!
+
+#### Debug
+
+- [fatal error: gnu/stubs-32.h: No such file or directory – 王明军的博客 (wordpress.com)](https://iwmj.wordpress.com/2018/04/11/fatal-error-gnu-stubs-32-h-no-such-file-or-directory/)
+
+  ```shell
+  yum install libstdc++-devel.i686
+  ```
+
+- 
 
 ### intel oneapi
 
@@ -752,6 +936,8 @@ conda install -c bioconda gromacs
 
 2. check gcc version
 
+   > gmx 2020.x: unsupported GNU version! gcc versions later than 12 are not supported! The nvcc flag '-allow-unsupported-compiler' can be used to override this version check" " however, using an unsupported host compiler may cause compilation failure or incorrect run time execution. Use at your own risk.
+
 3. install cuda and cmake
 
    - cmake
@@ -769,9 +955,8 @@ conda install -c bioconda gromacs
      or `sudo apt-get`
      
      - http://www.fftw.org/fftw2_doc/fftw_6.html
-- rather than official manual, I used
 
-### installation
+### Installation with GPU support
 
 ```shell
 # fftw: http://www.fftw.org/download.html
@@ -1018,9 +1203,7 @@ not solve by `conda install openmotif`. compiling: need `sudo`
 
 `conda install xmgrace`: no documentation, no cmd command, python2.7, didn't work 
 
-
-
-![image-20221016211602695](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/xmgrace.png)![image-20221016211759336](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/xmgrace-gmx.png)
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/xmgrace.png" style="zoom:60%;" />![image-20221016211759336](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/xmgrace-gmx.png)
 
 ## dssp
 
@@ -1501,6 +1684,8 @@ https://brooks.chem.lsa.umich.edu/download/software/match/MATCH_RELEASE.tar.gz
 
 ## Autodock
 
+### vina
+
 https://ccsb.scripps.edu/projects/docking/
 
 Installing
@@ -1517,6 +1702,10 @@ This file is copied into /home/Desktop/work/xufan and /usr/local
 http://vina.scripps.edu/manual.html#usage for running docking.
 
 **安装目录和打开的文件不要包含任何中文！！！！！**
+
+### smina
+
+https://anaconda.org/conda-forge/smina
 
 ## mgl
 
@@ -1536,16 +1725,11 @@ icon path: just search `adt` or `icon`
 
 > adt: $HOME/mgltools_x86_64Linux2_1.5.7/MGLToolsPckgs/Pmv/Icons/128x128/adt.png
 
-> ## backup
->
 > ```shell
-> # paths
-> export PATH=$PATH:/home/user/MGLTools-1.5.7/bin # mgltools
-> export PATH=$PATH:/home/user/Desktop/work/xufan/bin # vina
-> # now it can run under root
+>export PATH=$PATH:/home/user/MGLTools-1.5.7/bin # mgltools
+> # now we can it run under root
 > ```
->
-> ## 
+> 
 
 ## zdock
 
@@ -1796,77 +1980,3 @@ Parameters written to file: `/home/moonlight/LigPlus/lib/params/ligplus.par`
 ## RasMol
 
 http://www.rasmol.org/software/RasMol_2.7.5/INSTALL.html
-
-# Paper, work
-
-## Chat
-
-https://github.com/Hackerl/Wine_Appimage
-
-https://github.com/eNkru/freechat/releases
-
-https://github.com/askme765cs/Wine-QQ-TIM
-
-[vscode qq extension based on android qq protocol](https://github.com/takayama-lily/vscode-qq)
-
-## office
-
-https://www.libreoffice.org/download/appimage/  ok
-
-https://github.com/linlinger/wps-appimage/releases/tag/1.0 dependence unsatisfied...
-
-## text editor
-
-vscode
-
-```shell
-sudo apt-get install snap
-sudo snap install --classic code
-sudo snap r codium
-```
-- vscode: https://code.visualstudio.com/docs/setup/linux
-- typora: https://www.typora.io/releases/all
-- https://www.sublimetext.com/docs/linux_repositories.html
-- https://atom.io/  sunset...
-
-## foxit reader
-
-Silly installation
-
-- install: run the .run file
-
-  - it's good. rename it, and run the .run file under root
-
-    ```
-    ./foxit.run
-    ```
-
-    or it will die
-
-- remove: find the uninstall file under /home/opt/foxitsoftware/...
-
-- cannot open: kill the process...
-
-## medeley
-
-```shell
-# never run under root!!
-python3 ~/mendeleydesktop-1.19.8-linux-x86_64/bin/mendeleydesktop
-# always sync to avoid losing data!!!
-
-Fatal Python error: _Py_HashRandomization_Init: failed to get random numbers to initialize Python
-Python runtime state: preinitialized
-```
-
-https://stackoverflow.com/questions/47936584/what-does-client-failed-to-connect-to-the-d-bus-daemon-mean
-
-## Other
-
-无线网卡 (英文名称：**Wireless network interface controller**，缩写为WNIC) driver
-
-https://www.nnnxxx.cn/
-
-https://github.com/the-tcpdump-group/libpcap
-
-https://askubuntu.com/questions/537170/no-such-file-or-directory-net-bpf-h
-

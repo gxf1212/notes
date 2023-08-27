@@ -11,6 +11,12 @@ and sync for files in all platforms
 > https://zhuanlan.zhihu.com/p/360780042 百度阿里迅雷腾讯详细对比
 >
 > https://zhuanlan.zhihu.com/p/44103820 如何搭建自己的私有云盘
+>
+> future: onedrive cloud mount, not occupying my HD...
+>
+> 能装/home还是尽量
+>
+> Now at lab,
 
 # Requirement
 

@@ -19,7 +19,8 @@ I'm just too lazy to make things clear, so these are just what I wrote when I le
   - [ ] scp, ssh, pbs and slurm (software usage)
   - [ ] 整理笔记时过一遍ChatGPT的记录？但很多都记过了。。
   - [ ] source: Google chat, slack, notion.so, wolai.com, coda
-  - [ ] CUDA environment section in Linux-funda
+  - [ ] CUDA environment 就这么点？
+  - [ ] prepare for the computer, fundamental tools, move to software usage?
 - [ ] **beautify the theme** (sidebar?)
 - [ ] try interesting plugins
 - [ ] make badges? beautify hyperref?

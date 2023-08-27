@@ -91,7 +91,7 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
   - `zoom` or `orient` also do centering...
 
-- 
+- action--rename, or `set_name object-name, new-name`
 
 ### Editing
 
@@ -175,7 +175,7 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 10. https://pymolwiki.org/index.php/Rock
 
-11. 
+11. 按insert键等价于命令rock
 
 ### cmd & API
 
@@ -872,6 +872,8 @@ This section is about basics and common usage. For more (theory, concepts), see 
 
    or just `gmx`
 
+   如果有安装Gromacs的话,可以在`gmx -version`下看到fftw的版本信息
+
 2. In gromacs, chain names are lost?!
 
 ## Modeling
@@ -956,27 +958,7 @@ vdw and elec, common cutoff/switchdist
 
 
 
-- gmx中断后保持步数? 
-
-  http://bbs.keinsci.com/thread-17980-1-1.html
-
-  https://blog.csdn.net/MurphyStar/article/details/113679744
-
-  -extend. edit .tpr file and provide .cpt file
-
-  > Fatal error: Cannot change a simulation algorithm during a checkpoint restart. Perhaps you should make a new .tpr with grompp -f new.mdp -t npt.cpt 
-
-  The cpt file extension stands for portable checkpoint file. The complete state of the simulation is stored in the checkpoint file
-
-  `gmx trjconv -f npt.cpt -s npt.tpr -o npt_cpt.gro`
-
-  recover interrupted simulation, to get the .gro
-
-- [gmx逐步放开限制：暴力修改`itp`文件](https://jerkwin.github.io/2017/10/20/GROMACS%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%A8%A1%E6%8B%9F%E6%95%99%E7%A8%8B-%E5%A4%9A%E8%82%BD-%E8%9B%8B%E7%99%BD%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/#9-%E6%94%BE%E5%BC%80%E9%99%90%E5%88%B6-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E9%A2%84%E5%B9%B3%E8%A1%A1)
-
-
-
-`mdout.mdp`: all arguments actually used. help with debugging....
+`mdout.mdp`: **all** arguments actually used (default value if not specified). help with debugging....
 
 
 
@@ -991,6 +973,34 @@ vdw and elec, common cutoff/switchdist
 - it is simpler to do everything with a single lambda setup without the lambda for interaction types.
 
 - Dummy atoms have epsilon and q both in zero, so no worry
+
+
+
+### Continue a run
+
+http://bbs.keinsci.com/thread-17980-1-1.html
+
+[官方解决方案](http://manual.gromacs.org/current/user-guide/managing-simulations.html)：举个例子，如果中断的任务是这样运行的：`gmx mdrun -deffnm md` 你可以在同一个文件夹下运行：
+
+``` shell
+gmx mdrun -s md.tpr -cpi md.cpt -deffnm md
+```
+
+`mdrun`默认会将新产生的轨迹添加到原始文件末尾，最终文件会包括续跑前与续跑后的所有内容。
+
+[延长时间再跑](https://blog.csdn.net/MurphyStar/article/details/113679744)
+
+`-extend`. edit `.tpr` file and provide `.cpt` file
+
+> Fatal error: Cannot change a simulation algorithm during a checkpoint restart. Perhaps you should make a new .tpr with grompp -f new.mdp -t npt.cpt 
+
+The cpt file extension stands for portable checkpoint file. The complete state of the simulation is stored in the checkpoint file
+
+```shell
+gmx trjconv -f npt.cpt -s npt.tpr -o npt_cpt.gro
+```
+
+recover interrupted simulation, to get the .gro
 
 
 

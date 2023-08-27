@@ -53,6 +53,8 @@ for each protein, always check:
 
 1. generate topology
 
+   [gmx pdb2gmx - GROMACS documentation](https://manual.gromacs.org/documentation/current/onlinehelp/gmx-pdb2gmx.html)
+
    ```shell
    gmx pdb2gmx -f 2cqg_1.pdb -o 2cqg_1.gro -water tip3p -ignh
    ```
@@ -67,26 +69,16 @@ for each protein, always check:
 
    > note
    >
-   > - 检查组氨酸质子化状态所做的选择, 注意蛋白质的总电荷数
    > - path to forcefield files: `~/gromacs-2021.5-gpu/share/gromacs/top`. refer to `forcefield.itp` under each folder to use that forcefield
-   > - 
+   > - 检查组氨酸质子化状态所做的选择, 注意蛋白质的总电荷数。add options like `-his`, `-lys`, `-ter` to specify each one interactively
 
    > output
    >
    > - The topology for the molecule.   
    >   - The topology (topol.top by default) contains all the  information necessary to define the molecule within a simulation.  This  information includes nonbonded parameters (atom types and charges) as  well as bonded parameters (bonds, angles, and dihedrals).
-   > - A position restraint file.   
-   >   - .itp
+   > - A position restraint `.itp` file. 
    >   - it defines a force constant used to keep atoms in place during equilibration
-   > - A post-processed structure file.
-   >   - .gro
-
-   > There are 3784 dihedrals,  268 impropers, 2506 angles 
-   > 3611 pairs,   1386 bonds and   0 virtual sites 
-   >
-   > Total mass 9777.308 a.m.u. 
-   >
-   > Total charge 2.000 e
+   > - A post-processed structure `.gro` file.
 
    > error: 
    >
@@ -100,7 +92,7 @@ for each protein, always check:
    gmx editconf -f 2cqg_1.gro -o 2cqg_1_newbox.gro -c -d 1.0 -bt cubic
    ```
 
-   The above command centers the protein in the box (-c), and places it at least 1.0 nm from the box edge (-d 1.0). The box type is defined as a cube (-bt cubic).
+   The above command centers the protein in the box (`-c`), and places it at least 1.0 nm from the box edge (`-d 1.0`). The box type is defined as a cube (`-bt cubic`).
 
 4. solvate
 
@@ -109,7 +101,7 @@ for each protein, always check:
    # also backed up the former .top as #topol.top.1#
    ```
 
-   The configuration of the protein (-cp) is contained in  the output of the previous editconf step, and the configuration of the  solvent (-cs) is part of the standard GROMACS installation.  We are using spc216.gro, which is a generic equilibrated 3-point solvent model.  You can use spc216.gro as the solvent configuration for SPC, SPC/E, or TIP3P water, since they are all three-point water models.
+   The configuration of the protein (`-cp`) is contained in the output of the previous editconf step, and the configuration of the  solvent (`-cs`) is part of the standard GROMACS installation. We are using `spc216.gro`, which is a generic equilibrated 3-point solvent model.  You can use `spc216.gro` as the solvent configuration for SPC, SPC/E, or TIP3P water, since they are all three-point water models.
 
 5. add ions
 
@@ -117,25 +109,25 @@ for each protein, always check:
    gmx grompp -f ions.mdp -c 2cqg_1_solv.gro -p topol.top -o ions.tpr
    ```
 
-   > generated .trp (which is just a helper file to add ions) and mdout.mdp (not used later??)
-
-   I don't know if ions.mdp is functioning?? seems they are related to energy minimization
+   > generated `.tpr` (which is just a helper file to add ions. parameters don't matter) and mdout.mdp (not used later...)
 
    ```shell
    gmx genion -s ions.tpr -o 2cqg_1_solv_ions.gro -p topol.top -pname NA -nname CL -neutral -conc 0.15 # -nn 8
    ```
 
-   定义了阳离子和阴离子的名称(分别使用`-pname`和`-nname`), 告诉`genion`只需要添加必要的离子来中和蛋白质所带的净电荷, 添加的阴离子数目为8(`-nn 8`). 对于`genion`, 除了简单地中和体系所带的净电荷以外, 你也可以同时指定`-neutral`和`-conc`选项来添加指定浓度的离子. 关于如何使用这些选项, 请参考`genion`的说明.
+   定义了阳离子和阴离子的名称 (分别使用`-pname`和`-nname`)，告诉`genion`只需要添加必要的离子来中和蛋白质所带的净电荷，添加的阴离子数目为8 (`-nn 8`). 对于`genion`，除了简单地中和体系所带的净电荷以外，你也可以同时指定`-neutral`和`-conc`选项来添加指定浓度的离子. 关于如何使用这些选项，请参考`genion`的说明.
 
-   `-neutral`选项保证体系总的净电荷为零, 体系呈电中性, `-conc`选项设定需要的离子浓度(这里为0.15 M). `-g`选项指定输出日志文件的名称. `-norandom`选项会依据静电势来放置离子而不是随机放置(默认), 但我们在这里使用随机放置方法.
+   `-neutral`选项保证体系总的净电荷为零，体系呈电中性，`-conc`选项设定需要的离子浓度(这里为0.15 M). `-g`选项指定输出日志文件的名称. `-norandom`选项会依据静电势来放置离子而不是随机放置(默认)，但我们在这里使用随机放置方法.
 
-   出现提示后, 选择13 “SOL”. 这意味这我们将用离子替换一些溶剂分子. 
+   出现提示后，选择13 “SOL”. 这意味这我们将用离子替换一些溶剂分子. 
 
    > backed up topol.top to ./#topol.top.2#
 
 6. energy minimization
 
-   1. ```shell
+   1. setup
+      
+      ```shell
       gmx grompp -f em_sol_pme.mdp -c 2cqg_1_solv_ions.gro -p topol.top -o em.tpr
       ```
 
@@ -1875,7 +1867,8 @@ input: .tpr, .xtc, .ndx
 
    [gmx-users: increasing cut-off and PME grid spacing (narkive.com)](https://gromacs.org-gmx-users.maillist.sys.kth.narkive.com/J6lqsB6H/gmx-users-increasing-cut-off-and-pme-grid-spacing)
 
-4. aa
+4. I encoutered this when I: put crystal water before the protein (not the last component before solvation)
+   solution: put all water molecules together
 
    ```
    Fatal error:
@@ -1886,9 +1879,6 @@ input: .tpr, .xtc, .ndx
    files specify groups. Otherwise, you may wish to change the least-used
    block of molecules with SETTLE constraints into 3 normal constraints.
    ```
-
-   I encoutered this when I: put crystal water before the protein (not the last component before solvation)
-   solution: put all water molecules together
 
 5. 
 

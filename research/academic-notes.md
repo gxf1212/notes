@@ -207,8 +207,6 @@ PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
 
 ## General
 
-
-
 A **non-receptor tyrosine kinase** (**nRTK**) is a [cytosolic](https://en.wikipedia.org/wiki/Cytosolic) [enzyme](https://en.wikipedia.org/wiki/Enzyme)
 
 [An orphan receptor is a protein that has a similar structure to other identified receptors but whose endogenous ligand has not yet been identified](https://en.wikipedia.org/wiki/Orphan_receptor).
@@ -312,12 +310,11 @@ https://escholarship.org/content/qt95k0h86q/qt95k0h86q.pdf  also an Amber TI exa
 
 # Physics
 
-Dissipated work is a concept in thermodynamics that refers to the amount of work that is lost to heat during a process. When work is done on or by a system, some of the energy may be transferred to the system’s surroundings as heat. This heat transfer represents a loss of useful energy, as it is no longer available to do work. The amount of work that is lost in this way is called dissipated work. For example, when you rub your hands together, you are doing work to overcome the friction between your hands. Some of the energy from this work is transferred to your hands as heat, warming them up. This heat transfer represents dissipated work.
+- Dissipated work is a concept in thermodynamics that refers to the amount of work that is lost to heat during a process. When work is done on or by a system, some of the energy may be transferred to the system’s surroundings as heat. This heat transfer represents a loss of useful energy, as it is no longer available to do work. The amount of work that is lost in this way is called dissipated work. For example, when you rub your hands together, you are doing work to overcome the friction between your hands. Some of the energy from this work is transferred to your hands as heat, warming them up. This heat transfer represents dissipated work.
+- Rupture force 断裂力 is the external force put on a material of interest that causes it to break or rupture. It can be calculated using a formula that takes into account the load force and size dimensions of the material1. It can also be measured using an atomic force microscope (AFM) for single covalent bonds
+- 
 
-Rupture force 断裂力 is the external force put on a material of interest that causes it to break or rupture. It can be calculated using a formula that takes into account the load force and size dimensions of the material1. It can also be measured using an atomic force microscope (AFM) for single covalent bonds
-
-
-
+[物理四神兽——拉普拉斯的妖 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/35239781)
 
 
 

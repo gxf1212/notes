@@ -43,6 +43,14 @@ Linux desktop的优势：可以直接为cluster做测试
 
   exFAT应该是都兼容的一种格式。
 
+- 运行qsub命令时，报错: `script is written in DOS/Windows text format`。 解决办法：输入 
+
+  ```shell
+dos2unix <pbs-script-file>
+  ```
+
+- 
+
 - 回收站：`~/.local/share/Trash/files`
 
 
@@ -64,17 +72,12 @@ Linux desktop的优势：可以直接为cluster做测试
 - 下面是一些典型的段错误的原因：由内存管理硬件试图访问一个不存在的内存地址
 - Linux操作系统执行可执行文件提示*No such file or directory*的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
 
-## Releases
+## Hardware-related
 
-[技术|最适合程序员的 10 款 Linux 发行版](https://linux.cn/article-14547-1.html)
+- HDMI线必须要插在主机的偏下一点，也就是直接插在显卡上，偏上的那个口是没有用的
+- disk自我检测分析与报告技术smart: https://www.cnblogs.com/xqzt/p/5512075.html
 
-[2022 年适合初学者的 10 个最佳 Linux 发行版 - Linux迷 (linuxmi.com)](https://www.linuxmi.com/2022-10-top-linux.html)
 
-linux核心的东西都一样，发行版之间最大的区别无非是包管理和发行周期，以及默认带的软件包。当然，还有桌面管理和外观。。
-
-- The big thing with CentOS 9 Stream is that it’s kind of the polar opposite of what CentOS once was. In the past, CentOS was all about stability. Because of that, packages were very slow to upgrade to new releases. In fact, you would often find packages that were a few releases old. That was done by design, to keep the operating system as absolutely rock-solid as possible. And it worked. CentOS was always amazingly stable.
-
-This time I installed https://labs.fedoraproject.org/scientific/
 
 # Operations
 
@@ -123,14 +126,30 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
    nvidia-smi -L  # check the number and info of GPUs
    ```
 
-5. my base board
+5. check Display
 
-   https://www.asus.com/hk/Motherboards-Components/Motherboards/PRIME/PRIME-Z390-P/ 华硕PRIME Z390-P
+   ```shell
+   lspci | grep -i nvidia
+   ```
+
+   I do not know of a direct equivalent, but `lshw` should give you the info you want, try:
+
+   ```shell
+   sudo lshw -C display
+   ```
+
+   (it also works without sudo but the info may be less complete/accurate)
+
+   You can also install the package lshw-gtk to get a GUI.
 
 6. change hostname 
 
    - just type: `sudo hostname new_hostname`, but works temporarily
-   - 
+   - maybe also edit `/etc/hosts` and `/etc/hostsname`
+
+   [Ubuntu Linux Change Hostname (computer name)](https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/)
+
+   [修改主机名(/etc/hostname和/etc/hosts区别)-CSDN博客](https://blog.csdn.net/dufufd/article/details/75330423)
 
 7. [check shell version](https://blog.csdn.net/electrocrazy/article/details/78313962): `bash --version`
 
@@ -157,6 +176,9 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 12. 
 
+> my (previous workstation) base board
+>
+> https://www.asus.com/hk/Motherboards-Components/Motherboards/PRIME/PRIME-Z390-P/ 华硕PRIME Z390-P
 
 ### monitor resource usage
 
@@ -550,7 +572,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 just fundamental usage. For advanced shell syntax as well as commands used in programming (`sed`, `grep`, etc.), see [this link](/research/Programming-for-MD.md?id=bash-shell)
 
-### create and delete
+### Create and delete
 
 1. create directory: 
 
@@ -604,8 +626,8 @@ just fundamental usage. For advanced shell syntax as well as commands used in pr
    mv file ~/.local/share/Trash/files
    ```
 
-4. Usage: rmdir [OPTION]... DIRECTORY...
-   Remove the DIRECTORY(ies), if they are empty
+4. Usage: `rmdir [OPTION]... DIRECTORY...`
+   Remove the DIRECTORY(ies), <u>if they are empty</u>
 
 5. `cp`
 
@@ -632,7 +654,71 @@ just fundamental usage. For advanced shell syntax as well as commands used in pr
    sudo mv ./fca58054-9480-4790-a8ab-bc37f33823a4/ ./mechanical
    ```
 
-7. another tool to search
+7. `rename` to change 
+
+   https://blog.51cto.com/jiemian/1846951 Perl语言版本格式
+   
+   ```shell
+   rename 's/a/b/' *a*
+   ```
+   
+9. 
+
+### Check and search
+
+see also [File processing](/research/Programming-for-MD.md#file-processing)
+
+1. check the size of a folder: https://zhidao.baidu.com/question/1178566665695139419.html
+
+   ```shell
+   du -sh /directory  # total size. default is .
+   du -d 1 -h  # show folder and size, finally total size
+   ```
+
+   The `-d 1` option specifies the maximum depth of 1 level for the directory tree and the `-h` option prints sizes in human-readable format.
+   To sort the output of `du -d 1 -h` in dictionary order, you can pipe the output to the `sort` command with the `-k 2` option to specify that sorting should be performed on the second field (i.e., the directory names). Here’s an example:
+
+   ```shell
+   du -d 1 -h | sort -k 2
+   ```
+
+   This will print the sizes of the directories in the current directory and its subdirectories, sorted in dictionary order by directory name.
+
+2. `ls`
+
+   https://www.runoob.com/linux/linux-comm-ls.html
+
+   ```shell
+   ls -l                    # 以长格式显示当前目录中的文件和目录
+   ls -a                    # 显示当前目录中的所有文件和目录，包括隐藏文件
+   ls -lh                   # 以人类可读的方式显示当前目录中的文件和目录大小
+   ls -t                    # 按照修改时间排序显示当前目录中的文件和目录
+   ls -R                    # 递归显示当前目录中的所有文件和子目录
+   ```
+
+3. `tree`: show directory as tree
+
+   https://blog.csdn.net/xuehuafeiwu123/article/details/53817161
+
+   ```shell
+   sudo apt-get install tree
+   tree /path/to/dir
+   ```
+
+4. `find`
+
+   ```shell
+   sudo find / -name "*your-query*" # all that contains your query
+   ```
+
+   [select file according to size](https://blog.csdn.net/Cassiel60/article/details/89016530)
+
+   ```shell
+   find . -name "*" -type f -size 0c > out.txt # output
+   find . -name "*" -type f -size 0c | xargs -n 1 rm -f # delete
+   ```
+
+5. `locate`
 
    ```shell
    locate -h
@@ -645,142 +731,62 @@ just fundamental usage. For advanced shell syntax as well as commands used in pr
      -w, --wholename        match whole path name (default)
    ```
 
-   locate命令其实是find -name的另一种写法，但是要比后者快得多，原因在于它不搜索具体目录，而是搜索一个数据库/var/lib/locatedb，这个数据库中含有本地所有文件信息。**Linux系统自动创建这个数据库，并且每天自动更新一次**，所以使用locate命令查不到最新变动过的文件。为了避免这种情况，可以在使用locate之前，先使用updatedb命令，手动更新数据库。
+   `locate`命令其实是`find -name`的另一种写法，但是要比后者快得多，原因在于它不搜索具体目录，而是搜索一个数据库`/var/lib/locatedb`，这个数据库中含有本地所有文件信息。**Linux系统自动创建这个数据库，并且每天自动更新一次**，所以使用`locate`命令查不到最新变动过的文件。为了避免这种情况，可以在使用`locate`之前，先使用`updatedb`命令，手动更新数据库。
 
-   ```shell
+   ```bash
    /usr/bin/updatedb && locate
    ```
 
-8. `rename` to change 
+6. `whereis`
 
-   https://blog.51cto.com/jiemian/1846951 Perl语言版本格式
+   [每天一个linux命令（17）：whereis 命令 - peida - 博客园 (cnblogs.com)](https://www.cnblogs.com/peida/archive/2012/11/09/2761928.html)
 
-   ```shell
-   rename 's/a/b/' *a*
-   ```
+   whereis命令只能用于程序名的搜索，而且只搜索二进制文件（参数-b）、man说明文件（参数-m）和源代码文件（参数-s）。
 
-9. 
+   和`locate`一样，查找那个数据库
 
+7. 
 
-### view file
+### View file
 
-1. `vi`
-2. `head` and `tail`
-3. what if message is too long? add `|more` https://blog.csdn.net/weixin_34293911/article/details/86473042
+see more in [Text editor](#text-editor)
 
-### check dir
+1. `head` and `tail`
+2. what if message is too long? add `|more` https://blog.csdn.net/weixin_34293911/article/details/86473042
 
-1. check the size of a folder: https://zhidao.baidu.com/question/1178566665695139419.html
+### Soft link
 
-   ```shell
-   du -sh /directory  # total size. default is .
-   du -d 1 -h  # show folder and size, finally total size
-   ```
-
-   The `-d 1` option specifies the maximum depth of 1 level for the directory tree and the `-h` option prints sizes in human-readable format.
-   To sort the output of `du -d 1 -h` in dictionary order, you can pipe the output to the `sort` command with the `-k 2` option to specify that sorting should be performed on the second field (i.e., the directory names). Here’s an example:
-
-   ```
-   du -d 1 -h | sort -k 2
-   ```
-
-   This will print the sizes of the directories in the current directory and its subdirectories, sorted in dictionary order by directory name.
-
-2. `ls`
-
-   https://www.runoob.com/linux/linux-comm-ls.html
-
-3. `tree`: show directory as tree
-
-   https://blog.csdn.net/xuehuafeiwu123/article/details/53817161
-
-   ```shell
-   sudo apt-get install tree
-   ```
-
-4. `locate`
-
-5. `find`
-
-6. 
-
-### other
-
-1. create a **soft link** (short cut). Files stored in `gxf1` are actually occupying space in `gxf`. 
-
-   ```shell
-   sudo ln -s /source/dir/ ./target
-   ```
-
-   We'd better put the absolute path here...
-
-   > (However, I still have to specify the install directory.)
-
-   create a **hard link**:
-
-   ```shell
-   sudo ln ./source ./target
-   ```
-
-   https://zhuanlan.zhihu.com/p/88891362
-
-   my comprehension: 都是一个指针
-
-   硬链接和源文件是一样的，指向相同的内容（文件、inode）；
-
-   软链接指向一个东西（链接文件），这个东西（也算是指针）告诉你某处有个文件（源文件内容）。
-
-   区别就是删了源文件，硬链接还能访问，软的就不行。但是两种链接都可以改名字？
-
-   如果要类比，硬链接就像win备份用的那个符号链接，软链接则像快捷方式
-
-   ![img](https://pic4.zhimg.com/80/v2-679da10fd5e4193d0098e6d6a35d5e1b_1440w.jpg)
-
-   <img src="https://pic3.zhimg.com/80/v2-9abd33350e3bcb401f379752874f9b52_1440w.jpg" alt="img" style="zoom:80%;" />
-
-2. 运行qsub命令时，报错: `script is written in DOS/Windows text format`。 解决办法：输入 
-
-   ```shell
-   dos2unix <pbs-script-file>
-   ```
-
-3. 
-
-
-### zip and unzip
-
-the problem rises when installing Gaussian
+create a **soft link** (short cut). Files stored in `gxf1` are actually occupying space in `gxf`. 
 
 ```shell
-sudo apt-get install rar unrar
+sudo ln -s /source/dir/ ./target
 ```
 
-unzip multiple files: <u>maybe just select all part files and right click</u>...
+We'd better put the absolute path here...
 
-https://www.cnblogs.com/xd502djj/archive/2011/03/25/1995331.html
+> (However, I still have to specify the install directory.)
+
+create a **hard link**:
 
 ```shell
-unrar x -o- -y 'the first part file' 'target path'
-
-unrar x -o- -y 'Gaussian 16 Rev. A.03 ES64L Linux x64.part1.rar' .
+sudo ln ./source ./target
 ```
 
-zip into some certain-size part files to store in baidunetdisk or qq
+https://zhuanlan.zhihu.com/p/88891362
 
-```shell
-tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
-```
+my comprehension: 都是一个指针
 
-> `-c` denotes zipping and `-x` denotes unzipping
+硬链接和源文件是一样的，指向相同的内容（文件、inode）；
 
+软链接指向一个东西（链接文件），这个东西（也算是指针）告诉你某处有个文件（源文件内容）。
 
+区别就是删了源文件，硬链接还能访问，软的就不行。但是两种链接都可以改名字？
 
-```shell
-tar xf xx.tar.gz # or:
-tar -zxvf xx.tar.gz                       
-```
+如果要类比，硬链接就像win备份用的那个符号链接，软链接则像快捷方式
 
-rather than xvrf...
+![img](https://pic4.zhimg.com/80/v2-679da10fd5e4193d0098e6d6a35d5e1b_1440w.jpg)
+
+<img src="https://pic3.zhimg.com/80/v2-9abd33350e3bcb401f379752874f9b52_1440w.jpg" alt="img" style="zoom:80%;" />
 
 
 
@@ -839,13 +845,9 @@ in GNOME, maybe click Software & updates
 >https://packages.ubuntu.com
 > https://packages.debian.org
 
+# Installation
 
-
-# Specific commands
-
-## Installation
-
-### apt
+## apt
 
 > !NOTE
 >
@@ -918,7 +920,7 @@ in GNOME, maybe click Software & updates
 
   如果让我删，就手动`apt-get install`几个再用软件更新器
 
-### yum
+## yum
 
 similar....
 
@@ -937,7 +939,7 @@ similar....
 
 3. 
 
-### dnf
+## dnf
 
 dnf, which has many useful subcommands, has replaced yum in newer RHEL OS like CentOS 8 or later...
 
@@ -957,7 +959,7 @@ dnf repolist
 
 
 
-### dpkg
+## dpkg
 
 install with .deb
 
@@ -1038,7 +1040,7 @@ debug
 
   
 
-### rpm
+## rpm
 
 - in RedHat, use `.rpm`, no `.deb`. `rpm` is `dpkg` in RHEL
 
@@ -1054,13 +1056,13 @@ debug
 
 - The command `rpm -qa` is used to query all installed RPM packages on a system. The `-q` flag stands for "query" and the `-a` flag stands for "all"
 
-### npm
+## npm
 
 install nodejs first.
 
 change source: https://www.cnblogs.com/feng-hao/p/11774543.html
 
-### other
+## other
 
 1. run .sh files:
 
@@ -1128,6 +1130,8 @@ change source: https://www.cnblogs.com/feng-hao/p/11774543.html
 
 
 
+# Specific commands
+
 ## privilige
 
 `chown` and `chmod`, means change owner, change mode respectively
@@ -1138,7 +1142,15 @@ https://www.runoob.com/linux/linux-comm-chmod.html  great tutorial!
 
 https://www.runoob.com/linux/linux-comm-chown.html
 
+- 适合于重装系统or迁移某软件到另一台机器：你可以使用 find 命令和 chmod 命令结合起来批量修改文件夹下所有可执行文件的权限。例如，如果你想让文件夹下所有文件都具有执行权限，可以使用以下命令：
 
+  ```shell
+  find <文件夹名> -type f -exec chmod a+x {} \;
+  ```
+
+  这条命令会查找指定文件夹下的所有文件，并使用 `chmod` 命令为它们添加执行权限。当然最后也 `chown` 一下
+
+  `chown -R`: recursive
 
 ## Download
 
@@ -1180,41 +1192,69 @@ get part of the files in one GitHub repository
 
 
 
-## tar and unzip
+## Zip and unzip
 
-- manual
+### tar
 
-  ```shell
-  tar -cf archive.tar foo bar  # Create archive.tar from files foo and bar.
-  tar -tvf archive.tar         # List all files in archive.tar verbosely.
-  tar -xf archive.tar          # Extract all files from archive.tar.
-  
-   主操作模式:
-  
-    -A, --catenate, --concatenate   追加 tar 文件至归档
-    -c, --create               创建一个新归档
-    -d, --diff, --compare      找出归档和文件系统的差异
-        --delete               从归档(非磁带！)中删除
-    -r, --append               追加文件至归档结尾
-    -t, --list                 列出归档内容
-        --test-label           测试归档卷标并退出
-    -u, --update               仅追加比归档中副本更新的文件
-    -x, --extract, --get       从归档中解出文件
-  
-    -j, --bzip2                通过 bzip2 过滤归档
-    -z, --gzip, --gunzip, --ungzip   通过 gzip 过滤归档
-        --zstd                 通过 zstd 过滤归档
-    -Z, --compress, --uncompress   通过 compress 过滤归档
-    -v, --verbose              详细地列出处理的文件
-  ```
+`-c` denotes zipping and `-x` denotes unzipping
 
-- tbz file
+```shell
+tar -cf archive.tar foo bar  # Create archive.tar from files foo and bar.
+tar -tvf archive.tar         # List all files in archive.tar verbosely.
+tar -xf archive.tar          # Extract all files from archive.tar.
 
-  ```shell
-  tar -xjvf G16-A03-AVX2.tbz
-  ```
+ 主操作模式:
 
-- unzip
+  -A, --catenate, --concatenate   追加 tar 文件至归档
+  -c, --create               创建一个新归档
+  -d, --diff, --compare      找出归档和文件系统的差异
+      --delete               从归档(非磁带！)中删除
+  -r, --append               追加文件至归档结尾
+  -t, --list                 列出归档内容
+      --test-label           测试归档卷标并退出
+  -u, --update               仅追加比归档中副本更新的文件
+  -x, --extract, --get       从归档中解出文件
+
+  -j, --bzip2                通过 bzip2 过滤归档
+  -z, --gzip, --gunzip, --ungzip   通过 gzip 过滤归档
+      --zstd                 通过 zstd 过滤归档
+  -Z, --compress, --uncompress   通过 compress 过滤归档
+  -v, --verbose              详细地列出处理的文件
+```
+
+tbz file
+
+```shell
+tar -xjvf G16-A03-AVX2.tbz
+```
+
+zip into some certain-size part files to store in baidunetdisk or qq
+
+```shell
+tar -zcvf folder.tar.gz folder1 folder2 | split -b 4000M -d -a 1 - folder.tar.gz
+```
+
+
+
+### unzip
+
+### rar
+
+the problem rises when installing Gaussian
+
+```shell
+sudo apt-get install rar unrar
+```
+
+unzip multiple files: <u>maybe just select all part files and right click</u>...
+
+https://www.cnblogs.com/xd502djj/archive/2011/03/25/1995331.html
+
+```shell
+unrar x -o- -y 'the first part file' 'target path'
+
+unrar x -o- -y 'Gaussian 16 Rev. A.03 ES64L Linux x64.part1.rar' .
+```
 
 
 
@@ -1230,10 +1270,13 @@ get part of the files in one GitHub repository
 
 `make`命令是运行的所在目录下的`Makefile`文件, 如果*Make*file 里有*check*的话, 会执行测试,也就是检查下编译出来的东西能不能用
 
-```
+```shell
 make -jn (install...)`
-n代表同时编译的进程，可以加快编译速度，n由用户计算机的配置与性能决定，当前的典型值为10。所以`make -j10
 ```
+
+`n`代表同时编译的进程，可以加快编译速度，`n`由用户计算机的配置与性能决定
+
+### cmake
 
 
 
@@ -1271,11 +1314,17 @@ n代表同时编译的进程，可以加快编译速度，n由用户计算机的
 
   gg: head of the file
 
+  0：本行第一个字符
+
+  $：本行最后一个字符
+
 - 在Vim中，您可以使用dd命令删除光标所在的整行。如果您想删除多行，可以在dd前面加上一个数字，例如3dd将删除光标所在行及其下面的两行。
 
 - 
 
 ### nano
+
+
 
 ## System function
 
@@ -1307,82 +1356,17 @@ bash 的历史函数依赖于一个名为 *HISTFILE* 的变量，通常设置为
 
 
 
-## Directory exploration
 
-### du
-
-The `du` command is used to estimate file space usage. The `-d 1` option specifies the maximum depth of 1 level for the directory tree and the `-h` option prints sizes in human-readable format.
-To sort the output of `du -d 1 -h` in dictionary order, you can pipe the output to the `sort` command with the `-k 2` option to specify that sorting should be performed on the second field (i.e., the directory names). Here’s an example:
-
-```
-du -d 1 -h | sort -k 2
-```
-
-This will print the sizes of the directories in the current directory and its subdirectories, sorted in dictionary order by directory name.
-
-### tree
-
-```shell
-tree .
-```
-
-# Hardware-related
-
-- HDMI线必须要插在主机的偏下一点，也就是直接插在显卡上，偏上的那个口是没有用的
-- disk自我检测分析与报告技术smart: https://www.cnblogs.com/xqzt/p/5512075.html
-
-
-
-# Emergency
-
-[技术|详解在 Ubuntu 中引导到救援模式或紧急模式 (linux.cn)](https://linux.cn/article-14709-1.html)
-
-When system halted/stuck
-
-1. do not double click .sdf file with multiple conformations...it occupies all memory..
-
-2. 1st solution
-
-   1. press ctrl+alt+F1~6 to enter tty. 
-      - F7 or F8: exit? not useful. maybe directly `reboot`..
-   2. use `top` to see threads. 
-      - top: https://www.cnblogs.com/ggjucheng/archive/2012/01/08/2316399.html
-   3. `kill id` to release.
-
-   ubuntu的话，卡死崩溃时你切换到tty1～6然后 
-
-   ```shell
-   sudo pkill X
-   startx
-   ```
-
-   一下，就好了。不需要重启。
-
-3. 2nd solution
-
-   https://blog.csdn.net/openswc/article/details/9105071
-
-   search SysRq fedora
-
-   I've tried https://fedoraproject.org/wiki/QA/Sysrq#How_do_I_enable_the_magic_SysRq_key.3F, don't know if it's applicable on this computer
-
-4. 
-
-5. http://www.mamicode.com/info-detail-2913916.html
-
-   also stop, disable .....but only under user.....
-
-   https://blog.csdn.net/xinxinqqt/article/details/44784195
-
-   https://blog.csdn.net/fryingpan/article/details/42641999
-
-   might because handling too many files in a folder...?
 
 # Desktop managers
 
-kde and gnome are two types of desktop interface. KDE looks like Windows desktop and gnome is the classic Linux desktop interface.
+kde and gnome are two types of desktop interface. KDE looks like Windows desktop and gnome is the classic Linux desktop interface. They both have specific fundamental tools.
 
+## Common
 
+To be re-organized
+
+- terminal可以Ctrl+Shift+F
 
 ## GNOME
 
@@ -1392,9 +1376,15 @@ kde and gnome are two types of desktop interface. KDE looks like Windows desktop
    gnome-shell --version
    ```
 
-2. 在Ubuntu的系统中如何将应用程序添加到开始菜单中 https://blog.csdn.net/qk1992919/article/details/51034361/ https://ubuntuqa.com/article/1235.html
+2. 重启桌面
 
+   ```shell
+   sudo /etc/init.d/gdm restart
    ```
+
+3. 在Ubuntu的系统中如何将应用程序添加到开始菜单中 https://blog.csdn.net/qk1992919/article/details/51034361/ https://ubuntuqa.com/article/1235.html
+
+   ```shell
    Name=Pymol   #此软件在菜单中当语言为英语的时候的显示名称      
    Name[zh_CN]=Pymol  #此软件在菜单中当语言为中文的时候的显示名称
    Comment=pymol   #此软件在菜单中当语言为英语的时候的说明       
@@ -1406,33 +1396,15 @@ kde and gnome are two types of desktop interface. KDE looks like Windows desktop
    Icon=/home/gxf/pymol/share/pymol/data/pymol/icons/icon2_128x128.png   #在开始菜>单中的显示图标
    ```
 
-   还是用**alacarte**. need to configure:
-
-   ```
-   adt
-   pymol
-   DSV
-   GaussView
-   chimera
-   Pycharm
-   anaconda-navigator
-   ```
-
-3. 软件中心点开没反应？ 
-
-   ```shell
-   sudo apt-get update  
-   sudo apt-get dist-upgrade
-   sudo apt-get install --reinstall ubuntu-software
-   ```
-
-   也没用
+   还是用**alacarte**. 
 
 4. 设置→隐私→**屏幕**锁定→设置时间
 
 5. https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu windows环境，装qq微信等
 
-6. Ubuntu分屏 https://blog.csdn.net/SiriusExplorer/article/details/103016747
+6. [Gnome设置双屏 - 掘金 (juejin.cn)](https://juejin.cn/post/7158803954175279112)
+
+7. [Ubuntu分屏](https://blog.csdn.net/SiriusExplorer/article/details/103016747)
 
    go to https://extensions.gnome.org/extension/39/put-windows/
 
@@ -1440,39 +1412,113 @@ kde and gnome are two types of desktop interface. KDE looks like Windows desktop
 
    <img src="https://img-blog.csdnimg.cn/20191111203143905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Npcml1c0V4cGxvcmVy,size_16,color_FFFFFF,t_70" style="zoom:50%;" />
 
-7. 有时候打开文件发现侧边栏不见了，这时候设置别的也没办法
+8. 有时候打开文件发现侧边栏不见了，这时候设置别的也没办法。解决但其实只要一个按键就好啦，就是F9
 
-   解决但其实只要一个按键就好啦，就是F9
+9. 在正常情况下，通过Alt + F2 => R => Enter 组合即可重启桌面环境。
 
-8. [Gnome设置双屏 - 掘金 (juejin.cn)](https://juejin.cn/post/7158803954175279112)
+10. 
 
-9. terminal可以Ctrl+Shift+F
+11. 
+
+12. 软件中心点开没反应？ 
+
+    ```shell
+    sudo apt-get update  
+    sudo apt-get dist-upgrade
+    sudo apt-get install --reinstall ubuntu-software
+    ```
+
+    也没用
 
 ## KDE
 
-1. Checking KDE Version? In konsole just type :
+### Fundamental
 
-   ```shell
-   kwin --version
-   ```
+- Checking KDE Version? In konsole just type :
 
-2. Default shortcut for creating a folder: F10; F2: rename
+  ```shell
+  kwin --version
+  ```
 
-3. Add application: you may want to add items to the KDE Menu toolbar. In order to do so, select/search Utilities, Menu Editor.
+- 
 
-4. [Linux中设置开机启动脚本（fedora）](https://blog.csdn.net/s651665496/article/details/51569729)
+### Shortcuts
 
-5. 使用CTRL键和功能键组合在一起可切换到指定的桌面，例如，CTRL-F1切换到1个桌面，CTRL-F3切换到第三个桌面。
+- Default shortcut for creating a folder: F10; 
 
-   ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/switch-desktop.jpg)
+- F2: rename file/folder
 
-6. The quick way to open a terminal: Ctrl+Alt+T
+- The quick way to open a terminal: Ctrl+Alt+T
 
-7. 要切换窗口可以用Alt+Tab来进行
+- 要切换窗口可以用Alt+Tab来进行
 
-8. https://os.51cto.com/art/200902/109883.htm
+  [桌面应用|如何在 KDE Plasma 桌面上配置任务切换器](https://linux.cn/article-14450-1.html)
 
-   如何在KDE桌面添加启动程序
+- 使用CTRL键和功能键组合在一起可切换到指定的桌面，例如，CTRL-F1切换到1个桌面，CTRL-F3切换到第三个桌面。
+
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/switch-desktop.jpg)
+
+  配置你的桌面的 pager 控件。它允许你轻松地切换至另三个附加工作区，带来更大的屏幕空间。
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-desktops.png" style="zoom:50%;" />
+
+### Settings
+
+- Display
+
+  - Dual screen: Settings---Display Configuration
+
+  - 把某个应用挪到显示屏2上，可以让它始终显示在显示屏2上，无论在主显示屏上如何在多个virtual desktop上切换
+
+    ![1693117470557](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-window-rules.png)
+
+  - Night color
+
+    ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-nightcolor.jpg)
+
+  - https://blog.csdn.net/qq_44760799/article/details/121057915
+
+- Konsole-profile
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/Konsole-profile.png" style="zoom:50%;" />
+
+- Appearance--Fonts
+
+  ![KDE-font](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-font.png)
+
+- In KDE 5.22.4 (Find your version in the About program):
+
+  Right click the time > Configure Digital Clock > Time Display > 24-hour
+
+  [reference](https://askubuntu.com/questions/1268176/global-24-hour-time-format-in-kde-plasma)
+
+- KDE Plasma 环境里可以打开Discover的设置，然后再设置软件源
+
+- Add application: you may want to add items to the KDE Menu toolbar. In order to do so, select/search Utilities, Menu Editor.
+
+- https://os.51cto.com/art/200902/109883.htm
+
+  如何在KDE桌面添加启动程序
+
+- [Linux中设置开机启动脚本（fedora）](https://blog.csdn.net/s651665496/article/details/51569729): `/etc/rc.d/rc.local`
+
+- 
+
+- 
+
+### Functions
+
+[8 个在 KDE Plasma 桌面环境下提高生产力的技巧和提示](https://zhuanlan.zhihu.com/p/57696044?utm_id=0)
+
+1. KDE-screenshot
+
+   ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-screenshot.jpg)
+
+2. Clipboard: lower right corner
+
+3. Konsole SSH manager
+
+   ![Konsole-ssh](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/Konsole-ssh.png)
 
 > deprecated 
 >
@@ -1482,17 +1528,7 @@ kde and gnome are two types of desktop interface. KDE looks like Windows desktop
 >
 >    now this is activated by default
 
-### Fedora38 Scientific
 
-https://labs.fedoraproject.org/scientific/
-
-评价：
-
-- gcc有点太新了，人家最多12.x它已经13.1了
-- 确实有各种花里胡哨的工具（或在应用商店里），但也不太用
-  - 默认的Spyder无法配自己的conda环境，默认的Pymol字体太小，等等
-
-其他和正常KDE差不多
 
 ### Fix problems
 
@@ -1505,7 +1541,7 @@ https://labs.fedoraproject.org/scientific/
 
   kwin_wayland is the KDE window manager. Nothing like lightdm, gdm, sddm,....
 
-  `kwin_x11 --replace` kills all processes and applications, but no need to reboot
+  they kill all processes and applications, but no need to reboot
 
   [是否可以不注销而重新启动KDE Plasma Desktop？](http://129.226.226.195/post/31487.html)
 
@@ -1516,6 +1552,14 @@ https://labs.fedoraproject.org/scientific/
 
   run all these in tty or a remote client
 
+- If the desktop taskbar does not work
+
+  ```shell
+  plasmashell --replace
+  ```
+  
+  But this occupies a terminal
+  
 - 
 
 - CentOs 重启ssh服务的命令如下：
@@ -1543,11 +1587,167 @@ https://labs.fedoraproject.org/scientific/
 
 
 
+## Emergency
+
+see also [Debugging experiences](#debugging-experiences )
+
+[技术|详解在 Ubuntu 中引导到救援模式或紧急模式 (linux.cn)](https://linux.cn/article-14709-1.html)
+
+When system halted/stuck
+
+1. 1st solution
+
+   1. press ctrl+alt+F1~6 to enter tty. 
+      - F7 or F8: exit? not useful. maybe directly `reboot`..
+   2. use `top` to see threads. 
+      - top: https://www.cnblogs.com/ggjucheng/archive/2012/01/08/2316399.html
+   3. `kill id` to release.
+
+   ubuntu的话，卡死崩溃时你切换到tty1～6然后 
+
+   ```shell
+   sudo pkill X
+   startx
+   ```
+
+   一下，就好了。不需要重启。
+
+2. 2nd solution
+
+   https://blog.csdn.net/openswc/article/details/9105071
+
+   search SysRq fedora
+
+   I've tried https://fedoraproject.org/wiki/QA/Sysrq#How_do_I_enable_the_magic_SysRq_key.3F, don't know if it's applicable on this computer
+
+3. [如何重置Xorg/xserver？ - Ubuntu问答 (ubuntuqa.com)](https://ubuntuqa.com/article/3066.html)
+
+   ```shell
+   sudo X -configure
+   Xorg -configure
+   ```
+
+   or, enter tty, kill the process of `gnome-shell` or tty7
+
+4. 
+
+5. http://www.mamicode.com/info-detail-2913916.html
+
+   also stop, disable .....but only under user.....
+
+   https://blog.csdn.net/xinxinqqt/article/details/44784195
+
+   https://blog.csdn.net/fryingpan/article/details/42641999
+
+   might because handling too many files in a folder...?
+
+> - do not double click .sdf file with multiple conformations...it occupies all memory..
+> - 
+
+
+
+
+
+无线网卡 (英文名称：**Wireless network interface controller**，缩写为WNIC) driver
+
+https://www.nnnxxx.cn/
+
+https://github.com/the-tcpdump-group/libpcap
+
+https://askubuntu.com/questions/537170/no-such-file-or-directory-net-bpf-h
+
 # System installation
 
 note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
-## memo
+## Releases
+
+[技术|最适合程序员的 10 款 Linux 发行版](https://linux.cn/article-14547-1.html)
+
+[2022 年适合初学者的 10 个最佳 Linux 发行版 - Linux迷 (linuxmi.com)](https://www.linuxmi.com/2022-10-top-linux.html)
+
+linux核心的东西都一样，发行版之间最大的区别无非是包管理和发行周期，以及默认带的软件包。当然，还有桌面管理和外观。。
+
+### Ubuntu
+
+familiar...
+
+### CentOS 9 Stream
+
+> it's GNOME by default
+
+The big thing with CentOS 9 Stream is that it’s kind of the polar opposite of what CentOS once was. In the past, CentOS was all about stability. Because of that, packages were very slow to upgrade to new releases. In fact, you would often find packages that were a few releases old. That was done by design, to keep the operating system as absolutely rock-solid as possible. And it worked. CentOS was always amazingly stable.
+
+### Fedora
+
+https://docs.fedoraproject.org/en-US/epel/
+Note that EPEL is not suitable for use in Fedora! Fedora is not Enterprise Linux. EPEL provides "a high quality set of additional packages for Enterprise Linux, including, but not limited to, Red Hat Enterprise Linux (RHEL), CentOS and Scientific Linux (SL), Oracle Linux (OL)". Put simply, Enterprise Linux is a term that refers to Red Hat Enterprise Linux or one of its clones. And Fedora is not a Red Hat clone.
+
+That is why you cannot install the "epel-release" package in Fedora. It simply does not exist. Don't try to use EPEL on Fedora.
+
+As noted before, the Fedora repositories provide most (if not all) of the EPEL packages. Additional software for Fedora is available in the RPMFusion repositories. In their own words, RPMFusion is "an extension of Fedora" that "provides software that the Fedora Project or Red Hat doesn't want to ship." RPMFusion can not be used on Enterprise Linux. You could see RPMFusion as the "EPEL alternative" for Fedora, but be aware that the software collections provided by RPMFusion and EPEL are entirely unrelated and uncomparable.
+
+[Failed to synchronize cache for repos for RHEL 8 - Red Hat Customer Portal](https://access.redhat.com/discussions/4222851?tour=8)
+
+#### Fedora38 Scientific
+
+https://labs.fedoraproject.org/scientific/
+
+评价：
+
+- gcc有点太新了，人家最多12.x它已经13.1了
+- 确实有各种花里胡哨的工具（或在应用商店里），但也不太用
+  - 默认的Spyder无法配自己的conda环境，默认的Pymol字体太小，等等
+
+Periodic table of elements
+
+![](E:\GitHub-repo\notes\techniques\images\Fedora-table-elements.jpg)
+
+![](E:\GitHub-repo\notes\techniques\images\Fedora-table-elements2.jpg)
+
+其他和正常KDE差不多
+
+> [Error while loading libgconf-2.so.4 - Fedora Discussion](https://discussion.fedoraproject.org/t/error-while-loading-libgconf-2-so-4/77736), [Linux 缺少 libgconf库 libgconf-2.so.4 =＞ not found](https://blog.csdn.net/wwlhz/article/details/109765020)
+
+## Installation
+
+### Partition
+
+2022.1.3重装
+
+| 挂载点 | 大小     | 文件系统 | 分区类型 |
+| ------ | -------- | -------- | -------- |
+| \boot  | 1G       | ext4     | 逻辑     |
+| \efi   | 1G       | EFI      | 主分区   |
+| \swap  | 16G      | swap     | 逻辑     |
+| \      | ≥80G     | ext4     | 主分区   |
+| \home  | /dev/sdb | ext4     | 主分区   |
+
+2022.2更新：其实boot和efi半个g就够了，swap倒可多点（32g，2倍内存，1倍内存也行） 
+
+### Other
+
+
+
+#### Grub
+
+[How to Change Grub Boot Order and Make Windows Default?](https://itslinuxfoss.com/how-to-change-grub-boot-order-and-make-windows-default/)
+
+[Change Grub Boot Order - Ask Ubuntu](https://askubuntu.com/questions/961929/change-grub-boot-order)
+
+```shell
+sudo nano /etc/default/grub
+GRUB_DEFAULT=1
+sudo update-grub
+```
+
+
+
+## Common configuration
+
+### Ubuntu
+
+2022, for my previous workstation
 
 > 安排存储分配。关键的软件也许装到root，但不利于重装
 >
@@ -1570,23 +1770,6 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 > 小问题
 >
 > - [x] 输入法点不开  界面（算了）
-
-## Re-installation
-
-### Partition
-
-2022.1.3重装
-
-| 挂载点   | 大小  | 文件系统 | 分区类型 |
-| ----- | --- | ---- | ---- |
-| \boot | 1G  | ext4 | 逻辑   |
-| \efi  | 1G  | EFI  | 主分区  |
-| \swap | 16G | swap | 逻辑   |
-| \     | 剩下的 | ext4 | 主分区  |
-
-2022.2更新：其实boot和efi半个g就够了，swap倒可多点（32g，2倍内存）
-
-### Common flow
 
 - 安装时定好系统语言等
 
@@ -1674,13 +1857,43 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
 [common installations reference](https://www.zdaiot.com/Linux/%E8%BD%AF%E4%BB%B6/Ubuntu%E5%AE%89%E8%A3%85%E5%90%8E%E8%A6%81%E8%A3%85%E7%9A%84%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/)
 
-### quick re-install
+need to configure in alacarte:
+
+```
+adt
+pymol
+DSV
+GaussView
+chimera
+Pycharm
+anaconda-navigator
+```
+
+in Fedora KDE, alacarte is replaced by "Menu Editor", gparted by KDE Partition Manager
+
+### Fedora KDE
+
+其实差不多
+
+- 改root密码
+- 至少有线能连上
+- zjunet连网；Firefox登录
+- NVIDIA driver, CUDA, etc.
+- 分辨率，双屏等
+- try ssh from and to
+- QQ, electerm, LibreOffice
+- conda, Pycharm, VScode, Pymol, vmd
+- cmake, gcc, fftw, gromacs, namd (intel, Amber, at least AmberTools)
+- try SSR
+- shortcuts, time zone, user info, multiple desktops, ...
+
+## Quick re-install
 
 Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 
 [reference](https://needis.me/ubuntu/2011/01/11/e9-87-8d-e8-a3-85ubuntu-e7-b3-bb-e7-bb-9f-ef-bc-8c-e5-ba-94-e7-94-a8-e7-a8-8b-e5-ba-8f-e7-9a-84-e6-81-a2-e5-a4-8d.html)
 
-#### backup
+### backup
 
 1. 备份已安装软件包列表
 
@@ -1718,7 +1931,7 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 
    
 
-#### recover
+### recover
 
 1. 新系统安装：一定是保持username不变的重装！（最好所有都别变）才能直接挂载home盘，直接原样使用……
 
@@ -1755,9 +1968,9 @@ Keep the HDD unchanged; keep all congfigurations; recover dpkg softwares.
 
 3. 重新下载安装之前系统中的软件（如果你安装的软件数量比较多，可能会花费较长时间） 
 
-    ```shell
-    sudo dpkg --set-selections < ~/packages.txt && sudo apt-get dselect-upgrade
-    ```
+   ```shell
+   sudo dpkg --set-selections < ~/packages.txt && sudo apt-get dselect-upgrade
+   ```
 
 4. 
 
@@ -1875,17 +2088,6 @@ cannot run dnf, rpm; yum is already removed: [rpm 和 yum 失败并显示“错�
 >
 > fedora36和38的启动盘，rescue时看到的挂载情况还不一样。后者看不到原来的root盘，只能看到home？
 >
-
-## Other info (Basics)
-
-https://docs.fedoraproject.org/en-US/epel/
-Note that EPEL is not suitable for use in Fedora! Fedora is not Enterprise Linux. EPEL provides "a high quality set of additional packages for Enterprise Linux, including, but not limited to, Red Hat Enterprise Linux (RHEL), CentOS and Scientific Linux (SL), Oracle Linux (OL)". Put simply, Enterprise Linux is a term that refers to Red Hat Enterprise Linux or one of its clones. And Fedora is not a Red Hat clone.
-
-That is why you cannot install the "epel-release" package in Fedora. It simply does not exist. Don't try to use EPEL on Fedora.
-
-As noted before, the Fedora repositories provide most (if not all) of the EPEL packages. Additional software for Fedora is available in the RPMFusion repositories. In their own words, RPMFusion is "an extension of Fedora" that "provides software that the Fedora Project or Red Hat doesn't want to ship." RPMFusion can not be used on Enterprise Linux. You could see RPMFusion as the "EPEL alternative" for Fedora, but be aware that the software collections provided by RPMFusion and EPEL are entirely unrelated and uncomparable.
-
-[Failed to synchronize cache for repos for RHEL 8 - Red Hat Customer Portal](https://access.redhat.com/discussions/4222851?tour=8)
 
 
 
