@@ -82,6 +82,14 @@ HSE no!
 
 
 
+## Loop modeling
+
+or remodeling
+
+- https://modbase.compbio.ucsf.edu/modloop/
+- https://new.rosettacommons.org/demos/latest/tutorials/loop_modeling/loop_modeling
+- http://rcd.iqfr.csic.es/
+
 
 
 # System setup
@@ -94,7 +102,7 @@ also refer to [related programming](Programming-for-MD.md#modeling-and-analysis)
 
 or CgenFF
 
-see [P]()
+see [CHARMM-GUI for ligands](Protein-ligand-simulation.md#charmm-gui-for-ligands)
 
 
 

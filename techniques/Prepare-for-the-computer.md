@@ -348,7 +348,18 @@ sudo dnf install NetworkManager-l2tp
 
 - ...
 
-### Fixed IP
+### Static IP
+
+[如何在Fedora 31上配置静态IP地址-之路教程 (onitroad.com)](https://www.onitroad.com/jc/linux/fedora/faq/how-to-configure-static-ip-address-on-fedora-31.html)
+
+```shell
+sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.address 192.168.1.127/24
+sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.gateway 192.168.1.1
+sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.dns 8.8.8.8
+sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.method bananaal
+```
+
+[如何在 Fedora Linux 系统下配置静态IP地址？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/589864823)
 
 
 
@@ -619,9 +630,9 @@ Go to Software & Updates...
 ### Install Nvidia in Fedora
 
 ```shell
-echo -e "blacklist nouveau" | tee -a /etc/modprobe.d/blacklist.conf
-mv /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).img.bak
-dracut -v /boot/initramfs-$(uname -r).img $(uname -r)
+sudo echo -e "blacklist nouveau" | tee -a /etc/modprobe.d/blacklist.conf
+sudo mv /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).img.bak
+sudo dracut -v /boot/initramfs-$(uname -r).img $(uname -r)
 ```
 
 [Configuration - RPM Fusion](https://rpmfusion.org/Configuration)
@@ -632,10 +643,15 @@ dracut -v /boot/initramfs-$(uname -r).img $(uname -r)
 # rpmfusion
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 # driver
-sudo dnf install xorg-x11-drv-nvidia-cuda
+sudo dnf update -y # and reboot if you are not on the latest kernel
+# sudo dnf install akmod-nvidia # rhel/centos users can use kmod-nvidia instead
+# we might not run this because it's installed in the next line as a dependency
+sudo dnf install xorg-x11-drv-nvidia-cuda #optional for cuda/nvdec/nvenc support
 ```
 
-install cuda as usual
+install cuda as usual? no, from rpmfusion
+
+Disable secure boot!
 
 [如何在 Fedora Linux 中安装 Nvidia 驱动 | Linux 中国 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/147186283)
 
@@ -643,7 +659,13 @@ install cuda as usual
 
 > [manjaro kde 21.2.5安装nvidia显卡驱动以解决笔记本电脑亮度调节问题](https://blog.csdn.net/a772304419/article/details/124141154)
 
+
+
 ### Debug
+
+#### Failed to start nvidia powerd service after update
+
+and even cannot boot
 
 [Failed to start nvidia powerd service after update - Fedora Discussion](https://discussion.fedoraproject.org/t/failed-to-start-nvidia-powerd-service-after-update/77482)
 
@@ -658,7 +680,23 @@ https://forums.developer.nvidia.com/t/nvidia-powerd-fails-to-start/235498
 systemctl disable nvidia-powerd
 ```
 
+#### After trying the driver with cuda and failed and removed
 
+[Solution: Modular Filtering Issue for NVIDIA Drivers/CUDA Sources Conflict - Fedora Discussion (fedoraproject.org)](https://discussion.fedoraproject.org/t/solution-modular-filtering-issue-for-nvidia-drivers-cuda-sources-conflict/78440)
+
+> ```
+> - package xorg-x11-drv-nvidia-3:530.41.03-1.fc37.x86_64 is filtered out by modular filtering
+> ```
+
+This is the key line. When a [dnf module](https://docs.pagure.org/modularity/) is enabled, packages in that module are preferred over non-modular packages.
+
+Did you follow [the RPM Fusion CUDA guide](https://rpmfusion.org/Howto/CUDA) or otherwise enable the official NVIDIA repo? That repo uses modularity, and so the RPM Fusion guide has you disable the module to prevent breakage:
+
+```shell
+sudo dnf module disable nvidia-driver
+```
+
+### 
 
 ## cuda
 
@@ -1980,3 +2018,9 @@ Parameters written to file: `/home/moonlight/LigPlus/lib/params/ligplus.par`
 ## RasMol
 
 http://www.rasmol.org/software/RasMol_2.7.5/INSTALL.html
+
+## Maestro
+
+(Education)
+
+Enter the unzipped archive, just run `./INSTALL` (interactively)

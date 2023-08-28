@@ -738,6 +738,18 @@ ax.tick_params(width=5,...)
 
   - 
 
+
+
+### pandas
+
+- 通过指定行及列索引号进行索引, 返回DataFrame对象
+
+  ```shell
+  df.iloc[[0, 1], [1, 2]]
+  ```
+
+- 
+
 ## building softwares
 
 ### argparse

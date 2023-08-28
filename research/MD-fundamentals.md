@@ -1023,6 +1023,13 @@ https://www.jianshu.com/p/5dc493663ed2
 
 ## other
 
+- is this right?
+
+  Actually, the SR terms are indeed interactions of the polymer with itself. 1-4
+  interactions are special interactions that occur between atoms separated by 3
+  bonds. SR stands for "short range," which encompasses all interactions that are
+  not excluded by that occur within the shortest nonbonded cutoff.
+
 - 
 
 
@@ -1138,6 +1145,10 @@ and VMD and CHARMM FF? I don't feel too much to say since they are just responsi
 ### Basics
 
 [prmtop format](https://ambermd.org/prmtop.pdf). only after .prmtop file is read into parmed do the residues have indices....
+
+使用文本编辑器打开生成的.inpcrd文件，然后查找其中的盒子参数。盒子参数位于文件的最后一行，包含三个数字，分别表示盒子在x、y和z方向上的长度。
+
+
 
 
 

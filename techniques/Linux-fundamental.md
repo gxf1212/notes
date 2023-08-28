@@ -49,7 +49,7 @@ Linux desktop的优势：可以直接为cluster做测试
 dos2unix <pbs-script-file>
   ```
 
-- 
+- emm
 
 - 回收站：`~/.local/share/Trash/files`
 
@@ -289,6 +289,12 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 12. give user sudo privilege
 
     https://blog.csdn.net/Dream_angel_Z/article/details/45841109
+
+    ```shell
+    visudo
+    ```
+
+    add: `user ALL=(ALL)     ALL`
 
 13. under root, no need to add `sudo`
 
@@ -1356,7 +1362,19 @@ bash 的历史函数依赖于一个名为 *HISTFILE* 的变量，通常设置为
 
 
 
+# Hardware-related
 
+- HDMI线必须要插在主机的偏下一点，也就是直接插在显卡上，偏上的那个口是没有用的
+
+- disk自我检测分析与报告技术smart: https://www.cnblogs.com/xqzt/p/5512075.html
+
+- 无线网卡 (英文名称：**Wireless network interface controller**，缩写为WNIC) driver
+
+  https://www.nnnxxx.cn/
+
+  https://github.com/the-tcpdump-group/libpcap
+
+  https://askubuntu.com/questions/537170/no-such-file-or-directory-net-bpf-h
 
 # Desktop managers
 
@@ -1410,7 +1428,7 @@ To be re-organized
 
    setting 
 
-   <img src="https://img-blog.csdnimg.cn/20191111203143905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1Npcml1c0V4cGxvcmVy,size_16,color_FFFFFF,t_70" style="zoom:50%;" />
+   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/divide-screen.png" style="zoom:50%;" />
 
 8. 有时候打开文件发现侧边栏不见了，这时候设置别的也没办法。解决但其实只要一个按键就好啦，就是F9
 
@@ -1456,11 +1474,13 @@ To be re-organized
 
 - 使用CTRL键和功能键组合在一起可切换到指定的桌面，例如，CTRL-F1切换到1个桌面，CTRL-F3切换到第三个桌面。
 
-  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/switch-desktop.jpg)
-
   配置你的桌面的 pager 控件。它允许你轻松地切换至另三个附加工作区，带来更大的屏幕空间。
 
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-desktops.png" style="zoom:50%;" />
+
+  将应用移动到特定虚拟桌面or工作区，设置快捷键：
+
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/switch-desktop.jpg)
 
 ### Settings
 
@@ -1502,7 +1522,13 @@ To be re-organized
 
 - [Linux中设置开机启动脚本（fedora）](https://blog.csdn.net/s651665496/article/details/51569729): `/etc/rc.d/rc.local`
 
-- 
+- Dolphin 
+
+  - Click on the path. You can type or copy!
+
+  - startup path
+
+    ![](E:\GitHub-repo\notes\techniques\images\KDE-Dolphin-startup.png)
 
 - 
 
@@ -1516,7 +1542,9 @@ To be re-organized
 
 2. Clipboard: lower right corner
 
-3. Konsole SSH manager
+3. 鼠标移动到左上角：Activities
+
+4. Konsole SSH manager
 
    ![Konsole-ssh](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/Konsole-ssh.png)
 
@@ -1545,6 +1573,8 @@ To be re-organized
 
   [是否可以不注销而重新启动KDE Plasma Desktop？](http://129.226.226.195/post/31487.html)
 
+  [How to fix the KDE Plasma panel crash problem (addictivetips.com)](https://www.addictivetips.com/ubuntu-linux-tips/fix-kde-plasma-panel-crash/)
+
   ```shell
   killall plasmashell # to stop it
   kstart plasmashell # to restart it
@@ -1560,9 +1590,11 @@ To be re-organized
   
   But this occupies a terminal
   
+  [A quick way to restart panel in KDE?](https://bbs.archlinux.org/viewtopic.php?id=273779)
+  
 - 
 
-- CentOs 重启ssh服务的命令如下：
+- CentOS重启ssh服务的命令如下：
 
   ```shell
   service sshd restart
@@ -1592,6 +1624,8 @@ To be re-organized
 see also [Debugging experiences](#debugging-experiences )
 
 [技术|详解在 Ubuntu 中引导到救援模式或紧急模式 (linux.cn)](https://linux.cn/article-14709-1.html)
+
+> [如何进入Linux救援模式 | CS笔记 (pynote.net)](https://cs.pynote.net/se/202111251/)
 
 When system halted/stuck
 
@@ -1643,18 +1677,6 @@ When system halted/stuck
 
 > - do not double click .sdf file with multiple conformations...it occupies all memory..
 > - 
-
-
-
-
-
-无线网卡 (英文名称：**Wireless network interface controller**，缩写为WNIC) driver
-
-https://www.nnnxxx.cn/
-
-https://github.com/the-tcpdump-group/libpcap
-
-https://askubuntu.com/questions/537170/no-such-file-or-directory-net-bpf-h
 
 # System installation
 
@@ -1875,11 +1897,10 @@ in Fedora KDE, alacarte is replaced by "Menu Editor", gparted by KDE Partition M
 
 其实差不多
 
-- 改root密码
 - 至少有线能连上
 - zjunet连网；Firefox登录
 - NVIDIA driver, CUDA, etc.
-- 分辨率，双屏等
+- system configuration: 分辨率，双屏等, disable screen lock, virtual desktop
 - try ssh from and to
 - QQ, electerm, LibreOffice
 - conda, Pycharm, VScode, Pymol, vmd
@@ -2929,7 +2950,7 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
     切换盘符和切换路径是分离的。想要切盘符 直接使用命令 `e:` 或者 `cd /d e:` 即可
 
-19. 
+19. [将 Windows 电脑用作移动热点 - Microsoft 支持](https://support.microsoft.com/zh-cn/windows/将-windows-电脑用作移动热点-c89b0fad-72d5-41e8-f7ea-406ad9036b85)  not useful for 188...
 
 ## WSL
 
@@ -2937,6 +2958,8 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 - WSL 可以使用 `[tool-name].exe` 直接从 WSL 命令行运行 Windows 工具。 例如，`notepad.exe`。
 
 
+
+- powershell: [无法加载文件 ******.ps1，因为在此系统中禁止执行脚本。有关详细信息，请参阅 "get-help about_signing"_gulp : 无法加载文件 c:\program files\nodejs\gulp.ps1,因为在...](https://blog.csdn.net/github_35186068/article/details/80518681)
 
 # MacOS notes
 

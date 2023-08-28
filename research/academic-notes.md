@@ -14,7 +14,11 @@ maybe a new .md file in the future
 
   ![](E:\GitHub-repo\notes\research\academic-notes.asssets\hsab.jpg)
 
-- 
+- 6s 
+
+  <img src="E:\GitHub-repo\notes\research\academic-notes.asssets\6s-ele.jpg" style="zoom:80%;" />
+
+- [Metal to Ligand and Ligand to Metal Charge Transfer Bands - Chemistry LibreTexts](https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Supplemental_Modules_(Physical_and_Theoretical_Chemistry)/Spectroscopy/Electronic_Spectroscopy/Metal_to_Ligand_and_Ligand_to_Metal_Charge_Transfer_Bands)
 
 ## Bioinorganic Chemistry
 
@@ -29,6 +33,7 @@ maybe a new .md file in the future
 - one-third of all proteins are estimated to be metalloprotein
 - Mammalian metallothioneins (MTs) are a group of cysteine-rich proteins that bind metal ions in two α- and β-domains and represent a major cellular Zn(II)/Cu(I) buffering system in the cell.
 - Heavy metal ions can precipitate proteins by bonding with negatively charged parts of the protein molecule, reducing the tendency of the protein to attract a layer of water molecules around it, allowing the protein molecules to interact with one another and precipitate out of solution.
+- For example, the average concentrations of free Na<sup>+</sup>, K<sup>+</sup>, Mg<sup>2+</sup>, and Ca<sup>2+</sup> in the blood plasma are ∼145, ∼4, ∼1.5, and ∼1.8 mM, respectively, while those in the cytosol are ∼12, ∼139, ∼0.8, and <0.2 × 10<sup>–3</sup> mM, respectively. (6) At the same time, the intracellular concentration of the free transition metals such as Zn<sup>2+</sup> (10<sup>–10</sup>–10<sup>–15</sup> M) (7-9) and Cu<sup>+</sup> (∼10<sup>–18</sup> M) (10) is kept very low, yet the cellular/extracellular proteins in a healthy organism select with high fidelity the “right” metal ion against a background of, sometimes, higher concentrations of competing cations.
 
 
 
