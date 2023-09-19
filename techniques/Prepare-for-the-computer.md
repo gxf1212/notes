@@ -1,4 +1,8 @@
-# Prepare for the computer
+
+
+
+
+# mputer
 
 This page is all about software installing (Linux), both for system and project environment. Also something about Fedora. A little bit messy. 
 
@@ -33,7 +37,7 @@ other text editors
 - https://www.sublimetext.com/docs/linux_repositories.html
 - https://atom.io/  sunset...
 
-## Chat
+## chat
 
 These are for old systems:
 
@@ -329,8 +333,33 @@ sudo dnf install NetworkManager-l2tp
   # --zone 作用域 
   # 添加端口，格式为：端口/通讯协议
   # --permanent 永久生效，没有此参数重启后失效
+  +
   
-  # 重启防火墙
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   firewall-cmd --reload
   # 查看端口号
   netstat -ntlp
@@ -356,7 +385,7 @@ sudo dnf install NetworkManager-l2tp
 sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.address 192.168.1.127/24
 sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.gateway 192.168.1.1
 sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.dns 8.8.8.8
-sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.method bananaal
+sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.method manual
 ```
 
 [如何在 Fedora Linux 系统下配置静态IP地址？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/589864823)
@@ -696,7 +725,13 @@ Did you follow [the RPM Fusion CUDA guide](https://rpmfusion.org/Howto/CUDA) or 
 sudo dnf module disable nvidia-driver
 ```
 
-### 
+[NVIDIA drivers not being detected in Fedora/KDE](https://forums.developer.nvidia.com/t/nvidia-drivers-not-being-detected-in-fedora-kde/75350)
+
+
+
+If you installed the NVIDIA driver from `.run` files or bundled driver from CUDA Toolkit, the driver may be lost when you upgrade your Linux kernel.
+
+
 
 ## cuda
 
@@ -1787,11 +1822,15 @@ snugdock is an Ab docking tool
 
 ## VMD
 
+https://www.ks.uiuc.edu/Research/vmd/current/docs.html   VMD doc with installation guide
+
 ### pre-compiled version
 
 https://blog.csdn.net/qyb19970829/article/details/106947424
 
 > 2022.2.11, `vmd-1.9.4a55.bin.LINUXAMD64-CUDA102-OptiX650-OSPRay185-RTXRTRT.opengl.tar.gz`
+
+**READ THE README FILE FOR INSTALLATION!**
 
 `$install_bin_dir`: `/usr/local/bin` This is the location of the startup script ’vmd’.
 
@@ -1802,7 +1841,7 @@ All files are here.
 > customize: `$Home/$install_name/bin`       `$Home/$install_name/lib`
 
 ```shell
-sudo  ./configure LINUXAMD64
+sudo  ./configure LINUXAMD64  # update: this is nolonger needed. 
 sudo  ./configure
 cd src
 sudo make install
@@ -1814,9 +1853,9 @@ if you don't want to customize, keep the installation folder to run the followin
 sudo make uninstall
 ```
 
-You may refer to the pdf attached for more options
+or delete the files  https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/25245.html
 
-uninstall: delete the files  https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/25245.html
+You may refer to the pdf attached for more options
 
 ### windows
 

@@ -25,6 +25,8 @@ Linux desktop的优势：可以直接为cluster做测试
 
   transform `.rpm` to `.deb`: `sudo alien ./*.rpm`
   
+- [Linux 黑话解释：什么是长期支持（LTS）版本？什么是 Ubuntu LTS？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/246313340)
+
 - 
 
 - https://www.techtarget.com/whatis/definition/daemon
@@ -126,7 +128,14 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
    nvidia-smi -L  # check the number and info of GPUs
    ```
 
-5. check Display
+5. [Linux下如何查看一块硬盘是不是固态硬盘（SSD）](https://blog.csdn.net/qq_42303254/article/details/89317618)：因为SSD是非转动盘，*如果返回结果为0说明是SSD硬盘，如果返回结果为1，说明是转动盘HDD类的硬盘。* 
+
+   ```shell
+   cat /sys/block/sda/queue/rotational
+   lsblk -d -o name,rota
+   ```
+
+6. check Display
 
    ```shell
    lspci | grep -i nvidia
@@ -142,7 +151,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
    You can also install the package lshw-gtk to get a GUI.
 
-6. change hostname 
+7. change hostname 
 
    - just type: `sudo hostname new_hostname`, but works temporarily
    - maybe also edit `/etc/hosts` and `/etc/hostsname`
@@ -151,20 +160,20 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
    [修改主机名(/etc/hostname和/etc/hosts区别)-CSDN博客](https://blog.csdn.net/dufufd/article/details/75330423)
 
-7. [check shell version](https://blog.csdn.net/electrocrazy/article/details/78313962): `bash --version`
+8. [check shell version](https://blog.csdn.net/electrocrazy/article/details/78313962): `bash --version`
 
-8. [update kernel](https://ubuntuhandbook.org/index.php/2022/05/kernel-5-18-released-install-in-ubuntu-2204/): just install the four packages
+9. [update kernel](https://ubuntuhandbook.org/index.php/2022/05/kernel-5-18-released-install-in-ubuntu-2204/): just install the four packages
 
    https://kernel.ubuntu.com/~kernel-ppa/mainline. find 'amd'
 
-9. edit path:
+10. edit path:
 
    ```shell
    sudo gedit ~/.bashrc
    source ~/.bashrc
    ```
 
-10. 查看当前系统的glibc版本: `/lib64/libc.so.6`
+11. 查看当前系统的glibc版本: `/lib64/libc.so.6`
 
    https://lindevs.com/check-glibc-version-in-linux: `ldd --version`
 
@@ -963,6 +972,8 @@ dnf repolist
 
 `distro-sync` synchronize system with all available repositories, but `upgrade` only upgrade your system.
 
+[Adding or removing software repositories in Fedora](https://docs.fedoraproject.org/en-US/quick-docs/adding-or-removing-software-repositories-in-fedora/)
+
 
 
 ## dpkg
@@ -1194,7 +1205,7 @@ get part of the files in one GitHub repository
 
   [如何在github下载一个项目中的单个文件或者子文件](https://blog.csdn.net/ai_faker/article/details/107823359)
 
-- https://blog.csdn.net/q279838089/article/details/44751039
+- [ubuntu 下重新定位SVN URL方法](https://blog.csdn.net/q279838089/article/details/44751039)
 
 
 
@@ -1490,6 +1501,8 @@ To be re-organized
 
   - 把某个应用挪到显示屏2上，可以让它始终显示在显示屏2上，无论在主显示屏上如何在多个virtual desktop上切换
 
+    > match by regular expression
+
     ![1693117470557](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-window-rules.png)
 
   - Night color
@@ -1520,7 +1533,18 @@ To be re-organized
 
   如何在KDE桌面添加启动程序
 
-- [Linux中设置开机启动脚本（fedora）](https://blog.csdn.net/s651665496/article/details/51569729): `/etc/rc.d/rc.local`
+- [Linux中设置开机启动脚本（fedora）](https://blog.csdn.net/s651665496/article/details/51569729)
+
+  ````shell
+  sudo vi /etc/rc.d/rc.local
+  sudo chmod +x /etc/rc.d/rc.local
+  sudo systemctl enable rc-local.service
+  sudo vim /usr/lib/systemd/system/rc-local.service
+  #在rc-local.service文件末尾加入:
+  [Install]
+  WantedBy=multi-user.target
+  #重新执行
+  ````
 
 - Dolphin 
 
@@ -1702,8 +1726,10 @@ The big thing with CentOS 9 Stream is that it’s kind of the polar opposite of 
 
 ### Fedora
 
+[Fedora 38 科研环境搭建](https://zhuanlan.zhihu.com/p/635384972): compare with others
+
 https://docs.fedoraproject.org/en-US/epel/
-Note that EPEL is not suitable for use in Fedora! Fedora is not Enterprise Linux. EPEL provides "a high quality set of additional packages for Enterprise Linux, including, but not limited to, Red Hat Enterprise Linux (RHEL), CentOS and Scientific Linux (SL), Oracle Linux (OL)". Put simply, Enterprise Linux is a term that refers to Red Hat Enterprise Linux or one of its clones. And Fedora is not a Red Hat clone.
+Note that EPEL is not suitable for use in Fedora! Fedora is not Enterprise Linux. EPEL provides "a high quality set of additional packages for Enterprise Linux, including, but not limited to, Red Hat Enterprise Linux (RHEL), CentOS and Scientific Linux (SL), Oracle Linux (OL)". Put simply, Enterprise Linux is a term that refers to Red Hat Enterprise Linux or one of its clones. And Fedora is not a Red Hat clone.f
 
 That is why you cannot install the "epel-release" package in Fedora. It simply does not exist. Don't try to use EPEL on Fedora.
 
@@ -1725,11 +1751,19 @@ Periodic table of elements
 
 ![](E:\GitHub-repo\notes\techniques\images\Fedora-table-elements.jpg)
 
-![](E:\GitHub-repo\notes\techniques\images\Fedora-table-elements2.jpg)
+<img src="E:\GitHub-repo\notes\techniques\images\Fedora-table-elements2.jpg" style="zoom:67%;" />
 
 其他和正常KDE差不多
 
 > [Error while loading libgconf-2.so.4 - Fedora Discussion](https://discussion.fedoraproject.org/t/error-while-loading-libgconf-2-so-4/77736), [Linux 缺少 libgconf库 libgconf-2.so.4 =＞ not found](https://blog.csdn.net/wwlhz/article/details/109765020)
+
+unsolved problems:
+
+- taskbar always frozen
+- login waiting 1 min
+- startup recover windows
+- GFW
+- download WeChat files just in Fedora
 
 ## Installation
 

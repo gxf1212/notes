@@ -128,7 +128,7 @@ examples
   sed -n '/^RIM-COD/p' file.txt
   ```
 
-- 
+- to support a varible, double quote! single does not work
 
 
 
@@ -146,7 +146,54 @@ examples
 
 - 
 
+- range of action
+
+  ```shell
+  sed -i '1,/^\#include "amber99sb-star-ildn-mut.ff\/forcefield.itp"/d' topol_Protein_chain_H_hybrid.itp
+  # remove everything before (including) something
+  sed -i '/#ifdef POSRES/,$d' topol_Protein_chain_H_hybrid.itp
+  # remove everything after  (including) something
+  sed '0,/#ifdef POSRES/{s/#ifdef POSRES/#ifdef POSRES_abiss/}' top.top > newtop.top
+  ```
+
+  - `0,/#ifdef POSRES/`: This specifies a range of lines to search for the pattern. The range is defined from the beginning of the file (line 0) to the first line containing `#ifdef POSRES`.
+  - `{s/#ifdef POSRES/#ifdef POSRES_abiss/}`: This is the substitution command within the specified range. It replaces the first occurrence of `#ifdef POSRES` with `#ifdef POSRES_abiss`.
+
+- Append "This is a new line." before a line containing "Pattern":
+
+  ```shell
+  sed -i '/Pattern/i This is a new line.' input_file > output_file
+  ```
+
+  Append "This is a new line." after a line containing "Pattern":
+
+  ```shell
+  sed '/Pattern/a This is a new line.' input_file > output_file
+  ```
+
+  Append "This line goes after line 3." after the third line (at line 4):
+
+  ```shell
+  sed '3a This line goes after line 3.' input_file > output_file
+  ```
+
+  Insert "This line goes at line 3." at the third line:
+
+  ```shell
+  sed '3id This line goes at line 3.' input_file > output_file
+  ```
+
+  Append "This is the last line." after the last line of the file:
+
+  ```shell
+  sed '$a This is the last line.' input_file > output_file
+  ```
+
+  After running one of these commands, the modified content will be written to `output_file`. **If you want to edit the file in-place, you can use the `-i` option with `sed`**
+
 - 
+
+
 
 ## File processing
 
@@ -240,6 +287,11 @@ examples
    perform any math: (()) or between ``
 
    `$( )` to store any outputed number in a variable
+
+   ```shell
+   # e.g. 
+   left_water=$(( $all_water - $removed_water ))
+   ```
 
 2. keep the calculated result
 

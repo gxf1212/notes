@@ -270,9 +270,11 @@ finalshell does not look so pretty though we can just use it. cannot update..?
 
 #### electerm
 
+[开源的 SSH SFTP 客户端 Electerm + Gitee gist - 简书 (jianshu.com)](https://www.jianshu.com/p/399725eb5014)
+
 > functions covers what is in Xshell and Xftp, but kind of small font...but a great tool!
 
-（不是恰饭，是我在用）
+写于2022（不是恰饭，是我在用）
 
 electerm是一个Linux端的ssh客户端，国产软件。
 

@@ -339,6 +339,14 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
    [VMD启动时自动调整窗口的设置方法](https://www.bilibili.com/read/cv7167667)
 
+   Not useful in new Fedora system (2023.8)? see [VMD-L Mailing List (uiuc.edu)](https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/24413.html)
+
+   Press "Push Menus" after vmd startup for other windows
+
+   For OpenGL Display, just set it here...
+
+   ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/vmd-display.jpg)
+
 2. Graphics--Representations: for visualization.
 
    - Draw Style

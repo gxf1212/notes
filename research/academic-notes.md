@@ -20,6 +20,25 @@ maybe a new .md file in the future
 
 - [Metal to Ligand and Ligand to Metal Charge Transfer Bands - Chemistry LibreTexts](https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Supplemental_Modules_(Physical_and_Theoretical_Chemistry)/Spectroscopy/Electronic_Spectroscopy/Metal_to_Ligand_and_Ligand_to_Metal_Charge_Transfer_Bands)
 
+
+
+
+charge transfer from the ligands to Hg2+ (0.49−0.62 e) is greater than that to Zn2+ (0.32−0.41 e), indicating that Hg2+ can accept more negative charge from the ligands than Zn2+.
+
+
+The thermodynamical preference of the harder N and O--containing side chains for the “soft” Hg rather than the “borderline” Zn is probably due to relativistic effects resulting in a strong stabilization of mercury's vacant 6s orbitals, which in turn enhances its electron-accepting ability.
+
+
+preventing the metal-bound water from acting as a nucleophile in the reaction.
+
+
+Cys-rich proteins have been used by living
+organisms to fight heavy metal intoxication. Cys-rich proteins
+such as metallothionein are used as traps to sequester nonbiogenic metal ions from the body fluids
+
+
+铝离子应该不会MLCT啥的
+
 ## Bioinorganic Chemistry
 
 - Cadmium can replace zinc, but is toxic because it does not have the same catalytic ability.
@@ -109,11 +128,31 @@ The most abundant membrane lipids are the phospholipids. These have a polar head
 
 
 
-## Principle
+## Thermodynamics & kinetics
 
 The inhibitory constant (Ki) is a type of equilibrium dissociation constant (Kd) that represents the equilibrium binding affinity for a ligand that reduces the activity of its binding partner.
 
 Ki is associated with thermodynamic parameters in that ΔG = RTln(Ki), where ΔG, R, and T are the absolute binding free energy, the gas constant, and the absolute temperature, respectively
+
+
+
+The turnover number of an enzyme (kcat or catalytic rate constant) is <u>the maximal number of molecules of substrate converted to product per active site per unit time of several different substrates to different products</u>.
+
+
+
+How to estimate how long a substrate stays at the active site? Given the M-M equation:
+$$
+v=k_{cat}\dfrac{[E][S]}{K_m+[S]}
+$$
+meaning how many substrates are converted per unit time. So $\dfrac{v}{[E]}$ means how many substrates are converted per unit time per unit enzyme, or $\dfrac{[E]}{v}$ means how long it takes for **one enzyme molecule** to convert one substrate molecule to the product.
+$$
+t=\dfrac{1+K_m/[S]}{k_{cat}}
+$$
+
+- reversibly proportional to $k_{cat}$. For protein kinases with $k_{cat}$ of several seconds<sup>-1</sup>, it should require seconds to simulate the whole process.
+- $t$ increases dramatically if $[S]$ is much lower than $K_m$, usually in 0.x µM
+
+see [data](https://www.brenda-enzymes.org/enzyme.php?ecno=2.7.11.1#TURNOVER%20NUMBER%20[1/s])
 
 
 
@@ -218,6 +257,19 @@ A **non-receptor tyrosine kinase** (**nRTK**) is a [cytosolic](https://en.wikipe
 
 
 
+### Macropinocytosis
+
+Macropinocytosis is responsible for nonspecific uptake of fluid, solutes, membrane, ligands and smaller particles attached to the plasma membrane.
+
+In macropinocytosis, vesicles larger than those formed by micropinocytosis are created. These vesicles hold larger volumes of fluid and dissolved nutrients. The vesicles range in size from 0.5 to 5 micrometers in diameter.
+https://www.thoughtco.com/pinocytosis-definition-4143229
+
+Macropinosomes are known to be leaky
+
+![](E:\GitHub-repo\notes\research\academic-notes.asssets\macropinocytosis.png)
+
+
+
 ## Cancer biology
 
 - [The main difference between hyperplasia and neoplasia is that hyperplasia is an increase in the number of cells either due to physiological or pathological conditions, whereas neoplasia is unregulated cell proliferation due to genetic changes](https://pediaa.com/what-is-the-difference-between-hyperplasia-and-neoplasia/). Hyperplasia is generally benign, meaning that once the stimulus causing it is removed, the abnormal increase in cell number stops. [On the other hand, neoplasia can be malignant](https://www.healthresearchpolicy.org/hyperplastic/).
@@ -269,6 +321,10 @@ RNA aptamer targeting AR (v7) DNA binding domain?
   Plasma membranes are normally about -116 mV, which would keep K+ concentrations inside a cell 100 times higher and Cl- concentrations 100 times lower than in the external solution.
 
 
+
+# Polymer
+
+One of the fascinating properties of polyzwitterions is the so-called anti-polyelectrolyte behavior in aqueous solutions – **the polymer solubility, the solution viscosity and the swelling of polymer network increase with added salts**, in contrast to salt-induced collapse of ordinary polyelectrolytes.
 
 
 
