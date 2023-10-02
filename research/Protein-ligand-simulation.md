@@ -4,6 +4,12 @@ Mainly from UROPS project and FYP experiences. May also include some general MD 
 
 This page includes general results, not project-specific details.
 
+
+
+### Other
+
+[ATB](https://atb.uq.edu.au/index.py?tab=submit), an old ligand parametrizer
+
 # MD simulation
 
 ## Amber99SB-ildn+GAFF+gmx
@@ -591,23 +597,23 @@ see method 1 for detailed parameters
 
 ### Generate the topology of ligands
 
-> see: 
->
-> - [使用GAFF力场参数化小分子的自动化工具](https://jerkwin.github.io/2019/07/14/%E8%AE%B8%E6%A5%A0-%E4%BD%BF%E7%94%A8GAFF%E5%8A%9B%E5%9C%BA%E5%8F%82%E6%95%B0%E5%8C%96%E5%B0%8F%E5%88%86%E5%AD%90%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/) but did not understood the script
-> - [使用AmberTools+ACPYPE+Gaussian创建小分子GAFF力场的拓扑文件](https://jerkwin.github.io/2015/12/08/%E4%BD%BF%E7%94%A8AmberTools+ACPYPE+Gaussian%E5%88%9B%E5%BB%BA%E5%B0%8F%E5%88%86%E5%AD%90GAFF%E5%8A%9B%E5%9C%BA%E7%9A%84%E6%8B%93%E6%89%91%E6%96%87%E4%BB%B6/) with gui and script examples
-> - user protocols
->   - https://zhuanlan.zhihu.com/p/188735956 use gaussian and resp charge
->   - https://gohom.win/2015/11/12/AMBER-Ligand/
->   - http://kangsgo.com/94.html
-> - summary
->   - [几种生成有机分子GROMACS拓扑文件的工具](http://bbs.keinsci.com/thread-428-1-1.html) generate charge
->   - [RESP2原子电荷的思想](http://sobereva.com/531) intro to resp charge
->
-> comments:
->
-> - it's better to work under Linux environment. Windows cmd does not support statement like `f=atp`. you may install WSL (Windows subsystem for Linux) and find your files at `\mnt`
-> - tools needed: conda (AmberTools, acpype), Gaussian+MDanalysis, openbabel, gromacs, bash shell
-> - [download G16 for Linux](https://murbsch-my.sharepoint.com/:f:/g/personal/gxf1212_880n_vip/Em7CrTdwlC5Horhyc1RxCBEBdlhKyrUy5Og55gbckLL4sg?e=XD0A7B)
+#### QM-Reference
+
+- [使用GAFF力场参数化小分子的自动化工具](https://jerkwin.github.io/2019/07/14/%E8%AE%B8%E6%A5%A0-%E4%BD%BF%E7%94%A8GAFF%E5%8A%9B%E5%9C%BA%E5%8F%82%E6%95%B0%E5%8C%96%E5%B0%8F%E5%88%86%E5%AD%90%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/) but did not understood the script
+- [使用AmberTools+ACPYPE+Gaussian创建小分子GAFF力场的拓扑文件](https://jerkwin.github.io/2015/12/08/%E4%BD%BF%E7%94%A8AmberTools+ACPYPE+Gaussian%E5%88%9B%E5%BB%BA%E5%B0%8F%E5%88%86%E5%AD%90GAFF%E5%8A%9B%E5%9C%BA%E7%9A%84%E6%8B%93%E6%89%91%E6%96%87%E4%BB%B6/) with gui and script examples
+- user protocols
+  - https://zhuanlan.zhihu.com/p/188735956 use gaussian and resp charge
+  - https://gohom.win/2015/11/12/AMBER-Ligand/
+  - http://kangsgo.com/94.html
+- sob articles
+  - [几种生成有机分子GROMACS拓扑文件的工具](http://bbs.keinsci.com/thread-428-1-1.html) generate charge
+  - [RESP2原子电荷的思想](http://sobereva.com/531) intro to resp charge
+  - [RESP拟合静电势电荷的原理以及在Multiwfn中的计算](http://sobereva.com/441), principles and examples
+
+comments:
+
+- it's better to work under Linux environment. Windows cmd does not support statement like `f=atp`. you may install WSL (Windows subsystem for Linux) and find your files at `\mnt`
+- tools needed: conda (AmberTools, acpype), Gaussian+MDanalysis, openbabel, gromacs, bash shell
 
 #### QM charge+GAFF
 
@@ -3117,6 +3123,8 @@ calculating free energies for transformations involving ring openings and net ch
   最好是用benchmark检验，也算一个测试了
 
   至于采用common多一点还是少一点，可以让用户自己决定。Leili还觉得似乎考虑charge更合理
+  
+- 非公共部分太大了，分子构象可能不稳定：两个OH非公共，在λ=0.5时，任何一个作用力都不够强，可能飞了。虽然按理说应该考虑其charge的差异。。
 
 
 ### Charged mutation

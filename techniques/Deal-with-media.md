@@ -485,7 +485,9 @@ https://www.apowersoft.cn/  一个处理视频的网站
 
 [怎么直接下载网页版酷狗音乐上的歌曲，在哪保存-百度经验](https://jingyan.baidu.com/article/2a138328dad459074a134fcc.html)
 
-网易云直接得到mp3：https://blog.csdn.net/songxiaolingbaobao/article/details/117747808
+
+
+网易云直接得到mp3：[轻松下载网易云音乐中的歌曲_网易云音乐根据id下载](https://blog.csdn.net/songxiaolingbaobao/article/details/117747808)
 
 ### 歌词文件
 
@@ -650,6 +652,28 @@ ffmpeg -i meeting_01.mp4 -vcodec copy -acodec copy -ss 00:00:37 -to 00:51:00 mee
 
 
 
+[什么是智能纪要,如何配置智能纪要_钉钉会议](https://help.aliyun.com/document_detail/208719.html) 要钱？
+
+https://www.jianshu.com/p/e3cdd268ef59
+顶端搜索“钉钉闪记”
+
+![](E:\GitHub-repo\notes\techniques\images\dingtalk-meeting.jpg)
+
+线下会议应该够用了
+
+其实钉钉和剪映效果差不多，效率和编辑界面都还行
+
+除了钉钉要上传，以及要分开每个文件
+
+
+
+https://clideo.com/editor/merge-audio
+
+
+
+> 出席人：是参加该会议的人，在会上有发言权，表决权，选举权和被选举权等等所有与会者应有权力；
+> 列席人：则是指在别人开会时旁听的人，一般可以发言，但不能表决。
+
 
 
 ## 录制视频
@@ -739,7 +763,7 @@ GreasyFork脚本：[全网VIP视频免费破解去广告、全网音乐直接下
   
 - [在秀米中前后元素的重叠规律以及如何改变前后元素的重叠层次 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/430995397)
 
-
+[微信公众号 Markdown 排版](https://zhuanlan.zhihu.com/p/385098206)
 
 # B站运营
 

@@ -55,29 +55,47 @@ dos2unix <pbs-script-file>
 
 - 回收站：`~/.local/share/Trash/files`
 
+## Bash environment
+
+1. [一文彻底搞懂linux全局环境变量生效顺序_51CTO博客](https://blog.51cto.com/zpf666/2334770)
+
+   `.bashrc`并非是登录shell时唯一会被加载的脚本
+
+2. root和user的`.bashrc`是不一样的！
+
+   [`export`的含义 What does export PATH=something:$PATH mean? - Ask Ubuntu](https://askubuntu.com/questions/720678/what-does-export-path-somethingpath-mean)
+
+   > `export` sets the environment variable that is visible to the process that sets it and to all the subprocesses spawned in the same environment
+
+3. clear path, remove redundant
+
+   ```shell
+   export PATH=$(echo -n $PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}' | sed 's/:$//')
+   ```
+
+4. `$LD_LIBRARY_PATH`最初是空的，第一个不要有多余的`:`
 
 
-1. 环境变量
 
-   root和user的`.bashrc`是不一样的！
-
-   `export`的含义 https://askubuntu.com/questions/720678/what-does-export-path-somethingpath-mean
-
-   `$LD_LIBRARY_PATH`最初是空的，第一个不要有多余的`:`
-
-2. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
-
-3. [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
+1. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
 
 ## Common errors
 
 - 下面是一些典型的段错误的原因：由内存管理硬件试图访问一个不存在的内存地址
-- Linux操作系统执行可执行文件提示*No such file or directory*的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
+- Linux操作系统执行可执行文件提示`No such file or directory`的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
 
 ## Hardware-related
 
 - HDMI线必须要插在主机的偏下一点，也就是直接插在显卡上，偏上的那个口是没有用的
 - disk自我检测分析与报告技术smart: https://www.cnblogs.com/xqzt/p/5512075.html
+
+- 无线网卡 (英文名称：**Wireless network interface controller**，缩写为WNIC) driver
+
+  https://www.nnnxxx.cn/
+
+  https://github.com/the-tcpdump-group/libpcap
+
+  https://askubuntu.com/questions/537170/no-such-file-or-directory-net-bpf-h
 
 
 
@@ -87,7 +105,7 @@ Bash cheat sheet: Top 25 commands and creating custom commands
 
 https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
-## Fundamental settings and softwares
+## Fundamental settings
 
 ### system info
 
@@ -713,12 +731,16 @@ see also [File processing](/research/Programming-for-MD.md#file-processing)
 
 3. `tree`: show directory as tree
 
-   https://blog.csdn.net/xuehuafeiwu123/article/details/53817161
+   [linux 如何以树形结构显示文件目录结构](https://blog.csdn.net/xuehuafeiwu123/article/details/53817161)
 
    ```shell
    sudo apt-get install tree
    tree /path/to/dir
    ```
+
+   要显示深度为2的文件，你可以使用命令`tree -L 2`
+
+   > Windows的`tree`命令并不支持直接显示特定深度的文件。tree命令有两个参数，`/f`和`/a`。其中，/f是递归显示每个文件夹的名称，而`/a`是使用ASCII字符而不是扩展字符
 
 4. `find`
 
@@ -1371,22 +1393,6 @@ bash 的历史函数依赖于一个名为 *HISTFILE* 的变量，通常设置为
 - The `killall` command is used to send a signal to one or more processes specified by name.  So, `killall -9 process_name` will immediately terminate all processes with the name `process_name`.
 - By default, `pkill` sends the `SIGTERM` signal, which asks the process to terminate gracefully. `pkill -u username` will send the `SIGTERM` signal to all processes owned by the user `username`
 
-
-
-# Hardware-related
-
-- HDMI线必须要插在主机的偏下一点，也就是直接插在显卡上，偏上的那个口是没有用的
-
-- disk自我检测分析与报告技术smart: https://www.cnblogs.com/xqzt/p/5512075.html
-
-- 无线网卡 (英文名称：**Wireless network interface controller**，缩写为WNIC) driver
-
-  https://www.nnnxxx.cn/
-
-  https://github.com/the-tcpdump-group/libpcap
-
-  https://askubuntu.com/questions/537170/no-such-file-or-directory-net-bpf-h
-
 # Desktop managers
 
 kde and gnome are two types of desktop interface. KDE looks like Windows desktop and gnome is the classic Linux desktop interface. They both have specific fundamental tools.
@@ -1717,6 +1723,8 @@ linux核心的东西都一样，发行版之间最大的区别无非是包管理
 ### Ubuntu
 
 familiar...
+
+[How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
 
 ### CentOS 9 Stream
 
@@ -2985,6 +2993,23 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
     切换盘符和切换路径是分离的。想要切盘符 直接使用命令 `e:` 或者 `cd /d e:` 即可
 
 19. [将 Windows 电脑用作移动热点 - Microsoft 支持](https://support.microsoft.com/zh-cn/windows/将-windows-电脑用作移动热点-c89b0fad-72d5-41e8-f7ea-406ad9036b85)  not useful for 188...
+
+20. windows11删除文件需要管理员权限怎么办？删完里面的东西，包括隐藏文件。重启后再删文件夹
+
+    不重启：可能需要管理员模式打开cmd去删？
+
+21. 按下键盘“Win+Ctrl+D”可以一键生成一个新桌面。生成后，再按下“Win+Ctrl+方向键”可以快速切换这两个桌面。
+    why not work in ToDesk?
+
+22. 
+
+23. 联想拯救者电源键红点是进入了野兽模式。联想拯救者有三种模式：
+
+    - 电源红色是野兽模式，在大型游戏时开.
+    - 白色是均衡模式平常用的.
+    - 蓝色是静音模式，办公时候使用。
+
+    按住键盘Fn+Q能快速切换模式。
 
 ## WSL
 

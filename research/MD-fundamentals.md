@@ -2,7 +2,7 @@
 
 see [here](/techniques/Prepare-for-the-computer.md) for installation
 
-this page also includes usage of pymol, vmd, gmx, etc.
+This page includes fundamental concepts of MD simulation, usage of pymol, vmd, gmx, etc., and also quantum chemistry concepts
 
 # Visualization & Modeling
 
@@ -22,6 +22,28 @@ be careful doing selection
 pymol/vmd measurement in angstrom. gmx: nm!!!
 
 https://manual.gromacs.org/documentation/current/onlinehelp/gmx-editconf.html#gmx-editconf
+
+### PBC processing
+
+http://bbs.keinsci.com/thread-2085-1-1.html
+
+http://blog.sciencenet.cn/blog-548663-981600.html
+
+https://www.jianshu.com/p/5dc493663ed2
+
+
+
+gmx generated trajectory, must be processed by trjconv nojump. vmd pbc wrap doesn't work. However, coordinated water molecules are lost; in the original trajectory, protein goes across the pbc. What fxxk doing clustering with gmx! 
+
+However, pbc wrap does not always work with NAMD generated trajectories either...still we need `gmx` and even `nojmp`
+
+usually we use `gmx trjconv -pbc mol` or `whole` followed by `nojump`...
+
+Zhaoqi has tried doing this with MDanalysis but it cannot easily write frames
+
+
+
+
 
 ## Pymol
 
@@ -215,121 +237,14 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
 杂记, some extra functions, that I encountered. for details, check vmd-ug.pdf or [MD-tutorials.md](MD-tutorials.md)
 
-### Scripts
-
-#### Basics
-
-1. run in terminal
-
-   ```shell
-   vmd -dispdev text -e combine.tcl
-   ```
-
-   vmd scripting, [pass parameters](http://timchen314.com/vmd%E7%AC%94%E8%AE%B0/)
-
-   ```
-   set file [lindex $argv 0]
-   vmd .... -args arg arg2
-   ```
-
-2. How to run TCL script on VMD?
-
-   This is very easy to do. Just use any text editor to write your script file, and in a VMD session, use the command 
-
-   ```shell
-   source filename
-   ```
-
-   to execute the file. (either VMD command line or Tk Console)
-
-3. question mark prompt and return to the normal vmd> prompt? that mean the tcl interpreter is waiting for you to **close a brace**, so try } or ] or ) followed by enter. you may need to enter it a couple of times.
-
-4. 在VMD的`atomselect`命令中，您可以使用Tcl变量替换来引用变量的值。例如，如果您已经定义了一个名为`my_variable`的变量并将其值设置为`5`，则可以使用以下命令在`atomselect`命令中引用该变量的值（不要加"{}"）：
-
-   ```tcl
-   set sel [atomselect top "resid $my_variable"]
-   ```
-
-   This also works for RMSD Trajectory Tool (`$resid` is just replaced), 但创建representation时仍不行？It just doesn't interpret the variable
-
-   ```tcl
-   set resid 34
-   puts "
-   mol representation Licorice 0.200000 12.000000 12.000000
-   mol color Type
-   mol selection {resid $resid}
-   mol material Opaque
-   mol addrep top
-   
-   mol representation CPK 0.200000
-   mol color Type
-   mol selection {same residue as within 5 of resid $resid}
-   mol material Opaque
-   mol addrep top
-   # update selection every frame
-   mol selupdate 2 top 1
-   mol colupdate 2 top 0
-   "
-   ```
-
-   or cover with "{}"
-
-5. 
-
-6. 
-
-7. select certain frames
-
-   ```tcl
-   atomselect top "within 5 of resname LYR" frame 23
-   ```
-
-8. 
-
-#### Tkconsole
-
-1. resize font in TkConsole https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/29151.html
-
-   type in TkConsole: tkcon font <type> <size>
-
-   ```
-   tkcon font Courier 16
-   ```
-
-   size of the window is automatically changed. But font type not affected?
-
-2. As for the global font: the higher resolution your screen is, the smaller your font is
-
-   Maybe because the source code specifies pixels??
-
-3. TkConsole auto-loads history file?
-
-   https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/8543.html
-
-   Yeah, just about last 10 commands you typed, with the starting number 48. 强迫症犯了。。
-
-   >    history command
-   >
-   >    https://www.tcl.tk/man/tcl8.4/TclCmd/history.html
-   >
-   >    ```tcl
-   >    history clear
-   >    ```
-   >
-   >    or Ctrl+r, but no use
-   >
-   >    ```tcl
-   >    clear
-   >    ```
-   >
-   >    just clears the screen
+### Basics
 
 
 
-### Visualization
+#### Visualization
 
-点点点的操作
-
+> not all 点点点的操作
+>
 > references:
 >
 > - refer to [this](https://pengpengyang94.github.io/2020/05/vmd%E4%BD%BF%E7%94%A8%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E/) to make transparent surface+cartoon (material--Transparent) like in papers
@@ -396,42 +311,42 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
 9. VMD representation里面写变量`$ligname`只是不报错，还是得手动改
 
-      ```tcl
-      set ligname UDCA
-      
-      mol representation CPK 0.200000
-      mol color Type
-      mol selection {(protein or water) and (same residue as within 5 of residue $ligname)}
-      mol material Opaque
-      mol addrep top
-      # update selection every frame
-      mol selupdate 2 top 1
-      mol colupdate 2 top 0
-      
-      pbc wrap -centersel "protein or residue ${ligname}" -compound segid -center com -all
-      # align the protein
-      package require rmsdtt
-      # open the window
-      set w [rmsdtt_tk_cb]
-      $w.top.left.sel delete 1.0 end
-      $w.top.left.sel insert end "protein"
-      # set the states of checkboxes1
-      set rmsdtt::trace_only 0
-      set rmsdtt::noh 0
-      set rmsdtt::bb_only 1
-      # rmsdtt::set_sel  # verify selection
-      rmsdtt::doAlign
-      # change selection text
-      $w.top.left.sel delete 1.0 end
-      $w.top.left.sel insert end "residue ${ligname}"
-      set rmsdtt::bb_only 0
-      # set rmsdtt::xmgrace 1
-      # set rmsdtt::multiplot 0
-      set rmsdtt::plot_sw 1
-      set rmsdtt::save_sw 1
-      set rmsdtt::save_file sys-rmsd.dat
-      rmsdtt::doRmsd
-      ```
+   ```tcl
+   set ligname UDCA
+   
+   mol representation CPK 0.200000
+   mol color Type
+   mol selection {(protein or water) and (same residue as within 5 of residue $ligname)}
+   mol material Opaque
+   mol addrep top
+   # update selection every frame
+   mol selupdate 2 top 1
+   mol colupdate 2 top 0
+   
+   pbc wrap -centersel "protein or residue ${ligname}" -compound segid -center com -all
+   # align the protein
+   package require rmsdtt
+   # open the window
+   set w [rmsdtt_tk_cb]
+   $w.top.left.sel delete 1.0 end
+   $w.top.left.sel insert end "protein"
+   # set the states of checkboxes1
+   set rmsdtt::trace_only 0
+   set rmsdtt::noh 0
+   set rmsdtt::bb_only 1
+   # rmsdtt::set_sel  # verify selection
+   rmsdtt::doAlign
+   # change selection text
+   $w.top.left.sel delete 1.0 end
+   $w.top.left.sel insert end "residue ${ligname}"
+   set rmsdtt::bb_only 0
+   # set rmsdtt::xmgrace 1
+   # set rmsdtt::multiplot 0
+   set rmsdtt::plot_sw 1
+   set rmsdtt::save_sw 1
+   set rmsdtt::save_file sys-rmsd.dat
+   rmsdtt::doRmsd
+   ```
 
 10. Distance, angle, dihedral measurements: To begin a measurement, use the right-mouse button (or the left-mouse button and the Control key/Control key and mouse click) to select 1, 2, 3 or 4 atoms. Complete the measurement by selecting the final atom twice. Depending on how many atoms are selected, the distance (2 atoms), the angle (3 atoms) or the dihedral angle (4 atoms) is measured and displayed. Deselect all atoms with a right-click in empty space. To remove a measurement, re-select all involved atoms and then the last atom twice in a row.
 
@@ -445,7 +360,167 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
 14. [vmd粗粒化显示插件bendix简单介绍](https://kangsgo.cn/p/vmd粗粒化显示插件bendix简单介绍/)
 
-### psfgen
+#### Scripting
+
+1. run in terminal
+
+   ```shell
+   vmd -dispdev text -e combine.tcl
+   ```
+
+   vmd scripting, [pass parameters](http://timchen314.com/vmd%E7%AC%94%E8%AE%B0/)
+
+   ```
+   set file [lindex $argv 0]
+   vmd .... -args arg arg2
+   ```
+
+2. How to run TCL script on VMD?
+
+   This is very easy to do. Just use any text editor to write your script file, and in a VMD session, use the command 
+
+   ```shell
+   source filename
+   ```
+
+   to execute the file. (either VMD command line or Tk Console)
+
+3. question mark prompt and return to the normal vmd> prompt? that mean the tcl interpreter is waiting for you to **close a brace**, so try } or ] or ) followed by enter. you may need to enter it a couple of times.
+
+#### Selection
+
+1. 在VMD的`atomselect`命令中，您可以使用Tcl变量替换来引用变量的值。例如，如果您已经定义了一个名为`my_variable`的变量并将其值设置为`5`，则可以使用以下命令在`atomselect`命令中引用该变量的值（不要加"{}"）：
+
+   ```tcl
+   set sel [atomselect top "resid $my_variable"]
+   ```
+
+   This also works for RMSD Trajectory Tool (`$resid` is just replaced), 但创建representation时仍不行？It just doesn't interpret the variable
+
+   ```tcl
+   set resid 34
+   puts "
+   mol representation Licorice 0.200000 12.000000 12.000000
+   mol color Type
+   mol selection {resid $resid}
+   mol material Opaque
+   mol addrep top
+   
+   mol representation CPK 0.200000
+   mol color Type
+   mol selection {same residue as within 5 of resid $resid}
+   mol material Opaque
+   mol addrep top
+   # update selection every frame
+   mol selupdate 2 top 1
+   mol colupdate 2 top 0
+   "
+   ```
+
+   or cover with "{}"
+
+2. select certain frames
+
+   ```tcl
+   atomselect top "within 5 of resname LYR" frame 23
+   ```
+
+3. 
+
+
+
+#### Trajectory
+
+```tcl
+# load
+mol addfile
+# write
+animate write xx.dcd
+```
+
+
+
+
+
+![](E:\GitHub-repo\notes\research\MD-fundamentals.assets\save-mdcrd.png)
+
+
+
+#### about Tkconsole
+
+1. resize font in TkConsole https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/29151.html
+
+   type in TkConsole: tkcon font <type> <size>
+
+   ```
+   tkcon font Courier 16
+   ```
+
+   size of the window is automatically changed. But font type not affected?
+
+2. As for the global font: the higher resolution your screen is, the smaller your font is
+
+   Maybe because the source code specifies pixels??
+
+3. TkConsole auto-loads history file?
+
+   https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/8543.html
+
+   Yeah, just about last 10 commands you typed, with the starting number 48. 强迫症犯了。。
+
+   >    history command
+   >
+   >    https://www.tcl.tk/man/tcl8.4/TclCmd/history.html
+   >
+   >    ```tcl
+   >    history clear
+   >    ```
+   >
+   >    or Ctrl+r, but no use
+   >
+   >    ```tcl
+   >    clear
+   >    ```
+   >
+   >    just clears the screen
+
+
+
+#### Movie
+
+1. trajectory view
+
+   ```tcl
+   MovieMaker::moviemaker
+   # install netpbm
+   # set MovieMaker::presmooth 1
+   # set MovieMaker::prescale 1
+   set MovieMaker::movieformat imgif
+   set MovieMaker::framerate 30
+   set MovieMaker::workdir ./
+   set MovieMaker::basename movie
+   set MovieMaker::trjstep 20
+   set MovieMaker::renderer libtachyon
+   set MovieMaker::movietype trajectory
+   ```
+
+   manually edit trjstep again or it's not updated...
+
+2. [VMD制作体系旋转演示播放轨迹的gif动画的简单方法 - 思想家公社的门口：量子化学·分子模拟·二次元 (sobereva.com)](http://sobereva.com/15)
+
+
+
+### Extensions
+
+path to plugins
+
+```shell
+$VMDPATH/lib/vmd/plugins/noarch/tcl/
+```
+
+maybe just `locate`
+
+#### psfgen
 
 1. Clears the structure, topology definitions, and aliases, creating clean environment just like a new context.
 
@@ -455,25 +530,37 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
 2. 
 
-### PBC processing
+#### RMSD trajecoty tool
 
-http://bbs.keinsci.com/thread-2085-1-1.html
+rmsdtt in abbreviation
 
-gmx generated trajectory, must be processed by trjconv nojump. vmd pbc wrap doesn't work. However, coordinated water molecules are lost; in the original trajectory, protein goes across the pbc. What fxxk doing clustering with gmx! 
+#### Timeline
 
-usually we use -pbc mol...
+http://www.ks.uiuc.edu/Research/vmd/plugins/timeline/
+
+https://www.ks.uiuc.edu/Training/Tutorials/science/timeline/tutorial_timeline-html/
+
+https://www.ks.uiuc.edu/Training/Tutorials/science/timeline/tutorial_timeline.pdf
+
+It can calculate Secondary structure, RMSD, RMSF, angle, dihedral, SASA, contacts (H bond, salt bridge), user-defined fields/selections, etc.
+
+- https://www.researchgate.net/post/How-can-I-calculate-the-RMSF-of-a-protein-in-VMD
+
+  IN VMD toolbar, Extensions > Analysis > timeline > calculate > calc. RMSF
+
+  also click 'every residue', and then File > Write data. Align your protein in advance
+
+  <img src="E:\GitHub-repo\notes\research\MD-fundamentals.assets\vmd-rmsf.jpg" style="zoom: 67%;" />
+
+  view structure and RMSF simultanously
+
+  But it seems to give RMSD at all time points...??
+
+- 
 
 
 
 ### Other
-
-- path to plugins
-
-  ```shell
-  /usr/local/lib/vmd/plugins/noarch/tcl/
-  ```
-
-  maybe just `locate`
 
 - To know about your system, like checking the number of atoms, just load it into vmd (also when executing scripts) and see the cmd.
 
@@ -481,7 +568,7 @@ usually we use -pbc mol...
 
 - 
 
-## UCSF Chimera
+## UCSF Chimera(X)
 
 - https://www.researchgate.net/post/How-to-re-number-the-chains-in-PDB-file
 
@@ -491,7 +578,7 @@ usually we use -pbc mol...
 
 - for UCSD DOCK? https://zhuanlan.zhihu.com/p/148384183
 
-- 
+- Tools---structural editing---rotamers: mutate residues
 
 
 
@@ -602,6 +689,14 @@ This part is about general MD and comparison between common MD engines. These co
 https://www.cryst.bbk.ac.uk/pps97/course/index.html Section 7: molecular forces
 
 ## Force field
+
+### Fundamental
+
+- Exchange-repulsion, also known as Pauli repulsion or exchange integral, is a correction to the Coulomb repulsion between two electrons in orbitals for the case when the electrons possess parallel spins. It is to be subtracted from the Coulomb repulsion to give the total energy of the electron-electron interaction.
+
+  In other words, exchange-repulsion arises as a consequence of the Pauli exclusion principle
+
+- 
 
 ### Support
 
@@ -799,11 +894,11 @@ Within the TI region there will be atoms which are linearly transformed (LTA) di
 
 [hardware background information - Gromacs document](https://manual.gromacs.org/current/user-guide/mdrun-performance.html#hardware-background-information)
 
+[The pmemd.cuda GPUPerformance](http://ambermd.org/GPUPerformance.php)
 
 
 
-
-Read this: https://ambermd.org/GPULogistics.php
+Read this: [The pmemd.cuda GPU Logistics](https://ambermd.org/GPULogistics.php)
 
 and 22.6.7. Considerations for Maximizing GPU Performance
 
@@ -986,7 +1081,7 @@ vdw and elec, common cutoff/switchdist
 
 ### Continue a run
 
-http://bbs.keinsci.com/thread-17980-1-1.html
+#### [gromacs的续跑问题](http://bbs.keinsci.com/thread-17980-1-1.html)
 
 [官方解决方案](http://manual.gromacs.org/current/user-guide/managing-simulations.html)：举个例子，如果中断的任务是这样运行的：`gmx mdrun -deffnm md` 你可以在同一个文件夹下运行：
 
@@ -996,7 +1091,7 @@ gmx mdrun -s md.tpr -cpi md.cpt -deffnm md
 
 `mdrun`默认会将新产生的轨迹添加到原始文件末尾，最终文件会包括续跑前与续跑后的所有内容。
 
-[延长时间再跑](https://blog.csdn.net/MurphyStar/article/details/113679744)
+#### [延长时间再跑](https://blog.csdn.net/MurphyStar/article/details/113679744)
 
 `-extend`. edit `.tpr` file and provide `.cpt` file
 
@@ -1010,6 +1105,10 @@ gmx trjconv -f npt.cpt -s npt.tpr -o npt_cpt.gro
 
 recover interrupted simulation, to get the .gro
 
+#### Restart a run with multidir 
+
+(gmx_mpi)
+
 
 
 ## trjconv
@@ -1021,11 +1120,7 @@ It is a pity that gmx itself cannot process trajectories in parallel. MPI is for
 - `-dt`: not real time, but how many frames we go through each time we collect one frame
 - Using `-cat`, you can simply paste several files together without removal of frames with identical time stamps.
 
-### pbc processing
-
-http://blog.sciencenet.cn/blog-548663-981600.html
-
-https://www.jianshu.com/p/5dc493663ed2
+see [here](#pbc-processing) for pbc processing
 
 
 
@@ -1042,7 +1137,7 @@ https://www.jianshu.com/p/5dc493663ed2
 
 
 
-## debug
+## Debug
 
 ### general and notes
 
@@ -1086,11 +1181,17 @@ https://www.jianshu.com/p/5dc493663ed2
      Consider using -pin on (and -pinoffset in case you run multiple jobs).'
   ```
 
-- 
+- [谈谈怎么判断分子动力学模拟是否达到了平衡 - 思想家公社的门口：量子化学·分子模拟·二次元 (sobereva.com)](http://sobereva.com/627)
 
+### GPU, MPI, plumed, etc.
 
+1. https://stackoverflow.com/questions/33176592/pmpi-comm-rank-invalid-communicator
 
+   This usually indicates that some sort of a <u>mix-up between various MPI implementations</u> or different versions of the same MPI implementation has occurred. E.g. mpi.h is from one version while the binary library files are from another one. Or the code was linked against one version but then the runtime environment provides a different one. <u>Make sure that mpicc / mpic++ / mpiCC are from the same MPI implementation as mpirun / mpiexec used to launch the executable.</u>
 
+2.  In command-line option -plumed
+     File 'dat.plumed' cannot be used by GROMACS because it does not have a recognizable extension.
+     The following extensions are possible for this option:  .dat
 
 # NAMD and Amber
 
@@ -1296,6 +1397,67 @@ mask syntax
 - [Combining multiple trajectory files into a single trajectory and remove water molecules to save space. – AMBER-hub (utah.edu)](https://amberhub.chpc.utah.edu/combining-multiple-trajectory-files-into-a-single-trajectory-and-remove-water-molecules-to-save-space/)
 
 
+
+# Quantum Chemistry
+
+## Basics
+
+
+
+
+
+## RESP
+
+RESP charge reference articles: see [Protein-ligand-simulation sob articles](Protein-ligand-simulation.md#QM-Reference)
+
+
+
+According to [sob RESP charge](http://sobereva.com/531), DFT overestimates the polarity in solution. Use a small dielectric constant.
+
+- RESP (antechamber, single g16 run): **benzene** (my idea...Amber $\varepsilon_r=4$)
+- RESP2 (Sobtop, two g16 runs): **(gas+your solvent)/2**. e.g. [(Metal-ion) RESP with sobtop](Metal-ion.md#Sobtop)
+
+> [Liquids - Dielectric Constants (engineeringtoolbox.com)](https://www.engineeringtoolbox.com/liquid-dielectric-constants-d_1263.html)
+>
+> benzene: $\varepsilon_r=2.28$; ethanol: $\varepsilon_r=25.3$ at 20℃. benzene: half the polarity (for formaldhyde)
+
+
+
+## Gaussian
+
+### gjf input file
+
+
+
+#### geom
+
+http://bbs.keinsci.com/thread-1464-1-1.html
+
+**写了geom=connectivity就会从输入文件末尾读取连接关系**，所以末尾那一堆连接关系不能删，否则必报错。
+
+连接关系的设定原理上并不会影响量化的计算结果。geom=connectivity留不留它都一样。<u>仅对于分子力学计算</u>连接关系是必须的。
+即便输入文件相同，跑两次结果也可能不同。应该先对比最后得到的结构、能量相差多少。可能只是因为数值巧合收敛到了不同极小点上。
+
+没写geom=connectivity时末尾的连接关系可保留也可以不保留，保留了也不会被读取。但是，如果你的计算任务牵扯到从末尾读取其它额外信息，比如基组信息、溶剂设定、输出的wfn文件路径等等，就必须把连接关系删掉，否则那些设定将没法正常读取。
+
+没有可靠或者不可靠之说，都一样，不影响结果
+
+### result
+
+
+
+## Multiwfn
+
+see details in each topic...
+
+
+
+
+
+### Other
+
+https://www.theochem.ru.nl/molden/
+Molden is a package for displaying Molecular Density from the Ab Initio packages GAMESS-UK , GAMESS-US and GAUSSIAN and the Semi-Empirical packages……
 
 
 

@@ -4,26 +4,28 @@ maybe a new .md file in the future
 
 
 
-# Biochemistry
-
-## General chemistry
+# General chemistry
 
 - A coordinate bond (also called a dative covalent bond) is a covalent bond (a shared pair of electrons) in which both electrons come from the same atom.
 
 - [3.2.1: Hard and Soft Acid and Base Theory - Chemistry LibreTexts](https://chem.libretexts.org/Courses/Saint_Marys_College_Notre_Dame_IN/CHEM_342%3A_Bio-inorganic_Chemistry/Readings/Week_3%3A_Metal-Ligand_Interactions_continued..../3.2%3A_The_identity_of_metal_ion_and_the_ligand_donor_atom(s)_affects_affinity/3.2.1%3A_Hard_and_Soft_Acid_and_Base_Theory)
 
-  ![](E:\GitHub-repo\notes\research\academic-notes.asssets\hsab.jpg)
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/hsab.jpg)
 
-- 6s 
+- 6s Inert Electron Pair Effect
 
-  <img src="E:\GitHub-repo\notes\research\academic-notes.asssets\6s-ele.jpg" style="zoom:80%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/6s-ele.jpg" style="zoom: 50%;" />
 
 - [Metal to Ligand and Ligand to Metal Charge Transfer Bands - Chemistry LibreTexts](https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Supplemental_Modules_(Physical_and_Theoretical_Chemistry)/Spectroscopy/Electronic_Spectroscopy/Metal_to_Ligand_and_Ligand_to_Metal_Charge_Transfer_Bands)
 
+  charge transfer from the ligands to Hg<sup>2+<sup/> (0.49−0.62 e) is greater than that to Zn<sup>2+<sup/> (0.32−0.41 e), indicating that Hg<sup>2+<sup/> can accept more negative charge from the ligands than Zn<sup>2+<sup/>.
+
+- 
 
 
 
-charge transfer from the ligands to Hg2+ (0.49−0.62 e) is greater than that to Zn2+ (0.32−0.41 e), indicating that Hg2+ can accept more negative charge from the ligands than Zn2+.
+
+
 
 
 The thermodynamical preference of the harder N and O--containing side chains for the “soft” Hg rather than the “borderline” Zn is probably due to relativistic effects resulting in a strong stabilization of mercury's vacant 6s orbitals, which in turn enhances its electron-accepting ability.
@@ -32,29 +34,39 @@ The thermodynamical preference of the harder N and O--containing side chains for
 preventing the metal-bound water from acting as a nucleophile in the reaction.
 
 
-Cys-rich proteins have been used by living
-organisms to fight heavy metal intoxication. Cys-rich proteins
-such as metallothionein are used as traps to sequester nonbiogenic metal ions from the body fluids
 
 
-铝离子应该不会MLCT啥的
+
+
+# Biochemistry
 
 ## Bioinorganic Chemistry
 
-- Cadmium can replace zinc, but is toxic because it does not have the same catalytic ability.
-
-  Mercury can bind to thiol groups, which are found in the amino acid cysteine in proteins. This can disrupt the function of proteins and enzymes that contain cysteine residues. Mercury can also replace zinc ions in certain proteins (SH)
+- 
 
 - 
 
 ### Metal and Metalloproteins
 
+#### Basics
+
 - one-third of all proteins are estimated to be metalloprotein
-- Mammalian metallothioneins (MTs) are a group of cysteine-rich proteins that bind metal ions in two α- and β-domains and represent a major cellular Zn(II)/Cu(I) buffering system in the cell.
-- Heavy metal ions can precipitate proteins by bonding with negatively charged parts of the protein molecule, reducing the tendency of the protein to attract a layer of water molecules around it, allowing the protein molecules to interact with one another and precipitate out of solution.
+
 - For example, the average concentrations of free Na<sup>+</sup>, K<sup>+</sup>, Mg<sup>2+</sup>, and Ca<sup>2+</sup> in the blood plasma are ∼145, ∼4, ∼1.5, and ∼1.8 mM, respectively, while those in the cytosol are ∼12, ∼139, ∼0.8, and <0.2 × 10<sup>–3</sup> mM, respectively. (6) At the same time, the intracellular concentration of the free transition metals such as Zn<sup>2+</sup> (10<sup>–10</sup>–10<sup>–15</sup> M) (7-9) and Cu<sup>+</sup> (∼10<sup>–18</sup> M) (10) is kept very low, yet the cellular/extracellular proteins in a healthy organism select with high fidelity the “right” metal ion against a background of, sometimes, higher concentrations of competing cations.
 
+- “Alien metal cations” refers to metal cations that are not native to a particular biological system or molecule. For example, in the context of adenosine triphosphate (ATP), which exists in solution mostly as ATP-Mg, Mg<sup>2+<sup/> would be considered the native metal cation while other metal cations such as Li+ would be considered alien
 
+- [Irving–Williams series - Wikipedia](https://en.wikipedia.org/wiki/Irving–Williams_series): stability of complexes, Mn(II) < Fe(II) < Co(II) < Ni(II) < Cu(II) > Zn(II)
+
+  Natural [proteins'](https://en.wikipedia.org/wiki/Protein) affinities for metal binding also follow the Irving–Williams series? Of course there are selective proteins...
+
+#### Metal-protein interactions
+
+- Mammalian metallothioneins (MTs) are a group of cysteine-rich proteins that bind metal ions in two α- and β-domains and represent a major cellular Zn(II)/Cu(I) buffering system in the cell.
+- Heavy metal ions can precipitate proteins by bonding with negatively charged parts of the protein molecule, reducing the tendency of the protein to attract a layer of water molecules around it, allowing the protein molecules to interact with one another and precipitate out of solution.
+  - Cadmium can replace zinc, but is toxic because it does not have the same catalytic ability.
+  - Mercury can bind to thiol groups, which are found in the amino acid cysteine in proteins. This can disrupt the function of proteins and enzymes that contain cysteine residues. Mercury can also replace zinc ions in certain proteins (SH)
+- Cys-rich proteins have been used by living organisms to fight heavy metal intoxication. Cys-rich proteins such as metallothionein are used as traps to sequester nonbiogenic metal ions from the body fluids
 
 ## Organic Chemistry
 
@@ -88,7 +100,11 @@ such as metallothionein are used as traps to sequester nonbiogenic metal ions fr
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/halogen-bond.png" alt="anomeric-carbon" width=50% />
 
-## Protein
+## Common Biomolecules
+
+just basic properties
+
+### Protein
 
 - hypophosphorylated (comparative more hypophosphorylated, superlative most hypophosphorylated) (biochemistry) phosphorylated to a less than normal extent, or less than fully.
 - 
@@ -100,11 +116,11 @@ such as metallothionein are used as traps to sequester nonbiogenic metal ions fr
 
 
 
-## Nucleic acids
+### Nucleic acids
 
 RNA aptamer柔性比DNA强，理论上能达到更高的亲和力
 
-### DNA/RNA polymerase
+#### DNA/RNA polymerase
 
 ![DNAPol](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/DNAPol.png)
 
@@ -112,7 +128,7 @@ RNA aptamer柔性比DNA强，理论上能达到更高的亲和力
 
 
 
-## Lipids
+### Lipids
 
 The most abundant membrane lipids are the phospholipids. These have a polar head group and two hydrophobic hydrocarbon tails.
 [Phosphatidylcholine (PC) and phosphatidylethanolamine (PE) are the most abundant phospholipids in all mammalian cell membranes](https://pubmed.ncbi.nlm.nih.gov/28411170/).
@@ -120,7 +136,13 @@ The most abundant membrane lipids are the phospholipids. These have a polar head
 
 
 
-## Saccharides/Carbonhydrates
+[Phospholipids are a class of lipids that consist of two fatty acyl molecules esterified at the sn-1 and sn-2 positions of glycerol, and contain a head group linked by a phosphate residue at the sn-3 position](https://lipidlibrary.aocs.org/chemistry/physics/animal-lipids/phospholipid-biosynthesis)[2](https://lipidlibrary.aocs.org/chemistry/physics/animal-lipids/phospholipid-biosynthesis). [The hydrocarbon in the “sn-2” position refers to the second fatty acid chain attached to the glycerol backbone](https://lipidlibrary.aocs.org/chemistry/physics/animal-lipids/phospholipid-biosynthesis).
+
+The carbon atom that appears on top in the Fischer projection that shows a vertical carbon chain with the hydroxyl group at carbon-2 to the left is designated as C-1. [To differentiate such numbering from conventional numbering conveying no steric information, the prefix ‘sn’ (for stereospecifically numbered) is used](https://avantilipids.com/tech-support/faqs/meaning-of-sn)[1](https://avantilipids.com/tech-support/faqs/meaning-of-sn).
+
+
+
+### Saccharides/Carbonhydrates
 
 自然界几乎所有天然存在的糖类化合物均是D构型，D-核糖的三个手性碳均为D构型。
 
@@ -204,7 +226,7 @@ PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
 
 ## Strategy of design
 
-![](E:\GitHub-repo\notes\research\academic-notes.asssets\synthetic-lethals.jpg)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/synthetic-lethals.jpg)
 
 
 
@@ -245,6 +267,18 @@ PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
 
 
 
+## Compounds
+
+- 布洛芬(Ibuprofen)又名异丁苯丙酸
+
+- 环磷酰胺在体外无活性，主要通过肝脏P450酶水解成醛磷酰胺再运转到组织中形成磷酰胺氮芥而发挥作用。环磷酰胺可由脱氢酶转变为羧磷酰胺而失活，或以丙烯醛形式排出，导致泌尿道毒性。属于周期非特异性药，作用机制与氮芥相同。
+
+  ![Cyclophosphamid](academic-notes.asssets\Cyclophosphamid.png)
+
+- 阿斯巴甜，学名为天门冬酰苯丙氨酸甲酯，是一种重要的甜味剂。
+
+
+
 
 
 # Molecular & Cell Biology
@@ -266,7 +300,7 @@ https://www.thoughtco.com/pinocytosis-definition-4143229
 
 Macropinosomes are known to be leaky
 
-![](E:\GitHub-repo\notes\research\academic-notes.asssets\macropinocytosis.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/macropinocytosis.png)
 
 
 
@@ -319,6 +353,7 @@ RNA aptamer targeting AR (v7) DNA binding domain?
 - https://www.rseco.org/content/363-ions-charge-and-membrane-voltages.html
   Ions such as potassium and chloride (K+ and Cl–) are major osmotic solutes in plant cells.
   Plasma membranes are normally about -116 mV, which would keep K+ concentrations inside a cell 100 times higher and Cl- concentrations 100 times lower than in the external solution.
+- 非原质体 The apoplast is the space outside the plasma membrane within which material can disperse freely.
 
 
 
@@ -379,3 +414,26 @@ https://escholarship.org/content/qt95k0h86q/qt95k0h86q.pdf  also an Amber TI exa
 
 
 
+
+
+# Other
+
+## English 
+
+### writing
+
+To shed light on, throw light on, or cast light on something means to make it easier to understand, because more information is known about it.
+
+主宰: dominate, dictate, rule, decide
+
+### Common
+
+The must common uses are "vide 63" (which means "see page sixty-three"), v.s. vide supra ("see earlier" or "look above on this page") and v.i. vide infra ("See below" or "Look below"). Don't confuse v.s. (vide supra) with vs. (versus).
+
+## Industry
+
+CRO：首席风险官
+
+bd是公司的外交部门，是BusinessDevelopment的缩写，意思是商务拓展。
+
+cmc通常是指在制药行业中,专门从事化学成分生产与控制(chemical manufacture and control)相关的职位

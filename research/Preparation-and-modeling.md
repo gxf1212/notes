@@ -1,6 +1,6 @@
 # Preparation and Modeling
 
-This page is about protein/ligand/.... structure modeling and preprocessing.
+This page is about protein/ligand/.... structure modeling and preprocessing, including docking, virtual screening, etc.
 
 
 
@@ -276,15 +276,13 @@ https://cluspro.bu.edu/home.php
 
 # Virtual Screening of Drugs
 
-This part is from 2021 UROPS project. 
+This part is from 2021 UROPS project, structure-based virtual screening (SBVS)
 
 for basic usage of Python packages like rdkit and openbabel, please [go to this link](Programming-for-MD#small-molecule). If I use them to construct a library, maybe I'll write here.
 
 Contents need more organization....
 
 ## Database setup
-
-structure-based virtual screening (SBVS)
 
 ### Example: FDA approved
 
@@ -396,6 +394,8 @@ structure-based virtual screening (SBVS)
 from ATP mimics to **their** analogs (2D), might be a lot? 
 
 ### result list
+
+> 2021.2
 
 | name                                                         | quantity | preference     | filtered with 0.4 | converted |
 | ------------------------------------------------------------ | -------- | -------------- | ----------------- | --------- |
@@ -884,4 +884,26 @@ see [Protein-ligand simulation](/research/Protein-ligand-simulation.md#visualize
 ### attention
 
 - You should probably avoid search spaces bigger than  `30 x 30 x 30` Angstrom, unless you also increase "`--exhaustiveness`".
+
+
+
+## Methods
+
+23.5.14 group tutorial
+
+Vina系列:
+AutoDock Vina AutoDock-GPU AutoDockFR AutoDock-CrankPep QuickVina2 Smina Vina-Carb VinaXB Vinardo QuickVina-W
+
+FR：柔性；Pep：态；Carb：糖；。。
+共价对接：先选基团
+柔性对接应该不用MD
+MMFF对于小分子更精细
+modeller补链？
+smina，-6kcal，不能结合的能排掉，不一定能真的结合
+对应实验值。。
+-6是考虑误差，其实有点不够
+可能拿晶体结构去拟合，所以可能比同源模型结果更好？
+看一下最大类中心的构象是否合适
+
+
 

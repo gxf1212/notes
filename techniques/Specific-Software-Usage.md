@@ -702,8 +702,6 @@ Mac：https://macwk.com/soft/typora
 
 ### VScode
 
-#### Basics
-
 1. VScode安装完默认不能自动换行，需要我们手动配置。 文本超出显示时，会溢出，如图： 进入文件>首选项>设置，打开设置界面，在常用设置下找到Editor:Word Wrap选项，默认为off,设置为on即可。
 
 2. theme
@@ -782,21 +780,32 @@ https://blog.csdn.net/zhayushui/article/details/80433768
 
 2. no need to be under `su root`
 
-3. `conda: no command`: add path? open a new terminal after installation 
+3. `conda: no command`: add path? open a new terminal after installation [conda:未找到命令](https://blog.csdn.net/freezeplantt/article/details/80176215)
 
-   https://blog.csdn.net/freezeplantt/article/details/80176215
-
-4. cannot activate at the first time: run `source activate`
+4. if cannot activate at the first time: run `source activate`
 
    then run `conda activate` or `conda deactivate`
 
-   see https://blog.csdn.net/qq_36338754/article/details/97009338
+   see [conda activate激活环境出错的解决办法-CSDN博客](https://blog.csdn.net/qq_36338754/article/details/97009338)
+
+5. reinstall conda:
+   - update pycharm interpreter
+   - paste back mutff of pmx
+   - add matplotlib fonts
+
+6. If you want to update to a newer version of Anaconda, type:
+
+   ```shell
+   conda update --prefix /opt/anaconda3 anaconda
+   ```
+
+7. 
 
 #### Basics
 
 - https://blog.csdn.net/xiangfengl/article/details/127597065 on a new machine. OpenSSL appears to be unavailable on this machine.
 
-- Add to path! https://blog.csdn.net/sdnuwjw/article/details/112207440
+- Add to path for Windoes! [ImportError: DLL load failed while importing _ssl: 找不到指定的模块 No module named ‘jupyter_server‘](https://blog.csdn.net/sdnuwjw/article/details/112207440)
 
 - maybe 
 
@@ -924,27 +933,25 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   # in it before installing with pip
   ```
 
-  https://blog.csdn.net/weixin_41712499/article/details/105430471  it's just the problem with pat
+  [anaconda创建新虚拟环境后，pip总是定位到全局Python的pip路径中（无法定位到虚拟环境的pip）](https://blog.csdn.net/weixin_41712499/article/details/105430471)  it's just the problem with path
 
-- https://blog.csdn.net/qazplm12_3/article/details/108924561
-
-  卡在solving environment这一步：现在安装的东西太多，垃圾太多，搜索兼容。。
+- [一招解决Conda安装卡在solving environment这一步！](https://blog.csdn.net/qazplm12_3/article/details/108924561)：现在安装的东西太多，垃圾太多，搜索兼容。。
 
   > https://blog.csdn.net/qq_27377201/article/details/107009927
 
   ```shell
-  conda update --strict-channel-priority --all
+conda update --strict-channel-priority --all
   conda update --all
   conda install mamba -c conda-forge
   ```
-
+  
   也没用
 
   maybe don't put too many channels. https://www.jianshu.com/p/1dbaef6b3209
 
-  .condarc文件在`C:\User\xx\`目录（Windows的HOME）下，或者使用win+R后在运行窗口中输入`%HOMEPATH%`进入
+- `.condarc`文件在`C:\User\xx\`目录（Windows的HOME）下，或者使用win+R后在运行窗口中输入`%HOMEPATH%`进入
 
-  ```
+  ```bash
   channels:
     - conda-forge
     - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
@@ -952,16 +959,16 @@ https://blog.csdn.net/zhayushui/article/details/80433768
     - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
     - defaults
   ```
-
+  
   [解决.condarc文件找不到的问题-CSDN博客](https://blog.csdn.net/ljx0951/article/details/104121844)：只有当用户第一次使用conda config命令时，系统才会自动创建.condarc文件。`conda config --add channels defaults`
-
+  
 - conda 环境迁移, 修改conda路径（复制文件夹 + 软连接）https://blog.csdn.net/qq_34342853/article/details/123020957
 
   没成功
 
-  https://www.jb51.net/article/256139.htm
+  [conda虚拟环境默认路径的修改方法](https://www.jb51.net/article/256139.htm)
 
-  add env path to .condarc, and change the priority of D:\Anaconda3 (both package and environment directory)
+  add env path to .condarc, and change the priority of `D:\Anaconda3` (both package and environment directory)
 
   ```shell
   conda config --add envs_dirs newdir
@@ -970,7 +977,7 @@ https://blog.csdn.net/zhayushui/article/details/80433768
 
   No writeable pkgs directories configured: https://blog.csdn.net/qq_37142541/article/details/125428689
 
-- https://blog.csdn.net/shuiyixin/article/details/90370588
+- [Python报错：ImportError: DLL load failed: 找不到指定的模块 解决方案详解](https://blog.csdn.net/shuiyixin/article/details/90370588)
 
   [Windows conda ImportError: DLL load failed while importing shell_Ayka的博客-CSDN博客](https://blog.csdn.net/yihuajack/article/details/122123674)
 
@@ -982,7 +989,18 @@ https://blog.csdn.net/zhayushui/article/details/80433768
 
 - [Unable to update anaconda - KeyError('pkgs_dirs')](https://github.com/ContinuumIO/anaconda-issues/issues/13051)
 
-- 
+- I removed previous miniconda and when creating conda environment for new anaconda from yaml file exported from previous miniconda.
+
+  ```python
+  InvalidArchiveError("Error with archive /home/gxf1212/data/local-programs/anaconda3/pkgs/gxx_impl_linux-64-10.4.0-h7ee1905_16.tar.bz2.  You probably need to delete and re-download or re-create this file.  Message was:\n\nfailed with error: [Errno 2] No such file or directory: '/home/gxf1212/data/local-programs/anaconda3/pkgs/gxx_impl_linux-64-10.4.0-h7ee1905_16.tar.bz2'")        
+  ....
+  ```
+
+  ```shell
+  conda clean -a
+  ```
+
+  
 
 > icon path: `xxx/anaconda/lib/python3.7/site-packages/anaconda_navigator/static/images/anaconda-icon-256x256.png` 
 >
@@ -1152,12 +1170,19 @@ also for LibreOffice Calc, many commands are the same....
 #### Shortcuts
 
 - Alt+F3：手型工具
+- Alt+F6：选择
 
 ### Convert
 
 https://cloudconvert.com/epub-to-pdf
 
 https://www.freepdfconvert.com/epub-to-pdf
+
+### Other Windows Tools
+
+[Win11画图工具怎么图片调整像素-百度经验 (baidu.com)](https://jingyan.baidu.com/article/3065b3b681e9b1ffcff8a4c7.html)
+
+
 
 ## Scientific
 
@@ -1250,9 +1275,13 @@ For ACS papers, copy from here
 
 ![](E:\GitHub-repo\notes\techniques\images\acs-cite.png)
 
+#### Other
+
+pdf文件标题粘贴到微信对话框就失去换行成为一整行了
 
 
-## Other
+
+## Other Tools
 
 [浙大邮箱 帮助中心](https://mail.zju.edu.cn/coremail/help/clientoption_zh_CN.jsp)
 
@@ -1312,6 +1341,12 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 - a domestic new choice: [天工AI搜索 — 知识从这里开始 (tiangong.cn)](https://search.tiangong.cn/)，除了百度、讯飞、阿里等
 
 - 
+
+### Tencent meeting
+
+<img src="E:\GitHub-repo\notes\techniques\images\Tencent-meeting.png" style="zoom:50%;" />
+
+
 
 
 
@@ -1407,6 +1442,8 @@ notes from Windows
 6. 万方可以直接导出bibtex，辣鸡知网就不行. whatever
 7. citation keys cases https://tex.stackexchange.com/questions/623482/case-mismatch-between-cite-keys
 8. https://tex.stackexchange.com/questions/174030/misplaced-alignment-tab-character-error-when-citing-a-particular-entry Look for & in a bibliographic item and change it into \&
+
+https://www.bruot.org/ris2bib/
 
 ## Chinese
 
@@ -1530,11 +1567,216 @@ texstudio中文红线，临时的办法 https://www.cnblogs.com/litifeng/p/11633
 
 - 
 
+# VScode syntax highlight tool
+
+Welcome to install my [md-highlighter](https://marketplace.visualstudio.com/items?itemName=gxf1212.md-highlighter)!
+
+## workflow
+
+[Syntax Highlight Guide | Visual Studio Code Extension API](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide)
+
+> [Extension API](https://code.visualstudio.com/api)
+
+example tutorial: 
+
+- [想让VSCode识别自己的编程语言？立马安排 CSDN博客](https://blog.csdn.net/weixin_44151650/article/details/121321503)
+- [从零开始撸一个 VSCode Extension - 掘金 (juejin.cn)](https://juejin.cn/post/7117082008819351566) see 'publish'
+
+related extensions: gmxhelper, bioSyntax
+
+download [Yocode - vscode-docs](https://vscode-docs.readthedocs.io/en/stable/tools/yocode/)
+
+```shell
+npm install -g yo generator-code
+```
+
+`package.json` example: https://github.com/Zuttergutao/gmxhelper/blob/main/package.json
+
+```shell
+yo code
+```
+
+select "New Language Support"
+
+Directory structure: see the above links
+
+- `package.json`，保存了我们在第二步中给出的答案，你也可以在此处进行修改。
+- 几个Markdown文件，为你提供了标准的通知模板，如果你有留意过VSCode下载插件界面的内容，会发现与该模板大差不差。
+- `language-configuration.json`，该文件中的内容，相当于全局定义，它包括以下几部分：注释方式、允许的括号、自动补全的括号、选中文字后输入会自动括起来的符号。
+- `./syntexes/mylang.tmLanguage.json`，该文件是本项目的重点，我们需要在此处定义编程语言的文法
+
+> [Semantic Highlight Guide | Visual Studio Code Extension API](https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide#theming): define color styles different from the current theme?
+
+Test or debug: Run the extension (open that folder) by pressing F5 in Visual Studio Code. This will open a new window with the extension loaded. Or [Ctrl+shift+P and "Reload window"](https://stackoverflow.com/questions/42002852/how-to-restart-vscode-after-editing-extensions-config) to refresh extensions. Open a file with the .rtf extension to test the syntax highlighting.
+
+When you're satisfied with the extension, package it by running vsce package in the terminal window. This will create a .vsix file that you can distribute or install on other machines.
+
+手动安装插件：非常简单，把整个插件文件夹，拷贝到`%USERPROFILE%/.vscode/extensions`(Linux是`~/.vscode/extensions`)，重启VSCode就可以啦！
+
+or: Ctrl+shift+P and "install extension from location"
+
+> debug: sometimes failed. may edit `extensions.json` and restart
+>
+> maybe still fail. I'm not clear about the mechanism of recognition....
+>
+> debug: after reloading vscode window, my extension disappears. how to install it permanently? I have put the folder in .vscode/extensions. this is an extension I am developing and files are constantly changing. so using vsix file is not possible.
+>
+> 莫名其妙就好了，好像是把.obsolete (已废弃的，已不用的，已失时效的) 文件清空而不是删掉？
+
+[Publishing Extensions | Visual Studio Code Extension API](https://code.visualstudio.com/api/working-with-extensions/publishing-extension)
+
+> [Extension Manifest](https://code.visualstudio.com/api/references/extension-manifest#approved-badges)
+>
+> [VSCode 插件开发（三）：插件打包与本地安装 - 简书 (jianshu.com)](https://www.jianshu.com/p/bb379a628004)
+
+debug: ["vsce publish" command returns Invalid publisher name 'Siarhei Kuchuk'. Expected the identifier of a publisher, not its human-friendly name. · Issue #419 · microsoft/vscode-vsce (github.com)](https://github.com/microsoft/vscode-vsce/issues/419)
+
+publisher name in `package.json` should not contain spaces
+
+## `package.json` file
+
+```json
+	{
+	  "id": "in",
+      "aliases": ["Amber in file"],
+      "extensions": [".in"],
+      "configuration": "./language-configuration.json"
+    }
+```
+
+aliases: what appears in the bottom right corner of VScode
+
+## `xxx.tmLanguage.json` file
+
+e.g. [bioSyntax/vscode/syntaxes/pdb.tmLanguage.json at master](https://github.com/bioSyntax/bioSyntax/blob/master/vscode/syntaxes/pdb.tmLanguage.json)
+
+also, see the above tutorial, or [md-highlighter/syntaxes/rtf.tmLanguage.json at main ](https://github.com/gxf1212/md-highlighter/blob/main/syntaxes/rtf.tmLanguage.json)
+
+replace the content with yours
+
+```json
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "PSF from GUI, that from vmd is different",
+    "scopeName": "source.psf",
+    "fileTypes": [
+        "psf"
+    ],
+    "patterns": [
+        {
+            "name": "comment.line.psf",
+            "match": "^\\*.*$"
+        },
+        {
+            "begin": "^\\s+REMARKS\\b",
+            "end": "$",
+            "name": "comment.line.remark.pdb"
+        },
+        {
+            "//": "ATOM and BOND is missing...",
+            "name": "keyword.psf",
+            "match": "\\b(PSF|CMAP|NTITLE|NATOM|NBOND|NTHETA|NPHI|NIMPHI|NDON|NACC|NNB|NGRP|NUMLP|NCRTERM)\\b"
+        },
+        {
+            "name": "entity.name.tag.total_number",
+            "match": "(?<=^\\s+)\\d+(?= !N)"
+        },
+        {
+            "begin": "(^\\s*\\d+\\s+!NATOM\\s*$)", 
+            "end": "(^\\s*\\d+\\s+!NBOND:\\s+bonds\\s*$)",
+            "//": "format: atomid segname resid resname atomname atomtype charge mass unknown",
+            "///":"^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$",
+            "patterns": [
+                {
+                    "name": "constant.numeric.atom-number.psf",
+                    "match": "(?<=^\\s+)\\d+(?=\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
+                },
+......               
+            ]
+        },
+        {
+            "name": "constant.numeric.psf",
+            "match": "\\b\\d+\\b|(?<=^\\s*)\\d+"
+        }
+    ]
+}
+```
+
+NOTE: no comments in `.json` file. write a field `'//': 'comment'`
+
+List of scope names: [Scope Naming (sublimetext.com)](https://www.sublimetext.com/docs/scope_naming.html), recommended: see "MINIMAL SCOPE COVERAGE"
+
+> actually you can define anything after the first keyword...
+
+capture group: failed and not using...
+
+## Regular expression
+
+### Basics
+
+反斜杠\需要用另一个反斜杠进行转义，所以特殊匹配一般都是双反斜杠
+
+### Elements
+
+#### Characters
+
+- 非空白字符（`\\S`）
+- a whitespace character (`\\s`), 
+  - `\\s` 匹配任何空白字符，包括空格、制表符、换页符等。
+
+- a digit, or integer (`\\d`)
+- 任意字符（`.{#}`）。
+  - `"^.{6}(.{5})"`：第7到第11列中的任意字符
+  - `.*`: any characters (between something)
+  - point: `\\.`
+
+#### Quantity
+
+- 可选：`?`
+  - 一个可选的负号（`-?`）
+- `*`表示零个或多个，`+`表示一个或多个
+  -  `\\s*` 来表示零个或多个空白字符。
+  - 一个或多个数字（`\\d+`）；至少一个空白字符（`\\s+`）
 
 
-## R language
+#### Range
 
-to be continue...
+`\\b`表示单词边界。它用于匹配一个位置，这个位置的前面或后面是一个单词字符（字母、数字或下划线），而另一边不是单词字符。例如，在正则表达式`\\bword\\b`中，两个`\\b`分别表示单词"word"的开头和结尾。这个正则表达式可以匹配字符串"This is a word."中的"word"，但不会匹配字符串"This is a sword."
+
+- start of line (`^`)
+- end of line (`$`)
+
+#### Assertion
+
+`(?<=\\bBOND\\s)`是一个正向后视断言，它表示匹配的内容必须紧跟在"BOND"这个单词和一个空格之后。
+
+`"^(?!\\${4})\\S+$"`是负向前瞻断言，可以匹配以非空白字符开头且不包含字符串 `$$$$` 的行
+
+
+
+在正则表达式中，可以在模式的开始处使用(?i)选项来表示接下来的匹配将不区分大小写。例如，如果要匹配字符串hello，可以使用如下的模式：
+(?i)hello
+这将匹配Hello、HELLO、hello等任何形式的hello字符串。
+
+
+
+### Examples
+
+- `"(?<=\\bBOND\\s)(\\S+\\s+\\S+\\s*)+"`，这样就可以匹配"BOND"后面的所有字符串对了。
+- `"(?<=\\bIC\\s)(\\S+\\s+){4}"`，这样就可以匹配"IC"后面的前四个字符串了。
+- a combination: `(?<=\\bANGLE\\s*)((\\S+\\s*){3})+`
+
+
+
+### begin-end
+
+begin和end匹配的关键词，如psf的ATOM和BOND，目前无法进行任何形式的高亮
+
+ begin和end之间也不再用外部的语法，而是独立的
+
+
+
+
 
 
 

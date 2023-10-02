@@ -180,7 +180,7 @@ examples
   Insert "This line goes at line 3." at the third line:
 
   ```shell
-  sed '3id This line goes at line 3.' input_file > output_file
+  sed '3i This line goes at line 3.' input_file > output_file
   ```
 
   Append "This is the last line." after the last line of the file:
@@ -705,30 +705,38 @@ ax.tick_params(width=5,...)
 
 - how to add fonts?
 
-  - just copy .ttf files to `~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf`
+  - just copy .ttf files to font dir  [Linux下的python修改画图的字体](https://blog.csdn.net/qq_32442683/article/details/108298763)
 
-    https://blog.csdn.net/qq_32442683/article/details/108298763
-
-  - [use .ttf file](https://www.cnblogs.com/arkenstone/p/6411055.html)
-
+    ```python
+    import os
+    import matplotlib
+    font_directory = os.path.join(matplotlib.get_data_path(), 'fonts', 'ttf')  # ~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf
+    os.system("copy *.ttf *.TTF "+font_directory)
+    cache_dir = matplotlib.get_cachedir()
+    os.system("rm -r "+cache_dir)  # /home/gxf1212/.cache/matplotlib
+    # re-import matplotlib
+    ```
+  
+  - [use .ttf file temporarily](https://www.cnblogs.com/arkenstone/p/6411055.html)
+  
     ```python
     from matplotlib.font_manager import FontProperties
     chinese_font = FontProperties(fname='/usr/share/fonts/MyFonts/YaHei.Consolas.1.11b.ttf')
     ...
     plt.text(x, y, display, fontsize=12, fontproperties=chinese_font)
     ```
-
+  
   - find from somewhere else
-
+  
     ```python
     font_dirs = ['/home/gxf1212/data/local-programs/Fonts']
     font_files = font_manager.findSystemFonts(fontpaths=font_dirs)
     for font_file in font_files:
         font_manager.fontManager.addfont(font_file)
     ```
-
+  
   - [check usable Chinese font family in matplotlib](https://www.cnblogs.com/arkenstone/p/6411055.html)
-
+  
     ```python
     from matplotlib.font_manager import FontManager
     import subprocess
@@ -748,18 +756,18 @@ ax.tick_params(width=5,...)
     for f in available:
         print(f)
     ```
-
+  
     copy the results into `font_la = {'family': 'dengxian'}`. capitalization does not matter.
-
+  
   - after installing font for the system (see [here](/techniques/Linux-fundamental#system-settings))
-
+  
     ```python
     import matplotlib
     matplotlib.get_cachedir()
     ```
-
+  
     `rm -rf` it! then just use the `available` fonts above. No need to configure as other blogs did.
-
+  
     [after removing cache....](https://blog.csdn.net/u014712482/article/details/85802563)here's how we can check name for ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190104211934391.jpg)
 
     ```python
@@ -769,9 +777,9 @@ ax.tick_params(width=5,...)
     prop = font_manager.FontProperties(fname=fontpath)
     print(prop.get_name())
     ```
-
+  
   - choose a font
-
+  
     ```python
     # global setting
     plt.rcParams['font.family'] = 'Machine Gunk'
@@ -787,7 +795,7 @@ ax.tick_params(width=5,...)
     [label.set_fontsize(12) for label in labels]
     [label.set_fontweight('roman') for label in labels]
     ```
-
+  
   - 
 
 
@@ -899,27 +907,22 @@ even `python xx.py -W` didn't work
 
 - 
 
-# Regular expression
-
-These are mainly from Development of VScode syntax highlight tool
-
-## workflow
-
-https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide
-
-
-
-
-
-
-
-
-
 
 
 
 
 # Small molecule
+
+## File formats
+
+mol2:
+
+- [谈谈记录化学体系结构的mol2文件](http://sobereva.com/655)
+  - mol2文件里以#作为第一列的是注释行，空行也被完全无视。mol2文件是自由格式，因此空格数目完全随意。
+  - 即便你不想定义原子所属的子结构信息而只想定义原子电荷，也必须随便写上子结构序号和子结构名字来占位，比如此例用0 UNK0来占位。
+- https://chemicbook.com/2021/02/20/mol2-file-format-explained-for-beginners-part-2.html
+- http://chemyang.ccnu.edu.cn/ccb/server/AIMMS/mol2.pdf
+- [mol2 format in details](https://www.structbio.vanderbilt.edu/archives/amber-archive/2007/att-1568/01-mol2_2pg_113.pdf)
 
 ## RDkit
 

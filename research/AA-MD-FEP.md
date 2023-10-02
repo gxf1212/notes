@@ -936,7 +936,7 @@ filter the mutation site: through buried area of each residue (residue expose an
 
 # Gromacs MD
 
-## System setup
+## From PSK project
 
 ### pre-process the pdb files
 
@@ -1048,7 +1048,6 @@ rm \#*\#
 split_states clusters
 save c01.pdb, clusters_0001
 
-
 ```
 
 
@@ -1061,7 +1060,7 @@ save c01.pdb, clusters_0001
 >
 > [How to Calculate the Free Energy of Methane in Water Using Gromacs with Cloud HPC (cloudam.io)](https://www.cloudam.io/post/how-to-calculate-the-free-energy-of-methane-in-water-using-gromacs-with-cloud-hpc)
 
-from Connexin. **update the code later**
+from Connexin Ab project. **update the code later**
 
 ## pmx residue mutation
 
@@ -1427,7 +1426,7 @@ also works for other FEP in gmx
 
 ## MD workflow
 
-Not using? He has provided me a full workflow
+Not using? He has provided me a full set of files (top, gro)
 
 > Maybe we need to confirm the end state conformation....
 >
@@ -1483,7 +1482,17 @@ Not using? He has provided me a full workflow
 
   not checked
 
-- 
+- I have a gromacs .gro file with multiple identical chains, i.e. same residue numbers but no chain identifiers. when I save coordinates into pdb in VMD, only one chain is left and the structure is messy (average coordinate?). how to correctly save pdb files from gro file with multiple identical chains?
+
+  answer: save as .gro file
+
+- [Fatal error: atom C1 not found in buiding block 1MET while combining tdb and rtp. error in ignh cmd - User discussions - GROMACS forums (bioexcel.eu)](https://gromacs.bioexcel.eu/t/fatal-error-atom-c1-not-found-in-buiding-block-1met-while-combining-tdb-and-rtp-error-in-ignh-cmd/5804)
+
+  [Newest CHARMM36 port for GROMACS - Third party tools and files](https://gromacs.bioexcel.eu/t/newest-charmm36-port-for-gromacs/868/11)
+
+  For CHARMM36 in the case of an N-terminal MET residue in a polypeptide sequence, you **MUST** interactively choose the appropriate terminal patch. `pdb2gmx` tries to be smart and match by name but in this case, it causes an erroneous attempt to patch with a carbohydrate-specific patch. (2022.11)
+
+  
 
 
 

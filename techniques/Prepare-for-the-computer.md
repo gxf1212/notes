@@ -2,11 +2,9 @@
 
 
 
-# mputer
+# Prepare for the computer
 
-This page is all about software installing (Linux), both for system and project environment. Also something about Fedora. A little bit messy. 
-
-Mainly recorded while in NUS. The installation of DL environment, Gromacs, and plans are all in `Linux fundamental (Installation and softwares)`.
+This page is all about software installing (Linux), both for system and research environment. (Used to) Mainly recorded while in NUS. 
 
 # General
 
@@ -1475,7 +1473,13 @@ conda install -c omnia msmbuilder
    mcsalign mobile, target
    ```
 
-## Clustering plugin in VMD
+## Other
+
+### PyInstaller
+
+[PyInstaller Manual — PyInstaller 6.0.0 documentation](https://pyinstaller.org/en/stable/)
+
+### Clustering plugin in VMD
 
 https://github.com/luisico/clustering
 
@@ -1568,6 +1572,8 @@ parmed is along with ambertools. won't need to install alone
 
 ## acpype
 
+> AnteChamber PYthon Parser interfacE
+
 this tool should be separate from ambertools...
 
 https://github.com/alanwilter/acpype#how-to-use-acpype
@@ -1582,7 +1588,7 @@ conda install -c acpype acpype -y # this contains ambertools-17
 2022.2.11 update
 
 ```shell
-conda create -n Acpype -
+conda create -n Acpype 
 conda install -c conda-forge acpype
 ```
 
@@ -1608,7 +1614,7 @@ tar -xjvf G16-A03-AVX2.tbz
 mkdir g16/scratch
 ```
 
-after extraction, add these to `~/.bashrc` http://sobereva.com/439
+after extraction, add these to `~/.bashrc` ([Gaussian的安装方法及运行时的相关问题](http://sobereva.com/439))
 
 ```shell
 export g16root=$HOME
@@ -1617,6 +1623,16 @@ export GAUSS_EXEDIR=$g16root/g16
 source $g16root/g16/bsd/g16.profile
 export PATH=$PATH:$g16root/g16
 ```
+
+[g16 view csdn](https://download.csdn.net/download/lk2069/10777135), buy at 1 yuan [here](https://www.kerwin.cn/dl/detail/lk2069/275737); [win?](https://getintopc.com/softwares/design/gaussview-6-0-16-free-download/); [Linux g16 share](https://zjueducn-my.sharepoint.com/:u:/g/personal/gxf1212_zju_edu_cn/ESd17fbcNXtNlm9AR5Xs_CQBywj7CC4mmEn2M_wiYZT-IQ?e=H10csy)
+
+[another installation guide](http://www.molcalx.com.cn/gaussian-16-installation/)
+
+put the folder `gv` under your g16 folder!! 
+
+You can type `gv` in the terminal to start GView and link to Gaussian as we did in Windows, only if it can be found by g16 path settings!
+
+> icon: downloaded from web
 
 > debugging experience 2022.2.10
 > 
@@ -1642,23 +1658,13 @@ export PATH=$PATH:$g16root/g16
 >    
 >    `%chk=D:\Doctor\my work\undergraduate\TA\2019\0912\ethylene.chk`
 
-[g16 view csdn](https://download.csdn.net/download/lk2069/10777135), buy at 1 yuan [here](https://www.kerwin.cn/dl/detail/lk2069/275737); [win?](https://getintopc.com/softwares/design/gaussview-6-0-16-free-download/)
-
-[installation guide](http://www.molcalx.com.cn/gaussian-16-installation/)
-
-put the folder `gv` under your g16 folder!! 
-
-You can type `gv` in the terminal to start GView and link to Gaussian as we did in Windows, only if it can be found by g16 path settings!
-
-> icon: downloaded from web
-
 ## PMX
 
 https://github.com/deGrootLab/pmx/tree/develop
 
-develop!
+develop! default pmx may need python2; conda install not ok
 
-remember to set gmxlib: https://degrootlab.github.io/pmx/installation.html#gmxlib
+remember to set GMXLIB: https://degrootlab.github.io/pmx/installation.html#gmxlib
 
 ```shell
 git clone https://github.com/deGrootLab/pmx.git
@@ -1666,7 +1672,7 @@ cd pmx
 # to switch to 'develop' branch type:
 git checkout develop
 
-conda activate  AmberTools22 # whatever
+conda activate something # whatever
 # conda install pip
 conda install -c conda-forge rdkit -y
 python -m pip install .

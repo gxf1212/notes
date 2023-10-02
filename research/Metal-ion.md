@@ -2,10 +2,13 @@
 
 From the PSKR1-Al<sup>3+</sup> project. Modeling (inclulding advanced FF parametrization) and simulation (maybe advanced techniques) involving metal ions. Maybe related literature and binding site prediction.
 
-- Amber special setup (e.g. MCPB.py)
-- special MD (US, etc.)
+- setup with tleap and convert to gmx with parmed
+- Amber special setup (e.g. MCPB.py), or Gaussian+Sobtop
+- special MD (US, etc.), see Enhanced sampling
 
 ## First things to know
+
+see also: [academic notes](academic-notes.md#metal-and-metalloproteins)
 
 - Alkaline earth metal ions are expected to bind to dsDNA through electrostatic and van der Waals interactions due to their closed-shell electronic structure; therefore, classical force fields can accurately model DNA–ion interactions of alkaline earth metal ions.
 
@@ -18,6 +21,20 @@ From the PSKR1-Al<sup>3+</sup> project. Modeling (inclulding advanced FF paramet
 - 
 
 - 
+
+
+
+## Aluminum
+
+Despite its natural abundance, however, it has been excluded from biochemical evolution, and thus has never been assigned any biological function in living organisms. The reasons for this apparent paradox are not clear.
+
+why does Al<sup>3+</sup> inhibit kinase activity by replacing Mg<sup>2+</sup>? Al<sup>3+</sup> is a stronger Lewis acid, which should have promote the catalytic process. Is it true that Al<sup>3+</sup>-PPi won't leave the active site after the reaction?
+
+铝离子应该不会MLCT啥的
+
+<img src="E:\GitHub-repo\notes\research\academic-notes.asssets\Al-preference.png" style="zoom:50%;" />
+
+
 
 
 
@@ -171,13 +188,190 @@ rm pro-1264.pdb
 
 ## Sobtop
 
+[Sobtop](http://sobereva.com/soft/Sobtop/), and list of examples
+
+[使用Sobtop超级方便地创建二茂铁的GROMACS的拓扑文件](http://sobereva.com/635)
+
 Sobtop is absolutely simpler than MCPB.py. Choose this for simple systems like hydrated Al<sup>3+</sup>.
 
 We generate parameters for them (.itp file), and insert into Gromacs .top file.
 
+RESP charge reference: see [Protein-ligand-simulation sob articles](Protein-ligand-simulation.md#QM-Reference)
+
+### Model a hydrated ion
+
+```mermaid
+graph LR
+c(structure\npdb/mol2)--GaussView-->g(gjf file)--replace\nheader-->og(opt.gjf)--g16-->ol(opt.log)--GaussView-->opt(optimized\nstructure)--Sobtop-->gmx(gmx files)
+og--g16-->gas(gas.chk)--Multiwfn-->charge(charge)
+og--g16-->solv(solv.chk)--Multiwfn-->charge(charge)
+charge--Sobtop-->gmx(gmx files)
+```
+
+Workflow:
+
+```bash
+# setup the molecule and create g16 input file
+# optimize in vacuo, check freq, gas/solv single point
+qsub g16.pbs  
+bash charge.sh aloh
+# get mol2 file from g16 optimization 
+gv opt.log
+bash gentop.sh aloh
+# go to sobtop directory (cannot call from elsewhere...) to generate gmx files
+cdsob
+# paste the content outputed and get .gro .itp and copy them back
+```
+
+`g16.pbs` is
+
+```shell
+....
+
+g16 < "opt.gjf" > "opt.log"
+formchk "opt.chk" "opt.fchk"
+g16 < "gas.gjf" > "gas.log"
+formchk "gas.chk" "gas.fchk"
+g16 < "solv.gjf" > "solv.log"
+formchk "solv.chk" "solv.fchk"
+
+...
+```
+
+`opt.gjf` header:
+
+```gas
+%chk=opt.chk
+%Mem=16GB
+%NProcShared=28
+# B3LYP/def2TZVP em=GD3BJ Geom=PrintInputOrient Integral=(Grid=Fine) Opt Freq geom=connectivity
+
+LIG
+
+3 1
+ Al ....
+```
+
+`gas.gjf`
+
+```gas
+%oldchk=opt.chk
+%chk=gas.chk
+%Mem=16GB
+%NProcShared=28
+# B3LYP/def2TZVP em=GD3BJ Integral=(Grid=Fine) Pop(MK,ReadRadii) IOp(6/33=2,6/42=6) geom=allcheck
+```
+
+`solv.gjf`
+
+```gas
+%oldchk=opt.chk
+%chk=solv.chk
+%Mem=16GB
+%NProcShared=28
+# B3LYP/def2TZVP em=GD3BJ Integral=(Grid=Fine) Pop(MK,ReadRadii) IOp(6/33=2,6/42=6) geom=allcheck scrf=solvent=water
+```
+
+see [MD-fundamentals](MD-fundamentals.md#RESP)
+
+`charge.sh`
+
+```shell
+#!/bin/bash
+# bash charge.sh prefix
+
+# Modified from A script to calculate RESP2 charges by invoking Gaussian and Multiwfn
+# Written by Tian Lu (sobereva@sina.com)
+# Last update: 2021-Dec-16
+# Examples:
+# RESP2(0.5) for singlet neutral molecule with water solvent: ./RESP2.sh maki.pdb
+# RESP2(0.5) for triplet neutral molecule with water solvent: ./RESP2.sh nozomi.xyz 0 3
+# RESP2(0.5) for singlet anion with ethanol solvent: ./RESP2.sh nico.mol -1 1 ethanol
+
+delta=0.5
+
+export inname=$1
+filename=${inname%.*}
+suffix=${inname##*.}
+
+echo Running Multiwfn...
+Multiwfn gas.fchk -ispecial 1 > /dev/null << EOF
+7
+18
+8
+1
+gas.log
+y
+0
+0
+q
+EOF
+
+echo RESP charge in gas phase has been outputted to gas.chg
+
+echo Running Multiwfn...
+Multiwfn solv.fchk -ispecial 1 > /dev/null << EOF
+7
+18
+8
+1
+solv.log
+y
+0
+0
+q
+EOF
+
+echo RESP charge in solvent phase has been outputted to solv.chg
+
+#### Calculate RESP2
+paste gas.chg solv.chg |awk '{printf ("%-3s %12.6f %12.6f %12.6f %15.10f\n",$1,$2,$3,$4,(1-d)*$5+d*$10)}' d=$delta > $1.chg
+
+echo
+echo Finished! The optimized atomic coordinates with RESP2 charges \(the last column\) have been exported to $chgname in current folder
+# echo Please properly cite Multiwfn in your publication according to \"How to cite Multiwfn.pdf\" in Multiwfn package
+
+```
+
+`gentop.sh`
+
+```shell
+#!/bin/bash
+# bash gentop.sh prefix
+# copy the output content to sobtop directory
+
+path=`pwd`
+name=$1
+
+echo """
+./sobtop > /dev/null << EOF
+${path}/${name}.mol2
+7
+10
+${path}/${name}.chg
+0
+2
+${name}.gro
+1
+2
+2
+${path}/opt.fchk
+${name}.top
+${name}.itp
+0
+EOF
+
+mv ${name}.* ${path}
+"""
+
+# after gro, -1 4: DRIH. -1 3: m2S. now, default: mS metho
+```
 
 
 
+
+
+### Insert into water from tleap for gmx
 
 Workflow:
 
@@ -547,6 +741,12 @@ The spatial distribution of ions surrounding DNA was analyzed using radial distr
 https://docs.mdanalysis.org/stable/documentation_pages/analysis/rdf.html
 
 https://amberhub.chpc.utah.edu/radial-rdf/
+
+
+
+# Binding site prediction
+
+a few notes on the literatures. from yuque
 
 
 
