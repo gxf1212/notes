@@ -170,6 +170,33 @@ contents
 - [虚拟筛选和Gromacs基础操作](/research/Previous-projects/UROPS-run-and-result.md)
 - [NAMD/VMD和FEP计算基本操作](/research/Previous-projects/FYP-notes.md)
 
+download and extract. then
+
+```shell
+./configure --prefix=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs --with-cuda=/usr/local/cuda
+make
+make install
+# in ~./bashrc
+export PATH=$PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/bin/ 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/bin/lib/ 
+source ~/.bashrc  
+sudo ldconfig 
+# test in the installing directory
+cd examples
+make
+mpirun -np 8 hello_c
+```
+
+## Not using
+
+>     1. `nvidia smi` shows cuda version 11.1, driver is 455.45.01. We should not use an open source driver. check additional driver from 'start'.
+>     2. nivida.cn also shows 455.45, so do I need to install the driver? Now no.
+>
+>     3. problem! can only run .sh file now!
+>     4. configure a command for them
+
+
+
 # Other---the first time I install Ubuntu
 
 not helpful now

@@ -1,6 +1,32 @@
 # RNA simulation
 
+TODO: Thanks for Protein-RNA互作.pdf from Mark
 
+
+
+# Basics
+
+## Secondory structure
+
+### 点括号注释
+
+. 表示未配对核苷酸， () 表示配对核苷酸
+
+如果存在交叉配对，就依次用[ ]，{ }  
+
+<img src="E:\GitHub-repo\notes\research\RNA-simulation.assets\dot-parentheses.png" style="zoom:67%;" />
+
+
+
+### Prediction
+
+形成碱基互补配对的自由能为负值，而未形成碱基互补配对的自由能为正值
+
+MFE (Minimum Free Energy)算法，由Zuker提出
+
+自由能 ≠ 碱基对的数目
+
+现在流行是机器学习和同源比对相结合，对更长的RNA序列进行二级结构预测  
 
 
 
@@ -8,6 +34,8 @@ http://wiki.chenglab.net/mediawiki/index.php/How_to_do_MDs#MD_parameters
 做DNA/RNA末端要restrain住
 
 
+
+# Tools
 
 https://rna-tools.online/tools/rpr/
 
@@ -30,3 +58,14 @@ Automatic building of ncRNA and DNA 3D structures
 
 
 
+预测二级结构:
+
+- Mfold Sever http://www.mfold.org/mfold/applications/rna-folding-form.php
+- RNAfold Sever http://rna.tbi.univie.ac.at//cgi-bin/RNAWebSuite/RNAfold.cgi
+- Vfold2D: http://ma.physics.missouri.edu/vfold2D/index.html 如果考虑存在“假节” pseudoknot结构
+
+已知二级结构，预测三级结构:
+
+- IsRNA2
+- RNAComposer: https://rnacomposer.cs.put.poznan.pl      http://rnacomposer.ibch.poznan.pl/
+- FARFAR2 Rosetta

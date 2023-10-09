@@ -199,6 +199,12 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 11. 按insert键等价于命令rock
 
+12. advanced: [Displaying Biochemical Properties - PyMOLWiki](https://pymolwiki.org/index.php/Displaying_Biochemical_Properties). show valance, secondary structure, surface, etc.
+
+13. pymol中按住shift可以框选
+    picking atoms模式下才能拖拽原子etc
+
+
 ### cmd & API
 
 1. pymol save session as a script: impossible now. write `.pml` file yourself and 
@@ -358,7 +364,15 @@ a website to draw electrostatic potential surface: https://server.poissonboltzma
 
 13. Menu--Mouse--Center: pick an atom to center
 
-14. [vmd粗粒化显示插件bendix简单介绍](https://kangsgo.cn/p/vmd粗粒化显示插件bendix简单介绍/)
+14. 比如第8200帧相对于第8100帧出现了RMSD的巨大升高，想弄清楚结构什么地方发生了怎样的巨大变化，在VMD的Graphics - Representation里选Trajectory标签页，在Draw Multiple Frames里输入`8100:100:8200`，并且把Coloring Method设为Trajectory - Timestep，这样这两帧就会用不同颜色一起显示出来便于比较在哪里结构有明显变化。
+
+    http://sobereva.com/627
+
+15. 
+
+16. 
+
+17. [vmd粗粒化显示插件bendix简单介绍](https://kangsgo.cn/p/vmd粗粒化显示插件bendix简单介绍/)
 
 #### Scripting
 
@@ -580,6 +594,16 @@ It can calculate Secondary structure, RMSD, RMSF, angle, dihedral, SASA, contact
 
 - Tools---structural editing---rotamers: mutate residues
 
+- mutate a residue:
+
+  ```Bash
+  sel #0:50
+  swapaa ARG #0:50
+  ```
+
+- 
+
+
 
 
 ## Gaussian & view
@@ -690,14 +714,6 @@ https://www.cryst.bbk.ac.uk/pps97/course/index.html Section 7: molecular forces
 
 ## Force field
 
-### Fundamental
-
-- Exchange-repulsion, also known as Pauli repulsion or exchange integral, is a correction to the Coulomb repulsion between two electrons in orbitals for the case when the electrons possess parallel spins. It is to be subtracted from the Coulomb repulsion to give the total energy of the electron-electron interaction.
-
-  In other words, exchange-repulsion arises as a consequence of the Pauli exclusion principle
-
-- 
-
 ### Support
 
 - [AMBER、GROMOS、OPLS、CHARMM最新版本的GROMACS力场包 - 分子模拟 (Molecular Modeling) - 计算化学公社](http://bbs.keinsci.com/thread-15094-1-1.html)
@@ -720,7 +736,11 @@ https://www.cryst.bbk.ac.uk/pps97/course/index.html Section 7: molecular forces
 
 
 
-<img src="E:\GitHub-repo\notes\research\Protein-ligand-simulation.assets\c4.png" alt="1692793734134" style="zoom: 50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/c4.png" alt="1692793734134" style="zoom: 50%;" />
+
+antechamber时，和氨基酸比较像的用amber，一般小分子用gaff
+
+
 
 ### Water Model
 
@@ -796,7 +816,13 @@ $$
 - CgenFF: epsilon F<Cl<Br<S
 - For C=O and COO-, Amber14 is a little more polarized than CHARMM36.
 
+Fundamental
 
+- Exchange-repulsion, also known as Pauli repulsion or exchange integral, is a correction to the Coulomb repulsion between two electrons in orbitals for the case when the electrons possess parallel spins. It is to be subtracted from the Coulomb repulsion to give the total energy of the electron-electron interaction.
+
+  In other words, exchange-repulsion arises as a consequence of the Pauli exclusion principle
+
+- LAMMPS支持的势函数形式多，gmx要想加，要么改代码，要么打表（类似cmap？）
 
 ## Algorithm & special
 
@@ -834,7 +860,7 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 
 ### Pressure control
 
-1. [C-rescale](https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp-value-pcoupl-C-rescale) in gmx
+1. [C-rescale](https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp-value-pcoupl-C-rescale) in gmx. 老版的gmx没有C-rescale
 
 2. http://www.sklogwiki.org/SklogWiki/index.php/Berendsen_barostat
 
@@ -854,7 +880,7 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 
     It's possible that it may take a while for the MC barostat to find an effective step size. But it is actually a more rigorously correct barostat. And quite a bit faster for pmemd.cuda.
 
-    https://computecanada.github.io/molmodsim-md-theory-lesson-novice/08-barostats/index.html
+    [Controlling Pressure – Practical considerations for Molecular Dynamics (computecanada.github.io)](https://computecanada.github.io/molmodsim-md-theory-lesson-novice/08-barostats/index.html)
 
 4. 
 
@@ -981,35 +1007,13 @@ This section is about basics and common usage. For more (theory, concepts), see 
 
 ## Modeling
 
-### pdb2gmx
+Modeling details: see [Preparation and modeling (gmx)](Preparation-and-modeling.md#gmx)
 
-prepare the system
+### topology file format
 
-- The protonation state of N- and C-termini can be chosen interactively with the `-ter` flag.
-
-- pdb2gmx产生的蛋白拓扑文件时可以加上`-his`选项来人工选择各个组氨酸的质子化态
-
-- `-ter` option for termini (only useful for proteins)
-
-- https://manual.gromacs.org/documentation/2020-current/onlinehelp/gmx-pdb2gmx.html  add -ff folder. xx.ff, forcefield.itp in 
-
-- `pdb2gmx` can recognize terminal residue's COO^-^ if chain ID is assigned
-
-Force field
-
-- source: local directory, installation top folder, `GMXLIB` variable
-
-- 
-
-### topology file
+https://manual.gromacs.org/current/reference-manual/topologies/topology-file-formats.html
 
 [defaults]是1-4 scaling之类的东西，不同力场不一样
-
-
-
-### editconf
-
-- https://gromacs.bioexcel.eu/t/merging-two-gro-files/2960/2 editconf converts between .pdb and .gro (etc.) freely
 
 ### make_ndx
 
@@ -1023,16 +1027,25 @@ type 'h' for help...
 
 `-n index.ndx`: based on an existing index file
 
+`nr`: number
+
+> rename: 
+>
+> ```shell
+> xxx selection \n
+> name 9 New_name
+> ```
+
 > 选区用于选择原子/分子/残基以进行后续分析. 与传统索引(index)文件不同, 选区可以是动态的, 即, 可以对轨迹中的不同帧选择不同的原子. GROMACS手册的第八章《分析》中有一小节对选区进行了简短的介绍, 并给出了一些建议. 当你初次接触选区概念时, 这些建议可帮助你熟悉它. 下面将就选区的技术细节和语法方面给出更加详细的说明.
 > [在命令行中指定选区](https://jerkwin.github.io/GMX/GMXsel/#在命令行中指定选区)
 
-## minimization
+## mdrun and .mdp options
+
+### minimization
 
 - For efficient BFGS minimization, use switch/shift/pme instead of cut-off.
 
-## mdrun and .mdp options
-
-### vdw
+### non-bonded
 
 use “switch”, Smoothly switches the potential to zero between rvdw-switch (page 211) and rvdw (page 212). i.e. a switching distance of 10 Å and a smooth cutoff distance of 12Å in the paper
 
@@ -1044,7 +1057,7 @@ vdw and elec, common cutoff/switchdist
 
 
 
-### trajectory
+### saving
 
 - gmx log file not that useful
 
@@ -1108,6 +1121,16 @@ recover interrupted simulation, to get the .gro
 #### Restart a run with multidir 
 
 (gmx_mpi)
+
+may not be available
+
+
+
+### Options
+
+`-nsteps <int>` (default: -2)
+
+Run this number of steps (-1 means infinite, -2 means use mdp option, smaller is invalid)
 
 
 
@@ -1402,7 +1425,9 @@ mask syntax
 
 ## Basics
 
+[大体系弱相互作用计算的解决之道](http://sobereva.com/214)
 
+MOZYME doing simulation for biomolecules...
 
 
 
@@ -1443,6 +1468,32 @@ http://bbs.keinsci.com/thread-1464-1-1.html
 没有可靠或者不可靠之说，都一样，不影响结果
 
 ### result
+
+- extract optimized structure from `.log` file in cmd:
+
+  ```shell
+  antechamber -i opt.log -fi gout -o opt.mol2 -fo mol2
+  ```
+
+- 
+
+
+
+## Common errors
+
+- [gaussian提示illegal instruction , illegal opcode错误](http://bbs.keinsci.com/thread-1331-1-1.html): CPU architechture not support, or too old. use old versions of Gaussian
+
+- [Gaussian 运行错误 l1.exe omode 33261 compare 7](http://bbs.keinsci.com/thread-3554-1-1.html) or [Files in the Gaussian directory are world accessible](https://www.researchgate.net/post/How-to-solve-Gaussian09-Error-l1exe-omode-33261-compare-7)
+
+  the right command after installation:
+
+  ```bash
+  chmod -R 700 /home/software/gaussian/g09
+  ```
+
+  which will restrict the access to the entire directory (recursively) only to you
+
+- 
 
 
 

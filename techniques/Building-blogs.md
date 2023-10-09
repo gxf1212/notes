@@ -1232,6 +1232,8 @@ extensions = ['myst_parser']
 
 [reference](https://myst-parser.readthedocs.io/en/latest/faq/index.html)
 
+#### Basics
+
 e.g. insert .md into .rst
 
 ````markdown
@@ -1251,20 +1253,21 @@ insert .md into .rst
 
 - [subscript-superscript](https://myst-parser.readthedocs.io/en/latest/syntax/typography.html#subscript-superscript)
 - [Cross-references](https://myst-parser.readthedocs.io/en/latest/syntax/cross-referencing.html#inline-links-with-implicit-text): normal markdown inline links
-- [Images and figures](https://myst-parser.readthedocs.io/en/latest/syntax/images_and_figures.html#figures-images-with-captions) not quite successful?
 
+#### Images
 
+[Images and figures](https://myst-parser.readthedocs.io/en/latest/syntax/images_and_figures.html#figures-images-with-captions) not quite successful?
 
 For centered figures with captions:
 
 ```html
 <center>
-<img src="../_static/images/interactive.png" style="zoom:100%;" />
+<img src="../_static/images/interactive.png" width="900px" />
 FEbuilder will pop out figures like this
 <center/>
 ```
 
-
+[Syntax Extensions--HTML Images](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#syntax-images-html): simply markdown cannot implement a centered image. Either html, or rst. But for html only `width` works? Typora default: `style="zoom=..."`
 
 ### extensions
 

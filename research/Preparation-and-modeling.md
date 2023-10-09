@@ -40,7 +40,9 @@ http://www.sbg.bio.ic.ac.uk/phyre2/html/page.cgi?id=index
 
 
 
-## AF2
+## new prediction
+
+https://github.com/sokrypton/ColabFold   all kinds of fold
 
 https://alphafold.ebi.ac.uk/ 
 
@@ -49,6 +51,10 @@ https://colab.research.google.com/github/deepmind/alphafold/blob/main/notebooks/
 
 
 ## Protonation state
+
+> !NOTE
+>
+> check especial the region around ligands!
 
 放弃了，反正case-by-case，实在是想起来了就用一下H++
 
@@ -61,14 +67,35 @@ His整体是6.0，one that is part of an imidazole ring (Nπ) and one that is pa
 The right way to obtain Amber FF file:
 
 ```shell
-ambpdb -c -p > ambpdb.pdb
+ambpdb -c xxx.crd -p xxx.top > ambpdb.pdb
+# maybe then use pdb4amber. but tleap can recognize this
 ```
 
+> !NOTE
+>
+> I don't think in all cases the results (for HIS) is right...for this single conformation, we try to form as many H bonds as possible.
 
+Disadvantage: clean the structure before submitting
 
 ### propka3
 
-HSE no!
+Simple conda install. Simple run:
+
+```shell
+propka3 xx.pdb
+```
+
+propka3 doesn't print HIS because their residue name is HSE, etc. .... PoDaFang
+
+```Bash
+for key in HSE HSD HSP HID HIE HIP ; do
+grep $key -rl $file.pdb | xargs sed -i "s/${key}/HIS/g" 
+done
+```
+
+cannot model and replace residue names? write a script?
+
+它没说忽略了其他成分，配体等
 
 ### Other
 
@@ -92,6 +119,46 @@ or remodeling
 
 
 
+
+
+
+
+# Docking
+
+Multimers(Colabfold): https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb
+
+HADDOCK: https://wenmr.science.uu.nl/haddock2.4/submit/1
+
+CoDockPP: http://codockpp.schanglab.org.cn/
+
+I-TASSER: https://zhanggroup.org/I-TASSER/
+
+
+
+HDOCK: http://hdock.phys.hust.edu.cn/ 有离线版  
+
+## Protein-protein docking
+
+or Protein-peptide
+
+
+
+
+
+### Clus Pro 2.0
+
+https://cluspro.bu.edu/home.php
+
+
+
+
+
+## Protein-NA docking
+
+
+
+
+
 # System setup
 
 also refer to [related programming](Programming-for-MD.md#modeling-and-analysis)
@@ -108,77 +175,181 @@ see [CHARMM-GUI for ligands](Protein-ligand-simulation.md#charmm-gui-for-ligands
 
 ### PDB reader
 
-residue mutation, etc.
+residue mutation, protonation etc.
 
 only for CHARMM FF...
 
 
 
-CSML search: whether this ligand already in FF. If not, go to LigandRM.
+CSML search: whether this ligand already in FF (and RCSB?). If not, go to LigandRM. 
+
+> It seems that this is also done in Ligandrm...
+
+
+
+### Force Field converter
+
+Supports Amber/OPLS-AA, etc. in most cases.
+
+You must provide `.psf` and `.crd`??
+
+Called by other tools like membrane builder
 
 
 
 ## VMD
 
-for visualization with VMD, see [MD fundamentals](MD-fundamentals.md#VMD)
+### Tips
 
+> !NOTE
+>
+> For visualization with VMD, see [MD fundamentals](MD-fundamentals.md#VMD)
+>
+> For a modeling example, see [Protein-Ligand setup](Protein-ligand-simulation.md#setup-with-vmd)
 
+VMD scripting is highly flexible and provides many possibilities.
+
+The only default is that each chain needs to be manually separated (which is just `gmx pdb2gmx` good at). To split chains, refer to:
 
 [mkrun/Gromacs/fep/mkpy_split_chains.py at master · skblnw/mkrun · GitHub](https://github.com/skblnw/mkrun/blob/master/Gromacs/fep/mkpy_split_chains.py)
 
+or my script (which was meant to assign segnames):
+
+```python
+
+```
+
+### Disadvantages
+
+- mainly works for CHARMM series force field.
+  - There are limited Amber/OPLS-AA files, and "use at your own risk". converting from other tools might be easier.
+  - gmx and charmm are using different potential energy forms...add a minus to epsilon!
+- solvate: cannot rotate (despite this option exists) and add water isotropically (unless do this manually). Have to use a HUGE box, otherwise the protein interacts with itself...
 
 
 
+```python
+# both .gro and .top
+# python convert_charmm2gmx_via_parmed.py pro 688
+
+import parmed as pmd 
+from parmed.charmm import CharmmParameterSet
+import sys
+prefix = sys.argv[1]
+offset = int(sys.argv[2])
+
+structure = pmd.load_file(prefix+'.psf')
+for residue in structure.residues:
+    _ = residue.idx
+    residue._idx += offset
+    residue.number += offset
+parameter = CharmmParameterSet('par_all36m_prot.prm', 'toppar_water_ions_namd.str')
+for atomname, atomtype in parameter.atom_types.items():
+    atomtype.epsilon *= -1
+    atomtype.epsilon_14 *= -1
+structure.load_parameters(parameter)
+structure.save(prefix+'.top', overwrite=True, combine='all')
+structure = pmd.load_file(prefix+'.pdb')
+structure.save(prefix+'.gro', overwrite=True, combine='all')
+```
+
+
+
+#### Other
 
 > https://anaconda.org/conda-forge/psfgen
-
-
-
-
 
 ## AmberTools (tleap)
 
 leap stands for "Livermore Energy-aware molecular Prototyping".
 
+### Preparation
+
+Then users need to combine these fragments into a single PDB file. Afterwards pdb4amber can be used to re-sequence the PDB file. The final PDB file should meet the criteria mentioned above.
+
+For residues that are identical except the coordinates (e.g., the water molecules in the PDB file), only one mol2 file is enough.
+
+### Tips
+
+- `addIonsRand`
+
+  otherwise (`addIons`), ions are on one surface
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Preparation-and-modeling.assets/tleap-ion.png" alt="tleap-ion" style="zoom: 50%;" />
+
+- `solvateBox obj distance`
+
+  > If the distance parameter is a single NUMBER then the minimum distance is the same for the x, y, and z directions, unless the STRING "iso" parameter is specified to make the box or truncated octahedron isometric. For solvateBox if "iso" is used, the solute is rotated to orient the principal axes, otherwise it is just centered on the origin.
+
+  `iso` is particularly useful for reducing the size of system and guaranteeing no interaction-with-image problem!! **superiority over VMD!**
+
+### Disadvantages
+
 - tleap will always renumber residues (starting from 1) and you cannot set residue index in tleap.
 
-   fix it via parmed (sometimes useful) or MDA (for analysis)
+  fix it via parmed (sometimes useful) or MDA (for analysis)
 
-   ```python
-   # amber2gmx.py
-   
-   ```
+  ```python
+  # amber2gmx.py
+  
+  ```
 
-   
+- calculate # of ions (protein mass) for tleap: 
 
-- calculate # of ions (protein mass) for tleap
+  https://www.phys.ksu.edu/personal/schmit/SLTCAP/SLTCAP.html
 
-   - tleap calculate number of ions:
-     Total mass 459655.794 amu, Density 0.846 g/cc
-     Added 23449 residues.
+  - tleap calculate number of ions:
+    Total mass 459655.794 amu, Density 0.846 g/cc
+    Added 23449 residues.
 
-     online calculator: https://www.desmos.com/scientific
+    online calculator: https://www.desmos.com/scientific  to obtain protein mass
 
-   - open with Pymol, click A--compute--molecular weight
+  - open with Pymol, click A--compute--molecular weight
 
-- addIonsRand
+  Question: what about non-protein system (like membrane)?
 
-   otherwise, ions are on one surface
+- tleap is also unable to insert molecules
 
-   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Preparation-and-modeling.assets/tleap-ion.png" alt="tleap-ion" style="zoom: 50%;" />
+## gmx
+
+### pdb2gmx
+
+prepare the system
+
+- The protonation state of N- and C-termini can be chosen interactively with the `-ter` flag.
+
+- pdb2gmx产生的蛋白拓扑文件时可以加上`-his`选项来人工选择各个组氨酸的质子化态
+
+- `-ter` option for termini (only useful for proteins)
+
+- https://manual.gromacs.org/documentation/2020-current/onlinehelp/gmx-pdb2gmx.html  add -ff folder. xx.ff, forcefield.itp in 
+
+- `pdb2gmx` can recognize terminal residue's COO^-^ if chain ID is assigned
+
+Force field
+
+- source: local directory, installation top folder, `GMXLIB` variable
 
 - 
 
+### Other tools
+
+#### insert-molecules
+
+Monte-Carlo based. vmd/tleap don't have this...
 
 
 
+#### editconf
+
+- https://gromacs.bioexcel.eu/t/merging-two-gro-files/2960/2 editconf converts between .pdb and .gro (etc.) freely
 
 ## Packmol
 
 it may built complex systems, but
 
 - can only add certain number of water; we must calculate through density and volume?
-- is not responsible for generating .top files
+- is not responsible for generating .top files, and `gmx pdb2gmx` cannot handle such (usually) complex systems
 
 
 
@@ -242,34 +413,6 @@ it would also be simple in Python with my `read_pdb` code....
 
 
 
-# Docking
-
-
-
-
-
-
-
-
-
-## Protein-protein docking
-
-or Protein-peptide
-
-
-
-
-
-### Clus Pro 2.0
-
-https://cluspro.bu.edu/home.php
-
-
-
-
-
-## Protein-NA docking
-
 
 
 
@@ -280,13 +423,13 @@ This part is from 2021 UROPS project, structure-based virtual screening (SBVS)
 
 for basic usage of Python packages like rdkit and openbabel, please [go to this link](Programming-for-MD#small-molecule). If I use them to construct a library, maybe I'll write here.
 
-Contents need more organization....
+Contents need more organization....put before system setup later
 
 ## Database setup
 
 ### Example: FDA approved
 
-- zinc: 4161765
+- zinc: 4161765 is ATP
 
   - https://zinc.docking.org/substances/subsets/
 

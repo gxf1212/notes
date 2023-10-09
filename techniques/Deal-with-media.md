@@ -781,9 +781,9 @@ GreasyFork脚本：[全网VIP视频免费破解去广告、全网音乐直接下
 
 - https://pay.bilibili.com/pay-v2-web/shell_withdraw  创作激励提现
 
+  提现：B站手机端，我的钱包---贝壳---提现
 
-
-提现
+  网页：收益管理--激励结算
 
 
 

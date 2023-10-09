@@ -42,9 +42,9 @@ This page includes general results, not project-specific details.
 
 for each protein, always check:
 
-1. **if the position is right**
+1. if the position is right
 
-2. **if non-polar hydrogens are added** (only for method 1)
+2. if non-polar hydrogens are added (only for method 1? no H always works?)
 
 3. delete water (if strange errors emerge)
 
@@ -52,7 +52,7 @@ for each protein, always check:
    grep -v HOH 2cqg_1.pdb > 2cqg_1.pdb
    ```
 
-   Always check your .pdb file for entries listed under the comment MISSING
+4. if any residues are missing (comment MISSING)
 
 
 #### method 1: pdb2gmx
@@ -180,7 +180,7 @@ for each protein, always check:
       analysis: 
 
       ```shell
-      yum install grace
+      # yum install grace
       xmgrace em.xvg # outputs a plot
       ```
 
@@ -242,41 +242,37 @@ for each protein, always check:
    >
    > `Data` -> `FeatureExtraction` -> `Y average`,`Data` -> `export...`
    >
-   > mean pressure: -79.846729
-   >
-   > density: 1008.3168
-   >
-   > in matlab: https://ww2.mathworks.cn/matlabcentral/fileexchange/70607-import-and-plot-gromacs-xvg-data-files
+   > in matlab: [Import and plot Gromacs .xvg data files - File Exchange - MATLAB Central (mathworks.cn)](https://ww2.mathworks.cn/matlabcentral/fileexchange/70607-import-and-plot-gromacs-xvg-data-files)
    >
    > check by pymol:
    >
    > ```shell
-   > gmx trjconv -f npt.trr -o npt.xtc
+   >gmx trjconv -f npt.trr -o npt.xtc
    > load nvt.gro, npt # theFormer.gro
-   > load npt.xtc, npt # same name
+   >load npt.xtc, npt # same name
    > show sticks,resi 105+106+107+109+110+113+114+137+145+147+149+151+132+176+177+179+181+183
    > color magenta,resi 105+106+107+109+110+113+114+137+145+147+149+151+132+176+177+179+181+183
    > ```
-   >
+   > 
    > check by vmd
-   >
+   > 
    > ```shell
-   > # in extensions--tk console
+   ># in extensions--tk console
    > cd /home/gxf/Desktop/xufan/MD/try/2cqg_1
-   > mol load gro npt.gro trr npt.trr
+   >mol load gro npt.gro trr npt.trr
    > # in extensions--visualization--movie maker
    > # movie settings--trajectory
    > # 
    > ```
-   >
+   > 
    > I found it's somehow good except those water who crosses the boundary showed their bond across the whole box and make it a mess
-   >
+   > 
    > if still not sure, check more properties
    >
    > ```shell
-   > gmx energy -f npt.edr -o npt-temp.xvg # temp, 15
+   >gmx energy -f npt.edr -o npt-temp.xvg # temp, 15
    > xmgrace npt-temp.xvg
-   > gmx energy -f npt.edr -o npt-vol.xvg # volume, 22
+   >gmx energy -f npt.edr -o npt-vol.xvg # volume, 22
    > xmgrace npt-vol.xvg
    > ```
 
@@ -340,92 +336,62 @@ see method 1 for detailed parameters
    quit
    ```
 
-   calculate the number of ions you need and modify the leap.in by (may take a while)
+   calculate the number of ions you need and modify the leap.in by (may take a while) 
 
-   https://ambermd.org/tutorials/basic/tutorial8/index.php https://www.phys.ksu.edu/personal/schmit/SLTCAP/SLTCAP.html
+   Update 2023: we use `addIonsRand` instead
 
-   > - mw of protein: 9.762 kDa
-   > - concentration: 150
-   > - Net charge: 2.00
-   > - number of water: 5560
+   [Calculating Salt Molarity in an Explicit Water System (ambermd.org)](https://ambermd.org/tutorials/basic/tutorial8/index.php)   
+
+   [SLTCAP tool to calculate the number of ions](https://www.phys.ksu.edu/personal/schmit/SLTCAP/SLTCAP.html)
 
 3. get .top and .gro
 
+   Update 2023: we no longer use acpype to convert a solvated system from tleap, but parmed. Acpype is useful for a single ligand but terrible for ion names.
+
+   >  ```shell
+   >  conda activate Acpype
+   >  acpype -p 2cqg.prmtop -x 2cqg.inpcrd -d
+   >  # rename
+   >  mv 2cqg_GMX.gro 2cqg_1_solv.gro
+   >  mv 2cqg_GMX.top topol.top
+   >  # also generated em.mdp and md.mdp for test
+   >  mv em.mdp em_test.mdp
+   >  mv md.mdp md_test.mdp
+   >  ```
+   >
+   >  change the representation
+   >
+   >  ```shell
+   >  grep "WAT" -rl ./2cqg_1_solv.gro | xargs sed -i "s/WAT/SOL/g" 
+   >  grep "WAT" -rl ./topol.top | xargs sed -i "s/WAT/SOL/g" 
+   >  # WAT in Amber, "SOL" in gromacs; just need to change those under moleculetype and molecule
+   >  # can do for all files under a dir
+   >  # change in topol.top (under "atom") IM to Cl-, IP to Na+
+   >  grep " IP " -rl ./com.top | xargs sed -i "s/ IP / Na+ /g" 
+   >  grep " IM " -rl ./com.top | xargs sed -i "s/ IM / Cl- /g" 
+   >  ```
+   >
+   >  atom name 1397 in topol.top and 2cqg_1_solv.gro does not match (NA+ - CL-) ...
+   >  WARNING 1 [file topol.top, line 14435]: 
+   >  14 non-matching atom names 
+   >  atom names from topol.top will be used 
+   >  atom names from 2cqg_1_solv.gro will be ignored
+   >
+   >  **use `-maxwarn 2`** 
+
+   do position restraint if you want
+
    ```shell
-   conda activate Acpype
-   acpype -p 2cqg.prmtop -x 2cqg.inpcrd -d
-   # rename
-   mv 2cqg_GMX.gro 2cqg_1_solv.gro
-   mv 2cqg_GMX.top topol.top
-   # also generated em.mdp and md.mdp for test
-   mv em.mdp em_test.mdp
-   mv md.mdp md_test.mdp
+   echo 1 | gmx genrestr -f 2cqg_1_solv.gro -o pro.itp -fc 1000 1000 1000
    ```
-
-4. change the representation
-
+   
+   add them to the end of protein part in .top file
+   
    ```shell
-   grep "WAT" -rl ./2cqg_1_solv.gro | xargs sed -i "s/WAT/SOL/g" 
-   grep "WAT" -rl ./topol.top | xargs sed -i "s/WAT/SOL/g" 
-   # WAT in Amber, "SOL" in gromacs; just need to change those under moleculetype and molecule
-   # can do for all files under a dir
-   # change in topol.top (under "atom") IM to Cl-, IP to Na+
-   grep " IP " -rl ./com.top | xargs sed -i "s/ IP / Na+ /g" 
-   grep " IM " -rl ./com.top | xargs sed -i "s/ IM / Cl- /g" 
+   #include "pro.itp"
    ```
-
-   > atom name 1397 in topol.top and 2cqg_1_solv.gro does not match (NA+ - CL-) 
-   >
-   > atom name 1397 in topol.top and 2cqg_1_solv.gro does not match (NA+ - CL-) 
-   >
-   > atom name 1399 in topol.top and 2cqg_1_solv.gro does not match (NA+ - CL-) 
-   >
-   > atom name 1399 in topol.top and 2cqg_1_solv.gro does not match (NA+ - CL-) 
-   >
-   > atom name 1400 in topol.top and 2cqg_1_solv.gro does not match (NA+ - CL-)
-   >
-   > atom name 1400 in topol.top and 2cqg_1_solv.gro does not match (NA+ - CL-) 
-   >
-   > WARNING 1 [file topol.top, line 14435]: 
-   > 14 non-matching atom names 
-   > atom names from topol.top will be used 
-   > atom names from 2cqg_1_solv.gro will be ignored
-   >
-   > **use `-maxwarn 2`** 
-   >
-   > 
-   >
-   > Excluding 3 bonded neighbours molecule type '2cqg' 
-   >
-   > turning H bonds into constraints... 
-   >
-   > Excluding 1 bonded neighbours molecule type 'CL-' 
-   >
-   > turning H bonds into constraints... 
-   >
-   > Excluding 1 bonded neighbours molecule type 'NA+' 
-   >
-   > turning H bonds into constraints... 
-   >
-   > Excluding 2 bonded neighbours molecule type 'SOL' 
-   >
-   > turning H bonds into constraints...
-   >
-   > **it's just name-related problem. I don't know if it matters**
-
-   > don't do position restraint!!!!
-   >
-   > ```shell
-   > echo 1 | gmx genrestr -f 2cqg_1_solv.gro -o pro.itp -fc 1000 1000 1000
-   > ```
-   >
-   > add them to the end of protein part in .top file
-   >
-   > ```shell
-   > #include "pro.itp"
-   > ```
-
-5. energy minimization
+   
+4. energy minimization
 
    ```shell
    gmx grompp -f em_sol_pme.mdp -c 2cqg_1_solv.gro -r 2cqg_1_solv.gro -p topol.top -o em.tpr -maxwarn 2  # after position restraint, must add -r same.gro
@@ -436,10 +402,8 @@ see method 1 for detailed parameters
    ```
 
    > `grompp`程序将会提示此体系的净电荷不为零, 还会输出一些与体系和控制参数有关的其他信息. 该程序也会产生一个额外的输出文件(`mdout.mdp`), 里面包含所有控制参数的设置。
-   >
-   > 我咋不信在em这步的？可以作为参考，比如group的设置。甚至FEP的东西都出来了。。
-
-6. nvt
+   
+5. nvt
 
    delete: "define PORES..."
 
@@ -453,20 +417,18 @@ see method 1 for detailed parameters
    # posre mean: 299.6911
    ```
 
-   > after this step, the cubic water is partially torted, but recovered after npt. from the animation we can see it recovers in several steps gradually. Amazing!
+   > after this step, the cubic water is partially torted, but recovered after npt. from the animation we can see it recovers in several steps gradually. Amazing! 
    >
-   > it might not be related to porse.itp
-   >
-   > either does the restrained version! (seemed smaller, only corner?)
-
-7. npt
+   > Update: see [this](MD-fundamentals.md#Basic)
+   
+6. npt
 
    ```shell
    gmx grompp -f npt.mdp -c nvt.gro -r nvt.gro -t nvt.cpt -p topol.top -o npt.tpr
    gmx mdrun -deffnm npt
    ```
 
-8. check (restraint # non-restraint)
+7. check (restraint # non-restraint)
 
    ```shell
    echo 17 0 | gmx energy -f npt.edr -o npt-pressure.xvg # 16
@@ -490,7 +452,7 @@ see method 1 for detailed parameters
    load npt.xtc, npt # same name
    ```
 
-9. run
+8. run
 
    ```shell
    gmx grompp -f md.mdp -c npt.gro -r npt.gro -t npt.cpt -p topol.top -o final_2cqg.tpr
@@ -662,7 +624,7 @@ comments:
 
    https://zhuanlan.zhihu.com/p/59070901 use its gaussian setting
 
-   http://ambermd.org/antechamber/ac.html#antechamber antechamber parameters
+   http://ambermd.org/antechamber/ac.html#antechamber antechamber arguments
 
 3. run gaussian
 
@@ -673,15 +635,9 @@ comments:
 
    `B3LYP/6-31G* em=GD3BJ`: 8h51min to optimize. 
 
-   we don’t optimize
+   we don’t optimize because we already had the optimal conformation when interacting with the protein
 
    get .log, .chk, .gesp files
-
-   > segmentation violation
-   >
-   > 成因：提供这种报错信息毫无意义，任何原因Gaussian报错退出都会有类似的输出。
-   >
-   > 解决：**用文本编辑器打开输出文件**，如上图中为“a.out”文件，**拖到最后看最终报错**。Linux下也是如此，可用 nano, tail, cat, vi 等命令阅读文件。看到真正报错后，可按照相应信息（如下文中涉及的这些报错）进行解决。
 
 4. get .mol2 file with the resp charge
 
@@ -693,38 +649,24 @@ comments:
    parmchk2 -i ${f}.mol2 -f mol2 -o ${f}.frcmod # check GAFF parameters. additional parameters are here
    ```
 
-   https://zhuanlan.zhihu.com/p/59070901
+   [Gromacs联用GAFF力场处理水溶剂下小分子动力学 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/59070901)
 
    also get some *out file
 
-   > for drugbank618
-   >
-   > Warning: The assigned bond types may be wrong, please : 
-   > (1) double check the structure (the connectivity) and/or  
-   > (2) adjust atom valence penalty parameters in APS.DAT, and/or  
-   > (3) increase PSCUTOFF in define.h and recompile bondtype.c 
-   > (be cautious, using a large value of PSCUTOFF (>100) will  
-   > significantly increase the computation time). 
-   >
-   > Info: The number of path atoms exceeded MAXPATHATOMNUM for atom (ID: 7, Name: C7). 
-   >  Automatically increasing to 10000. 
-   > Info: The number of path atoms exceeded MAXPATHATOMNUM for atom (ID: 8, Name: O1). 
-   >  Automatically increasing to 10000.
+   > it is not guaranteed that parmchk2 can handle all the cases that parmchk can handle. So when it fails, users can try parmchk.
 
 5. **ALIGN**. accidentally, gaussian output structure runs away from the docked. 
 
    run python to get ${f}_aligned.mol2
 
    ```shell
-   ~/Desktop/work/projects/undergraduate/NUS-UROPS/md/prepare/align.py PEP
-   # new version
-   # alias align_gauss='python3 ~/Desktop/work/projects/tools/Python-for-MD/prepare/align_gauss.py'
+   alias align_gauss='python /path/to/prepare/align_gauss.py'
    align_gauss `pwd`/ ${f}
    ```
 
 #### A simplified alternative: bcc charge
 
-bcc charge, less time-consuming than Gaussian
+bcc charge, less time-consuming than Gaussian (fitting the RESP charge)
 
 ```shell
 conda activate AmberTools21

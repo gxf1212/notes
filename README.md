@@ -30,4 +30,5 @@ I'm just too lazy to make things clear, so these are just what I wrote when I le
 - [ ] PDF previewer and meta info
 - [ ] 也许有一天，博客的课程列表那里能做成iGem那个建模首页那样，文字和图片的。
 - [ ] 添加网站背景音乐
+- [ ] syntax highlighting as in vscode?
 - [ ] 。。。

@@ -350,6 +350,13 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
     sudo apt purge ibus
     ```
 
+    check
+
+    ```Bash
+    whereis ibus
+    # check linux输入法
+    ```
+
   - also set fcitx in "language support". reboot.
 
   - uninstall: https://jingyan.baidu.com/article/d5c4b52b95eb52da570dc511.html
@@ -1151,9 +1158,17 @@ change source: https://www.cnblogs.com/feng-hao/p/11774543.html
 
    install with flatpak: add a remote, download a flatpakref file, and install
 
-5. check version: `软件名 -version`
+5. check version: `软件名 -version/--version`
 
-6. 
+6. 你可以使用 find 命令和 chmod 命令结合起来批量修改文件夹下所有可执行文件的权限。例如，如果你想让文件夹下所有文件都具有执行权限，可以使用以下命令：
+
+   ```shell
+   find <文件夹名> -type f -exec chmod a+x {} \;
+   ```
+
+   这条命令会查找指定文件夹下的所有文件，并使用 chmod 命令为它们添加执行权限。
+
+   You usually need this when copying a program directly to another computer
 
 7. wget失败：拒绝连接 https://www.jianshu.com/p/cba95f62dc35  ??
 
@@ -1163,7 +1178,7 @@ change source: https://www.cnblogs.com/feng-hao/p/11774543.html
    warning:  Clock skew detected.  Your build may be incomplete.
    ```
 
-   time is problematic (install time in the future?) but it doesn't matter.
+   time is problematic (<u>install time in the future</u>?) but it doesn't matter.
 
 9. 
 

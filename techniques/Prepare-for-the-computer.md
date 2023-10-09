@@ -47,13 +47,23 @@ https://github.com/askme765cs/Wine-QQ-TIM
 
 [vscode qq extension based on android qq protocol](https://github.com/takayama-lily/vscode-qq)
 
+[https://github.com/wszqkzqk/deepin-wine-ubuntu](https://github.com/wszqkzqk/deepin-wine-ubuntu)
+
+[https://www.cnblogs.com/kittybunny/p/13603714.html](https://www.cnblogs.com/kittybunny/p/13603714.html)
+
+[https://blog.csdn.net/weixin_44268185/article/details/107083916](https://blog.csdn.net/weixin_44268185/article/details/107083916)
+
+[https://blog.csdn.net/qq_42114918/article/details/81840335](https://blog.csdn.net/qq_42114918/article/details/81840335)
+
 Now QQ, Dingtalk, Slack, etc. should all be avaibable
+
+Still no elegant ways to install WeChat (wine/docker). 啊呸！<u>人人都骂微信，人人都用微信。</u>
 
 ## Office
 
 ### LibreOffice
 
-Usually already installed
+Usually already installed in common Linux distributions
 
 Appimage for my previous old system: https://www.libreoffice.org/download/appimage/  ok
 
@@ -552,7 +562,7 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
      ```shell
      export http_proxy="http://127.0.0.1:12333"
-     export https_proxy="https:/ /127.0.0.1:12333"
+     export https_proxy="https://127.0.0.1:12333"
      ```
 
 6. electron-ssr icon becomes grey: right click the icon and cllick 'Enable' (‘启用’)
@@ -567,11 +577,14 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
 
    > using lightdm does not help
 
-   
+8. port 12333/1080 is taken: just reboot several times....or
 
-8. port 12333/1080 is taken
+   Identify the process using the port: open a terminal and type:
 
-   just reboot several times....
+   ```shell
+   sudo lsof -i :12333
+   kill xxxx
+   ```
 
 9. 
 
@@ -913,23 +926,17 @@ not sure how to do...
    Test passed!
     ```
 
-## Not using
-
->     1. `nvidia smi` shows cuda version 11.1, driver is 455.45.01. We should not use an open source driver. check additional driver from 'start'.
->     2. nivida.cn also shows 455.45, so do I need to install the driver? Now no.
->
->     3. problem! can only run .sh file now!
->     4. configure a command for them
-
-# MD engine
+# Computational engine
 
 Refer to https://github.com/skblnw/mkrun/tree/master/Installation
+
+2023 for new system and 28: https://www.wolai.com/8Z6ZChWebaTEQfNg7BBjcn
 
 ## Auxillary tools
 
 ### gcc
 
-https://blog.csdn.net/zhaozhiyuan111/article/details/118566452
+[Ubuntu上安装gcc-10.2.0_gcc 10.2 ubuntu 14_Black_黑色的博客-CSDN博客](https://blog.csdn.net/zhaozhiyuan111/article/details/118566452)
 
 - `-disable-multilib`： 不生成编译为其他平台 (e.g. 32bit) 可执行代码的交叉编译器。add this according to the error prompt
 - `gcc-path/contrib/download_prerequisites`: if you don't have mpfr, etc.
@@ -956,9 +963,40 @@ https://www.intel.com/content/www/us/en/developer/tools/oneapi/hpc-toolkit-downl
 
 ### fftw
 
-see Gromacs section
+see in Gromacs section
 
+### openmpi
 
+ Open MPI: Open Source High Performance Computing https://www.open-mpi.org
+ The Open MPI Project is an open source Message Passing Interface implementation...
+
+ But it seems not to accelerate...
+
+do a simple installation like this: [OpenMPI - Ubuntu安装与配置-CSDN博客](https://blog.csdn.net/zziahgf/article/details/72781799)
+
+test: 
+
+```shell
+source ~/.bashrc
+export PATH=$PATH:/usr/local/openmpi/bin  
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/openmpi/lib/
+
+sudo ldconfig 
+# test in the installing directory
+cd examples
+make
+mpirun -np 8 hello_c
+```
+
+check openmpi info: `ompi_info | grep cuda`
+
+> ```
+> Running as root is *strongly* discouraged as any mistake (e.g., in
+> defining TMPDIR) or bug can result in catastrophic damage to the OS
+> file system, leaving your system in an unusable state.
+> 
+> We strongly suggest that you run mpirun as a non-root user.
+> ```
 
 ## Gromacs (dirty)
 
@@ -1226,41 +1264,58 @@ https://www.ddl.unimi.it/cms/index.php?Software_projects:VEGA_ZZ:Main_features
 
 one year trial...
 
-## openmpi
-
-  Open MPI: Open Source High Performance Computing https://www.open-mpi.org
-  The Open MPI Project is an open source Message Passing Interface implementation...
-
-  But it seems not to accelerate...
-
-  https://blog.csdn.net/zziahgf/article/details/72781799
-
-  download and extract. then
+## Gaussian16 and view
 
 ```shell
-./configure --prefix=/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs --with-cuda=/usr/local/cuda
-make
-make install
-# in ~./bashrc
-export PATH=$PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/bin/ 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/media/kemove/fca58054-9480-4790-a8ab-bc37f33823a4/programfiles/root-like-programs/bin/lib/ 
-source ~/.bashrc  
-sudo ldconfig 
-# test in the installing directory
-cd examples
-make
-mpirun -np 8 hello_c
+tar -xjvf G16-A03-AVX2.tbz
+mkdir g16/scratch
 ```
 
-check openmpi info: `ompi_info | grep cuda`
+after extraction, add these to `~/.bashrc` ([Gaussian的安装方法及运行时的相关问题](http://sobereva.com/439))
 
-> ```
-> Running as root is *strongly* discouraged as any mistake (e.g., in
-> defining TMPDIR) or bug can result in catastrophic damage to the OS
-> file system, leaving your system in an unusable state.
-> 
-> We strongly suggest that you run mpirun as a non-root user.
-> ```
+```shell
+export g16root=$HOME
+export GAUSS_SCRDIR=$g16root/g16/scratch
+export GAUSS_EXEDIR=$g16root/g16
+source $g16root/g16/bsd/g16.profile
+export PATH=$PATH:$g16root/g16
+```
+
+[g16 view csdn](https://download.csdn.net/download/lk2069/10777135), buy at 1 yuan [here](https://www.kerwin.cn/dl/detail/lk2069/275737); [win?](https://getintopc.com/softwares/design/gaussview-6-0-16-free-download/); [Linux g16 share](https://zjueducn-my.sharepoint.com/:u:/g/personal/gxf1212_zju_edu_cn/ESd17fbcNXtNlm9AR5Xs_CQBywj7CC4mmEn2M_wiYZT-IQ?e=H10csy)
+
+[another installation guide](http://www.molcalx.com.cn/gaussian-16-installation/)
+
+put the folder `gv` under your g16 folder!! 
+
+You can type `gv` in the terminal to start GView and link to Gaussian as we did in Windows, only if it can be found by g16 path settings!
+
+> icon: downloaded from web
+
+> debugging experience 2022.2.10
+>
+> 1. below
+>
+>    ```
+>    PGFIO/stdio: No such file or directory
+>    PGFIO-F-/OPEN/unit=11/error code returned by host stdio - 2.
+>     File name = /home/gxf/g16/scratch/Gau-8001.inp
+>     In source file ml0.f, at line number 197
+>    ```
+>
+>    means you need to `mkdir scratch`
+>
+> 2. below
+>
+>    ```shell
+>    ntrex1: Bad file descriptor
+>    Segmentation fault (core dumped)
+>    ```
+>
+>    means you assigned an improper chk file in your .gjf file like 
+>
+>    `%chk=D:\Doctor\my work\undergraduate\TA\2019\0912\ethylene.chk`
+
+
 
 # Analysis tools: Python/cmd tookit
 
@@ -1607,57 +1662,6 @@ propka3 merged.pdb -o 7.4 > merged.log
 
 It can process multiple chIt's strange that when the system contains sth other than protein, HIS is not present (only combine protein chains...)
 
-## Gaussian16 and view
-
-```shell
-tar -xjvf G16-A03-AVX2.tbz
-mkdir g16/scratch
-```
-
-after extraction, add these to `~/.bashrc` ([Gaussian的安装方法及运行时的相关问题](http://sobereva.com/439))
-
-```shell
-export g16root=$HOME
-export GAUSS_SCRDIR=$g16root/g16/scratch
-export GAUSS_EXEDIR=$g16root/g16
-source $g16root/g16/bsd/g16.profile
-export PATH=$PATH:$g16root/g16
-```
-
-[g16 view csdn](https://download.csdn.net/download/lk2069/10777135), buy at 1 yuan [here](https://www.kerwin.cn/dl/detail/lk2069/275737); [win?](https://getintopc.com/softwares/design/gaussview-6-0-16-free-download/); [Linux g16 share](https://zjueducn-my.sharepoint.com/:u:/g/personal/gxf1212_zju_edu_cn/ESd17fbcNXtNlm9AR5Xs_CQBywj7CC4mmEn2M_wiYZT-IQ?e=H10csy)
-
-[another installation guide](http://www.molcalx.com.cn/gaussian-16-installation/)
-
-put the folder `gv` under your g16 folder!! 
-
-You can type `gv` in the terminal to start GView and link to Gaussian as we did in Windows, only if it can be found by g16 path settings!
-
-> icon: downloaded from web
-
-> debugging experience 2022.2.10
-> 
-> 1. below
->    
->    ```
->    PGFIO/stdio: No such file or directory
->    PGFIO-F-/OPEN/unit=11/error code returned by host stdio - 2.
->     File name = /home/gxf/g16/scratch/Gau-8001.inp
->     In source file ml0.f, at line number 197
->    ```
->    
->    means you need to `mkdir scratch`
-> 
-> 2. below
->    
->    ```shell
->    ntrex1: Bad file descriptor
->    Segmentation fault (core dumped)
->    ```
->    
->    means you assigned an improper chk file in your .gjf file like 
->    
->    `%chk=D:\Doctor\my work\undergraduate\TA\2019\0912\ethylene.chk`
-
 ## PMX
 
 https://github.com/deGrootLab/pmx/tree/develop
@@ -1757,7 +1761,14 @@ server: https://brooks.chem.lsa.umich.edu/index.php?matchserver=submit
 
 https://brooks.chem.lsa.umich.edu/download/software/match/MATCH_RELEASE.tar.gz
 
+## One-line-with-conda
 
+```shell
+conda install -c anaconda scikit-learn -y
+conda install -c conda-forge opencv -y
+```
+
+...
 
 # Docking
 

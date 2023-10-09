@@ -774,7 +774,7 @@ Mac：https://macwk.com/soft/typora
 
 https://blog.csdn.net/zhayushui/article/details/80433768
 
-#### Initialize
+#### Initialize &Basics
 
 1. no need to copy the installation .sh file to where to install. You can specify a directory.
 
@@ -799,27 +799,23 @@ https://blog.csdn.net/zhayushui/article/details/80433768
    conda update --prefix /opt/anaconda3 anaconda
    ```
 
-7. 
+7. https://blog.csdn.net/xiangfengl/article/details/127597065 on a new machine. OpenSSL appears to be unavailable on this machine.
 
-#### Basics
+8. Add to path for Windoes! [ImportError: DLL load failed while importing _ssl: 找不到指定的模块 No module named ‘jupyter_server‘](https://blog.csdn.net/sdnuwjw/article/details/112207440)
 
-- https://blog.csdn.net/xiangfengl/article/details/127597065 on a new machine. OpenSSL appears to be unavailable on this machine.
+9. maybe 
 
-- Add to path for Windoes! [ImportError: DLL load failed while importing _ssl: 找不到指定的模块 No module named ‘jupyter_server‘](https://blog.csdn.net/sdnuwjw/article/details/112207440)
+   ```shell
+   conda init shell
+   ```
 
-- maybe 
+10. Please update conda by running
 
-  ```shell
-  conda init shell
-  ```
+    ```shell
+    conda update -n base conda
+    ```
 
-- Please update conda by running
-
-  ```shell
-  conda update -n base conda
-  ```
-
-- 
+11. 
 
 #### Environments
 
@@ -847,14 +843,25 @@ https://blog.csdn.net/zhayushui/article/details/80433768
     conda env create -f study.yaml
     ```
 
-- export
+- export environment
 
-  ```
+  ```shell
   conda activate your_env
   conda env export > environment.yaml # in your current directory
+  # on a new computer/environment
+  conda create -f environment.yaml
   ```
 
+  You can change the name of the environment (and also path! or remove this?) in the file
+
   注：.yaml文件移植过来的环境只是安装了你原来环境里用conda install等命令直接安装的包，你用pip之类装的东西没有移植过来，需要你重新安装。
+
+  ```shell
+  pip freeze > requirements.txt
+  pip install -r requirements.txt
+  ```
+
+  But I do see pip terms in `.yaml` file
 
 - remove
 
@@ -882,6 +889,12 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   pip list
   ```
 
+- Update specific package: 
+
+  ```shell
+  conda update package-name
+  ```
+
 - win32 or win_amd64 means version of python
 
   in win, run python in cmd to know version.
@@ -891,15 +904,6 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   station: 3.8, 64bit
 
   https://blog.csdn.net/taquguodedifang/article/details/78039181 in linux
-
-- some packages
-
-  ```shell
-  conda install -c anaconda scikit-learn -y
-  conda install -c conda-forge opencv -y
-  ```
-
-- 
 
 #### Bugs
 
@@ -1223,7 +1227,10 @@ https://www.zhihu.com/column/c_1368227352443572224
 #### other
 
 - linear regression: https://www.graphpad.com/quickcalcs/linear1/
+
 - [GraphPad Prism 9 Curve Fitting Guide - Equation: Competitive inhibition](https://www.graphpad.com/guides/prism/latest/curve-fitting/reg_competitive_inhibition.htm)
+
+  > these free tools are calculator; it cannot create simp
 
 ### Scientific writing
 

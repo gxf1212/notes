@@ -106,7 +106,7 @@ examples
 
 ### sed
 
-#### working with lines
+#### file search
 
 - [bash - Sed: get lines beginning with some prefix - Stack Overflow](https://stackoverflow.com/questions/13202715/sed-get-lines-beginning-with-some-prefix/13202791#13202791)
 
@@ -130,7 +130,7 @@ examples
 
 - to support a varible, double quote! single does not work
 
-
+#### file editing
 
 - another most application: replacing text
 
@@ -677,6 +677,8 @@ read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arg
 
 
 
+### spines
+
 ```python
 for axis in ['top','bottom','left','right']:
     ax.spines[axis].set_linewidth(30)  #设置坐标轴的粗细
@@ -768,7 +770,7 @@ ax.tick_params(width=5,...)
   
     `rm -rf` it! then just use the `available` fonts above. No need to configure as other blogs did.
   
-    [after removing cache....](https://blog.csdn.net/u014712482/article/details/85802563)here's how we can check name for ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190104211934391.jpg)
+    [after removing cache....](https://blog.csdn.net/u014712482/article/details/85802563)here's how we can check name for ![](https://img-blog.csdnimg.cn/20190104211934391.jpg)
 
     ```python
     import matplotlib as plt
@@ -796,7 +798,17 @@ ax.tick_params(width=5,...)
     [label.set_fontweight('roman') for label in labels]
     ```
   
-  - 
+- use font dictionary for labels, etc.
+
+  ```python
+  
+  ```
+
+- 渲染LaTeX公式是matplotlib自己的功能，Python本身不具有
+
+  simply `$\your \equation$` in a string
+
+- 
 
 
 

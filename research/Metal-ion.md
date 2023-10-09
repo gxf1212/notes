@@ -12,7 +12,7 @@ see also: [academic notes](academic-notes.md#metal-and-metalloproteins)
 
 - Alkaline earth metal ions are expected to bind to dsDNA through electrostatic and van der Waals interactions due to their closed-shell electronic structure; therefore, classical force fields can accurately model DNA–ion interactions of alkaline earth metal ions.
 
-- parameter fitting targets: IOD, HFE, CN, 
+- parameter fitting targets: IOD, HFE, CN, diffusion coefficient, water exchange...
 
   water residence time or exchange rate, coefficient of diffusion
 
@@ -185,6 +185,10 @@ rm pro-1264.pdb
 
 
 # QM-refitted parameters
+
+Here, to fit the real charge for hydrated Al<sup>3+</sup>
+
+> Amber是有Al<sup>3+</sup>没OH<sup>-</sup>，CHARMM是有OH<sup>-</sup>没Al<sup>3+</sup>，笑死
 
 ## Sobtop
 
@@ -369,9 +373,9 @@ mv ${name}.* ${path}
 
 
 
-
-
 ### Insert into water from tleap for gmx
+
+> this workflow is a little tedious. It makes life easier to create a residue type AlOH (`.prepin`). See bcc+tleap at Polymer-membrane page.
 
 Workflow:
 
@@ -399,8 +403,6 @@ alh2o               10
 ```
 
 "alh2o" is the complex ion.
-
-
 
 This is the setup script for random run with complex ions.
 

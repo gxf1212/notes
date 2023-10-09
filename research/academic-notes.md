@@ -4,7 +4,10 @@ maybe a new .md file in the future
 
 
 
-# General chemistry
+
+# (Bio)chemistry
+
+## General (inorganic) chemistry
 
 - A coordinate bond (also called a dative covalent bond) is a covalent bond (a shared pair of electrons) in which both electrons come from the same atom.
 
@@ -16,29 +19,21 @@ maybe a new .md file in the future
 
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/6s-ele.jpg" style="zoom: 50%;" />
 
+  The thermodynamical preference of the harder N and O--containing side chains for the “soft” Hg rather than the “borderline” Zn is probably due to relativistic effects resulting in a strong stabilization of mercury's vacant 6s orbitals, which in turn enhances its electron-accepting ability.
+
+  > preventing the metal-bound water from acting as a nucleophile in the reaction.???
+
 - [Metal to Ligand and Ligand to Metal Charge Transfer Bands - Chemistry LibreTexts](https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Supplemental_Modules_(Physical_and_Theoretical_Chemistry)/Spectroscopy/Electronic_Spectroscopy/Metal_to_Ligand_and_Ligand_to_Metal_Charge_Transfer_Bands)
 
   charge transfer from the ligands to Hg<sup>2+<sup/> (0.49−0.62 e) is greater than that to Zn<sup>2+<sup/> (0.32−0.41 e), indicating that Hg<sup>2+<sup/> can accept more negative charge from the ligands than Zn<sup>2+<sup/>.
 
-- 
+- In chemistry, hydronium is the common name for the aqueous cation H<sub>3</sub>O<sup>+</sup>.
+
+- [Tricapped trigonal prismatic molecular geometry - Wikipedia](https://en.wikipedia.org/wiki/Tricapped_trigonal_prismatic_molecular_geometry)
 
 
 
 
-
-
-
-The thermodynamical preference of the harder N and O--containing side chains for the “soft” Hg rather than the “borderline” Zn is probably due to relativistic effects resulting in a strong stabilization of mercury's vacant 6s orbitals, which in turn enhances its electron-accepting ability.
-
-
-preventing the metal-bound water from acting as a nucleophile in the reaction.
-
-
-
-
-
-
-# Biochemistry
 
 ## Bioinorganic Chemistry
 
@@ -178,29 +173,35 @@ see [data](https://www.brenda-enzymes.org/enzyme.php?ecno=2.7.11.1#TURNOVER%20NU
 
 
 
-## Structural biology
+## Quantum chemistry
 
-PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
+- In quantum chemistry, the Hessian matrix is a matrix of second derivatives of a molecule’s energy with respect to its atomic coordinates. It is used to describe the curvature of the potential energy surface near a stationary point, such as a minimum or transition state. The Hessian matrix can be used to determine the vibrational frequencies of a molecule and its normal modes of vibration
+- Hohenberg-Kohn定理的核心思想是：体系中的所有物理量都可以通过只包含电子密度的变量来唯一决定，而实现方法是通过变分原理来求得体系基态。
+- <img src="E:\GitHub-repo\notes\research\academic-notes.asssets\pseudo-potential.png" style="zoom:50%;" />
 
 
 
 ## Other general
 
+PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
+
 [甲醛中毒的化学原理是什么？ - 知乎](https://www.zhihu.com/question/363622944/answer/963100232)
 
 
 
+单胞（Unit cell）：又称晶胞，能够反映晶格的对称性的周期单元。 
 
+超胞（Supercell）：超胞是对单胞的扩展，扩展成新的重复单元。
 
-
+<img src="E:\GitHub-repo\notes\research\academic-notes.asssets\super-cell.png" style="zoom:50%;" />
 
 # Pharmacology
 
 ## Concepts
 
-- The inhibitory constant (Ki) is a type of [equilibrium dissociation constant (Kd)](https://pharmacologycanada.org/equilibrium-dissociation-constant-Kd) that represents the equilibrium binding [affinity](https://pharmacologycanada.org/Affinity) for a ligand that reduces the activity of its binding partner.
+- The inhibitory constant ($K_i$) is a type of [equilibrium dissociation constant (Kd)](https://pharmacologycanada.org/equilibrium-dissociation-constant-Kd) that represents the equilibrium binding [affinity](https://pharmacologycanada.org/Affinity) for a ligand that reduces the activity of its binding partner.
 
-  *K*i is associated with thermodynamic parameters in that Δ*G* = *RT*ln(*K*i), where Δ*G*, *R*, and *T* are the absolute binding free energy, the gas constant, and the absolute temperature, respectively
+  $K_i$ is associated with thermodynamic parameters in that $\Delta G = RT\ln(K_i)$, where $\Delta G$, $R$ , and $T$ are the absolute binding free energy, the gas constant, and the absolute temperature, respectively
 
 - In-house drug discovery refers to the process of discovering new drugs within a company or organization, rather than outsourcing the process to another company.
 
@@ -363,6 +364,14 @@ One of the fascinating properties of polyzwitterions is the so-called anti-polye
 
 
 
+# Experiments
+
+[拉曼or红外光谱，你真的分清了吗？](https://www.cailiaoren.com/m_zl_detail.php?dbid=14)
+
+
+
+
+
 # Computer science
 
 ## Coding
@@ -429,6 +438,8 @@ To shed light on, throw light on, or cast light on something means to make it ea
 ### Common
 
 The must common uses are "vide 63" (which means "see page sixty-three"), v.s. vide supra ("see earlier" or "look above on this page") and v.i. vide infra ("See below" or "Look below"). Don't confuse v.s. (vide supra) with vs. (versus).
+
+\#号: number sign
 
 ## Industry
 
