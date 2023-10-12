@@ -50,6 +50,7 @@ Zhaoqi has tried doing this with MDanalysis but it cannot easily write frames
 ref:
 
 - [Visualizing protein-protein docking using PyMOL | by The Bioinformatics Manual | Medium](https://medium.com/@snippetsbio/visualizing-protein-protein-docking-using-pymol-cc49494e54bb)
+- [pymol.org/tutorials](https://pymol.org/tutorials/)
 
 ### Basics
 
@@ -207,45 +208,52 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 ### cmd & API
 
-1. pymol save session as a script: impossible now. write `.pml` file yourself and 
+1. [PyMOL how to run scripts](https://pymol.org/tutorials/scripting/howtorunscripts.html)
+
+   ```shell
+   # run a PyMOL command script (opens PyMOL GUI)
+   pymol script.pml
+   # run a Python script
+   pymol script.py
+   # batch mode (no PyMOL GUI)
+   pymol -c script.pml
+   # use absolute path if "pymol" is not in $PATH
+   /opt/pymol-2.2.3/pymol -c script.pml
+   ```
+
+2. pymol save session as a script: impossible now. write `.pml` file yourself and 
 
    ```shell
    pymol xx.pml
    ```
 
-2. `cd directory`
+3. `cd directory`
 
-3. delete命令！
+4. delete命令！
 
-4. must use cmd to align small molecules
+5. must use cmd to align small molecules
 
    ```
-   align mol1,mol2
+   align mol1, mol2
    ```
 
-5. api: https://pymol.org/dokuwiki/doku.php?id=api:cmd:alpha  https://pymol.org/pymol-command-ref.html. for other commands we have to view documentation in pycharm
+6. api: https://pymol.org/dokuwiki/doku.php?id=api:cmd:alpha  https://pymol.org/pymol-command-ref.html. for other commands we have to view documentation in pycharm
 
 
 
 ### plugin
 
-a website to draw electrostatic potential surface: https://server.poissonboltzmann.org. Seeing a blank web page suggests a bad network.
+- PyMod 3 is an open source PyMOL plugin, designed to act as an interface between PyMOL and several bioinformatics tools (for example: BLAST+, HMMER, Clustal Omega, MUSCLE, PSIPRED and MODELLER).
 
-
-
-
-
-
+> a website to draw electrostatic potential surface: https://server.poissonboltzmann.org. Seeing a blank web page suggests a bad network. 
 
 
 
 ## VMD
 
-杂记, some extra functions, that I encountered. for details, check vmd-ug.pdf or [MD-tutorials.md](MD-tutorials.md)
+杂记, some extra functions, that I encountered. for details, check vmd-ug.pdf or [MD-tutorials](Previous-projects/MD-tutorials-all.md)
 
 ### Basics
-
-
 
 #### Visualization
 
@@ -734,11 +742,15 @@ https://www.cryst.bbk.ac.uk/pps97/course/index.html Section 7: molecular forces
 
 - 
 
+#### Amber
 
+- antechamber时，和氨基酸比较像的用amber，一般小分子用gaff
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/c4.png" alt="1692793734134" style="zoom: 50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/c4.png" alt="1692793734134" style="zoom: 50%;" />
 
-antechamber时，和氨基酸比较像的用amber，一般小分子用gaff
+- Li-Merz ions, IOD set vs HFE set: divalent, some are different; 3+ or 4+, usually the same?
+
+- 
 
 
 
@@ -1013,7 +1025,8 @@ Modeling details: see [Preparation and modeling (gmx)](Preparation-and-modeling.
 
 https://manual.gromacs.org/current/reference-manual/topologies/topology-file-formats.html
 
-[defaults]是1-4 scaling之类的东西，不同力场不一样
+- In GROMACS, the `[pairs]` section in the topology file is used to define non-bonded interactions between pairs of atoms that are separated by more than three bonds and calculate the non-bonded interactions.
+- `[defaults]` 是1-4 scaling之类的东西，不同力场不一样
 
 ### make_ndx
 

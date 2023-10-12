@@ -258,7 +258,7 @@ usage: 没事不要老开着，当自动断开时就重启一下！！
 
 https://my.liyunde.com/easy-connect-activity-monitor/  强制杀死easyconnect，但没launchctl这个命令
 
-[Web of Science检索平台 - 数据库导航 - 浙江大学图书馆](http://210.32.137.90/s/lib/libtb/show/405)：[校外使用WOS](https://www.webofknowledge.com/?auth=ShibbolethIdPForm&entityID=https%3A%2F%2Fidp.zju.edu.cn%2Fidp%2Fshibboleth&target=https%253A%252F%252Fwww.webofknowledge.com%252F%253FDestApp%253DUA&ShibFederation=ChineseFederation&DestApp=UA)
+
 
 ## ZJUnet: extend LAN to WLAN
 

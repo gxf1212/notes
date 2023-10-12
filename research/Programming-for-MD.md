@@ -812,7 +812,15 @@ ax.tick_params(width=5,...)
 
 
 
-### pandas
+### seaborn
+
+- [Python 绘制列表数据的小提琴图Violin Plot](https://zhuanlan.zhihu.com/p/596479904)  better than `plt.violinplot`
+
+  [Python数据可视化的例子——小提琴图（violin）](https://blog.csdn.net/weixin_48615832/article/details/108452781)
+
+
+
+## pandas
 
 - 通过指定行及列索引号进行索引, 返回DataFrame对象
 
@@ -957,15 +965,20 @@ mol2:
 
 
 
-### Plot molecule
+### Draw molecule
+
+#### Draw.MolToImage
+
+Simply the structure
 
 - `Draw.MolsToGridImage` is equivalent to typing the Mol variable in ipynb
 
 - show structure quickly (not in jupyter notebook): 
 
   ```python
+  from rdkit import Chem
   def see_mol(mol):
-      newmol = Chem.MolFromSmiles(Chem.MolToSmiles(mol))
+      newmol = Chem.MolFromSmiles(Chem.MolToSmiles(mol))  # make it 2D
       Chem.Draw.MolToImage(newmol, size=(600, 600)).show()
   ```
 
@@ -973,17 +986,192 @@ mol2:
 
   RDKit isn't actually adding Hs here, it just recognizes that the P atoms have implicit Hs on them and then when drawing the molecule shows those implicit Hs.
 
+- with highlighting:
+
+  ```python
+  def see_highlight(mol, option):
+      newmol = Chem.MolFromSmiles(Chem.MolToSmiles(mol))
+      if option == 'chiral':
+      	highlightatms = [atm.GetIdx() for atm in newmol.GetAtoms() if str(atm.GetChiralTag()).startswith('CHI_TETRAHEDRAL') and atm.GetAtomicNum() == 6]
+      elif option == 'aromatic':
+          aromatic = [atm.GetIdx() for atm in newmol.GetAtoms() if atm.GetIsAromatic()]
+      Chem.Draw.MolToImage(newmol, size=(600, 600), highlightAtoms=highlightatms).show()
+  ```
+
+- different colors?
+
+  ```python
+  highlight = a list of indices of the mol to be highlighted
+  highlight_map = {}
+  for h in highlight:
+      highlight_map[h] = (1, 1, 0.6)   # color
+  ```
+
+- [RDKit: New drawing options in the 2020.03 release](http://rdkit.blogspot.com/2020/04/new-drawing-options-in-202003-release.html)
+
+<img src="E:\GitHub-repo\notes\techniques\images\draw-highlight.png" style="zoom: 67%;" />
+
+
+
+#### Other
+
+- rdkit确实改不了字体
+
 - [MartonVass_MCSAlignedDepiction.ipynb (github.com)](https://gist.github.com/greglandrum/82d9a86acb3b00d3bb1df502779a5810)
 
   https://www.jianshu.com/p/b0148c74e85d 
 
-- [add rdkit image into matplotlib image](https://gist.github.com/iwatobipen/1b384d145024663151b3252bf16d2aa8) 
-
-- [RDKit: New drawing options in the 2020.03 release](http://rdkit.blogspot.com/2020/04/new-drawing-options-in-202003-release.html)
+- 
 
   - 
 
-- rdkit确实改不了字体
+
+
+#### MolDraw2D
+
+```python
+# python /home/gxf1212/data/work/analysis/draw_charge.py xx.mol2 <xx.str/rtf/mol2>
+# visualize ligands with charges. support charges from mol2/itp file or CgenFF rtf/str file
+# note that order of atoms must be the same! And the xx.mol2 is totally correct!
+
+import sys, io, re
+from rdkit import Chem
+from rdkit.Chem import Draw, AllChem
+from PIL import Image
+
+file = sys.argv[1]
+cfile = sys.argv[2] if len(sys.argv) >= 2 else None
+edge = 1200
+
+mol = Chem.MolFromMol2File(file, removeHs=False, sanitize=False)
+_ = AllChem.Compute2DCoords(mol)
+
+d = Draw.rdMolDraw2D.MolDraw2DCairo(edge, edge)
+opt = d.drawOptions()
+opt.baseFontSize = 0.45  # default 0.6
+
+charges = get_charge(cfile)
+for i in range(len(mol.GetAtoms())):
+    atom = mol.GetAtomWithIdx(i)
+    atom.SetProp('atomNote', "%.3f" % charges[i])
+    # atom.SetProp('molAtomMapNumber', index)  # only numbers are accepted
+    opt.atomLabels[i] = atom.GetSymbol()
+
+d.DrawMolecule(mol)
+d.FinishDrawing()
+Image.open(io.BytesIO(d.GetDrawingText())).show()
+```
+
+how to get charges?
+
+```python
+def get_charge(cfile):
+    # assuming orders match that in .mol2 file
+    lines = open(cfile, 'r').readlines()
+    charges = []
+    if cfile.endswith('.itp'):
+        for i in range(len(lines)):
+            if lines[i].startswith('[ atoms ]'):
+                start = i+2
+            elif lines[i].startswith('[ bonds ]'):
+                end = i-2  # one space from previous section
+                break
+        for i in range(start, end+1):
+            fields = re.split('\\s+', lines[i])
+            charges.append(float(fields[7]))
+    elif cfile.endswith('.str') or cfile.endswith('.rtf'):
+        for i in range(len(lines)):
+            if lines[i].startswith('GROUP  '):
+                start = i+1
+            elif lines[i].startswith('BOND '):
+                end = i-2  # one space from previous section
+                break
+        for i in range(start, end+1):
+            fields = re.split('\\s+', lines[i])
+            charges.append(float(fields[3]))
+    elif cfile.endswith('.mol2'):
+        start = len(lines)
+        for i in range(len(lines)):
+            if lines[i].startswith('@<TRIPOS>ATOM'):
+                start = i+1
+            elif lines[i].startswith('@<TRIPOS>') and i > start:
+                end = i-1  # no space from previous section
+                break
+        for i in range(start, end+1):
+            fields = re.split('\\s+', lines[i])
+            charges.append(float(fields[9]))
+    return charges
+```
+
+Result
+
+<img src="E:\GitHub-repo\notes\techniques\images\draw-charge.jpg" style="zoom: 50%;" />
+
+#### Draw ligand libraries
+
+a series of ligands with similar backbone, for screening or FEP. Align them 2D first.
+
+```python
+from rdkit import Chem, Geometry
+from rdkit.Chem import Draw, AllChem, rdFMCS
+
+
+def align_mols_2d(mols):
+    mcs = Chem.rdFMCS.FindMCS(mols, atomCompare=rdFMCS.AtomCompare.CompareAny,
+                              bondCompare=rdFMCS.BondCompare.CompareAny, ringMatchesRingOnly=True)
+    core = Chem.MolFromSmarts(mcs.smartsString)  # common structure
+    _ = AllChem.Compute2DCoords(core)
+    for i in range(len(mols)):
+        _ = AllChem.Compute2DCoords(mols[i])  # resolve clashes
+        # _ = AllChem.EmbedMolecule(mols[i])  # same as the above
+        _ = AllChem.GenerateDepictionMatching2DStructure(mols[i], core)  # all align to core
+        _ = AllChem.NormalizeDepiction(mols[i])
+
+        
+file = 'xxx.smi'
+mols = []
+lines = open(file, 'r').readlines()
+for smi in lines:
+    mols.append(Chem.MolFromSmiles(smi.strip()))
+legends = [str(i+1) for i in range(len(mols))]  # whatever rules
+align_mols_2d(mols)
+img = Draw.MolsToGridImage(mols, molsPerRow=12, subImgSize=(300, 300), useSVG=True, legends=legends)
+with open(file+'.svg', 'w') as f:
+    f.write(img)
+```
+
+Result
+
+![](E:\GitHub-repo\notes\techniques\images\draw-library.png)
+
+- ligands with different scafford, not well aligned...
+
+- allowRGroups=True, H positions might change (extension), neither better nor worse
+
+  [rdkit.Chem.rdDepictor.GenerateDepictionMatching2DStructure](https://www.rdkit.org/docs/source/rdkit.Chem.rdDepictor.html#rdkit.Chem.rdDepictor.GenerateDepictionMatching2DStructure)
+
+#### with matplotlib
+
+[add rdkit image into matplotlib image](https://gist.github.com/iwatobipen/1b384d145024663151b3252bf16d2aa8) 
+
+```python
+# put two Image.open(io.BytesIO(d.GetDrawingText())) horizontally together, a temporary solution
+font = {'family': 'Arial', 'weight': 'demibold', 'size': edge/50}
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(edge/100*2, edge/100), dpi=100, subplot_kw={'aspect': 'equal'})
+fig.subplots_adjust(wspace=0, hspace=0)
+ax1.axis('off')
+ax1.imshow(imgs[0])
+ax1.text(0.5, 0.03, 'Reference', transform=ax1.transAxes, fontdict=font,
+         verticalalignment='bottom', horizontalalignment='center')
+ax2.axis('off')
+ax2.imshow(imgs[1])
+ax2.text(0.5, 0.03, 'Mutant', transform=ax2.transAxes, fontdict=font,
+         verticalalignment='bottom', horizontalalignment='center')
+buf = io.BytesIO()
+fig.savefig(buf)
+buf.seek(0)
+Image.open(buf).show()
+```
 
 
 
@@ -1148,6 +1336,8 @@ In ParmEd, the `idx` attribute of a `Residue` object represents the index of the
 
 Though, we can modify residue numbers for Amber files
 
+#### amber2gmx
+
 ```python
 # both .gro and .top
 # python ../convert_amber2gmx_via_parmed.py pro 688
@@ -1169,7 +1359,8 @@ amber.save(prefix+'.top', overwrite=True, combine='all')
 amber.save(prefix+'.gro', overwrite=True, combine='all')
 ```
 
-> call .idx before assigning value for ._idx, works.....removing the second line just causes no edit, and residue.idx = xx is not allowed
+> call `.idx` before assigning value for `._idx`, works.....removing `residue._idx += offset` just causes no edit, and `residue.idx = xx` is not allowed (protected)
+>
 > remember that _a is not a private variable...
 >
 > https://parmed.github.io/ParmEd/html/_modules/parmed/gromacs/gromacstop.html#GromacsTopologyFile.from_structure
@@ -1177,6 +1368,8 @@ amber.save(prefix+'.gro', overwrite=True, combine='all')
 > https://parmed.github.io/ParmEd/html/_modules/parmed/topologyobjects.html#Residue
 
 
+
+#### charmm2gmx
 
 ```python
 # both .gro and .top
@@ -1187,32 +1380,86 @@ from parmed.charmm import CharmmParameterSet
 import sys
 prefix = sys.argv[1]
 offset = int(sys.argv[2])
-# test
-# import os
-# os.chdir('...../build/')
-# prefix = 'pro'
-# offset = 688
 
 structure = pmd.load_file(prefix+'.psf')
 for residue in structure.residues:
     _ = residue.idx
     residue._idx += offset
     residue.number += offset
-parameter = CharmmParameterSet('par_all36m_prot.prm', 'toppar_water_ions_namd.str')
+parameter = CharmmParameterSet('par_all36m_prot.prm', 'toppar_water_ions_namd.str')  # add more if necessary
 # parmed does not realize that gmx adopts the absolute value while charmm files store the real value (negative!)
 for atomname, atomtype in parameter.atom_types.items():
     atomtype.epsilon *= -1
     atomtype.epsilon_14 *= -1
 structure.load_parameters(parameter)
 structure.save(prefix+'.top', overwrite=True, combine='all')
-# a simple convert
 structure = pmd.load_file(prefix+'.pdb')
 structure.save(prefix+'.gro', overwrite=True, combine='all')
 ```
 
+> !NOTE
+>
+> `par_all36m_prot.prm`, officially all atom types are commented, but should not for parmed, or it cannot find atomtypes. 
+>
+> Other such files may have similar problems.
 
 
-but not editable for gmx files?
+
+#### gmx2amber
+
+```python
+# python gmx2amber.py aloh
+
+import parmed as pmd
+import sys
+prefix = sys.argv[1]
+
+parm = pmd.load_file(prefix+'.itp', prefix+'.gro')
+parm.write(prefix+'.prmtop')
+parm.write(prefix+'.inpcrd')
+```
+
+not tried (see [problems](#problems)). so is it possible to convert to `.prepin` files?
+
+
+
+#### renumber gmx files
+
+```python
+# python gmx_renumber_via_parmed.py pro 688
+
+import parmed as pmd 
+import sys
+prefix = sys.argv[1]
+offset = int(sys.argv[2])
+gmx = pmd.load_file(prefix+'.top', prefix+'.gro')
+
+for residue in gmx.residues:
+    _ = residue.idx
+    residue._idx += offset
+    residue.number += offset
+gmx.remake_parm()
+gmx.save(prefix+'.top', overwrite=True)
+gmx.save(prefix+'.gro', overwrite=True)
+```
+
+
+
+
+
+### Problems
+
+- It seems you are getting a ParameterError from ParmEd because it found unequal bond types defined between AL3+ and ow atoms in your Gromacs topology file. This means that there are different bond parameters for the same pair of atom types, which is not allowed by Amber force field. You need to either assign different atom types to the atoms that have different bond parameters, or use a single bond parameter for all AL3±ow bonds.
+
+  > In your GROMACS file, each bond term is specified independently. In CHARMM, however, parameters are defined between different atom types, which makes it impossible (by definition) to define different bond terms between two pairs of atoms that have the same sets of atom types.
+
+  https://github.com/ParmEd/ParmEd/blob/master/parmed/parameters.py
+  https://github.com/ParmEd/ParmEd/issues/1111
+  https://github.com/ParmEd/ParmEd/issues/968
+
+  In short: gmx .top should not contain different parameters (written right after bonds, angles, etc., e.g. asymmetric $\ce{Al(OH)(H2O)5^2+}$ generated by sobtop) when converting to Amber files. strange! Amber parameters are explicitly written. Charmm not.
+
+
 
 
 

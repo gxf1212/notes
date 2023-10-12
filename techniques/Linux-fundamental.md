@@ -82,6 +82,15 @@ dos2unix <pbs-script-file>
 ## Common errors
 
 - 下面是一些典型的段错误的原因：由内存管理硬件试图访问一个不存在的内存地址
+
+  A segmentation fault is a specific kind of error that occurs when a program attempts to access a memory location that it is not allowed to access, or attempts to access a memory location in a way that is not allowed
+
+  - Dereferencing a null pointer.
+  - Attempting to write to read-only memory.
+  - Attempting to read from an invalid memory address.
+  - Writing beyond the end of an array.
+  - Using uninitialized pointers.
+
 - Linux操作系统执行可执行文件提示`No such file or directory`的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
 
 ## Hardware-related

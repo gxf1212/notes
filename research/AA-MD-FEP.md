@@ -252,6 +252,10 @@ grep -v "ATTN" frcmod.tym > frcmod1.tym # Strip out ATTN lines
 parmchk2 -i tym.prepin -f prepi -o frcmod2.tym  # other params from GAFF
 ```
 
+> Note: `ATTN: need revision` lines might be problematic and removed (replaced by those from gaff). 
+>
+> `parm10.dat` works with Amber14SB. If you require other backgrounds, maybe use other parm files
+
 where `tym.mc` is defined as
 
 ```
@@ -271,7 +275,7 @@ POST_TAIL_TYPE N
 CHARGE -1.0
 ```
 
-and `1.pdb` is extracted and termini are capped with (e.g.) CH<sub>3</sub>
+and `1.pdb` is extracted and termini are capped with (e.g.) CH<sub>3</sub> that is omitted above
 
 ````pdb
 ATOM      1  N   TYR    88      -5.248  -1.000  25.800  1.00  0.00           N  
@@ -331,6 +335,10 @@ saveamberparm pro pro.prmtop pro.inpcrd
 quit
 ```
 
+> !NOTE
+>
+> `frcmod1.tym`, which is load later, overwrites what are already in `frcmod2.tym`
+
 `tym.prepin`
 
 ```
@@ -380,10 +388,9 @@ IMPROPER
 
 DONE
 STOP
-
 ```
 
-why three dummy
+why three dummy atoms? You should keep them. See [AMBER Prep File Specification](https://ambermd.org/doc/prep.html)
 
 # NAMD+CHARMM
 
@@ -1659,5 +1666,10 @@ Not using? He has provided me a full set of files (top, gro)
 
 
 
+Thoughts: what might a mutation do to protein-ligand binding?
 
+- 直接相互作用改变：突变可能改变残基的电荷性质或氢键供体/受体性质...
+- 构象变化：突变可能引起残基的构象变化，导致结合位点的空间结构发生改变。例如，突变可能导致结合位点的闭合或开放程度发生改变。
+- 溶剂效应改变：突变可能影响结合位点的溶剂可及性，可能改变配体与结合位点之间的溶剂效应
+- 动态变化：突变可能导致蛋白质整体或局部的动力学特性发生变化，从而影响结合位点的构象动态或动力学稳定性。
 

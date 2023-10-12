@@ -101,9 +101,7 @@ cannot model and replace residue names? write a script?
 
 - http://compbio.clemson.edu/pka_webserver/
 
-- predict protonation pH
-
-  [PlayMolecule - Click. Compute. Discover.](https://playmolecule.com/proteinPrepare)
+- [PlayMolecule - proteinPrepare: predict protonation pH](https://playmolecule.com/proteinPrepare)
 
 - https://github.com/isayevlab/pKa-ANI
 
@@ -156,6 +154,28 @@ https://cluspro.bu.edu/home.php
 ## Protein-NA docking
 
 
+
+
+
+## Protein-ligand docking
+
+
+
+### AutoDock vina series
+
+move from virtual screening...
+
+
+
+
+
+
+
+## Other
+
+Allosite: provide a protein, 光预测别构在哪，不管正构在哪...
+
+[AlloReverse (shsmu.edu.cn)](https://mdl.shsmu.edu.cn/AlloReverse/)
 
 
 
@@ -225,33 +245,11 @@ or my script (which was meant to assign segnames):
   - There are limited Amber/OPLS-AA files, and "use at your own risk". converting from other tools might be easier.
   - gmx and charmm are using different potential energy forms...add a minus to epsilon!
 - solvate: cannot rotate (despite this option exists) and add water isotropically (unless do this manually). Have to use a HUGE box, otherwise the protein interacts with itself...
+- for large systems, it takes untolerably long to convert to gmx via parmed since every water is to be explicitly written...
 
 
 
-```python
-# both .gro and .top
-# python convert_charmm2gmx_via_parmed.py pro 688
-
-import parmed as pmd 
-from parmed.charmm import CharmmParameterSet
-import sys
-prefix = sys.argv[1]
-offset = int(sys.argv[2])
-
-structure = pmd.load_file(prefix+'.psf')
-for residue in structure.residues:
-    _ = residue.idx
-    residue._idx += offset
-    residue.number += offset
-parameter = CharmmParameterSet('par_all36m_prot.prm', 'toppar_water_ions_namd.str')
-for atomname, atomtype in parameter.atom_types.items():
-    atomtype.epsilon *= -1
-    atomtype.epsilon_14 *= -1
-structure.load_parameters(parameter)
-structure.save(prefix+'.top', overwrite=True, combine='all')
-structure = pmd.load_file(prefix+'.pdb')
-structure.save(prefix+'.gro', overwrite=True, combine='all')
-```
+See [convert_charmm2gmx_via_parmed.py](Programming-for-MD.md#charmm2gmx)
 
 
 
@@ -283,16 +281,17 @@ For residues that are identical except the coordinates (e.g., the water molecule
 
   `iso` is particularly useful for reducing the size of system and guaranteeing no interaction-with-image problem!! **superiority over VMD!**
 
+- When tleap encounters multiple definitions for the same atom type, it uses the last definition it encounters.
+
+- 最后一个residue有OXT原子就没事，如果后面还有水就报错（确定不是`pdb2gmx`？）
+
 ### Disadvantages
 
 - tleap will always renumber residues (starting from 1) and you cannot set residue index in tleap.
 
   fix it via parmed (sometimes useful) or MDA (for analysis)
 
-  ```python
-  # amber2gmx.py
-  
-  ```
+  See [convert_amber2gmx_via_parmed.py](Programming-for-MD.md#amber2gmx)
 
 - calculate # of ions (protein mass) for tleap: 
 
@@ -488,29 +487,11 @@ Contents need more organization....put before system setup later
     - all are planar molecule!!!
     - some molecule is big!
 
-  - 
-
-  > | similarity | 70   | 50   | 45   | 42   |
-  > | ---------- | ---- | ---- | ---- | ---- |
-  > | quantity   | 300  | 484  | 644  | 923  |
-  >
-  > similarity 30
-  >
-  > | type     | approved | experimental | Nutraceutical |
-  > | -------- | -------- | ------------ | ------------- |
-  > | quantity | 771      | 1000+        | ~100          |
-  >
-  > all drugs (not sure with structure?)
-  >
-  > | type     | approved | approved+experimental+nutraceutical |
-  > | -------- | -------- | ----------------------------------- |
-  > | quantity | 2679     | 882                                 |
-
-- superdrug2: 66
+  - superdrug2: 66
 
   - <u>approved or clinical drugs</u>
   - limited similarity search
-
+  
 - https://tripod.nih.gov/npc/
 
 ### preference
@@ -532,7 +513,7 @@ Contents need more organization....put before system setup later
 
    pubchem
 
-4. [world](https://zinc.docking.org/substances/subsets/world/)natural products (optional)
+4. [world](https://zinc.docking.org/substances/subsets/world/) natural products (optional)
 
 from ATP mimics to **their** analogs (2D), might be a lot? 
 

@@ -1129,6 +1129,12 @@ also for LibreOffice Calc, many commands are the same....
 - Excel的paste special必须是复制，辣鸡！Calc就可以剪切
 - Change the default language in LibreOffice for the whole document
   Choose Tools > Options. Go to Language Settings > Languages. Under Default languages for documents, select the document language for all newly created documents.
+- To turn off the language check in LibreOffice Calc, you can follow these steps:
+  
+  Open any LibreOffice application (Writer, Calc, etc.).
+  Click on Tools > Options.
+  Go to Language Settings > Writing Aids.
+  In the Options section, uncheck Check spelling as you type. 
 
 #### Text & Format
 
@@ -1230,7 +1236,7 @@ https://www.zhihu.com/column/c_1368227352443572224
 
 - [GraphPad Prism 9 Curve Fitting Guide - Equation: Competitive inhibition](https://www.graphpad.com/guides/prism/latest/curve-fitting/reg_competitive_inhibition.htm)
 
-  > these free tools are calculator; it cannot create simp
+  > these free tools are calculator; it cannot create simple plots?
 
 ### Scientific writing
 
@@ -1290,7 +1296,14 @@ pdf文件标题粘贴到微信对话框就失去换行成为一整行了
 
 ## Other Tools
 
+### ZJU
+
 [浙大邮箱 帮助中心](https://mail.zju.edu.cn/coremail/help/clientoption_zh_CN.jsp)
+
+[Web of Science检索平台 - 数据库导航 - 浙江大学图书馆](http://210.32.137.90/s/lib/libtb/show/405)：[校外使用WOS](https://www.webofknowledge.com/?auth=ShibbolethIdPForm&entityID=https%3A%2F%2Fidp.zju.edu.cn%2Fidp%2Fshibboleth&target=https%253A%252F%252Fwww.webofknowledge.com%252F%253FDestApp%253DUA&ShibFederation=ChineseFederation&DestApp=UA)
+
+图书馆讲座视频会自动保存在钉群的直播回放中，此外，往期讲座视频还可在学在浙大上观看，详见：
+https://course.zju.edu.cn/zh-cn/pages/courselist?departmentid=3598&departmentname=%E5%9B%BE%E4%B9%A6%E9%A6%86
 
 ### ThunderBird
 
@@ -1578,7 +1591,7 @@ texstudio中文红线，临时的办法 https://www.cnblogs.com/litifeng/p/11633
 
 Welcome to install my [md-highlighter](https://marketplace.visualstudio.com/items?itemName=gxf1212.md-highlighter)!
 
-## workflow
+## Workflow
 
 [Syntax Highlight Guide | Visual Studio Code Extension API](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide)
 
@@ -1590,6 +1603,8 @@ example tutorial:
 - [从零开始撸一个 VSCode Extension - 掘金 (juejin.cn)](https://juejin.cn/post/7117082008819351566) see 'publish'
 
 related extensions: gmxhelper, bioSyntax
+
+### Initialize
 
 download [Yocode - vscode-docs](https://vscode-docs.readthedocs.io/en/stable/tools/yocode/)
 
@@ -1605,7 +1620,51 @@ yo code
 
 select "New Language Support"
 
-Directory structure: see the above links
+### Test or debug
+
+Run the extension (open that folder) by pressing F5 in Visual Studio Code. This will open a new window with the extension loaded. Or [Ctrl+shift+P and "Reload window"](https://stackoverflow.com/questions/42002852/how-to-restart-vscode-after-editing-extensions-config) to refresh extensions. Open a file with the .rtf extension to test the syntax highlighting.
+
+When you're satisfied with the extension, package it by running `vsce package` in the terminal window. This will create a .vsix file that you can distribute or install on other machines.
+
+手动安装插件：非常简单，把整个插件文件夹，拷贝到`%USERPROFILE%/.vscode/extensions`(Linux是`~/.vscode/extensions`)，重启VSCode就可以啦！
+
+or: Ctrl+shift+P and "install extension from location"
+
+### Publish
+
+[Publishing Extensions | Visual Studio Code Extension API](https://code.visualstudio.com/api/working-with-extensions/publishing-extension)
+
+```shell
+# modify version number
+git commit ...
+vsce publish
+```
+
+> [Extension Manifest](https://code.visualstudio.com/api/references/extension-manifest#approved-badges)
+>
+> [VSCode 插件开发（三）：插件打包与本地安装 - 简书 (jianshu.com)](https://www.jianshu.com/p/bb379a628004)
+
+### Debug
+
+- Test or debug
+
+  - sometimes failed. may edit `extensions.json` and restart
+
+    maybe still fail. I'm not clear about the mechanism of recognition....
+
+  - after reloading vscode window, my extension disappears. how to install it permanently? I have put the folder in .vscode/extensions. this is an extension I am developing and files are constantly changing. so using vsix file is not possible.
+
+    莫名其妙就好了，好像是把.obsolete (已废弃的，已不用的，已失时效的) 文件清空而不是删掉？
+
+  - Press F5 and it says`you don't have an extension for debugging json`: lacking of `.vscode` folder...
+
+- ["vsce publish" command returns Invalid publisher name 'Siarhei Kuchuk'. Expected the identifier of a publisher, not its human-friendly name. · Issue #419 · microsoft/vscode-vsce (github.com)](https://github.com/microsoft/vscode-vsce/issues/419)
+
+  publisher name in `package.json` should not contain spaces
+
+## Directory structure
+
+see the above reference links
 
 - `package.json`，保存了我们在第二步中给出的答案，你也可以在此处进行修改。
 - 几个Markdown文件，为你提供了标准的通知模板，如果你有留意过VSCode下载插件界面的内容，会发现与该模板大差不差。
@@ -1614,46 +1673,67 @@ Directory structure: see the above links
 
 > [Semantic Highlight Guide | Visual Studio Code Extension API](https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide#theming): define color styles different from the current theme?
 
-Test or debug: Run the extension (open that folder) by pressing F5 in Visual Studio Code. This will open a new window with the extension loaded. Or [Ctrl+shift+P and "Reload window"](https://stackoverflow.com/questions/42002852/how-to-restart-vscode-after-editing-extensions-config) to refresh extensions. Open a file with the .rtf extension to test the syntax highlighting.
-
-When you're satisfied with the extension, package it by running vsce package in the terminal window. This will create a .vsix file that you can distribute or install on other machines.
-
-手动安装插件：非常简单，把整个插件文件夹，拷贝到`%USERPROFILE%/.vscode/extensions`(Linux是`~/.vscode/extensions`)，重启VSCode就可以啦！
-
-or: Ctrl+shift+P and "install extension from location"
-
-> debug: sometimes failed. may edit `extensions.json` and restart
->
-> maybe still fail. I'm not clear about the mechanism of recognition....
->
-> debug: after reloading vscode window, my extension disappears. how to install it permanently? I have put the folder in .vscode/extensions. this is an extension I am developing and files are constantly changing. so using vsix file is not possible.
->
-> 莫名其妙就好了，好像是把.obsolete (已废弃的，已不用的，已失时效的) 文件清空而不是删掉？
-
-[Publishing Extensions | Visual Studio Code Extension API](https://code.visualstudio.com/api/working-with-extensions/publishing-extension)
-
-> [Extension Manifest](https://code.visualstudio.com/api/references/extension-manifest#approved-badges)
->
-> [VSCode 插件开发（三）：插件打包与本地安装 - 简书 (jianshu.com)](https://www.jianshu.com/p/bb379a628004)
-
-debug: ["vsce publish" command returns Invalid publisher name 'Siarhei Kuchuk'. Expected the identifier of a publisher, not its human-friendly name. · Issue #419 · microsoft/vscode-vsce (github.com)](https://github.com/microsoft/vscode-vsce/issues/419)
-
-publisher name in `package.json` should not contain spaces
-
-## `package.json` file
+### `package.json` file
 
 ```json
-	{
-	  "id": "in",
-      "aliases": ["Amber in file"],
-      "extensions": [".in"],
+{
+  "name": "md-highlighter",
+  "displayName": "md-highlighter",
+  "description": "Highlighting files about molecular modeling and dynamics simulation.",
+  "version": "0.0.3",
+  "publisher": "gxf1212",
+  "repository": "https://github.com/gxf1212/md-highlighter",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "icon": "./images/benzene.png",
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "rtf",
+      "aliases": ["NAMD force field", "rtf"],
+      "extensions": [".rtf", ".str", ".inp", ".prm"],
       "configuration": "./language-configuration.json"
-    }
+    },
+    {
+      "id": "pdb",
+      "aliases": ["PDB file", "pdb"],
+      "extensions": [".pdb"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "frcmod",
+      "aliases": ["frcmod file", "frcmod"],
+      "extensions": [".frcmod"],
+      "filenamePatterns": ["frcmod.*"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "rtf",
+      "scopeName": "source.rtf",
+      "path": "./syntaxes/rtf.tmLanguage.json"
+    },
+    {
+      "language": "pdb",
+      "scopeName": "source.pdb",
+      "path": "./syntaxes/pdb.tmLanguage.json"
+    },
+    {
+      "language": "frcmod",
+      "scopeName": "source.frcmod",
+      "path": "./syntaxes/frcmod.tmLanguage.json"
+    }]
+  }
+}
+
 ```
 
-aliases: what appears in the bottom right corner of VScode
+- `aliases`: what appears in the bottom right corner of VScode
+- To highlight all files **starting with frcmod**, you can use the `filenamePatterns` property that co-exists with `extensions` field
 
-## `xxx.tmLanguage.json` file
+### `xxx.tmLanguage.json` file
 
 e.g. [bioSyntax/vscode/syntaxes/pdb.tmLanguage.json at master](https://github.com/bioSyntax/bioSyntax/blob/master/vscode/syntaxes/pdb.tmLanguage.json)
 
@@ -1755,15 +1835,17 @@ capture group: failed and not using...
 
 #### Assertion
 
+https://www.regular-expressions.info/lookaround.html
+
 `(?<=\\bBOND\\s)`是一个正向后视断言，它表示匹配的内容必须紧跟在"BOND"这个单词和一个空格之后。
 
 `"^(?!\\${4})\\S+$"`是负向前瞻断言，可以匹配以非空白字符开头且不包含字符串 `$$$$` 的行
 
+`(?!foo)`:Negative Lookahead. Asserts that what immediately follows the current position in the string is not foo
 
+`(?<!foo): Negative Lookbehind. Asserts that what immediately precedes the current position in the string is not foo
 
-在正则表达式中，可以在模式的开始处使用(?i)选项来表示接下来的匹配将不区分大小写。例如，如果要匹配字符串hello，可以使用如下的模式：
-(?i)hello
-这将匹配Hello、HELLO、hello等任何形式的hello字符串。
+在正则表达式中，可以在模式的开始处使用(?i)选项来表示接下来的匹配将不区分大小写。例如`(?i)hello`将匹配Hello、HELLO、hello等任何形式的hello字符串。
 
 
 

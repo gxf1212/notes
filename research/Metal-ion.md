@@ -754,5 +754,11 @@ a few notes on the literatures. from yuque
 
 
 
+# Other
 
+## Thoughts
+
+现在的MD习惯性地bidentate，可能是因为两个氧是等价的，而用QM/MM或可极化力场就能正确描述
+
+ Amber series FF 8-羟基喹啉铝都稳定不住怎么解释呢
 

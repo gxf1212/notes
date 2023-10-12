@@ -211,6 +211,20 @@ PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
 
 - 干扰PPI很难使用小分子，因为：1）没有明显口袋，容易被水竞争掉；2）界面高度柔性，小分子可能刚性难调整。可以截一段蛋白作为多肽药
 
+- 由于环肽具备环化的稳定序列及构象，以此获得更好的细胞渗透性和稳定性，并且与线性肽一样，环肽也能够靶向蛋白质-蛋白质界面，因此，环肽是Gαs蛋白药物开发的有希望的候选者。环肽的优势
+
+  与小分子比：
+
+  - 更适用于PPI
+  - 更稳定
+  - 毒性更小
+
+  与线性肽比：
+
+  - 更强细胞穿透性
+  - 更高亲和力
+  - 环化多样性
+
 ### Macrolide
 
 大环内酯（Macrolide）是一类广谱抗生素，能够有效抑制细菌的生长和繁殖。大环内酯分子结构由16-环的大环和一定的糖基组成，作用于细菌的机理主要是通过抑制细菌蛋白质的合成。
@@ -228,6 +242,8 @@ PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
 ## Strategy of design
 
 ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/synthetic-lethals.jpg)
+
+synthetic lethality
 
 
 
@@ -448,3 +464,8 @@ CRO：首席风险官
 bd是公司的外交部门，是BusinessDevelopment的缩写，意思是商务拓展。
 
 cmc通常是指在制药行业中,专门从事化学成分生产与控制(chemical manufacture and control)相关的职位
+
+## Research ideas?
+
+https://mdl.shsmu.edu.cn/zh/home.jsp  上交张健老师组，做别构
+
