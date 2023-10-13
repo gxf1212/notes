@@ -4,17 +4,17 @@
 
 This is research hub page. Click on the sidebar to select a chapter and start reading!
 
-- [Fragments of science](/research/academic-notes.md)
+- [Fragments of science](/research/academic-notes.md): notes on pieces of knowledge
 - [MD Fundamentals.md](/research/MD-fundamentals.md): visualization programs, molecular dynamics basics, Gromacs/NAMD/Amber basics, etc.
 - [Programming for MD](/research/Programming-for-MD.md): Python, tcl, bash, specific Python packages, etc.
 - [Preparation and modeling](/research/Preparation-and-modeling.md): general modeling: protein (AF2, Swiss-Model, etc.), protonation state, Leap/VMD, packmol, docking and VS (distribute to other pages later?)
 - [Protein-ligand simulation](/research/Protein-ligand-simulation.md): MD/FEP with all MD engines
 - [Protein/Amino Acid FEP](/research/AA-MD-FEP.md): MD/FEP with all MD engines
 - [Systems with metal ions](/research/Metal-ion.md)
+- [RNA simulation](RNA-simulation.md)
+- [Polymer-membrane](Polymer-membrane.md)
+- [Advanced techniques](Advanced-techniques.md)
 - [MD official tutorials](/research/Previous-projects/MD-tutorials-all.md)
-- [RNA simulation](RNA-simulation.md) (future)
-- [Polymer-membrane](Polymer-membrane.md) (future)
-- [Enhanced Sampling and Coarse Grained](Enhanced-sampling-Coarse-Grain.md) (future)
 
 In the future, I will try not to write pages by project, but will still focus on specific themes in each page. Previous projects:
 - [NUS project: virtual screening and MD simulation with Gromacs](/research/Previous-projects/UROPS-run-and-result.md)

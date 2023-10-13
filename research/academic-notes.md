@@ -25,7 +25,7 @@ maybe a new .md file in the future
 
 - [Metal to Ligand and Ligand to Metal Charge Transfer Bands - Chemistry LibreTexts](https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Supplemental_Modules_(Physical_and_Theoretical_Chemistry)/Spectroscopy/Electronic_Spectroscopy/Metal_to_Ligand_and_Ligand_to_Metal_Charge_Transfer_Bands)
 
-  charge transfer from the ligands to Hg<sup>2+<sup/> (0.49−0.62 e) is greater than that to Zn<sup>2+<sup/> (0.32−0.41 e), indicating that Hg<sup>2+<sup/> can accept more negative charge from the ligands than Zn<sup>2+<sup/>.
+  charge transfer from the ligands to Hg<sup>2+</sup> (0.49−0.62 e) is greater than that to Zn<sup>2+</sup> (0.32−0.41 e), indicating that Hg<sup>2+</sup> can accept more negative charge from the ligands than Zn<sup>2+</sup>.
 
 - In chemistry, hydronium is the common name for the aqueous cation H<sub>3</sub>O<sup>+</sup>.
 
@@ -83,13 +83,6 @@ maybe a new .md file in the future
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/anomeric-carbon.jpg" alt="anomeric-carbon" width=50% />
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/anomeric-carbon2.jpg" alt="anomeric-carbon2" width=45% />
-
-
-
-> from wiki
-
-**脒**[[注 1\]](https://zh.wikipedia.org/zh-cn/脒#cite_note-1)（Amidine）是一类含氮[有机化合物](https://zh.wikipedia.org/wiki/有机化合物)，通式见右图，是[羧酸](https://zh.wikipedia.org/wiki/羧酸)的含氮衍生物。最简单的脒是[甲脒](https://zh.wikipedia.org/wiki/甲脒)，HC(=NH)NH2。常见的脒包括[DBN](https://zh.wikipedia.org/wiki/DBN)、[DBU](https://zh.wikipedia.org/wiki/DBU)和[三氮脒](https://zh.wikipedia.org/w/index.php?title=三氮脒&action=edit&redlink=1)等。低级的脒有毒。
-脒具碱性，可以和酸形成稳定的盐，常用作[杂环化合物](https://zh.wikipedia.org/wiki/杂环化合物)的合成前体，有些脒类也是药物。脒可通过[Pinner反应](https://zh.wikipedia.org/wiki/Pinner反应)制取。
 
 
 
@@ -177,7 +170,7 @@ see [data](https://www.brenda-enzymes.org/enzyme.php?ecno=2.7.11.1#TURNOVER%20NU
 
 - In quantum chemistry, the Hessian matrix is a matrix of second derivatives of a molecule’s energy with respect to its atomic coordinates. It is used to describe the curvature of the potential energy surface near a stationary point, such as a minimum or transition state. The Hessian matrix can be used to determine the vibrational frequencies of a molecule and its normal modes of vibration
 - Hohenberg-Kohn定理的核心思想是：体系中的所有物理量都可以通过只包含电子密度的变量来唯一决定，而实现方法是通过变分原理来求得体系基态。
-- <img src="E:\GitHub-repo\notes\research\academic-notes.asssets\pseudo-potential.png" style="zoom:50%;" />
+- <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/pseudo-potential.png" style="zoom:50%;" />
 
 
 
@@ -193,7 +186,7 @@ PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
 
 超胞（Supercell）：超胞是对单胞的扩展，扩展成新的重复单元。
 
-<img src="E:\GitHub-repo\notes\research\academic-notes.asssets\super-cell.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/super-cell.png" style="zoom:50%;" />
 
 # Pharmacology
 
@@ -278,6 +271,8 @@ synthetic lethality
 
 ![BHO](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/BHO.png)
 
+---
+
 
 
 ![ring-design](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/ring-design.png)
@@ -290,9 +285,13 @@ synthetic lethality
 
 - 环磷酰胺在体外无活性，主要通过肝脏P450酶水解成醛磷酰胺再运转到组织中形成磷酰胺氮芥而发挥作用。环磷酰胺可由脱氢酶转变为羧磷酰胺而失活，或以丙烯醛形式排出，导致泌尿道毒性。属于周期非特异性药，作用机制与氮芥相同。
 
-  ![Cyclophosphamid](academic-notes.asssets\Cyclophosphamid.png)
+  ![Cyclophosphamid](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/Cyclophosphamid.png)
 
 - 阿斯巴甜，学名为天门冬酰苯丙氨酸甲酯，是一种重要的甜味剂。
+
+- from wikipedia: **脒**[[注 1\]](https://zh.wikipedia.org/zh-cn/脒#cite_note-1)（Amidine）是一类含氮[有机化合物](https://zh.wikipedia.org/wiki/有机化合物)，通式见右图，是[羧酸](https://zh.wikipedia.org/wiki/羧酸)的含氮衍生物。最简单的脒是[甲脒](https://zh.wikipedia.org/wiki/甲脒)，HC(=NH)NH2。常见的脒包括[DBN](https://zh.wikipedia.org/wiki/DBN)、[DBU](https://zh.wikipedia.org/wiki/DBU)和[三氮脒](https://zh.wikipedia.org/w/index.php?title=三氮脒&action=edit&redlink=1)等。低级的脒有毒。
+  脒具碱性，可以和酸形成稳定的盐，常用作[杂环化合物](https://zh.wikipedia.org/wiki/杂环化合物)的合成前体，有些脒类也是药物。脒可通过[Pinner反应](https://zh.wikipedia.org/wiki/Pinner反应)制取。
+
 
 
 
@@ -432,7 +431,7 @@ https://escholarship.org/content/qt95k0h86q/qt95k0h86q.pdf  also an Amber TI exa
 # Physics
 
 - Dissipated work is a concept in thermodynamics that refers to the amount of work that is lost to heat during a process. When work is done on or by a system, some of the energy may be transferred to the system’s surroundings as heat. This heat transfer represents a loss of useful energy, as it is no longer available to do work. The amount of work that is lost in this way is called dissipated work. For example, when you rub your hands together, you are doing work to overcome the friction between your hands. Some of the energy from this work is transferred to your hands as heat, warming them up. This heat transfer represents dissipated work.
-- Rupture force 断裂力 is the external force put on a material of interest that causes it to break or rupture. It can be calculated using a formula that takes into account the load force and size dimensions of the material1. It can also be measured using an atomic force microscope (AFM) for single covalent bonds
+- Rupture force 断裂力 is the external force put on a material of interest that causes it to break or rupture. It can be calculated using a formula that takes into account the load force and size dimensions of the material. It can also be measured using an atomic force microscope (AFM) for single covalent bonds
 - 
 
 [物理四神兽——拉普拉斯的妖 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/35239781)

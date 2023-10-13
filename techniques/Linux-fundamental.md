@@ -1582,7 +1582,7 @@ To be re-organized
 
   - startup path
 
-    ![](E:\GitHub-repo\notes\techniques\images\KDE-Dolphin-startup.png)
+    ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-Dolphin-startup.png)
 
 - 
 
@@ -1781,9 +1781,9 @@ https://labs.fedoraproject.org/scientific/
 
 Periodic table of elements
 
-![](E:\GitHub-repo\notes\techniques\images\Fedora-table-elements.jpg)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/Fedora-table-elements.jpg)
 
-<img src="E:\GitHub-repo\notes\techniques\images\Fedora-table-elements2.jpg" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/Fedora-table-elements2.jpg" style="zoom:67%;" />
 
 其他和正常KDE差不多
 

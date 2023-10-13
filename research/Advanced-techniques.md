@@ -1,4 +1,4 @@
-# Enhanced Samping & Coarse Grained
+# Advanced techniques
 
 # Pulling
 
@@ -30,6 +30,10 @@ https://zhuanlan.zhihu.com/p/385098206
 
 
 [take two methanes and restrain them at different distances using a harmonic potential (miletic.net)](https://group.miletic.net/en/tutorials/gromacs/5-umbrella/#parameter-files)
+
+
+
+[GROMACS中伞型采样算法应用详解 - 分子模拟 (Molecular Modeling) - 计算化学公社 (keinsci.com)](http://bbs.keinsci.com/thread-36490-1-1.html)
 
 
 

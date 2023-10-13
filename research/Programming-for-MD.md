@@ -1009,7 +1009,7 @@ Simply the structure
 
 - [RDKit: New drawing options in the 2020.03 release](http://rdkit.blogspot.com/2020/04/new-drawing-options-in-202003-release.html)
 
-<img src="E:\GitHub-repo\notes\techniques\images\draw-highlight.png" style="zoom: 67%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/draw-highlight.png" style="zoom: 67%;" />
 
 
 
@@ -1105,7 +1105,7 @@ def get_charge(cfile):
 
 Result
 
-<img src="E:\GitHub-repo\notes\techniques\images\draw-charge.jpg" style="zoom: 50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/draw-charge.jpg" style="zoom: 50%;" />
 
 #### Draw ligand libraries
 
@@ -1142,7 +1142,7 @@ with open(file+'.svg', 'w') as f:
 
 Result
 
-![](E:\GitHub-repo\notes\techniques\images\draw-library.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/draw-library.png)
 
 - ligands with different scafford, not well aligned...
 

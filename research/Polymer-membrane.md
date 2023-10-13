@@ -48,11 +48,29 @@ restraint of POPC during equilibration
 
 
 
+## Packmol
+
+
+
+
+
+
+
+
+
+## VMD
+
+http://www.ks.uiuc.edu/Training/Tutorials/science/membrane/mem-tutorial.pdf
+
+
+
 
 
 # Ligand-membrane setup
 
-
+- database/server of ligand-membrane interaction
+  - https://molmedb.upol.cz/detail/intro  no data, only indices of papers. many too small ligands like CO<sub>2</sub>
+  - https://permm.phar.umich.edu/  calculate passive permeability of molecules across the lipid bilayer
 
 ## Amber
 
@@ -114,7 +132,7 @@ Pulling out of membrane: see [Pulling](Enhanced-sampling-Coarse-Grain.md)
 
 [GROMACS如何做之膜模拟|Jerkwin](http://jerkwin.github.io/2016/09/19/GROMACS如何做之膜模拟/)  read outer links, e.g. [membrane_simulations.pdf by Erik Lindahl](https://extras.csc.fi/chem/courses/gmx2007/Erik_Talks/membrane_simulations.pdf)
 
-
+[An Amber Lipid Force Field Tutorial](https://ambermd.org/tutorials/advanced/tutorial16/)  analysis with cpptraj, what to analyze
 
 
 

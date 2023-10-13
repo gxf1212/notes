@@ -10,11 +10,9 @@ TODO: Thanks for Protein-RNA互作.pdf from Mark
 
 ### 点括号注释
 
-. 表示未配对核苷酸， () 表示配对核苷酸
+`.` 表示未配对核苷酸， `()` 表示配对核苷酸。如果存在交叉配对，就依次用`[ ]`，`{ } ` 
 
-如果存在交叉配对，就依次用[ ]，{ }  
-
-<img src="E:\GitHub-repo\notes\research\RNA-simulation.assets\dot-parentheses.png" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/RNA-simulation.assets/dot-parentheses.png" style="zoom:67%;" />
 
 
 

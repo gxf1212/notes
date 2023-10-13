@@ -1080,7 +1080,7 @@ spyder conda interpreter：光设置没用，直接打开conda里每个对应环
 
 要是只有miniconda，对不起。按照提示（此为Fedora38 Scientific上的）：
 
-<img src="E:\GitHub-repo\notes\techniques\images\spyder-error.jpg" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/spyder-error.jpg" style="zoom:50%;" />
 
 安装时总是报conda底层的错（要report），版本不对还不行
 
@@ -1286,7 +1286,7 @@ bug：Chemical Science那篇文章，无法根据缩略版的条目搜到文章�
 
 For ACS papers, copy from here
 
-![](E:\GitHub-repo\notes\techniques\images\acs-cite.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/acs-cite.png)
 
 #### Other
 
@@ -1364,7 +1364,7 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 
 ### Tencent meeting
 
-<img src="E:\GitHub-repo\notes\techniques\images\Tencent-meeting.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/Tencent-meeting.png" style="zoom:50%;" />
 
 
 

@@ -32,7 +32,7 @@ why does Al<sup>3+</sup> inhibit kinase activity by replacing Mg<sup>2+</sup>? A
 
 铝离子应该不会MLCT啥的
 
-<img src="E:\GitHub-repo\notes\research\academic-notes.asssets\Al-preference.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/Al-preference.png" style="zoom:50%;" />
 
 
 
