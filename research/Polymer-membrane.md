@@ -118,7 +118,7 @@ Also, build membrane with CHARMM-GUI membrane builder
 
 
 
-Pulling out of membrane: see [Pulling](Enhanced-sampling-Coarse-Grain.md)
+Pulling out of membrane: see [Pulling](Advanced-techniques.md#pulling)
 
 
 
