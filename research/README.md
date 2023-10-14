@@ -49,7 +49,7 @@ FEP入门：
 
 - 先做tutorial：https://www.ks.uiuc.edu/Training/Tutorials/，**Free-Energy and Enhanced Sampling Methods**的前两个。Geometrical route可先不看。了解基础知识和implementation
 - 小分子的话，做我那个tutorial，了解setup的details，了解修改后的脚本
-- 
+- ...
 
 ## Gromacs
 
