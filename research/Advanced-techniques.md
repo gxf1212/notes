@@ -25,7 +25,7 @@ https://gaseri.org/en/tutorials/gromacs/5-umbrella/#setup
 
 没搞清楚定速度、定距离之类的啥意思
 
-https://zhuanlan.zhihu.com/p/385098206
+
 
 
 
@@ -37,7 +37,15 @@ https://zhuanlan.zhihu.com/p/385098206
 
 
 
-### Pulling out of membrane
+https://gitlab.com/gromacs/online-tutorials/umbrella-sampling
+
+
+
+https://2022.igem.wiki/cu-egypt/MolecularDynamics.html#short3
+
+
+
+Pulling out of membrane
 
 
 

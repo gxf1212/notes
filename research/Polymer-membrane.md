@@ -13,8 +13,6 @@ Since I got a project on polymer/ligand-membrane interaction, I put these two to
 membrane setup tutorials
 
 - [Building Systems - Membrane Systems (ambermd.org)](https://ambermd.org/tutorials/MembraneSystems.php)
-  - Basic, lipid14, from CHARMM-GUI: [An Amber Lipid Force Field Tutorial](https://ambermd.org/tutorials/advanced/tutorial16/)
-  - [Membrane System Setup with PACKMOL-Memgen](https://ambermd.org/tutorials/advanced/tutorial38/index.php)
 - [The Lipid21 Force Field is recommended in Amber](https://ambermd.org/AmberModels_lipids.php)
 
 ## CHARMM-GUI
@@ -48,9 +46,10 @@ restraint of POPC during equilibration
 
 
 
-## Packmol
+## Packmol+tleap
 
-
+- Basic, lipid14, from CHARMM-GUI: [An Amber Lipid Force Field Tutorial](https://ambermd.org/tutorials/advanced/tutorial16/) with Amber restraints but not for gmx!
+- [Membrane System Setup with PACKMOL-Memgen](https://ambermd.org/tutorials/advanced/tutorial38/index.php)
 
 
 
@@ -60,7 +59,9 @@ restraint of POPC during equilibration
 
 ## VMD
 
-http://www.ks.uiuc.edu/Training/Tutorials/science/membrane/mem-tutorial.pdf
+[mem-tutorial.pdf](http://www.ks.uiuc.edu/Training/Tutorials/science/membrane/mem-tutorial.pdf) (still in CHARMM-GUI)
+
+[memprot2-tutorial.pdf](https://www.ks.uiuc.edu/Training/Tutorials/science/membrane2/memprot2-tutorial.pdf)  (vmd)
 
 
 
@@ -72,7 +73,7 @@ http://www.ks.uiuc.edu/Training/Tutorials/science/membrane/mem-tutorial.pdf
   - https://molmedb.upol.cz/detail/intro  no data, only indices of papers. many too small ligands like CO<sub>2</sub>
   - https://permm.phar.umich.edu/  calculate passive permeability of molecules across the lipid bilayer
 
-## Amber
+## Amber FF
 
 
 
@@ -92,7 +93,7 @@ http://www.ks.uiuc.edu/Training/Tutorials/science/membrane/mem-tutorial.pdf
 
 
 
-## CHARMM
+## CHARMM FF
 
 
 

@@ -320,7 +320,29 @@ sudo snap install termius-app
 
 ##### basics
 
+[Slurm作业调度系统使用指南 (ustc.edu.cn)](http://hmli.ustc.edu.cn/doc/userguide/slurm-userguide.pdf)  a very detailed guide!
+
+[https://slurm.schedmd.com/](https://slurm.schedmd.com/): official
+
+
+
+- [Job Priority | Princeton Research Computing](https://researchcomputing.princeton.edu/support/knowledge-base/job-priority) 
+
+  > in most cases those jobs requesting shorter times are given the highest priority in QOS
+
+  [Priority_and_Fair_Trees.pdf](https://slurm.schedmd.com/SLUG19/Priority_and_Fair_Trees.pdf); [Slurm Workload Manager - Multifactor Priority Plugin](https://slurm.schedmd.com/priority_multifactor.html)
+
+  <img src="E:\GitHub-repo\notes\techniques\images\slurm-jobsize.png" style="zoom:50%;" />
+
+  [Slurm Workload Manager - sprio](https://slurm.schedmd.com/sprio.html)
+
+  ```shell
+  spiro -j jobname 
+  spiro -u user-id
+  ```
+
 - 
+  
 
 ##### example
 
@@ -422,14 +444,14 @@ date > log
 
 #### Summary
 
-| system     | PBS        | SLURM          |
-| ---------- | ---------- | -------------- |
-|            | qsub       | sbatch         |
-|            | qstat      | squeue         |
-|            | qdel       | scancel        |
-| job name   | -N (name)  | -J (job)       |
-| queue name | -q (queue) | -p (partition) |
-|            |            |                |
+| system      | PBS        | SLURM          |
+| ----------- | ---------- | -------------- |
+| submit      | qsub       | sbatch         |
+| check queue | qstat      | squeue         |
+| kill job    | qdel       | scancel        |
+| job name    | -N (name)  | -J (job)       |
+| queue name  | -q (queue) | -p (partition) |
+|             |            |                |
 
 
 
@@ -1813,7 +1835,7 @@ capture group: failed and not using...
 
 - a digit, or integer (`\\d`)
 - 任意字符（`.{#}`）。
-  - `"^.{6}(.{5})"`：第7到第11列中的任意字符
+  - `"(?<=^.{6}).{5}"`：第7到第11列中的任意字符
   - `.*`: any characters (between something)
   - point: `\\.`
 

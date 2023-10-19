@@ -1483,6 +1483,13 @@ u = mda.Universe('pro.prmtop', 'md.nc')  # Amber
 
 Mostly looks like vmd syntax
 
+
+
+> https://github.com/MDAnalysis/mdanalysis/issues/2082
+> In MDAnalysis, you can select atoms using a syntax very similar to CHARMM’s atom selection syntax. However, there isn’t a built-in keyword to select all lipids in a Universe
+
+
+
 #### work through all frames
 
 ```python
