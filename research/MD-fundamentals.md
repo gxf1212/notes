@@ -43,6 +43,22 @@ Zhaoqi has tried doing this with MDanalysis but it cannot easily write frames
 
 
 
+gmx pbc mol，是蛋白/lipid保持完整，中心水盒子位置不变（还有离子？）反正除了蛋白？都在水盒子之外。代价是蛋白不在中心水盒子，之前POC算的是错的
+gmx不做处理，蛋白也全部在中心水盒子，代价是要跳过边界到另一边，蛋白全部被拉开。这种算POC应该也不对吧
+pbc res也会被拉开
+vmd处理pbc mol之后的：蛋白总是在水盒子中心，align之后就是蛋白不转水盒子转。可以用来算POC
+
+pbc wrap segid/residue--align，蛋白还是有些不在水里？在吧，只是处理得有问题。结果是蛋白全部在水里，盒子相应地平移（位置），应该还是按周期性挪过去的。align之后盒子才倾斜。
+对于visualization，其实pbc mol就已经够了？看蛋白是够了，但要看离子还是wrap一下。
+直接改变计算方式：反正gmx的水盒子都是沿着Cartesian axes的。存出来的轨迹和这样算出来结果大体相同，个别不一样。
+改变计算方式的问题在于假定蛋白跑不出周围的26个盒子，pbc wrap是我不知道能否信任它
+
+wrap之后还是得那么算呀，只是不用循环两次了
+xtc算的还是小一点点
+理论上是用vmd存的算更准
+高旭帆   wrap之后还是得那么算呀，只是不用循环两次了
+vmd轨迹基本是对的，就是小心离子跨过pbc
+
 
 
 ## Pymol
@@ -231,7 +247,7 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 4. delete命令！
 
-5. must use cmd to align small molecules
+5. must use cmd to align small molecules (not always use)
 
    ```
    align mol1, mol2
@@ -244,6 +260,7 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 ### plugin
 
 - PyMod 3 is an open source PyMOL plugin, designed to act as an interface between PyMOL and several bioinformatics tools (for example: BLAST+, HMMER, Clustal Omega, MUSCLE, PSIPRED and MODELLER).
+- https://pymolwiki.org/index.php/Mcsalign  align ligand?
 
 > a website to draw electrostatic potential surface: https://server.poissonboltzmann.org. Seeing a blank web page suggests a bad network. 
 
@@ -1446,6 +1463,8 @@ MOZYME doing simulation for biomolecules...
 
 ## RESP
 
+One of the most used QC tools for molecular simulation is to fit charges. Here is the index for RESP and you can jump to other pages to see applications.
+
 RESP charge reference articles: see [Protein-ligand-simulation sob articles](Protein-ligand-simulation.md#QM-Reference)
 
 
@@ -1461,7 +1480,54 @@ According to [sob RESP charge](http://sobereva.com/531), DFT overestimates the p
 
 
 
-## Gaussian
+
+
+### Amber
+
+`prepgen` is able to restrain the total charge of a residue, but what's the difference between this and <u>restraints in RESP fitting</u>?
+
+simply see [Make topology (AmberTools)](Preparation-and-modeling.md#ambertools+tleap)
+
+
+
+As for manually add restraints to RESP fitting (for special purposes), AmberTools provide a two-step RESP fitting protocol
+
+https://ambermd.org/antechamber/dna.html  manually modify?
+
+https://jerkwin.github.io/2018/03/20/AMBER高级教程A1-建小分子与DNA体系(包括基本电荷计算)
+
+https://jerkwin.github.io/2017/09/20/GROMACS非标准残基教程2-芋螺毒素小肽实例
+
+too cumbersome/handful!
+
+
+
+### Multwfn
+
+http://sobereva.com/441  case 3.4, add charge constraint in RESP fitting
+
+http://bbs.keinsci.com/thread-35708-1-1.html
+
+http://sobereva.com/soft/Sobtop/#ex5  Hint：关于给聚合物用RESP原子电荷
+
+sobtop has not implemented such functionality. and for simply an unnatural amino acid, it can remove the extra atoms either? even though charges might be well fitted.
+
+
+
+
+
+
+
+### Other tools
+
+- [用Psi4计算RESP电荷](https://cloud.tencent.com/developer/article/1873725)
+- [RESP charges — OpenFF Recharge documentation](https://docs.openforcefield.org/projects/recharge/en/stable/users/resp.html) also principles
+- [Automatically calculate RESP charge using ORCA and Multiwfn - 知乎](https://zhuanlan.zhihu.com/p/475100962)
+- [Restrained ElectroStatic Potential (RESP) atomic charge fitting | McCarty Group Wiki](https://jamesmccarty.github.io/research-wiki/RESP) using GAMESS-US/ORCA
+
+
+
+## Gaussian Usage
 
 ### gjf input file
 
@@ -1492,7 +1558,7 @@ http://bbs.keinsci.com/thread-1464-1-1.html
 
 
 
-## Common errors
+### Common errors
 
 - [gaussian提示illegal instruction , illegal opcode错误](http://bbs.keinsci.com/thread-1331-1-1.html): CPU architechture not support, or too old. use old versions of Gaussian
 
@@ -1512,7 +1578,7 @@ http://bbs.keinsci.com/thread-1464-1-1.html
 
 ## Multiwfn
 
-see details in each topic...
+see details in each section...
 
 
 

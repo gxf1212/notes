@@ -561,7 +561,13 @@ see method 1 for detailed parameters
 
 #### QM-Reference
 
-- [使用GAFF力场参数化小分子的自动化工具](https://jerkwin.github.io/2019/07/14/%E8%AE%B8%E6%A5%A0-%E4%BD%BF%E7%94%A8GAFF%E5%8A%9B%E5%9C%BA%E5%8F%82%E6%95%B0%E5%8C%96%E5%B0%8F%E5%88%86%E5%AD%90%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/) but did not understood the script
+see [more details on RESP charge and residue modeling](MD-fundamentals.md#resp)
+
+- [使用GAFF力场参数化小分子的自动化工具](https://jerkwin.github.io/2019/07/14/%E8%AE%B8%E6%A5%A0-%E4%BD%BF%E7%94%A8GAFF%E5%8A%9B%E5%9C%BA%E5%8F%82%E6%95%B0%E5%8C%96%E5%B0%8F%E5%88%86%E5%AD%90%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/)
+  - [Basic Workshop - Hands on Session 4 (ambermd.org)](https://ambermd.org/tutorials/basic/tutorial4/index.htm)
+  - [Simulating a pharmaceutical compound using antechamber and the Generalized Amber Force Field](https://ambermd.org/tutorials/basic/tutorial4b/)
+  - [GitHub - tamaswells/GMX: GMX——tools](https://github.com/tamaswells/GMX)  sob gjf but not RESP2
+
 - [使用AmberTools+ACPYPE+Gaussian创建小分子GAFF力场的拓扑文件](https://jerkwin.github.io/2015/12/08/%E4%BD%BF%E7%94%A8AmberTools+ACPYPE+Gaussian%E5%88%9B%E5%BB%BA%E5%B0%8F%E5%88%86%E5%AD%90GAFF%E5%8A%9B%E5%9C%BA%E7%9A%84%E6%8B%93%E6%89%91%E6%96%87%E4%BB%B6/) with gui and script examples
 - user protocols
   - https://zhuanlan.zhihu.com/p/188735956 use gaussian and resp charge
@@ -1865,7 +1871,7 @@ You can follow two pathways:
 
 Read the notes above the Marvin JS panel before uploading.
 
-<img src="E:\GitHub-repo\notes\research\Protein-ligand-simulation.assets\charmm-gui-ligandrm-eg.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Protein-ligand-simulation.assets/charmm-gui-ligandrm-eg.png" style="zoom:50%;" />
 
 - <font color=red>All hydrogen and missing atoms should be explicitly added, including non-polar hydrogens.</font> or it reports error
 
@@ -2831,7 +2837,7 @@ Protein Ligand Complex Simulations with OPLS-AA
 
 - but that top NH2 and O are really single topology, not separated and dummy...
 
-  ![1692775708473](E:\GitHub-repo\notes\research\Protein-ligand-simulation.assets\AG.png)
+  ![1692775708473](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Protein-ligand-simulation.assets/AG.png)
 
 - 
 
@@ -2879,7 +2885,7 @@ combine the hybrid ligand with protein
 
 - single vs dual topology
 
-  ![Two-topology-generation-approaches-illustrated-by-an-example-of-a-methyl-to-ethyl_W640](E:\GitHub-repo\notes\research\Protein-ligand-simulation.assets\Two-topology-generation-approaches-illustrated-by-an-example-of-a-methyl-to-ethyl_W640.jpg)
+  ![Two-topology-generation-approaches-illustrated-by-an-example-of-a-methyl-to-ethyl_W640]https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Protein-ligand-simulation.assets/Two-topology-generation-approaches-illustrated-by-an-example-of-a-methyl-to-ethyl_W640.jpg)
 
 - CHARMM-GUI Relative Ligand Solvator outputs two separate ligands (with restraint). This is hybrid single-dual topology.
   I'm using dual topology
@@ -3203,7 +3209,7 @@ must make a complex
 
 <img src="https://cdn.rcsb.org/news/2016/ligand-interaction.png" alt="RCSB PDB News Image" style="zoom: 67%;" />
 
-![](E:\GitHub-repo\notes\research\Protein-ligand-simulation.assets\ngl.jpg)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Protein-ligand-simulation.assets/ngl.jpg)
 
 https://www.rcsb.org/3d-view
 

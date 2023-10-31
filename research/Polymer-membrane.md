@@ -115,6 +115,37 @@ Also, build membrane with CHARMM-GUI membrane builder
 
 # Polymer setup
 
+## Parametrization (CgenFF)
+
+
+
+
+
+
+
+## Parametrization (GAFF)
+
+
+
+
+
+
+
+Workflow:
+
+```mermaid
+graph TB
+read(read files) --> match(match substructure) --min_cover_set--> unit(identify units) --> conn(connection graph/bonds)
+conn --> define(define units) --> write(write mc files)
+conn --> assign(assign head/tail) --> write
+```
+
+
+
+
+
+
+
 
 
 

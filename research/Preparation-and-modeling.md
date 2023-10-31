@@ -141,19 +141,15 @@ or Protein-peptide
 
 
 
-
-
 ### Clus Pro 2.0
 
 https://cluspro.bu.edu/home.php
 
 
 
-
-
 ## Protein-NA docking
 
-
+HADDOCK
 
 
 
@@ -167,10 +163,6 @@ move from virtual screening...
 
 
 
-
-
-
-
 ## Other
 
 Allosite: provide a protein, 光预测别构在哪，不管正构在哪...
@@ -179,9 +171,419 @@ Allosite: provide a protein, 光预测别构在哪，不管正构在哪...
 
 
 
+# Modeling novel residues
+
+> this also applies to unit of a polymer
+
+## VMD+CHARMM
+
+summary
+
+- hybrid topology做对是一切的基础
+- 需更改mutator.tcl
+- 需手动设定在哪突变
+- 其他都是自动化的
+
+做topology的要求：
+
+### For novel residues
+
+- 一个原则是，尽量和parent residue接近。
+
+  Take the sulfonated TYR as example, the partial charges in the aromatic ring will change, but the atom types of your common part had better be the same as your parent residue. 
+
+  > correction: mainchain atom charges must be the same. That's one of the reasons why we mutate everything to Ala instead of Gly.
+
+- 另一个原则是，如果不想编辑pdb文件（两个态单独pdb都要生成），就需要写完整的IC，还要check sidechain conformation
+
+  只要有IC，完全可以不需要PDB文件。但是CHARMM-GUI和cgenff不会提供任何IC，只有从现存的rtf中找
+
+#### Search from similar topology
+
+1. in CHARMM FF folder (toppar/stream/prot). You may search and visualize them in [CHARMM-GUI PDB reader](https://www.charmm-gui.org/?doc=input/pdbreader) --- Non-standard amino acid / RNA substitution --- select image (the figure below). Search by "Parent amino acid" or smiles substructure. 
+
+   - `toppar_all36_prot_modify_res.str`: a lot of modified residues
+   - `toppar_all36_prot_c36m_d_aminoacids.str`: D amino acids
+     those files also include common patches.
+   - `toppar_all36_prot_na_combined.str`: phosphorylated residues or patches
+
+   Finally, find to residue entries in those files. **You should first use this if what you want is already in them.**
+
+2. in CHARMM-GUI LigandRM, search for similar residues. Upload that residue, and it may suggest similar parts from cgenff.rtf, etc (but may not include `prot_modify_res.str`). 
+
+3. If no exact match is found, we may combine groups from >=2 residues. Modularization in CHARMM FF is great! [Force field tutorial](https://www.ks.uiuc.edu/Training/Tutorials/science/forcefield-tutorial/forcefield.pdf) seems to provide an example of combining.
+
+It's acceptable to make the topology by hand (since examination is necessary), but FEP should be automatic.
+
+> Other ways to search for useful parts?
+>
+> read FF files, always gain so much...
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/AA-MD-FEP.assets/search-nonstandard-residue.png" alt="image-20221105205515004" style="zoom:50%;" />
+
+visit [this site](https://www.charmm-gui.org/?doc=input/pdbreader_uaa&jobid=6615771465&rowId=0&segid=PROA) for the above page!
+
+##### steps
+
+- find where you can graft topologies
+- copy atoms here
+  - adjust charges
+  - add bonds (and impr, etc.)
+  - add IC terms
+- try setup and run, so that you know what parameters are missing
+
+##### Notes during making tys.rtf
+
+> - the provided TYM.rtf is different from the provided TYS residue. It was built like general small molecules. Though Leili also mentioned this CHARMM-GUI workflow, I will try to avoid using LigandRM. 
+> - Doing that manually doesn't hurt because I have to inspect the files. But for small molecules, (automatically) doing some QM optimization is useful.
+> - SO4- charge: -1.005
+
+
+Both of the workflows get different atom types from normal TYR. I'll just keep most of the types aligned with standard TYR. 
+
+- It's strange in the provided .str that the atomtype of CB is like that of small molecules (CG321), whose bond parameters with CA (CT1) doesn't exist...as the partial charges are the same, I just change CG321 into CT2 (like normal residues), but it still won't work. **So all atom types (that could be aligned) in the side chain should also align with the parent standard residue.**
+- Maybe, we can transfer the IC terms of TYR to TYS (if cannot align?)...
+
+#### Modify from LigandRM
+
+I do not recommend building with LigandRM since it just treats our residue as a normal small molecule and atom names are not that of amino acids, unless you make an effort to replace the standard AA part (e.g. a small molecule attached to a standard AA) back, and add missing parameter terms...
+
+But one advantage for this: theoretically this can be automated (for many similar ligands).
+
+
+
+### Write a two-end patch
+
+This is mainly for strange peptides with noncanonical cyclizations, e.g. Glu and Lys, or even involving UAAs.
+
+写一个类似disulfide的patch的技术要领：
+
+- find a template for the new group (atom type, charge, etc.)
+- delete unnecessary atoms, but keep those aligned
+- add or redefine atoms
+- add necessary bonds (if pdb file is nicely built, no need to add angles/dihedrals)
+- add necessary parameters (copy from others)
+
+e.g. connecting lysine and glutamate
+
+```
+read rtf card append
+* residues and patches associated with reactive RNA FF
+*
+31  1
+! from ALY, stick to protein atom types. 
+! other refs: KHB/LA2, PRK
+
+!  HN-N                   
+!    HE1  HZ1   HG1
+!    |    /    /
+!  --CE--NZ   CG--
+!    |     \ /  \ 
+!    HE2    CD   HG2
+!           ||
+!           OE1
+PRES NHGC       ! Lysine NH2 linked to Glutamic acid CO(O-)
+DELETE ATOM 1HZ2
+DELETE ATOM 1HZ3
+DELETE ATOM 2OE2
+GROUP   
+ATOM 1CE  CT2    -0.02
+ATOM 1HE1 HA2     0.09
+ATOM 1HE2 HA2     0.09
+ATOM 1NZ  NH1    -0.47
+ATOM 1HZ1 H       0.31
+GROUP
+ATOM 2CD  C       0.51
+ATOM 2OE1 O      -0.51
+GROUP
+ATOM 2CG  CT2    -0.18  
+ATOM 2HG1 HA2     0.09 
+ATOM 2HG2 HA2     0.09  
+
+BOND 1NZ  2CD
+
+END
+
+ANGLES
+CT2A CT2  C      52.000   108.0000 ! from CT2  CT1  C
+
+DIHEDRALS
+C    CT2  CT2A  CT1     0.2000  3     0.00 ! From X    CT1  CT2  X  !temporary RJP
+CT2A CT2  C    O        1.4000  1     0.00 ! from O    C    CT1  CT2
+HA2  CT2A CT2  C        0.2000  3     0.00 ! Same as C CT CT3 HA3 ; kevo
+```
+
+and
+
+```tcl
+package require psfgen
+psfcontext reset
+
+topology top_all36_prot_1.rtf
+topology conh2.str
+pdbalias residue HIS HSE
+pdbalias atom ILE CD1 CD
+
+segment PEP {
+    pdb peptide_dh.pdb
+    first NTER
+    last CT2
+    }
+patch NHGC PEP:14 PEP:10
+# regenerate angles dihedrals
+coordpdb peptide_dh.pdb PEP
+guesscoord
+writepdb peptide.pdb
+writepsf peptide.psf
+package require solvate
+# ionize complex
+mol delete all
+mol load psf peptide.psf pdb peptide.pdb
+solvate peptide.psf peptide.pdb -t 12 -o system
+exit
+```
+
+## AmberTools+tleap
+
+[Amber Basic Tutorials - Tutorial A26 ](https://ambermd.org/tutorials/basic/tutorial5/index.php) or
+
+[Amber基础教程B5：模拟绿色荧光蛋白及构建修饰的氨基酸残基|Jerkwin](https://jerkwin.github.io/2018/01/07/Amber基础教程B5-模拟绿色荧光蛋白及构建修饰的氨基酸残基/)
+
+existing residue libraries:
+
+- [The AMBER ff15ipq-m Force Field Tutorial](http://ambermd.org/tutorials/advanced/tutorial36/index.php): a library of unnatural amino acids, especially beta amino acids
+- `mod_amino.lib`, very few
+- sth containing `ipq`: protonation states
+
+### e.g. 2d3i
+
+separate all parts, and model them
+
+```shell
+ambpdb -p *.top -c *.crd > ambpdb.pdb
+# manually check
+metalpdb2mol2.py -i al.pdb -o al.mol2 -c 3
+antechamber -fi pdb -fo mol2 -i co3.pdb -o co3.mol2 -at gaff -nc -2 -c bcc -pf y
+parmchk2 -i co3.mol2 -o co3.frcmod -f mol2
+```
+
+deprotonated TYR
+
+```shell
+# create a terminal-capped model
+antechamber -fi pdb -i 1.pdb -fo ac -o tym.ac -c bcc -at amber -nc -1
+# manually compare atom types with standard AA
+# .mc file: define mainchain atoms other than head/tail; omit cap atoms
+prepgen -i tym.ac -o tym.prepin -m tym.mc -rn TYM
+parmchk2 -i tym.prepin -f prepi -o frcmod.tym -a Y \
+         -p $AMBERHOME/dat/leap/parm/parm10.dat  # get parameters of protein residues
+grep -v "ATTN" frcmod.tym > frcmod1.tym # Strip out ATTN lines
+parmchk2 -i tym.prepin -f prepi -o frcmod2.tym  # other params from GAFF
+```
+
+> Note: `ATTN: need revision` lines might be problematic and removed (replaced by those from gaff). 
+>
+> `parm10.dat` works with Amber14SB. If you require other backgrounds, maybe use other parm files
+
+where `tym.mc` is defined as
+
+```
+HEAD_NAME N
+TAIL_NAME C
+MAIN_CHAIN CA
+OMIT_NAME C01
+OMIT_NAME C02
+OMIT_NAME H01
+OMIT_NAME H02
+OMIT_NAME H03
+OMIT_NAME H04
+OMIT_NAME H05
+OMIT_NAME H06
+PRE_HEAD_TYPE C
+POST_TAIL_TYPE N
+CHARGE -1.0
+```
+
+and `1.pdb` is extracted and termini are capped with (e.g.) CH<sub>3</sub> that is omitted above
+
+````pdb
+ATOM      1  N   TYR    88      -5.248  -1.000  25.800  1.00  0.00           N  
+ATOM      2  CA  TYR    88      -6.622  -0.750  26.213  1.00  0.00           C  
+ATOM      3  C   TYR    88      -6.654  -0.356  27.678  1.00  0.00           C  
+ATOM      4  O   TYR    88      -5.631  -0.404  28.358  1.00  0.00           O  
+ATOM      5  CB  TYR    88      -7.529  -1.969  25.966  1.00  0.00           C  
+ATOM      6  CG  TYR    88      -7.069  -3.286  26.553  1.00  0.00           C  
+ATOM      7  CD1 TYR    88      -6.085  -4.047  25.921  1.00  0.00           C  
+ATOM      8  CD2 TYR    88      -7.660  -3.804  27.711  1.00  0.00           C  
+ATOM      9  CE1 TYR    88      -5.703  -5.289  26.413  1.00  0.00           C  
+ATOM     10  CE2 TYR    88      -7.281  -5.053  28.216  1.00  0.00           C  
+ATOM     11  CZ  TYR    88      -6.302  -5.792  27.557  1.00  0.00           C  
+ATOM     12  OH  TYR    88      -5.941  -7.046  28.016  1.00  0.00           O  
+ATOM     13  C01 TYR    88      -7.976   0.107  28.317  1.00  0.00           C  
+ATOM     14  C02 TYR    88      -5.306  -1.790  24.562  1.00  0.00           C  
+ATOM     15  H01 TYR    88      -6.062  -2.568  24.661  1.00  0.00           H  
+ATOM     16  H02 TYR    88      -8.238   1.095  27.938  1.00  0.00           H  
+ATOM     17  H03 TYR    88      -7.861   0.152  29.400  1.00  0.00           H  
+ATOM     18  H04 TYR    88      -8.768  -0.599  28.066  1.00  0.00           H  
+ATOM     19  H05 TYR    88      -4.334  -2.248  24.376  1.00  0.00           H  
+ATOM     20  H06 TYR    88      -5.564  -1.138  23.727  1.00  0.00           H  
+ATOM     21  H   TYR    88      -4.628  -1.486  26.434  1.00  0.00           H  
+ATOM     22  HA  TYR    88      -7.033   0.094  25.657  1.00  0.00           H  
+ATOM     23  HB2 TYR    88      -8.525  -1.764  26.351  1.00  0.00           H  
+ATOM     24  HB3 TYR    88      -7.627  -2.100  24.888  1.00  0.00           H  
+ATOM     25  HD1 TYR    88      -5.602  -3.652  25.047  1.00  0.00           H  
+ATOM     26  HD2 TYR    88      -8.414  -3.230  28.229  1.00  0.00           H  
+ATOM     27  HE1 TYR    88      -4.931  -5.858  25.922  1.00  0.00           H  
+ATOM     28  HE2 TYR    88      -7.747  -5.444  29.107  1.00  0.00           H  
+TER   
+END
+````
+
+finally go to tleap
+
+```shell
+tleap
+source leaprc.protein.ff14SB
+source leaprc.gaff
+source leaprc.water.tip3p
+loadAmberPrep tym.prepin
+loadAmberParams frcmod2.tym
+loadAmberParams frcmod1.tym
+loadAmberParams frcmod.ions234lm_iod_tip3p
+loadAmberParams co3.frcmod
+protein = loadpdb fixed.pdb
+al = loadpdb al.pdb
+co3 = loadmol2 co3.mol2
+pro = combine {protein al co3}
+solvatebox pro TIP3PBOX 12.0
+charge pro
+# avoid alternating ions
+addIonsRand pro Cl- 30
+addIonsRand pro Na+ 34
+saveamberparm pro pro.prmtop pro.inpcrd
+quit
+```
+
+> !NOTE
+>
+> `frcmod1.tym`, which is load later, overwrites what are already in `frcmod2.tym`
+
+`tym.prepin`
+
+```
+   0    0    2
+
+This is a remark line
+molecule.res
+TYM   INT  0
+CORRECT     OMIT DU   BEG
+  0.0000
+   1  DUMM  DU    M    0  -1  -2     0.000      .0        .0      .00000
+   2  DUMM  DU    M    1   0  -1     1.449      .0        .0      .00000
+   3  DUMM  DU    M    2   1   0     1.523   111.21       .0      .00000
+   4  N     N     M    3   2   1     1.540   111.208  -180.000 -0.784327
+   5  H     H     E    4   3   2     1.011   127.816   -52.528  0.404780
+   6  CA    CX    M    4   3   2     1.456    19.360  -121.187  0.084200
+   7  CB    CT    3    6   4   3     1.539   111.990    39.865  0.000930
+   8  CG    CA    S    7   6   4     1.513   116.601    53.445 -0.316457
+   9  CD1   CA    B    8   7   6     1.395   120.882   -79.430 -0.043509
+  10  CE1   CA    B    9   8   7     1.389   121.402  -176.679 -0.322452
+  11  CZ    C     B   10   9   8     1.386   119.862    -0.177  0.579275
+  12  CE2   CA    B   11  10   9     1.392   120.129    -0.254 -0.322452
+  13  CD2   CA    S   12  11  10     1.400   119.556     0.351 -0.043509
+  14  HD2   HA    E   13  12  11     1.080   119.362  -179.517  0.072836
+  15  HE2   HA    E   12  11  10     1.079   120.147  -179.957  0.104346
+  16  OH    O     E   11  10   9     1.383   119.350   178.170 -0.763539
+  17  HE1   HA    E   10   9   8     1.077   120.511  -179.073  0.104346
+  18  HD1   HA    E    9   8   7     1.074   119.028     4.519  0.072836
+  19  HB2   HC    E    7   6   4     1.087   109.488   176.075  0.019836
+  20  HB3   HC    E    7   6   4     1.090   107.863   -67.968  0.019836
+  21  HA    H1    E    6   4   3     1.091   110.101   -80.299  0.039982
+  22  C     C     M    6   4   3     1.517   109.771   162.828  0.606549
+  23  O     O     E   22   6   4     1.229   120.422    -6.524 -0.513506
+
+
+LOOP
+  CD2   CG
+
+IMPROPER
+  CD2  CD1   CG   CB
+   CG  CE1  CD1  HD1
+   CZ  CD1  CE1  HE1
+  CE2  CE1   CZ   OH
+   CZ  CD2  CE2  HE2
+  CE2   CG  CD2  HD2
+   CA   +M    C    O
+
+DONE
+STOP
+```
+
+why three dummy atoms? You should keep them. See [AMBER Prep File Specification](https://ambermd.org/doc/prep.html)
+
+
+
+## Gromacs
+
+Here I mean generating gmx `.rtp` series files (and then [Adding a Residue to a gmx Force Field](#adding-a-residue-to-a-gmx-force-field)), or simply `.itp`/`.gro` file.
+
+### CHARMM
+
+
+
+### sobtop
+
+Sobtop mainly works for Amber FF, RESP(2) charge, Gromacs MD
+
+
+
+### Amber
+
+- [A Jerkwin example 芋螺毒素小肽实例](https://jerkwin.github.io/2017/09/20/GROMACS%E9%9D%9E%E6%A0%87%E5%87%86%E6%AE%8B%E5%9F%BA%E6%95%99%E7%A8%8B2-%E8%8A%8B%E8%9E%BA%E6%AF%92%E7%B4%A0%E5%B0%8F%E8%82%BD%E5%AE%9E%E4%BE%8B/)  antechamber bcc+acpype, manually edit
+- [GROMOS力场自定义非标准残基的方式 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/87402839)  ATB, GROMOS, Multiwfn拟合RESP电荷
+
+
+
+## Adding a Residue to a gmx Force Field
+
+### Gromacs ff folder
+
+(downloaded from charmm)
+
+```shell
+sudo cp -r charmm36-jul2021.ff /your/working/directory
+```
+
+> we may not copy into `/usr/share/gromacs/top` because we may not have permission. But gmx can recognize the folder in your cwd or `GMXLIB`.
+
+and modify files related to that residue
+
+> on provided files
+>
+> - `residuetype.dat`: only one line added
+>
+> senior sister: keep the backbone charge distribution of Y-SO3 identical to that of Y, and spare the extra charge in the side chain. I'll use that.
+
+> - `.itp` file: gromacs topology file
+> - `.rtp` file: residue type. its format looks like `.rtf` file in NAMD, defining one and another molecules.
+> - `.atp` file: atom type. looks like `xxx.inp` in NAMD, defining atom types and masses.
+> - `.r2b` file: Residue to rtp building block table. a map.
+> - `.arn` file: atom renaming specification
+> - `.hdb` file:
+
+### Adding a residue
+
+[reference](https://manual.gromacs.org/current/how-to/topology.html#adding-a-residue-to-a-force-field)
+
+- put `residuetype.dat` in both the cwd and forcefield.ff folder
+
+> maybe I'll handcraft one later.
+
 # System setup
 
 also refer to [related programming](Programming-for-MD.md#modeling-and-analysis)
+
+My opinion (23.10.17): rtp文件其实并不难写，和rtf的复杂度几乎相同，扩展参数的复杂度和prm也基本相同。问题是gmx建模的可扩展性极差，对于非标准成分频繁更改力场文件令人难以接受，所以也没人开发自动转化为rtp等格式、自动加入gmx格式力场的程序。其实vmd（加水）和tleap（序号、插入），`sobtop`好像也不能随机塞东西，包括`packmol`用法很迷它们弊端也很明显，竟然显示出`gmx insert-molecules`的不可替代性，所以对非聚合物体系（不是聚合物、+非标准残基的蛋白），都暂且忍受了。对特殊聚合物，往往需要用vmd/tleap建模再转过去。对于偶尔一用的residue，还是勉强添加到gmx中，当然要先看看有没有（如之前那个TYM）。
 
 ## CHARMM-GUI
 
