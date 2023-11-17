@@ -646,7 +646,11 @@ or my script (which was meant to assign segnames):
 - mainly works for CHARMM series force field.
   - There are limited Amber/OPLS-AA files, and "use at your own risk". converting from other tools might be easier.
   - gmx and charmm are using different potential energy forms...add a minus to epsilon!
+  
 - solvate: cannot rotate (despite this option exists) and add water isotropically (unless do this manually). Have to use a HUGE box, otherwise the protein interacts with itself...
+
+  > `vmd solvate -rotate` 只能手动确定哪个边最长，然后补其他的。。
+
 - for large systems, it takes untolerably long to convert to gmx via parmed since every water is to be explicitly written...
 
 
@@ -686,6 +690,8 @@ For residues that are identical except the coordinates (e.g., the water molecule
 - When tleap encounters multiple definitions for the same atom type, it uses the last definition it encounters.
 
 - 最后一个residue有OXT原子就没事，如果后面还有水就报错（确定不是`pdb2gmx`？）
+
+- `iso`就可以用1nm的边距，这样镜像间绝对至少有2nm的距离。
 
 ### Disadvantages
 

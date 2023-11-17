@@ -144,8 +144,11 @@ examples
   sed -i "s/init-lambda-state.*/init-lambda-state = $jj/g" ../mdps/md_$jj.mdp
   ```
 
-- 
-
+- `sed -i "s/#SBATCH -p quick/#SBATCH -p ${queue}/g" fe*.slurm.sh`
+  
+  - `"`: replace with varible value
+  - `'`: keep ${string}
+  
 - range of action
 
   ```shell
@@ -192,6 +195,28 @@ examples
   After running one of these commands, the modified content will be written to `output_file`. **If you want to edit the file in-place, you can use the `-i` option with `sed`**
 
 - 
+
+### alternative
+
+If you don't want to or can't edit a file with varying filenames every time, you just create one. Variable values will be replaced.
+
+```shell
+cat > tleap.in << EOF
+source leaprc.protein.ff14SB 
+source leaprc.lipid21
+source leaprc.water.tip3p
+source leaprc.gaff
+loadAmberPrep ${f}.prepi
+loadamberparams ${f}.prepi.frcmod
+sys = loadpdb system.pdb
+charge sys
+addIonsRand sys Cl- 13
+addIonsRand sys Na+ 13
+saveamberparm sys system.prmtop system.inpcrd 
+quit
+EOF
+tleap -f tleap.in > tleap.log
+```
 
 
 
@@ -265,10 +290,13 @@ examples
 
    https://blog.csdn.net/m0_38039437/article/details/100160042
 
+### function
 
-### arguments
+[Bash函数 - Bash Shell教程 (yiibai.com)](https://www.yiibai.com/bash/bash-functions.html)
 
-1. .sh file has arguments: https://www.runoob.com/linux/linux-shell-passing-arguments.html
+### arguments of a script
+
+1. `.sh` file has arguments: https://www.runoob.com/linux/linux-shell-passing-arguments.html
 
 2. 默认参数(变量默认值) 比较low的方式
 
@@ -588,6 +616,28 @@ puts "    $count1, $count2, $count3, and $count4"
 
 - `assert`: https://www.tutorialsteacher.com/python/python-assert
   应该assert还是try except呢？后处理内容比较多、不一定退出程序时，只能用except
+  
+- for a directory
+
+  ```
+  - utils.py
+  - folder
+    - my.py
+  ```
+
+  In `my.py`, you can import utils.py using the following code. If you don't want to convert your directory structure into a package, you can modify the import statement to use an absolute import:
+
+  ```python
+  import sys
+  import os
+  sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+  import utils
+  ```
+
+  
+
+  
+  
 
 
 ## operating files and cmd
@@ -713,7 +763,7 @@ ax.tick_params(width=5,...)
     import os
     import matplotlib
     font_directory = os.path.join(matplotlib.get_data_path(), 'fonts', 'ttf')  # ~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf
-    os.system("copy *.ttf *.TTF "+font_directory)
+    os.system("copy *.ttf *.TTF "+font_directory)  # cp for Unix
     cache_dir = matplotlib.get_cachedir()
     os.system("rm -r "+cache_dir)  # /home/gxf1212/.cache/matplotlib
     # re-import matplotlib
@@ -810,7 +860,17 @@ ax.tick_params(width=5,...)
 
 - 
 
+### coloring
 
+- color bars according to value gradient:
+
+  ```python
+  cmap = plt.cm.get_cmap('gist_rainbow')  # viridis, Set3, tab20b, Paired, winter
+  norm = plt.Normalize(min(y), max(y))
+  plt.bar(x, y, color=cmap(norm(y)), alpha=0.5)
+  ```
+
+- 
 
 ### seaborn
 

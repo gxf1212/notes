@@ -48,8 +48,10 @@ Linux desktop的优势：可以直接为cluster做测试
 - 运行qsub命令时，报错: `script is written in DOS/Windows text format`。 解决办法：输入 
 
   ```shell
-dos2unix <pbs-script-file>
+  dos2unix <pbs-script-file>
   ```
+
+  https://sourceforge.net/projects/dos2unix/
 
 - emm
 
@@ -105,6 +107,10 @@ dos2unix <pbs-script-file>
   https://github.com/the-tcpdump-group/libpcap
 
   https://askubuntu.com/questions/537170/no-such-file-or-directory-net-bpf-h
+  
+- 固态硬盘不需要整理碎片
+
+- Deep-Learning Computing Unit (DCU)
 
 
 
@@ -2996,8 +3002,6 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 12. TTC字体是TrueType字体集成文件(. TTC文件)，可和ttf放一起
 
-13. （联想）win11护眼模式：文件夹中右键--护眼卫士
-
 14. In the Command Prompt window, press and hold the F7 key (no Fn) to view the history of Command Prompt. Then it will open the list of commands you currently typed in.
 
     https://www.alphr.com/view-command-history-command-prompt/
@@ -3027,13 +3031,23 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 22. 
 
-23. 联想拯救者电源键红点是进入了野兽模式。联想拯救者有三种模式：
+22. 
 
-    - 电源红色是野兽模式，在大型游戏时开.
-    - 白色是均衡模式平常用的.
-    - 蓝色是静音模式，办公时候使用。
+## Lenovo
 
-    按住键盘Fn+Q能快速切换模式。
+- [联想电脑管家最新功能—桌面助手 - bilibili](https://www.bilibili.com/video/BV1Ke411V74Y/)
+
+- 联想拯救者电源键红点是进入了野兽模式。联想拯救者有三种模式：
+
+  - 电源红色是野兽模式，在大型游戏时开.
+  - 白色是均衡模式平常用的.
+  - 蓝色是静音模式，办公时候使用。
+
+  按住键盘Fn+Q能快速切换模式。
+
+- 
+
+- （联想）win11护眼模式：文件夹中右键--护眼卫士
 
 ## WSL
 

@@ -837,7 +837,14 @@ https://blog.csdn.net/zhayushui/article/details/80433768
     conda update -n base conda
     ```
 
-11. 
+11. If you'd prefer that conda's base environment not be activated on startup, set the auto_activate_base parameter to false: 
+
+    ```shell
+    conda config --set auto_activate_base false
+    ```
+
+    
+
 
 #### Environments
 

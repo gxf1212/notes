@@ -789,7 +789,13 @@ https://www.cryst.bbk.ac.uk/pps97/course/index.html Section 7: molecular forces
 
 ### Unit
 
-- gmx: https://manual.gromacs.org/documentation/current/reference-manual/topologies/topology-file-formats.html
+- gmx
+  - [File formats](https://manual.gromacs.org/documentation/current/reference-manual/topologies/topology-file-formats.html)
+  - [Definitions and Units](https://manual.gromacs.org/current/reference-manual/definitions.html#reduced-units)
+
+- NAMD
+  - [Potential energy functions (NAMD 2.14 User's Guide) (uiuc.edu)](https://www.ks.uiuc.edu/Research/namd/2.14/ug/node24.html#SECTION00081200000000000000)
+
 - 
 
 #### LJ parameters
@@ -812,6 +818,8 @@ vdW parameters
 | CHARMM .rtf/psf   | R<sub>min</sub> | Å    | kcal/mol           |
 |                   |                 |      |                    |
 |                   |                 |      |                    |
+
+in gmx,   $\varepsilon$ should be positive, while in NAMD `.rtf` files they are negative! but parmed does not do this conversion...
 
 
 
@@ -1105,6 +1113,16 @@ vdw and elec, common cutoff/switchdist
 
 
 `mdout.mdp`: **all** arguments actually used (default value if not specified). help with debugging....
+
+
+
+### Other
+
+顺带一提，对生物分子的模拟，我一般建议让程序在模拟过程中就一直对生物分子消除平动转动，对于GROMACS跑蛋白质来说就是设comm-grps = protein和comm-mode = angular，这样就避免了生物分子中途跑出盒子的问题。
+
+http://sobereva.com/627
+
+https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp-comm-mode
 
 
 

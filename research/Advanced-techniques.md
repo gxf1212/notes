@@ -12,6 +12,14 @@ In umbrella sampling, you specify the initial value of the reaction coordinate f
 
 
 
+https://gromacs.bioexcel.eu/t/protein-ligand-umbrella-sampling-binding-affinity-not-matching-experimental-values/5740
+
+Reducing protein-ligand binding to a one-dimensional reaction coordinate (and as you have, only one spatial dimension of a one-dimensional reaction coordinate) is almost certainly inappropriate. And I’ve seen some recent evidence that any one-dimensional umbrella sampling may not even be reproducible, for a variety of reasons. Ligand binding to proteins is complex (see, e.g. https://doi.org/10.1038/s41467-022-33104-3) and simply trying to compute a binding free energy from a single, chosen path may never be right
+
+
+
+
+
 ## Tutorials
 
 [AMBER高级教程A17：伞形采样实例--计算丙氨酸二肽Phi/Psi旋转过程的平均力势PMF|Jerkwin](https://jerkwin.github.io/2018/04/26/AMBER高级教程A17-伞形采样实例-计算丙氨酸二肽Phi-Psi旋转过程的平均力势PMF/)
@@ -50,8 +58,6 @@ Pulling out of membrane
 
 
 ## PMF/US
-
-
 
 
 
