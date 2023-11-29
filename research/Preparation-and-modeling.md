@@ -629,17 +629,19 @@ Called by other tools like membrane builder
 >
 > For a modeling example, see [Protein-Ligand setup](Protein-ligand-simulation.md#setup-with-vmd)
 
-VMD scripting is highly flexible and provides many possibilities.
+- VMD scripting is highly flexible and provides many possibilities.
 
-The only default is that each chain needs to be manually separated (which is just `gmx pdb2gmx` good at). To split chains, refer to:
+  The only default is that each chain needs to be manually separated (which is just `gmx pdb2gmx` good at). To split chains, refer to:
 
-[mkrun/Gromacs/fep/mkpy_split_chains.py at master · skblnw/mkrun · GitHub](https://github.com/skblnw/mkrun/blob/master/Gromacs/fep/mkpy_split_chains.py)
+  [mkrun/Gromacs/fep/mkpy_split_chains.py at master · skblnw/mkrun · GitHub](https://github.com/skblnw/mkrun/blob/master/Gromacs/fep/mkpy_split_chains.py)
 
-or my script (which was meant to assign segnames):
+  or my script (which was meant to assign segnames):
 
-```python
+  ```python
+  
+  ```
 
-```
+- vmd可以读已有的psf和pdb，也是gmx和tleap不可以的
 
 ### Disadvantages
 
@@ -650,6 +652,8 @@ or my script (which was meant to assign segnames):
 - solvate: cannot rotate (despite this option exists) and add water isotropically (unless do this manually). Have to use a HUGE box, otherwise the protein interacts with itself...
 
   > `vmd solvate -rotate` 只能手动确定哪个边最长，然后补其他的。。
+
+  > tleap, `pdb2gmx`, GUI 等都可以达到类似`iso`的效果吧
 
 - for large systems, it takes untolerably long to convert to gmx via parmed since every water is to be explicitly written...
 

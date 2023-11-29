@@ -56,8 +56,14 @@ pbc wrap segid/residue--align，蛋白还是有些不在水里？在吧，只是
 wrap之后还是得那么算呀，只是不用循环两次了
 xtc算的还是小一点点
 理论上是用vmd存的算更准
-高旭帆   wrap之后还是得那么算呀，只是不用循环两次了
+wrap之后还是得那么算呀，只是不用循环两次了
 vmd轨迹基本是对的，就是小心离子跨过pbc
+
+
+
+不知道为什么pbc wrap -compound residue才能让蛋白始终在中间，segid就只有水盒子的一个角在接触蛋白
+
+还要吐槽vmd：存轨迹为xtc实现不了，先trr再转xtc
 
 
 

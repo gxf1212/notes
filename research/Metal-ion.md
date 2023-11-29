@@ -371,7 +371,9 @@ mv ${name}.* ${path}
 # after gro, -1 4: DRIH. -1 3: m2S. now, default: mS metho
 ```
 
-
+>
+> All bonded parameters are determined by mSeminario method
+> 几何（平衡键长等）就直接从优化的构象而来
 
 ### Insert into water from tleap for gmx
 
