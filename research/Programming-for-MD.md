@@ -872,6 +872,12 @@ ax.tick_params(width=5,...)
 
 - 
 
+### complex plots
+
+[用python的Matplotlib库画多序列条形图和堆叠条形图](https://blog.csdn.net/weixin_43799652/article/details/101320976)
+
+
+
 ### seaborn
 
 - [Python 绘制列表数据的小提琴图Violin Plot](https://zhuanlan.zhihu.com/p/596479904)  better than `plt.violinplot`
@@ -886,9 +892,14 @@ ax.tick_params(width=5,...)
 
   ```shell
   df.iloc[[0, 1], [1, 2]]
+  # select column with index position 3
+  df.iloc[:, 3]
   ```
 
 - 
+  `df[df['A'].isin([3, 6])]`
+  
+
 
 ## building softwares
 
@@ -1167,6 +1178,17 @@ Result
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/draw-charge.jpg" style="zoom: 50%;" />
 
+[Partial charge visualization with RDKit](https://iwatobipen.wordpress.com/2020/01/08/partial-charge-visualization-with-rdkit-rdkit-quantumchemistry-psikit/) or [QM based partial charge calculation and visualization (github.com)](https://gist.github.com/iwatobipen/b49fb916d07ee871f00441690de77d87#file-parchai_charge_viz-ipynb)
+
+get charge in rdkit:
+
+```python
+_, res = rdEHTTools.RunMol(mh)
+static_chgs = res.GetAtomicCharges()[:atorvastatin.GetNumAtoms()]
+```
+
+![img](Programming-for-MD.assets\rdkit_charge.png)
+
 #### Draw ligand libraries
 
 a series of ligands with similar backbone, for screening or FEP. Align them 2D first.
@@ -1232,6 +1254,18 @@ fig.savefig(buf)
 buf.seek(0)
 Image.open(buf).show()
 ```
+
+### Labeling in figures
+
+[How to show atom numbers in a RdKit molecule (or how to label atoms in a rdkit molecule) · ChemicBook](https://chemicbook.com/2021/03/01/how-to-show-atom-numbers-in-rdkit-molecule.html)
+
+```python
+atom.SetProp("molAtomMapNumber", str(atom.GetIdx()+1))
+atom.SetProp("atomLabel", f"a{i+1}")  # the whole label
+atom.SetProp("atomNote", "Nitrogen")
+```
+
+
 
 
 

@@ -88,6 +88,16 @@ maybe a new .md file in the future
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/halogen-bond.png" alt="anomeric-carbon" width=50% />
 
+
+
+激酶作用机理
+
+![1701698699581](E:\GitHub-repo\notes\research\academic-notes.asssets\kinase-mechanism.png)
+
+
+
+
+
 ## Common Biomolecules
 
 just basic properties

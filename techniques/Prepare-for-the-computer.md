@@ -1035,6 +1035,8 @@ conda install -c bioconda gromacs
 
 ## GROMACS installation on a workstation
 
+2023.8 installation on the new Fedora system and 28: https://www.wolai.com/8Z6ZChWebaTEQfNg7BBjcn
+
 ### prepare
 
   Follow this order:

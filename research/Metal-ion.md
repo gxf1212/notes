@@ -38,6 +38,56 @@ why does Al<sup>3+</sup> inhibit kinase activity by replacing Mg<sup>2+</sup>? A
 
 
 
+# Binding site prediction
+
+- structure-based
+
+  - template-based
+    - MIB2 (https://doi.org/10.1093/bioinformatics/btac534): no Al3+
+    - IonCom: https://zhanggroup.org/IonCom/ no Al3+, 2016
+    - they only predict the binding residues?
+    - Inferring metal binding sites in flexible regions of proteins https://onlinelibrary.wiley.com/doi/10.1002/prot.26085
+
+  - template-free
+    - BioMetAll: Identifying Metal-Binding Sites in Proteins from Backbone Preorganization
+
+  - learning
+
+    - Metal3D https://www.nature.com/articles/s41467-023-37870-6
+
+    - MetalNet: Co-evolution-based prediction, Predicting metal-binding residue pairs
+
+    - MetalSiteHunter https://www.sciencedirect.com/science/article/pii/S266638642200340X
+
+- 
+
+- sequence-based
+
+  - mebipred: https://academic.oup.com/bioinformatics/article/38/14/3532/6594112
+
+  - LMetalSite https://pubmed.ncbi.nlm.nih.gov/36274238/
+
+- other
+
+  - [A Novel Prediction Method for Metal-Ion Binding Sites in Protein Sequence Based on Ensemble Learning | Proceedings of the 2022 5th International Conference on Algorithms, Computing and Artificial Intelligence (acm.org)](https://dl.acm.org/doi/10.1145/3579654.3579694) new, unusable
+
+  - [Metal binding prediction using coevolution](https://github.com/wangchulab/MetalNet) new, unusable
+
+  - [MIonSite: an accurate metal ion binding site predictor (github.com)](https://github.com/LiangQiaoGu/MIonSite): no Al3+, not updated since 2018
+
+  - AlphaFill https://www.nature.com/articles/s41592-022-01685-y an algorithm that uses sequence and structure similarity to 'transplant' such 'missing' small molecules and ions from experimentally determined structures to predicted protein models.
+
+
+
+note
+
+- https://mohamad-lab.ai/metalsitehunter/ no Al3+
+- https://github.com/biomed-AI/LMetalSite or http://bio-web1.nscc-gz.cn/app/lmetalsite: no Al3+. An alignment-free sequence-based predictor for binding sites of the four most frequently seen metal ions (Zn2+, Ca2+, Mg2+ and Mn2+).
+
+
+
+
+
 # Fundamental usage
 
 
@@ -371,9 +421,11 @@ mv ${name}.* ${path}
 # after gro, -1 4: DRIH. -1 3: m2S. now, default: mS metho
 ```
 
+>default: All bonded parameters are determined by mSeminario method
 >
-> All bonded parameters are determined by mSeminario method
-> 几何（平衡键长等）就直接从优化的构象而来
+>几何（平衡键长等）就直接从优化的构象而来
+>
+>for AlOH: 水分子键角的k太小。。DRIH和m2S更小。。DRIH还有负的。。
 
 ### Insert into water from tleap for gmx
 
@@ -747,10 +799,6 @@ https://docs.mdanalysis.org/stable/documentation_pages/analysis/rdf.html
 https://amberhub.chpc.utah.edu/radial-rdf/
 
 
-
-# Binding site prediction
-
-a few notes on the literatures. from yuque
 
 
 

@@ -324,6 +324,8 @@ sudo snap install termius-app
 
 [https://slurm.schedmd.com/](https://slurm.schedmd.com/): official
 
+[Useful Slurm commands (curc.readthedocs.io)](https://curc.readthedocs.io/en/latest/running-jobs/slurm-commands.html)
+
 
 
 - [Job Priority | Princeton Research Computing](https://researchcomputing.princeton.edu/support/knowledge-base/job-priority) 
@@ -341,8 +343,19 @@ sudo snap install termius-app
   spiro -u user-id
   ```
 
-- 
+- scontrol
   
+  <img src="E:\GitHub-repo\notes\techniques\images\scontrol1.png" alt="1701699867598" style="zoom:80%;" />
+  
+  <img src="E:\GitHub-repo\notes\techniques\images\scontrol2.png" alt="1701699219869" style="zoom:80%;" />
+  
+  <img src="E:\GitHub-repo\notes\techniques\images\scontrol3.png" alt="1701699968758" style="zoom:80%;" />
+
+
+
+
+
+
 
 ##### example
 
@@ -1321,6 +1334,39 @@ For ACS papers, copy from here
 
 pdf文件标题粘贴到微信对话框就失去换行成为一整行了
 
+## ChatGPT etc.
+
+- OpenAI's services are not available in your country. (error=unsupported_country)
+  解决方法：全局模式
+
+- [ChatGPT 常见错误原因及解决方案：报错、回答不完整、网络错误等](https://blog.csdn.net/marin1993/article/details/128219198)。搞不定就换节点，刷新
+
+- Edge dev: https://www.microsoftedgeinsider.com/zh-tw/download
+
+- https://platform.openai.com/ get your API key
+
+- 只需要在 Chrome 浏览器上下载安装[ `Bing Chained` ](https://chrome.google.com/webstore/detail/bing-unchained-use-new-bi/laldfnbbeocphnilnofhedhcjcnchbld/related)这个插件，再访问 [www.bing.com](https://link.juejin.cn/?target=http%3A%2F%2Fwww.bing.com) 就会出现 New Bing AI 入口
+
+- Bing AI for Firefox: [Get this Extension for 🦊 Firefox (en-US) (mozilla.org)](https://addons.mozilla.org/en-US/firefox/addon/bing-ai-for-firefox/)
+
+- https://github.com/xcanwin/KeepChatGPT 
+
+  https://mp.weixin.qq.com/s/ngOXSb296BLf74usmc9kqw
+
+- a domestic new choice: [天工AI搜索 — 知识从这里开始 (tiangong.cn)](https://search.tiangong.cn/)，除了百度、讯飞、阿里等
+
+- 
+
+
+
+usage
+
+[升级篇：超详细ChatGPT(GPT 4.0)论文润色指南+最全提示词——持续更新 - 简书 (jianshu.com)](https://www.jianshu.com/p/f228222f623b)
+
+[ChatGPT Prompt 最佳指南一：写清晰的说明 (selfboot.cn)](https://selfboot.cn/2023/06/10/gpt4_prompt_clear/)
+
+[Prompt engineering - OpenAI API](https://platform.openai.com/docs/guides/prompt-engineering/strategy-write-clear-instructions)
+
 
 
 ## Other Tools
@@ -1367,27 +1413,6 @@ installation: see [Linux-fundamental](/techniques/Linux-fundamental?id=other-sof
    - cannot 'open the folder' (redirect to the browser with wrong path...)
 
 new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
-
-### ChatGPT etc.
-
-- OpenAI's services are not available in your country. (error=unsupported_country)
-  解决方法：全局模式
-  
-- [ChatGPT 常见错误原因及解决方案：报错、回答不完整、网络错误等](https://blog.csdn.net/marin1993/article/details/128219198)。搞不定就换节点，刷新
-
-- Edge dev: https://www.microsoftedgeinsider.com/zh-tw/download
-
-- https://platform.openai.com/ get your API key
-
-- 只需要在 Chrome 浏览器上下载安装[ `Bing Chained` ](https://chrome.google.com/webstore/detail/bing-unchained-use-new-bi/laldfnbbeocphnilnofhedhcjcnchbld/related)这个插件，再访问 [www.bing.com](https://link.juejin.cn/?target=http%3A%2F%2Fwww.bing.com) 就会出现 New Bing AI 入口
-
-- Bing AI for Firefox: [Get this Extension for 🦊 Firefox (en-US) (mozilla.org)](https://addons.mozilla.org/en-US/firefox/addon/bing-ai-for-firefox/)
-
-- https://github.com/xcanwin/KeepChatGPT 
-
-  https://mp.weixin.qq.com/s/ngOXSb296BLf74usmc9kqw
-  
-- a domestic new choice: [天工AI搜索 — 知识从这里开始 (tiangong.cn)](https://search.tiangong.cn/)，除了百度、讯飞、阿里等
 
 - 
 

@@ -1401,6 +1401,18 @@ usually these are theme-specific.
 
 Using autodoc extension. 
 
+| website   | code path (`sys.path.insert`) | intra-package import |
+| --------- | ----------------------------- | -------------------- |
+| rdkit     | $HOME/rdkit                   | absolute             |
+| deepchem  | $HOME/deepchem                | absolute             |
+| alchemlyb | $HOME/src/alchemlyb           | relative             |
+| pmx       | $HOME/src/pmx                 | relative             |
+| lomap     | $HOME/lomap                   | relative             |
+| biometall | $HOME/biometall               | relative             |
+|           |                               | relative             |
+|           |                               | relative             |
+
+
 ### Steps
 
 [a full guide](https://www.slideshare.net/shimizukawa/sphinx-autodoc-automated-api-documentation-europython-2015-in-bilbao)

@@ -112,6 +112,8 @@ Linux desktop的优势：可以直接为cluster做测试
 
 - Deep-Learning Computing Unit (DCU)
 
+- 你们电脑沾水了一定要拆开晒干啊，前两周发热没注意想着清下灰就行，今天跑去看，说是受潮了然后主板芯片烧了
+
 
 
 # Operations
@@ -3000,36 +3002,40 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 11. [计算机桌面图标不见了，怎么恢复](https://consumer.huawei.com/cn/support/content/zh-cn00695687/)
 
-12. TTC字体是TrueType字体集成文件(. TTC文件)，可和ttf放一起
+12. TTC字体是TrueType字体集成文件(.TTC文件)，可和ttf放一起
 
-14. In the Command Prompt window, press and hold the F7 key (no Fn) to view the history of Command Prompt. Then it will open the list of commands you currently typed in.
+13. In the Command Prompt window, press and hold the F7 key (no Fn) to view the history of Command Prompt. Then it will open the list of commands you currently typed in.
 
     https://www.alphr.com/view-command-history-command-prompt/
 
     but only this cmd...
 
-15. 选择任务栏上的" 任务视图"，然后选择" 新建桌面"，然后打开所需的应用。 若要在虚拟桌面之间移动应用，请选择" 任务视图"，然后将所需的应用从一个桌面拖到另一个桌面。 或通过将应用拖动到新桌面来创建另一个虚拟桌面。
+14. 选择任务栏上的" 任务视图"，然后选择" 新建桌面"，然后打开所需的应用。 若要在虚拟桌面之间移动应用，请选择" 任务视图"，然后将所需的应用从一个桌面拖到另一个桌面。 或通过将应用拖动到新桌面来创建另一个虚拟桌面。
 
-16. https://home.csulb.edu/~murdock/tree.html
+15. https://home.csulb.edu/~murdock/tree.html
 
-17. 今日弄完VPN，普通网络都上不了。解决方法：
+16. 今日弄完VPN，普通网络都上不了。解决方法：
 
     ![restore-network](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/restore-network.png)
 
-18. [切换盘符：使用cmd命令行 cd e: 无法切换到E盘-CSDN博客](https://blog.csdn.net/u011288271/article/details/52781342)
+17. [切换盘符：使用cmd命令行 cd e: 无法切换到E盘-CSDN博客](https://blog.csdn.net/u011288271/article/details/52781342)
 
     切换盘符和切换路径是分离的。想要切盘符 直接使用命令 `e:` 或者 `cd /d e:` 即可
 
-19. [将 Windows 电脑用作移动热点 - Microsoft 支持](https://support.microsoft.com/zh-cn/windows/将-windows-电脑用作移动热点-c89b0fad-72d5-41e8-f7ea-406ad9036b85)  not useful for 188...
+18. [将 Windows 电脑用作移动热点 - Microsoft 支持](https://support.microsoft.com/zh-cn/windows/将-windows-电脑用作移动热点-c89b0fad-72d5-41e8-f7ea-406ad9036b85)  not useful for 188...
 
-20. windows11删除文件需要管理员权限怎么办？删完里面的东西，包括隐藏文件。重启后再删文件夹
+19. windows11删除文件需要管理员权限怎么办？删完里面的东西，包括隐藏文件。重启后再删文件夹
 
     不重启：可能需要管理员模式打开cmd去删？
 
-21. 按下键盘“Win+Ctrl+D”可以一键生成一个新桌面。生成后，再按下“Win+Ctrl+方向键”可以快速切换这两个桌面。
+20. 按下键盘“Win+Ctrl+D”可以一键生成一个新桌面。生成后，再按下“Win+Ctrl+方向键”可以快速切换这两个桌面。
     why not work in ToDesk?
 
-22. 
+21. 浏览器默认应用
+
+    ![](E:\GitHub-repo\notes\techniques\images\chrome.png)
+
+    点击链接用浏览器打开：下面的https
 
 22. 
 

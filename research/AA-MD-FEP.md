@@ -1160,7 +1160,9 @@ more windows doesn't solve the second law of thermodynamics problem
 ### notes
 
 - FEP模拟中会使用多个window来计算自由能变化，有时会出现某些window无法运行的情况。
+
 - 可以尝试重新运行出现问题的window，或者修改随机数等参数，也可以考虑减少窗口数量。
+
 - 大量窗口的FEP模拟容易出现问题，可以尝试采用更少的窗口，例如22个窗口。
 
 - window多了，可能用上一个window作为输入应该可以大概率避免这个情况，这可能就是kevin之前提到的，在某个lambda它就是姿势不舒服或者什么其他问题
@@ -1170,9 +1172,24 @@ more windows doesn't solve the second law of thermodynamics problem
 - 非5和0的lambda引入以后，再四舍五入以后出现大的偏差。纯猜测，没证据
 
 - GROMACS软件在进行计算时会进行近似处理，例如离散化等，这也可能会导致计算出现问题。
+
 - pmx也可以指定fep怎么mapping?
+
 - "state B has non-zero total charge": 没办法
+
 - Some parameters for bonded interaction involving perturbed atoms are specified explicitly in state A, but not B - copying A to B
+
+- maybe
+
+  ```
+  WARNING: Some of these results violate the Second Law of Thermodynamics:
+           This is can be the result of severe undersampling, or (more likely)
+           there is something wrong with the simulations.
+  ```
+
+  no harm?
+
+- 
 
 
 

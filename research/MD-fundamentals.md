@@ -25,17 +25,21 @@ https://manual.gromacs.org/documentation/current/onlinehelp/gmx-editconf.html#gm
 
 ### PBC processing
 
+#### gmx
+
+[gmx trjconv - GROMACS documentation](https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html)
+
 http://bbs.keinsci.com/thread-2085-1-1.html
 
 http://blog.sciencenet.cn/blog-548663-981600.html
 
 https://www.jianshu.com/p/5dc493663ed2
 
+gmx generated trajectory, complex system, **must be processed by trjconv**. vmd pbc wrap doesn't work. 
 
+However, nojump: coordinated water molecules are lost; in the original trajectory, protein goes across the pbc. What the fxxk doing clustering with gmx! 
 
-gmx generated trajectory, must be processed by trjconv nojump. vmd pbc wrap doesn't work. However, coordinated water molecules are lost; in the original trajectory, protein goes across the pbc. What fxxk doing clustering with gmx! 
-
-However, pbc wrap does not always work with NAMD generated trajectories either...still we need `gmx` and even `nojmp`
+However, pbc wrap does not always work with NAMD generated trajectories either...still we need to convert to `gmx` and even use `nojmp`
 
 usually we use `gmx trjconv -pbc mol` or `whole` followed by `nojump`...
 
@@ -43,27 +47,48 @@ Zhaoqi has tried doing this with MDanalysis but it cannot easily write frames
 
 
 
-gmx pbc mol，是蛋白/lipid保持完整，中心水盒子位置不变（还有离子？）反正除了蛋白？都在水盒子之外。代价是蛋白不在中心水盒子，之前POC算的是错的
-gmx不做处理，蛋白也全部在中心水盒子，代价是要跳过边界到另一边，蛋白全部被拉开。这种算POC应该也不对吧
-pbc res也会被拉开
+`gmx trjconv -pbc mol`，是蛋白/lipid保持完整，中心水盒子位置不变（还有离子？）反正除了蛋白？都在水盒子之外。代价是蛋白不在中心水盒子，之前POC算的是错的
+
+gmx不做处理，蛋白也全部在中心水盒子，代价是要跳过边界到另一边，蛋白全部被拉开。这种算POC应该也不对吧；pbc res也会被拉开
+
 vmd处理pbc mol之后的：蛋白总是在水盒子中心，align之后就是蛋白不转水盒子转。可以用来算POC
 
-pbc wrap segid/residue--align，蛋白还是有些不在水里？在吧，只是处理得有问题。结果是蛋白全部在水里，盒子相应地平移（位置），应该还是按周期性挪过去的。align之后盒子才倾斜。
-对于visualization，其实pbc mol就已经够了？看蛋白是够了，但要看离子还是wrap一下。
+
+
+#### VMD
+
+[PBCTools Plugin](https://www.ks.uiuc.edu/Research/vmd/plugins/pbctools/)
+
+```
+-compound: Defines, which atom compounds should be kept together, i.e. which atoms will not be wrapped if a compound would be split by the wrapping: residues, segments or chains (default: -nocompound).
+
+wrap means make the atoms into the unitcell
+
+pbc unwrap -sel "protein"
+means no jump?
+```
+
+
+
+`pbc wrap segid/residue`然后align，结果是**蛋白全部在水里**，盒子相应地平移（位置），应该还是按周期性挪过去的。align之后盒子才倾斜。
+
+不知道为什么`pbc wrap -compound residue`才能让蛋白始终在中间，segid就只有水盒子的一个角在接触蛋白
+
+> 还要吐槽vmd：存轨迹为xtc实现不了，先trr再转xtc
+
+
+
+关于计算蛋白-离子的接触：
+
+对于visualization，其实`pbc mol`就已经够了？看蛋白是够了，但要看离子还是wrap一下。
+
 直接改变计算方式：反正gmx的水盒子都是沿着Cartesian axes的。存出来的轨迹和这样算出来结果大体相同，个别不一样。
 改变计算方式的问题在于假定蛋白跑不出周围的26个盒子，pbc wrap是我不知道能否信任它
 
 wrap之后还是得那么算呀，只是不用循环两次了
 xtc算的还是小一点点
 理论上是用vmd存的算更准
-wrap之后还是得那么算呀，只是不用循环两次了
 vmd轨迹基本是对的，就是小心离子跨过pbc
-
-
-
-不知道为什么pbc wrap -compound residue才能让蛋白始终在中间，segid就只有水盒子的一个角在接触蛋白
-
-还要吐槽vmd：存轨迹为xtc实现不了，先trr再转xtc
 
 
 
@@ -611,6 +636,10 @@ It can calculate Secondary structure, RMSD, RMSF, angle, dihedral, SASA, contact
 
 - The current VMD source code has been tested to compile with Python versions 2.4 to 2.6 on a few platforms. Don't use that....
 
+- mdcrd
+
+  ![](E:\GitHub-repo\notes\research\MD-fundamentals.assets\vmd-mdcrd.png)
+
 - 
 
 ## UCSF Chimera(X)
@@ -763,7 +792,23 @@ https://www.cryst.bbk.ac.uk/pps97/course/index.html Section 7: molecular forces
 
   pmemd supports charmm FF?
 
-- 
+- from sob handout: 对于模拟蛋白质目的，强烈不建议用GROMACS自带的OPLS-AA/L力场。若非要用OPLS-AA系列，至少也应该用2015年提出的OPLS-AA/M可通过以下方式添加
+
+  去此地址下载OPLS-AAM力场的gromacs的包：http:/zarbi/chem.yale.edu/oplsaam.html
+
+  之后使用诸如gmx pdb2gmx时即可看到已经可用:
+
+  ```
+  15: OPLS-AA/L all-atom force field (2001 aminoacid dihedrals)
+  16: OPLS-AA/M all-atom force field (2015 aminoacid dihedrals)
+  ```
+
+  
+
+
+
+
+
 
 #### Amber
 
@@ -1058,6 +1103,8 @@ https://manual.gromacs.org/current/reference-manual/topologies/topology-file-for
 
 - In GROMACS, the `[pairs]` section in the topology file is used to define non-bonded interactions between pairs of atoms that are separated by more than three bonds and calculate the non-bonded interactions.
 - `[defaults]` 是1-4 scaling之类的东西，不同力场不一样
+- The [ settles ] directive (**specifically for water**) defines the first atom of the water molecule. The settle funct is always 1, and the distance between O-H and H-H distances must be given. Note that the algorithm can also be used for TIP3P and TIP4P
+  https://manual.gromacs.org/current/reference-manual/topologies/constraint-algorithm-section.html
 
 ### make_ndx
 
@@ -1098,6 +1145,22 @@ With GPU-accelerated PME or with separate PME ranks, [gmx mdrun](https://manual.
 
 
 vdw and elec, common cutoff/switchdist
+
+
+from sob handout（我没查到）: 根据GROMACS手册的建议，使用各版本CHARMM力场时都建议用以下参数
+
+```
+constraints = h-bonds
+cutoff-scheme = Verlet
+vdwtype = cutoff
+vdw-modifier = force-switch
+rlist = 1.2
+rvdw = 1.2
+rvdw-switch = 1.0
+coulombtype = PME
+rcoulomb = 1.2
+DispCorr = no
+```
 
 
 
@@ -1280,47 +1343,60 @@ and VMD and CHARMM FF? I don't feel too much to say since they are just responsi
 
 ### Basics
 
+![](E:\GitHub-repo\notes\research\MD-fundamentals.assets\alchequilsteps.jpg)
 
+> 有没有可能，这里没有加restrain，只是不算在fep采样里
+> 只是从lambda1 到 lambda2的平衡，还是production simulation
 
 
 
 ### Debug
 
+#### Short
+
 - FATAL ERROR: Atom 9 has bad hydrogen group size.  Check for duplicate bonds. 居然是vmd1.9.3的锅
 
-- I'm running MD simulation of a protein-ligand system (pdb id: 5tbm) with NAMD3 and CHARMM36/CgenFF force field. I removed extra components (except a water molecule near the ligand binding site which forms hydrogen bonds), and fixed the protein structure. After minimization, NVT, NPT with restrain, and NPT equilibration, everything went well. Then I performed 100ns MD simulation (delta t is 1 femtosecond), following by a 500ns MD simulation (delta t is 2 femtosecond). However, the latter simulation reports the following error after 200~300ns:
-  Error: atoms moving too fast at timestep 107643652; simulation has become unstable (0 atoms at pe 0).
-  FATAL ERROR:SequencerCUDA: Atoms moving too fast.
-  Only one of three simulations survive. I'm setting rigidbonds to all.
-  The structure looks fine until the last frame recorded. I didn't find the initial structure unstable. Nor does bonds break apart.
-  I've also tried setting margin to 4, but the simulations stops even earlier.
-  What should I do to solve this problem? Should I just run production MD with a timestep of 1fs?
-  I hope to obtain the clustered binding structure and perform FEP (to compare with experimental data). In the cystal structure, the water molecule acts as two H bond donors; while after NVT, it accepts a O-H from a nearby tyrosine residue. Will that difference affect FEP results a lot?
+- FATAL ERROR: Incorrect atom count in binary file equilibrate.coor     可能是文件损坏
 
-  atom moving too fast?
+  vmd says "ERROR) Mismatch between existing molecule or structure file atom count and coordinate or trajectory file atom count."
 
-  1. check the structure, system volume?
-  2. minimize and equilibration ok?
-  3. use shorter timestep
-  4. increase margin?
-  5. gradually heat the system
-  6. more (langevin) parameters?
-
+- 
   
-
-  > *> try these*
-  > *>*
-  > *> 1] Apply the temperature step by step (100 200 290 ..)*
-  > *> 2] You can use smaller time step (1 fs or 0.5 fs)*
-  > *> 3] make sure all atoms inside the cell basis vector*
-  > *> 4] use Velocity control or Temperature control with Langivin Dynamics*
-  > Use "margin 3" or larger.
-  >
-  > In rare special circumstances atoms that are involved in bonded terms (bonds, angles, dihedrals, or impropers) or nonbonded exclusions (especially implicit exclusions due to bonds) will be placed on non-neighboring patches because they are more than the cutoff distance apart. This can result in the simulation dying with a message of “bad global exclusion count”. If an “atoms moving too fast; simulation has become unstable”, “bad global exclusion count”, or similar error happens on the first timestep then there is likely something very wrong with the input coordinates, such as the atoms with uninitialized coordinates or different atom orders in the PSF and PDB file. Looking at the system in VMD will often reveal an abnormal structure. Be aware that the atom IDs in the “Atoms moving too fast” error message are 1-based, while VMD’s atom indices are 0-based. If an “atoms moving too fast; simulation has become unstable”, “bad global exclusion count”, or similar error happens later in the simulation then the dynamics have probably become unstable, resulting in the system “exploding” apart. Energies printed at every timestep should show an exponential increase. This may be due to a timestep that is too long, or some other strange feature. **Saving a trajectory of every step** and working backwards in can also sometimes reveal the origin of the instability. 
-
 - 
 
 
+
+#### Atom moving too fast
+
+I'm running MD simulation of a protein-ligand system (pdb id: 5tbm) with NAMD3 and CHARMM36/CgenFF force field. I removed extra components (except a water molecule near the ligand binding site which forms hydrogen bonds), and fixed the protein structure. After minimization, NVT, NPT with restrain, and NPT equilibration, everything went well. Then I performed 100ns MD simulation (delta t is 1 femtosecond), following by a 500ns MD simulation (delta t is 2 femtosecond). However, the latter simulation reports the following error after 200~300ns:
+Error: atoms moving too fast at timestep 107643652; simulation has become unstable (0 atoms at pe 0).
+FATAL ERROR:SequencerCUDA: Atoms moving too fast.
+Only one of three simulations survive. I'm setting rigidbonds to all.
+The structure looks fine until the last frame recorded. I didn't find the initial structure unstable. Nor does bonds break apart.
+I've also tried setting margin to 4, but the simulations stops even earlier.
+What should I do to solve this problem? Should I just run production MD with a timestep of 1fs?
+I hope to obtain the clustered binding structure and perform FEP (to compare with experimental data). In the cystal structure, the water molecule acts as two H bond donors; while after NVT, it accepts a O-H from a nearby tyrosine residue. Will that difference affect FEP results a lot?
+
+atom moving too fast?
+
+1. check the structure, system volume?
+2. minimize and equilibration ok?
+3. use shorter timestep
+4. increase margin?
+5. gradually heat the system
+6. more (langevin) parameters?
+
+
+
+> *> try these*
+> *>*
+> *> 1] Apply the temperature step by step (100 200 290 ..)*
+> *> 2] You can use smaller time step (1 fs or 0.5 fs)*
+> *> 3] make sure all atoms inside the cell basis vector*
+> *> 4] use Velocity control or Temperature control with Langivin Dynamics*
+> Use "margin 3" or larger.
+>
+> In rare special circumstances atoms that are involved in bonded terms (bonds, angles, dihedrals, or impropers) or nonbonded exclusions (especially implicit exclusions due to bonds) will be placed on non-neighboring patches because they are more than the cutoff distance apart. This can result in the simulation dying with a message of “bad global exclusion count”. If an “atoms moving too fast; simulation has become unstable”, “bad global exclusion count”, or similar error happens on the first timestep then there is likely something very wrong with the input coordinates, such as the atoms with uninitialized coordinates or different atom orders in the PSF and PDB file. Looking at the system in VMD will often reveal an abnormal structure. Be aware that the atom IDs in the “Atoms moving too fast” error message are 1-based, while VMD’s atom indices are 0-based. If an “atoms moving too fast; simulation has become unstable”, “bad global exclusion count”, or similar error happens later in the simulation then the dynamics have probably become unstable, resulting in the system “exploding” apart. Energies printed at every timestep should show an exponential increase. This may be due to a timestep that is too long, or some other strange feature. **Saving a trajectory of every step** and working backwards in can also sometimes reveal the origin of the instability. 
 
 
 
@@ -1482,6 +1558,10 @@ mask syntax
 [大体系弱相互作用计算的解决之道](http://sobereva.com/214)
 
 MOZYME doing simulation for biomolecules...
+
+[要善用簇模型，不要盲目用ONIOM算蛋白质-小分子相互作用问题 - 思想家公社的门口：量子化学·分子模拟·二次元 (sobereva.com)](http://sobereva.com/597)
+
+退而求其次，在提一个簇模型来QM优化、算单点能
 
 
 
