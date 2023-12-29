@@ -44,28 +44,39 @@ why does Al<sup>3+</sup> inhibit kinase activity by replacing Mg<sup>2+</sup>? A
 
   - template-based
     - MIB2 (https://doi.org/10.1093/bioinformatics/btac534): no Al3+
+    
+      [MIB2 Home (cmu.edu.tw)](http://bioinfo.cmu.edu.tw/MIB2/)
+    
     - IonCom: https://zhanggroup.org/IonCom/ no Al3+, 2016
-    - they only predict the binding residues?
+    
+      - they only predict the binding residues?
+    
     - Inferring metal binding sites in flexible regions of proteins https://onlinelibrary.wiley.com/doi/10.1002/prot.26085
-
+    
+      no resources? only five types of ions
+    
   - template-free
     - BioMetAll: Identifying Metal-Binding Sites in Proteins from Backbone Preorganization
 
+      [Welcome to BioMetAll’s documentation! — biometall documentation](https://biometall.readthedocs.io/en/latest/)
+    
   - learning
 
-    - Metal3D https://www.nature.com/articles/s41467-023-37870-6
+    - Metal3D https://www.nature.com/articles/s41467-023-37870-6 
+
+      online usage: [ColabMetal.ipynb - Colaboratory](https://colab.research.google.com/github/lcbc-epfl/metal-site-prediction/blob/main/Metal3D/ColabMetal.ipynb)
 
     - MetalNet: Co-evolution-based prediction, Predicting metal-binding residue pairs
-
-    - MetalSiteHunter https://www.sciencedirect.com/science/article/pii/S266638642200340X
-
-- 
+    
+    - MetalSiteHunter https://www.sciencedirect.com/science/article/pii/S266638642200340X no Al3+
+    
+      [Mohamad-lab metalsitehunter](https://mohamad-lab.ai/metalsitehunter/)  cannot set box size, only the center??
 
 - sequence-based
 
-  - mebipred: https://academic.oup.com/bioinformatics/article/38/14/3532/6594112
+  - mebipred: https://academic.oup.com/bioinformatics/article/38/14/3532/6594112   all ions are No??
 
-  - LMetalSite https://pubmed.ncbi.nlm.nih.gov/36274238/
+  - LMetalSite https://pubmed.ncbi.nlm.nih.gov/36274238/ or http://bio-web1.nscc-gz.cn/app/lmetalsite: no Al3+. An alignment-free sequence-based predictor for binding sites of the four most frequently seen metal ions (Zn2+, Ca2+, Mg2+ and Mn2+).
 
 - other
 
@@ -75,14 +86,7 @@ why does Al<sup>3+</sup> inhibit kinase activity by replacing Mg<sup>2+</sup>? A
 
   - [MIonSite: an accurate metal ion binding site predictor (github.com)](https://github.com/LiangQiaoGu/MIonSite): no Al3+, not updated since 2018
 
-  - AlphaFill https://www.nature.com/articles/s41592-022-01685-y an algorithm that uses sequence and structure similarity to 'transplant' such 'missing' small molecules and ions from experimentally determined structures to predicted protein models.
-
-
-
-note
-
-- https://mohamad-lab.ai/metalsitehunter/ no Al3+
-- https://github.com/biomed-AI/LMetalSite or http://bio-web1.nscc-gz.cn/app/lmetalsite: no Al3+. An alignment-free sequence-based predictor for binding sites of the four most frequently seen metal ions (Zn2+, Ca2+, Mg2+ and Mn2+).
+  - AlphaFill https://www.nature.com/articles/s41592-022-01685-y  an algorithm that uses sequence and structure similarity to 'transplant' such 'missing' small molecules and ions from experimentally determined structures to predicted protein models.
 
 
 
