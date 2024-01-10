@@ -18,9 +18,10 @@ I'm just too lazy to make things clear, so these are just what I wrote when I le
     - [ ] rdkit and those in FEbuilder
   - [ ] scp, ssh, pbs and slurm (software usage)
   - [ ] 整理笔记时过一遍ChatGPT的记录？但很多都记过了。。
-  - [ ] source: Google chat, slack, notion.so, wolai.com, coda
+  - [ ] source: Google chat, slack, notion.so, wolai.com, coda, everyday code
   - [ ] CUDA environment 就这么点？
   - [ ] prepare for the computer, fundamental tools, move to software usage?
+  - [ ] title and filenames (reference links)
 - [ ] **beautify the theme** (sidebar?)
 - [ ] try interesting plugins
 - [ ] make badges? beautify hyperref?

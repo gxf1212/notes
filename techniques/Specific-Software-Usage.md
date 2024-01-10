@@ -1468,21 +1468,31 @@ notes from Windows
 
 1. `\titlecontents`：目录中的格式
 
-## Float
+### Float
 
 - https://blog.csdn.net/u012428169/article/details/80558331 没有进行特殊命令处理，但是显示的图片和表格标号跟它们在LaTeX编辑环境中放置的章节有关，这并不是一般文章要求的。
 
-### table
+#### table
 
 - [Latex 表格文字居中（垂直和水平居中）_latex表格文字居中_ICQQ123的博客-CSDN博客](https://blog.csdn.net/ICQQ123/article/details/114701859)
 
-## Page
+### Paragraph
+
+- 首行全部缩进2字符
+
+  ```latex
+  \setlength{\parindent}{2em}
+  ```
+
+- 
+
+### Page
 
 - The command `\clearpage` forces a page break and flushes all floats (e.g., figures and tables) that have not yet been placed. The command `\pagestyle{empty}` changes the page style for the current and subsequent pages to `empty`, which means that the headers and footers will be empty.
   The command `\cleardoublepage` is similar to `\clearpage`, but it also ensures that the next page is an odd-numbered page (i.e., a right-hand page in a two-sided document). If the current page is already an odd-numbered page, then `\cleardoublepage` simply issues a new page. Otherwise, it issues two new pages.
   In summary, the command `\clearpage{\pagestyle{empty}\cleardoublepage}` forces a page break, flushes all floats, changes the page style to `empty`, and ensures that the next page is an odd-numbered page.
 
-### fancyhdr
+#### fancyhdr
 
 1. 如何在目录页去掉页码：可以在目录生成命令后加入`\thispagestyle{empty}`即可。
 

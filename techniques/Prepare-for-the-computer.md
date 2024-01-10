@@ -809,35 +809,46 @@ If you installed the NVIDIA driver from `.run` files or bundled driver from CUDA
 
 - 
 
-- multiple version of cuda: https://bluesmilery.github.io/blogs/a687003b/
+- multiple version of cuda: [多版本CUDA和TensorFlow共存 - Gai's Blog (bluesmilery.github.io)](https://bluesmilery.github.io/blogs/a687003b/)
+
+  [ubuntu 安装多个CUDA版本并可以随时切换](https://blog.csdn.net/yinxingtianxia/article/details/80462892)
+
+  [Ubuntu多版本CUDA安装与切换 | Yuan (qiyuan-z.github.io)](https://qiyuan-z.github.io/2022/01/04/Ubuntu多版本cuda安装与切换/)
+
+  可以使用stat命令查看当前cuda软链接指向的哪个cuda版本
 
 - problems
 
   - I ran ...run.1 rather than .run ???
   - don't know if this matters: https://blog.davidou.org/archives/1361
+  - 
 
-> log file using `.run`
->
-> Driver:   Not Selected
-> Toolkit:  Installed in /usr/local/cuda-11.1/
-> Samples:  Installed in /home/kemove/, but missing recommended libraries
->
-> Please make sure that
->
-> - PATH includes /usr/local/cuda-11.1/bin
-> - LD_LIBRARY_PATH includes /usr/local/cuda-11.1/lib64, or, add /usr/local/cuda-11.1/lib64 to /etc/ld.so.conf and run ldconfig as root
->
-> ```shell
-> export PATH=$PATH:/usr/local/cuda/bin
-> export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
-> ```
->
-> > ***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least .00 is required for CUDA 11.1 functionality to work.
-> > To install the driver using this installer, run the following command, replacing <CudaInstaller> with the name of this run file:
->
-> ​    sudo <CudaInstaller>.run --silent --driver
->
-> Logfile is /var/log/cuda-installer.log
+final log
+
+````
+Driver:   Not Selected
+Toolkit:  Installed in /usr/local/cuda-11.1/
+Samples:  Installed in /home/kemove/, but missing recommended libraries
+
+Please make sure that
+
+- PATH includes /usr/local/cuda-11.1/bin
+- LD_LIBRARY_PATH includes /usr/local/cuda-11.1/lib64, or, add /usr/local/cuda-11.1/lib64 to /etc/ld.so.conf and run ldconfig as root
+
+```shell
+export PATH=$PATH:/usr/local/cuda/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+```
+
+***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least .00 is required for CUDA 11.1 functionality to work.
+To install the driver using this installer, run the following command, replacing <CudaInstaller> with the name of this run file:
+
+​    sudo <CudaInstaller>.run --silent --driver
+
+Logfile is /var/log/cuda-installer.log
+````
+
+
 
 ## cudnn
 
@@ -938,10 +949,14 @@ Refer to https://github.com/skblnw/mkrun/tree/master/Installation
 
 [Ubuntu上安装gcc-10.2.0_gcc 10.2 ubuntu 14_Black_黑色的博客-CSDN博客](https://blog.csdn.net/zhaozhiyuan111/article/details/118566452)
 
+Also refer to Kevin
+
 - `-disable-multilib`： 不生成编译为其他平台 (e.g. 32bit) 可执行代码的交叉编译器。add this according to the error prompt
 - `gcc-path/contrib/download_prerequisites`: if you don't have mpfr, etc.
 
-An important note: add correct gcc version you used when compiling gmx/Amber when you run MD, otherwise the performance will be significantly hurt!
+An important note: add correct gcc version you used when compiling gmx/Amber when you run MD, otherwise the performance will be significantly hurt! (really?)
+
+> [Build and Install GCC Suite from Scratch (github.com)](https://gist.github.com/jeetsukumaran/5224956)
 
 #### Debug
 
@@ -997,6 +1012,77 @@ check openmpi info: `ompi_info | grep cuda`
 > 
 > We strongly suggest that you run mpirun as a non-root user.
 > ```
+
+### plumed
+
+installation with conda is simpler but may not make use of the best efficiency?
+
+[Plumed :: Anaconda.org](https://anaconda.org/conda-forge/plumed)
+
+OK, just refer to Kevin's notes
+
+```shell
+./configure --prefix=/opt/plumed-2.9.0
+make -j 16
+sudo make install -j 16
+```
+
+debug:
+
+```
+configure: WARNING: **** PLUMED will NOT be compiled using MPI because MPI have not been found!
+```
+
+MPI solved by adding mpirun seen in PATH
+
+final notes:
+
+```
+Install prefix : /home/gxf/plumed-2.9.0
+Full name      : plumed
+
+Setup your environment
+- Ensure this is in your execution path         : /home/gxf/plumed-2.9.0/bin
+- Ensure this is in your include path           : /home/gxf/plumed-2.9.0/include
+- Ensure this is in your library path           : /home/gxf/plumed-2.9.0/lib
+- Ensure this is in your PKG_CONFIG_PATH path   : /home/gxf/plumed-2.9.0/lib/pkgconfig
+For runtime binding:
+- Set this environment variable                 : PLUMED_KERNEL=/home/gxf/plumed-2.9.0/lib/libplumedKernel.so
+
+To create a tcl module that sets all the variables above, use this one as a starting point:
+/home/gxf/plumed-2.9.0/lib/plumed/modulefile
+
+To uninstall, remove the following files and directories:
+/home/gxf/plumed-2.9.0/lib/plumed
+/home/gxf/plumed-2.9.0/share/doc/plumed
+/home/gxf/plumed-2.9.0/include/plumed
+/home/gxf/plumed-2.9.0/bin/plumed
+/home/gxf/plumed-2.9.0/bin/plumed-patch
+/home/gxf/plumed-2.9.0/bin/plumed-config
+/home/gxf/plumed-2.9.0/lib/pkgconfig/plumed.pc
+/home/gxf/plumed-2.9.0/lib/libplumed.so
+/home/gxf/plumed-2.9.0/lib/libplumedKernel.so
+A vim plugin can be found here: /home/gxf/plumed-2.9.0/lib/plumed/vim/
+Copy it to /home/gxf/.vim/ directory
+Alternatively:
+- Set this environment variable         : PLUMED_VIMPATH=/home/gxf/plumed-2.9.0/lib/plumed/vim
+- Add the command 'let &runtimepath.=','.$PLUMED_VIMPATH' to your .vimrc file
+From vim, you can use :set syntax=plumed to enable it
+```
+
+other 
+
+> [Install Gromacs-2016.3 and Plumed-2.3.3 | Life is Worth Living (birdlet.github.io)](https://birdlet.github.io/trash/plumed_gromacs_install.html)
+>
+> [PLUMED系列-安装教程 (kangsgo.cn)](https://kangsgo.cn/p/plumed系列-安装教程/)
+>
+> oh, external gsl and blas may not be necessary?
+>
+> - [GSL - GNU Scientific Library - GNU Project - Free Software Foundation](https://www.gnu.org/software/gsl/)
+> - https://www.openblas.net/
+> - [Release Official Release for LAPACK 3.11.0 · Reference-LAPACK/lapack (github.com)](https://github.com/Reference-LAPACK/lapack/releases/tag/v3.11.0)
+>
+> [gromacs编译安装教程 编译带plumed的版本 | 超算小站 (mrzhenggang.com)](https://nscc.mrzhenggang.com/gromacs/#编译带plumed的版本)
 
 ## Gromacs (dirty)
 
@@ -1113,17 +1199,23 @@ make check
 make install
 ```
 
-gromacs newer version reads older files fine sometimes, but not vice versa
-
 other issues
 
-- https://gitlab.com/gromacs/gromacs/-/issues/4037
+- [Gromacs-2021.1 Installation Error with Cuda11.3 (#4037) · Issues · GROMACS / GROMACS · GitLab](https://gitlab.com/gromacs/gromacs/-/issues/4037)   already fixed...
 
 - gmx 2023
 
   ```
   #error -- unsupported GNU version! gcc versions later than 10 are not supported! The nvcc flag '-allow-unsupported-compiler' can be used to override this version check; however, using an unsupported host compiler may cause compilation failure or incorrect run time execution. Use at your own risk.
   ```
+
+- plumed
+
+  ```
+  plumed patch -p
+  ```
+
+  Patching must be done in the gromacs root directory before the cmake command is invoked.
 
 - 
 
@@ -1141,48 +1233,13 @@ cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf1212/gromacs-2021.5-gpu -DGMX_FFT_LIBRA
 -DCMAKE_C_COMPILER=/home/gxf1212/program/bin/gcc -DCMAKE_CXX_COMPILER=/home/gxf1212/program/bin/g++ -DGMX_CUDA_TARGET_SM=80 -DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON -DGMX_GPU=CUDA # 80: just a workaround
 ```
 
-## plumed
+### Other
 
-installation with conda is simpler but may not make use of the best efficiency?
+[Gromacs :: Anaconda.org](https://anaconda.org/conda-forge/gromacs)
 
+[Distributing Hardware-optimized Simulation Software with Conda (manchester.ac.uk)](https://research-it.manchester.ac.uk/news/2021/05/25/distributing-hardware-optimized-simulation-software-conda/)
 
-
-final notes:
-
-```
-Install prefix : /home/gxf/plumed-2.9.0
-Full name      : plumed
-
-Setup your environment
-- Ensure this is in your execution path         : /home/gxf/plumed-2.9.0/bin
-- Ensure this is in your include path           : /home/gxf/plumed-2.9.0/include
-- Ensure this is in your library path           : /home/gxf/plumed-2.9.0/lib
-- Ensure this is in your PKG_CONFIG_PATH path   : /home/gxf/plumed-2.9.0/lib/pkgconfig
-For runtime binding:
-- Set this environment variable                 : PLUMED_KERNEL=/home/gxf/plumed-2.9.0/lib/libplumedKernel.so
-
-To create a tcl module that sets all the variables above, use this one as a starting point:
-/home/gxf/plumed-2.9.0/lib/plumed/modulefile
-
-To uninstall, remove the following files and directories:
-/home/gxf/plumed-2.9.0/lib/plumed
-/home/gxf/plumed-2.9.0/share/doc/plumed
-/home/gxf/plumed-2.9.0/include/plumed
-/home/gxf/plumed-2.9.0/bin/plumed
-/home/gxf/plumed-2.9.0/bin/plumed-patch
-/home/gxf/plumed-2.9.0/bin/plumed-config
-/home/gxf/plumed-2.9.0/lib/pkgconfig/plumed.pc
-/home/gxf/plumed-2.9.0/lib/libplumed.so
-/home/gxf/plumed-2.9.0/lib/libplumedKernel.so
-A vim plugin can be found here: /home/gxf/plumed-2.9.0/lib/plumed/vim/
-Copy it to /home/gxf/.vim/ directory
-Alternatively:
-- Set this environment variable         : PLUMED_VIMPATH=/home/gxf/plumed-2.9.0/lib/plumed/vim
-- Add the command 'let &runtimepath.=','.$PLUMED_VIMPATH' to your .vimrc file
-From vim, you can use :set syntax=plumed to enable it
-```
-
-
+however the packages we have released are hosted on the biology specific channel `bioconda` configuring for the lowest common denominator would mean a loss of performance on newer compute nodes.
 
 ## Amber22
 
@@ -1190,6 +1247,7 @@ see [Amber22安（cai）装（keng）过程分享 - 哔哩哔哩 (bilibili.com)]
 
 > - https://prof.uok.ac.ir/m.irani/index_files/Page312.htm
 > - https://zhuanlan.zhihu.com/p/479919955
+> - [介绍-Amber 20 移植指南（CentOS 8.2）-教育科研-...-文档首页-鲲鹏社区 (hikunpeng.com)](https://www.hikunpeng.com/document/detail/zh/kunpenghpcs/prtg-osc/centos_kunpeng_amber_20_02_0001.html)
 
 ### from the manual
 

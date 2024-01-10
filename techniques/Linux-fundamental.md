@@ -4,6 +4,8 @@ This is a record of 折腾ing the system, in order not to forget.
 
 有些使用方法写在debugging那里了，也许要整理吧，但尽量描述详细，方便搜到
 
+> Update: not only Linux, but also fundamentals of computers. See [Computer science](#computer-science).
+
 **Tutorial share**
 
 - [鸟哥的Linux私房菜-基础学习篇](https://gitee.com/gxf1212/notes/raw/master/utils/tutorials/鸟哥的Linux私房菜-基础学习篇(第四版)高清完整书签PDF版.pdf)
@@ -69,7 +71,7 @@ Linux desktop的优势：可以直接为cluster做测试
 
    > `export` sets the environment variable that is visible to the process that sets it and to all the subprocesses spawned in the same environment
 
-3. clear path, remove redundant
+3. clear `$PATH`, remove redundant
 
    ```shell
    export PATH=$(echo -n $PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}' | sed 's/:$//')
@@ -94,25 +96,6 @@ Linux desktop的优势：可以直接为cluster做测试
   - Using uninitialized pointers.
 
 - Linux操作系统执行可执行文件提示`No such file or directory`的原因可能是操作系统位数和可执行文件需要的lib库的位数不匹配
-
-## Hardware-related
-
-- HDMI线必须要插在主机的偏下一点，也就是直接插在显卡上，偏上的那个口是没有用的
-- disk自我检测分析与报告技术smart: https://www.cnblogs.com/xqzt/p/5512075.html
-
-- 无线网卡 (英文名称：**Wireless network interface controller**，缩写为WNIC) driver
-
-  https://www.nnnxxx.cn/
-
-  https://github.com/the-tcpdump-group/libpcap
-
-  https://askubuntu.com/questions/537170/no-such-file-or-directory-net-bpf-h
-  
-- 固态硬盘不需要整理碎片
-
-- Deep-Learning Computing Unit (DCU)
-
-- 你们电脑沾水了一定要拆开晒干啊，前两周发热没注意想着清下灰就行，今天跑去看，说是受潮了然后主板芯片烧了
 
 
 
@@ -1202,6 +1185,8 @@ change source: https://www.cnblogs.com/feng-hao/p/11774543.html
 
 
 # Specific commands
+
+See [here](../research/Programming-for-MD#bash-shell) for Bash shell programming.
 
 ## privilige
 
@@ -3057,12 +3042,48 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 ## WSL
 
+### Installation
+
+https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#2-install-wsl
+
+install wsl, ubuntu, and ubuntu22.04 (choose one of the two) in microsoft store
+
+- The error "wslregisterdistribution failed with error: 0x80370114" typically occurs when the Hyper-V service is blocked during the installation of a Linux distribution using the Windows Subsystem for Linux (WSL).
+
+  控制面板--程序与功能--左侧，或直接搜索“Windows功能”
+
+  <img src="E:\GitHub-repo\notes\techniques\images\windows-function.png" alt="1704871157971" style="zoom:80%;" />
+
+- [将 Windows10 中的 WSL 添加至右键菜单_shift+右键没有wsl选项-CSDN博客](https://blog.csdn.net/gulang03/article/details/79177500)
+
+- 
+
+### cuda
+
+在Windows装好cuda的情况下给wsl2装cuda？我的直接能用nvidia-smi，但是`'/usr/bin/cuda': No such file or directory`
+
+https://www.jianshu.com/p/be669d9359e2
+
+[Enabling GPU acceleration on Ubuntu on WSL2 with the NVIDIA CUDA Platform | Ubuntu](https://ubuntu.com/tutorials/enabling-gpu-acceleration-on-ubuntu-on-wsl2-with-the-nvidia-cuda-platform#1-overview)
+
+The latest NVIDIA Windows GPU Driver will fully support WSL 2....Once a Windows NVIDIA GPU driver is installed on the system, CUDA becomes available within WSL 2. The CUDA driver installed on Windows host will be stubbed inside the WSL 2 as libcuda.so, therefore users must not install any NVIDIA GPU Linux driver within WSL 2.
+We recommend developers to use a separate CUDA Toolkit for WSL 2 (Ubuntu) available from the CUDA Toolkit Downloads page to avoid this overwriting. This WSL-Ubuntu CUDA toolkit installer will not overwrite the NVIDIA driver that was already mapped into the WSL 2 environment.
+
+到底咋弄
+
+[WSL libcuda.so.1 is not a symbolic link 的解决方法 | kiraの博客 (kira-96.github.io)](https://kira-96.github.io/posts/wsl-libcuda.so.1-is-not-a-symbolic-link-的解决方法/)
+
+### Usage
+
 - WSL is highly memory-demanding...
 - WSL 可以使用 `[tool-name].exe` 直接从 WSL 命令行运行 Windows 工具。 例如，`notepad.exe`。
+- wsl2的套路变了，linux的文件系统整个是个镜像文件，启动系统后，这个文件系统映射到了 \\wsl$\系统名 下面
+
+  在Windows下访问：`\\wsl$\Ubuntu-20.04\`
 
 
 
-- powershell: [无法加载文件 ******.ps1，因为在此系统中禁止执行脚本。有关详细信息，请参阅 "get-help about_signing"_gulp : 无法加载文件 c:\program files\nodejs\gulp.ps1,因为在...](https://blog.csdn.net/github_35186068/article/details/80518681)
+- 无法以管理员运行powershell: [无法加载文件 ps1，因为在此系统中禁止执行脚本。有关详细信息，请参阅 "get-help about_signing"_gulp : 无法加载文件 c:\program files\nodejs\gulp.ps1,因为在...](https://blog.csdn.net/github_35186068/article/details/80518681)
 
 # MacOS notes
 
@@ -3072,7 +3093,76 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 首先，在设置中，点击最上面的选项进入自己的AppleID的设置。 点击管理储存空间;选择你不想用的那部分，点击打开，选择【停用和删除】即可。
 要不就停用iCloud（不推荐），要不就买。没办法
 
+# Computer science
 
+## Coding
+
+- 重写(Override)与重载(Overload)
+
+  - 重写是子类对父类的允许访问的方法的实现过程进行重新编写, 返回值和形参都不能改变。**即外壳不变，核心重写！**
+  - 重载(overloading) 是在一个类里面，方法名字相同，而参数不同。返回类型可以相同也可以不同。
+- C language is faster than Python because it is a compiled language while Python is an interpreted language. This means that C code is directly translated into machine code by the compiler, while Python code is first translated into bytecode and then interpreted by the interpreter
+
+## numerical simulation
+
+> In computer programming, numbers are represented using a finite number of bits (0s and 1s). Decimal numbers can be represented in two ways: floating point and fixed point.
+>
+> Floating point representation is a way of representing numbers with a varying number of digits before and after the decimal point. The position of the decimal point can change depending on the magnitude of the number. This allows for a wide range of numbers to be represented, both very large and very small. However, because the position of the decimal point is not fixed, it can lead to rounding errors and loss of precision.
+>
+> Fixed point representation, on the other hand, uses a fixed number of bits to represent the whole number and decimal portion of a number. This means that the decimal point is fixed at a specific position, and the number of digits before and after the decimal point is predetermined. This limits the size of the number that can be represented, but also ensures that the precision is maintained and rounding errors are minimized.
+> For example, let's say we want to represent the number 3.14159. In floating point representation, the computer may represent it as 3.141590118408203125, which is an approximation. In fixed point representation, we could choose to use 16 bits, with 8 bits for the whole number and 8 bits for the decimal portion. This would allow us to represent numbers between -128 and 127, with a maximum of 256 possible decimal values (0-255). We could represent 3.14159 as 3.25 (in binary, 00000011.01000000).
+> there is no rounding error when performing arithmetic operations within the bounds of the fixed point representation.
+
+- 浮点数：科学计数法，范围更广
+- 定点数：保持精度（绝对位数，不是有效数字位数）
+
+https://escholarship.org/content/qt95k0h86q/qt95k0h86q.pdf  also an Amber TI example?
+
+Single-precision floating-point format: a binary32 as having:
+
+- Sign bit: 1 bit
+- Exponent width: 8 bits
+- Significand precision: 24 bits (23 explicitly stored)
+
+a binary64 as having:
+
+- Sign bit: 1 bit
+- Exponent: 11 bits
+- Significand precision: 53 bits (52 explicitly stored)
+
+## HPC
+
+- **Tesla A100 is...2~3x** faster than the V100 using 32-bit precision.
+- SIMD stands for **Single Instruction, Multiple Data**. It is a type of parallel processing in Flynn’s taxonomy. [SIMD describes computers with multiple processing elements that perform the same operation on multiple data points simultaneously](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data)
+- NCCL：Nvidia Collective multi-GPU Communication Library，多GPU通讯
+- MPI是高性能计算常用的实现方式，它的全名叫做Message Passing Interface。顾名思义，它是一个实现了消息传递接口的库。MPI作为编程库很丰满，作为计算框架很骨感。它的好处在于一切自己动手，不利也在于一切全靠自己。
+  http://www.xtaohub.com/IT-neo/Parallel-programming-MPI.html
+
+## Hardware-related
+
+- HDMI线必须要插在主机的偏下一点，也就是直接插在显卡上，偏上的那个口是没有用的
+
+- disk自我检测分析与报告技术smart: https://www.cnblogs.com/xqzt/p/5512075.html
+
+- 无线网卡 (英文名称：**Wireless network interface controller**，缩写为WNIC) driver
+
+  https://www.nnnxxx.cn/
+
+  https://github.com/the-tcpdump-group/libpcap
+
+  https://askubuntu.com/questions/537170/no-such-file-or-directory-net-bpf-h
+
+- 固态硬盘不需要整理碎片
+
+- Deep-Learning Computing Unit (DCU)
+
+- 你们电脑沾水了一定要拆开晒干啊，前两周发热没注意想着清下灰就行，今天跑去看，说是受潮了然后主板芯片烧了
+
+- [四个内核八个逻辑处理器是什么意思，我的电脑cpu到底是几核 - 老马奇遇记 (z197.com)](https://z197.com/blog/four-cores-eight-logical-processors-how-much.html)
+
+  一个物理CPU可以有1个或者多个物理内核，一个物理内核可以作为1个或者2个逻辑CPU。有多少个逻辑处理器，就可以开多少个线程。
+
+- 
 
 
 

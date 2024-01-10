@@ -2,9 +2,7 @@
 
 Mainly from UROPS project and FYP experiences. May also include some general MD workflows and debugs.
 
-This page includes general results, not project-specific details.
-
-
+This page includes general results, not project-specific details. Especially NAMD FEP (protein-ligand).
 
 ### Other
 

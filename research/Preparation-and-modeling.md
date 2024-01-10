@@ -721,6 +721,15 @@ For residues that are identical except the coordinates (e.g., the water molecule
 
 - tleap is also unable to insert molecules
 
+### Commands
+
+```shell
+desc variable
+# Print a description of the object variable.
+```
+
+
+
 ## gmx
 
 ### pdb2gmx
@@ -1443,3 +1452,4 @@ smina，-6kcal，不能结合的能排掉，不一定能真的结合
 
 
 
+对接：结合位点裸露在膜外可以提取出来直接做，如果在膜中或者膜内这两种情况难说，不是很多物质能都进膜内

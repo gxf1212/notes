@@ -45,7 +45,7 @@ why does Al<sup>3+</sup> inhibit kinase activity by replacing Mg<sup>2+</sup>? A
   - template-based
     - MIB2 (https://doi.org/10.1093/bioinformatics/btac534): no Al3+
     
-      [MIB2 Home (cmu.edu.tw)](http://bioinfo.cmu.edu.tw/MIB2/)
+      [MIB2 Home (cmu.edu.tw)](http://bioinfo.cmu.edu.tw/MIB2/), turn on the global proxy
     
     - IonCom: https://zhanggroup.org/IonCom/ no Al3+, 2016
     
@@ -256,6 +256,8 @@ We generate parameters for them (.itp file), and insert into Gromacs .top file.
 
 RESP charge reference: see [Protein-ligand-simulation sob articles](Protein-ligand-simulation.md#QM-Reference)
 
+> sobtop中的键的数量有上限？？离谱
+
 ### Model a hydrated ion
 
 ```mermaid
@@ -330,7 +332,7 @@ LIG
 # B3LYP/def2TZVP em=GD3BJ Integral=(Grid=Fine) Pop(MK,ReadRadii) IOp(6/33=2,6/42=6) geom=allcheck scrf=solvent=water
 ```
 
-see [MD-fundamentals](MD-fundamentals.md#RESP)
+see [MD-fundamentals](MD-fundamentals.md#RESP) for more on RESP
 
 `charge.sh`
 

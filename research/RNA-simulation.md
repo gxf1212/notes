@@ -49,7 +49,7 @@ The **RNAeval web server** calculates the energy of a RNA sequence on a given se
 
 
 
-http://biophy.hust.edu.cn/new/3dRNA/create
+[Xiao Lab (hust.edu.cn)](http://biophy.hust.edu.cn/new/3dRNA/create)
 
 3dRNA/DNA Web Server
 Automatic building of ncRNA and DNA 3D structures
@@ -67,3 +67,23 @@ Automatic building of ncRNA and DNA 3D structures
 - IsRNA2
 - RNAComposer: https://rnacomposer.cs.put.poznan.pl      http://rnacomposer.ibch.poznan.pl/
 - FARFAR2 Rosetta
+
+
+
+
+
+
+
+## Modeling
+
+[Circular RNA topology file from case on 2009-10-21 (Amber Archive Oct 2009) (ambermd.org)](http://archive.ambermd.org/200910/0327.html)
+
+```
+bond <unit>.<residue #>.<atom name> <unit>.<residue #>.<atom name>
+```
+
+
+
+[cRNAsp12 (xxulab.org.cn)](http://xxulab.org.cn/crnasp12/)
+
+cRNAsp12 Web Server for the Prediction of Circular RNA Secondary Structures and Stabilities

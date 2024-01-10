@@ -395,39 +395,6 @@ One of the fascinating properties of polyzwitterions is the so-called anti-polye
 
 
 
-
-
-# Computer science
-
-## Coding
-
-- 重写(Override)与重载(Overload)
-
-  - 重写是子类对父类的允许访问的方法的实现过程进行重新编写, 返回值和形参都不能改变。**即外壳不变，核心重写！**
-  - 重载(overloading) 是在一个类里面，方法名字相同，而参数不同。返回类型可以相同也可以不同。
-- C language is faster than Python because it is a compiled language while Python is an interpreted language. This means that C code is directly translated into machine code by the compiler, while Python code is first translated into bytecode and then interpreted by the interpreter
-
-## numerical simulation
-
-> In computer programming, numbers are represented using a finite number of bits (0s and 1s). Decimal numbers can be represented in two ways: floating point and fixed point.
->
-> Floating point representation is a way of representing numbers with a varying number of digits before and after the decimal point. The position of the decimal point can change depending on the magnitude of the number. This allows for a wide range of numbers to be represented, both very large and very small. However, because the position of the decimal point is not fixed, it can lead to rounding errors and loss of precision.
->
-> Fixed point representation, on the other hand, uses a fixed number of bits to represent the whole number and decimal portion of a number. This means that the decimal point is fixed at a specific position, and the number of digits before and after the decimal point is predetermined. This limits the size of the number that can be represented, but also ensures that the precision is maintained and rounding errors are minimized.
-> For example, let's say we want to represent the number 3.14159. In floating point representation, the computer may represent it as 3.141590118408203125, which is an approximation. In fixed point representation, we could choose to use 16 bits, with 8 bits for the whole number and 8 bits for the decimal portion. This would allow us to represent numbers between -128 and 127, with a maximum of 256 possible decimal values (0-255). We could represent 3.14159 as 3.25 (in binary, 00000011.01000000).
-> there is no rounding error when performing arithmetic operations within the bounds of the fixed point representation.
-
-- 浮点数：科学计数法，范围更广
-- 定点数：保持精度（绝对位数，不是有效数字位数）
-
-https://escholarship.org/content/qt95k0h86q/qt95k0h86q.pdf  also an Amber TI example?
-
-## HPC
-
-- **Tesla A100 is...2~3x** faster than the V100 using 32-bit precision.
-- SIMD stands for **Single Instruction, Multiple Data**. It is a type of parallel processing in Flynn’s taxonomy. [SIMD describes computers with multiple processing elements that perform the same operation on multiple data points simultaneously](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data)
-- NCCL：Nvidia Collective multi-GPU Communication Library，多GPU通讯
-
 # AI
 
 - RLHF就是基于人类反馈（Human Feedback）对语言模型进行强化学习（Reinforcement Learning），和一般的fine-tune过程乃至prompt tuning自然也不同。

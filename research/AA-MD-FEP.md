@@ -1,6 +1,6 @@
 # Protein MD and Amino Acid FEP
 
-Somethin about amino acid modification, MD and FEP.
+Somethin about amino acid modification, MD and FEP. Especially, Gromacs AA FEP
 
 > the first part is written during the PSK project. Then contents are added (e.g. from connexin Ab project).
 
@@ -1208,7 +1208,8 @@ It is even impossible for sth like pmx-based AA FEP:
 
 This is an issue as long as there is an element type (essentially, mass) changed from A to B (rather than defining dummy atom for both A/B state, which looks like dual-topology paradigm).
 
-
+https://gromacs.org-gmx-users.maillist.sys.kth.narkive.com/NbtCy2iY/gmx-users-energy-decomposition-from-fep
+meaningless?
 
 
 
