@@ -1083,6 +1083,10 @@ other
 > - [Release Official Release for LAPACK 3.11.0 · Reference-LAPACK/lapack (github.com)](https://github.com/Reference-LAPACK/lapack/releases/tag/v3.11.0)
 >
 > [gromacs编译安装教程 编译带plumed的版本 | 超算小站 (mrzhenggang.com)](https://nscc.mrzhenggang.com/gromacs/#编译带plumed的版本)
+>
+> [PLUMED安装+patch Lammps - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/104259987)
+>
+> [Plumed — WVU-RC documentation](https://docs.hpc.wvu.edu/text/608.ForceFields.html#plumed)
 
 ## Gromacs (dirty)
 

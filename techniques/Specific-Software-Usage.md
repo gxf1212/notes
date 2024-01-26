@@ -8,7 +8,7 @@ Fret not over bygones, and the forward journey take.
 
 # Commonly used for working
 
-## Connect and remote control
+## Connect the remote
 
 Connection, *pn, remote control usage
 
@@ -334,7 +334,7 @@ sudo snap install termius-app
 
   [Priority_and_Fair_Trees.pdf](https://slurm.schedmd.com/SLUG19/Priority_and_Fair_Trees.pdf); [Slurm Workload Manager - Multifactor Priority Plugin](https://slurm.schedmd.com/priority_multifactor.html)
 
-  <img src="E:\GitHub-repo\notes\techniques\images\slurm-jobsize.png" style="zoom:50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/slurm-jobsize.png" style="zoom:50%;" />
 
   [Slurm Workload Manager - sprio](https://slurm.schedmd.com/sprio.html)
 
@@ -345,11 +345,11 @@ sudo snap install termius-app
 
 - scontrol
   
-  <img src="E:\GitHub-repo\notes\techniques\images\scontrol1.png" alt="1701699867598" style="zoom:80%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/scontrol1.png" alt="1701699867598" style="zoom:80%;" />
   
-  <img src="E:\GitHub-repo\notes\techniques\images\scontrol2.png" alt="1701699219869" style="zoom:80%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/scontrol2.png" alt="1701699219869" style="zoom:80%;" />
   
-  <img src="E:\GitHub-repo\notes\techniques\images\scontrol3.png" alt="1701699968758" style="zoom:80%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/scontrol3.png" alt="1701699968758" style="zoom:80%;" />
 
 
 
@@ -514,7 +514,7 @@ Then We just need to kill gmx once and the whole script will terminate.
 
 
 
-## Git
+## Git VCS
 
 ### in cmd
 
@@ -1147,6 +1147,10 @@ F11：全屏
 Tab：空行前是代码缩进；在输入一个字母后，按Tab健会自动补全或者代码提示。
 Shift+Tab：撤销代码缩进
 Ctrl+双击：打开加载包源代码
+
+### MATLAB
+
+在matlab编辑窗口中怎样只运行选中的命令？快捷键：F9
 
 ## Office
 

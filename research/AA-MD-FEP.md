@@ -928,6 +928,8 @@ mv `ls -F | grep -v /` free/system/
 
 pmx assigns a wrong mass for dummy atoms (divided by 100/33??? what the hell...), so fix it. Someone else report that if you don't edit the simulation is unstable, though I didn't encounter this.
 
+pmx的dummy atom，atomtype.dat文件中质量都没问题，写出来就都除以了（100/33），很精确。估计程序写错了，不必这样设计。离谱，更离谱的是模拟没报过错。
+
 ```shell
 function fixpmxmass {
 sed -i 's/ 3.9633/12.0100/g' $1
@@ -937,8 +939,6 @@ sed -i 's/ 4.6233/14.0100/g' $1
 sed -i 's/10.5798/32.0600/g' $1
 }
 ```
-
-
 
 ### TEST
 

@@ -36,8 +36,6 @@ why does Al<sup>3+</sup> inhibit kinase activity by replacing Mg<sup>2+</sup>? A
 
 
 
-
-
 # Binding site prediction
 
 - structure-based
@@ -54,6 +52,16 @@ why does Al<sup>3+</sup> inhibit kinase activity by replacing Mg<sup>2+</sup>? A
     - Inferring metal binding sites in flexible regions of proteins https://onlinelibrary.wiley.com/doi/10.1002/prot.26085
     
       no resources? only five types of ions
+      
+    - https://gitlab.com/Jukic/made_software
+    
+      pymol plugin, aligning all kinds of homology structures and cluster
+      
+      supports PDB and AlphaFold template? no found...
+      
+      custom files: manually specify template....
+      
+    - 
     
   - template-free
     - BioMetAll: Identifying Metal-Binding Sites in Proteins from Backbone Preorganization
@@ -68,24 +76,34 @@ why does Al<sup>3+</sup> inhibit kinase activity by replacing Mg<sup>2+</sup>? A
 
     - MetalNet: Co-evolution-based prediction, Predicting metal-binding residue pairs
     
+      [Metal binding prediction using coevolution](https://github.com/wangchulab/MetalNet) new, unusable
+    
     - MetalSiteHunter https://www.sciencedirect.com/science/article/pii/S266638642200340X no Al3+
     
       [Mohamad-lab metalsitehunter](https://mohamad-lab.ai/metalsitehunter/)  cannot set box size, only the center??
 
 - sequence-based
 
-  - mebipred: https://academic.oup.com/bioinformatics/article/38/14/3532/6594112   all ions are No??
+  - mebipred: all ions are No??
 
-  - LMetalSite https://pubmed.ncbi.nlm.nih.gov/36274238/ or http://bio-web1.nscc-gz.cn/app/lmetalsite: no Al3+. An alignment-free sequence-based predictor for binding sites of the four most frequently seen metal ions (Zn2+, Ca2+, Mg2+ and Mn2+).
+    [mebipred: identifying metal-binding potential in protein sequence | Bioinformatics | Oxford Academic (oup.com)](https://academic.oup.com/bioinformatics/article/38/14/3532/6594112)
+
+  - LMetalSite or [Biomedical AI Platform (nscc-gz.cn)](https://bio-web1.nscc-gz.cn/app/lmetalsite): no Al3+. An alignment-free sequence-based predictor for binding sites of the four most frequently seen metal ions (Zn2+, Ca2+, Mg2+ and Mn2+).
+
+    [Alignment-free metal ion-binding site prediction from protein sequence through pretrained language model and multi-task learning - PubMed (nih.gov)](https://pubmed.ncbi.nlm.nih.gov/36274238/)
+
+  - [clemEssien/IonPred (github.com)](https://github.com/clemEssien/IonPred)
+
+    9 metal ions (Zn2+, Cu2+, Fe2+, Fe3+, Ca2+, Mg2+, Mn2+, Na+, and K+) and 4 acid radical ion ligands (CO32−, SO32−, PO43−, NO2−)
+
+  - [M-Ionic.ipynb - Colaboratory (google.com)](https://colab.research.google.com/drive/1gJo8JOOZSK_ab0UabCSEo5RPV0zOo-PN)
+
+    ESM model, very fast, all zero...
 
 - other
 
   - [A Novel Prediction Method for Metal-Ion Binding Sites in Protein Sequence Based on Ensemble Learning | Proceedings of the 2022 5th International Conference on Algorithms, Computing and Artificial Intelligence (acm.org)](https://dl.acm.org/doi/10.1145/3579654.3579694) new, unusable
-
-  - [Metal binding prediction using coevolution](https://github.com/wangchulab/MetalNet) new, unusable
-
   - [MIonSite: an accurate metal ion binding site predictor (github.com)](https://github.com/LiangQiaoGu/MIonSite): no Al3+, not updated since 2018
-
   - AlphaFill https://www.nature.com/articles/s41592-022-01685-y  an algorithm that uses sequence and structure similarity to 'transplant' such 'missing' small molecules and ions from experimentally determined structures to predicted protein models.
 
 

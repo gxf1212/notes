@@ -473,7 +473,7 @@ https://www.apowersoft.cn/  一个处理视频的网站
 
 短视频截图（封面）可用，本地还是用爱奇艺播放器，左边的相机标志可截图
 
-## 其他
+## 下载其他
 
 ### 歌曲
 
@@ -642,22 +642,14 @@ ffmpeg -i meeting_01.mp4 -vcodec copy -acodec copy -ss 00:00:37 -to 00:51:00 mee
 
 ### 会议纪要
 
-**[腾讯会议 自动会议纪要-操作指南](https://cloud.tencent.com/document/product/1095/53483)**。但是要企业版
-
-[Windows 实时语音转文字](https://blog.csdn.net/qq_41095608/article/details/126308275)
-
-联想语音助手已经满足我的需要了，但是这玩意半天退出不了
-
-最后就用系统自带的录音机。可以上传到钉钉，或加载到剪映以转换成文字
-
-
+#### 钉钉
 
 [什么是智能纪要,如何配置智能纪要_钉钉会议](https://help.aliyun.com/document_detail/208719.html) 要钱？
 
 https://www.jianshu.com/p/e3cdd268ef59
 顶端搜索“钉钉闪记”
 
-![](E:\GitHub-repo\notes\techniques\images\dingtalk-meeting.jpg)
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/dingtalk-meeting.jpg" style="zoom:80%;" />
 
 线下会议应该够用了
 
@@ -665,16 +657,30 @@ https://www.jianshu.com/p/e3cdd268ef59
 
 除了钉钉要上传，以及要分开每个文件
 
+#### 其他
 
+**[腾讯会议 自动会议纪要-操作指南](https://cloud.tencent.com/document/product/1095/53483)**。但是要企业版
 
-https://clideo.com/editor/merge-audio
+[讯飞听见会议-AI高清视频会议系统|线上远程网络云会议软件 (iflyrec.com)](https://meeting.iflyrec.com/)
 
-
+[Online Audio Joiner — Merge Audio Files for Free — Clideo](https://clideo.com/merge-audio)
 
 > 出席人：是参加该会议的人，在会上有发言权，表决权，选举权和被选举权等等所有与会者应有权力；
 > 列席人：则是指在别人开会时旁听的人，一般可以发言，但不能表决。
 
+### 语音转文字
 
+[语音转文字-WINDOWS内置自带功能-无需安装第三方软件和插件 (youtube.com)](https://www.youtube.com/watch?v=kgfR88SSHx0)：打开记事本，Windows+H
+
+[Windows 实时语音转文字](https://blog.csdn.net/qq_41095608/article/details/126308275)
+
+[免费无时长限制的实时语音转文字方法 - 哔哩哔哩 (bilibili.com)](https://www.bilibili.com/read/cv19107730/)
+
+一般这种限制还是比较多，记事本好像得一直开着
+
+联想语音助手已经满足我的需要了，但是这玩意半天退出不了
+
+系统自带的录音机。可以上传到钉钉，或加载到剪映以转换成文字
 
 ## 录制视频
 

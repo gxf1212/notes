@@ -27,9 +27,9 @@ Linux desktop的优势：可以直接为cluster做测试
 
   transform `.rpm` to `.deb`: `sudo alien ./*.rpm`
   
-- [Linux 黑话解释：什么是长期支持（LTS）版本？什么是 Ubuntu LTS？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/246313340)
+- 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
 
-- 
+- [Linux 黑话解释：什么是长期支持（LTS）版本？什么是 Ubuntu LTS？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/246313340)
 
 - https://www.techtarget.com/whatis/definition/daemon
 
@@ -79,9 +79,13 @@ Linux desktop的优势：可以直接为cluster做测试
 
 4. `$LD_LIBRARY_PATH`最初是空的，第一个不要有多余的`:`
 
+5. [Bash 解决多个终端History丢失的问题-CSDN博客](https://blog.csdn.net/weixin_34311757/article/details/91544518)
 
+   ```
+   shopt -s histappend
+   ```
 
-1. 关机重启：`reboot (-f)`，`shutdown -r now`，`poweroff`，`halt`, `systemctl  reboot`
+   
 
 ## Common errors
 
@@ -167,7 +171,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
    (it also works without sudo but the info may be less complete/accurate)
 
-   You can also install the package lshw-gtk to get a GUI.
+   You can also install the package `lshw-gtk` to get a GUI.
 
 7. change hostname 
 
@@ -180,7 +184,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 8. [check shell version](https://blog.csdn.net/electrocrazy/article/details/78313962): `bash --version`
 
-9. [update kernel](https://ubuntuhandbook.org/index.php/2022/05/kernel-5-18-released-install-in-ubuntu-2204/): just install the four packages
+9. [gupdate kernel](https://ubuntuhandbook.org/index.php/2022/05/kernel-5-18-released-install-in-ubuntu-2204/): just install the four packages
 
    https://kernel.ubuntu.com/~kernel-ppa/mainline. find 'amd'
 
@@ -1154,7 +1158,7 @@ change source: https://www.cnblogs.com/feng-hao/p/11774543.html
    sudo apt install gnome-software-plugin-flatpak # GUI
    ```
 
-   https://docs.flatpak.org/en/latest/using-flatpak.html
+   [解决“正在连接443...失败：拒绝连接”问题 - 简书 (jianshu.com)](https://www.jianshu.com/p/cba95f62dc35)
 
    install with flatpak: add a remote, download a flatpakref file, and install
 
@@ -1663,8 +1667,14 @@ To be re-organized
   ```shell
   systemctl disable nvidia-powerd
   ```
+  
+- 
+  
+- 
+  
+- 
 
-
+- [Error while loading libgconf-2.so.4 - Fedora Discussion](https://discussion.fedoraproject.org/t/error-while-loading-libgconf-2-so-4/77736), [Linux 缺少 libgconf库 libgconf-2.so.4 =＞ not found](https://blog.csdn.net/wwlhz/article/details/109765020)
 
 ## Emergency
 
@@ -1780,15 +1790,13 @@ Periodic table of elements
 
 其他和正常KDE差不多
 
-> [Error while loading libgconf-2.so.4 - Fedora Discussion](https://discussion.fedoraproject.org/t/error-while-loading-libgconf-2-so-4/77736), [Linux 缺少 libgconf库 libgconf-2.so.4 =＞ not found](https://blog.csdn.net/wwlhz/article/details/109765020)
-
-unsolved problems:
-
-- taskbar always frozen
-- login waiting 1 min
-- startup recover windows
-- GFW
-- download WeChat files just in Fedora
+> unsolved problems:
+>
+> - taskbar always frozen
+> - login waiting 1 min
+> - startup recover windows
+> - GFW
+> - download WeChat files just in Fedora
 
 ## Installation
 
@@ -3018,7 +3026,7 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 21. 浏览器默认应用
 
-    ![](E:\GitHub-repo\notes\techniques\images\chrome.png)
+    ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/chrome.png)
 
     点击链接用浏览器打开：下面的https
 
@@ -3052,7 +3060,7 @@ install wsl, ubuntu, and ubuntu22.04 (choose one of the two) in microsoft store
 
   控制面板--程序与功能--左侧，或直接搜索“Windows功能”
 
-  <img src="E:\GitHub-repo\notes\techniques\images\windows-function.png" alt="1704871157971" style="zoom:80%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/windows-function.png" alt="1704871157971" style="zoom:80%;" />
 
 - [将 Windows10 中的 WSL 添加至右键菜单_shift+右键没有wsl选项-CSDN博客](https://blog.csdn.net/gulang03/article/details/79177500)
 
@@ -3162,7 +3170,9 @@ a binary64 as having:
 
   一个物理CPU可以有1个或者多个物理内核，一个物理内核可以作为1个或者2个逻辑CPU。有多少个逻辑处理器，就可以开多少个线程。
 
-- 
+- U盘的可用空间通常会比标明的容量稍小一点，这是正常现象。这主要是因为存储设备制造商和操作系统使用不同的计算方法来计算存储容量。（我不信所有大小不一样都是这个缘故）
+
+  存储设备制造商通常使用十进制计算方法来计算存储容量，即1GB = 1000MB，1MB = 1000KB，1KB = 1000字节。然而，操作系统通常使用二进制计算方法来计算存储容量，即1GB = 1024MB，1MB = 1024KB，1KB = 1024字节。
 
 
 
