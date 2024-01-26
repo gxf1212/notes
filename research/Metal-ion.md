@@ -70,21 +70,23 @@ why does Al<sup>3+</sup> inhibit kinase activity by replacing Mg<sup>2+</sup>? A
     
   - learning
 
-    - Metal3D https://www.nature.com/articles/s41467-023-37870-6 
+    - MetalSiteHunter: Zn, Fe, Mg, Mn, Ca, and Na
 
-      online usage: [ColabMetal.ipynb - Colaboratory](https://colab.research.google.com/github/lcbc-epfl/metal-site-prediction/blob/main/Metal3D/ColabMetal.ipynb)
+      [Mohamad-lab metalsitehunter](https://mohamad-lab.ai/metalsitehunter/)  cannot set box size, only the center?? at least usable
 
+      [An ensemble 3D deep-learning model to predict protein metal-binding site - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S266638642200340X)
+    
+    - Metal3D. online usage: [ColabMetal.ipynb - Colaboratory](https://colab.research.google.com/github/lcbc-epfl/metal-site-prediction/blob/main/Metal3D/ColabMetal.ipynb). no metal type, like BioMetAll. but hard to install...
+    
+      [Metal3D: a general deep learning framework for accurate metal ion location prediction in proteins | Nature Communications](https://www.nature.com/articles/s41467-023-37870-6)
+    
     - MetalNet: Co-evolution-based prediction, Predicting metal-binding residue pairs
     
       [Metal binding prediction using coevolution](https://github.com/wangchulab/MetalNet) new, unusable
-    
-    - MetalSiteHunter https://www.sciencedirect.com/science/article/pii/S266638642200340X no Al3+
-    
-      [Mohamad-lab metalsitehunter](https://mohamad-lab.ai/metalsitehunter/)  cannot set box size, only the center??
 
 - sequence-based
 
-  - mebipred: all ions are No??
+  - mebipred: [Mebipred v 2.0 (bromberglab.org)](https://services.bromberglab.org/mebipred/home) all ions are No?? 
 
     [mebipred: identifying metal-binding potential in protein sequence | Bioinformatics | Oxford Academic (oup.com)](https://academic.oup.com/bioinformatics/article/38/14/3532/6594112)
 
