@@ -41,52 +41,58 @@ why does Al<sup>3+</sup> inhibit kinase activity by replacing Mg<sup>2+</sup>? A
 - structure-based
 
   - template-based
-    - MIB2 (https://doi.org/10.1093/bioinformatics/btac534): no Al3+
+    - **MIB2** (https://doi.org/10.1093/bioinformatics/btac534): no Al3+
     
       [MIB2 Home (cmu.edu.tw)](http://bioinfo.cmu.edu.tw/MIB2/), turn on the global proxy
     
-    - IonCom: https://zhanggroup.org/IonCom/ no Al3+, 2016
+    - **IonCom**: https://zhanggroup.org/IonCom/ no Al3+, 2016
     
       - they only predict the binding residues?
     
-    - Inferring metal binding sites in flexible regions of proteins https://onlinelibrary.wiley.com/doi/10.1002/prot.26085
-    
-      no resources? only five types of ions
-      
     - https://gitlab.com/Jukic/made_software
     
       pymol plugin, aligning all kinds of homology structures and cluster
-      
+    
       supports PDB and AlphaFold template? no found...
-      
+    
       custom files: manually specify template....
+    
+    - [PROTEINS: Structure, Function, and Bioinformatics | Protein Science Journal | Wiley Online Journal](https://onlinelibrary.wiley.com/doi/10.1002/prot.26085)
+    
+      no resources? only five types of ions
       
     - 
     
   - template-free
-    - BioMetAll: Identifying Metal-Binding Sites in Proteins from Backbone Preorganization
+    - **BioMetAll**: Identifying Metal-Binding Sites in Proteins from Backbone Preorganization
 
       [Welcome to BioMetAll’s documentation! — biometall documentation](https://biometall.readthedocs.io/en/latest/)
     
   - learning
 
-    - MetalSiteHunter: Zn, Fe, Mg, Mn, Ca, and Na
+    - **MetalSiteHunter**: Zn, Fe, Mg, Mn, Ca, and Na
 
       [Mohamad-lab metalsitehunter](https://mohamad-lab.ai/metalsitehunter/)  cannot set box size, only the center?? at least usable
 
       [An ensemble 3D deep-learning model to predict protein metal-binding site - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S266638642200340X)
     
-    - Metal3D. online usage: [ColabMetal.ipynb - Colaboratory](https://colab.research.google.com/github/lcbc-epfl/metal-site-prediction/blob/main/Metal3D/ColabMetal.ipynb). no metal type, like BioMetAll. but hard to install...
+    - **Metal3D**. online usage: [ColabMetal.ipynb - Colaboratory](https://colab.research.google.com/github/lcbc-epfl/metal-site-prediction/blob/main/Metal3D/ColabMetal.ipynb). no metal type, like BioMetAll. but hard to install...
     
       [Metal3D: a general deep learning framework for accurate metal ion location prediction in proteins | Nature Communications](https://www.nature.com/articles/s41467-023-37870-6)
     
-    - MetalNet: Co-evolution-based prediction, Predicting metal-binding residue pairs
+    - [DELIA (sjtu.edu.cn)](http://www.csbio.sjtu.edu.cn/bioinf/delia/)  single chain
     
-      [Metal binding prediction using coevolution](https://github.com/wangchulab/MetalNet) new, unusable
+      ATP, HEME, Mn2+, Ca2+, Mg2+
+    
+      http://www.csbio.sjtu.edu.cn/TargetS/   older version??
+    
+    - 
 
 - sequence-based
 
-  - mebipred: [Mebipred v 2.0 (bromberglab.org)](https://services.bromberglab.org/mebipred/home) all ions are No?? 
+  - mebipred: [Mebipred v 2.0 (bromberglab.org)](https://services.bromberglab.org/mebipred/home) 
+
+    (Fe, Ca, Na, K, Mg, Mn, Cu, K, Co, Ni) all ions are No?? 
 
     [mebipred: identifying metal-binding potential in protein sequence | Bioinformatics | Oxford Academic (oup.com)](https://academic.oup.com/bioinformatics/article/38/14/3532/6594112)
 
@@ -94,19 +100,34 @@ why does Al<sup>3+</sup> inhibit kinase activity by replacing Mg<sup>2+</sup>? A
 
     [Alignment-free metal ion-binding site prediction from protein sequence through pretrained language model and multi-task learning - PubMed (nih.gov)](https://pubmed.ncbi.nlm.nih.gov/36274238/)
 
-  - [clemEssien/IonPred (github.com)](https://github.com/clemEssien/IonPred)
+  - [OSML: A Query-Driven Dynamic Machine Learning Model for Predicting Protein-Ligand Binding Sites (sjtu.edu.cn)](http://www.csbio.sjtu.edu.cn/OSML/)
 
-    9 metal ions (Zn2+, Cu2+, Fe2+, Fe3+, Ca2+, Mg2+, Mn2+, Na+, and K+) and 4 acid radical ion ligands (CO32−, SO32−, PO43−, NO2−)
+     ATP, ADP, AMP, GTP, GDP
+     Ca2+, Mg2+, Mn2+, Fe3+, Zn2+
 
   - [M-Ionic.ipynb - Colaboratory (google.com)](https://colab.research.google.com/drive/1gJo8JOOZSK_ab0UabCSEo5RPV0zOo-PN)
 
     ESM model, very fast, all zero...
 
+  - [clemEssien/IonPred (github.com)](https://github.com/clemEssien/IonPred)
+
+    9 metal ions (Zn2+, Cu2+, Fe2+, Fe3+, Ca2+, Mg2+, Mn2+, Na+, and K+) and 4 acid radical ion ligands (CO32−, SO32−, PO43−, NO2−)
+
+  - 
+
 - other
 
+  - MetalNet: Co-evolution-based prediction, Predicting metal-binding residue pairs
+  
+    [Metal binding prediction using coevolution](https://github.com/wangchulab/MetalNet) new, unusable
+  
+    ESM-MSA
   - [A Novel Prediction Method for Metal-Ion Binding Sites in Protein Sequence Based on Ensemble Learning | Proceedings of the 2022 5th International Conference on Algorithms, Computing and Artificial Intelligence (acm.org)](https://dl.acm.org/doi/10.1145/3579654.3579694) new, unusable
   - [MIonSite: an accurate metal ion binding site predictor (github.com)](https://github.com/LiangQiaoGu/MIonSite): no Al3+, not updated since 2018
   - AlphaFill https://www.nature.com/articles/s41592-022-01685-y  an algorithm that uses sequence and structure similarity to 'transplant' such 'missing' small molecules and ions from experimentally determined structures to predicted protein models.
+  - [Genes | Free Full-Text | SXGBsite: Prediction of Protein–Ligand Binding Sites Using Sequence Information and Extreme Gradient Boosting (mdpi.com)](https://www.mdpi.com/2073-4425/10/12/965)   no code
+  - [Identifying metal binding amino acids based on backbone geometries as a tool for metalloprotein engineering - Nguyen - 2021 - Protein Science - Wiley Online Library](https://onlinelibrary.wiley.com/doi/10.1002/pro.4074)  no code
+  - [QuJing785464/TMP_MIBS: Data and code used to train the TMP_MIBS model. (github.com)](https://github.com/QuJing785464/TMP_MIBS)   就没打算给人用
 
 
 
