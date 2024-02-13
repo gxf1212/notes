@@ -55,9 +55,12 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
   ${f:1:3}  # nbo
   ${f:1:-3} # nbound.fepout.
   ${f: -1}  # the last char
+  ${f: -2:-1}  # the second last
   ```
 
-  To get the last character of a string in a shell script, you can use the following command: `echo "${str: -1}"`. The space after the colon (:) is REQUIRED
+  To get the last character of a string in a shell script, you can use the following command: `echo "${str: -1}"`. The space after the colon (:) is REQUIRED. the second arg with a space before it, meaning starting from -1
+
+  > 倒着数就要加空格
 
 - cut: split with any char
 
@@ -77,7 +80,25 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
 
 ### awk
 
-- **awk必须单引号**
+> !NOTE
+>
+> **awk必须单引号**
+
+- 在awk命令中使用-v选项来将bash变量传递给awk。例如：
+
+  ```shell
+    awk -v t=$temp '{esum_elec += (exp($2 * 0.239 / -0.001987 / t)); \
+      esum_vdw += (exp($3 * 0.239 / -0.001987 / t)); \
+      esum_total += (exp($1 * 0.239 / -0.001987 / t)); \
+      sum_elec += $2 * 0.239; sum2_elec += $2*$2 * 0.057; \
+      sum_vdw += $3 * 0.239; sum2_vdw += $3*$3 * 0.057; \
+      sum_couple += $2*$3 * 0.057; n++;} END \
+      {printf "%3d ....
+        }' < output/data$ii >> output/decomp
+  ```
+
+
+  在上述代码中，我们使用`-v t=$temp`选项来将bash变量`$temp`的值传递给awk变量`t`。然后，在awk代码中，我们使用`t`变量来替换原来的数字298。
 
 
 

@@ -1197,19 +1197,26 @@ more windows doesn't solve the second law of thermodynamics problem
 
 ### ddG decomposition
 
-It is hard to do this in Gromacs since none of the files record vdW and columb energy at every step for FEP as NAMD does. We have to rerun all production trajectories. 
+It is hard to do this in Gromacs since **none of the files record vdW and columb energy** at every step for FEP as NAMD does. 
+
+We have to rerun all production trajectories, to extract vdW and elec energy. 
 
 > rerun: [Useful mdrun features - GROMACS documentation](https://manual.gromacs.org/current/user-guide/mdrun-features.html#re-running-a-simulation)
 
 It is even impossible for sth like pmx-based AA FEP:
 
 ```
+Fatal error:
+Perturbed masses or constraints are not supported by rerun. Either make a .tpr without mass and constraint perturbation, or use GROMACS 2018.4, 2018.5 or later 2018 version.
 ```
 
-This is an issue as long as there is an element type (essentially, mass) changed from A to B (rather than defining dummy atom for both A/B state, which looks like dual-topology paradigm).
+This is an issue as long as there is an **element type** (essentially, mass) **changed** from A to B (rather than defining dummy atom for both A/B state, like dual-topology paradigm).
 
-https://gromacs.org-gmx-users.maillist.sys.kth.narkive.com/NbtCy2iY/gmx-users-energy-decomposition-from-fep
-meaningless?
+[Energy decomposition from FEP (narkive.com)](https://gromacs.org-gmx-users.maillist.sys.kth.narkive.com/NbtCy2iY/gmx-users-energy-decomposition-from-fep)
+
+> This is physically meaningless. You want to decompose into enthalpy and entropy instead.
+
+They said this because elec and vdw can be separately decoupled in gromacs, making them not state functions. We decouple them together.
 
 
 

@@ -29,3 +29,4 @@ I'm just too lazy to make things clear, so these are just what I wrote when I le
 - [ ] 添加网站背景音乐
 - [ ] syntax highlighting as in vscode?
 - [ ] 。。。
+- [ ] migrate to mkdocs material? no sidebar folding?

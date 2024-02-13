@@ -20,6 +20,8 @@ To activate the professional version
 
 ### VScode
 
+just follow the official site
+
 [Running Visual Studio Code on Linux](https://code.visualstudio.com/docs/setup/linux)
 
 or via snap
@@ -294,7 +296,7 @@ y应为a, b, c其中一个，我的套餐是10元档所以填的a。
 
 not useful here
 
-
+[linux配置vpn客户端时，service xl2tpd restart 不成功 · Issue #261 · hwdsl2/docker-ipsec-vpn-server (github.com)](https://github.com/hwdsl2/docker-ipsec-vpn-server/issues/261)
 
 ```shell
 sudo systemctl status xl2tpd.service
@@ -306,6 +308,12 @@ sudo dnf install NetworkManager-l2tp
 # https://github.com/QSCTech/zjunet/issues/68
 ```
 
+### Other
+
+[使用 ZJU Connect 代替 EasyConnect 提升你的 RVPN 体验！ - CC98论坛](https://www.cc98.org/topic/5521873)
+
+
+
 ## Configure wired
 
 ### Source
@@ -316,19 +324,74 @@ sudo dnf install NetworkManager-l2tp
 
 [Configure ZJU source for conda](http://mirror.zju.edu.cn/docs/anaconda/)
 
+### Static IP
+
+[How to Configure Static IP Address on Fedora – TecAdmin](https://tecadmin.net/configure-static-ip-address-on-fedora-desktop/)
+
+[如何在 Fedora Linux 系统下配置静态IP地址？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/589864823)
+
+#### KDE
+
+only cmd?
+
+我们写：10.77.14.188/24
+
+```shell
+sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.address 192.168.1.127/24
+sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.gateway 192.168.1.1
+sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.dns 8.8.8.8
+sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.method manual
+```
+
+#### GNOME
+
+just GUI
+
+
+
+### ssh service
+
+- 要将sshd服务设置为开机自启动，您可以使用以下命令（我感觉默认就enable了）
+
+  ```shell
+  sudo systemctl enable sshd
+  ```
+
+- CentOS重启ssh服务的命令如下：
+
+  ```shell
+  sudo service sshd restart
+  sudo service sshd restart
+  ```
+
+  which fix "ssh cannot connect" problem
+
+  `/etc/init.d/sshd restart` does not work here
+
+- 要查看所有服务的状态，您可以在终端中运行以下命令：
+
+  ```shell
+  systemctl list-units --type=service
+  ```
+
+- 
+
 ### ports
 
 - [First check ssh service and opened port](https://www.thegeekdiary.com/error-bind-to-port-2222-on-0-0-0-0-failed-permission-denied-error-while-starting-sshd-service-on-centos-rhel/)
 
   ```shell
   grep ssh /etc/services
+  # install openssh-client/server
   ```
 
-- [Linux中修改SSH端口号](https://www.jianshu.com/p/de8a5a69c9ea)
+- [How to change SSH port on Linux - Linux Tutorials - Learn Linux Configuration](https://linuxconfig.org/how-to-change-ssh-port-on-linux)
+
+  [Linux中修改SSH端口号](https://www.jianshu.com/p/de8a5a69c9ea)
 
   ```shell
   vim /etc/ssh/sshd_config
-  将`#Port 22`修改为`Port 端口号`
+  # uncomment Port 22; 将`#Port 22`修改为`Port 端口号`
   ```
 
   刚打开时被注释掉了
@@ -341,64 +404,24 @@ sudo dnf install NetworkManager-l2tp
   # --zone 作用域 
   # 添加端口，格式为：端口/通讯协议
   # --permanent 永久生效，没有此参数重启后失效
-  +
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   firewall-cmd --reload
   # 查看端口号
   netstat -ntlp
   ```
-
+  
   and check. No need to bother like this?
-
-  https://blog.csdn.net/Vrobron/article/details/55006182
-
+  
+  [linux打开端口命令是什么-睿象云平台 (aiops.com)](https://www.aiops.com/news/post/5409.html)
+  
+  [CentOS 7 firewall-cmd开放端口时出现bad port (most likely missing protocol)解决方案_error: invalid_port: bad port (most likely missing-CSDN博客](https://blog.csdn.net/Vrobron/article/details/55006182)
+  
   [linux打开端口](https://www.aiops.com/news/post/5409.html)
-
-  error: [bad port (most likely missing protocol)](https://blog.csdn.net/Vrobron/article/details/55006182): you missed tcp
+  
+- error: [bad port (most likely missing protocol)](https://blog.csdn.net/Vrobron/article/details/55006182): you missed tcp
 
   [“error: Bind to port 2222 on 0.0.0.0 failed: Permission denied” – error while starting sshd service on CentOS/RHEL – The Geek Diary](https://www.thegeekdiary.com/error-bind-to-port-2222-on-0-0-0-0-failed-permission-denied-error-while-starting-sshd-service-on-centos-rhel/)
-
+  
 - ...
-
-### Static IP
-
-[如何在Fedora 31上配置静态IP地址-之路教程 (onitroad.com)](https://www.onitroad.com/jc/linux/fedora/faq/how-to-configure-static-ip-address-on-fedora-31.html)
-
-```shell
-sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.address 192.168.1.127/24
-sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.gateway 192.168.1.1
-sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.dns 8.8.8.8
-sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.method manual
-```
-
-[如何在 Fedora Linux 系统下配置静态IP地址？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/589864823)
-
-
 
 # break the wall
 
@@ -1223,8 +1246,6 @@ other issues
 
 - 
 
-
-
 on my previous workstation
 
 ```shell
@@ -1236,6 +1257,20 @@ make install
 cmake .. -DCMAKE_INSTALL_PREFIX=/home/gxf1212/gromacs-2021.5-gpu -DGMX_FFT_LIBRARY=fftw3 -DCMAKE_PREFIX_PATH=/home/gxf1212/program \# -DFFTWF_LIBRARY=/home/gxf1212/program/lib/libfftw3f.so -DFFTWF_INCLUDE_DIR=/home/gxf1212/program/include  
 -DCMAKE_C_COMPILER=/home/gxf1212/program/bin/gcc -DCMAKE_CXX_COMPILER=/home/gxf1212/program/bin/g++ -DGMX_CUDA_TARGET_SM=80 -DGMX_MPI=OFF -DREGRESSIONTEST_DOWNLOAD=ON -DGMX_GPU=CUDA # 80: just a workaround
 ```
+
+Finally source this to activate
+
+```shell
+source /path/to/gmx/GMXRC.bash
+```
+
+To verify that everything proceeded according to our plans you can type the following command:
+
+```shell
+gmx --version
+```
+
+this also shows the compilation environment, like which gcc was used
 
 ### Other
 
@@ -1306,6 +1341,8 @@ other possible notes:
 
 ## NAMD
 
+### Normal
+
 If your workstation has a CUDA-capable GPU, you should try downloading Linux-x86_64-multicore-CUDA. If you wish to run multi-copy algorithms, such as replica-exchange MD, you should try the "netlrts" builds, such as Linux-x86_64-netlrts-smp or Linux-x86_64-netlrts-smp-CUDA. Windows users are encouraged to install WSL ([Windows for Linux Subsystem](https://learn.microsoft.com/en-us/windows/wsl/install)) in order to run our most recent Linux builds.
 
 just unzip...
@@ -1316,11 +1353,93 @@ https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=NAMD
 
 [NAMD3alpha](https://www.ks.uiuc.edu/Research/namd/alpha/3.0alpha/)
 
-
-
 http://bbs.keinsci.com/thread-22004-1-1.html
 
+### Install NAMD on an old system
 
+#### GLIBC installation
+
+https://stackoverflow.com/questions/72513993/how-to-install-glibc-2-29-or-higher-in-ubuntu-18-04
+
+```Shell
+wget -c https://ftp.gnu.org/gnu/glibc/glibc-2.29.tar.gz
+tar -zxvf glibc-2.29.tar.gz
+mkdir glibc-2.29/build
+cd glibc-2.29/build
+../configure --prefix=/your/path/glibc
+make
+make install
+```
+
+Do not run `./configure` in the same folder with sources.
+
+笑死了。需要以下才能装：
+
+```shell
+ln -s /path/to/make /path/to/gmake
+export LD_LIBRARY_PATH=   # empty
+```
+
+another problem
+
+```Shell
+make[2]: *** Cannot open jobserver /tmp/GMfifo28229r: No such file or directory.  Stop.
+make[2]: Leaving directory '/public/home/gxf1212/data/glibc-2.29/csu'
+make[1]: *** [Makefile:258: csu/subdir_lib] Error 2
+make[1]: Leaving directory '/public/home/gxf1212/data/glibc-2.29'
+make: *** [Makefile:9: all] Error 2
+```
+
+> The error you're encountering, "Cannot open jobserver: No such file or directory," typically occurs due to issues with make's job server mode, which is used for controlling parallelism. This can happen if make is invoked in a way that it expects to use a job server (typically through recursive make calls with the -j flag) but cannot find or access the job server's file descriptor.
+
+> After you've successfully built and installed the new GLIBC into `/opt/glibc`, you will probably try to use it by setting `LD_LIBRARY_PATH=/opt/glibc/lib` or similar … which would not work. Under no circumstances try to copy libraries from `/opt/glibc` into your system library directory, create equivalent symlinks, or add the `LD_LIBRARY_PATH` above systemwide -- that will render your system un-bootable!
+
+https://stackoverflow.com/questions/68828494/building-glibc-from-source-causes-an-error
+
+https://blog.csdn.net/qq_24755999/article/details/78722788
+
+glibc是系统底层库，不能单独升，直接替换的话，系统就崩了，或至少命令行打不开了
+
+#### Use NAMD
+
+其实就是同时用系统的库和新glibc的库
+
+- libmvec in new `glibc/lib` (by default, for new glibc `ld-linux-x86-64.so.2`)
+- libz.so.1 etc., libcuda* in `/usr/lib64`, link to `glibc/lib`
+- GLIBCXX_3.4.20 in `gcc-x.x.x/lib`
+
+```Shell
+source_dir="/usr/lib64"
+target_dir="/public/home/gxf1212/programs/glibc-2.29/lib"
+# Define the list of files and additional symbolic links. 
+# everything starting with libcuda, and those missings libs
+files=(
+    "libcudadebugger.so.1"
+    "libcudadebugger.so.535.146.02"
+    "libcuda.so"
+    "libcuda.so.1"
+    "libcuda.so.535.146.02"
+    "libicudata.so"
+    "libicudata.so.50"
+    "libicudata.so.50.1.2"
+    "libstdc++.so.6"
+    "libgcc_s.so.1"
+    "libz.so.1"
+)
+
+# Loop over the files
+for file in "${files[@]}"; do
+    # Create the symbolic link
+    ln -s "${source_dir}/${file}" "${target_dir}/${file}"
+done
+
+# usage
+source /public/software/profile.d/compiler_gcc-9.5.0.sh
+source /public/software/compiler/intel/intel-compiler-2017.5.239/bin/compilervars.sh intel64
+source /public/software/profile.d/mpi_openmpi-intel-2.1.2.sh
+
+/public/home/gxf1212/programs/glibc-2.29/lib/ld-linux-x86-64.so.2 --library-path /public/software/compiler/gcc/9.5.0/lib64/ /public/software/apps/namd/3.0b5/namd3
+```
 
 ## VEGA_ZZ
 

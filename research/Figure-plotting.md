@@ -125,7 +125,7 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
   sele /2cqg//A/PHE`149/CZ
   ```
 
-- If you click on where it says “Selecting: Residues”, you can cycle  through the available selection modes below.  These modes are also available from the “Mouse” menu under “Selection Mode”.   
+- If you click on where it says “Selecting: Residues”, you can cycle through the available selection modes below.  These modes are also available from the “Mouse” menu under “Selection Mode”.   
 
   - Atoms
   - C-alphas
@@ -169,7 +169,11 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 ### Editing
 
-1. Using Editing Mode to Move Atoms Now, please set the mouse mode to Editing, and CTRL-Left-drag on an atom.
+1. edit object name
+
+   ```shell
+   set_name complex, 41
+   ```
 
 2. renumber residues and fix names
 
@@ -189,7 +193,9 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
    http://dunbrack3.fccc.edu/PDBrenum/
 
-3. 
+3. Using Editing Mode to Move Atoms 
+
+   Now, please set the mouse mode to Editing, and CTRL-Left-drag on an atom.
 
 ### Label
 

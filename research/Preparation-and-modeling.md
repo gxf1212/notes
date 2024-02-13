@@ -111,9 +111,15 @@ cannot model and replace residue names? write a script?
 
 or remodeling
 
-- https://modbase.compbio.ucsf.edu/modloop/
-- https://new.rosettacommons.org/demos/latest/tutorials/loop_modeling/loop_modeling
-- http://rcd.iqfr.csic.es/
+- [ModLoop (ucsf.edu)](https://modbase.compbio.ucsf.edu/modloop/)
+- [Loop Modeling (rosettacommons.org)](https://new.rosettacommons.org/demos/latest/tutorials/loop_modeling/loop_modeling)
+- http://rcd.iqfr.csic.es/ (not available?)
+
+
+
+## Structure Fixing
+
+### PDBFixer
 
 
 
@@ -619,6 +625,14 @@ Called by other tools like membrane builder
 
 
 
+### Solution builder
+
+<img src="E:\GitHub-repo\notes\research\Preparation-and-modeling.assets\GUI-Berendsen.png" style="zoom:50%;" />
+
+We just don't use CHARMM-GUI `.mdp` files...
+
+
+
 ## VMD
 
 ### Tips
@@ -727,6 +741,12 @@ For residues that are identical except the coordinates (e.g., the water molecule
 desc variable
 # Print a description of the object variable.
 ```
+
+
+
+### Other
+
+使用文本编辑器打开生成的.inpcrd文件，然后查找其中的盒子参数。盒子参数位于文件的最后一行，包含三个数字，分别表示盒子在x、y和z方向上的长度。
 
 
 
@@ -1437,9 +1457,9 @@ see [Protein-ligand simulation](/research/Protein-ligand-simulation.md#visualize
 23.5.14 group tutorial
 
 Vina系列:
-AutoDock Vina AutoDock-GPU AutoDockFR AutoDock-CrankPep QuickVina2 Smina Vina-Carb VinaXB Vinardo QuickVina-W
+AutoDock Vina, AutoDock-GPU, AutoDockFR, AutoDock-CrankPep, QuickVina2, Smina, Vina-Carb, VinaXB, Vinardo, QuickVina-W
 
-FR：柔性；Pep：态；Carb：糖；。。
+FR：柔性；Pep：肽；Carb：糖；。。
 共价对接：先选基团
 柔性对接应该不用MD
 MMFF对于小分子更精细
@@ -1453,3 +1473,11 @@ smina，-6kcal，不能结合的能排掉，不一定能真的结合
 
 
 对接：结合位点裸露在膜外可以提取出来直接做，如果在膜中或者膜内这两种情况难说，不是很多物质能都进膜内
+
+
+
+
+
+
+
+

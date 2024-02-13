@@ -17,7 +17,7 @@ Linux desktop的优势：可以直接为cluster做测试
 
 ## Concepts
 
-- Linux是把要安装的软件分布在整个系统的各个文件夹里面， 比如所有软件的配置文件都安装在`/etc`下面， 软件需要的库文件都安装在`/lib`下面，日志文件都在`/var/log`下面，`/bin`下是常用的程序，等等。 比较复杂 哈哈。
+- Linux是把要安装的软件分布在整个系统的各个文件夹里面， 比如所有软件的配置文件都安装在`/etc`下面， 软件需要的库文件都安装在`/lib`下面，日志文件都在`/var/log`下面，`/bin`下是常用的程序，等等。 比较复杂。
 
 - 标准库的大部分函数通常放在文件 libc.a 中（文件名后缀.a代表“achieve”，译为“获取”），或者放在用于共享的动态链接文件 libc.so 中（文件名后缀.so代表“share object”，译为“共享对象”）。这些链接库一般位于 /lib/ 或 /usr/lib/，或者位于 GCC 默认搜索的其他目录。
 
@@ -176,11 +176,15 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 7. change hostname 
 
    - just type: `sudo hostname new_hostname`, but works temporarily
-   - maybe also edit `/etc/hosts` and `/etc/hostsname`
+   - permanently: edit `/etc/hostname`
 
    [Ubuntu Linux Change Hostname (computer name)](https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/)
 
    [修改主机名(/etc/hostname和/etc/hosts区别)-CSDN博客](https://blog.csdn.net/dufufd/article/details/75330423)
+
+   `/etc/hosts`存放的是域名与ip的对应关系，域名与主机名没有任何关系，你可以为任何一个IP指定任意一个名字，hostname文件的一个例子：
+   127.0.0.1       localhost
+   127.0.1.1       v-jiwan-ubuntu
 
 8. [check shell version](https://blog.csdn.net/electrocrazy/article/details/78313962): `bash --version`
 
@@ -1500,7 +1504,9 @@ To be re-organized
 
 ### Shortcuts
 
-- Default shortcut for creating a folder: F10; 
+[Using and Customizing Shortcuts (kde.org)](https://docs.kde.org/stable5/en/khelpcenter/fundamentals/shortcuts.html)
+
+- Default shortcut for creating a folder: F10
 
 - F2: rename file/folder
 
@@ -1530,11 +1536,17 @@ To be re-organized
 
     > match by regular expression
 
+    在KDE桌面上右键单击，然后选择“配置桌面”。
+    在左侧菜单中选择“窗口管理”，然后选择“窗口规则”。
+    单击“新建”按钮，然后在弹出的窗口中设置您想要的规则。
+    例如，您可以创建一个规则，指定某个应用程序总是在特定的虚拟桌面上打开。要实现这个目的，您可以在“窗口匹配”选项卡中指定应用程序的名称或类名，然后在“大小与位置”选项卡中选择“所有桌面”，并将其设置为“强制”，然后选择您想要的虚拟桌面。
+    您需要在“窗口匹配”选项卡中选择“窗口标题”，然后将匹配条件设置为“正则表达式匹配”。
+
     ![1693117470557](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-window-rules.png)
 
   - Night color
 
-    ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-nightcolor.jpg)
+    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-nightcolor.jpg" style="zoom:67%;" />
 
   - https://blog.csdn.net/qq_44760799/article/details/121057915
 
@@ -1544,7 +1556,7 @@ To be re-organized
 
 - Appearance--Fonts
 
-  ![KDE-font](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-font.png)
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-font.png" alt="KDE-font" style="zoom:67%;" />
 
 - In KDE 5.22.4 (Find your version in the About program):
 
@@ -1573,13 +1585,19 @@ To be re-organized
   #重新执行
   ````
 
-- Dolphin 
+- 
 
-  - Click on the path. You can type or copy!
+### Dolphin 
 
-  - startup path
+- Click on the path. You can type or copy!
 
-    ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-Dolphin-startup.png)
+- startup path
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-Dolphin-startup.png" style="zoom: 67%;" />
+
+- copy/edit path. click √, go back to directory
+
+  <img src="E:\GitHub-repo\notes\techniques\images\dolphin-path.jpg" style="zoom:67%;" />
 
 - 
 
@@ -1645,34 +1663,20 @@ To be re-organized
   
 - 
 
-- CentOS重启ssh服务的命令如下：
-
-  ```shell
-  service sshd restart
-  ```
-
-  which fix "ssh cannot connect" problem
-
-  `/etc/init.d/sshd restart` does not work here
-
-- 要查看所有服务的状态，您可以在终端中运行以下命令：
-
-  ```shell
-  systemctl list-units --type=service
-  ```
-
 - Nvidia-powerd is only for mobile Ampere gpus so it’s useless with your 2080. Please disable and mask the service.
-  https://forums.developer.nvidia.com/t/nvidia-powerd-fails-to-start/235498
-
+https://forums.developer.nvidia.com/t/nvidia-powerd-fails-to-start/235498
+  
   ```shell
   systemctl disable nvidia-powerd
-  ```
-  
-- 
-  
-- 
-  
-- 
+```
+
+
+
+Installation
+
+- [How to install build-essential on Fedora - PragmaticLinux](https://www.pragmaticlinux.com/2022/05/how-to-install-build-essential-on-fedora/)
+
+- [What does DKMS (Dynamic Kernel Module Support) do? How do I use it? - Ask Ubuntu](https://askubuntu.com/questions/408605/what-does-dkms-do-how-do-i-use-it)
 
 - [Error while loading libgconf-2.so.4 - Fedora Discussion](https://discussion.fedoraproject.org/t/error-while-loading-libgconf-2-so-4/77736), [Linux 缺少 libgconf库 libgconf-2.so.4 =＞ not found](https://blog.csdn.net/wwlhz/article/details/109765020)
 
@@ -1753,6 +1757,10 @@ familiar...
 
 [How to autostart applications on Ubuntu 20.04](https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-20-04-focal-fossa-linux): search 'startup' app
 
+### POP! OS
+
+based on Ubuntu, mostly similar...
+
 ### CentOS 9 Stream
 
 > it's GNOME by default
@@ -1764,7 +1772,7 @@ The big thing with CentOS 9 Stream is that it’s kind of the polar opposite of 
 [Fedora 38 科研环境搭建](https://zhuanlan.zhihu.com/p/635384972): compare with others
 
 https://docs.fedoraproject.org/en-US/epel/
-Note that EPEL is not suitable for use in Fedora! Fedora is not Enterprise Linux. EPEL provides "a high quality set of additional packages for Enterprise Linux, including, but not limited to, Red Hat Enterprise Linux (RHEL), CentOS and Scientific Linux (SL), Oracle Linux (OL)". Put simply, Enterprise Linux is a term that refers to Red Hat Enterprise Linux or one of its clones. And Fedora is not a Red Hat clone.f
+Note that EPEL is not suitable for use in Fedora! Fedora is not Enterprise Linux. EPEL provides "a high quality set of additional packages for Enterprise Linux, including, but not limited to, Red Hat Enterprise Linux (RHEL), CentOS and Scientific Linux (SL), Oracle Linux (OL)". Put simply, Enterprise Linux is a term that refers to Red Hat Enterprise Linux or one of its clones. And Fedora is not a Red Hat clone.
 
 That is why you cannot install the "epel-release" package in Fedora. It simply does not exist. Don't try to use EPEL on Fedora.
 
@@ -2973,64 +2981,136 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
    - 关闭NumLock，小键盘可以当做上下键、End等用
    - alt加双击直接打开属性，F2重命名
 
-8. Windows-Unix reference table
-
-   | Windows command | Unix command |
-   | --------------- | ------------ |
-   | `dir`           | `ls`         |
-   | `cls`           | `clear`      |
-   | `curl`          | `curl`       |
-
-   
-
-9. duplicate tab with the same path in cmd
+8. duplicate tab with the same path in cmd
 
    https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/new-tab-same-directory
 
-10. cmd的设置
+9. 
 
-    config file: `C:\Users\Lenovo\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`  
+10. [计算机桌面图标不见了，怎么恢复](https://consumer.huawei.com/cn/support/content/zh-cn00695687/)
 
-    [link](https://learn.microsoft.com/zh-cn/windows/terminal/install#settings-json-file)
+11. TTC字体是TrueType字体集成文件(.TTC文件)，可和ttf放一起
 
-11. [计算机桌面图标不见了，怎么恢复](https://consumer.huawei.com/cn/support/content/zh-cn00695687/)
-
-12. TTC字体是TrueType字体集成文件(.TTC文件)，可和ttf放一起
-
-13. In the Command Prompt window, press and hold the F7 key (no Fn) to view the history of Command Prompt. Then it will open the list of commands you currently typed in.
+12. In the Command Prompt window, press and hold the F7 key (no Fn) to view the history of Command Prompt. Then it will open the list of commands you currently typed in.
 
     https://www.alphr.com/view-command-history-command-prompt/
 
     but only this cmd...
 
-14. 选择任务栏上的" 任务视图"，然后选择" 新建桌面"，然后打开所需的应用。 若要在虚拟桌面之间移动应用，请选择" 任务视图"，然后将所需的应用从一个桌面拖到另一个桌面。 或通过将应用拖动到新桌面来创建另一个虚拟桌面。
+13. 选择任务栏上的" 任务视图"，然后选择" 新建桌面"，然后打开所需的应用。 若要在虚拟桌面之间移动应用，请选择" 任务视图"，然后将所需的应用从一个桌面拖到另一个桌面。 或通过将应用拖动到新桌面来创建另一个虚拟桌面。
 
-15. https://home.csulb.edu/~murdock/tree.html
+14. https://home.csulb.edu/~murdock/tree.html
 
-16. 今日弄完VPN，普通网络都上不了。解决方法：
+15. 今日弄完VPN，普通网络都上不了。解决方法：
 
     ![restore-network](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/restore-network.png)
 
-17. [切换盘符：使用cmd命令行 cd e: 无法切换到E盘-CSDN博客](https://blog.csdn.net/u011288271/article/details/52781342)
+17. [将 Windows 电脑用作移动热点 - Microsoft 支持](https://support.microsoft.com/zh-cn/windows/将-windows-电脑用作移动热点-c89b0fad-72d5-41e8-f7ea-406ad9036b85)  not useful for 188...
 
-    切换盘符和切换路径是分离的。想要切盘符 直接使用命令 `e:` 或者 `cd /d e:` 即可
-
-18. [将 Windows 电脑用作移动热点 - Microsoft 支持](https://support.microsoft.com/zh-cn/windows/将-windows-电脑用作移动热点-c89b0fad-72d5-41e8-f7ea-406ad9036b85)  not useful for 188...
-
-19. windows11删除文件需要管理员权限怎么办？删完里面的东西，包括隐藏文件。重启后再删文件夹
+17. windows11删除文件需要管理员权限怎么办？删完里面的东西，包括隐藏文件。重启后再删文件夹
 
     不重启：可能需要管理员模式打开cmd去删？
 
-20. 按下键盘“Win+Ctrl+D”可以一键生成一个新桌面。生成后，再按下“Win+Ctrl+方向键”可以快速切换这两个桌面。
+18. 按下键盘“Win+Ctrl+D”可以一键生成一个新桌面。生成后，再按下“Win+Ctrl+方向键”可以快速切换这两个桌面。
     why not work in ToDesk?
 
-21. 浏览器默认应用
+19. 浏览器默认应用
 
     ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/chrome.png)
 
     点击链接用浏览器打开：下面的https
 
-22. 
+20. 
+
+
+
+## CMD
+
+- cmd的设置
+
+  config file: `C:\Users\Lenovo\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`  
+
+  [link](https://learn.microsoft.com/zh-cn/windows/terminal/install#settings-json-file)
+
+- Windows-Unix reference table
+
+  | Windows command | Unix command |
+  | --------------- | ------------ |
+  | `dir`           | `ls`         |
+  | `cls`           | `clear`      |
+  | `curl`          | `curl`       |
+
+- [切换盘符：使用cmd命令行 cd e: 无法切换到E盘-CSDN博客](https://blog.csdn.net/u011288271/article/details/52781342)
+
+  切换盘符和切换路径是分离的。想要切盘符 直接使用命令 `e:` 或者 `cd /d e:` 即可
+
+- [Windows cmd 将命令（/指令）写到一个文件里，直接运行这个脚本](https://blog.csdn.net/github_35160620/article/details/52334942)
+
+  cmd:
+
+  ```cmd
+  xxx.
+  ```
+
+- 
+
+### 删除
+
+本文将介绍如何使用CMD命令来删除文件和目录，以及一些需要注意的事项。
+
+#### 一、删除文件
+
+要删除文件，我们首先需要打开CMD命令行界面。可以通过按下Win+R键，然后输入“cmd”来打开CMD窗口。接下来，我们可以使用以下命令来删除文件：
+
+##### 1. del命令
+
+del命令用于删除一个或多个文件。
+
+- 要删除单个文件，可以使用以下命令格式： `del 文件路径`  
+  例如，要删除桌面上的一个名为“example.txt”的文件，可以输入以下命令：  
+  `del C:\Users\用户名\Desktop\example.txt`
+
+- 如果要删除多个文件，可以使用通配符“*”来匹配文件名的一部分。  
+  例如，要删除桌面上所有以“.txt”为扩展名的文件，可以输入以下命令：  
+  `del C:\Users\用户名\Desktop\*.txt`
+
+##### 2. erase命令
+
+erase命令与del命令功能相同，也用于删除文件。使用方法与del命令相同，只需将“del”替换为“erase”。
+
+> 需要注意的是，删除文件是一个不可逆的操作，被删除的文件将无法恢复。在使用del或erase命令删除文件之前，请确保你真的不再需要这些文件。
+
+#### 二、删除目录
+
+与删除文件类似，删除目录也是一个常见的操作。下面是一些常用的命令来删除目录：
+
+##### 1. rmdir命令
+
+rmdir命令用于删除一个空目录。
+
+- 要删除一个空目录，可以使用以下命令格式： `rmdir 目录路径`  
+  例如，要删除桌面上的一个名为“example”的空目录，可以输入以下命令：  
+  `rmdir C:\Users\用户名\Desktop\example`
+
+- 如果要删除多个空目录，可以使用通配符“*”来匹配目录名的一部分。  
+  例如，要删除桌面上所有以“test”开头的空目录，可以输入以下命令：  
+  `rmdir C:\Users\用户名\Desktop\test*`
+
+##### 2. rd命令
+
+rd命令与rmdir命令功能相同，也用于删除一个空目录。使用方法与rmdir命令相同，只需将“rmdir”替换为“rd”。
+
+##### 3. rd /s命令
+
+rd /s命令用于删除一个非空目录及其所有子目录和文件。
+
+- 要删除一个非空目录，可以使用以下命令格式： `rd /s 目录路径`  
+  例如，要删除桌面上的一个名为“example”目录及其所有子目录和文件，可以输入以下命令：  
+  `rd /s C:\Users\用户名\Desktop\example`
+
+> 在使用rd /s命令删除非空目录时，请务必小心，确保你真的不再需要这些目录和文件。
+
+
 
 ## Lenovo
 
@@ -3145,6 +3225,7 @@ a binary64 as having:
 - NCCL：Nvidia Collective multi-GPU Communication Library，多GPU通讯
 - MPI是高性能计算常用的实现方式，它的全名叫做Message Passing Interface。顾名思义，它是一个实现了消息传递接口的库。MPI作为编程库很丰满，作为计算框架很骨感。它的好处在于一切自己动手，不利也在于一切全靠自己。
   http://www.xtaohub.com/IT-neo/Parallel-programming-MPI.html
+- gsl（GNU Scientific Library）
 
 ## Hardware-related
 

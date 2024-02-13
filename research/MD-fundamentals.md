@@ -450,7 +450,7 @@ DispCorr = no
 
 ### Other
 
-顺带一提，对生物分子的模拟，我一般建议让程序在模拟过程中就一直对生物分子消除平动转动，对于GROMACS跑蛋白质来说就是设comm-grps = protein和comm-mode = angular，这样就避免了生物分子中途跑出盒子的问题。
+顺带一提，对生物分子的模拟，我一般建议让程序在模拟过程中就一直对生物分子消除平动转动，对于GROMACS跑蛋白质来说就是设`comm-grps = protein`和`comm-mode = angular`，这样就避免了生物分子中途跑出盒子的问题。
 
 http://sobereva.com/627
 
@@ -547,6 +547,13 @@ see [here](#pbc-processing) for pbc processing
 - https://gromacs.org-gmx-users.maillist.sys.kth.narkive.com/J6lqsB6H/gmx-users-increasing-cut-off-and-pme-grid-spacing
   box too big!
 
+- bad bond modeling, connecting far atoms
+  
+  ```
+  Fatal error:
+  239 of the 71274 bonded interactions could not be calculated because some atoms involved moved further apart than the multi-body cut-off distance (0.494608 nm) or the two-body cut-off distance (1.4325 nm), see option -rdd, for pairs and tabulated bonds also see option -ddcheck
+  ```
+  
 - 
 
 - does not matter for ions?
