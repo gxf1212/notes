@@ -1220,6 +1220,10 @@ They said this because elec and vdw can be separately decoupled in gromacs, maki
 
 
 
+FEP中，原子数目改变了，凭什么从哈密顿量中消掉动能？怪不得gmx不支持mass perturbation（不对呀，只是decomposition不支持，那这么说mass perturbation的single topology就是错的？）
+
+至少，dual topology更好，本质上是所有原子都还在，只是调了势能。mass不变的single topology同理
+
 ### Time convergence
 
 also works for other FEP in gmx

@@ -1,5 +1,7 @@
 # Notes Site
 
+https://gxf1212.github.io/notes
+
 I am a graduate student in biophysics in ZJU. This site shows some of my notes on Linux \& softwares, molecular dynamics simulation tutorials \& experiences, and notes on core courses.
 
 I'm just too lazy to make things clear, so these are just what I wrote when I learned. Maybe it's mainly for synchronizing notes 2333...

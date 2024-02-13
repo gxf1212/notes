@@ -1857,7 +1857,7 @@ You can follow two pathways:
 - edit your ligand locally and save as `.mol2` or `.sdf` file, so that GUI gets a nearly correct structure (not possibly 100% right...)
 - or save a roughly-right (e.g. `.pdb`) file and upload it
 
-> !Note
+> [!NOTE]
 >
 > - uploading your own file is suggested. **The coordinates will be preserved if you upload .pdb file.**
 >   - you can graft coordinates later, which are exclusively provided by .pdb files. But why don't you make them right in the first place...

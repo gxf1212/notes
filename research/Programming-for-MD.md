@@ -80,7 +80,7 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
 
 ### awk
 
-> !NOTE
+> [!NOTE]
 >
 > **awk必须单引号**
 
@@ -1512,7 +1512,7 @@ structure = pmd.load_file(prefix+'.pdb')
 structure.save(prefix+'.gro', overwrite=True, combine='all')
 ```
 
-> !NOTE
+> [!NOTE]
 >
 > `par_all36m_prot.prm`, officially all atom types are commented, but should not for parmed, or it cannot find atomtypes. 
 >

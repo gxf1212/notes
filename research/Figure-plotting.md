@@ -135,7 +135,13 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
   - Chains
   - Residues  
 
-- You can use the command` show sticks, (byres [selection]) within 5 of [selection]` to show sticks of (residues) within 5 angstroms of a selection in PyMOL command line
+- You can use the command to show sticks of (residues) within 5 angstroms of a selection in PyMOL command line
+
+  ```
+  show sticks, (byres )[selection] around 5 
+  ```
+
+- 按住shift点击一个resi，直接选择当前已选的到这个残基
 
 - save
 
@@ -146,6 +152,8 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
   - save a file
 
     <img src="E:\GitHub-repo\notes\research\MD-fundamentals.assets\pymol-save.jpg" style="zoom:67%;" />
+  
+- 
 
 ### Action
 
@@ -465,9 +473,9 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
    to execute the file. (either VMD command line or Tk Console)
 
-3. question mark prompt and return to the normal vmd> prompt? that mean the tcl interpreter is waiting for you to **close a brace**, so try } or ] or ) followed by enter. you may need to enter it a couple of times.
+3. question mark prompt and return to the normal `vmd> prompt?` that mean the tcl interpreter is waiting for you to **close a brace**, so try `}` or `]` or `)` followed by enter. you may need to enter it a couple of times.
 
-#### Selection
+#### Selection and set values
 
 1. 在VMD的`atomselect`命令中，您可以使用Tcl变量替换来引用变量的值。例如，如果您已经定义了一个名为`my_variable`的变量并将其值设置为`5`，则可以使用以下命令在`atomselect`命令中引用该变量的值（不要加"{}"）：
 
@@ -505,7 +513,25 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
    atomselect top "within 5 of resname LYR" frame 23
    ```
 
-3. 
+3. set segment name
+
+   ```tcl
+   set sel [atomselect top "protein and resid 1 to 10"]
+   $sel set segname PROT
+   $sel writepdb "modified_protein.pdb"
+   ```
+
+4. modify residue number
+
+   ```tcl
+   set all [atomselect top "protein or resname AL or resid 1 to 1500"]
+   foreach idx [$all get index] {
+       set atom [atomselect top "index $idx"]
+       $atom set resid [expr [$atom get resid] + 688]
+   }
+   ```
+
+5. 
 
 
 

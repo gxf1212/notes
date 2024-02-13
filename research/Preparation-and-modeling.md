@@ -28,6 +28,16 @@ Swiss-Model的结果，最长也就是模板的长度？？
 
 Can it just add missing residues, rather than build all side chains again? Maybe ligand interaction map will be changed...
 
+### I-TASSER
+
+> not very good?
+
+https://zhanggroup.org/I-TASSER/
+
+https://zhanggroup.org/COTH for protein complex
+
+it gives broken structure…
+
 
 
 ### Other
@@ -36,11 +46,17 @@ Prime: Schrödinger that incorporates homology modeling and fold recognition int
 
 
 
-http://www.sbg.bio.ic.ac.uk/phyre2/html/page.cgi?id=index
+[PHYRE2 Protein Fold Recognition Server (ic.ac.uk)](http://www.sbg.bio.ic.ac.uk/phyre2/html/page.cgi?id=index)
+
+mainly single chain. Threading
 
 
 
-## new prediction
+
+
+## New prediction
+
+### AlphaFold
 
 https://github.com/sokrypton/ColabFold   all kinds of fold
 
@@ -50,9 +66,33 @@ https://colab.research.google.com/github/deepmind/alphafold/blob/main/notebooks/
 
 
 
+### RosettaFold
+
+[Servers | RosettaCommons](https://www.rosettacommons.org/software/servers)
+
+
+
+### ESMFold
+
+
+
+
+
+### CombFold
+
+
+
+### Other
+
+https://tulip.rnet.missouri.edu/deepcomplex/web_index.html
+
+also, no restraint
+
+
+
 ## Protonation state
 
-> !NOTE
+> [!NOTE]
 >
 > check especial the region around ligands!
 
@@ -71,7 +111,7 @@ ambpdb -c xxx.crd -p xxx.top > ambpdb.pdb
 # maybe then use pdb4amber. but tleap can recognize this
 ```
 
-> !NOTE
+> [!NOTE]
 >
 > I don't think in all cases the results (for HIS) is right...for this single conformation, we try to form as many H bonds as possible.
 
@@ -143,7 +183,55 @@ HDOCK: http://hdock.phys.hust.edu.cn/ 有离线版
 
 ## Protein-protein docking
 
-or Protein-peptide
+or Protein-peptide. We should **also try protein complex structure prediction**!
+
+### HADDOCK
+
+[HADDOCK file submission](https://wenmr.science.uu.nl/haddock2.4/submit_file)
+
+> [HADDOCK Web Server - Settings](https://wenmr.science.uu.nl/haddock2.4/library)
+>
+> [Obtaining HADDOCK – Bonvin Lab](https://www.bonvinlab.org/software/haddock2.4/download/)
+
+- almost rigid docking by default
+- many features, like restraint, MD optimization (with CHARMM FF/NAMD), etc.
+
+> HADDOCK distinguishes itself from ab-initio docking methods in the fact that it encodes information from identified or predicted protein interfaces in ambiguous interaction restraints (AIRs) to drive the docking process. It also allows to define specific unambiguous distance restraints (e.g. from MS cross-links) and supports a variety of other experimental data including NMR residual dipolar couplings, pseudo contact shifts and cryo-EM maps.
+> HADDOCK can deal with a large class of modeling problems including protein-protein, protein-nucleic acids and protein-ligand complexes, including multi-bodies (N>2) assemblies.
+
+
+
+![](E:\GitHub-repo\notes\research\Preparation-and-modeling.assets\HADDOCK-flexible.jpg)
+
+haddock flexible is in step 2
+
+
+
+### zdock
+
+https://zdock.umassmed.edu/
+
+- totally rigid…..
+- specify interacting and non-interacting residues
+- very fast
+
+
+
+### RosettaDock
+
+[submit RosettaDock-5.0 job - ROSIE (jhu.edu)](https://r2.graylab.jhu.edu/apps/submit/docking)
+
+> [Servers | RosettaCommons](https://www.rosettacommons.org/software/servers)
+>
+> [Index - ROSIE (jhu.edu)](https://r2.graylab.jhu.edu/)
+
+it’s flexible, ensemble docking by default. 
+
+
+
+### FlexPepDock
+
+http://flexpepdock.furmanlab.cs.huji.ac.il/
 
 
 
@@ -151,11 +239,17 @@ or Protein-peptide
 
 https://cluspro.bu.edu/home.php
 
+### trRosetta
 
+[yanglab.nankai.edu.cn](http://yanglab.nankai.edu.cn/trRosetta/)
+
+
+
+Oh, I think there must be more tools....
 
 ## Protein-NA docking
 
-HADDOCK
+### HADDOCK
 
 
 
@@ -470,7 +564,7 @@ saveamberparm pro pro.prmtop pro.inpcrd
 quit
 ```
 
-> !NOTE
+> [!NOTE]
 >
 > `frcmod1.tym`, which is load later, overwrites what are already in `frcmod2.tym`
 
@@ -637,7 +731,7 @@ We just don't use CHARMM-GUI `.mdp` files...
 
 ### Tips
 
-> !NOTE
+> [!NOTE]
 >
 > For visualization with VMD, see [MD fundamentals](MD-fundamentals.md#VMD)
 >
@@ -719,6 +813,8 @@ For residues that are identical except the coordinates (e.g., the water molecule
 
   See [convert_amber2gmx_via_parmed.py](Programming-for-MD.md#amber2gmx)
 
+- Amber无区分chain的方式？tleap最高层次就是unit
+
 - calculate # of ions (protein mass) for tleap: 
 
   https://www.phys.ksu.edu/personal/schmit/SLTCAP/SLTCAP.html
@@ -765,6 +861,8 @@ prepare the system
 - https://manual.gromacs.org/documentation/2020-current/onlinehelp/gmx-pdb2gmx.html  add -ff folder. xx.ff, forcefield.itp in 
 
 - `pdb2gmx` can recognize terminal residue's COO^-^ if chain ID is assigned
+
+- gmx区分的方式就是多个.itp文件，所以没有chain
 
 Force field
 

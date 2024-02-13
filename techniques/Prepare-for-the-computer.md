@@ -343,6 +343,12 @@ sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.dns 8.8.8
 sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.method manual
 ```
 
+> ```shell
+> /etc/init.d/network restart
+> ```
+>
+> 我机子上没有
+
 #### GNOME
 
 just GUI
@@ -722,7 +728,7 @@ Disable secure boot!
 
 > [manjaro kde 21.2.5安装nvidia显卡驱动以解决笔记本电脑亮度调节问题](https://blog.csdn.net/a772304419/article/details/124141154)
 
-
+Unfortunately, NVIDIA drivers are really unstable lately. 只有和Windows适配得比较好
 
 ### Debug
 

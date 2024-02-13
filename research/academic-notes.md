@@ -92,7 +92,7 @@ maybe a new .md file in the future
 
 激酶作用机理
 
-![1701698699581](E:\GitHub-repo\notes\research\academic-notes.asssets\kinase-mechanism.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/kinase-mechanism.png)
 
 
 
@@ -106,11 +106,14 @@ just basic properties
 
 - hypophosphorylated (comparative more hypophosphorylated, superlative most hypophosphorylated) (biochemistry) phosphorylated to a less than normal extent, or less than fully.
 - 
-- 关于His：
-  反正case-by-case，实在是想起来了就用一下H++ 
-  his整体是6.0，one that is part of an imidazole ring (Nπ) and one that is part of an imine group (Nτ). The Nπ nitrogen has a lone pair of electrons that can act as a Lewis base and accept a proton（带双键那个）
-  这就是MD的不足了，只能同时用一个形式，不能叠加态
-  有些具体case，如酶：https://en.wikipedia.org/wiki/Histidine。传递质子的作用
+- protonation
+  - The pKa of thiol groups (also known as sulfhydryl or mercapto groups) in organic molecules is typically around 8-10. This means that at physiological pH (around 7.4), thiol groups are mostly in their protonated form
+  - 关于His：
+    反正case-by-case，实在是想起来了就用一下H++ 
+    his整体是6.0，one that is part of an imidazole ring (Nπ) and one that is part of an imine group (Nτ). The Nπ nitrogen has a lone pair of electrons that can act as a Lewis base and accept a proton（带双键那个）
+    这就是MD的不足了，只能同时用一个形式，不能叠加态
+    有些具体case，如酶：https://en.wikipedia.org/wiki/Histidine。传递质子的作用
+
 
 
 
@@ -301,6 +304,12 @@ synthetic lethality
 
 - from wikipedia: **脒**[[注 1\]](https://zh.wikipedia.org/zh-cn/脒#cite_note-1)（Amidine）是一类含氮[有机化合物](https://zh.wikipedia.org/wiki/有机化合物)，通式见右图，是[羧酸](https://zh.wikipedia.org/wiki/羧酸)的含氮衍生物。最简单的脒是[甲脒](https://zh.wikipedia.org/wiki/甲脒)，HC(=NH)NH2。常见的脒包括[DBN](https://zh.wikipedia.org/wiki/DBN)、[DBU](https://zh.wikipedia.org/wiki/DBU)和[三氮脒](https://zh.wikipedia.org/w/index.php?title=三氮脒&action=edit&redlink=1)等。低级的脒有毒。
   脒具碱性，可以和酸形成稳定的盐，常用作[杂环化合物](https://zh.wikipedia.org/wiki/杂环化合物)的合成前体，有些脒类也是药物。脒可通过[Pinner反应](https://zh.wikipedia.org/wiki/Pinner反应)制取。
+  
+- 二硫苏糖醇（Dithiothreitol，简称为DTT）是一种小分子有机还原剂，化学式为C4H10O2S2。其还原状态下为线性分子，被氧化后变为包含二硫键的六元环状结构
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/dtt.jpg" style="zoom:50%;" />
+
+- 
 
 
 

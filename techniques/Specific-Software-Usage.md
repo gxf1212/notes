@@ -1440,6 +1440,10 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 
 [键盘快捷键 | Firefox 帮助 (mozilla.org)](https://support.mozilla.org/zh-CN/kb/键盘快捷键)
 
+[How to Disable the Pop-Up Blocker in Mozilla Firefox (howtogeek.com)](https://www.howtogeek.com/769916/how-to-disable-the-pop-up-blocker-in-mozilla-firefox/)
+
+> On the settings page, in the left sidebar, click "Privacy & Security." On the right pane, scroll down to the "Permissions" section. Here, at the bottom, disable the "Block Pop-Up Windows" option.
+
 
 
 # LaTeX
@@ -1713,6 +1717,8 @@ vsce publish
 > [VSCode 插件开发（三）：插件打包与本地安装 - 简书 (jianshu.com)](https://www.jianshu.com/p/bb379a628004)
 
 ### Debug
+
+- Ctrl+Shift+P, Developer: Install Extension from Location. select your code folder
 
 - Test or debug
 

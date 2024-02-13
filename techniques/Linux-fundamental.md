@@ -215,12 +215,25 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 >
 > https://www.asus.com/hk/Motherboards-Components/Motherboards/PRIME/PRIME-Z390-P/ 华硕PRIME Z390-P
 
-### monitor resource usage
+### monitor management
 
-[ref](https://blog.csdn.net/liaomin416100569/article/details/76920328)
+1. [linux系统资源监控命令_linux资源监测命令-CSDN博客](https://blog.csdn.net/liaomin416100569/article/details/76920328)
 
-1. `top`
-2. 
+2. dual-monitor debugging
+
+   [nvidia - How to get external monitor to reconnect after sleep or power off - Ask Ubuntu](https://askubuntu.com/questions/1333688/how-to-get-external-monitor-to-reconnect-after-sleep-or-power-off)
+
+   [fedora - Second display does not turn on after sleep - Unix & Linux Stack Exchange](https://unix.stackexchange.com/questions/690516/second-display-does-not-turn-on-after-sleep)
+
+   [One Monitor Doesn't Wake from Sleep Mode / Applications & Desktop Environments / Arch Linux Forums](https://bbs.archlinux.org/viewtopic.php?id=260159)
+
+3. don't do this:
+
+   ```
+   rm ~/.local/share/kscreen
+   ```
+
+   这删掉了所有双屏的配置信息
 
 ### disk management
 
@@ -307,7 +320,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 9. add user
 
-   `adduser` or `useradd`. we'd better explicitly provide parameters (home dir missing: cannot login; bash missing: cannot use bash?)
+   `adduser` or `useradd`. Though `sudo adduser xxx`就完了, we'd better explicitly provide parameters (home dir missing: cannot login; bash missing: cannot use bash?)
 
    ```shell
    adduser -m username -d /home/user -s bash
@@ -323,13 +336,15 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 12. give user sudo privilege
 
-    https://blog.csdn.net/Dream_angel_Z/article/details/45841109
+    [Linux学习-给普通用户加sudo权限_sudo 加入-CSDN博客](https://blog.csdn.net/Dream_angel_Z/article/details/45841109)
 
     ```shell
     visudo
     ```
 
     add: `user ALL=(ALL)     ALL`
+
+    不能sudo vi /etc/sudoers on Fedora??
 
 13. under root, no need to add `sudo`
 
@@ -901,7 +916,7 @@ in GNOME, maybe click Software & updates
 
 ## apt
 
-> !NOTE
+> [!NOTE]
 >
 > https://blog.csdn.net/liudsl/article/details/79200134
 >
@@ -1524,7 +1539,11 @@ To be re-organized
 
   将应用移动到特定虚拟桌面or工作区，设置快捷键：
 
-  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/switch-desktop.jpg)
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/switch-desktop.jpg" style="zoom:67%;" />
+  
+- check system
+
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/Fedora-system-info.jpg)
 
 ### Settings
 
@@ -1589,17 +1608,15 @@ To be re-organized
 
 ### Dolphin 
 
-- Click on the path. You can type or copy!
-
 - startup path
 
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/KDE-Dolphin-startup.png" style="zoom: 67%;" />
 
 - copy/edit path. click √, go back to directory
 
-  <img src="E:\GitHub-repo\notes\techniques\images\dolphin-path.jpg" style="zoom:67%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/dolphin-path.jpg" style="zoom:67%;" />
 
-- 
+- rename (F2) 不像gnome能统一加后缀
 
 ### Functions
 
@@ -1644,6 +1661,8 @@ To be re-organized
 
   [How to fix the KDE Plasma panel crash problem (addictivetips.com)](https://www.addictivetips.com/ubuntu-linux-tips/fix-kde-plasma-panel-crash/)
 
+  [How to Restart KDE Plasma without Rebooting - Technastic](https://technastic.com/restart-kde-plasma-desktop-without-rebooting/)
+
   ```shell
   killall plasmashell # to stop it
   kstart plasmashell # to restart it
@@ -1661,10 +1680,10 @@ To be re-organized
   
   [A quick way to restart panel in KDE?](https://bbs.archlinux.org/viewtopic.php?id=273779)
   
-- 
+- [Second external monitor not waking up](https://askubuntu.com/questions/1131558/second-external-monitor-not-waking-up)          Switching to TTY3/1 and back to TTY2.
 
 - Nvidia-powerd is only for mobile Ampere gpus so it’s useless with your 2080. Please disable and mask the service.
-https://forums.developer.nvidia.com/t/nvidia-powerd-fails-to-start/235498
+  https://forums.developer.nvidia.com/t/nvidia-powerd-fails-to-start/235498
   
   ```shell
   systemctl disable nvidia-powerd
@@ -1703,7 +1722,7 @@ When system halted/stuck
    ```shell
    sudo pkill X
    startx
-   ```
+```
 
    一下，就好了。不需要重启。
 
@@ -3049,10 +3068,16 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
   cmd:
 
   ```cmd
-  xxx.
+  xxx.bat
   ```
 
-- 
+- [无法加载文件 ******.ps1，因为在此系统中禁止执行脚本。有关详细信息，请参阅 "get-help about_signing"_gulp : 无法加载文件 c:\program files\nodejs\gulp.ps1.....](https://blog.csdn.net/github_35186068/article/details/80518681)
+
+  ```
+  Set-ExecutionPolicy -Scope CurrentUser remotesigned
+  ```
+
+  
 
 ### 删除
 

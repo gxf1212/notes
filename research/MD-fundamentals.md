@@ -350,7 +350,7 @@ This section is about basics and common usage. For more (theory, concepts), see 
 
 Modeling details: see [Preparation and modeling (gmx)](Preparation-and-modeling.md#gmx)
 
-### topology file format
+### Topology file format
 
 [Topology file formats - GROMACS documentation](https://manual.gromacs.org/current/reference-manual/topologies/topology-file-formats.html)
 
@@ -368,6 +368,35 @@ Modeling details: see [Preparation and modeling (gmx)](Preparation-and-modeling.
   [Exclusion of nonbonded interactions - GROMACS documentation](https://manual.gromacs.org/current/reference-manual/topologies/molecule-definition.html#exclusions)
 
   > gromacs中加了bond的atom pairs（约束）是不自动exclude non-bonded interaction的，否则键长不应该变
+
+#### Restraints
+
+gmx genrestr is used to generate position restraints, not distance restraints.
+
+- [Flat-bottomed Position Restraints - GROMACS documentation](https://manual.gromacs.org/documentation/current/reference-manual/functions/restraints.html#flat-bottomed-position-restraints)
+
+  ```
+  ; Position restraint for each water oxygen  
+  [ position_restraints ]  
+  ; 	ai 	funct	g 	r 	k  
+  	1 	1		1 	0.3	1000
+  ```
+
+  $g=1$ (Sphere), $r$ (nm), $k$​ (kJ mol<sup>−1</sup> nm<sup>−2</sup>). still single parti
+
+- [Distance Restraints - GROMACS documentation](https://manual.gromacs.org/documentation/current/reference-manual/functions/restraints.html#distance-restraints). put this after `[ bond ]` section. Example: 
+
+  ```
+  #ifdef POSRES_restr
+    [ bonds ]
+    ;    ai     aj funct         c0         c1         c2         c3
+      1137    1861    10       0.30       0.38        0.40      25000
+      1819    1890    10       0.27       0.32        0.35      25000
+      1833    1867    10       0.27       0.32        0.35      25000
+  #endif
+  ```
+
+- 
 
 ### make_ndx
 
@@ -1014,4 +1043,4 @@ Uniqueness and relative abundance of protein sequences....
 
 ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/casp.png)
 
-![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/casp15.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/casp15.png)E
