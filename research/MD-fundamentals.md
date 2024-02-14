@@ -61,7 +61,7 @@ https://www.cryst.bbk.ac.uk/pps97/course/index.html Section 7: molecular forces
 
 
 
-#### Amber
+### Amber
 
 - antechamber时，和氨基酸比较像的用amber，一般小分子用gaff
 
@@ -73,6 +73,14 @@ https://www.cryst.bbk.ac.uk/pps97/course/index.html Section 7: molecular forces
 
 - 
   
+
+### CHARMM
+
+- `stream/prot/toppar_all36_prot_na_combined.str`有磷酸化蛋白
+
+  https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3367516/  用QM拟合的
+
+- So, as indicated in rtop.doc, IC and BILD are equivalent; BUILd would appear to be a 3rd synonym.
 
 
 

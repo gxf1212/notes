@@ -6,15 +6,13 @@ See [Deal-with-media.md](Deal-with-media.md) for applications about videos, etc.
 
 Fret not over bygones, and the forward journey take.
 
-# Commonly used for working
-
-## Connect the remote
+# Connect the remote
 
 Connection, *pn, remote control usage
 
 configure *PN: see [prepare-for-the-computer](/techniques/Prepare-for-the-computer#break-the-wall)
 
-### Common
+## Common
 
 1. get ip address
    
@@ -88,7 +86,7 @@ configure *PN: see [prepare-for-the-computer](/techniques/Prepare-for-the-comput
 
 9. 
 
-### Sunlogin remote control
+## Sunlogin remote control
 
 工单：可以咨询技术人员。https://console.oray.com/center/workorder
 
@@ -121,7 +119,7 @@ configure *PN: see [prepare-for-the-computer](/techniques/Prepare-for-the-comput
 
 4. 
 
-### phddns
+## phddns
 
 花生壳
 
@@ -131,7 +129,7 @@ https://hsk.oray.com/cooperation/ 使用花生壳快速建立端口映射，在�
 
 for students，白嫖内网穿透，还要做任务？
 
-#### usage
+### usage
 
 > phlinux is the old version. forget about it!
 
@@ -185,7 +183,7 @@ ssh gxf@xxxxx.xxx.xx:port
 
 花生壳下线，用`sudo phddns start`
 
-### ToDesk
+## ToDesk
 
 https://www.todesk.com/linux.html
 
@@ -211,7 +209,7 @@ flaws
 
 charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 
-#### Summary on remote control
+### Summary on remote control
 
 回家三天，总结一下解决远程控制Linux服务器卡机的修复过程。
 
@@ -232,11 +230,11 @@ charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 
 希望以后的工作能顺利进行。😭😭
 
-## Cluster/Supercomputers
+# Cluster/Supercomputers
 
-### ssh and scp
+## ssh and scp
 
-#### Basics
+### Basics
 
 - scp: sesure copy
 
@@ -244,7 +242,7 @@ charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 
   [Linux使用scp拷贝多个文件到远程服务器](https://blog.csdn.net/weixin_40918067/article/details/117376103) 
 
-#### ssh key
+### ssh key
 
 重要的经验
 
@@ -260,7 +258,7 @@ charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 
 - 
 
-### ssh/sftp Tools
+## ssh/sftp Tools
 
 xshell http://www.netsarang.com/download/free_license.html not for Linux?
 
@@ -268,7 +266,7 @@ under Win, Xshell+Xftp look very good. Dragging and clicking a visualized folder
 
 finalshell does not look so pretty though we can just use it. cannot update..?
 
-#### electerm
+### electerm
 
 [开源的 SSH SFTP 客户端 Electerm + Gitee gist - 简书 (jianshu.com)](https://www.jianshu.com/p/399725eb5014)
 
@@ -295,7 +293,7 @@ electerm是一个Linux端的ssh客户端，国产软件。
 
 https://zhuanlan.zhihu.com/p/348324919
 
-#### Xshell & Xftp
+### Xshell & Xftp
 
 1. Xshell font (for only for one dialog)
 
@@ -314,11 +312,9 @@ sudo rm -r /usr/lib/FinalShell
 sudo snap install termius-app
 ```
 
-### Scheduling system
+## Scheduling system
 
-#### slurm
-
-##### basics
+### slurm
 
 [Slurm作业调度系统使用指南 (ustc.edu.cn)](http://hmli.ustc.edu.cn/doc/userguide/slurm-userguide.pdf)  a very detailed guide!
 
@@ -326,38 +322,52 @@ sudo snap install termius-app
 
 [Useful Slurm commands (curc.readthedocs.io)](https://curc.readthedocs.io/en/latest/running-jobs/slurm-commands.html)
 
+#### Job Priority
 
+[Job Priority | Princeton Research Computing](https://researchcomputing.princeton.edu/support/knowledge-base/job-priority) 
 
-- [Job Priority | Princeton Research Computing](https://researchcomputing.princeton.edu/support/knowledge-base/job-priority) 
+> in most cases those jobs requesting shorter times are given the highest priority in QOS
 
-  > in most cases those jobs requesting shorter times are given the highest priority in QOS
+[Priority_and_Fair_Trees.pdf](https://slurm.schedmd.com/SLUG19/Priority_and_Fair_Trees.pdf); [Slurm Workload Manager - Multifactor Priority Plugin](https://slurm.schedmd.com/priority_multifactor.html)
 
-  [Priority_and_Fair_Trees.pdf](https://slurm.schedmd.com/SLUG19/Priority_and_Fair_Trees.pdf); [Slurm Workload Manager - Multifactor Priority Plugin](https://slurm.schedmd.com/priority_multifactor.html)
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/slurm-jobsize.png" style="zoom:50%;" />
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/slurm-jobsize.png" style="zoom:50%;" />
+[Slurm Workload Manager - sprio](https://slurm.schedmd.com/sprio.html)
 
-  [Slurm Workload Manager - sprio](https://slurm.schedmd.com/sprio.html)
-
-  ```shell
-  spiro -j jobname 
-  spiro -u user-id
-  ```
-
-- scontrol
-  
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/scontrol1.png" alt="1701699867598" style="zoom:80%;" />
-  
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/scontrol2.png" alt="1701699219869" style="zoom:80%;" />
-  
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/scontrol3.png" alt="1701699968758" style="zoom:80%;" />
+```shell
+spiro -j jobname 
+spiro -u user-id
+```
 
 
 
+#### scontrol
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/scontrol1.png" alt="1701699867598" style="zoom:80%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/scontrol2.png" alt="1701699219869" style="zoom:80%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/scontrol3.png" alt="1701699968758" style="zoom:80%;" />
+
+[Slurm: How could I return all the completed jobs submitted by a some user? - Stack Overflow](https://stackoverflow.com/questions/43677586/slurm-how-could-i-return-all-the-completed-jobs-submitted-by-a-some-user)
+
+This only works for jobs that are in currently in queue.
+
+```shell
+scontrol show job <your_job_number>
+```
+
+To view general information about the history of previous jobs queued, you can run the following command:
+
+```shell
+sacct (--start=YYYY-MM-DD) -u <your_user_name>
+```
 
 
 
 
-##### example
+
+#### example
 
 read the pdf from hpc.xjtu.edu.cn for more
 
@@ -412,7 +422,7 @@ date > log
 ~
 ```
 
-#### PBS
+### PBS
 
 - basics https://www.jianshu.com/p/2f6c799ca147
   - `qstat`
@@ -455,7 +465,7 @@ date > log
 
 
 
-#### Summary
+### Summary
 
 | system      | PBS        | SLURM          |
 | ----------- | ---------- | -------------- |
@@ -468,7 +478,7 @@ date > log
 
 
 
-### run in backend and redirection
+## run in backend and redirection
 
 namd好像也不能在命令行直接nohup，现在这个2&>xx.log会导致最后没有输出（只有restart）
 
@@ -514,9 +524,9 @@ Then We just need to kill gmx once and the whole script will terminate.
 
 
 
-## Git VCS
+# Git VCS
 
-### in cmd
+## in cmd
 
 1. basic usage
 
@@ -673,7 +683,7 @@ Then We just need to kill gmx once and the whole script will terminate.
     This will clone only the specified branch of the repository.
 
 
-### exploration
+## exploration
 
 1. GitHub克隆Gitee的仓库
 
@@ -699,13 +709,13 @@ Then We just need to kill gmx once and the whole script will terminate.
 
 4. 
 
-### git bash
+## git bash
 
 - [如何修改 Git Bash 窗口中默认的字体大小](https://www.cnblogs.com/heroljy/p/8989123.html)：点击右键，选择 Options
 
-## Coding and writing
+# Coding and writing
 
-### Typora
+## Typora
 
 install: https://www.typora.io/releases/all
 
@@ -717,17 +727,17 @@ install: https://www.typora.io/releases/all
 
 2. 
 
-#### plugins
+### plugins
 
 1. mermaid语法
    - 特殊符号，要加引号才显示 https://github.com/mermaid-js/mermaid/issues/213
 2. 
 
-#### themes
+### themes
 
 1. liquid: cannot see the mouse cursor in titles and hyperlinks?
 
-#### Crack
+### Crack
 
 just search...
 
@@ -735,9 +745,9 @@ https://www.ghxi.com/typora.html
 
 Mac：https://macwk.com/soft/typora
 
-### VScode
+## VScode
 
-#### Appearance
+### Appearance
 
 1. VScode安装完默认不能自动换行，需要我们手动配置。 文本超出显示时，会溢出，如图： 进入文件>首选项>设置，打开设置界面，在常用设置下找到Editor:Word Wrap选项，默认为off,设置为on即可。
 
@@ -757,7 +767,7 @@ Mac：https://macwk.com/soft/typora
 
 4. 
 
-#### Code Text
+### Code Text
 
 1. [How to format source code in Visual Studio Code (VSCode) - Mkyong.com](https://mkyong.com/vscode/how-to-format-source-code-in-visual-studio-code-vscode/)
 
@@ -774,7 +784,7 @@ Mac：https://macwk.com/soft/typora
 
 3. 
 
-#### Python
+### Python
 
 - [vscode中选择Anaconda的python环境](https://blog.csdn.net/u013187057/article/details/83418425)
   - 方法一： 点击vscode左下角然后选择相应的Anaconda环境
@@ -785,13 +795,13 @@ Mac：https://macwk.com/soft/typora
 
 [VS Code Remote SSH配置 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/68577071)
 
-### Pycharm
+## Pycharm
 
 [Jetbrains 全家桶教育授权许可edu域名黑名单 (edumails.cn)](https://www.edumails.cn/stoplist.html)
 
 验证要上传证件
 
-#### Basics
+### Basics
 
 1. https://blog.csdn.net/qq_41330454/article/details/105906347 控制台命令提示符是In[2]. ipython!
 
@@ -819,7 +829,7 @@ Mac：https://macwk.com/soft/typora
 
 7. 
 
-#### other execution notes
+### other execution notes
 
 - [AttributeError: partially initialized module ''has no attribute''(most likely dueto a circular import_懒笑翻的博客](https://blog.csdn.net/c_lanxiaofang/article/details/103997425)
 
@@ -829,11 +839,11 @@ Mac：https://macwk.com/soft/typora
 
 
 
-### conda & python cmd
+## conda & python cmd
 
 https://blog.csdn.net/zhayushui/article/details/80433768
 
-#### Initialize &Basics
+### Initialize &Basics
 
 1. no need to copy the installation .sh file to where to install. You can specify a directory.
 
@@ -883,7 +893,7 @@ https://blog.csdn.net/zhayushui/article/details/80433768
     
 
 
-#### Environments
+### Environments
 
 - see env list
 
@@ -939,7 +949,7 @@ https://blog.csdn.net/zhayushui/article/details/80433768
 
 - 
 
-#### Packages
+### Packages
 
 - packages of an environment
 
@@ -971,7 +981,7 @@ https://blog.csdn.net/zhayushui/article/details/80433768
 
   https://blog.csdn.net/taquguodedifang/article/details/78039181 in linux
 
-#### Bugs
+### Bugs
 
 - An unexpected error has occurred. Conda has prepared the above report.
 
@@ -1076,7 +1086,7 @@ conda update --strict-channel-priority --all
 >
 > [link](https://dannyda.com/2020/03/21/how-to-create-shortcut-icon-for-anaconda-anaconda3-navigator-launch-anaconda-navigator-in-linux-debian-ubuntu-kali-linux/?__cf_chl_managed_tk__=8b0602f628e3697df877a10ef8acbd1aaed57efe-1624180568-0-AQN5TbG3O_yGaDEn0fVCjKdPwJeitKXjQ5dGrRfek69NylD0fJ5-atmRV2JoCodX4-mn_CX-vH8Ay_KzM9Ew77recYhgLQF_b3AqC85p9Pt8IVjBso98tTdFN9TknxGj5tTJFM_8KyF_S4qbMmoTpsiUnMKl2kc3rlzmRlQZvO0AJaILgZakK-WjM6xFauMno73HWqkCE4IaHB35y0M0C0dnw8t2b5qReINgAcLiCZuHX897fWj-OLS6yNbAVjmkgOPbkazSG3X8a-o_AgziC8zfKXi584jpGmet4WwRwFnSaWJvOAp7BA7vSIkcSJ7UAOFWzpvkDilEtFoa-XMd6jpZQgKbtBVQn4vLT5LUl1_XLFU3M7B9G_vN7vcyUcFjLV2gl6xdDcx9WA-JypLtICF3nbFVjS3gvK_WCEqs30dnW38X3Ceuk9Bhq7FFyegkaQmnFy5a4V5KeJob3h_gXQRaWwaeAFAHoeuYY0RXfAtfD82sJgJP0UOOYC8IBBV43rGAmhSOsLhiC2u3hk2hwLIEy7mG10sSUlGq_3I_dPjha1qlIAP0APiBXaWOOdujGD2gFeot6PQGwrg71cglm4rQc1Zei_kF8QfHdYerOFjLLtbfWC0HTeoFZ_L7Qu9R9c8npxn9Z5Np2O_IqqsKo3yaDAxR_aV8JVS3rS-a4mxAunZXcWj734HTBAJaTTSdepNfW2PdqnUEbsnD5bAyjeDPVQQupDNG_1qz8fsEzThDBSPP04GMtGJGqpEBawQvu2Nk857rXxA-_V2AwE9s7Og)
 
-#### For R language
+### For R language
 
 when pycharm is open, working directory is set to the current. to install a package (dependent on) tcl
 
@@ -1097,7 +1107,7 @@ conda install -c intel tcl
 
 failed, remove this env...
 
-### Jupyter Notebook, Google Colab, etc.
+## Jupyter Notebook, Google Colab, etc.
 
 1. Jupyter Notebook 更换主题（背景、字体）:  https://www.cnblogs.com/shanger/p/12006161.html
    
@@ -1138,9 +1148,9 @@ failed, remove this env...
    > conda install matplotlib==2.0.0 networkx==1.11 pandas==0.20.3 scikit-learn==0.18.2 scipy==0.18.1 numpy==1.13.1
    > ```
 
-### Spyder
+## Spyder
 
-#### setup
+### setup
 
 spyder conda interpreter：光设置没用，直接打开conda里每个对应环境的Spyder
 
@@ -1152,7 +1162,7 @@ spyder conda interpreter：光设置没用，直接打开conda里每个对应环
 
 [Using Conda Python Environments with Spyder IDE and Jupyter Notebooks in Windows | by Prem George | Medium](https://medium.com/@apremgeorge/using-conda-python-environments-with-spyder-ide-and-jupyter-notebooks-in-windows-4e0a905aaac5)
 
-#### shortcut
+### shortcut
 
 [【Spyder】Python内置IDE之Spyder快捷键 - 锦绣良缘](https://www.cnblogs.com/grace731/articles/15029832.html)
 
@@ -1178,27 +1188,27 @@ Ctrl+双击：打开加载包源代码
 
 How to open a project folder in Spyder IDE? Projects > New project > Existing directory > Create
 
-### MATLAB
+## MATLAB
 
 在matlab编辑窗口中怎样只运行选中的命令？快捷键：F9
 
-### Online document
+## Online document
 
 
 
 在腾讯文档中，您可以通过以下两种方式进行换行： 按下回车键（Enter）：在您需要进行换行的地方按下回车键即可。 使用Shift+Enter 进行强制换行：如果您需要在一行中换行，可以按下Shift+Enter 键，这将在当前位置插入一个换行符。
 
-## Office
+# Office
 
-### Common
+## Common
 
 - [查看 Office 文件的先前版本](https://support.microsoft.com/zh-cn/office/查看-office-文件的先前版本-5c1e076f-a9c9-41b8-8ace-f77b9642e2c2)
 
-### MS Word
+## MS Word
 
 - [Word调整编号与文字距离的方法](https://www.jb51.net/office/word/755262.html)：右键弹出下拉菜单，点击【调整列表缩进】
 
-#### 表格
+### 表格
 
 - 表格左上角斜线
 
@@ -1208,11 +1218,11 @@ How to open a project folder in Spyder IDE? Projects > New project > Existing di
 
 - [word如何设置表格距离文字的下方距离](https://jingyan.baidu.com/article/d5a880eb68067c52f147cce9.html)：表格属性---文字环绕
 
-### MS Excel
+## MS Excel
 
 also for LibreOffice Calc, many commands are the same....
 
-#### General
+### General
 
 - Excel的paste special必须是复制，辣鸡！Calc就可以剪切
 
@@ -1228,7 +1238,7 @@ also for LibreOffice Calc, many commands are the same....
   Go to Language Settings > Writing Aids.
   In the Options section, uncheck Check spelling as you type. 
 
-#### Text & Format
+### Text & Format
 
 - [Excel 将文本或数字的格式设置为上标或下标](https://support.microsoft.com/zh-cn/office/%E5%B0%86%E6%96%87%E6%9C%AC%E6%88%96%E6%95%B0%E5%AD%97%E7%9A%84%E6%A0%BC%E5%BC%8F%E8%AE%BE%E7%BD%AE%E4%B8%BA%E4%B8%8A%E6%A0%87%E6%88%96%E4%B8%8B%E6%A0%87-3649411b-adf4-483e-b0e8-7b844605da74)
 
@@ -1242,7 +1252,7 @@ also for LibreOffice Calc, many commands are the same....
 
 - When you copy the text out of Excel, it adds double quotes to preserve the linebreak character??
 
-#### Calculation
+### Calculation
 
 - To calculate the correlation coefficient, you can use the `CORREL` function. 
 
@@ -1262,33 +1272,33 @@ also for LibreOffice Calc, many commands are the same....
 
 - if your vector is in cells A1 to A5, you can use the formula =SUMSQ(A1:A5) to calculate the sum of squares of the values in those cells.
 
-### MS PPT
+## MS PPT
 
 - [PPT中如何将多个图形等距分布](https://jingyan.baidu.com/article/fec7a1e5c51b1d1190b4e7ca.html)
 - 美化大师插件：批量删除动画；PPT工具栏
 
-### Foxit Reader
+## Foxit Reader
 
-#### Shortcuts
+### Shortcuts
 
 - Alt+F3：手型工具
 - Alt+F6：选择
 
-### Convert Filetypes
+## Convert Filetypes
 
 https://cloudconvert.com/epub-to-pdf
 
 https://www.freepdfconvert.com/epub-to-pdf
 
-### Other Windows Tools
+## Other Windows Tools
 
 [Win11画图工具怎么图片调整像素-百度经验 (baidu.com)](https://jingyan.baidu.com/article/3065b3b681e9b1ffcff8a4c7.html)
 
 
 
-## Scientific
+# Scientific
 
-### Origin
+## Origin
 
 https://www.zhihu.com/column/c_1368227352443572224
 
@@ -1318,11 +1328,11 @@ https://www.zhihu.com/column/c_1368227352443572224
 
 > [origin自动载入xvg数据作图](https://jerkwin.github.io/2018/08/06/origin%E8%87%AA%E5%8A%A8%E8%BD%BD%E5%85%A5xvg%E6%95%B0%E6%8D%AE%E4%BD%9C%E5%9B%BE/)
 
-### GraphPad Prism
+## GraphPad Prism
 
 
 
-#### other
+### other
 
 - linear regression: https://www.graphpad.com/quickcalcs/linear1/
 
@@ -1330,7 +1340,7 @@ https://www.zhihu.com/column/c_1368227352443572224
 
   > these free tools are calculator; it cannot create simple plots?
 
-### Scientific writing
+## Scientific writing
 
 https://www.home-for-researchers.com/static/index.html#/
 
@@ -1338,9 +1348,9 @@ https://app.bibguru.com/: fast citation generation
 
 
 
-## Literature
+# Literature
 
-### Mendeley
+## Mendeley
 
 skills:
 
@@ -1353,7 +1363,7 @@ skills:
 
 
 
-### Export a brief format
+## Export a brief format
 
 导出那种，作者、杂志、年期卷的格式，放在PPT最下面：
 
@@ -1380,13 +1390,13 @@ For ACS papers, copy from here
 
 ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/acs-cite.png)
 
-#### Other
+### Other
 
 pdf文件标题粘贴到微信对话框就失去换行成为一整行了
 
-## ChatGPT etc.
+# ChatGPT etc.
 
-### Basics
+## Basics
 
 - OpenAI's services are not available in your country. (error=unsupported_country)
   解决方法：全局模式
@@ -1403,7 +1413,7 @@ pdf文件标题粘贴到微信对话框就失去换行成为一整行了
 
 
 
-### skills
+## skills
 
 [升级篇：超详细ChatGPT(GPT 4.0)论文润色指南+最全提示词——持续更新 - 简书 (jianshu.com)](https://www.jianshu.com/p/f228222f623b)
 
@@ -1411,7 +1421,7 @@ pdf文件标题粘贴到微信对话框就失去换行成为一整行了
 
 [Prompt engineering - OpenAI API](https://platform.openai.com/docs/guides/prompt-engineering/strategy-write-clear-instructions)
 
-### New Bing
+## New Bing
 
 - Edge dev: https://www.microsoftedgeinsider.com/zh-tw/download
 
@@ -1419,22 +1429,22 @@ pdf文件标题粘贴到微信对话框就失去换行成为一整行了
 
 - Bing AI for Firefox: [Get this Extension for 🦊 Firefox (en-US) (mozilla.org)](https://addons.mozilla.org/en-US/firefox/addon/bing-ai-for-firefox/)
 
-### Alternatives
+## Alternatives
 
 - 
 
 - a domestic new choice: [天工AI搜索 — 知识从这里开始 (tiangong.cn)](https://search.tiangong.cn/)，除了百度、讯飞、阿里等
 
-### traditional AI chatbots
+## traditional AI chatbots
 
 - https://www.cleverbot.com/
 - https://myanima.ai/app/
 - https://my.replika.ai/
 - https://simsimi.com/chat
 
-## Other Tools
+# Other Tools
 
-### ZJU
+## ZJU
 
 [浙大邮箱 帮助中心](https://mail.zju.edu.cn/coremail/help/clientoption_zh_CN.jsp)
 
@@ -1443,7 +1453,7 @@ pdf文件标题粘贴到微信对话框就失去换行成为一整行了
 图书馆讲座视频会自动保存在钉群的直播回放中，此外，往期讲座视频还可在学在浙大上观看，详见：
 https://course.zju.edu.cn/zh-cn/pages/courselist?departmentid=3598&departmentname=%E5%9B%BE%E4%B9%A6%E9%A6%86
 
-### ThunderBird
+## ThunderBird
 
 xjtu email: just login, default configuration
 
@@ -1454,12 +1464,12 @@ xjtu email: just login, default configuration
 
 网易邮箱大师，可以搞个Mac版？
 
-### Gmail
+## Gmail
 
 在搜索栏输入 in:**inbox** is:unread 筛选出**收**件**箱**中所有**未读邮件**； 点击左上角的选中全部； 在页面上面点击“选择与此搜索匹配的所有会话”选择出所有**未读邮件**。 之后点击“**标记**为**已读**”即可将收件箱中的所有**未读邮件**一键**标记**为**已读**状态：
 [谷歌邮箱 Gmail 如何一次性将所有未读邮件标为已读？ - 老王博客](https://www.bing.com/ck/a?!&&p=3890c46df33db1bcJmltdHM9MTY3ODc1MjAwMCZpZ3VpZD0yYmEyOWMwMi1lZDI3LTZlNTQtMDBmNC04ZWJlZWM2ZDZmODgmaW5zaWQ9NTQwNA&ptn=3&hsh=3&fclid=2ba29c02-ed27-6e54-00f4-8ebeec6d6f88&psq=gmail的inbox中总是有11封邮件未读，但又看不到，如何将它们标记为已读或删除？&u=a1aHR0cHM6Ly9sYW93YW5nYmxvZy5jb20vZ21haWwtcmVhZC1hbGwuaHRtbCM6fjp0ZXh0PSVFNSU5QyVBOCVFNiU5MCU5QyVFNyVCNCVBMiVFNiVBMCU4RiVFOCVCRSU5MyVFNSU4NSVBNSUyMGluJTNBaW5ib3glMjBpcyUzQXVucmVhZCwlRTclQUQlOUIlRTklODAlODklRTUlODclQkElRTYlOTQlQjYlRTQlQkIlQjYlRTclQUUlQjElRTQlQjglQUQlRTYlODklODAlRTYlOUMlODklRTYlOUMlQUElRTglQUYlQkIlRTklODIlQUUlRTQlQkIlQjYlRUYlQkMlOUIlMjAlRTclODIlQjklRTUlODclQkIlRTUlQjclQTYlRTQlQjglOEElRTglQTclOTIlRTclOUElODQlRTklODAlODklRTQlQjglQUQlRTUlODUlQTglRTklODMlQTglRUYlQkMlOUIlMjAlRTUlOUMlQTglRTklQTElQjUlRTklOUQlQTIlRTQlQjglOEElRTklOUQlQTIlRTclODIlQjklRTUlODclQkIlRTIlODAlOUMlRTklODAlODklRTYlOEIlQTklRTQlQjglOEUlRTYlQUQlQTQlRTYlOTAlOUMlRTclQjQlQTIlRTUlOEMlQjklRTklODUlOEQlRTclOUElODQlRTYlODklODAlRTYlOUMlODklRTQlQkMlOUElRTglQUYlOUQlRTIlODAlOUQlRTklODAlODklRTYlOEIlQTklRTUlODclQkElRTYlODklODAlRTYlOUMlODklRTYlOUMlQUElRTglQUYlQkIlRTklODIlQUUlRTQlQkIlQjYlRTMlODAlODIlMjAlRTQlQjklOEIlRTUlOTAlOEUlRTclODIlQjklRTUlODclQkIlRTIlODAlOUMlRTYlQTAlODclRTglQUUlQjAlRTQlQjglQkElRTUlQjclQjIlRTglQUYlQkIlRTIlODAlOUQlRTUlOEQlQjMlRTUlOEYlQUYlRTUlQjAlODYlRTYlOTQlQjYlRTQlQkIlQjYlRTclQUUlQjElRTQlQjglQUQlRTclOUElODQlRTYlODklODAlRTYlOUMlODklRTYlOUMlQUElRTglQUYlQkIlRTklODIlQUUlRTQlQkIlQjYlRTQlQjglODAlRTklOTQlQUUlRTYlQTAlODclRTglQUUlQjAlRTQlQjglQkElRTUlQjclQjIlRTglQUYlQkIlRTclOEElQjYlRTYlODAlODElRUYlQkMlOUE&ntb=1)
 
-### TIM in Linux (wine)
+## TIM in Linux (wine)
 
 installation: see [Linux-fundamental](/techniques/Linux-fundamental?id=other-softwares)
 
@@ -1479,7 +1489,7 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 
 - 
 
-### Tencent meeting
+## Tencent meeting
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/Tencent-meeting.png" style="zoom:50%;" />
 
@@ -1487,7 +1497,7 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 
 
 
-### 钉钉
+## 钉钉
 
 钉钉客户免费享有聊天消息云端存储180天
 
@@ -1495,7 +1505,7 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 
 
 
-### Browser
+## Browser
 
 [键盘快捷键 | Firefox 帮助 (mozilla.org)](https://support.mozilla.org/zh-CN/kb/键盘快捷键)
 
@@ -1956,7 +1966,7 @@ capture group: failed and not using...
   - 一个可选的负号（`-?`）
 - `*`表示零个或多个，`+`表示一个或多个
   -  `\\s*` 来表示零个或多个空白字符。
-  - 一个或多个数字（`\\d+`）；至少一个空白字符（`\\s+`）
+  -  一个或多个数字（`\\d+`）；至少一个空白字符（`\\s+`）
 
 
 #### Range
@@ -2039,27 +2049,27 @@ https://docs.python.org/3/library/tkinter.html
 但是那个doc基本用不了
 
 - Python: tkinter窗口屏幕居中,设置窗口最大,最小尺寸
-  
+
   https://blog.csdn.net/yao_yu_126/article/details/23717355
 
 - Button详解与位置调整
-  
+
   https://www.tianqiweiqi.com/python-tkinter-button.html
-  
+
   - command： 指定按钮消息的回调函数；
   - 指定按钮上文本的位置anchor: must be n, ne, e, se, s, sw, w, nw, or center
-  
+
   > frame类似panel？
 
 - `.place()` is not used often. It has two main drawbacks:
-  
+
   1. **Layout can be difficult to manage with `.place()`.** This is especially true if your application has lots of widgets.
   2. **Layouts created with `.place()` are not responsive.** They don’t change as the window is resized. 除非用相对的。relx/y是针对window的
 
 - 您可以call self.update（）你已经把它的屏幕（上之后`pack`，`grid`等），以使其绘制。绘制后，`winfo_width`, `winfo_x` and `winfo_height`命令将起作用。
 
 - https://jingyan.baidu.com/article/3f16e00312aaa62591c10315.html
-  
+
   win.winfo_x()
 
 #### wx
