@@ -131,7 +131,7 @@ examples
 
 - [bash - Sed: get lines beginning with some prefix - Stack Overflow](https://stackoverflow.com/questions/13202715/sed-get-lines-beginning-with-some-prefix/13202791#13202791)
 
-  Try doing this :
+  Try doing this:
 
   ```bash
   awk '/^RIM-COD/' file.txt
@@ -217,7 +217,7 @@ examples
 
 - 
 
-### alternative
+### Alternatives of editing
 
 If you don't want to or can't edit a file with varying filenames every time, you just create one. Variable values will be replaced.
 
@@ -239,7 +239,15 @@ EOF
 tleap -f tleap.in > tleap.log
 ```
 
+### printf
 
+- fixed lenght (fill with 0)
+
+  ```shell
+  $(printf "%02d" $jj)
+  ```
+
+- 
 
 ## File processing
 
@@ -295,62 +303,7 @@ tleap -f tleap.in > tleap.log
 
 3. 
 
-## Control
-
-### for loop
-
-
-
-### if statement
-
-1. shell-if表达式关于文件存在判断，变量比较判断用法
-
-   https://blog.csdn.net/khx0910/article/details/106383294/
-
-2. if 判断文件或目录是否存在
-
-   https://blog.csdn.net/m0_38039437/article/details/100160042
-
-### function
-
-[Bash函数 - Bash Shell教程 (yiibai.com)](https://www.yiibai.com/bash/bash-functions.html)
-
-### arguments of a script
-
-1. `.sh` file has arguments: https://www.runoob.com/linux/linux-shell-passing-arguments.html
-
-2. 默认参数(变量默认值) 比较low的方式
-
-   ```shell
-   if [ ! $1 ]; then
-       $1='default'
-   fi
-   ```
-
-3. 
-
-### math
-
-1. perform string: [[]]
-
-   perform any math: (()) or between ``
-
-   `$( )` to store any outputed number in a variable
-
-   ```shell
-   # e.g. 
-   left_water=$(( $all_water - $removed_water ))
-   ```
-
-2. keep the calculated result
-
-   ```shell
-   i=`expr ${f:0-1} + 1`
-   ```
-
-3. 
-
-### other
+### filename
 
 1. unify the format of file names
 
@@ -369,43 +322,9 @@ tleap -f tleap.in > tleap.log
 
 2. 
 
-## stdin stdout
+## Control
 
-### xargs
-
-The `xargs` command is used to build and execute command lines from standard input. So, `xargs -n 1` means that `xargs` will use at most one argument per command line. For example:
-
-```shell
-rpm -qa | grep -i devel | xargs -n 1 dnf remove -y
-```
-
-### pipeline
-
-
-
-## advanced (scripting)
-
-1. process files line by line
-
-   https://www.cnblogs.com/iloveyoucc/archive/2012/07/10/2585529.html
-
-   ```shell
-   while read line
-   do
-       echo $line
-   done < file
-   ```
-
-2. https://cloud.tencent.com/developer/ask/sof/806010
-
-   如何在Bash函数中添加默认参数？`${1:-.}`
-
-3. 
-
-4. 
-
-
-## examples
+### for loop
 
 1. download: an example of for loop
 
@@ -433,7 +352,109 @@ rpm -qa | grep -i devel | xargs -n 1 dnf remove -y
    6
    ```
 
-2. 如果你想要更简单的方法来生成一个包含两位数字符串的数组，可以使用以下命令：
+2. 
+
+### while loop
+
+1. process files line by line
+
+   https://www.cnblogs.com/iloveyoucc/archive/2012/07/10/2585529.html
+
+   ```shell
+   while read line
+   do
+       echo $line
+   done < file
+   ```
+
+2. 
+
+### if statement
+
+string comparison: `[[ ... ]]`
+
+1. shell-if表达式关于文件存在判断，变量比较判断用法
+
+   https://blog.csdn.net/khx0910/article/details/106383294/
+
+2. if 判断文件或目录是否存在
+
+   https://blog.csdn.net/m0_38039437/article/details/100160042
+
+### function
+
+[Bash函数 - Bash Shell教程 (yiibai.com)](https://www.yiibai.com/bash/bash-functions.html)
+
+### arguments
+
+1. `.sh` file has arguments: https://www.runoob.com/linux/linux-shell-passing-arguments.html
+
+2. 默认参数(变量默认值) 比较low的方式
+
+   ```shell
+   if [ ! $1 ]; then
+       $1='default'
+   fi
+   ```
+
+3. 
+
+## stdin stdout
+
+### xargs
+
+The `xargs` command is used to build and execute command lines from standard input. So, `xargs -n 1` means that `xargs` will use at most one argument per command line. For example:
+
+```shell
+rpm -qa | grep -i devel | xargs -n 1 dnf remove -y
+```
+
+### pipeline
+
+
+
+## math
+
+1. perform any math: (()) or between ``
+
+   `$( )` to store any outputed number in a variable
+
+   `$((...))`: arithmetic expression. It **only supports integer** arithmetic.
+
+   ```shell
+   # e.g. 
+   left_water=$(( $all_water - $removed_water ))
+   i=`expr ${f:0-1} + 1`
+   ```
+
+   keep the calculated result
+
+2. [shell script for multiplication of two numbers](https://www.log2base2.com/shell-script-examples/operator/shell-script-for-multiplication-of-two-numbers.html)
+
+   [shell script for division of two numbers](https://www.log2base2.com/shell-script-examples/operator/shell-script-for-division-of-two-numbers.html)
+
+   ```
+   num1=10
+   num2=20
+   num3=2
+   
+   ans=$((num1 * num2))
+   ans=`expr $num1 \* $num2`
+   result=$(echo "$num1 * $num2 / $num3" | bc)
+   ```
+
+   
+
+## advanced
+
+1. 
+
+4. 
+
+
+## examples
+
+1. 如果你想要更简单的方法来生成一个包含两位数字符串的数组，可以使用以下命令：
 
    ```shell
    numbers=($(seq -f "%02g" 1 20))
@@ -446,7 +467,7 @@ rpm -qa | grep -i devel | xargs -n 1 dnf remove -y
    echo ${numbers[@]}
    ```
 
-3. batch submit jobs
+2. batch submit jobs
 
    https://www.cnblogs.com/wutou/p/16398524.html
 
@@ -472,7 +493,7 @@ rpm -qa | grep -i devel | xargs -n 1 dnf remove -y
    done
    ```
 
-4. The error message "value too great for base" occurs because the leading zero in the number 09 is interpreted as an octal (base 8) number in Bash, and octal numbers cannot have a digit 9.
+3. The error message "value too great for base" occurs because the leading zero in the number 09 is interpreted as an octal (base 8) number in Bash, and octal numbers cannot have a digit 9.
    To overcome this issue and generate the desired two-digit numbers with leading zeros, you can use the printf function with a format specifier. Here's an example:
 
    ```bash
@@ -483,21 +504,41 @@ rpm -qa | grep -i devel | xargs -n 1 dnf remove -y
        echo "ii: $ii, jj: $jj"
    done
    ```
-   
+
    In this example, `10#$ii` is used to explicitly specify that the variable $ii should be interpreted as a base-10 number. The printf statement then formats the number with %02d, which ensures it is printed with two digits and leading zeros if necessary.
 
+4. https://cloud.tencent.com/developer/ask/sof/806010
 
-# Tcl programming
+   如何在Bash函数中添加默认参数？`${1:-.}`
 
-## String
+5. 
+
+# VMD scripting
+
+## Tcl Basics
+
+### String
+
+Tcl本身将所有的变量值视为字符串，并将他们作为字符串来保存
 
 - format strings: https://wiki.tcl-lang.org/page/format
 
 - append something to a string: https://wiki.tcl-lang.org/page/append
 
+- [Tcl的字符串操作：获取字符_tcl字符串截取-CSDN博客](https://blog.csdn.net/bleauchat/article/details/89061420)
+
+  ```tcl
+  set str "Hello world"
+  string range $str 3 end-2
+  ```
+
+  **在使用end时，表达式中不能有空格**
+
+- 
 
 
-## List
+
+### List
 
 everything about lists https://zetcode.com/lang/tcl/lists/
 
@@ -519,13 +560,15 @@ everything about lists https://zetcode.com/lang/tcl/lists/
 
 
 
-## Vector
+### Vector Matrix
 
-Everything: https://www.ks.uiuc.edu/Research/vmd/current/ug/node193.html 
+Everything is here: [Vectors](https://www.ks.uiuc.edu/Research/vmd/current/ug/node193.html)  [Matrix routines](https://www.ks.uiuc.edu/Research/vmd/current/ug/node194.html)
+
+- `vecnorm v` - Returns the vector of length 1 directed along v
 
 
 
-## Control
+### Control
 
 - if...else
 
@@ -569,16 +612,16 @@ Everything: https://www.ks.uiuc.edu/Research/vmd/current/ug/node193.html
 
 
 
-## Files
+### Files
 
 - [Output results to the text file](https://sunxiaoquan.wordpress.com/2015/02/20/vmd-tcltk-output-results-to-the-text-file/)
 - https://wiki.tcl-lang.org/page/file+delete
 
 
 
-## Function
+### Function
 
-[Tcl Tutorial 笔记9 · proc 参数传递与return_tcl proc { a 16}_Taurus_ZSZ的博客-CSDN博客](https://blog.csdn.net/qq_39597489/article/details/111411707)
+[Tcl Tutorial 笔记9 · proc 参数传递与return](https://blog.csdn.net/qq_39597489/article/details/111411707)
 
 ```tcl
 proc example {first {second ""} args} {
@@ -604,6 +647,110 @@ set count4 [example ONE TWO THREE FOUR]
 puts "The example was called with a varying number of arguments:"
 puts "    $count1, $count2, $count3, and $count4"
 ```
+
+## VMD Scripting 
+
+### Basics
+
+1. run in terminal
+
+   ```shell
+   vmd -dispdev text -e combine.tcl
+   ```
+
+   vmd scripting, [pass parameters](http://timchen314.com/vmd%E7%AC%94%E8%AE%B0/)
+
+   ```
+   set file [lindex $argv 0]
+   vmd .... -args arg arg2
+   ```
+
+2. How to run TCL script on VMD?
+
+   This is very easy to do. Just use any text editor to write your script file, and in a VMD session, use the command 
+
+   ```shell
+   source filename
+   ```
+
+   to execute the file. (either VMD command line or Tk Console)
+
+3. question mark prompt and return to the normal `vmd> prompt?` that mean the tcl interpreter is waiting for you to **close a brace**, so try `}` or `]` or `)` followed by enter. you may need to enter it a couple of times.
+
+#### about Tkconsole
+
+1. resize font in TkConsole https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/29151.html
+
+   type in TkConsole: tkcon font <type> <size>
+
+   ```
+   tkcon font Courier 16
+   ```
+
+   size of the window is automatically changed. But font type not affected?
+
+2. As for the global font: the higher resolution your screen is, the smaller your font is
+
+   Maybe because the source code specifies pixels??
+
+3. TkConsole auto-loads history file?
+
+   https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/8543.html
+
+   Yeah, just about last 10 commands you typed, with the starting number 48. 强迫症犯了。。
+
+   >    history command
+   >
+   >    https://www.tcl.tk/man/tcl8.4/TclCmd/history.html
+   >
+   >    ```tcl
+   >    history clear
+   >    ```
+   >
+   >    or Ctrl+r, but no use
+   >
+   >    ```tcl
+   >    clear
+   >    ```
+   >
+   >    just clears the screen
+
+
+
+## VMD applications
+
+### measure
+
+Here is an example of how you can use the measure contacts command to find the interacting residues between two proteins:
+
+```tcl
+set protein1 [atomselect top "protein and chain A"]
+set protein2 [atomselect top "protein and chain B"]
+set cutoff 4.0
+set contacts [measure contacts $cutoff $protein1 $protein2]
+set seltext ""
+foreach pair $contacts {
+    set res1 [atomselect top "index [lindex $pair 0]"]
+    set res2 [atomselect top "index [lindex $pair 1]"]
+    set seltext "$seltext or (resid [[lindex [$res1 get {resid}] 0]] and chain A) or (resid [[lindex [$res2 get {resid}] 0]] and chain B)"
+}
+set interacting_residues [atomselect top [string range $seltext 4 end]]
+```
+
+In this example, we first create two selections, one for each protein, using the atomselect command. We then specify a cutoff distance of 4.0 angstroms and use the measure contacts command to find all pairs of atoms from the two proteins that are within this distance. Finally, we loop over the list of atom pairs and create a new selection that includes only the interacting residues.
+
+To move a molecule along a certain direction in VMD, you can use the moveby command, which translates all atoms in a selection by a specified vector. Here is an example of how you can use this command to move a molecule along the x-axis:
+
+```tcl
+set sel [atomselect top "all"]
+$sel moveby {5 0 0}
+```
+
+In this example, we first create a selection that includes all atoms in the molecule using the atomselect command. We then use the moveby command to translate all atoms in the selection by a vector of {5 0 0}, which moves the molecule 5 units along the x-axis.
+
+measure contacts cutoff selection1 [selection2]: Find all atoms in selection1 that are within cutoff of any atom in selection2 and not bonded to it. If selection2 is omitted, it is taken to be the same as selection1. selection2 and selection1 can either be from the same of from different molecules. Returns two lists of atom indices, the first containing the first index of each pair (taken from selection1) and the second containing the second index (taken from selection2). Note that the index is the global index of the atom with respect to its parent molecule, as opposed to the index within the given atom selection that contains it.
+
+
 
 
 

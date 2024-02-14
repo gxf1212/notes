@@ -4,6 +4,8 @@ I've tried docsify, sphinx and hexo
 
 # Build a note site with docsify
 
+Docsify makes it easy to create a documentation website, but is not a static-site generator and is not SEO friendly.
+
 ## References
 
 read through the official! https://docsify.js.org/#/quickstart  生成那种模块API的，或者学习笔记的一个框架
@@ -1669,7 +1671,7 @@ https://bibichuan.github.io/posts/5affe24.html
 
 https://www.jekyll.com.cn/docs/
 
-https://www.jekyll.com.cn/docs/installation/
+[Jekyll on Windows | Jekyll • 一个简洁的博客、静态网站生成工具](https://www.jekyll.com.cn/docs/installation/windows/)
 
 https://rubyinstaller.org/
 
@@ -1690,6 +1692,12 @@ Jekyll官网也可以做成程序文档的样子？
 https://www.jekyll.com.cn/docs/step-by-step/01-setup/
 
 
+
+### Other
+
+Docusaurus is a project for building, deploying, and maintaining open source project websites easily.
+
+mkdocs material
 
 
 

@@ -28,6 +28,10 @@ https://www.cryst.bbk.ac.uk/pps97/course/index.html Section 7: molecular forces
   - [amber14SB力场报错“No default Improper Dih. types”的解决办法](https://zhuanlan.zhihu.com/p/389786141)
   - or [Fixing bugs in FF14SB port for Gromacs](http://zhenglz.blogspot.com/2017/05/fixing-bugs-in-ff14sb-port-for-gromacs.html)
 
+- Also, ion parameters (alkali metals, halogens) in ff99SB-ildn is problematic, e.g. KCl just crystalizes perfectly...
+
+  Solution: copy from FF14SB `ffnonbonded.itp`
+
 - CHAMBER: Comprehensive support for CHARMM force fields within the AMBER software
 
   CHAMBER is part of ParmEd, and parmed is part of AmberTools
@@ -583,7 +587,7 @@ see [here](#pbc-processing) for pbc processing
   239 of the 71274 bonded interactions could not be calculated because some atoms involved moved further apart than the multi-body cut-off distance (0.494608 nm) or the two-body cut-off distance (1.4325 nm), see option -rdd, for pairs and tabulated bonds also see option -ddcheck
   ```
   
-- 
+- gmx加了GPU就闪退、CPU极慢的问题，就是跟体系、建模有关，之前是键删得不对，现在是把em的steep改成cg，就跑不了了
 
 - does not matter for ions?
 
@@ -1019,10 +1023,6 @@ doing MSA: cluster omega
 
 UniProt has a ClustalW interface but no showing colors. Just export sequences and upload...
 
-## Shannon's entropy plot
-
-Uniqueness and relative abundance of protein sequences....
-
 
 
 
@@ -1041,6 +1041,7 @@ Uniqueness and relative abundance of protein sequences....
 
 ## CASP
 
-![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/casp.png)
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/casp.png" style="zoom:50%;" />
 
-![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/casp15.png)E
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/casp15.png" style="zoom:50%;" />
+

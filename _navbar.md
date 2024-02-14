@@ -9,7 +9,7 @@
 - [Research](/research/README.md)
   - [Fragments of science](/research/academic-notes.md)
   - [MD Fundamentals](/research/MD-fundamentals.md)
-  - [Programming 101](/research/Programming-for-MD.md)
+  - [Programming 101](/research/Programming.md)
   - [Setup and modeling](/research/Preparation-and-modeling.md)
   - [Protein-ligand MD/FEP](/research/Protein-ligand-simulation.md)
   - [Protein/Amino Acid FEP](/research/AA-MD-FEP.md)

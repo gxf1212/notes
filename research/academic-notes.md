@@ -390,6 +390,16 @@ RNA aptamer targeting AR (v7) DNA binding domain?
   Plasma membranes are normally about -116 mV, which would keep K+ concentrations inside a cell 100 times higher and Cl- concentrations 100 times lower than in the external solution.
 - 非原质体 The apoplast is the space outside the plasma membrane within which material can disperse freely.
 
+### Genetics
+
+- 多效性 pleiotropy: the phenomenon of a single gene influencing two or more distinct phenotypic traits
+
+- [12.3F: Epistasis - Biology LibreTexts](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(Boundless)/12%3A_Mendel's_Experiments_and_Heredity/12.03%3A_Laws_of_Inheritance/12.3F%3A_Epistasis)
+
+  一个基因掩盖了另一个的作用。如下图，cc就一定是白的
+
+  <img src="https://bio.libretexts.org/@api/deki/files/78607/figure-12-03-05.jpeg?revision=1" alt="image" style="zoom:67%;" />
+
 
 
 # Polymer
@@ -417,14 +427,18 @@ One of the fascinating properties of polyzwitterions is the so-called anti-polye
 # Physics
 
 - Dissipated work is a concept in thermodynamics that refers to the amount of work that is lost to heat during a process. When work is done on or by a system, some of the energy may be transferred to the system’s surroundings as heat. This heat transfer represents a loss of useful energy, as it is no longer available to do work. The amount of work that is lost in this way is called dissipated work. For example, when you rub your hands together, you are doing work to overcome the friction between your hands. Some of the energy from this work is transferred to your hands as heat, warming them up. This heat transfer represents dissipated work.
+
 - Rupture force 断裂力 is the external force put on a material of interest that causes it to break or rupture. It can be calculated using a formula that takes into account the load force and size dimensions of the material. It can also be measured using an atomic force microscope (AFM) for single covalent bonds
-- 
+
+- 各态历经假说（ergodic hypothesis）是指在一些物理系统中，这些系统的状态空间是分离的，但是**时间平均和状态平均是等价的**。 基于这个假设，我们才会有物理量沿时间平均等价于系综平均的结论。
+
+  > MD采出来的算时间平均吗？又不是精确的轨迹
+
+
 
 [物理四神兽——拉普拉斯的妖 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/35239781)
 
-
-
-
+[物理学四大神兽:芝诺的乌龟、拉普拉斯兽、麦克斯韦妖、薛定谔的猫 - 简书 (jianshu.com)](https://www.jianshu.com/p/25cf0340c9e5)
 
 # Other
 

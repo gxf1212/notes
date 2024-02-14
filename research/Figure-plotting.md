@@ -203,7 +203,9 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 3. Using Editing Mode to Move Atoms 
 
-   Now, please set the mouse mode to Editing, and CTRL-Left-drag on an atom.
+   Now, please set the mouse mode to Editing, and CTRL-Left-drag on an atom. 只有在3-button editing下才能编辑分子
+
+   extract all you want to move as an object -> shifting to 3-button Editing mode; then shift + mouse M (click precisely on the object you want to move) to move entire object along 2D plane, shift + left click to rotate, shift + right click to move along Z-axis (entire molecule). In viewing mode, shift + left drag to select what you want, then type drag sele, then use the above controls. Just noticed this playing around lol (also read Ryan Quinn's comment here)
 
 ### Label
 
@@ -318,6 +320,8 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 ## VMD
 
 杂记, some extra functions, that I encountered. for details, check vmd-ug.pdf or [MD-tutorials](Previous-projects/MD-tutorials-all.md)
+
+Focus on visualization. More on programming, see []()
 
 ### Basics
 
@@ -442,38 +446,17 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
     http://sobereva.com/627
 
-15. 
+15. Label format
+
+    ![](E:\GitHub-repo\notes\research\MD-fundamentals.assets\vmd-label.jpg)
+
+    ```tcl
+    addLabel
+    ```
 
 16. 
 
 17. [vmd粗粒化显示插件bendix简单介绍](https://kangsgo.cn/p/vmd粗粒化显示插件bendix简单介绍/)
-
-#### Scripting
-
-1. run in terminal
-
-   ```shell
-   vmd -dispdev text -e combine.tcl
-   ```
-
-   vmd scripting, [pass parameters](http://timchen314.com/vmd%E7%AC%94%E8%AE%B0/)
-
-   ```
-   set file [lindex $argv 0]
-   vmd .... -args arg arg2
-   ```
-
-2. How to run TCL script on VMD?
-
-   This is very easy to do. Just use any text editor to write your script file, and in a VMD session, use the command 
-
-   ```shell
-   source filename
-   ```
-
-   to execute the file. (either VMD command line or Tk Console)
-
-3. question mark prompt and return to the normal `vmd> prompt?` that mean the tcl interpreter is waiting for you to **close a brace**, so try `}` or `]` or `)` followed by enter. you may need to enter it a couple of times.
 
 #### Selection and set values
 
@@ -549,46 +532,6 @@ animate write xx.dcd
 
 
 ![](E:\GitHub-repo\notes\research\MD-fundamentals.assets\save-mdcrd.png)
-
-
-
-#### about Tkconsole
-
-1. resize font in TkConsole https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/29151.html
-
-   type in TkConsole: tkcon font <type> <size>
-
-   ```
-   tkcon font Courier 16
-   ```
-
-   size of the window is automatically changed. But font type not affected?
-
-2. As for the global font: the higher resolution your screen is, the smaller your font is
-
-   Maybe because the source code specifies pixels??
-
-3. TkConsole auto-loads history file?
-
-   https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/8543.html
-
-   Yeah, just about last 10 commands you typed, with the starting number 48. 强迫症犯了。。
-
-   >    history command
-   >
-   >    https://www.tcl.tk/man/tcl8.4/TclCmd/history.html
-   >
-   >    ```tcl
-   >    history clear
-   >    ```
-   >
-   >    or Ctrl+r, but no use
-   >
-   >    ```tcl
-   >    clear
-   >    ```
-   >
-   >    just clears the screen
 
 
 
@@ -800,9 +743,19 @@ like DSV
 
 # General figures
 
+## Data Visualization
+
+### Information entropy plot
+
+Uniqueness and relative abundance of protein sequences....
+
+There are several tools you can use to draw sequence information entropy figures like the one you sent. Some popular options include WebLogo, Seq2Logo, and HMMLogo. One such tool is MIA (Mutual Information Analyzer). Another option is the Sequence Statistics Tools
 
 
 
+## 示意图
+
+### Flowchart
 
 流程图 (e.g. NN framework)：
 

@@ -1644,7 +1644,17 @@ To be re-organized
 
 
 
-### Fix problems
+### Display problems
+
+ChatGPT:
+
+> Wayland is a display server protocol that is intended to be a simpler and more modern replacement for the X Window System (X11). Display servers using the Wayland protocol are called compositors because they also act as compositing window managers 1.
+>
+> X11 is a display server protocol that provides the basic framework for building a graphical user interface (GUI) on Unix-like operating systems. It defines how applications can create windows, draw graphics, and receive input from users.
+>
+> KWin is the window manager for the KDE Plasma desktop environment. It is responsible for managing the placement and appearance of windows on the screen. KWin can run on both X11 and Wayland.
+>
+> A display manager is responsible for starting the display server and managing user logins. On Fedora KDE Plasma, the default display manager is SDDM (Simple Desktop Display Manager).
 
 - 重启KWin：黑屏的时候用。。。
 
@@ -1656,6 +1666,8 @@ To be re-organized
   kwin_wayland is the KDE window manager. Nothing like lightdm, gdm, sddm,....
 
   they kill all processes and applications, but no need to reboot
+
+  [kwin_wayland --replace & command kills all apps](https://www.reddit.com/r/kde/comments/ovakzi/kwin_wayland_replace_command_kills_all_apps/?rdt=33609)
 
   [是否可以不注销而重新启动KDE Plasma Desktop？](http://129.226.226.195/post/31487.html)
 
@@ -1687,11 +1699,11 @@ To be re-organized
   
   ```shell
   systemctl disable nvidia-powerd
-```
+  ```
 
 
 
-Installation
+### Installation
 
 - [How to install build-essential on Fedora - PragmaticLinux](https://www.pragmaticlinux.com/2022/05/how-to-install-build-essential-on-fedora/)
 
@@ -1739,7 +1751,7 @@ When system halted/stuck
    ```shell
    sudo X -configure
    Xorg -configure
-   ```
+```
 
    or, enter tty, kill the process of `gnome-shell` or tty7
 
@@ -3169,6 +3181,17 @@ install wsl, ubuntu, and ubuntu22.04 (choose one of the two) in microsoft store
 
 - [将 Windows10 中的 WSL 添加至右键菜单_shift+右键没有wsl选项-CSDN博客](https://blog.csdn.net/gulang03/article/details/79177500)
 
+  [WSL小技巧：切换到zsh以及加入右键菜单 - 画星星高手 DealiAxy的个人博客 (deali-axy.github.io)](https://deali-axy.github.io/Windows/WSL小技巧：切换到zsh以及加入右键菜单/)
+
+  [Launching WSL Programs from a Right Click Windows Menu — Nick Janetakis](https://nickjanetakis.com/blog/launching-wsl-programs-from-a-right-click-windows-menu)
+
+  [文件夹下右键在终端打开，希望从当前目录下打开wsl，Ubuntu · Issue #13081 · microsoft/terminal (github.com)](https://github.com/microsoft/terminal/issues/13081)
+
+  直接仿照Windows terminal里的设置：ubuntu.exe
+  其实文件夹目录栏输入ubuntu.exe也行，但默认在~启动。。（update：现在好了）
+
+  文件夹目录栏输入wsl也可以
+
 - 
 
 ### cuda
@@ -3182,7 +3205,7 @@ https://www.jianshu.com/p/be669d9359e2
 The latest NVIDIA Windows GPU Driver will fully support WSL 2....Once a Windows NVIDIA GPU driver is installed on the system, CUDA becomes available within WSL 2. The CUDA driver installed on Windows host will be stubbed inside the WSL 2 as libcuda.so, therefore users must not install any NVIDIA GPU Linux driver within WSL 2.
 We recommend developers to use a separate CUDA Toolkit for WSL 2 (Ubuntu) available from the CUDA Toolkit Downloads page to avoid this overwriting. This WSL-Ubuntu CUDA toolkit installer will not overwrite the NVIDIA driver that was already mapped into the WSL 2 environment.
 
-到底咋弄
+到底咋弄？update：最后还是装了一个
 
 [WSL libcuda.so.1 is not a symbolic link 的解决方法 | kiraの博客 (kira-96.github.io)](https://kira-96.github.io/posts/wsl-libcuda.so.1-is-not-a-symbolic-link-的解决方法/)
 

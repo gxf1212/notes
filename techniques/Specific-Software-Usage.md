@@ -737,6 +737,8 @@ Mac：https://macwk.com/soft/typora
 
 ### VScode
 
+#### Appearance
+
 1. VScode安装完默认不能自动换行，需要我们手动配置。 文本超出显示时，会溢出，如图： 进入文件>首选项>设置，打开设置界面，在常用设置下找到Editor:Word Wrap选项，默认为off,设置为on即可。
 
 2. theme
@@ -751,21 +753,43 @@ Mac：https://macwk.com/soft/typora
 
    solution: disable掉他俩, 然后settings（ctrl+,）里面搜索theme
 
-3. https://jingyan.baidu.com/article/e6c8503ca7706de54f1a18f4.html vs code 字体分辨率
+3. [vs code 字体很大(分辨率变小了)，如何恢复](https://jingyan.baidu.com/article/e6c8503ca7706de54f1a18f4.html)
 
-4. https://zhuanlan.zhihu.com/p/68577071  run remote code, but view locally
+4. 
 
-5. [How to format source code in Visual Studio Code (VSCode) - Mkyong.com](https://mkyong.com/vscode/how-to-format-source-code-in-visual-studio-code-vscode/)
+#### Code Text
 
-6. [VS Code: How to Compare Two Files (Find the Difference)](https://www.kindacode.com/article/vs-code-how-to-compare-two-files-find-the-difference/)\
-
-7. format code
+1. [How to format source code in Visual Studio Code (VSCode) - Mkyong.com](https://mkyong.com/vscode/how-to-format-source-code-in-visual-studio-code-vscode/)
 
    ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/vscode-format-code.png)
 
-8. 
+   if this does not work:
+
+   ```shell
+   # for bash
+   sudo dnf install shfmt
+   ```
+
+2. [VS Code: How to Compare Two Files (Find the Difference)](https://www.kindacode.com/article/vs-code-how-to-compare-two-files-find-the-difference/)
+
+3. 
+
+#### Python
+
+- [vscode中选择Anaconda的python环境](https://blog.csdn.net/u013187057/article/details/83418425)
+  - 方法一： 点击vscode左下角然后选择相应的Anaconda环境
+  - 方法二：快捷键`ctrl+p`，输入`>select interpreter`来选择相应的Anaconda环境
+- vscode执行python快捷键：先选中你要运行的代码段，然后按下 Shift+Enter 键即可执行该代码段。
+
+
+
+[VS Code Remote SSH配置 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/68577071)
 
 ### Pycharm
+
+[Jetbrains 全家桶教育授权许可edu域名黑名单 (edumails.cn)](https://www.edumails.cn/stoplist.html)
+
+验证要上传证件
 
 #### Basics
 
@@ -1126,9 +1150,11 @@ spyder conda interpreter：光设置没用，直接打开conda里每个对应环
 
 安装时总是报conda底层的错（要report），版本不对还不行
 
+[Using Conda Python Environments with Spyder IDE and Jupyter Notebooks in Windows | by Prem George | Medium](https://medium.com/@apremgeorge/using-conda-python-environments-with-spyder-ide-and-jupyter-notebooks-in-windows-4e0a905aaac5)
+
 #### shortcut
 
-https://www.cnblogs.com/grace731/articles/15029832.html
+[【Spyder】Python内置IDE之Spyder快捷键 - 锦绣良缘](https://www.cnblogs.com/grace731/articles/15029832.html)
 
 Ctrl+1：注释、取消注释
 Ctrl+4/5：块注释/取消块注释
@@ -1148,9 +1174,19 @@ Tab：空行前是代码缩进；在输入一个字母后，按Tab健会自动�
 Shift+Tab：撤销代码缩进
 Ctrl+双击：打开加载包源代码
 
+
+
+How to open a project folder in Spyder IDE? Projects > New project > Existing directory > Create
+
 ### MATLAB
 
 在matlab编辑窗口中怎样只运行选中的命令？快捷键：F9
+
+### Online document
+
+
+
+在腾讯文档中，您可以通过以下两种方式进行换行： 按下回车键（Enter）：在您需要进行换行的地方按下回车键即可。 使用Shift+Enter 进行强制换行：如果您需要在一行中换行，可以按下Shift+Enter 键，这将在当前位置插入一个换行符。
 
 ## Office
 
@@ -1160,11 +1196,17 @@ Ctrl+双击：打开加载包源代码
 
 ### MS Word
 
+- [Word调整编号与文字距离的方法](https://www.jb51.net/office/word/755262.html)：右键弹出下拉菜单，点击【调整列表缩进】
+
+#### 表格
+
 - 表格左上角斜线
 
   ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/word-table.png)
 
-- 
+- [word如何改变表格线框的线宽](https://jingyan.baidu.com/article/d2b1d1026de5e91d7f37d47e.html)：选中后编辑边框
+
+- [word如何设置表格距离文字的下方距离](https://jingyan.baidu.com/article/d5a880eb68067c52f147cce9.html)：表格属性---文字环绕
 
 ### MS Excel
 
@@ -1173,8 +1215,12 @@ also for LibreOffice Calc, many commands are the same....
 #### General
 
 - Excel的paste special必须是复制，辣鸡！Calc就可以剪切
+
+- [手动将txt文件导入excel，并分列显示](https://zhuanlan.zhihu.com/p/267271754)：已经不小心粘进去了以后怎么拆分
+
 - Change the default language in LibreOffice for the whole document
   Choose Tools > Options. Go to Language Settings > Languages. Under Default languages for documents, select the document language for all newly created documents.
+  
 - To turn off the language check in LibreOffice Calc, you can follow these steps:
   
   Open any LibreOffice application (Writer, Calc, etc.).
@@ -1228,7 +1274,7 @@ also for LibreOffice Calc, many commands are the same....
 - Alt+F3：手型工具
 - Alt+F6：选择
 
-### Convert
+### Convert Filetypes
 
 https://cloudconvert.com/epub-to-pdf
 
@@ -1340,30 +1386,24 @@ pdf文件标题粘贴到微信对话框就失去换行成为一整行了
 
 ## ChatGPT etc.
 
+### Basics
+
 - OpenAI's services are not available in your country. (error=unsupported_country)
   解决方法：全局模式
 
 - [ChatGPT 常见错误原因及解决方案：报错、回答不完整、网络错误等](https://blog.csdn.net/marin1993/article/details/128219198)。搞不定就换节点，刷新
 
-- Edge dev: https://www.microsoftedgeinsider.com/zh-tw/download
-
 - https://platform.openai.com/ get your API key
-
-- 只需要在 Chrome 浏览器上下载安装[ `Bing Chained` ](https://chrome.google.com/webstore/detail/bing-unchained-use-new-bi/laldfnbbeocphnilnofhedhcjcnchbld/related)这个插件，再访问 [www.bing.com](https://link.juejin.cn/?target=http%3A%2F%2Fwww.bing.com) 就会出现 New Bing AI 入口
-
-- Bing AI for Firefox: [Get this Extension for 🦊 Firefox (en-US) (mozilla.org)](https://addons.mozilla.org/en-US/firefox/addon/bing-ai-for-firefox/)
 
 - https://github.com/xcanwin/KeepChatGPT 
 
   https://mp.weixin.qq.com/s/ngOXSb296BLf74usmc9kqw
 
-- a domestic new choice: [天工AI搜索 — 知识从这里开始 (tiangong.cn)](https://search.tiangong.cn/)，除了百度、讯飞、阿里等
-
 - 
 
 
 
-usage
+### skills
 
 [升级篇：超详细ChatGPT(GPT 4.0)论文润色指南+最全提示词——持续更新 - 简书 (jianshu.com)](https://www.jianshu.com/p/f228222f623b)
 
@@ -1371,7 +1411,26 @@ usage
 
 [Prompt engineering - OpenAI API](https://platform.openai.com/docs/guides/prompt-engineering/strategy-write-clear-instructions)
 
+### New Bing
 
+- Edge dev: https://www.microsoftedgeinsider.com/zh-tw/download
+
+- 只需要在 Chrome 浏览器上下载安装[ `Bing Chained` ](https://chrome.google.com/webstore/detail/bing-unchained-use-new-bi/laldfnbbeocphnilnofhedhcjcnchbld/related)这个插件，再访问 [www.bing.com](https://link.juejin.cn/?target=http%3A%2F%2Fwww.bing.com) 就会出现 New Bing AI 入口
+
+- Bing AI for Firefox: [Get this Extension for 🦊 Firefox (en-US) (mozilla.org)](https://addons.mozilla.org/en-US/firefox/addon/bing-ai-for-firefox/)
+
+### Alternatives
+
+- 
+
+- a domestic new choice: [天工AI搜索 — 知识从这里开始 (tiangong.cn)](https://search.tiangong.cn/)，除了百度、讯飞、阿里等
+
+### traditional AI chatbots
+
+- https://www.cleverbot.com/
+- https://myanima.ai/app/
+- https://my.replika.ai/
+- https://simsimi.com/chat
 
 ## Other Tools
 
@@ -2021,10 +2080,4 @@ other
 
 ## other
 
-AI chatbots
-
-- https://www.cleverbot.com/
-- https://myanima.ai/app/
-- https://my.replika.ai/
-- https://simsimi.com/chat
-
+https://www.similarweb.com/zh/website/keinsci.com/vs/jerkwin.github.io

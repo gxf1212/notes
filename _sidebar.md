@@ -8,7 +8,7 @@
 - [科研学习类](/research/README.md)
   - [碎片化知识点（理化生计）](/research/academic-notes.md)
   - [计算化学工具基础](/research/MD-fundamentals.md)
-  - [各种编程语法和应用](/research/Programming-for-MD.md)
+  - [各种编程语法和应用](/research/Programming.md)
   - [MD建模和体系准备](/research/Preparation-and-modeling.md)
   - [蛋白/小分子模拟和FEP](/research/Protein-ligand-simulation.md)
   - [蛋白/氨基酸模拟和FEP](/research/AA-MD-FEP.md)
