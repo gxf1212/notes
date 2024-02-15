@@ -631,7 +631,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 6. 
 
-## Operation on files and directories
+## Files and directories
 
 just fundamental usage. For advanced shell syntax as well as commands used in programming (`sed`, `grep`, etc.), see [this link](/research/Programming-for-MD.md?id=bash-shell)
 
@@ -720,11 +720,22 @@ just fundamental usage. For advanced shell syntax as well as commands used in pr
 7. `rename` to change 
 
    https://blog.51cto.com/jiemian/1846951 Perl语言版本格式
-   
+
    ```shell
    rename 's/a/b/' *a*
    ```
-   
+
+8. [Linux 下删除大量文件效率对比，看谁删的快！](https://cloud.tencent.com/developer/article/1647290)
+
+   ```shell
+   rm  # 文件数量太多，不可用
+   find ./ -type f -exec rm {} \; # 50万文件耗时43分钟
+   find ./ -type f -delete # 9分钟
+   perl -e 'for(<*>){((stat)[9]<(unlink))}' # 16s
+   os.remove(file) # 9分钟
+   rsync -a --delete blanktest/ test/ # 16s
+   ```
+
 9. 
 
 ### Check and search
@@ -3302,6 +3313,8 @@ a binary64 as having:
 - U盘的可用空间通常会比标明的容量稍小一点，这是正常现象。这主要是因为存储设备制造商和操作系统使用不同的计算方法来计算存储容量。（我不信所有大小不一样都是这个缘故）
 
   存储设备制造商通常使用十进制计算方法来计算存储容量，即1GB = 1000MB，1MB = 1000KB，1KB = 1000字节。然而，操作系统通常使用二进制计算方法来计算存储容量，即1GB = 1024MB，1MB = 1024KB，1KB = 1024字节。
+  
+- IB网卡：NVIDIA ConnectX InfiniBand 网卡。IB：是一个用于高性能计算的计算机网络通信标准，它具有极高的吞吐量和极低的延迟，用于计算机与计算机之间的数据互连。能达到100GB/s?
 
-
+- WIFI是Wireless Fidelity的缩写
 

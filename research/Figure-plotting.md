@@ -3,6 +3,8 @@
 - structure
 - general figures
 
+For matplotlib, please read [Programming](Programming.md)
+
 # Visualization of Structures
 
 This part will include fundamentals of the tools as well as code for visualization examples. No specific pages for visualization and analysis alone for now. Maybe in the future.
@@ -161,9 +163,23 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
   https://www.researchgate.net/post/How_to_overlay_multiple_structures_in_Pymol
 
+- ExecutiveAlign-Error: atomic alignment failed (mismatched identifiers?).
+
+  always occur for gromacs `.gro` file!
+
+  solution: extract this object; reload into pymol; assign chain id? cannot fix this usually
+
 - align pocket in Pymol: https://pymolwiki.org/index.php/Focus_alignment
 
-  pocket alignment，最好只用pocket的原子
+  pocket alignment，最好只用pocket的原子。在pymol还是比较麻烦
+
+- must use cmd to align small molecules (not always use)
+
+  ```
+  align mol1, mol2
+  ```
+
+- 
 
 - action--preset
 
@@ -173,11 +189,11 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
   - `zoom` or `orient` also do centering...
 
-- action--rename, or `set_name object-name, new-name`
+- action--rename, or command: `set_name object-name, new-name`
 
 ### Editing
 
-1. edit object name
+1. edit object name: [Set name - PyMOLWiki](https://pymolwiki.org/index.php/Set_name)
 
    ```shell
    set_name complex, 41
@@ -243,13 +259,21 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
    opaque off, then type `ray`
 
-6. set cartoon_fancy_helices/sheets, 0/1
+6. [Cartoon Helix Settings - PyMOLWiki](https://pymolwiki.org/index.php/Cartoon_Helix_Settings)
 
-7. set cartoon_side_chain_helper, on
+   <img src="E:\GitHub-repo\notes\research\MD-fundamentals.assets\pymol-helix.png" style="zoom:67%;" />
 
-   remove the sticks of main chain 
+   ```
+   set cartoon_fancy_helices/sheets, 0/1
+   ```
 
-8. center
+7. remove the sticks of main chain 
+
+   ```
+   set cartoon_side_chain_helper, on
+   ```
+
+8. center sth
 
    ```
    center object
@@ -271,6 +295,17 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 13. pymol中按住shift可以框选
     picking atoms模式下才能拖拽原子etc
+
+14. To create what I'll call a closed surface (see images), you need to first make your atom selections, then create a new object for that selection then show the surface for that object. Here's an example.
+    ```
+    sel A, id 1-100
+    create B, A
+    show surface, B
+    ```
+
+    ![](https://pymolwiki.org/images/f/f5/Surface_closed.png)
+
+15. 
 
 
 ### cmd & API
@@ -298,15 +333,24 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 4. delete命令！
 
-5. must use cmd to align small molecules (not always use)
-
-   ```
-   align mol1, mol2
-   ```
-
-6. api: https://pymol.org/dokuwiki/doku.php?id=api:cmd:alpha  https://pymol.org/pymol-command-ref.html. for other commands we have to view documentation in pycharm
+5. api: https://pymol.org/dokuwiki/doku.php?id=api:cmd:alpha  https://pymol.org/pymol-command-ref.html. for other commands we have to view documentation in pycharm
 
 
+### Logging
+
+当在PYMOL上操作时，如果想记录下完成的操作步骤，可创建一个日志文件（log-file）：
+
+log_open log-file-name
+
+或File---Log file---Open
+
+无论是输入的还是点击的命令都会记录在log-file中。文件扩展名是“.pml”，这样可以把文件作为脚本在新会话中打开。
+
+输入log_close命令可以停止记录，如果不输入此命令，日志文件会一直记录存盘直到关闭PYMOL。
+
+如果仅想保存PYMOL当前的状态而不关心操作步骤，可创建一个会话文件（session-file）。
+
+你也可以在“File”菜单选择“append（附加）”或“resume（重新开始）”，把命令行写入现有的日志文件中。
 
 ### plugin
 
@@ -623,26 +667,66 @@ It can calculate Secondary structure, RMSD, RMSF, angle, dihedral, SASA, contact
 
 ## UCSF Chimera(X)
 
-- https://www.researchgate.net/post/How-to-re-number-the-chains-in-PDB-file
+### Basics
+
+#### GUI
+
+- right mouse: translate; scroll: zoom
+- favorites--side view. 显示/隐藏区域：通过调整蓝框中的两条黄线，显示或隐藏蛋白质的一部分区域. Just like rolling mouse wheel in pymol
+
+#### cmd
+
+- help command: pop out a window explaining this command
+- `pwd` works but `ls` does not
+- 
+
+### selection, show
+
+- selection
+
+  ```shell
+  select #1/P  # model 1
+  select /?:63  # Ctrl+click
+  select add /?:62  # Ctrl+Shift+click
+  ```
+
+- 
+
+- show
+
+  ```shell
+  show xxx surface 
+  show xxx cartoons
+  transparency xxx, s 50
+  ```
+
+- 
+
+- save
+
+  ```shell
+  save xxx.png  # take a snapshot
+  save xxx.cxs  # save a session, or File--save
+  ```
+
+- 
+
+- 
+
+### Tools
+
+- [How to re-number the chains in PDB file? | ResearchGate](https://www.researchgate.net/post/How-to-re-number-the-chains-in-PDB-file)
 
   select, Tools--structure editing--the last one
 
-- favorites--side view. 显示/隐藏区域：通过调整蓝框中的两条黄线，显示或隐藏蛋白质的一部分区域. Just like rolling mouse wheel in pymol
-
-- for UCSD DOCK? https://zhuanlan.zhihu.com/p/148384183
-
-- Tools---structural editing---rotamers: mutate residues
-
-- mutate a residue:
+- Tools---structural editing---rotamers: mutate residues; or
 
   ```Bash
   sel #0:50
   swapaa ARG #0:50
   ```
 
-- 
-
-
+- [分子对接的常见方法](https://zhuanlan.zhihu.com/p/148384183), preprocessing, calling vina, UCSD DOCK, etc.
 
 
 ## Gaussian & view

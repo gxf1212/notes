@@ -18,6 +18,8 @@ Swiss-Model的结果，最长也就是模板的长度？？
 
 
 
+you can provide alignment file or .pdb file as a template in Swiss-Model server
+
 ### Modeller
 
 [ModWeb (ucsf.edu)](https://modbase.compbio.ucsf.edu/modweb/)
@@ -63,6 +65,14 @@ https://github.com/sokrypton/ColabFold   all kinds of fold
 https://alphafold.ebi.ac.uk/ 
 
 https://colab.research.google.com/github/deepmind/alphafold/blob/main/notebooks/AlphaFold.ipynb
+
+
+
+
+
+[AlphaFold2怎么给蛋白结构打分？ (qq.com)](https://mp.weixin.qq.com/s/6KGsazYa5MXtCTkwaogBjA)
+
+精细side chain控制，还是要谨慎用AlphaFold呀，不如同源建模
 
 
 
@@ -697,15 +707,16 @@ see [CHARMM-GUI for ligands](Protein-ligand-simulation.md#charmm-gui-for-ligands
 
 ### PDB reader
 
-residue mutation, protonation etc.
+- pdb reader可以residue mutation, protonation etc., 加磷酸、生成psf，但好像会renumber。
 
-only for CHARMM FF...
+- only for CHARMM FF...go to force field converter
 
+- 也不识别多条链，你的pdb必须要有chain ID
 
+- CSML search: whether this ligand already in FF (and RCSB?). If not, go to LigandRM. 
 
-CSML search: whether this ligand already in FF (and RCSB?). If not, go to LigandRM. 
+  > It seems that this is also done in Ligandrm...
 
-> It seems that this is also done in Ligandrm...
 
 
 
@@ -721,9 +732,15 @@ Called by other tools like membrane builder
 
 ### Solution builder
 
-<img src="E:\GitHub-repo\notes\research\Preparation-and-modeling.assets\GUI-Berendsen.png" style="zoom:50%;" />
+- We just don't use CHARMM-GUI `.mdp` files...
 
-We just don't use CHARMM-GUI `.mdp` files...
+  <img src="E:\GitHub-repo\notes\research\Preparation-and-modeling.assets\GUI-Berendsen.png" style="zoom:50%;" />
+
+- GUI automatically generates gradually-released restraint for all kinds of species, which gmx cannot...
+
+  ![](E:\GitHub-repo\notes\research\Preparation-and-modeling.assets\GUI-restraint.jpg)
+
+
 
 
 
@@ -1571,7 +1588,6 @@ smina，-6kcal，不能结合的能排掉，不一定能真的结合
 
 
 对接：结合位点裸露在膜外可以提取出来直接做，如果在膜中或者膜内这两种情况难说，不是很多物质能都进膜内
-
 
 
 

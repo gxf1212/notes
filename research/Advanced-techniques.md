@@ -69,6 +69,14 @@ Pulling out of membrane
 
 
 
+# REST2
+
+[增强采样--REST2模拟原理及搭建 (qq.com)](https://mp.weixin.qq.com/s/GF5waWvBoEXUVcqa_xBgTA)
+
+
+
+
+
 # Coarse Grained Simulations
 
 
@@ -77,9 +85,13 @@ Pulling out of membrane
 
 ## Martini Basics
 
-http://md.chem.rug.nl/images/stories/WORKSHOP2017/lecture-01.pdf
+[Home (cgmartini.nl)](http://cgmartini.nl/index.php)
 
+[【GROMACS进阶】膜蛋白MARTINI 粗粒化模型的MD模拟教程 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/555567498)
 
+[WORKSHOP2017 lecture-01.pdf (rug.nl)](http://md.chem.rug.nl/images/stories/WORKSHOP2017/lecture-01.pdf)
+
+[3: Proteins - Part I: Basic and Martinize 2 (rug.nl)](http://md.chem.rug.nl/index.php/2021-martini-online-workshop/tutorials/564-2-proteins-basic-and-martinize-2#martini3-proteins)
 
 Building block types: apolar, intermediate, polar, charged
 

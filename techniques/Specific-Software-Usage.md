@@ -780,6 +780,12 @@ Mac：https://macwk.com/soft/typora
    sudo dnf install shfmt
    ```
 
+   if still not: [beautysh · PyPI](https://pypi.org/project/beautysh/)
+
+   ```shell
+   beautysh file1.sh file2.sh file3.sh
+   ```
+
 2. [VS Code: How to Compare Two Files (Find the Difference)](https://www.kindacode.com/article/vs-code-how-to-compare-two-files-find-the-difference/)
 
 3. 
@@ -1184,15 +1190,17 @@ Tab：空行前是代码缩进；在输入一个字母后，按Tab健会自动�
 Shift+Tab：撤销代码缩进
 Ctrl+双击：打开加载包源代码
 
+### Settings
 
-
-How to open a project folder in Spyder IDE? Projects > New project > Existing directory > Create
+- How to open a project folder in Spyder IDE? Projects > New project > Existing directory > Create
+- I don't think that Spyder has a autosave-feature but in case of a PC crash it keeps a autosaved backup of the modified files as far as I know.
+- There is an option Save all files before running script in the preferences. You will need to go to Preferences > Editor > Run code
 
 ## MATLAB
 
 在matlab编辑窗口中怎样只运行选中的命令？快捷键：F9
 
-## Online document
+## Online documents
 
 
 

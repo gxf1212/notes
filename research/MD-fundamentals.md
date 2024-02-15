@@ -4,7 +4,7 @@ see [here](/techniques/Prepare-for-the-computer.md) for installation
 
 This page includes fundamental concepts of MD simulation, fundamental usage of gmx, namd, etc., and also quantum chemistry concepts.
 
-
+[JCIM｜在出版物中报告分子动力学模拟研究的指南](https://mp.weixin.qq.com/s/sRg-ip6rR2mAdw8hoC_HbA)
 
 # MD Basics
 
@@ -412,9 +412,9 @@ gmx genrestr is used to generate position restraints, not distance restraints.
 
 ### make_ndx
 
-https://manual.gromacs.org/documentation/current/onlinehelp/gmx-make_ndx.html
+[gmx make_ndx - GROMACS documentation](https://manual.gromacs.org/documentation/current/onlinehelp/gmx-make_ndx.html)
 
-https://www.compchems.com/how-to-create-an-index-file-in-gromacs/#creating-a-new-index
+[How to create an index file in GROMACS - Compchems](https://www.compchems.com/how-to-create-an-index-file-in-gromacs/#creating-a-new-index)
 
 type 'h' for help...
 
@@ -654,6 +654,23 @@ and VMD and CHARMM FF? I don't feel too much to say since they are just responsi
 
 ### Basics
 
+#### langevin dynamics
+
+- if you set up a simulation with langevin dynamics but without pressure controls, it will be in the NVT ensemble.
+
+  Langevin dynamics balances friction with random noise to drive each atom in the system towards a target temperature. The following parameters are good for equilibration, but a `langevinDamping` as low as 1. would be sufficient for simulation. Higher damping may be necessary if, for example, work done on the system by steering forces is driving up the temperature.
+
+  [NAMD Configuration Files (uiuc.edu)](https://www.ks.uiuc.edu/Training/Tutorials/namd/namd-tutorial-unix-html/node26.html)
+
+- 
+
+- StrainRate < initial strain rate >
+  Acceptable Values: decimal triple (x y z) 
+  Default Value: 0. 0. 0. 
+  Description: Optionally specifies the initial strain rate for pressure control.Is overridden by value read from file specified with extendedSystem.There is typically no reason to set this parameter.
+
+#### FEP
+
 ![](E:\GitHub-repo\notes\research\MD-fundamentals.assets\alchequilsteps.jpg)
 
 > 有没有可能，这里没有加restrain，只是不算在fep采样里
@@ -679,6 +696,12 @@ and VMD and CHARMM FF? I don't feel too much to say since they are just responsi
 
 #### Atom moving too fast
 
+[namd-l: Re: difficulty converting namd2 channel system to namd3 Atom velocity too fast, box too small errors. (uiuc.edu)](https://www.ks.uiuc.edu/Research/namd/mailing_list/namd-l.2020-2021/1291.html)
+
+这种cuda底层错误，可能是结构有问题，多半是自己魔改参数了
+
+
+
 I'm running MD simulation of a protein-ligand system (pdb id: 5tbm) with NAMD3 and CHARMM36/CgenFF force field. I removed extra components (except a water molecule near the ligand binding site which forms hydrogen bonds), and fixed the protein structure. After minimization, NVT, NPT with restrain, and NPT equilibration, everything went well. Then I performed 100ns MD simulation (delta t is 1 femtosecond), following by a 500ns MD simulation (delta t is 2 femtosecond). However, the latter simulation reports the following error after 200~300ns:
 Error: atoms moving too fast at timestep 107643652; simulation has become unstable (0 atoms at pe 0).
 FATAL ERROR:SequencerCUDA: Atoms moving too fast.
@@ -697,8 +720,6 @@ atom moving too fast?
 5. gradually heat the system
 6. more (langevin) parameters?
 
-
-
 > *> try these*
 > *>*
 > *> 1] Apply the temperature step by step (100 200 290 ..)*
@@ -708,8 +729,6 @@ atom moving too fast?
 > Use "margin 3" or larger.
 >
 > In rare special circumstances atoms that are involved in bonded terms (bonds, angles, dihedrals, or impropers) or nonbonded exclusions (especially implicit exclusions due to bonds) will be placed on non-neighboring patches because they are more than the cutoff distance apart. This can result in the simulation dying with a message of “bad global exclusion count”. If an “atoms moving too fast; simulation has become unstable”, “bad global exclusion count”, or similar error happens on the first timestep then there is likely something very wrong with the input coordinates, such as the atoms with uninitialized coordinates or different atom orders in the PSF and PDB file. Looking at the system in VMD will often reveal an abnormal structure. Be aware that the atom IDs in the “Atoms moving too fast” error message are 1-based, while VMD’s atom indices are 0-based. If an “atoms moving too fast; simulation has become unstable”, “bad global exclusion count”, or similar error happens later in the simulation then the dynamics have probably become unstable, resulting in the system “exploding” apart. Energies printed at every timestep should show an exponential increase. This may be due to a timestep that is too long, or some other strange feature. **Saving a trajectory of every step** and working backwards in can also sometimes reveal the origin of the instability. 
-
-
 
 
 

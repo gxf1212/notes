@@ -115,6 +115,10 @@ but after introducing the “sidebar collapse”, I don’t think the sidebar is
 
 Also, the sidebar should be further beautified (**colored**) to clarify the file structure. And the text size in vue?
 
+
+
+.list最后一行不要留空的"- "
+
 ### Beautify
 
 #### Cover
@@ -627,7 +631,7 @@ refer to [html](#something-html)
      ```markdown
      > [!NOTE]
      > 
-     > [!TIP]
+     > [!TIP|label:Usage] 
      > 
      > [!WARNING]
      > 
@@ -781,6 +785,12 @@ L2Dwidget.min.js
 
 ### mindmap
 
+> [!TIP]
+>
+> [AntHubTC/docsify-xmind: A live preview of your xmind fiile 在docsify的md文档中能查看xmind文档 (github.com)](https://github.com/AntHubTC/docsify-xmind)
+>
+> 直接就是原封不动的样式，原来的味道。没试过
+
 https://github.com/up9cloud/docsify-mindmap 照着做
 
 steps
@@ -928,25 +938,7 @@ more plugins: https://docsify.js.org/#/awesome?id=plugins，https://docsify.js.o
 
 - 
 
-SEO：search engine optimization
 
-hexo+github pages个人博客做百度、谷歌、bing等搜索引擎收录
-
-https://reiner.host/posts/2262a2b8.html
-
-hexo生成sitemap？
-
-https://cloud.tencent.com/developer/article/1736970
-
-提交你的域名
-
-https://search.google.com/search-console/welcome
-
-> 请求编入索引：已将网址添加到优先抓取队列中。 多次提交同一网页并不能改变该网页的队列顺序或优先级
-
-https://ziyuan.baidu.com/site/index#/
-
-百度资源
 
 https://github.com/docsifyjs/docsify/issues/656
 
@@ -1583,7 +1575,11 @@ https://www.cnblogs.com/jonnyan/p/14207711.html
 
 
 
-# Hexo (not organized yet)
+# Hexo 
+
+(not organized yet)
+
+## Setup
 
 [build-blog-website-by-hexo](https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html#%E4%BD%BF%E7%94%A8hexo%E5%86%99%E5%8D%9A%E5%AE%A2)
 
@@ -1664,6 +1660,30 @@ npm install --save hexo-pdf
 https://bibichuan.github.io/posts/5affe24.html
 
 使用hexo等工具，在git上只提交下面的一个`.deploy_git`文件夹。。clone根本没用
+
+
+
+## SEO
+
+SEO：search engine optimization
+
+hexo+github pages个人博客做百度、谷歌、bing等搜索引擎收录
+
+https://reiner.host/posts/2262a2b8.html
+
+hexo生成sitemap？
+
+https://cloud.tencent.com/developer/article/1736970
+
+提交你的域名
+
+https://search.google.com/search-console/welcome
+
+> 请求编入索引：已将网址添加到优先抓取队列中。 多次提交同一网页并不能改变该网页的队列顺序或优先级
+
+https://ziyuan.baidu.com/site/index#/
+
+百度资源
 
 # Jekyll
 

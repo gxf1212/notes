@@ -1,4 +1,4 @@
-# Programming for MD
+# Programming
 
 See [here](/techniques/Prepare-for-the-computer.md) for installation
 
@@ -74,15 +74,44 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
 
 - 
 
-### Output
-
-- `printf "format" $variable`
-
 ### awk
 
 > [!NOTE]
 >
 > **awk必须单引号**
+
+#### Text
+
+- take all lines with "#Free energy", print the no. 8,9,12 word (separated by space) to the output file
+
+  ```shell
+  awk '/^#Free energy/ {printf "%.5f,%.5f,%.9f\n",$8,$9,$12}' ${fn}.fepout > ${fn}.csv
+  ```
+
+- I have a commas-separated file, please use awk to get the second element in each line and also filter those lines containing keyword 'spiro'Sent message. I have a commas-separated file, please use awk to get the second element in each line and also filter those lines containing keyword 'spiro'
+
+  To use awk to get the second element in each line and also filter those lines containing keyword ‘spiro’, you can use a command like this:
+
+  ```shell
+  awk -F ',' '$0~/spiro/ {print $2}' file.csv
+  ```
+
+  This command will:
+
+  - Use a comma (,) as the field separator (-F) for each line
+  - Match lines that contain ‘spiro’ in any field ($0~/spiro/)
+  - Print the second field ($2) of those lines
+  - Read from file.csv
+
+- get the number of non-empty lines
+
+  ```shell
+  count=$(awk 'END {print NR}' "50.0000.dat")
+  ```
+
+
+
+#### Calculation
 
 - 在awk命令中使用-v选项来将bash变量传递给awk。例如：
 
@@ -97,33 +126,37 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
         }' < output/data$ii >> output/decomp
   ```
 
-
   在上述代码中，我们使用`-v t=$temp`选项来将bash变量`$temp`的值传递给awk变量`t`。然后，在awk代码中，我们使用`t`变量来替换原来的数字298。
+
+- calculate sum, average
+
+  ```bash
+  sum=$(awk '{sum += $1} END {print sum}' "50.0000.dat")
+  # Calculate the average
+  average=$(awk -v sum="$sum" -v count="$count" 'BEGIN {print sum / count}')
+  ```
+
+- 
 
 
 
 examples
 
-- take all lines with "#Free energy", print the no. 8,9,12 word (separated by space) to the output file
+- paste
 
   ```shell
-  awk '/^#Free energy/ {printf "%.5f,%.5f,%.9f\n",$8,$9,$12}' ${fn}.fepout > ${fn}.csv
+  paste bound.dat free.dat | awk '{printf "%10s%10s%10s%10s\n", $1, $2, $4, $2 - $4}' > convergence.dat
+  # Add headers to the output file
+  sed -i '1i time(ps) bound free ddg' convergence.dat
   ```
   
-- I have a commas-separated file, please use awk to get the second element in each line and also filter those lines containing keyword 'spiro'Sent message. I have a commas-separated file, please use awk to get the second element in each line and also filter those lines containing keyword 'spiro'
+- go to xmgrace
 
-  To use awk to get the second element in each line and also filter those lines containing keyword ‘spiro’, you can use a command like this:
-  
   ```shell
-  awk -F ',' '$0~/spiro/ {print $2}' file.csv
+  awk '{print $1, $4}' convergence.dat | xmgrace -block -
   ```
+
   
-  This command will:
-  
-  - Use a comma (,) as the field separator (-F) for each line
-  - Match lines that contain ‘spiro’ in any field ($0~/spiro/)
-  - Print the second field ($2) of those lines
-  - Read from file.csv
 
 ### sed
 
@@ -240,6 +273,8 @@ tleap -f tleap.in > tleap.log
 ```
 
 ### printf
+
+`printf "format" $variable`
 
 - fixed lenght (fill with 0)
 
@@ -872,7 +907,7 @@ read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arg
 
   也可以使用 `os` 模块中的 `os.environ` 和 `os.pathsep` 来获取 `PATH` 环境变量并将其转换为目录列表。下面是一个示例代码：
 
-  ```
+  ```python
   import os
   
   path = os.environ['PATH']
@@ -895,23 +930,33 @@ read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arg
 
 
 
-### spines
+### axis and spines
 
-```python
-for axis in ['top','bottom','left','right']:
-    ax.spines[axis].set_linewidth(30)  #设置坐标轴的粗细
-    ax.spines[axis].set_color("gold")
-    ax.spines[axis].set_zorder(0)
-```
+- 设置坐标轴刻度的粗细
 
+  ```python
+  for axis in ['top','bottom','left','right']:
+      ax.spines[axis].set_linewidth(30)  #设置坐标轴的粗细
+      ax.spines[axis].set_color("gold")
+      ax.spines[axis].set_zorder(0)
+  ```
 
+  If you want to set this for *all* the ticks in your axes,
 
-If you want to set this for *all* the ticks in your axes,
+  ```python
+  ax = plt.gca()
+  ax.tick_params(width=5,...)
+  ```
 
-```python
-ax = plt.gca()
-ax.tick_params(width=5,...)
-```
+- 设置坐标轴刻度之间的间隔
+
+  ```python
+  from matplotlib.ticker import MultipleLocator, MaxNLocator
+  plt.gca().xaxis.set_major_locator(MultipleLocator(1))
+  ```
+
+  
+
 
 
 
@@ -1056,6 +1101,18 @@ ax.tick_params(width=5,...)
 
 ## pandas
 
+### I/O
+
+- read csv
+
+  ```python
+  df = pd.read_csv ("my_data.txt", delim_whitespace=True)
+  ```
+
+- 
+
+### manipulate
+
 - 通过指定行及列索引号进行索引, 返回DataFrame对象
 
   ```shell
@@ -1064,10 +1121,13 @@ ax.tick_params(width=5,...)
   df.iloc[:, 3]
   ```
 
-- 
-  `df[df['A'].isin([3, 6])]`
-  
+- filter specific column
 
+  ```python
+  df[df['A'].isin([3, 6])]
+  ```
+
+  
 
 ## building softwares
 
@@ -1799,3 +1859,10 @@ G.add_edge(nodes[0], nodes[1])
 
 This will add an edge between the first and second nodes in the graph.
 
+
+
+# Other
+
+[PyRosetta.notebooks, jupyter pyrosetta保姆教程](https://nbviewer.org/github/RosettaCommons/PyRosetta.notebooks/blob/master/notebooks/index.ipynb)
+
+[PyRosetta - Tutorials](https://www.pyrosetta.org/documentation/tutorials)

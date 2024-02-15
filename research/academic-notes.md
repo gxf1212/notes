@@ -412,7 +412,7 @@ One of the fascinating properties of polyzwitterions is the so-called anti-polye
 
 [拉曼or红外光谱，你真的分清了吗？](https://www.cailiaoren.com/m_zl_detail.php?dbid=14)
 
-
+[免疫共沉淀（Co-IP）实验原理流程-CoIP实验对照设置-德泰生物 (detaibio.com)](https://www.detaibio.com/topics/co-ip-overview.html)
 
 # AI
 
@@ -442,7 +442,7 @@ One of the fascinating properties of polyzwitterions is the so-called anti-polye
 
 # Other
 
-## English 
+## English
 
 ### writing
 
