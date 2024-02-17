@@ -13,11 +13,11 @@ maybe a new .md file in the future
 
 - [3.2.1: Hard and Soft Acid and Base Theory - Chemistry LibreTexts](https://chem.libretexts.org/Courses/Saint_Marys_College_Notre_Dame_IN/CHEM_342%3A_Bio-inorganic_Chemistry/Readings/Week_3%3A_Metal-Ligand_Interactions_continued..../3.2%3A_The_identity_of_metal_ion_and_the_ligand_donor_atom(s)_affects_affinity/3.2.1%3A_Hard_and_Soft_Acid_and_Base_Theory)
 
-  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/hsab.jpg)
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/hsab.jpg)
 
 - 6s Inert Electron Pair Effect
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/6s-ele.jpg" style="zoom: 50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/6s-ele.jpg" style="zoom: 50%;" />
 
   The thermodynamical preference of the harder N and O--containing side chains for the “soft” Hg rather than the “borderline” Zn is probably due to relativistic effects resulting in a strong stabilization of mercury's vacant 6s orbitals, which in turn enhances its electron-accepting ability.
 
@@ -80,19 +80,19 @@ maybe a new .md file in the future
 
 异头碳效应：连接在异头碳的杂原子取代基更倾向于处于直立键。可能也是二卤代烷稳定的原因
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/anomeric-carbon.jpg" alt="anomeric-carbon" width=50% />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/anomeric-carbon.jpg" alt="anomeric-carbon" width=50% />
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/anomeric-carbon2.jpg" alt="anomeric-carbon2" width=45% />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/anomeric-carbon2.jpg" alt="anomeric-carbon2" width=45% />
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/halogen-bond.png" alt="anomeric-carbon" width=50% />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/halogen-bond.png" alt="anomeric-carbon" width=50% />
 
 
 
 激酶作用机理
 
-![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/kinase-mechanism.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/kinase-mechanism.png)
 
 
 
@@ -123,7 +123,7 @@ RNA aptamer柔性比DNA强，理论上能达到更高的亲和力
 
 #### DNA/RNA polymerase
 
-![DNAPol](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/DNAPol.png)
+![DNAPol](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/DNAPol.png)
 
 3'-OH和Pβ的O形成氢键是有道理的！焦磷酸离去之后直接把3'-OH去质子化了！！
 
@@ -183,7 +183,7 @@ see [data](https://www.brenda-enzymes.org/enzyme.php?ecno=2.7.11.1#TURNOVER%20NU
 
 - In quantum chemistry, the Hessian matrix is a matrix of second derivatives of a molecule’s energy with respect to its atomic coordinates. It is used to describe the curvature of the potential energy surface near a stationary point, such as a minimum or transition state. The Hessian matrix can be used to determine the vibrational frequencies of a molecule and its normal modes of vibration
 - Hohenberg-Kohn定理的核心思想是：体系中的所有物理量都可以通过只包含电子密度的变量来唯一决定，而实现方法是通过变分原理来求得体系基态。
-- <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/pseudo-potential.png" style="zoom:50%;" />
+- <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/pseudo-potential.png" style="zoom:50%;" />
 
 
 
@@ -199,7 +199,7 @@ PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
 
 超胞（Supercell）：超胞是对单胞的扩展，扩展成新的重复单元。
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/super-cell.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/super-cell.png" style="zoom:50%;" />
 
 # Pharmacology
 
@@ -247,7 +247,7 @@ PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
 
 ## Strategy of design
 
-![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/synthetic-lethals.jpg)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/synthetic-lethals.jpg)
 
 synthetic lethality
 
@@ -267,7 +267,7 @@ synthetic lethality
 - 药物分子中的羧基可以用磺酰胺，磷酸酯，四唑，硼酸等代替。
   - 在羧基的各种生物电子等排体中，羟肟酸的酸性稍弱，离子化程度较低，能显著提高透膜能力，然而在体内容易被代谢成羧酸，可在其氮原子上引入大一点的基团来提高其代谢稳定性。
   
-    ![boric-acid](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/boric-acid.png)
+    ![boric-acid](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/boric-acid.png)
 
 
 
@@ -282,13 +282,13 @@ synthetic lethality
 
 [综述| 药物发现中的共价抑制剂](https://mp.weixin.qq.com/s/B0iYLWQIvlcn4N_0F2o_rw)
 
-![BHO](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/BHO.png)
+![BHO](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/BHO.png)
 
 ---
 
 
 
-![ring-design](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/ring-design.png)
+![ring-design](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/ring-design.png)
 
 
 
@@ -298,7 +298,7 @@ synthetic lethality
 
 - 环磷酰胺在体外无活性，主要通过肝脏P450酶水解成醛磷酰胺再运转到组织中形成磷酰胺氮芥而发挥作用。环磷酰胺可由脱氢酶转变为羧磷酰胺而失活，或以丙烯醛形式排出，导致泌尿道毒性。属于周期非特异性药，作用机制与氮芥相同。
 
-  ![Cyclophosphamid](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/Cyclophosphamid.png)
+  ![Cyclophosphamid](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/Cyclophosphamid.png)
 
 - 阿斯巴甜，学名为天门冬酰苯丙氨酸甲酯，是一种重要的甜味剂。
 
@@ -307,7 +307,7 @@ synthetic lethality
   
 - 二硫苏糖醇（Dithiothreitol，简称为DTT）是一种小分子有机还原剂，化学式为C4H10O2S2。其还原状态下为线性分子，被氧化后变为包含二硫键的六元环状结构
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/dtt.jpg" style="zoom:50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/dtt.jpg" style="zoom:50%;" />
 
 - 
 
@@ -335,7 +335,7 @@ https://www.thoughtco.com/pinocytosis-definition-4143229
 
 Macropinosomes are known to be leaky
 
-![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/macropinocytosis.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/macropinocytosis.png)
 
 
 
@@ -354,23 +354,23 @@ The exact mechanisms behind why prostate cancer prefers to metastasize to the bo
 
 双膦酸盐是一类可防止骨密度降低的药物，用于治疗骨质疏松症和类似疾病。双膦酸盐类药物吸附于骨表面上的羟磷灰石结合位点，尤其是在骨质吸收活跃的骨表面。当破骨细胞开始重吸收充满双膦酸盐的骨质时，骨质吸收期间释放的双膦酸盐就会损害破骨细胞形成皱褶缘、黏附于骨表面和产生持续骨质吸收所必需的质子的能力。双膦酸盐类药物也可通过减少破骨细胞前体细胞的发育和募集以及促进破骨细胞凋亡，来降低破骨细胞的活性。
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/bisphosphates.png" alt="bisphosphates" style="zoom: 33%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/bisphosphates.png" alt="bisphosphates" style="zoom: 33%;" />
 
 
 
 sexual hormones
 
-![sexual-hormones](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/sexual-hormones.png)
+![sexual-hormones](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/sexual-hormones.png)
 
 
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/bicalutamine.png" alt="bicalutamine" style="zoom:25%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/bicalutamine.png" alt="bicalutamine" style="zoom:25%;" />
 
 bicalutamine，比卡鲁胺
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.asssets/Enzalutamide.png" alt="Enzalutamide" style="zoom:25%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/Enzalutamide.png" alt="Enzalutamide" style="zoom:25%;" />
 
 恩杂鲁胺 (Enzalutamide)
 
@@ -381,6 +381,12 @@ RNA aptamer targeting AR (v7) DNA binding domain?
 
 
 # Other Biology
+
+### Physiology
+
+- 多年来，我们一直认为，人体的结缔组织应该是非常致密的。Interstitium是一种在粘膜下层和全身各部位存在的网状结构，内有组织间液，可能参与炎症和肿瘤的浸润过程。
+
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/interstitium.jpg)
 
 ## Plant physiology
 
@@ -468,3 +474,6 @@ cmc通常是指在制药行业中,专门从事化学成分生产与控制(chemic
 
 https://mdl.shsmu.edu.cn/zh/home.jsp  上交张健老师组，做别构
 
+
+
+第一个问题是有没有一些实际的工程人员真正关心你要研究的这个问题；第二，你是不是不完全了解这个问题，你如果已经对这个问题非常了解，知道怎么做，甚至预计做的结果是什么，这可能不是一个好事情；第三，不管什么样的原因，是不是对这个问题感兴趣。如果这三个问题当中有两个回答是肯定的，这个问题就值得你去做

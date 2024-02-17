@@ -153,7 +153,7 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
   - save a file
 
-    <img src="E:\GitHub-repo\notes\research\MD-fundamentals.assets\pymol-save.jpg" style="zoom:67%;" />
+    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/pymol-save.jpg" style="zoom:67%;" />
   
 - 
 
@@ -181,6 +181,14 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 - 
 
+- For example, to align residues 10-20 of protein A with residues 30-40 of protein B, you can use the following command: 
+
+  ```
+  align A and resi 10-20, B and resi 30-40
+  ```
+
+- 
+
 - action--preset
 
   publication (different colors), simple (thin lines, ligands sticks), technical (H bonds), ligand (only ligand H bonds)
@@ -190,6 +198,8 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
   - `zoom` or `orient` also do centering...
 
 - action--rename, or command: `set_name object-name, new-name`
+
+- A--generate--vacuum electrostatics, a rough electrostatic potential surface?
 
 ### Editing
 
@@ -245,7 +255,7 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
    [For example, to set the label size to 10pt, you can use the command](https://pymolwiki.org/index.php/Label_size)
 
-   ```
+   ```shell
    set label_size, 10
    ```
 
@@ -261,7 +271,7 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 6. [Cartoon Helix Settings - PyMOLWiki](https://pymolwiki.org/index.php/Cartoon_Helix_Settings)
 
-   <img src="E:\GitHub-repo\notes\research\MD-fundamentals.assets\pymol-helix.png" style="zoom:67%;" />
+   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/pymol-helix.png" style="zoom:67%;" />
 
    ```
    set cartoon_fancy_helices/sheets, 0/1
@@ -305,7 +315,16 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
     ![](https://pymolwiki.org/images/f/f5/Surface_closed.png)
 
-15. 
+15. s
+
+    ```
+    util.color_chains("(all and elem C)",_self=cmd)
+    obj="cluster1_1"
+    util.mass_align(obj,0,_self=cmd)
+    cmd.disable('aln_all_to_'+obj)
+    ```
+
+    
 
 
 ### cmd & API
@@ -388,7 +407,7 @@ Focus on visualization. More on programming, see []()
 
    For OpenGL Display, just set it here...
 
-   ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/vmd-display.jpg)
+   ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/vmd-display.jpg)
 
 2. Graphics--Representations: for visualization.
 
@@ -435,7 +454,7 @@ Focus on visualization. More on programming, see []()
 
    set label colors
 
-   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/color-bond.png" alt="color-bond" style="zoom:20%;" />
+   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/color-bond.png" alt="color-bond" style="zoom:20%;" />
 
 9. VMD representation里面写变量`$ligname`只是不报错，还是得手动改
 
@@ -492,15 +511,17 @@ Focus on visualization. More on programming, see []()
 
 15. Label format
 
-    ![](E:\GitHub-repo\notes\research\MD-fundamentals.assets\vmd-label.jpg)
+    ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/vmd-label.jpg)
 
     ```tcl
     addLabel
     ```
 
-16. 
+16. vmd不一定按psf显示bond？那以后最终还是要手动看psf
 
-17. [vmd粗粒化显示插件bendix简单介绍](https://kangsgo.cn/p/vmd粗粒化显示插件bendix简单介绍/)
+17. 
+
+18. [vmd粗粒化显示插件bendix简单介绍](https://kangsgo.cn/p/vmd粗粒化显示插件bendix简单介绍/)
 
 #### Selection and set values
 
@@ -575,7 +596,7 @@ animate write xx.dcd
 
 
 
-![](E:\GitHub-repo\notes\research\MD-fundamentals.assets\save-mdcrd.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/save-mdcrd.png)
 
 
 
@@ -629,21 +650,21 @@ rmsdtt in abbreviation
 
 #### Timeline
 
-http://www.ks.uiuc.edu/Research/vmd/plugins/timeline/
+[Timeline Plugin, Version 2.3 (uiuc.edu)](https://www.ks.uiuc.edu/Research/vmd/plugins/timeline/)
 
-https://www.ks.uiuc.edu/Training/Tutorials/science/timeline/tutorial_timeline-html/
+[Timeline Tutorial (uiuc.edu)](https://www.ks.uiuc.edu/Training/Tutorials/science/timeline/tutorial_timeline-html/)
 
-https://www.ks.uiuc.edu/Training/Tutorials/science/timeline/tutorial_timeline.pdf
+[tutorial_timeline.pdf (uiuc.edu)](https://www.ks.uiuc.edu/Training/Tutorials/science/timeline/tutorial_timeline.pdf)
 
 It can calculate Secondary structure, RMSD, RMSF, angle, dihedral, SASA, contacts (H bond, salt bridge), user-defined fields/selections, etc.
 
-- https://www.researchgate.net/post/How-can-I-calculate-the-RMSF-of-a-protein-in-VMD
+- [How can I calculate the RMSF of a protein in VMD? | ResearchGate](https://www.researchgate.net/post/How-can-I-calculate-the-RMSF-of-a-protein-in-VMD)
 
   IN VMD toolbar, Extensions > Analysis > timeline > calculate > calc. RMSF
 
   also click 'every residue', and then File > Write data. Align your protein in advance
 
-  <img src="E:\GitHub-repo\notes\research\MD-fundamentals.assets\vmd-rmsf.jpg" style="zoom: 67%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/vmd-rmsf.jpg" style="zoom: 67%;" />
 
   view structure and RMSF simultanously
 
@@ -661,7 +682,7 @@ It can calculate Secondary structure, RMSD, RMSF, angle, dihedral, SASA, contact
 
 - mdcrd
 
-  ![](E:\GitHub-repo\notes\research\MD-fundamentals.assets\vmd-mdcrd.png)
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/vmd-mdcrd.png)
 
 - 
 
@@ -711,9 +732,13 @@ It can calculate Secondary structure, RMSD, RMSF, angle, dihedral, SASA, contact
 
 - 
 
-- 
-
 ### Tools
+
+- For example, to align residues 10-20 of protein A with residues 30-40 of protein B, you can use the following command:
+
+  ```shell
+  match #0:10-20 #1:30-40
+  ```
 
 - [How to re-number the chains in PDB file? | ResearchGate](https://www.researchgate.net/post/How-to-re-number-the-chains-in-PDB-file)
 
@@ -771,7 +796,7 @@ It can calculate Secondary structure, RMSD, RMSF, angle, dihedral, SASA, contact
 
 - 全选改字体（18），在file--document setting--Drawing改线宽，大概0.56（0.4倍粗体），就和Wikipedia的比较接近（平常不用加粗）。全选--右键--Object Settings也可以。
 
-  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/chembiodraw-drawing.png)
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/chembiodraw-drawing.png)
 
 - [怎样在ChemDraw中设置字体的默认格式？](https://www.sohu.com/a/104294282_395309)
 
@@ -797,7 +822,7 @@ It can calculate Secondary structure, RMSD, RMSF, angle, dihedral, SASA, contact
 
 ### Cheat sheet
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/CD_cheatsheet.png" alt="image.png" style="zoom: 60%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/CD_cheatsheet.png" alt="image.png" style="zoom: 60%;" />
 
 ## Other
 
@@ -847,7 +872,7 @@ There are several tools you can use to draw sequence information entropy figures
 
 [迅捷画图-专业的在线作图网站,在线画思维导图、流程图 (liuchengtu.com)](https://www.liuchengtu.com/)
 
-
+[Hiplot (ORG) | Cloud-based biomedical data visualization system](https://hiplot.cn/basic/line-color-dot)  各种图
 
 
 

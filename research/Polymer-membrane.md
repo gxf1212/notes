@@ -117,11 +117,23 @@ Also, build membrane with CHARMM-GUI membrane builder
 
 ## Parametrization (CgenFF)
 
+- [CHARMM-GUI Polymer Builder](https://www.charmm-gui.org/?doc=input/polymer)
+
+  [Polymer Builder 2: Build a Polymer Structure (youtube.com)](https://www.youtube.com/watch?v=WuhV2hUprD8)
+
+  不能自定义啊，尤其是侧链，只能做已有的。不过结构是挺灵活的
+
+  existing structures
+
+  - `toppar_all36_synthetic_polymer.str`
+
+- [makoto-yoneya/gmx-polymer-tools: Perl scripts for polymer modeling using GROMACS (github.com)](https://github.com/makoto-yoneya/gmx-polymer-tools)
 
 
 
 
 
+> [Polymer in water - (gromacstutorials.github.io)](https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/stretchingpolymer.html)
 
 ## Parametrization (GAFF)
 

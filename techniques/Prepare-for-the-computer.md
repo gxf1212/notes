@@ -753,6 +753,8 @@ systemctl disable nvidia-powerd
 
 [Solution: Modular Filtering Issue for NVIDIA Drivers/CUDA Sources Conflict - Fedora Discussion (fedoraproject.org)](https://discussion.fedoraproject.org/t/solution-modular-filtering-issue-for-nvidia-drivers-cuda-sources-conflict/78440)
 
+[(1) This is not a problem, but it is a question. I would like to understand what the following means? : Fedora (reddit.com)](https://www.reddit.com/r/Fedora/comments/132i0d3/this_is_not_a_problem_but_it_is_a_question_i/)
+
 > ```
 > - package xorg-x11-drv-nvidia-3:530.41.03-1.fc37.x86_64 is filtered out by modular filtering
 > ```
@@ -765,13 +767,13 @@ Did you follow [the RPM Fusion CUDA guide](https://rpmfusion.org/Howto/CUDA) or 
 sudo dnf module disable nvidia-driver
 ```
 
+---
+
 [NVIDIA drivers not being detected in Fedora/KDE](https://forums.developer.nvidia.com/t/nvidia-drivers-not-being-detected-in-fedora-kde/75350)
 
+If you installed the NVIDIA driver from `.run` files or bundled driver from CUDA Toolkit, **the driver may be lost when you upgrade your Linux kernel**.
 
-
-If you installed the NVIDIA driver from `.run` files or bundled driver from CUDA Toolkit, the driver may be lost when you upgrade your Linux kernel.
-
-
+这就是为什么别装cuda自带的驱动
 
 ## cuda
 
@@ -997,13 +999,19 @@ An important note: add correct gcc version you used when compiling gmx/Amber whe
 
 - 
 
+> [!NOTE]
+>
+> `mpicxx` is within `openmpi` rather than `gcc`
+
 ### intel oneapi
 
-https://www.intel.com/content/www/us/en/developer/tools/oneapi/hpc-toolkit-download.html
+[Download the Intel® HPC Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/hpc-toolkit-download.html)
 
 [Linux中ifort的安装教程及使用方法](https://www.bilibili.com/read/cv15164219)
 
+[Install oneAPI for NVIDIA GPUs - Guides - oneAPI for NVIDIA® GPUs - Products - Codeplay Developer](https://developer.codeplay.com/products/oneapi/nvidia/2023.2.1/guides/get-started-guide-nvidia.html)
 
+装好NVIDIA driver再装intel
 
 ### fftw
 
@@ -1506,7 +1514,42 @@ You can type `gv` in the terminal to start GView and link to Gaussian as we did 
 
 
 
-# Analysis tools: Python/cmd tookit
+# Analysis/Modelling tools 
+
+Python/cmd
+
+## conda
+
+傻瓜式就行。。
+
+conda在Linux上是可迁移的吧，至少是系统、路径完全一样的情况下。重装系统直接挂载硬盘，用户名不变的话，重新`conda init`就行
+
+### conda packages
+
+[MDAnalysis · MDAnalysis](https://www.mdanalysis.org/)
+
+[Openbabel :: Anaconda.org](https://anaconda.org/conda-forge/openbabel) (see above)
+
+```shell
+conda config --add channels conda-forge
+conda install mdanalysis -y
+conda install -c openbabel openbabel -y
+# conda install -c bioconda pybel # not this
+conda install -c rdkit rdkit -y
+
+conda install -c anaconda scikit-learn -y
+conda install -c conda-forge opencv -y
+```
+
+## OpenBabel
+
+may also
+
+```shell
+dnf install openbabel-gui # do not support converting to pdb???
+dnf install openbabel # without gui
+sudo apt-get install openbabel # debian
+```
 
 ## xmgrace
 
@@ -1635,7 +1678,9 @@ conda install -c conda-forge -c bioconda gromacswrapper
 from gromacs.fileformats.xvg import XVG # read .xvg files
 ```
 
-## alchemical-analysis, alchemlyb
+## alchemlyb
+
+alchemical-analysis
 
 We are in the process of migrating all functionality from here to instead use [`alchemlyb`](https://github.com/alchemistry/alchemlyb)
 
@@ -1717,44 +1762,17 @@ conda install -c omnia msmbuilder
    mcsalign mobile, target
    ```
 
-## Other
+### Spyder
 
-### PyInstaller
+spyder conda interpreter：光设置没用，直接打开conda里每个对应环境的Spyder
 
-[PyInstaller Manual — PyInstaller 6.0.0 documentation](https://pyinstaller.org/en/stable/)
+要是只有miniconda，对不起。按照提示（此为Fedora38 Scientific上的）：
 
-### Clustering plugin in VMD
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/spyder-error.jpg" style="zoom:50%;" />
 
-https://github.com/luisico/clustering
+安装时总是报conda底层的错（要report），版本不对还不行
 
-# Modelling tools
-
-## pycharm and miniconda
-
-no difficulty...
-
-common packages
-
-```shell
-# https://www.mdanalysis.org/
-conda config --add channels conda-forge
-conda install mdanalysis -y
-conda install -c openbabel openbabel -y
-# conda install -c bioconda pybel # not this
-conda install -c rdkit rdkit -y
-```
-
-### OpenBabel
-
-may also
-
-```shell
-dnf install openbabel-gui # do not support converting to pdb???
-dnf install openbabel # without gui
-sudo apt-get install openbabel # debian
-```
-
-
+[Using Conda Python Environments with Spyder IDE and Jupyter Notebooks in Windows | by Prem George | Medium](https://medium.com/@apremgeorge/using-conda-python-environments-with-spyder-ide-and-jupyter-notebooks-in-windows-4e0a905aaac5)
 
 ## AMBER
 
@@ -1942,6 +1960,10 @@ Download the files from here and copy them to `BOSSdir/scripts` folder
 
 https://www.chemsafetypro.com/Topics/CRA/How_to_Use_US_EPA_EPI_Suite_to_Predict_Chemical_Substance_Properties.html
 
+### packmol
+
+[m3g/packmol: Packmol - Initial configurations for molecular dynamics simulations (github.com)](https://github.com/m3g/packmol)
+
 ## MATCH
 
 https://brooks.chem.lsa.umich.edu/index.php?page=match&subdir=articles/resources/software
@@ -1950,14 +1972,15 @@ server: https://brooks.chem.lsa.umich.edu/index.php?matchserver=submit
 
 https://brooks.chem.lsa.umich.edu/download/software/match/MATCH_RELEASE.tar.gz
 
-## One-line-with-conda
+## Other
 
-```shell
-conda install -c anaconda scikit-learn -y
-conda install -c conda-forge opencv -y
-```
+### PyInstaller
 
-...
+[PyInstaller Manual — PyInstaller 6.0.0 documentation](https://pyinstaller.org/en/stable/)
+
+
+
+
 
 # Docking
 
@@ -2223,9 +2246,15 @@ MathPix can also recognize figure as smiles.
 
 ## Avogadro
 
-[refer to](https://ubunlog.com/zh-CN/avogadro%E7%BC%96%E8%BE%91%E4%BD%BF%E5%88%86%E5%AD%90%E5%8F%AF%E8%A7%86%E5%8C%96/#Instalar_Avogadro_en_Ubuntu)
+[使用此开源程序进行Avogadro，编辑和可视化分子| Ubunlog](https://ubunlog.com/zh-CN/avogadro编辑使分子可视化/#Instalar_Avogadro_en_Ubuntu)
 
-official: https://avogadro.cc/devel/compiling
+```shell
+flatpak install flathub org.openchemistry.Avogadro2
+```
+
+official package: [Install — Avogadro 1.99.0 documentation](https://two.avogadro.cc/install/index.html)
+
+https://avogadro.cc/devel/compiling
 
 > [install-qt4-ubuntu-20-04](https://ubuntuhandbook.org/index.php/2020/07/install-qt4-ubuntu-20-04/)
 

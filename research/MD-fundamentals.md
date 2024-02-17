@@ -65,7 +65,7 @@ https://www.cryst.bbk.ac.uk/pps97/course/index.html Section 7: molecular forces
 
 - antechamber时，和氨基酸比较像的用amber，一般小分子用gaff
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/c4.png" alt="1692793734134" style="zoom: 50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/c4.png" alt="1692793734134" style="zoom: 50%;" />
 
 - Li-Merz ions, IOD set vs HFE set: divalent, some are different; 3+ or 4+, usually the same?
 
@@ -185,7 +185,7 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 
 > from Amber manual
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/nvt-npt.png" alt="1689997407699" style="zoom: 80%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/nvt-npt.png" alt="1689997407699" style="zoom: 80%;" />
 
 ### Control
 
@@ -237,13 +237,12 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 
 
 
-![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/pcontrol.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/pcontrol.png)
 
 ### Restraint
 
-在GROMACS中，SHAKE算法用于对键和角施加约束，以固定它们的长度或角度。而restraint则是一种更广泛的概念，它可以用来对模拟中的各种属性施加约束。
-
-
+- 在GROMACS中，SHAKE算法用于对键和角施加约束，以固定它们的长度或角度。而restraint则是一种更广泛的概念，它可以用来对模拟中的各种属性施加约束。
+- 加键听起来像artifact，加约束好像就是很合理的建模方式
 
 ## Free energy calculations
 
@@ -263,15 +262,13 @@ Within the TI region there will be atoms which are linearly transformed (LTA) di
 
 
 
-
-
 ## GPU and Performance
 
 ### Concepts
 
 [hardware background information - Gromacs document](https://manual.gromacs.org/current/user-guide/mdrun-performance.html#hardware-background-information)
 
-[The pmemd.cuda GPUPerformance](http://ambermd.org/GPUPerformance.php)
+[The pmemd.cuda GPU Performance](http://ambermd.org/GPUPerformance.php)
 
 
 
@@ -295,13 +292,15 @@ and 22.6.7. Considerations for Maximizing GPU Performance
 
 ### Performance
 
-https://developer.nvidia.com/hpc-application-performance
+[NVIDIA HPC Application Performance | NVIDIA Developer](https://developer.nvidia.com/hpc-application-performance)
 
 several benchmark data
 
 Amber≈Gromacs>NAMD?
 
 Typically the performance differential between GPU and CPU runs will increase as atom count increases.
+
+4070比2080Ti也没快多少，30%左右？4090可能快两倍。。
 
 ## Advanced topics
 
@@ -418,7 +417,7 @@ gmx genrestr is used to generate position restraints, not distance restraints.
 
 type 'h' for help...
 
-![make_ndx](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/make_ndx.png)
+![make_ndx](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/make_ndx.png)
 
 `-n index.ndx`: based on an existing index file
 
@@ -511,6 +510,16 @@ https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp
 
 - Dummy atoms have epsilon and q both in zero, so no worry
 
+### Replica
+
+- [Running multi-simulations - GROMACS documentation](https://manual.gromacs.org/current/user-guide/mdrun-features.html#running-multi-simulations)
+
+  ```shell
+  mpirun -oversubscribe -np ${NUMBER_OF_WINDOWS} gmx_mpi mdrun -v -deffnm prod -nb gpu -bonded gpu -replex 1000 -multidir `echo "${directories}"` -gpu_id "${gpu_ids}" -pin on -dhdl dhdl
+  ```
+
+  The `-oversubscribe` option allows more processes to be launched than available processing elements, while the `-np ${NUMBER_OF_WINDOWS}` option specifies the number of processes to launch.
+
 
 
 ### Continue a run
@@ -583,6 +592,8 @@ see [here](#pbc-processing) for pbc processing
 
 ## Debug
 
+[谈谈怎么判断分子动力学模拟是否达到了平衡 - 思想家公社的门口：量子化学·分子模拟·二次元 (sobereva.com)](http://sobereva.com/627)
+
 ### general and notes
 
 - https://gromacs.org-gmx-users.maillist.sys.kth.narkive.com/J6lqsB6H/gmx-users-increasing-cut-off-and-pme-grid-spacing
@@ -632,7 +643,11 @@ see [here](#pbc-processing) for pbc processing
      Consider using -pin on (and -pinoffset in case you run multiple jobs).'
   ```
 
-- [谈谈怎么判断分子动力学模拟是否达到了平衡 - 思想家公社的门口：量子化学·分子模拟·二次元 (sobereva.com)](http://sobereva.com/627)
+- 
+
+- step 4: One or more water molecules can not be settled.
+  Check for bad contacts and/or reduce the timestep if appropriate.
+
 
 ### GPU, MPI, plumed, etc.
 
@@ -648,11 +663,15 @@ see [here](#pbc-processing) for pbc processing
 
 and VMD and CHARMM FF? I don't feel too much to say since they are just responsible for running MD (refer to pmemd as Amber)... so just put (common/fundamental) debug experiences here (no system-specific debug?...).
 
-
-
 ## NAMD 
 
 ### Basics
+
+#### File format
+
+- [Topology Files (uiuc.edu)](https://www.ks.uiuc.edu/Training/Tutorials/namd/namd-tutorial-unix-html/node24.html)
+- [Parameter Files (uiuc.edu)](https://www.ks.uiuc.edu/Training/Tutorials/namd/namd-tutorial-unix-html/node25.html)
+- [NAMD Configuration Files (uiuc.edu)](https://www.ks.uiuc.edu/Training/Tutorials/namd/namd-tutorial-unix-html/node26.html)
 
 #### langevin dynamics
 
@@ -671,7 +690,7 @@ and VMD and CHARMM FF? I don't feel too much to say since they are just responsi
 
 #### FEP
 
-![](E:\GitHub-repo\notes\research\MD-fundamentals.assets\alchequilsteps.jpg)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/alchequilsteps.jpg)
 
 > 有没有可能，这里没有加restrain，只是不算在fep采样里
 > 只是从lambda1 到 lambda2的平衡，还是production simulation
@@ -680,7 +699,7 @@ and VMD and CHARMM FF? I don't feel too much to say since they are just responsi
 
 ### Debug
 
-#### Short
+#### General
 
 - FATAL ERROR: Atom 9 has bad hydrogen group size.  Check for duplicate bonds. 居然是vmd1.9.3的锅
 
@@ -688,7 +707,9 @@ and VMD and CHARMM FF? I don't feel too much to say since they are just responsi
 
   vmd says "ERROR) Mismatch between existing molecule or structure file atom count and coordinate or trajectory file atom count."
 
-- 
+- slurmstepd: error: Detected 1 oom-kill event(s) in StepId=16838.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.
+  
+  Solution: really specify larger memory...
   
 - 
 
@@ -739,8 +760,6 @@ atom moving too fast?
 [prmtop format](https://ambermd.org/prmtop.pdf). only after .prmtop file is read into parmed do the residues have indices....
 
 使用文本编辑器打开生成的.inpcrd文件，然后查找其中的盒子参数。盒子参数位于文件的最后一行，包含三个数字，分别表示盒子在x、y和z方向上的长度。
-
-
 
 
 
@@ -1068,7 +1087,7 @@ UniProt has a ClustalW interface but no showing colors. Just export sequences an
 
 ## CASP
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/casp.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/casp.png" style="zoom:50%;" />
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals.assets/casp15.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/casp15.png" style="zoom:50%;" />
 

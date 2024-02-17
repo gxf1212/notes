@@ -173,8 +173,10 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 <img src="https://cdn.jsdelivr.net/gh/user-name/repo-name@master/path/to/figure" style="zoom:50%;" />
 ```
 
-- common md syntax is ok, Windows backslash and Linux slash are all ok. and zooming:
-  
+to attach files, we can only also paste the cdn path, not the relative path
+
+- common md syntax is ok, Windows backslash and Linux slash are both ok. and zooming:
+
   ```html
   <!-- 指定像素值 -->
   ![logo](https://docsify.js.org/_media/icon.svg ':size=50x100')
@@ -182,43 +184,43 @@ If you want to modify a theme, download from cdn website rather than GitHub!
   <!-- 支持按百分比缩放 -->
   ![logo](https://docsify.js.org/_media/icon.svg ':size=10%')
   ```
-  
+
   centering is not supported here...
-  
+
   > Typora zooming script is not supported in docsify (but is ok in a normal html, but center works)
   >
   > already asked in CSDN. https://github.com/HanquanHq/MD-Notes
-  
+
   no, it supports. But the root directory is not the current directory but the repository’s.....
-  
+
   - in normal md grammar, relative path is ok
-  
+
   - in html, zooming without relative path is ok
-  
+
   - the problem is, in html, <u>it cannot recognize relative path as markdown does (no matter whether zooming)</u>. But it works if you use path relative to the root of repository...which makes figures invisible in local Typora
-  
+
   - 本来还猜测只是重新定义了根目录的原因，加个`../`就认为是相对路径了。事实上是，不管加不加这些东西，都是从the root of repository开始算的。。所以你以为加了../就是父目录了，其实还是root
-  
+
     but still no luck
-  
+
 - 解决图片问题的思路：
-  
+
   - 上传的时候render为正确的html格式
-  
+
   - 把图上传到另一个地方，链接一个网址以实现缩放
     
     hexo就是可以渲染出图片，他docsify就是不行
-  
+
   引用网址图片也不行
-  
+
   **解决之道**：要用这个打头（算是git的api？）
-  
+
   `https://cdn.jsdelivr.net/gh/gxf1212/notes@master/` or 
-  
+
   `https://gitee.com/gxf1212/notes/raw/master/`
-  
+
   其实git他俩用来做图床就是如此
-  
+
 - both markdown and html (for zooming) syntaxes work ok
 
   ```markdown
@@ -1329,6 +1331,7 @@ pip install sphinx_theme
 7. [Piccolo](https://sphinx-themes.org/#theme-piccolo-theme)
 8. [Karma](https://sphinx-themes.org/#theme-karma-sphinx-theme)
 9. [Furo](https://sphinx-themes.org/#theme-furo): new gromacs doc
+10. [The PyData Sphinx Theme](https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html)
 
 > other
 >

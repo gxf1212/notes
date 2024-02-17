@@ -799,7 +799,10 @@ Mac：https://macwk.com/soft/typora
 
 
 
-[VS Code Remote SSH配置 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/68577071)
+### Extensions
+
+- [VS Code Remote SSH配置 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/68577071)
+- mol star: but I don't like that
 
 ## Pycharm
 
@@ -809,9 +812,7 @@ Mac：https://macwk.com/soft/typora
 
 ### Basics
 
-1. https://blog.csdn.net/qq_41330454/article/details/105906347 控制台命令提示符是In[2]. ipython!
-
-   http://errornoerror.com/question/13223264808178804318/
+1. [pycharm的python console控制台命令提示符是 In[2]](https://blog.csdn.net/qq_41330454/article/details/105906347) 
 
 2. [关闭代码风格检查](https://blog.csdn.net/u013088062/article/details/50001189)
 
@@ -823,7 +824,9 @@ Mac：https://macwk.com/soft/typora
 
      <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/pycharm.png" alt="image" style="zoom:80%;" />
 
-3. 实际上没有那么快自动保存，还是需要ctrl+s，尤其是引用别的包的时候
+3. [pycharm软件实现设置自动保存操作-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1734921)
+
+   实际上没有那么快自动保存，还是需要ctrl+s，尤其是引用别的包的时候
 
 4. intepreter: create from existing sources. 
 
@@ -1156,18 +1159,6 @@ failed, remove this env...
 
 ## Spyder
 
-### setup
-
-spyder conda interpreter：光设置没用，直接打开conda里每个对应环境的Spyder
-
-要是只有miniconda，对不起。按照提示（此为Fedora38 Scientific上的）：
-
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/spyder-error.jpg" style="zoom:50%;" />
-
-安装时总是报conda底层的错（要report），版本不对还不行
-
-[Using Conda Python Environments with Spyder IDE and Jupyter Notebooks in Windows | by Prem George | Medium](https://medium.com/@apremgeorge/using-conda-python-environments-with-spyder-ide-and-jupyter-notebooks-in-windows-4e0a905aaac5)
-
 ### shortcut
 
 [【Spyder】Python内置IDE之Spyder快捷键 - 锦绣良缘](https://www.cnblogs.com/grace731/articles/15029832.html)
@@ -1198,6 +1189,10 @@ Ctrl+双击：打开加载包源代码
 
 ## MATLAB
 
+> ![NOTE]
+>
+> Octave是完全免费的（并且是开源的），而Matlab是商业软件，价格很昂贵。
+
 在matlab编辑窗口中怎样只运行选中的命令？快捷键：F9
 
 ## Online documents
@@ -1211,6 +1206,12 @@ Ctrl+双击：打开加载包源代码
 ## Common
 
 - [查看 Office 文件的先前版本](https://support.microsoft.com/zh-cn/office/查看-office-文件的先前版本-5c1e076f-a9c9-41b8-8ace-f77b9642e2c2)
+
+- [在 Microsoft Office 中减小图片的文件大小 - Microsoft 支持](https://support.microsoft.com/zh-cn/office/在-microsoft-office-中减小图片的文件大小-8db7211c-d958-457c-babd-194109eb9535)
+
+  在 **“图片工具”**下的“ **格式** ”选项卡上的“ **调整** ”组中，选择“**压缩图片**”。
+
+- 
 
 ## MS Word
 
@@ -1513,15 +1514,18 @@ new QQ for Linux: https://im.qq.com/linuxqq/index.shtml
 
 
 
-## Browser
+## Firefox
 
-[键盘快捷键 | Firefox 帮助 (mozilla.org)](https://support.mozilla.org/zh-CN/kb/键盘快捷键)
+- [键盘快捷键 | Firefox 帮助 (mozilla.org)](https://support.mozilla.org/zh-CN/kb/键盘快捷键)
 
-[How to Disable the Pop-Up Blocker in Mozilla Firefox (howtogeek.com)](https://www.howtogeek.com/769916/how-to-disable-the-pop-up-blocker-in-mozilla-firefox/)
+- [How to Disable the Pop-Up Blocker in Mozilla Firefox (howtogeek.com)](https://www.howtogeek.com/769916/how-to-disable-the-pop-up-blocker-in-mozilla-firefox/)
 
-> On the settings page, in the left sidebar, click "Privacy & Security." On the right pane, scroll down to the "Permissions" section. Here, at the bottom, disable the "Block Pop-Up Windows" option.
+  > On the settings page, in the left sidebar, click "Privacy & Security." On the right pane, scroll down to the "Permissions" section. Here, at the bottom, disable the "Block Pop-Up Windows" option.
 
+- Managing usernames and passwords
 
+  - Click the menu button ≡ to open the menu panel.
+  - Click Logins and Passwords. The Firefox about:logins page will open in a new tab.
 
 # LaTeX
 

@@ -81,7 +81,7 @@ Linux desktop的优势：可以直接为cluster做测试
 
 5. [Bash 解决多个终端History丢失的问题-CSDN博客](https://blog.csdn.net/weixin_34311757/article/details/91544518)
 
-   ```
+   ```shell
    shopt -s histappend
    ```
 
@@ -237,27 +237,36 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 ### disk management
 
-1. 删除分区用gparted
+1. [Linux系统查看磁盘类型](https://huaweicloud.csdn.net/635639a8d3efff3090b5b38f.html)：如果返回1则表示磁盘可旋转，那么就是HDD了；反之，如果返回0，则表示磁盘不可以旋转，那么就有可能是SSD了。
 
-   也许 https://blog.csdn.net/xiexievv/article/details/50525783
+   ```shell
+   grep ^ /sys/block/*/queue/rotational
+   ```
 
-   https://blog.csdn.net/renfeigui0/article/details/100765958 格式化
+2. IDE磁盘的文件名为：/dev/hdxx
+   SCSI/SATA/USB磁盘文件名为：/dev/sdxx
 
-2. Linux中/var空间不足的解决办法 https://blog.csdn.net/hqzhon/article/details/49027351
+3. 删除分区用gparted
+
+   也许 [linux 挂载硬盘，创建新分区，删除分区_在sda1下创建分区-CSDN博客](https://blog.csdn.net/xiexievv/article/details/50525783)
+
+   [Linux磁盘分区和格式化（fdisk、mkfs）（单块硬盘小于2TB）_mkfs 格式化大小有限制吗](https://blog.csdn.net/renfeigui0/article/details/100765958) 格式化
+
+4. [Linux中/var空间不足的解决办法](https://blog.csdn.net/hqzhon/article/details/49027351)
 
    not use this partition anymore
 
-3. on disk check
+5. on disk check
 
    > see below debugging 22.1.14
 
-4. Linux `dmesg`（英文全称：display message）命令用于显示开机信息。
+6. Linux `dmesg`（英文全称：display message）命令用于显示开机信息。
 
-5. [解决类似umount target is busy挂载盘卸载不掉问题 - Adrian·Ding - 博客园](https://www.cnblogs.com/ding2016/p/9605526.html)
+7. [解决类似umount target is busy挂载盘卸载不掉问题 - Adrian·Ding - 博客园](https://www.cnblogs.com/ding2016/p/9605526.html)
 
-6. directory of U disk: `/run/media/user/u disk name`
+8. directory of U disk: `/run/media/user/u disk name`
 
-7. 
+9. 
 
 ### system/user settings
 
@@ -1270,9 +1279,13 @@ curl -O http://example.com/file.zip
 
 ### svn
 
+[see Git here](Specific-Software-Usage.md?Git-VCS)
+
 get part of the files in one GitHub repository
 
-- `svn checkout url`, 将地址中的 `/tree/master/` 换成 `/trunk/`
+- [svn checkout (co) | SVN Book (visualsvn.com)](https://www.visualsvn.com/support/svnbook/ref/svn/c/checkout/)
+
+  `svn checkout url`, 将地址中的 `/tree/master/` 换成 `/trunk/`
 
   Then the files are downloaded to the current directory of terminal.
 
@@ -1592,7 +1605,9 @@ To be re-organized
 
   Right click the time > Configure Digital Clock > Time Display > 24-hour
 
-  [reference](https://askubuntu.com/questions/1268176/global-24-hour-time-format-in-kde-plasma)
+  [20.04 - Global 24-hour time format in KDE Plasma - Ask Ubuntu](https://askubuntu.com/questions/1268176/global-24-hour-time-format-in-kde-plasma)
+
+  [linux - How can I set 24 hour time in KDE5 - Super User](https://superuser.com/questions/947428/how-can-i-set-24-hour-time-in-kde5)
 
 - KDE Plasma 环境里可以打开Discover的设置，然后再设置软件源
 
@@ -1745,7 +1760,7 @@ When system halted/stuck
    ```shell
    sudo pkill X
    startx
-```
+   ```
 
    一下，就好了。不需要重启。
 
@@ -1762,19 +1777,19 @@ When system halted/stuck
    ```shell
    sudo X -configure
    Xorg -configure
-```
+   ```
 
    or, enter tty, kill the process of `gnome-shell` or tty7
 
-4. 
+4. Fedora: 要使用安装盘或USB驱动器来加载救援系统，你需要在Troubleshooting子菜单中选择`Rescue a Fedora system`
 
 5. http://www.mamicode.com/info-detail-2913916.html
 
    also stop, disable .....but only under user.....
 
-   https://blog.csdn.net/xinxinqqt/article/details/44784195
+   [kde桌面解决baloo_file的霸道行为_baloo_file arch-CSDN博客](https://blog.csdn.net/xinxinqqt/article/details/44784195)
 
-   https://blog.csdn.net/fryingpan/article/details/42641999
+   [禁用 baloo_file_extractor 加速 ubuntu 14.04 (KDE)_什么是baloo_file_extr-CSDN博客](https://blog.csdn.net/fryingpan/article/details/42641999)
 
    might because handling too many files in a folder...?
 
@@ -1789,7 +1804,7 @@ note: some used stupid old strange paths. replace with yours (eg: your `/home`)
 
 [技术|最适合程序员的 10 款 Linux 发行版](https://linux.cn/article-14547-1.html)
 
-[2022 年适合初学者的 10 个最佳 Linux 发行版 - Linux迷 (linuxmi.com)](https://www.linuxmi.com/2022-10-top-linux.html)
+[2022 年适合初学者的 10 个最佳 Linux 发行版 - Linux迷](https://www.linuxmi.com/2022-10-top-linux.html)
 
 linux核心的东西都一样，发行版之间最大的区别无非是包管理和发行周期，以及默认带的软件包。当然，还有桌面管理和外观。。
 
@@ -1927,6 +1942,10 @@ sudo update-grub
   # 添加如下内容：
   # uuid=xxxxxxx /home ext4 defaults 0 0
   ```
+
+  >![TIP]
+  >
+  > `blkid`没反应：得加`sudo`
 
 - 更改desktop的路径为英文，极端cmd下语言改成英文 [命令行更改系统语言](https://blog.csdn.net/MaryChow/article/details/68494243?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link)
 
@@ -2985,11 +3004,21 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 # Windows notes
 
+## Settings
+
+- Find operating system info in Windows 11
+
+  Select Start > Settings > System > About (系统信息). Open About settings.
+
+- 浏览器默认应用
+
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/chrome.png)
+
+  点击链接用浏览器打开：下面的https
+
 ## General
 
-1. Find operating system info in Windows 11
-
-   Select Start > Settings > System > About (系统信息). Open About settings.
+1. 
 
 2. windows如何查看用户名 https://zhuanlan.zhihu.com/p/129858590
 
@@ -3025,19 +3054,11 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 8. duplicate tab with the same path in cmd
 
-   https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/new-tab-same-directory
-
-9. 
+   [在同一目录中打开选项卡/窗格 | Microsoft Learn](https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/new-tab-same-directory)
 
 10. [计算机桌面图标不见了，怎么恢复](https://consumer.huawei.com/cn/support/content/zh-cn00695687/)
 
 11. TTC字体是TrueType字体集成文件(.TTC文件)，可和ttf放一起
-
-12. In the Command Prompt window, press and hold the F7 key (no Fn) to view the history of Command Prompt. Then it will open the list of commands you currently typed in.
-
-    https://www.alphr.com/view-command-history-command-prompt/
-
-    but only this cmd...
 
 13. 选择任务栏上的" 任务视图"，然后选择" 新建桌面"，然后打开所需的应用。 若要在虚拟桌面之间移动应用，请选择" 任务视图"，然后将所需的应用从一个桌面拖到另一个桌面。 或通过将应用拖动到新桌面来创建另一个虚拟桌面。
 
@@ -3056,11 +3077,7 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 18. 按下键盘“Win+Ctrl+D”可以一键生成一个新桌面。生成后，再按下“Win+Ctrl+方向键”可以快速切换这两个桌面。
     why not work in ToDesk?
 
-19. 浏览器默认应用
-
-    ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/chrome.png)
-
-    点击链接用浏览器打开：下面的https
+19. 
 
 20. 
 
@@ -3068,11 +3085,13 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 ## CMD
 
+### General
+
 - cmd的设置
 
   config file: `C:\Users\Lenovo\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`  
 
-  [link](https://learn.microsoft.com/zh-cn/windows/terminal/install#settings-json-file)
+  [Windows 终端安装 | Microsoft Learn](https://learn.microsoft.com/zh-cn/windows/terminal/install#settings-json-file)
 
 - Windows-Unix reference table
 
@@ -3094,13 +3113,21 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
   xxx.bat
   ```
 
-- [无法加载文件 ******.ps1，因为在此系统中禁止执行脚本。有关详细信息，请参阅 "get-help about_signing"_gulp : 无法加载文件 c:\program files\nodejs\gulp.ps1.....](https://blog.csdn.net/github_35186068/article/details/80518681)
+- [How To View Your Command History in the Command Prompt on a Windows PC (alphr.com)](https://www.alphr.com/view-command-history-command-prompt/)
 
-  ```
-  Set-ExecutionPolicy -Scope CurrentUser remotesigned
-  ```
-
+  In the Command Prompt window, press and hold the F7 key (no Fn) to view the history of Command Prompt. Then it will open the list of commands you currently typed in.
   
+  but only for this cmd...
+
+- 关机
+
+  ```cmd
+  shutdown /s /t 0
+  ```
+
+  其中/s表示关闭计算机，/t表示指定等待时间（单位为秒），0表示立即关闭计算机。
+  
+- [DOS Command: TREE (csulb.edu)](https://home.csulb.edu/~murdock/tree.html)
 
 ### 删除
 
@@ -3158,7 +3185,13 @@ rd /s命令用于删除一个非空目录及其所有子目录和文件。
 
 > 在使用rd /s命令删除非空目录时，请务必小心，确保你真的不再需要这些目录和文件。
 
+### Powershell
 
+- [无法加载文件 ******.ps1，因为在此系统中禁止执行脚本。有关详细信息，请参阅 "get-help about_signing"_gulp : 无法加载文件 c:\program files\nodejs\gulp.ps1.....](https://blog.csdn.net/github_35186068/article/details/80518681)
+
+  ```
+  Set-ExecutionPolicy -Scope CurrentUser remotesigned
+  ```
 
 ## Lenovo
 
@@ -3279,7 +3312,13 @@ a binary64 as having:
 
 ## HPC
 
+### CPU GPU
+
 - **Tesla A100 is...2~3x** faster than the V100 using 32-bit precision.
+- [NVIDIA GeForce RTX 4070 Specs | TechPowerUp GPU Database](https://www.techpowerup.com/gpu-specs/geforce-rtx-4070.c3924)
+
+### Jargon
+
 - SIMD stands for **Single Instruction, Multiple Data**. It is a type of parallel processing in Flynn’s taxonomy. [SIMD describes computers with multiple processing elements that perform the same operation on multiple data points simultaneously](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data)
 - NCCL：Nvidia Collective multi-GPU Communication Library，多GPU通讯
 - MPI是高性能计算常用的实现方式，它的全名叫做Message Passing Interface。顾名思义，它是一个实现了消息传递接口的库。MPI作为编程库很丰满，作为计算框架很骨感。它的好处在于一切自己动手，不利也在于一切全靠自己。
@@ -3294,11 +3333,13 @@ a binary64 as having:
 
 - 无线网卡 (英文名称：**Wireless network interface controller**，缩写为WNIC) driver
 
-  https://www.nnnxxx.cn/
+  曾经装了驱动，不成功
 
-  https://github.com/the-tcpdump-group/libpcap
-
-  https://askubuntu.com/questions/537170/no-such-file-or-directory-net-bpf-h
+  > https://www.nnnxxx.cn/
+  >
+  > [the-tcpdump-group/libpcap: the LIBpcap interface to various kernel packet capture mechanism (github.com)](https://github.com/the-tcpdump-group/libpcap)
+  >
+  > [12.04 - No such file or directory net/bpf.h - Ask Ubuntu](https://askubuntu.com/questions/537170/no-such-file-or-directory-net-bpf-h)
 
 - 固态硬盘不需要整理碎片
 

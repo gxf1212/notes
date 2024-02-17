@@ -4,9 +4,50 @@ Mainly from UROPS project and FYP experiences. May also include some general MD 
 
 This page includes general results, not project-specific details. Especially NAMD FEP (protein-ligand).
 
-### Other
+# Modeling small molecule
 
-[ATB](https://atb.uq.edu.au/index.py?tab=submit), an old ligand parametrizer
+For more about programming, see []
+
+## Manually
+
+#### sdf
+
+[2.5: Structural Data Files - Chemistry LibreTexts](https://chem.libretexts.org/Courses/Intercollegiate_Courses/Cheminformatics/02%3A_Representing_Small_Molecules_on_Computers/2.05%3A_Structural_Data_Files)
+
+#### mol2
+
+- [谈谈记录化学体系结构的mol2文件](http://sobereva.com/655)
+  - mol2文件里以#作为第一列的是注释行，空行也被完全无视。mol2文件是自由格式，因此空格数目完全随意。
+  - 即便你不想定义原子所属的子结构信息而只想定义原子电荷，也必须随便写上子结构序号和子结构名字来占位，比如此例用0 UNK0来占位。
+- https://chemicbook.com/2021/02/20/mol2-file-format-explained-for-beginners-part-2.html
+- http://chemyang.ccnu.edu.cn/ccb/server/AIMMS/mol2.pdf
+- [mol2 format in details](https://www.structbio.vanderbilt.edu/archives/amber-archive/2007/att-1568/01-mol2_2pg_113.pdf)
+
+### Ligand drawing tools
+
+- [ZINC substances (zinc.docking.org)](https://zinc.docking.org/substances/home/)
+
+- [PubChem Sketcher V2.4](https://pubchem.ncbi.nlm.nih.gov/edit3/index.html)
+
+- [MolView](https://molview.org/) with good 3D rendering
+
+> pubchem sketcher, MolView cannot export sdf or mol2 either
+
+
+
+Other
+
+> smi2pdb: [Convert SMILES to 3D structure (novoprolabs.com)](https://www.novoprolabs.com/tools/smiles2pdb)
+>
+> smi2image in batch: [Smi2Depict: Generate 2D Images from Molecule Files (uci.edu)](https://cdb.ics.uci.edu/cgibin/Smi2DepictWeb.py)
+
+
+
+
+
+[Molecular Modelling Group](https://www.molecular-modelling.ch/swiss-drug-design.html)
+
+- bioisostere
 
 # MD simulation
 
@@ -1936,6 +1977,8 @@ But CgenFF does not support special species like:
   - similar parameters, (maybe) better transferability
   
 - https://www.swissparam.ch/ MMFF/CHARMM22, too old
+
+- [ATB](https://atb.uq.edu.au/index.py?tab=submit), an old ligand parametrizer, usually not using
 
 these servers generate files for multiple MD engines
 

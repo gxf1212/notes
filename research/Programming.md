@@ -272,7 +272,9 @@ EOF
 tleap -f tleap.in > tleap.log
 ```
 
-### printf
+### output
+
+#### printf
 
 `printf "format" $variable`
 
@@ -282,7 +284,9 @@ tleap -f tleap.in > tleap.log
   $(printf "%02d" $jj)
   ```
 
-- 
+#### cat
+
+- `tac` 命令是 Linux 系统中的一个命令行工具，它的作用是反向输出文件内容。`tac` 是 `cat` 命令的反向操作，`cat` 命令用于将文件内容输出到标准输出，而 `tac` 命令则是将文件内容反向输出。
 
 ## File processing
 
@@ -419,6 +423,8 @@ string comparison: `[[ ... ]]`
 ### function
 
 [Bash函数 - Bash Shell教程 (yiibai.com)](https://www.yiibai.com/bash/bash-functions.html)
+
+- In a Bash script, the symbol "$?" represents the exit status of the last executed command.
 
 ### arguments
 
@@ -683,7 +689,7 @@ puts "The example was called with a varying number of arguments:"
 puts "    $count1, $count2, $count3, and $count4"
 ```
 
-## VMD Scripting 
+## VMD Specific
 
 ### Basics
 
@@ -712,7 +718,7 @@ puts "    $count1, $count2, $count3, and $count4"
 
 3. question mark prompt and return to the normal `vmd> prompt?` that mean the tcl interpreter is waiting for you to **close a brace**, so try `}` or `]` or `)` followed by enter. you may need to enter it a couple of times.
 
-#### about Tkconsole
+### about Tkconsole
 
 1. resize font in TkConsole https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/29151.html
 
@@ -750,7 +756,11 @@ puts "    $count1, $count2, $count3, and $count4"
    >
    >    just clears the screen
 
+### Clustering
 
+see [Protein-ligand-simulation.md](Protein-ligand-simulation.md)
+
+https://github.com/luisico/clustering
 
 ## VMD applications
 
@@ -787,6 +797,14 @@ measure contacts cutoff selection1 [selection2]: Find all atoms in selection1 th
 
 
 
+For example, to align residues 10-20 of protein A with residues 30-40 of protein B, you can use the following command: 
+
+```tcl
+set sel [atomselect top "resid 10 to 20"]
+set ref [atomselect top "resid 30 to 40"]
+measure fit $sel $ref
+```
+
 
 
 
@@ -811,7 +829,7 @@ measure contacts cutoff selection1 [selection2]: Find all atoms in selection1 th
 
 - [Python 中下划线的 5 种含义 | 菜鸟教程 (runoob.com)](https://www.runoob.com/w3cnote/python-5-underline.html)
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/underline.png" alt="underline" style="zoom:50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/underline.png" alt="underline" style="zoom:50%;" />
 
 - [Convert Letters to Numbers and vice versa in Python | bobbyhadz](https://bobbyhadz.com/blog/python-convert-letters-to-numbers): `chr()`, `ord()`
 
@@ -1171,7 +1189,7 @@ https://juejin.cn/post/6844903919978545160
 
 - 互斥参数组：https://michael728.github.io/2018/12/09/python-argparse-note/ 
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/exclusive.png" alt="exclusive" style="zoom:80%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/exclusive.png" alt="exclusive" style="zoom:80%;" />
 
 - `parser.print_help()`
 
@@ -1231,17 +1249,6 @@ even `python xx.py -W` didn't work
 
 
 # Small molecule
-
-## File formats
-
-mol2:
-
-- [谈谈记录化学体系结构的mol2文件](http://sobereva.com/655)
-  - mol2文件里以#作为第一列的是注释行，空行也被完全无视。mol2文件是自由格式，因此空格数目完全随意。
-  - 即便你不想定义原子所属的子结构信息而只想定义原子电荷，也必须随便写上子结构序号和子结构名字来占位，比如此例用0 UNK0来占位。
-- https://chemicbook.com/2021/02/20/mol2-file-format-explained-for-beginners-part-2.html
-- http://chemyang.ccnu.edu.cn/ccb/server/AIMMS/mol2.pdf
-- [mol2 format in details](https://www.structbio.vanderbilt.edu/archives/amber-archive/2007/att-1568/01-mol2_2pg_113.pdf)
 
 ## RDkit
 
@@ -1308,7 +1315,7 @@ Simply the structure
 
 - [RDKit: New drawing options in the 2020.03 release](http://rdkit.blogspot.com/2020/04/new-drawing-options-in-202003-release.html)
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/draw-highlight.png" style="zoom: 67%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/draw-highlight.png" style="zoom: 67%;" />
 
 
 
@@ -1404,7 +1411,7 @@ def get_charge(cfile):
 
 Result
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/draw-charge.jpg" style="zoom: 50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/draw-charge.jpg" style="zoom: 50%;" />
 
 [Partial charge visualization with RDKit](https://iwatobipen.wordpress.com/2020/01/08/partial-charge-visualization-with-rdkit-rdkit-quantumchemistry-psikit/) or [QM based partial charge calculation and visualization (github.com)](https://gist.github.com/iwatobipen/b49fb916d07ee871f00441690de77d87#file-parchai_charge_viz-ipynb)
 
@@ -1415,7 +1422,7 @@ _, res = rdEHTTools.RunMol(mh)
 static_chgs = res.GetAtomicCharges()[:atorvastatin.GetNumAtoms()]
 ```
 
-![img](Programming-for-MD.assets\rdkit_charge.png)
+![img](Programming-Preparation.assets.assets/rdkit_charge.png)
 
 #### Draw ligand libraries
 
@@ -1452,7 +1459,7 @@ with open(file+'.svg', 'w') as f:
 
 Result
 
-![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-for-MD.assets/draw-library.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/draw-library.png)
 
 - ligands with different scafford, not well aligned...
 

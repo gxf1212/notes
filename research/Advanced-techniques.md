@@ -99,7 +99,7 @@ about four heavy atoms per bead (include their hydrogen atoms)
 
 
 
-
+[Polymers (PEG as an example)](http://www.cgmartini.nl/index.php/tutorials-general-introduction-gmx5/martini-tutorials-polymers-gmx5)
 
 
 

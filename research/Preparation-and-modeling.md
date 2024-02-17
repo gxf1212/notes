@@ -6,6 +6,8 @@ This page is about protein/ligand/.... structure modeling and preprocessing, inc
 
 # Protein structure
 
+see also [NA-simulation](NA-simulation.md), [Metal-ion](Metal-ion.md), etc. for these systems
+
 ## Homology modeling
 
 精细side chain控制，还是要谨慎用AlphaFold呀，不如同源建模
@@ -211,7 +213,7 @@ or Protein-peptide. We should **also try protein complex structure prediction**!
 
 
 
-![](E:\GitHub-repo\notes\research\Preparation-and-modeling.assets\HADDOCK-flexible.jpg)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/HADDOCK-flexible.jpg)
 
 haddock flexible is in step 2
 
@@ -287,6 +289,11 @@ Allosite: provide a protein, 光预测别构在哪，不管正构在哪...
 
 ## VMD+CHARMM
 
+非标准残基的教程
+
+- [ks.uiuc.edu/Training/Tutorials/science/forcefield-tutorial/forcefield.pdf](https://www.ks.uiuc.edu/Training/Tutorials/science/forcefield-tutorial/forcefield.pdf)
+- [topology-tutorial.pdf (uiuc.edu)](http://www.ks.uiuc.edu/Training/Tutorials/science/topology/topology-tutorial.pdf)
+
 summary
 
 - hybrid topology做对是一切的基础
@@ -361,6 +368,11 @@ I do not recommend building with LigandRM since it just treats our residue as a 
 But one advantage for this: theoretically this can be automated (for many similar ligands).
 
 
+
+没有写IC的novel residue（rtf），guesscoord以后坐标全变成0了。然而我们从小分子做的很难自己整一个IC（而且也不对）
+只能在vmd里，先把其他链建好（guesscoord），加入novel residue，做一个selection但不选择原来那个residue，就是一个坐标是对的pdb、psf了，当然要set一下segname,resid,chain id等。然后加水和离子。
+
+再试试吧，发现guesscoord对它没有影响，psf里的键也是对的，虽然pymol显示不出来..
 
 ### Write a two-end patch
 
@@ -691,7 +703,7 @@ and modify files related to that residue
 
 # System setup
 
-also refer to [related programming](Programming-for-MD.md#modeling-and-analysis)
+also refer to [related programming](Programming.md#modeling-and-analysis)
 
 My opinion (23.10.17): rtp文件其实并不难写，和rtf的复杂度几乎相同，扩展参数的复杂度和prm也基本相同。问题是gmx建模的可扩展性极差，对于非标准成分频繁更改力场文件令人难以接受，所以也没人开发自动转化为rtp等格式、自动加入gmx格式力场的程序。其实vmd（加水）和tleap（序号、插入），`sobtop`好像也不能随机塞东西，包括`packmol`用法很迷它们弊端也很明显，竟然显示出`gmx insert-molecules`的不可替代性，所以对非聚合物体系（不是聚合物、+非标准残基的蛋白），都暂且忍受了。对特殊聚合物，往往需要用vmd/tleap建模再转过去。对于偶尔一用的residue，还是勉强添加到gmx中，当然要先看看有没有（如之前那个TYM）。
 
@@ -734,11 +746,11 @@ Called by other tools like membrane builder
 
 - We just don't use CHARMM-GUI `.mdp` files...
 
-  <img src="E:\GitHub-repo\notes\research\Preparation-and-modeling.assets\GUI-Berendsen.png" style="zoom:50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/GUI-Berendsen.png" style="zoom:50%;" />
 
 - GUI automatically generates gradually-released restraint for all kinds of species, which gmx cannot...
 
-  ![](E:\GitHub-repo\notes\research\Preparation-and-modeling.assets\GUI-restraint.jpg)
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/GUI-restraint.jpg)
 
 
 
@@ -784,7 +796,7 @@ Called by other tools like membrane builder
 
 
 
-See [convert_charmm2gmx_via_parmed.py](Programming-for-MD.md#charmm2gmx)
+See [convert_charmm2gmx_via_parmed.py](Programming.md#charmm2gmx)
 
 
 
@@ -808,7 +820,7 @@ For residues that are identical except the coordinates (e.g., the water molecule
 
   otherwise (`addIons`), ions are on one surface
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Preparation-and-modeling.assets/tleap-ion.png" alt="tleap-ion" style="zoom: 50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/tleap-ion.png" alt="tleap-ion" style="zoom: 50%;" />
 
 - `solvateBox obj distance`
 
@@ -828,7 +840,7 @@ For residues that are identical except the coordinates (e.g., the water molecule
 
   fix it via parmed (sometimes useful) or MDA (for analysis)
 
-  See [convert_amber2gmx_via_parmed.py](Programming-for-MD.md#amber2gmx)
+  See [convert_amber2gmx_via_parmed.py](Programming.md#amber2gmx)
 
 - Amber无区分chain的方式？tleap最高层次就是unit
 
@@ -976,7 +988,7 @@ it would also be simple in Python with my `read_pdb` code....
 
 This part is from 2021 UROPS project, structure-based virtual screening (SBVS)
 
-for basic usage of Python packages like rdkit and openbabel, please [go to this link](Programming-for-MD#small-molecule). If I use them to construct a library, maybe I'll write here.
+for basic usage of Python packages like rdkit and openbabel, please [go to this link](Programming.md#small-molecule). If I use them to construct a library, maybe I'll write here.
 
 Contents need more organization....put before system setup later
 
