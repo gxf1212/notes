@@ -417,7 +417,7 @@ gmx genrestr is used to generate position restraints, not distance restraints.
 
 type 'h' for help...
 
-![make_ndx](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/make_ndx.png)
+![make_ndx](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets/make_ndx.png)
 
 `-n index.ndx`: based on an existing index file
 
@@ -725,7 +725,7 @@ and VMD and CHARMM FF? I don't feel too much to say since they are just responsi
 
 I'm running MD simulation of a protein-ligand system (pdb id: 5tbm) with NAMD3 and CHARMM36/CgenFF force field. I removed extra components (except a water molecule near the ligand binding site which forms hydrogen bonds), and fixed the protein structure. After minimization, NVT, NPT with restrain, and NPT equilibration, everything went well. Then I performed 100ns MD simulation (delta t is 1 femtosecond), following by a 500ns MD simulation (delta t is 2 femtosecond). However, the latter simulation reports the following error after 200~300ns:
 Error: atoms moving too fast at timestep 107643652; simulation has become unstable (0 atoms at pe 0).
-FATAL ERROR:SequencerCUDA: Atoms moving too fast.
+FATAL ERROR: SequencerCUDA: Atoms moving too fast.
 Only one of three simulations survive. I'm setting rigidbonds to all.
 The structure looks fine until the last frame recorded. I didn't find the initial structure unstable. Nor does bonds break apart.
 I've also tried setting margin to 4, but the simulations stops even earlier.
@@ -823,19 +823,19 @@ Other (e.g. modeling):
 
 
 
-refer [here](Metal-ion.md#Amber+12-6-4)
+refer [here](Metal-ion.md#Amber+12-6-4) for Amber 12-6-4
 
 "Plain" molecular dynamics run
 
-```
+```tcl
 molecular dynamics run
  &cntrl
-  imin=0，irest=1， ntx=5，(restart MD)
-  ntt=3，temp0=300.0， gamma_ 1n=5.0， (temperature control)
-  ntp=1，taup=2.0， (pressure control) 
-  ntb=2，ntc=2， ntf=2，(SHAKE， periodic bc.)
-  nstl im=500000，(run for 0.5 nsec)
-  ntwx=1000，ntpr=200， (output frequency)
+  imin=0，irest=1， ntx=5, !(restart MD)
+  ntt=3，temp0=300.0, ;gamma_ 1n=5.0, !(temperature control)
+  ntp=1，taup=2.0, !(pressure control) 
+  ntb=2，ntc=2， ntf=2, !(SHAKE， periodic bc.)
+  nstl im=500000, !(run for 0.5 nsec)
+  ntwx=1000，ntpr=200, !(output frequency)
 /
 ```
 
@@ -1075,13 +1075,9 @@ UniProt has a ClustalW interface but no showing colors. Just export sequences an
 
 # Other
 
-- [How to Use US EPA EPI Suite to Predict Chemical Substance Properties](https://www.chemsafetypro.com/Topics/CRA/How_to_Use_US_EPA_EPI_Suite_to_Predict_Chemical_Substance_Properties.html)
+[计算蛋白自由能形貌图的简单示例|Jerkwin](https://jerkwin.github.io/2017/12/14/计算蛋白自由能形貌图的简单示例/)
 
-  [Download EPI Suite™ - Estimation Program Interface v4.11 | US EPA](https://www.epa.gov/tsca-screening-tools/download-epi-suitetm-estimation-program-interface-v411): predict properties of small molecules
-
-
-
-
+其实是按采样频率转的能量。。
 
 
 
@@ -1090,4 +1086,12 @@ UniProt has a ClustalW interface but no showing colors. Just export sequences an
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/casp.png" style="zoom:50%;" />
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/casp15.png" style="zoom:50%;" />
+
+<img src="E:\GitHub-repo\notes\research\MD-fundamentals-Figure.assets\CASP15.jpg" style="zoom:80%;" />
+
+[AlphaFold2怎么给蛋白结构打分？ (qq.com)](https://mp.weixin.qq.com/s/6KGsazYa5MXtCTkwaogBjA)
+
+精细side chain控制，还是要谨慎用AlphaFold呀，不如同源建模
+
+[CAPRI ceriteria](https://medium.com/roivant-technology/using-alphafold2-to-predict-the-structure-of-a-protein-protein-complex-5d4dabe64cc5)
 

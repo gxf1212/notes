@@ -6,7 +6,7 @@ See [Deal-with-media.md](Deal-with-media.md) for applications about videos, etc.
 
 Fret not over bygones, and the forward journey take.
 
-# Connect the remote
+# Remote connection
 
 Connection, *pn, remote control usage
 
@@ -340,6 +340,8 @@ spiro -u user-id
 ```
 
 
+
+`QOSMaxJobsPerUserLimit` is a parameter that sets the maximum number of jobs that a user can have in a given Quality of Service (QOS) at any given time...<u>If the user submits more jobs, they will be queued until some of the running jobs finish or are cancelled</u>.
 
 #### scontrol
 
@@ -1197,7 +1199,7 @@ Ctrl+双击：打开加载包源代码
 
 ## Online documents
 
-
+in notion, no sidebar outline for a page, just create a TOC in the beginning...
 
 在腾讯文档中，您可以通过以下两种方式进行换行： 按下回车键（Enter）：在您需要进行换行的地方按下回车键即可。 使用Shift+Enter 进行强制换行：如果您需要在一行中换行，可以按下Shift+Enter 键，这将在当前位置插入一个换行符。
 
@@ -1284,6 +1286,7 @@ also for LibreOffice Calc, many commands are the same....
 ## MS PPT
 
 - [PPT中如何将多个图形等距分布](https://jingyan.baidu.com/article/fec7a1e5c51b1d1190b4e7ca.html)
+- PPT内跳转：打开PPT文档，在需要的页面中，选定一个文本框，右键--超链接。进入后，选择”本文档中的位置“，设定要跳转到哪张幻灯片（可以在右侧预览），点击确定。 以后就可以直接点击这个文本进行跳转（不点击时默认还是下一张）。
 - 美化大师插件：批量删除动画；PPT工具栏
 
 ## Foxit Reader

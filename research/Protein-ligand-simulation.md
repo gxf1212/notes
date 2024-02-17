@@ -14,6 +14,8 @@ For more about programming, see []
 
 [2.5: Structural Data Files - Chemistry LibreTexts](https://chem.libretexts.org/Courses/Intercollegiate_Courses/Cheminformatics/02%3A_Representing_Small_Molecules_on_Computers/2.05%3A_Structural_Data_Files)
 
+only sdf is for many small molecules together, that's why rdkit implements SDMolSupplier which you must iterate it...
+
 #### mol2
 
 - [谈谈记录化学体系结构的mol2文件](http://sobereva.com/655)

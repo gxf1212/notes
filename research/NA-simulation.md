@@ -70,7 +70,7 @@ Automatic building of ncRNA and DNA 3D structures
 
 
 
-
+[Nat. Commun | DNA结构预测最新进展 (qq.com)](https://mp.weixin.qq.com/s/-_PK8ibzD_7bprjyG_JZVw)
 
 
 

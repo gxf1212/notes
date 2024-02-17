@@ -211,12 +211,13 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
 2. renumber residues and fix names
 
-   ```shell
+   ```python
    # substitute (all) with other selections
    load PR1.pdb
-   alter (all), chain='P'
-   alter (all), segi='PR1'
-   alter (all), resi=str(int(resi)+121)
+   alter all, chain='P'
+   alter all, segi='PR1'
+   alter all, resi=str(int(resi)+121)
+   alter all, b = 50  # beta
    save PR1.pdb
    delete all
    ```
@@ -241,7 +242,9 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
   label sele, "%s%s" % (resn, resi)
   ```
 
-- 
+- Pymol hide label of measurement: H--labels
+
+  one-by-one: that object, L--clear
 
 ### View
 
@@ -701,7 +704,7 @@ It can calculate Secondary structure, RMSD, RMSF, angle, dihedral, SASA, contact
 - `pwd` works but `ls` does not
 - 
 
-### selection, show
+### Selection, show
 
 - selection
 
@@ -732,6 +735,21 @@ It can calculate Secondary structure, RMSD, RMSF, angle, dihedral, SASA, contact
 
 - 
 
+### Edit
+
+- if you want to set the beta values of all atoms to 50, you can use this command:
+  ```shell
+  setattr a bfactor 50
+  ```
+
+  if you want to set the beta values of all atoms to their occupancy values multiplied by 10, you can use this command:
+
+  ```shell
+  setattr a bfactor a.occupancy * 10
+  ```
+
+  
+
 ### Tools
 
 - For example, to align residues 10-20 of protein A with residues 30-40 of protein B, you can use the following command:
@@ -752,6 +770,28 @@ It can calculate Secondary structure, RMSD, RMSF, angle, dihedral, SASA, contact
   ```
 
 - [分子对接的常见方法](https://zhuanlan.zhihu.com/p/148384183), preprocessing, calling vina, UCSD DOCK, etc.
+
+- [Tool: ESMFold (ucsf.edu)](https://www.cgl.ucsf.edu/chimerax/docs/user/tools/esmfold.html)
+
+  The server has some limits on sequence length and on the number of requests per user. You can also choose to run the ESMFold model yourself by downloading the pytorch model code and model weights from the ESM github repo.
+  https://esmatlas.com/resources?action=fold
+  no multimer?...
+
+## Mol* viewer
+
+main viewer of RCSB PDB
+
+![](E:\GitHub-repo\notes\research\MD-fundamentals-Figure.assets\AF2-molstar.jpg)
+
+- full screen: the fourth button on the right of the panel
+- sixth, mouse: top selection bar
+- click substract (or other), then click on the top sequence panel
+- [Making Selections - Mol* Viewer Documentation (molstar.org)](https://molstar.org/viewer-docs/making-selections/)
+- finally click minus sign
+- preset
+- brush on residue selection bar: edit color theme
+- load file: cannot exit? just load a random file
+
 
 
 ## Gaussian & view
@@ -859,6 +899,8 @@ like DSV
 Uniqueness and relative abundance of protein sequences....
 
 There are several tools you can use to draw sequence information entropy figures like the one you sent. Some popular options include WebLogo, Seq2Logo, and HMMLogo. One such tool is MIA (Mutual Information Analyzer). Another option is the Sequence Statistics Tools
+
+[HLAthena](http://hlathena.tools/)：指定HLA allele的logo图
 
 
 

@@ -422,9 +422,16 @@ One of the fascinating properties of polyzwitterions is the so-called anti-polye
 
 # AI
 
-- RLHF就是基于人类反馈（Human Feedback）对语言模型进行强化学习（Reinforcement Learning），和一般的fine-tune过程乃至prompt tuning自然也不同。
+- RLHF就是**基于人类反馈**（Human Feedback）对语言模型进行强化学习（Reinforcement Learning），和一般的fine-tune过程乃至prompt tuning自然也不同。
   https://zhuanlan.zhihu.com/p/591474085
 - In artificial intelligence (AI), particularly machine learning (ML), ablation study **investigates the performance of an AI system by removing certain components to understand the contribution of the component to the overall system**.
+- Zero-shot prediction is a type of machine learning task where the model has to **make predictions for classes or categories that it has never seen before during training**. For example, if the model is trained to classify images of animals into cats, dogs, and birds, but then it is asked to classify an image of a zebra, that would be a zero-shot prediction.
+
+  Zero-shot prediction is challenging because the model has to generalize from the existing classes to the unseen classes, without any direct supervision or feedback. To achieve this, the model usually **needs some form of auxiliary information that can link the seen and unseen classes, such as attributes, descriptions, or embeddings**. For instance, the model can use the fact that a zebra is similar to a horse, has stripes like a tiger, and is black and white like a panda, to infer that it belongs to a different class than cats, dogs, and birds.
+
+  [Zero-shot / One-shot / Few-shot Learning 简析 - 清风与归_G - 博客园 (cnblogs.com)](https://www.cnblogs.com/jngwl/articles/10221819.html)
+
+  [Few-Shot, Zero-Shot & One-shot 的通俗理解 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/624793654)
 
 
 

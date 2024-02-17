@@ -1762,7 +1762,7 @@ conda install -c omnia msmbuilder
    mcsalign mobile, target
    ```
 
-### Spyder
+## Spyder
 
 spyder conda interpreter：光设置没用，直接打开conda里每个对应环境的Spyder
 
@@ -1958,9 +1958,11 @@ Download the files from here and copy them to `BOSSdir/scripts` folder
 
 ## EPI suite
 
-https://www.chemsafetypro.com/Topics/CRA/How_to_Use_US_EPA_EPI_Suite_to_Predict_Chemical_Substance_Properties.html
+[How to Use US EPA EPI Suite to Predict Chemical Substance Properties](https://www.chemsafetypro.com/Topics/CRA/How_to_Use_US_EPA_EPI_Suite_to_Predict_Chemical_Substance_Properties.html)
 
-### packmol
+[Download EPI Suite™ - Estimation Program Interface v4.11 | US EPA](https://www.epa.gov/tsca-screening-tools/download-epi-suitetm-estimation-program-interface-v411): predict properties of small molecules
+
+## packmol
 
 [m3g/packmol: Packmol - Initial configurations for molecular dynamics simulations (github.com)](https://github.com/m3g/packmol)
 
@@ -2296,5 +2298,9 @@ http://www.rasmol.org/software/RasMol_2.7.5/INSTALL.html
 ## Maestro
 
 (Education)
+
+```shell
+sudo dnf install libnsl
+```
 
 Enter the unzipped archive, just run `./INSTALL` (interactively)

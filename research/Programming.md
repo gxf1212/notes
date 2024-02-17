@@ -184,7 +184,7 @@ examples
 
 - to support a varible, double quote! single does not work
 
-#### file editing
+#### match and replace
 
 - another most application: replacing text
 
@@ -234,7 +234,7 @@ examples
   sed '3a This line goes after line 3.' input_file > output_file
   ```
 
-  Insert "This line goes at line 3." at the third line:
+  Insert "This line goes at line 3." at the third line (the original line 3 goes to line 4):
 
   ```shell
   sed '3i This line goes at line 3.' input_file > output_file
@@ -248,7 +248,21 @@ examples
 
   After running one of these commands, the modified content will be written to `output_file`. **If you want to edit the file in-place, you can use the `-i` option with `sed`**
 
-- 
+- To support regex, add `\`
+
+  e.g. 你可以在sed命令中使用\s\+来匹配一个或多个空格。例如：
+
+  ```shell
+  sed 's/\s\+/ /g'
+  ```
+
+  你还可以直接在sed命令中使用空格字符来匹配空格。例如：
+
+  ```shell
+  sed 's/ */ /g'
+  ```
+
+  这些命令会将一个或多个连续的空格替换为一个空格。
 
 ### Alternatives of editing
 
@@ -819,7 +833,7 @@ measure fit $sel $ref
 
   always use for loop rather than multiplication...
 
-- If there is a __init__.py file in a folder, which means this folder is a python model. __init__.py will be run when i import this model.
+- If there is a `__init__.py` file in a folder, which means this folder is a python model. `__init__.py` will be run when i import this model.
 
 - [Python3字典合并的几种方法](https://blog.csdn.net/asialee_bird/article/details/79809248)
 
@@ -829,11 +843,13 @@ measure fit $sel $ref
 
 - [Python 中下划线的 5 种含义 | 菜鸟教程 (runoob.com)](https://www.runoob.com/w3cnote/python-5-underline.html)
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/underline.png" alt="underline" style="zoom:50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets/underline.png" alt="underline" style="zoom:50%;" />
+
+  pmx倒是有个规范：类内方法都是下划线开头
 
 - [Convert Letters to Numbers and vice versa in Python | bobbyhadz](https://bobbyhadz.com/blog/python-convert-letters-to-numbers): `chr()`, `ord()`
 
-- pmx倒是有个规范：类内方法都是下划线开头
+- 
 
 - `assert`: https://www.tutorialsteacher.com/python/python-assert
   应该assert还是try except呢？后处理内容比较多、不一定退出程序时，只能用except
@@ -855,10 +871,7 @@ measure fit $sel $ref
   import utils
   ```
 
-  
-
-  
-  
+- 获取脚本所在目录：`exepath = os.path.dirname(__file__)`
 
 
 ## operating files and cmd
@@ -996,9 +1009,11 @@ read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arg
     font_directory = os.path.join(matplotlib.get_data_path(), 'fonts', 'ttf')  # ~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf
     os.system("copy *.ttf *.TTF "+font_directory)  # cp for Unix
     cache_dir = matplotlib.get_cachedir()
-    os.system("rm -r "+cache_dir)  # /home/gxf1212/.cache/matplotlib
+    os.system("rm -r "+cache_dir)  # ~/.cache/matplotlib
     # re-import matplotlib
     ```
+  
+  - if still `findfont: Font family 'Arial' not found.`, You can delete the font cache file located in `~/.cache/matplotlib/fontList.json` and let matplotlib rebuild it.
   
   - [use .ttf file temporarily](https://www.cnblogs.com/arkenstone/p/6411055.html)
   
@@ -1050,9 +1065,9 @@ read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arg
     ```
   
     `rm -rf` it! then just use the `available` fonts above. No need to configure as other blogs did.
-  
-    [after removing cache....](https://blog.csdn.net/u014712482/article/details/85802563)here's how we can check name for ![](https://img-blog.csdnimg.cn/20190104211934391.jpg)
 
+    [after removing cache....](https://blog.csdn.net/u014712482/article/details/85802563)here's how we can check name for ![](https://img-blog.csdnimg.cn/20190104211934391.jpg)
+  
     ```python
     import matplotlib as plt
     import matplotlib.font_manager as font_manager
@@ -1079,6 +1094,10 @@ read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arg
     [label.set_fontweight('roman') for label in labels]
     ```
   
+- 
+
+
+
 - use font dictionary for labels, etc.
 
   ```python
@@ -1189,7 +1208,7 @@ https://juejin.cn/post/6844903919978545160
 
 - 互斥参数组：https://michael728.github.io/2018/12/09/python-argparse-note/ 
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/exclusive.png" alt="exclusive" style="zoom:80%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets/exclusive.png" alt="exclusive" style="zoom:80%;" />
 
 - `parser.print_help()`
 
@@ -1315,7 +1334,7 @@ Simply the structure
 
 - [RDKit: New drawing options in the 2020.03 release](http://rdkit.blogspot.com/2020/04/new-drawing-options-in-202003-release.html)
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/draw-highlight.png" style="zoom: 67%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets/draw-highlight.png" style="zoom: 67%;" />
 
 
 
@@ -1411,7 +1430,7 @@ def get_charge(cfile):
 
 Result
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/draw-charge.jpg" style="zoom: 50%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets/draw-charge.jpg" style="zoom: 50%;" />
 
 [Partial charge visualization with RDKit](https://iwatobipen.wordpress.com/2020/01/08/partial-charge-visualization-with-rdkit-rdkit-quantumchemistry-psikit/) or [QM based partial charge calculation and visualization (github.com)](https://gist.github.com/iwatobipen/b49fb916d07ee871f00441690de77d87#file-parchai_charge_viz-ipynb)
 
@@ -1422,7 +1441,7 @@ _, res = rdEHTTools.RunMol(mh)
 static_chgs = res.GetAtomicCharges()[:atorvastatin.GetNumAtoms()]
 ```
 
-![img](Programming-Preparation.assets.assets/rdkit_charge.png)
+![img](Programming-Preparation.assets/rdkit_charge.png)
 
 #### Draw ligand libraries
 
@@ -1459,7 +1478,7 @@ with open(file+'.svg', 'w') as f:
 
 Result
 
-![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/draw-library.png)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets/draw-library.png)
 
 - ligands with different scafford, not well aligned...
 

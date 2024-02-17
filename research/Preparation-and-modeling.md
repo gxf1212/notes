@@ -60,6 +60,8 @@ mainly single chain. Threading
 
 ## New prediction
 
+For CASP details, read [CASP](#CASP)
+
 ### AlphaFold
 
 https://github.com/sokrypton/ColabFold   all kinds of fold
@@ -72,9 +74,7 @@ https://colab.research.google.com/github/deepmind/alphafold/blob/main/notebooks/
 
 
 
-[AlphaFold2怎么给蛋白结构打分？ (qq.com)](https://mp.weixin.qq.com/s/6KGsazYa5MXtCTkwaogBjA)
 
-精细side chain控制，还是要谨慎用AlphaFold呀，不如同源建模
 
 
 
@@ -86,11 +86,13 @@ https://colab.research.google.com/github/deepmind/alphafold/blob/main/notebooks/
 
 ### ESMFold
 
-
+https://www.cgl.ucsf.edu/chimerax/docs/user/tools/esmfold.html
 
 
 
 ### CombFold
+
+[Nat. Methods | CombFold预测大型蛋白质复合物结构 (qq.com)](https://mp.weixin.qq.com/s/ttTl4rSWlGmWrLLELrTQHQ)
 
 
 
@@ -213,7 +215,7 @@ or Protein-peptide. We should **also try protein complex structure prediction**!
 
 
 
-![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/HADDOCK-flexible.jpg)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets/HADDOCK-flexible.jpg)
 
 haddock flexible is in step 2
 
@@ -746,11 +748,11 @@ Called by other tools like membrane builder
 
 - We just don't use CHARMM-GUI `.mdp` files...
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/GUI-Berendsen.png" style="zoom:50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets/GUI-Berendsen.png" style="zoom:50%;" />
 
 - GUI automatically generates gradually-released restraint for all kinds of species, which gmx cannot...
 
-  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/GUI-restraint.jpg)
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets/GUI-restraint.jpg)
 
 
 
@@ -820,7 +822,7 @@ For residues that are identical except the coordinates (e.g., the water molecule
 
   otherwise (`addIons`), ions are on one surface
 
-  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets.assets/tleap-ion.png" alt="tleap-ion" style="zoom: 50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Programming-Preparation.assets/tleap-ion.png" alt="tleap-ion" style="zoom: 50%;" />
 
 - `solvateBox obj distance`
 
