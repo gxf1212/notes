@@ -10,15 +10,21 @@ The difference between setting `pull_coord1_rate` to 0 and specifying `pull_coor
 
 In umbrella sampling, you specify the initial value of the reaction coordinate for each window using the `pull_coord1_init` option. The system is then simulated with a harmonic potential applied to the reaction coordinate to keep it close to the initial value. In steered molecular dynamics, you specify a non-zero pulling rate using the `pull_coord1_rate` option. The system is then simulated with a constant force applied to the reaction coordinate to move it along a predefined path.
 
-
-
-https://gromacs.bioexcel.eu/t/protein-ligand-umbrella-sampling-binding-affinity-not-matching-experimental-values/5740
+[Protein-ligand umbrella sampling binding affinity not matching experimental values - User discussions - GROMACS forums (bioexcel.eu)](https://gromacs.bioexcel.eu/t/protein-ligand-umbrella-sampling-binding-affinity-not-matching-experimental-values/5740)
 
 Reducing protein-ligand binding to a one-dimensional reaction coordinate (and as you have, only one spatial dimension of a one-dimensional reaction coordinate) is almost certainly inappropriate. And I’ve seen some recent evidence that any one-dimensional umbrella sampling may not even be reproducible, for a variety of reasons. Ligand binding to proteins is complex (see, e.g. https://doi.org/10.1038/s41467-022-33104-3) and simply trying to compute a binding free energy from a single, chosen path may never be right
 
 
 
 [GROMACS质心牵引的几点说明|Jerkwin](https://jerkwin.github.io/2015/10/12/GROMACS质心牵引的几点说明/)
+
+[请问有人知道利用g_mmpbsa计算的结合自由能与由PMF估计的自由能之间的区别和联系吗？ - 分子模拟 (Molecular Modeling) - 计算化学公社 (keinsci.com)](http://bbs.keinsci.com/forum.php?mod=viewthread&tid=28490&highlight=pmf)
+
+PMF反映系统在某一特定反应坐标上的变化趋势，如果以质心距离为反应坐标计算PMF，并假设质心距离很小时为binding，质心距离很大时为unbinding。
+
+PMF的数据主要来自分子动力学模拟，所以选用不同的力场会得到不同的PMF，不同力场对应的PMF的数值也没有可比性，只能比较PMF的合理性，选择合适的力场可以得到比较符合真实情况的PMF。
+
+
 
 
 
@@ -41,23 +47,17 @@ https://gaseri.org/en/tutorials/gromacs/5-umbrella/#setup
 
 [take two methanes and restrain them at different distances using a harmonic potential (miletic.net)](https://group.miletic.net/en/tutorials/gromacs/5-umbrella/#parameter-files)
 
+[GROMACS中伞型采样算法应用详解 - 分子模拟 (Molecular Modeling) - 计算化学公社 (keinsci.com)](http://bbs.keinsci.com/thread-36490-1-1.html): general and transmembrane
 
+[GROMACS / Tutorials / umbrella-sampling · GitLab](https://gitlab.com/gromacs/online-tutorials/umbrella-sampling): ligand-ligand
 
-[GROMACS中伞型采样算法应用详解 - 分子模拟 (Molecular Modeling) - 计算化学公社 (keinsci.com)](http://bbs.keinsci.com/thread-36490-1-1.html)
-
-
-
-https://gitlab.com/gromacs/online-tutorials/umbrella-sampling
-
-
-
-https://2022.igem.wiki/cu-egypt/MolecularDynamics.html#short3
+[Umbrella Sampling (mdtutorials.com)](http://www.mdtutorials.com/gmx/umbrella/05_pull.html): protein-protein, CV is just COM of two chains
 
 
 
-Pulling out of membrane
-
-
+> https://2022.igem.wiki/cu-egypt/MolecularDynamics.html#short3
+>
+> just copy from mdtutorial
 
 ## PMF/US
 

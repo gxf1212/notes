@@ -12,7 +12,7 @@ TODO: Thanks for Protein-RNA互作.pdf from Mark
 
 `.` 表示未配对核苷酸， `()` 表示配对核苷酸。如果存在交叉配对，就依次用`[ ]`，`{ } ` 
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/RNA-simulation.assets/dot-parentheses.png" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/Polymer-membrane-RNA-simulation.assets/dot-parentheses.png" style="zoom:67%;" />
 
 
 
@@ -87,3 +87,8 @@ bond <unit>.<residue #>.<atom name> <unit>.<residue #>.<atom name>
 [cRNAsp12 (xxulab.org.cn)](http://xxulab.org.cn/crnasp12/)
 
 cRNAsp12 Web Server for the Prediction of Circular RNA Secondary Structures and Stabilities
+
+
+
+
+

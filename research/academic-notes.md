@@ -143,6 +143,10 @@ The carbon atom that appears on top in the Fischer projection that shows a verti
 
 
 
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/lipid-area.png)
+
+
+
 ### Saccharides/Carbonhydrates
 
 自然界几乎所有天然存在的糖类化合物均是D构型，D-核糖的三个手性碳均为D构型。

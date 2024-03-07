@@ -36,6 +36,8 @@ Linux desktop的优势：可以直接为cluster做测试
   https://zh.wikipedia.org/wiki/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B
 
   （古希腊神话中的）半神半人的精灵
+  
+- The %U parameter in the Linux command-line is used in the command of a .desktop file. It signifies that the program can handle a list of URLs or local files as separate arguments. This allows the program to handle multiple selected files or URLs, enhancing efficiency in Linux system administration.
 
 ## File
 
@@ -183,27 +185,30 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
    [修改主机名(/etc/hostname和/etc/hosts区别)-CSDN博客](https://blog.csdn.net/dufufd/article/details/75330423)
 
    `/etc/hosts`存放的是域名与ip的对应关系，域名与主机名没有任何关系，你可以为任何一个IP指定任意一个名字，hostname文件的一个例子：
+
+   ```
    127.0.0.1       localhost
    127.0.1.1       v-jiwan-ubuntu
+   ```
 
 8. [check shell version](https://blog.csdn.net/electrocrazy/article/details/78313962): `bash --version`
 
 9. [gupdate kernel](https://ubuntuhandbook.org/index.php/2022/05/kernel-5-18-released-install-in-ubuntu-2204/): just install the four packages
 
-   https://kernel.ubuntu.com/~kernel-ppa/mainline. find 'amd'
+   find 'amd'
 
-10. edit path:
+10. edit bashrc
 
-   ```shell
-   sudo gedit ~/.bashrc
-   source ~/.bashrc
-   ```
+       ```shell
+       sudo gedit ~/.bashrc
+       source ~/.bashrc
+       ```
 
 11. 查看当前系统的glibc版本: `/lib64/libc.so.6`
 
-   https://lindevs.com/check-glibc-version-in-linux: `ldd --version`
+   [Check glibc Version in Linux | Lindevs](https://lindevs.com/check-glibc-version-in-linux): `ldd --version`
 
-11. watch temperature with `lm-sensor` https://zhuanlan.zhihu.com/p/143123436
+11. watch temperature with `lm-sensor`    [如何在Ubuntu Linux上获取CPU温度 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/143123436)
 
     ```shell
     sensors-detect # root
@@ -272,9 +277,9 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 1. 字体缺失（WPS等）
 
-   - install Windows fonts https://itsfoss.com/install-microsoft-fonts-ubuntu/ useful?
+   - [How to Install Microsoft Fonts on Ubuntu Linux](https://itsfoss.com/install-microsoft-fonts-ubuntu/) useful?
 
-   - emm
+     emm
 
      ```shell
      fc-list # 查看当前支持的字体
@@ -317,13 +322,13 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 4. [Ubuntu设置文件默认打开方式](https://jingyan.baidu.com/article/915fc414b686a251394b2080.html)：右键、属性
 
-5. LD_LIBRARY_PATH不能以终结符（冒号）作为开始和最后一个字符，不能有2个终结符连在一起，所以修改下LD_LIBRARY_PATH即可
+5. `LD_LIBRARY_PATH`不能以终结符（冒号）作为开始和最后一个字符，不能有2个终结符连在一起，所以修改下`LD_LIBRARY_PATH`即可
 
 6. 养成--prefix的好习惯
 
-7. do not forget export $PATH:, or 
+7. do not forget `export $PATH:`, or 
 
-   https://blog.csdn.net/xiaoshunzi111/article/details/50623078
+   [bash: su: command not found_vhost command not found-CSDN博客](https://blog.csdn.net/xiaoshunzi111/article/details/50623078)
 
 8. `sudo gedit /etc/motd`: message at login
 
@@ -339,7 +344,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 11. change user name
 
-    https://blog.csdn.net/lanxuezaipiao/article/details/43153367
+    [Linux系统中修改用户名的两种方案整理_linux修改了用户名,whoami还没变-CSDN博客](https://blog.csdn.net/lanxuezaipiao/article/details/43153367)
 
     log in with another user (or root), execute the commands, change your .bashrc and so on manually
 
@@ -359,7 +364,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 14. `su` or `su root`: enter root. 
 
-15. forgot root passwd (without sudo) https://www.bbsmax.com/A/rV57qW6VzP/
+15. forgot root passwd (without sudo)
 
     boot with rescue CD and remove that in `vi /etc/shadow`
 
@@ -391,7 +396,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
   - also set fcitx in "language support". reboot.
 
-  - uninstall: https://jingyan.baidu.com/article/d5c4b52b95eb52da570dc511.html
+  - uninstall: [ubuntu16.04彻底卸载fcitx输入法-百度经验 (baidu.com)](https://jingyan.baidu.com/article/d5c4b52b95eb52da570dc511.html)
 
     ```shell
     sudo apt-get remove fcitx fcitx-module* fcitx-frontend*
@@ -400,7 +405,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 - 迅飞输入法
 
-  - install https://www.yoki.moe/Intstu/24.html and https://www.52pojie.cn/thread-1243805-1-1.html
+  - install [在Ubuntu下安装讯飞输入法linux版以及卸载方法 - Yoki的小站](https://www.yoki.moe/Intstu/24.html) and [[Linux\]讯飞输入法V1.0.6-7 For Linux [2020.08.11]](https://www.52pojie.cn/thread-1243805-1-1.html)
   - 先到官网下几个lib然后update就把依赖装好了
   - setting: Ctrl+space 激活/反激活输入法
 
@@ -410,7 +415,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
   - install
 
-    https://pinyin.sogou.com/linux/help.php
+    [搜狗输入法 for linux 安装指南 (sogou.com)](https://pinyin.sogou.com/linux/help.php)
 
     ```shell
     # install and dependencies
@@ -421,7 +426,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
     add sogou. then it works!
 
-  - 开启了细胞词库功能  https://blog.csdn.net/Teri_Tor/article/details/111461984
+  - 开启了细胞词库功能  [Linux下如何使用搜狗词库_linux版搜狗输入法自定义词库位置-CSDN博客](https://blog.csdn.net/Teri_Tor/article/details/111461984)
 
     > 感觉搜狗拼音输入法比谷歌拼音输入法更好，因为有最新流行词汇，可以打出表情符号等等。
 
@@ -435,7 +440,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
     not work. other old tutorials is outdated...
 
-    skins: https://pinyin.sogou.com/skins
+    skins: [皮肤下载 - 搜狗输入法 - 搜狗皮肤 (sogou.com)](https://pinyin.sogou.com/skins/)
 
     > Windows: just click to install.
     >
@@ -479,7 +484,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 1. cannot play video?
 
-   https://blog.csdn.net/weixin_45361800/article/details/116844378  solved!
+   [解决ubuntu下firefox浏览器无法观看视频](https://blog.csdn.net/weixin_45361800/article/details/116844378)  solved!
 
    ```shell
    sudo apt install ffmpeg
@@ -487,7 +492,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
    no longer support Adobe flash player
 
-   > 可能导致有命令`flash-player-properties`的:https://jingyan.baidu.com/article/3c48dd34a2952ee10be35820.html
+   > 可能导致有命令`flash-player-properties`的: [ubuntu如何安装 adobe flash player插件-百度经验 (baidu.com)](https://jingyan.baidu.com/article/3c48dd34a2952ee10be35820.html)
    >
    > install flash player for firefox (not successful，没删)
    >
@@ -500,7 +505,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
    > sudo cp -r usr/* /usr
    > ```
    >
-   > 如何显示Firefox插件(Plugins)的完整路径 https://blog.csdn.net/xuewuzhijin2012/article/details/53140899
+   > [如何显示Firefox插件(Plugins)的完整路径并删除](https://blog.csdn.net/xuewuzhijin2012/article/details/53140899)
 
 2. no sound?
 
@@ -512,7 +517,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
    reboot
    ```
 
-   https://blog.csdn.net/swordsm/article/details/108417931
+   [解决 Deepin V20、Ubuntu 20.04、Linux Mint 20 声卡无法识别导致的没有声音_linux 声卡拒绝访问-CSDN博客](https://blog.csdn.net/swordsm/article/details/108417931)
 
    but, only when the headphone is charged can we play music........
 
@@ -527,20 +532,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
    搜索：电脑桌面壁纸 化学; microscopy photos
 
-   some good websites
-
-   - https://wall.alphacoders.com/
-   - https://wallpapercave.com/
-   - https://www.wallpaperflare.com/search?wallpaper=chemistry
-   - https://www.flickr.com/photos/zeissmicro/
-   - https://wallpaperaccess.com/beautiful-biology  good!
-   - [Wallpapers | Unsplash](https://unsplash.com/t/wallpapers)
-   - https://blog.csdn.net/Eumenidus/article/details/124504631  Nature 封面
-   - https://pixabay.com/
-
-   > https://cdn.shopify.com/s/files/1/1064/0118/files/periodic-table-of-tech-standalone_alt.png?v=1579813258
-
-   Lively WallpaperLively *Wallpaper* for Windows
+   [see some good websites](../research/Figure-plotting.md#wall-paper)
 
 4. process figure
 
@@ -563,17 +555,17 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
    - As for add border, use `cv2.copyMakeBorder()`
 
-   https://blog.csdn.net/qq_36560894/article/details/105416273 
+   [OpenCV-Python: cv2.copyMakeBorder()函数详解-CSDN博客](https://blog.csdn.net/qq_36560894/article/details/105416273)
 
-   https://www.geeksforgeeks.org/python-opencv-cv2-copymakeborder-method/
+   [Python OpenCV | cv2.copyMakeBorder() method - GeeksforGeeks](https://www.geeksforgeeks.org/python-opencv-cv2-copymakeborder-method/)
 
 5. 截图
 
    ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/screenshot.png)
 
-6. install lightdm: https://blog.csdn.net/hgtjcxy/article/details/90645838
+6. install lightdm: [ubuntu18.04开机无背景，全黑屏，只有鼠标_ubuntu黑屏进不去桌面鼠标能动-CSDN博客](https://blog.csdn.net/hgtjcxy/article/details/90645838)
 
-   display managers: https://ubuntuqa.com/article/6577.html
+   display managers: [什么是gdm3，kdm，lightdm？如何安装和删除它们？ - Ubuntu问答 (ubuntuqa.com)](https://ubuntuqa.com/article/6577.html)
 
    ```shell
    sudo apt update
@@ -604,11 +596,11 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
    >
    > finally, for the xxx-plugin-ugly: https://my.oschina.net/u/3384982/blog/867063
 
-   see https://blog.csdn.net/weixin_42912072/article/details/108572983, should be the newest version https://cidian.youdao.com/multi.html#linuxAll! just download all the dependencies, no need to fix xxx-plugin-ugly!
+   see [ubuntu18.04有道词典无法开（亲测有效）](https://blog.csdn.net/weixin_42912072/article/details/108572983), should be the newest version https://cidian.youdao.com/multi.html#linuxAll! just download all the dependencies, no need to fix xxx-plugin-ugly!
 
 3. “软件”里有typora
 
-   https://typora.io/windows/dev_release.html dev版本不要钱的
+   [Typora for windows — beta version release](https://typora.io/windows/dev_release.html) dev版本不要钱的
 
    主题路径：`/home/gxf/.config/Typora/themes`
 
@@ -622,7 +614,7 @@ https://www.educative.io/blog/bash-shell-command-cheat-sheet
 
 5. wine applications!
 
-   https://github.com/zq1997/deepin-wine
+   [zq1997/deepin-wine: 【deepin源移植】Debian/Ubuntu上的QQ/微信快速安装方式 (github.com)](https://github.com/zq1997/deepin-wine)
 
    - 首次使用需要添加仓库：
 
@@ -683,7 +675,7 @@ just fundamental usage. For advanced shell syntax as well as commands used in pr
    find . -name query -type d -exec rm -rf {} \; # delete all directories with "query" in name. 
    ```
 
-   https://my.oschina.net/u/4328928/blog/3315425
+   [Linux 递归批量删除文件夹或文件的命令 - OSCHINA - 中文开源技术交流社区](https://my.oschina.net/u/4328928/blog/3315425)
 
    directory: /
 
@@ -713,7 +705,7 @@ just fundamental usage. For advanced shell syntax as well as commands used in pr
 
 6. `mv`
 
-   move file in terminal: https://blog.csdn.net/qq_38451119/article/details/81121906
+   move file in terminal: [Ubuntu下终端进行移动文件的方法](https://blog.csdn.net/qq_38451119/article/details/81121906)
 
    ```shell
    sudo mv filename target-dir
@@ -728,7 +720,7 @@ just fundamental usage. For advanced shell syntax as well as commands used in pr
 
 7. `rename` to change 
 
-   https://blog.51cto.com/jiemian/1846951 Perl语言版本格式
+   [linux下rename命令用法详解(重命名文件)](https://blog.51cto.com/jiemian/1846951) Perl语言版本格式
 
    ```shell
    rename 's/a/b/' *a*
@@ -751,7 +743,7 @@ just fundamental usage. For advanced shell syntax as well as commands used in pr
 
 see also [File processing](/research/Programming-for-MD.md#file-processing)
 
-1. check the size of a folder: https://zhidao.baidu.com/question/1178566665695139419.html
+1. `du`: check the size of a folder: [linux怎么查看一个文件夹的大小](https://zhidao.baidu.com/question/1178566665695139419.html)
 
    ```shell
    du -sh /directory  # total size. default is .
@@ -769,7 +761,7 @@ see also [File processing](/research/Programming-for-MD.md#file-processing)
 
 2. `ls`
 
-   https://www.runoob.com/linux/linux-comm-ls.html
+   [Linux ls命令 | 菜鸟教程 (runoob.com)](https://www.runoob.com/linux/linux-comm-ls.html)
 
    ```shell
    ls -l                    # 以长格式显示当前目录中的文件和目录
@@ -821,7 +813,7 @@ see also [File processing](/research/Programming-for-MD.md#file-processing)
    `locate`命令其实是`find -name`的另一种写法，但是要比后者快得多，原因在于它不搜索具体目录，而是搜索一个数据库`/var/lib/locatedb`，这个数据库中含有本地所有文件信息。**Linux系统自动创建这个数据库，并且每天自动更新一次**，所以使用`locate`命令查不到最新变动过的文件。为了避免这种情况，可以在使用`locate`之前，先使用`updatedb`命令，手动更新数据库。
 
    ```bash
-   /usr/bin/updatedb && locate
+   sudo /usr/bin/updatedb && locate
    ```
 
 6. `whereis`
@@ -839,7 +831,10 @@ see also [File processing](/research/Programming-for-MD.md#file-processing)
 see more in [Text editor](#text-editor)
 
 1. `head` and `tail`
-2. what if message is too long? add `|more` https://blog.csdn.net/weixin_34293911/article/details/86473042
+
+2. what if message is too long? add `|more`  or `less` （它可以用”PageUp”和”PageDown”按键上下翻页，也可以用上下方向键一点点查看。退出按q。）
+
+   [linux 终端 查看上一页-CSDN博客](https://blog.csdn.net/weixin_34293911/article/details/86473042)
 
 ### Soft link
 
@@ -859,7 +854,7 @@ create a **hard link**:
 sudo ln ./source ./target
 ```
 
-https://zhuanlan.zhihu.com/p/88891362
+[面试 | Linux 下软链接和硬链接的区别 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/88891362)
 
 my comprehension: 都是一个指针
 
@@ -881,56 +876,62 @@ my comprehension: 都是一个指针
 
 in GNOME, maybe click Software & updates
 
-> Ubuntu20.04软件源更换 - 舟公的文章 - 知乎 https://zhuanlan.zhihu.com/p/142014944
+[Manage Repositories (Pop!_OS) - System76 Support](https://support.system76.com/articles/manage-repos-pop/)
+
+>[!NOTE]
 >
-> ```
-> sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak # backup
-> sudo vim /etc/apt/sources.list
-> #添加阿里源
-> deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
-> deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
-> deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
-> deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
-> deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
-> deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
-> deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
-> deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
-> deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
-> deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
-> #添加清华源
-> deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
-> # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
-> deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
-> # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
-> deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
-> # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
-> deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
-> # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse multiverse
-> # deepin
+>This is outdated (`/etc/apt/sources.list` no longer useful?) but the mirror sites are correct
+>
+>Ubuntu20.04软件源更换 - 舟公的文章 - 知乎 https://zhuanlan.zhihu.com/p/142014944
+>
+>```
+>sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak # backup
+>sudo vim /etc/apt/sources.list
+>#添加阿里源
+>deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+>deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+>deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+>deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+>deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+>deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+>deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+>deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+>deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+>deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+>#添加清华源
+>deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
+># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
+>deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+>deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+>deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse multiverse
+># deepin
 >deb http://mirrors.aliyun.com/deepin/ bionic main restricted universe multiverse
-> deb-src http://mirrors.aliyun.com/deepin/ bionic main restricted universe multiverse
-> 
-> deb http://mirrors.aliyun.com/deepin/ bionic-security main restricted universe multiverse
-> deb-src http://mirrors.aliyun.com/deepin/ bionic-security main restricted universe multiverse
-> 
-> deb http://mirrors.aliyun.com/deepin/ bionic-updates main restricted universe multiverse
-> deb-src http://mirrors.aliyun.com/deepin/ bionic-updates main restricted universe multiverse
-> 
-> deb http://mirrors.aliyun.com/deepin/ bionic-proposed main restricted universe multiverse
-> deb-src http://mirrors.aliyun.com/deepin/ bionic-proposed main restricted universe multiverse
-> 
-> deb http://mirrors.aliyun.com/deepin/ bionic-backports main restricted universe multiverse
-> deb-src http://mirrors.aliyun.com/deepin/ bionic-backports main restricted universe multiverse
-> ```
-> 
-> E: 仓库 “http://mirrors.aliyun.com/deepin bionic Release” 没有 Release 文件。
-> 
+>deb-src http://mirrors.aliyun.com/deepin/ bionic main restricted universe multiverse
+>
+>deb http://mirrors.aliyun.com/deepin/ bionic-security main restricted universe multiverse
+>deb-src http://mirrors.aliyun.com/deepin/ bionic-security main restricted universe multiverse
+>
+>deb http://mirrors.aliyun.com/deepin/ bionic-updates main restricted universe multiverse
+>deb-src http://mirrors.aliyun.com/deepin/ bionic-updates main restricted universe multiverse
+>
+>deb http://mirrors.aliyun.com/deepin/ bionic-proposed main restricted universe multiverse
+>deb-src http://mirrors.aliyun.com/deepin/ bionic-proposed main restricted universe multiverse
+>
+>deb http://mirrors.aliyun.com/deepin/ bionic-backports main restricted universe multiverse
+>deb-src http://mirrors.aliyun.com/deepin/ bionic-backports main restricted universe multiverse
+>```
+>
+>E: 仓库 “http://mirrors.aliyun.com/deepin bionic Release” 没有 Release 文件。
+>
 >N: 无法安全地用该源进行更新，所以默认禁用该源。
-> 
+>
 >N: 参见 apt-secure(8) 手册以了解仓库创建和用户配置方面的细节。
-> 
+>
 >https://packages.ubuntu.com
-> https://packages.debian.org
+>https://packages.debian.org
 
 # Installation
 
@@ -1469,41 +1470,107 @@ To be re-organized
 
 ## GNOME
 
-1. [How to Check GNOME Version*- Linux Nightly*](https://www.bing.com/ck/a?!&&p=e77723a6a2d79f1cJmltdHM9MTY3OTUyOTYwMCZpZ3VpZD0wYmUxMDdlNC03MWMxLTZlM2ItMGNlMi0xNTVhNzBjOTZmYWQmaW5zaWQ9NTQyNQ&ptn=3&hsh=3&fclid=0be107e4-71c1-6e3b-0ce2-155a70c96fad&u=a1aHR0cHM6Ly9saW51eG5pZ2h0bHkuY29tL2hvdy10by1jaGVjay1nbm9tZS12ZXJzaW9uLyM6fjp0ZXh0PTElMjBTdGVwJTIwMS4lMjBHbyUyMHRvJTIwdGhlJTIwQWN0aXZpdGllcyUyMG1lbnUsR05PTUUlMjB2ZXJzaW9uJTIwdGhhdCUyMGlzJTIwaW5zdGFsbGVkJTIwaW4lMjB5b3VyJTIwc3lzdGVtLg&ntb=1)
+### Genereal
 
-   ```shell
-   gnome-shell --version
-   ```
+- [How to Check GNOME Version*- Linux Nightly*](https://www.bing.com/ck/a?!&&p=e77723a6a2d79f1cJmltdHM9MTY3OTUyOTYwMCZpZ3VpZD0wYmUxMDdlNC03MWMxLTZlM2ItMGNlMi0xNTVhNzBjOTZmYWQmaW5zaWQ9NTQyNQ&ptn=3&hsh=3&fclid=0be107e4-71c1-6e3b-0ce2-155a70c96fad&u=a1aHR0cHM6Ly9saW51eG5pZ2h0bHkuY29tL2hvdy10by1jaGVjay1nbm9tZS12ZXJzaW9uLyM6fjp0ZXh0PTElMjBTdGVwJTIwMS4lMjBHbyUyMHRvJTIwdGhlJTIwQWN0aXZpdGllcyUyMG1lbnUsR05PTUUlMjB2ZXJzaW9uJTIwdGhhdCUyMGlzJTIwaW5zdGFsbGVkJTIwaW4lMjB5b3VyJTIwc3lzdGVtLg&ntb=1)
 
-2. 重启桌面
+  ```shell
+  gnome-shell --version
+  ```
 
-   ```shell
-   sudo /etc/init.d/gdm restart
-   ```
+- 重启桌面
 
-3. 在Ubuntu的系统中如何将应用程序添加到开始菜单中 https://blog.csdn.net/qk1992919/article/details/51034361/ https://ubuntuqa.com/article/1235.html
+  ```shell
+  sudo /etc/init.d/gdm restart
+  ```
 
-   ```shell
-   Name=Pymol   #此软件在菜单中当语言为英语的时候的显示名称      
-   Name[zh_CN]=Pymol  #此软件在菜单中当语言为中文的时候的显示名称
-   Comment=pymol   #此软件在菜单中当语言为英语的时候的说明       
-   Comment[zh_CN]=pymol   #此软件在菜单中当语言为中文的时候的说明
-   Exec=/home/gxf/pymol/pymol     #要执行的程序的名称
-   Terminal=false        #执行时是否启动终端
-   X-MultipleArgs=false   #是否有多个参数
-   Type=Application      #程序的类型
-   Icon=/home/gxf/pymol/share/pymol/data/pymol/icons/icon2_128x128.png   #在开始菜>单中的显示图标
-   ```
+  在正常情况下，通过`Alt + F2` => `R` => `Enter` 组合即可重启桌面环境。
 
-   还是用**alacarte**. 
+- OS upgrade and recovery
 
-4. 设置→隐私→**屏幕**锁定→设置时间
+  另有一个盘用来备份？refresh OS without affecting users?
 
-5. https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu windows环境，装qq微信等
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagesgnome-os-upgrade.png" style="zoom:67%;" />
 
-6. [Gnome设置双屏 - 掘金 (juejin.cn)](https://juejin.cn/post/7158803954175279112)
+#### Appearance
 
-7. [Ubuntu分屏](https://blog.csdn.net/SiriusExplorer/article/details/103016747)
+- 任务栏（底部）叫dock
+
+  in pop OS, e.g. extend to the edges
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagesgnome-dock.png" style="zoom:67%;" />
+
+  gnome手动添加的应用固定到任务栏add to favorite，也可以呀。虽然实际窗口还在右边，能方便地触发就挺好
+
+- Font size
+
+  Accessibility--Large Text. This is too big...and cannot customize, but fine
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagesgnome-large-text.png" style="zoom:67%;" />
+
+- 
+
+#### APP
+
+- 在Ubuntu的系统中如何将应用程序添加到开始菜单中 https://blog.csdn.net/qk1992919/article/details/51034361/ https://ubuntuqa.com/article/1235.html
+
+  ```shell
+  Name=Pymol   #此软件在菜单中当语言为英语的时候的显示名称      
+  Name[zh_CN]=Pymol  #此软件在菜单中当语言为中文的时候的显示名称
+  Comment=pymol   #此软件在菜单中当语言为英语的时候的说明       
+  Comment[zh_CN]=pymol   #此软件在菜单中当语言为中文的时候的说明
+  Exec=/home/gxf/pymol/pymol     #要执行的程序的名称
+  Terminal=false        #执行时是否启动终端
+  X-MultipleArgs=false   #是否有多个参数
+  Type=Application      #程序的类型
+  Icon=/home/gxf/pymol/share/pymol/data/pymol/icons/icon2_128x128.png   #在开始菜>单中的显示图标
+  ```
+
+  还是用**alacarte**. 
+
+- press Super to launch apps
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagesgnome-super-launcher.png" alt="gnome-super-launcher" style="zoom:67%;" />
+
+- 默认应用：[How to set the program defaults in Gnome Shell (addictivetips.com)](https://www.addictivetips.com/ubuntu-linux-tips/set-program-defaults-in-gnome-shell/)
+
+  - 设置里，但没几个
+  - 右键打开特定文件时
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagesgnome-default-applicaiton.png" style="zoom: 67%;" />
+  
+- startup apps
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagesgnome-tweaks-startup.png" style="zoom:67%;" />
+
+- printscreen key can select window/monitor, and record a video!
+
+  no modification? use QQ: `Ctrl + Alt + A`
+
+#### File
+
+GNOME的文件管理器（Nautilus）
+
+- 使用键盘快捷键：在Nautilus中，你可以按`Ctrl + L`来将路径栏转换为可编辑文本，然后就可以复制路径了。按下`Ctrl + L`后，路径栏会显示完整路径，你可以使用`Ctrl + C`来复制。
+- 有时候打开文件发现侧边栏不见了，这时候设置别的也没办法。解决但其实只要一个按键就好啦，就是F9
+
+### Settings
+
+#### locking and suspend
+
+[ubuntu20.04禁止自动休眠的几种方式](https://blog.51cto.com/u_15309736/5430835)
+
+Power---Automatic suspend---off
+
+and 设置→隐私→**屏幕**锁定→设置时间
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagesgnome-lock-screen.png" style="zoom:67%;" />
+
+#### Background, Monitor
+
+1. [Gnome设置双屏 - 掘金 (juejin.cn)](https://juejin.cn/post/7158803954175279112)
+
+2. [Ubuntu分屏](https://blog.csdn.net/SiriusExplorer/article/details/103016747)
 
    go to https://extensions.gnome.org/extension/39/put-windows/
 
@@ -1511,23 +1578,86 @@ To be re-organized
 
    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/divide-screen.png" style="zoom:50%;" />
 
-8. 有时候打开文件发现侧边栏不见了，这时候设置别的也没办法。解决但其实只要一个按键就好啦，就是F9
+3. [桌面应用|如何在 Linux 中为每个屏幕设置不同的壁纸](https://linux.cn/article-10306-1.html)
 
-9. 在正常情况下，通过Alt + F2 => R => Enter 组合即可重启桌面环境。
+   HydraPaper为每个屏幕设置不同的壁纸
 
-10. 
+   Ubuntu背景图片目录：`/usr/share/backgrounds`
 
-11. 
+4. [桌面应用|如何启用 GNOME 42 中的深色和浅色双主题壁纸 (linux.cn)](https://linux.cn/article-14472-1.html)
 
-12. 软件中心点开没反应？ 
+5. [桌面应用|动态壁纸给linux发行版添加活力背景](https://linux.cn/article-5812-1.html)
 
-    ```shell
-    sudo apt-get update  
-    sudo apt-get dist-upgrade
-    sudo apt-get install --reinstall ubuntu-software
-    ```
+#### Workspaces, Windows
 
-    也没用
+virtual desktops in KDE, workspaces in gnome
+
+- [Super](https://help.gnome.org/users/gnome-help/stable/keyboard-key-super.html.en) key
+
+- [window switcher](https://help.gnome.org/users/gnome-help/stable/shell-windows-switching.html.en): using the `Super + Tab`
+
+  Navigate Windows: only within this workspace, and not periodic! And not very useful!
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagespop-os-shortcuts.png" style="zoom:80%;" />
+
+- Move current window up/down one workspace: `Super + Shift + ↑/↓`
+
+- Adjust windows with keyboard
+
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagesgnome-adjust-windows.png" style="zoom: 67%;" />
+
+
+
+[Pop!_OS Keyboard Shortcuts to Boost your Productivity (fosslinux.com)](https://www.fosslinux.com/109539/pop_os-keyboard-shortcuts-to-boost-your-productivity.htm)
+
+> Below is not useful in POP OS?
+>
+> [Useful keyboard shortcuts (gnome.org)](https://help.gnome.org/users/gnome-help/stable/shell-keyboard-shortcuts.html.en)
+>
+> - [Switch between workspaces (gnome.org)](https://help.gnome.org/users/gnome-help/stable/shell-workspaces-switch.html.en)
+>
+>   Using the keyboard:
+>
+>   - Press `Super + Page Up` or `Ctrl + Alt + Up` to move to the workspace shown above the current workspace in the workspace selector.
+>   - Press `Super + Page Down` or `Ctrl + Alt + Down` to move to the workspace shown below the current workspace in the workspace selector.
+>
+> - [Move a window to a different workspace (gnome.org)](https://help.gnome.org/users/gnome-help/stable/shell-workspaces-movewindow.html.en)
+>
+>   Using the keyboard:
+>
+>   - Select the window that you want to move
+>
+>   - Press `Super+Shift+Page Up` to move the window to a workspace which is above the current workspace on the workspace selector.
+>
+>   - Press `Super+Shift+Page Down` to move the window to a workspace which is below the current workspace on the workspace selector.
+>
+> - 
+
+#### Other
+
+- [在 Ubuntu 下实现单击任务栏图标最小化窗口的功能](https://blog.csdn.net/weixin_44760904/article/details/130181933)
+
+  ```shell
+  gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
+  ```
+
+  
+
+### Software
+
+1. https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu windows环境，装qq微信等
+
+2. photoflare, image editor
+
+3. 软件中心点开没反应？ 
+
+   ```shell
+   sudo apt-get update  
+   sudo apt-get dist-upgrade
+   sudo apt-get install --reinstall ubuntu-software
+   ```
+
+   也没用
 
 ## KDE
 
@@ -1818,6 +1948,16 @@ familiar...
 
 based on Ubuntu, mostly similar...
 
+special in: 
+
+- pop-os installation is much faster than ubuntu! less unimportant packages
+
+- pre-installs NVIDIA driver!
+
+- data encryption: another password to unlock, for any user
+
+  [Disable encryption : pop_os (reddit.com)](https://www.reddit.com/r/pop_os/comments/eiyyj9/disable_encryption/). 这玩意不能再改了，除非格式化、重装，所以不能远程重启。。？
+
 ### CentOS 9 Stream
 
 > it's GNOME by default
@@ -1936,6 +2076,8 @@ sudo update-grub
   ```
 
 - 挂载home盘，实现自动挂载。找uuid：那个设备的路径（`blkid`）
+
+  [Linux 中获取硬盘分区或文件系统的 UUID 的七种方法 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/62459117)
 
   ```shell
   vi /etc/fstab
@@ -2609,7 +2751,7 @@ formatted my HDD when re-installing the system, lost all data
 ### 问题的产生
 
 >[!WARNING] 
->https://blog.csdn.net/qq_40907977/article/details/105900429 用移动硬盘拷数据，先umount再弹出。。
+>[linux服务器中用U盘或者移动硬盘拷贝数据_从服务器往u盘拷贝文件-CSDN博客](https://blog.csdn.net/qq_40907977/article/details/105900429) 用移动硬盘拷数据，先umount再弹出。。
 
 出于对电脑软硬件，特别是对温逗死的了解，知道一般格式化后的数据还是可以找回来的，只要没有被数据二次覆盖。
 
@@ -2880,7 +3022,7 @@ Though I only need to re-install programs in gxf (like gmx), a sea of permission
    
    solution: `rm ~/.git-credentials` and rerun `git config --global credential.helper store`. done.
    
-   > https://stackoverflow.com/questions/61376694/git-ubuntu-url-has-no-scheme
+   > [Git : Ubuntu: Url has no scheme - Stack Overflow](https://stackoverflow.com/questions/61376694/git-ubuntu-url-has-no-scheme)
    
 6. tbc
 
@@ -2933,7 +3075,7 @@ Though I only need to re-install programs in gxf (like gmx), a sea of permission
 
 
 
-https://askubuntu.com/questions/906251/systemd-journald-high-cpu-usage
+[systemd-journald high CPU usage - Ask Ubuntu](https://askubuntu.com/questions/906251/systemd-journald-high-cpu-usage)
 
 按此方法，systemd-journal终于被抑制了
 
@@ -3324,6 +3466,9 @@ a binary64 as having:
 - MPI是高性能计算常用的实现方式，它的全名叫做Message Passing Interface。顾名思义，它是一个实现了消息传递接口的库。MPI作为编程库很丰满，作为计算框架很骨感。它的好处在于一切自己动手，不利也在于一切全靠自己。
   http://www.xtaohub.com/IT-neo/Parallel-programming-MPI.html
 - gsl（GNU Scientific Library）
+- **并发计算**（英语：Concurrent computing，或译为**并发处理**、**共时计算**），是一种程序计算的形式，在系统中，至少有两个以上的计算在同时运作，计算结果可能同时发生。用来实现[并发系统](https://zh.wikipedia.org/wiki/并发性)（Concurrent system）的[编程语言](https://zh.wikipedia.org/wiki/程式語言)与各种[算法](https://zh.wikipedia.org/wiki/演算法)，统称为并发计算。
+
+  并发程序通常被设计为交互式的运算过程，因为它的运算过程是不确定的，在设计上的难度较高。设计[并发](https://zh.wikipedia.org/wiki/并发性)程序最大的挑战，在于确保不同运算执行步骤间的交互或是通信，能以正确的顺序进行，同时，也要确保在不同执行步骤间共享的资源，能够正确被访问。
 
 ## Hardware-related
 

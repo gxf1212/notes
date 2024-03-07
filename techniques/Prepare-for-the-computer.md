@@ -330,6 +330,10 @@ sudo dnf install NetworkManager-l2tp
 
 [如何在 Fedora Linux 系统下配置静态IP地址？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/589864823)
 
+To get your gateway's IP address, use the `route` command with the `-n` flag to translate hostnames into IP addresses
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagesgnome-static-IP.png" style="zoom:67%;" />
+
 #### KDE
 
 only cmd?
@@ -351,7 +355,7 @@ sudo nmcli connection modify 91d78f79-c7cf-32fc-8a91-bc2d587a2461 IPv4.method ma
 
 #### GNOME
 
-just GUI
+just GUI, see above
 
 
 
@@ -428,6 +432,12 @@ just GUI
   [“error: Bind to port 2222 on 0.0.0.0 failed: Permission denied” – error while starting sshd service on CentOS/RHEL – The Geek Diary](https://www.thegeekdiary.com/error-bind-to-port-2222-on-0-0-0-0-failed-permission-denied-error-while-starting-sshd-service-on-centos-rhel/)
   
 - ...
+
+### then
+
+[如何从外网访问拥有内网地址的局域网内某台电脑](https://blog.51cto.com/u_1121681/784378)
+
+现在只有断了WiFi才能ssh？
 
 # break the wall
 
@@ -1328,8 +1338,6 @@ https://docs.nvidia.com/cuda/archive/11.7.1/cuda-installation-guide-linux/index.
 11.4 - 11.7 GCC < 12
 ```
 
-
-
 notes:
 
 - [Amber-Wiki - C Make-Common-Options](http://ambermd.org/pmwiki/pmwiki.php/Main/CMake-Common-Options)
@@ -1352,6 +1360,8 @@ other possible notes:
 > 重新做了一遍Python环境还是没好，装了一下boost又卸掉了以后又好了
 >
 > http://archive.ambermd.org/202204/0094.html
+
+[linux安装doxygen: Could NOT find FLEX_could not find flex (missing: flex_executable)-CSDN博客](https://blog.csdn.net/pas_zoujp/article/details/117351781)
 
 ## NAMD
 

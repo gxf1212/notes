@@ -10,18 +10,15 @@ Docsify makes it easy to create a documentation website, but is not a static-sit
 
 read through the official! https://docsify.js.org/#/quickstart  生成那种模块API的，或者学习笔记的一个框架
 
-also learn settings and styles from https://github.com/jhildenbiddle/docsify-themeable/tree/master/docs
+also learn settings and styles from [docsify-themeable/docs at master · jhildenbiddle/docsify-themeable (github.com)](https://github.com/jhildenbiddle/docsify-themeable/tree/master/docs)
 
-some translated doc
+some translated doc: [javascript - docsify - 生成文档网站简单使用教程 - 个人文章 - SegmentFault 思否](https://segmentfault.com/a/1190000017576714) 
 
-- https://www.cxyzjd.com/article/jackson0714/105331564
-- https://segmentfault.com/a/1190000017576714  
-
-a lot of fancy features: https://zxiaosi.cn/archives/cd1d42d1.html
-
-https://www.yumefx.com/?p=5310
+a lot of fancy features: [小四先生的栈 (zxiaosi.cn)](https://zxiaosi.cn/archives/cd1d42d1.html)      [Docsify文档系统 (yumefx.com)](https://www.yumefx.com/?p=5310)
 
 ## Basics
+
+You should know some html, javascript, ...
 
 1. installation
 
@@ -40,40 +37,7 @@ https://www.yumefx.com/?p=5310
 
 3. the first subtitle is not included into the sidebar
 
-### something html
-
-杂记
-
-```html
-<p> text </p>
-<p align=right> bulabula </p>
-<strong> bold text </strong>
-<u> underlined text </u>
-<li> list item </li>
-<!-- comment here -->
-<span> 标签被用来组合文档中的行内元素 </span>
-<hr> 标签定义 HTML 页面中的主题变化(比如话题的转移),并显示为一条水平线。
-<a href='url'> your text </a>
-<a href="#main">回到顶部</a>
-```
-
-1. `<a>` 标签的 target 属性规定在何处打开链接文档 https://www.w3school.com.cn/tags/att_a_target.asp
-2. `href` rules (also, in markdown, `[content](#link)`)
-   - case-insensitive
-   - replace space with `-`
-   - remove parethesis. e.g. `GAFF (not using)` should write`#GAFF-not-using`
-   - special: `2023.1 update` should write `_20231-update`; 
-1. 
-
-### something JavaScript
-
-1. https://blog.csdn.net/sally18/article/details/84326528
-   
-   点击事件
-
-2. 
-
-## Basic functions
+Basic functions
 
 - visualize .md as html
 - customize sidebar, navbar, cover page
@@ -146,14 +110,16 @@ in coverpage.md
 
 #### Theme
 
-4 official themes: https://docsify.js.org/#/themes?id=themes and dolphin
+4 official themes: [Themes](https://docsify.js.org/#/themes) and dolphin
 
 ```html
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 <!-- should not miss // and @4! -->
 ```
 
-some others https://docsify.js.org/#/awesome?id=themes
+some others [Awesome docsify themes](https://docsify.js.org/#/awesome?id=themes)
+
+> [docsify-darklight-theme](https://docsify-darklight-theme.boopathikumar.me/#/)
 
 If you want to modify a theme, download from cdn website rather than GitHub!
 
@@ -173,7 +139,18 @@ If you want to modify a theme, download from cdn website rather than GitHub!
 <img src="https://cdn.jsdelivr.net/gh/user-name/repo-name@master/path/to/figure" style="zoom:50%;" />
 ```
 
-to attach files, we can only also paste the cdn path, not the relative path
+to attach files, we can only also paste the cdn path, not the relative path, to show them **correctly both locally and in website**.
+
+rename: 以后notes site需要批量调整文件名，还得是用Linux的命令
+
+```shell
+sed -i 's/E:\\GitHub-repo\\notes\\techniques\\images\\/https\:\/\/cdn.jsdelivr.net\/gh\/gxf1212\/notes\@master\/techniques\/images/g' *.md
+
+sed -i 's/E:\\GitHub-repo\\notes\\research\\/https\:\/\/cdn.jsdelivr.net\/gh\/gxf1212\/notes\@master\/research\//g' *.md
+sed -i 's/assets\\/assets\//g' *.md
+```
+
+#### 探索历程
 
 - common md syntax is ok, Windows backslash and Linux slash are both ok. and zooming:
 
@@ -1083,10 +1060,12 @@ more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
 - build
 
   ```shell
-  # in /xx/docs
+  # in /xx/docs, which has two folders: build and source
   make html
   make html SPHINXOPTS=-vvv # to debug
   ```
+
+- We no longer see warnings if we run `make html` again (no new modification)?
 
 - 
 
@@ -1189,11 +1168,11 @@ more examples: https://sphinx-doc.readthedocs.io/zh_CN/master/examples.html
 
 
 
-## Markdown support
+## Markdown support (MyST)
 
-https://www.sphinx-doc.org/en/master/usage/markdown.html
+[Markdown — Sphinx documentation (sphinx-doc.org)](https://www.sphinx-doc.org/en/master/usage/markdown.html)
 
-https://sphinx-doc.readthedocs.io/zh_CN/master/usage/markdown.html
+[Markdown — Sphinx 1.8.5 文档 (sphinx-doc.readthedocs.io)](https://sphinx-doc.readthedocs.io/zh-cn/master/usage/markdown.html)
 
 The official site says *MyST-Parser*...
 
@@ -1224,9 +1203,9 @@ extensions = ['myst_parser']
 
 [mr2](https://github.com/miyakogi/m2r) is archived. Maybe m2r2....
 
-### insert other file formats (MyST)
+### insert other file formats
 
-[reference](https://myst-parser.readthedocs.io/en/latest/faq/index.html)
+[FAQ (myst-parser.readthedocs.io)](https://myst-parser.readthedocs.io/en/latest/faq/index.html)
 
 #### Basics
 
@@ -1269,19 +1248,21 @@ FEbuilder will pop out figures like this
 
 #### math
 
-https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#math-shortcuts
+[Syntax Extensions optional.html math-shortcuts](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#math-shortcuts)
 
 the same as usual...
 
 #### other
 
-https://github.com/ryanfox/sphinx-markdown-tables
+[ryanfox/sphinx-markdown-tables: A markdown table plugin for Sphinx (github.com)](https://github.com/ryanfox/sphinx-markdown-tables)
+
+[mgaitan/sphinxcontrib-mermaid: Mermaid diagrams in yours sphinx powered docs (github.com)](https://github.com/mgaitan/sphinxcontrib-mermaid)
 
 ```shell
 pip install sphinx-markdown-tables sphinxcontrib-mermaid
 ```
 
-
+mermaid only works in rst?
 
 
 
@@ -1323,15 +1304,15 @@ pip install sphinx_theme
 > https://github.com/LinxiFan/Sphinx-theme
 
 1. [Stanford](https://sphinx-themes.org/#theme-sphinx-theme): color changed
-2. [press_theme](https://github.com/schettino72/sphinx_press_theme). ruined by sidebar title level
+2. [press_theme](https://github.com/schettino72/sphinx_press_theme). beautiful, but ruined by sidebar title level
 3. [Yummy](https://sphinx-themes.org/#theme-yummy-sphinx-theme). beautiful page, terrible font
 4. [Sizzle](https://sphinx-themes.org/#theme-sphinx-sizzle-theme): font. caption font??
 5. [Basicstrap](https://sphinx-themes.org/#theme-sphinxjp-themes-basicstrap): also great. 
-6. [Material](https://sphinx-themes.org/#theme-sphinx-material): toc on the right
-7. [Piccolo](https://sphinx-themes.org/#theme-piccolo-theme)
+6. [Material](https://sphinx-themes.org/#theme-sphinx-material): toc on the right, no toc for all pages...
+7. [Piccolo](https://sphinx-themes.org/#theme-piccolo-theme): blue theme
 8. [Karma](https://sphinx-themes.org/#theme-karma-sphinx-theme)
 9. [Furo](https://sphinx-themes.org/#theme-furo): new gromacs doc
-10. [The PyData Sphinx Theme](https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html)
+10. [The PyData Sphinx Theme](https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html): looks fine too. 
 
 > other
 >
@@ -1343,17 +1324,23 @@ pip install sphinx_theme
 >
 >   But they don't work with sphinx 5.3.0, thus including markdown failed
 >
-> - [sphinxdoc](https://sphinx-themes.org/#theme-default-sphinxdoc): openbabel
+> - [sphinxdoc](https://sphinx-themes.org/#theme-default-sphinxdoc): openbabel doc
 >
-> - [classic](https://sphinx-themes.org/#theme-default-classic): gromacs
+> - [classic](https://sphinx-themes.org/#theme-default-classic): old gromacs doc
 
 ### Press
 
-press theme causes the first level title shown twice,
+the best font and color! but
 
-一个md文件，除了第一个一级标题外没有别的小标题时，sidebar就会有两个这个一级标题。。
+- only shows headings in this page
 
-I guess the mechanism is: press downgrade the title levels, while stanford keeps all first-levels in sidebar and removes duplicated titles
+- does not recognize subpages (as *piccolo_theme* does)
+
+- press theme causes the first level title shown twice,
+
+  一个md文件，除了第一个一级标题外没有别的小标题（目录不算；一级标题不算，而且渲染出来大小都和页面标题一样）时，sidebar就会有两个这个一级标题。。
+
+> I guess the mechanism is: press downgrade the title levels, while stanford keeps all first-levels in sidebar and removes duplicated titles
 
 ### stanford
 
@@ -1368,22 +1355,26 @@ but rendered as the first **first level title**.
 
 https://github.com/vsajip/sphinx_sizzle_theme
 
-https://docs.red-dove.com/sphinx_sizzle_theme/index.html
+[The Sizzle theme for Sphinx (red-dove.com)](https://docs.red-dove.com/sphinx_sizzle_theme/index.html)
 
 - [sidebar](https://docs.red-dove.com/sphinx_sizzle_theme/index.html#sidebar)
 - https://docs.red-dove.com/sphinx_sizzle_theme/index.html#summary-detail-lists
+
+### Furo
+
+sidebar is fine
+
+### Pydata
+
+subpages left, called "Section Navigation". nothing if no subpages (kind of strange) 
+
+this page headings on the right
 
 ### theme options
 
 usually these are theme-specific.
 
-
-
 [HTML Theming — Sphinx documentation (sphinx-doc.org)](https://www.sphinx-doc.org/en/master/usage/theming.html#builtin-themes)
-
-
-
-
 
 
 
@@ -1565,6 +1556,7 @@ docstring基本是得写rst格式
 - [x] docstring format (more?)
 - [x] utils.AssignBondOrdersFromTemplate
 - [x] math
+- [ ] page overview when mouse hovers, in MyST site
 
 
 
@@ -1573,6 +1565,12 @@ docstring基本是得写rst格式
 Private repositories are not supported...
 
 https://www.cnblogs.com/jonnyan/p/14207711.html
+
+# WordPress
+
+tbc...
+
+
 
 
 

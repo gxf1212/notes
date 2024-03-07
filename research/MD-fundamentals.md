@@ -213,7 +213,7 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 
 1. [C-rescale](https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp-value-pcoupl-C-rescale) in gmx. 老版的gmx没有C-rescale
 
-2. http://www.sklogwiki.org/SklogWiki/index.php/Berendsen_barostat
+2. [Berendsen barostat page on SklogWiki - a wiki for statistical mechanics and thermodynamics](http://www.sklogwiki.org/SklogWiki/index.php/Berendsen_barostat)
 
     in newer gmx:
 
@@ -223,9 +223,16 @@ The nature of molecular dynamics is such that the course of the  calculation is 
     For isotropic scaling we would recommend the C-rescale barostat that also
     ensures fast relaxation without oscillations, and for anisotropic scaling
     you likely want to use the Parrinello-Rahman barostat.
+    Parrinello-Rahman is a good method when you want to apply pressure scaling during data collection, but beware that you can get very large oscillations if you are starting from a different pressure. For simulations where the exact fluctations of the NPT ensemble are important
     ```
 
-    Amber: Berendsen Barostat converges fast and is generally well-behaving, but gives you wrong sampling.
+    [Molecular dynamics parameters (.mdp options) - GROMACS 2024.1 documentation](https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#pressure-coupling)
+
+    Amber
+
+    ```
+    Berendsen Barostat converges fast and is generally well-behaving, but gives you wrong sampling.
+    ```
 
 3. Berendsen thermostat is very efficient in equilibrating the system. However, it does not sample the exact NPT statistical ensemble. Recently several efficient Monte Carlo methods have been introduced. Monte Carlo pressure control samples volume fluctuations at a predefined number of steps at a given constant external pressure. It involves generation of a random volume change from a uniform distribution followed by evaluation of the potential energy of the trial system. The volume move is then accepted with the standard Monte-Carlo probability.
 
@@ -233,7 +240,14 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 
     [Controlling Pressure – Practical considerations for Molecular Dynamics (computecanada.github.io)](https://computecanada.github.io/molmodsim-md-theory-lesson-novice/08-barostats/index.html)
 
-4. 
+4. [求助：Parrinello-Rahman压浴的使用 - 分子模拟 (Molecular Modeling) - 计算化学公社 (keinsci.com)](http://bbs.keinsci.com/thread-39482-1-1.html)
+
+    ```
+    Step 73901 Pressure scaling more than 1%. This may mean your system is not yet equilibrated. Use of Parrinello-Rahman pressure coupling during equilibration can lead to simulation instability, and is discouraged.
+    ```
+
+    前面不管eq用的是v-rescale和berendsen还是c-rescale，都不符合PR的要求，那算了别用了
+
 
 
 
@@ -259,6 +273,10 @@ In NAMD, FEP calculations can be performed using either the “alchemical” or 
 http://ambermd.org/tutorials/advanced/tutorial9/#overview
 
 Within the TI region there will be atoms which are linearly transformed (LTA) directly from one atom type into another in a "**single–topology**" fashion and thus share coordinates (black atoms). Disappearing or appearing atoms are treated in a special way with "softcore" potentials (SCA) but in principal any atom can be defined as softcore atom depending on the user's needs. These atoms do not "see" each other that is no interaction will ever be calculated between them (blue atom for benzene and green atoms for phenol, the number labels are the respective atom indices).
+
+
+
+[浅谈自由能微扰(FEP)计算原理 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/611826076)
 
 
 
@@ -379,6 +397,10 @@ Modeling details: see [Preparation and modeling (gmx)](Preparation-and-modeling.
   [Exclusion of nonbonded interactions - GROMACS documentation](https://manual.gromacs.org/current/reference-manual/topologies/molecule-definition.html#exclusions)
 
   > gromacs中加了bond的atom pairs（约束）是不自动exclude non-bonded interaction的，否则键长不应该变
+  
+- [Improper dihedrals - GROMACS documentation](https://manual.gromacs.org/documentation/current/reference-manual/functions/bonded-interactions.html#improper-dihedrals)
+
+  ijk,jkl
 
 #### Restraints
 
@@ -406,6 +428,8 @@ gmx genrestr is used to generate position restraints, not distance restraints.
       1833    1867    10       0.27       0.32        0.35      25000
   #endif
   ```
+
+- [Dihedral restraints - GROMACS documentation](https://manual.gromacs.org/documentation/current/reference-manual/functions/restraints.html#dihedral-restraints)
 
 - 
 
@@ -1087,7 +1111,7 @@ UniProt has a ClustalW interface but no showing colors. Just export sequences an
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/casp15.png" style="zoom:50%;" />
 
-<img src="E:\GitHub-repo\notes\research\MD-fundamentals-Figure.assets\CASP15.jpg" style="zoom:80%;" />
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/CASP15.jpg" style="zoom:80%;" />
 
 [AlphaFold2怎么给蛋白结构打分？ (qq.com)](https://mp.weixin.qq.com/s/6KGsazYa5MXtCTkwaogBjA)
 

@@ -4,6 +4,8 @@ I am a graduate student in biophysics in ZJU. This site shows some of my notes o
 
 IT techniques like python coding, LaTeX, setup a blog, processing videos, etc are a good way to relax. These are cool things aside from our research, right? I want to share everything in this site to save our time googling all day long for solution. 
 
+![](./utils/figure/touch-fish.jpg)
+
 My hobbies are traveling (also riding, climbing), ball sports, watching movies or shows, listening to books. Some TODOs: take a picture of the milky way, visit all six continents (2 already), 100k followers at bilibili, .....and most importantly, no one can impose meaning on life, so **Always Do What Brings Me Happiness**. 
 
 <a href="https://gxf1212.github.io/notes/#/utils/about" target="_self">Click to see something more about me</a>

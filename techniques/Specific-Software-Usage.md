@@ -183,7 +183,9 @@ ssh gxf@xxxxx.xxx.xx:port
 
 花生壳下线，用`sudo phddns start`
 
-## ToDesk
+## Remote control
+
+### ToDesk
 
 https://www.todesk.com/linux.html
 
@@ -192,43 +194,58 @@ doc: https://docs.todesk.com/zh-CN
 advantages/functions
 
 - free, no rate limit, all platforms
-- check rate: upper left letter
-- no more stucking? yes!
+- clearer than sunlogin
+- check frame rate, etc: upper left letter
+- one-click reboot
 
 flaws
 
-- have to open a client or it cannot be connected
-- WOL under lan failed
-- 占用这么大内存, twice of sunlogin
-- screen is not as clear, even free version?
-- 鼠标光标太大，而且位置难以把控。。
-- 不能用PageUp/Down键
-- 这两天在此重启时会卡
+- WOL under lan failed. 也就是，该启动不了时也没救，关机了也启动不了
+- 占用这么大内存, twice of sunlogin?
+- have to open the main window or it cannot be connected
 
-两者都：播放pymol的movie会卡（vmd还好），向日葵也有点卡（变得不清晰）
 
-charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
 
-### Summary on remote control
+向日葵的剪切板是互通的，可以直接粘贴。但是截图也用的是主控机的
 
-回家三天，总结一下解决远程控制Linux服务器卡机的修复过程。
 
-问题起因：安装了nvidia用于GPU计算的驱动，导致不能很好地使用图形界面应用，如远程控制。
 
-问题表现：有时用着用着就卡机了；远控打开长时间不动就卡机；有时关掉向日葵后第二天早上发现卡机。
+Previous:
 
-问题解决：大佬们释放资源的操作我不会
-
-1. 以ToDesk软件为主，免费又不限速，可以避免向日葵远控产生的一部分上述问题。
-   但是它的光标太大、鼠标定位不准，网好时没有向日葵清晰，所以可以短时间使用一下向日葵。
-   还有，在ToDesk下重启会导致`a stop job is running...`，所以重启前要关完程序
-2. 更改系统设置，如关闭自动休眠等。
-3. 改善网络环境。。。图书馆出来挨打
-4. 更改使用习惯，包括：1）以ToDesk软件为主，间歇使用；2）不使用时关闭远控界面；3）少用费资源的图形软件，如pymol和vmd的movie；4）吃饭睡觉前重启以清理内存，但跑程序时不太会卡；5）重启时记得登录进去，否则20分钟内将自动休眠，无法连接。。。
-
-失败的解决方法：wakeonlan（连不上）、ssh（卡机时也不一定能连上）、卸掉vnc（不是因为冲突）
-
-希望以后的工作能顺利进行。😭😭
+> flaws
+>
+> - have to open a client or it cannot be connected
+> - WOL under lan failed
+> - 占用这么大内存, twice of sunlogin
+> - screen is not as clear, even free version?
+> - 鼠标光标太大，而且位置难以把控。。
+> - 不能用PageUp/Down键
+> - 这两天在此重启时会卡
+>
+> 两者都：播放pymol的movie会卡（vmd还好），向日葵也有点卡（变得不清晰）
+>
+> charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
+>
+> 
+>
+> 回家三天，总结一下解决远程控制Linux服务器卡机的修复过程。
+>
+> 问题起因：安装了nvidia用于GPU计算的驱动，导致不能很好地使用图形界面应用，如远程控制。
+>
+> 问题表现：有时用着用着就卡机了；远控打开长时间不动就卡机；有时关掉向日葵后第二天早上发现卡机。
+>
+> 问题解决：大佬们释放资源的操作我不会
+>
+> 1. 以ToDesk软件为主，免费又不限速，可以避免向日葵远控产生的一部分上述问题。
+>    但是它的光标太大、鼠标定位不准，网好时没有向日葵清晰，所以可以短时间使用一下向日葵。
+>    还有，在ToDesk下重启会导致`a stop job is running...`，所以重启前要关完程序
+> 2. 更改系统设置，如关闭自动休眠等。
+> 3. 改善网络环境。。。图书馆出来挨打
+> 4. 更改使用习惯，包括：1）以ToDesk软件为主，间歇使用；2）不使用时关闭远控界面；3）少用费资源的图形软件，如pymol和vmd的movie；4）吃饭睡觉前重启以清理内存，但跑程序时不太会卡；5）重启时记得登录进去，否则20分钟内将自动休眠，无法连接。。。
+>
+> 失败的解决方法：wakeonlan（连不上）、ssh（卡机时也不一定能连上）、卸掉vnc（不是因为冲突）
+>
+> 希望以后的工作能顺利进行。😭😭
 
 # Cluster/Supercomputers
 
@@ -241,18 +258,35 @@ charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
   https://www.cnblogs.com/l199616j/p/12092113.html
 
   [Linux使用scp拷贝多个文件到远程服务器](https://blog.csdn.net/weixin_40918067/article/details/117376103) 
+  
+- [传输文件的四种方式](https://blog.csdn.net/qw_xingzhe/article/details/80167888): scp, rcp, wget, rsync
 
-### ssh key
+### Usage
 
-重要的经验
-
-- [传输文件的四种方式](https://blog.csdn.net/qw_xingzhe/article/details/80167888)
+- 
 
 - 免密码登录
 
   ```shell
   ssh-keygen -t rsa -P ""
   ```
+
+- debug (after reinstalling system, why?):
+
+  ```
+  Permissions 0644 for '/public/home/gxf1212/.ssh/id_rsa' are too open.
+  It is required that your private key files are NOT accessible by others.
+  This private key will be ignored.
+  Load key "/public/home/gxf1212/.ssh/id_rsa": bad permissions
+  ```
+
+  I suggest you to do:
+
+  ```shell
+  chmod 400 ~/.ssh/id_rsa
+  ```
+
+  also fixed still requiring passwd after adding pub to authorized_keys!
 
 - Linux远程执行命令：`sh [options] [user@]host [command]`，如`ssh -p 606 gxf1212@10.77.14.186 "ls $workdir/prod"`
 
@@ -684,6 +718,56 @@ Then We just need to kill gmx once and the whole script will terminate.
 
     This will clone only the specified branch of the repository.
 
+#### new cmd git
+
+1. Then,
+
+   - set the `git config --global`for email address by performing given command in terminal by providing email address of your GitHub account within double qoutes instead of **[you@example.com](mailto:you@example.com)** and press **Enter**.
+
+   ```shell
+   git config --global user.email "you@example.com"
+   ```
+
+   - Again,set the `git config --global`for username by performing given command in terminal by providing username of your GitHub account within double qoutes instead of **Your Name** and press **Enter**.
+
+   ```shell
+   git config --global user.name "Your Name"
+   ```
+
+2. Next, perform `git add` and `git commit` to save the changes for GitHub repository by running the following commands one after another:
+
+   ```shell
+   git add --a
+   ```
+
+   ```shell
+   git commit -m "initial commit"
+   ```
+
+3. Perform `git push` commands to push the files into your GitHub repository.
+
+   - Add your GitHub repository URL in origin2 variable by writing given command in terminal.
+   - Also replace entire `<git-repo-url>` with your GitHub repository URL such as `git remote add origin2 https://github.com//youraccountname//yourrepositoryname` as shown in given screenshot and click **Enter**.
+
+   ![img](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMSkillsNetwork-JS0101EN-SkillsNetwork/images/gitpush.png)
+
+   ```
+   git remote add origin2 <git-repo-url>
+   ```
+
+   - Then, perform the given command in the terminal to push the content of your file in GitHub repository and click **Enter**.
+
+   ```
+   git push origin2
+   ```
+
+4. While pushing the files in GitHub using `git push` command, it will ask you to enter the username for your GitHub account in the terminal. Enter your username and then press enter. Next, it will also ask for your password, here you need to paste the **Personal Access Token** that you generated in step 1.
+
+> **Note:** Upon pasting your **Personal Access Token** into the terminal, it won't show for security reasons, but it's already there. Simply hit enter, and it will push your files and folders to the GitHub repository.
+
+1. It will push all the files directly into your GitHub repository.
+
+> **Note:** You can also refer to [git_commands](https://author-ide.skills.network/render?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZF9pbnN0cnVjdGlvbnNfdXJsIjoiaHR0cHM6Ly9jZi1jb3Vyc2VzLWRhdGEuczMudXMuY2xvdWQtb2JqZWN0LXN0b3JhZ2UuYXBwZG9tYWluLmNsb3VkL0lCTS1DRDAxMzFFTi1Ta2lsbHNOZXR3b3JrL2xhYnMvZ2l0LWJyYW5jaC1jb21tYW5kcy9pbnN0cnVjdGlvbnMubWQiLCJ0b29sX3R5cGUiOiJ0aGVpYSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNzAwNjcxMzMxfQ.69DnACDvY1aP2faCJad6uXfgaOnMl1BuUWYN7s-1_DU) for more detailed instruction.
 
 ## exploration
 
@@ -881,7 +965,7 @@ https://blog.csdn.net/zhayushui/article/details/80433768
 
 7. https://blog.csdn.net/xiangfengl/article/details/127597065 on a new machine. OpenSSL appears to be unavailable on this machine.
 
-8. Add to path for Windoes! [ImportError: DLL load failed while importing _ssl: 找不到指定的模块 No module named ‘jupyter_server‘](https://blog.csdn.net/sdnuwjw/article/details/112207440)
+8. Add to path for Windows! [ImportError: DLL load failed while importing _ssl: 找不到指定的模块 No module named ‘jupyter_server‘](https://blog.csdn.net/sdnuwjw/article/details/112207440)
 
 9. maybe 
 
@@ -901,8 +985,31 @@ https://blog.csdn.net/zhayushui/article/details/80433768
     conda config --set auto_activate_base false
     ```
 
-    
+12. 
 
+### Config .condarc
+
+[Using the .condarc conda configuration file — conda documentation](https://conda.io/projects/conda/en/latest/user-guide/configuration/use-condarc.html)
+
+`.condarc`文件在`C:\User\xx\`目录（Windows的HOME）下，或者使用win+R后在运行窗口中输入`%HOMEPATH%`进入
+
+Linux, usually under Home
+
+- [解决.condarc文件找不到的问题-CSDN博客](https://blog.csdn.net/ljx0951/article/details/104121844)：只有当用户第一次使用conda config命令时，系统才会自动创建.condarc文件。
+- 无法直接创建名为 .condarc 的文件，可先执行 conda config --set show_channel_urls yes 生成该文件之后再修改。
+
+You can just edit it...
+
+Without this file:
+
+```shell
+conda config --show   # check info
+conda config --set ssl_verify false
+conda config --add channels defaults   # or conda-forge
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
+```
+
+see more usage below
 
 ### Environments
 
@@ -979,18 +1086,14 @@ https://blog.csdn.net/zhayushui/article/details/80433768
 - Update specific package: 
 
   ```shell
-  conda update package-name
+  conda update/upgrade package-name
   ```
 
 - win32 or win_amd64 means version of python
 
   in win, run python in cmd to know version.
 
-  my win: 3.7, 32bit 
-
-  station: 3.8, 64bit
-
-  https://blog.csdn.net/taquguodedifang/article/details/78039181 in linux
+  [查看python是32位还是64位_import platform 32 64-CSDN博客](https://blog.csdn.net/taquguodedifang/article/details/78039181)
 
 ### Bugs
 
@@ -1010,11 +1113,9 @@ https://blog.csdn.net/zhayushui/article/details/80433768
   sudo chmod -R 777 anaconda3/
   ```
 
-- PackagesNotFoundError:
+- PackagesNotFoundError: [conda install Python库时报PackagesNotFoundError:的错误的解决方案](https://blog.csdn.net/weixin_43815222/article/details/108549497)
 
-  https://blog.csdn.net/weixin_43815222/article/details/108549497
-
-- pip install the package only inside one specific conda environment
+- pip install the package **only inside one specific conda environment**
 
   ```shell
   # make sure
@@ -1040,19 +1141,6 @@ conda update --strict-channel-priority --all
 
   maybe don't put too many channels. https://www.jianshu.com/p/1dbaef6b3209
 
-- `.condarc`文件在`C:\User\xx\`目录（Windows的HOME）下，或者使用win+R后在运行窗口中输入`%HOMEPATH%`进入
-
-  ```bash
-  channels:
-    - conda-forge
-    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
-    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
-    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-    - defaults
-  ```
-  
-  [解决.condarc文件找不到的问题-CSDN博客](https://blog.csdn.net/ljx0951/article/details/104121844)：只有当用户第一次使用conda config命令时，系统才会自动创建.condarc文件。`conda config --add channels defaults`
-  
 - conda 环境迁移, 修改conda路径（复制文件夹 + 软连接）https://blog.csdn.net/qq_34342853/article/details/123020957
 
   没成功
@@ -1087,15 +1175,83 @@ conda update --strict-channel-priority --all
   ....
   ```
 
+  solution: 
+  
   ```shell
   conda clean -a
   ```
-
+  
   
 
 > icon path: `xxx/anaconda/lib/python3.7/site-packages/anaconda_navigator/static/images/anaconda-icon-256x256.png` 
 >
-> [link](https://dannyda.com/2020/03/21/how-to-create-shortcut-icon-for-anaconda-anaconda3-navigator-launch-anaconda-navigator-in-linux-debian-ubuntu-kali-linux/?__cf_chl_managed_tk__=8b0602f628e3697df877a10ef8acbd1aaed57efe-1624180568-0-AQN5TbG3O_yGaDEn0fVCjKdPwJeitKXjQ5dGrRfek69NylD0fJ5-atmRV2JoCodX4-mn_CX-vH8Ay_KzM9Ew77recYhgLQF_b3AqC85p9Pt8IVjBso98tTdFN9TknxGj5tTJFM_8KyF_S4qbMmoTpsiUnMKl2kc3rlzmRlQZvO0AJaILgZakK-WjM6xFauMno73HWqkCE4IaHB35y0M0C0dnw8t2b5qReINgAcLiCZuHX897fWj-OLS6yNbAVjmkgOPbkazSG3X8a-o_AgziC8zfKXi584jpGmet4WwRwFnSaWJvOAp7BA7vSIkcSJ7UAOFWzpvkDilEtFoa-XMd6jpZQgKbtBVQn4vLT5LUl1_XLFU3M7B9G_vN7vcyUcFjLV2gl6xdDcx9WA-JypLtICF3nbFVjS3gvK_WCEqs30dnW38X3Ceuk9Bhq7FFyegkaQmnFy5a4V5KeJob3h_gXQRaWwaeAFAHoeuYY0RXfAtfD82sJgJP0UOOYC8IBBV43rGAmhSOsLhiC2u3hk2hwLIEy7mG10sSUlGq_3I_dPjha1qlIAP0APiBXaWOOdujGD2gFeot6PQGwrg71cglm4rQc1Zei_kF8QfHdYerOFjLLtbfWC0HTeoFZ_L7Qu9R9c8npxn9Z5Np2O_IqqsKo3yaDAxR_aV8JVS3rS-a4mxAunZXcWj734HTBAJaTTSdepNfW2PdqnUEbsnD5bAyjeDPVQQupDNG_1qz8fsEzThDBSPP04GMtGJGqpEBawQvu2Nk857rXxA-_V2AwE9s7Og)
+> [link](https://dannyda.com/2020/03/21/how-to-create-shortcut-icon-for-anaconda-anaconda3-navigator-launch-anaconda-navigator-in-linux-debian-ubuntu-kali-linux)
+
+### Deal with proxy
+
+> already `export http_proxy=xxx`, but still...
+
+Under Unbuntu+Clash for Windows, conda says:
+
+```
+Exception: HTTPSConnectionPool(host='conda.anaconda.org', port=443): Max retries exceeded with url: /conda-forge/linux-64/repodata.json.zst (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)')))
+```
+
+not instantly working
+
+```shell
+conda config --set ssl_verify false
+```
+
+adding and removing proxy for conda:
+
+```shell
+conda config --set proxy_servers.http  http://127.0.0.1:7890
+conda config --set proxy_servers.https https://127.0.0.1:7890
+conda config --remove-key proxy_servers.http
+conda config --remove-key proxy_servers.https
+```
+
+but solution is: domestic source
+
+- [conda更换清华源,阿里源(最新版)](https://blog.csdn.net/weixin_44942303/article/details/121977449)
+- [anaconda镜像---阿里巴巴开源镜像站 (aliyun.com)](https://developer.aliyun.com/mirror/anaconda)
+
+```markdown
+channels:
+  - conda-forge
+  - defaults
+show_channel_urls: true
+default_channels:
+  - http://mirrors.aliyun.com/anaconda/pkgs/main
+  - http://mirrors.aliyun.com/anaconda/pkgs/r
+  - http://mirrors.aliyun.com/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: http://mirrors.aliyun.com/anaconda/cloud
+  msys2: http://mirrors.aliyun.com/anaconda/cloud
+  bioconda: http://mirrors.aliyun.com/anaconda/cloud
+  menpo: http://mirrors.aliyun.com/anaconda/cloud
+  pytorch: http://mirrors.aliyun.com/anaconda/cloud
+  simpleitk: http://mirrors.aliyun.com/anaconda/cloud
+```
+
+[conda和pip环境常用命令 - CharlesLC - 博客园 (cnblogs.com)](https://www.cnblogs.com/CharlesLC/p/15668955.html)
+
+For pip, change source did not work
+
+```shell
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+while with proxy, it works
+
+```shell
+pip install sphinx-material --proxy="http://127.0.0.1:7890"
+```
+
+
+
+> [【已解决】ProxyError: Conda cannot proceed due to an error in your proxy configuration.](https://gitcode.csdn.net/65e7daa61a836825ed78a9f8.html)
 
 ### For R language
 
@@ -1187,11 +1343,11 @@ Ctrl+双击：打开加载包源代码
 
 - How to open a project folder in Spyder IDE? Projects > New project > Existing directory > Create
 - I don't think that Spyder has a autosave-feature but in case of a PC crash it keeps a autosaved backup of the modified files as far as I know.
-- There is an option Save all files before running script in the preferences. You will need to go to Preferences > Editor > Run code
+- There is an option Save all files before running script in the preferences. You will need to go to Tools > Preferences > Editor > Run code
 
 ## MATLAB
 
-> ![NOTE]
+>[!NOTE]
 >
 > Octave是完全免费的（并且是开源的），而Matlab是商业软件，价格很昂贵。
 
@@ -1199,9 +1355,64 @@ Ctrl+双击：打开加载包源代码
 
 ## Online documents
 
+PKMS: Personal Knowledge Management Systems
+
+### Usage
+
 in notion, no sidebar outline for a page, just create a TOC in the beginning...
 
+coda，按=后esc，还是能输入等号的
+
 在腾讯文档中，您可以通过以下两种方式进行换行： 按下回车键（Enter）：在您需要进行换行的地方按下回车键即可。 使用Shift+Enter 进行强制换行：如果您需要在一行中换行，可以按下Shift+Enter 键，这将在当前位置插入一个换行符。
+
+
+
+### Main apps
+
+Good UI, editing
+
+| Product                                                     | (self) Freely <br />unlimited | Outline<br />bar | Doc<br />embed | Max<br />heading | Figure         | Export<br />Markdown | Other<br />features |
+| ----------------------------------------------------------- | ----------------------------- | ---------------- | -------------- | ---------------- | -------------- | -------------------- | ------------------- |
+| Notion                                                      | yes                           | no               | yes            | 4                |                |                      |                     |
+| Coda                                                        | yes                           | yes              | yes            | 3                | good           | no, ok figure        |                     |
+| [Confluence](https://www.atlassian.com/software/confluence) | yes                           | no               | yes            | 4                |                | no..                 |                     |
+| [craft.do](https://docs.craft.do/recents)                   | 2 docs/week                   | yes              | folder         | 3                |                | import...            | web embed           |
+| Wolai                                                       | 1000 blocks                   | yes              | yes            |                  |                |                      |                     |
+| FlowUS                                                      | 200 MB                        | yes              | yes            | 4                | export trouble | yes, bad figure      |                     |
+
+
+
+### Other Apps (24.3)
+
+[Best Knowledge Management Software 2024 | Capterra](https://www.capterra.com/knowledge-management-software/)
+
+[2024年11款好用的笔记软件推荐 - v1tx](https://www.v1tx.com/post/best-note-software/)
+
+| Product                                                      | Good                                                         | Bad                                                          |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| https://docs.craft.do/                                       | good, a little trouble in editing type and code pasting      | cannot scale figures freely, just auto or large (acceptable?)<br />![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagescraft.JPG)<br />no other limitations? |
+| https://www.wrike.com/comparison-table/                      | not tried                                                    | 2GB is ok...other?                                           |
+|                                                              |                                                              |                                                              |
+| https://app.nuclino.com                                      | simple (not beautiful?); export; outline                     | free: 50 items, 2GB<br />hard to login?...                   |
+|                                                              |                                                              |                                                              |
+| https://app.getguru.com/collections                          | cards<br />actually **good**...                              | $180 per year x 1 user<br />no free plan, only try 1 month   |
+| https://fibery.io                                            | **fine**; export                                             | cannot edit in my Linux?<br />no-text outline...<br />no free plan?? |
+| https://app.clickup.com                                      | **fine looking**...<br /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagesclickup-sidebar.jpg" style="zoom:50%;" /><br />export is also here in the fourth tab | kind of strange alignment, quantumized figure size...(acceptable?)<br />100 MB for free, 7$/month |
+| https://app.simplenote.com/                                  |                                                              | too simple, no folders...                                    |
+| https://www.remnote.com/                                     |                                                              | all bullet list??                                            |
+| https://app.capacities.io/                                   |                                                              | cannot get used to no-folder all-object scheme...            |
+| https://www.wiz.cn/xapp                                      |                                                              | not that beautiful                                           |
+| https://www.getoutline.com/pricing                           |                                                              | limited for free                                             |
+| www.evernote.com                                             | <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagesevernote.jpg" style="zoom:50%;" /> | very limited for free                                        |
+| https://note.youdao.com/                                     |                                                              | not good editor...not good supported                         |
+| https://onedrive.live.com<br/>onenote mainly for hand writing |                                                              | no outline...no heading, no code....                         |
+| https://get.mem.ai/pricing                                   |                                                              | cannot sign up                                               |
+| https://ai.n.cn/chat                                         |                                                              | cannot add database now                                      |
+| https://monday.com                                           |                                                              | only work management                                         |
+| https://www.zoho.com/notebook/features.html                  |                                                              | not a document                                               |
+| https://notebook.zoho.com.cn/                                |                                                              | not very formal...                                           |
+
+
 
 # Office
 

@@ -733,14 +733,15 @@ see [CHARMM-GUI for ligands](Protein-ligand-simulation.md#charmm-gui-for-ligands
 
 
 
-
 ### Force Field converter
+
+[CHARMM-GUI Force Field converter](https://charmm-gui.org/?doc=input/converter.ffconverter)
 
 Supports Amber/OPLS-AA, etc. in most cases.
 
-You must provide `.psf` and `.crd`??
+You must provide `.psf` and CHARMM `.crd`, which can come from PDB reader
 
-Called by other tools like membrane builder
+Called by other tools like Membrane Builder
 
 
 

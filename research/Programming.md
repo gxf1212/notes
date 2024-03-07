@@ -1846,15 +1846,37 @@ for i in range(len(u.trajectory)):
     ...
 ```
 
+### Other
+
+ngl view traj in python, mdanalysis also view...
+
 
 
 ### GromacsWrapper
 
 https://gromacswrapper.readthedocs.io/en/latest/
 
+Basically use it `.xvg` reading utility
+
+```python
+from gromacs.fileformats.xvg import XVG
+def read_gmx_xvg(xvg_path):
+    xvg = XVG(xvg_path)
+    data = xvg.array.T
+    # if 'RMSD' in xvg.yaxis:
+    if 'rmsd' in xvg_path:
+        data[:,0] *= 1000 # time in ns
+    # if 'RMS' in xvg.yaxis:
+    if 'rms' in xvg_path:
+        data[:,1] *= 10   # in angstrom
+    return data
+```
 
 
-## NetworX
+
+
+
+## NetworkX
 
 ### basics
 
@@ -1892,3 +1914,39 @@ This will add an edge between the first and second nodes in the graph.
 [PyRosetta.notebooks, jupyter pyrosetta保姆教程](https://nbviewer.org/github/RosettaCommons/PyRosetta.notebooks/blob/master/notebooks/index.ipynb)
 
 [PyRosetta - Tutorials](https://www.pyrosetta.org/documentation/tutorials)
+
+
+
+### something html
+
+杂记
+
+```html
+<p> text </p>
+<p align=right> bulabula </p>
+<strong> bold text </strong>
+<u> underlined text </u>
+<li> list item </li>
+<!-- comment here -->
+<span> 标签被用来组合文档中的行内元素 </span>
+<hr> 标签定义 HTML 页面中的主题变化(比如话题的转移),并显示为一条水平线。
+<a href='url'> your text </a>
+<a href="#main">回到顶部</a>
+```
+
+1. `<a>` 标签的 target 属性规定在何处打开链接文档 https://www.w3school.com.cn/tags/att_a_target.asp
+2. `href` rules (also, in markdown, `[content](#link)`)
+   - case-insensitive
+   - replace space with `-`
+   - remove parethesis. e.g. `GAFF (not using)` should write`#GAFF-not-using`
+   - special: `2023.1 update` should write `_20231-update`; 
+3. 
+
+### something JavaScript
+
+1. https://blog.csdn.net/sally18/article/details/84326528
+
+   点击事件
+
+2. 
+

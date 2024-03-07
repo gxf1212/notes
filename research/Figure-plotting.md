@@ -781,7 +781,7 @@ It can calculate Secondary structure, RMSD, RMSF, angle, dihedral, SASA, contact
 
 main viewer of RCSB PDB
 
-![](E:\GitHub-repo\notes\research\MD-fundamentals-Figure.assets\AF2-molstar.jpg)
+![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/AF2-molstar.jpg)
 
 - full screen: the fourth button on the right of the panel
 - sixth, mouse: top selection bar
@@ -919,3 +919,38 @@ There are several tools you can use to draw sequence information entropy figures
 
 
 [图片编辑助手 - 一款快速编辑图片、图片去水印的图片编辑软件 (xunjiepdf.com)](https://www.xunjiepdf.com/tupian)
+
+
+
+
+
+## Resources
+
+### Icon
+
+[Search results for Molecule - Flaticon](https://www.flaticon.com/search?word=molecule)
+
+
+
+### Wall paper
+
+- https://wall.alphacoders.com/
+- https://wallpapercave.com/
+- https://www.wallpaperflare.com/search?wallpaper=chemistry
+- https://www.flickr.com/photos/zeissmicro/
+- https://wallpaperaccess.com/beautiful-biology  good!
+- [Wallpapers | Unsplash](https://unsplash.com/t/wallpapers)
+- https://blog.csdn.net/Eumenidus/article/details/124504631  Nature 封面
+- https://pixabay.com/
+
+> https://cdn.shopify.com/s/files/1/1064/0118/files/periodic-table-of-tech-standalone_alt.png?v=1579813258
+
+Lively Wallpaper for Windows
+
+
+
+For Windows
+
+[付费动态壁纸软件 Wallpaper Engine测评 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/103604007)
+
+前段时间购入了Steam上售价19元的Wallpaper Engine。创意工坊有很多设计师设计的优秀作品，全部都能下载使用，没有内购

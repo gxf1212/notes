@@ -10,4 +10,4 @@
 
 
 <!-- 背景图片 -->
-<!-- ![](./_media/virus.jpg)
+<!-- ![](./_media/virus.jpg) <center><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/utils/figure/photo.jpg" style="zoom:50%;" /></center> -->

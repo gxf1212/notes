@@ -1189,7 +1189,7 @@ more windows doesn't solve the second law of thermodynamics problem
 
   no harm?
 
-- 
+- 时间长一点就先确定不是时间的问题；有replica exchange采样空间会比重复多次好一点（后续事实证明，确实好一点）
 
 
 
@@ -1217,6 +1217,10 @@ This is an issue as long as there is an **element type** (essentially, mass) **c
 > This is physically meaningless. You want to decompose into enthalpy and entropy instead.
 
 They said this because elec and vdw can be separately decoupled in gromacs, making them not state functions. We decouple them together.
+
+X师兄喜欢先消掉elec再消掉vdw，这样可能能假装做一下decomposition，但是不在意的话可以不管。
+
+
 
 
 
