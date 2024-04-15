@@ -703,6 +703,8 @@ puts "The example was called with a varying number of arguments:"
 puts "    $count1, $count2, $count3, and $count4"
 ```
 
+
+
 ## VMD Specific
 
 ### Basics
@@ -780,6 +782,8 @@ https://github.com/luisico/clustering
 
 ### measure
 
+#### contacts
+
 Here is an example of how you can use the measure contacts command to find the interacting residues between two proteins:
 
 ```tcl
@@ -809,7 +813,7 @@ In this example, we first create a selection that includes all atoms in the mole
 
 measure contacts cutoff selection1 [selection2]: Find all atoms in selection1 that are within cutoff of any atom in selection2 and not bonded to it. If selection2 is omitted, it is taken to be the same as selection1. selection2 and selection1 can either be from the same of from different molecules. Returns two lists of atom indices, the first containing the first index of each pair (taken from selection1) and the second containing the second index (taken from selection2). Note that the index is the global index of the atom with respect to its parent molecule, as opposed to the index within the given atom selection that contains it.
 
-
+#### fit
 
 For example, to align residues 10-20 of protein A with residues 30-40 of protein B, you can use the following command: 
 
@@ -818,6 +822,10 @@ set sel [atomselect top "resid 10 to 20"]
 set ref [atomselect top "resid 30 to 40"]
 measure fit $sel $ref
 ```
+
+
+
+
 
 
 
@@ -956,6 +964,53 @@ read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arg
 ### read and write
 
 - If you want to write bytes then you should open the file in binary mode. `f = open('/tmp/output', 'wb')`
+
+## numpy, scipy
+
+### Fitting
+
+- normal distribution
+
+  ```python
+  import numpy as np
+  from scipy.stats import norm
+  import matplotlib.pyplot as plt
+  
+  # Your data
+  data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+  
+  # Fit a normal distribution to the data
+  mu, std = norm.fit(data)
+  ```
+
+- 
+
+
+
+
+
+### histogram
+
+```python
+# Calculate the histogram
+hist, bin_edges = np.histogram(data, bins=50, density=True)
+
+# Calculate bin centers
+bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2.
+plt.hist(distances, bins=bins, density=True, color=colors[i], histtype='step')
+
+hist, xedges, yedges = np.histogram2d(data[:,0], data[:,1], bins=30)
+
+# Plot the histogram as a heat map
+plt.imshow(hist, interpolation='nearest', origin='low',
+           extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]])
+
+plt.colorbar(label='Probability Density')
+```
+
+
+
+
 
 ## matplotlib 
 
@@ -1833,7 +1888,10 @@ Mostly looks like vmd syntax
 
 
 
-> https://github.com/MDAnalysis/mdanalysis/issues/2082
+> [Add "lipid" keyword to select_atoms · Issue #2082 · MDAnalysis/mdanalysis (github.com)](https://github.com/MDAnalysis/mdanalysis/issues/2082)
+>
+> but still not available now
+>
 > In MDAnalysis, you can select atoms using a syntax very similar to CHARMM’s atom selection syntax. However, there isn’t a built-in keyword to select all lipids in a Universe
 
 
@@ -1846,15 +1904,49 @@ for i in range(len(u.trajectory)):
     ...
 ```
 
+
+
+[4.2.2. Native contacts analysis — MDAnalysis.analysis.contacts — MDAnalysis documentation](https://docs.mdanalysis.org/stable/documentation_pages/analysis/contacts.html#module-MDAnalysis.analysis.contacts)
+
+kind of strange...
+
+
+
+### Functions
+
+#### Distance
+
+For simple distances, numpy might be faster?
+
+
+
+#### Contact
+
+[4.2.2. Native contacts analysis — MDAnalysis.analysis.contacts — MDAnalysis 2.7.0 documentation](https://docs.mdanalysis.org/stable/documentation_pages/analysis/contacts.html#module-MDAnalysis.analysis.contacts)
+
+Contacts are typically defined as pairs of atoms that are within a certain distance from each other. The fraction of native contacts is calculated as the total number of native contacts for a given time frame divided by the total number of contacts in the **reference structure**
+
+
+
+For simple contacts, just calculate distance...
+
+
+
 ### Other
+
+- The `principal_axes` method returns a 3x3 numpy array, where each row is one of the principal axes, sorted by decreasing eigenvalue. The direction of each axis is from the center of mass of the atoms to the positive direction along the axis.
+
+Unfortunately, MDtraj does not support writing to .psf files...？
+
+
+
+## Other packages
 
 ngl view traj in python, mdanalysis also view...
 
-
-
 ### GromacsWrapper
 
-https://gromacswrapper.readthedocs.io/en/latest/
+[GromacsWrapper — a Python framework for GROMACS ---- documentation](https://gromacswrapper.readthedocs.io/en/latest/)
 
 Basically use it `.xvg` reading utility
 
@@ -1873,6 +1965,8 @@ def read_gmx_xvg(xvg_path):
 ```
 
 
+
+https://lipyphilic.readthedocs.io/en/latest/index.html
 
 
 

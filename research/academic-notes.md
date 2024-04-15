@@ -31,6 +31,10 @@ maybe a new .md file in the future
 
 - [Tricapped trigonal prismatic molecular geometry - Wikipedia](https://en.wikipedia.org/wiki/Tricapped_trigonal_prismatic_molecular_geometry)
 
+- anion hydration
+
+  <img src="E:\GitHub-repo\notes\research\academic-notes.assets\anion-hydration.png" style="zoom: 67%;" />
+
 
 
 
@@ -75,26 +79,24 @@ maybe a new .md file in the future
 
   However, aromatic esters may have electron-withdrawing groups that increase their reactivity towards hydrolysis. Some aliphatic esters may have bulky groups that hinder their hydrolysis.
   [reference](https://chem.libretexts.org/Courses/Brevard_College/CHE_202%3A_Organic_Chemistry_II/02%3A_Carboxylic_Acids_and_Esters/2.10%3A_Reactions_of_Esters)
+  
+- 异头碳效应：连接在异头碳的杂原子取代基更倾向于处于直立键。可能也是二卤代烷稳定的原因
 
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/anomeric-carbon.jpg" alt="anomeric-carbon" width=50% />
+  
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/anomeric-carbon2.jpg" alt="anomeric-carbon2" width=55% />
+  
+- 卤键
 
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/halogen-bond.png" alt="anomeric-carbon" width=50% />
 
-异头碳效应：连接在异头碳的杂原子取代基更倾向于处于直立键。可能也是二卤代烷稳定的原因
+- 激酶作用机理
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/anomeric-carbon.jpg" alt="anomeric-carbon" width=50% />
+  ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/kinase-mechanism.png)
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/anomeric-carbon2.jpg" alt="anomeric-carbon2" width=45% />
+- [碘内酯化反应 Iodolactonization | 化学空间 Chem-Station](https://cn.chem-station.com/reactions/2014/07/碘内酯化反应-iodolactonization.html)
 
-
-
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/halogen-bond.png" alt="anomeric-carbon" width=50% />
-
-
-
-激酶作用机理
-
-![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/kinase-mechanism.png)
-
-
+- 
 
 
 
@@ -204,6 +206,13 @@ PDB 3hh6、3ht9说明有两个occupancy时晶体结构是能捕捉到的
 超胞（Supercell）：超胞是对单胞的扩展，扩展成新的重复单元。
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/super-cell.png" style="zoom:50%;" />
+
+
+
+异型生物质 (Xenobiotic)
+异型生物质又称异生素，是在生物体内发现的一种并非由其自然产生的化学物质。 致癌物、药物、环境污染物、食品添加剂、碳氢化合物和杀虫剂均可归类为异型生物质。 异生素是在生物体中发现的一种化学物质，它不是自然产生的或预计不会存在于生物体中。它还可以涵盖以比通常情况高得多的浓度存在的物质。
+
+
 
 # Pharmacology
 
@@ -328,18 +337,31 @@ A **non-receptor tyrosine kinase** (**nRTK**) is a [cytosolic](https://en.wikipe
 
 [An orphan receptor is a protein that has a similar structure to other identified receptors but whose endogenous ligand has not yet been identified](https://en.wikipedia.org/wiki/Orphan_receptor).
 
+### Endocytosis
+
+#### Macropinocytosis
+
+Macropinocytosis is responsible for **nonspecific** uptake of **fluid**, solutes, membrane, ligands and smaller particles attached to the plasma membrane.
+
+In macropinocytosis, vesicles larger than those formed by micropinocytosis are created. These vesicles hold larger volumes of fluid and dissolved nutrients. The vesicles range in size from **0.5 to 5 micrometers** in diameter.
+
+[Pinocytosis Definition and Examples (thoughtco.com)](https://www.thoughtco.com/pinocytosis-definition-4143229)
+
+> Typically, proteins and other molecules do not travel directly from the lysosome to the Golgi apparatus
+
+Macropinosomems are known to be leaky
+
+<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/macropinocytosis.png" style="zoom: 80%;" />
+
+![](E:\GitHub-repo\notes\research\academic-notes.assets\macropinocytosis-2.png)
+
+Each caveolae (小窝蛋白) has around 140-150 CAV1 molecules. Caveolins possess a hairpin domain embedded within the membrane while both the amino and carboxy terminus face the cytoplasm.
+
+小窝蛋白（Caveolin）在细胞内吞过程中起着重要的作用，但它并不直接介导巨胞饮（它俩没啥关系？）
+
+Typically, proteins and other molecules do not travel directly from the lysosome to the Golgi apparatus
 
 
-### Macropinocytosis
-
-Macropinocytosis is responsible for nonspecific uptake of fluid, solutes, membrane, ligands and smaller particles attached to the plasma membrane.
-
-In macropinocytosis, vesicles larger than those formed by micropinocytosis are created. These vesicles hold larger volumes of fluid and dissolved nutrients. The vesicles range in size from 0.5 to 5 micrometers in diameter.
-https://www.thoughtco.com/pinocytosis-definition-4143229
-
-Macropinosomes are known to be leaky
-
-![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/macropinocytosis.png)
 
 
 
@@ -386,7 +408,7 @@ RNA aptamer targeting AR (v7) DNA binding domain?
 
 # Other Biology
 
-### Physiology
+## Physiology
 
 - 多年来，我们一直认为，人体的结缔组织应该是非常致密的。Interstitium是一种在粘膜下层和全身各部位存在的网状结构，内有组织间液，可能参与炎症和肿瘤的浸润过程。
 
@@ -410,11 +432,33 @@ RNA aptamer targeting AR (v7) DNA binding domain?
 
   <img src="https://bio.libretexts.org/@api/deki/files/78607/figure-12-03-05.jpeg?revision=1" alt="image" style="zoom:67%;" />
 
+## Neurobiology
+
+<img src="E:\GitHub-repo\notes\research\academic-notes.assets\action-potential.jpg" style="zoom: 67%;" />
+
+
+
 
 
 # Polymer
 
-One of the fascinating properties of polyzwitterions is the so-called anti-polyelectrolyte behavior in aqueous solutions – **the polymer solubility, the solution viscosity and the swelling of polymer network increase with added salts**, in contrast to salt-induced collapse of ordinary polyelectrolytes.
+- One of the fascinating properties of polyzwitterions is the so-called anti-polyelectrolyte behavior in aqueous solutions – **the polymer solubility, the solution viscosity and the swelling of polymer network increase with added salts**, in contrast to salt-induced collapse of ordinary polyelectrolytes.
+
+- [Zeta potential - Wikipedia](https://en.wikipedia.org/wiki/Zeta_potential)
+
+  The zeta potential is an important and readily measurable indicator of the stability of colloidal dispersions.
+
+- Block copolymers are a type of copolymer where two or more homopolymer subunits are linked together via covalent bonds. These homopolymer subunits form ‘blocks’ of repeating units. For example, a polymer made up of X and Y monomers joined together like: -Y-Y-Y-Y-Y-X-X-X-X-X-Y-Y-Y-Y-Y-X-X-X-X-X- is a block copolymer where -Y-Y-Y-Y-Y- and -X-X-X-X-X- groups are the blocks.
+
+- [Copolymer - Wikipedia](https://en.wikipedia.org/wiki/Copolymer)
+
+  a **copolymer** is a [polymer](https://en.wikipedia.org/wiki/Polymer) derived from more than one species of [monomer](https://en.wikipedia.org/wiki/Monomer).
+
+
+
+### Polyzwitterions
+
+![](E:\GitHub-repo\notes\research\academic-notes.assets\zwitterions.png)
 
 
 

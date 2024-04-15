@@ -28,17 +28,34 @@ https://manual.gromacs.org/documentation/current/onlinehelp/gmx-editconf.html#gm
 
 #### gmx
 
+> [!TIP]
+>
+> Generally this is enough for biomolecule complexes
+>
+> ```shell
+> i=2
+> echo -e "a_489 \n 0" | gmx trjconv -s md${i}.tpr -f md${i}.xtc -o md_atom${i}.xtc -pbc atom -n index.ndx -center
+> echo 0 | gmx trjconv -s md${i}.tpr -f md_atom${i}.xtc -o md_pbcmol_${i}.xtc -pbc mol -ur compact
+> rm \#*
+> ```
+>
+> [GROMACS轨迹周期性边界条件的处理|Jerkwin](https://jerkwin.github.io/2016/05/31/GROMACS轨迹周期性边界条件的处理/)
+
+
+
 [gmx trjconv - GROMACS documentation](https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html)
 
-http://bbs.keinsci.com/thread-2085-1-1.html
+[vmd中去周期性如何实现 - 分子模拟 (Molecular Modeling) - 计算化学公社 (keinsci.com)](http://bbs.keinsci.com/thread-2085-1-1.html)
 
-http://blog.sciencenet.cn/blog-548663-981600.html
+[gmx trjconv pbc 周期性边界处理 - 简书 (jianshu.com)](https://www.jianshu.com/p/5dc493663ed2)
 
-https://www.jianshu.com/p/5dc493663ed2
+
 
 gmx generated trajectory, complex system, **must be processed by trjconv**. vmd pbc wrap doesn't work. 
 
-However, nojump: coordinated water molecules are lost; in the original trajectory, protein goes across the pbc. What the fxxk doing clustering with gmx! 
+However, nojump: coordinated water molecules are lost; 
+
+> in the original trajectory, protein goes across the pbc. What the fxxk doing clustering with gmx! 
 
 However, pbc wrap does not always work with NAMD generated trajectories either...still we need to convert to `gmx` and even use `nojmp`
 
@@ -52,7 +69,9 @@ Zhaoqi has tried doing this with MDanalysis but it cannot easily write frames
 
 gmx不做处理，蛋白也全部在中心水盒子，代价是要跳过边界到另一边，蛋白全部被拉开。这种算POC应该也不对吧；pbc res也会被拉开
 
-vmd处理pbc mol之后的：蛋白总是在水盒子中心，align之后就是蛋白不转水盒子转。可以用来算POC
+> [!NOTE]
+>
+> vmd处理pbc mol之后的：蛋白总是在水盒子中心，align之后就是蛋白不转水盒子转。可以用来算POC
 
 
 
@@ -246,7 +265,7 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
   one-by-one: that object, L--clear
 
-### View
+### Viewing
 
 1. pymol show contact residues http://shdf611.lofter.com/post/1cd0a1d0_a6e8874
 
@@ -318,16 +337,25 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
 
     ![](https://pymolwiki.org/images/f/f5/Surface_closed.png)
 
-15. s
+15. align in cmd
 
-    ```
+    ```python
     util.color_chains("(all and elem C)",_self=cmd)
     obj="cluster1_1"
     util.mass_align(obj,0,_self=cmd)
     cmd.disable('aln_all_to_'+obj)
     ```
 
-    
+
+### Advanced Viewing
+
+1. [高质量PyMOL作图教程 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/61568763)
+
+   ![img](https://pic4.zhimg.com/v2-c26a9eb287a6d0d6c8892df8a5d03c8f_r.jpg)
+
+   ![img](https://pic1.zhimg.com/v2-23fca49a5599495b616e2855db0463c8_r.jpg)
+
+2. 
 
 
 ### cmd & API
@@ -520,7 +548,13 @@ Focus on visualization. More on programming, see []()
     addLabel
     ```
 
-16. vmd不一定按psf显示bond？那以后最终还是要手动看psf
+16. vmd不一定按psf显示bond？那以后最终还是要手动看psf? at least pdb does not work
+
+    [VMD-L Mailing List (uiuc.edu)](https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/29972.html)
+
+    ```shell
+    vmd  system.pdb run.xtc
+    ```
 
 17. 
 

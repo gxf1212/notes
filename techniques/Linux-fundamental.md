@@ -1902,7 +1902,13 @@ When system halted/stuck
 
    I've tried https://fedoraproject.org/wiki/QA/Sysrq#How_do_I_enable_the_magic_SysRq_key.3F, don't know if it's applicable on this computer
 
-3. [如何重置Xorg/xserver？ - Ubuntu问答 (ubuntuqa.com)](https://ubuntuqa.com/article/3066.html)
+3. 3rd (not encountered)
+
+   [linux命令行突然卡住的一种解决办法_命令行卡住该怎么办-CSDN博客](https://blog.csdn.net/weixin_41973774/article/details/119241860)
+
+   解决方法很简单，按下Ctrl + q即可。卡住的原因是你之前误按了Ctrl + s，使得当前应用暂停向终端输出字符。（经常发生在使用Vim的过程中：一种常见的情况是习惯性地把Ctrl + s当作存档操作；另一种是在使用Ctrl + w, s进行分屏操作时，按s的时候没有松开Ctrl）
+
+4. [如何重置Xorg/xserver？ - Ubuntu问答 (ubuntuqa.com)](https://ubuntuqa.com/article/3066.html)
 
    ```shell
    sudo X -configure
@@ -1911,9 +1917,9 @@ When system halted/stuck
 
    or, enter tty, kill the process of `gnome-shell` or tty7
 
-4. Fedora: 要使用安装盘或USB驱动器来加载救援系统，你需要在Troubleshooting子菜单中选择`Rescue a Fedora system`
+5. Fedora: 要使用安装盘或USB驱动器来加载救援系统，你需要在Troubleshooting子菜单中选择`Rescue a Fedora system`
 
-5. http://www.mamicode.com/info-detail-2913916.html
+6. http://www.mamicode.com/info-detail-2913916.html
 
    also stop, disable .....but only under user.....
 

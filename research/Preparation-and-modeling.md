@@ -1187,7 +1187,7 @@ Good results especially for ligands with 8 or more rotatable bonds
 #### algorithms and settings
 
 - docking box: the search space (for the whole ligand, rather than the center)
-- 
+- AutoGrid is initially **used to calculate the noncovalent energy of interaction between the rigid part of the receptor and a probe atom that is located at various grid points of the lattice**. Furthermore, AutoGrid generates an electrostatic potential grid map and a desolvation map.
 
 #### parameters
 

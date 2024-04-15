@@ -6,7 +6,7 @@ This page includes general results, not project-specific details. Especially NAM
 
 # Modeling small molecule
 
-For more about programming, see []
+For more about programming to process small molecul, see [Programming.md](Programming.md#small-molecule)
 
 ## Manually
 

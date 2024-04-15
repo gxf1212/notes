@@ -1159,11 +1159,17 @@ more windows doesn't solve the second law of thermodynamics problem
 
 ### notes
 
+- [GMXLIB global variable is ignored · Issue #1210 · ParmEd/ParmEd (github.com)](https://github.com/ParmEd/ParmEd/issues/1210)
+
+  we can only set one path for `$GMXLIB`, separator `:` not useful. this even affects parmed converting `.top` to `.psf` including `xxx.ff`
+
+  gmx本身能接受GMXLIB多个路径`:`隔开，但似乎pmx指认最后一个？
+
 - FEP模拟中会使用多个window来计算自由能变化，有时会出现某些window无法运行的情况。
 
 - 可以尝试重新运行出现问题的window，或者修改随机数等参数，也可以考虑减少窗口数量。
 
-- 大量窗口的FEP模拟容易出现问题，可以尝试采用更少的窗口，例如22个窗口。
+- 大量窗口的FEP模拟出现问题，可以尝试采用更少的窗口，例如22个窗口。
 
 - window多了，可能用上一个window作为输入应该可以大概率避免这个情况，这可能就是kevin之前提到的，在某个lambda它就是姿势不舒服或者什么其他问题
 
@@ -1178,6 +1184,8 @@ more windows doesn't solve the second law of thermodynamics problem
 - "state B has non-zero total charge": 没办法
 
 - Some parameters for bonded interaction involving perturbed atoms are specified explicitly in state A, but not B - copying A to B
+
+  这个没关系
 
 - maybe
 

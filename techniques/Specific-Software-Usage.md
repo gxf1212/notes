@@ -370,9 +370,10 @@ sudo snap install termius-app
 
 ```shell
 spiro -j jobname 
-spiro -u user-id
+spiro -u user-id  # 看自己的
 ```
 
+sprio priority=age（排队的小时数）+fairshare（过往计算资源利用分，越低说明过去用的越多）
 
 
 `QOSMaxJobsPerUserLimit` is a parameter that sets the maximum number of jobs that a user can have in a given Quality of Service (QOS) at any given time...<u>If the user submits more jobs, they will be queued until some of the running jobs finish or are cancelled</u>.
@@ -393,13 +394,48 @@ This only works for jobs that are in currently in queue.
 scontrol show job <your_job_number>
 ```
 
+#### sacct
+
 To view general information about the history of previous jobs queued, you can run the following command:
 
 ```shell
 sacct (--start=YYYY-MM-DD) -u <your_user_name>
 ```
 
+您可以使用SLURM的 sacct 命令来查看任务的排队时间。这个命令可以显示任务从提交到开始运行的等待时间。具体的命令如下:
+```shell
+sacct -X -j <jobid> -o Reserved
+```
 
+`<jobid>`需要替换为您的任务ID。Reserved 列显示的就是任务的排队时间
+
+另外，如果您想查看任务提交和开始的具体时间，可以使用以下命令
+
+```shell
+sacct -o start,submit -j <jobid>
+```
+
+这个命令会显示任务的提交时间 (submit) 和开始时间 (start)
+
+在Slurm中，您可以使用sacct命令来查看历史作业的工作目录。例如，以下命令会列出自2020年8月10日以来用户myUserName的所有作业的作业ID、作业名称和工作目录：
+
+```shell
+sacct -S 2020-08-10 -u myUserName --format "jobid,jobname%20,workdir%70"
+```
+
+请注意，%30和%70是字段宽度，您可以根据需要调整这些值
+
+#### [squeue](https://slurm.schedmd.com/squeue.html)
+
+#### Other
+
+此外，您还可以通过设置环境变量SQUEUE_FORMAT来改变默认的格式。例如，您可以在.bashrc文件中添加以下内容：
+
+```shell
+export SQUEUE_FORMAT="%.18i %.9P %.50j %.8u %.8T %.10M %.9l %.6D %R"
+```
+
+这样，每次运行squeue命令时，都会使用您指定的格式。
 
 
 
@@ -407,7 +443,7 @@ sacct (--start=YYYY-MM-DD) -u <your_user_name>
 
 read the pdf from hpc.xjtu.edu.cn for more
 
-https://blog.csdn.net/qq_33275276/article/details/105060613
+[SLURM 系统入门使用指南_qosmaxgresperuser-CSDN博客](https://blog.csdn.net/qq_33275276/article/details/105060613)
 
 ```shell
 # install
@@ -458,6 +494,10 @@ date > log
 ~
 ```
 
+
+
+
+
 ### PBS
 
 - basics https://www.jianshu.com/p/2f6c799ca147
@@ -495,8 +535,10 @@ date > log
   echo "Argument 3: $3"
   ```
   
-- To check which node a job is running on in PBS, you can use the qstat -f <job_id> command, where <job_id> is the ID of your PBS job. This command will display detailed information about the job, including the node on which it is running.
-一旦您知道了作业运行的节点，您可以使用ssh命令登录到该节点，例如 ssh node_name。登录后，您可以使用诸如free或top之类的命令来查看节点的内存使用情况。
+- To check which node a job is running on in PBS, you can use the `qstat -f <job_id>` command, where `<job_id>` is the ID of your PBS job. This command will display detailed information about the job, including the node on which it is running.
+  一旦您知道了作业运行的节点，您可以使用ssh命令登录到该节点，例如 ssh node_name。登录后，您可以使用诸如free或top之类的命令来查看节点的内存使用情况。
+
+- [mpi - 确定 PBS 脚本中 qsub 之后的总 CPU 计数](https://www.coder.work/article/6306345): `NP=$(wc -l $PBS_NODEFILE | awk '{print $1}') `
 
 
 
@@ -512,15 +554,9 @@ date > log
 | queue name  | -q (queue) | -p (partition) |
 |             |            |                |
 
+## Run Control
 
-
-## run in backend and redirection
-
-namd好像也不能在命令行直接nohup，现在这个2&>xx.log会导致最后没有输出（只有restart）
-
-应该是1>& xx.log!
-
-
+### run in backend and redirection
 
 [如何在ssh断开后继续让程序在后台运行](https://blog.csdn.net/liuyanfeier/article/details/62422742)
 
@@ -529,12 +565,13 @@ namd好像也不能在命令行直接nohup，现在这个2&>xx.log会导致最�
 - 当在前台运行某个作业时，终端被该作业占据；可以在命令后面加上& 实现后台运行。
 
 - 2与>结合代表错误重定向，而1则代表错误重定向到一个文件1，而不代表标准输出；换成2>&1，&与1结合就代表标准输出了，就变成错误重定向到标准输出
-
-- - 也可以正常重定向输出
+  - 也可以正常重定向输出
 
 - 可以用进程号来监控该进程，或杀死它
 
-
+> namd好像也不能在命令行直接nohup，现在这个`2&>xx.log`会导致最后没有输出（只有restart）
+>
+> 应该是`1>& xx.log`?
 
 - If you want to see only the standard output (stdout) on the screen and redirect the standard error (stderr) to a file, you can use the `>` operator to redirect the stderr to a file. Here’s an example:
 
@@ -546,10 +583,31 @@ namd好像也不能在命令行直接nohup，现在这个2&>xx.log会导致最�
 
 
 
+- run consecutively
+
+  ```shell
+  sleep 6h && gmx mdrun ....  # if the first run uses 'nohup'
+  ```
+
+  or in a local machine
+
+  ```shell
+  namd3 ..... [Enter]
+  namd3 .... # before job finishes
+  ```
+
+- 最好把本地机设成禁止自动suspend、black screen (gnome Settings--power)，否则跑着跑着无法看到图形界面。。
+
+- 
+
+
+
+### kill in batch
+
 I have a bash script which contains tens of gmx mdrun commands. Each of them generates an independent process and will not start until the previous one finishes (i.e. they are not running in parallel). I'm running like nohup bash xx.sh &. How can I kill this bash script or all gmx processes at once?
 If you want to kill the bash script that is running the `gmx mdrun` commands sequentially, you can use the `ps` command to find its process ID and then use the `kill` command to send it a `SIGTERM` signal. For example:
 
-```
+```shell
 ps aux | grep "bash xx.sh"
 # Find the process ID (PID) from the output of the above command
 kill <PID>
@@ -557,6 +615,8 @@ kill <PID>
 
 This will send a `SIGTERM` signal to the bash script process, causing it to terminate gracefully.
 Then We just need to kill gmx once and the whole script will terminate.
+
+
 
 
 
@@ -1361,7 +1421,13 @@ PKMS: Personal Knowledge Management Systems
 
 in notion, no sidebar outline for a page, just create a TOC in the beginning...
 
-coda，按=后esc，还是能输入等号的
+#### coda
+
+按=后esc，还是能输入等号的
+
+智障coda带图片的表格不能调（图片/行高）大小
+
+
 
 在腾讯文档中，您可以通过以下两种方式进行换行： 按下回车键（Enter）：在您需要进行换行的地方按下回车键即可。 使用Shift+Enter 进行强制换行：如果您需要在一行中换行，可以按下Shift+Enter 键，这将在当前位置插入一个换行符。
 
@@ -1390,20 +1456,20 @@ Good UI, editing
 
 | Product                                                      | Good                                                         | Bad                                                          |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| https://docs.craft.do/                                       | good, a little trouble in editing type and code pasting      | cannot scale figures freely, just auto or large (acceptable?)<br />![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagescraft.JPG)<br />no other limitations? |
+| https://docs.craft.do/                                       | good, a little trouble in editing type and code pasting      | cannot scale figures freely, just auto or large (acceptable?)<br />![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/craft.JPG)<br />no other limitations? |
 | https://www.wrike.com/comparison-table/                      | not tried                                                    | 2GB is ok...other?                                           |
 |                                                              |                                                              |                                                              |
 | https://app.nuclino.com                                      | simple (not beautiful?); export; outline                     | free: 50 items, 2GB<br />hard to login?...                   |
 |                                                              |                                                              |                                                              |
 | https://app.getguru.com/collections                          | cards<br />actually **good**...                              | $180 per year x 1 user<br />no free plan, only try 1 month   |
 | https://fibery.io                                            | **fine**; export                                             | cannot edit in my Linux?<br />no-text outline...<br />no free plan?? |
-| https://app.clickup.com                                      | **fine looking**...<br /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagesclickup-sidebar.jpg" style="zoom:50%;" /><br />export is also here in the fourth tab | kind of strange alignment, quantumized figure size...(acceptable?)<br />100 MB for free, 7$/month |
+| https://app.clickup.com                                      | **fine looking**...<br /><img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/clickup-sidebar.jpg" style="zoom:50%;" /><br />export is also here in the fourth tab | kind of strange alignment, quantumized figure size...(acceptable?)<br />100 MB for free, 7$/month |
 | https://app.simplenote.com/                                  |                                                              | too simple, no folders...                                    |
 | https://www.remnote.com/                                     |                                                              | all bullet list??                                            |
 | https://app.capacities.io/                                   |                                                              | cannot get used to no-folder all-object scheme...            |
 | https://www.wiz.cn/xapp                                      |                                                              | not that beautiful                                           |
 | https://www.getoutline.com/pricing                           |                                                              | limited for free                                             |
-| www.evernote.com                                             | <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/imagesevernote.jpg" style="zoom:50%;" /> | very limited for free                                        |
+| www.evernote.com                                             | <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/evernote.jpg" style="zoom:50%;" /> | very limited for free                                        |
 | https://note.youdao.com/                                     |                                                              | not good editor...not good supported                         |
 | https://onedrive.live.com<br/>onenote mainly for hand writing |                                                              | no outline...no heading, no code....                         |
 | https://get.mem.ai/pricing                                   |                                                              | cannot sign up                                               |
@@ -1439,6 +1505,9 @@ Good UI, editing
 - [word如何改变表格线框的线宽](https://jingyan.baidu.com/article/d2b1d1026de5e91d7f37d47e.html)：选中后编辑边框
 
 - [word如何设置表格距离文字的下方距离](https://jingyan.baidu.com/article/d5a880eb68067c52f147cce9.html)：表格属性---文字环绕
+
+- word表格怎么填充颜色：选中单元格，右键，点击菜单商店油漆桶，选择一种颜色。
+
 
 ## MS Excel
 
@@ -1483,22 +1552,24 @@ also for LibreOffice Calc, many commands are the same....
 - In both Excel and LibreOffice Calc, you can calculate the dot product (点积) of two vectors by using similar formulas.
   In Excel, you can use the `SUMPRODUCT` function to calculate the dot product of two vectors. 
 
-  For example, if your first vector is in cells A2:A8 and your second vector is in cells B2:B8, you can use the following formula: `=SUMPRODUCT(A2:A8,B2:B8)`. This formula multiplies corresponding entries in the given arrays and returns the sum of those products.
+  For example, if your first vector is in cells A2:A8 and your second vector is in cells `B2:B8`, you can use the following formula: `=SUMPRODUCT(A2:A8,B2:B8)`. This formula multiplies corresponding entries in the given arrays and returns the sum of those products.
   In LibreOffice Calc, you can also use the `SUMPRODUCT` function
 
-- *SUMXMY2*(array_x, array_y) 返回两数组中对应数值之差的平方和。For example:
+- `SUMXMY2(array_x, array_y)` 返回两数组中对应数值之差的平方和。For example:
 
   ```
   =SQRT(SUMXMY2(B12:J12,B13:J13)/COUNT(B12:J12))
   ```
 
-- if your vector is in cells A1 to A5, you can use the formula =SUMSQ(A1:A5) to calculate the sum of squares of the values in those cells.
+- if your vector is in cells A1 to A5, you can use the formula `=SUMSQ(A1:A5)` to calculate the sum of squares of the values in those cells.
 
 ## MS PPT
 
 - [PPT中如何将多个图形等距分布](https://jingyan.baidu.com/article/fec7a1e5c51b1d1190b4e7ca.html)
 - PPT内跳转：打开PPT文档，在需要的页面中，选定一个文本框，右键--超链接。进入后，选择”本文档中的位置“，设定要跳转到哪张幻灯片（可以在右侧预览），点击确定。 以后就可以直接点击这个文本进行跳转（不点击时默认还是下一张）。
 - 美化大师插件：批量删除动画；PPT工具栏
+- [旋转或翻转文本框、形状、艺术字或图片 - Microsoft 支持](https://support.microsoft.com/zh-cn/office/旋转或翻转文本框-形状-艺术字或图片-399e7a92-87e9-4d86-a03a-be120056fe3b)
+- 
 
 ## Foxit Reader
 

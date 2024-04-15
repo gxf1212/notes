@@ -14,9 +14,8 @@ membrane setup tutorials (Amber). See also: [Analysis](#analysis)
 
 - [Building Systems - Membrane Systems (ambermd.org)](https://ambermd.org/tutorials/MembraneSystems.php)
 - [The Lipid21 Force Field is recommended in Amber](https://ambermd.org/AmberModels_lipids.php)
-- 
-
-
+- [only the bilayer and associated properties (springer.com)](https://link.springer.com/content/pdf/10.1007/978-1-62703-017-5_15.pdf)
+- [Versuch13_Molecular_Dynamics.pdf (biophysik.org) self-assembly of lipid bilayer](https://biophysik.org/~koefinger/BiophysikPraktikum/Versuch13_Molecular_Dynamics.pdf)
 
 ## CHARMM-GUI
 
@@ -47,6 +46,8 @@ restraint of POPC during equilibration
 
 [A Beginner’s Guide to Perform Molecular Dynamics Simulation of a Membrane Protein using GROMACS — GROMACS tutorials https://tutorials.gromacs.org documentation](https://tutorials.gromacs.org/docs/membrane-protein.html)
 
+[Molecular Dynamics simulations of lipid bilayers and membrane proteins](https://mptg-cbp.github.io/teaching/tutorials/membranes/index.html)
+
 
 
 ## Packmol+tleap
@@ -66,7 +67,9 @@ restraint of POPC during equilibration
 
 [memprot2-tutorial.pdf](https://www.ks.uiuc.edu/Training/Tutorials/science/membrane2/memprot2-tutorial.pdf)  (vmd)
 
+[Molecular Dynamics Simulations of Lipid Bilayers: Simple Recipe of How to Do It](https://link.springer.com/content/pdf/10.1007/978-1-62703-017-5_15.pdf)    gmx and vmd
 
+[Versuch13_Molecular_Dynamics.pdf (biophysik.org)](https://biophysik.org/~koefinger/BiophysikPraktikum/Versuch13_Molecular_Dynamics.pdf)   martini membrane
 
 
 

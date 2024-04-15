@@ -177,15 +177,15 @@ Fundamental
 
 ## Algorithm & special
 
-### Basic
+### Basics
 
-[分子动力学模拟为什么会有先NVT后NVE？](http://bbs.keinsci.com/thread-9699-1-1.html)
+- [分子动力学模拟为什么会有先NVT后NVE？](http://bbs.keinsci.com/thread-9699-1-1.html)
 
-The nature of molecular dynamics is such that the course of the  calculation is very dependent on the order of arithmetical operations  and the machine arithmetic implementation, i.e., the method used for  round-off. Because each step of the calculation depends on the results  of the previous step, the slightest difference will eventually lead to a divergence in trajectories. As an initially identical dynamics run  progresses on two different machines, the trajectories will eventually  become completely uncorrelated. Neither of them are "wrong;" they are  just exploring different regions of phase space. Hence, states at the  end of long simulations are not very useful for verifying correctness.  Averages are meaningful, provided that normal statistical fluctuations  are taken into account. "Different machines" in this context means any  difference in floating point hardware, word size, or rounding modes, as  well as any differences in compilers or libraries. Differences in the  order of arithmetic operations will affect round-off behavior; (a + b) + c is not necessarily the same as a + (b + c). Different optimization  levels will affect operation order, and may therefore affect the course  of the calculations.
+  <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/nvt-npt.png" alt="1689997407699" style="zoom: 80%;" />
 
-> from Amber manual
+- The nature of molecular dynamics is such that the course of the calculation is very dependent on the order of arithmetical operations  and the machine arithmetic implementation, i.e., the method used for round-off. Because each step of the calculation depends on the results of the previous step, the slightest difference will eventually lead to a divergence in trajectories. As an initially identical dynamics run progresses on two different machines, the trajectories will eventually  become completely uncorrelated. Neither of them are "wrong;" they are  just exploring different regions of phase space. Hence, states at the end of long simulations are not very useful for verifying correctness.  Averages are meaningful, provided that normal statistical fluctuations  are taken into account. "Different machines" in this context means any  difference in floating point hardware, word size, or rounding modes, as  well as any differences in compilers or libraries. Differences in the  order of arithmetic operations will affect round-off behavior; (a + b) + c is not necessarily the same as a + (b + c). Different optimization levels will affect operation order, and may therefore affect the course of the calculations.
 
-<img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/nvt-npt.png" alt="1689997407699" style="zoom: 80%;" />
+  > from Amber manual
 
 ### Control
 
@@ -211,6 +211,8 @@ The nature of molecular dynamics is such that the course of the  calculation is 
 
 ### Pressure control
 
+NPT，盒子大小每帧都不一样
+
 1. [C-rescale](https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp-value-pcoupl-C-rescale) in gmx. 老版的gmx没有C-rescale
 
 2. [Berendsen barostat page on SklogWiki - a wiki for statistical mechanics and thermodynamics](http://www.sklogwiki.org/SklogWiki/index.php/Berendsen_barostat)
@@ -226,7 +228,7 @@ The nature of molecular dynamics is such that the course of the  calculation is 
     Parrinello-Rahman is a good method when you want to apply pressure scaling during data collection, but beware that you can get very large oscillations if you are starting from a different pressure. For simulations where the exact fluctations of the NPT ensemble are important
     ```
 
-    [Molecular dynamics parameters (.mdp options) - GROMACS 2024.1 documentation](https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#pressure-coupling)
+    [Molecular dynamics parameters (.mdp options) - GROMACS documentation](https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#pressure-coupling)
 
     Amber
 
@@ -338,24 +340,12 @@ AMOEBA (Atomic Multipole Optimized Energetics for Biomolecular Simulation) is a 
 
 ## Other
 
+Contacts are typically defined as pairs of atoms that are within a certain distance from each other. The fraction of native contacts is calculated as the total number of native contacts for a given time frame divided by the total number of contacts in the reference structure
+
 ### Techniques
 
-- run consecutively
-
-  ```shell
-  sleep 6h && gmx mdrun ....  # if the first run uses 'nohup'
-  ```
-
-  or in a local machine
-
-  ```shell
-  namd3 ..... [Enter]
-  namd3 .... # before job finishes
-  ```
-
-- 最好把本地机设成禁止自动suspend、black screen (gnome Settings--power)，否则跑着跑着无法看到图形界面。。
-
 - 
+
 
 # Gromacs
 
@@ -378,6 +368,25 @@ This section is about basics and common usage. For more (theory, concepts), see 
 ## Modeling
 
 Modeling details: see [Preparation and modeling (gmx)](Preparation-and-modeling.md#gmx)
+
+### pdb2gmx
+
+- [Newest CHARMM36 port for GROMACS - Third party tools and files - GROMACS forums (bioexcel.eu)](https://gromacs.bioexcel.eu/t/newest-charmm36-port-for-gromacs/868/11)
+
+  In the case of an N-terminal MET residue in a polypeptide sequence, you MUST interactively choose the appropriate terminal patch. pdb2gmx tries to be smart and match by name but in this case, it causes an erroneous attempt to patch with a carbohydrate-specific patch.
+
+  就很离谱！很多蛋白都是以MET开始的。。
+
+  ```shell
+  echo 1 0 | gmx pdb2gmx -f xxx.pdb -o model.gro -ff charmm36-jul2022 -water tip3p -ignh -ter
+  # now 0 is MET, 1 is NH3+
+  ```
+
+  
+
+
+
+
 
 ### Topology file format
 
@@ -514,15 +523,27 @@ DispCorr = no
 
 ### Other
 
+#### comm-grps
+
+default is the whole system
+
 顺带一提，对生物分子的模拟，我一般建议让程序在模拟过程中就一直对生物分子消除平动转动，对于GROMACS跑蛋白质来说就是设`comm-grps = protein`和`comm-mode = angular`，这样就避免了生物分子中途跑出盒子的问题。
 
-http://sobereva.com/627
+[谈谈怎么判断分子动力学模拟是否达到了平衡](http://sobereva.com/627)
 
-https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp-comm-mode
+[Molecular dynamics parameters (.mdp options)](https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp-comm-mode)
+
+for membrane system
+```
+; group(s) for center of mass motion removal
+comm_grps        = MEMB SOLV
+```
+
+so the membrane COM won't go up and down
 
 
 
-### Free energy
+### Free energy simulation
 
 - [Free energy interactions - GROMACS documentation](https://manual.gromacs.org/documentation/current/reference-manual/functions/free-energy-interactions.html)
 
@@ -534,7 +555,7 @@ https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp
 
 - Dummy atoms have epsilon and q both in zero, so no worry
 
-### Replica
+### Replica exchange
 
 - [Running multi-simulations - GROMACS documentation](https://manual.gromacs.org/current/user-guide/mdrun-features.html#running-multi-simulations)
 
@@ -597,7 +618,7 @@ It is a pity that gmx itself cannot process trajectories in parallel. MPI is for
 - `-dt`: not real time, but how many frames we go through each time we collect one frame
 - Using `-cat`, you can simply paste several files together without removal of frames with identical time stamps.
 
-see [here](#pbc-processing) for pbc processing
+see [here](Figure-plotting.md#pbc-processing) for pbc processing for visualization and post-processing
 
 
 
@@ -696,6 +717,16 @@ and VMD and CHARMM FF? I don't feel too much to say since they are just responsi
 - [Topology Files (uiuc.edu)](https://www.ks.uiuc.edu/Training/Tutorials/namd/namd-tutorial-unix-html/node24.html)
 - [Parameter Files (uiuc.edu)](https://www.ks.uiuc.edu/Training/Tutorials/namd/namd-tutorial-unix-html/node25.html)
 - [NAMD Configuration Files (uiuc.edu)](https://www.ks.uiuc.edu/Training/Tutorials/namd/namd-tutorial-unix-html/node26.html)
+
+#### Restraint
+
+[Constraints and Restraints (uiuc.edu)](https://www.ks.uiuc.edu/Research/namd/3.0/ug/node29.html)
+
+![](E:\GitHub-repo\notes\research\academic-notes.assets\constraint-scaling.png)
+
+what is the default k?
+
+
 
 #### langevin dynamics
 
@@ -1092,6 +1123,16 @@ doing MSA: cluster omega
 
 
 UniProt has a ClustalW interface but no showing colors. Just export sequences and upload...
+
+
+
+
+
+[NAR︱华科大薛宇团队开发激酶特异性磷酸化位点预测工具GPS 6.0 (qq.com)](https://mp.weixin.qq.com/s/4FFD_jzNvhBAgl0hxRqx6Q)
+
+[GPS 6.0 - Kinase-specific Phosphorylation Site Prediction (biocuckoo.cn)](https://gps.biocuckoo.cn/)
+
+
 
 
 
