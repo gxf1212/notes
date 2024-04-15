@@ -1659,7 +1659,7 @@ virtual desktops in KDE, workspaces in gnome
 
    也没用
 
-## KDE
+## KDE plasma
 
 ### Fundamental
 
@@ -1668,6 +1668,10 @@ virtual desktops in KDE, workspaces in gnome
   ```shell
   kwin --version
   ```
+
+- Plasma application launchers：左下角的那个f
+
+- 
 
 - 
 
@@ -1760,7 +1764,9 @@ virtual desktops in KDE, workspaces in gnome
   #重新执行
   ````
 
-- 
+- autostart apps
+
+  ![](E:\GitHub-repo\notes\techniques\images\Fedora-autostart.jpg)
 
 ### Dolphin 
 
@@ -1772,7 +1778,18 @@ virtual desktops in KDE, workspaces in gnome
 
   <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/dolphin-path.jpg" style="zoom:67%;" />
 
-- rename (F2) 不像gnome能统一加后缀
+- rename (F2) 不像gnome能统一加后缀；但gnome也很傻逼，只能用统一的前缀
+
+- Dolphin:
+  F2: selection mode
+  F3: separate into two
+  F4: Konsole
+  F5: refresh
+  F6: edit path
+  F9: hide left Places bar
+  F10: create new folder
+  F11: details of this folder
+
 
 ### Functions
 
@@ -1866,6 +1883,54 @@ ChatGPT:
 - [What does DKMS (Dynamic Kernel Module Support) do? How do I use it? - Ask Ubuntu](https://askubuntu.com/questions/408605/what-does-dkms-do-how-do-i-use-it)
 
 - [Error while loading libgconf-2.so.4 - Fedora Discussion](https://discussion.fedoraproject.org/t/error-while-loading-libgconf-2-so-4/77736), [Linux 缺少 libgconf库 libgconf-2.so.4 =＞ not found](https://blog.csdn.net/wwlhz/article/details/109765020)
+
+
+
+### KDE Connect
+
+[Download | KDE Connect](https://kdeconnect.kde.org/download.html)
+
+确定连接到同一网络后
+
+简单一点：
+
+win+k 搜索无线显示器
+
+按 Win+P 键，然后选择“连接到无线显示器”
+
+没有就是没有能支持的设备
+
+利用KDE Connect，不需要蓝牙，只要设备在同一个局域网中，就可以实现多设备（Windows、Linux、macOS、iOS、安卓等等）之间的文件发送
+
+KDE Connect并不是投屏软件，起先让我有点失望。后来翻阅了功能，发现基本上手机可以成为电脑的遥控器了，在连接的状态下，在电脑文件上右键即可发送至手机（手机里的图片、视频等也可以发送到电脑指定的文件夹）；可以分享手机、电脑的剪贴板；在电脑上听音乐看视频还可以手机遥控调整音量、进度、暂停播放等；播放PPT时可以手机可以作为翻页器；手机有了电话、短信等通知可同步通知到电脑上，找不到手机还可以在电脑上让手机发出声音，甚至还可以预设Linux命令，让手机远程遥控电脑执行关机、锁屏、甚至一组预设的动作。。。
+————————————————
+版权声明：本文为CSDN博主「RockyCoder」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/RockyCoder/article/details/115961170
+
+
+
+https://sspai.com/post/68779
+https://wker.com/kde-connect/
+
+### Problems
+
+- Plasma takes 25-40 seconds to start up (with and without splash screen). My guess is some bug due to using NVIDIA card.
+
+- crash,鼠标点不上之类的问题都是驱动
+
+- session
+
+  ![](E:\GitHub-repo\notes\techniques\images\Fedora-desktop-session.jpg)
+
+  [KDE 5.27 - All Firefox Windows restore on top of each other - Fedora Discussion (fedoraproject.org)](https://discussion.fedoraproject.org/t/kde-5-27-all-firefox-windows-restore-on-top-of-each-other/63810)
+
+  Currently, there is no built-in feature in Visual Studio Code (VSCode) or Firefox that allows you to restore all windows in their correct virtual desktops on Fedora KDE. This is a known issue and has been discussed in various forums.
+  https://github.com/microsoft/vscode/issues/116358
+  https://github.com/microsoft/vscode/issues/88257
+
+  [372650 - session restore should restore windows to original virtual desktop (mozilla.org)](https://bugzilla.mozilla.org/show_bug.cgi?id=372650)
+
+
 
 ## Emergency
 
@@ -3384,7 +3449,9 @@ install wsl, ubuntu, and ubuntu22.04 (choose one of the two) in microsoft store
 
   文件夹目录栏输入wsl也可以
 
-- 
+- Windows vmd.exe also works in WSL. in my PC, vmd in WSL shows a very small font
+
+  paths in the script should be in Windows' format
 
 ### cuda
 

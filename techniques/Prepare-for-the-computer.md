@@ -625,7 +625,7 @@ configuration: https://github.com/qingshuisiyuan/electron-ssr-backup/blob/master
    kill xxxx
    ```
 
-9. 
+9. [拒绝连接 can not initialize cipher context · Issue #126 · shadowsocksrr/electron-ssr · GitHub](https://github.com/shadowsocksrr/electron-ssr/issues/126)
 
 > other
 >

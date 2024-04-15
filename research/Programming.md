@@ -8,6 +8,8 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
 
 跟系统相关的，请阅读《Linux基础》
 
+## Basics
+
 1. syntax error: unexpected end of file
 
    https://unix.stackexchange.com/questions/591208/fix-syntax-error-unexpected-end-of-file-in-a-for-loop
@@ -26,7 +28,14 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
 
 4. 在`=`运算符两边不能有空格。
 
-5. 
+5. 这将在bash脚本中执行一行Python代码，输出"Hello, World!"
+
+   ```bash
+   #!/bin/bash
+   python -c "print('Hello, World!')"
+   ```
+
+6. 
 
 
 ## text processing
@@ -488,7 +497,7 @@ rpm -qa | grep -i devel | xargs -n 1 dnf remove -y
 
    [shell script for division of two numbers](https://www.log2base2.com/shell-script-examples/operator/shell-script-for-division-of-two-numbers.html)
 
-   ```
+   ```bash
    num1=10
    num2=20
    num3=2
@@ -589,7 +598,13 @@ Tcl本身将所有的变量值视为字符串，并将他们作为字符串来�
 
   **在使用end时，表达式中不能有空格**
 
-- 
+- you can execute bash commands directly in a Tcl script using the **exec** command.
+
+  ```tcl
+  exec grep 'ATOM' ${i}.pdb >> ${outputFile}
+  ```
+
+  should only use ""....???
 
 
 
@@ -620,6 +635,28 @@ everything about lists https://zetcode.com/lang/tcl/lists/
 Everything is here: [Vectors](https://www.ks.uiuc.edu/Research/vmd/current/ug/node193.html)  [Matrix routines](https://www.ks.uiuc.edu/Research/vmd/current/ug/node194.html)
 
 - `vecnorm v` - Returns the vector of length 1 directed along v
+
+
+
+```
+transabout v amount [deg|rad|pi] - Generates the transformation matrix needed to rotate by the given amount counter-clockwise around axis which goes through the origin and along the given vector. As with transvec, the units of the amount of rotation can be degrees, radians, or multiples of pi.
+```
+
+
+
+debug
+
+[*vector subtraction doesn't work* (uiuc.edu)](https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/2584.html)
+
+```
+The reason is that coord1, coord2, and coord3 are all nested lists, i.e.
+they look like this:
+ {{a b c}}
+instead of this:
+  {a b c}
+The solution is to do this:
+  set coord1 [lindex [$atm get {x y z}] 0]
+```
 
 
 
@@ -1922,13 +1959,19 @@ For simple distances, numpy might be faster?
 
 #### Contact
 
+> For simple contacts, just calculate distance...
+
 [4.2.2. Native contacts analysis — MDAnalysis.analysis.contacts — MDAnalysis 2.7.0 documentation](https://docs.mdanalysis.org/stable/documentation_pages/analysis/contacts.html#module-MDAnalysis.analysis.contacts)
 
 Contacts are typically defined as pairs of atoms that are within a certain distance from each other. The fraction of native contacts is calculated as the total number of native contacts for a given time frame divided by the total number of contacts in the **reference structure**
 
+> reference groups (first frame of the trajectory, but you could also use a separate PDB, eg crystal structure)
 
 
-For simple contacts, just calculate distance...
+
+`results.timeseries`是一个二维数组，用于存储所有参考组合和分析帧的Q值。
+
+在MDAnalysis中，Q值是指“native contacts”的分数，用于描述蛋白质模拟中的原子接触情况。在蛋白质模拟中，原子之间的接触可以被定义为与参考结构中的原子之间的距离小于一定阈值的情况。Q值是指在给定时间段内与参考结构中的原子接触的总数与参考结构中的原子接触总数之比。
 
 
 

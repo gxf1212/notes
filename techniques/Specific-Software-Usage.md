@@ -86,12 +86,35 @@ configure *PN: see [prepare-for-the-computer](/techniques/Prepare-for-the-comput
 
 9. 
 
-## Sunlogin remote control
+## Remote control
+
+### ToDesk
+
+https://www.todesk.com/linux.html
+
+doc: https://docs.todesk.com/zh-CN
+
+advantages/functions
+
+- free, no rate limit, all platforms
+- clearer than sunlogin
+- check frame rate, etc: upper left letter
+- one-click reboot
+
+flaws
+
+- WOL under lan failed. 也就是，该启动不了时也没救，关机了也启动不了
+- 占用这么大内存, twice of sunlogin?
+- have to open the main window or it cannot be connected
+
+todesk还是不能直接复制东西出来
+
+### Sunlogin remote control
 
 工单：可以咨询技术人员。https://console.oray.com/center/workorder
 
 > auto-boot: https://www.cnblogs.com/citrus/p/13879021.html
-> 
+>
 > use realvnc? actually no need...
 
 向日葵
@@ -101,23 +124,64 @@ configure *PN: see [prepare-for-the-computer](/techniques/Prepare-for-the-comput
 1. check “start upon boot”
 
 2. about wait 120s to connect
-   
+
    > try connection
-   > 
+   >
    > `telnet client.oray.net 443`
    > https://blog.csdn.net/MuscleBaBa_Chang/article/details/110562652
 
 3. 连接后即断开解决办法 https://blog.csdn.net/u012254599/article/details/107807751
-   
+
    ```shell
    sudo dpkg-reconfigure lightdm # 切换lightdm图形页面
    ```
-   
+
    切换完成后重启电脑，就可以使用向日葵远程了…
-   
+
    which leads that the login displays in a strange de-centered looking...
 
 4. 
+
+向日葵的剪切板是互通的，可以直接粘贴。但是截图也用的是主控机的
+
+
+
+Previous:
+
+> flaws
+>
+> - have to open a client or it cannot be connected
+> - WOL under lan failed
+> - 占用这么大内存, twice of sunlogin
+> - screen is not as clear, even free version?
+> - 鼠标光标太大，而且位置难以把控。。
+> - 不能用PageUp/Down键
+> - 这两天在此重启时会卡
+>
+> 两者都：播放pymol的movie会卡（vmd还好），向日葵也有点卡（变得不清晰）
+>
+> charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
+>
+> 
+>
+> 回家三天，总结一下解决远程控制Linux服务器卡机的修复过程。
+>
+> 问题起因：安装了nvidia用于GPU计算的驱动，导致不能很好地使用图形界面应用，如远程控制。
+>
+> 问题表现：有时用着用着就卡机了；远控打开长时间不动就卡机；有时关掉向日葵后第二天早上发现卡机。
+>
+> 问题解决：大佬们释放资源的操作我不会
+>
+> 1. 以ToDesk软件为主，免费又不限速，可以避免向日葵远控产生的一部分上述问题。
+>    但是它的光标太大、鼠标定位不准，网好时没有向日葵清晰，所以可以短时间使用一下向日葵。
+>    还有，在ToDesk下重启会导致`a stop job is running...`，所以重启前要关完程序
+> 2. 更改系统设置，如关闭自动休眠等。
+> 3. 改善网络环境。。。图书馆出来挨打
+> 4. 更改使用习惯，包括：1）以ToDesk软件为主，间歇使用；2）不使用时关闭远控界面；3）少用费资源的图形软件，如pymol和vmd的movie；4）吃饭睡觉前重启以清理内存，但跑程序时不太会卡；5）重启时记得登录进去，否则20分钟内将自动休眠，无法连接。。。
+>
+> 失败的解决方法：wakeonlan（连不上）、ssh（卡机时也不一定能连上）、卸掉vnc（不是因为冲突）
+>
+> 希望以后的工作能顺利进行。😭😭
 
 ## phddns
 
@@ -183,69 +247,7 @@ ssh gxf@xxxxx.xxx.xx:port
 
 花生壳下线，用`sudo phddns start`
 
-## Remote control
 
-### ToDesk
-
-https://www.todesk.com/linux.html
-
-doc: https://docs.todesk.com/zh-CN
-
-advantages/functions
-
-- free, no rate limit, all platforms
-- clearer than sunlogin
-- check frame rate, etc: upper left letter
-- one-click reboot
-
-flaws
-
-- WOL under lan failed. 也就是，该启动不了时也没救，关机了也启动不了
-- 占用这么大内存, twice of sunlogin?
-- have to open the main window or it cannot be connected
-
-
-
-向日葵的剪切板是互通的，可以直接粘贴。但是截图也用的是主控机的
-
-
-
-Previous:
-
-> flaws
->
-> - have to open a client or it cannot be connected
-> - WOL under lan failed
-> - 占用这么大内存, twice of sunlogin
-> - screen is not as clear, even free version?
-> - 鼠标光标太大，而且位置难以把控。。
-> - 不能用PageUp/Down键
-> - 这两天在此重启时会卡
->
-> 两者都：播放pymol的movie会卡（vmd还好），向日葵也有点卡（变得不清晰）
->
-> charged: file transfer. Ctrl + C/V; dragging 拖拽; the client
->
-> 
->
-> 回家三天，总结一下解决远程控制Linux服务器卡机的修复过程。
->
-> 问题起因：安装了nvidia用于GPU计算的驱动，导致不能很好地使用图形界面应用，如远程控制。
->
-> 问题表现：有时用着用着就卡机了；远控打开长时间不动就卡机；有时关掉向日葵后第二天早上发现卡机。
->
-> 问题解决：大佬们释放资源的操作我不会
->
-> 1. 以ToDesk软件为主，免费又不限速，可以避免向日葵远控产生的一部分上述问题。
->    但是它的光标太大、鼠标定位不准，网好时没有向日葵清晰，所以可以短时间使用一下向日葵。
->    还有，在ToDesk下重启会导致`a stop job is running...`，所以重启前要关完程序
-> 2. 更改系统设置，如关闭自动休眠等。
-> 3. 改善网络环境。。。图书馆出来挨打
-> 4. 更改使用习惯，包括：1）以ToDesk软件为主，间歇使用；2）不使用时关闭远控界面；3）少用费资源的图形软件，如pymol和vmd的movie；4）吃饭睡觉前重启以清理内存，但跑程序时不太会卡；5）重启时记得登录进去，否则20分钟内将自动休眠，无法连接。。。
->
-> 失败的解决方法：wakeonlan（连不上）、ssh（卡机时也不一定能连上）、卸掉vnc（不是因为冲突）
->
-> 希望以后的工作能顺利进行。😭😭
 
 # Cluster/Supercomputers
 
@@ -1506,7 +1508,7 @@ Good UI, editing
 
 - [word如何设置表格距离文字的下方距离](https://jingyan.baidu.com/article/d5a880eb68067c52f147cce9.html)：表格属性---文字环绕
 
-- word表格怎么填充颜色：选中单元格，右键，点击菜单商店油漆桶，选择一种颜色。
+- word表格怎么填充颜色：选中单元格，右键，点击菜单上点油漆桶，选择一种颜色。
 
 
 ## MS Excel
@@ -1545,6 +1547,8 @@ also for LibreOffice Calc, many commands are the same....
 
 ### Calculation
 
+[Mathematical Functions (libreoffice.org)](https://help.libreoffice.org/6.1/en-US/text/scalc/01/04060106.html)
+
 - To calculate the correlation coefficient, you can use the `CORREL` function. 
 
   In an empty cell, enter the formula `=CORREL(A1:A10,B1:B10)`, replacing `A1:A10` and `B1:B10` with the cell ranges containing your data.
@@ -1562,6 +1566,27 @@ also for LibreOffice Calc, many commands are the same....
   ```
 
 - if your vector is in cells A1 to A5, you can use the formula `=SUMSQ(A1:A5)` to calculate the sum of squares of the values in those cells.
+
+- 
+
+<img src="E:\GitHub-repo\notes\techniques\images\LibreOffice-paragraph1.jpg" style="zoom:67%;" />
+
+<img src="E:\GitHub-repo\notes\techniques\images\LibreOffice-paragraph2.jpg" style="zoom:67%;" />
+
+[Find & Replace (libreoffice.org)](https://help.libreoffice.org/latest/en-US/text/shared/01/02100000.html)
+
+From the menu bar:  
+Choose Edit - Find & Replace.  
+From toolbars:    
+
+Find & Replace                  
+
+From the keyboard:  
+Ctrl + H
+
+[Spelling (libreoffice.org)](https://help.libreoffice.org/latest/en-US/text/shared/01/06010000.html)
+
+Tools---Automatic spell checking
 
 ## MS PPT
 
@@ -1722,6 +1747,8 @@ pdf文件标题粘贴到微信对话框就失去换行成为一整行了
 - 只需要在 Chrome 浏览器上下载安装[ `Bing Chained` ](https://chrome.google.com/webstore/detail/bing-unchained-use-new-bi/laldfnbbeocphnilnofhedhcjcnchbld/related)这个插件，再访问 [www.bing.com](https://link.juejin.cn/?target=http%3A%2F%2Fwww.bing.com) 就会出现 New Bing AI 入口
 
 - Bing AI for Firefox: [Get this Extension for 🦊 Firefox (en-US) (mozilla.org)](https://addons.mozilla.org/en-US/firefox/addon/bing-ai-for-firefox/)
+
+- [2024 年 1 月，New Bing 免魔法新方案 - 奔跑中的奶酪 (runningcheese.com)](https://www.runningcheese.com/new-bing)
 
 ## Alternatives
 

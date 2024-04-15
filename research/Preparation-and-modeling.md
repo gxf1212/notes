@@ -807,6 +807,14 @@ See [convert_charmm2gmx_via_parmed.py](Programming.md#charmm2gmx)
 
 > https://anaconda.org/conda-forge/psfgen
 
+The comment “use in generate statement” indicates that the NTER patch is used during segment generation, and is applied before angles and dihedrals are generated. An example of the other type of patch, those applied after segment generation, is the LINK patch given below. These types of patches are used to alter protonation state, create disulphide bonds...
+
+
+
+有了坐标，IC不起作用
+
+
+
 ## AmberTools (tleap)
 
 leap stands for "Livermore Energy-aware molecular Prototyping".

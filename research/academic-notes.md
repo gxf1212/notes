@@ -353,7 +353,7 @@ Macropinosomems are known to be leaky
 
 <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/academic-notes.assets/macropinocytosis.png" style="zoom: 80%;" />
 
-![](E:\GitHub-repo\notes\research\academic-notes.assets\macropinocytosis-2.png)
+<img src="E:\GitHub-repo\notes\research\academic-notes.assets\macropinocytosis-2.png" style="zoom:67%;" />
 
 Each caveolae (小窝蛋白) has around 140-150 CAV1 molecules. Caveolins possess a hairpin domain embedded within the membrane while both the amino and carboxy terminus face the cytoplasm.
 

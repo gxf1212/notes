@@ -1970,6 +1970,17 @@ But CgenFF does not support special species like:
   - CHARMM-GUI slightly optimizes the coordinates. It doesn't matter.
   
     if you want to *perfectly* retain its coordinates and atom names, use CGenFF server
+    
+  - then go to vmd
+  
+    ```bash
+    # convert mol2 to pdb
+    obabel -imol2 ${f}.str.mol2 -opdb -O temp.pdb
+    grep 'ATOM' temp.pdb > ${f}.pdb
+    sed -i 's/UNL/LIG/g' ${f}.pdb
+    ```
+  
+    cgenff mol2 file, no atom name....
   
 - https://brooks.chem.lsa.umich.edu/index.php?matchserver=submit MATCH: an alternative of CgenFF
   - online and offline is the same; ML-MATCH is not public

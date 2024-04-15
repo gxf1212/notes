@@ -345,6 +345,8 @@ see more identifiers  https://pymolwiki.org/index.php/Selection_Algebra
     util.mass_align(obj,0,_self=cmd)
     cmd.disable('aln_all_to_'+obj)
     ```
+    
+16. [为什么Pymol中显示的氢键和其他软件不一样？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/545288342)
 
 
 ### Advanced Viewing
@@ -627,13 +629,23 @@ Focus on visualization. More on programming, see []()
 mol addfile
 # write
 animate write xx.dcd
+
+animate goto 296
 ```
 
 
 
-
-
 ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/save-mdcrd.png)
+
+
+
+`/lib/vmd/plugins/LINUXAMD64/bin/catdcd5.2`
+
+Usage
+
+```shell
+catdcd -o output.dcd xxx.dcd yyy.dcd
+```
 
 
 
