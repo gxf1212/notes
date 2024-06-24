@@ -106,8 +106,11 @@ flaws
 - WOL under lan failed. 也就是，该启动不了时也没救，关机了也启动不了
 - 占用这么大内存, twice of sunlogin?
 - have to open the main window or it cannot be connected
-
-todesk还是不能直接复制东西出来
+- Linux主控时的问题：
+  - 有时网得连一会，登录不了
+  - Win11的任务栏在全屏是显示不出来
+  - 除了微软输入法，无法切换到英文，只能打出《
+- todesk还是不能直接复制东西出来
 
 ### Sunlogin remote control
 
@@ -861,6 +864,27 @@ Then We just need to kill gmx once and the whole script will terminate.
 
 - [如何修改 Git Bash 窗口中默认的字体大小](https://www.cnblogs.com/heroljy/p/8989123.html)：点击右键，选择 Options
 
+## Other
+
+### travis-ci badge
+
+https://docs.travis-ci.com/user/tutorial/
+https://app.travis-ci.com/
+
+To add a Travis CI badge to your GitHub README.md, follow these steps:
+
+1. **Set Up Travis CI:** Sign up on api.travis-ci.com with your GitHub account and enable Travis CI for your repository.
+2. **Configure Your Build:** Create a `.travis.yml` file in your repository root to specify how your project should be built and tested. Customize it according to your project requirements.
+3. **Get Badge URL:** Go to your repository page on Travis CI, click on the status image to get the markdown code for the badge. You can customize this URL for different branches or events.
+4. **Update README.md:** Insert the markdown code for the badge into your README.md to display the build status.
+5. **Commit and Push:** Save your changes and push them to GitHub. Travis CI will automatically process builds and update the badge status.
+
+This will display your current build status directly in your project's README file on GitHub.
+
+
+
+[Adding a license to a repository - GitHub Docs](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository)
+
 # Coding and writing
 
 ## Typora
@@ -1492,7 +1516,7 @@ Good UI, editing
 
   在 **“图片工具”**下的“ **格式** ”选项卡上的“ **调整** ”组中，选择“**压缩图片**”。
 
-- 
+- [ppt已存档如何复原为原先的文档（4种必学方法） - 数据蛙 (shujuwa.net)](https://www.shujuwa.net/shuju/restore-ppt-history-version-method)
 
 ## MS Word
 
@@ -1669,7 +1693,9 @@ https://app.bibguru.com/: fast citation generation
 
 # Literature
 
-## Mendeley
+## Management
+
+### Mendeley
 
 skills:
 
@@ -1680,7 +1706,11 @@ skills:
 - files--add file
 - contents: to quickly compare the papers, to summarize
 
+### Zotero
 
+## Retrival
+
+[科研通，轻松享有文献下载的自由 (qq.com)](https://mp.weixin.qq.com/s?__biz=MzAxNzE5MTYzNw==&mid=2247483886&idx=2&sn=2894ef2ccb02f436999c10c836ba8bc4&chksm=9be80654ac9f8f42ed02fe9fddcde8d9c230bc56c65d5fc43fe2a227aedb76107681b136b7d1&mpshare=1&scene=23&srcid=0923XG6Gi185KnrjRULnjR3B&sharer_shareinfo=a65f4e52554c6c4f37e153f1b8a2083f&sharer_shareinfo_first=a65f4e52554c6c4f37e153f1b8a2083f#rd)
 
 ## Export a brief format
 
@@ -2128,6 +2158,8 @@ vsce publish
 - ["vsce publish" command returns Invalid publisher name 'Siarhei Kuchuk'. Expected the identifier of a publisher, not its human-friendly name. · Issue #419 · microsoft/vscode-vsce (github.com)](https://github.com/microsoft/vscode-vsce/issues/419)
 
   publisher name in `package.json` should not contain spaces
+  
+- "scopeName" should be consistent...
 
 ## Directory structure
 
@@ -2268,7 +2300,11 @@ capture group: failed and not using...
 
 ### Basics
 
-反斜杠\需要用另一个反斜杠进行转义，所以特殊匹配一般都是双反斜杠
+- 反斜杠`\`需要用另一个反斜杠进行转义，所以特殊匹配一般都是双反斜杠
+
+- 被begin，end，patterns匹配的东西，如psf的ATOM和BOND，本身就属于了这个pattern，外部的语法不再起作用
+
+  begin和end之间也不再用外部的语法，而是独立的
 
 ### Elements
 
@@ -2310,11 +2346,13 @@ https://www.regular-expressions.info/lookaround.html
 
 `(?!foo)`:Negative Lookahead. Asserts that what immediately follows the current position in the string is not foo
 
-`(?<!foo): Negative Lookbehind. Asserts that what immediately precedes the current position in the string is not foo
+`(?<!foo)`: Negative Lookbehind. Asserts that what immediately precedes the current position in the string is not foo
 
-在正则表达式中，可以在模式的开始处使用(?i)选项来表示接下来的匹配将不区分大小写。例如`(?i)hello`将匹配Hello、HELLO、hello等任何形式的hello字符串。
+在正则表达式中，可以在模式的开始处使用`(?i)`选项来表示接下来的匹配将不区分大小写。例如`(?i)hello`将匹配`Hello`、`HELLO`、`hello`等任何形式的hello字符串。
 
+#### Other
 
+`\G` matches the end of the previous match or the start of the string.
 
 ### Examples
 

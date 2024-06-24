@@ -369,6 +369,8 @@ Typically, proteins and other molecules do not travel directly from the lysosome
 
 - [The main difference between hyperplasia and neoplasia is that hyperplasia is an increase in the number of cells either due to physiological or pathological conditions, whereas neoplasia is unregulated cell proliferation due to genetic changes](https://pediaa.com/what-is-the-difference-between-hyperplasia-and-neoplasia/). Hyperplasia is generally benign, meaning that once the stimulus causing it is removed, the abnormal increase in cell number stops. [On the other hand, neoplasia can be malignant](https://www.healthresearchpolicy.org/hyperplastic/).
 - <u>A micronucleus</u> is a small nucleus that forms whenever a chromosome or a fragment of a chromosome is not incorporated into one of the daughter nuclei during cell division. It usually is a sign of genotoxic events and chromosomal instability. Micronuclei are commonly seen in cancerous cells and may indicate genomic instability
+- Tumor cells were characterized by irregular neovascularization, higher expression of inflammatory factors, and lack of an efficient lymphatic drainage system.
+- H&E-stained tumor sections are tissue samples from tumors dyed with Hematoxylin and Eosin. **Hematoxylin colors cell nuclei blue, while Eosin dyes the cytoplasm and other structures various shades of pink**, enhancing the visibility of cellular and structural details in the tissue. This staining technique is crucial in medical diagnosis, especially for identifying and assessing tumors in biopsy samples.
 
 
 

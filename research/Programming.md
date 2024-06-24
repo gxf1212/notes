@@ -301,7 +301,7 @@ tleap -f tleap.in > tleap.log
 
 `printf "format" $variable`
 
-- fixed lenght (fill with 0)
+- fixed length (fill with 0)
 
   ```shell
   $(printf "%02d" $jj)
@@ -1533,7 +1533,7 @@ _, res = rdEHTTools.RunMol(mh)
 static_chgs = res.GetAtomicCharges()[:atorvastatin.GetNumAtoms()]
 ```
 
-![img](Programming-Preparation.assets/rdkit_charge.png)
+<img src="Programming-Preparation.assets/rdkit_charge.png" alt="img" style="zoom:50%;" />
 
 #### Draw ligand libraries
 

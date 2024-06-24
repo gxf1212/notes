@@ -21,7 +21,7 @@ only sdf is for many small molecules together, that's why rdkit implements SDMol
 - [谈谈记录化学体系结构的mol2文件](http://sobereva.com/655)
   - mol2文件里以#作为第一列的是注释行，空行也被完全无视。mol2文件是自由格式，因此空格数目完全随意。
   - 即便你不想定义原子所属的子结构信息而只想定义原子电荷，也必须随便写上子结构序号和子结构名字来占位，比如此例用0 UNK0来占位。
-- https://chemicbook.com/2021/02/20/mol2-file-format-explained-for-beginners-part-2.html
+- [Mol2 file format explained for beginners (Cheminformatics Part 2) · ChemicBook](https://chemicbook.com/2021/02/20/mol2-file-format-explained-for-beginners-part-2.html)
 - http://chemyang.ccnu.edu.cn/ccb/server/AIMMS/mol2.pdf
 - [mol2 format in details](https://www.structbio.vanderbilt.edu/archives/amber-archive/2007/att-1568/01-mol2_2pg_113.pdf)
 

@@ -417,9 +417,11 @@ log_open log-file-name
 
 杂记, some extra functions, that I encountered. for details, check vmd-ug.pdf or [MD-tutorials](Previous-projects/MD-tutorials-all.md)
 
-Focus on visualization. More on programming, see []()
+Focus on visualization. More on programming, see [here](Programming.md#vmd-scripting)
 
 ### Basics
+
+[.vmdrc and vmd.rc Files (uiuc.edu)](https://www.ks.uiuc.edu/Research/vmd/vmd-1.7.1/ug/node197.html)
 
 #### Visualization
 
