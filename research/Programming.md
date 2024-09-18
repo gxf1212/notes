@@ -862,6 +862,44 @@ measure fit $sel $ref
 
 
 
+#### cluster
+
+```tcl
+# http://github.com/anjibabuIITK/CLUSTER-ANALYSIS-USING-VMD-TCL
+# please align the receptor/po
+set number 9	;# number of clusters, others are tagged 'other'
+set rcutoff 1.5  ;# RMSD cutoff. unit: angstrom
+set step_size 1
+set nframes [molinfo top get numframes]
+set inf 0
+set nf $nframes
+set totframes [expr $nf - 1 ]
+set selA [atomselect top "fragment 1 and resid 149 to 156 and backbone"]    ;# select the ligand
+set lists [measure cluster $selA num $number cutoff $rcutoff first $inf last $totframes step $step_size distfunc rmsd weight mass]
+
+set file [open "clus_result.dat" w]
+for {set i 1} {$i <= [llength $lists]} {incr i} {
+    set lst [lindex $lists [expr $i-1]]
+    puts $file [format "cluster %d: %d" $i [llength $lst]]
+    puts $file $lst
+    puts $file ""
+}
+close $file
+
+# save the coordinates of centroid structures
+set c01 [lindex [lindex $lists 0] 0]
+set sel [atomselect top all frame $c01]
+set real_frame [expr $c01+1]
+$sel writegro c01_${real_frame}.gro
+puts [format "write the centroid of 1st cluster: frame %d" $real_frame]
+
+set c02 [lindex [lindex $lists 1] 0]
+set sel [atomselect top all frame $c02]
+set real_frame [expr $c02+1]
+$sel writegro c02_${real_frame}.gro
+puts [format "write the centroid of 2nd cluster: frame %d" $real_frame]
+```
+
 
 
 
@@ -1770,6 +1808,17 @@ https://pypi.org/project/chemdraw/
 
 ## ParmEd
 
+### Basics
+
+- [Add "lipid" keyword to select_atoms · Issue #2082 · MDAnalysis/mdanalysis (github.com)](https://github.com/MDAnalysis/mdanalysis/issues/2082)
+  In MDAnalysis, you can select atoms using a syntax very similar to CHARMM’s atom selection syntax. However, there isn't a built-in keyword to select all lipids in a Universe
+
+- [GMXLIB global variable is ignored · Issue #1210 · ParmEd/ParmEd (github.com)](https://github.com/ParmEd/ParmEd/issues/1210)
+
+  When the input is Gromacs file, it refers to the `GMXLIB` variable.
+
+
+
 ### Convert among MD engines
 
 In ParmEd, the `idx` attribute of a `Residue` object represents the index of the residue in the `Structure` object that contains it. This attribute is automatically set and updated by ParmEd and should not be changed manually.
@@ -2008,8 +2057,6 @@ def read_gmx_xvg(xvg_path):
 ```
 
 
-
-https://lipyphilic.readthedocs.io/en/latest/index.html
 
 
 
