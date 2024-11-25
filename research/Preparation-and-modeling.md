@@ -473,6 +473,8 @@ exit
 
 [Amber基础教程B5：模拟绿色荧光蛋白及构建修饰的氨基酸残基|Jerkwin](https://jerkwin.github.io/2018/01/07/Amber基础教程B5-模拟绿色荧光蛋白及构建修饰的氨基酸残基/)
 
+[Amber Custom Residue Parameterization – JIGGLINGS AND WIGGLINGS](https://carlosramosg.com/amber-custom-residue-parameterization)
+
 existing residue libraries:
 
 - [The AMBER ff15ipq-m Force Field Tutorial](http://ambermd.org/tutorials/advanced/tutorial36/index.php): a library of unnatural amino acids, especially beta amino acids
@@ -920,6 +922,8 @@ Force field
 
 Monte-Carlo based. vmd/tleap don't have this...
 
+或者，分子只能插入在position.dat（-ip）中定义的位置。该文件应具有3列（x，y，z），该列给出与输入分子位置（-ci）相比较的位移。
+
 
 
 #### editconf
@@ -937,7 +941,7 @@ it may built complex systems, but
 
 [Packmol的使用-构建分子动力学初始结构](https://zhuanlan.zhihu.com/p/491254490)
 
-```
+```bash
 tolerance 2.0
 filetype pdb
 output system.pdb
@@ -953,8 +957,6 @@ structure aloh.pdb
   inside box -30. -30. -30. 30. 30. 30.
 end structure
 ```
-
-
 
 
 
@@ -990,10 +992,6 @@ common tools can also do this
   ```
 
 it would also be simple in Python with my `read_pdb` code....
-
-
-
-
 
 
 

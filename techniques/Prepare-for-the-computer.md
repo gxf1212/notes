@@ -789,6 +789,8 @@ If you installed the NVIDIA driver from `.run` files or bundled driver from CUDA
 
 ## cuda
 
+compatibility is in cuda-toolkit-release-notes page
+
 ### Installation
 
 - `.deb` just follow official guide
@@ -854,9 +856,9 @@ If you installed the NVIDIA driver from `.run` files or bundled driver from CUDA
 
 - multiple version of cuda: [多版本CUDA和TensorFlow共存 - Gai's Blog (bluesmilery.github.io)](https://bluesmilery.github.io/blogs/a687003b/)
 
-  [ubuntu 安装多个CUDA版本并可以随时切换](https://blog.csdn.net/yinxingtianxia/article/details/80462892)
-
   [Ubuntu多版本CUDA安装与切换 | Yuan (qiyuan-z.github.io)](https://qiyuan-z.github.io/2022/01/04/Ubuntu多版本cuda安装与切换/)
+
+  [ubuntu 安装多个CUDA版本并可以随时切换_cuda9.0下载 多cuda-CSDN博客](https://blog.csdn.net/yinxingtianxia/article/details/80462892)
 
   可以使用stat命令查看当前cuda软链接指向的哪个cuda版本
 
@@ -1318,9 +1320,10 @@ however the packages we have released are hosted on the biology specific channel
 
 see [Amber22安（cai）装（keng）过程分享 - 哔哩哔哩 (bilibili.com)](https://www.bilibili.com/read/cv23212288)
 
-> - https://prof.uok.ac.ir/m.irani/index_files/Page312.htm
-> - https://zhuanlan.zhihu.com/p/479919955
+> - [AMBER Installation Mehdi Irani](https://prof.uok.ac.ir/m.irani/index_files/Page312.htm)
+> - [AmberTools22+Amber22 的安装过程 - 知乎](https://zhuanlan.zhihu.com/p/479919955)
 > - [介绍-Amber 20 移植指南（CentOS 8.2）-教育科研-...-文档首页-鲲鹏社区 (hikunpeng.com)](https://www.hikunpeng.com/document/detail/zh/kunpenghpcs/prtg-osc/centos_kunpeng_amber_20_02_0001.html)
+> - [Amber_22_and_Tools_22_install_Ubuntu_22.pdf](http://archive.ambermd.org/202302/att-0090/Amber_22_and_Tools_22_install_Ubuntu_22.pdf)
 
 ### from the manual
 
@@ -1336,7 +1339,7 @@ A full list of the options, with descriptions of what each one does, is availabl
 
 [CUDA GNU compatibility](https://gist.github.com/ax3l/9489132)
 
-https://docs.nvidia.com/cuda/archive/11.7.1/cuda-installation-guide-linux/index.html   
+[Installation Guide Linux :: CUDA Toolkit Documentation](https://docs.nvidia.com/cuda/archive/11.7.1/cuda-installation-guide-linux/index.html)   
 
 **Table 1. Native Linux Distribution Support in CUDA.** check the version you care
 
@@ -1348,6 +1351,17 @@ https://docs.nvidia.com/cuda/archive/11.7.1/cuda-installation-guide-linux/index.
 11.4 - 11.7 GCC < 12
 ```
 
+Amber also tells you
+
+```
+-- CUDA version 12.2 detected
+CMake Error at cmake/CudaConfig.cmake:84 (message):
+  Error: Untested CUDA version.  AMBER currently requires CUDA version >= 7.5
+  and <= 12.1.
+```
+
+change cmake/CudaConfig.cmake ...
+
 notes:
 
 - [Amber-Wiki - C Make-Common-Options](http://ambermd.org/pmwiki/pmwiki.php/Main/CMake-Common-Options)
@@ -1355,9 +1369,9 @@ notes:
 
 other possible notes:
 
-- http://archive.ambermd.org/202105/0167.html
+- [Re: [AMBER\] Unsupported Cuda Version on Amber 20 Installation from David A Case on 2020-11-18 (Amber Archive Nov 2020)](http://archive.ambermd.org/202011/0157.html)   yes we can edit version check...
 
-- https://stackoverflow.com/questions/64514666/what-does-performing-test-cmake-have-libc-pthread-failed-actually-mean
+- [cmake - What does "Performing Test CMAKE_HAVE_LIBC_PTHREAD" failed actually mean? - Stack Overflow](https://stackoverflow.com/questions/64514666/what-does-performing-test-cmake-have-libc-pthread-failed-actually-mean)
 
   This output is common for Unix-like systems. Despite "Failed" and "not found" words, this is perfectly good output.
 
@@ -1372,6 +1386,28 @@ other possible notes:
 > http://archive.ambermd.org/202204/0094.html
 
 [linux安装doxygen: Could NOT find FLEX_could not find flex (missing: flex_executable)-CSDN博客](https://blog.csdn.net/pas_zoujp/article/details/117351781)
+
+I just hit a build failure with CMAKE using 'make -j4' that was resolved with using plain 'make'
+
+[Re: [AMBER-Developers\] CMake vs configure2 in Amber from Scott Le Grand on 2021-04-05 (Amber Developers Archive Apr 2021)](http://dev-archive.ambermd.org/202104/0035.html)
+
+### Other
+
+```
+./update_amber --update
+Preparing to apply updates... please wait.
+NoInternetAccess: Cannot connect to https://ambermd.org
+```
+
+
+
+[Amber Bug Fixes and Updates](https://ambermd.org/BugFixes.php)
+
+The best way to apply patches is permit the updater to run automatically when running configure, the first step of the installation process.
+
+
+
+
 
 ## NAMD
 
@@ -1794,7 +1830,7 @@ spyder conda interpreter：光设置没用，直接打开conda里每个对应环
 
 [Using Conda Python Environments with Spyder IDE and Jupyter Notebooks in Windows | by Prem George | Medium](https://medium.com/@apremgeorge/using-conda-python-environments-with-spyder-ide-and-jupyter-notebooks-in-windows-4e0a905aaac5)
 
-## AMBER
+## AMBER (old)
 
 Amber软件包主要包括2个部分：Amber Tools和Amber，其中Amber Tools可以免费在[Amber官网](http://ambermd.org/AmberTools17-get.html)下载，Tools中包含了Amber几乎所有的模块，Sander、tleap、MMPBSA等最核心的内容都可以免费使用。而另外的Amber则是唯一收费的部分，该部分主要包括了PMEMD以及GPU加速 的功能
 
@@ -1873,6 +1909,8 @@ conda install -c acpype acpype -y # this contains ambertools-17
 conda create -n Acpype 
 conda install -c conda-forge acpype
 ```
+
+acpype is dependent on AmberTools but Amber does not include acpype...installation via conda  retrieves another ambertools...so pip install acpype in another environment
 
 ## Propka
 

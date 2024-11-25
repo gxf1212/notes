@@ -35,7 +35,13 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
    python -c "print('Hello, World!')"
    ```
 
-6. 
+6. 你可以使用 sort 和 uniq 命令来删除重复的行。这是一个示例：
+
+   ```bash
+   grep -a repeat6 failed/slurm-* | cut -d : -f 1 | sort | uniq
+   ```
+
+   
 
 
 ## text processing
@@ -932,13 +938,11 @@ puts [format "write the centroid of 2nd cluster: frame %d" $real_frame]
 
 ## Basics
 
-- python嵌套列表赋值，想更改其中一个元素但是一整列的元素都被更改,是什么原因呢，应该怎么修改？ - Demon的回答 - 知乎
-
-  https://www.zhihu.com/question/355374988/answer/891028270
+- [python嵌套列表赋值，想更改其中一个元素但是一整列的元素都被更改,是什么原因呢，应该怎么修改？ - 知乎](https://www.zhihu.com/question/355374988/answer/891028270)
 
   always use for loop rather than multiplication...
 
-- If there is a `__init__.py` file in a folder, which means this folder is a python model. `__init__.py` will be run when i import this model.
+- 
 
 - [Python3字典合并的几种方法](https://blog.csdn.net/asialee_bird/article/details/79809248)
 
@@ -956,9 +960,25 @@ puts [format "write the centroid of 2nd cluster: frame %d" $real_frame]
 
 - 
 
-- `assert`: https://www.tutorialsteacher.com/python/python-assert
+- `assert`: [Assert in Python](https://www.tutorialsteacher.com/python/python-assert)
   应该assert还是try except呢？后处理内容比较多、不一定退出程序时，只能用except
   
+- 
+
+- 在Python中，没有直接的问号语句，类似于其他编程语言中的三元条件运算符（ternary conditional operator）（例如C语言中的condition ? expression1 : expression2）
+  ```python
+  x = 5
+  result = "Yes" if x > 0 else "No"
+  ```
+
+  however, not doing the condition first but do expression1 (which may cause errors, e.g. `len(sys.argv)`
+
+- [python格式化输出之format用法 - 知乎](https://zhuanlan.zhihu.com/p/151442933)
+
+### File and import
+
+- If there is a `__init__.py` file in a folder, which means this folder is a python module. `__init__.py` will be run when i import this model.
+
 - for a directory
 
   ```
@@ -977,6 +997,7 @@ puts [format "write the centroid of 2nd cluster: frame %d" $real_frame]
   ```
 
 - 获取脚本所在目录：`exepath = os.path.dirname(__file__)`
+
 
 
 ## operating files and cmd
@@ -1285,6 +1306,8 @@ plt.colorbar(label='Probability Density')
 - [Python 绘制列表数据的小提琴图Violin Plot](https://zhuanlan.zhihu.com/p/596479904)  better than `plt.violinplot`
 
   [Python数据可视化的例子——小提琴图（violin）](https://blog.csdn.net/weixin_48615832/article/details/108452781)
+  
+  例如，可以使用参数"cut"来控制小提琴图的形状，将其截断在0以上的范围内。您可以尝试设置cut参数的值，以适应您的数据分布。
 
 
 
@@ -1386,7 +1409,11 @@ The logging levels in Python’s logging module are used to indicate the severit
 
 ### pyinstall
 
+```bash
+pyinstaller -F cgenff_charmm2gmx_py3_nx2.py
+```
 
+useful? only thing in dist is this exe of >300MB
 
 it requires a few minutes to pack up...
 

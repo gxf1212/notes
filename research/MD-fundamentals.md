@@ -314,6 +314,10 @@ and 22.6.7. Considerations for Maximizing GPU Performance
 
 Since version 4.6.x GROMACS can run in an hybrid mode making use of both your CPU and your GPU (either using CUDA or OpenCL for newer versions of GROMACS). The calculation of the short-range non-bonded interactions is performed on the GPU while long-range and bonded interactions are at the same time calculated on the CPU. By varying the cut-off for short-range interactions GROMACS can optimize the balance between GPU/CPU loading and obtain amazing performances.
 
+
+
+[请问gromacs里面是不是有些计算不能使用gpu加速？ - 分子模拟 (Molecular Modeling) - 计算化学公社](http://bbs.keinsci.com/thread-12910-1-1.html)
+
 ### Performance benchmark
 
 [NVIDIA HPC Application Performance | NVIDIA Developer](https://developer.nvidia.com/hpc-application-performance)
@@ -377,15 +381,17 @@ Modeling details: see [Preparation and modeling (gmx)](Preparation-and-modeling.
 
 - [Newest CHARMM36 port for GROMACS - Third party tools and files - GROMACS forums (bioexcel.eu)](https://gromacs.bioexcel.eu/t/newest-charmm36-port-for-gromacs/868/11)
 
+  [Fatal error: atom C1 not found in buiding block 1MET while combining tdb and rtp. error in ignh cmd - User discussions - GROMACS forums](https://gromacs.bioexcel.eu/t/fatal-error-atom-c1-not-found-in-buiding-block-1met-while-combining-tdb-and-rtp-error-in-ignh-cmd/5804)
+
   In the case of an N-terminal MET residue in a polypeptide sequence, you MUST interactively choose the appropriate terminal patch. pdb2gmx tries to be smart and match by name but in this case, it causes an erroneous attempt to patch with a carbohydrate-specific patch.
 
   就很离谱！很多蛋白都是以MET开始的。。
-
+  
   ```shell
   echo 1 0 | gmx pdb2gmx -f xxx.pdb -o model.gro -ff charmm36-jul2022 -water tip3p -ignh -ter
   # now 0 is MET, 1 is NH3+
   ```
-
+  
   
 
 
@@ -707,7 +713,25 @@ see [here](Figure-plotting.md#pbc-processing) for pbc processing for visualizati
      Consider using -pin on (and -pinoffset in case you run multiple jobs).'
   ```
 
-- 
+- em is slightly different
+
+  ```bash
+  Inconsistency in user input:
+  Cannot compute PME interactions on a GPU, because:
+    PME GPU does not support:
+      Non-dynamical integrator (use md, sd, etc).
+  ```
+
+- `-ntomp 10`
+
+  ```
+  Fatal error:
+  Environment variable OMP_NUM_THREADS (2) and the number of threads requested
+  on the command line (10) have different values. Either omit one, or set them
+  both to the same value.
+  ```
+
+  
 
 - step 4: One or more water molecules can not be settled.
   Check for bad contacts and/or reduce the timestep if appropriate.
@@ -715,13 +739,13 @@ see [here](Figure-plotting.md#pbc-processing) for pbc processing for visualizati
 
 ### GPU, MPI, plumed, etc.
 
-1. https://stackoverflow.com/questions/33176592/pmpi-comm-rank-invalid-communicator
+1. [c++ - PMPI_COMM_RANK Invalid Communicator - Stack Overflow](https://stackoverflow.com/questions/33176592/pmpi-comm-rank-invalid-communicator)
 
    This usually indicates that some sort of a <u>mix-up between various MPI implementations</u> or different versions of the same MPI implementation has occurred. E.g. mpi.h is from one version while the binary library files are from another one. Or the code was linked against one version but then the runtime environment provides a different one. <u>Make sure that mpicc / mpic++ / mpiCC are from the same MPI implementation as mpirun / mpiexec used to launch the executable.</u>
 
-2.  In command-line option -plumed
-     File 'dat.plumed' cannot be used by GROMACS because it does not have a recognizable extension.
-     The following extensions are possible for this option:  .dat
+   ![](E:\GitHub-repo\notes\research\MD-fundamentals-Figure.assets\mpi-error.jpeg)
+
+2. 
 
 # NAMD and Amber
 
@@ -1065,7 +1089,7 @@ sob: 还有个有点名气的计算RESP电荷的在线程序叫R.E.D.（http://u
 
 #### geom
 
-http://bbs.keinsci.com/thread-1464-1-1.html
+[高斯输入文件中的geom=connectivity有什么用？ - 量子化学 (Quantum Chemistry) - 计算化学公社](http://bbs.keinsci.com/thread-1464-1-1.html)
 
 **写了geom=connectivity就会从输入文件末尾读取连接关系**，所以末尾那一堆连接关系不能删，否则必报错。
 
@@ -1131,9 +1155,21 @@ http://sobereva.com/soft/Sobtop/#ex5
 
 
 
+
+
+### GaussView
+
+gaussview no command line usage
+
+
+
 ## Multiwfn
 
 see details in each section...
+
+[详谈Multiwfn的命令行方式运行和批量运行的方法 - 思想家公社的门口：量子化学·分子模拟·二次元](http://sobereva.com/612)
+
+multiwfn cannot obtain connectivity
 
 
 

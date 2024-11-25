@@ -19,7 +19,7 @@ Linux desktop的优势：可以直接为cluster做测试
 
 - Linux是把要安装的软件分布在整个系统的各个文件夹里面， 比如所有软件的配置文件都安装在`/etc`下面， 软件需要的库文件都安装在`/lib`下面，日志文件都在`/var/log`下面，`/bin`下是常用的程序，等等。 比较复杂。
 
-- 标准库的大部分函数通常放在文件 libc.a 中（文件名后缀.a代表“achieve”，译为“获取”），或者放在用于共享的动态链接文件 libc.so 中（文件名后缀.so代表“share object”，译为“共享对象”）。这些链接库一般位于 /lib/ 或 /usr/lib/，或者位于 GCC 默认搜索的其他目录。
+- 标准库的大部分函数通常放在文件 libc.a 中（文件名后缀.a代表“achieve”，译为“获取”），或者放在用于共享的动态链接文件 `libc.so` 中（文件名后缀`.so`代表“share object”，译为“共享对象”）。这些链接库一般位于 `/lib/` 或 `/usr/lib/`，或者位于 GCC 默认搜索的其他目录。
 
 - 在Linux中，TTY是终端设备的一种表示方式，它代表“teletypewriter”的缩写。在早期计算机系统中，TTY是指打字机终端设备。随着技术的发展，TTY逐渐演变为代表终端设备的抽象概念，包括物理终端、虚拟终端、串口终端等。因此，在这个语境下，TTY的全称是“teletypewriter”。
 
@@ -41,7 +41,7 @@ Linux desktop的优势：可以直接为cluster做测试
 
 ## File
 
-- cp: cannot create regular file 'xxxx' 'xxxx': Invalid argument
+- `cp: cannot create regular file 'xxxx' 'xxxx': Invalid argument`
 
   The syntax of your command is correct. “Invalid argument” from cp usually means that the file name is not valid on the target filesystem. It may be too long, contain a forbidden character, or be a reserved word.
 
@@ -57,7 +57,7 @@ Linux desktop的优势：可以直接为cluster做测试
 
   https://sourceforge.net/projects/dos2unix/
 
-- emm
+- 
 
 - 回收站：`~/.local/share/Trash/files`
 
@@ -65,12 +65,14 @@ Linux desktop的优势：可以直接为cluster做测试
 
 1. [一文彻底搞懂linux全局环境变量生效顺序_51CTO博客](https://blog.51cto.com/zpf666/2334770)
 
-   `.bashrc`并非是登录shell时唯一会被加载的脚本
+   `.bashrc`并非是登录shell时唯一会被加载的脚本（这个其实早就知道，只不过是这次才知道加载的先后次序，具体加载次序详见博客：https://blog.51cto.com/zpf666/2334770）。我家目录的.bashrc，实际上是被家目录下的.bash_profile(若没有这个文件，则去找.profile)启动运行的。
 
 2. root和user的`.bashrc`是不一样的！
 
    [`export`的含义 What does export PATH=something:$PATH mean? - Ask Ubuntu](https://askubuntu.com/questions/720678/what-does-export-path-somethingpath-mean)
 
+   > [!NOTE]
+   >
    > `export` sets the environment variable that is visible to the process that sets it and to all the subprocesses spawned in the same environment
 
 3. clear `$PATH`, remove redundant
@@ -1435,11 +1437,23 @@ make -jn (install...)`
 
 - 在Vim中，您可以使用dd命令删除光标所在的整行。如果您想删除多行，可以在dd前面加上一个数字，例如3dd将删除光标所在行及其下面的两行。
 
+- vim 查找下一个
+  按下小写字母"n"键。 这将跳转到下一个匹配项。
+  如果您想查找上一个匹配项，可以按大写字母"N"键。
+
+- [在 Vim 中优雅地查找和替换 - marsggbo - 博客园](https://www.cnblogs.com/marsggbo/p/12152374.html)
+
+  ```bash
+  :{作用范围}s/{目标}/{替换}/{替换标志}
+  ```
+
+  例如:%s/foo/bar/g会在 全局范围(global) 查找foo并替换为bar，所有出现都会被替换。
+
 - 
 
 ### nano
 
-
+- Ctrl+X: exit and save
 
 ## System function
 
@@ -3256,6 +3270,8 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
    [mklink命令给C盘软件搬家](https://www.cnblogs.com/life-of-coding/p/10871831.html)：等搞清楚了哪些地方比较大就整
 
+2. [为什么会有许多人认为C盘太满会影响电脑运行速度？ - 知乎](https://www.zhihu.com/question/29302513)
+
 3. win11系统如何显示文件后缀名：搜索“文件资源管理器选项”
 
    http://www.ujiaoshou.com/xtjc/164431010.html
@@ -3498,6 +3514,16 @@ We recommend developers to use a separate CUDA Toolkit for WSL 2 (Ubuntu) availa
 苹果手机提示icloud储存空间不足
 首先，在设置中，点击最上面的选项进入自己的AppleID的设置。 点击管理储存空间;选择你不想用的那部分，点击打开，选择【停用和删除】即可。
 要不就停用iCloud（不推荐），要不就买。没办法
+
+# Android
+
+[通用刷机教程 - 知乎](https://zhuanlan.zhihu.com/p/159322731)
+
+刷机是指在移动设备上更改或替换操作系统的过程。刷机可以让用户安装定制的操作系统、升级系统版本或解锁设备的潜在功能。刷机操作需要谨慎进行，因为错误的刷机操作可能导致设备损坏或数据丢失。
+
+
+
+
 
 # Computer science
 

@@ -476,6 +476,11 @@ mv ${name}.* ${path}
 >
 >for AlOH: 水分子键角的k太小。。DRIH和m2S更小。。DRIH还有负的。。
 
+```bash
+antechamber -i bay.log -fi gout -o bay.mol2 -fo mol2
+# get mol2 from gaussian optimization
+```
+
 ### Insert into water from tleap for gmx
 
 > this workflow is a little tedious. It makes life easier to create a residue type AlOH (`.prepin`). See bcc+tleap at Polymer-membrane page.

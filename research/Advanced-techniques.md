@@ -86,13 +86,23 @@ basics
 
 [PLUMED: GROUP](https://www.plumed.org/doc-v2.9/user-doc/html/_g_r_o_u_p.html)
 
+plumed算质心的操作导致跑得非常慢，去掉后速度就正常了
 
 
 
+[QuickreferenceguideonPLUMEDwithQuantum ESPRESSO](https://www.quantum-espresso.org/wp-content/uploads/2022/03/plumed_quick_ref.pdf)
 
-### REST2
+
+
+# REST2
 
 [增强采样--REST2模拟原理及搭建 (qq.com)](https://mp.weixin.qq.com/s/GF5waWvBoEXUVcqa_xBgTA)
+
+## Gromacs
+
+[REMD: "topol.tpr" required but I do not have it - User discussions - GROMACS forums](https://gromacs.bioexcel.eu/t/remd-topol-tpr-required-but-i-do-not-have-it/1425)
+
+mdrun looked for the default input to -s, which is topol.tpr.
 
 
 

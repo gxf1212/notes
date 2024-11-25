@@ -513,9 +513,9 @@ The Journal Citation Indicator (JCI) is the average Category Normalized Citation
 
 ### writing
 
-To shed light on, throw light on, or cast light on something means to make it easier to understand, because more information is known about it.
-
-主宰: dominate, dictate, rule, decide
+- To shed light on, throw light on, or cast light on something means to make it easier to understand, because more information is known about it.
+- 决定、主宰: dominate, dictate, rule, decide
+- 在英语中翻译"繁琐". 形容词. cumbersome · tedious
 
 ### Common
 
