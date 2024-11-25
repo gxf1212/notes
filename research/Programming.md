@@ -117,6 +117,14 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
   ```shell
   count=$(awk 'END {print NR}' "50.0000.dat")
   ```
+  
+- This command will print each line of your_file.itp to ligtypes.itp until it encounters a line containing [ moleculetype ]. At that point, awk will exit and stop printing lines.
+
+  ```bash
+  awk '/\[ moleculetype \]/{exit} {print}' your_file.itp > ligtypes.itp
+  ```
+
+  
 
 
 
@@ -191,7 +199,7 @@ examples
   sed -n '/^RIM-COD/p' file.txt
   ```
 
-- to support a varible, double quote! single does not work
+- to support a varible, **double quote**! single does not work
 
 #### match and replace
 
@@ -255,7 +263,13 @@ examples
   sed '$a This is the last line.' input_file > output_file
   ```
 
-  After running one of these commands, the modified content will be written to `output_file`. **If you want to edit the file in-place, you can use the `-i` option with `sed`**
+	This command will extract the lines from [ moleculetype ] to the end of the file and save it to a temporary file temp.itp. Then it replaces the original file with this temporary file
+
+  ```bash
+  sed -n '/\[ moleculetype \]/,$p' your_file.itp > temp.itp && mv temp.itp your_file.itp
+  ```
+
+- After running one of these commands, the modified content will be written to `output_file`. **If you want to edit the file in-place, you can use the `-i` option with `sed`**
 
 - To support regex, add `\`
 
@@ -272,6 +286,14 @@ examples
   ```
 
   这些命令会将一个或多个连续的空格替换为一个空格。
+  
+- 要使用sed命令删除前两行，可以使用以下命令：
+
+  ```bash
+  sed '1,2d' filename
+  ```
+  
+  
 
 ### Alternatives of editing
 
@@ -866,7 +888,7 @@ measure fit $sel $ref
 
 ```tcl
 # http://github.com/anjibabuIITK/CLUSTER-ANALYSIS-USING-VMD-TCL
-# please align the receptor/po
+# please align the receptor/pocket residues first
 set number 9	;# number of clusters, others are tagged 'other'
 set rcutoff 1.5  ;# RMSD cutoff. unit: angstrom
 set step_size 1
@@ -1412,7 +1434,7 @@ even `python xx.py -W` didn't work
 
 ### Read/Write/Convert
 
-- 
+- [Thread: [Rdkit-discuss\] Load mol2 file with partial charges | RDKit](https://sourceforge.net/p/rdkit/mailman/rdkit-discuss/thread/564E5B26.3020403@uci.edu/)
 
 
 
@@ -1572,6 +1594,16 @@ static_chgs = res.GetAtomicCharges()[:atorvastatin.GetNumAtoms()]
 ```
 
 <img src="Programming-Preparation.assets/rdkit_charge.png" alt="img" style="zoom:50%;" />
+
+#### Similarity plot
+
+Do interpretability study.
+
+[Assessing Interpretable Models | Practical Cheminformatics](https://patwalters.github.io/practicalcheminformatics/jupyter/ml/interpretability/2021/06/03/interpretable.html)
+
+
+
+
 
 #### Draw ligand libraries
 

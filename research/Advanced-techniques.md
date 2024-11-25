@@ -61,15 +61,36 @@ https://gaseri.org/en/tutorials/gromacs/5-umbrella/#setup
 
 ## PMF/US
 
+When the maximum distance from a pull group reference atom to other atomsin the group is larger than 0.5 times half the box size a centrally placed atom should be chosen as pbcatom. Pull group 2 is larger than that and does not have a specific atom selected as reference atom.
+
+[Steered MD simulation of ligand through membrane protein - User discussions - GROMACS forums](https://gromacs.bioexcel.eu/t/steered-md-simulation-of-ligand-through-membrane-protein/3568)
+
+
+
+# Plumed
+
+The main goal of PLUMED is to compute collective variables (or CVs), which are complex descriptors of the system that can be used to describe the conformational change of a protein or a chemical reaction. This can be done either on-the-fly during a molecular dynamics simulations or a posteriori on a pre-calculated trajectory using PLUMED as a post-processing tool
+
+
+
+- PLUMED internal units: the same as gromacs
+- The following extensions are possible for this `-plumed` option: `.dat`
+- the default value for STRIDE is always 1
+- 
+
+
+
+basics
+
+[PLUMED: PLUMED Masterclass 21.1: PLUMED syntax and analysis](https://www.plumed.org/doc-v2.9/user-doc/html/masterclass-21-1.html)
+
+[PLUMED: GROUP](https://www.plumed.org/doc-v2.9/user-doc/html/_g_r_o_u_p.html)
 
 
 
 
 
-
-
-
-# REST2
+### REST2
 
 [增强采样--REST2模拟原理及搭建 (qq.com)](https://mp.weixin.qq.com/s/GF5waWvBoEXUVcqa_xBgTA)
 

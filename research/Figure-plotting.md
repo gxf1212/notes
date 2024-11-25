@@ -421,7 +421,7 @@ Focus on visualization. More on programming, see [here](Programming.md#vmd-scrip
 
 ### Basics
 
-[.vmdrc and vmd.rc Files (uiuc.edu)](https://www.ks.uiuc.edu/Research/vmd/vmd-1.7.1/ug/node197.html)
+[.vmdrc and vmd.rc Files](https://www.ks.uiuc.edu/Research/vmd/current/ug/node251.html#31920)
 
 #### Visualization
 

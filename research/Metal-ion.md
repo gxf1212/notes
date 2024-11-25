@@ -301,6 +301,8 @@ RESP charge reference: see [Protein-ligand-simulation sob articles](Protein-liga
 
 ### Model a hydrated ion
 
+This applies for all small molecules...
+
 ```mermaid
 graph LR
 c(structure\npdb/mol2)--GaussView-->g(gjf file)--replace\nheader-->og(opt.gjf)--g16-->ol(opt.log)--GaussView-->opt(optimized\nstructure)--Sobtop-->gmx(gmx files)

@@ -508,6 +508,8 @@ parmchk2 -i tym.prepin -f prepi -o frcmod2.tym  # other params from GAFF
 > Note: `ATTN: need revision` lines might be problematic and removed (replaced by those from gaff). 
 >
 > `parm10.dat` works with Amber14SB. If you require other backgrounds, maybe use other parm files
+>
+> Amber14引入了parmchk2, 用法和parmchk 一样. 而parmchk2要比parmchk要好, 因为它将对所有子结构进行搜索打分, 对所有参数比较打分得到其中最适合的参数，而parmchk只是检查其中某几个子结构的参数文件来获取缺失参数.
 
 where `tym.mc` is defined as
 
@@ -664,6 +666,8 @@ Sobtop mainly works for Amber FF, RESP(2) charge, Gromacs MD
 ### Amber
 
 - [A Jerkwin example 芋螺毒素小肽实例](https://jerkwin.github.io/2017/09/20/GROMACS%E9%9D%9E%E6%A0%87%E5%87%86%E6%AE%8B%E5%9F%BA%E6%95%99%E7%A8%8B2-%E8%8A%8B%E8%9E%BA%E6%AF%92%E7%B4%A0%E5%B0%8F%E8%82%BD%E5%AE%9E%E4%BE%8B/)  antechamber bcc+acpype, manually edit
+- [ambermd.org tutorial4b](https://ambermd.org/tutorials/basic/tutorial4b/)
+- [Using antechamber and parmchk for Ligands | Computational Chemistry Resources](https://emleddin.github.io/comp-chem-website/AMBERguide-antechamber.html)   bcc charge and tleap for drug mol
 - [GROMOS力场自定义非标准残基的方式 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/87402839)  ATB, GROMOS, Multiwfn拟合RESP电荷
 
 

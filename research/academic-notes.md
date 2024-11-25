@@ -505,6 +505,10 @@ RNA aptamer targeting AR (v7) DNA binding domain?
 
 # Other
 
+## Academic
+
+The Journal Citation Indicator (JCI) is the average Category Normalized Citation Impact (CNCI) of citable items (articles & reviews) published by a journal over a recent three year period. The average JCI in a category is 1. Journals with a JCI of 1.5 have 50% more citation impact than the average in that category. It may be used alongside other metrics to help you evaluate journals.
+
 ## English
 
 ### writing

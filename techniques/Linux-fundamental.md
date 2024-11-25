@@ -771,6 +771,17 @@ see also [File processing](/research/Programming-for-MD.md#file-processing)
    ls -R                    # 递归显示当前目录中的所有文件和子目录
    ```
 
+   To display the results of ls | grep V2 on a single line, you can use the tr (translate) command to replace newlines with spaces. Here's how you can do it:
+
+   ```bash
+   ls | grep V2 | tr '\n' ' '
+   ```
+
+   Explanation:
+
+   - ls | grep V2: Lists the files that match the pattern "V2".
+   - tr '\n' ' ': Translates the newline characters (\n) into spaces, resulting in a single-line output.
+
 3. `tree`: show directory as tree
 
    [linux 如何以树形结构显示文件目录结构](https://blog.csdn.net/xuehuafeiwu123/article/details/53817161)
@@ -3231,13 +3242,11 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
 ## General
 
-1. 
-
-2. windows如何查看用户名 https://zhuanlan.zhihu.com/p/129858590
+1. windows如何查看用户名 https://zhuanlan.zhihu.com/p/129858590
 
    控制面板--用户账户
 
-3. win下扩容？
+2. win下扩容？
 
    https://www.cnblogs.com/yunweis/p/8023098.html
 
@@ -3247,52 +3256,54 @@ clash会自动调成手动的，但当前状态下ssr和clash都能用
 
    [mklink命令给C盘软件搬家](https://www.cnblogs.com/life-of-coding/p/10871831.html)：等搞清楚了哪些地方比较大就整
 
-4. win11系统如何显示文件后缀名：搜索“文件资源管理器选项”
+3. win11系统如何显示文件后缀名：搜索“文件资源管理器选项”
 
    http://www.ujiaoshou.com/xtjc/164431010.html
 
-5. [windows如何查看目前显存的占用情况](https://zhidao.baidu.com/question/136674799462427125.html)：任务管理器---性能
+4. [windows如何查看目前显存的占用情况](https://zhidao.baidu.com/question/136674799462427125.html)：任务管理器---性能
 
    > [主存、辅存、内存、外存、存储器是什么？还傻傻分不清楚？看完这一篇就够了](https://zhuanlan.zhihu.com/p/113869761)
    >
    > RAM是memory（主要是内存）的一部分
 
-6. Windows 11 22H2大版本：文件夹标签页。直接在设置的检查更新里
+5. Windows 11 22H2大版本：文件夹标签页。直接在设置的检查更新里
 
-7. 快捷键
+6. 快捷键
 
    - 联想，打开键盘灯光：Fn+空格键
    - 关闭NumLock，小键盘可以当做上下键、End等用
    - alt加双击直接打开属性，F2重命名
 
-8. duplicate tab with the same path in cmd
+7. duplicate tab with the same path in cmd
 
    [在同一目录中打开选项卡/窗格 | Microsoft Learn](https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/new-tab-same-directory)
 
-10. [计算机桌面图标不见了，怎么恢复](https://consumer.huawei.com/cn/support/content/zh-cn00695687/)
+8. [计算机桌面图标不见了，怎么恢复](https://consumer.huawei.com/cn/support/content/zh-cn00695687/)
 
-11. TTC字体是TrueType字体集成文件(.TTC文件)，可和ttf放一起
+9. TTC字体是TrueType字体集成文件(.TTC文件)，可和ttf放一起
 
-13. 选择任务栏上的" 任务视图"，然后选择" 新建桌面"，然后打开所需的应用。 若要在虚拟桌面之间移动应用，请选择" 任务视图"，然后将所需的应用从一个桌面拖到另一个桌面。 或通过将应用拖动到新桌面来创建另一个虚拟桌面。
+10. 选择任务栏上的" 任务视图"，然后选择" 新建桌面"，然后打开所需的应用。 若要在虚拟桌面之间移动应用，请选择" 任务视图"，然后将所需的应用从一个桌面拖到另一个桌面。 或通过将应用拖动到新桌面来创建另一个虚拟桌面。
 
-14. https://home.csulb.edu/~murdock/tree.html
-
-15. 今日弄完VPN，普通网络都上不了。解决方法：
+11. 今日弄完VPN，普通网络都上不了。解决方法：
 
     ![restore-network](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/techniques/images/restore-network.png)
 
-17. [将 Windows 电脑用作移动热点 - Microsoft 支持](https://support.microsoft.com/zh-cn/windows/将-windows-电脑用作移动热点-c89b0fad-72d5-41e8-f7ea-406ad9036b85)  not useful for 188...
+12. [将 Windows 电脑用作移动热点 - Microsoft 支持](https://support.microsoft.com/zh-cn/windows/将-windows-电脑用作移动热点-c89b0fad-72d5-41e8-f7ea-406ad9036b85)  not useful for 188...
 
-17. windows11删除文件需要管理员权限怎么办？删完里面的东西，包括隐藏文件。重启后再删文件夹
+13. windows11删除文件需要管理员权限怎么办？删完里面的东西，包括隐藏文件。重启后再删文件夹
 
     不重启：可能需要管理员模式打开cmd去删？
 
-18. 按下键盘“Win+Ctrl+D”可以一键生成一个新桌面。生成后，再按下“Win+Ctrl+方向键”可以快速切换这两个桌面。
+14. 按下键盘“Win+Ctrl+D”可以一键生成一个新桌面。生成后，再按下“Win+Ctrl+方向键”可以快速切换这两个桌面。
     why not work in ToDesk?
 
-19. 
+    windows also Alt+Tab to switch windows
 
-20. 
+15. Windows软件能一键迁移出C盘？只有通过Microsoft store装的可以移动，自己装的不行
+
+    ![](E:\GitHub-repo\notes\techniques\images\Windows-disk-transfer.png)
+
+16. 
 
 
 

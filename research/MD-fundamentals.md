@@ -310,7 +310,11 @@ and 22.6.7. Considerations for Maximizing GPU Performance
 
 - Anton的硬件架构被设计成能够快速执行分子动力学相关的计算，但它并不包含将代码写入硬件的过程。代码仍然是在处理器上运行的，只不过这些处理器被设计成能够快速执行特定类型的计算。如并行、快速数据传输等。
 
-### Performance
+### MD details
+
+Since version 4.6.x GROMACS can run in an hybrid mode making use of both your CPU and your GPU (either using CUDA or OpenCL for newer versions of GROMACS). The calculation of the short-range non-bonded interactions is performed on the GPU while long-range and bonded interactions are at the same time calculated on the CPU. By varying the cut-off for short-range interactions GROMACS can optimize the balance between GPU/CPU loading and obtain amazing performances.
+
+### Performance benchmark
 
 [NVIDIA HPC Application Performance | NVIDIA Developer](https://developer.nvidia.com/hpc-application-performance)
 
@@ -439,6 +443,10 @@ gmx genrestr is used to generate position restraints, not distance restraints.
   ```
 
 - [Dihedral restraints - GROMACS documentation](https://manual.gromacs.org/documentation/current/reference-manual/functions/restraints.html#dihedral-restraints)
+
+- [求助在gromacs模拟的过程中要限制某几组原子之间的距离 - 分子模拟 (Molecular Modeling) - 计算化学公社](http://bbs.keinsci.com/thread-15380-1-2.html)   
+
+  use [ intermolecular_interactions] onl
 
 - 
 
@@ -631,7 +639,18 @@ see [here](Figure-plotting.md#pbc-processing) for pbc processing for visualizati
   bonds. SR stands for "short range," which encompasses all interactions that are
   not excluded by that occur within the shortest nonbonded cutoff.
 
-- 
+- Use `-skip` Option to Reduce Data Load
+
+  Sometimes, processing every frame can cause memory issues.
+
+  Action: Skip frames to reduce the data
+
+  ```bash
+  gmx trjconv -f remd.trr -o remd_reduced.xtc -skip N
+  ```
+
+  Replace N with an integer (e.g., 10) to skip every N frames.
+
 
 
 
@@ -965,7 +984,7 @@ MOZYME doing simulation for biomolecules...
 
 [要善用簇模型，不要盲目用ONIOM算蛋白质-小分子相互作用问题 - 思想家公社的门口：量子化学·分子模拟·二次元 (sobereva.com)](http://sobereva.com/597)
 
-退而求其次，在提一个簇模型来QM优化、算单点能
+退而求其次，提一个簇模型来QM优化、算单点能
 
 
 
@@ -1022,7 +1041,10 @@ sobtop has not implemented such functionality. and for simply an unnatural amino
 
 
 
+### Other
 
+Last update of the R.E.D. Home Page: June 16th, 2017
+sob: 还有个有点名气的计算RESP电荷的在线程序叫R.E.D.（http://upjv.q4md-forcefieldtools.org/RED/），这网站做得什么时候看都闹心、看着眼晕
 
 
 
@@ -1068,6 +1090,19 @@ http://bbs.keinsci.com/thread-1464-1-1.html
 
 ### Common errors
 
+- [Gaussian 常见报错及解决方法；新手求助报错时的注意事项 - 量子化学 (Quantum Chemistry) - 计算化学公社](http://bbs.keinsci.com/thread-4829-1-1.html)
+
+- [Gaussian的安装方法及运行时的相关问题 - 思想家公社的门口：量子化学·分子模拟·二次元](http://sobereva.com/439)
+
+  如果是copy文件夹过去，可能文件权限有问题
+
+  运行时提示files in the gaussian directory are world accessible. this must be fixed
+  这说明你没做chmod 750 -R *这一步。Gaussian如果发现其可执行文件对于所有用户都可以访问时就不干，这是Gaussian的一个莫名其妙、很固执的地方。
+
+  ```bash
+  find . -type f -exec chmod a+x {} \;
+  ```
+
 - [gaussian提示illegal instruction , illegal opcode错误](http://bbs.keinsci.com/thread-1331-1-1.html): CPU architechture not support, or too old. use old versions of Gaussian
 
 - [Gaussian 运行错误 l1.exe omode 33261 compare 7](http://bbs.keinsci.com/thread-3554-1-1.html) or [Files in the Gaussian directory are world accessible](https://www.researchgate.net/post/How-to-solve-Gaussian09-Error-l1exe-omode-33261-compare-7)
@@ -1080,7 +1115,19 @@ http://bbs.keinsci.com/thread-1464-1-1.html
 
   which will restrict the access to the entire directory (recursively) only to you
 
-- 
+- 老生常谈了，chk文件不能在两个平台通用，必须转化成fchk文件才能通用。
+
+- [出现Error termination in NtrErr: NtrErr Called from FileIO.错误 - 量子化学 (Quantum Chemistry) - 计算化学公社](http://bbs.keinsci.com/thread-3285-1-1.html)
+  many people says not enough space on disk
+  but different message in the end of log file...
+  mine is copied from another machine (same username and place)
+
+
+
+### Tutorials
+
+http://sobereva.com/soft/Sobtop/#ex5
+产生聚合度为40的氯丁二烯聚合物的拓扑文件
 
 
 
@@ -1092,7 +1139,13 @@ see details in each section...
 
 
 
-### Other
+## cp2k
+
+
+
+
+
+## Other
 
 https://www.theochem.ru.nl/molden/
 Molden is a package for displaying Molecular Density from the Ab Initio packages GAMESS-UK , GAMESS-US and GAUSSIAN and the Semi-Empirical packages……

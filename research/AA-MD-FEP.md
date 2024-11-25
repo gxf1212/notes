@@ -836,6 +836,10 @@ save c01.pdb, clusters_0001
 
 
 
+More formally, if you have two molecules, and , the BSA is defined by the surface area exposed by the individual molecules, minus that of the complex
+
+
+
 # Gromacs FEP
 
 > https://tutorials.gromacs.org/docs/free-energy-of-solvation.html

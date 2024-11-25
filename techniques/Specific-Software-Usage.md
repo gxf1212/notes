@@ -1615,9 +1615,21 @@ Tools---Automatic spell checking
 ## MS PPT
 
 - [PPT中如何将多个图形等距分布](https://jingyan.baidu.com/article/fec7a1e5c51b1d1190b4e7ca.html)
+
 - PPT内跳转：打开PPT文档，在需要的页面中，选定一个文本框，右键--超链接。进入后，选择”本文档中的位置“，设定要跳转到哪张幻灯片（可以在右侧预览），点击确定。 以后就可以直接点击这个文本进行跳转（不点击时默认还是下一张）。
+
 - 美化大师插件：批量删除动画；PPT工具栏
+
 - [旋转或翻转文本框、形状、艺术字或图片 - Microsoft 支持](https://support.microsoft.com/zh-cn/office/旋转或翻转文本框-形状-艺术字或图片-399e7a92-87e9-4d86-a03a-be120056fe3b)
+
+- 第一步：点击ppt文左上角的文件，点击【选项】。 第二步：在“保存”选项卡中有一个【自动恢复文件位置】，此路径就是自动保存文件的地址。
+
+- 使用biorender插件，点update就更新
+
+  ![](E:\GitHub-repo\notes\techniques\images\PPT-biorender.png)
+
+  其实没必要：绘制完成后，右上角Export即可导出图片；可以根据要求设置图片的长、宽、保存格式以及分辨率。
+
 - 
 
 ## Foxit Reader
@@ -2340,7 +2352,7 @@ capture group: failed and not using...
 
 https://www.regular-expressions.info/lookaround.html
 
-`(?<=\\bBOND\\s)`是一个正向后视断言，它表示匹配的内容必须紧跟在"BOND"这个单词和一个空格之后。
+`(?<=\\bBOND\\s)`是一个正向后视断言（positive lookbehind assertion），它表示匹配的内容必须紧跟在"BOND"这个单词和一个空格之后。
 
 `"^(?!\\${4})\\S+$"`是负向前瞻断言，可以匹配以非空白字符开头且不包含字符串 `$$$$` 的行
 
@@ -2359,6 +2371,7 @@ https://www.regular-expressions.info/lookaround.html
 - `"(?<=\\bBOND\\s)(\\S+\\s+\\S+\\s*)+"`，这样就可以匹配"BOND"后面的所有字符串对了。
 - `"(?<=\\bIC\\s)(\\S+\\s+){4}"`，这样就可以匹配"IC"后面的前四个字符串了。
 - a combination: `(?<=\\bANGLE\\s*)((\\S+\\s*){3})+`
+- 数字：optionally starts with a minus sign (-?), followed by one or more digits (\\d+), a decimal point (\\.), and zero or more digits (\\d*)
 
 
 

@@ -156,6 +156,8 @@ I don't use remote control now...
 
 ## real vnc on linux
 
+只能试用14天了。。
+
 https://www.realvnc.com/en/connect/download/vnc/linux/
 
 ```shell
@@ -1134,6 +1136,14 @@ other
 > [PLUMED安装+patch Lammps - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/104259987)
 >
 > [Plumed — WVU-RC documentation](https://docs.hpc.wvu.edu/text/608.ForceFields.html#plumed)
+
+### Devtoolset
+
+Devtoolset是一个用于在Red Hat Enterprise Linux (RHEL)和CentOS系统上安装和使用多个版本的编译器和开发工具的软件集合。它提供了更新的编译器版本，以便开发人员可以使用最新的功能和优化。
+
+通过执行"scl enable devtoolset-7 bash"命令，可以在编译gmx时启用Devtoolset-7工具集。这将确保在编译过程中使用Devtoolset-7提供的编译器和工具，以获得更好的性能和功能支持。
+
+具体来说，这条命令会创建一个新的bash环境，并在该环境中启用Devtoolset-7工具集。在这个新的bash环境中，编译过程将使用Devtoolset-7提供的编译器和工具，而不是系统默认的版本。这样可以确保编译过程中使用的工具是与Devtoolset-7兼容的，以获得更好的结果。
 
 ## Gromacs (dirty)
 

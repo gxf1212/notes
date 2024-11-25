@@ -50,10 +50,27 @@ restraint of POPC during equilibration
 
 
 
-## Packmol+tleap
+## Packmol+tleap (Amber)
+
+- general: [Building Systems - Membrane Systems](https://ambermd.org/tutorials/MembraneSystems.php)
 
 - Basic, lipid14, from CHARMM-GUI: [An Amber Lipid Force Field Tutorial](https://ambermd.org/tutorials/advanced/tutorial16/) with Amber restraints but not for gmx!
+
+  [CHARMM-GUI, Which lipids are compatible with the Amber force fields? ](https://charmm-gui.org/?doc=faq#amber_ff)
+
+  at step5, Force Field Options
+
+  One can select the Amber force fields under available force fields in the input generation step (generally the last step of any building module).
+
+- [The Amber Force Fields](https://ambermd.org/AmberModels_lipids.php)   
+
+  LIPID21 is the latest and recommended lipid force field. [SLipids](http://www.fos.su.se/~sasha/SLipids/Downloads.html), the 2nd option of GUI Amber lipids
+
 - [Membrane System Setup with PACKMOL-Memgen](https://ambermd.org/tutorials/advanced/tutorial38/index.php)
+
+  There are a number of ways to construct such systems for AMBER, including but not limited to: AMBAT, charmm-gui, DABBLE. In this case, we use the recently released PACKMOL-Memgen: https://pubs.acs.org/doi/10.1021/acs.jcim.9b00269
+
+
 
 
 
