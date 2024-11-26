@@ -44,7 +44,7 @@ This page doesn't include usage of pymol, vmd, gmx, etc. It's not just about bas
    
 
 
-## text processing
+## Text processing
 
 ### string spliting
 
@@ -633,6 +633,13 @@ Tcl本身将所有的变量值视为字符串，并将他们作为字符串来�
   ```
 
   should only use ""....???
+  
+- 在Tcl中，你可以通过ASCII码将数字转换为对应的字母。
+```tcl
+  set letter [format %c [expr {$number + 64}]]
+  ```
+  
+
 
 
 
@@ -685,6 +692,31 @@ instead of this:
 The solution is to do this:
   set coord1 [lindex [$atm get {x y z}] 0]
 ```
+
+#### e.g. aligning the principal axis to x axis
+
+```tcl
+# vmd -dispdev text -e align.tcl -args xx.pdb
+
+set pdb [lindex $argv 0]
+puts $pdb
+mol load pdb $pdb
+set sel [atomselect top all]
+set I [measure inertia $sel]
+set A [lindex $I 1]
+set B [lindex $A 0]
+# Align the principal axes to the x axis
+set M [transvecinv $B]
+$sel move $M
+# move the center of mass to the origin
+set C [lindex $I 0]
+$sel move [vecinvert $C]
+
+$sel writepdb $pdb.pdb
+exit 
+```
+
+this helps to determine a good solvation box
 
 
 
@@ -932,6 +964,101 @@ puts [format "write the centroid of 2nd cluster: frame %d" $real_frame]
 
 
 
+### VMD solvating a system
+
+first, do [aligning-the-principal-axis-to-x-axis](#eg-aligning-the-principal-axis-to-x-axis), then:
+
+```tcl
+#!/bin/bash
+# vmd -dispdev text -e ../vmd_solvate_box.tcl -args xx.pdb 8
+
+set file [lindex $argv 0]
+set basepad [lindex $argv 1]    ;# in Angstrom
+
+# Define the function to find the maximum
+proc maxVec { vec } {
+    set max [lindex $vec 0]
+    foreach val $vec {
+        if {$val > $max} {
+            set max $val
+        }
+    }
+    return $max
+}
+
+package require psfgen
+psfcontext reset
+mol load pdb $file
+
+# measure and assign values
+set everyone [atomselect top all]
+set minmax [measure minmax $everyone]
+# set center [measure center $everyone]
+foreach {min max} $minmax { break }
+foreach {xmin ymin zmin} $min { break }
+foreach {xmax ymax zmax} $max { break }
+
+# Calculate the box lengths (x, y, z)
+set lengths [vecsub $max $min]
+# Find the minimum length
+set maxlen [maxVec $lengths]
+# Subtract the minimum from each length, divide by 2, and add $basepad
+set adjusted_lengths [vecscale [vecsub [list $maxlen $maxlen $maxlen] $lengths] 0.5]
+set padded_lengths [vecadd $adjusted_lengths [list $basepad $basepad $basepad]]
+# Unpack the vector to individual components
+foreach {xp yp zp} $padded_lengths { break }
+# Print the vector in the specified format
+puts ""
+puts "-x $xp -y $yp -z $zp +x $xp +y $yp +z $zp"
+
+exit
+```
+
+Or more simply, solvate twice, where the first round rotates the system to align, and the second solvation add more padding to make it cubic. This is what we do now in FEbuilder.
+
+```tcl
+....
+# solvation and ionization
+package require solvate
+package require autoionize
+mol load psf complex-merged.psf pdb complex-merged.pdb
+solvate complex-merged.psf complex-merged.pdb -t 8.0 -o complex-solvated -rotate
+
+# Define the function to find the maximum
+proc maxVec { vec } {
+    set max [lindex $vec 0]
+    foreach val $vec {
+        if {$val > $max} {
+            set max $val
+        }
+    }
+    return $max
+}
+set minmax [measure minmax [atomselect top "not water"]]
+foreach {min max} $minmax { break }
+foreach {xmin ymin zmin} $min { break }
+foreach {xmax ymax zmax} $max { break }
+# Calculate the box lengths (x, y, z)
+set lengths [vecsub $max $min]
+set maxlen [maxVec $lengths]
+# Subtract each length from the max, divide by 2
+set adjusted_lengths [vecscale [vecsub [list $maxlen $maxlen $maxlen] $lengths] 0.5]
+# Unpack the vector to individual components
+foreach {xp yp zp} $adjusted_lengths { break }
+# Solvate, another segname prefix
+solvate complex-solvated.psf complex-solvated.pdb -x $xp -y $yp -z $zp +x $xp +y $yp +z $zp -o complex-solvated2 -s WA
+autoionize -psf complex-solvated2.psf -pdb complex-solvated2.pdb -sc 0 -cation SOD -anion CLA -o complex
+set everyone [atomselect top all]
+set minmax [measure minmax $everyone]
+...
+```
+
+
+
+
+
+
+
 
 
 # Fundamental Python
@@ -1000,7 +1127,7 @@ puts [format "write the centroid of 2nd cluster: frame %d" $real_frame]
 
 
 
-## operating files and cmd
+## Operating files and cmd
 
 ### about bash commands
 
@@ -1012,9 +1139,6 @@ puts [format "write the centroid of 2nd cluster: frame %d" $real_frame]
 
 - 
 
-- 
-
-- 
 
 shutil是个增强版的：
 
@@ -1052,7 +1176,7 @@ read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arg
 
 ### about path
 
-- When we execute a Python script in cmd in another folder, os.curdir is still your cwd. i.e. cmd parameters is fine.
+- When we execute a Python script in cmd in another folder, `os.curdir` is still your cwd. i.e. cmd parameters is fine.
 
   But within a script, if you want to execute another file (in the same folder, like .tcl), it can still find it. All the output will be in your cwd.
 
@@ -1074,6 +1198,8 @@ read more: https://docs.python.org/3/library/subprocess.html#frequently-used-arg
   ```
 
   这段代码首先从 `os.environ` 字典中获取 `PATH` 环境变量的值，然后使用 `os.pathsep`（路径分隔符）将其分割为目录列表。最后，打印出目录列表。
+
+- 参数的开头包含了斜杠'/'，这会被`os.path.join()`函数解释为绝对路径。因此，`os.path.join(path, subdir, '/result/lambda*xvg')`会从斜杠'/'开始拼接路径，忽略之前的参数，导致输出结果为`'/result/lambda*xvg'`。
 
 - [glob — Unix style pathname pattern expansion](https://docs.python.org/3/library/glob.html#module-glob).
 
@@ -1285,6 +1411,8 @@ plt.colorbar(label='Probability Density')
 
 ### coloring
 
+- [List of named colors — Matplotlib documentation](https://matplotlib.org/stable/gallery/color/named_colors.html)
+
 - color bars according to value gradient:
 
   ```python
@@ -1299,6 +1427,12 @@ plt.colorbar(label='Probability Density')
 
 [用python的Matplotlib库画多序列条形图和堆叠条形图](https://blog.csdn.net/weixin_43799652/article/details/101320976)
 
+[matplotlib之pyplot模块之柱状图（bar()：多组数据并列柱状图通用简便创建方法）_使用matplotlib在同一个图里面绘制多行柱状图-CSDN博客](https://blog.csdn.net/mighty13/article/details/113873617)
+
+[python 绘制箱型图_python_Vergil_Zsh-华为开发者空间](https://huaweicloud.csdn.net/63803085dacf622b8df86930.html)
+
+but I prefer seaborn
+
 
 
 ### seaborn
@@ -1309,7 +1443,10 @@ plt.colorbar(label='Probability Density')
   
   例如，可以使用参数"cut"来控制小提琴图的形状，将其截断在0以上的范围内。您可以尝试设置cut参数的值，以适应您的数据分布。
 
+### debug
 
+- [Error importing plotnine with Python 3.6.1 · Issue #79 · has2k1/plotnine](https://github.com/has2k1/plotnine/issues/79)
+- 
 
 ## pandas
 
@@ -1321,7 +1458,7 @@ plt.colorbar(label='Probability Density')
   df = pd.read_csv ("my_data.txt", delim_whitespace=True)
   ```
 
-- 
+- `pd.ExcelFile(file).parse()`方法默认将第一行作为表头。如果您不想将第一行作为表头，可以通过传递`header=None`参数来实现。
 
 ### manipulate
 
@@ -1339,7 +1476,22 @@ plt.colorbar(label='Probability Density')
   df[df['A'].isin([3, 6])]
   ```
 
+- 我们使用reindex()方法来重新索引DataFrame的列。通过指定新的列顺序，我们可以交换'A'列和'B'列的位置
+
+  ```python
+  import pandas as pd
   
+  # 创建一个DataFrame
+  df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]})
+  
+  # 交换'A'列和'B'列的位置
+  df = df.reindex(columns=['B', 'A', 'C'])
+  
+  # 打印DataFrame
+  print(df)
+  ```
+
+- 
 
 ## building softwares
 
@@ -2001,11 +2153,13 @@ gmx.save(prefix+'.gro', overwrite=True)
 
   > In your GROMACS file, each bond term is specified independently. In CHARMM, however, parameters are defined between different atom types, which makes it impossible (by definition) to define different bond terms between two pairs of atoms that have the same sets of atom types.
 
-  https://github.com/ParmEd/ParmEd/blob/master/parmed/parameters.py
-  https://github.com/ParmEd/ParmEd/issues/1111
-  https://github.com/ParmEd/ParmEd/issues/968
+  [ParmEd/parmed/parameters.py at master · ParmEd/ParmEd](https://github.com/ParmEd/ParmEd/blob/master/parmed/parameters.py)
+  [unable to create CHARMM prm file from GROMACS top file · Issue #1111 · ParmEd/ParmEd](https://github.com/ParmEd/ParmEd/issues/1111)
+  [Unequal dihedral types defined between · Issue #968 · ParmEd/ParmEd](https://github.com/ParmEd/ParmEd/issues/968)
 
   In short: gmx .top should not contain different parameters (written right after bonds, angles, etc., e.g. asymmetric $\ce{Al(OH)(H2O)5^2+}$ generated by sobtop) when converting to Amber files. strange! Amber parameters are explicitly written. Charmm not.
+  
+- only gromacs may have moleculetype in .top file (Amber/NAMD: list all), so those converted from others are only possible to list all, making complexed restraint generation so hard!
 
 
 
@@ -2083,11 +2237,51 @@ Contacts are typically defined as pairs of atoms that are within a certain dista
 
 
 
+## Applications
+
+#### aligning the line of COM
+
+Maunally calculate the coordinates and transform it. For example, aligning the line of COM to a certain axis for Umbrella Sampling:
+
+```python
+# python align_CV_toZ.py xx.pdb/gro
+
+import sys
+file = sys.argv[1]
+# file = '/data/work/peptide-inhibitor/MD/SIRPa-pep-amber-pmf/run2/setup/c01_257.pdb'
+import MDAnalysis as mda
+import numpy as np
+
+# Load the PDB file
+u = mda.Universe(file)
+pep = u.select_atoms('chainID B')
+ref = u.select_atoms('chainID A')
+# ref = u.select_atoms('chainID A and around 10 chainID B')
+direction = pep.center_of_geometry() - ref.center_of_geometry()
+
+# Get the rotation matrix. e2/e3 are actually arbitrary
+e1 = direction / np.linalg.norm(direction)
+e2 = np.cross(e1, np.array([0, 0, 1]))
+e2 = e2 / np.linalg.norm(e2)
+e3 = np.cross(e1, e2)
+e3 = e3 / np.linalg.norm(e3)
+R = np.vstack((e2, e3, e1))  # align to z axis. index 0 for x, 1 for y
+
+u.atoms.positions = np.dot(u.atoms.positions, np.linalg.inv(R))
+u.atoms.translate(-u.atoms.center_of_geometry())
+u.atoms.write(file+'.pdb')
+```
+
+
+
+
+
 ### Other
 
 - The `principal_axes` method returns a 3x3 numpy array, where each row is one of the principal axes, sorted by decreasing eigenvalue. The direction of each axis is from the center of mass of the atoms to the positive direction along the axis.
+- Unfortunately, MDtraj does not support writing to .psf files...？
 
-Unfortunately, MDtraj does not support writing to .psf files...？
+
 
 
 

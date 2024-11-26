@@ -545,6 +545,10 @@ default is the whole system
 
 [谈谈怎么判断分子动力学模拟是否达到了平衡](http://sobereva.com/627)
 
+> 有些人试图用衡量小分子液体的方式衡量生物分子模拟体系是否达到稳定，即还用温度、密度、势能等参数来衡量，这明显不行。因为这些量的收敛速度远快于蛋白质的RMSD的收敛，在这些指标已平稳的时候蛋白质部分通常还明显没达到平衡。虽然蛋白质整体结构的进一步变化必然会对势能等因素有多多少少的影响，但在势能曲线上基本体现不出来。通常模拟蛋白质都是在显式水模型下模拟的，势能绝大部分都是水所贡献的
+> 顺带一提，对生物分子的模拟，我一般建议让程序在模拟过程中就一直对生物分子消除平动转动，对于GROMACS跑蛋白质来说就是设`comm-grps = protein`和`comm-mode = angular`，这样就避免了生物分子中途跑出盒子的问题。
+> 作者建议以已经平衡了的结构作为参考帧来计算RMSD。
+
 [Molecular dynamics parameters (.mdp options)](https://manual.gromacs.org/documentation/current/user-guide/mdp-options.html#mdp-comm-mode)
 
 for membrane system

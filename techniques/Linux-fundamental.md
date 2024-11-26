@@ -837,7 +837,11 @@ see also [File processing](/research/Programming-for-MD.md#file-processing)
 
    和`locate`一样，查找那个数据库
 
-7. 
+7. `grep`
+
+   可以使用选项"-o"或"--only-matching"。这个选项告诉grep只输出匹配模式的部分，而不是整行内容
+
+8. 
 
 ### View file
 
@@ -3514,6 +3518,8 @@ We recommend developers to use a separate CUDA Toolkit for WSL 2 (Ubuntu) availa
 苹果手机提示icloud储存空间不足
 首先，在设置中，点击最上面的选项进入自己的AppleID的设置。 点击管理储存空间;选择你不想用的那部分，点击打开，选择【停用和删除】即可。
 要不就停用iCloud（不推荐），要不就买。没办法
+
+我的iOS美区账号，在别的设备登录，可以不用再买一次shadowrocket了
 
 # Android
 

@@ -69,6 +69,10 @@ restraint of POPC during equilibration
 - [Membrane System Setup with PACKMOL-Memgen](https://ambermd.org/tutorials/advanced/tutorial38/index.php)
 
   There are a number of ways to construct such systems for AMBER, including but not limited to: AMBAT, charmm-gui, DABBLE. In this case, we use the recently released PACKMOL-Memgen: https://pubs.acs.org/doi/10.1021/acs.jcim.9b00269
+  
+- [生成混合组分的磷脂双层膜结构文件的工具genmixmem - 思想家公社的门口：量子化学·分子模拟·二次元](http://sobereva.com/245)
+
+  emm，需要自己准备Align好的lipid的pdb文件，还要自己搭力场。当然，好处是比GUI容易自定义
 
 
 

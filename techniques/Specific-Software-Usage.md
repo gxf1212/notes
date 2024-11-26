@@ -1554,6 +1554,8 @@ also for LibreOffice Calc, many commands are the same....
   Click on Tools > Options.
   Go to Language Settings > Writing Aids.
   In the Options section, uncheck Check spelling as you type. 
+  
+- 
 
 ### Text & Format
 
@@ -2173,6 +2175,8 @@ vsce publish
   
 - "scopeName" should be consistent...
 
+- lacking of .vscode folder→not recognized as an extension
+
 ## Directory structure
 
 see the above reference links
@@ -2350,7 +2354,7 @@ capture group: failed and not using...
 
 #### Assertion
 
-https://www.regular-expressions.info/lookaround.html
+[Regex Tutorial - Lookahead and Lookbehind Zero-Length Assertions](https://www.regular-expressions.info/lookaround.html)
 
 `(?<=\\bBOND\\s)`是一个正向后视断言（positive lookbehind assertion），它表示匹配的内容必须紧跟在"BOND"这个单词和一个空格之后。
 

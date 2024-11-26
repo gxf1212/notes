@@ -37,7 +37,7 @@ PMF的数据主要来自分子动力学模拟，所以选用不同的力场会�
 similar, but In our example here we will be varying the distance between the center of mass of ligand, lovastatin,
 and the center of binding pocket.
 
-https://gaseri.org/en/tutorials/gromacs/5-umbrella/#setup
+[Window sampling - GASERI](https://group.miletic.net/en/tutorials/gromacs/5-umbrella/#setup)
 
 没搞清楚定速度、定距离之类的啥意思
 
@@ -55,7 +55,7 @@ https://gaseri.org/en/tutorials/gromacs/5-umbrella/#setup
 
 
 
-> https://2022.igem.wiki/cu-egypt/MolecularDynamics.html#short3
+> [Molecular-Dynamics](https://2022.igem.wiki/cu-egypt/MolecularDynamics.html#short3)
 >
 > just copy from mdtutorial
 

@@ -491,7 +491,9 @@ Focus on visualization. More on programming, see [here](Programming.md#vmd-scrip
 
    <img src="https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/color-bond.png" alt="color-bond" style="zoom:20%;" />
 
-9. VMD representation里面写变量`$ligname`只是不报错，还是得手动改
+9. vmd: 双击一个分子的D，D表示的是“Display”。当D灰化的时候，分子是隐藏的。你可以通过双击D来显示或者隐藏分子。
+
+10. VMD representation里面写变量`$ligname`只是不报错，还是得手动改
 
    ```tcl
    set ligname UDCA
@@ -530,21 +532,21 @@ Focus on visualization. More on programming, see [here](Programming.md#vmd-scrip
    rmsdtt::doRmsd
    ```
 
-10. Distance, angle, dihedral measurements: To begin a measurement, use the right-mouse button (or the left-mouse button and the Control key/Control key and mouse click) to select 1, 2, 3 or 4 atoms. Complete the measurement by selecting the final atom twice. Depending on how many atoms are selected, the distance (2 atoms), the angle (3 atoms) or the dihedral angle (4 atoms) is measured and displayed. Deselect all atoms with a right-click in empty space. To remove a measurement, re-select all involved atoms and then the last atom twice in a row.
+11. Distance, angle, dihedral measurements: To begin a measurement, use the right-mouse button (or the left-mouse button and the Control key/Control key and mouse click) to select 1, 2, 3 or 4 atoms. Complete the measurement by selecting the final atom twice. Depending on how many atoms are selected, the distance (2 atoms), the angle (3 atoms) or the dihedral angle (4 atoms) is measured and displayed. Deselect all atoms with a right-click in empty space. To remove a measurement, re-select all involved atoms and then the last atom twice in a row.
 
     ? see [VMD Measurements: Analyze Distances and Angles with VMD - Compchems](https://www.compchems.com/vmd-measurements-analyze-distances-and-angles-with-vmd/#simplifying-your-vmd-display-removing-labels)
 
-11. In the main menu, press the Save State button found in the File menu; this will bring up a browser window where you can enter a file name in which to save your work. 
+12. In the main menu, press the Save State button found in the File menu; this will bring up a browser window where you can enter a file name in which to save your work. 
 
-12. VMD的快捷键等号，把当前显示的东西们center一下。
+13. VMD的快捷键等号，把当前显示的东西们center一下。
 
-13. Menu--Mouse--Center: pick an atom to center
+14. Menu--Mouse--Center: pick an atom to center
 
-14. 比如第8200帧相对于第8100帧出现了RMSD的巨大升高，想弄清楚结构什么地方发生了怎样的巨大变化，在VMD的Graphics - Representation里选Trajectory标签页，在Draw Multiple Frames里输入`8100:100:8200`，并且把Coloring Method设为Trajectory - Timestep，这样这两帧就会用不同颜色一起显示出来便于比较在哪里结构有明显变化。
+15. 比如第8200帧相对于第8100帧出现了RMSD的巨大升高，想弄清楚结构什么地方发生了怎样的巨大变化，在VMD的Graphics - Representation里选Trajectory标签页，在Draw Multiple Frames里输入`8100:100:8200`，并且把Coloring Method设为Trajectory - Timestep，这样这两帧就会用不同颜色一起显示出来便于比较在哪里结构有明显变化。
 
     http://sobereva.com/627
 
-15. Label format
+16. Label format
 
     ![](https://cdn.jsdelivr.net/gh/gxf1212/notes@master/research/MD-fundamentals-Figure.assets/vmd-label.jpg)
 
@@ -552,7 +554,7 @@ Focus on visualization. More on programming, see [here](Programming.md#vmd-scrip
     addLabel
     ```
 
-16. vmd不一定按psf显示bond？那以后最终还是要手动看psf? at least pdb does not work
+17. vmd不一定按psf显示bond？那以后最终还是要手动看psf? at least pdb does not work
 
     [VMD-L Mailing List (uiuc.edu)](https://www.ks.uiuc.edu/Research/vmd/mailing_list/vmd-l/29972.html)
 
@@ -560,9 +562,9 @@ Focus on visualization. More on programming, see [here](Programming.md#vmd-scrip
     vmd  system.pdb run.xtc
     ```
 
-17. 
+18. 
 
-18. [vmd粗粒化显示插件bendix简单介绍](https://kangsgo.cn/p/vmd粗粒化显示插件bendix简单介绍/)
+19. [vmd粗粒化显示插件bendix简单介绍](https://kangsgo.cn/p/vmd粗粒化显示插件bendix简单介绍/)
 
 #### Selection and set values
 

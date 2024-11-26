@@ -481,6 +481,8 @@ existing residue libraries:
 - `mod_amino.lib`, very few
 - sth containing `ipq`: protonation states
 
+[AMBER Prep File Specification](https://ambermd.org/doc/prep.html)     Prep(in) file formats
+
 ### e.g. 2d3i
 
 separate all parts, and model them
@@ -777,7 +779,7 @@ Called by other tools like Membrane Builder
 
 - VMD scripting is highly flexible and provides many possibilities.
 
-  The only default is that each chain needs to be manually separated (which is just `gmx pdb2gmx` good at). To split chains, refer to:
+  The only inconvenience is that each chain needs to be manually separated (which is just `gmx pdb2gmx` good at). To split chains, refer to:
 
   [mkrun/Gromacs/fep/mkpy_split_chains.py at master · skblnw/mkrun · GitHub](https://github.com/skblnw/mkrun/blob/master/Gromacs/fep/mkpy_split_chains.py)
 
@@ -789,6 +791,12 @@ Called by other tools like Membrane Builder
 
 - vmd可以读已有的psf和pdb，也是gmx和tleap不可以的
 
+- vmd glycine n terminal failed to guess coordinates for HA? use GLYP (and PROP for proline)
+
+- Atoms with guessed coordinates will have occupancy of 0.0, failed: -1
+
+- 
+
 ### Disadvantages
 
 - mainly works for CHARMM series force field.
@@ -798,6 +806,8 @@ Called by other tools like Membrane Builder
 - solvate: cannot rotate (despite this option exists) and add water isotropically (unless do this manually). Have to use a HUGE box, otherwise the protein interacts with itself...
 
   > `vmd solvate -rotate` 只能手动确定哪个边最长，然后补其他的。。
+  >
+  > see [VMD solvating a system](Programming.md#vmd-solvating-a-system) for new scripts
 
   > tleap, `pdb2gmx`, GUI 等都可以达到类似`iso`的效果吧
 
@@ -932,10 +942,22 @@ Monte-Carlo based. vmd/tleap don't have this...
 
 ## Packmol
 
+[Packmol User Guide - Initial configurations for Molecular Dynamics](https://m3g.github.io/packmol/userguide.shtml)
+
 it may built complex systems, but
 
 - can only add certain number of water; we must calculate through density and volume?
-- is not responsible for generating .top files, and `gmx pdb2gmx` cannot handle such (usually) complex systems
+
+  > 根据搜索结果，我没有找到直接提供在Packmol中指定盒子大小并自动添加水分子的代码。
+
+  虽然也可以用Packmol构建蛋白质、核酸浸在溶剂环境中的体系，但是这样做明显不如用动力学程序自带的专用做这种事情的程序好，因为Packmol产生的水的密度偏低，水的分布特征和实际体相水相差较大，可能NPT模拟起来之后盒子变形、收缩得厉害，出现溶质与其镜像最近距离太近之类问题。而如果用比如GROMACS里的gmx solvate命令给蛋白质/核酸加溶剂，由于是直接用事先已经做NPT平衡好的溶剂盒子（比如加水一般用自带的spc216.gro）通过平移复制来填充真空区，加的溶剂的分布状态明显理想得多得多。
+
+- is not responsible for generating .top files, and `gmx pdb2gmx` cannot handle such (usually) complex systems too...maybe packmol and then `gmx pdb2gmx` and then `gmx solvate` works for unsolvated systems without molecule types outside the force field package.
+
+- 之前都是用Packmol来构建团簇的，那个软件的逻辑是你自己设定一个三维空间的尺寸，然后再设定该空间内的原子数目。所以用Packmol经常还要自己预先估算一下多大空间适合放多少分子，有时候数量填多了会报错，填少了又太疏了，总之是用起来不太方便。这个算法只要输入数量就可以自动生成团簇了
+  此程序目的不在于建立动力学模拟的初始构型，只是用于产生团簇构型搜索的初始构型，还没打算在建模的功能设置上做扩展。
+
+  [genmer：生成团簇初始构型结合molclus做团簇结构搜索的超便捷工具 - 量子化学 (Quantum Chemistry) - 计算化学公社](http://bbs.keinsci.com/thread-2369-1-1.html)
 
 
 

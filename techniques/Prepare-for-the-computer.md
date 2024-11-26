@@ -441,7 +441,7 @@ just GUI, see above
 
 现在只有断了WiFi才能ssh？
 
-# break the wall
+# cross the GFW
 
 ## 禾斗学上网
 
@@ -650,10 +650,13 @@ intro https://iyuantiao.com/fenxiangfuli/jiaocheng/v2ray.html
 
 ## clash
 
-- https://github.com/Fndroid/clash_for_windows_pkg/releases
+- https://github.com/Fndroid/clash_for_windows_pkg/releases   已经被和谐了。。
 - video reference: https://www.youtube.com/watch?v=pTlso8m_iRk
+- [我的Linux科学上网方案](https://bestoko.cc/p/linux-clash-for-windows/)
 
 2022: I won't use that since it breaks system configurations and caused problems (GreenVPN, conda proxy error) in both Windows and Linux
+
+2024: 真香，至少肯定能用，虽然 conda 要关掉clash才能安装包
 
 ## qt-5
 
