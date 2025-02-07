@@ -447,7 +447,7 @@ just GUI, see above
 
 这几个机场都是我用过的，都还不错的，适用于ssr、clash等多种连接方式，配有详细的教程。欢迎点击以下几个连接注册账号，根据需要购买合适的套餐。
 
-- [管人痴](https://xn--gmq396grzd.com/auth/register?code=dZNd)  （我年付了。偶尔不稳定换个节点就行）240/年
+- [管人痴](https://管人痴.com/auth/register?code=dZNd)  （我年付了。偶尔不稳定换个节点就行）240/年
 - [忍者云](https://renzhe.cloud/auth/register?code=pE4p)
 
 更多选择，上Google和YouTube搜一下就好了。。SSR机场对于我们基本够用了
@@ -462,7 +462,7 @@ just GUI, see above
 - https://github.com/shadowsocksrr/electron-ssr  Linux
 - https://github.com/Fndroid/clash_for_windows_pkg
 
-大概步骤：安装electron-ssr，导入订阅链接。教程参考[云翻墙](https://support.dellcomputer.online/auth/register?code=dZNd)等官网的说明。
+大概步骤：安装electron-ssr，导入订阅链接。教程参考[管人痴](https://管人痴.com/auth/register?code=dZNd)等官网的说明。
 
 VPN：之前用过[GreenVPN](https://www.greenvpn.host/)，感觉还可以，流量包是3 US dollar 10个G。但这家现在被ChatGPT封了。
 
