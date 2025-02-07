@@ -453,7 +453,8 @@ just GUI, see above
 更多选择，上Google和YouTube搜一下就好了。。SSR机场对于我们基本够用了
 
 - [壁虎翻墙](https://freegecko.com/index.php/#/register?code=R6kbY2VP)：在win和Linux上用clash都遇到了麻烦，虽然可能是我自己的问题。SSR上不能用。
-  - 更新：clash把我的代理设置全毁了，现在conda、GreenVPN在打开clash时都用不了。用回ShadowsocksR才好了。已经配置好的童鞋谨慎换客户端吧。。
+- 更新：clash把我的代理设置全毁了，现在conda、GreenVPN在打开clash时都用不了。用回ShadowsocksR才好了。已经配置好的童鞋谨慎换客户端吧。。
+- 更新：Linux端electron-ssr还是不好配环境，CentOS、Fedora之类的从来没装成功过，所以直接clash搞定。但代价是conda、pip时要关掉代理
 
 客户端：
 
