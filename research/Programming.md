@@ -637,8 +637,8 @@ Tcl本身将所有的变量值视为字符串，并将他们作为字符串来�
 - 在Tcl中，你可以通过ASCII码将数字转换为对应的字母。
 ```tcl
   set letter [format %c [expr {$number + 64}]]
-  ```
-  
+```
+
 
 
 
@@ -1304,11 +1304,19 @@ plt.colorbar(label='Probability Density')
 
     ```python
     import os
+    import shutil
     import matplotlib
-    font_directory = os.path.join(matplotlib.get_data_path(), 'fonts', 'ttf')  # ~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf
-    os.system("copy *.ttf *.TTF "+font_directory)  # cp for Unix
+    
+    # 复制字体文件到 matplotlib 字体目录
+    font_dir = os.path.join(matplotlib.get_data_path(), 'fonts', 'ttf')
+    # ~/miniconda3/envs/work/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf
+    for f in [x for x in os.listdir() if x.lower().endswith('.ttf')]:
+        shutil.copy(f, font_dir)
+    
+    # 删除缓存
     cache_dir = matplotlib.get_cachedir()
-    os.system("rm -r "+cache_dir)  # ~/.cache/matplotlib
+    if os.path.exists(cache_dir):
+        shutil.rmtree(cache_dir)
     # re-import matplotlib
     ```
   
@@ -1364,7 +1372,7 @@ plt.colorbar(label='Probability Density')
     ```
   
     `rm -rf` it! then just use the `available` fonts above. No need to configure as other blogs did.
-
+  
     [after removing cache....](https://blog.csdn.net/u014712482/article/details/85802563)here's how we can check name for ![](https://img-blog.csdnimg.cn/20190104211934391.jpg)
   
     ```python
